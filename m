@@ -1,81 +1,81 @@
-Return-Path: <afd@ti.com>
+Return-Path: <radoslav.pesek@microstep-mis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7219C32772
-	for <webhook@archiver.kernel.org>; Thu, 18 Aug 2022 19:52:43 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web09.47174.1660852362663974782
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E89C6C32771
+	for <webhook@archiver.kernel.org>; Fri, 19 Aug 2022 14:17:00 +0000 (UTC)
+Received: from smtp.microstep-mis.sk (smtp.microstep-mis.sk [62.168.101.10])
+ by mx.groups.io with SMTP id smtpd.web10.3590.1660918610426829607
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 18 Aug 2022 12:52:43 -0700
+ Fri, 19 Aug 2022 07:16:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=tJZI6WEh;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: afd@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 27IJqbLk048691;
-	Thu, 18 Aug 2022 14:52:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1660852357;
-	bh=jSRGU0d0eEz3bD0vxrN4B21Qhu5GIfBsTHmO6EWtlAQ=;
-	h=From:To:CC:Subject:Date;
-	b=tJZI6WEhhgqyrHwIYw2+SaBuuuNkFrDPzGAjnYzZPRv7y42XI8IIYp7wUMvFZvtJx
-	 xexXLXGQyp4truaxO+0pCUmaDyC17kQ8fumJ8gi9xGuJ7Yxb5nOnol+pGxZmMR5oTk
-	 JfV5uwFyDe1oiJ7okaaI/c4EQQwZ9JTXqCqtunIw=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 27IJqbYH018167
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 18 Aug 2022 14:52:37 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Thu, 18
- Aug 2022 14:52:37 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
- Frontend Transport; Thu, 18 Aug 2022 14:52:37 -0500
-Received: from ula0226330.dal.design.ti.com (ileax41-snat.itg.ti.com
- [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 27IJqaAO027830;
-	Thu, 18 Aug 2022 14:52:36 -0500
-From: Andrew Davis <afd@ti.com>
-To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][dunfell][PATCH] optee-examples: Add dependency on
- python3-cryptography-native
-Date: Thu, 18 Aug 2022 14:52:36 -0500
-Message-ID: <20220818195236.19319-1-afd@ti.com>
-X-Mailer: git-send-email 2.36.1
+ dkim=missing;
+ spf=pass (domain: microstep-mis.com, ip: 62.168.101.10,
+ mailfrom: radoslav.pesek@microstep-mis.com)
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.microstep-mis.sk (Postfix) with ESMTP id DD2A656
+	for <meta-ti@lists.yoctoproject.org>; Fri, 19 Aug 2022 16:16:46 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at smtp.microstep-mis.sk
+Received: from smtp.microstep-mis.sk ([127.0.0.1])
+	by localhost (smtp01.mstep [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id CWwWiVrghsP2 for <meta-ti@lists.yoctoproject.org>;
+	Fri, 19 Aug 2022 16:16:45 +0200 (CEST)
+Received: from [192.168.0.178] (188-167-253-95.dynamic.chello.sk
+ [188.167.253.95])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.microstep-mis.sk (Postfix) with ESMTPSA id 7C3F211
+	for <meta-ti@lists.yoctoproject.org>; Fri, 19 Aug 2022 16:16:45 +0200 (CEST)
+Message-ID: <fda6f93c-257c-88c5-4ec3-d793e78552a6@microstep-mis.com>
+Date: Fri, 19 Aug 2022 16:16:44 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.12.0
+Subject: devtool modify linux-ti-mainline gives defconfig_builder.sh: not
+ found
+Content-Language: en-US
+References: <b88b1eb3-8dc5-e1ef-3697-1e7d05e5b850@microstep-mis.com>
+To: meta-ti@lists.yoctoproject.org
+From: Radoslav Pesek <radoslav.pesek@microstep-mis.com>
+In-Reply-To: <b88b1eb3-8dc5-e1ef-3697-1e7d05e5b850@microstep-mis.com>
+X-Forwarded-Message-Id: 
+ <b88b1eb3-8dc5-e1ef-3697-1e7d05e5b850@microstep-mis.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 18 Aug 2022 19:52:43 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14962
+ <meta-ti@lists.yoctoproject.org>; Fri, 19 Aug 2022 14:17:00 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14963
 
-This is needed for building the latest optee-examples.
+Hello,
 
-While here switch to HTTPS for fetching from Github.
+I'm trying to update kernel configuration using devtool modify 
+linux-ti-mainline, but when I do devtool menuconfig linux-ti-mainline or 
+devtool build linux-ti-mainline (or anything that involves configure 
+step, I guess), I get:
 
-Signed-off-by: Andrew Davis <afd@ti.com>
----
- recipes-security/optee/optee-examples_%.bbappend | 3 +++
- 1 file changed, 3 insertions(+)
+/home/radoslavp/oe_bbb/build_bbb/tmp-glibc/work/beaglebone-oe-linux-gnueabi/linux-ti-mainline/5.15+git999-r22b/temp/run.do_configure.23628: 
+118: 
+/home/radoslavp/oe_bbb/build_bbb/tmp-glibc/work/beaglebone-oe-linux-gnueabi/linux-ti-mainline/5.15+git999-r22b/ti-upstream-tools/config/defconfig_builder.sh: 
+not found
 
-diff --git a/recipes-security/optee/optee-examples_%.bbappend b/recipes-security/optee/optee-examples_%.bbappend
-index 19e32d9d..9941b345 100644
---- a/recipes-security/optee/optee-examples_%.bbappend
-+++ b/recipes-security/optee/optee-examples_%.bbappend
-@@ -1,2 +1,5 @@
- PV_ti-soc = "3.17.0+git${SRCPV}"
- SRCREV_ti-soc = "65fc74309e12189ad5b6ce3ffec37c8011088a5a"
-+SRC_URI_ti-soc = "git://github.com/linaro-swg/optee_examples.git;protocol=https"
-+
-+DEPENDS_append_ti-soc = " python3-cryptography-native"
--- 
-2.36.1
+Building kernel works flawlessly running bitbake linux-ti-mainline.
+
+The configure step seems to delete original source tree under 
+/home/radoslavp/oe_bbb/build_bbb/tmp-glibc/work/beaglebone-oe-linux-gnueabi/linux-ti-mainline/ 
+where ti-upstream-tools normally resides and replaces it with 
+5.15+git999-r22b, where it is missing - for some reason it's not 
+unpacked there or under workspace/sources where the source tree is moved 
+after devtool modify. Not sure if this is expected (I'm beginner 
+regarding yocto).
+
+I'm on dunfell, last commit. I made my own distro, maybe I'm missing 
+something somewhere.
+
+Thanks for any hint, google didn't help,
+
+Rado.
+
 
 
