@@ -1,98 +1,93 @@
-Return-Path: <afd@ti.com>
+Return-Path: <gadiyar@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 205A5ECAAD1
-	for <webhook@archiver.kernel.org>; Thu,  1 Sep 2022 18:56:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 69732ECAAD5
+	for <webhook@archiver.kernel.org>; Thu,  1 Sep 2022 19:40:09 +0000 (UTC)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.16497.1662058615096873810
+ by mx.groups.io with SMTP id smtpd.web11.16984.1662061203228151192
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 01 Sep 2022 11:56:55 -0700
+ Thu, 01 Sep 2022 12:40:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=B5O8hkIy;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: afd@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 281Iuqkb086464;
-	Thu, 1 Sep 2022 13:56:52 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=lXqUKeY9;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: gadiyar@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 281Je0W9096024;
+	Thu, 1 Sep 2022 14:40:00 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1662058612;
-	bh=U5Iu222y1kORdhnmLXUV9px/tuleUEe1RYwtiFtO8Og=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=B5O8hkIyuMDt4evXMZwPStlVhkpSW0pMbe138Z3tS9m6LqRsbLkqBVrFDSqY90/N8
-	 lGFFkshy6a+YUQ4P0a0+nCMAArJj7R1AvsSdV9FOad5HI8gB9GoK2NJLbscBEeT9T5
-	 ky42FwxIToAUnDVjQeIRO1E0ubdFx7cQkB0kocak=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 281IuqVM030823
+	s=ti-com-17Q1; t=1662061200;
+	bh=Kjhaqk2WfLc8tXOwBJKqrBA6yNF7h0zOOI0LXIhbyN4=;
+	h=From:To:Subject:Date:References:In-Reply-To;
+	b=lXqUKeY90z2gA8j7LrecG9jni8WnWITQt7T3oWjkCGkxZqOIjsB4OzWJcVIwEpTVY
+	 gmx7pzEP6d14vpVjoYT0oBnsV6NYrz8fraJdsBp7NqmhbF8cxv08ypYrVTRyyUWGoZ
+	 gFbtWowSxcEgJzN+h2/LTDd0SJz7ShoGeFmIHueQ=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 281Je0xw081082
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 1 Sep 2022 13:56:52 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 1 Sep 2022 14:40:00 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Thu, 1 Sep
- 2022 13:56:52 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
- Frontend Transport; Thu, 1 Sep 2022 13:56:52 -0500
-Received: from [10.250.34.212] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 281IupZS016185;
-	Thu, 1 Sep 2022 13:56:51 -0500
-Message-ID: <f71a1fe4-92e3-0e82-e2bd-07b5a32fd86a@ti.com>
-Date: Thu, 1 Sep 2022 13:56:51 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [meta-ti][dunfell][PATCH 2/2] optee-os: Lower log level for AM62x
-Content-Language: en-US
-To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-        Anand Gadiyar <gadiyar@ti.com>, <meta-ti@lists.yoctoproject.org>
+ 2022 14:39:59 -0500
+Received: from DFLE111.ent.ti.com ([fe80::6c89:b1ca:ee8f:1a6f]) by
+ DFLE111.ent.ti.com ([fe80::6c89:b1ca:ee8f:1a6f%17]) with mapi id
+ 15.01.2507.006; Thu, 1 Sep 2022 14:39:59 -0500
+From: "Gadiyar, Anand" <gadiyar@ti.com>
+To: "Davis, Andrew" <afd@ti.com>, Denys Dmytriyenko <denys@konsulko.com>,
+        "Eatmon, Ryan" <reatmon@ti.com>,
+        "meta-ti@lists.yoctoproject.org"
+	<meta-ti@lists.yoctoproject.org>
+Subject: RE: [meta-ti][dunfell][PATCH 2/2] optee-os: Lower log level for AM62x
+Thread-Topic: [meta-ti][dunfell][PATCH 2/2] optee-os: Lower log level for
+ AM62x
+Thread-Index: AQHYuYBgnvwvNZ+SQki4U93vU3Bh5K3LSgGA//+3VkA=
+Date: Thu, 1 Sep 2022 19:39:59 +0000
+Message-ID: <eaf0b3e408724b3982ff04cb47f3d764@ti.com>
 References: <20220826191641.31116-1-afd@ti.com>
  <20220826191641.31116-2-afd@ti.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20220826191641.31116-2-afd@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+ <f71a1fe4-92e3-0e82-e2bd-07b5a32fd86a@ti.com>
+In-Reply-To: <f71a1fe4-92e3-0e82-e2bd-07b5a32fd86a@ti.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.247.23.90]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 01 Sep 2022 18:56:59 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14989
+ <meta-ti@lists.yoctoproject.org>; Thu, 01 Sep 2022 19:40:09 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14990
 
-On 8/26/22 2:16 PM, Andrew Davis wrote:
-> During resume from low power mode suspend OP-TEE prints some messages
-> on the UART. It seems this UART is not powered at this point in the
-> sequence breaking suspend/resume. We should track down the exact
-> prints and quiet them. Until we get that fix upstream, lets lower
-> the log level for this platform to unblock the LPM work.
-> 
-> Signed-off-by: Andrew Davis <afd@ti.com>
-> ---
->   recipes-security/optee/optee-os_%.bbappend | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/recipes-security/optee/optee-os_%.bbappend b/recipes-security/optee/optee-os_%.bbappend
-> index 4081b324..3cda8559 100644
-> --- a/recipes-security/optee/optee-os_%.bbappend
-> +++ b/recipes-security/optee/optee-os_%.bbappend
-> @@ -6,7 +6,7 @@ DEPENDS_append_ti-soc = " python3-cryptography-native"
->   
->   EXTRA_OEMAKE_append_k3 = "${@ 'CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
->   
-> -EXTRA_OEMAKE_append_am62xx-evm = " CFG_WITH_SOFTWARE_PRNG=y"
-> +EXTRA_OEMAKE_append_am62xx-evm = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
-
-
-ping.
-
-Looks like there is now a merge conflict for this, easy enough to
-fix, add CFG_TEE_CORE_LOG_LEVEL=1 to the new am62xx-lp-evm also.
-
-If you want me to re-send let me know.
-
-Andrew
-
-
->   EXTRA_OEMAKE_append_j721s2-evm = " CFG_WITH_SOFTWARE_PRNG=y"
->   EXTRA_OEMAKE_append_j721s2-hs-evm = " CFG_WITH_SOFTWARE_PRNG=y"
->   
+PiBGcm9tOiBEYXZpcywgQW5kcmV3IDxhZmRAdGkuY29tPg0KPiANCj4gT24gOC8yNi8yMiAyOjE2
+IFBNLCBBbmRyZXcgRGF2aXMgd3JvdGU6DQo+ID4gRHVyaW5nIHJlc3VtZSBmcm9tIGxvdyBwb3dl
+ciBtb2RlIHN1c3BlbmQgT1AtVEVFIHByaW50cyBzb21lIG1lc3NhZ2VzDQo+ID4gb24gdGhlIFVB
+UlQuIEl0IHNlZW1zIHRoaXMgVUFSVCBpcyBub3QgcG93ZXJlZCBhdCB0aGlzIHBvaW50IGluIHRo
+ZQ0KPiA+IHNlcXVlbmNlIGJyZWFraW5nIHN1c3BlbmQvcmVzdW1lLiBXZSBzaG91bGQgdHJhY2sg
+ZG93biB0aGUgZXhhY3QNCj4gPiBwcmludHMgYW5kIHF1aWV0IHRoZW0uIFVudGlsIHdlIGdldCB0
+aGF0IGZpeCB1cHN0cmVhbSwgbGV0cyBsb3dlcg0KPiA+IHRoZSBsb2cgbGV2ZWwgZm9yIHRoaXMg
+cGxhdGZvcm0gdG8gdW5ibG9jayB0aGUgTFBNIHdvcmsuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5
+OiBBbmRyZXcgRGF2aXMgPGFmZEB0aS5jb20+DQo+ID4gLS0tDQo+ID4gICByZWNpcGVzLXNlY3Vy
+aXR5L29wdGVlL29wdGVlLW9zXyUuYmJhcHBlbmQgfCAyICstDQo+ID4gICAxIGZpbGUgY2hhbmdl
+ZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9y
+ZWNpcGVzLXNlY3VyaXR5L29wdGVlL29wdGVlLW9zXyUuYmJhcHBlbmQgYi9yZWNpcGVzLQ0KPiBz
+ZWN1cml0eS9vcHRlZS9vcHRlZS1vc18lLmJiYXBwZW5kDQo+ID4gaW5kZXggNDA4MWIzMjQuLjNj
+ZGE4NTU5IDEwMDY0NA0KPiA+IC0tLSBhL3JlY2lwZXMtc2VjdXJpdHkvb3B0ZWUvb3B0ZWUtb3Nf
+JS5iYmFwcGVuZA0KPiA+ICsrKyBiL3JlY2lwZXMtc2VjdXJpdHkvb3B0ZWUvb3B0ZWUtb3NfJS5i
+YmFwcGVuZA0KPiA+IEBAIC02LDcgKzYsNyBAQCBERVBFTkRTX2FwcGVuZF90aS1zb2MgPSAiIHB5
+dGhvbjMtY3J5cHRvZ3JhcGh5LW5hdGl2ZSINCj4gPg0KPiA+ICAgRVhUUkFfT0VNQUtFX2FwcGVu
+ZF9rMyA9ICIke0AgJ0NGR19DT05TT0xFX1VBUlQ9JysgZC5nZXRWYXIoJ09QVEVFX0szX1VTQVJU
+JykgaWYgZC5nZXRWYXIoJ09QVEVFX0szX1VTQVJUJykgZWxzZSAnJ30iDQo+ID4NCj4gPiAtRVhU
+UkFfT0VNQUtFX2FwcGVuZF9hbTYyeHgtZXZtID0gIiBDRkdfV0lUSF9TT0ZUV0FSRV9QUk5HPXki
+DQo+ID4gK0VYVFJBX09FTUFLRV9hcHBlbmRfYW02Mnh4LWV2bSA9ICIgQ0ZHX1dJVEhfU09GVFdB
+UkVfUFJORz15IENGR19URUVfQ09SRV9MT0dfTEVWRUw9MSINCj4gDQo+IA0KPiBwaW5nLg0KPiAN
+Cj4gTG9va3MgbGlrZSB0aGVyZSBpcyBub3cgYSBtZXJnZSBjb25mbGljdCBmb3IgdGhpcywgZWFz
+eSBlbm91Z2ggdG8NCj4gZml4LCBhZGQgQ0ZHX1RFRV9DT1JFX0xPR19MRVZFTD0xIHRvIHRoZSBu
+ZXcgYW02Mnh4LWxwLWV2bSBhbHNvLg0KPiANCj4gSWYgeW91IHdhbnQgbWUgdG8gcmUtc2VuZCBs
+ZXQgbWUga25vdy4NCj4gDQo+IEFuZHJldw0KDQpQcm9iYWJseSBiZXN0IHRvIHJlc2VuZCAtIEkg
+dGhvdWdodCBJIGhhZCBhZGRlZCBpdCBmb3IgYW02Mnh4LWxwLWV2bQ0Kd2hlbiBJIHNlbnQgaXQg
+b3V0IGJ1dCBpdCBzZWVtcyBJIGRpZCBub3QuIFNvcnJ5Lg0KDQoNCg==
 
