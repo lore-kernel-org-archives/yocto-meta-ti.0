@@ -1,48 +1,50 @@
-Return-Path: <rs@ti.com>
+Return-Path: <r-ravikumar@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 64779ECAAA1
-	for <webhook@archiver.kernel.org>; Fri,  2 Sep 2022 21:57:48 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.4337.1662155860058660918
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60CA9ECAAA1
+	for <webhook@archiver.kernel.org>; Tue,  6 Sep 2022 15:51:28 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web09.881.1662479482385931257
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 02 Sep 2022 14:57:40 -0700
+ Tue, 06 Sep 2022 08:51:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=P3pvbrxl;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: rs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 282Lvd6R031673
-	for <meta-ti@lists.yoctoproject.org>; Fri, 2 Sep 2022 16:57:39 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=WRloTY+K;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: a0123456@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 286FpLHY047660
+	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Sep 2022 10:51:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1662155859;
-	bh=J1gM27aJCvw+ZaIiPrZGWeIHl5VpaH9vu7ZcAjc+33M=;
+	s=ti-com-17Q1; t=1662479481;
+	bh=Vwp+6oC/8ImMjaTKceNARxzwlM4EWX92QJ5BGpGaWc4=;
 	h=From:To:CC:Subject:Date;
-	b=P3pvbrxlRXay89j8lDI76WrvfWHWMBkcfDr1RfDcouYJ6Z7SPNie+wgkqBCvVnLmu
-	 f0rBu66tbuZ9JhX1efBXDconbbfxvhsyjr2vlsOVagVXwV1XYBZV53cvksAmmXl2l/
-	 hXoj9IiO8kl50HX/XlTODtqQE/YmFTM6WH+vnd/U=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 282Lvdbj095426
+	b=WRloTY+Ko3gHW5H/ALFZHl52ray4pTEp50TzkaXN1+AXmDEBmyL3ddaZ3AI975UD6
+	 fBLoRb+NRs1PEbdCJ8qMEVm9Leq0EWUOwdqBO5tKQx1xslAv03TsAqsjfCFGYcVyMj
+	 YIqd8rIG5DsnlyvfAexq5Io0LnxhFtVOQcO/3V2I=
+Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 286FpLYF071195
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Fri, 2 Sep 2022 16:57:39 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Fri, 2 Sep
- 2022 16:57:39 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Sep 2022 10:51:21 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Tue, 6 Sep
+ 2022 10:51:20 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
- Frontend Transport; Fri, 2 Sep 2022 16:57:39 -0500
-Received: from res.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 282LvcVP032501;
-	Fri, 2 Sep 2022 16:57:39 -0500
-From: Randolph Sapp <rs@ti.com>
-To: <reatmon@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, Randolph Sapp <rs@ti.com>
-Subject: [dunfell][PATCH] all: Fix new git://git.ti.com URLs
-Date: Fri, 2 Sep 2022 16:57:37 -0500
-Message-ID: <20220902215737.180610-1-rs@ti.com>
-X-Mailer: git-send-email 2.25.1
+ Frontend Transport; Tue, 6 Sep 2022 10:51:20 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 286FpJI1053869;
+	Tue, 6 Sep 2022 10:51:20 -0500
+From: Rahul T R <r-ravikumar@ti.com>
+To: <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>
+CC: <nsekhar@ti.com>, <devarsht@ti.com>, <vigneshr@ti.com>,
+        Ryan Eatmon
+	<reatmon@ti.com>, <r-ravikumar@ti.com>, <rs@ti.com>
+Subject: [meta-ti][dunfell][PATCH] cadence-mhdp-fw: Add dependency for j721s2
+Date: Tue, 6 Sep 2022 21:21:16 +0530
+Message-ID: <20220906155116.7563-1-r-ravikumar@ti.com>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -50,48 +52,45 @@ X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 02 Sep 2022 21:57:48 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14992
+ <meta-ti@lists.yoctoproject.org>; Tue, 06 Sep 2022 15:51:28 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/14993
 
-The regex originally to correct all URLs that were still using the old
-git protocol didn't have a check in place to see if the URL was already
-using the correct protocol.
+cdns mhdp bridge is present in j721s2 soc.
+Add the dependency for the same
 
-This just fixes the two affected URLs.
-
-Signed-off-by: Randolph Sapp <rs@ti.com>
+Signed-off-by: Rahul T R <r-ravikumar@ti.com>
 ---
- recipes-bsp/x-load/x-load_1.46-psp.bb | 2 +-
- recipes-ti/secdev/ti-k3-secdev_git.bb | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb | 2 +-
+ recipes-kernel/linux/kernel-rdepends.inc           | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-bsp/x-load/x-load_1.46-psp.bb b/recipes-bsp/x-load/x-load_1.46-psp.bb
-index 413328e1..5713927b 100644
---- a/recipes-bsp/x-load/x-load_1.46-psp.bb
-+++ b/recipes-bsp/x-load/x-load_1.46-psp.bb
-@@ -12,7 +12,7 @@ PE = "1"
+diff --git a/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb b/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
+index ec102761..f4ee5f78 100644
+--- a/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
++++ b/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
+@@ -10,7 +10,7 @@ PR = "${INC_PR}.0"
  
- # TI PSP v1.46_OMAPPSP_03.00.01.06 (Tag is one commit different)
- SRCREV_pn-${PN} = "fc6d5be15c703d21aef0ae0b8c02177721f0445f"
--SRC_URI = "git://git.ti.com/git/git/arago-project-org/x-load-omap3.git;protocol=https"
-+SRC_URI = "git://git.ti.com/git/arago-project-org/x-load-omap3.git;protocol=https"
+ CLEANBROKEN = "1"
  
- S = "${WORKDIR}/git"
+-COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm"
++COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|j721s2-hs-evm"
  
-diff --git a/recipes-ti/secdev/ti-k3-secdev_git.bb b/recipes-ti/secdev/ti-k3-secdev_git.bb
-index 3851d35a..28dbe9ee 100644
---- a/recipes-ti/secdev/ti-k3-secdev_git.bb
-+++ b/recipes-ti/secdev/ti-k3-secdev_git.bb
-@@ -9,7 +9,7 @@ COMPATIBLE_MACHINE = "null"
- COMPATIBLE_MACHINE_class-native = "(.*)"
- COMPATIBLE_MACHINE_class-nativesdk = "(.*)"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
--GIT_URI = "git://git.ti.com/git/git/security-development-tools/core-secdev-k3.git"
-+GIT_URI = "git://git.ti.com/git/security-development-tools/core-secdev-k3.git"
- GIT_PROTOCOL = "https"
- GIT_BRANCH = "master"
- GIT_SRCREV = "eb2c4d734487e5095b94cef3fd7213ee71d9e016"
+diff --git a/recipes-kernel/linux/kernel-rdepends.inc b/recipes-kernel/linux/kernel-rdepends.inc
+index c181c893..ae855a88 100644
+--- a/recipes-kernel/linux/kernel-rdepends.inc
++++ b/recipes-kernel/linux/kernel-rdepends.inc
+@@ -40,6 +40,8 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am64xx = " prueth-fw-am65x-sr2"
+ # Add run-time dependency for Cadence MHDP firmware to the rootfs
+ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7-evm = " cadence-mhdp-fw"
+ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7-hs-evm = " cadence-mhdp-fw"
++RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j721s2-evm = " cadence-mhdp-fw"
++RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j721s2-hs-evm = " cadence-mhdp-fw"
+ 
+ # Add run-time dependency for Video Decoding firmware to the rootfs
+ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7 = " vxd-dec-fw"
 -- 
-2.25.1
+2.37.2
 
 
