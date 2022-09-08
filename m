@@ -2,117 +2,89 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9B97C54EE9
-	for <webhook@archiver.kernel.org>; Thu,  8 Sep 2022 20:21:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D11F0C38145
+	for <webhook@archiver.kernel.org>; Thu,  8 Sep 2022 20:25:07 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.1098.1662668461782760477
+ by mx.groups.io with SMTP id smtpd.web12.1147.1662668703444262887
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 08 Sep 2022 13:21:02 -0700
+ Thu, 08 Sep 2022 13:25:03 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 3F91840D1F;
-	Thu,  8 Sep 2022 20:21:01 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id D62E740D1F;
+	Thu,  8 Sep 2022 20:25:02 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6sGLciokRxM5; Thu,  8 Sep 2022 20:21:01 +0000 (UTC)
+	with ESMTP id gO0Qycp7W3Gj; Thu,  8 Sep 2022 20:25:02 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net
  [100.15.80.88])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 208C240D0A;
-	Thu,  8 Sep 2022 20:20:59 +0000 (UTC)
-Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 949BE1749CB;
-	Thu,  8 Sep 2022 16:20:57 -0400 (EDT)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id BA7FF40D0A;
+	Thu,  8 Sep 2022 20:25:01 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id C1CDB1749CE; Thu,  8 Sep 2022 16:24:59 -0400 (EDT)
+Date: Thu, 8 Sep 2022 16:24:59 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>,
-	Radoslav Pesek <radoslav.pesek@microstep-mis.com>
-Subject: [dunfell][PATCH v2] linux-ti-mainline: unbreak devtool
-Date: Thu,  8 Sep 2022 20:20:54 +0000
-Message-Id: <20220908202054.3800302-1-denis@denix.org>
-X-Mailer: git-send-email 2.25.1
+To: Radoslav Pesek <radoslav.pesek@microstep-mis.com>
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] devtool modify linux-ti-mainline gives
+ defconfig_builder.sh: not found
+Message-ID: <20220908202459.GM18429@denix.org>
+References: <b88b1eb3-8dc5-e1ef-3697-1e7d05e5b850@microstep-mis.com>
+ <fda6f93c-257c-88c5-4ec3-d793e78552a6@microstep-mis.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <fda6f93c-257c-88c5-4ec3-d793e78552a6@microstep-mis.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 08 Sep 2022 20:21:07 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15009
+ <meta-ti@lists.yoctoproject.org>; Thu, 08 Sep 2022 20:25:07 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15010
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+Sorry for the delay, finally had a chance to look into this. Could you please 
+try this patch:
 
-devtool has a long-standing bug where it cannot handle references to ${WO=
-RKDIR}
-due to externalsrc:
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D12677
+https://patchwork.yoctoproject.org/project/ti/patch/20220908202054.3800302-1-denis@denix.org/
 
-linux-ti-mainline clones additional ti-upstream-tools repo alongside the =
-kernel
-sources into ${WORKDIR}, which exposes this devtool bug.
 
-Work around the issue by moving ti-upstream-tools inside the kernel sourc=
-e tree,
-i.e. inside ${S}
+On Fri, Aug 19, 2022 at 04:16:44PM +0200, Radoslav Pesek wrote:
+> Hello,
+> 
+> I'm trying to update kernel configuration using devtool modify
+> linux-ti-mainline, but when I do devtool menuconfig
+> linux-ti-mainline or devtool build linux-ti-mainline (or anything
+> that involves configure step, I guess), I get:
+> 
+> /home/radoslavp/oe_bbb/build_bbb/tmp-glibc/work/beaglebone-oe-linux-gnueabi/linux-ti-mainline/5.15+git999-r22b/temp/run.do_configure.23628:
+> 118: /home/radoslavp/oe_bbb/build_bbb/tmp-glibc/work/beaglebone-oe-linux-gnueabi/linux-ti-mainline/5.15+git999-r22b/ti-upstream-tools/config/defconfig_builder.sh:
+> not found
+> 
+> Building kernel works flawlessly running bitbake linux-ti-mainline.
+> 
+> The configure step seems to delete original source tree under /home/radoslavp/oe_bbb/build_bbb/tmp-glibc/work/beaglebone-oe-linux-gnueabi/linux-ti-mainline/
+> where ti-upstream-tools normally resides and replaces it with
+> 5.15+git999-r22b, where it is missing - for some reason it's not
+> unpacked there or under workspace/sources where the source tree is
+> moved after devtool modify. Not sure if this is expected (I'm
+> beginner regarding yocto).
+> 
+> I'm on dunfell, last commit. I made my own distro, maybe I'm missing
+> something somewhere.
+> 
+> Thanks for any hint, google didn't help,
+> 
+> Rado.
+> 
+> 
 
-Reported-by: Radoslav Pesek <radoslav.pesek@microstep-mis.com>
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
----
-v2 - add accidentally forgotten Reported-by: tag
-
- recipes-kernel/linux/linux-ti-mainline_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-mainline_git.bb b/recipes-kern=
-el/linux/linux-ti-mainline_git.bb
-index 3b7ad885..e8e5cd03 100644
---- a/recipes-kernel/linux/linux-ti-mainline_git.bb
-+++ b/recipes-kernel/linux/linux-ti-mainline_git.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6bc538ed5bd9a7=
-fc9398086aedcd7e46"
-=20
- inherit kernel
-=20
--DEFCONFIG_BUILDER =3D "${WORKDIR}/ti-upstream-tools/config/defconfig_bui=
-lder.sh"
-+DEFCONFIG_BUILDER =3D "${S}/ti-upstream-tools/config/defconfig_builder.s=
-h"
- require recipes-kernel/linux/setup-defconfig.inc
- require recipes-kernel/linux/kernel-rdepends.inc
- require recipes-kernel/linux/ti-kernel.inc
-@@ -32,7 +32,7 @@ KERNEL_GIT_URI =3D "git://git.kernel.org/pub/scm/linux/=
-kernel/git/torvalds/linux.g
- KERNEL_GIT_PROTOCOL =3D "https"
- SRC_URI +=3D " \
-     ${KERNEL_GIT_URI};protocol=3D${KERNEL_GIT_PROTOCOL};branch=3D${BRANC=
-H};name=3Dlinux \
--    git://git.ti.com/git/ti-linux-kernel/ti-upstream-tools.git;branch=3D=
-${TOOLS_BRANCH};protocol=3D${KERNEL_GIT_PROTOCOL};name=3Dti-upstream-tool=
-s;destsuffix=3Dti-upstream-tools \
-+    git://git.ti.com/git/ti-linux-kernel/ti-upstream-tools.git;branch=3D=
-${TOOLS_BRANCH};protocol=3D${KERNEL_GIT_PROTOCOL};name=3Dti-upstream-tool=
-s;destsuffix=3Dgit/ti-upstream-tools \
-     file://defconfig \
- "
-=20
-@@ -43,7 +43,7 @@ KERNEL_DEVICETREE =3D ""
-=20
- kernel_do_compile_append() {
- 	oe_runmake dtbs CC=3D"${KERNEL_CC} $cc_extra " LD=3D"${KERNEL_LD}" ${KE=
-RNEL_EXTRA_ARGS}
--	oe_runmake -C ${WORKDIR}/ti-upstream-tools LINUX=3D${S} DTC=3D${B}/scri=
-pts/dtc/dtc O=3D${B} CC=3D"${KERNEL_CC} $cc_extra " LD=3D"${KERNEL_LD}" $=
-{KERNEL_EXTRA_ARGS}
-+	oe_runmake -C ${S}/ti-upstream-tools LINUX=3D${S} DTC=3D${B}/scripts/dt=
-c/dtc O=3D${B} CC=3D"${KERNEL_CC} $cc_extra " LD=3D"${KERNEL_LD}" ${KERNE=
-L_EXTRA_ARGS}
- }
-=20
- do_install_append() {
---=20
-2.25.1
-
+-- 
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
 
