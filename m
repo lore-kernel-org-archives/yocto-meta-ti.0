@@ -2,45 +2,46 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4F6AC54EE9
-	for <webhook@archiver.kernel.org>; Thu,  8 Sep 2022 20:18:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9B97C54EE9
+	for <webhook@archiver.kernel.org>; Thu,  8 Sep 2022 20:21:07 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.1118.1662668325300245305
+ by mx.groups.io with SMTP id smtpd.web12.1098.1662668461782760477
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 08 Sep 2022 13:18:45 -0700
+ Thu, 08 Sep 2022 13:21:02 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 0612A40D0C;
-	Thu,  8 Sep 2022 20:18:44 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3F91840D1F;
+	Thu,  8 Sep 2022 20:21:01 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id DX7pn3tvH0V3; Thu,  8 Sep 2022 20:18:43 +0000 (UTC)
+	with ESMTP id 6sGLciokRxM5; Thu,  8 Sep 2022 20:21:01 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net
  [100.15.80.88])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id DD4BE40D0A;
-	Thu,  8 Sep 2022 20:18:42 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 208C240D0A;
+	Thu,  8 Sep 2022 20:20:59 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 6127D1749CB;
-	Thu,  8 Sep 2022 16:18:41 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 949BE1749CB;
+	Thu,  8 Sep 2022 16:20:57 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [dunfell][PATCH] linux-ti-mainline: unbreak devtool
-Date: Thu,  8 Sep 2022 20:18:40 +0000
-Message-Id: <20220908201840.3800210-1-denis@denix.org>
+Cc: Denys Dmytriyenko <denys@konsulko.com>,
+	Radoslav Pesek <radoslav.pesek@microstep-mis.com>
+Subject: [dunfell][PATCH v2] linux-ti-mainline: unbreak devtool
+Date: Thu,  8 Sep 2022 20:20:54 +0000
+Message-Id: <20220908202054.3800302-1-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 08 Sep 2022 20:18:47 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15008
+ <meta-ti@lists.yoctoproject.org>; Thu, 08 Sep 2022 20:21:07 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15009
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
@@ -57,8 +58,11 @@ Work around the issue by moving ti-upstream-tools inside the kernel sourc=
 e tree,
 i.e. inside ${S}
 
+Reported-by: Radoslav Pesek <radoslav.pesek@microstep-mis.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
+v2 - add accidentally forgotten Reported-by: tag
+
  recipes-kernel/linux/linux-ti-mainline_git.bb | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
