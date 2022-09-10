@@ -1,77 +1,144 @@
-Return-Path: <afd@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 790EAECAAA1
-	for <webhook@archiver.kernel.org>; Fri,  9 Sep 2022 16:45:47 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web08.134.1662741944351797909
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EBC02C6FA82
+	for <webhook@archiver.kernel.org>; Sat, 10 Sep 2022 23:21:28 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.4973.1662852088192693803
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 09 Sep 2022 09:45:44 -0700
+ Sat, 10 Sep 2022 16:21:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=HNoG8uLK;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: afd@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 289Gjh1L084865
-	for <meta-ti@lists.yoctoproject.org>; Fri, 9 Sep 2022 11:45:43 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1662741943;
-	bh=7rlyIwsOBEnjJEyR+wc+lLWErT4Ff/lpqaGkBp0bQEU=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=HNoG8uLKLjSCXuc16C2FKeXAvGkwy4PmHfkrIYVvYsFVEp2pHQTdJ8PiodnkfMLWL
-	 FKj/d536sFwqWk02D0SuWUhLXCHcAG3/SVYZHolarjJS7s7Hqe6QrApyRWzgjdAHrP
-	 rJGdopXxIjQNtelK68VAUnMr+YkM1NuSmDHSEeXo=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 289Gjh78044474
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Fri, 9 Sep 2022 11:45:43 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Fri, 9 Sep
- 2022 11:45:43 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
- Frontend Transport; Fri, 9 Sep 2022 11:45:43 -0500
-Received: from [10.250.33.246] (ileax41-snat.itg.ti.com [10.172.224.153])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 289GjgbV100530;
-	Fri, 9 Sep 2022 11:45:42 -0500
-Message-ID: <9ec2c1b8-becd-086c-fac8-28035c82c4d5@ti.com>
-Date: Fri, 9 Sep 2022 11:45:42 -0500
+ dkim=missing;
+ spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
+ mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3754140D4C;
+	Sat, 10 Sep 2022 23:21:27 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id E55cmcs0lRI3; Sat, 10 Sep 2022 23:21:27 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net
+ [100.15.80.88])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0F3C340D4B;
+	Sat, 10 Sep 2022 23:21:24 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 059F31749CE; Sat, 10 Sep 2022 19:21:22 -0400 (EDT)
+Date: Sat, 10 Sep 2022 19:21:21 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: m-chawdhry@ti.com
+Cc: meta-ti@lists.yoctoproject.org, Andrew Davis <afd@ti.com>,
+	Nishanth Menon <nm@ti.com>
+Subject: Re: [meta-ti][dunfell][PATCH 2/3] ti-rtos-firmware: j7200-hs-evm:
+ add secure firmware images
+Message-ID: <20220910232121.GO18429@denix.org>
+References: <20220909055055.38394-1-m-chawdhry@ti.com>
+ <20220909055055.38394-3-m-chawdhry@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [meta-ti] [dunfell][PATCH] ti-sci-fw: Use d.getVar() in DEPENDS
- expression
-Content-Language: en-US
-To: "Sapp, Randolph" <rs@ti.com>
-CC: <reatmon@ti.com>, <meta-ti@lists.yoctoproject.org>
-References: <20220902201247.605908-1-rs@ti.com>
- <6015a645-b1ea-c87c-2b1e-00870118dea1@ti.com> <13BYHR.0IQPEKD6T7ZE3@ti.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <13BYHR.0IQPEKD6T7ZE3@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220909055055.38394-3-m-chawdhry@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 09 Sep 2022 16:45:47 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15016
+ <meta-ti@lists.yoctoproject.org>; Sat, 10 Sep 2022 23:21:28 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15017
 
-On 9/9/22 11:28 AM, Sapp, Randolph wrote:
-> On Tue, Sep 6, 2022 at 13:37, Andrew Davis <afd@ti.com> wrote:
->> I had originally done it this way (just due to copy/paste from elsewhere), but
->> couldn't think of a case that would cause mangling, do you have an example?
+On Fri, Sep 09, 2022 at 11:20:54AM +0530, Manorit Chawdhry via lists.yoctoproject.org wrote:
+> Adds support for secure firmware images in J7200 HS EVM.
 > 
-> Ah, sorry. I didn't actually spend the time to see if it was actually mangling from the variable or just Yocto moving away from this notation and python choking on the un-expanded variable.
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> ---
+>  recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 28 ++++++++++++++++++++++
+>  1 file changed, 28 insertions(+)
 > 
-> https://docs.yoctoproject.org/dunfell/ref-manual/migration-2.1.html?highlight=d+getvar#variable-expansion-in-python-functions
-> 
-> 
+> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+> index 78faeae3..f7a28218 100644
+> --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+> @@ -89,6 +89,18 @@ do_install_prepend_j7200-hs-evm() {
+>                  mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
+>                  ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
+>          )
+> +        (
+> +          cd ${RTOS_IPC_FW_DIR}; \
 
-I see, well if Yocto is moving away they must be doing it
-for a good reason, so all good here.
+Please keep formatting and indentation similar to existing code.
 
-Andrew
+
+
+> +                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_test_mcu2_0_release_strip.xer5f \
+> +                        ipc_echo_test_mcu2_0_release_strip.xer5f.signed; \
+> +                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_test_mcu2_1_release_strip.xer5f \
+> +                        ipc_echo_test_mcu2_1_release_strip.xer5f.signed; \
+> +        )
+> +        (
+> +          cd ${RTOS_ETH_FW_DIR}; \
+> +                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh app_remoteswitchcfg_server_strip.xer5f \
+> +                        app_remoteswitchcfg_server_strip.xer5f.signed;
+> +        )
+>  }
+>  
+>  # J7 HS support
+> @@ -169,11 +181,16 @@ do_install_j7200-hs-evm() {
+>      install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
+>      install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
+>      install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
+> +    # Signed Firmwares
+> +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_strip.xer5f.signed ${LEGACY_IPC_FW_DIR}
+> +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_strip.xer5f.signed ${LEGACY_IPC_FW_DIR}
+>      # DM Firmware
+>      install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
+>      # ETH firmware
+>      install -d ${LEGACY_ETH_FW_DIR}
+>      install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.xer5f ${LEGACY_ETH_FW_DIR}
+> +    # ETH Signed firmware
+> +    install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.xer5f.signed ${LEGACY_ETH_FW_DIR}
+>  }
+>  
+>  do_install_j721s2-evm() {
+> @@ -301,6 +318,8 @@ ALTERNATIVE_${PN}_j7200-hs-evm = "\
+>                      j7200-mcu-r5f0_1-fw \
+>                      j7200-main-r5f0_0-fw \
+>                      j7200-main-r5f0_1-fw \
+> +                    j7200-main-r5f0_0-fw-sec \
+> +                    j7200-main-r5f0_1-fw-sec \
+>                      "
+>  
+>  ALTERNATIVE_${PN}_j721s2-evm = "\
+> @@ -367,6 +386,9 @@ TARGET_MCU_R5FSS0_1_j7200-hs-evm = "j7200-mcu-r5f0_1-fw"
+>  TARGET_MAIN_R5FSS0_0_j7200-hs-evm = "j7200-main-r5f0_0-fw"
+>  TARGET_MAIN_R5FSS0_1_j7200-hs-evm = "j7200-main-r5f0_1-fw"
+>  
+> +TARGET_MAIN_R5FSS0_0_SIGNED_j7200-hs-evm = "j7200-main-r5f0_0-fw-sec"
+> +TARGET_MAIN_R5FSS0_1_SIGNED_j7200-hs-evm = "j7200-main-r5f0_1-fw-sec"
+> +
+>  TARGET_MCU_R5FSS0_0_j721s2-evm = "j721s2-mcu-r5f0_0-fw"
+>  TARGET_MCU_R5FSS0_1_j721s2-evm = "j721s2-mcu-r5f0_1-fw"
+>  TARGET_MAIN_R5FSS0_0_j721s2-evm = "j721s2-main-r5f0_0-fw"
+> @@ -420,6 +442,9 @@ ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_M
+>  ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
+>  ALTERNATIVE_LINK_NAME[j7200-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
+>  
+> +ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw-sec] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0_SIGNED}"
+> +ALTERNATIVE_LINK_NAME[j7200-main-r5f0_1-fw-sec] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1_SIGNED}"
+> +
+>  ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
+>  ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
+>  ALTERNATIVE_LINK_NAME[j721s2-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
+> @@ -466,6 +491,9 @@ ALTERNATIVE_TARGET[j7200-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_e
+>  ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw] = "${base_libdir}/firmware/ethfw/app_remoteswitchcfg_server_strip.xer5f"
+>  ALTERNATIVE_TARGET[j7200-main-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f"
+>  
+> +ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw-sec] = "${base_libdir}/firmware/ethfw/app_remoteswitchcfg_server_strip.xer5f.signed"
+> +ALTERNATIVE_TARGET[j7200-main-r5f0_1-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f.signed"
+> +
+>  ALTERNATIVE_TARGET[j721s2-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
+>  ALTERNATIVE_TARGET[j721s2-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
+>  ALTERNATIVE_TARGET[j721s2-main-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_0_release_strip.xer5f"
+> -- 
+> 2.34.1
 
