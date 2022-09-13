@@ -2,38 +2,38 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2CFAC6FA8A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E1B12C6FA8D
 	for <webhook@archiver.kernel.org>; Tue, 13 Sep 2022 03:56:05 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.886.1663041351830870557
+ by mx.groups.io with SMTP id smtpd.web10.835.1663041348399963810
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 12 Sep 2022 20:55:52 -0700
+ Mon, 12 Sep 2022 20:55:48 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4C28640D6E
-	for <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:51 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3BE7040D8E
+	for <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:46 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iD1B-eWK0e_8 for <meta-ti@lists.yoctoproject.org>;
-	Tue, 13 Sep 2022 03:55:51 +0000 (UTC)
+	with ESMTP id qBPTTlgygBX0 for <meta-ti@lists.yoctoproject.org>;
+	Tue, 13 Sep 2022 03:55:46 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net
  [100.15.80.88])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0FA7C40D7E
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D4E9840D7A
 	for <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:44 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id A3EB81749E2
-	for <meta-ti@lists.yoctoproject.org>; Mon, 12 Sep 2022 23:55:40 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 8B6741749F8
+	for <meta-ti@lists.yoctoproject.org>; Mon, 12 Sep 2022 23:55:41 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master/kirkstone][PATCH 22/65] ti-linux-fw: Bump to 08.04.00.001
- release
-Date: Tue, 13 Sep 2022 03:54:58 +0000
-Message-Id: <20220913035541.2364351-23-denis@denix.org>
+Subject: [master/kirkstone][PATCH 44/65] conf: dra7xx-evm: avoid missing dtb
+ files for linux-ti-mainline
+Date: Tue, 13 Sep 2022 03:55:20 +0000
+Message-Id: <20220913035541.2364351-45-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220913035541.2364351-1-denis@denix.org>
 References: <20220913035541.2364351-1-denis@denix.org>
@@ -43,38 +43,34 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:56:05 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15084
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15061
 
-From: Ryan Eatmon <reatmon@ti.com>
+From: Drew Fustini <dfustini@baylibre.com>
 
-Updated the ti-linux-fw version for 08.04.00.001
+Avoid the inclusion of device tree files that do not exist upstream
+when virtual/kernel is linux-ti-mainline for the dra7xx-evm MACHINE.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Signed-off-by: Drew Fustini <dfustini@baylibre.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-ti-bsp/conf/machine/dra7xx-evm.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-t=
-i-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 52766ac0..ffbb1bba 100644
---- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -20,12 +20,12 @@ IMG_DEC_FW_VERSION =3D "1.0"
- CNM_WAVE521_FW_VERSION =3D "1.0.00"
- TIFS_LPM_STUB_FW_VERSION =3D "08.03.02"
-=20
--TI_LINUX_FW_SRCREV ?=3D "5aa15e59927a5c4acc4dd61d213ab6cef7c0209f"
-+TI_LINUX_FW_SRCREV ?=3D "224f82474e4029dd2e550600ba7e59f687ff7131"
- SRCREV =3D "${TI_LINUX_FW_SRCREV}"
-=20
- BRANCH ?=3D "ti-linux-firmware"
-=20
--K3_IMAGE_GEN_SRCREV ?=3D "79492803a70ba1918116ac28e18c74670cdda2b9"
-+K3_IMAGE_GEN_SRCREV ?=3D "c43068a114a86daad9241724ef8e3afda45be9be"
- SRCREV_imggen =3D "${K3_IMAGE_GEN_SRCREV}"
- SRCREV_FORMAT =3D "imggen"
-=20
+diff --git a/meta-ti-bsp/conf/machine/dra7xx-evm.conf b/meta-ti-bsp/conf/=
+machine/dra7xx-evm.conf
+index 5fa1dfa5..813e0e06 100644
+--- a/meta-ti-bsp/conf/machine/dra7xx-evm.conf
++++ b/meta-ti-bsp/conf/machine/dra7xx-evm.conf
+@@ -12,7 +12,7 @@ KERNEL_DEVICETREE =3D " \
+     dra7-evm.dtb \
+     ti/dra7x-evm-osd-lcd-common.dtbo \
+     dra71-evm.dtb \
+-    dra71-evm-nand.dtb \
++    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-=
+ti-mainline', '', 'dra71-evm-nand.dtb', d)} \
+     ti/dra71-evm-lcd-auo-g101evn01.0.dtbo \
+     dra72-evm.dtb \
+     dra72-evm-revc.dtb \
 --=20
 2.25.1
 
