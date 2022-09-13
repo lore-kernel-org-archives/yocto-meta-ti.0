@@ -2,10 +2,10 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87121C6FD1F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91674C6FD20
 	for <webhook@archiver.kernel.org>; Tue, 13 Sep 2022 03:55:55 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.880.1663041348305109013
+ by mx.groups.io with SMTP id smtpd.web12.830.1663041348074083600
  for <meta-ti@lists.yoctoproject.org>;
  Mon, 12 Sep 2022 20:55:48 -0700
 Authentication-Results: mx.groups.io;
@@ -13,27 +13,27 @@ Authentication-Results: mx.groups.io;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 2F6B040D92
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 0F0A940D9E
 	for <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:46 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id J-hYBOkD5ruY for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id oEzVyC-u4FMx for <meta-ti@lists.yoctoproject.org>;
 	Tue, 13 Sep 2022 03:55:46 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net
  [100.15.80.88])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4DB3440D93
-	for <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:44 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id EE07340D8F
+	for <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:43 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 6B2AE1749F5
-	for <meta-ti@lists.yoctoproject.org>; Mon, 12 Sep 2022 23:55:41 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id BC5201749E5
+	for <meta-ti@lists.yoctoproject.org>; Mon, 12 Sep 2022 23:55:40 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master/kirkstone][PATCH 41/65] u-boot-ti-staging: Bump to
- 08.04.00.004 release
-Date: Tue, 13 Sep 2022 03:55:17 +0000
-Message-Id: <20220913035541.2364351-42-denis@denix.org>
+Subject: [master/kirkstone][PATCH 25/65] k3conf: update SRCREV to add J721S2
+ support
+Date: Tue, 13 Sep 2022 03:55:01 +0000
+Message-Id: <20220913035541.2364351-26-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220913035541.2364351-1-denis@denix.org>
 References: <20220913035541.2364351-1-denis@denix.org>
@@ -43,35 +43,34 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:55 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15056
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15048
 
-From: Ryan Eatmon <reatmon@ti.com>
+From: Bryan Brattlof <bb@ti.com>
 
-Updated the u-boot version for 08.04.00.004
+update the SHA of k3conf to pickup j721s2 support
 
+Signed-off-by: Bryan Brattlof <bb@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb =
-b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-index 91ae0319..a1d2f14c 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-@@ -2,8 +2,8 @@ require u-boot-ti.inc
+diff --git a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb b/meta-ti-=
+bsp/recipes-devtools/k3conf/k3conf_git.bb
+index 3f542da4..af48337f 100644
+--- a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
++++ b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
+@@ -8,7 +8,7 @@ PV =3D "0.2+git${SRCPV}"
+ COMPATIBLE_MACHINE =3D "k3"
 =20
- LIC_FILES_CHKSUM =3D "file://Licenses/README;md5=3D5a7450c57ffe5ae63fd73=
-2446b988025"
+ BRANCH ?=3D "master"
+-SRCREV =3D "966a5695b73bc53039ca60d196b77de0640088d4"
++SRCREV =3D "4ca1c3d330bc1de779909e733483b09a1fc4fe44"
 =20
--PR =3D "r30"
-+PR =3D "r31"
+ SRC_URI =3D "git://git.ti.com/k3conf/k3conf.git;protocol=3Dgit;branch=3D=
+${BRANCH}"
 =20
- BRANCH =3D "ti-u-boot-2021.01"
-=20
--SRCREV =3D "5de948718fab9c024b56268860a06fab9c7d514c"
-+SRCREV =3D "24bb75ba60e716a606bb90150348bfe3a21a5120"
 --=20
 2.25.1
 
