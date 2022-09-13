@@ -2,10 +2,10 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B29BC6FD1A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76C50C6FD18
 	for <webhook@archiver.kernel.org>; Tue, 13 Sep 2022 03:55:55 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web08.840.1663041348333415404
+ by mx.groups.io with SMTP id smtpd.web11.796.1663041348467707977
  for <meta-ti@lists.yoctoproject.org>;
  Mon, 12 Sep 2022 20:55:48 -0700
 Authentication-Results: mx.groups.io;
@@ -13,27 +13,27 @@ Authentication-Results: mx.groups.io;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 3591B40D74
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 4A83340D7A
 	for <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:46 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kNCDBoyZ8owa for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id A3mmkjxr8oup for <meta-ti@lists.yoctoproject.org>;
 	Tue, 13 Sep 2022 03:55:46 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net
  [100.15.80.88])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5704540D94
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id F0E9040D9C
 	for <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:44 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 75F5D1749F6
+	by mail.denix.org (Postfix) with ESMTP id 97D171749FA
 	for <meta-ti@lists.yoctoproject.org>; Mon, 12 Sep 2022 23:55:41 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master/kirkstone][PATCH 42/65] linux-ti-staging: Bump to
- 08.04.00.004 release
-Date: Tue, 13 Sep 2022 03:55:18 +0000
-Message-Id: <20220913035541.2364351-43-denis@denix.org>
+Subject: [master/kirkstone][PATCH 46/65] conf: am43: avoid missing dtb files
+ for linux-ti-mainline
+Date: Tue, 13 Sep 2022 03:55:22 +0000
+Message-Id: <20220913035541.2364351-47-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220913035541.2364351-1-denis@denix.org>
 References: <20220913035541.2364351-1-denis@denix.org>
@@ -43,33 +43,42 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:55 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15058
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15062
 
-From: Ryan Eatmon <reatmon@ti.com>
+From: Drew Fustini <dfustini@baylibre.com>
 
-Updated the linux version for 08.04.00.004
+Avoid the inclusion of device tree files that do not exist upstream
+when virtual/kernel is linux-ti-mainline for the am43xx machines.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Signed-off-by: Drew Fustini <dfustini@baylibre.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-ti-bsp/conf/machine/include/ti43x.inc | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb b/=
-meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
-index af848175..9a80870e 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
-@@ -25,7 +25,7 @@ S =3D "${WORKDIR}/git"
+diff --git a/meta-ti-bsp/conf/machine/include/ti43x.inc b/meta-ti-bsp/con=
+f/machine/include/ti43x.inc
+index 0da5f761..5509a54d 100644
+--- a/meta-ti-bsp/conf/machine/include/ti43x.inc
++++ b/meta-ti-bsp/conf/machine/include/ti43x.inc
+@@ -20,9 +20,11 @@ PREFERRED_PROVIDER_virtual/gpudriver ?=3D "ti-sgx-ddk-=
+km"
+ KERNEL_IMAGETYPE =3D "zImage"
 =20
- BRANCH =3D "ti-linux-5.10.y"
+ KERNEL_DEVICETREE =3D " \
+-    am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb \
++    am437x-gp-evm.dtb \
++    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-=
+ti-mainline', '', 'am437x-gp-evm-hdmi.dtb', d)} \
+     am437x-sk-evm.dtb am437x-idk-evm.dtb \
+-    am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb \
++    am43x-epos-evm.dtb \
++    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-=
+ti-mainline', '', 'am43x-epos-evm-hdmi.dtb', d)} \
+ "
 =20
--SRCREV =3D "a293790a7822997b0ff63bdd95f580ac6e2d85e2"
-+SRCREV =3D "b56b1fd4a1c0e331114d15f7030bc8397a7e7b9b"
- PV =3D "5.10.120+git${SRCPV}"
-=20
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebu=
-ild
+ KERNEL_DEVICETREE +=3D "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES',=
+ '1', 'am437x-idk-pru-excl-uio.dtb', '', d)}"
 --=20
 2.25.1
 
