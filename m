@@ -2,38 +2,38 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 079B6C54EE9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08BD4C6FA86
 	for <webhook@archiver.kernel.org>; Tue, 13 Sep 2022 03:55:55 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.843.1663041351825505429
+ by mx.groups.io with SMTP id smtpd.web12.826.1663041344552917780
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 12 Sep 2022 20:55:52 -0700
+ Mon, 12 Sep 2022 20:55:44 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4AAB340D4B
-	for <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:51 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 93AC340D22
+	for <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:43 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NrpAS2VwJWSj for <meta-ti@lists.yoctoproject.org>;
-	Tue, 13 Sep 2022 03:55:51 +0000 (UTC)
+	with ESMTP id bnJ4GCTihRNm for <meta-ti@lists.yoctoproject.org>;
+	Tue, 13 Sep 2022 03:55:43 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net
  [100.15.80.88])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0C8CE40D7D
-	for <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:44 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8169B40D68
+	for <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:43 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 8E7931749E0
-	for <meta-ti@lists.yoctoproject.org>; Mon, 12 Sep 2022 23:55:40 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id D8CA31749CE
+	for <meta-ti@lists.yoctoproject.org>; Mon, 12 Sep 2022 23:55:39 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master/kirkstone][PATCH 20/65] linux-ti-staging: Bump to
- 08.04.00.001 release
-Date: Tue, 13 Sep 2022 03:54:56 +0000
-Message-Id: <20220913035541.2364351-21-denis@denix.org>
+Subject: [master/kirkstone][PATCH 02/65] ti-tros-firmware: Add DM firmware
+ binary to deploy directory for am62xx-evm
+Date: Tue, 13 Sep 2022 03:54:38 +0000
+Message-Id: <20220913035541.2364351-3-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220913035541.2364351-1-denis@denix.org>
 References: <20220913035541.2364351-1-denis@denix.org>
@@ -43,35 +43,52 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Tue, 13 Sep 2022 03:55:55 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15085
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15025
 
-From: Ryan Eatmon <reatmon@ti.com>
+From: Aparna M <a-m1@ti.com>
 
-Updated the linux version for 08.04.00.001
+The DM firmware binary is required for building uboot binaries for
+am62xx-evm  using toplevel makefile in SDK. Add this file to deploy
+directory so it can be included in prebuilt-images directory of SDK
+for am62xx-evm.
 
+Signed-off-by: Aparna M <a-m1@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb       | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb b/=
-meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
-index 86ba2145..bc024cf6 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
-@@ -25,8 +25,8 @@ S =3D "${WORKDIR}/git"
+diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/met=
+a-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index 93429570..317ff4c4 100644
+--- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -167,6 +167,16 @@ do_install:am62xx() {
+     install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_stri=
+p.xer5f ${LEGACY_DM_FW_DIR}
+ }
 =20
- BRANCH =3D "ti-linux-5.10.y"
-=20
--SRCREV =3D "9e58028f945f077b3e0d7423c6af8938ec46a80a"
--PV =3D "5.10.109+git${SRCPV}"
-+SRCREV =3D "d5f4ca50bbb42d7872dfa7286c7a0f9f5699e94b"
-+PV =3D "5.10.120+git${SRCPV}"
-=20
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebu=
-ild
- MACHINE_KERNEL_PR:append =3D "b"
++
++do_deploy() {
++    install -d ${DEPLOYDIR}
++}
++
++do_deploy:am62xx() {
++    install -d ${DEPLOYDIR}
++    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_stri=
+p.xer5f ${DEPLOYDIR}
++}
++
+ # Set up names for the firmwares
+ ALTERNATIVE:${PN}:am65xx =3D "\
+                     am65x-mcu-r5f0_0-fw \
+@@ -355,3 +365,5 @@ INSANE_SKIP:${PN} +=3D "arch"
+ # we don't want to configure and build the source code
+ do_compile[noexec] =3D "1"
+ do_configure[noexec] =3D "1"
++
++addtask deploy after do_install
 --=20
 2.25.1
 
