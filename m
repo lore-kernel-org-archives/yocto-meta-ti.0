@@ -1,329 +1,387 @@
-Return-Path: <paul.barker@sancloud.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85C8FC32771
-	for <webhook@archiver.kernel.org>; Wed, 28 Sep 2022 14:21:49 +0000 (UTC)
-Received: from GBR01-LO2-obe.outbound.protection.outlook.com
- (GBR01-LO2-obe.outbound.protection.outlook.com [40.107.10.134])
- by mx.groups.io with SMTP id smtpd.web08.8592.1664374904955141155
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9224EC433FE
+	for <webhook@archiver.kernel.org>; Thu, 29 Sep 2022 20:19:08 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.1043.1664482739159315657
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 28 Sep 2022 07:21:45 -0700
+ Thu, 29 Sep 2022 13:18:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@sancloud.onmicrosoft.com
- header.s=selector2-sancloud-onmicrosoft-com header.b=ck2VUSNI;
- spf=pass (domain: sancloud.com, ip: 40.107.10.134,
- mailfrom: paul.barker@sancloud.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HDKg6BnBOPETHSfELkBwSk0QegvaBvcJlPcV87KtlJgm4jqJgTbbcluIImc4pNAKhwJE6WvxpiuVIOHg60g6+aCjwPkTV/t6Mp0BD0BbJJzX3OgMkcf6dTK3e0ddYEBtpzOCC8cqee86dGkMmGs55h6Cbr1EDv7G/arzXl3dQuELHuh7Zq3C3UMOvx535A5E1AxaBg0Sxl1KRRiUFwmV+VAXONiL2HKwJhCOyLnCcrZrpAXYEYogzE9+HqVQjO307IiBX+8dkSXH9ZhkdI93O890XujkxJcBQ1kyJYO0zdAHyQKbHE7GqKHgPzk/iyYOpbJj+4wPdc1T6r6C5YIsfg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cvgIiQ2wULusL32qDt2QgW6dh67H+flTN0PmlB6IqRU=;
- b=J4JlvcF5I/1+1MTVEaHRT8bsLJfbpm5fuQ2IR85Gc0SGLROAkKvJbCKn2FlEXcfiMmRYyVqWDL7MLkEO/UPclVw2EoPh3PxSkOs5z005JI2KG8DMksUfwyuOZZLcG0f1Ht90PJ7w5XRpFzKGEtu2VoC6PJS375labmM3RtyL93NKvR3gl1phn7E/nl02ouhz4fjuub8ajtu/pJfweVkRmKfh9M/laNX5QmDzPHUwUCbPvG9ntx/Hp4rQHI9RWx8uuDyLU68XRzdg8e9dEP80mV5ahOaFSiPBjWLIZEVkeDiXwtG4s4fe4/vs47nkpGbfKWRC3Wc0idsTBzTlyjsMiQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=sancloud.com; dmarc=pass action=none header.from=sancloud.com;
- dkim=pass header.d=sancloud.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sancloud.onmicrosoft.com; s=selector2-sancloud-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cvgIiQ2wULusL32qDt2QgW6dh67H+flTN0PmlB6IqRU=;
- b=ck2VUSNIP8ntxTG45+VIWTlW2QrsLVWfwoXImwm2BhdE5GS8IsClSxoHQU2/iwkb7VmXeBMhyQKNLdSFN/ktCRMnf4S1GzCTRktxrmfMK8Wnx2Eh68mMDfCJHjnmu9Ol7J9eg0qZyj25LWkxaZ2xZBgut2VNKA0N/CtO992le7M=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=sancloud.com;
-Received: from CWLP123MB2241.GBRP123.PROD.OUTLOOK.COM (2603:10a6:401:61::19)
- by CWLP123MB2868.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:5d::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.17; Wed, 28 Sep
- 2022 14:21:42 +0000
-Received: from CWLP123MB2241.GBRP123.PROD.OUTLOOK.COM
- ([fe80::11d5:40af:9060:6b08]) by CWLP123MB2241.GBRP123.PROD.OUTLOOK.COM
- ([fe80::11d5:40af:9060:6b08%6]) with mapi id 15.20.5654.025; Wed, 28 Sep 2022
- 14:21:42 +0000
-Message-ID: <b3b49652-0d17-9819-5cf5-f1c7cc280701@sancloud.com>
-Date: Wed, 28 Sep 2022 15:21:42 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.0
-To: Andrew Davis <afd@ti.com>, meta-ti@lists.yoctoproject.org,
- Ryan Eatmon <reatmon@ti.com>, Denys Dmytriyenko <denys@konsulko.com>
-References: <0ba3f29c-3e37-ab9d-93e1-82e9da6ccc9a@sancloud.com>
- <f991b40b-d8be-ed31-ec49-43931f3fc338@ti.com>
-From: Paul Barker <paul.barker@sancloud.com>
-Subject: Re: [meta-ti] Build failure for beaglebone on kirkstone branch
-In-Reply-To: <f991b40b-d8be-ed31-ec49-43931f3fc338@ti.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------mwOzb0crpNjnjW6jzO9jjDFc"
-X-ClientProxiedBy: LO4P265CA0090.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:2bc::11) To CWLP123MB2241.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:401:61::19)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=E/KsuZrL;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 28TKIs1I080306;
+	Thu, 29 Sep 2022 15:18:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1664482734;
+	bh=WF1WJhcIa8SPDQbPAK7jZDDR/N8zj8XYVWTSmk17hxg=;
+	h=From:To:Subject:Date;
+	b=E/KsuZrLpfvrx0t97SgtGk6Lf0e9qqjCiHseUpbpDzZ/nqe/dBPvt4jb07iGmer8o
+	 tGlSn7YZcJ9ObymxT8KQVmDGNAowlZfrzbGE4fgkWd0+1blcaVtTh73tmwALE8KHvU
+	 rPvGv+1D7BDSX8NcGGXv61g/Jzcn5Q42Gi9kaaQ0=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 28TKIsFE060058
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 29 Sep 2022 15:18:54 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Thu, 29
+ Sep 2022 15:18:54 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
+ Frontend Transport; Thu, 29 Sep 2022 15:18:54 -0500
+Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 28TKIsT3025099;
+	Thu, 29 Sep 2022 15:18:54 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1odzzh-0002w4-UL; Thu, 29 Sep 2022 15:18:53 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master/dunfell][PATCH v3] machine: Add j784s4-evm
+ configuration.
+Date: Thu, 29 Sep 2022 15:18:53 -0500
+Message-ID: <20220929201853.11242-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CWLP123MB2241:EE_|CWLP123MB2868:EE_
-X-MS-Office365-Filtering-Correlation-Id: 101885bd-33af-4802-3759-08daa15cc3b0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	O8AU1Wwk/7dJbI+3qbIOkW2AjjZHSweccukBajVDRVFS+pFTtHpLkz+TenwkuqnQTznjLd20m6zKguVu6tv1tLbew2zUF0OQikocXlWbsS1KYzunahloLs+zuhUz1WOgdvXoNzJ3vmoUlJF24x5X7x1xYSKHAP/qd2sdpayBEKOoWw8LgohA8LMx7LrrpByhD56DszFcKgBslXXkd2gLU46Eiih3hLYYBcmISC40mbQ46v6HNwHbAieNR14s8qD1uA7HHKNbijdyU/MPmdCKR+LVHbCm5ycjK2JTUGFzw3TVLXTTcS1njJiEtAJhy6FGyAoD2nMOsE68LD8TIBWYW9Od4VMaleciJQgjkqecHgEVydqaU+s1fqTCggbHwksbpzxheceaHmiQFuDEObNlju9Rb1jGOZZwGc80vCY03ylrKIil+vNkItO9svCJkyJf6eMATh92Q0jSO1jyzhUH8zo/dU7R2iJOn5zrqrrwGnKSCBoSaWCJaR+NhVKj14keoqEYLLmhGq+lmBWey67HitxUn2PsbHxNgoU9yrK1GWzm/61T6ATDvL9d9lhWZk7bMyFcntmCjvPwuAtm4cT3jD3eulxR9sedYRd+yGWpoSHn/WdmRM/SFpqbXk+WYX6nZCQpKeYmRflqUv6ghoaodIYT5lzDB3Bxt9gfxiv7e3orih64GpJrv7DJ2tso5N1dfQiEQTzU/gV0R5N3HgxUlFHrbVL+YR7d52Y9ZmG6+QL2eY53/6DvadDrPcCKhRbze2wuetKmlFDD9LGBCLaqfHhKSr7zHMftS85HLTPWiA2XuTKdRF8KDHXE+dIQWQcg+iVkYYKmancNSAavKbSSehOFfcGQ1gALEgIr+f8QfubC4Rf8KSfuh8pwbq/Be1zV
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CWLP123MB2241.GBRP123.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230022)(346002)(396003)(376002)(39830400003)(136003)(366004)(451199015)(478600001)(6486002)(31686004)(966005)(53546011)(52116002)(33964004)(6506007)(186003)(110136005)(316002)(2906002)(2616005)(38350700002)(21480400003)(83380400001)(38100700002)(26005)(6512007)(36756003)(41300700001)(8676002)(66946007)(86362001)(66556008)(31696002)(44832011)(235185007)(8936002)(5660300002)(66476007)(175373001)(45980500001)(43740500002);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?Q3dFaW9JT3NCV0hNTTlXZkJVT1pFWkZ3ang4ekNWNUQxVUdVRllKRHdaTWt0?=
- =?utf-8?B?ZVlrcnpPWmdXOVlLWGZyamFmNFI4VDZsTjM3dzA4V0d4MVgvTUpIeXFpWmJJ?=
- =?utf-8?B?SnhoUVdTdnhlczc2MjFWSTByb3J3UzhpbmpwRFZCYlp5RTY2dVJ4VENBMmkw?=
- =?utf-8?B?SGhKZ1k5eWhDQ3lJWXVRbU4rMmJYMS91WjhaWGRzTDdlWUlBMVJRN3I4a3BI?=
- =?utf-8?B?UDlEdGI4RHNYTFBXVjFPVFFHWGpJS3FwNWwvaExUdDU2NVQ5TmUwTm9pRGRt?=
- =?utf-8?B?WGZ4YlFaUW9QcXlha09jUUZsbDJpS2JIbkNXZzI3aFJ1anY2UDdnQWJieFRo?=
- =?utf-8?B?TGJxUDBKaHBEeWNIUTBWMGNtanlIM3hkM0Y3NVFjTEdzYUFsRDJCejZTNWxV?=
- =?utf-8?B?dWo4WGJrVnpkVkltM1hFM0Q4QUJES0VuakJwQkdsdE5mRUFaYmhpZmxyUlBH?=
- =?utf-8?B?UGxtbVlla2JGS1BXK2NXL1JXaXQ2MVZvQ1JRZktzZzdZMWszUVljQzJFb2hU?=
- =?utf-8?B?djBnYitQeDlLN3NZT1I1dS9VbEdZNHJHZGh4dkVsQVhMTjZzUUtUZ0xiV0p6?=
- =?utf-8?B?cDdOaTYyTzlaK2FodEdodlRpOW5ITXZDVkJSKytyYkxSVVUwTjZkOUVrQlhu?=
- =?utf-8?B?VlFGcHNJY1ZKMTZJS1pzR3QxVGZYamxMRlBJanIzUWNMa05QeHY3SzJCSnhS?=
- =?utf-8?B?NWRDSVJ2anJsVzhJV0tPZXQxSDFPdm1jT1hCYjBNd1VaMmR0UFRBV0xDSVBY?=
- =?utf-8?B?VG9oN2RGK0VlT1JXeDZ6ckJBdmdrbC9HaFptZ0xhdk5qWks4S0hzMVB5Mk5n?=
- =?utf-8?B?L3VBZitSZElIb0ZubWtKQUpjVHlZN2NGYStTZHRRWldhMllDbzEvMWttMno1?=
- =?utf-8?B?bzhzUHJZcWFFN0FxYmpMT0VvZHVnNWtnR01aeEtyVllVS2NWamdjVkhWTUcw?=
- =?utf-8?B?ZVRud1pNdHIxQUswZU9YY0VEZHhSRWx6cUpWWUduYnN6bnd6UXo3QWg3WkdU?=
- =?utf-8?B?cDZhNnVrcVlOZUVIcWpXdkRxdC9pbUw3OXFMQmpvdm4zbFdDMHE1Nzgzbndz?=
- =?utf-8?B?TVBVdVBIektmWGlpVCtxVkYrS243SjhjSWRWYUdhZjd2dHlwM2x3L2UrVUFP?=
- =?utf-8?B?VzVvUWdpc2YxemN1ZFkzQ0dqZDZhbTY0OEhpb0VJUWhER3hReU9MRyt2YkV1?=
- =?utf-8?B?eXFTd3EvR0c1WnFDbWVmTllvMnUvV01HU0M1STFLTDVwaGtQZ2hqeEJVMXcy?=
- =?utf-8?B?S2tVWmpnYVQzaEwwL0lHczh1SElXdDVTUlVITjNOSE9PakVuSGFPWVo2WS9a?=
- =?utf-8?B?QW9qaU0xZU9rRkNLZ0tRd3FHWGM1QmFSdDNicWtSYnhYWXVSUjRuUit4dnBn?=
- =?utf-8?B?LzRKY1gvVFUzaTNVbUxQVU9vNk1ub3ZPT1dGKy9NWTlhNlVFTG1Fc1gySGFl?=
- =?utf-8?B?YTg3cTBSY2xNUkJNMzQwNU5MSXJ1UElVOWdZdGoyQXdRUUYxbEpENEVGZVNX?=
- =?utf-8?B?ZU51YkMvMmYyUVlJTXU5ay9zWmRyemF3VzB3cTVzYkE3TXRVVTJZa25VSFJw?=
- =?utf-8?B?aGU4VG9KakdVZ1VibHF4dUdtaU92cHp4d1ExTXREUW52TEQwdkpTbndrQzFj?=
- =?utf-8?B?UlBQemd0WjZqTEZqamx3MElLYXFmTlNiejk1QVJHK0ptUklwOUY0ZzdURHZD?=
- =?utf-8?B?Z3RkTUpBYmU1SHVTRFBGQ2ZWeitrZVZMZUFDVzNON2xSZ3R6ODZyUnR3SE52?=
- =?utf-8?B?L29wTldNeWRXS3FORUtXRXhwc0lVTWlTeXhTL0Q3UGpDNHJLQmx2ZFRKNzZq?=
- =?utf-8?B?U2V3VjJuZURObzJ0Y2ZQUVpLanlWR25NbzFReGhNK2NsU2MxNysrRXhPeHdD?=
- =?utf-8?B?RXY0aW1tOEVSeUpPZ2xLSlFmSFk5VDNWSVBUcDV2OHNrc0laVnhOend5M2w3?=
- =?utf-8?B?ZGF0ajRidUR5REpheFlaNmExN0FVZzlOMmV5aW1jSS9vV1dDMHBlZmIvYTho?=
- =?utf-8?B?R3p5aUpWeDhyTTg5Q3I2SWhtakcwaWFaOEtFc0NSTCtkWnZPQmtHVU1mcVFt?=
- =?utf-8?B?VCtESWJ2Z0FjNktVTElwSjl4LzlreUloQ0pvYUVtS0ZtZFphSG5ZcGU2djB1?=
- =?utf-8?B?TmVOVEdJa3o2UjY0S2wrcE1ib0ZIeU9QSmJxYnMrekd2aE9MQUJnTlhSdStL?=
- =?utf-8?B?cVE9PQ==?=
-X-OriginatorOrg: sancloud.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 101885bd-33af-4802-3759-08daa15cc3b0
-X-MS-Exchange-CrossTenant-AuthSource: CWLP123MB2241.GBRP123.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2022 14:21:41.9765
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 840be37c-244a-450e-9bcc-2064862de1f4
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- bLzzZkTdeAtD/Q2TbN10ZsWG4+jFFLffjThRb/Ls3XLZZI8RNnQ+Gx+MUWxxkjYZpSdSZixmETOVcamgNxwbAg4k8mYdS4xRdxTXyCWGrvE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CWLP123MB2868
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 28 Sep 2022 14:21:49 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15101
+ <meta-ti@lists.yoctoproject.org>; Thu, 29 Sep 2022 20:19:08 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15102
 
---------------mwOzb0crpNjnjW6jzO9jjDFc
-Content-Type: multipart/mixed; boundary="------------95KaVHUi8l7qP9eNuB7MJ1B3";
- protected-headers="v1"
-From: Paul Barker <paul.barker@sancloud.com>
-To: Andrew Davis <afd@ti.com>, meta-ti@lists.yoctoproject.org,
- Ryan Eatmon <reatmon@ti.com>, Denys Dmytriyenko <denys@konsulko.com>
-Message-ID: <b3b49652-0d17-9819-5cf5-f1c7cc280701@sancloud.com>
-Subject: Re: [meta-ti] Build failure for beaglebone on kirkstone branch
-References: <0ba3f29c-3e37-ab9d-93e1-82e9da6ccc9a@sancloud.com>
- <f991b40b-d8be-ed31-ec49-43931f3fc338@ti.com>
-In-Reply-To: <f991b40b-d8be-ed31-ec49-43931f3fc338@ti.com>
+Adding support for j784s4-evm:
+- Add configurations.
+- Add firmware.
+- Add u-boot.
+- Add gpu support.
 
---------------95KaVHUi8l7qP9eNuB7MJ1B3
-Content-Type: multipart/mixed; boundary="------------YwIEEnpZWzdMtHqxk46mwVq6"
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+Signed-off-by: Randolph Sapp <rs@ti.com>
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+v3: Changing the cnm firmware to use the j721s2 version.
+v2: Some additional changes were required due to changes in dunfell
+    since the j784s4 wakeup branch was created.
 
---------------YwIEEnpZWzdMtHqxk46mwVq6
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+conf/machine/j784s4-evm-k3r5.conf             | 11 +++
+ conf/machine/j784s4-evm.conf                  | 24 ++++++
+ .../cadence-mhdp-fw/cadence-mhdp-fw_git.bb    |  2 +-
+ recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb    |  3 +-
+ .../ti-img-rogue-driver_1.15.6133109.bb       |  6 +-
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb        |  1 +
+ .../ti-img-rogue-umlibs_1.15.6133109.bb       |  5 +-
+ recipes-kernel/linux/kernel-rdepends.inc      |  2 +
+ recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb    | 75 +++++++++++++++++++
+ 9 files changed, 123 insertions(+), 6 deletions(-)
+ create mode 100644 conf/machine/j784s4-evm-k3r5.conf
+ create mode 100644 conf/machine/j784s4-evm.conf
 
-Hi Andrew,
+diff --git a/conf/machine/j784s4-evm-k3r5.conf b/conf/machine/j784s4-evm-k3r5.conf
+new file mode 100644
+index 00000000..04feebc6
+--- /dev/null
++++ b/conf/machine/j784s4-evm-k3r5.conf
+@@ -0,0 +1,11 @@
++#@TYPE: Machine
++#@NAME: J784S4 EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI J784S4 EVM (R5F core)
++
++require conf/machine/include/k3r5.inc
++
++SYSFW_SOC = "j784s4"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "gp"
++
++UBOOT_MACHINE = "j784s4_evm_r5_defconfig"
+diff --git a/conf/machine/j784s4-evm.conf b/conf/machine/j784s4-evm.conf
+new file mode 100644
+index 00000000..a8ad25f6
+--- /dev/null
++++ b/conf/machine/j784s4-evm.conf
+@@ -0,0 +1,24 @@
++#@TYPE: Machine
++#@NAME: J784S4 EVM
++#@DESCRIPTION: Machine configuration for the TI J784S4 EVM
++
++require conf/machine/include/j7.inc
++
++MACHINE_FEATURES += "gpu"
++
++SERIAL_CONSOLES = "115200;ttyS10"
++SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
++TFA_K3_USART = "0x8"
++OPTEE_K3_USART = "0x8"
++
++KERNEL_DEVICETREE = " \
++    ti/k3-j784s4-evm.dtb \
++"
++
++UBOOT_MACHINE = "j784s4_evm_a72_defconfig"
++
++do_image_wic[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
++do_image_tar[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
++
++TFA_BOARD = "j784s4"
++
+diff --git a/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb b/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
+index f4ee5f78..57780cb2 100644
+--- a/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
++++ b/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
+@@ -10,7 +10,7 @@ PR = "${INC_PR}.0"
+ 
+ CLEANBROKEN = "1"
+ 
+-COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|j721s2-hs-evm"
++COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|j721s2-hs-evm|j784s4-evm"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+diff --git a/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb b/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+index 83619090..b5ad3e31 100644
+--- a/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
++++ b/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+@@ -13,7 +13,7 @@ PR = "${INC_PR}.1"
+ 
+ CLEANBROKEN = "1"
+ 
+-COMPATIBLE_MACHINE = "j721s2-evm|j721s2-hs-evm"
++COMPATIBLE_MACHINE = "j721s2-evm|j721s2-hs-evm|j784s4-evm"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+@@ -23,6 +23,7 @@ TARGET_WAVE521C = "wave521c_codec_fw.bin"
+ SOURCE_WAVE521C = "wave521c_codec_fw.bin"
+ SOURCE_WAVE521C_j721s2-evm = "wave521c_j721s2_codec_fw.bin"
+ SOURCE_WAVE521C_j721s2-hs-evm = "wave521c_j721s2_codec_fw.bin"
++SOURCE_WAVE521C_j784s4-evm = "wave521c_j721s2_codec_fw.bin"
+ 
+ ALTERNATIVE_LINK_NAME[wave521c_codec_fw.bin] = "${base_libdir}/firmware/${TARGET_WAVE521C}"
+ ALTERNATIVE_TARGET[wave521c_codec_fw.bin] = "${base_libdir}/firmware/cnm/${TARGET_WAVE521C}"
+diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+index 3dbc87b6..1127c5d1 100644
+--- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
++++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+@@ -11,7 +11,7 @@ MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|j721s2-hs-evm|am62xx"
++COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|j721s2-hs-evm|j784s4-evm|am62xx"
+ 
+ DEPENDS = "virtual/kernel"
+ 
+@@ -26,17 +26,19 @@ SRC_URI = " \
+ 
+ S = "${WORKDIR}/git"
+ 
+-SRCREV = "6d3d62a15ceb85b719c35f34c6c9e35f556b406b"
++SRCREV = "ea2ac3fda4ac442b639bc3a0b73e9c4feac2081a"
+ 
+ TARGET_PRODUCT_j7-evm = "j721e_linux"
+ TARGET_PRODUCT_j7-hs-evm = "j721e_linux"
+ TARGET_PRODUCT_j721s2-evm = "j721s2_linux"
+ TARGET_PRODUCT_j721s2-hs-evm = "j721s2_linux"
++TARGET_PRODUCT_j784s4-evm = "j784s4_linux"
+ TARGET_PRODUCT_am62xx = "am62_linux"
+ TARGET_BVNC_j7-evm = "22.104.208.318"
+ TARGET_BVNC_j7-hs-evm = "22.104.208.318"
+ TARGET_BVNC_j721s2-evm = "36.53.104.796"
+ TARGET_BVNC_j721s2-hs-evm = "36.53.104.796"
++TARGET_BVNC_j784s4-evm = "36.53.104.796"
+ TARGET_BVNC_am62xx = "33.15.11.3"
+ PVR_BUILD = "release"
+ PVR_WS = "wayland"
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index 2a59e896..866cd7b2 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -35,6 +35,7 @@ SYSFW_PREFIX_j7200-evm-k3r5 = "fs"
+ SYSFW_PREFIX_j7200-hs-evm-k3r5 = "fs"
+ SYSFW_PREFIX_j721s2-evm-k3r5 = "fs"
+ SYSFW_PREFIX_j721s2-hs-evm-k3r5 = "fs"
++SYSFW_PREFIX_j784s4-evm-k3r5 = "fs"
+ SYSFW_PREFIX_am62xx-evm-k3r5 = "fs"
+ SYSFW_PREFIX_am62xx-lp-evm-k3r5 = "fs"
+ 
+diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
+index 323978bf..b6bb4324 100644
+--- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
++++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
+@@ -8,19 +8,20 @@ inherit features_check
+ REQUIRED_MACHINE_FEATURES = "gpu"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|j721s2-hs-evm|am62xx"
++COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|j721s2-hs-evm|j784s4-evm|am62xx"
+ 
+ PR = "r2"
+ 
+ BRANCH = "linuxws/dunfell/k5.10/${PV}_unified_fw_pagesize"
+ 
+ SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-umlibs.git;protocol=https;branch=${BRANCH}"
+-SRCREV = "fba0c770b712640ab3761dbe8369d43f89f616ed"
++SRCREV = "4207c0ea429ec751b1ff5f831a84ceeb76ad578d"
+ 
+ TARGET_PRODUCT_j7-evm = "j721e_linux"
+ TARGET_PRODUCT_j7-hs-evm = "j721e_linux"
+ TARGET_PRODUCT_j721s2-evm = "j721s2_linux"
+ TARGET_PRODUCT_j721s2-hs-evm = "j721s2_linux"
++TARGET_PRODUCT_j784s4-evm = "j784s4_linux"
+ TARGET_PRODUCT_am62xx = "am62_linux"
+ PVR_BUILD ?= "release"
+ PVR_WS = "wayland"
+diff --git a/recipes-kernel/linux/kernel-rdepends.inc b/recipes-kernel/linux/kernel-rdepends.inc
+index ae855a88..8225a5af 100644
+--- a/recipes-kernel/linux/kernel-rdepends.inc
++++ b/recipes-kernel/linux/kernel-rdepends.inc
+@@ -42,6 +42,7 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7-evm = " cadence-mhdp-fw"
+ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7-hs-evm = " cadence-mhdp-fw"
+ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j721s2-evm = " cadence-mhdp-fw"
+ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j721s2-hs-evm = " cadence-mhdp-fw"
++RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j784s4-evm = " cadence-mhdp-fw"
+ 
+ # Add run-time dependency for Video Decoding firmware to the rootfs
+ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7 = " vxd-dec-fw"
+@@ -49,6 +50,7 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7 = " vxd-dec-fw"
+ # Add run-time dependency for Chips&Media Wave521 firmware to the rootfs
+ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j721s2-evm = " cnm-wave-fw"
+ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j721s2-hs-evm = " cnm-wave-fw"
++RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j784s4-evm = " cnm-wave-fw"
+ 
+ # Add run-time dependency for TIFS Low Power Module stub
+ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am62xx-evm = " tifs-lpm-stub"
+diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index afff8d15..68c93ae7 100644
+--- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -19,6 +19,7 @@ PLAT_SFX_j7200-evm = "j7200"
+ PLAT_SFX_j7200-hs-evm = "j7200"
+ PLAT_SFX_j721s2-evm = "j721s2"
+ PLAT_SFX_j721s2-hs-evm = "j721s2"
++PLAT_SFX_j784s4-evm = "j784s4"
+ PLAT_SFX_am65xx = "am65xx"
+ PLAT_SFX_am64xx = "am64xx"
+ PLAT_SFX_am62xx = "am62xx"
+@@ -247,6 +248,26 @@ do_install_j721s2-hs-evm() {
+     # install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.xer5f ${LEGACY_ETH_FW_DIR}
+ }
+ 
++do_install_j784s4-evm() {
++    install -d ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu4_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu4_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_1_release_strip.xe71 ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_2_release_strip.xe71 ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_3_release_strip.xe71 ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_4_release_strip.xe71 ${LEGACY_IPC_FW_DIR}
++    # DM Firmware
++    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
++    # ETH firmware
++    install -d ${LEGACY_ETH_FW_DIR}
++    install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.xer5f ${LEGACY_ETH_FW_DIR}
++}
++
+ do_install_am65xx() {
+     install -d ${LEGACY_IPC_FW_DIR}
+     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
+@@ -372,6 +393,21 @@ ALTERNATIVE_${PN}_j721s2-hs-evm = "\
+                     j721s2-c71_1-fw-sec \
+                     "
+ 
++ALTERNATIVE_${PN}_j784s4-evm = "\
++                    j784s4-mcu-r5f0_0-fw \
++                    j784s4-mcu-r5f0_1-fw \
++                    j784s4-main-r5f0_0-fw \
++                    j784s4-main-r5f0_1-fw \
++                    j784s4-main-r5f1_0-fw \
++                    j784s4-main-r5f1_1-fw \
++                    j784s4-main-r5f2_0-fw \
++                    j784s4-main-r5f2_1-fw \
++                    j784s4-c71_0-fw \
++                    j784s4-c71_1-fw \
++                    j784s4-c71_2-fw \
++                    j784s4-c71_3-fw \
++                    "
++
+ # Set up link names for the firmwares
+ 
+ TARGET_MCU_R5FSS0_0_am65xx = "am65x-mcu-r5f0_0-fw"
+@@ -442,6 +478,19 @@ TARGET_MAIN_R5FSS1_1_SIGNED_j721s2-hs-evm = "j721s2-main-r5f1_1-fw-sec"
+ TARGET_C7X_0_SIGNED_j721s2-hs-evm = "j721s2-c71_0-fw-sec"
+ TARGET_C7X_1_SIGNED_j721s2-hs-evm = "j721s2-c71_1-fw-sec"
+ 
++TARGET_MCU_R5FSS0_0_j784s4-evm = "j784s4-mcu-r5f0_0-fw"
++TARGET_MCU_R5FSS0_1_j784s4-evm = "j784s4-mcu-r5f0_1-fw"
++TARGET_MAIN_R5FSS0_0_j784s4-evm = "j784s4-main-r5f0_0-fw"
++TARGET_MAIN_R5FSS0_1_j784s4-evm = "j784s4-main-r5f0_1-fw"
++TARGET_MAIN_R5FSS1_0_j784s4-evm = "j784s4-main-r5f1_0-fw"
++TARGET_MAIN_R5FSS1_1_j784s4-evm = "j784s4-main-r5f1_1-fw"
++TARGET_MAIN_R5FSS2_0_j784s4-evm = "j784s4-main-r5f2_0-fw"
++TARGET_MAIN_R5FSS2_1_j784s4-evm = "j784s4-main-r5f2_1-fw"
++TARGET_C7X_0_j784s4-evm = "j784s4-c71_0-fw"
++TARGET_C7X_1_j784s4-evm = "j784s4-c71_1-fw"
++TARGET_C7X_2_j784s4-evm = "j784s4-c71_2-fw"
++TARGET_C7X_3_j784s4-evm = "j784s4-c71_3-fw"
++
+ ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
+ ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
+ 
+@@ -496,6 +545,19 @@ ALTERNATIVE_LINK_NAME[j721s2-main-r5f1_1-fw-sec] = "${base_libdir}/firmware/${TA
+ ALTERNATIVE_LINK_NAME[j721s2-c71_0-fw-sec] = "${base_libdir}/firmware/${TARGET_C7X_0_SIGNED}"
+ ALTERNATIVE_LINK_NAME[j721s2-c71_1-fw-sec] = "${base_libdir}/firmware/${TARGET_C7X_1_SIGNED}"
+ 
++ALTERNATIVE_LINK_NAME[j784s4-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
++ALTERNATIVE_LINK_NAME[j784s4-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
++ALTERNATIVE_LINK_NAME[j784s4-main-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0}"
++ALTERNATIVE_LINK_NAME[j784s4-main-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1}"
++ALTERNATIVE_LINK_NAME[j784s4-main-r5f1_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_0}"
++ALTERNATIVE_LINK_NAME[j784s4-main-r5f1_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1}"
++ALTERNATIVE_LINK_NAME[j784s4-main-r5f2_0-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS2_0}"
++ALTERNATIVE_LINK_NAME[j784s4-main-r5f2_1-fw] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS2_1}"
++ALTERNATIVE_LINK_NAME[j784s4-c71_0-fw] = "${base_libdir}/firmware/${TARGET_C7X_0}"
++ALTERNATIVE_LINK_NAME[j784s4-c71_1-fw] = "${base_libdir}/firmware/${TARGET_C7X_1}"
++ALTERNATIVE_LINK_NAME[j784s4-c71_2-fw] = "${base_libdir}/firmware/${TARGET_C7X_2}"
++ALTERNATIVE_LINK_NAME[j784s4-c71_3-fw] = "${base_libdir}/firmware/${TARGET_C7X_3}"
++
+ # Create the firmware alternatives
+ 
+ ALTERNATIVE_TARGET[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_0_release_strip.xer5f"
+@@ -552,6 +614,19 @@ ALTERNATIVE_TARGET[j721s2-main-r5f1_1-fw-sec] = "${base_libdir}/firmware/pdk-ipc
+ ALTERNATIVE_TARGET[j721s2-c71_0-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_1_release_strip.xe71.signed"
+ ALTERNATIVE_TARGET[j721s2-c71_1-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_2_release_strip.xe71.signed"
+ 
++ALTERNATIVE_TARGET[j784s4-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
++ALTERNATIVE_TARGET[j784s4-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
++ALTERNATIVE_TARGET[j784s4-main-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_0_release_strip.xer5f"
++ALTERNATIVE_TARGET[j784s4-main-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f"
++ALTERNATIVE_TARGET[j784s4-main-r5f1_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_0_release_strip.xer5f"
++ALTERNATIVE_TARGET[j784s4-main-r5f1_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_1_release_strip.xer5f"
++ALTERNATIVE_TARGET[j784s4-main-r5f2_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu4_0_release_strip.xer5f"
++ALTERNATIVE_TARGET[j784s4-main-r5f2_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu4_1_release_strip.xer5f"
++ALTERNATIVE_TARGET[j784s4-c71_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_1_release_strip.xe71"
++ALTERNATIVE_TARGET[j784s4-c71_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_2_release_strip.xe71"
++ALTERNATIVE_TARGET[j784s4-c71_2-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_3_release_strip.xe71"
++ALTERNATIVE_TARGET[j784s4-c71_3-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_4_release_strip.xe71"
++
+ ALTERNATIVE_PRIORITY = "10"
+ 
+ # make sure that lib/firmware, and all its contents are part of the package
+-- 
+2.17.1
 
-On 27/09/2022 18:53, Andrew Davis wrote:
-> On 9/27/22 12:01 PM, Paul Barker wrote:
->> Hi folks,
->>
->> I'm trying to add support for the Yocto Project kirkstone release to o=
-ur
->> meta-sancloud BSP layer and I'm facing a build issue. I've reproduced =
-the
->> issue using just the meta-ti layer and its dependencies, targeting the=
-
->> beaglebone machine. I've used the kirkstone-next branch of meta-ti as
->> the kirkstone branch has not been updated in 5 months and has the same=
-
->> issue.
->>
->> The build fails due to a lack of buildable providers for virtual/libgl=
-=2E
->> Is this a known issue?
->>
->=20
->=20
-> I've run into this before, Cairo package pulls in desktop OpenGL when
-> GLES2 would be more appropriate. I'll look for the exact fix but
-> you can try putting this in your distro .conf file:
->=20
-> PACKAGECONFIG_remove_pn-cairo =3D "opengl"
-> PACKAGECONFIG_append_pn-cairo =3D " egl"
-> PACKAGECONFIG_append_pn-cairo =3D " glesv2"
-
-If these settings are required they should be applied by default (perhaps=
- via a
-MACHINE_FEATURE). I would expect the beaglebone machine to build
-"out-of-the-box" with the poky distro. If that really isn't possible then=
-
-necessary settings should be documented in the readme file for the layer,=
- added
-to a local.conf.sample file or applied via a setup script.
-
-Thanks,
-
---=20
-Paul Barker
-Principal Software Engineer
-SanCloud Ltd
-
-e: paul.barker@sancloud.com
-w: https://sancloud.com/
---------------YwIEEnpZWzdMtHqxk46mwVq6
-Content-Type: application/pgp-keys; name="OpenPGP_0xA67255DFCCE62ECD.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xA67255DFCCE62ECD.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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
-=3DsH2a
------END PGP PUBLIC KEY BLOCK-----
-
---------------YwIEEnpZWzdMtHqxk46mwVq6--
-
---------------95KaVHUi8l7qP9eNuB7MJ1B3--
-
---------------mwOzb0crpNjnjW6jzO9jjDFc
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQS7m7rT1+CktY3YG1PYN3IfEvob6gUCYzRYdgUDAAAAAAAKCRDYN3IfEvob6ut6
-AQCcE2m22xvc/zVqNZZgm20r4ALmJ1UX21c22EakmNRn1gEAkrHBqgK09C1/oTgGNd6bu3u2iNfW
-Jzc5N2RUvsT2pAU=
-=OHHd
------END PGP SIGNATURE-----
-
---------------mwOzb0crpNjnjW6jzO9jjDFc--
 
