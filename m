@@ -1,105 +1,76 @@
-Return-Path: <quaresma.jose@gmail.com>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B9DCC433FE
-	for <webhook@archiver.kernel.org>; Fri, 30 Sep 2022 11:15:18 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
- [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web10.4377.1664536509481639961
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5060C433FE
+	for <webhook@archiver.kernel.org>; Tue,  4 Oct 2022 19:38:29 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.15046.1664912307305776976
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 30 Sep 2022 04:15:09 -0700
+ Tue, 04 Oct 2022 12:38:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=DaK+8TOb;
- spf=pass (domain: gmail.com, ip: 209.85.221.43,
- mailfrom: quaresma.jose@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id bq9so6339457wrb.4
-        for <meta-ti@lists.yoctoproject.org>;
- Fri, 30 Sep 2022 04:15:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date;
-        bh=pJkcvE1XCFqQWj+nnKqHQEhFlhUZ6nwqXO8pkqoUXUs=;
-        b=DaK+8TObNInfziAgasnhSt7G29kvBk2YQMAMrXVmbOgClSHVbsnbgSV/k44jNTvxI2
-         xzPEtRB29HqpgpjgNWv0XF3/2gN8pJlp56eCbmqUFA2cOsDQRS6mlOg6i7Z1r5JG9bYI
-         ecxSqYkQuCyye4XBi2qV10Jv16dmUUKBcw/a7Kp435L/bvRVYlTbnM67i6MFP1CdN4vK
-         5L1tnLM2DU9FR8IhkofNybDcESTvW7cWZRop82By2JaW91NvxqNEOAm9SpBGyd2gMD0C
-         vFvFfxEls6F4QOg6+o1A0SjI6YObX/gqhdzIYbZaUkLOsXkvBkvTKa555s0uzuOLrioE
-         hIcA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=pJkcvE1XCFqQWj+nnKqHQEhFlhUZ6nwqXO8pkqoUXUs=;
-        b=eTvfDID6GUqmk0E8dPIznankKQBEjUVPwWH3C4+gcU/GP8dgbsSB9mPXkCeDPn7ba5
-         MquroEYEYRGt37hjKQZttFNgX8eRWS91wXqnRVQ5UAsrtokYhrzk858cTV0+eu2kO3GA
-         /SpHnWGohOkUJI9IYG2ET2tECUOV3xm1Q9LztSPGzCKSDdsywtiYY/POJx5UjqVfNthB
-         nlpU8UMZkOiAeSaa5pQYa/7qq5/cC1sKcRJ3GqEuuW6xyK2a9itW2oynh7Sw0ErK9p3j
-         vbHBA4hnnJSrj7Ep1ku8yD6MW8ofwAL90h4Dbuy4LfQKoA93EI3zhizYJtC2NfdVXh+t
-         b8jQ==
-X-Gm-Message-State: ACrzQf3qQbLKMEAl5TxZr8Dji5Ybw8I53+5qu2WPGgm18zZwtPY9qSAQ
-	RVsZ2V5QEaVSLp3j4vzRt2Kcv7xu5s2yJQ==
-X-Google-Smtp-Source: 
- AMsMyM5RwSGC7JFovcM3I/wn6Vyz72Z9A7T+DdXG3OxgcQZclxdws+BP+kLXAO1SA8S+xmnVgzsJWA==
-X-Received: by 2002:a05:6000:1c18:b0:22b:13e3:19d3 with SMTP id
- ba24-20020a0560001c1800b0022b13e319d3mr5569321wrb.699.1664536507115;
-        Fri, 30 Sep 2022 04:15:07 -0700 (PDT)
-Received: from og-worker-dev-01.infra.foundries.io.net
- (51-159-19-113.rev.poneytelecom.eu. [51.159.19.113])
-        by smtp.gmail.com with ESMTPSA id
- u12-20020adfc64c000000b00225307f43fbsm1881853wrg.44.2022.09.30.04.15.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Sep 2022 04:15:06 -0700 (PDT)
-From: Jose Quaresma <quaresma.jose@gmail.com>
-X-Google-Original-From: Jose Quaresma <jose.quaresma@foundries.io>
-To: meta-ti@lists.yoctoproject.org
-Cc: Jose Quaresma <jose.quaresma@foundries.io>
-Subject: [PATCH] meta-ti: set layer compatibility with langdale
-Date: Fri, 30 Sep 2022 11:14:43 +0000
-Message-Id: <20220930111443.2520958-1-jose.quaresma@foundries.io>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=oHBiBIUw;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 294JcM23018136;
+	Tue, 4 Oct 2022 14:38:22 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1664912302;
+	bh=LaXXbzS9h5FdCtS66QeD1ZaxrrfxqgXzlLqyXR/EeoE=;
+	h=Date:Subject:To:References:From:In-Reply-To;
+	b=oHBiBIUwmpXrTxfG9TouEgjQhIJhm9283HDea+gOmbSQzwpY7ffRmqesJFI6V/00Y
+	 Vrk+bcQ0Mz+bROGaIubjjgjpLNfqoaWkq03imw8fWYXQiuWId6KuDYxGcRcAF66+XV
+	 r5YyQRbBL8Wg5mKRrq77LOYJ52AuQP6UcJSADdYQ=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 294JcMcK111501
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 4 Oct 2022 14:38:22 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Tue, 4 Oct
+ 2022 14:38:11 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
+ Frontend Transport; Tue, 4 Oct 2022 14:38:11 -0500
+Received: from [10.250.32.190] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 294JcB3x030360;
+	Tue, 4 Oct 2022 14:38:11 -0500
+Message-ID: <91d1794f-ed22-7f0f-ad4a-b33ba93500f9@ti.com>
+Date: Tue, 4 Oct 2022 14:38:11 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [meta-ti] [master/kirkstone][PATCH 61/65] conf: machine: Make
+ multi-certificate image the default
+Content-Language: en-US
+To: Denys Dmytriyenko <denis@denix.org>, <meta-ti@lists.yoctoproject.org>
+References: <20220913035541.2364351-1-denis@denix.org>
+ <20220913035541.2364351-62-denis@denix.org>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20220913035541.2364351-62-denis@denix.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 30 Sep 2022 11:15:18 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15104
+ <meta-ti@lists.yoctoproject.org>; Tue, 04 Oct 2022 19:38:29 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15105
 
-Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
----
- meta-ti-bsp/conf/layer.conf    | 2 +-
- meta-ti-extras/conf/layer.conf | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+On 9/12/22 10:55 PM, Denys Dmytriyenko wrote:
+> From: Andrew Davis <afd@ti.com>
+> 
+> Only the first two K3 devices do not support multi-cert boot so
+> lets make multi-cert the default and only add back sysfw.itb
+> for these two devices.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> Reviewed-by: lines be preserved?
 
-diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
-index e3542f50..76c1af2f 100644
---- a/meta-ti-bsp/conf/layer.conf
-+++ b/meta-ti-bsp/conf/layer.conf
-@@ -9,7 +9,7 @@ BBFILE_COLLECTIONS += "meta-ti-bsp"
- BBFILE_PATTERN_meta-ti-bsp := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-ti-bsp = "6"
- 
--LAYERSERIES_COMPAT_meta-ti-bsp = "kirkstone"
-+LAYERSERIES_COMPAT_meta-ti-bsp = "langdale"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
-diff --git a/meta-ti-extras/conf/layer.conf b/meta-ti-extras/conf/layer.conf
-index 1fb77e2a..96d5e315 100644
---- a/meta-ti-extras/conf/layer.conf
-+++ b/meta-ti-extras/conf/layer.conf
-@@ -9,7 +9,7 @@ BBFILE_COLLECTIONS += "meta-ti-extras"
- BBFILE_PATTERN_meta-ti-extras := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-ti-extras = "6"
- 
--LAYERSERIES_COMPAT_meta-ti-extras = "kirkstone"
-+LAYERSERIES_COMPAT_meta-ti-extras = "langdale"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
--- 
-2.34.1
+By who?..
 
+> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> ---
 
