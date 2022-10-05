@@ -2,91 +2,103 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F21E4C43217
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F21B9C4332F
 	for <webhook@archiver.kernel.org>; Wed,  5 Oct 2022 15:31:25 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
- [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web09.25175.1664983878704522160
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
+ [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web10.24872.1664983878180235270
  for <meta-ti@lists.yoctoproject.org>;
  Wed, 05 Oct 2022 08:31:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=RBtr5d/a;
- spf=pass (domain: gmail.com, ip: 209.85.214.173,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=peWaCnDR;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id b2so10814520plc.7
+Received: by mail-pg1-f169.google.com with SMTP id c7so15531888pgt.11
         for <meta-ti@lists.yoctoproject.org>;
  Wed, 05 Oct 2022 08:31:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=IYF+KqDQlfH1XSRQitejlZO9FmNix7bny38KKBxsBzk=;
-        b=RBtr5d/atj0FxVKzQH2XRoeP5qD3H9/sPueZh/Su/nzVcGse/y4PuN3EUg7pX8ystP
-         fWxQcAOVBN0q2F+yr1rxERHazpCZdp0//t/yod8W/NDhlOtZtDiPAPXJWbwdT/jz0lPc
-         7Rg1MKkVulCPhMFluxuEyMq4CQzBP8LC2c6FFKNFBl3UHiqwedcl13pnHvGyIy3JeCzB
-         AGLvoT9u19M3yzZ3wvK/RWUHv9RcqqUNWJK/hRlS8EKC5vVzX4Y3WWEIvM95fhK2pw3L
-         S4KPZd7VMG4SXj0EzbzYH06CzLL7R3Lmss58BBqNWuVHXturXaeTcMrLMeNxHlAEt6Ds
-         QoFQ==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date;
+        bh=9zgaaFM/C7saKUnttHIDa/leJJDfbrW/Pj2XnEYKoQ0=;
+        b=peWaCnDRlRDGxjmNamUtPZMJpdSV+m/JNXoFq2iGp2gJJzW6kLqVI9wmmng0g5OGkq
+         ProMYs3dyioTPeDiRWB9xAnrfviVr+cflFXCqDdsS/i3VHdULG6IuPBHT2TQqGwpC/El
+         DGbvd4encWVoGUjgrgo0IyU+H1VboXW1b9TqtxJ4uQIQAUKT5HG5cvFr+9ZuB1In8alV
+         ky6NZaOuudKsHGqtLlWRNdIbHdpbtcFTas7PDBSzf8W/grgzp1aJQ4HH/NxkKHh4v/F5
+         9Kx7gLW6TJy80JkCplPILr24NmpDwtqSbeMMiNGO8AJIakG6hZydfSeKt+uA+PnlD0zc
+         uKVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date;
-        bh=IYF+KqDQlfH1XSRQitejlZO9FmNix7bny38KKBxsBzk=;
-        b=CJ8FtkIrKjpZGnhyRin177dcAeJcYic1I2YihqFPACpeZT0myvHAW2SaSAc4P58q4s
-         8DXKs580RP7F6MBhqd9iuR1Y2LtETocbhSU5Ox79HYmlt+TySfq6Q86rJvJYzQiPx41U
-         4bmhngDR3Ugomv3tczJgizBjcpeTUlanrY/4RJkk3wKYvrslSeF0VeFT+ZtoQU1eQeIK
-         dXIdBPk1jD1pyFyk6oh1r1PynABVUw4VD8DS3u7c+3cJxMWt2KH3vw3MI2Qk+Qp4P10i
-         k+wSz0Sc0+EPWyhE2nBZchaNCL9BzCWMPSF2KDxzpI67OnDIeBJ9+xhYmzdYsE4gS+I5
-         N6Bg==
-X-Gm-Message-State: ACrzQf34RGHwCDMAaNYUwzSrUz3mNXj0TCzQIZC98Z+MeeuJ7ghWnxYI
-	osRHbzIlk2jSJ36WpJmTIfdUA7OJX+nDzQ==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date;
+        bh=9zgaaFM/C7saKUnttHIDa/leJJDfbrW/Pj2XnEYKoQ0=;
+        b=KCat8akSKb7EzgHBr+ozMpcHbB9rqxDDFMK6ATrKaUWMwNebQdFXWaIvCoQIzYr/kK
+         RpTtRPb205P+nYIVU10Fy3vWMLvhYrj0SPQ++ShDr1RZetYOwmkjWXSViApX9agHfSN6
+         05ou72qnwjqgvZ0tcXVIBjgFEZcjuYmWCS48zEvcLNla31ffDqrBPYLG9M8moG1znfEl
+         HJBoXhIQ7kdvCG4yby5na4t/OXqof1eoSq6+kmllh/oX1m6U51w4VQTxlMv9UM/kOUxv
+         IypnwFJDlV2PF7UGTrB3Awqng2rYYiTTjlcDfxr4onvYPZGEsBnOfnV5+ucZXCIueKyX
+         BGyg==
+X-Gm-Message-State: ACrzQf3aPIfXms2EaC7hOS+TQz/nqHXnd0H4SKRdYl0bdGjr6QEdu4e5
+	1G0zRcdUpzhWv+U62te1n4LAIQAbkBXfXQ==
 X-Google-Smtp-Source: 
- AMsMyM7lEptakDKCbzTHEPCC2yuuEZQdvFcxk2JUf95Q+mIwhXryDkxCkK4YSccXCfPG9sA6jiQG8A==
-X-Received: by 2002:a17:902:b70c:b0:179:eb79:cf9a with SMTP id
- d12-20020a170902b70c00b00179eb79cf9amr297457pls.130.1664983877823;
+ AMsMyM5LjsSQYyXRneDJMNe9NZMEWu9sTS/dr+voR5FeqcqQg1CV1EdDxJbw+RMO50VajstWobOpOA==
+X-Received: by 2002:a63:5a63:0:b0:42f:e143:80d4 with SMTP id
+ k35-20020a635a63000000b0042fe14380d4mr342810pgm.456.1664983877070;
         Wed, 05 Oct 2022 08:31:17 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::32cd])
         by smtp.gmail.com with ESMTPSA id
- i7-20020a170902c94700b00177f32b1a32sm10760913pla.271.2022.10.05.08.31.17
+ i7-20020a170902c94700b00177f32b1a32sm10760913pla.271.2022.10.05.08.31.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Oct 2022 08:31:17 -0700 (PDT)
+        Wed, 05 Oct 2022 08:31:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: meta-ti@lists.yoctoproject.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH 2/2] ffa-debugfs-mod: Remove bbappend
-Date: Wed,  5 Oct 2022 08:31:14 -0700
-Message-Id: <20221005153114.265420-2-raj.khem@gmail.com>
+Subject: [PATCH v2 1/2] layers: Bump layer compatibility to langdale
+Date: Wed,  5 Oct 2022 08:31:13 -0700
+Message-Id: <20221005153114.265420-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.38.0
-In-Reply-To: <20221005153114.265420-1-raj.khem@gmail.com>
-References: <20221005153114.265420-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Wed, 05 Oct 2022 15:31:25 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15112
-
-The main recipe in meta-arm is gone with 5.19 kernel onwards
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15111
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend             | 5 -----
- 1 file changed, 5 deletions(-)
- delete mode 100644 meta-ti-bsp/recipes-kernel/linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend
+v2: Replace kirkstone instead of adding just langdale
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend b/meta-ti-bsp/recipes-kernel/linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend
-deleted file mode 100644
-index 67fcf6ec..00000000
---- a/meta-ti-bsp/recipes-kernel/linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend
-+++ /dev/null
-@@ -1,5 +0,0 @@
--# Added my meta-arm, this needs ceetain backports in 5.10
--# Disable until kernel upgrades to newer than 5.10 where it
--# is already upstreamed
--# Revisit when kernel is upgraded to 5.15 or newer e.g.
--COMPATIBLE_HOST:ti-soc = "null"
+ meta-ti-bsp/conf/layer.conf    | 2 +-
+ meta-ti-extras/conf/layer.conf | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
+index e3542f50..76c1af2f 100644
+--- a/meta-ti-bsp/conf/layer.conf
++++ b/meta-ti-bsp/conf/layer.conf
+@@ -9,7 +9,7 @@ BBFILE_COLLECTIONS += "meta-ti-bsp"
+ BBFILE_PATTERN_meta-ti-bsp := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-ti-bsp = "6"
+ 
+-LAYERSERIES_COMPAT_meta-ti-bsp = "kirkstone"
++LAYERSERIES_COMPAT_meta-ti-bsp = "langdale"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+diff --git a/meta-ti-extras/conf/layer.conf b/meta-ti-extras/conf/layer.conf
+index 1fb77e2a..96d5e315 100644
+--- a/meta-ti-extras/conf/layer.conf
++++ b/meta-ti-extras/conf/layer.conf
+@@ -9,7 +9,7 @@ BBFILE_COLLECTIONS += "meta-ti-extras"
+ BBFILE_PATTERN_meta-ti-extras := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-ti-extras = "6"
+ 
+-LAYERSERIES_COMPAT_meta-ti-extras = "kirkstone"
++LAYERSERIES_COMPAT_meta-ti-extras = "langdale"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
 -- 
 2.38.0
 
