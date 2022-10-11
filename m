@@ -2,50 +2,50 @@ Return-Path: <m-chawdhry@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B0D8C43217
-	for <webhook@archiver.kernel.org>; Tue, 11 Oct 2022 09:18:49 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web09.5271.1665479926837800123
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C843C43219
+	for <webhook@archiver.kernel.org>; Tue, 11 Oct 2022 09:18:59 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web09.5273.1665479930033609611
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 11 Oct 2022 02:18:47 -0700
+ Tue, 11 Oct 2022 02:18:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=FmDSjPa4;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: m-chawdhry@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=JTzrHguO;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: m-chawdhry@ti.com)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 29B9Ij0Y095369
-	for <meta-ti@lists.yoctoproject.org>; Tue, 11 Oct 2022 04:18:45 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 29B9Inm7064511
+	for <meta-ti@lists.yoctoproject.org>; Tue, 11 Oct 2022 04:18:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1665479925;
-	bh=61v/VUlEKmeKoZjHxlyNZn62y5Txo0b49iGHybYXFUk=;
+	s=ti-com-17Q1; t=1665479929;
+	bh=uSiF+LEmr8WS1lb199SvyoplMU9m/YoUom+WoY7imzk=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=FmDSjPa4HG2G749yGa1oER5Hvt9GkMODpfebbhEwQK96fNI4w9VeagG3h+TK1MUY4
-	 CVytvMBDZlfr/+KODklKhFxEAGp02n8gnqwnCBWw+hmhAfon/9PHdM69Qbd+eQjlsd
-	 TukTLJMnRT7x/P6v5/a7qvhV3bu1XVD0x2PBOmb4=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 29B9IjkN004052
+	b=JTzrHguOXCbIYFH0TejYhBgT6yrlDokfFcbtSPcSRw0WXTV1nF65CMjvkpJ4O+jvA
+	 z6wIincEWwclxbwu7FSAtxxeOhNIiLOc62cu7v+0qAHiANxxzSu4IQNV6nqnrycs8B
+	 DXzsKzk3JIMmn6MsMGQk31ItB8W8IDwSkM6fXTNc=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 29B9IndV004073
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Tue, 11 Oct 2022 04:18:45 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Tue, 11 Oct 2022 04:18:49 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Tue, 11
- Oct 2022 04:18:45 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2022 04:18:49 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
- Frontend Transport; Tue, 11 Oct 2022 04:18:45 -0500
+ Frontend Transport; Tue, 11 Oct 2022 04:18:49 -0500
 Received: from uda0497581.dhcp.ti.com (ileaxei01-snat.itg.ti.com
  [10.180.69.5])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 29B9IdG6015392;
-	Tue, 11 Oct 2022 04:18:43 -0500
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 29B9IdG8015392;
+	Tue, 11 Oct 2022 04:18:47 -0500
 From: Manorit Chawdhry <m-chawdhry@ti.com>
 To: <meta-ti@lists.yoctoproject.org>
 CC: Andrew Davis <afd@ti.com>, Ryan Eatmon <reatmon@ti.com>,
         Manorit Chawdhry
 	<m-chawdhry@ti.com>
-Subject: [meta-ti][RFC dunfell][PATCH 2/6] ti-rtos-firmware: Add J784S4 High
- Security support
-Date: Tue, 11 Oct 2022 14:48:35 +0530
-Message-ID: <20221011091839.1337077-3-m-chawdhry@ti.com>
+Subject: [meta-ti][RFC dunfell][PATCH 4/6] ti-graphics: Add j784s4-hs-evm as a
+ compatible machine
+Date: Tue, 11 Oct 2022 14:48:37 +0530
+Message-ID: <20221011091839.1337077-5-m-chawdhry@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20221011091839.1337077-1-m-chawdhry@ti.com>
 References: <20221011091839.1337077-1-m-chawdhry@ti.com>
@@ -56,206 +56,66 @@ X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 11 Oct 2022 09:18:49 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15140
+ <meta-ti@lists.yoctoproject.org>; Tue, 11 Oct 2022 09:18:59 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15142
 
-Sign the firmwares for j784s4 similar to j721s2 hs.
-Duplicate all j784s4 entries for j784s4-hs as we cannot use same
-keyword for match between j784s4-evm and j784s4-hs-evm.
+Add HS platform to the list of compatible machines.
 
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
- recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 135 +++++++++++++++++++++
- 1 file changed, 135 insertions(+)
+ .../powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb       | 4 +++-
+ recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb  | 3 ++-
+ 2 files changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-index 68c93ae7..f3b7d416 100644
---- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-+++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -20,6 +20,7 @@ PLAT_SFX_j7200-hs-evm = "j7200"
- PLAT_SFX_j721s2-evm = "j721s2"
- PLAT_SFX_j721s2-hs-evm = "j721s2"
- PLAT_SFX_j784s4-evm = "j784s4"
-+PLAT_SFX_j784s4-hs-evm = "j784s4"
- PLAT_SFX_am65xx = "am65xx"
- PLAT_SFX_am64xx = "am64xx"
- PLAT_SFX_am62xx = "am62xx"
-@@ -128,6 +129,38 @@ do_install_prepend_j721s2-hs-evm() {
-         )
- }
+diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+index 1127c5d1..308984fe 100644
+--- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
++++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+@@ -11,7 +11,7 @@ MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
  
-+# J784S4 support
-+do_install_prepend_j784s4-hs-evm() {
-+        export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
-+        ( cd ${RTOS_DM_FW_DIR}; \
-+                mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
-+                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
-+        )
-+        (
-+          cd ${RTOS_IPC_FW_DIR}; \
-+            ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_test_mcu2_0_release_strip.xer5f \
-+                ipc_echo_test_mcu2_0_release_strip.xer5f.signed; \
-+            ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_test_mcu2_1_release_strip.xer5f \
-+                ipc_echo_test_mcu2_1_release_strip.xer5f.signed; \
-+            ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_test_mcu3_0_release_strip.xer5f \
-+                ipc_echo_test_mcu3_0_release_strip.xer5f.signed; \
-+            ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_test_mcu3_1_release_strip.xer5f \
-+                ipc_echo_test_mcu3_1_release_strip.xer5f.signed; \
-+            ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_test_mcu4_0_release_strip.xer5f \
-+                ipc_echo_test_mcu4_0_release_strip.xer5f.signed; \
-+            ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_test_mcu4_1_release_strip.xer5f \
-+                ipc_echo_test_mcu4_1_release_strip.xer5f.signed; \
-+            ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_test_c7x_1_release_strip.xe71 \
-+                ipc_echo_test_c7x_1_release_strip.xe71.signed; \
-+            ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_test_c7x_2_release_strip.xe71 \
-+                ipc_echo_test_c7x_2_release_strip.xe71.signed; \
-+            ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_test_c7x_3_release_strip.xe71 \
-+                ipc_echo_test_c7x_3_release_strip.xe71.signed; \
-+            ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_test_c7x_4_release_strip.xe71 \
-+                ipc_echo_test_c7x_4_release_strip.xe71.signed; \
-+        )
-+}
-+
- # Update the am64xx ipc binaries to be consistent with other platforms
- do_install_prepend_am64xx() {
-         ( cd ${RTOS_IPC_FW_DIR}; \
-@@ -248,6 +281,37 @@ do_install_j721s2-hs-evm() {
-     # install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.xer5f ${LEGACY_ETH_FW_DIR}
- }
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|j721s2-hs-evm|j784s4-evm|am62xx"
++COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|j721s2-hs-evm|j784s4-evm|j784s4-hs-evm|am62xx"
  
-+do_install_j784s4-hs-evm() {
-+    install -d ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu4_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu4_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_1_release_strip.xe71 ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_2_release_strip.xe71 ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_3_release_strip.xe71 ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_4_release_strip.xe71 ${LEGACY_IPC_FW_DIR}
-+    # Signed firmware
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_strip.xer5f.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_strip.xer5f.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_0_release_strip.xer5f.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_1_release_strip.xer5f.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu4_0_release_strip.xer5f.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu4_1_release_strip.xer5f.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_1_release_strip.xe71.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_2_release_strip.xe71.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_3_release_strip.xe71.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_4_release_strip.xe71.signed ${LEGACY_IPC_FW_DIR}
-+    # DM Firmware
-+    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
-+    # ETH firmware
-+    install -d ${LEGACY_ETH_FW_DIR}
-+    install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.xer5f ${LEGACY_ETH_FW_DIR}
-+}
-+
- do_install_j784s4-evm() {
-     install -d ${LEGACY_IPC_FW_DIR}
-     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-@@ -408,6 +472,31 @@ ALTERNATIVE_${PN}_j784s4-evm = "\
-                     j784s4-c71_3-fw \
-                     "
+ DEPENDS = "virtual/kernel"
  
-+ALTERNATIVE_${PN}_j784s4-hs-evm = "\
-+                    j784s4-mcu-r5f0_0-fw \
-+                    j784s4-mcu-r5f0_1-fw \
-+                    j784s4-main-r5f0_0-fw \
-+                    j784s4-main-r5f0_1-fw \
-+                    j784s4-main-r5f1_0-fw \
-+                    j784s4-main-r5f1_1-fw \
-+                    j784s4-main-r5f2_0-fw \
-+                    j784s4-main-r5f2_1-fw \
-+                    j784s4-c71_0-fw \
-+                    j784s4-c71_1-fw \
-+                    j784s4-c71_2-fw \
-+                    j784s4-c71_3-fw \
-+		    j784s4-main-r5f0_0-fw-sec \
-+                    j784s4-main-r5f0_1-fw-sec \
-+                    j784s4-main-r5f1_0-fw-sec \
-+                    j784s4-main-r5f1_1-fw-sec \
-+                    j784s4-main-r5f2_0-fw-sec \
-+                    j784s4-main-r5f2_1-fw-sec \
-+                    j784s4-c71_0-fw-sec \
-+                    j784s4-c71_1-fw-sec \
-+                    j784s4-c71_2-fw-sec \
-+                    j784s4-c71_3-fw-sec \
-+                    "
-+
- # Set up link names for the firmwares
+@@ -33,12 +33,14 @@ TARGET_PRODUCT_j7-hs-evm = "j721e_linux"
+ TARGET_PRODUCT_j721s2-evm = "j721s2_linux"
+ TARGET_PRODUCT_j721s2-hs-evm = "j721s2_linux"
+ TARGET_PRODUCT_j784s4-evm = "j784s4_linux"
++TARGET_PRODUCT_j784s4-hs-evm = "j784s4_linux"
+ TARGET_PRODUCT_am62xx = "am62_linux"
+ TARGET_BVNC_j7-evm = "22.104.208.318"
+ TARGET_BVNC_j7-hs-evm = "22.104.208.318"
+ TARGET_BVNC_j721s2-evm = "36.53.104.796"
+ TARGET_BVNC_j721s2-hs-evm = "36.53.104.796"
+ TARGET_BVNC_j784s4-evm = "36.53.104.796"
++TARGET_BVNC_j784s4-hs-evm = "36.53.104.796"
+ TARGET_BVNC_am62xx = "33.15.11.3"
+ PVR_BUILD = "release"
+ PVR_WS = "wayland"
+diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
+index b6bb4324..024aca67 100644
+--- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
++++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
+@@ -8,7 +8,7 @@ inherit features_check
+ REQUIRED_MACHINE_FEATURES = "gpu"
  
- TARGET_MCU_R5FSS0_0_am65xx = "am65x-mcu-r5f0_0-fw"
-@@ -491,6 +580,30 @@ TARGET_C7X_1_j784s4-evm = "j784s4-c71_1-fw"
- TARGET_C7X_2_j784s4-evm = "j784s4-c71_2-fw"
- TARGET_C7X_3_j784s4-evm = "j784s4-c71_3-fw"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|j721s2-hs-evm|j784s4-evm|am62xx"
++COMPATIBLE_MACHINE = "j7-evm|j7-hs-evm|j721s2-evm|j721s2-hs-evm|j784s4-evm|j784s4-hs-evm|am62xx"
  
-+TARGET_MCU_R5FSS0_0_j784s4-hs-evm = "j784s4-mcu-r5f0_0-fw"
-+TARGET_MCU_R5FSS0_1_j784s4-hs-evm = "j784s4-mcu-r5f0_1-fw"
-+TARGET_MAIN_R5FSS0_0_j784s4-hs-evm = "j784s4-main-r5f0_0-fw"
-+TARGET_MAIN_R5FSS0_1_j784s4-hs-evm = "j784s4-main-r5f0_1-fw"
-+TARGET_MAIN_R5FSS1_0_j784s4-hs-evm = "j784s4-main-r5f1_0-fw"
-+TARGET_MAIN_R5FSS1_1_j784s4-hs-evm = "j784s4-main-r5f1_1-fw"
-+TARGET_MAIN_R5FSS2_0_j784s4-hs-evm = "j784s4-main-r5f2_0-fw"
-+TARGET_MAIN_R5FSS2_1_j784s4-hs-evm = "j784s4-main-r5f2_1-fw"
-+TARGET_C7X_0_j784s4-hs-evm = "j784s4-c71_0-fw"
-+TARGET_C7X_1_j784s4-hs-evm = "j784s4-c71_1-fw"
-+TARGET_C7X_2_j784s4-hs-evm = "j784s4-c71_2-fw"
-+TARGET_C7X_3_j784s4-hs-evm = "j784s4-c71_3-fw"
-+
-+TARGET_MAIN_R5FSS0_0_SIGNED_j784s4-hs-evm = "j784s4-main-r5f0_0-fw-sec"
-+TARGET_MAIN_R5FSS0_1_SIGNED_j784s4-hs-evm = "j784s4-main-r5f0_1-fw-sec"
-+TARGET_MAIN_R5FSS1_0_SIGNED_j784s4-hs-evm = "j784s4-main-r5f1_0-fw-sec"
-+TARGET_MAIN_R5FSS1_1_SIGNED_j784s4-hs-evm = "j784s4-main-r5f1_1-fw-sec"
-+TARGET_MAIN_R5FSS2_0_SIGNED_j784s4-hs-evm = "j784s4-main-r5f2_0-fw-sec"
-+TARGET_MAIN_R5FSS2_1_SIGNED_j784s4-hs-evm = "j784s4-main-r5f2_1-fw-sec"
-+TARGET_C7X_0_SIGNED_j784s4-hs-evm = "j784s4-c71_0-fw-sec"
-+TARGET_C7X_1_SIGNED_j784s4-hs-evm = "j784s4-c71_1-fw-sec"
-+TARGET_C7X_2_SIGNED_j784s4-hs-evm = "j784s4-c71_2-fw-sec"
-+TARGET_C7X_3_SIGNED_j784s4-hs-evm = "j784s4-c71_3-fw-sec"
-+
- ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_0}"
- ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_1-fw] = "${base_libdir}/firmware/${TARGET_MCU_R5FSS0_1}"
+ PR = "r2"
  
-@@ -558,6 +671,17 @@ ALTERNATIVE_LINK_NAME[j784s4-c71_1-fw] = "${base_libdir}/firmware/${TARGET_C7X_1
- ALTERNATIVE_LINK_NAME[j784s4-c71_2-fw] = "${base_libdir}/firmware/${TARGET_C7X_2}"
- ALTERNATIVE_LINK_NAME[j784s4-c71_3-fw] = "${base_libdir}/firmware/${TARGET_C7X_3}"
- 
-+ALTERNATIVE_LINK_NAME[j784s4-main-r5f0_0-fw-sec] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_0_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j784s4-main-r5f0_1-fw-sec] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS0_1_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j784s4-main-r5f1_0-fw-sec] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_0_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j784s4-main-r5f1_1-fw-sec] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS1_1_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j784s4-main-r5f2_0-fw-sec] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS2_0_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j784s4-main-r5f2_1-fw-sec] = "${base_libdir}/firmware/${TARGET_MAIN_R5FSS2_1_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j784s4-c71_0-fw-sec] = "${base_libdir}/firmware/${TARGET_C7X_0_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j784s4-c71_1-fw-sec] = "${base_libdir}/firmware/${TARGET_C7X_1_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j784s4-c71_2-fw-sec] = "${base_libdir}/firmware/${TARGET_C7X_2_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j784s4-c71_3-fw-sec] = "${base_libdir}/firmware/${TARGET_C7X_3_SIGNED}"
-+
- # Create the firmware alternatives
- 
- ALTERNATIVE_TARGET[am65x-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_0_release_strip.xer5f"
-@@ -627,6 +751,17 @@ ALTERNATIVE_TARGET[j784s4-c71_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_
- ALTERNATIVE_TARGET[j784s4-c71_2-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_3_release_strip.xe71"
- ALTERNATIVE_TARGET[j784s4-c71_3-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_4_release_strip.xe71"
- 
-+ALTERNATIVE_TARGET[j784s4-main-r5f0_0-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_0_release_strip.xer5f.signed"
-+ALTERNATIVE_TARGET[j784s4-main-r5f0_1-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f.signed"
-+ALTERNATIVE_TARGET[j784s4-main-r5f1_0-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_0_release_strip.xer5f.signed"
-+ALTERNATIVE_TARGET[j784s4-main-r5f1_1-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_1_release_strip.xer5f.signed"
-+ALTERNATIVE_TARGET[j784s4-main-r5f2_0-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu4_0_release_strip.xer5f.signed"
-+ALTERNATIVE_TARGET[j784s4-main-r5f2_1-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu4_1_release_strip.xer5f.signed"
-+ALTERNATIVE_TARGET[j784s4-c71_0-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_1_release_strip.xe71.signed"
-+ALTERNATIVE_TARGET[j784s4-c71_1-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_2_release_strip.xe71.signed"
-+ALTERNATIVE_TARGET[j784s4-c71_2-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_3_release_strip.xe71.signed"
-+ALTERNATIVE_TARGET[j784s4-c71_3-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_4_release_strip.xe71.signed"
-+
- ALTERNATIVE_PRIORITY = "10"
- 
- # make sure that lib/firmware, and all its contents are part of the package
+@@ -22,6 +22,7 @@ TARGET_PRODUCT_j7-hs-evm = "j721e_linux"
+ TARGET_PRODUCT_j721s2-evm = "j721s2_linux"
+ TARGET_PRODUCT_j721s2-hs-evm = "j721s2_linux"
+ TARGET_PRODUCT_j784s4-evm = "j784s4_linux"
++TARGET_PRODUCT_j784s4-hs-evm = "j784s4_linux"
+ TARGET_PRODUCT_am62xx = "am62_linux"
+ PVR_BUILD ?= "release"
+ PVR_WS = "wayland"
 -- 
 2.34.1
 
