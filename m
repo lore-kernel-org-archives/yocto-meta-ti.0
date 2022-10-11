@@ -2,107 +2,68 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09586C4332F
-	for <webhook@archiver.kernel.org>; Tue, 11 Oct 2022 01:44:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60335C433FE
+	for <webhook@archiver.kernel.org>; Tue, 11 Oct 2022 02:39:37 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web08.2536.1665452648673417057
+ by mx.groups.io with SMTP id smtpd.web10.3044.1665455970463345619
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 10 Oct 2022 18:44:09 -0700
+ Mon, 10 Oct 2022 19:39:30 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
  mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id CB0D840CFF;
-	Tue, 11 Oct 2022 01:44:07 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 5AB3740D23
+	for <meta-ti@lists.yoctoproject.org>; Tue, 11 Oct 2022 02:39:29 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id BbyEOwTk4FzP; Tue, 11 Oct 2022 01:44:07 +0000 (UTC)
+	with ESMTP id e9LnV1rue1j7 for <meta-ti@lists.yoctoproject.org>;
+	Tue, 11 Oct 2022 02:39:29 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net
  [100.15.80.88])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id AE1A440CCF;
-	Tue, 11 Oct 2022 01:44:05 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4A96440CCC
+	for <meta-ti@lists.yoctoproject.org>; Tue, 11 Oct 2022 02:39:29 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 3FE7A174A1C; Mon, 10 Oct 2022 21:44:03 -0400 (EDT)
-Date: Mon, 10 Oct 2022 21:44:03 -0400
+	id 2D99B174A1C; Mon, 10 Oct 2022 22:39:27 -0400 (EDT)
+Date: Mon, 10 Oct 2022 22:39:27 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-To: rs@ti.com
-Cc: reatmon@ti.com, meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [dunfell][PATCH] ti-img-rogue-*: Bump the graphics
- recipes
-Message-ID: <20221011014403.GG30861@denix.org>
-References: <20221006234108.1696865-1-rs@ti.com>
+To: meta-ti@lists.yoctoproject.org
+Subject: meta-ti langdale plans
+Message-ID: <20221011023927.GA22689@denix.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20221006234108.1696865-1-rs@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 11 Oct 2022 01:44:17 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15136
+ <meta-ti@lists.yoctoproject.org>; Tue, 11 Oct 2022 02:39:37 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15137
 
-On Thu, Oct 06, 2022 at 06:41:08PM -0500, Randolph Sapp via lists.yoctoproject.org wrote:
-> Bump the graphics recipes source revision and remove the old BVNC
-> switch. The BVNC is now baked into the platform Makefile that is
-> selected with PVR_BUILD_DIR / TARGET_PRODUCT.
+All,
 
-Any useful changelog between the 2 SRCREVs, besides removal of BVNC?
+Due to limited resources, meta-ti has no plans to branch off and separately 
+support "langdale" release. There are currently 2 actively supported LTS 
+releases in meta-ti - "dunfell" and "kirkstone". That means CI builds and 
+testing (to some extent, as kirkstone limitations are being addressed now). 
+The plan for "master" branch is to stay as close to kirkstone and for as long, 
+as possible. As such, master will be marked as compatible with langdale in 
+addition to kirkstone for now.
 
+Historically, this is no different to handling past intermediate releases - 
+there were no branches for "gatesgarth", "hardknott" or "honister". Only 
+tracking compatibility changes in master:
 
-> Signed-off-by: Randolph Sapp <rs@ti.com>
-> ---
->  .../ti-img-rogue-driver_1.15.6133109.bb                | 10 ++--------
->  .../libgles/ti-img-rogue-umlibs_1.15.6133109.bb        |  2 +-
->  2 files changed, 3 insertions(+), 9 deletions(-)
-> 
-> diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
-> index 1127c5d1..4f6dc4d4 100644
-> --- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
-> +++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
-> @@ -26,7 +26,7 @@ SRC_URI = " \
->  
->  S = "${WORKDIR}/git"
->  
-> -SRCREV = "ea2ac3fda4ac442b639bc3a0b73e9c4feac2081a"
-> +SRCREV = "a353b9524399d927af8e824f92902065947b2fbe"
->  
->  TARGET_PRODUCT_j7-evm = "j721e_linux"
->  TARGET_PRODUCT_j7-hs-evm = "j721e_linux"
-> @@ -34,16 +34,10 @@ TARGET_PRODUCT_j721s2-evm = "j721s2_linux"
->  TARGET_PRODUCT_j721s2-hs-evm = "j721s2_linux"
->  TARGET_PRODUCT_j784s4-evm = "j784s4_linux"
->  TARGET_PRODUCT_am62xx = "am62_linux"
-> -TARGET_BVNC_j7-evm = "22.104.208.318"
-> -TARGET_BVNC_j7-hs-evm = "22.104.208.318"
-> -TARGET_BVNC_j721s2-evm = "36.53.104.796"
-> -TARGET_BVNC_j721s2-hs-evm = "36.53.104.796"
-> -TARGET_BVNC_j784s4-evm = "36.53.104.796"
-> -TARGET_BVNC_am62xx = "33.15.11.3"
->  PVR_BUILD = "release"
->  PVR_WS = "wayland"
->  
-> -EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" RGX_BVNC=${TARGET_BVNC} BUILD=${PVR_BUILD} PVR_BUILD_DIR=${TARGET_PRODUCT} WINDOW_SYSTEM=${PVR_WS}'
-> +EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" BUILD=${PVR_BUILD} PVR_BUILD_DIR=${TARGET_PRODUCT} WINDOW_SYSTEM=${PVR_WS}'
->  
->  do_install() {
->      make -C ${STAGING_KERNEL_DIR} M=${B}/binary_${TARGET_PRODUCT}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
-> diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
-> index b6bb4324..de979be0 100644
-> --- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
-> +++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
-> @@ -15,7 +15,7 @@ PR = "r2"
->  BRANCH = "linuxws/dunfell/k5.10/${PV}_unified_fw_pagesize"
->  
->  SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-umlibs.git;protocol=https;branch=${BRANCH}"
-> -SRCREV = "4207c0ea429ec751b1ff5f831a84ceeb76ad578d"
-> +SRCREV = "5977e82b96028f783d39c7219f016c1faf8dc5f5"
->  
->  TARGET_PRODUCT_j7-evm = "j721e_linux"
->  TARGET_PRODUCT_j7-hs-evm = "j721e_linux"
-> -- 
-> 2.25.1
+https://git.yoctoproject.org/meta-ti/commit/conf/layer.conf?id=37d8e1829447df919945181ef05b43f08696dbe2
+https://git.yoctoproject.org/meta-ti/commit/conf/layer.conf?id=5d0855593915c6bbd2261e2047d389f894afd5cd
+https://git.yoctoproject.org/meta-ti/commit/conf/layer.conf?id=cfe3f785739428552ffd9afe24b9f2000d1d2cc6
+https://git.yoctoproject.org/meta-ti/commit/conf/layer.conf?id=e21c11b4a44417f67c78503bc3f954c175ac20e2
+
+-- 
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
 
