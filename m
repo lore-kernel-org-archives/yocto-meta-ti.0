@@ -1,61 +1,108 @@
-Return-Path: <rs@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F001C433FE
-	for <webhook@archiver.kernel.org>; Mon, 10 Oct 2022 23:31:06 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web08.1366.1665444662076603783
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09586C4332F
+	for <webhook@archiver.kernel.org>; Tue, 11 Oct 2022 01:44:17 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web08.2536.1665452648673417057
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 10 Oct 2022 16:31:02 -0700
+ Mon, 10 Oct 2022 18:44:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=INSIPq3M;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: rs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 29ANV0EO099905
-	for <meta-ti@lists.yoctoproject.org>; Mon, 10 Oct 2022 18:31:00 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1665444660;
-	bh=BnMjFU0LVtt1LFIFtaHye9BRhvXVT+THMzSBn/25d0k=;
-	h=Date:From:Subject:To:CC:In-Reply-To:References;
-	b=INSIPq3MGQI1pZPET1G67wUDfslO/yetMnvaSIci5h3HFcydVI8TGgQ5Bqc2vkt86
-	 UYUFRk8FXAmj2f90iKgBIqH0WI8UxYGZCTT89dtJbR2xIiNl2BqEyd3CtSzSEIO9+p
-	 X0BlJxw7+UyMiI/dMv35+sMFWa0y2a9PY3aBUd+w=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 29ANV0Vo049846
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 10 Oct 2022 18:31:00 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Mon, 10
- Oct 2022 18:31:00 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
- Frontend Transport; Mon, 10 Oct 2022 18:31:00 -0500
-Received: from res.dhcp.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 29ANV0ZO022461;
-	Mon, 10 Oct 2022 18:31:00 -0500
-Date: Mon, 10 Oct 2022 18:30:55 -0500
-From: "Sapp, Randolph" <rs@ti.com>
-Subject: Re: [EXTERNAL] [meta-ti] [dunfell][PATCH] ti-img-rogue-*: Bump the
- graphics recipes
-To: "Sapp, Randolph" <rs@ti.com>
-CC: "Eatmon, Ryan" <reatmon@ti.com>, <meta-ti@lists.yoctoproject.org>
-Message-ID: <JB9KJR.HI2H88MQ4X131@ti.com>
-In-Reply-To: <171B9F56778DDEEC.1795@lists.yoctoproject.org>
-References: <171B9F56778DDEEC.1795@lists.yoctoproject.org>
-X-Mailer: geary/40.0
+ dkim=missing;
+ spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
+ mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id CB0D840CFF;
+	Tue, 11 Oct 2022 01:44:07 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id BbyEOwTk4FzP; Tue, 11 Oct 2022 01:44:07 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net
+ [100.15.80.88])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id AE1A440CCF;
+	Tue, 11 Oct 2022 01:44:05 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 3FE7A174A1C; Mon, 10 Oct 2022 21:44:03 -0400 (EDT)
+Date: Mon, 10 Oct 2022 21:44:03 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: rs@ti.com
+Cc: reatmon@ti.com, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] [dunfell][PATCH] ti-img-rogue-*: Bump the graphics
+ recipes
+Message-ID: <20221011014403.GG30861@denix.org>
+References: <20221006234108.1696865-1-rs@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"; format=flowed
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20221006234108.1696865-1-rs@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 10 Oct 2022 23:31:06 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15135
+ <meta-ti@lists.yoctoproject.org>; Tue, 11 Oct 2022 01:44:17 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15136
 
-Forgot to mention what ticket this is tied to. LCPD-28762
+On Thu, Oct 06, 2022 at 06:41:08PM -0500, Randolph Sapp via lists.yoctoproject.org wrote:
+> Bump the graphics recipes source revision and remove the old BVNC
+> switch. The BVNC is now baked into the platform Makefile that is
+> selected with PVR_BUILD_DIR / TARGET_PRODUCT.
+
+Any useful changelog between the 2 SRCREVs, besides removal of BVNC?
 
 
+> Signed-off-by: Randolph Sapp <rs@ti.com>
+> ---
+>  .../ti-img-rogue-driver_1.15.6133109.bb                | 10 ++--------
+>  .../libgles/ti-img-rogue-umlibs_1.15.6133109.bb        |  2 +-
+>  2 files changed, 3 insertions(+), 9 deletions(-)
+> 
+> diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+> index 1127c5d1..4f6dc4d4 100644
+> --- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+> +++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+> @@ -26,7 +26,7 @@ SRC_URI = " \
+>  
+>  S = "${WORKDIR}/git"
+>  
+> -SRCREV = "ea2ac3fda4ac442b639bc3a0b73e9c4feac2081a"
+> +SRCREV = "a353b9524399d927af8e824f92902065947b2fbe"
+>  
+>  TARGET_PRODUCT_j7-evm = "j721e_linux"
+>  TARGET_PRODUCT_j7-hs-evm = "j721e_linux"
+> @@ -34,16 +34,10 @@ TARGET_PRODUCT_j721s2-evm = "j721s2_linux"
+>  TARGET_PRODUCT_j721s2-hs-evm = "j721s2_linux"
+>  TARGET_PRODUCT_j784s4-evm = "j784s4_linux"
+>  TARGET_PRODUCT_am62xx = "am62_linux"
+> -TARGET_BVNC_j7-evm = "22.104.208.318"
+> -TARGET_BVNC_j7-hs-evm = "22.104.208.318"
+> -TARGET_BVNC_j721s2-evm = "36.53.104.796"
+> -TARGET_BVNC_j721s2-hs-evm = "36.53.104.796"
+> -TARGET_BVNC_j784s4-evm = "36.53.104.796"
+> -TARGET_BVNC_am62xx = "33.15.11.3"
+>  PVR_BUILD = "release"
+>  PVR_WS = "wayland"
+>  
+> -EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" RGX_BVNC=${TARGET_BVNC} BUILD=${PVR_BUILD} PVR_BUILD_DIR=${TARGET_PRODUCT} WINDOW_SYSTEM=${PVR_WS}'
+> +EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" BUILD=${PVR_BUILD} PVR_BUILD_DIR=${TARGET_PRODUCT} WINDOW_SYSTEM=${PVR_WS}'
+>  
+>  do_install() {
+>      make -C ${STAGING_KERNEL_DIR} M=${B}/binary_${TARGET_PRODUCT}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
+> diff --git a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
+> index b6bb4324..de979be0 100644
+> --- a/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
+> +++ b/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
+> @@ -15,7 +15,7 @@ PR = "r2"
+>  BRANCH = "linuxws/dunfell/k5.10/${PV}_unified_fw_pagesize"
+>  
+>  SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-umlibs.git;protocol=https;branch=${BRANCH}"
+> -SRCREV = "4207c0ea429ec751b1ff5f831a84ceeb76ad578d"
+> +SRCREV = "5977e82b96028f783d39c7219f016c1faf8dc5f5"
+>  
+>  TARGET_PRODUCT_j7-evm = "j721e_linux"
+>  TARGET_PRODUCT_j7-hs-evm = "j721e_linux"
+> -- 
+> 2.25.1
 
