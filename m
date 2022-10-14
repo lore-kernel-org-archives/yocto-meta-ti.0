@@ -1,85 +1,69 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <JPEWhacker@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F29E1C433FE
-	for <webhook@archiver.kernel.org>; Thu, 13 Oct 2022 21:04:14 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web12.22.1665695045049074617
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9273C4332F
+	for <webhook@archiver.kernel.org>; Fri, 14 Oct 2022 15:45:39 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web08.8921.1665762334773883294
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 13 Oct 2022 14:04:05 -0700
+ Fri, 14 Oct 2022 08:45:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=X8eXwYL9;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 29DL44M6061066;
-	Thu, 13 Oct 2022 16:04:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1665695044;
-	bh=1XLtY1Trr23LdH1wK2A2gcjYwaVUBVEX8YRpOSvaHNU=;
-	h=From:To:Subject:Date;
-	b=X8eXwYL9Nac9XKbD0yIeWZBgXRFl0jaRSAUO2lR/IFT0Mwbu6CqIfCIS8JbWVpN8D
-	 iEIP7IvI7hThOkYWQaE1ybHGHxKeqnTgeF1RhOVhikSp34hMQzDzPX2xOL+lnD/98x
-	 upJM5SfTpQ1Dkb9lR6CaYegwLj427iryCsRgTEX8=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 29DL439X040321
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 13 Oct 2022 16:04:04 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Thu, 13
- Oct 2022 16:04:03 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
- Frontend Transport; Thu, 13 Oct 2022 16:04:03 -0500
-Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 29DL43FY013884;
-	Thu, 13 Oct 2022 16:04:03 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1oj5N5-00050d-6V; Thu, 13 Oct 2022 16:04:03 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] u-boot: Remove lzop dependency
-Date: Thu, 13 Oct 2022 16:04:03 -0500
-Message-ID: <20221013210403.18295-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=OW8VoCRq;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: jpewhacker@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id q9so11498084ejd.0
+        for <meta-ti@lists.yoctoproject.org>; Fri, 14 Oct 2022 08:45:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=7haWiuSA9q7Rbr709Id1rTYG7rrMnEq3GjeSMx0CdIE=;
+        b=OW8VoCRqgpJg4CY+U9FCDYT6wC+Mot24TWWn5bn+7RIwalGHhjIOGChCvXsybuv13a
+         /jALhxg1nmCzy1hUohJjAGWBOk9O6t4bg5MsWHNLVCNf9xtrLwydW8yFzXEXYkO8VJiW
+         KpeZhD09UhzyJ3c/5t/2IdO4UfO1+Z5lzlXeHhr0h5O2B8dVrwKJiW5egT+bKZZwOniI
+         LPMR3Ox+zuL9wRdb9m3zDBB484O4KyyOd21TyDzLkcn5adN74+zuNyv2KO4PK8N6ryLh
+         oFviciSoiCcwASFBCPgZAa2URDVOR5pp92zVaa5ElXAvV/SFLwLOB75CrP6gnbLupuzR
+         0F0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=7haWiuSA9q7Rbr709Id1rTYG7rrMnEq3GjeSMx0CdIE=;
+        b=hsDcUckNpKEJwh2FBzZ5KAUZp9YCa4a1cjzXOPJngTgA2WvxHxZ+txCqx5HM2Ac7Lr
+         bShFw1jrtizxFatPa93hOb9pyoWshaYWaDoDEaxilApHRA/NUvCfA9UWxIFQzJOVxQj6
+         E+4hWz/9IfyXEseyqRZIY9CdjeEHUYC6ZhxualVaKHqwO+D2pyCyzloWbdsSVL6kpNkO
+         GkZ/wDBLpKUOAUSkaypZs7/lu8BihrD50CyqqLJpfBlAihU5XAlIcMDEWh+YG4boXyJq
+         AfnMjN8Tp0qmfa0O/UEDtoLqRgoPe3+9TgLarGZL43dI3aDpWxn3dDZmWgKNmdURP2db
+         quGw==
+X-Gm-Message-State: ACrzQf0rK3v648AEwb+OX7z5W7cl1zehdH/z1K3CuQxxRaqcV52QDWgr
+	A6UnEYahrKk4Ka6buZpz19lhOaxzdMvQNb+F1IGg5CnJF+8=
+X-Google-Smtp-Source: AMsMyM5IBPSKt2ySS7wB6xPbSIp9LWoZIJV/9Zn7KnNlBT0ZTZvZtDtk8RipJ6eVPFmzx/0mTVZo6trTdw0c8SBdaiI=
+X-Received: by 2002:a17:907:1b12:b0:72f:9b44:f9e with SMTP id
+ mp18-20020a1709071b1200b0072f9b440f9emr4015721ejc.653.1665762332569; Fri, 14
+ Oct 2022 08:45:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+From: Joshua Watt <jpewhacker@gmail.com>
+Date: Fri, 14 Oct 2022 10:45:21 -0500
+Message-ID: <CAJdd5GZshPXLmnpvNN-086V2oDFYCifCVx5+02--Dm3tAbVVTA@mail.gmail.com>
+Subject: PDK Source Missing on Dunfell
+To: meta-ti@lists.yoctoproject.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 13 Oct 2022 21:04:14 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15173
+ <meta-ti@lists.yoctoproject.org>; Fri, 14 Oct 2022 15:45:39 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15174
 
-lzop support has been moved from oe-core to meta-oe.  Since we are not
-setting FIT_KERNEL_COMP_ALG and (for minimal poky builds) we would like
-to not require meta-oe just for this, just remove the dependency entirely.
+I'm attempting to use PDK sources on Dunfell (basically trying to
+include any recipe that inherits ti-pdk-fetch.bbclass) and it's
+started erroring out saying that
+https://git.ti.com/git/processor-sdk/pdk.git  doesn't exist anymore.
+I've poked around on git.ti.com and it looks like this repo doesn't
+exist anymore, or maybe got renamed to something else?
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Either way, it appears that the PDK is broken on dunfell since it
+can't fetch and I don't know how to fix it.
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-index d29c80cf..a82981cc 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -23,7 +23,7 @@ SRC_URI = "${UBOOT_GIT_URI};protocol=${UBOOT_GIT_PROTOCOL};branch=${BRANCH}"
- PV:append = "+git${SRCPV}"
- 
- # u-boot needs devtree compiler to parse dts files
--DEPENDS += "dtc-native bc-native lzop-native flex-native bison-native python3-setuptools-native"
-+DEPENDS += "dtc-native bc-native flex-native bison-native python3-setuptools-native"
- 
- DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
- 
--- 
-2.17.1
-
+Thanks,
+Joshua Watt
 
