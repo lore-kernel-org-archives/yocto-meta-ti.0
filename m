@@ -2,120 +2,80 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2EB3C04A95
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4749C433FE
 	for <webhook@archiver.kernel.org>; Sat, 22 Oct 2022 04:56:42 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.3683.1666414592601113852
+ by mx.groups.io with SMTP id smtpd.web12.3492.1666414593134956010
  for <meta-ti@lists.yoctoproject.org>;
  Fri, 21 Oct 2022 21:56:33 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id EF09040DF3;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id ED76240DF2;
 	Sat, 22 Oct 2022 04:56:31 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TUNqjJPtFb2x; Sat, 22 Oct 2022 04:56:31 +0000 (UTC)
+	with ESMTP id m1L5JAQnupRd; Sat, 22 Oct 2022 04:56:31 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-80-88.washdc.fios.verizon.net [100.15.80.88])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D31D640DEF;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D127540D84;
 	Sat, 22 Oct 2022 04:56:30 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id CD49C174A3B;
+	by mail.denix.org (Postfix) with ESMTP id BE7B2174A39;
 	Sat, 22 Oct 2022 00:56:28 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master/kirkstone][PATCH 2/2] linux-ti-next: add recipe for building linux-next
-Date: Sat, 22 Oct 2022 04:56:25 +0000
-Message-Id: <20221022045625.3385830-2-denis@denix.org>
+Subject: [master/kirkstone][PATCH 1/2] u-boot-ti-mainline: update to the latest 2022.10
+Date: Sat, 22 Oct 2022 04:56:24 +0000
+Message-Id: <20221022045625.3385830-1-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221022045625.3385830-1-denis@denix.org>
-References: <20221022045625.3385830-1-denis@denix.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Sat, 22 Oct 2022 04:56:42 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15195
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15196
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-Required for daily test plans. Can be enabled in local.conf or <distro>.c=
-onf:
-
-PREFERRED_PROVIDER_virtual/kernel =3D "linux-ti-next"
-SRCREV:pn-linux-ti-next =3D "${AUTOREV}"
-
-Only uses in-tree defconfigs, does not support config fragments, builds a=
-nd
-packages in-tree DTBs.
+Update to the latest release version.
+bzip2 license was added to the list, update checksum.
 
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- .../recipes-kernel/linux/linux-ti-next_git.bb | 43 +++++++++++++++++++
- 1 file changed, 43 insertions(+)
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb b/meta=
--ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb
-new file mode 100644
-index 00000000..e2908951
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb
-@@ -0,0 +1,43 @@
-+SECTION =3D "kernel"
-+SUMMARY =3D "Linux-next kernel for TI devices"
-+LICENSE =3D "GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6bc538ed5bd9a7fc9398086aedcd7=
-e46"
-+
-+inherit kernel
-+
-+require recipes-kernel/linux/ti-kernel.inc
-+
-+DEPENDS +=3D "gmp-native libmpc-native"
-+
-+KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT} ${EXTRA_DTC_ARGS}=
-"
-+
-+S =3D "${WORKDIR}/git"
-+
-+# 6.1.0-rc1+ version
-+SRCREV =3D "4d48f589d294ddc5e01d3b0dc7cecc55324c05ca"
-+PV =3D "6.1.0-rc1+git${SRCPV}"
-+
-+SRC_URI =3D "git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-ne=
-xt.git;protocol=3Dhttps;branch=3Dmaster"
-+
-+def list_dtbs(dts_dir, dts_subdir):
-+    import os
-+    import fnmatch
-+    matches =3D []
-+
-+    for root,dirnames,filenames in os.walk(os.path.join(dts_dir, dts_sub=
-dir)):
-+        for filename in fnmatch.filter(filenames, '*.dtb'):
-+            matches.append(os.path.join(dts_subdir, filename))
-+        for filename in fnmatch.filter(filenames, '*.dtbo'):
-+            matches.append(os.path.join(dts_subdir, filename))
-+    return ' '.join(matches)
-+
-+DTS_SUBDIR =3D ""
-+DTS_SUBDIR:k3 =3D "ti"
-+KERNEL_DEVICETREE =3D "${@list_dtbs('${B}/arch/${ARCH}/boot/dts', '${DTS=
-_SUBDIR}')}"
-+DEFCONFIG_NAME =3D "multi_v7_defconfig"
-+DEFCONFIG_NAME:k3 =3D "defconfig"
-+KERNEL_CONFIG_COMMAND =3D "oe_runmake -C ${S} O=3D${B} ${DEFCONFIG_NAME}=
-"
-+
-+kernel_do_compile:append() {
-+	oe_runmake dtbs CC=3D"${KERNEL_CC} $cc_extra " LD=3D"${KERNEL_LD}" ${KE=
-RNEL_EXTRA_ARGS}
-+}
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb b/m=
+eta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
+index 76aaa4b2..ebeb4d42 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
+@@ -1,10 +1,10 @@
+ require u-boot-ti.inc
+=20
+-LIC_FILES_CHKSUM =3D "file://Licenses/README;md5=3D5a7450c57ffe5ae63fd73=
+2446b988025"
++LIC_FILES_CHKSUM =3D "file://Licenses/README;md5=3D2ca5f2c35c8cc335f0a19=
+756634782f1"
+=20
+ PR =3D "r0"
+=20
+-PV =3D "2021.10"
++PV =3D "2022.10"
+=20
+ # For the un-initiated:
+ # The actual URL you'd use with a git clone for example would be:
+@@ -15,4 +15,4 @@ PV =3D "2021.10"
+ # b) and we want git fetcher to use https protocol, hence GIT_PROTOCOL a=
+s https
+ UBOOT_GIT_URI =3D "git://source.denx.de/u-boot/u-boot.git"
+ UBOOT_GIT_PROTOCOL =3D "https"
+-SRCREV =3D "d80bb749fab53da72c4a0e09b8c2d2aaa3103c91"
++SRCREV =3D "4debc57a3da6c3f4d3f89a637e99206f4cea0a96"
 --=20
 2.25.1
 
