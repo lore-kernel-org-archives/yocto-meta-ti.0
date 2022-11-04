@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0184C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DFB3AC4167E
 	for <webhook@archiver.kernel.org>; Fri,  4 Nov 2022 22:46:58 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.933.1667602018307077686
+ by mx.groups.io with SMTP id smtpd.web08.826.1667602017114540106
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 04 Nov 2022 15:46:58 -0700
+ Fri, 04 Nov 2022 15:46:57 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9366440D81
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 8848A40D85
 	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 22:46:56 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xB-9ry7vz8w7 for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id VQPTAHg3Zicb for <meta-ti@lists.yoctoproject.org>;
 	Fri,  4 Nov 2022 22:46:56 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 79D9940D84
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7107C40D81
 	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 22:46:56 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 0F98F163680
-	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 18:46:51 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id E87A316367C
+	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 18:46:50 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master/kirkstone][PATCH 07/50] conf: machine: Move K3 TI_SECURE_DEV_PKG definition to common include
-Date: Fri,  4 Nov 2022 22:46:09 +0000
-Message-Id: <20221104224653.1223044-8-denis@denix.org>
+Subject: [master/kirkstone][PATCH 03/50] ti-sci-fw: Deploy all SYSFW firmware types
+Date: Fri,  4 Nov 2022 22:46:05 +0000
+Message-Id: <20221104224653.1223044-4-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221104224653.1223044-1-denis@denix.org>
 References: <20221104224653.1223044-1-denis@denix.org>
@@ -39,168 +39,63 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Fri, 04 Nov 2022 22:46:58 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15278
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15275
 
 From: Andrew Davis <afd@ti.com>
 
-The K3 TI_SECURE_DEV_PKG is the same for all devices, move this out
-of each machine file and into the common K3 includes. This doesn't
-have any effect on the GP machines as they make no use of it.
+This allows us to rebuild and re-sign the SYSFW image if needed from
+the deploy directory for any SoC type.
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/conf/machine/am64xx-hs-evm-k3r5.conf | 2 --
- meta-ti-bsp/conf/machine/am64xx-hs-evm.conf      | 2 --
- meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf | 2 --
- meta-ti-bsp/conf/machine/am65xx-hs-evm.conf      | 2 --
- meta-ti-bsp/conf/machine/include/k3.inc          | 2 ++
- meta-ti-bsp/conf/machine/include/k3r5.inc        | 2 ++
- meta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf  | 2 --
- meta-ti-bsp/conf/machine/j7200-hs-evm.conf       | 2 --
- meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf  | 2 --
- meta-ti-bsp/conf/machine/j721e-hs-evm.conf       | 2 --
- meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf | 2 --
- meta-ti-bsp/conf/machine/j721s2-hs-evm.conf      | 2 --
- 12 files changed, 4 insertions(+), 20 deletions(-)
+ .../recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb    | 28 ++++++++-----------
+ 1 file changed, 12 insertions(+), 16 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/machine/am64xx-hs-evm-k3r5.conf b/meta-ti-b=
-sp/conf/machine/am64xx-hs-evm-k3r5.conf
-index d12c030f..647c8beb 100644
---- a/meta-ti-bsp/conf/machine/am64xx-hs-evm-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/am64xx-hs-evm-k3r5.conf
-@@ -10,5 +10,3 @@ SYSFW_SUFFIX =3D "hs"
- SYSFW_SYMLINK =3D ""
+diff --git a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/meta-ti=
+-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index 64c71292..61afeaeb 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -22,24 +22,20 @@ TI_SECURE_DEV_PKG ?=3D ""
+ export TI_SECURE_DEV_PKG
 =20
- UBOOT_MACHINE =3D "am64x_hs_evm_r5_defconfig"
+ SYSFW_SOC ?=3D "unknown"
+-SYSFW_CONFIG ?=3D "unknown"
 -
--TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/meta-ti-bsp/conf/machine/am64xx-hs-evm.conf b/meta-ti-bsp/co=
-nf/machine/am64xx-hs-evm.conf
-index ebbe2e62..3ab9a49e 100644
---- a/meta-ti-bsp/conf/machine/am64xx-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am64xx-hs-evm.conf
-@@ -17,5 +17,3 @@ UBOOT_DTBO_OFFSET =3D      "0x00010000"
- SPL_BINARY =3D "tispl.bin_HS"
- UBOOT_BINARY =3D "u-boot.img_HS"
- UBOOT_SYMLINK =3D "u-boot.img"
+-SYSFW_PREFIX =3D "ti-sci-firmware"
+-SYSFW_PREFIX:j721e-evm-k3r5 =3D "ti-fs-firmware"
+-SYSFW_PREFIX:j721e-hs-evm-k3r5 =3D "ti-fs-firmware"
+-SYSFW_PREFIX:j721e-hs-evm-k3r5-sr1-1 =3D "ti-fs-firmware"
+-SYSFW_PREFIX:j7200-evm-k3r5 =3D "ti-fs-firmware"
+-SYSFW_PREFIX:j7200-hs-evm-k3r5 =3D "ti-fs-firmware"
+-SYSFW_PREFIX:j721s2-evm-k3r5 =3D "ti-fs-firmware"
+-SYSFW_PREFIX:j721s2-hs-evm-k3r5 =3D "ti-fs-firmware"
+-SYSFW_PREFIX:am62xx-evm-k3r5 =3D "ti-fs-firmware"
 -
--TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf b/meta-ti-b=
-sp/conf/machine/am65xx-hs-evm-k3r5.conf
-index 81b8c75f..d9041c9d 100644
---- a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
-@@ -16,5 +16,3 @@ UBOOT_IMAGE =3D "tiboot3-${MAINMACHINE}-${PV}-${PR}.${U=
-BOOT_SUFFIX}"
- UBOOT_SYMLINK =3D "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
+ SYSFW_SUFFIX ?=3D "unknown"
++SYSFW_CONFIG ?=3D "unknown"
 =20
- UBOOT_MACHINE =3D "am65x_hs_evm_r5_defconfig"
+-SYSFW_BASE =3D "${SYSFW_PREFIX}-${SYSFW_SOC}-${SYSFW_SUFFIX}"
+-SYSFW_BASE:append =3D "${@['','*']['${SYSFW_SUFFIX}' =3D=3D 'hs']}"
 -
--TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf b/meta-ti-bsp/co=
-nf/machine/am65xx-hs-evm.conf
-index de92cacb..ea1f8ff1 100644
---- a/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf
-@@ -17,5 +17,3 @@ UBOOT_DTBO_OFFSET =3D      "0x00010000"
- SPL_BINARY =3D "tispl.bin_HS"
- UBOOT_BINARY =3D "u-boot.img_HS"
- UBOOT_SYMLINK =3D "u-boot.img"
--
--TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/m=
-achine/include/k3.inc
-index 8a32e0fe..7cefd6c3 100644
---- a/meta-ti-bsp/conf/machine/include/k3.inc
-+++ b/meta-ti-bsp/conf/machine/include/k3.inc
-@@ -49,3 +49,5 @@ WKS_FILE ?=3D "sdimage-2part-efi.wks"
- do_image_wic[depends] +=3D "virtual/bootloader:do_deploy"
- do_image_wic[mcdepends] +=3D "mc::k3r5:virtual/bootloader:do_deploy mc::=
-k3r5:ti-sci-fw:do_deploy"
- do_image_tar[mcdepends] +=3D "mc::k3r5:virtual/bootloader:do_deploy mc::=
-k3r5:ti-sci-fw:do_deploy"
+-SYSFW_TISCI =3D "${S}/ti-sysfw/${SYSFW_BASE}.bin"
++SYSFW_PREFIX =3D "sci"
++SYSFW_PREFIX:j721e-evm-k3r5 =3D "fs"
++SYSFW_PREFIX:j721e-hs-evm-k3r5 =3D "fs"
++SYSFW_PREFIX:j721e-hs-evm-k3r5-sr1-1 =3D "fs"
++SYSFW_PREFIX:j7200-evm-k3r5 =3D "fs"
++SYSFW_PREFIX:j7200-hs-evm-k3r5 =3D "fs"
++SYSFW_PREFIX:j721s2-evm-k3r5 =3D "fs"
++SYSFW_PREFIX:j721s2-hs-evm-k3r5 =3D "fs"
++SYSFW_PREFIX:am62xx-evm-k3r5 =3D "fs"
 +
-+TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/meta-ti-bsp/conf/machine/include/k3r5.inc b/meta-ti-bsp/conf=
-/machine/include/k3r5.inc
-index d000404e..31646f5a 100644
---- a/meta-ti-bsp/conf/machine/include/k3r5.inc
-+++ b/meta-ti-bsp/conf/machine/include/k3r5.inc
-@@ -22,3 +22,5 @@ UBOOT_SYMLINK =3D "u-boot-r5spl.${UBOOT_SUFFIX}"
++SYSFW_TISCI =3D "${S}/ti-sysfw/ti-${SYSFW_PREFIX}-firmware-${SYSFW_SOC}-=
+*.bin"
 =20
- PACKAGECONFIG:pn-u-boot-ti-staging =3D ""
- PACKAGECONFIG:pn-u-boot-ti-mainline =3D ""
-+
-+TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/meta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf b/meta-ti-bs=
-p/conf/machine/j7200-hs-evm-k3r5.conf
-index 3f134877..3fe06e74 100644
---- a/meta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf
-@@ -9,5 +9,3 @@ SYSFW_CONFIG =3D "evm"
- SYSFW_SUFFIX =3D "hs"
-=20
- UBOOT_MACHINE =3D "j7200_hs_evm_r5_defconfig"
--
--TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/meta-ti-bsp/conf/machine/j7200-hs-evm.conf b/meta-ti-bsp/con=
-f/machine/j7200-hs-evm.conf
-index 8821ffac..ef7268b1 100644
---- a/meta-ti-bsp/conf/machine/j7200-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j7200-hs-evm.conf
-@@ -17,5 +17,3 @@ UBOOT_DTBO_OFFSET =3D      "0x00010000"
- SPL_BINARY =3D "tispl.bin_HS"
- UBOOT_BINARY =3D "u-boot.img_HS"
- UBOOT_SYMLINK =3D "u-boot.img"
--
--TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf b/meta-ti-bs=
-p/conf/machine/j721e-hs-evm-k3r5.conf
-index 8e53a5cb..a0d000b2 100644
---- a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
-@@ -16,5 +16,3 @@ UBOOT_IMAGE =3D "tiboot3-${MAINMACHINE}-${PV}-${PR}.${U=
-BOOT_SUFFIX}"
- UBOOT_SYMLINK =3D "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
-=20
- UBOOT_MACHINE =3D "j721e_hs_evm_r5_defconfig"
--
--TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/meta-ti-bsp/conf/machine/j721e-hs-evm.conf b/meta-ti-bsp/con=
-f/machine/j721e-hs-evm.conf
-index 0c493459..9ef7b86a 100644
---- a/meta-ti-bsp/conf/machine/j721e-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j721e-hs-evm.conf
-@@ -25,5 +25,3 @@ BBMULTICONFIG +=3D "k3r5-sr1-1"
- IMAGE_BOOT_FILES +=3D "sysfw-j721e-evm.itb"
- do_image_wic[mcdepends] +=3D "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
- do_image_tar[mcdepends] +=3D "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
--
--TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf b/meta-ti-b=
-sp/conf/machine/j721s2-hs-evm-k3r5.conf
-index ac4df86e..a4d51904 100644
---- a/meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf
-@@ -9,5 +9,3 @@ SYSFW_CONFIG =3D "evm"
- SYSFW_SUFFIX =3D "hs"
-=20
- UBOOT_MACHINE =3D "j721s2_hs_evm_r5_defconfig"
--
--TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_K3}"
-diff --git a/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf b/meta-ti-bsp/co=
-nf/machine/j721s2-hs-evm.conf
-index 7ffad45a..84db90bb 100644
---- a/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf
-@@ -17,5 +17,3 @@ UBOOT_DTBO_OFFSET =3D      "0x00010000"
- SPL_BINARY =3D "tispl.bin_HS"
- UBOOT_BINARY =3D "u-boot.img_HS"
- UBOOT_SYMLINK =3D "u-boot.img"
--
--TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_K3}"
+ SYSFW_BINARY =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
+ SYSFW_VBINARY =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
 --=20
 2.25.1
 
