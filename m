@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB800C63703
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CCF40C63705
 	for <webhook@archiver.kernel.org>; Fri,  4 Nov 2022 21:41:07 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.221.1667598060740674032
+ by mx.groups.io with SMTP id smtpd.web08.213.1667598060696518523
  for <meta-ti@lists.yoctoproject.org>;
  Fri, 04 Nov 2022 14:41:00 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 71FA940D8F
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 4730B40D95
 	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 21:40:58 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id V5hhJnZX_b-k for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id itUBZL-ZbKgp for <meta-ti@lists.yoctoproject.org>;
 	Fri,  4 Nov 2022 21:40:58 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 68F2140D91
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3DA5A40D89
 	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 21:40:58 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id DD8D71636A9
+	by mail.denix.org (Postfix) with ESMTP id B394E1636A3
 	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 17:40:52 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master/kirkstone][PATCH 35/47] ti-img-rogue-*: Bump the graphics recipes
-Date: Fri,  4 Nov 2022 21:40:43 +0000
-Message-Id: <20221104214055.1221197-36-denis@denix.org>
+Subject: [master/kirkstone][PATCH 29/47] ti-rtos-firmware: j7200-hs-evm: add secure firmware images
+Date: Fri,  4 Nov 2022 21:40:37 +0000
+Message-Id: <20221104214055.1221197-30-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221104214055.1221197-1-denis@denix.org>
 References: <20221104214055.1221197-1-denis@denix.org>
@@ -39,76 +39,130 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Fri, 04 Nov 2022 21:41:07 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15247
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15244
 
-From: Randolph Sapp <rs@ti.com>
+From: Manorit Chawdhry <m-chawdhry@ti.com>
 
-Bump the graphics recipes source revision and remove the old BVNC
-switch. The BVNC is now baked into the platform Makefile that is
-selected with PVR_BUILD_DIR / TARGET_PRODUCT.
+Adds support for secure firmware images in J7200 HS EVM.
 
-Signed-off-by: Randolph Sapp <rs@ti.com>
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- .../powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb   | 8 ++------
- .../libgles/ti-img-rogue-umlibs_1.15.6133109.bb           | 2 +-
- 2 files changed, 3 insertions(+), 7 deletions(-)
+ .../ti-rtos-bin/ti-rtos-firmware.bb           | 28 +++++++++++++++++++
+ 1 file changed, 28 insertions(+)
 
-diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_=
-1.15.6133109.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-dr=
-iver_1.15.6133109.bb
-index 00bc719a..fd595dea 100644
---- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.61=
-33109.bb
-+++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.61=
-33109.bb
-@@ -27,20 +27,16 @@ SRC_URI =3D " \
+diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/met=
+a-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index d8f00ccd..ea4737b9 100644
+--- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -87,6 +87,18 @@ do_install:prepend:j7200-hs-evm() {
+                 mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
+                 ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM=
+_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
+         )
++        (
++          cd ${RTOS_IPC_FW_DIR}; \
++                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_=
+echo_test_mcu2_0_release_strip.xer5f \
++                        ipc_echo_test_mcu2_0_release_strip.xer5f.signed;=
+ \
++                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_=
+echo_test_mcu2_1_release_strip.xer5f \
++                        ipc_echo_test_mcu2_1_release_strip.xer5f.signed;=
+ \
++        )
++        (
++          cd ${RTOS_ETH_FW_DIR}; \
++                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh app_=
+remoteswitchcfg_server_strip.xer5f \
++                        app_remoteswitchcfg_server_strip.xer5f.signed;
++        )
+ }
 =20
- S =3D "${WORKDIR}/git"
+ # J7 HS support
+@@ -167,11 +179,16 @@ do_install:j7200-hs-evm() {
+     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_stri=
+p.xer5f ${LEGACY_IPC_FW_DIR}
+     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_stri=
+p.xer5f ${LEGACY_IPC_FW_DIR}
+     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_stri=
+p.xer5f ${LEGACY_IPC_FW_DIR}
++    # Signed Firmwares
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_stri=
+p.xer5f.signed ${LEGACY_IPC_FW_DIR}
++    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_stri=
+p.xer5f.signed ${LEGACY_IPC_FW_DIR}
+     # DM Firmware
+     install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_stri=
+p.xer5f ${LEGACY_DM_FW_DIR}
+     # ETH firmware
+     install -d ${LEGACY_ETH_FW_DIR}
+     install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.=
+xer5f ${LEGACY_ETH_FW_DIR}
++    # ETH Signed firmware
++    install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.=
+xer5f.signed ${LEGACY_ETH_FW_DIR}
+ }
 =20
--SRCREV =3D "ea2ac3fda4ac442b639bc3a0b73e9c4feac2081a"
-+SRCREV =3D "a353b9524399d927af8e824f92902065947b2fbe"
+ do_install:j721s2-evm() {
+@@ -299,6 +316,8 @@ ALTERNATIVE:${PN}:j7200-hs-evm =3D "\
+                     j7200-mcu-r5f0_1-fw \
+                     j7200-main-r5f0_0-fw \
+                     j7200-main-r5f0_1-fw \
++                    j7200-main-r5f0_0-fw-sec \
++                    j7200-main-r5f0_1-fw-sec \
+                     "
 =20
- TARGET_PRODUCT:j721e =3D "j721e_linux"
- TARGET_PRODUCT:j721s2 =3D "j721s2_linux"
- TARGET_PRODUCT:j784s4 =3D "j784s4_linux"
- TARGET_PRODUCT:am62xx =3D "am62_linux"
--TARGET_BVNC:j721e =3D "22.104.208.318"
--TARGET_BVNC:j721s2 =3D "36.53.104.796"
--TARGET_BVNC:j784s4 =3D "36.53.104.796"
--TARGET_BVNC:am62xx =3D "33.15.11.3"
- PVR_BUILD =3D "release"
- PVR_WS =3D "wayland"
+ ALTERNATIVE_${PN}:j721s2-evm =3D "\
+@@ -365,6 +384,9 @@ TARGET_MCU_R5FSS0_1:j7200-hs-evm =3D "j7200-mcu-r5f0_=
+1-fw"
+ TARGET_MAIN_R5FSS0_0:j7200-hs-evm =3D "j7200-main-r5f0_0-fw"
+ TARGET_MAIN_R5FSS0_1:j7200-hs-evm =3D "j7200-main-r5f0_1-fw"
 =20
--EXTRA_OEMAKE +=3D 'KERNELDIR=3D"${STAGING_KERNEL_DIR}" RGX_BVNC=3D${TARG=
-ET_BVNC} BUILD=3D${PVR_BUILD} PVR_BUILD_DIR=3D${TARGET_PRODUCT} WINDOW_SY=
-STEM=3D${PVR_WS}'
-+EXTRA_OEMAKE +=3D 'KERNELDIR=3D"${STAGING_KERNEL_DIR}" BUILD=3D${PVR_BUI=
-LD} PVR_BUILD_DIR=3D${TARGET_PRODUCT} WINDOW_SYSTEM=3D${PVR_WS}'
++TARGET_MAIN_R5FSS0_0_SIGNED:j7200-hs-evm =3D "j7200-main-r5f0_0-fw-sec"
++TARGET_MAIN_R5FSS0_1_SIGNED:j7200-hs-evm =3D "j7200-main-r5f0_1-fw-sec"
++
+ TARGET_MCU_R5FSS0_0:j721s2-evm =3D "j721s2-mcu-r5f0_0-fw"
+ TARGET_MCU_R5FSS0_1:j721s2-evm =3D "j721s2-mcu-r5f0_1-fw"
+ TARGET_MAIN_R5FSS0_0:j721s2-evm =3D "j721s2-main-r5f0_0-fw"
+@@ -418,6 +440,9 @@ ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_1-fw] =3D "${non=
+arch_base_libdir}/firmware/${
+ ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw] =3D "${nonarch_base_libdir}/=
+firmware/${TARGET_MAIN_R5FSS0_0}"
+ ALTERNATIVE_LINK_NAME[j7200-main-r5f0_1-fw] =3D "${nonarch_base_libdir}/=
+firmware/${TARGET_MAIN_R5FSS0_1}"
 =20
- do_install() {
-     make -C ${STAGING_KERNEL_DIR} M=3D${B}/binary_${TARGET_PRODUCT}_${PV=
-R_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=3D${D}${root_pr=
-efix} PREFIX=3D${STAGING_DIR_HOST} modules_install
-diff --git a/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.1=
-5.6133109.bb b/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1=
-.15.6133109.bb
-index 2abec024..a665c614 100644
---- a/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.61331=
-09.bb
-+++ b/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.61331=
-09.bb
-@@ -15,7 +15,7 @@ PR =3D "r2"
- BRANCH =3D "linuxws/dunfell/k5.10/${PV}_unified_fw_pagesize"
++ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw-sec] =3D "${base_libdir}/firm=
+ware/${TARGET_MAIN_R5FSS0_0_SIGNED}"
++ALTERNATIVE_LINK_NAME[j7200-main-r5f0_1-fw-sec] =3D "${base_libdir}/firm=
+ware/${TARGET_MAIN_R5FSS0_1_SIGNED}"
++
+ ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_0-fw] =3D "${nonarch_base_libdir}/=
+firmware/${TARGET_MCU_R5FSS0_0}"
+ ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_1-fw] =3D "${nonarch_base_libdir}/=
+firmware/${TARGET_MCU_R5FSS0_1}"
+ ALTERNATIVE_LINK_NAME[j721s2-main-r5f0_0-fw] =3D "${nonarch_base_libdir}=
+/firmware/${TARGET_MAIN_R5FSS0_0}"
+@@ -464,6 +489,9 @@ ALTERNATIVE_TARGET[j7200-mcu-r5f0_1-fw] =3D "${nonarc=
+h_base_libdir}/firmware/pdk-i
+ ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw] =3D "${nonarch_base_libdir}/fir=
+mware/ethfw/app_remoteswitchcfg_server_strip.xer5f"
+ ALTERNATIVE_TARGET[j7200-main-r5f0_1-fw] =3D "${nonarch_base_libdir}/fir=
+mware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f"
 =20
- SRC_URI =3D "git://git.ti.com/git/graphics/ti-img-rogue-umlibs.git;proto=
-col=3Dhttps;branch=3D${BRANCH}"
--SRCREV =3D "4207c0ea429ec751b1ff5f831a84ceeb76ad578d"
-+SRCREV =3D "5977e82b96028f783d39c7219f016c1faf8dc5f5"
-=20
- TARGET_PRODUCT:j721e =3D "j721e_linux"
- TARGET_PRODUCT:j721s2 =3D "j721s2_linux"
++ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw-sec] =3D "${base_libdir}/firmwar=
+e/ethfw/app_remoteswitchcfg_server_strip.xer5f.signed"
++ALTERNATIVE_TARGET[j7200-main-r5f0_1-fw-sec] =3D "${base_libdir}/firmwar=
+e/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f.signed"
++
+ ALTERNATIVE_TARGET[j721s2-mcu-r5f0_0-fw] =3D "${nonarch_base_libdir}/fir=
+mware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
+ ALTERNATIVE_TARGET[j721s2-mcu-r5f0_1-fw] =3D "${nonarch_base_libdir}/fir=
+mware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
+ ALTERNATIVE_TARGET[j721s2-main-r5f0_0-fw] =3D "${nonarch_base_libdir}/fi=
+rmware/pdk-ipc/ipc_echo_test_mcu2_0_release_strip.xer5f"
 --=20
 2.25.1
 
