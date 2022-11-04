@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53719C4167E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 600E8C41535
 	for <webhook@archiver.kernel.org>; Fri,  4 Nov 2022 21:41:07 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.203.1667598065005358578
+ by mx.groups.io with SMTP id smtpd.web11.201.1667598061822236703
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 04 Nov 2022 14:41:05 -0700
+ Fri, 04 Nov 2022 14:41:02 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 7616A40D52
-	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 21:41:04 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 0D21F40DA5
+	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 21:41:00 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id OOksd_Cbhl0S for <meta-ti@lists.yoctoproject.org>;
-	Fri,  4 Nov 2022 21:41:04 +0000 (UTC)
+	with ESMTP id ntxm06drAG87 for <meta-ti@lists.yoctoproject.org>;
+	Fri,  4 Nov 2022 21:41:00 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id F321140D96
-	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 21:40:57 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 02A9D40D85
+	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 21:40:58 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 8A90916368F
-	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 17:40:52 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 50B9D1636B8
+	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 17:40:53 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master/kirkstone][PATCH 22/47] optee-os: Lower log level for AM62x
-Date: Fri,  4 Nov 2022 21:40:30 +0000
-Message-Id: <20221104214055.1221197-23-denis@denix.org>
+Subject: [master/kirkstone][PATCH 46/47] ti-k3-secdev: include ti-paths.inc
+Date: Fri,  4 Nov 2022 21:40:54 +0000
+Message-Id: <20221104214055.1221197-47-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221104214055.1221197-1-denis@denix.org>
 References: <20221104214055.1221197-1-denis@denix.org>
@@ -39,41 +39,34 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Fri, 04 Nov 2022 21:41:07 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15270
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15266
 
-From: Andrew Davis <afd@ti.com>
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-During resume from low power mode suspend OP-TEE prints some messages
-on the UART. It seems this UART is not powered at this point in the
-sequence breaking suspend/resume. We should track down the exact
-prints and quiet them. Until we get that fix upstream, lets lower
-the log level for this platform to unblock the LPM work.
+Include ti-paths.inc so TI_K3_SECDEV_INSTALL_DIR_RECIPE gets defined and
+artifacts are installed in the correct location.
 
-Signed-off-by: Andrew Davis <afd@ti.com>
-Acked-by: Anand Gadiyar <gadiyar@ti.com>
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Cc: Andrew Davis <afd@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-ti-extras/recipes-ti/secdev/ti-k3-secdev_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend b/met=
-a-ti-bsp/recipes-security/optee/optee-os_%.bbappend
-index 76f55257..3c4383ba 100644
---- a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
-+++ b/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
-@@ -3,7 +3,7 @@ SRCREV:ti-soc =3D "8e155bae3a5eb9d1a3ed9260bd7281a7a35f50=
-86"
+diff --git a/meta-ti-extras/recipes-ti/secdev/ti-k3-secdev_git.bb b/meta-=
+ti-extras/recipes-ti/secdev/ti-k3-secdev_git.bb
+index 7a5dd573..3763c339 100644
+--- a/meta-ti-extras/recipes-ti/secdev/ti-k3-secdev_git.bb
++++ b/meta-ti-extras/recipes-ti/secdev/ti-k3-secdev_git.bb
+@@ -4,6 +4,8 @@ SECTION =3D "devel"
+ LICENSE =3D "BSD-3-Clause"
+ LIC_FILES_CHKSUM =3D "file://manifest/k3-secdev-0.2-manifest.html;md5=3D=
+f632a78870cc64550078d7b3cbac0892"
 =20
- EXTRA_OEMAKE:append:k3 =3D "${@ ' CFG_CONSOLE_UART=3D'+ d.getVar('OPTEE_=
-K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
-=20
--EXTRA_OEMAKE:append:am62xx =3D " CFG_WITH_SOFTWARE_PRNG=3Dy"
-+EXTRA_OEMAKE:append:am62xx =3D " CFG_WITH_SOFTWARE_PRNG=3Dy CFG_TEE_CORE=
-_LOG_LEVEL=3D1"
- EXTRA_OEMAKE:append:j721s2 =3D " CFG_WITH_SOFTWARE_PRNG=3Dy"
-=20
- do_compile:prepend:ti-soc() {
++require recipes-ti/includes/ti-paths.inc
++
+ # Native host tool only
+ COMPATIBLE_MACHINE =3D "null"
+ COMPATIBLE_MACHINE:class-native =3D "(.*)"
 --=20
 2.25.1
 
