@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 43EFCC63707
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 392C9C63709
 	for <webhook@archiver.kernel.org>; Fri,  4 Nov 2022 22:47:09 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.846.1667602019295926095
+ by mx.groups.io with SMTP id smtpd.web12.849.1667602019492337622
  for <meta-ti@lists.yoctoproject.org>;
  Fri, 04 Nov 2022 15:46:59 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 1E1A940D95
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A775F40D96
 	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 22:46:57 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hu6OJea3YPsa for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id WXCyMd_s-qBX for <meta-ti@lists.yoctoproject.org>;
 	Fri,  4 Nov 2022 22:46:57 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0E70A40D8E
-	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 22:46:57 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9DF7440D9D
+	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 22:46:56 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id AFCD21636A2
+	by mail.denix.org (Postfix) with ESMTP id 415F4163687
 	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 18:46:51 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master/kirkstone][PATCH 28/50] ti-rtos-firmware: j721e-hs-evm: add secure firmware images
-Date: Fri,  4 Nov 2022 22:46:30 +0000
-Message-Id: <20221104224653.1223044-29-denis@denix.org>
+Subject: [master/kirkstone][PATCH 14/50] recipies-ti: Add TI K3 Security Development Package
+Date: Fri,  4 Nov 2022 22:46:16 +0000
+Message-Id: <20221104224653.1223044-15-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221104224653.1223044-1-denis@denix.org>
 References: <20221104224653.1223044-1-denis@denix.org>
@@ -39,211 +39,95 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Fri, 04 Nov 2022 22:47:09 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15289
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15294
 
-From: Manorit Chawdhry <m-chawdhry@ti.com>
+From: Andrew Davis <afd@ti.com>
 
-Adds support for secure firmware images in J721E HS EVM.
-
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+Signed-off-by: Andrew Davis <afd@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- .../ti-rtos-bin/ti-rtos-firmware.bb           | 80 ++++++++++++++++++-
- 1 file changed, 79 insertions(+), 1 deletion(-)
+ .../recipes-ti/includes/ti-paths.inc          |  2 ++
+ .../recipes-ti/secdev/ti-k3-secdev_git.bb     | 36 +++++++++++++++++++
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-ti-extras/recipes-ti/secdev/ti-k3-secdev_git.bb
 
-diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/met=
-a-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-index 072a7c3c..d8f00ccd 100644
---- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-+++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -14,6 +14,7 @@ inherit update-alternatives
+diff --git a/meta-ti-extras/recipes-ti/includes/ti-paths.inc b/meta-ti-ex=
+tras/recipes-ti/includes/ti-paths.inc
+index 358d7dfd..5994ff0a 100644
+--- a/meta-ti-extras/recipes-ti/includes/ti-paths.inc
++++ b/meta-ti-extras/recipes-ti/includes/ti-paths.inc
+@@ -51,6 +51,7 @@ export OMP_INSTALL_DIR_RECIPE        =3D "${installdir}=
+/ti-omp-tree"
+ export MPM_INSTALL_DIR_RECIPE        =3D "${installdir}/ti-mpm-tree"
+ export TI_CGT6X_7_INSTALL_DIR_RECIPE   =3D "${installdir}/cgt6x-7"
+ export TI_CGT7X_INSTALL_DIR_RECIPE        =3D "${installdir}/cgt-c7x"
++export TI_K3_SECDEV_INSTALL_DIR_RECIPE =3D "${installdir}/ti-k3-secdev"
 =20
- PLAT_SFX =3D ""
- PLAT_SFX:j7 =3D "j721e"
-+PLAT_SFX:j721e-hs-evm =3D "j721e"
- PLAT_SFX:j7200-evm =3D "j7200"
- PLAT_SFX:j7200-hs-evm =3D "j7200"
- PLAT_SFX:j721s2-evm =3D "j721s2"
-@@ -31,7 +32,7 @@ PV =3D "${CORESDK_RTOS_VERSION}"
- CLEANBROKEN =3D "1"
- PR =3D "${INC_PR}.0"
 =20
--# Secure Build=20
-+# Secure Build
- DEPENDS +=3D "openssl-native"
+ # This is where the tools will end up in sysroot
+@@ -100,6 +101,7 @@ export TI_CGT6X_7_INSTALL_DIR   =3D "${STAGING_DIR_NA=
+TIVE}${TI_CGT6X_7_INSTALL_DIR
+ export GCC_LINARO_BAREMETAL_TOOLCHAIN         =3D  "${STAGING_DIR_NATIVE=
+}${GCC_LINARO_BAREMETAL_TOOLCHAIN_RECIPE}"
+ export GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN =3D  "${STAGING_DIR_NATIVE=
+}${GCC_LINARO_BAREMETAL_AARCH64_TOOLCHAIN_RECIPE}"
+ export TI_CGT7X_INSTALL_DIR        =3D "${STAGING_DIR_NATIVE}${TI_CGT7X_=
+INSTALL_DIR_RECIPE}"
++export TI_K3_SECDEV_INSTALL_DIR =3D "${STAGING_DIR_NATIVE}${TI_K3_SECDEV=
+_INSTALL_DIR_RECIPE}"
 =20
- TI_SECURE_DEV_PKG ?=3D ""
-@@ -55,6 +56,28 @@ do_install:prepend:j721e-hs-evm() {
-                 mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
-                 ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM=
-_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
-         )
-+        (
-+          cd ${RTOS_IPC_FW_DIR}; \
-+                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_=
-echo_test_mcu2_0_release_strip.xer5f \
-+                        ipc_echo_test_mcu2_0_release_strip.xer5f.signed;=
- \
-+                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_=
-echo_test_mcu2_1_release_strip.xer5f \
-+                        ipc_echo_test_mcu2_1_release_strip.xer5f.signed;=
- \
-+                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_=
-echo_test_mcu3_0_release_strip.xer5f \
-+                        ipc_echo_test_mcu3_0_release_strip.xer5f.signed;=
- \
-+                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_=
-echo_test_mcu3_1_release_strip.xer5f \
-+                        ipc_echo_test_mcu3_1_release_strip.xer5f.signed;=
- \
-+                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_=
-echo_test_c66xdsp_1_release_strip.xe66 \
-+                        ipc_echo_test_c66xdsp_1_release_strip.xe66.signe=
-d; \
-+                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_=
-echo_test_c66xdsp_2_release_strip.xe66 \
-+                        ipc_echo_test_c66xdsp_2_release_strip.xe66.signe=
-d; \
-+                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_=
-echo_test_c7x_1_release_strip.xe71 \
-+                        ipc_echo_test_c7x_1_release_strip.xe71.signed; \
-+        )
-+        (
-+          cd ${RTOS_ETH_FW_DIR}; \
-+                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh app_=
-remoteswitchcfg_server_strip.xer5f \
-+                        app_remoteswitchcfg_server_strip.xer5f.signed;
-+        )
- }
 =20
- # J7 HS support
-@@ -115,6 +138,18 @@ do_install:j7() {
-     install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.=
-xer5f ${LEGACY_ETH_FW_DIR}
- }
-=20
-+do_install:append:j721e-hs-evm() {
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_stri=
-p.xer5f.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_stri=
-p.xer5f.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_0_release_stri=
-p.xer5f.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_1_release_stri=
-p.xer5f.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c66xdsp_1_release_s=
-trip.xe66.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c66xdsp_2_release_s=
-trip.xe66.signed ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_c7x_1_release_strip=
-.xe71.signed ${LEGACY_IPC_FW_DIR}
-+    # ETH firmware
-+    install -m 0644 ${RTOS_ETH_FW_DIR}/app_remoteswitchcfg_server_strip.=
-xer5f.signed ${LEGACY_ETH_FW_DIR}
+ DSPSUFFIX:omapl137 =3D "x674"
+diff --git a/meta-ti-extras/recipes-ti/secdev/ti-k3-secdev_git.bb b/meta-=
+ti-extras/recipes-ti/secdev/ti-k3-secdev_git.bb
+new file mode 100644
+index 00000000..7a5dd573
+--- /dev/null
++++ b/meta-ti-extras/recipes-ti/secdev/ti-k3-secdev_git.bb
+@@ -0,0 +1,36 @@
++DESCRIPTION =3D "Security development tools for High-Security(HS) TI K3 =
+processors."
++HOMEPAGE =3D "https://git.ti.com/cgit/security-development-tools/core-se=
+cdev-k3"
++SECTION =3D "devel"
++LICENSE =3D "BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://manifest/k3-secdev-0.2-manifest.html;md5=3D=
+f632a78870cc64550078d7b3cbac0892"
++
++# Native host tool only
++COMPATIBLE_MACHINE =3D "null"
++COMPATIBLE_MACHINE:class-native =3D "(.*)"
++COMPATIBLE_MACHINE:class-nativesdk =3D "(.*)"
++
++GIT_URI =3D "git://git.ti.com/git/security-development-tools/core-secdev=
+-k3.git"
++GIT_PROTOCOL =3D "https"
++GIT_BRANCH =3D "master"
++GIT_SRCREV =3D "eb2c4d734487e5095b94cef3fd7213ee71d9e016"
++
++SRC_URI =3D "${GIT_URI};protocol=3D${GIT_PROTOCOL};branch=3D${GIT_BRANCH=
+}"
++SRCREV =3D "${GIT_SRCREV}"
++
++S =3D "${WORKDIR}/git"
++
++do_install() {
++    CP_ARGS=3D"-Prf --preserve=3Dmode,links,timestamps --no-preserve=3Do=
+wnership"
++    install -d ${D}${TI_K3_SECDEV_INSTALL_DIR_RECIPE}
++    cp ${CP_ARGS} ${S}/* ${D}${TI_K3_SECDEV_INSTALL_DIR_RECIPE}
 +}
 +
- do_install:j7200-evm() {
-     install -d ${LEGACY_IPC_FW_DIR}
-     install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_stri=
-p.xer5f ${LEGACY_IPC_FW_DIR}
-@@ -221,6 +256,25 @@ ALTERNATIVE:${PN}:am62xx =3D "\
-                     am62-main-r5f0_0-fw \
-                     "
-=20
-+ALTERNATIVE:${PN}:j721e-hs-evm =3D "\
-+                    j7-mcu-r5f0_0-fw \
-+                    j7-mcu-r5f0_1-fw \
-+                    j7-main-r5f0_0-fw \
-+                    j7-main-r5f0_1-fw \
-+                    j7-main-r5f1_0-fw \
-+                    j7-main-r5f1_1-fw \
-+                    j7-c66_0-fw \
-+                    j7-c66_1-fw \
-+                    j7-c71_0-fw\
-+                    j7-main-r5f0_0-fw-sec \
-+                    j7-main-r5f0_1-fw-sec \
-+                    j7-main-r5f1_0-fw-sec \
-+                    j7-main-r5f1_1-fw-sec \
-+                    j7-c66_0-fw-sec \
-+                    j7-c66_1-fw-sec \
-+                    j7-c71_0-fw-sec \
-+                    "
++FILES:${PN} +=3D "${TI_K3_SECDEV_INSTALL_DIR_RECIPE}"
 +
- ALTERNATIVE:${PN}:j7 =3D "\
-                     j7-mcu-r5f0_0-fw \
-                     j7-mcu-r5f0_1-fw \
-@@ -293,6 +347,14 @@ TARGET_C66_0:j7 =3D "j7-c66_0-fw"
- TARGET_C66_1:j7 =3D "j7-c66_1-fw"
- TARGET_C7X_0:j7 =3D "j7-c71_0-fw"
-=20
-+TARGET_MAIN_R5FSS0_0_SIGNED:j721e-hs-evm =3D "j7-main-r5f0_0-fw-sec"
-+TARGET_MAIN_R5FSS0_1_SIGNED:j721e-hs-evm =3D "j7-main-r5f0_1-fw-sec"
-+TARGET_MAIN_R5FSS1_0_SIGNED:j721e-hs-evm =3D "j7-main-r5f1_0-fw-sec"
-+TARGET_MAIN_R5FSS1_1_SIGNED:j721e-hs-evm =3D "j7-main-r5f1_1-fw-sec"
-+TARGET_C66_0_SIGNED:j721e-hs-evm =3D "j7-c66_0-fw-sec"
-+TARGET_C66_1_SIGNED:j721e-hs-evm =3D "j7-c66_1-fw-sec"
-+TARGET_C7X_0_SIGNED:j721e-hs-evm =3D "j7-c71_0-fw-sec"
++INSANE_SKIP:${PN} =3D "arch ldflags file-rdeps"
 +
- TARGET_MCU_R5FSS0_0:j7200-evm =3D "j7200-mcu-r5f0_0-fw"
- TARGET_MCU_R5FSS0_1:j7200-evm =3D "j7200-mcu-r5f0_1-fw"
- TARGET_MAIN_R5FSS0_0:j7200-evm =3D "j7200-main-r5f0_0-fw"
-@@ -343,6 +405,14 @@ ALTERNATIVE_LINK_NAME[j7-c66_0-fw] =3D "${nonarch_ba=
-se_libdir}/firmware/${TARGET_C
- ALTERNATIVE_LINK_NAME[j7-c66_1-fw] =3D "${nonarch_base_libdir}/firmware/=
-${TARGET_C66_1}"
- ALTERNATIVE_LINK_NAME[j7-c71_0-fw] =3D "${nonarch_base_libdir}/firmware/=
-${TARGET_C7X_0}"
-=20
-+ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw-sec] =3D "${base_libdir}/firmwar=
-e/${TARGET_MAIN_R5FSS0_0_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j7-main-r5f0_1-fw-sec] =3D "${base_libdir}/firmwar=
-e/${TARGET_MAIN_R5FSS0_1_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j7-main-r5f1_0-fw-sec] =3D "${base_libdir}/firmwar=
-e/${TARGET_MAIN_R5FSS1_0_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j7-main-r5f1_1-fw-sec] =3D "${base_libdir}/firmwar=
-e/${TARGET_MAIN_R5FSS1_1_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j7-c66_0-fw-sec] =3D "${base_libdir}/firmware/${TA=
-RGET_C66_0_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j7-c66_1-fw-sec] =3D "${base_libdir}/firmware/${TA=
-RGET_C66_1_SIGNED}"
-+ALTERNATIVE_LINK_NAME[j7-c71_0-fw-sec] =3D "${base_libdir}/firmware/${TA=
-RGET_C7X_0_SIGNED}"
++INHIBIT_PACKAGE_STRIP =3D "1"
++INHIBIT_SYSROOT_STRIP =3D "1"
++INHIBIT_PACKAGE_DEBUG_SPLIT =3D "1"
 +
- ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_0-fw] =3D "${nonarch_base_libdir}/f=
-irmware/${TARGET_MCU_R5FSS0_0}"
- ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_1-fw] =3D "${nonarch_base_libdir}/f=
-irmware/${TARGET_MCU_R5FSS0_1}"
- ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw] =3D "${nonarch_base_libdir}/=
-firmware/${TARGET_MAIN_R5FSS0_0}"
-@@ -381,6 +451,14 @@ ALTERNATIVE_TARGET[j7-c66_0-fw] =3D "${nonarch_base_=
-libdir}/firmware/pdk-ipc/ipc_e
- ALTERNATIVE_TARGET[j7-c66_1-fw] =3D "${nonarch_base_libdir}/firmware/pdk=
--ipc/ipc_echo_test_c66xdsp_2_release_strip.xe66"
- ALTERNATIVE_TARGET[j7-c71_0-fw] =3D "${nonarch_base_libdir}/firmware/pdk=
--ipc/ipc_echo_test_c7x_1_release_strip.xe71"
-=20
-+ALTERNATIVE_TARGET[j7-main-r5f0_0-fw-sec] =3D "${base_libdir}/firmware/e=
-thfw/app_remoteswitchcfg_server_strip.xer5f.signed"
-+ALTERNATIVE_TARGET[j7-main-r5f0_1-fw-sec] =3D "${base_libdir}/firmware/p=
-dk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f.signed"
-+ALTERNATIVE_TARGET[j7-main-r5f1_0-fw-sec] =3D "${base_libdir}/firmware/p=
-dk-ipc/ipc_echo_test_mcu3_0_release_strip.xer5f.signed"
-+ALTERNATIVE_TARGET[j7-main-r5f1_1-fw-sec] =3D "${base_libdir}/firmware/p=
-dk-ipc/ipc_echo_test_mcu3_1_release_strip.xer5f.signed"
-+ALTERNATIVE_TARGET[j7-c66_0-fw-sec] =3D "${base_libdir}/firmware/pdk-ipc=
-/ipc_echo_test_c66xdsp_1_release_strip.xe66.signed"
-+ALTERNATIVE_TARGET[j7-c66_1-fw-sec] =3D "${base_libdir}/firmware/pdk-ipc=
-/ipc_echo_test_c66xdsp_2_release_strip.xe66.signed"
-+ALTERNATIVE_TARGET[j7-c71_0-fw-sec] =3D "${base_libdir}/firmware/pdk-ipc=
-/ipc_echo_test_c7x_1_release_strip.xe71.signed"
-+
- ALTERNATIVE_TARGET[j7200-mcu-r5f0_0-fw] =3D "${nonarch_base_libdir}/firm=
-ware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
- ALTERNATIVE_TARGET[j7200-mcu-r5f0_1-fw] =3D "${nonarch_base_libdir}/firm=
-ware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
- ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw] =3D "${nonarch_base_libdir}/fir=
-mware/ethfw/app_remoteswitchcfg_server_strip.xer5f"
++BBCLASSEXTEND =3D "native nativesdk"
 --=20
 2.25.1
 
