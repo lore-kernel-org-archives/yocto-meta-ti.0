@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7745DC3A59F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 85F34C3A5A1
 	for <webhook@archiver.kernel.org>; Fri,  4 Nov 2022 21:41:07 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web08.220.1667598061596163506
+ by mx.groups.io with SMTP id smtpd.web09.223.1667598061101158626
  for <meta-ti@lists.yoctoproject.org>;
  Fri, 04 Nov 2022 14:41:01 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 866E640DA7
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 60BCB40DA6
 	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 21:40:59 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9Q48ZadHggte for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id fsxqQgopeCQ3 for <meta-ti@lists.yoctoproject.org>;
 	Fri,  4 Nov 2022 21:40:59 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7C44840D85
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5613A40DA5
 	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 21:40:58 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 240331636B2
+	by mail.denix.org (Postfix) with ESMTP id 0D9671636AE
 	for <meta-ti@lists.yoctoproject.org>; Fri,  4 Nov 2022 17:40:53 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master/kirkstone][PATCH 41/47] optee-os: Enable TRNG driver as OP-TEE support is added
-Date: Fri,  4 Nov 2022 21:40:49 +0000
-Message-Id: <20221104214055.1221197-42-denis@denix.org>
+Subject: [master/kirkstone][PATCH 39/47] conf: machine: j784s4: Add OP-TEE flavour
+Date: Fri,  4 Nov 2022 21:40:47 +0000
+Message-Id: <20221104214055.1221197-40-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221104214055.1221197-1-denis@denix.org>
 References: <20221104214055.1221197-1-denis@denix.org>
@@ -39,36 +39,34 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Fri, 04 Nov 2022 21:41:07 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15261
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15257
 
 From: Jayesh Choudhary <j-choudhary@ti.com>
 
-OP-TEE upstream now has support for sa3ul for j721s2 platform.
-Re-enable the trng driver which was disabled earlier.
+Add the new OP-TEE flavour for J784S4 instead of default k3-j721e.
+The TI-SCI ID for MCU domain sa2ul/sa3ul are not the same for
+J721E and J784S4. So a new flavour is added in upstream OP-TEE.
 
 Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend | 1 -
- 1 file changed, 1 deletion(-)
+ meta-ti-bsp/conf/machine/j784s4-evm.conf | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend b/met=
-a-ti-bsp/recipes-security/optee/optee-os_%.bbappend
-index ee6ee458..9cb3f503 100644
---- a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
-+++ b/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
-@@ -4,7 +4,6 @@ SRCREV:ti-soc =3D "6bf4a81a8f5388e6cb6b1d7e8ebe57c5089c09=
-54"
- EXTRA_OEMAKE:append:k3 =3D "${@ ' CFG_CONSOLE_UART=3D'+ d.getVar('OPTEE_=
-K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
+diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf b/meta-ti-bsp/conf/=
+machine/j784s4-evm.conf
+index 278b393c..96acca13 100644
+--- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
++++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
+@@ -9,6 +9,7 @@ MACHINE_FEATURES +=3D "gpu"
+ SERIAL_CONSOLES =3D "115200;ttyS2"
+ SERIAL_CONSOLES_CHECK =3D "${SERIAL_CONSOLES}"
+ TFA_K3_USART =3D "0x8"
++OPTEEMACHINE =3D "k3-j784s4"
+ OPTEE_K3_USART =3D "0x8"
 =20
- EXTRA_OEMAKE:append:am62xx =3D " CFG_WITH_SOFTWARE_PRNG=3Dy CFG_TEE_CORE=
-_LOG_LEVEL=3D1"
--EXTRA_OEMAKE:append:j721s2 =3D " CFG_WITH_SOFTWARE_PRNG=3Dy"
-=20
- do_compile:prepend:ti-soc() {
-     export TI_SECURE_DEV_PKG=3D${TI_SECURE_DEV_PKG}
+ KERNEL_DEVICETREE =3D " \
 --=20
 2.25.1
 
