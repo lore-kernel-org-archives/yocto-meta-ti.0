@@ -1,96 +1,95 @@
-Return-Path: <m-chawdhry@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA64DC43217
-	for <webhook@archiver.kernel.org>; Mon,  7 Nov 2022 09:21:10 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web09.1503.1667812861846235034
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A62DC4332F
+	for <webhook@archiver.kernel.org>; Mon,  7 Nov 2022 19:18:02 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.2079.1667848678808048624
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 07 Nov 2022 01:21:02 -0800
+ Mon, 07 Nov 2022 11:17:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=EigGcCCv;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: m-chawdhry@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2A79L1vK052006
-	for <meta-ti@lists.yoctoproject.org>; Mon, 7 Nov 2022 03:21:01 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1667812861;
-	bh=/9weXzBzng8nUbjcDbEz25ZK774z9feIAYc2DQTha+0=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=EigGcCCviHQVdnlyxIG/AnS/12tbakWysa/GwIDslXv7OJcgWZLNlRW6T+ze1QV3c
-	 lVpTmMp0Mv5X8/boToWbxjbcsxOEUgxCBslChqX63suX6iHwD1YEK/eRJY6G7tPHWG
-	 U5UqQHHUPDffQg1TqCRTKU0VfIujreTJqPhlj7bw=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2A79L1kx059630
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 7 Nov 2022 03:21:01 -0600
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Mon, 7 Nov
- 2022 03:21:00 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
- Frontend Transport; Mon, 7 Nov 2022 03:21:00 -0600
-Received: from uda0497581.dhcp.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2A79KnXN049504;
-	Mon, 7 Nov 2022 03:20:59 -0600
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-CC: Andrew Davis <afd@ti.com>, Ryan Eatmon <reatmon@ti.com>,
-        Manorit Chawdhry
-	<m-chawdhry@ti.com>
-Subject: [meta-ti][dunfell][PATCH v4 5/6] cnm-wave-fw: add compatible for j784s4-hs-evm
-Date: Mon, 7 Nov 2022 14:50:47 +0530
-Message-ID: <20221107092048.555881-6-m-chawdhry@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20221107092048.555881-1-m-chawdhry@ti.com>
-References: <20221107092048.555881-1-m-chawdhry@ti.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id F27F740D35;
+	Mon,  7 Nov 2022 19:17:57 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 5zTJhqCSpq8N; Mon,  7 Nov 2022 19:17:57 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id DB77040D20;
+	Mon,  7 Nov 2022 19:17:56 +0000 (UTC)
+Received: from thorin.denix (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id B2763162035;
+	Mon,  7 Nov 2022 14:17:52 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [kirkstone][PATCH] optee: make bbappends version-specific
+Date: Mon,  7 Nov 2022 19:17:52 +0000
+Message-Id: <20221107191752.829183-1-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 07 Nov 2022 09:21:10 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15329
+ <meta-ti@lists.yoctoproject.org>; Mon, 07 Nov 2022 19:18:02 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15331
 
-Add the HS platform to the compatible list in the recipe.
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+Kirkstone branch of meta-arm comes with 2 versions of optee-os and
+optee-client - 3.14 and 3.16. They have different dependencies and
+slightly different build flows.
+
+In our bbappends we bump SRCREV to latest version for newer platform
+support and also update PV to indicate the correct version. While
+bbappends are expected to be applied against newer 3.16 version of the
+recipes, they use wildcard versioning and are not version-specific.
+
+That results in bbappends applied to both versions of the recipes and
+PV set to be the same, while the content is different. At this point
+bitbake can pick up any version of the base recipe and if it gets
+3.14 to apply the bbappend, the build fails due to that version being
+too old and have different dependencies and build flows.
+
+Making bbappends version-specific avoids the problem. Alternatively,
+a whole recipe of the required newer version could be added, instead
+of using bbappends.
+
+Also, this is specific to Kirkstone, where meta-arm provides two
+versions of optee - 3.14 and 3.16. In Lagdale and master only a
+single 3.18 version of optee is provided.
+
+Another hacky approach would be to not bump PV and let it be set by
+the base recipe. That would avoid the build issue and keep bbappends
+version-agnostic across branches, but result in incorrect versioning
+of the binary packages, which might be confusing.
+
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb | 2 +-
- recipes-kernel/linux/kernel-rdepends.inc   | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ .../{optee-client_%.bbappend =3D> optee-client_3.16%.bbappend}      | 0
+ .../optee/{optee-os_%.bbappend =3D> optee-os_3.16%.bbappend}        | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-ti-bsp/recipes-security/optee/{optee-client_%.bbappend =3D> =
+optee-client_3.16%.bbappend} (100%)
+ rename meta-ti-bsp/recipes-security/optee/{optee-os_%.bbappend =3D> opte=
+e-os_3.16%.bbappend} (100%)
 
-diff --git a/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb b/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
-index 4c9c8d31..c904ba62 100644
---- a/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
-+++ b/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
-@@ -13,7 +13,7 @@ PR = "${INC_PR}.1"
- 
- CLEANBROKEN = "1"
- 
--COMPATIBLE_MACHINE = "j721s2-evm|j721s2-hs-evm|j784s4-evm"
-+COMPATIBLE_MACHINE = "j721s2-evm|j721s2-hs-evm|j784s4-evm|j784s4-hs-evm"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
-diff --git a/recipes-kernel/linux/kernel-rdepends.inc b/recipes-kernel/linux/kernel-rdepends.inc
-index 8225a5af..0a61c408 100644
---- a/recipes-kernel/linux/kernel-rdepends.inc
-+++ b/recipes-kernel/linux/kernel-rdepends.inc
-@@ -51,6 +51,7 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j7 = " vxd-dec-fw"
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j721s2-evm = " cnm-wave-fw"
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j721s2-hs-evm = " cnm-wave-fw"
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j784s4-evm = " cnm-wave-fw"
-+RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_j784s4-hs-evm = " cnm-wave-fw"
- 
- # Add run-time dependency for TIFS Low Power Module stub
- RDEPENDS_${KERNEL_PACKAGE_NAME}-base_append_am62xx-evm = " tifs-lpm-stub"
--- 
-2.34.1
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-client_%.bbappend b=
+/meta-ti-bsp/recipes-security/optee/optee-client_3.16%.bbappend
+similarity index 100%
+rename from meta-ti-bsp/recipes-security/optee/optee-client_%.bbappend
+rename to meta-ti-bsp/recipes-security/optee/optee-client_3.16%.bbappend
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend b/met=
+a-ti-bsp/recipes-security/optee/optee-os_3.16%.bbappend
+similarity index 100%
+rename from meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
+rename to meta-ti-bsp/recipes-security/optee/optee-os_3.16%.bbappend
+--=20
+2.25.1
 
 
