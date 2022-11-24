@@ -1,85 +1,89 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 398C8C4332F
-	for <webhook@archiver.kernel.org>; Wed, 23 Nov 2022 16:44:24 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web11.1412.1669221856309592139
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AEB28C433FE
+	for <webhook@archiver.kernel.org>; Thu, 24 Nov 2022 01:14:56 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.13066.1669252488777024365
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 23 Nov 2022 08:44:16 -0800
+ Wed, 23 Nov 2022 17:14:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=foOsOO0y;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id j10-20020a17090aeb0a00b00218dfce36e5so2072481pjz.1
-        for <meta-ti@lists.yoctoproject.org>; Wed, 23 Nov 2022 08:44:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=gkTc9WjS47qHfJv7rudWYrR/vEebFtszpEKz1wMbrxo=;
-        b=foOsOO0yGkmkrvl9wni52gxbc2Lu5dCM7K6F3ThijeNDHkYq+gk1TZdOy8t2i3Icyd
-         18OKPUqnC/rVeoFKC58GJlq6tSnfyFQMbTsaG5CEs477ffY2AzJnHz3iHzUZ0SuA7CtQ
-         iqcNJOUXrkIuJtp8LqXUh0UbrFL+80JotCmU+/fHltN3dKOqxIvJ46xoPhP9ne15xwbT
-         W5NsRBr9D+30MA6qvhDz+Iwz4+/BeXNp2TUuhVlASu+1C/E6VeEdWkvBcE4cWP8T1mGH
-         jZGSFr1yvu94nXQdewLEjjSqUJZk9Fb8+IiiOtqh0oiNRPVPMoH8qnzuvZJbUEBeDW5D
-         Y+RA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=gkTc9WjS47qHfJv7rudWYrR/vEebFtszpEKz1wMbrxo=;
-        b=NVl1mYq0oV0D9nGLlSseDjKydWOyuNkLS/2A+wlRUT4uX37xevBjtaPNrKPYVI8O68
-         rSeFkIrT4gloBVFuaeC/wmC/9fPiNtsJlUp3IiHaWEjeVwQsVkl3Qwf0Ixf3jd7688aT
-         RSJRORazVm5nTvM/GV3rNE7AJe/MxqgmmMlwJA3VkXgUE8G9y1P5jADMtSD7GV7xl55E
-         N5kyXb1Ce2WGf1sqRtVaMSKwWtjQiBdoLQ9IJjR4Sz+bV3VQTrX/6rFxRbsWLCTaZSZu
-         ux3Cg1fXpFklPhsRuZqjBVpUQOQMhmzhH5SXudeM1EJcF3qzkWFyxaBj33QZP2alX9Xf
-         RK9Q==
-X-Gm-Message-State: ANoB5pl9FKUzPqSB7vcAMLEWGTvCyHZxa87rbF3NLOn1z4Pq9EUVh4se
-	89TviU2JZjvIuyHtyrYPidlLlAIbm8w=
-X-Google-Smtp-Source: AA0mqf5G1aAUyv601rTKoutE9vWKdMet0BM/wVWG89OWijBORrsypjLhTAbOkZmAcBiaUgFxbwZEIg==
-X-Received: by 2002:a17:903:286:b0:189:39e4:c50b with SMTP id j6-20020a170903028600b0018939e4c50bmr6521594plr.101.1669221855132;
-        Wed, 23 Nov 2022 08:44:15 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::a42c])
-        by smtp.gmail.com with ESMTPSA id r8-20020a170902be0800b00176e6f553efsm14468833pls.84.2022.11.23.08.44.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Nov 2022 08:44:14 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: meta-ti@lists.yoctoproject.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH] ffa-debugfs-mod: Remove bbappend
-Date: Wed, 23 Nov 2022 08:44:12 -0800
-Message-Id: <20221123164412.3764415-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.38.1
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=FnQJhWf4;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2AO1EjbH092781;
+	Wed, 23 Nov 2022 19:14:45 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1669252485;
+	bh=tZdyzA2FtEb06H0pzx/cK/SZnNor8Jqtr8h3Kx9iTOA=;
+	h=From:To:Subject:Date;
+	b=FnQJhWf4dUb37UmntuaWN6gtoX9yof9wKbiPxdxPJbtuKGjHOzzHGeC10zOGyzVWx
+	 IH0k5QiHxyualpsAavkcptp+TsdMzwid8MkpSK/HQQ8Z1lbGqMAiLMj6mJtnINqzQw
+	 h6XFnXbM8ETC/oCBTEkgIloa7DQGCMQj2F1+G+nw=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2AO1EjKV018323
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 23 Nov 2022 19:14:45 -0600
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Wed, 23
+ Nov 2022 19:14:45 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
+ Frontend Transport; Wed, 23 Nov 2022 19:14:45 -0600
+Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2AO1EjKr098422;
+	Wed, 23 Nov 2022 19:14:45 -0600
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1oy0pB-0003fz-5o; Wed, 23 Nov 2022 19:14:45 -0600
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH] optee-os: Remove 3.18 patches from our 3.19 recipe
+Date: Wed, 23 Nov 2022 19:14:45 -0600
+Message-ID: <20221124011445.14092-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 23 Nov 2022 16:44:24 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15360
+ <meta-ti@lists.yoctoproject.org>; Thu, 24 Nov 2022 01:14:56 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15361
 
-The main recipe in meta-arm is gone with 5.19 kernel onwards
+These patches are from upstream against v3.18, but we moved to v3.19 and the
+patches are now invalid.  These can be removed once upstream moves up to or
+beyond v3.19.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- .../linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend             | 5 -----
- 1 file changed, 5 deletions(-)
- delete mode 100644 meta-ti-bsp/recipes-kernel/linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend
+ meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend b/meta-ti-bsp/recipes-kernel/linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend
-deleted file mode 100644
-index 67fcf6ec..00000000
---- a/meta-ti-bsp/recipes-kernel/linux/ffa-debugfs/ffa-debugfs-mod_%.bbappend
-+++ /dev/null
-@@ -1,5 +0,0 @@
--# Added my meta-arm, this needs ceetain backports in 5.10
--# Disable until kernel upgrades to newer than 5.10 where it
--# is already upstreamed
--# Revisit when kernel is upgraded to 5.15 or newer e.g.
--COMPATIBLE_HOST:ti-soc = "null"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend b/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
+index 6913851b..8640d7b0 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
++++ b/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
+@@ -1,6 +1,12 @@
+ PV:ti-soc = "3.19.0+git${SRCPV}"
+ SRCREV:ti-soc = "afacf356f9593a7f83cae9f96026824ec242ff52"
+ 
++# These patches are from upstream against v3.18, but we moved to v3.19 and the
++# patches are now invalid.  These can be removed once upstream moves up to or
++# beyond v3.19.
++SRC_URI:remove:ti-soc = "file://0008-no-warn-rwx-segments.patch"
++SRC_URI:remove:ti-soc = "file://0009-add-z-execstack.patch"
++
+ EXTRA_OEMAKE:append:k3 = "${@ ' CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
+ 
+ EXTRA_OEMAKE:append:am62xx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
 -- 
-2.38.1
+2.17.1
 
 
