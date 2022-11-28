@@ -1,85 +1,68 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30580C4332F
-	for <webhook@archiver.kernel.org>; Fri, 25 Nov 2022 23:00:31 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.59228.1669417222475172144
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AF00C46467
+	for <webhook@archiver.kernel.org>; Mon, 28 Nov 2022 03:15:17 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.108946.1669605316056106948
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 25 Nov 2022 15:00:22 -0800
+ Sun, 27 Nov 2022 19:15:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=h2CHeOWv;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2APN0L0K047989;
-	Fri, 25 Nov 2022 17:00:21 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1669417221;
-	bh=wUnm9/HfQkrbt1dDgnhU6OmYwnqWzKcnQesJUdpTInc=;
-	h=From:To:Subject:Date;
-	b=h2CHeOWv3oZ9utMkItMPZgtIC3lmUVxRMkvr4AlVU6NjlRNdlYPQMG5TBhH3zEaRw
-	 4WUcZbrVsde7oGnZx20J1o9yQMnVj766ytveF89oLSLRJE6exiYcBnjXI8abBWkxk9
-	 2Mc/VyPy3F503TR3PSZKEU0UwUlSlQhATSQY7xFY=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2APN0Lu7001644
+ dkim=missing; spf=pass (domain: list.ti.com, ip: 198.47.19.141, mailfrom: lcpdbld@list.ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2AS3FDSt106824;
+	Sun, 27 Nov 2022 21:15:13 -0600
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2AS3FDPn062358
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 25 Nov 2022 17:00:21 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Fri, 25
- Nov 2022 17:00:21 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	Sun, 27 Nov 2022 21:15:13 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Sun, 27
+ Nov 2022 21:15:13 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Fri, 25 Nov 2022 17:00:20 -0600
-Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2APN0KAY092771;
-	Fri, 25 Nov 2022 17:00:20 -0600
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1oyhgC-0001OR-O5; Fri, 25 Nov 2022 17:00:20 -0600
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
+ Frontend Transport; Sun, 27 Nov 2022 21:15:13 -0600
+Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2AS3FDpK085213;
+	Sun, 27 Nov 2022 21:15:13 -0600
+Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
+	id 1D28C11225B3; Sun, 27 Nov 2022 21:15:13 -0600 (CST)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] ti-unpack: Remove update_data call
-Date: Fri, 25 Nov 2022 17:00:20 -0600
-Message-ID: <20221125230020.5316-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+Subject: [meta-ti][dunfell][PATCH 0/4] Update to cicd.2022.11.27.19:06:00
+Date: Sun, 27 Nov 2022 21:15:09 -0600
+Message-ID: <1669605313-143229-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 25 Nov 2022 23:00:31 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15362
+ <meta-ti@lists.yoctoproject.org>; Mon, 28 Nov 2022 03:15:17 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15363
 
-update_data() was removed from upstream bitbake, so we should remove
-the call from our code as well.
+Update linux-ti-staging, linux-ti-staging-rt, ti-linux-fw and u-boot-ti-staging to cicd.2022.11.27.19:06:00 tag
 
-https://github.com/openembedded/bitbake/commit/584989ed2b5af4e8799571dece0cf94f995ef14e
+LCPD Automation Script (4):
+  ti-linux-fw: CI/CD Auto-Merger: cicd.2022.11.27.19:06:00
+  u-boot-ti-staging: CI/CD Auto-Merger: cicd.2022.11.27.19:06:00
+  linux-ti-staging-rt: CI/CD Auto-Merger: cicd.2022.11.27.19:06:00
+  linux-ti-staging: CI/CD Auto-Merger: cicd.2022.11.27.19:06:00
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- meta-ti-extras/recipes-ti/includes/ti-unpack.inc | 1 -
- 1 file changed, 1 deletion(-)
+ recipes-bsp/ti-linux-fw/ti-linux-fw.inc          | 2 +-
+ recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb  | 2 +-
+ recipes-kernel/linux/linux-ti-staging-rt_5.10.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_5.10.bb    | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-ti-extras/recipes-ti/includes/ti-unpack.inc b/meta-ti-extras/recipes-ti/includes/ti-unpack.inc
-index 46bfb957..13068843 100644
---- a/meta-ti-extras/recipes-ti/includes/ti-unpack.inc
-+++ b/meta-ti-extras/recipes-ti/includes/ti-unpack.inc
-@@ -24,7 +24,6 @@ python ti_bin_do_unpack() {
-         bb.fatal("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install libc6:i386' on Ubuntu/Debian")
- 
-     localdata = bb.data.createCopy(d)
--    bb.data.update_data(localdata)
- 
-     binfile  = localdata.getVar('BINFILE')
-     binfile  = bb.data.expand(binfile, localdata)
 -- 
-2.17.1
+1.8.3.1
 
 
