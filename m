@@ -1,68 +1,105 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23BE8C4708A
-	for <webhook@archiver.kernel.org>; Wed, 30 Nov 2022 19:16:26 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.21293.1669835784981505242
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0277C4321E
+	for <webhook@archiver.kernel.org>; Wed, 30 Nov 2022 22:38:26 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.27598.1669847897583649360
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 30 Nov 2022 11:16:25 -0800
+ Wed, 30 Nov 2022 14:38:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: list.ti.com, ip: 198.47.19.142, mailfrom: lcpdbld@list.ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2AUJGMJS094999;
-	Wed, 30 Nov 2022 13:16:22 -0600
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2AUJGMFC093781
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 30 Nov 2022 13:16:22 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Wed, 30
- Nov 2022 13:16:21 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Wed, 30 Nov 2022 13:16:21 -0600
-Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2AUJGLwf048727;
-	Wed, 30 Nov 2022 13:16:21 -0600
-Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
-	id 95ED611483D4; Wed, 30 Nov 2022 13:16:21 -0600 (CST)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH 0/4] Update to cicd.2022.11.30.11:05:19
-Date: Wed, 30 Nov 2022 13:16:17 -0600
-Message-ID: <1669835781-116675-1-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 827D940ACD;
+	Wed, 30 Nov 2022 22:38:16 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id cf9F1QwIlGw3; Wed, 30 Nov 2022 22:38:16 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6ADAA400CF;
+	Wed, 30 Nov 2022 22:38:15 +0000 (UTC)
+Received: from thorin.denix (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id 99D88163689;
+	Wed, 30 Nov 2022 17:38:07 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [master][PATCH] optee: drop 3.17 versions
+Date: Wed, 30 Nov 2022 22:38:11 +0000
+Message-Id: <20221130223811.330397-1-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 30 Nov 2022 19:16:26 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15378
+ <meta-ti@lists.yoctoproject.org>; Wed, 30 Nov 2022 22:38:26 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15379
 
-Update linux-ti-staging, linux-ti-staging-rt, ti-linux-fw and u-boot-ti-staging to cicd.2022.11.30.11:05:19 tag
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-LCPD Automation Script (4):
-  ti-linux-fw: CI/CD Auto-Merger: cicd.2022.11.30.11:05:19
-  u-boot-ti-staging: CI/CD Auto-Merger: cicd.2022.11.30.11:05:19
-  linux-ti-staging-rt: CI/CD Auto-Merger: cicd.2022.11.30.11:05:19
-  linux-ti-staging: CI/CD Auto-Merger: cicd.2022.11.30.11:05:19
+These bbappends were bumping versions to 3.17 when upstream only provided
+3.16 version. Now that upstream meta-arm provides 3.18 versions, there's
+no need for the bbappends, especially since they break in do_install.
 
- recipes-bsp/ti-linux-fw/ti-linux-fw.inc          | 2 +-
- recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb  | 2 +-
- recipes-kernel/linux/linux-ti-staging-rt_5.10.bb | 2 +-
- recipes-kernel/linux/linux-ti-staging_5.10.bb    | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+---
+ meta-ti-bsp/recipes-security/optee/optee-client_%.bbappend     | 2 --
+ meta-ti-bsp/recipes-security/optee/optee-examples_%.bbappend   | 2 --
+ .../recipes-security/optee/optee-os-tadevkit_%.bbappend        | 2 --
+ meta-ti-bsp/recipes-security/optee/optee-test_%.bbappend       | 3 ---
+ 4 files changed, 9 deletions(-)
+ delete mode 100644 meta-ti-bsp/recipes-security/optee/optee-client_%.bba=
+ppend
+ delete mode 100644 meta-ti-bsp/recipes-security/optee/optee-examples_%.b=
+bappend
+ delete mode 100644 meta-ti-bsp/recipes-security/optee/optee-os-tadevkit_=
+%.bbappend
+ delete mode 100644 meta-ti-bsp/recipes-security/optee/optee-test_%.bbapp=
+end
 
--- 
-1.8.3.1
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-client_%.bbappend b=
+/meta-ti-bsp/recipes-security/optee/optee-client_%.bbappend
+deleted file mode 100644
+index 109d451c..00000000
+--- a/meta-ti-bsp/recipes-security/optee/optee-client_%.bbappend
++++ /dev/null
+@@ -1,2 +0,0 @@
+-PV:ti-soc =3D "3.17.0+git${SRCPV}"
+-SRCREV:ti-soc =3D "a5c30b1277466a9bf85b62f45a6b00e79774e29c"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-examples_%.bbappend=
+ b/meta-ti-bsp/recipes-security/optee/optee-examples_%.bbappend
+deleted file mode 100644
+index 98b5bea4..00000000
+--- a/meta-ti-bsp/recipes-security/optee/optee-examples_%.bbappend
++++ /dev/null
+@@ -1,2 +0,0 @@
+-PV:ti-soc =3D "3.17.0+git${SRCPV}"
+-SRCREV:ti-soc =3D "65fc74309e12189ad5b6ce3ffec37c8011088a5a"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-tadevkit_%.bbapp=
+end b/meta-ti-bsp/recipes-security/optee/optee-os-tadevkit_%.bbappend
+deleted file mode 100644
+index 4300c1a9..00000000
+--- a/meta-ti-bsp/recipes-security/optee/optee-os-tadevkit_%.bbappend
++++ /dev/null
+@@ -1,2 +0,0 @@
+-PV:ti-soc =3D "3.17.0+git${SRCPV}"
+-SRCREV:ti-soc =3D "15a746d28d10df3d79d72bc9fe4a5a654b88bcca"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-test_%.bbappend b/m=
+eta-ti-bsp/recipes-security/optee/optee-test_%.bbappend
+deleted file mode 100644
+index 4fbaa4c4..00000000
+--- a/meta-ti-bsp/recipes-security/optee/optee-test_%.bbappend
++++ /dev/null
+@@ -1,3 +0,0 @@
+-PV:ti-soc =3D "3.17.0+git${SRCPV}"
+-SRCREV:ti-soc =3D "8a698baf9e8e010e4d8d52e6aded42dfc31e5b25"
+-SRC_URI:ti-soc =3D "git://github.com/OP-TEE/optee_test.git;branch=3Dmast=
+er;protocol=3Dhttps"
+--=20
+2.25.1
 
 
