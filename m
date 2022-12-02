@@ -2,202 +2,146 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E0A72C4332F
-	for <webhook@archiver.kernel.org>; Fri,  2 Dec 2022 19:53:13 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.86064.1670010792641184425
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 001CFC4332F
+	for <webhook@archiver.kernel.org>; Fri,  2 Dec 2022 20:10:43 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.86427.1670011840879541984
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 02 Dec 2022 11:53:12 -0800
+ Fri, 02 Dec 2022 12:10:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=n5AAeHWs;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2B2Jr7n4123882;
-	Fri, 2 Dec 2022 13:53:07 -0600
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=ai1HQGKq;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2B2KAakB073583;
+	Fri, 2 Dec 2022 14:10:36 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1670010787;
-	bh=EeXiiqhHIZEiJfQ+o9eLnK2khvVPCa3J5OdprYpimIw=;
+	s=ti-com-17Q1; t=1670011836;
+	bh=Cptou3z1FBDwCGcijYYarnnk47Ic/uD9IvEqKnYNkkA=;
 	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=n5AAeHWsFv82NGwcGmfWSC6yHFi/IYgQ/5uBW1yf9JzN5lQGVv4bZcg+eiHvbARdJ
-	 cWUIf2KNOvj1U3fmFvHnDe7i9LAqCGX712R9s64D+vQQH3IlvWNGDpNDHkOehC1WRv
-	 2UVwrKellANPIIR3xsEoR1LwKnNwWD2joblDfkGs=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2B2Jr7dw105333
+	b=ai1HQGKqTjCi3H0SHnno+tdqSX/Qk+tgbQF6Fyx2hbKlLeqZxtadgQk6IhbnWCZ4m
+	 9Ke0/NNnMzOxzkLx6UFnHEAHzmeAKl7EVZcAC8MGjUk3+1XdZxXBHYIjaEzJ0g30Yj
+	 iSEJYKYiCuFvcZujptGeEDsm3/HSsHxN26ePcNsk=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2B2KAaGL080387
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 2 Dec 2022 13:53:07 -0600
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 2 Dec 2022 14:10:36 -0600
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Fri, 2
- Dec 2022 13:53:06 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2022 14:10:35 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Fri, 2 Dec 2022 13:53:07 -0600
+ Frontend Transport; Fri, 2 Dec 2022 14:10:35 -0600
 Received: from [10.249.38.163] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2B2Jr6Pq064311;
-	Fri, 2 Dec 2022 13:53:06 -0600
-Message-ID: <63882f90-dd71-3e01-578c-23c36b405e07@ti.com>
-Date: Fri, 2 Dec 2022 13:53:06 -0600
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2B2KAZTm005692;
+	Fri, 2 Dec 2022 14:10:35 -0600
+Message-ID: <488655ee-9187-e157-a3f4-975ccdb36df6@ti.com>
+Date: Fri, 2 Dec 2022 14:10:35 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.5.1
-Subject: Re: [meta-ti] [PATCH] linux-ti: Drop unneeded update_data calls
+Subject: Re: [meta-ti][master][PATCH] u-boot: Add lzop dependency
 Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>
-CC: <denis@denix.org>, <meta-ti@lists.yoctoproject.org>
-References: <20221201064805.2094474-1-raj.khem@gmail.com>
- <20221201143643.GT22689@denix.org>
- <CAMKF1sq=gYbvmiNYZyCf6oYDO4B0zELWF0F-hgBhVgW9KwXjZA@mail.gmail.com>
- <d95ec770-88d8-c27d-008c-7cfd6b706ed2@ti.com>
- <CAMKF1sqAJXscBK=bYq_2ML3jNo-ZEtXOX=5LeguEP9P9sAor6w@mail.gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>
+CC: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+References: <20221202145817.28581-1-reatmon@ti.com>
+ <20221202161051.GU22689@denix.org>
+ <172D078D53F719C6.27320@lists.yoctoproject.org>
 From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <CAMKF1sqAJXscBK=bYq_2ML3jNo-ZEtXOX=5LeguEP9P9sAor6w@mail.gmail.com>
+In-Reply-To: <172D078D53F719C6.27320@lists.yoctoproject.org>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 2B2KAakB073583
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 02 Dec 2022 19:53:13 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15391
+ <meta-ti@lists.yoctoproject.org>; Fri, 02 Dec 2022 20:10:43 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15392
 
 
-I saw those, but we don't have the QA issue for patch-fuzz turned on as 
-an error.  Just warnings.  I'll take a look.
 
-
-On 12/2/2022 12:57, Khem Raj wrote:
-> Ryan
-> 
-> Thanks for applying the fixes. I am seeing another issue
-> 
-> 2022-12-02T17:26:17.8104311Z ERROR:
-> linux-ti-staging-5.10.145+gitAUTOINC+8b51d20b6e-0b do_patch: Fuzz
-> detected:
-> 2022-12-02T17:26:17.8105197Z
-> 2022-12-02T17:26:17.8106282Z Applying patch
-> init_disassemble_info-signature-changes-causes-compile-failures.patch
-> 2022-12-02T17:26:17.8107676Z patching file tools/perf/util/annotate.c
-> 2022-12-02T17:26:17.8108593Z Hunk #1 succeeded at 1685 with fuzz 2.
-> 2022-12-02T17:26:17.8109470Z Hunk #2 succeeded at 1739 with fuzz 2.
-> 2022-12-02T17:26:17.8109999Z
-> 2022-12-02T17:26:17.8110016Z
-> 2022-12-02T17:26:17.8110542Z The context lines in the patches can be
-> updated with devtool:
-> 2022-12-02T17:26:17.8111180Z
-> 2022-12-02T17:26:17.8117818Z     devtool modify linux-ti-staging
-> 2022-12-02T17:26:17.8118351Z     devtool finish --force-patch-refresh
-> linux-ti-staging <layer_path>
-> 2022-12-02T17:26:17.8118625Z
-> 2022-12-02T17:26:17.8118872Z Don't forget to review changes done by devtool!
-> 2022-12-02T17:26:17.8119097Z
-> 2022-12-02T17:26:17.8126616Z ERROR:
-> linux-ti-staging-5.10.145+gitAUTOINC+8b51d20b6e-0b do_patch: QA Issue:
-> Patch log indicates that patches do not apply cleanly. [patch-fuzz]
-> 
-> 
-> Do you have a patch for this too ?
-> 
-> On Thu, Dec 1, 2022 at 12:48 PM Ryan Eatmon <reatmon@ti.com> wrote:
+On 12/2/2022 10:42, Ryan Eatmon via lists.yoctoproject.org wrote:
+>=20
+>=20
+> On 12/2/2022 10:10, Denys Dmytriyenko wrote:
+>> On Fri, Dec 02, 2022 at 08:58:17AM -0600, Ryan Eatmon via=20
+>> lists.yoctoproject.org wrote:
+>>> It turns out we do need lzop for building dra7 and am57 in u-boot,
+>>> so add the dependency back in and add a layer dependency on
+>>> meta-oe(openembedded-layer).
 >>
+>> Oh, no, please don't do that! This is a heavy dependency and meta-ti=20
+>> BSP has
+>> stayed away from it since the beginning of times.
 >>
->> On 12/1/2022 11:40, Khem Raj wrote:
->>> On Thu, Dec 1, 2022 at 6:36 AM Denys Dmytriyenko <denis@denix.org> wrote:
->>>>
->>>> NAK
->>>>
->>>> cmem is being removed:
->>>> https://patchwork.yoctoproject.org/project/ti/patch/20221104224653.1223044-51-denis@denix.org/
->>>>
->>>> ti-unpack is being patched already:
->>>> https://patchwork.yoctoproject.org/project/ti/patch/20221125230020.5316-1-reatmon@ti.com/
->>>>
->>>> It's just getting longer to get the patches merged due to other breakages
->>>> in master...
+>> It would be better to figure out why lzop is used for those platforms =
+and
+>> change that, as LZOP is pretty much deprecated these days...
+>=20
+> Ok.=C2=A0 I'll back this one out.=C2=A0 And look for an alternative sol=
+ution.
+
+
+Ok.  Adding lzop to HOSTTOOLS in our build script and adding lzop to our=20
+build environment fixes this issue.
+
+
+>>
+>>> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+>>> ---
+>>> =C2=A0 meta-ti-bsp/conf/layer.conf=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 1 +
+>>> =C2=A0 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc | 2 +-
+>>> =C2=A0 2 files changed, 2 insertions(+), 1 deletion(-)
 >>>
->>> Can we expedite these two fixes or atleast my cosmetic change ? this
->>> will fix CI breakages for distros
->>> living on master.
->>
->> Just updated master-wip -> master.  So your issue should be fixed now.
->>
->>
->>>>
->>>> --
->>>> Denys
->>>>
->>>>
->>>> On Wed, Nov 30, 2022 at 10:48:05PM -0800, Khem Raj wrote:
->>>>>    datastore works dynamically we don't need the update_data calls
->>>>>    anymore, so far they were no-ops, now bitbake has recently dropped this
->>>>>    API and hence compile fails with core/master
->>>>>
->>>>>    Fixes
->>>>>     *** 0052:        bb.data.update_data(localdata)
->>>>>        0053:
->>>>>        0054:        cmem_dtsi.add(localdata.getVar('CMEM_DTSI'))
->>>>>        0055:
->>>>>        0056:    d.appendVar('SRC_URI', ' file://'.join(cmem_dtsi))
->>>>> Exception: AttributeError: module 'bb.data' has no attribute 'update_data'
->>>>>
->>>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>>>> ---
->>>>>    meta-ti-bsp/recipes-kernel/linux/cmem.inc        | 2 --
->>>>>    meta-ti-extras/recipes-ti/includes/ti-unpack.inc | 1 -
->>>>>    2 files changed, 3 deletions(-)
->>>>>
->>>>> diff --git a/meta-ti-bsp/recipes-kernel/linux/cmem.inc b/meta-ti-bsp/recipes-kernel/linux/cmem.inc
->>>>> index fd913f6c..f560932c 100644
->>>>> --- a/meta-ti-bsp/recipes-kernel/linux/cmem.inc
->>>>> +++ b/meta-ti-bsp/recipes-kernel/linux/cmem.inc
->>>>> @@ -49,7 +49,6 @@ python do_unpack() {
->>>>>            # Create copy of data for additional override
->>>>>            localdata = bb.data.createCopy(d)
->>>>>            localdata.setVar('OVERRIDES', '%s:%s' % (cmem_machine, old_overrides))
->>>>> -        bb.data.update_data(localdata)
->>>>>
->>>>>            cmem_dtsi.add(localdata.getVar('CMEM_DTSI'))
->>>>>
->>>>> @@ -67,7 +66,6 @@ python do_setup_cmem() {
->>>>>                # Create copy of data for additional override
->>>>>                localdata = bb.data.createCopy(d)
->>>>>                localdata.setVar('OVERRIDES', '%s:%s' % (cmem_machine, old_overrides))
->>>>> -            bb.data.update_data(localdata)
->>>>>
->>>>>                # Get source directory and dtsi filename
->>>>>                src_dir  = localdata.getVar('WORKDIR')
->>>>> diff --git a/meta-ti-extras/recipes-ti/includes/ti-unpack.inc b/meta-ti-extras/recipes-ti/includes/ti-unpack.inc
->>>>> index 46bfb957..13068843 100644
->>>>> --- a/meta-ti-extras/recipes-ti/includes/ti-unpack.inc
->>>>> +++ b/meta-ti-extras/recipes-ti/includes/ti-unpack.inc
->>>>> @@ -24,7 +24,6 @@ python ti_bin_do_unpack() {
->>>>>            bb.fatal("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install libc6:i386' on Ubuntu/Debian")
->>>>>
->>>>>        localdata = bb.data.createCopy(d)
->>>>> -    bb.data.update_data(localdata)
->>>>>
->>>>>        binfile  = localdata.getVar('BINFILE')
->>>>>        binfile  = bb.data.expand(binfile, localdata)
->>>>> --
->>>>> 2.38.1
->>>>>
->>>>>
->>>>>
->>>>> -=-=-=-=-=-=-=-=-=-=-=-
->>>>> Links: You receive all messages sent to this group.
->>>>> View/Reply Online (#15383): https://lists.yoctoproject.org/g/meta-ti/message/15383
->>>>> Mute This Topic: https://lists.yoctoproject.org/mt/95376959/6551054
->>>>> Group Owner: meta-ti+owner@lists.yoctoproject.org
->>>>> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [reatmon@ti.com]
->>>>> -=-=-=-=-=-=-=-=-=-=-=-
->>>>>
->>
->> --
->> Ryan Eatmon                reatmon@ti.com
->> -----------------------------------------
->> Texas Instruments, Inc.  -  LCPD  -  MGTS
+>>> diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.con=
+f
+>>> index 39e7f9eb..8bafa854 100644
+>>> --- a/meta-ti-bsp/conf/layer.conf
+>>> +++ b/meta-ti-bsp/conf/layer.conf
+>>> @@ -15,6 +15,7 @@ LICENSE_PATH +=3D "${LAYERDIR}/licenses"
+>>> =C2=A0 LAYERDEPENDS_meta-ti-bsp =3D " \
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 core \
+>>> +=C2=A0=C2=A0=C2=A0 openembedded-layer \
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 meta-arm \
+>>> =C2=A0 "
+>>> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc=20
+>>> b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+>>> index d87dcbe1..5127e137 100644
+>>> --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+>>> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+>>> @@ -23,7 +23,7 @@ SRC_URI =3D=20
+>>> "${UBOOT_GIT_URI};protocol=3D${UBOOT_GIT_PROTOCOL};branch=3D${BRANCH}=
+"
+>>> =C2=A0 PV:append =3D "+git${SRCPV}"
+>>> =C2=A0 # u-boot needs devtree compiler to parse dts files
+>>> -DEPENDS +=3D "dtc-native bc-native flex-native bison-native=20
+>>> python3-setuptools-native"
+>>> +DEPENDS +=3D "dtc-native bc-native lzop-native flex-native=20
+>>> bison-native python3-setuptools-native"
+>>> =C2=A0 DM_FIRMWARE =3D "ipc_echo_testb_mcu1_0_release_strip.xer5f"
+>>> --=20
+>>> 2.17.1
+>=20
+>=20
+>=20
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#15389): https://lists.yoctoproject.org/g/meta-ti/me=
+ssage/15389
+> Mute This Topic: https://lists.yoctoproject.org/mt/95407408/6551054
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [reatmon@ti=
+.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>=20
 
--- 
+--=20
 Ryan Eatmon                reatmon@ti.com
 -----------------------------------------
 Texas Instruments, Inc.  -  LCPD  -  MGTS
