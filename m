@@ -1,118 +1,92 @@
-Return-Path: <denis@denix.org>
+Return-Path: <a-bhatia1@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 40270C4332F
-	for <webhook@archiver.kernel.org>; Sun,  4 Dec 2022 22:56:51 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.728.1670194609278890991
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2F9FC4321E
+	for <webhook@archiver.kernel.org>; Mon,  5 Dec 2022 11:45:24 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.13319.1670240722230013587
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 04 Dec 2022 14:56:49 -0800
+ Mon, 05 Dec 2022 03:45:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 294D140C2B;
-	Sun,  4 Dec 2022 22:56:48 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id EdzM488DwpEw; Sun,  4 Dec 2022 22:56:48 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D831D40A03;
-	Sun,  4 Dec 2022 22:56:42 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id C31E91636A5; Sun,  4 Dec 2022 17:56:34 -0500 (EST)
-Date: Sun, 4 Dec 2022 17:56:34 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Ryan Eatmon <reatmon@ti.com>
-Cc: Manorit Chawdhry <m-chawdhry@ti.com>, meta-ti@lists.yoctoproject.org,
-	Andrew Davis <afd@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
-	Praneeth Bajjuri <praneeth@ti.com>
-Subject: Re: [meta-ti][dunfell][PATCH] optee: update optee-client,
- optee-test, optee-examples to 3.19 tag
-Message-ID: <20221204225634.GX22689@denix.org>
-References: <20221202100452.1868797-1-m-chawdhry@ti.com>
- <b1812e45-6c73-4a2a-16a1-704393f35e3a@ti.com>
- <20221203154808.GV22689@denix.org>
- <811707e3-c815-000d-75a9-49fd4d4242e7@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=TGmHLP8z;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: a-bhatia1@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2B5BjJtc063469;
+	Mon, 5 Dec 2022 05:45:19 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1670240719;
+	bh=9Zp+6YncLd4SsidkEi8KNJigiffo9M1G6MufnguWSgE=;
+	h=From:To:CC:Subject:Date;
+	b=TGmHLP8zCcC6La2e/yM0eKCFZCiPNe1oEhubY8cWBxyDxvSs5Hq4yf58Ao3CgVPja
+	 9Q4eMhLs29Emq+lF7SEsKnXdb6qrQ+cq/mKi3Bvm7R8rpRlCLpe7/3OkPAquQ1bvsj
+	 Uc/ZTAOpRaL3zqo8/hTuiNE+Y6dvHKaw4TDixqJM=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2B5BjJg9083547
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 5 Dec 2022 05:45:19 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Mon, 5
+ Dec 2022 05:45:19 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
+ Frontend Transport; Mon, 5 Dec 2022 05:45:19 -0600
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2B5BjI5h042975;
+	Mon, 5 Dec 2022 05:45:19 -0600
+From: Aradhya Bhatia <a-bhatia1@ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Denys Dmytriyenko <denys@konsulko.com>
+CC: Meta-TI List <meta-ti@lists.yoctoproject.org>,
+        Vignesh Raghavendra
+	<vigneshr@ti.com>,
+        Devarsh Thakkar <devarsht@ti.com>, Aradhya Bhatia
+	<a-bhatia1@ti.com>
+Subject: [dunfell][PATCH] conf: machine: am62xx: Add missing overlays for AM625 SK
+Date: Mon, 5 Dec 2022 17:15:18 +0530
+Message-ID: <20221205114518.17263-1-a-bhatia1@ti.com>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <811707e3-c815-000d-75a9-49fd4d4242e7@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sun, 04 Dec 2022 22:56:51 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15405
+ <meta-ti@lists.yoctoproject.org>; Mon, 05 Dec 2022 11:45:24 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15406
 
-On Sat, Dec 03, 2022 at 11:04:00AM -0600, Ryan Eatmon wrote:
-> 
-> 
-> On 12/3/2022 9:48, Denys Dmytriyenko wrote:
-> >On Fri, Dec 02, 2022 at 08:04:52PM -0600, Ryan Eatmon via lists.yoctoproject.org wrote:
-> >>
-> >>
-> >>On 12/2/2022 4:04, Manorit Chawdhry wrote:
-> >>>optee-os was updated to 3.19 tag but the others were still outdated.
-> >>>
-> >>>Updates other optee components to 3.19 tag
-> >>>
-> >>>Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> >>>---
-> >>>  recipes-security/optee/optee-client_%.bbappend   | 4 ++--
-> >>>  recipes-security/optee/optee-examples_%.bbappend | 4 ++--
-> >>>  recipes-security/optee/optee-test_%.bbappend     | 4 ++--
-> >>>  3 files changed, 6 insertions(+), 6 deletions(-)
-> >>>
-> >>>diff --git a/recipes-security/optee/optee-client_%.bbappend b/recipes-security/optee/optee-client_%.bbappend
-> >>>index 5675570a..6737ba92 100644
-> >>>--- a/recipes-security/optee/optee-client_%.bbappend
-> >>>+++ b/recipes-security/optee/optee-client_%.bbappend
-> >>>@@ -1,2 +1,2 @@
-> >>>-PV_ti-soc = "3.17.0+git${SRCPV}"
-> >>>-SRCREV_ti-soc = "a5c30b1277466a9bf85b62f45a6b00e79774e29c"
-> >>>+PV_ti-soc = "3.19.0+git${SRCPV}"
-> >>>+SRCREV_ti-soc = "140bf463046071d3ca5ebbde3fb21ee0854e1951"
-> >>
-> >>optee-client will not build against this SRCREV.  They added a call
-> >>to pkg-config which is not readily available to the recipe without a
-> >>change to your patch.
-> >>
-> >>You need to add:
-> >>
-> >>DEPENDS += "pkgconfig"
-> >
-> >You probably don't want a target pkgconfig, but a native one.
-> >Do this instead:
-> >
-> >inherit pkgconfig
-> 
-> Actually, I thought that at first too and tried all variations of
-> the native (inherit, depends, hosttools, etc...).  The only thing
-> that actually made it work was the above.
-> 
-> In this case, pkg-config is not being called from configure, but
-> from the Makefile.  The Makefile is trying to make sure that libuuid
-> is installed for the target.  And the native would only make sure it
-> is installed on the native side, where as pkgconfig for target looks
-> in all of the places for the target library.  At least that was my
-> understanding in reading online docs about it.
-> 
-> But depending on pkgconfig (for target) actually fixed the compile
-> issue.  If you want to verify that or disprove it I would be most
-> appreciative.  I spent a few hours banging my head on this one.
+Add the overlay files, over AM625 SK, for the following:
 
-Looks like you've done your research - it's a bit strange use of pkgconfig 
-by optee-client, not a basic normal use case I was referring to.
+1. Technexion OV5640 Camera
+2. Enhanced Capture (ECAP)
+3. HDMI Audio Output
+4. MCAN Transceiver
+5. Microtips OLDI Panel
 
-If the Makefile is trying to check if libuuid is installed, don't you need to 
-also have it the DEPENDS?
+Signed-off-by: Aradhya Bhatia <a-bhatia1@ti.com>
+---
+ conf/machine/am62xx-evm.conf | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-And we'll see how meta-arm/master handles it soon enough, when updating to 
-3.19 upstream...
-
+diff --git a/conf/machine/am62xx-evm.conf b/conf/machine/am62xx-evm.conf
+index cbab26dd15c8..3d9e3b903487 100644
+--- a/conf/machine/am62xx-evm.conf
++++ b/conf/machine/am62xx-evm.conf
+@@ -11,6 +11,11 @@ KERNEL_DEVICETREE = " \
+     ti/k3-am625-skeleton.dtb \
+     ti/k3-am625-sk-lpmdemo.dtb \
+     ti/k3-am625-sk-csi2-ov5640.dtbo \
++    ti/k3-am625-sk-csi2-tevi-ov5640.dtbo \
++    ti/k3-am625-sk-ecap-capture.dtbo \
++    ti/k3-am625-sk-hdmi-audio.dtbo \
++    ti/k3-am625-sk-mcan.dtbo \
++    ti/k3-am625-sk-oldi-panel.dtbo \
+ "
+ 
+ UBOOT_MACHINE = "am62x_evm_a53_defconfig"
 -- 
-Denys
+2.38.1
+
 
