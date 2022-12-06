@@ -2,46 +2,46 @@ Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4406C4708C
-	for <webhook@archiver.kernel.org>; Tue,  6 Dec 2022 17:41:23 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.54733.1670348482757407105
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA73AC352A1
+	for <webhook@archiver.kernel.org>; Tue,  6 Dec 2022 17:46:03 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.54792.1670348756264751903
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 06 Dec 2022 09:41:23 -0800
+ Tue, 06 Dec 2022 09:45:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=fOfcrQ9o;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: rs@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2B6HfLtS114828
-	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Dec 2022 11:41:21 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Tw++MmT/;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: rs@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2B6HjtLm048422
+	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Dec 2022 11:45:55 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1670348482;
-	bh=MRDb2NwNDWMirU88Yth8dzmsToem8cM/0E0PhbJFTaU=;
+	s=ti-com-17Q1; t=1670348755;
+	bh=0noCPfeOlMJ+eAraX8Cf5pIwJWvSs+KVZHXdi7FVwF0=;
 	h=From:To:CC:Subject:Date;
-	b=fOfcrQ9ozri5IFI3/L7l7MBUbm3Wt81x4Gmh4+aQzl/P4c3l9Agae1NmHvB1s7bEP
-	 tJw0f6hkY2LynbhXUcLqHU7LQObcu2Py1i5K28LluvLdTCJrSb+tFl0PAcupnVIqRn
-	 rDbde7+kGY41HP5Wnf8M40+RWnjuuNjDPQwIy6vg=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2B6HfLil004348
+	b=Tw++MmT/qdkfiFfMtND7xQcqoAvSkad83IEGyT2RJqLpfcfW0iK8R7VboF5pncY4V
+	 tTXg8lWfukmHdoAJUpzZ7dAoGW/lQcZjm6Rncbd8hZLnEg/iVu2eDvXm4lgJ4IhYts
+	 wVq8yr0vt0qRcytj1lWqNhmk8m5W+u8E4+R3q7gk=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2B6HjtDO121355
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Dec 2022 11:41:21 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Tue, 6 Dec 2022 11:45:55 -0600
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 6
- Dec 2022 11:41:21 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2022 11:45:54 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Tue, 6 Dec 2022 11:41:21 -0600
+ Frontend Transport; Tue, 6 Dec 2022 11:45:55 -0600
 Received: from res.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2B6HfL80089630;
-	Tue, 6 Dec 2022 11:41:21 -0600
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2B6HjtBO000564;
+	Tue, 6 Dec 2022 11:45:55 -0600
 From: Randolph Sapp <rs@ti.com>
 To: <reatmon@ti.com>, <denys@ti.com>, <detheridge@ti.com>
 CC: <meta-ti@lists.yoctoproject.org>, Randolph Sapp <rs@ti.com>
-Subject: [master][PATCH] meta-ti-bsp: Graphics recipe overhaul
-Date: Tue, 6 Dec 2022 11:41:18 -0600
-Message-ID: <20221206174118.2390897-1-rs@ti.com>
+Subject: [master][PATCH v2] meta-ti-bsp: Graphics recipe overhaul
+Date: Tue, 6 Dec 2022 11:45:53 -0600
+Message-ID: <20221206174553.2391187-1-rs@ti.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -50,8 +50,8 @@ X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 06 Dec 2022 17:41:23 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15413
+ <meta-ti@lists.yoctoproject.org>; Tue, 06 Dec 2022 17:46:03 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15414
 
 Individually package rogue graphics components to prevent conflicts with
 other recipes.
@@ -297,7 +297,7 @@ index a665c614..00000000
 -CLEANBROKEN = "1"
 diff --git a/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.18.6276027.bb b/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.18.6276027.bb
 new file mode 100644
-index 00000000..ebe60b39
+index 00000000..c9110053
 --- /dev/null
 +++ b/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.18.6276027.bb
 @@ -0,0 +1,55 @@
@@ -318,7 +318,7 @@ index 00000000..ebe60b39
 +BRANCH = "linuxws/kirkstone/k5.10/${PV}"
 +
 +SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-umlibs.git;protocol=https;branch=${BRANCH}"
-+SRCREV = "552c13105f10573a12de162010c7808cb397a7f9"
++SRCREV = "540919e26f2a3674ba6a3044a113905298125894"
 +
 +TARGET_PRODUCT:j721e = "j721e_linux"
 +TARGET_PRODUCT:j721s2 = "j721s2_linux"
