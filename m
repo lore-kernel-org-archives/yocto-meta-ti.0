@@ -2,126 +2,77 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6468C4332F
-	for <webhook@archiver.kernel.org>; Mon, 12 Dec 2022 21:25:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD8C8C4332F
+	for <webhook@archiver.kernel.org>; Mon, 12 Dec 2022 21:35:12 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.56617.1670880330830725245
+ by mx.groups.io with SMTP id smtpd.web10.56871.1670880909563021084
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 12 Dec 2022 13:25:31 -0800
+ Mon, 12 Dec 2022 13:35:09 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id D80D240BA9;
-	Mon, 12 Dec 2022 21:25:29 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 00DC640BA9;
+	Mon, 12 Dec 2022 21:35:09 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lhazt_h-vccG; Mon, 12 Dec 2022 21:25:29 +0000 (UTC)
+	with ESMTP id mALnG8cL5HmS; Mon, 12 Dec 2022 21:35:08 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 99BBF40A3F;
-	Mon, 12 Dec 2022 21:25:24 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D169E40A3F;
+	Mon, 12 Dec 2022 21:35:06 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 16AB11636AE; Mon, 12 Dec 2022 16:25:15 -0500 (EST)
-Date: Mon, 12 Dec 2022 16:25:15 -0500
+	id 486551636AE; Mon, 12 Dec 2022 16:34:57 -0500 (EST)
+Date: Mon, 12 Dec 2022 16:34:57 -0500
 From: Denys Dmytriyenko <denis@denix.org>
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: meta-ti@lists.yoctoproject.org, Andrew Davis <afd@ti.com>,
-	Ryan Eatmon <reatmon@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
-	Praneeth Bajjuri <praneeth@ti.com>
-Subject: Re: [meta-ti][dunfell][PATCH v2] optee: update optee-client,
- optee-test, optee-examples to 3.19 tag
-Message-ID: <20221212212515.GG22689@denix.org>
-References: <20221212054705.94060-1-m-chawdhry@ti.com>
- <20221212055558.GD22689@denix.org>
- <20221212061237.wh54ly3hcsbvgbkd@ula0497581>
+To: Ryan Eatmon <reatmon@ti.com>
+Cc: Praneeth Bajjuri <praneeth@ti.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][master/kirkstone][PATCH] conf: change from
+ do_image_wic/tar to do_image
+Message-ID: <20221212213457.GH22689@denix.org>
+References: <20221211190240.7246-1-reatmon@ti.com>
+ <20221212181520.GE22689@denix.org>
+ <e318a600-c9f5-7969-d809-0748eaa786c7@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20221212061237.wh54ly3hcsbvgbkd@ula0497581>
+In-Reply-To: <e318a600-c9f5-7969-d809-0748eaa786c7@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 12 Dec 2022 21:25:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15454
+ <meta-ti@lists.yoctoproject.org>; Mon, 12 Dec 2022 21:35:12 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15455
 
-On Mon, Dec 12, 2022 at 11:42:37AM +0530, Manorit Chawdhry wrote:
-> On 00:55-20221212, Denys Dmytriyenko wrote:
-> > On Mon, Dec 12, 2022 at 11:17:05AM +0530, Manorit Chawdhry via lists.yoctoproject.org wrote:
-> > > optee-os was updated to 3.19 tag but the others were still outdated.
-> > > 
-> > > Updates other optee components to 3.19 tag
-> > > 
-> > > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> > > ---
-> > > v1->v2:
-> > > - Fix build by adding depends
-> > > 
-> > >  recipes-security/optee/optee-client_%.bbappend   | 6 ++++--
-> > >  recipes-security/optee/optee-examples_%.bbappend | 4 ++--
-> > >  recipes-security/optee/optee-test_%.bbappend     | 4 ++--
-> > >  3 files changed, 8 insertions(+), 6 deletions(-)
-> > > 
-> > > diff --git a/recipes-security/optee/optee-client_%.bbappend b/recipes-security/optee/optee-client_%.bbappend
-> > > index 5675570a..19feaf6d 100644
-> > > --- a/recipes-security/optee/optee-client_%.bbappend
-> > > +++ b/recipes-security/optee/optee-client_%.bbappend
-> > > @@ -1,2 +1,4 @@
-> > > -PV_ti-soc = "3.17.0+git${SRCPV}"
-> > > -SRCREV_ti-soc = "a5c30b1277466a9bf85b62f45a6b00e79774e29c"
-> > > +PV_ti-soc = "3.19.0+git${SRCPV}"
-> > > +SRCREV_ti-soc = "140bf463046071d3ca5ebbde3fb21ee0854e1951"
-> > > +
-> > > +DEPENDS += "pkgconfig"
-> > 
-> > NAK - any unconditional change of the upstream package will break YP compat 
-> > for meta-ti. Please see how it's done correctly - this patch actually captures 
-> > 2 such cases below...
-> > 
+On Mon, Dec 12, 2022 at 01:24:29PM -0600, Ryan Eatmon wrote:
 > 
-> Ah okay, I see upstream including some patches to fix this one. Will update the
-> SHA once it's done.
+> 
+> On 12/12/2022 12:15, Denys Dmytriyenko wrote:
+> >On Sun, Dec 11, 2022 at 01:02:40PM -0600, Ryan Eatmon via lists.yoctoproject.org wrote:
+> >>When trying to support OpenBMC we found that our use of do_image_wic
+> >>and do_image_tar for adding depends and mcdepends was too limiting.
+> >>Moving to do_image is a higher level in the tree that means for any
+> >>image type the dependencies will be correct.
+> >
+> >There might be some unexpected side effects, since do_image is too broard. Not
+> >every image has a boot partition and should depend on the corresponding boot
+> >files being deployed. Things like ramdisks, initramfs and such have different
+> >flows and own dependencies. Also images that include other images, like guests
+> >for VMs or hypervisors or even bootstrapping. All those could potentially have
+> >issues due to a global do_image dependency - I've seen circular dependency
+> >breakages in the past in those areas. Not all use cases are being tested by
+> >default, so not easy to tell if this change is compltetely harmless...
+> 
+> I was worried something like that might be true.  But how are we
+> supposed to know which images (present and future) that we need to
+> add dependencies for in this case?
 
-Well, they are moving the uuid check around, but it still requires cross 
-version of pkg-config and hence needs the above DEPENDNS:
-https://github.com/OP-TEE/optee_client/commit/dd2d39b49975d2ada7870fe2b7f5a84d0d3860dc
-
-But what I meant before - you cannot simply use DEPENDS in a bbappend that 
-alters upstream recipe unconditionally. You have to guard it with some 
-layer-specific override - see below.
-
-
-> > > diff --git a/recipes-security/optee/optee-examples_%.bbappend b/recipes-security/optee/optee-examples_%.bbappend
-> > > index 9941b345..dda7cbbf 100644
-> > > --- a/recipes-security/optee/optee-examples_%.bbappend
-> > > +++ b/recipes-security/optee/optee-examples_%.bbappend
-> > > @@ -1,5 +1,5 @@
-> > > -PV_ti-soc = "3.17.0+git${SRCPV}"
-> > > -SRCREV_ti-soc = "65fc74309e12189ad5b6ce3ffec37c8011088a5a"
-> > > +PV_ti-soc = "3.19.0+git${SRCPV}"
-> > > +SRCREV_ti-soc = "f301ee9df2129c0db683e726c91dc2cefe4cdb65"
-> > >  SRC_URI_ti-soc = "git://github.com/linaro-swg/optee_examples.git;protocol=https"
-> > >  
-> > >  DEPENDS_append_ti-soc = " python3-cryptography-native"
-
-E.g. here
-
-
-> > > diff --git a/recipes-security/optee/optee-test_%.bbappend b/recipes-security/optee/optee-test_%.bbappend
-> > > index d81ae521..79b4b4d6 100644
-> > > --- a/recipes-security/optee/optee-test_%.bbappend
-> > > +++ b/recipes-security/optee/optee-test_%.bbappend
-> > > @@ -1,5 +1,5 @@
-> > > -PV_ti-soc = "3.17.0+git${SRCPV}"
-> > > -SRCREV_ti-soc = "8a698baf9e8e010e4d8d52e6aded42dfc31e5b25"
-> > > +PV_ti-soc = "3.19.0+git${SRCPV}"
-> > > +SRCREV_ti-soc = "ab9863cc187724e54c032b738c28bd6e9460a4db"
-> > >  SRC_URI_ti-soc = "git://github.com/OP-TEE/optee_test.git;protocol=https"
-> > >  
-> > >  DEPENDS_append_ti-soc = " python3-cryptography-native"
-
-Oe here
+Yeah, that's a very good question. My thinking back then was that usually we 
+only want "wic" format for a bootable whole-system images, hence I limited 
+the dependency to do_image_wic (and the tar version was a by-product). Maybe 
+your change is not as dangerous as I was imagining :) - definitely needs more 
+thorough testing. Or we can come up with a completely different way of 
+specifying those dependencies?
 
 -- 
 Denys
