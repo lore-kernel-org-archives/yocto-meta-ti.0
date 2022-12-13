@@ -2,361 +2,203 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD70FC4332F
-	for <webhook@archiver.kernel.org>; Tue, 13 Dec 2022 17:03:28 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.79185.1670950998600761978
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10EDAC4332F
+	for <webhook@archiver.kernel.org>; Tue, 13 Dec 2022 17:05:59 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.79254.1670951157654808805
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 13 Dec 2022 09:03:18 -0800
+ Tue, 13 Dec 2022 09:05:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=rT6oZSoU;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2BDH3Et9118692;
-	Tue, 13 Dec 2022 11:03:14 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=il/Rosq0;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2BDH5rhJ047932;
+	Tue, 13 Dec 2022 11:05:53 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1670950994;
-	bh=Mc5dRmsszht5rN9PB4glowVpyVyW3Qr5aWqXZ9ITGAQ=;
+	s=ti-com-17Q1; t=1670951153;
+	bh=kClgQRbcA/yXBdkwj2HYW1pGUCZIIcxYm16o7COaL7U=;
 	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=rT6oZSoUycZVteUU9HPniVIXLvZLW9m84POa7W36RYkT7Drjng9MWu/yHNQs6uIyH
-	 hEOfk2TnTpLVEHigWZ4E7wvA5IE6VjBpvbH4DcF9a50+7l1Oz8lHGvyUlprr9xtIvu
-	 ZExqy6kjuAxJUf/oWR8xUXqI2J0K5Ad6gFaP+PwE=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2BDH3Eqh083985
+	b=il/Rosq04+uqf6IqubDtYQsbweMRSdvGRZR2XWxKbTQuE7MwbVuSMgCvMOT67v23r
+	 QGvw9MAeo+v1hz8o2YMOJLEN0iHIEanYYCU46MEA+BGM8JiLgOFLz2W25ISu6HOl6b
+	 TQLvGY4anYCUH8WYRtu02MY7LJkQ1sfYBzMkvYwE=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2BDH5r8X124632
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 13 Dec 2022 11:03:14 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 13 Dec 2022 11:05:53 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 13
- Dec 2022 11:03:14 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2022 11:05:53 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Tue, 13 Dec 2022 11:03:14 -0600
-Received: from [10.250.38.44] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2BDH3DRg023929;
-	Tue, 13 Dec 2022 11:03:13 -0600
-Message-ID: <b9ff93d1-97e4-18f3-d527-4802f5913d9a@ti.com>
-Date: Tue, 13 Dec 2022 11:03:13 -0600
+ Frontend Transport; Tue, 13 Dec 2022 11:05:53 -0600
+Received: from [10.250.38.44] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2BDH5qYk087687;
+	Tue, 13 Dec 2022 11:05:52 -0600
+Message-ID: <33a06e02-90a6-7125-26f4-f55f7a5e66ee@ti.com>
+Date: Tue, 13 Dec 2022 11:05:52 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
-Subject: Re: [meta-ti][master/kirkstone][PATCH 3/7] conf: machine: Use new J7
- SoC names over specific board names
+Subject: Re: [meta-ti][master/kirkstone][PATCH 5/7] conf: machine: Remove
+ OPTEEOUTPUTMACHINE definition
 Content-Language: en-US
 To: Denys Dmytriyenko <denis@denix.org>
 CC: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         <meta-ti@lists.yoctoproject.org>
 References: <20221207214312.21735-1-afd@ti.com>
- <20221207214312.21735-3-afd@ti.com> <20221212224330.GK22689@denix.org>
+ <20221207214312.21735-5-afd@ti.com> <20221212224746.GL22689@denix.org>
 From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20221212224330.GK22689@denix.org>
+In-Reply-To: <20221212224746.GL22689@denix.org>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 13 Dec 2022 17:03:28 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15462
+ <meta-ti@lists.yoctoproject.org>; Tue, 13 Dec 2022 17:05:59 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15463
 
-On 12/12/22 4:43 PM, Denys Dmytriyenko wrote:
-> On Wed, Dec 07, 2022 at 03:43:08PM -0600, Andrew Davis via lists.yoctoproject.org wrote:
->> Now that we have SoC names, we can avoid adding features based on the
->> board name. We expect folks to create their own boards based on these
->> SoCs, and so using the TI made EVM board name everywhere adds extra churn
->> when adding a new board. Plus it is more correct for most of these
->> features as they depend on the SoC, not on the EVM board.
->>
->> One other thing we do here is to not use the generic "j7" name,
->> the current and future J7 devices are far to feature diverse
->> to group at this level. Grouping like that will lead to the wrong
->> things getting enabled as new J7 SoCs are added.
+On 12/12/22 4:47 PM, Denys Dmytriyenko wrote:
+> On Wed, Dec 07, 2022 at 03:43:10PM -0600, Andrew Davis via lists.yoctoproject.org wrote:
+>> This was used in the base Linaro optee-os_git.bb recipe, it is
+>> no longer used, remove it from our boards.
 > 
-> Heh, I had most of these similar cleanup changes already staged locally since
-> my last sync-up with Dunfell, but didn't have time to finish them and submit.
+> Well, it was still used in meta-arm up to and including Dunfell:
+> https://git.yoctoproject.org/meta-arm/tree/meta-arm/recipes-security/optee/optee-os_git.bb?h=dunfell#n57
 > 
-> 
->> Signed-off-by: Andrew Davis <afd@ti.com>
->> ---
->>   .../cnm-wave-fw/cnm-wave-fw_git.bb            |  3 +-
->>   .../ti-img-encode-decode/vxd-dec-fw_git.bb    |  2 +-
->>   meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc  |  5 ++-
->>   .../recipes-kernel/linux/kernel-rdepends.inc  |  2 +-
->>   .../linux/linux-ti-staging_5.10.bb            |  2 +-
->>   .../ti-rtos-bin/ti-rtos-firmware.bb           | 39 +++++++++----------
->>   .../ti-rtos-bin/ti-rtos-metadata.bb           |  6 +--
->>   .../recipes-bsp/pru/pru-icss_git.bb           | 10 ++---
->>   8 files changed, 34 insertions(+), 35 deletions(-)
->>
->> diff --git a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
->> index 0e8ed897..e7aa9ef4 100644
->> --- a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
->> +++ b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
->> @@ -27,8 +27,7 @@ ALTERNATIVE_TARGET[wave521c_codec_fw.bin] = "${nonarch_base_libdir}/firmware/cnm
->>   ALTERNATIVE_PRIORITY = "10"
->>   
->>   # Set up names for the firmwares
->> -ALTERNATIVE_${PN}:j7 = "\
->> -                    wave521c_codec_fw.bin"
->> +ALTERNATIVE_${PN} = "wave521c_codec_fw.bin"
->>   
->>   do_install() {
->>   	install -d ${D}${nonarch_base_libdir}/firmware/cnm
->> diff --git a/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb b/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
->> index 7727e9af..bd103198 100644
->> --- a/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
->> +++ b/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
->> @@ -9,7 +9,7 @@ PR = "${INC_PR}.0"
->>   
->>   CLEANBROKEN = "1"
->>   
->> -COMPATIBLE_MACHINE = "j7"
->> +COMPATIBLE_MACHINE = "j721e"
->>   
->>   PACKAGE_ARCH = "${MACHINE_ARCH}"
->>   
->> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
->> index 5127e137..6f5b6313 100644
->> --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
->> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
->> @@ -32,7 +32,10 @@ PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/b
->>   PACKAGECONFIG[dm] = "DM=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/pdk-ipc/${DM_FIRMWARE},,ti-rtos-firmware"
->>   
->>   PACKAGECONFIG:append:aarch64 = " atf optee"
->> -PACKAGECONFIG:append:j7 = " dm"
->> +PACKAGECONFIG:append:j721e = " dm"
->> +PACKAGECONFIG:append:j7200 = " dm"
->> +PACKAGECONFIG:append:j721s2 = " dm"
->> +PACKAGECONFIG:append:j784s4 = " dm"
->>   PACKAGECONFIG:append:am62xx = " dm"
->>   
->>   COMPATIBLE_MACHINE = "(ti-soc)"
->> diff --git a/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc b/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
->> index 43cd31fe..54e6fdc6 100644
->> --- a/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
->> +++ b/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
->> @@ -26,7 +26,7 @@ RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j721s2 = " cadence-mhdp-fw"
->>   RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j784s4 = " cadence-mhdp-fw"
->>   
->>   # Add run-time dependency for Video Decoding firmware to the rootfs
->> -RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j7 = " vxd-dec-fw"
->> +RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j721e = " vxd-dec-fw"
->>   
->>   # Add run-time dependency for Chips&Media Wave521 firmware to the rootfs
->>   RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j721s2 = " cnm-wave-fw"
->> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
->> index bf230dbc..67b28b2a 100644
->> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
->> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
->> @@ -42,4 +42,4 @@ module_conf_rpmsg_client_sample = "blacklist rpmsg_client_sample"
->>   module_conf_ti_k3_r5_remoteproc = "softdep ti_k3_r5_remoteproc pre: virtio_rpmsg_bus"
->>   module_conf_ti_k3_dsp_remoteproc = "softdep ti_k3_dsp_remoteproc pre: virtio_rpmsg_bus"
->>   KERNEL_MODULE_PROBECONF += "rpmsg_client_sample ti_k3_r5_remoteproc ti_k3_dsp_remoteproc"
->> -KERNEL_MODULE_AUTOLOAD:append:j7 = " rpmsg_kdrv_switch"
->> +KERNEL_MODULE_AUTOLOAD:append:j721e = " rpmsg_kdrv_switch"
->> diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
->> index 0447bafe..9a6da088 100644
->> --- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
->> +++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
->> @@ -13,13 +13,10 @@ inherit deploy
->>   inherit update-alternatives
->>   
->>   PLAT_SFX = ""
->> -PLAT_SFX:j7 = "j721e"
->> -PLAT_SFX:j721e-hs-evm = "j721e"
->> -PLAT_SFX:j7200-evm = "j7200"
->> -PLAT_SFX:j7200-hs-evm = "j7200"
->> -PLAT_SFX:j721s2-evm = "j721s2"
->> -PLAT_SFX:j721s2-hs-evm = "j721s2"
->> -PLAT_SFX:j784s4-evm = "j784s4"
->> +PLAT_SFX:j721e = "j721e"
->> +PLAT_SFX:j7200 = "j7200"
->> +PLAT_SFX:j721s2 = "j721s2"
->> +PLAT_SFX:j784s4 = "j784s4"
->>   PLAT_SFX:am65xx = "am65xx"
->>   PLAT_SFX:am64xx = "am64xx"
->>   PLAT_SFX:am62xx = "am62xx"
->> @@ -50,7 +47,7 @@ LEGACY_DM_FW_DIR  = "${D}${nonarch_base_libdir}/firmware/pdk-ipc/"
->>   
->>   DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
->>   
->> -# J7 HS support
->> +# J721e HS support
->>   do_install:prepend:j721e-hs-evm() {
->>           export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
->>           ( cd ${RTOS_DM_FW_DIR}; \
->> @@ -81,7 +78,7 @@ do_install:prepend:j721e-hs-evm() {
->>           )
->>   }
->>   
->> -# J7 HS support
->> +# J7200 HS support
->>   do_install:prepend:j7200-hs-evm() {
->>           export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
->>           ( cd ${RTOS_DM_FW_DIR}; \
->> @@ -102,7 +99,7 @@ do_install:prepend:j7200-hs-evm() {
->>           )
->>   }
->>   
->> -# J7 HS support
->> +# J721s2 HS support
->>   do_install:prepend:j721s2-hs-evm() {
->>           export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
->>           ( cd ${RTOS_DM_FW_DIR}; \
->> @@ -149,7 +146,7 @@ do_install() {
->>   	:
->>   }
->>   
->> -do_install:j7() {
->> +do_install:j721e() {
->>       install -d ${LEGACY_IPC_FW_DIR}
->>       install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
->>       install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
->> @@ -335,7 +332,7 @@ ALTERNATIVE:${PN}:j721e-hs-evm = "\
->>                       j7-c71_0-fw-sec \
->>                       "
->>   
->> -ALTERNATIVE:${PN}:j7 = "\
->> +ALTERNATIVE:${PN}:j721e-evm = "\
-> 
-> Should this be a common list for all j721e platforms, not just the EVM?
+> Even though it got removed after Dunfell, there's one small reference
+> remaining in meta-arago, which I assume you'd be taking care of next? :)
+> https://git.yoctoproject.org/meta-arago/tree/meta-arago-distro/recipes-core/packagegroups/packagegroup-arago-base-tisdk.bb#n30
 > 
 
-The problem is the HS firmware (-sec) already listed. But yes the
-non-signed firmware could be made common, but that would be a different patch.
-
-> 
->>                       j7-mcu-r5f0_0-fw \
->>                       j7-mcu-r5f0_1-fw \
->>                       j7-main-r5f0_0-fw \
->> @@ -420,15 +417,15 @@ TARGET_MCU_M4FSS0_0:am64xx = "am64-mcu-m4f0_0-fw"
->>   TARGET_MAIN_R5FSS0_0:am62xx = "am62-main-r5f0_0-fw"
->>   TARGET_MCU_M4FSS0_0:am62xx = "am62-mcu-m4f0_0-fw"
->>   
->> -TARGET_MCU_R5FSS0_0:j7 = "j7-mcu-r5f0_0-fw"
->> -TARGET_MCU_R5FSS0_1:j7 = "j7-mcu-r5f0_1-fw"
->> -TARGET_MAIN_R5FSS0_0:j7 = "j7-main-r5f0_0-fw"
->> -TARGET_MAIN_R5FSS0_1:j7 = "j7-main-r5f0_1-fw"
->> -TARGET_MAIN_R5FSS1_0:j7 = "j7-main-r5f1_0-fw"
->> -TARGET_MAIN_R5FSS1_1:j7 = "j7-main-r5f1_1-fw"
->> -TARGET_C66_0:j7 = "j7-c66_0-fw"
->> -TARGET_C66_1:j7 = "j7-c66_1-fw"
->> -TARGET_C7X_0:j7 = "j7-c71_0-fw"
->> +TARGET_MCU_R5FSS0_0:j721e = "j7-mcu-r5f0_0-fw"
->> +TARGET_MCU_R5FSS0_1:j721e = "j7-mcu-r5f0_1-fw"
->> +TARGET_MAIN_R5FSS0_0:j721e = "j7-main-r5f0_0-fw"
->> +TARGET_MAIN_R5FSS0_1:j721e = "j7-main-r5f0_1-fw"
->> +TARGET_MAIN_R5FSS1_0:j721e = "j7-main-r5f1_0-fw"
->> +TARGET_MAIN_R5FSS1_1:j721e = "j7-main-r5f1_1-fw"
->> +TARGET_C66_0:j721e = "j7-c66_0-fw"
->> +TARGET_C66_1:j721e = "j7-c66_1-fw"
->> +TARGET_C7X_0:j721e = "j7-c71_0-fw"
->>   
->>   TARGET_MAIN_R5FSS0_0_SIGNED:j721e-hs-evm = "j7-main-r5f0_0-fw-sec"
->>   TARGET_MAIN_R5FSS0_1_SIGNED:j721e-hs-evm = "j7-main-r5f0_1-fw-sec"
->> diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
->> index be1ff013..ff715ce0 100644
->> --- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
->> +++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-metadata.bb
->> @@ -1,7 +1,7 @@
->>   LICENSE = "BSD-3-Clause"
->>   LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
->>   
->> -COMPATIBLE_MACHINE = "ti-soc"
->> +COMPATIBLE_MACHINE = "j721e|j7200|am65xx|am64xx"
-> 
-> Why?
-> 
-
-These are the only ones listed below, if it works on more machines
-then they will needed added to the PLAT_SFX below.
-
-> 
->>   PACKAGE_ARCH = "${MACHINE_ARCH}"
->>   
->> @@ -10,8 +10,8 @@ INHIBIT_DEFAULT_DEPS = "1"
->>   inherit nopackages deploy
->>   
->>   PLAT_SFX = ""
->> -PLAT_SFX:j7 = "/j721e"
->> -PLAT_SFX:j7200-evm = "/j7200"
->> +PLAT_SFX:j721e = "/j721e"
->> +PLAT_SFX:j7200 = "/j7200"
->>   PLAT_SFX:am65xx = "/am65xx"
->>   PLAT_SFX:am64xx = "/am64x"
-> 
-> This list seems incomplete. The whole concept of ti-rtos-metadata got shifted
-> towards using ti-linux-firmware and probably needs a deeper cleanup.
-> 
-
-Was planing on revisiting after this first round of cleanups.
-
-> 
->> diff --git a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb b/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
->> index cb2f8cc2..e3b5290a 100644
->> --- a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
->> +++ b/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
->> @@ -15,7 +15,7 @@ PR = "r0"
->>   
->>   require recipes-ti/includes/ti-paths.inc
->>   
->> -COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k3"
->> +COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|am62xx|am64xx|am65xx|j721e"
-> 
-> Should this be a separate commit? The below does cleanup j721e usage, but a
-> stricter COMPATIBLE_MACHINE should probably have a dedicated explanation?
-> Are these restrictions due to HW specifics or simply SW enablement?
-> 
-
-Could be a different patch sure, but this does make it clear what plats
-are actually supported below.
-
-This is hardware specific, only these SoCs have PRUs, the later
-J7x parts didn't get them.
+Yup, this should be changed to using OPTEEMACHINE or similar.
 
 Andrew
 
 > 
->>   PACKAGE_ARCH = "${MACHINE_ARCH}"
+>> Signed-off-by: Andrew Davis <afd@ti.com>
+>> ---
+>>   meta-ti-bsp/conf/machine/am437x-hs-evm.conf | 1 -
+>>   meta-ti-bsp/conf/machine/am57xx-hs-evm.conf | 1 -
+>>   meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf | 1 -
+>>   meta-ti-bsp/conf/machine/include/am62xx.inc | 1 -
+>>   meta-ti-bsp/conf/machine/include/am64xx.inc | 1 -
+>>   meta-ti-bsp/conf/machine/include/am65xx.inc | 1 -
+>>   meta-ti-bsp/conf/machine/include/j7200.inc  | 1 -
+>>   meta-ti-bsp/conf/machine/include/j721e.inc  | 1 -
+>>   meta-ti-bsp/conf/machine/include/j721s2.inc | 1 -
+>>   meta-ti-bsp/conf/machine/include/j784s4.inc | 1 -
+>>   10 files changed, 10 deletions(-)
+>>
+>> diff --git a/meta-ti-bsp/conf/machine/am437x-hs-evm.conf b/meta-ti-bsp/conf/machine/am437x-hs-evm.conf
+>> index 68b808d2..cdd664ac 100644
+>> --- a/meta-ti-bsp/conf/machine/am437x-hs-evm.conf
+>> +++ b/meta-ti-bsp/conf/machine/am437x-hs-evm.conf
+>> @@ -15,6 +15,5 @@ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_CAT}/am4x"
 >>   
->>   PACKAGES:prepend = " \
->> @@ -43,7 +43,7 @@ PLATFORM:omap-a15 = "am572x"
->>   PLATFORM:am62xx = "am62x"
->>   PLATFORM:am64xx = "am64x"
->>   PLATFORM:am65xx = "am65x"
->> -PLATFORM:j7 = "j721e"
->> +PLATFORM:j721e = "j721e"
+>>   OPTEEMACHINE = "ti-am43xx"
+>>   OPTEEFLAVOR = "am43xx"
+>> -OPTEEOUTPUTMACHINE = "ti"
 >>   
->>   do_compile() {
->>       for dir in ${SUBDIRS}
->> @@ -155,7 +155,7 @@ do_install:append:am65xx() {
->>       done
->>   }
+>>   EXTRA_IMAGEDEPENDS += "optee-os"
+>> diff --git a/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf b/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf
+>> index 5232cbd9..1e63f5d2 100644
+>> --- a/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf
+>> +++ b/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf
+>> @@ -15,7 +15,6 @@ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/am5x"
 >>   
->> -do_install:append:j7() {
->> +do_install:append:j721e() {
->>       for i in 0 1
->>       do
->>           install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU${i}/PRU_Halt_${i}.out \
->> @@ -189,7 +189,7 @@ PRU_ICSS_ALTERNATIVES:omap-a15 = "am57xx-pru1_0-fw am57xx-pru1_1-fw am57xx-pru2_
->>   PRU_ICSS_ALTERNATIVES:am62xx   = "am62x-pru0-fw am62x-pru1-fw"
->>   PRU_ICSS_ALTERNATIVES:am64xx   = "am64x-pru0_0-fw am64x-pru0_1-fw am64x-pru1_0-fw am64x-pru1_1-fw am64x-rtu0_0-fw am64x-rtu0_1-fw am64x-rtu1_0-fw am64x-rtu1_1-fw"
->>   PRU_ICSS_ALTERNATIVES:am65xx   = "am65x-pru0_0-fw am65x-pru0_1-fw am65x-pru1_0-fw am65x-pru1_1-fw am65x-pru2_0-fw am65x-pru2_1-fw am65x-rtu0_0-fw am65x-rtu0_1-fw am65x-rtu1_0-fw am65x-rtu1_1-fw am65x-rtu2_0-fw am65x-rtu2_1-fw"
->> -PRU_ICSS_ALTERNATIVES:j7       = "j7-pru0_0-fw j7-pru0_1-fw j7-pru1_0-fw j7-pru1_1-fw j7-rtu0_0-fw j7-rtu0_1-fw j7-rtu1_0-fw j7-rtu1_1-fw"
->> +PRU_ICSS_ALTERNATIVES:j721e    = "j7-pru0_0-fw j7-pru0_1-fw j7-pru1_0-fw j7-pru1_1-fw j7-rtu0_0-fw j7-rtu0_1-fw j7-rtu1_0-fw j7-rtu1_1-fw"
+>>   OPTEEMACHINE = "ti-am57xx"
+>>   OPTEEFLAVOR = "am57xx"
+>> -OPTEEOUTPUTMACHINE = "ti"
+>>   OPTEEPAGER = "y"
 >>   
->>   # Set up link names for the firmwares
->>   ALTERNATIVE_LINK_NAME[am335x-pru0-fw] = "${nonarch_base_libdir}/firmware/am335x-pru0-fw"
->> @@ -259,7 +259,7 @@ ALTERNATIVE:pru-icss-halt = "${PRU_ICSS_ALTERNATIVES}"
->>   # Only Halt firmware images are supported for the Tx_PRU cores
->>   ALTERNATIVE:pru-icss-halt:append:am64xx = " am64x-txpru0_0-fw am64x-txpru0_1-fw am64x-txpru1_0-fw am64x-txpru1_1-fw"
->>   ALTERNATIVE:pru-icss-halt:append:am65xx = " am65x-txpru0_0-fw am65x-txpru0_1-fw am65x-txpru1_0-fw am65x-txpru1_1-fw am65x-txpru2_0-fw am65x-txpru2_1-fw"
->> -ALTERNATIVE:pru-icss-halt:append:j7 = " j7-txpru0_0-fw j7-txpru0_1-fw j7-txpru1_0-fw j7-txpru1_1-fw"
->> +ALTERNATIVE:pru-icss-halt:append:j721e  = " j7-txpru0_0-fw j7-txpru0_1-fw j7-txpru1_0-fw j7-txpru1_1-fw"
+>>   EXTRA_IMAGEDEPENDS += "optee-os"
+>> diff --git a/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf b/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf
+>> index 49630081..810d53ed 100644
+>> --- a/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf
+>> +++ b/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf
+>> @@ -15,7 +15,6 @@ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_AUTO}/dra7"
 >>   
->>   ALTERNATIVE_TARGET_pru-icss-halt[am335x-pru0-fw] = "${nonarch_base_libdir}/firmware/pru/PRU_Halt.out"
->>   ALTERNATIVE_TARGET_pru-icss-halt[am335x-pru1-fw] = "${nonarch_base_libdir}/firmware/pru/PRU_Halt.out"
+>>   OPTEEMACHINE = "ti-dra7xx"
+>>   OPTEEFLAVOR = "dra7xx"
+>> -OPTEEOUTPUTMACHINE = "ti"
+>>   OPTEEPAGER = "y"
+>>   
+>>   EXTRA_IMAGEDEPENDS += "optee-os"
+>> diff --git a/meta-ti-bsp/conf/machine/include/am62xx.inc b/meta-ti-bsp/conf/machine/include/am62xx.inc
+>> index a5aad994..9d8bc87c 100644
+>> --- a/meta-ti-bsp/conf/machine/include/am62xx.inc
+>> +++ b/meta-ti-bsp/conf/machine/include/am62xx.inc
+>> @@ -19,4 +19,3 @@ TFA_BOARD = "lite"
+>>   TFA_K3_SYSTEM_SUSPEND = "1"
+>>   
+>>   OPTEEMACHINE = "k3-am62x"
+>> -OPTEEOUTPUTMACHINE = "k3"
+>> diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/conf/machine/include/am64xx.inc
+>> index 055f6036..7c46b630 100644
+>> --- a/meta-ti-bsp/conf/machine/include/am64xx.inc
+>> +++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
+>> @@ -33,4 +33,3 @@ do_image_tar[mcdepends] += "mc::k3r5-sr2-hs-se:ti-sci-fw:do_deploy"
+>>   
+>>   TFA_BOARD = "lite"
+>>   OPTEEMACHINE = "k3-am64x"
+>> -OPTEEOUTPUTMACHINE = "k3"
+>> diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
+>> index 80aa6d27..14e0d07f 100644
+>> --- a/meta-ti-bsp/conf/machine/include/am65xx.inc
+>> +++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
+>> @@ -38,4 +38,3 @@ do_image_wic[mcdepends] += "mc::k3r5-sr2:ti-sci-fw:do_deploy"
+>>   do_image_tar[mcdepends] += "mc::k3r5-sr2:ti-sci-fw:do_deploy"
+>>   
+>>   OPTEEMACHINE = "k3-am65x"
+>> -OPTEEOUTPUTMACHINE = "k3"
+>> diff --git a/meta-ti-bsp/conf/machine/include/j7200.inc b/meta-ti-bsp/conf/machine/include/j7200.inc
+>> index 3aedb3f8..1eaf7806 100644
+>> --- a/meta-ti-bsp/conf/machine/include/j7200.inc
+>> +++ b/meta-ti-bsp/conf/machine/include/j7200.inc
+>> @@ -2,4 +2,3 @@ require conf/machine/include/k3.inc
+>>   SOC_FAMILY:append = ":j7200"
+>>   
+>>   OPTEEMACHINE = "k3-j721e"
+>> -OPTEEOUTPUTMACHINE = "k3"
+>> diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/conf/machine/include/j721e.inc
+>> index 8a6c2bec..34569a01 100644
+>> --- a/meta-ti-bsp/conf/machine/include/j721e.inc
+>> +++ b/meta-ti-bsp/conf/machine/include/j721e.inc
+>> @@ -2,7 +2,6 @@ require conf/machine/include/k3.inc
+>>   SOC_FAMILY:append = ":j721e"
+>>   
+>>   OPTEEMACHINE = "k3-j721e"
+>> -OPTEEOUTPUTMACHINE = "k3"
+>>   
+>>   MACHINE_FEATURES += "gpu"
+>>   
+>> diff --git a/meta-ti-bsp/conf/machine/include/j721s2.inc b/meta-ti-bsp/conf/machine/include/j721s2.inc
+>> index 4959ad8f..2a60458e 100644
+>> --- a/meta-ti-bsp/conf/machine/include/j721s2.inc
+>> +++ b/meta-ti-bsp/conf/machine/include/j721s2.inc
+>> @@ -2,7 +2,6 @@ require conf/machine/include/k3.inc
+>>   SOC_FAMILY:append = ":j721s2"
+>>   
+>>   OPTEEMACHINE = "k3-j721e"
+>> -OPTEEOUTPUTMACHINE = "k3"
+>>   
+>>   MACHINE_FEATURES += "gpu"
+>>   
+>> diff --git a/meta-ti-bsp/conf/machine/include/j784s4.inc b/meta-ti-bsp/conf/machine/include/j784s4.inc
+>> index 83d7c760..e2f053ac 100644
+>> --- a/meta-ti-bsp/conf/machine/include/j784s4.inc
+>> +++ b/meta-ti-bsp/conf/machine/include/j784s4.inc
+>> @@ -2,7 +2,6 @@ require conf/machine/include/k3.inc
+>>   SOC_FAMILY:append = ":j784s4"
+>>   
+>>   OPTEEMACHINE = "k3-j721e"
+>> -OPTEEOUTPUTMACHINE = "k3"
+>>   
+>>   MACHINE_FEATURES += "gpu"
+>>   
 >> -- 
 >> 2.38.1
 
