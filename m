@@ -2,276 +2,211 @@ Return-Path: <quaresma.jose@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C3281C4332F
-	for <webhook@archiver.kernel.org>; Wed, 14 Dec 2022 09:29:33 +0000 (UTC)
-Received: from mail-vs1-f43.google.com (mail-vs1-f43.google.com [209.85.217.43])
- by mx.groups.io with SMTP id smtpd.web11.99146.1671010164500438483
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0097C4332F
+	for <webhook@archiver.kernel.org>; Wed, 14 Dec 2022 09:32:53 +0000 (UTC)
+Received: from mail-vs1-f51.google.com (mail-vs1-f51.google.com [209.85.217.51])
+ by mx.groups.io with SMTP id smtpd.web11.99186.1671010369492764641
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 14 Dec 2022 01:29:24 -0800
+ Wed, 14 Dec 2022 01:32:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=XYp624V1;
- spf=pass (domain: gmail.com, ip: 209.85.217.43, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-vs1-f43.google.com with SMTP id a66so8738601vsa.6
-        for <meta-ti@lists.yoctoproject.org>; Wed, 14 Dec 2022 01:29:24 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=llmHhIxo;
+ spf=pass (domain: gmail.com, ip: 209.85.217.51, mailfrom: quaresma.jose@gmail.com)
+Received: by mail-vs1-f51.google.com with SMTP id f189so17285592vsc.11
+        for <meta-ti@lists.yoctoproject.org>; Wed, 14 Dec 2022 01:32:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=+1BJHaWkxnu0YKrbM1xXEyTJNa/CDdoWEFXgWiBPAOk=;
-        b=XYp624V1ed5uWOGIrLpKkjxgaxk/DR2ASSVG/nvEblxDWHxjLrN3wIBhOAUe8YPnbt
-         PShiYYCRPph83tEkYL40rsF9Ep8TWFQVdeH/ZWlg6LEuzsXCSxG1xaEJFjXzrI3YOiXg
-         Z1OCbvyARtrclEE4tqfSRzuvPNbZNZI5J/IwCeQwNwNcaH4R1+xk8KPq8KOfeo9isdeM
-         VtakBeQvqUzR2QZns+20Fr7ZIDqDNQkne6Vpi3SsUA678bBfHtG3Tdhf/cJ5Lucf74z/
-         rIZA3SoPNrkakndDj1TNrx3+w1N9mfLgan96mK+FIugbDNLZCDbDFxBs25BY1cFsXRrv
-         8gYw==
+        bh=oakSx4q+zIiJtw9zU1XRPlN82xRgprvvJgaLogrjyS0=;
+        b=llmHhIxoaBAuKIhsMt/+RDxAE+RUrGEH5X4WMK6Gwyhfj9bOTdYyT8PWdAe1F9pPzH
+         ZBAys4NlLW+/Rs7y7QTi8nb2uYuwkxctV/HQ/2LtcFLNvSjYF+zMuen3mjF6nAyf0mhT
+         TExSc8AqPbG2Spc7YYuFT7pKYBwORzHRn1CdLc2UXQ3y02MTROdhk0s5NSDPNmGZPiyA
+         yCm4/3Dsj80x1MEymsHQgQAKQPo72EGBrW/npM02a7PgrxFFiqc7ereJY0LDLm+7NQzi
+         vj5D6hZXCRv0Vph5WwnV6Jd02vvC9K2yuJOCnaWRiZ1KYJ3H+nFelLnR7mNxmt7t/jSM
+         wEqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=+1BJHaWkxnu0YKrbM1xXEyTJNa/CDdoWEFXgWiBPAOk=;
-        b=y281yWxU6bAhtYxgnAy4gaVsQyYRVDWfbp8v8oWZU5PGaV4Ip1WgjnE3l+d0ug5dXU
-         Wfy+50fkQJUBzfxUh/oQdpMUg9qRI48lEC8St3GTmBr7o7l0Oxfvk/pq03NrTnsiDX2E
-         plcfMhddCO6fnGPifzim1ZQ3QJ/wtfEQpyieqNMI/1Or0aUIqip24PpevIc46mXpq3lV
-         7mxwPJgcxyntW4vmjstSb9Wbnocgz2dTnVmVN/Z6qKtvV/gUr4Vu9h0BLTaRQ5TUv2c8
-         fT+RAGV0ZOV09URm1LnAe/G8eLPMj4XC509wUrfrtrs8fBIMJc/eb7mvwfCZojh4krED
-         wpTg==
-X-Gm-Message-State: ANoB5pkjJXnndghcmeJ/UnObzeSUoGoGL+LTfBuve2JR+9eu+jk5+N/f
-	9XlNAEV/Sa5ho9kPYIs2ezkJjkhZPcVP0X5RKR0=
-X-Google-Smtp-Source: AA0mqf6delx/Y5njgfBJNr9kDLSxzmDopo/8MbNey/zfwqAUyOMQ5H3KAc2OMaxXzhPPtkvdL0kIq92x4D3iJe7WVww=
-X-Received: by 2002:a67:fc18:0:b0:3b1:542b:186c with SMTP id
- o24-20020a67fc18000000b003b1542b186cmr10013737vsq.33.1671010163335; Wed, 14
- Dec 2022 01:29:23 -0800 (PST)
+        bh=oakSx4q+zIiJtw9zU1XRPlN82xRgprvvJgaLogrjyS0=;
+        b=RNmZseZREqpJnYMY97Mrh0uGEwyhhxyHcDlvdw/3pFp5ipmkFx5klnmUEN7hQ/bcQU
+         UTbkN/lbxjbpJuuw+K6d07XHGtSxYLjnjH8OMTWTtOXFLoI3YKKFWsFiStqagowY1G9/
+         Aap0wCeKIjXnPlSlyQ8BiFiZ4Fbn2UhT5h9nlYftZPCNjQwZSLmNV8WtKOJclNeaYFFz
+         GscdXBQF8M1VK/D9w1SawPYiAko8n6Fkj2GjnaYFuq3HCOmV/sdNnndTb1kVyuvgjn2V
+         5d/th96aRx2jZqwflVpX8IouscRqvbDZObh704Kx2o22Vyo9fP9woHM0qtwJ/Sei4V6t
+         eUIQ==
+X-Gm-Message-State: ANoB5pk2RSlJQJdLtiZ1IOgx+kRMgLBA24Q3NOoUwkR5VFW8pBbY8AFv
+	0GwU/Eu8OROk5idJgBqipF+pezkeBu211bXoxiA=
+X-Google-Smtp-Source: AA0mqf6GNSAv2s3+6s4Sd2H3/HgNcaBKqLouxI3M+88eg47z5eg6/bPEXn2HVTwHIqrdn698dVvBqwj3a8QkI+D7gfE=
+X-Received: by 2002:a05:6102:755:b0:3b3:7d59:3f53 with SMTP id
+ v21-20020a056102075500b003b37d593f53mr1312095vsg.41.1671010368373; Wed, 14
+ Dec 2022 01:32:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20221213183818.206660-1-jose.quaresma@foundries.io> <20d8ecea-39f8-d965-7a1b-d0e085031095@ti.com>
-In-Reply-To: <20d8ecea-39f8-d965-7a1b-d0e085031095@ti.com>
+References: <20221213210653.2450345-1-denis@denix.org>
+In-Reply-To: <20221213210653.2450345-1-denis@denix.org>
 From: Jose Quaresma <quaresma.jose@gmail.com>
-Date: Wed, 14 Dec 2022 09:29:02 +0000
-Message-ID: <CANPvuRmLpQNKh+97K_hRGCxO3Xsb6toZ7BCt0+0EbOYHrVSh7A@mail.gmail.com>
-Subject: Re: [meta-ti][dunfell][PATCH 1/2] Revert "conf: machine: k3: Add
- fitImage to the default kernel image types"
-To: Ryan Eatmon <reatmon@ti.com>
-Cc: meta-ti@lists.yoctoproject.org, ricardo@foundries.io, 
-	Jose Quaresma <jose.quaresma@foundries.io>
-Content-Type: multipart/alternative; boundary="00000000000033a86305efc65f9a"
+Date: Wed, 14 Dec 2022 09:32:27 +0000
+Message-ID: <CANPvuRkmUzBinYVv32sO6+e7W1wTYa_TFiTuOgmp6xwiH-n+4w@mail.gmail.com>
+Subject: Re: [meta-ti] [dunfell][PATCH] k3: also inherit kernel-fitimage class
+ for FIT image generation
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denys@konsulko.com>, 
+	Ryan Eatmon <reatmon@ti.com>
+Content-Type: multipart/alternative; boundary="0000000000006c478a05efc66b4f"
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 14 Dec 2022 09:29:33 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15473
+ <meta-ti@lists.yoctoproject.org>; Wed, 14 Dec 2022 09:32:53 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15474
 
---00000000000033a86305efc65f9a
+--0000000000006c478a05efc66b4f
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Ryan Eatmon <reatmon@ti.com> escreveu no dia ter=C3=A7a, 13/12/2022 =C3=A0(=
-s) 20:03:
+Hi Denys,
 
->
->
-> On 12/13/2022 12:38, Jose Quaresma wrote:
-> > This reverts commit e6deeba806d2145fa16b0b5f444f2985e63e6366.
-> >
-> > Currently building with am62xx-evm/am64xx-evm machine fails with:
-> >
-> > | make[1]: *** No rule to make target 'fitImage'.  Stop.
-> > | make: ***
-> [/build/tmp/work-shared/am62xx-evm/kernel-source/Makefile:185: __sub-make=
-]
-> Error 2
-> > | ERROR: oe_runmake failed
->
-> This is a little surprising as we build dunfell every night without
-> issue.  Are you using the linux-ti-staging kernel in your build?
->
+Tested this locally and it fixes the following issue:
 
-I am building only with the bsp layer and with the default configuration.
-
-Build Configuration:
-BB_VERSION           =3D "1.46.0"
-BUILD_SYS            =3D "x86_64-linux"
-NATIVELSBSTRING      =3D "universal"
-TARGET_SYS           =3D "aarch64-poky-linux"
-MACHINE              =3D "am62xx-evm"
-DISTRO               =3D "poky"
-DISTRO_VERSION       =3D "3.1.21"
-TUNE_FEATURES        =3D "aarch64"
-TARGET_FPU           =3D ""
-meta-arm
-meta-arm-toolchain   =3D "dunfell:08c44df351ae1913f41de8388981b03e21235f09"
-meta-ti              =3D "dunfell:00f616fad364ba3ceffc35097ecd0c8d247ad52e"
-meta-oe
-meta-python          =3D "dunfell:7203130ed8b58c0df75cb72222ac2bcf546bce44"
-meta
-meta-poky            =3D "dunfell:3155eb565fb1758ba426ab7f5ea710004ccbeb58"
-
-The layer meta-oe/meta-python is a dependency of the meta-arm for
-python3-cryptography native:
-
-ERROR: Nothing PROVIDES 'python3-cryptography-native' (but
-/build/../work/meta-arm/meta-arm/recipes-security/optee/optee-os_git.bb
-DEPENDS on or otherwise requires it). Close matches:
-
-The default kernel is the linux-ti-staging:
-
+| make[1]: *** No rule to make target 'fitImage'.  Stop.
+| make: *** [/build/tmp/work-shared/am64xx-evm/kernel-source/Makefile:185:
+__sub-make] Error 2
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Execution of
+'/build/tmp/work/am64xx_evm-poky-linux/linux-ti-staging/5.10.158+gitAUTOINC=
++14d010266b-r0b/temp/run.do_compile.2076'
+failed with exit code 1
 ERROR: Task
 (/build/../work/meta-ti/recipes-kernel/linux/linux-ti-staging_5.10.bb:do_co=
 mpile)
 failed with exit code '1'
 
+Tested-by: Jose Quaresma <jose.quaresma@foundries.io>
 
+Denys Dmytriyenko <denis@denix.org> escreveu no dia ter=C3=A7a, 13/12/2022 =
+=C3=A0(s)
+21:06:
+
+> From: Denys Dmytriyenko <denys@konsulko.com>
 >
+> In order to support fitImage image type, kernel-fitimage class is needed.
 >
-> > Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
-> > ---
-> >   conf/machine/include/k3.inc | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
-> > index 349f4fda..ef4f107f 100644
-> > --- a/conf/machine/include/k3.inc
-> > +++ b/conf/machine/include/k3.inc
-> > @@ -15,7 +15,7 @@ PREFERRED_PROVIDER_virtual/bootloader =3D
-> "u-boot-ti-staging"
-> >   PREFERRED_PROVIDER_u-boot =3D "u-boot-ti-staging"
-> >
-> >   KERNEL_IMAGETYPE =3D "Image"
-> > -KERNEL_IMAGETYPES =3D "Image fitImage"
-> > +KERNEL_IMAGETYPES =3D "Image"
-> >
-> >   UBOOT_ARCH =3D "arm"
-> >   UBOOT_ENTRYPOINT =3D "0x80008000"
-> >
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#15465):
-> https://lists.yoctoproject.org/g/meta-ti/message/15465
-> > Mute This Topic: https://lists.yoctoproject.org/mt/95650880/6551054
-> > Group Owner: meta-ti+owner@lists.yoctoproject.org
-> > Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [
-> reatmon@ti.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+> (cherry picked from kirkstone/master commit
+> 48b22e8266ba0358b5b7319faa75ad731a350db7)
+> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> ---
+>  conf/machine/include/k3.inc | 1 +
+>  1 file changed, 1 insertion(+)
 >
+> diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc
+> index 349f4fda..81139571 100644
+> --- a/conf/machine/include/k3.inc
+> +++ b/conf/machine/include/k3.inc
+> @@ -16,6 +16,7 @@ PREFERRED_PROVIDER_u-boot =3D "u-boot-ti-staging"
+>
+>  KERNEL_IMAGETYPE =3D "Image"
+>  KERNEL_IMAGETYPES =3D "Image fitImage"
+> +KERNEL_CLASSES +=3D "kernel-fitimage"
+>
+>  UBOOT_ARCH =3D "arm"
+>  UBOOT_ENTRYPOINT =3D "0x80008000"
 > --
-> Ryan Eatmon                reatmon@ti.com
-> -----------------------------------------
-> Texas Instruments, Inc.  -  LCPD  -  MGTS
+> 2.25.1
 >
-
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#15469):
+> https://lists.yoctoproject.org/g/meta-ti/message/15469
+> Mute This Topic: https://lists.yoctoproject.org/mt/95653946/5052612
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [
+> quaresma.jose@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
 --=20
 Best regards,
 
 Jos=C3=A9 Quaresma
 
---00000000000033a86305efc65f9a
+--0000000000006c478a05efc66b4f
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">Ryan Eatmon &lt;<a href=3D"mailto:rea=
-tmon@ti.com">reatmon@ti.com</a>&gt; escreveu no dia ter=C3=A7a, 13/12/2022 =
-=C3=A0(s) 20:03:<br></div><blockquote class=3D"gmail_quote" style=3D"margin=
-:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
-><br>
+<div dir=3D"ltr">Hi=C2=A0Denys,<br><br>Tested this locally and it fixes the=
+ following issue:<br><br>| make[1]: *** No rule to make target &#39;fitImag=
+e&#39;.=C2=A0 Stop.<br>| make: *** [/build/tmp/work-shared/am64xx-evm/kerne=
+l-source/Makefile:185: __sub-make] Error 2<br>| ERROR: oe_runmake failed<br=
+>| WARNING: exit code 1 from a shell command.<br>| ERROR: Execution of &#39=
+;/build/tmp/work/am64xx_evm-poky-linux/linux-ti-staging/5.10.158+gitAUTOINC=
++14d010266b-r0b/temp/run.do_compile.2076&#39; failed with exit code 1<br>ER=
+ROR: Task (/build/../work/meta-ti/recipes-kernel/linux/linux-ti-staging_5.1=
+0.bb:do_compile) failed with exit code &#39;1&#39;<br><br>Tested-by: Jose Q=
+uaresma &lt;<a href=3D"mailto:jose.quaresma@foundries.io">jose.quaresma@fou=
+ndries.io</a>&gt;<br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
+class=3D"gmail_attr">Denys Dmytriyenko &lt;<a href=3D"mailto:denis@denix.or=
+g">denis@denix.org</a>&gt; escreveu no dia ter=C3=A7a, 13/12/2022 =C3=A0(s)=
+ 21:06:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
+0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">From: De=
+nys Dmytriyenko &lt;<a href=3D"mailto:denys@konsulko.com" target=3D"_blank"=
+>denys@konsulko.com</a>&gt;<br>
 <br>
-On 12/13/2022 12:38, Jose Quaresma wrote:<br>
-&gt; This reverts commit e6deeba806d2145fa16b0b5f444f2985e63e6366.<br>
-&gt; <br>
-&gt; Currently building with am62xx-evm/am64xx-evm machine fails with:<br>
-&gt; <br>
-&gt; | make[1]: *** No rule to make target &#39;fitImage&#39;.=C2=A0 Stop.<=
-br>
-&gt; | make: *** [/build/tmp/work-shared/am62xx-evm/kernel-source/Makefile:=
-185: __sub-make] Error 2<br>
-&gt; | ERROR: oe_runmake failed<br>
+In order to support fitImage image type, kernel-fitimage class is needed.<b=
+r>
 <br>
-This is a little surprising as we build dunfell every night without <br>
-issue.=C2=A0 Are you using the linux-ti-staging kernel in your build?<br></=
-blockquote><div><br></div><div>I am building only with the bsp layer and wi=
-th the default configuration.</div><div><br></div><div>Build Configuration:=
-<br>BB_VERSION =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &quot;1.46.0&quot;<br=
->BUILD_SYS =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;x86_64-linux&=
-quot;<br>NATIVELSBSTRING =C2=A0 =C2=A0 =C2=A0=3D &quot;universal&quot;<br>T=
-ARGET_SYS =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &quot;aarch64-poky-linux&q=
-uot;<br>MACHINE =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;a=
-m62xx-evm&quot;<br>DISTRO =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=3D &quot;poky&quot;<br>DISTRO_VERSION =C2=A0 =C2=A0 =C2=A0 =3D &quot;3.1.2=
-1&quot;<br>TUNE_FEATURES =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;aarch64&quot;=
-<br>TARGET_FPU =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &quot;&quot;<br>meta-=
-arm =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 <br>meta-arm-toolchain =C2=A0=
- =3D &quot;dunfell:08c44df351ae1913f41de8388981b03e21235f09&quot;<br>meta-t=
-i =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;dunfell:00f616f=
-ad364ba3ceffc35097ecd0c8d247ad52e&quot;<br>meta-oe =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0<br>meta-python =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-=3D &quot;dunfell:7203130ed8b58c0df75cb72222ac2bcf546bce44&quot;<br>meta =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 <br>meta-poky =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;dunfell:3155eb565fb1758ba42=
-6ab7f5ea710004ccbeb58&quot;<br><br>The layer meta-oe/meta-python is a depen=
-dency=C2=A0of the meta-arm for python3-cryptography native:</div><div><br>E=
-RROR: Nothing PROVIDES &#39;python3-cryptography-native&#39; (but /build/..=
-/work/meta-arm/meta-arm/recipes-security/optee/<a href=3D"http://optee-os_g=
-it.bb">optee-os_git.bb</a> DEPENDS on or otherwise requires it). Close matc=
-hes:</div><div><br>The default kernel is the linux-ti-staging:</div><div>=
-=C2=A0</div><div>ERROR: Task (/build/../work/meta-ti/recipes-kernel/linux/l=
-inux-ti-staging_5.10.bb:do_compile) failed with exit code &#39;1&#39;<br></=
-div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
-0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+Signed-off-by: Denys Dmytriyenko &lt;<a href=3D"mailto:denys@konsulko.com" =
+target=3D"_blank">denys@konsulko.com</a>&gt;<br>
+Signed-off-by: Ryan Eatmon &lt;<a href=3D"mailto:reatmon@ti.com" target=3D"=
+_blank">reatmon@ti.com</a>&gt;<br>
+(cherry picked from kirkstone/master commit 48b22e8266ba0358b5b7319faa75ad7=
+31a350db7)<br>
+Signed-off-by: Denys Dmytriyenko &lt;<a href=3D"mailto:denys@konsulko.com" =
+target=3D"_blank">denys@konsulko.com</a>&gt;<br>
+---<br>
+=C2=A0conf/machine/include/k3.inc | 1 +<br>
+=C2=A01 file changed, 1 insertion(+)<br>
 <br>
+diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc<br>
+index 349f4fda..81139571 100644<br>
+--- a/conf/machine/include/k3.inc<br>
++++ b/conf/machine/include/k3.inc<br>
+@@ -16,6 +16,7 @@ PREFERRED_PROVIDER_u-boot =3D &quot;u-boot-ti-staging&quo=
+t;<br>
 <br>
-&gt; Signed-off-by: Jose Quaresma &lt;<a href=3D"mailto:jose.quaresma@found=
-ries.io" target=3D"_blank">jose.quaresma@foundries.io</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0conf/machine/include/k3.inc | 2 +-<br>
-&gt;=C2=A0 =C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-&gt; <br>
-&gt; diff --git a/conf/machine/include/k3.inc b/conf/machine/include/k3.inc=
+=C2=A0KERNEL_IMAGETYPE =3D &quot;Image&quot;<br>
+=C2=A0KERNEL_IMAGETYPES =3D &quot;Image fitImage&quot;<br>
++KERNEL_CLASSES +=3D &quot;kernel-fitimage&quot;<br>
 <br>
-&gt; index 349f4fda..ef4f107f 100644<br>
-&gt; --- a/conf/machine/include/k3.inc<br>
-&gt; +++ b/conf/machine/include/k3.inc<br>
-&gt; @@ -15,7 +15,7 @@ PREFERRED_PROVIDER_virtual/bootloader =3D &quot;u-bo=
-ot-ti-staging&quot;<br>
-&gt;=C2=A0 =C2=A0PREFERRED_PROVIDER_u-boot =3D &quot;u-boot-ti-staging&quot=
-;<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0KERNEL_IMAGETYPE =3D &quot;Image&quot;<br>
-&gt; -KERNEL_IMAGETYPES =3D &quot;Image fitImage&quot;<br>
-&gt; +KERNEL_IMAGETYPES =3D &quot;Image&quot;<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0UBOOT_ARCH =3D &quot;arm&quot;<br>
-&gt;=C2=A0 =C2=A0UBOOT_ENTRYPOINT =3D &quot;0x80008000&quot;<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#15465): <a href=3D"https://lists.yoctoproject.org/=
-g/meta-ti/message/15465" rel=3D"noreferrer" target=3D"_blank">https://lists=
-.yoctoproject.org/g/meta-ti/message/15465</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.yoctoproject.org/mt/95650880=
-/6551054" rel=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.o=
-rg/mt/95650880/6551054</a><br>
-&gt; Group Owner: <a href=3D"mailto:meta-ti%2Bowner@lists.yoctoproject.org"=
- target=3D"_blank">meta-ti+owner@lists.yoctoproject.org</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.yoctoproject.org/g/meta-ti/unsub=
-" rel=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/met=
-a-ti/unsub</a> [<a href=3D"mailto:reatmon@ti.com" target=3D"_blank">reatmon=
-@ti.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; <br>
-<br>
+=C2=A0UBOOT_ARCH =3D &quot;arm&quot;<br>
+=C2=A0UBOOT_ENTRYPOINT =3D &quot;0x80008000&quot;<br>
 -- <br>
-Ryan Eatmon=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 <a href=
-=3D"mailto:reatmon@ti.com" target=3D"_blank">reatmon@ti.com</a><br>
------------------------------------------<br>
-Texas Instruments, Inc.=C2=A0 -=C2=A0 LCPD=C2=A0 -=C2=A0 MGTS<br>
+2.25.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#15469): <a href=3D"https://lists.yoctoproject.org/g/met=
+a-ti/message/15469" rel=3D"noreferrer" target=3D"_blank">https://lists.yoct=
+oproject.org/g/meta-ti/message/15469</a><br>
+Mute This Topic: <a href=3D"https://lists.yoctoproject.org/mt/95653946/5052=
+612" rel=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/mt=
+/95653946/5052612</a><br>
+Group Owner: <a href=3D"mailto:meta-ti%2Bowner@lists.yoctoproject.org" targ=
+et=3D"_blank">meta-ti+owner@lists.yoctoproject.org</a><br>
+Unsubscribe: <a href=3D"https://lists.yoctoproject.org/g/meta-ti/unsub" rel=
+=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/meta-ti/=
+unsub</a> [<a href=3D"mailto:quaresma.jose@gmail.com" target=3D"_blank">qua=
+resma.jose@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
 </blockquote></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr"=
  class=3D"gmail_signature"><div dir=3D"ltr">Best regards,<div><br>Jos=C3=A9=
- Quaresma</div></div></div></div>
+ Quaresma</div></div></div>
 
---00000000000033a86305efc65f9a--
+--0000000000006c478a05efc66b4f--
 
