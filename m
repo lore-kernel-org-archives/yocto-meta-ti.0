@@ -1,246 +1,172 @@
-Return-Path: <matthias.schiffer@ew.tq-group.com>
+Return-Path: <paul.barker@sancloud.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 358B5C10F1E
-	for <webhook@archiver.kernel.org>; Tue, 20 Dec 2022 09:10:52 +0000 (UTC)
-Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
- by mx.groups.io with SMTP id smtpd.web10.46198.1671527447181107496
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2913C4332F
+	for <webhook@archiver.kernel.org>; Tue, 20 Dec 2022 15:03:13 +0000 (UTC)
+Received: from APC01-TYZ-obe.outbound.protection.outlook.com (APC01-TYZ-obe.outbound.protection.outlook.com [40.107.117.67])
+ by mx.groups.io with SMTP id smtpd.web11.52293.1671548585192231003
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 20 Dec 2022 01:10:48 -0800
+ Tue, 20 Dec 2022 07:03:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@tq-group.com header.s=key1 header.b=kGXy7Y4M;
- spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81, mailfrom: matthias.schiffer@ew.tq-group.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
-  t=1671527447; x=1703063447;
-  h=message-id:subject:from:to:cc:date:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=LNLqlcRkvTLPJLhUKKsma6csUEivMH4RTBrh47dgjjQ=;
-  b=kGXy7Y4MZg6GgwNmIB/gDLM/2AhMdqCrn1sG5geX/tdQu1XxBMfuH+qO
-   OjKz81UPtRNiHLrM0pNFwTCH6xy31dpYd/W9mv9vov8s/TGWuywviD4d4
-   3D+tQWXlCvOf7NnPdBO7NCt+yH0SsfSdx9/4TnhmFqGnr41uDQzMMTnbj
-   EhsM1Xm7OGUBaNA0N80R16VifDUbphpRpl28Qzy+hZxFxat5BpuKqaDdN
-   +QWkp2pj1SP4sSU3mfjCBDTaAcHsIRbX2nGtBKR8sFrPQvPvgNiI+JhOI
-   ccwv78/59D9Lt9qzWaYUYGSmnJCf3lPN9Ywfzuk5PX1SdXvPKIDUFM6km
-   Q==;
-X-IronPort-AV: E=Sophos;i="5.96,259,1665439200"; 
-   d="scan'208";a="28049214"
-Received: from unknown (HELO tq-pgp-pr1.tq-net.de) ([192.168.6.15])
-  by mx1-pgp.tq-group.com with ESMTP; 20 Dec 2022 10:10:44 +0100
-Received: from mx1.tq-group.com ([192.168.6.7])
-  by tq-pgp-pr1.tq-net.de (PGP Universal service);
-  Tue, 20 Dec 2022 10:10:44 +0100
-X-PGP-Universal: processed;
-	by tq-pgp-pr1.tq-net.de on Tue, 20 Dec 2022 10:10:44 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
-  t=1671527444; x=1703063444;
-  h=message-id:subject:from:to:cc:date:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=LNLqlcRkvTLPJLhUKKsma6csUEivMH4RTBrh47dgjjQ=;
-  b=ZOeQ3rVtPdNRFxQrdoFUj6zVrXYJjGedSs7Dlo8h3qGh5PF/CpTmrJ/H
-   4TTfb2L0O2sw+ljJKnXQkTI9GHTa311rlqY8vOdV6bm7rRumDSpobsoHO
-   ltG2oHluAz1KX3C6013/249kIoBPEhl1H1xWOvPdKl2NbnUhkP3oZTI6D
-   pxTvMQA/E95I9P6IImSkxPoynJWQ1hFCZ0n070sXqHv+UaIxk1tfVKTse
-   pF3Mbd2X+p1IzTlniAoxjXDS1mzd7ehRdptVnJCPO95c2GP2rbL9bdmTz
-   UrKPutjixqRsvy+FMDqSSpb4uwAwAsxc+lF1dzjpGI0cC8EzGnZRbV70v
-   w==;
-X-IronPort-AV: E=Sophos;i="5.96,259,1665439200"; 
-   d="scan'208";a="28049212"
-Received: from vtuxmail01.tq-net.de ([10.115.0.20])
-  by mx1.tq-group.com with ESMTP; 20 Dec 2022 10:10:44 +0100
-Received: from [192.168.2.129] (SCHIFFERM-M2.tq-net.de [10.121.49.14])
-	by vtuxmail01.tq-net.de (Postfix) with ESMTPA id A0E76280056;
-	Tue, 20 Dec 2022 10:10:43 +0100 (CET)
-Message-ID: <38b94bc6ee2f585eddbe7461ecd1d02f4ced08ab.camel@ew.tq-group.com>
-Subject: Re: [meta-ti] [master/kirkstone][PATCH 2/2] ti-sgx-ddk-um: use udev
- for userspace initialization
-From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-To: Denys Dmytriyenko <denis@denix.org>
+ dkim=missing; spf=pass (domain: sancloud.com, ip: 40.107.117.67, mailfrom: paul.barker@sancloud.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TUQuBQ+V72lE5csEaSzWOtV6E+QL91/uZRd5QLYkTAWUImAbAmEWk1/L0uKvkgZhwEInJtLtObRUifggVORcOkeVdJ5vLipi/SZKiKCQnUWRgY7hkOg+QkvZ890uWgS3X25jIwmJ3LUps73cpBRKjrphTgaKApC3WtENfUggmEs9Ov69A53acF8A2shdKFy0+yeQ8CRDZNlnEubddnIStlqLOQzsNq0BWkxnjTte6SAVyNbKiEZGXqaYllffCVS4F4ryDQhPf5zx7ehDDI6tFthRVuvmklTLGzzgJkPmGaBMBTLfmpX/kyAzrERBHHdmi47tZBawt3587NIiTkvKWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mMyWrk6hZuu/09/Lc87INjpeth/WvaS+1VZAcjbTTmw=;
+ b=cnAaOzot9xotJcYPn/M7Bk03fVA8KvsGDm0r8ax9byebbOgsXfqUtWVV/JwK8tXE3/VN54JtNcu1Cy8z6+Z/rKYTprCkwvHujcFZGo/OdA/kPS1kMWFra70pbR104CbHi/qgNLVKUM4gm1eI5iRea+kdNjNdVVTlAuTjFfGlQRl4qR6IMdb9MWx1lmrfsow0SeQ7QTl5sYiYi/SX8sKzK1fn2HUBA1P/n84FN7O+hLEp2yFm/pdkXB1Qu4SdCBm/HyQb97tSaapbaWypzPHRdTWdEQp33O+xkERewkWKYZJqsn98c47Thcp6VyWoWffr7e8g7FTNPozzPrCYCjsQqw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=sancloud.com; dmarc=pass action=none header.from=sancloud.com;
+ dkim=pass header.d=sancloud.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=sancloud.com;
+Received: from SEYPR06MB5064.apcprd06.prod.outlook.com (2603:1096:101:55::13)
+ by SEZPR06MB6231.apcprd06.prod.outlook.com (2603:1096:101:e8::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5924.16; Tue, 20 Dec
+ 2022 15:03:01 +0000
+Received: from SEYPR06MB5064.apcprd06.prod.outlook.com
+ ([fe80::3343:e4e0:2fbb:3c9c]) by SEYPR06MB5064.apcprd06.prod.outlook.com
+ ([fe80::3343:e4e0:2fbb:3c9c%4]) with mapi id 15.20.5924.016; Tue, 20 Dec 2022
+ 15:03:01 +0000
+Message-ID: <91ceba60-0648-18ae-3890-50006ab84532@sancloud.com>
+Date: Tue, 20 Dec 2022 15:02:51 +0000
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.0
+Subject: Re: [master][PATCH v4] meta-ti-bsp: Graphics recipe overhaul
+To: Randolph Sapp <rs@ti.com>, reatmon@ti.com, denys@ti.com, detheridge@ti.com
 Cc: meta-ti@lists.yoctoproject.org
-Date: Tue, 20 Dec 2022 10:10:41 +0100
-In-Reply-To: <20221219210029.GU22689@denix.org>
-References: <20221216130139.20841-1-matthias.schiffer@ew.tq-group.com>
-	 <20221216130139.20841-2-matthias.schiffer@ew.tq-group.com>
-	 <20221219210029.GU22689@denix.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu1 
+References: <20221215040632.1404997-1-rs@ti.com>
+From: Paul Barker <paul.barker@sancloud.com>
+In-Reply-To: <20221215040632.1404997-1-rs@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LO4P265CA0185.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:311::14) To SEYPR06MB5064.apcprd06.prod.outlook.com
+ (2603:1096:101:55::13)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEYPR06MB5064:EE_|SEZPR06MB6231:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4619e9b5-e425-42fa-6044-08dae29b4999
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	uKfJ7AnXndpJWCwi7thHrKV2rc3kgtl5c2br/5v7usn5/L+kj7ODnXKuzbkVY1Igpd80TUW8+uQWaevW4IlRsOpxm3P3L/9ySE3VEy134WS5JcgBFi9YTfnIqCzfh7HaDc8Fl8I0lA0X0vxJFwH6wec+cKWTC27N8byBgXhLSnch7h2VxJ0fV3y8stW+dP4zkl4l5X/KTjSfAYZArd/t56HcsIjdl9nucBnKAQwa7+k4AJasBhMxUBLbSptB+RBpWCMzUNUUYSeKy4KsgFv43rd49F25RB9nDcB6H3D0pPvRUz6Xv2KhzBS6YVv/m7IyYOTcLeFc/KDpr4b1s0sYz6TxJfOKzFc4T7+GYFh25I5fqZqonE/r/k7b/wFn5eYwfamrdm55kdJSwcHR19WHIDPiFvfgUcp7+fWYkObaqIR5v3eYZl+KUJopkoY32KBDeM0zYONSW3ObrVGDmzs+g10tRypmUHAG+KcA/4avdPZFZcCQp3yW0pGMq6AGVu+X3QIqaFcmIBOzzOXo8MuYKQwvNzEGExv0nc+RFeI33pcfQbyophw1OwflkJicmsJPwwTdjekdMMeuMrgdUoI9QqvoP9NshNO75YKCgx47H8KZJn47DJ2pj0Vh0BBh8ET3Q8g7MTxGBLFZrmUB+AA+/FrMDZ7d76OtRNIXY3oIh6M+5GVSRhPmnhO/HDcdZPsi8qxFTYW0y4Klz5sRdEa0/6d6BKUiFvZuknj2vATKT4aaU3dgNVzWnGGFHaUlSxVo
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEYPR06MB5064.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(396003)(39830400003)(346002)(376002)(136003)(366004)(451199015)(41300700001)(4326008)(5660300002)(31686004)(8936002)(31696002)(44832011)(2906002)(8676002)(41320700001)(66476007)(86362001)(66946007)(66556008)(316002)(786003)(2616005)(53546011)(6506007)(38100700002)(6486002)(26005)(966005)(36756003)(478600001)(186003)(6512007)(6666004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?aXE4UURNdzcrN0Q4OVZwQW11b28zd2hUVkNBN1J1UUFrcXJjbFk5NGFwTUl4?=
+ =?utf-8?B?MlpQeVlCZHBHZjk4YWtwU1ZFQllCWFVzcXV6QWhxcHNnbE0waW4yR2ZGM01k?=
+ =?utf-8?B?RHRxL2k3cGdYRWJ2Q1MxbkVrOWxSVFVyUXZwMlBvSkFIZTREZ2xtSjlYMVNw?=
+ =?utf-8?B?Mjl3TU4yTU5zcjFGOG5ub2Fxc1NkN2NGT1Q5MjhYeXdrY0drcjUxd0szUnVD?=
+ =?utf-8?B?Tjk1N1NiYUFCYzVuakQ0MURzT1NlZ3h1MGVSRjBoR29obHZIeUlxVXA0RUFy?=
+ =?utf-8?B?L29GNkh4V1cyWHdvd1RidDJuU25Zd3M1VERCV2c3OEhZWnFodjBGeld0THNK?=
+ =?utf-8?B?WTVna0grSG5HTmI2amxWQjAxeWJKRTBMNEliUkdaZDlHZmM2Ulk2ZHo1Q3Aw?=
+ =?utf-8?B?RitNeUR4Qk9KTk9JL0pxdm5rMW1XbHd1ZHdQaEhxMDBKOUpqVW5FOFlocjJz?=
+ =?utf-8?B?ajE0cWZqTVM2TEdSNW9lcmorRDBocHZzWlo5QW5WS1dwS3pMdmFwYk42clhK?=
+ =?utf-8?B?cmgyUUpGNkx5UmZIK083REFPdnJUWk9XSUZ2RE1ZY0oyVWxvWWFlK2Fvc0dG?=
+ =?utf-8?B?ODJwaWtjT3lxWHV4L2xSalVoRGFoMEVrWXUwQlN6S0N1M1JYcGppZEtEU2ZV?=
+ =?utf-8?B?SHpTaTMxVUJDMjQ4cjFGK2lDRUZjUW9kMU1FY1RSMFprSkVnR0RudHdDbFhI?=
+ =?utf-8?B?b3lRZE1rcW4vZ1g1Zks5SllpTTdmcVl4NlVsaUtMR1FWSVFqTVM1ZE4xMkhK?=
+ =?utf-8?B?bEJrSTJhblkrdWpBNjlqSnRRZ09LRzBxVnRqV2VoRkFCS21wNTQzYzFMNC9N?=
+ =?utf-8?B?cnZ6WUZEcXg5anlUekVBVUxsbmRJTk04dDZQTmc1eXNpQmw2S2lVZS90SU5D?=
+ =?utf-8?B?d2g2Qk9GeXJVcjBoNFB6MXNYTHozdjFqRVBpbkhKL3VHTVljWEE5cWxEWWJo?=
+ =?utf-8?B?TXhraSs5aHVxM3FRQnk3TFFQckQ5S3ZMSVlKRlRFTUJsNVJ3aTNCcWtVaW5R?=
+ =?utf-8?B?eFNoMWRSbnN1QjhmWC9vZkdiZlFTM3J4a3VXVGdXcFhCWlFGUkMvTzl4cjl0?=
+ =?utf-8?B?Vy9maHZqUFQyZStlam5vd05oU055VkdtdmFpUzQ1NDlEVDZqVDJuV3Q4d1Vp?=
+ =?utf-8?B?Mk1uaTRNbDdSQkF4SXFZMEZPellTNnpFTUY4K1JJV1hvWmd4c0QyaXpzaXFp?=
+ =?utf-8?B?Yk5NS1Y5bFIyTGxCdXd1dUlMa3JUdUVMUEFvNmQ2ejhlNUE0MXUrT3R5RHg5?=
+ =?utf-8?B?azZrVkxpbjQzb2M4cWd3UFh2YWlYM21LcXEvNlNpZ2w4aE04UW1KQ290Y0do?=
+ =?utf-8?B?Y0Z0K3lRc2wzTEUzU0xGZXcrUFJUYnpSbVB5TUdNdjVKL2c2dk1QYkFWd0ht?=
+ =?utf-8?B?Z2dTOFNXRE81OEtjbFIrZ3h5aFByQ2t4VDJka1VpNlJ6U0QyU21ueU1GQXBt?=
+ =?utf-8?B?dnpCUzlhRlNuTjVvM2ttbkJrVUt3ZUhsZjhvZVVmYlpwY3ZGWXhSZlpHUlN1?=
+ =?utf-8?B?OXd0bUFRaFdSZ0JOMCtIZ0hwMHI5T2tWa2lYYjdhbGRxQ1pJOUVHNmowOEV3?=
+ =?utf-8?B?clZaUDlWUG02UFJvT0NlcDFHNUc0SlBUT3cwUmZNY1k1M1gvN3BBeTZyalBY?=
+ =?utf-8?B?aG52UEU3L2MrVTBESXNFMmhZTkRxVEMzdTF6bEt4RE5lMm9ncW1lSE9rNURM?=
+ =?utf-8?B?SU55OU5WdlJ0UE9wdUY2ckdMdk01QVhmVi9sNHpuaitRTnF4MXUwbXZ4VlhJ?=
+ =?utf-8?B?M3Y5bzJUSitFamZLaWpCNkNhdkI3ZUhESFQyQ2ZxbjhEUUVGMG9rUngySklJ?=
+ =?utf-8?B?WVB6S2ZaWVNIU0k1dHBMWi9iQTU0VHhBR2VVc0pPVUJFTlpGOHlVb3lZeWx0?=
+ =?utf-8?B?bURvdG5JdkNSbTh6TkJXZ00wcmgrbHY2d1gzSDZpSks5Ri9zOUpRQTN6Ulox?=
+ =?utf-8?B?RGxMaTQ5ZEtWT3FPYWNBK05pUVFYU3NCandiZFFnNkY0Zk10b29VZmNuOU9X?=
+ =?utf-8?B?c25qMHJpUS9kWjFIcVU1ejJoZkk5WXppTzc1YnhBOElVTU9sNGZYOW1xazBV?=
+ =?utf-8?B?QzZDM1lvdmpkY2VjbExPaXVldEV0R2pIMzJRRkNOZHFqWkl6bDZkemVYTnIr?=
+ =?utf-8?B?NktYa3ZVcjh5MjhySzRvOThtWUEvYkhsdExSNElRQzZKWStzTG5iU1pNbVBS?=
+ =?utf-8?B?UlE9PQ==?=
+X-OriginatorOrg: sancloud.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4619e9b5-e425-42fa-6044-08dae29b4999
+X-MS-Exchange-CrossTenant-AuthSource: SEYPR06MB5064.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2022 15:03:01.2243
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3e0f949f-6a74-4378-baf2-0abfca8d5e06
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Pf6HT616dxI37NYTRVawi2rlaoL0GM2LlUZPV47pFDOVhHorXjDmC7LGV98+Qmp30H4Dm/S14WoA+err82dxyKfdlZbYtPBE3SAQKebYRhs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR06MB6231
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 20 Dec 2022 09:10:52 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15494
+ <meta-ti@lists.yoctoproject.org>; Tue, 20 Dec 2022 15:03:13 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15495
 
-On Mon, 2022-12-19 at 16:00 -0500, Denys Dmytriyenko wrote:
-> On Fri, Dec 16, 2022 at 02:01:39PM +0100, Matthias Schiffer wrote:
-> > The ti-sgx-ddk driver requires an additional userspace initialization
-> > step after the kernel module has probed the device. Without this
-> > initialization, no EGL context can be created and Weston etc. will fail=
- to
-> > start.
-> >=20
-> > The driver package contains an init script, but this does not work on
-> > systemd-based systems.
->=20
-> Why? Please provide more details. Do you use systemd-compat-units?
+On 15/12/2022 04:06, Randolph Sapp wrote:
+> Individually package rogue graphics components to prevent conflicts with
+> other recipes.
+> 
+> The package ti-img-rogue-umlibs will now distribute the window system
+> agnostic components of the DDK. This being the IMG's implementations of
+> OpenGLES, OpenCL, and Vulkan in binary format and the device firmware.
+> These are the only components that cannot be open source currently.
+> 
+> The mesa component is currently piggybacking off the default mesa
+> package. It's not elegant, but it reflects the implementation well and
+> allows users to config mesa as needed.
+> 
+> This all hinges off of the new rogue-gpu machine feature.
+> 
+> Signed-off-by: Randolph Sapp <rs@ti.com>
+> ---
+>  meta-ti-bsp/conf/machine/include/am62xx.inc   |   8 +-
+>  meta-ti-bsp/conf/machine/include/j721e.inc    |   8 +-
+>  meta-ti-bsp/conf/machine/include/j721s2.inc   |   8 +-
+ 
+I've applied this patch locally and tried to build for the SanCloud BBE
+(with am335x SoC) so I can test things out.
 
-Ah, we are not using systemd-compat-units. So this commit message
-should be more specific and mention that this is about pure systemd
-systems without SysVinit compat.
+The layer tags/commits and configs I used are as follows:
 
-Given that /etc/init.d is empty except for "rc.pvr" in a simple Poky-
-based setup with ti-sgx-ddk-um when "sysvinit" is not in
-DISTRO_FEATURES, I understand that it is a good practice for packages
-not to rely on systemd-compat-units.
+    poky:               yocto-4.0.5
+    meta-openembedded:  50d4a8d2a983a68383ef1ffec2c8e21adf0c1a79
+    meta-ti:            2a5a0339d5bd28d6f6aedaf02a6aaa9b73a248e4 + this patch
+    meta-arm:           904f8e82c2772986fad500af4f72f5211a7ff831
+    meta-rtlwifi:       032a394e7569d1254cd17a0358475b986e64a5a4
+    meta-sancloud:      d1a93ed2205eea11e7cdffbc70578f07d5a609e4
+	
+    DISTRO = poky
+    MACHINE = bbe
 
->=20
->=20
-> > Introduce an enabled-by-default PACKAGECONFIG that
-> > installs a udev rule instead to run the init command automatically when
-> > the driver is loaded, solving the issue without depending on a specific
-> > init system.
-> >=20
-> > udev reports several events when the pvrsrvkm module is loaded:
-> >=20
-> > - add event for the kernel module
-> > - add events for two DRM devices
-> > - bind event for the GPU platform device
-> >=20
-> > The DRM devices aren't nice to match on, and the kernel module add is
-> > too early to run `pvrsrvctl --start`, so we trigger on the platform
-> > device bind.
-> >=20
-> > Tested with Weston 9.0.0 on the AM65x-based TQ-Systems MBa65xx.
-> >=20
-> > Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-> > ---
-> >  .../libgles/ti-sgx-ddk-um/pvrsrvkm.rules      |  1 +
-> >  .../libgles/ti-sgx-ddk-um_1.17.4948957.bb     | 23 ++++++++++++++++++-
-> >  2 files changed, 23 insertions(+), 1 deletion(-)
-> >  create mode 100644 meta-ti-bsp/recipes-graphics/libgles/ti-sgx-ddk-um/=
-pvrsrvkm.rules
-> >=20
-> > diff --git a/meta-ti-bsp/recipes-graphics/libgles/ti-sgx-ddk-um/pvrsrvk=
-m.rules b/meta-ti-bsp/recipes-graphics/libgles/ti-sgx-ddk-um/pvrsrvkm.rules
-> > new file mode 100644
-> > index 00000000..e49fd9b8
-> > --- /dev/null
-> > +++ b/meta-ti-bsp/recipes-graphics/libgles/ti-sgx-ddk-um/pvrsrvkm.rules
-> > @@ -0,0 +1 @@
-> > +SUBSYSTEM=3D=3D"platform", ACTION=3D=3D"bind", ENV{DRIVER}=3D=3D"pvrsr=
-vkm", RUN+=3D"/usr/bin/pvrsrvctl --start --no-module"
-> > diff --git a/meta-ti-bsp/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.49=
-48957.bb b/meta-ti-bsp/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.=
-bb
-> > index bd88d14d..2a8a0466 100644
-> > --- a/meta-ti-bsp/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.b=
-b
-> > +++ b/meta-ti-bsp/recipes-graphics/libgles/ti-sgx-ddk-um_1.17.4948957.b=
-b
-> > @@ -14,7 +14,10 @@ PR =3D "r37"
-> > =20
-> >  BRANCH =3D "ti-img-sgx/dunfell/${PV}"
-> > =20
-> > -SRC_URI =3D "git://git.ti.com/git/graphics/omap5-sgx-ddk-um-linux.git;=
-protocol=3Dhttps;branch=3D${BRANCH}"
-> > +SRC_URI =3D " \
-> > +    git://git.ti.com/git/graphics/omap5-sgx-ddk-um-linux.git;protocol=
-=3Dhttps;branch=3D${BRANCH} \
-> > +    file://pvrsrvkm.rules \
-> > +"
-> >  SRCREV =3D "742cf38aba13e1ba1a910cf1f036a1a212c263b6"
-> > =20
-> >  TARGET_PRODUCT:omap-a15 =3D "jacinto6evm"
-> > @@ -27,6 +30,9 @@ INITSCRIPT_PARAMS =3D "defaults 8"
-> > =20
-> >  inherit update-rc.d
-> > =20
-> > +PACKAGECONFIG ??=3D "udev"
-> > +PACKAGECONFIG[udev] =3D ",,,udev"
-> > +
-> >  PROVIDES +=3D "virtual/egl virtual/libgles1 virtual/libgles2 virtual/l=
-ibgbm"
-> > =20
-> >  DEPENDS +=3D "libdrm udev wayland wayland-protocols libffi expat"
-> > @@ -56,6 +62,20 @@ do_install () {
-> >      oe_runmake install DESTDIR=3D${D} TARGET_PRODUCT=3D${TARGET_PRODUC=
-T}
-> >      ln -sf libGLESv2.so.2 ${D}${libdir}/libGLESv2.so.1
-> > =20
-> > +    local without_sysvinit=3D${@bb.utils.contains('DISTRO_FEATURES', '=
-sysvinit', 'false', 'true', d)}
-> > +    local with_udev=3D${@bb.utils.contains('PACKAGECONFIG', 'udev', 't=
-rue', 'false', d)}
->=20
-> While "local" is supported by dash and ash and is not a strictly bashism,=
- it's=20
-> still not part of the POSIX spec and should be avoided in the recipes:
-> https://www.shellcheck.net/wiki/SC3043
+Both core-image-x11 and core-image-weston fail to build as no suitable
+provider of virtual/libgl can be found (as seen previously [1]).
 
-Makes sense. I was thrown off by seeing "local" used in a few recipes
-in Poky, but keeping this POSIX-compatible seems like a good idea.
+Looking at the patch, I see the new `rogue-gpu` machine feature has
+only been added for the am62xx, j721e & j721s2 families. Are further
+fixes required for the am335x or am65xx families? I'm happy to test any
+further patches targetting these SoC families.
 
->=20
->=20
-> > +    # Delete initscript if it is not needed or would conflict with the=
- udev rules
-> > +    if $without_sysvinit || $with_udev; then
-> > +        rm -rf ${D}${sysconfdir}/init.d
-> > +        rmdir --ignore-fail-on-non-empty ${D}${sysconfdir}
-> > +    fi
-> > +
-> > +    if $with_udev; then
-> > +        install -m644 -D ${WORKDIR}/pvrsrvkm.rules \
-> > +            ${D}${nonarch_base_libdir}/udev/rules.d/80-pvrsrvkm.rules
-> > +    fi
->=20
-> What happens when you use systemd with sysvinit PACKAGECONFIG that relies=
- on=20
-> initscripts in init.d?
+[1]: https://lore.kernel.org/yocto-meta-ti/0ba3f29c-3e37-ab9d-93e1-82e9da6ccc9a@sancloud.com/
 
-If the "udev" PACKAGECONFIG of ti-sgx-ddk-um is set, no initscript is
-installed regardless of DISTRO_FEATURES, to avoid running pvrsrvctl
-twice on such systems.
+Thanks,
 
-This configuration should work with any init system, as long as some
-udev implementation (systemd udev or eudev) is running (which should be
-ensured by the RRDEPENDS added by PACKAGECONFIG[udev]). udev will
-automatically load the kernel module based on modaliases, and then the
-rule will run pvrsrvctl.
+-- 
+Paul Barker
+Principal Software Engineer
+SanCloud Ltd
 
-To allow building a system without udev, the "udev" PACKAGECONFIG can
-be disabled. If "sysvinit" is in DISTRO_FEATURES, "rc.pvr" will be
-installed and everything works like it always has.
-
-Setups without the "udev" PACKAGECONFIG *and* without "sysvinit"
-DISTRO_FEATURES will not work out-of-the-box.
-
-I decided to set the "udev" PACKAGECONFIG by default, as I consider it
-the most elegant solution, and it is also required by default by Xorg
-and Weston.
-
-
-Regards,
-Matthias
-
-
->=20
->=20
-> >      chown -R root:root ${D}
-> >  }
-> > =20
-> > @@ -63,6 +83,7 @@ FILES:${PN} =3D  "${bindir}/*"
-> >  FILES:${PN} +=3D " ${libdir}/*"
-> >  FILES:${PN} +=3D  "${includedir}/*"
-> >  FILES:${PN} +=3D  "${sysconfdir}/*"
-> > +FILES:${PN} +=3D "${nonarch_base_libdir}/udev/rules.d"
-> > =20
-> >  INSANE_SKIP:${PN} +=3D "dev-so ldflags useless-rpaths"
-> >  INSANE_SKIP:${PN} +=3D "already-stripped dev-deps"
-> > --=20
-> > 2.34.1
+e: paul.barker@sancloud.com
+w: https://sancloud.com/
 
 
