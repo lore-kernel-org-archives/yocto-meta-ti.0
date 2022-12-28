@@ -1,139 +1,115 @@
-Return-Path: <rs@ti.com>
+Return-Path: <sinthu.raja@mistralsolutions.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABC2BC4167B
-	for <webhook@archiver.kernel.org>; Tue, 27 Dec 2022 18:36:19 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.163527.1672166173943812636
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 65CF0C4332F
+	for <webhook@archiver.kernel.org>; Wed, 28 Dec 2022 11:29:24 +0000 (UTC)
+Received: from egress-ip33a.ess.de.barracuda.com (egress-ip33a.ess.de.barracuda.com [18.185.115.192])
+ by mx.groups.io with SMTP id smtpd.web10.178322.1672226957469356033
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 27 Dec 2022 10:36:14 -0800
+ Wed, 28 Dec 2022 03:29:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=RBX4n3lt;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: rs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2BRIaASB000951;
-	Tue, 27 Dec 2022 12:36:10 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1672166170;
-	bh=OeT7szAsd7w/OO3752IN7s5/1jeSKhAbOofO3N+LOT4=;
-	h=Date:From:Subject:To:CC:In-Reply-To:References;
-	b=RBX4n3ltWhnTfwCO6XNSxSFlokuXMo0sR0mGu+6YsP9NB7iNgzdSVpqGKk03Qn97B
-	 mmQcUzRBeuDuchkg7I/AwE+Naa4wQjcXOqv0BWP0qRwcTXIYIwNUCgfO+vPcApVWlV
-	 9p2IDbQW3DGW7qGfqiJGgGpjWYyjwP6cnvauqccA=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2BRIaAKQ121556
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 27 Dec 2022 12:36:10 -0600
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 27
- Dec 2022 12:36:10 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Tue, 27 Dec 2022 12:36:10 -0600
-Received: from [10.249.32.65] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2BRIa736065214;
-	Tue, 27 Dec 2022 12:36:08 -0600
-Date: Tue, 27 Dec 2022 12:36:02 -0600
-From: "Sapp, Randolph" <rs@ti.com>
-Subject: Re: [EXTERNAL] Re: [EXTERNAL] Re: [meta-ti] [master][PATCH v2]
- meta-ti-bsp: Graphics recipe overhaul
-To: Denys Dmytriyenko <denis@denix.org>
-CC: Andrew Davis <afd@ti.com>, <reatmon@ti.com>, <denys@ti.com>,
-        <detheridge@ti.com>, <meta-ti@lists.yoctoproject.org>
-Message-ID: <2OBKNR.ERO28SJCKO2E2@ti.com>
-In-Reply-To: <20221222224746.GC22689@denix.org>
-References: <20221206174553.2391187-1-rs@ti.com>
-	<18ac8055-de7f-77fe-1b1b-36c5de4ef8d2@ti.com> <MY9NMR.KA5B9Y124SPL2@ti.com>
-	<b9d3f0aa-ad74-0de4-acdf-a359eac5c05f@ti.com> <J3EWMR.6Q68HWA4M8303@ti.com>
-	<20221219213235.GX22689@denix.org> <7Q29NR.T2R7VR8YUI2B2@ti.com>
-	<20221222224746.GC22689@denix.org>
-X-Mailer: geary/43.0
+ dkim=pass header.i=@mistralsolutions.com header.s=google header.b=bTdWmB9s;
+ spf=pass (domain: mistralsolutions.com, ip: 18.185.115.192, mailfrom: sinthu.raja@mistralsolutions.com)
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69]) by mx-outbound9-209.eu-central-1a.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Wed, 28 Dec 2022 11:29:14 +0000
+Received: by mail-pj1-f69.google.com with SMTP id i1-20020a17090a718100b00225c78f69c4so8125072pjk.7
+        for <meta-ti@lists.yoctoproject.org>; Wed, 28 Dec 2022 03:29:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mistralsolutions.com; s=google;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=JDm4O3c5P7EX4sJmMBjLpMXK1WeO9OvGojWKTl4+ZH8=;
+        b=bTdWmB9swwFdEpMr1qeMRaEh1Ct51sbsDWvtEKHRMpyQ5GHrbLEP6+Q9QeGeiGBA6+
+         01jdFMr8orzxrGBvzQp3CmwzzPd/lJWdNErDvQ2RAepNlYHa9GTDBYW3lnAaB/JZN1wa
+         25+jsXiqFVf/4GpERSDomzYDtZ/SjHfMZR234=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=JDm4O3c5P7EX4sJmMBjLpMXK1WeO9OvGojWKTl4+ZH8=;
+        b=03p/O6VP6FbJTbnrvPtTGB9rsQTM+RQgXTLsUWunN15O4ho+viT1laidAEze2QMT+o
+         E7yklh7ZlltVAO1Gbntbeab8z+y+MfmPX8OBhjHV1i58Uvf7/bfYgFn/57znrcVKTNKQ
+         0Jtr95iArgFQS9zqaDZSuofBLNeolX+kWgAdIWPuWL6GOyboMeKZQMv0E3pt0cCqdCVW
+         9eTuDiwVYPztJWoq/6KfoJrqon5p6huHBiwQzZB64a4z0a3HeY/FRMEIln3rxBxp4Fra
+         IGtCLaA8kHW1Xe6vPvhAwBZYLv2MFBcjk3wnbC8Mt+8T1lElQtMEupRFjjVfLY16+KSj
+         wTbg==
+X-Gm-Message-State: AFqh2kqUcIfVB+PDi13MWyx5/bM7YSxZPoz7zNjBXNYSLBD++dyU2pkv
+	AwG+rCumWEZZFEW9lykyRkEwj1szFm9bYC9kwt46Ilbpt9wLK2HIvczsnIVHxRA49rNdAuRM9bR
+	jKUULOZDiPzGDg/RZuqmySzYBzsb8IfFS2HCV7GHAIn5E3neIeCMTIxJMOny8aO0=
+X-Received: by 2002:a17:90b:1891:b0:226:280:9a40 with SMTP id mn17-20020a17090b189100b0022602809a40mr7163797pjb.30.1672226953478;
+        Wed, 28 Dec 2022 03:29:13 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXucXs7GdUnDygBc6JzheYgiC1gnj2v/xyVVTsnQajHW6ToTtZMcUqwFFNes3IAIs1N+By4mXQ==
+X-Received: by 2002:a17:90b:1891:b0:226:280:9a40 with SMTP id mn17-20020a17090b189100b0022602809a40mr7163767pjb.30.1672226953058;
+        Wed, 28 Dec 2022 03:29:13 -0800 (PST)
+Received: from LAP568U.mistral.in ([106.51.227.150])
+        by smtp.gmail.com with ESMTPSA id om1-20020a17090b3a8100b00218fba260e2sm5406761pjb.43.2022.12.28.03.29.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 28 Dec 2022 03:29:12 -0800 (PST)
+From: Sinthu Raja <sinthu.raja@mistralsolutions.com>
+X-Google-Original-From: Sinthu Raja <sinthu.raja@ti.com>
+To: reatmon@ti.com,
+	denys@ti.com,
+	detheridge@ti.com
+Cc: meta-ti@lists.yoctoproject.org,
+	Sinthu Raja <sinthu.raja@ti.com>
+Subject: [[meta-ti][master/dunfell][PATCH]] conf: machine: j721s2: Add AM68 SK specific dtb and dtbo to KERNEL_DEVICETREE
+Date: Wed, 28 Dec 2022 16:59:06 +0530
+Message-Id: <20221228112906.5301-1-sinthu.raja@ti.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-CZdaWHZzfPGV/GqWz9/J"
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+X-BESS-ID: 1672226954-302513-5503-176091-1
+X-BESS-VER: 2019.1_20221214.2106
+X-BESS-Apparent-Source-IP: 209.85.216.69
+X-BESS-Outbound-Spam-Score: 0.00
+X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.245097 [from 
+	cloudscan22-239.eu-central-1b.ess.aws.cudaops.com]
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------
+	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
+	0.00 BSF_SC0_MISMATCH_TO    META: Envelope rcpt doesn't match header 
+X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS91090 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND, BSF_SC0_MISMATCH_TO
+X-BESS-BRTS-Status: 1
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 27 Dec 2022 18:36:19 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15506
+ <meta-ti@lists.yoctoproject.org>; Wed, 28 Dec 2022 11:29:24 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15507
 
---=-CZdaWHZzfPGV/GqWz9/J
-Content-Type: text/plain; charset="us-ascii"; format=flowed
+From: Sinthu Raja <sinthu.raja@ti.com>
 
-On Thu, Dec 22 2022 at 17:47:46 -05:00:00, Denys Dmytriyenko 
-<denis@denix.org> wrote:
-> So, "gpu" flag specifically means HW-accelerated 3D graphics core,
-> regardless of the model, generation or driver used. That covers
-> SGX and Rogue now. You can still build Mesa and other graphics
-> components w/o "gpu" flag for software rendering just fine.
+AM68 Starter Kit is a low cost, small form factor board designed for
+TI's AM68/J721S2 SoC[1] which is optimized to provide best in class performance
+for industrial applications. Add DTB entry for the same.
 
-Thanks for the history lesson, but this use of the GPU flag has changed 
-over the years. We have overrides *for some reason* to drop 
-functionality of certain packages when GPU is not present -- even 
-though software rasterization could still be used here (take a look at 
-gstreamer). This is in addition to a rickety dependency chain that 
-seems to completely drop all graphics tooling when "gpu" is not present 
-(talk to the guys working on am62a right now).
+AM68 SK features camera support with MIPI(OV5640) and RPi(IMX219) connectors.
+Add DTBO for the same. Also, add DTBO entry for the DDR memory carveout.
 
-The issue I am trying to solve with the new machine feature is there is 
-a mix of packages/pkgconfigs that should be tweaked for each of the 
-following conditions:
-  - sgx grahpics
-  - rogue graphics
-  - swrast grahpics
-  - no graphics
+[1]:http://www.ti.com/lit/zip/spruj28
 
-Where the following should occur:
-  - SGX grahpics should conflict with ROGUE (different umlibs, km, and 
-mesa patches)
-  - Both SGX and ROGUE should pull in all the same packages as swrast, 
-only mesa should be configured differently (unless some userspace tools 
-have their own swrast tooling which is rare but not impossible)
-  - No graphics should do what dropping the GPU feature currently does 
--- completely remove all graphics libraries and swrast tools.
+Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
+---
+ conf/machine/j721s2-evm.conf | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Now, if you believe "screen" should be used in place of the "gpu" 
-machine feature in my current system; that's fine, I can update the 
-configs accordingly but a new machine feature or something similar will 
-be required to differentiate between SGX/RGX.
+diff --git a/conf/machine/j721s2-evm.conf b/conf/machine/j721s2-evm.conf
+index 6377c459..abdd9e03 100644
+--- a/conf/machine/j721s2-evm.conf
++++ b/conf/machine/j721s2-evm.conf
+@@ -13,6 +13,10 @@ OPTEEMACHINE = "k3-j784s4"
+ OPTEE_K3_USART = "0x8"
+ 
+ KERNEL_DEVICETREE = " \
++    ti/k3-am68-sk-base-board.dtb \
++    ti/k3-am68-sk-bb-csi2-ov5640.dtb \
++    ti/k3-am68-sk-rpi-cam-imx219.dtbo \
++    ti/k3-am68-sk-som-ddr_mem_carveout.dtbo \
+     ti/k3-j721s2-common-proc-board.dtb \
+     ti/k3-j721s2-gesi-exp-board.dtbo \
+ "
+-- 
+2.36.1
 
-
-
---=-CZdaWHZzfPGV/GqWz9/J
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"geary-body" dir=3D"auto">On Thu, Dec 22 2022 at 17:47:46 -05:00:=
-00, Denys Dmytriyenko &lt;denis@denix.org&gt; wrote:<br><blockquote type=3D=
-"cite"><div class=3D"plaintext" style=3D"white-space: break-spaces;">So, "g=
-pu" flag specifically means HW-accelerated 3D graphics core,=20
-regardless of the model, generation or driver used. That covers=20
-SGX and Rogue now. You can still build Mesa and other graphics=20
-components w/o "gpu" flag for software rendering just fine.
-</div></blockquote><div><br></div><div>Thanks for the history lesson, but t=
-his use of the GPU flag has changed over the years. We have overrides *for =
-some reason* to drop functionality of certain packages when GPU is not pres=
-ent -- even though software rasterization could still be used here (take a =
-look at gstreamer). This is in addition to a rickety dependency chain that =
-seems to completely drop all graphics tooling when "gpu" is not present (ta=
-lk to the guys working on am62a right now).</div><div><br></div><div>The is=
-sue I am trying to solve with the new machine feature is there is a mix of =
-packages/pkgconfigs that should be tweaked for each of the following condit=
-ions:</div><div>&nbsp; - sgx grahpics</div><div>&nbsp; - rogue graphics</di=
-v><div>&nbsp; - swrast grahpics</div>&nbsp; - no graphics<div><br><div>Wher=
-e the following should occur:</div><div>&nbsp; - SGX grahpics should confli=
-ct with ROGUE (different umlibs, km, and mesa patches)</div></div><div>&nbs=
-p; - Both SGX and ROGUE should pull in all the same packages as swrast, onl=
-y mesa should be configured differently (unless some userspace tools have t=
-heir own swrast tooling which is rare but not impossible)</div><div>&nbsp; =
-- No graphics should do what dropping the GPU feature currently does -- com=
-pletely remove all graphics libraries and swrast tools.</div><div><br></div=
-><div>Now, if you believe "screen" should be used in place of the "gpu" mac=
-hine feature in my current system; that's fine, I can update the configs ac=
-cordingly but a new machine feature or something similar will be required t=
-o differentiate between SGX/RGX.</div><div><br></div></div>
---=-CZdaWHZzfPGV/GqWz9/J--
 
