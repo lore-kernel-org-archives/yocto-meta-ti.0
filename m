@@ -2,493 +2,1050 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4632C3DA7D
-	for <webhook@archiver.kernel.org>; Tue,  3 Jan 2023 17:18:22 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.69922.1672766297316109164
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D460EC46467
+	for <webhook@archiver.kernel.org>; Tue,  3 Jan 2023 17:50:17 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.178.1672768215754538723
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 03 Jan 2023 09:18:17 -0800
+ Tue, 03 Jan 2023 09:50:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Vqvn1tyy;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: afd@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 303HIFBd041692;
-	Tue, 3 Jan 2023 11:18:15 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ZjG4yDb7;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 303HoE8r028450;
+	Tue, 3 Jan 2023 11:50:14 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1672766295;
-	bh=6e9aBiEajsCdqCL74jHEMJa3l4yhDV7g2CpmpiS6Zpk=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=Vqvn1tyyH6d485OETgnGXGQ2gTaCpi4GZzO1FShvE16mPqdPL/9kVlP8Leh7eOp5a
-	 r2OVUoZE6x8OYpsCN+EhXUe0ES0md53Eqb16OWZSfIQqHXcoemlXq8DjN+G/xxhxCx
-	 bCyDuWXOJ0Z/lEE3IXvjEeGxWeGh3ZV7rK4v+1LY=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 303HIFki043879
+	s=ti-com-17Q1; t=1672768214;
+	bh=GNBrWldg0fwHOZpO+rciA524OvnKxMiozy2KxC+qnDA=;
+	h=From:To:CC:Subject:Date;
+	b=ZjG4yDb7RmlHLGtJUAmGRAd0y4pf7Uo2intP+aMH4CRzhkRpEFmKTlMvsX0uLoN1c
+	 lXWiwQlUsbrkUYOKL5xW9VNheuQ6sTWC8VAXWO2MUM/kLw9nz1NVyufRzOxlka/kN4
+	 h0Xz0hRZ1w8kc1W8W4+5Mv+YTECbB7pruDdSatJU=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 303HoES1119735
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 3 Jan 2023 11:18:15 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 3 Jan 2023 11:50:14 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 3
- Jan 2023 11:18:14 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
+ Jan 2023 11:50:14 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE112.ent.ti.com
  (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Tue, 3 Jan 2023 11:18:14 -0600
-Received: from [10.250.33.81] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 303HIEKg085449;
-	Tue, 3 Jan 2023 11:18:14 -0600
-Message-ID: <1f93eaa3-6a50-d15b-057b-20f34f6cc107@ti.com>
-Date: Tue, 3 Jan 2023 11:18:14 -0600
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [meta-ti][master/kirkstone][PATCH] meta-ti-bsp: linux: Use filter
- to select KERNEL_DEVICETREE files
+ Frontend Transport; Tue, 3 Jan 2023 11:50:14 -0600
+Received: from ula0226330.dal.design.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 303HoDJi029219;
+	Tue, 3 Jan 2023 11:50:14 -0600
+From: Andrew Davis <afd@ti.com>
 To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         <meta-ti@lists.yoctoproject.org>
-References: <20230103171649.21428-1-afd@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20230103171649.21428-1-afd@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+CC: Andrew Davis <afd@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH] meta-ti-bsp: Move legacy HS signing classes into this layer
+Date: Tue, 3 Jan 2023 11:50:13 -0600
+Message-ID: <20230103175013.3937-1-afd@ti.com>
+X-Mailer: git-send-email 2.38.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 03 Jan 2023 17:18:22 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15510
+ <meta-ti@lists.yoctoproject.org>; Tue, 03 Jan 2023 17:50:17 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15511
 
-On 1/3/23 11:16 AM, Andrew Davis wrote:
-> Signed-off-by: Andrew Davis <afd@ti.com>
-> ---
+These were in the meta-arago layer, but any distro should be able
+to run on HS devices. So move the classes and setup to the BSP layer.
 
-I saw that Ryan had posted a version of this same idea, so wanted to
-post this one I had around just for compare/contrast.
+Signed-off-by: Andrew Davis <afd@ti.com>
+---
+ .../classes/kernel-fitimage-legacyhs.bbclass  | 758 ++++++++++++++++++
+ .../classes/uboot-sign-legacyhs.bbclass       | 131 +++
+ meta-ti-bsp/conf/machine/am335x-hs-evm.conf   |  10 +
+ meta-ti-bsp/conf/machine/am437x-hs-evm.conf   |  11 +
+ meta-ti-bsp/conf/machine/am57xx-hs-evm.conf   |  11 +
+ meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf   |  11 +
+ 6 files changed, 932 insertions(+)
+ create mode 100644 meta-ti-bsp/classes/kernel-fitimage-legacyhs.bbclass
+ create mode 100644 meta-ti-bsp/classes/uboot-sign-legacyhs.bbclass
 
-Andrew
+diff --git a/meta-ti-bsp/classes/kernel-fitimage-legacyhs.bbclass b/meta-ti-bsp/classes/kernel-fitimage-legacyhs.bbclass
+new file mode 100644
+index 00000000..69fa0ed2
+--- /dev/null
++++ b/meta-ti-bsp/classes/kernel-fitimage-legacyhs.bbclass
+@@ -0,0 +1,758 @@
++inherit kernel-uboot uboot-sign-legacyhs
++
++FITIMAGE_HASH_ALGO ?= "sha1"
++FITIMAGE_PACK_TEE ?= "0"
++FITIMAGE_DTB_BY_NAME ?= "0"
++FITIMAGE_TEE_BY_NAME ?= "0"
++FITIMAGE_CONF_BY_NAME ?= "0"
++
++python __anonymous () {
++    kerneltypes = d.getVar('KERNEL_IMAGETYPES') or ""
++    if 'fitImage' in kerneltypes.split():
++        depends = d.getVar("DEPENDS")
++        depends = "%s u-boot-mkimage-native dtc-native" % depends
++        d.setVar("DEPENDS", depends)
++
++        uarch = d.getVar("UBOOT_ARCH")
++        if uarch == "arm64":
++            replacementtype = "Image"
++        elif uarch == "mips":
++            replacementtype = "vmlinuz.bin"
++        elif uarch == "x86":
++            replacementtype = "bzImage"
++        elif uarch == "microblaze":
++            replacementtype = "linux.bin"
++        else:
++            replacementtype = "zImage"
++
++        # Override KERNEL_IMAGETYPE_FOR_MAKE variable, which is internal
++        # to kernel.bbclass . We have to override it, since we pack zImage
++        # (at least for now) into the fitImage .
++        typeformake = d.getVar("KERNEL_IMAGETYPE_FOR_MAKE") or ""
++        if 'fitImage' in typeformake.split():
++            d.setVar('KERNEL_IMAGETYPE_FOR_MAKE', typeformake.replace('fitImage', replacementtype))
++
++        image = d.getVar('INITRAMFS_IMAGE')
++        if image:
++            d.appendVarFlag('do_assemble_fitimage_initramfs', 'depends', ' ${INITRAMFS_IMAGE}:do_image_complete')
++
++        # Verified boot will sign the fitImage and append the public key to
++        # U-boot dtb. We ensure the U-Boot dtb is deployed before assembling
++        # the fitImage:
++        if d.getVar('UBOOT_SIGN_ENABLE'):
++            uboot_pn = d.getVar('PREFERRED_PROVIDER_u-boot') or 'u-boot'
++            d.appendVarFlag('do_assemble_fitimage', 'depends', ' %s:do_deploy' % uboot_pn)
++
++        if d.getVar('FITIMAGE_PACK_TEE') == "1":
++            d.appendVarFlag('do_assemble_fitimage', 'depends', ' optee-os:do_deploy')
++}
++
++# Options for the device tree compiler passed to mkimage '-D' feature:
++UBOOT_MKIMAGE_DTCOPTS ??= ""
++
++fitimage_ti_secure() {
++	if test -n "${TI_SECURE_DEV_PKG}"; then
++		export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
++		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh $1 $2
++	else
++		cp $1 $2
++	fi
++}
++
++#
++# Emit the fitImage ITS header
++#
++# $1 ... .its filename
++fitimage_emit_fit_header() {
++	cat << EOF >> ${1}
++/dts-v1/;
++
++/ {
++        description = "U-Boot fitImage for ${DISTRO_NAME}/${PV}/${MACHINE}";
++        #address-cells = <1>;
++EOF
++}
++
++#
++# Emit the fitImage section bits
++#
++# $1 ... .its filename
++# $2 ... Section bit type: imagestart - image section start
++#                          confstart  - configuration section start
++#                          sectend    - section end
++#                          fitend     - fitimage end
++#
++fitimage_emit_section_maint() {
++	case $2 in
++	imagestart)
++		cat << EOF >> ${1}
++
++        images {
++EOF
++	;;
++	confstart)
++		cat << EOF >> ${1}
++
++        configurations {
++EOF
++	;;
++	sectend)
++		cat << EOF >> ${1}
++        };
++EOF
++	;;
++	fitend)
++		cat << EOF >> ${1}
++};
++EOF
++	;;
++	esac
++}
++
++#
++# Emit the fitImage ITS kernel section
++#
++# $1 ... .its filename
++# $2 ... Image counter
++# $3 ... Path to kernel image
++# $4 ... Compression type
++fitimage_emit_section_kernel() {
++
++	kernel_csum=${FITIMAGE_HASH_ALGO}
++
++	ENTRYPOINT="${UBOOT_ENTRYPOINT}"
++	if test -n "${UBOOT_ENTRYSYMBOL}"; then
++		ENTRYPOINT=`${HOST_PREFIX}nm ${S}/vmlinux | \
++			awk '$4=="${UBOOT_ENTRYSYMBOL}" {print $2}'`
++	fi
++
++	cat << EOF >> ${1}
++                kernel-${2} {
++                        description = "Linux kernel";
++                        data = /incbin/("${3}");
++                        type = "kernel";
++                        arch = "${UBOOT_ARCH}";
++                        os = "linux";
++                        compression = "${4}";
++                        load = <${UBOOT_LOADADDRESS}>;
++                        entry = <${ENTRYPOINT}>;
++EOF
++	if test -n "${FITIMAGE_HASH_ALGO}"; then
++		cat << EOF >> ${1}
++                        hash-1 {
++                                algo = "${kernel_csum}";
++                        };
++EOF
++	fi
++	cat << EOF >> ${1}
++                };
++EOF
++}
++
++#
++# Emit the fitImage ITS DTB section
++#
++# $1 ... .its filename
++# $2 ... Image counter/name
++# $3 ... Path to DTB image
++# $4 ... Load address
++fitimage_emit_section_dtb() {
++
++	dtb_csum=${FITIMAGE_HASH_ALGO}
++	dtb_loadline="${4}"
++
++	cat << EOF >> ${1}
++                ${2} {
++                        description = "Flattened Device Tree blob";
++                        data = /incbin/("${3}");
++                        type = "flat_dt";
++                        arch = "${UBOOT_ARCH}";
++                        compression = "none";
++                        ${dtb_loadline}
++EOF
++	if test -n "${FITIMAGE_HASH_ALGO}"; then
++		cat << EOF >> ${1}
++                        hash-1 {
++                                algo = "${dtb_csum}";
++                        };
++EOF
++	fi
++	cat << EOF >> ${1}
++                };
++EOF
++}
++
++#
++# Emit the fitImage ITS TEE section
++#
++# $1 ... .its filename
++# $2 ... Image counter/name
++# $3 ... Path to TEE image
++fitimage_emit_section_tee() {
++
++	tee_csum=${FITIMAGE_HASH_ALGO}
++
++	cat << EOF >> ${1}
++                ${2} {
++                        description = "OPTEE OS Image";
++                        data = /incbin/("${3}");
++                        type = "tee";
++                        arch = "${UBOOT_ARCH}";
++                        compression = "none";
++EOF
++	if test -n "${FITIMAGE_HASH_ALGO}"; then
++		cat << EOF >> ${1}
++                        hash-1 {
++                                algo = "${tee_csum}";
++                        };
++EOF
++	fi
++	cat << EOF >> ${1}
++                };
++EOF
++}
++
++#
++# Emit the fitImage ITS setup section
++#
++# $1 ... .its filename
++# $2 ... Image counter
++# $3 ... Path to setup image
++fitimage_emit_section_setup() {
++
++	setup_csum=${FITIMAGE_HASH_ALGO}
++
++	cat << EOF >> ${1}
++                setup-${2} {
++                        description = "Linux setup.bin";
++                        data = /incbin/("${3}");
++                        type = "x86_setup";
++                        arch = "${UBOOT_ARCH}";
++                        os = "linux";
++                        compression = "none";
++                        load = <0x00090000>;
++                        entry = <0x00090000>;
++EOF
++	if test -n "${FITIMAGE_HASH_ALGO}"; then
++		cat << EOF >> ${1}
++                        hash-1 {
++                                algo = "${setup_csum}";
++                        };
++EOF
++	fi
++	cat << EOF >> ${1}
++                };
++EOF
++}
++
++#
++# Emit the fitImage ITS ramdisk section
++#
++# $1 ... .its filename
++# $2 ... Image counter
++# $3 ... Path to ramdisk image
++fitimage_emit_section_ramdisk() {
++
++	ramdisk_csum=${FITIMAGE_HASH_ALGO}
++	ramdisk_ctype="none"
++
++	case $3 in
++		*.gz|*.gz.sec)
++			ramdisk_ctype="gzip"
++			;;
++		*.bz2|*.bz2.sec)
++			ramdisk_ctype="bzip2"
++			;;
++		*.lzma|*.lzma.sec)
++			ramdisk_ctype="lzma"
++			;;
++		*.lzo|*.lzo.sec)
++			ramdisk_ctype="lzo"
++			;;
++		*.lz4|*.lz4.sec)
++			ramdisk_ctype="lz4"
++			;;
++	esac
++
++	cat << EOF >> ${1}
++                ramdisk-${2} {
++                        description = "ramdisk image";
++                        data = /incbin/("${3}");
++                        type = "ramdisk";
++                        arch = "${UBOOT_ARCH}";
++                        os = "linux";
++                        compression = "${ramdisk_ctype}";
++EOF
++	if test -n "${UBOOT_RD_LOADADDRESS}"; then
++		cat << EOF >> ${1}
++                        load = <${UBOOT_RD_LOADADDRESS}>;
++EOF
++	fi
++
++	if test -n "${UBOOT_RD_ENTRYPOINT}"; then
++		cat << EOF >> ${1}
++                        entry = <${UBOOT_RD_ENTRYPOINT}>;
++EOF
++	fi
++
++	if test -n "${FITIMAGE_HASH_ALGO}"; then
++		cat << EOF >> ${1}
++                        hash-1 {
++                                algo = "${ramdisk_csum}";
++                        };
++EOF
++	fi
++	cat << EOF >> ${1}
++                };
++EOF
++}
++
++#
++# Emit the fitImage ITS configuration section
++#
++# $1 ... .its filename
++# $2 ... Linux kernel ID
++# $3 ... DTB image ID/name
++# $4 ... ramdisk ID
++# $5 ... config ID
++# $6 ... tee ID/name
++fitimage_emit_section_config() {
++
++	conf_csum=${FITIMAGE_HASH_ALGO}
++	if [ -n "${UBOOT_SIGN_ENABLE}" ] ; then
++		conf_sign_keyname="${UBOOT_SIGN_KEYNAME}"
++	fi
++
++	sep=""
++	conf_desc=""
++	kernel_line=""
++	fdt_line=""
++	ramdisk_line=""
++	setup_line=""
++	default_line=""
++
++	if [ -n "${2}" ]; then
++		conf_desc="Linux kernel"
++		sep=", "
++		kernel_line="kernel = \"kernel-${2}\";"
++	fi
++
++	if [ -n "${3}" ]; then
++		conf_desc="${conf_desc}${sep}FDT blob"
++		sep=", "
++	fi
++
++	if [ -n "${4}" ]; then
++		conf_desc="${conf_desc}${sep}ramdisk"
++		sep=", "
++		ramdisk_line="ramdisk = \"ramdisk-${4}\";"
++	fi
++
++	if [ -n "${5}" ]; then
++		conf_desc="${conf_desc}${sep}setup"
++		sep=", "
++		setup_line="setup = \"setup-${5}\";"
++	fi
++
++	if [ -n "${6}" -a "x${FITIMAGE_PACK_TEE}" = "x1" ]; then
++		if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ]; then
++			loadables_line="loadables = \"${6}.optee\";"
++			loadables_pager_line="loadables = \"${6}-pager.optee\";"
++		else
++			loadables_line="loadables = \"tee-${6}\";"
++			nextnum=`expr ${6} + 1`
++			loadables_pager_line="loadables = \"tee-${nextnum}\";"
++		fi
++		final_conf_desc="${conf_desc}${sep}OPTEE OS Image"
++	else
++		loadables_line=""
++		loadables_pager_line=""
++		final_conf_desc="${conf_desc}"
++	fi
++
++	dtbcount=1
++	for DTB in ${KERNEL_DEVICETREE}; do
++		DTB=$(basename "${DTB}")
++		dtb_ext=${DTB##*.}
++		if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
++			conf_name="${DTB}"
++		else
++			conf_name="conf-${dtbcount}"
++		fi
++
++		if [ "x${FITIMAGE_DTB_BY_NAME}" = "x1" ] ; then
++			fdt_line="fdt = \"${DTB}\";"
++		else
++			fdt_line="fdt = \"fdt-${dtbcount}\";"
++		fi
++
++		if [ "x${dtbcount}" = "x1" ]; then
++			cat << EOF >> ${1}
++                default = "${conf_name}";
++EOF
++		fi
++
++# Generate a single configuration section
++			cat << EOF >> ${1}
++                ${conf_name} {
++                        description = "${final_conf_desc}";
++                        ${fdt_line}
++EOF
++			if [ "${dtb_ext}" != "dtbo" ]; then
++			cat << EOF >> ${1}
++                        ${kernel_line}
++                        ${ramdisk_line}
++                        ${setup_line}
++                        ${loadables_line}
++EOF
++			fi
++			if test -n "${FITIMAGE_HASH_ALGO}"; then
++				cat << EOF >> ${1}
++                        hash-1 {
++                                algo = "${conf_csum}";
++                        };
++EOF
++			fi
++
++			if [ ! -z "${conf_sign_keyname}" ] ; then
++
++				sign_line="sign-images = \"kernel\""
++
++				if [ -n "${3}" ]; then
++					sign_line="${sign_line}, \"fdt\""
++				fi
++
++				if [ -n "${4}" ]; then
++					sign_line="${sign_line}, \"ramdisk\""
++				fi
++
++				if [ -n "${5}" ]; then
++					sign_line="${sign_line}, \"setup\""
++				fi
++
++				sign_line="${sign_line};"
++
++				cat << EOF >> ${1}
++                        signature-1 {
++                                algo = "${conf_csum},rsa2048";
++                                key-name-hint = "${conf_sign_keyname}";
++                                ${sign_line}
++                        };
++EOF
++			fi
++
++			cat << EOF >> ${1}
++                };
++EOF
++# End single config section
++
++# Generate a single "pager" configuration section
++		if [ "${OPTEEPAGER}" = "y" ]; then
++			if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
++				conf_name="${DTB}-pager"
++			else
++				conf_name="conf-${dtbcount}"
++			fi
++
++			cat << EOF >> ${1}
++                ${conf_name} {
++                        description = "${final_conf_desc}";
++                        ${fdt_line}
++EOF
++			if [ "${dtb_ext}" != "dtbo" ]; then
++			cat << EOF >> ${1}
++                        ${kernel_line}
++                        ${ramdisk_line}
++                        ${setup_line}
++                        ${loadables_pager_line}
++EOF
++			fi
++			if test -n "${FITIMAGE_HASH_ALGO}"; then
++				cat << EOF >> ${1}
++                        hash-1 {
++                                algo = "${conf_csum}";
++                        };
++EOF
++			fi
++
++			if [ ! -z "${conf_sign_keyname}" ] ; then
++
++				sign_line="sign-images = \"kernel\""
++
++				if [ -n "${3}" ]; then
++					sign_line="${sign_line}, \"fdt\""
++				fi
++
++				if [ -n "${4}" ]; then
++					sign_line="${sign_line}, \"ramdisk\""
++				fi
++
++				if [ -n "${5}" ]; then
++					sign_line="${sign_line}, \"setup\""
++				fi
++
++				sign_line="${sign_line};"
++
++				cat << EOF >> ${1}
++                        signature-1 {
++                                algo = "${conf_csum},rsa2048";
++                                key-name-hint = "${conf_sign_keyname}";
++                                ${sign_line}
++                        };
++EOF
++			fi
++
++			cat << EOF >> ${1}
++                };
++EOF
++		fi
++# End single config section
++
++		dtbcount=`expr ${dtbcount} + 1`
++	done
++}
++
++#
++# Assemble fitImage
++#
++# $1 ... .its filename
++# $2 ... fitImage name
++# $3 ... include ramdisk
++fitimage_assemble() {
++	kernelcount=1
++	dtbcount=""
++	ramdiskcount=${3}
++	setupcount=""
++	teecount=1
++	rm -f ${1} arch/${ARCH}/boot/${2}
++
++	fitimage_emit_fit_header ${1}
++
++	#
++	# Step 1: Prepare a kernel image section.
++	#
++	fitimage_emit_section_maint ${1} imagestart
++
++	uboot_prep_kimage
++	fitimage_ti_secure linux.bin linux.bin.sec
++	fitimage_emit_section_kernel ${1} "${kernelcount}" linux.bin.sec "${linux_comp}"
++
++	#
++	# Step 2: Prepare a DTB image section
++	#
++	if test -n "${KERNEL_DEVICETREE}"; then
++		dtbcount=1
++		dtboaddress="${UBOOT_DTBO_LOADADDRESS}"
++		for DTB in ${KERNEL_DEVICETREE}; do
++			if echo ${DTB} | grep -q '/dts/'; then
++				bbwarn "${DTB} contains the full path to the the dts file, but only the dtb name should be used."
++				DTB=`basename ${DTB} | sed 's,\.dts$,.dtb,g'`
++			fi
++			DTB_PATH="arch/${ARCH}/boot/dts/${DTB}"
++			if [ ! -e "${DTB_PATH}" ]; then
++				DTB_PATH="arch/${ARCH}/boot/${DTB}"
++			fi
++			DTB=$(basename "${DTB}")
++
++			dtb_ext=${DTB##*.}
++			if [ "${dtb_ext}" = "dtbo" ]; then
++				if [ -n "${UBOOT_DTBO_LOADADDRESS}" ]; then
++					dtb_loadline="load = <${dtboaddress}>;"
++					num1=`printf "%d\n" ${dtboaddress}`
++					num2=`printf "%d\n" ${UBOOT_DTBO_OFFSET}`
++					num3=`expr $num1 + $num2`
++					dtboaddress=`printf "0x%x\n" $num3`
++				fi
++			elif [ -n "${UBOOT_DTB_LOADADDRESS}" ]; then
++				dtb_loadline="load = <${UBOOT_DTB_LOADADDRESS}>;"
++			fi
++
++			fitimage_ti_secure ${DTB_PATH} ${DTB_PATH}.sec
++			if [ "x${FITIMAGE_DTB_BY_NAME}" = "x1" ] ; then
++				fitimage_emit_section_dtb ${1} ${DTB} ${DTB_PATH}.sec "${dtb_loadline}"
++			else
++				fitimage_emit_section_dtb ${1} "fdt-${dtbcount}" ${DTB_PATH}.sec "${dtb_loadline}"
++			fi
++			if [ "x${dtbcount}" = "x1" ]; then
++				dtbref=${DTB}
++			fi
++			dtbcount=`expr ${dtbcount} + 1`
++		done
++	fi
++
++	#
++	# Step 2a: Prepare OP/TEE image section
++	#
++	if [ "x${FITIMAGE_PACK_TEE}" = "x1" ] ; then
++		mkdir -p ${B}/usr
++		rm -f ${B}/usr/${OPTEEFLAVOR}.optee
++		if [ -e "${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR}.optee" ]; then
++			cp ${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR}.optee ${B}/usr/.
++		fi
++		TEE_PATH="usr/${OPTEEFLAVOR}.optee"
++		fitimage_ti_secure ${TEE_PATH} ${TEE_PATH}.sec
++		if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
++			fitimage_emit_section_tee ${1} ${OPTEEFLAVOR}.optee ${TEE_PATH}.sec
++		else
++			fitimage_emit_section_tee ${1} "tee-${teecount}" ${TEE_PATH}.sec
++		fi
++
++		if [ "${OPTEEPAGER}" = "y" ]; then
++			teecount=`expr ${teecount} + 1`
++			rm -f ${B}/usr/${OPTEEFLAVOR}-pager.optee
++			if [ -e "${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR}-pager.optee" ]; then
++				cp ${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR}-pager.optee ${B}/usr/.
++			fi
++			TEE_PATH="usr/${OPTEEFLAVOR}-pager.optee"
++			fitimage_ti_secure ${TEE_PATH} ${TEE_PATH}.sec
++			if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
++				fitimage_emit_section_tee ${1} ${OPTEEFLAVOR}-pager.optee ${TEE_PATH}.sec
++			else
++				fitimage_emit_section_tee ${1} "tee-${teecount}" ${TEE_PATH}.sec
++			fi
++		fi
++	fi
++
++	#
++	# Step 3: Prepare a setup section. (For x86)
++	#
++	if test -e arch/${ARCH}/boot/setup.bin ; then
++		setupcount=1
++		fitimage_emit_section_setup ${1} "${setupcount}" arch/${ARCH}/boot/setup.bin
++	fi
++
++	#
++	# Step 4: Prepare a ramdisk section.
++	#
++	if [ "x${ramdiskcount}" = "x1" ] ; then
++		# Find and use the first initramfs image archive type we find
++		for img in cpio.lz4 cpio.lzo cpio.lzma cpio.xz cpio.gz cpio; do
++			initramfs_path="${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-${MACHINE}.${img}"
++			initramfs_local="usr/${INITRAMFS_IMAGE}-${MACHINE}.${img}"
++			echo "Using $initramfs_path"
++			if [ -e "${initramfs_path}" ]; then
++				fitimage_ti_secure ${initramfs_path} ${initramfs_local}.sec
++				fitimage_emit_section_ramdisk ${1} "${ramdiskcount}" ${initramfs_local}.sec
++				break
++			fi
++		done
++	fi
++
++	fitimage_emit_section_maint ${1} sectend
++
++	# Force the first Kernel and DTB in the default config
++	kernelcount=1
++	if test -n "${dtbcount}"; then
++		dtbcount=1
++	fi
++	teecount=1
++
++	#
++	# Step 5: Prepare a configurations section
++	#
++	fitimage_emit_section_maint ${1} confstart
++
++	if [ "x${FITIMAGE_DTB_BY_NAME}" != "x1" ] ; then
++		dtbref="fdt-${dtbcount}"
++	fi
++	if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
++		teeref="${OPTEEFLAVOR}"
++	else
++		teeref="${teecount}"
++	fi
++	fitimage_emit_section_config ${1} "${kernelcount}" "${dtbref}" "${ramdiskcount}" "${setupcount}" "${teeref}"
++
++	fitimage_emit_section_maint ${1} sectend
++
++	fitimage_emit_section_maint ${1} fitend
++
++	#
++	# Step 6: Assemble the image
++	#
++	uboot-mkimage \
++		${@'-D "${UBOOT_MKIMAGE_DTCOPTS}"' if len('${UBOOT_MKIMAGE_DTCOPTS}') else ''} \
++		-f ${1} \
++		arch/${ARCH}/boot/${2}
++
++	#
++	# Step 7: Sign the image and add public key to U-Boot dtb
++	#
++	if [ "x${UBOOT_SIGN_ENABLE}" = "x1" ] ; then
++		uboot-mkimage \
++			${@'-D "${UBOOT_MKIMAGE_DTCOPTS}"' if len('${UBOOT_MKIMAGE_DTCOPTS}') else ''} \
++			-F -k "${UBOOT_SIGN_KEYDIR}" \
++			-K "${DEPLOY_DIR_IMAGE}/${UBOOT_DTB_BINARY}" \
++			-r arch/${ARCH}/boot/${2}
++	fi
++}
++
++do_assemble_fitimage() {
++	if echo ${KERNEL_IMAGETYPES} | grep -wq "fitImage"; then
++		cd ${B}
++		fitimage_assemble fit-image.its fitImage
++	fi
++}
++
++addtask assemble_fitimage before do_install after do_compile
++
++do_assemble_fitimage_initramfs() {
++	if echo ${KERNEL_IMAGETYPES} | grep -wq "fitImage" && \
++		test -n "${INITRAMFS_IMAGE}" ; then
++		cd ${B}
++		fitimage_assemble fit-image-${INITRAMFS_IMAGE}.its fitImage-${INITRAMFS_IMAGE} 1
++	fi
++}
++
++addtask assemble_fitimage_initramfs before do_deploy after do_install
++
++FITIMAGE_ITS_SUFFIX ?= "its"
++FITIMAGE_ITB_SUFFIX ?= "itb"
++
++FITIMAGE_ITS_IMAGE ?= "fitImage-its-${PKGE}-${PKGV}-${PKGR}-${MACHINE}-${DATETIME}.${FITIMAGE_ITS_SUFFIX}"
++FITIMAGE_ITS_IMAGE[vardepsexclude] = "DATETIME"
++FITIMAGE_ITS_BINARY ?= "fitImage-its.${FITIMAGE_ITS_SUFFIX}"
++FITIMAGE_ITS_SYMLINK ?= "fitImage-its-${MACHINE}.${FITIMAGE_ITS_SUFFIX}"
++
++FITIMAGE_ITB_IMAGE ?= "fitImage-linux.bin-${PKGE}-${PKGV}-${PKGR}-${MACHINE}-${DATETIME}.${FITIMAGE_ITB_SUFFIX}"
++FITIMAGE_ITB_IMAGE[vardepsexclude] = "DATETIME"
++FITIMAGE_ITB_BINARY ?= "fitImage-linux.bin.${FITIMAGE_ITB_SUFFIX}"
++FITIMAGE_ITB_SYMLINK ?= "fitImage-linux.bin-${MACHINE}.${FITIMAGE_ITB_SUFFIX}"
++
++FITIMAGE_INITRAMFS_ITS_IMAGE ?= "fitImage-its-${INITRAMFS_IMAGE}-${PKGE}-${PKGV}-${PKGR}-${MACHINE}-${DATETIME}.${FITIMAGE_ITS_SUFFIX}"
++FITIMAGE_INITRAMFS_ITS_IMAGE[vardepsexclude] = "DATETIME"
++FITIMAGE_INITRAMFS_ITS_BINARY ?= "fitImage-its-${INITRAMFS_IMAGE}.${FITIMAGE_ITS_SUFFIX}"
++FITIMAGE_INITRAMFS_ITS_SYMLINK ?= "fitImage-its-${INITRAMFS_IMAGE}-${MACHINE}.${FITIMAGE_ITS_SUFFIX}"
++
++FITIMAGE_INITRAMFS_ITB_IMAGE ?= "fitImage-${INITRAMFS_IMAGE}-${PKGE}-${PKGV}-${PKGR}-${MACHINE}-${DATETIME}.${FITIMAGE_ITB_SUFFIX}"
++FITIMAGE_INITRAMFS_ITB_IMAGE[vardepsexclude] = "DATETIME"
++FITIMAGE_INITRAMFS_ITB_BINARY ?= "fitImage-${INITRAMFS_IMAGE}.${FITIMAGE_ITB_SUFFIX}"
++FITIMAGE_INITRAMFS_ITB_SYMLINK ?= "fitImage-${INITRAMFS_IMAGE}-${MACHINE}.${FITIMAGE_ITB_SUFFIX}"
++
++kernel_do_deploy:append() {
++	# Update deploy directory
++	if echo ${KERNEL_IMAGETYPES} | grep -wq "fitImage"; then
++		cd ${B}
++		echo "Copying fit-image.its source file..."
++		install -m 0644 fit-image.its ${DEPLOYDIR}/${FITIMAGE_ITS_IMAGE}
++		install -m 0644 arch/${ARCH}/boot/fitImage ${DEPLOYDIR}/${FITIMAGE_ITB_IMAGE}
++
++		if [ -n "${INITRAMFS_IMAGE}" ]; then
++			echo "Copying fit-image-${INITRAMFS_IMAGE}.its source file..."
++			install -m 0644 fit-image-${INITRAMFS_IMAGE}.its ${DEPLOYDIR}/${FITIMAGE_INITRAMFS_ITS_IMAGE}
++			install -m 0644 arch/${ARCH}/boot/fitImage-${INITRAMFS_IMAGE} ${DEPLOYDIR}/${FITIMAGE_INITRAMFS_ITB_IMAGE}
++		fi
++
++		cd ${DEPLOYDIR}
++		ln -sf ${FITIMAGE_ITS_IMAGE} ${FITIMAGE_ITS_SYMLINK}
++		ln -sf ${FITIMAGE_ITS_IMAGE} ${FITIMAGE_ITS_BINARY}
++		ln -sf ${FITIMAGE_ITB_IMAGE} ${FITIMAGE_ITB_SYMLINK}
++		ln -sf ${FITIMAGE_ITB_IMAGE} ${FITIMAGE_ITB_BINARY}
++
++		if [ -n "${INITRAMFS_IMAGE}" ]; then
++			ln -sf ${FITIMAGE_INITRAMFS_ITS_IMAGE} ${FITIMAGE_INITRAMFS_ITS_SYMLINK}
++			ln -sf ${FITIMAGE_INITRAMFS_ITS_IMAGE} ${FITIMAGE_INITRAMFS_ITS_BINARY}
++			ln -sf ${FITIMAGE_INITRAMFS_ITB_IMAGE} ${FITIMAGE_INITRAMFS_ITB_SYMLINK}
++			ln -sf ${FITIMAGE_INITRAMFS_ITB_IMAGE} ${FITIMAGE_INITRAMFS_ITB_BINARY}
++		fi
++	fi
++}
+diff --git a/meta-ti-bsp/classes/uboot-sign-legacyhs.bbclass b/meta-ti-bsp/classes/uboot-sign-legacyhs.bbclass
+new file mode 100644
+index 00000000..102232b9
+--- /dev/null
++++ b/meta-ti-bsp/classes/uboot-sign-legacyhs.bbclass
+@@ -0,0 +1,131 @@
++# This file is part of U-Boot verified boot support and is intended to be
++# inherited from u-boot recipe and from kernel-fitimage.bbclass.
++#
++# The signature procedure requires the user to generate an RSA key and
++# certificate in a directory and to define the following variable:
++#
++#   UBOOT_SIGN_KEYDIR = "/keys/directory"
++#   UBOOT_SIGN_KEYNAME = "dev" # keys name in keydir (eg. "dev.crt", "dev.key")
++#   UBOOT_MKIMAGE_DTCOPTS = "-I dts -O dtb -p 2000"
++#   UBOOT_SIGN_ENABLE = "1"
++#
++# As verified boot depends on fitImage generation, following is also required:
++#
++#   KERNEL_CLASSES ?= " kernel-fitimage "
++#   KERNEL_IMAGETYPE ?= "fitImage"
++#
++# The signature support is limited to the use of CONFIG_OF_SEPARATE in U-Boot.
++#
++# The tasks sequence is set as below, using DEPLOY_IMAGE_DIR as common place to
++# treat the device tree blob:
++#
++# * u-boot:do_install:append
++#   Install UBOOT_DTB_BINARY to datadir, so that kernel can use it for
++#   signing, and kernel will deploy UBOOT_DTB_BINARY after signs it.
++#
++# * virtual/kernel:do_assemble_fitimage
++#   Sign the image
++#
++# * u-boot:do_deploy[postfuncs]
++#   Deploy files like UBOOT_DTB_IMAGE, UBOOT_DTB_SYMLINK and others.
++#
++# For more details on signature process, please refer to U-Boot documentation.
++
++# Signature activation.
++UBOOT_SIGN_ENABLE ?= "0"
++
++# Default value for deployment filenames.
++UBOOT_DTB_IMAGE ?= "u-boot-${MACHINE}-${PV}-${PR}.dtb"
++UBOOT_DTB_BINARY ?= "u-boot.dtb"
++UBOOT_DTB_SYMLINK ?= "u-boot-${MACHINE}.dtb"
++UBOOT_NODTB_IMAGE ?= "u-boot-nodtb-${MACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
++UBOOT_NODTB_BINARY ?= "u-boot-nodtb.${UBOOT_SUFFIX}"
++UBOOT_NODTB_SYMLINK ?= "u-boot-nodtb-${MACHINE}.${UBOOT_SUFFIX}"
++
++# Functions in this bbclass is for u-boot only
++UBOOT_PN = "${@d.getVar('PREFERRED_PROVIDER_u-boot') or 'u-boot'}"
++
++concat_dtb_helper() {
++	if [ -e "${UBOOT_DTB_BINARY}" ]; then
++		ln -sf ${UBOOT_DTB_IMAGE} ${DEPLOYDIR}/${UBOOT_DTB_BINARY}
++		ln -sf ${UBOOT_DTB_IMAGE} ${DEPLOYDIR}/${UBOOT_DTB_SYMLINK}
++	fi
++
++	if [ -f "${UBOOT_NODTB_BINARY}" ]; then
++		install ${UBOOT_NODTB_BINARY} ${DEPLOYDIR}/${UBOOT_NODTB_IMAGE}
++		ln -sf ${UBOOT_NODTB_IMAGE} ${DEPLOYDIR}/${UBOOT_NODTB_SYMLINK}
++		ln -sf ${UBOOT_NODTB_IMAGE} ${DEPLOYDIR}/${UBOOT_NODTB_BINARY}
++	fi
++
++	# Concatenate U-Boot w/o DTB & DTB with public key
++	# (cf. kernel-fitimage.bbclass for more details)
++	deployed_uboot_dtb_binary='${DEPLOY_DIR_IMAGE}/${UBOOT_DTB_IMAGE}'
++	if [ "x${UBOOT_SUFFIX}" = "ximg" -o "x${UBOOT_SUFFIX}" = "xrom" ] && \
++		[ -e "$deployed_uboot_dtb_binary" ]; then
++		oe_runmake EXT_DTB=$deployed_uboot_dtb_binary
++		install ${UBOOT_BINARY} ${DEPLOYDIR}/${UBOOT_IMAGE}
++	elif [ -e "${DEPLOYDIR}/${UBOOT_NODTB_IMAGE}" -a -e "$deployed_uboot_dtb_binary" ]; then
++		cd ${DEPLOYDIR}
++		cat ${UBOOT_NODTB_IMAGE} $deployed_uboot_dtb_binary | tee ${B}/${CONFIG_B_PATH}/${UBOOT_BINARY} > ${UBOOT_IMAGE}
++	else
++		bbwarn "Failure while adding public key to u-boot binary. Verified boot won't be available."
++	fi
++}
++
++concat_dtb() {
++	if [ "${UBOOT_SIGN_ENABLE}" = "1" -a "${PN}" = "${UBOOT_PN}" -a -n "${UBOOT_DTB_BINARY}" ]; then
++		mkdir -p ${DEPLOYDIR}
++		if [ -n "${UBOOT_CONFIG}" ]; then
++			for config in ${UBOOT_MACHINE}; do
++				CONFIG_B_PATH="${config}"
++				cd ${B}/${config}
++				concat_dtb_helper
++			done
++		else
++			CONFIG_B_PATH=""
++			cd ${B}
++			concat_dtb_helper
++		fi
++	fi
++}
++
++# Install UBOOT_DTB_BINARY to datadir, so that kernel can use it for
++# signing, and kernel will deploy UBOOT_DTB_BINARY after signs it.
++install_helper() {
++	if [ -f "${UBOOT_DTB_BINARY}" ]; then
++		install -d ${D}${datadir}
++		# UBOOT_DTB_BINARY is a symlink to UBOOT_DTB_IMAGE, so we
++		# need both of them.
++		install ${UBOOT_DTB_BINARY} ${D}${datadir}/${UBOOT_DTB_IMAGE}
++		ln -sf ${UBOOT_DTB_IMAGE} ${D}${datadir}/${UBOOT_DTB_BINARY}
++	else
++		bbwarn "${UBOOT_DTB_BINARY} not found"
++	fi
++}
++
++do_install:append() {
++	if [ "${UBOOT_SIGN_ENABLE}" = "1" -a "${PN}" = "${UBOOT_PN}" -a -n "${UBOOT_DTB_BINARY}" ]; then
++		if [ -n "${UBOOT_CONFIG}" ]; then
++			for config in ${UBOOT_MACHINE}; do
++				cd ${B}/${config}
++				install_helper
++			done
++		else
++			cd ${B}
++			install_helper
++		fi
++	fi
++}
++
++python () {
++    if d.getVar('UBOOT_SIGN_ENABLE') == '1' and d.getVar('PN') == d.getVar('UBOOT_PN') and d.getVar('UBOOT_DTB_BINARY'):
++        kernel_pn = d.getVar('PREFERRED_PROVIDER_virtual/kernel')
++
++        # Make "bitbake u-boot -cdeploy" deploys the signed u-boot.dtb
++        d.appendVarFlag('do_deploy', 'depends', ' %s:do_deploy' % kernel_pn)
++
++        # kernerl's do_deploy is a litle special, so we can't use
++        # do_deploy:append, otherwise it would override
++        # kernel_do_deploy.
++        d.appendVarFlag('do_deploy', 'prefuncs', ' concat_dtb')
++}
+diff --git a/meta-ti-bsp/conf/machine/am335x-hs-evm.conf b/meta-ti-bsp/conf/machine/am335x-hs-evm.conf
+index 7caa5bfd..aef0d3aa 100644
+--- a/meta-ti-bsp/conf/machine/am335x-hs-evm.conf
++++ b/meta-ti-bsp/conf/machine/am335x-hs-evm.conf
+@@ -16,3 +16,13 @@ UBOOT_RD_LOADADDRESS = "0x84000000"
+ UBOOT_RD_ENTRYPOINT = "0x84000000"
+ 
+ TI_SECURE_DEV_PKG = "${TI_SECURE_DEV_PKG_CAT}/am3x"
++
++# FIT image for legacy secure devices
++KERNEL_CLASSES:append = " kernel-fitimage-legacyhs"
++KERNEL_IMAGETYPES:append = " fitImage"
++
++# FIT image settings
++FITIMAGE_HASH_ALGO = ""
++FITIMAGE_DTB_BY_NAME = "1"
++FITIMAGE_TEE_BY_NAME = "1"
++FITIMAGE_CONF_BY_NAME = "1"
+diff --git a/meta-ti-bsp/conf/machine/am437x-hs-evm.conf b/meta-ti-bsp/conf/machine/am437x-hs-evm.conf
+index 68b808d2..6c07b7e8 100644
+--- a/meta-ti-bsp/conf/machine/am437x-hs-evm.conf
++++ b/meta-ti-bsp/conf/machine/am437x-hs-evm.conf
+@@ -18,3 +18,14 @@ OPTEEFLAVOR = "am43xx"
+ OPTEEOUTPUTMACHINE = "ti"
+ 
+ EXTRA_IMAGEDEPENDS += "optee-os"
++
++# FIT image for legacy secure devices
++KERNEL_CLASSES:append = " kernel-fitimage-legacyhs"
++KERNEL_IMAGETYPES:append = " fitImage"
++
++# FIT image settings
++FITIMAGE_HASH_ALGO = ""
++FITIMAGE_PACK_TEE = "1"
++FITIMAGE_DTB_BY_NAME = "1"
++FITIMAGE_TEE_BY_NAME = "1"
++FITIMAGE_CONF_BY_NAME = "1"
+diff --git a/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf b/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf
+index 5232cbd9..7d1b0632 100644
+--- a/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf
++++ b/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf
+@@ -19,3 +19,14 @@ OPTEEOUTPUTMACHINE = "ti"
+ OPTEEPAGER = "y"
+ 
+ EXTRA_IMAGEDEPENDS += "optee-os"
++
++# FIT image for legacy secure devices
++KERNEL_CLASSES:append = " kernel-fitimage-legacyhs"
++KERNEL_IMAGETYPES:append = " fitImage"
++
++# FIT image settings
++FITIMAGE_HASH_ALGO = ""
++FITIMAGE_PACK_TEE = "1"
++FITIMAGE_DTB_BY_NAME = "1"
++FITIMAGE_TEE_BY_NAME = "1"
++FITIMAGE_CONF_BY_NAME = "1"
+diff --git a/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf b/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf
+index 49630081..9ab35b54 100644
+--- a/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf
++++ b/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf
+@@ -19,3 +19,14 @@ OPTEEOUTPUTMACHINE = "ti"
+ OPTEEPAGER = "y"
+ 
+ EXTRA_IMAGEDEPENDS += "optee-os"
++
++# FIT image for legacy secure devices
++KERNEL_CLASSES:append = " kernel-fitimage-legacyhs"
++KERNEL_IMAGETYPES:append = " fitImage"
++
++# FIT image settings
++FITIMAGE_HASH_ALGO = ""
++FITIMAGE_PACK_TEE = "1"
++FITIMAGE_DTB_BY_NAME = "1"
++FITIMAGE_TEE_BY_NAME = "1"
++FITIMAGE_CONF_BY_NAME = "1"
+-- 
+2.38.1
 
->   meta-ti-bsp/conf/machine/am335x-evm.conf      |  2 ++
->   meta-ti-bsp/conf/machine/am437x-evm.conf      |  2 ++
->   meta-ti-bsp/conf/machine/am57xx-evm.conf      | 15 +++-----------
->   meta-ti-bsp/conf/machine/am62xx-evm.conf      |  7 +------
->   meta-ti-bsp/conf/machine/am62xx-lp-evm.conf   |  7 +------
->   meta-ti-bsp/conf/machine/am64xx-evm.conf      |  2 ++
->   meta-ti-bsp/conf/machine/am65xx-evm.conf      |  2 ++
->   meta-ti-bsp/conf/machine/beagle-x15.conf      |  2 +-
->   meta-ti-bsp/conf/machine/beaglebone.conf      |  4 +---
->   meta-ti-bsp/conf/machine/dra7xx-evm.conf      | 10 +++-------
->   meta-ti-bsp/conf/machine/include/am64xx.inc   |  8 --------
->   meta-ti-bsp/conf/machine/include/am65xx.inc   | 14 -------------
->   meta-ti-bsp/conf/machine/include/ti33x.inc    | 11 ----------
->   meta-ti-bsp/conf/machine/include/ti43x.inc    | 10 ----------
->   meta-ti-bsp/conf/machine/j7200-evm.conf       |  4 +---
->   meta-ti-bsp/conf/machine/j721e-evm.conf       |  6 +-----
->   meta-ti-bsp/conf/machine/j721s2-evm.conf      |  5 +----
->   meta-ti-bsp/conf/machine/j784s4-evm.conf      |  4 +---
->   meta-ti-bsp/conf/machine/omapl138-lcdk.conf   |  2 +-
->   .../linux/linux-ti-mainline_git.bb            |  1 -
->   .../recipes-kernel/linux/linux-ti-next_git.bb | 19 ------------------
->   .../recipes-kernel/linux/ti-kernel.inc        | 20 +++++++++++++++++++
->   22 files changed, 43 insertions(+), 114 deletions(-)
-> 
-> diff --git a/meta-ti-bsp/conf/machine/am335x-evm.conf b/meta-ti-bsp/conf/machine/am335x-evm.conf
-> index 9301406b..01e169d9 100644
-> --- a/meta-ti-bsp/conf/machine/am335x-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am335x-evm.conf
-> @@ -12,6 +12,8 @@ IMAGE_FSTYPES += "ubifs ubi"
->   SERIAL_CONSOLES = "115200;ttyS0 115200;ttyS3"
->   SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
->   
-> +KERNEL_DEVICETREE_PREFIX = "am335x"
-> +
->   # UBI information.  Note that this is board and kernel specific.  Changes
->   # in your kernel port may require changes in these variables.  For more
->   # details about this board please see
-> diff --git a/meta-ti-bsp/conf/machine/am437x-evm.conf b/meta-ti-bsp/conf/machine/am437x-evm.conf
-> index 98602add..4da29982 100644
-> --- a/meta-ti-bsp/conf/machine/am437x-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am437x-evm.conf
-> @@ -10,6 +10,8 @@ IMAGE_FSTYPES += "ubifs ubi"
->   
->   SERIAL_CONSOLES = "115200;ttyS0"
->   
-> +KERNEL_DEVICETREE_PREFIX = "am43"
-> +
->   # UBI information.  Note that this is board and kernel specific.  Changes
->   # in your kernel port may require changes in these variables.  For more
->   # details about this board please see
-> diff --git a/meta-ti-bsp/conf/machine/am57xx-evm.conf b/meta-ti-bsp/conf/machine/am57xx-evm.conf
-> index ca635f43..e320477b 100644
-> --- a/meta-ti-bsp/conf/machine/am57xx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am57xx-evm.conf
-> @@ -8,19 +8,12 @@ MACHINE_FEATURES += "touchscreen"
->   
->   SERIAL_CONSOLES = "115200;ttyS2"
->   
-> -KERNEL_DEVICETREE = " \
-> -    am57xx-beagle-x15.dtb \
-> -    am57xx-beagle-x15-revb1.dtb \
-> -    am57xx-beagle-x15-revc.dtb \
-> -    am5729-beagleboneai.dtb \
-> -    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'am57xx-evm.dtb', d)} \
-> +KERNEL_DEVICETREE_PREFIX = "am57"
-> +
-> +KERNEL_DEVICETREE:append = " \
->       ti/am57xx-evm-common.dtbo \
-> -    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'am57xx-evm-reva3.dtb', d)} \
->       ti/am57xx-evm-reva3.dtbo \
-> -    am571x-idk.dtb \
->       ti/am571x-idk-touchscreen.dtbo \
-> -    am572x-idk.dtb \
-> -    am574x-idk.dtb \
->       ti/am57xx-idk-osd-lcd-common.dtbo \
->       ti/am572x-idk-touchscreen.dtbo \
->       ti/lcd-osd101t2587.dtbo \
-> @@ -28,8 +21,6 @@ KERNEL_DEVICETREE = " \
->       ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'ti/ov10635.dtbo', d)} \
->   "
->   
-> -KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am574x-idk-pru-excl-uio.dtb am572x-idk-pru-excl-uio.dtb am571x-idk-pru-excl-uio.dtb', '', d)}"
-> -
->   UBOOT_MACHINE = "am57xx_evm_config"
->   
->   # UBI information.  Note that this is board and kernel specific.  Changes
-> diff --git a/meta-ti-bsp/conf/machine/am62xx-evm.conf b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-> index 73859d5f..2316180b 100644
-> --- a/meta-ti-bsp/conf/machine/am62xx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-> @@ -4,11 +4,6 @@
->   
->   require conf/machine/include/am62xx.inc
->   
-> -KERNEL_DEVICETREE = " \
-> -    ti/k3-am625-sk.dtb \
-> -    ti/k3-am625-skeleton.dtb \
-> -    ti/k3-am625-sk-lpmdemo.dtb \
-> -    ti/k3-am625-sk-csi2-ov5640.dtbo \
-> -"
-> +KERNEL_DEVICETREE_PREFIX = "ti/k3-am62"
->   
->   UBOOT_MACHINE = "am62x_evm_a53_defconfig"
-> diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-> index ef8e8692..f1c5ee15 100644
-> --- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-> @@ -6,11 +6,6 @@ require conf/machine/include/am62xx.inc
->   
->   MACHINE_FEATURES += "gpu"
->   
-> -KERNEL_DEVICETREE = " \
-> -    ti/k3-am62x-lp-sk.dtb \
-> -    ti/k3-am625-skeleton.dtb \
-> -    ti/k3-am625-sk-lpmdemo.dtb \
-> -    ti/k3-am625-sk-csi2-ov5640.dtbo \
-> -"
-> +KERNEL_DEVICETREE_PREFIX = "ti/k3-am62"
->   
->   UBOOT_MACHINE = "am62x_lpsk_a53_defconfig"
-> diff --git a/meta-ti-bsp/conf/machine/am64xx-evm.conf b/meta-ti-bsp/conf/machine/am64xx-evm.conf
-> index c6ba2a87..af05ddf0 100644
-> --- a/meta-ti-bsp/conf/machine/am64xx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am64xx-evm.conf
-> @@ -4,4 +4,6 @@
->   
->   require conf/machine/include/am64xx.inc
->   
-> +KERNEL_DEVICETREE_PREFIX = "ti/k3-am642"
-> +
->   UBOOT_MACHINE = "am64x_evm_a53_defconfig"
-> diff --git a/meta-ti-bsp/conf/machine/am65xx-evm.conf b/meta-ti-bsp/conf/machine/am65xx-evm.conf
-> index 8b6ef546..0a7f46e2 100644
-> --- a/meta-ti-bsp/conf/machine/am65xx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am65xx-evm.conf
-> @@ -4,4 +4,6 @@
->   
->   require conf/machine/include/am65xx.inc
->   
-> +KERNEL_DEVICETREE_PREFIX = "ti/k3-am654"
-> +
->   UBOOT_MACHINE = "am65x_evm_a53_defconfig"
-> diff --git a/meta-ti-bsp/conf/machine/beagle-x15.conf b/meta-ti-bsp/conf/machine/beagle-x15.conf
-> index c7503266..beb0d892 100644
-> --- a/meta-ti-bsp/conf/machine/beagle-x15.conf
-> +++ b/meta-ti-bsp/conf/machine/beagle-x15.conf
-> @@ -4,7 +4,7 @@
->   
->   require conf/machine/include/dra7xx.inc
->   
-> -KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-beagle-x15-revc.dtb"
-> +KERNEL_DEVICETREE_PREFIX = "am57xx-beagle-x15"
->   
->   MACHINE_GUI_CLASS = "bigscreen"
->   
-> diff --git a/meta-ti-bsp/conf/machine/beaglebone.conf b/meta-ti-bsp/conf/machine/beaglebone.conf
-> index 413a960d..145b261a 100644
-> --- a/meta-ti-bsp/conf/machine/beaglebone.conf
-> +++ b/meta-ti-bsp/conf/machine/beaglebone.conf
-> @@ -4,9 +4,7 @@
->   
->   require conf/machine/include/ti33x.inc
->   
-> -KERNEL_DEVICETREE = "am335x-bone.dtb am335x-boneblue.dtb \
-> -                    am335x-boneblack.dtb am335x-boneblack-wireless.dtb \
-> -                    am335x-bonegreen.dtb am335x-bonegreen-wireless.dtb"
-> +KERNEL_DEVICETREE_PREFIX = "am335x-bone"
->   
->   MACHINE_GUI_CLASS = "bigscreen"
->   MACHINE_FEATURES += "screen"
-> diff --git a/meta-ti-bsp/conf/machine/dra7xx-evm.conf b/meta-ti-bsp/conf/machine/dra7xx-evm.conf
-> index 813e0e06..d944e860 100644
-> --- a/meta-ti-bsp/conf/machine/dra7xx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/dra7xx-evm.conf
-> @@ -8,17 +8,13 @@ MACHINE_FEATURES += "touchscreen"
->   
->   SERIAL_CONSOLES = "115200;ttyS0"
->   
-> -KERNEL_DEVICETREE = " \
-> -    dra7-evm.dtb \
-> +KERNEL_DEVICETREE_PREFIX = "dra7"
-> +
-> +KERNEL_DEVICETREE:append = " \
->       ti/dra7x-evm-osd-lcd-common.dtbo \
-> -    dra71-evm.dtb \
-> -    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'dra71-evm-nand.dtb', d)} \
->       ti/dra71-evm-lcd-auo-g101evn01.0.dtbo \
-> -    dra72-evm.dtb \
-> -    dra72-evm-revc.dtb \
->       ti/dra72-evm-touchscreen.dtbo \
->       ti/dra74-evm-touchscreen.dtbo \
-> -    dra76-evm.dtb \
->       ti/dra76-evm-tfp410.dtbo \
->       ti/lcd-osd101t2045.dtbo \
->       ti/lcd-osd101t2587.dtbo \
-> diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/conf/machine/include/am64xx.inc
-> index 055f6036..bff443f7 100644
-> --- a/meta-ti-bsp/conf/machine/include/am64xx.inc
-> +++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
-> @@ -6,14 +6,6 @@ MACHINE_FEATURES += "screen touchscreen"
->   SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS1"
->   SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
->   
-> -KERNEL_DEVICETREE = " \
-> -    ti/k3-am642-evm.dtb \
-> -    ti/k3-am642-sk.dtb \
-> -    ti/k3-am642-evm-icssg1-dualemac.dtbo \
-> -    ti/k3-am642-evm-icssg1-dualemac-mii.dtbo \
-> -    ti/k3-am642-evm-nand.dtbo \
-> -"
-> -
->   # Default tiboot3.bin on AM64x is for SR2.0 HS-FS
->   BBMULTICONFIG = "k3r5-sr2-hs-fs"
->   do_image_wic[mcdepends] = "mc::k3r5-sr2-hs-fs:ti-sci-fw:do_deploy"
-> diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
-> index 80aa6d27..5a2597e4 100644
-> --- a/meta-ti-bsp/conf/machine/include/am65xx.inc
-> +++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
-> @@ -12,20 +12,6 @@ PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-sgx-ddk-um"
->   PREFERRED_PROVIDER_virtual/libgbm ?= "ti-sgx-ddk-um"
->   PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
->   
-> -KERNEL_DEVICETREE = " \
-> -    ti/k3-am654-base-board.dtb \
-> -    ti/k3-am654-base-board-sr1.dtbo \
-> -    ti/k3-am654-gp.dtbo \
-> -    ti/k3-am654-idk.dtbo \
-> -    ti/k3-am654-idk-sr1.dtbo \
-> -    ti/k3-am654-sr1.dtbo \
-> -    ti/k3-am654-pcie-usb2.dtbo \
-> -    ti/k3-am654-pcie-usb3.dtbo \
-> -    ti/k3-am654-evm-tc358876.dtbo \
-> -    ti/k3-am654-evm-oldi-lcd1evm.dtbo \
-> -    ti/k3-am654-evm-ov5640.dtbo \
-> -"
-> -
->   BBMULTICONFIG += "k3r5-sr2"
->   
->   # Since J721e does not support multi-cert tiboot3.bin add standalone sysfw.itb
-> diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/conf/machine/include/ti33x.inc
-> index cfacc30d..6182ddc4 100644
-> --- a/meta-ti-bsp/conf/machine/include/ti33x.inc
-> +++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
-> @@ -19,17 +19,6 @@ PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
->   
->   KERNEL_IMAGETYPE = "zImage"
->   
-> -KERNEL_DEVICETREE = " \
-> -    am335x-evm.dtb am335x-evmsk.dtb \
-> -    am335x-icev2.dtb \
-> -    am335x-pocketbeagle.dtb am335x-bone.dtb am335x-boneblue.dtb \
-> -    am335x-bonegreen.dtb am335x-bonegreen-wireless.dtb \
-> -    am335x-boneblack.dtb am335x-boneblack-wireless.dtb \
-> -    am335x-sancloud-bbe.dtb \
-> -"
-> -
-> -KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am335x-icev2-pru-excl-uio.dtb', '', d)}"
-> -
->   UBOOT_ARCH = "arm"
->   UBOOT_MACHINE = "am335x_evm_config"
->   
-> diff --git a/meta-ti-bsp/conf/machine/include/ti43x.inc b/meta-ti-bsp/conf/machine/include/ti43x.inc
-> index 5509a54d..63821866 100644
-> --- a/meta-ti-bsp/conf/machine/include/ti43x.inc
-> +++ b/meta-ti-bsp/conf/machine/include/ti43x.inc
-> @@ -19,16 +19,6 @@ PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
->   
->   KERNEL_IMAGETYPE = "zImage"
->   
-> -KERNEL_DEVICETREE = " \
-> -    am437x-gp-evm.dtb \
-> -    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'am437x-gp-evm-hdmi.dtb', d)} \
-> -    am437x-sk-evm.dtb am437x-idk-evm.dtb \
-> -    am43x-epos-evm.dtb \
-> -    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'am43x-epos-evm-hdmi.dtb', d)} \
-> -"
-> -
-> -KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am437x-idk-pru-excl-uio.dtb', '', d)}"
-> -
->   UBOOT_ARCH = "arm"
->   UBOOT_MACHINE = "am43xx_evm_config"
->   
-> diff --git a/meta-ti-bsp/conf/machine/j7200-evm.conf b/meta-ti-bsp/conf/machine/j7200-evm.conf
-> index 303ec182..3d465287 100644
-> --- a/meta-ti-bsp/conf/machine/j7200-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/j7200-evm.conf
-> @@ -7,9 +7,7 @@ require conf/machine/include/j7200.inc
->   SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS3"
->   SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
->   
-> -KERNEL_DEVICETREE = " \
-> -    ti/k3-j7200-common-proc-board.dtb \
-> -"
-> +KERNEL_DEVICETREE_PREFIX = "ti/k3-j7200"
->   
->   UBOOT_MACHINE = "j7200_evm_a72_config"
->   
-> diff --git a/meta-ti-bsp/conf/machine/j721e-evm.conf b/meta-ti-bsp/conf/machine/j721e-evm.conf
-> index d28d16d1..448ba584 100644
-> --- a/meta-ti-bsp/conf/machine/j721e-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/j721e-evm.conf
-> @@ -10,10 +10,6 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
->   # Since J721e does not support multi-cert tiboot3.bin add standalone sysfw.itb
->   IMAGE_BOOT_FILES += "sysfw.itb"
->   
-> -KERNEL_DEVICETREE = " \
-> -    ti/k3-j721e-common-proc-board.dtb \
-> -    ti/k3-j721e-common-proc-board-infotainment.dtbo \
-> -    ti/k3-j721e-sk.dtb \
-> -"
-> +KERNEL_DEVICETREE_PREFIX = "ti/k3-j721e"
->   
->   UBOOT_MACHINE = "j721e_evm_a72_config"
-> diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/machine/j721s2-evm.conf
-> index 37353df4..0b10f139 100644
-> --- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
-> @@ -10,10 +10,7 @@ TFA_K3_USART = "0x8"
->   OPTEEMACHINE = "k3-j784s4"
->   OPTEE_K3_USART = "0x8"
->   
-> -KERNEL_DEVICETREE = " \
-> -    ti/k3-j721s2-common-proc-board.dtb \
-> -    ti/k3-j721s2-gesi-exp-board.dtbo \
-> -"
-> +KERNEL_DEVICETREE_PREFIX = "ti/k3-j721s2"
->   
->   UBOOT_MACHINE = "j721s2_evm_a72_defconfig"
->   
-> diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf b/meta-ti-bsp/conf/machine/j784s4-evm.conf
-> index 96acca13..a36db532 100644
-> --- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
-> @@ -12,9 +12,7 @@ TFA_K3_USART = "0x8"
->   OPTEEMACHINE = "k3-j784s4"
->   OPTEE_K3_USART = "0x8"
->   
-> -KERNEL_DEVICETREE = " \
-> -    ti/k3-j784s4-evm.dtb \
-> -"
-> +KERNEL_DEVICETREE_PREFIX = "ti/k3-j784s4"
->   
->   UBOOT_MACHINE = "j784s4_evm_a72_defconfig"
->   
-> diff --git a/meta-ti-bsp/conf/machine/omapl138-lcdk.conf b/meta-ti-bsp/conf/machine/omapl138-lcdk.conf
-> index b318f82d..7be214a7 100644
-> --- a/meta-ti-bsp/conf/machine/omapl138-lcdk.conf
-> +++ b/meta-ti-bsp/conf/machine/omapl138-lcdk.conf
-> @@ -15,4 +15,4 @@ IMAGE_FSTYPES += "tar.xz"
->   
->   SERIAL_CONSOLES = "115200;ttyS2"
->   
-> -KERNEL_DEVICETREE = "da850-evm.dtb da850-lcdk.dtb"
-> +KERNEL_DEVICETREE_PREFIX = "da850"
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
-> index 6c1b1825..54a2c176 100644
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
-> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
-> @@ -42,7 +42,6 @@ SRCREV_FORMAT = "linux"
->   KERNEL_DEVICETREE = ""
->   
->   kernel_do_compile:append() {
-> -	oe_runmake dtbs CC="${KERNEL_CC} $cc_extra " LD="${KERNEL_LD}" ${KERNEL_EXTRA_ARGS}
->   	oe_runmake -C ${S}/ti-upstream-tools LINUX=${S} DTC=${B}/scripts/dtc/dtc O=${B} CC="${KERNEL_CC} $cc_extra " LD="${KERNEL_LD}" ${KERNEL_EXTRA_ARGS}
->   }
->   
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb
-> index e2908951..3aa1934d 100644
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb
-> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb
-> @@ -19,25 +19,6 @@ PV = "6.1.0-rc1+git${SRCPV}"
->   
->   SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git;protocol=https;branch=master"
->   
-> -def list_dtbs(dts_dir, dts_subdir):
-> -    import os
-> -    import fnmatch
-> -    matches = []
-> -
-> -    for root,dirnames,filenames in os.walk(os.path.join(dts_dir, dts_subdir)):
-> -        for filename in fnmatch.filter(filenames, '*.dtb'):
-> -            matches.append(os.path.join(dts_subdir, filename))
-> -        for filename in fnmatch.filter(filenames, '*.dtbo'):
-> -            matches.append(os.path.join(dts_subdir, filename))
-> -    return ' '.join(matches)
-> -
-> -DTS_SUBDIR = ""
-> -DTS_SUBDIR:k3 = "ti"
-> -KERNEL_DEVICETREE = "${@list_dtbs('${B}/arch/${ARCH}/boot/dts', '${DTS_SUBDIR}')}"
->   DEFCONFIG_NAME = "multi_v7_defconfig"
->   DEFCONFIG_NAME:k3 = "defconfig"
->   KERNEL_CONFIG_COMMAND = "oe_runmake -C ${S} O=${B} ${DEFCONFIG_NAME}"
-> -
-> -kernel_do_compile:append() {
-> -	oe_runmake dtbs CC="${KERNEL_CC} $cc_extra " LD="${KERNEL_LD}" ${KERNEL_EXTRA_ARGS}
-> -}
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc b/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
-> index a7eb476e..7b0f9a64 100644
-> --- a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
-> +++ b/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
-> @@ -7,3 +7,23 @@ def get_extra_dtc_args(d):
->           return ""
->   
->   EXTRA_DTC_ARGS += "${@get_extra_dtc_args(d)}"
-> +
-> +def list_dtbs(dts_dir, dts_prefix):
-> +    import os
-> +    import glob
-> +    matches = []
-> +
-> +    filenames = glob.glob(dts_dir + dts_prefix + '*.dts')
-> +    filenames += glob.glob(dts_dir + dts_prefix + '*.dtso')
-> +    for filename in filenames:
-> +        # Before v6.2 kernels DTB Overlays shared the same name as DTB files
-> +        # so we need to search the file to find the type
-> +        with open(filename) as f:
-> +            file_postfix = '.dtbo' if '/plugin/;' in f.read() else '.dtb'
-> +        filename = os.path.split(filename)[1]
-> +        filename = os.path.splitext(filename)[0] + file_postfix
-> +        filename = os.path.join(os.path.split(dts_prefix)[0], filename)
-> +        matches.append(filename)
-> +    return ' '.join(matches)
-> +
-> +KERNEL_DEVICETREE ?= "${@list_dtbs('${S}/arch/${ARCH}/boot/dts/', '${KERNEL_DEVICETREE_PREFIX}')}"
 
