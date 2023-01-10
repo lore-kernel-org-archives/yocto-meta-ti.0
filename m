@@ -1,99 +1,123 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <sinthu.raja@mistralsolutions.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A49C3C54EBD
-	for <webhook@archiver.kernel.org>; Mon,  9 Jan 2023 20:42:30 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.84833.1673296945469441670
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13F0CC6379F
+	for <webhook@archiver.kernel.org>; Tue, 10 Jan 2023 07:39:04 +0000 (UTC)
+Received: from egress-ip33b.ess.de.barracuda.com (egress-ip33b.ess.de.barracuda.com [18.185.115.237])
+ by mx.groups.io with SMTP id smtpd.web11.98690.1673336338123878866
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 09 Jan 2023 12:42:25 -0800
+ Mon, 09 Jan 2023 23:38:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=qBPaXrIY;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 309KgN7j037127;
-	Mon, 9 Jan 2023 14:42:23 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1673296943;
-	bh=edSmz3oY18qXuBfRLnhecFXDiBxz2nYTThSnR9ibKfk=;
-	h=From:To:Subject:Date;
-	b=qBPaXrIYM2QemeUDdaG3FnbWKadcNWHiAEXkTpp3G+DaS3oRSR0F00fZoQy4MEJzc
-	 iWJeNmL7xW9O2Q9QgyYT14EzVcJpFObBx2+sWRNgxsExJw4qcZ9oJI17O2MKBag7ip
-	 Djda8GaOADTMmQj6G1Y+eeD21LLoMjt3pCM5OW0M=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 309KgNeS010504
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 9 Jan 2023 14:42:23 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Mon, 9
- Jan 2023 14:42:23 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Mon, 9 Jan 2023 14:42:23 -0600
-Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 309KgN2a038700;
-	Mon, 9 Jan 2023 14:42:23 -0600
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1pEyyN-0002hH-CK; Mon, 09 Jan 2023 14:42:23 -0600
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] layer.conf: Add kirkstone, langdale back into LAYERSERIES_COMPAT
-Date: Mon, 9 Jan 2023 14:42:23 -0600
-Message-ID: <20230109204223.10328-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@mistralsolutions.com header.s=google header.b=TPY6vMDI;
+ spf=pass (domain: mistralsolutions.com, ip: 18.185.115.237, mailfrom: sinthu.raja@mistralsolutions.com)
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197]) by mx-outbound19-242.eu-central-1b.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Tue, 10 Jan 2023 07:38:52 +0000
+Received: by mail-pl1-f197.google.com with SMTP id z10-20020a170902ccca00b001898329db72so7992660ple.21
+        for <meta-ti@lists.yoctoproject.org>; Mon, 09 Jan 2023 23:38:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mistralsolutions.com; s=google;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Opbq65tp2K5IR/Sr2g5SW9eGAB3boa6EXsNxMSGKgR4=;
+        b=TPY6vMDIn1MdTjxz+TcIzdIZpFKHrCRBxdJfnSg/kD3Y7uq7cf2g8C/yfFRhPRlIol
+         Q5gP0tM3DW4TVzdBBAq2xfYL21PK65ure7h0YK4CYBc8e4bBfVfElzHek+RJ2mYt1tdi
+         zOWWQ/nrSEsguCStqxtxidbrGtIe6InFBzRm0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Opbq65tp2K5IR/Sr2g5SW9eGAB3boa6EXsNxMSGKgR4=;
+        b=4DgOZODQFVKuxzJsdmKnnK9YngvuT3YS3VUscIRyqmeh2LsBIPPowpEJ3C51PGsD8K
+         LxNbiaXnwzHr9E0dfQuK3bbTFLlWFiWjPTzmXJZhufpKNUfqDncpIzYCujv4/IYakP2D
+         D+UqYE8fEfA7JuaSk9rzww1YJu+Jjdwip+oX+z47zMp9L50dOOUhDawRpbJfgo6DEef5
+         31KEhvzEhEY9S/iXLMbv0rGUyh5Gr4mHuN7Ssj/2Fl1ryhoBftsNb5tiUKFkDlyARlXD
+         /Ry6aB41vq5qalgEM15iQLVVuDiN427LPxqidH4SNGIQVwutCd06IRHa7CM9Je8jNVa5
+         nPfA==
+X-Gm-Message-State: AFqh2krn7CxbSEGVJVpCR28whcJCFkzYdMLZyu3iEuRiVTfD8Et8OQVR
+	eGmVWjhLsF0kyeH48ZqE48Mej4KLbbUaqcpD7Ixj3j+jgK04QE/IRd5xrvpI3UZB0YBCcqTBm3M
+	4U7Q7Hum16y9wq0xliMWHOCwn/6aj7oUNO1UjAgELfm3O7xkk896R/RAqc63PoIo=
+X-Received: by 2002:a17:903:54d:b0:190:fbbd:277d with SMTP id jo13-20020a170903054d00b00190fbbd277dmr66777451plb.17.1673336331643;
+        Mon, 09 Jan 2023 23:38:51 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXsT6E2zB5er0UwNYWfNAnwDescMn25PN1lXuJm2BNGuuEJGzPfHZPrng7IAyMnT1tIy1iFulg==
+X-Received: by 2002:a17:903:54d:b0:190:fbbd:277d with SMTP id jo13-20020a170903054d00b00190fbbd277dmr66777439plb.17.1673336331228;
+        Mon, 09 Jan 2023 23:38:51 -0800 (PST)
+Received: from LAP568U.mistral.in ([106.51.227.150])
+        by smtp.gmail.com with ESMTPSA id ij30-20020a170902ab5e00b00192721d4f2dsm7388256plb.82.2023.01.09.23.38.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Jan 2023 23:38:50 -0800 (PST)
+From: Sinthu Raja <sinthu.raja@mistralsolutions.com>
+X-Google-Original-From: Sinthu Raja <sinthu.raja@ti.com>
+To: reatmon@ti.com,
+	denys@ti.com,
+	detheridge@ti.com
+Cc: meta-ti@lists.yoctoproject.org,
+	Sinthu Raja <sinthu.raja@ti.com>
+Subject: [meta-ti][dunfell][PATCH V2] conf: machine: j721s2: Add AM68 SK specific dtb and dtbo to KERNEL_DEVICETREE
+Date: Tue, 10 Jan 2023 13:08:43 +0530
+Message-Id: <20230110073843.4452-1-sinthu.raja@ti.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+X-BESS-ID: 1673336332-305106-5385-1274-1
+X-BESS-VER: 2019.1_20221214.2106
+X-BESS-Apparent-Source-IP: 209.85.214.197
+X-BESS-Outbound-Spam-Score: 0.00
+X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.245368 [from 
+	cloudscan21-183.eu-central-1b.ess.aws.cudaops.com]
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------
+	0.00 BSF_SC0_MISMATCH_TO    META: Envelope rcpt doesn't match header 
+	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
+X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS91090 scores of KILL_LEVEL=7.0 tests=BSF_SC0_MISMATCH_TO, BSF_BESS_OUTBOUND
+X-BESS-BRTS-Status: 1
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 09 Jan 2023 20:42:30 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15543
+ <meta-ti@lists.yoctoproject.org>; Tue, 10 Jan 2023 07:39:04 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15544
 
-Rather than just support mickledore we should also support the other
-layers that we still support to ensure that as many as different
-versions we can.
+From: Sinthu Raja <sinthu.raja@ti.com>
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+AM68 Starter Kit is a low cost, small form factor board designed for
+TI's AM68/J721S2 SoC[1] which is optimized to provide best in class performance
+for industrial applications. Add DTB entry for the same.
+
+AM68 SK features camera support with MIPI(OV5640) and RPi(IMX219) connectors.
+Add DTBO for the same. Also, add DTBO entry for the DDR memory carveout.
+
+[1]:http://www.ti.com/lit/zip/spruj28
+
+Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
 ---
- meta-ti-bsp/conf/layer.conf    | 2 +-
- meta-ti-extras/conf/layer.conf | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
-index f3d43eee..228933cf 100644
---- a/meta-ti-bsp/conf/layer.conf
-+++ b/meta-ti-bsp/conf/layer.conf
-@@ -9,7 +9,7 @@ BBFILE_COLLECTIONS += "meta-ti-bsp"
- BBFILE_PATTERN_meta-ti-bsp := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-ti-bsp = "6"
+Changes in V2:
+============
+Address review comments:
+- Update RPi camera overlay file name to k3-am68-sk-bb-rpi-cam-imx219.dtbo.
+
+V1: https://lists.yoctoproject.org/g/meta-ti/message/15507
+
+ conf/machine/j721s2-evm.conf | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/conf/machine/j721s2-evm.conf b/conf/machine/j721s2-evm.conf
+index 6377c459..1ed693c5 100644
+--- a/conf/machine/j721s2-evm.conf
++++ b/conf/machine/j721s2-evm.conf
+@@ -13,6 +13,10 @@ OPTEEMACHINE = "k3-j784s4"
+ OPTEE_K3_USART = "0x8"
  
--LAYERSERIES_COMPAT_meta-ti-bsp = "mickledore"
-+LAYERSERIES_COMPAT_meta-ti-bsp = "kirkstone langdale mickledore"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
-diff --git a/meta-ti-extras/conf/layer.conf b/meta-ti-extras/conf/layer.conf
-index cbe9d83a..3665a4f0 100644
---- a/meta-ti-extras/conf/layer.conf
-+++ b/meta-ti-extras/conf/layer.conf
-@@ -9,7 +9,7 @@ BBFILE_COLLECTIONS += "meta-ti-extras"
- BBFILE_PATTERN_meta-ti-extras := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-ti-extras = "6"
- 
--LAYERSERIES_COMPAT_meta-ti-extras = "mickledore"
-+LAYERSERIES_COMPAT_meta-ti-extras = "kirkstone langdale mickledore"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
+ KERNEL_DEVICETREE = " \
++    ti/k3-am68-sk-base-board.dtb \
++    ti/k3-am68-sk-bb-csi2-ov5640.dtb \
++    ti/k3-am68-sk-bb-rpi-cam-imx219.dtbo \
++    ti/k3-am68-sk-som-ddr_mem_carveout.dtbo \
+     ti/k3-j721s2-common-proc-board.dtb \
+     ti/k3-j721s2-gesi-exp-board.dtbo \
+ "
 -- 
-2.17.1
+2.36.1
 
 
