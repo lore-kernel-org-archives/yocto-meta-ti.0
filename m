@@ -1,92 +1,85 @@
-Return-Path: <afd@ti.com>
+Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75A8BC5479D
-	for <webhook@archiver.kernel.org>; Wed, 11 Jan 2023 19:37:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46508C46467
+	for <webhook@archiver.kernel.org>; Wed, 11 Jan 2023 22:14:43 +0000 (UTC)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.34159.1673465864573521340
+ by mx.groups.io with SMTP id smtpd.web11.38909.1673475277791047414
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 11 Jan 2023 11:37:45 -0800
+ Wed, 11 Jan 2023 14:14:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=XhbZZvQK;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: afd@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30BJbfX1053909;
-	Wed, 11 Jan 2023 13:37:41 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=RznbECTr;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rs@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30BMEb6I085273
+	for <meta-ti@lists.yoctoproject.org>; Wed, 11 Jan 2023 16:14:37 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1673465861;
-	bh=vR3dz1kJtHX4AYRWzcfqXQ1w+gX3ZNylN/TBokEZi0M=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=XhbZZvQKl426HYyA0fI0xD7wH71TADBpB3bTJhm2iZLzpWgNQLrBIphJ/qMOjPX8z
-	 r2yWnQP1+y7OUwIR1GyWt8GNB2KQFwdscsoGwVK2eWiUJr8ATfDy3X0knzqPQxtYx8
-	 iG9vdfBIXWK2IfQtg3c1spI+xwUBGLW+gjKmTVEk=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30BJbeDv046699
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 11 Jan 2023 13:37:41 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1673475277;
+	bh=5e/LDTJT1b4tq4jfMl9Lz++eyviv8U0GWRG/dr260ic=;
+	h=From:To:CC:Subject:Date;
+	b=RznbECTrIQIKW+lYr18GA8eNauNQRe9au86OnLUwJpHwKLL3PZSIQMYxBXJeFn7FY
+	 CBP/90WjJNhzHCOSRSsarV3cUG8jbVCo71Xm/you1mTHmdJnl+bVOTwf1gN9aRyblW
+	 vT+KcqahjX+VO4PB8GKiUq4m32egG0oHD3x0lOck=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30BMEbPO045235
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Wed, 11 Jan 2023 16:14:37 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Wed, 11
- Jan 2023 13:37:41 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2023 16:14:36 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Wed, 11 Jan 2023 13:37:40 -0600
-Received: from [10.250.34.87] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 30BJbb39003783;
-	Wed, 11 Jan 2023 13:37:38 -0600
-Message-ID: <022bd03e-be86-3fd9-d638-5dfdf08e3d5e@ti.com>
-Date: Wed, 11 Jan 2023 13:37:36 -0600
+ Frontend Transport; Wed, 11 Jan 2023 16:14:36 -0600
+Received: from res.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 30BMEaGi006955;
+	Wed, 11 Jan 2023 16:14:36 -0600
+From: Randolph Sapp <rs@ti.com>
+To: <reatmon@ti.com>, <denys@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, Randolph Sapp <rs@ti.com>
+Subject: [dunfell][PATCH v2] ti-img-rogue-driver: AM62 Active power management
+Date: Wed, 11 Jan 2023 16:14:34 -0600
+Message-ID: <20230111221434.2399898-1-rs@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [EXTERNAL] Re: [meta-ti] [master][PATCH v2] meta-ti-bsp: Graphics
- recipe overhaul
-To: "Sapp, Randolph" <rs@ti.com>, Denys Dmytriyenko <denis@denix.org>
-CC: <reatmon@ti.com>, <denys@ti.com>, <detheridge@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20221206174553.2391187-1-rs@ti.com>
- <18ac8055-de7f-77fe-1b1b-36c5de4ef8d2@ti.com> <MY9NMR.KA5B9Y124SPL2@ti.com>
- <b9d3f0aa-ad74-0de4-acdf-a359eac5c05f@ti.com> <J3EWMR.6Q68HWA4M8303@ti.com>
- <20221219213235.GX22689@denix.org> <7Q29NR.T2R7VR8YUI2B2@ti.com>
- <20221222224746.GC22689@denix.org> <2OBKNR.ERO28SJCKO2E2@ti.com>
- <20230104230752.GO22689@denix.org> <7B6COR.0OP8M9KYKL9S3@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <7B6COR.0OP8M9KYKL9S3@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 11 Jan 2023 19:37:52 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15549
+ <meta-ti@lists.yoctoproject.org>; Wed, 11 Jan 2023 22:14:43 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15550
 
-On 1/11/23 1:33 PM, Sapp, Randolph wrote:
-> On Wed, Jan 4 2023 at 06:07:52 PM -0500, Denys Dmytriyenko <denis@denix.org> wrote:
->> Please list all the machine features you plan to add/rename/remove in
->> order to support all these use cases. Thanks.
-> 
-> On further inspection I believe adding these as distro features may be a better idea than machine features.
-> 
-> I believe the best course of action would be to re-evaluate all recipes that utilize the "gpu" machine feature and either switch it to use distro features and PACKAGECONFIGS (my gstreamer-plugins example should actually be removed as it is a pointless override).
-> 
-> Either x11 or wayland distro features should be enough to pull in software rendering toolkits and graphics frameworks like Qt so any overrides we had to prevent that should be dropped. That seems to be the way upstream intends that to work.
-> 
-> The rgx-gpu / sgx-gpu features will be added to switch mesa configs, pull in according kernel modules, and tweak other packages as necessary. There will need to be a preliminary check though to make sure sgx-gpu and rgx-gpu features aren't both included as currently these will clash.
-> 
+Bump source revision. Changelog from source:
+  - Cleanup the device initialization routine for all platforms
+  - Add a power safeguard for multicore initialization
+  - Enable active power management for AM62 devices
 
-The SGX/RGX recipes have COMPATIBLE_MACHINE lists that do not have any device in both sets.
-That should be a good enough check that both(or wrong one) are not selected.
+v2: This revision actually uses the correct commit hash. Not sure where
+I got the old one from.
 
-Andrew
+Signed-off-by: Randolph Sapp <rs@ti.com>
+---
+ recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Please feel free to correct me though. Unfortunately Yocto gives us too much freedom here.
-> 
-> Regards,
-> Randolph Sapp
-> 
-> 
+diff --git a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+index 94a7f220..9a5bc479 100644
+--- a/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
++++ b/recipes-bsp/powervr-drivers/ti-img-rogue-driver_1.15.6133109.bb
+@@ -26,7 +26,7 @@ SRC_URI = " \
+ 
+ S = "${WORKDIR}/git"
+ 
+-SRCREV = "c901804e8221d477983a6f7224a9cdc6e832f050"
++SRCREV = "1dd6291a5cad4f2b909fc2a14bd717a3bc5f0bb2"
+ 
+ TARGET_PRODUCT_j7-evm = "j721e_linux"
+ TARGET_PRODUCT_j7-hs-evm = "j721e_linux"
+-- 
+2.34.1
+
 
