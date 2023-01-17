@@ -1,100 +1,142 @@
-Return-Path: <d-gole@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8ECEC3DA78
-	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 06:13:12 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.190484.1673935988030303227
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59871C3DA78
+	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 15:32:35 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.199482.1673969553584466537
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 16 Jan 2023 22:13:08 -0800
+ Tue, 17 Jan 2023 07:32:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=yav7sXTR;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: d-gole@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30H6D6G5031134
-	for <meta-ti@lists.yoctoproject.org>; Tue, 17 Jan 2023 00:13:06 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=fswyh+Fz;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30HFWSen035457;
+	Tue, 17 Jan 2023 09:32:28 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1673935986;
-	bh=im+QYGQAc9C5g/ikX2GhNGHuuavbIrzPNWxjocR90nI=;
-	h=From:To:CC:Subject:Date;
-	b=yav7sXTRejZoL3gUycTp1/XRMjVJRE1WLQXsWSrO5FGNwRcvcqEuOhoCPMwewZZzf
-	 IKUv0L56HL5VJD+aSTXkSC4sHKJSI963YzkDRHSP5ipeZ662lmtRpR44XZNi1UyX8u
-	 ILbtLnRFdgDEegmRzCw/AYyw9kdab6EDDhsCx51U=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30H6D68P017234
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Tue, 17 Jan 2023 00:13:06 -0600
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1673969548;
+	bh=LgPBmvs5o51/4me2I8F2Fs5jJGO3kLC+nwAXk4riOSs=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=fswyh+FzG5LuX9PFuz1bY90rHi1I4CX5gX3dLly1cZ5yOFd70B3a1huRWIIOxWCV0
+	 e2iXc2jEu3r3mhtKgjY/VxF6SDW0ZFnpv0IzYcBRWqfcorr8YgSMvtqzkLKPVw4RE1
+	 OymK/eiJjWvcKJ1LJ5xl7KHbakI/uAJjgsLdbxG8=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30HFWSsu050532
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 17 Jan 2023 09:32:28 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 17
- Jan 2023 00:13:06 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2023 09:32:27 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Tue, 17 Jan 2023 00:13:06 -0600
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 30H6D5r2097639;
-	Tue, 17 Jan 2023 00:13:05 -0600
-From: Dhruva Gole <d-gole@ti.com>
-To: <d-gole@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, <vibhore@ti.com>,
-        Andrew Davis
-	<afd@ti.com>
-Subject: [dunfell PATCH] optee-os: Enable SW PRNG for OP-TEE in AM62X
-Date: Tue, 17 Jan 2023 11:42:57 +0530
-Message-ID: <20230117061257.341041-1-d-gole@ti.com>
-X-Mailer: git-send-email 2.25.1
+ Frontend Transport; Tue, 17 Jan 2023 09:32:27 -0600
+Received: from [10.250.35.40] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 30HFWRCn088133;
+	Tue, 17 Jan 2023 09:32:27 -0600
+Message-ID: <af3db8e5-bb0c-2cf3-735d-46b1c8274e48@ti.com>
+Date: Tue, 17 Jan 2023 09:32:27 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.1
+Subject: Re: [meta-ti][dunfell][PATCH] am62xx: Add support for secure RTOS IPC
+ Firmware images
+To: Chirag Shilwant <c-shilwant@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko <denis@denix.org>, <meta-ti@lists.yoctoproject.org>
+CC: Sai Sree Kartheek Adivi <s-adivi@ti.com>, Paresh Bhagat <p-bhagat@ti.com>,
+        Gyan Gupta <g-gupta@ti.com>
+References: <20230112112755.10791-1-c-shilwant@ti.com>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20230112112755.10791-1-c-shilwant@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 17 Jan 2023 06:13:12 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15574
+ <meta-ti@lists.yoctoproject.org>; Tue, 17 Jan 2023 15:32:35 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15575
 
-commit 98506a4a07363 ("optee-os: Update SRCREV for OP-TEE TRNG in AM62X")
 
-Disables SW PRNG => Enabling Hardware RNG. This is breaking Suspend Resume
-on AM62xx EVM variants. To fix this keep using SOFTWARE_PRNG enabled as
-it was.
 
-Cc: vibhore@ti.com
-Cc: Andrew Davis <afd@ti.com>
-Signed-off-by: Dhruva Gole <d-gole@ti.com>
----
+On 1/12/2023 5:27, Chirag Shilwant wrote:
+> - Let's add support for secure RTOS IPC Firmware images for am62xx. This will sign RTOS IPC Firmware for all EVMs based on am62xx (i.e AM62X and AM62X-LP-EVM)
+> 
+> Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
+> ---
+>   recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 28 +++++++---------------
+>   1 file changed, 8 insertions(+), 20 deletions(-)
+> 
+> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+> index 47b29632..72d85a6b 100644
+> --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+> @@ -174,20 +174,18 @@ do_install_prepend_am64xx() {
+>           )
+>   }
+>   
+> -# Update the am62xx ipc binaries to be consistent with other platforms
+> -do_install_prepend_am62xx() {
+> -        ( cd ${RTOS_IPC_FW_DIR}; \
+> -                mv am62-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f; \
+> -        )
+> -}
+> -
 
-I haven't tested thoroughly using bitbake and built from scratch yet,
-however locally in my OPTEE Repo the command I run is
-...
-make -j14 CROSS_COMPILE64=aarch64-none-linux-gnu- PLATFORM=k3-am62x
-CFG_ARM64_core=y CFG_TEE_CORE_LOG_LEVEL=1 CFG_TEE_CORE_DEBUG=y
-CFG_WITH_SOFTWARE_PRNG=y
-...
-and this seems to get low power mode (suspend resume) functional for
-AM625 SK EVM that I am testing on.
+Why are we removing am62xx-lp-evm?  Is this part of the move to remove 
+am62xx-lp-evm and merge everything into am62x-evm?
 
- recipes-security/optee/optee-os_%.bbappend | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-security/optee/optee-os_%.bbappend b/recipes-security/optee/optee-os_%.bbappend
-index db9064deba27..83eb9c6a20c6 100644
---- a/recipes-security/optee/optee-os_%.bbappend
-+++ b/recipes-security/optee/optee-os_%.bbappend
-@@ -6,8 +6,8 @@ DEPENDS_append_ti-soc = " python3-cryptography-native"
- 
- EXTRA_OEMAKE_append_k3 = "${@ 'CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
- 
--EXTRA_OEMAKE_append_am62xx-evm = " CFG_TEE_CORE_LOG_LEVEL=1"
--EXTRA_OEMAKE_append_am62xx-lp-evm = " CFG_TEE_CORE_LOG_LEVEL=1"
-+EXTRA_OEMAKE_append_am62xx-evm = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
-+EXTRA_OEMAKE_append_am62xx-lp-evm = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
- EXTRA_OEMAKE_append_am62axx-evm = " CFG_TEE_CORE_LOG_LEVEL=1"
- 
- do_compile_prepend_ti-soc() {
+>   # AM62Q HS-SE support
+> -do_install_prepend_am62xx-lp-evm() {
+> +do_install_prepend_am62xx() {
+>           export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
+>           ( cd ${RTOS_DM_FW_DIR}; \
+>                   mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
+>                   ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
+>           )
+> +        ( cd ${RTOS_IPC_FW_DIR}; \
+> +                mv am62-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f; \
+> +                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f \
+> +                    ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f.signed; \
+> +        )
+>   }
+>   
+>   #Install all R5 & DSP ipc echo test binaries in lib/firmware/pdk-ipc, with softlinks up a level
+> @@ -361,13 +359,8 @@ do_install_am64xx() {
+>   do_install_am62xx() {
+>       install -d ${LEGACY_IPC_FW_DIR}
+>       install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
+> -    # DM Firmware
+> -    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
+> -}
+> -
+> -do_install_am62xx-lp-evm() {
+> -    install -d ${LEGACY_IPC_FW_DIR}
+> -    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
+> +    # Signed Firmware
+> +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f.signed ${LEGACY_IPC_FW_DIR}
+>       # DM Firmware
+>       install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
+>   }
+> @@ -389,11 +382,6 @@ do_deploy_am62xx() {
+>       install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${DEPLOYDIR}
+>   }
+>   
+> -do_deploy_am62xx-lp-evm() {
+> -    install -d ${DEPLOYDIR}
+> -    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${DEPLOYDIR}
+> -}
+> -
+>   do_deploy_am62axx() {
+>       install -d ${DEPLOYDIR}
+>       install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${DEPLOYDIR}
+
 -- 
-2.25.1
-
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
