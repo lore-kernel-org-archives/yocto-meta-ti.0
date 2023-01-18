@@ -1,173 +1,130 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC592C32793
-	for <webhook@archiver.kernel.org>; Wed, 18 Jan 2023 16:55:04 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.21241.1674060903347270007
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C9D4C32793
+	for <webhook@archiver.kernel.org>; Wed, 18 Jan 2023 18:36:45 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.24535.1674066999261114949
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 18 Jan 2023 08:55:03 -0800
+ Wed, 18 Jan 2023 10:36:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=VrhEcdGz;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30IGswsn095963;
-	Wed, 18 Jan 2023 10:54:58 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1674060898;
-	bh=3GNZemUInlPvGEfuGFpHe/4mnLNnRHtVs6cspkNj/xY=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=VrhEcdGz2t0kRkLSFTVCo/GcRgo5m2UmThxXdFkJc2/oL060AF+QWGyZ6oywsZzAM
-	 KhZfL102A4uIIWKcnvoC7TGF/epm2tc5qQAByOf5NGIh9gzjE41ldNfAKu4E7xwFbi
-	 XY5L/9TNm57+GNw5hQgmrpSF/6JJHJD8F0OWeoE4=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30IGswsM022485
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 18 Jan 2023 10:54:58 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Wed, 18
- Jan 2023 10:54:58 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Wed, 18 Jan 2023 10:54:57 -0600
-Received: from [10.250.34.171] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 30IGsvkv009218;
-	Wed, 18 Jan 2023 10:54:57 -0600
-Message-ID: <62c188ea-03cc-662b-8419-a7d486e492b1@ti.com>
-Date: Wed, 18 Jan 2023 10:54:57 -0600
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 353F540C86;
+	Wed, 18 Jan 2023 18:36:38 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id XV3pv1S01bbi; Wed, 18 Jan 2023 18:36:38 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 056BE40BEB;
+	Wed, 18 Jan 2023 18:36:34 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id EAB9E163700; Wed, 18 Jan 2023 13:36:15 -0500 (EST)
+Date: Wed, 18 Jan 2023 13:36:15 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: afd@ti.com
+Cc: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][master/kirkstone][PATCH 7/7] conf: machine: Rework
+ do_image_wic dependencies
+Message-ID: <20230118183615.GH22689@denix.org>
+References: <20221207214312.21735-1-afd@ti.com>
+ <20221207214312.21735-7-afd@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-Subject: Re: [meta-ti][dunfell][PATCH] am62xx: Add support for secure RTOS IPC
- Firmware images
-Content-Language: en-US
-To: "Shilwant, Chirag" <c-shilwant@ti.com>,
-        "Bajjuri, Praneeth"
-	<praneeth@ti.com>,
-        Denys Dmytriyenko <denis@denix.org>,
-        "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-CC: "Adivi, Sai Sree Kartheek" <s-adivi@ti.com>,
-        "Bhagat, Paresh"
-	<p-bhagat@ti.com>, "Gupta, Gyan" <g-gupta@ti.com>
-References: <20230112112755.10791-1-c-shilwant@ti.com>
- <af3db8e5-bb0c-2cf3-735d-46b1c8274e48@ti.com>
- <2d4bc9ed6f004449afcbeae33ccfdd92@ti.com>
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <2d4bc9ed6f004449afcbeae33ccfdd92@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20221207214312.21735-7-afd@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 18 Jan 2023 16:55:04 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15584
+ <meta-ti@lists.yoctoproject.org>; Wed, 18 Jan 2023 18:36:45 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15585
+
+On Wed, Dec 07, 2022 at 03:43:12PM -0600, Andrew Davis via lists.yoctoproject.org wrote:
+> The WIC image for K3 depends on the TI-SCI firmware, on AM65x and J721e
+> also the bootloader. Make this clear by only depending on firmware in
+> the base k3.inc file, then adding the bootloader dependency in AM65x and
+> J721e specific includes.
+> 
+> Remove unneeded overrides from the evm level files.
+> 
+> Remove do_image_tar dependencies as the tar files do not include
+> the bootloader nor TI-SCI firmware, only the boot partition of
+> the WIC file needs these.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+> diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/conf/machine/include/j721e.inc
+> index 12ee0c90..6322fe46 100644
+> --- a/meta-ti-bsp/conf/machine/include/j721e.inc
+> +++ b/meta-ti-bsp/conf/machine/include/j721e.inc
+> @@ -9,6 +9,17 @@ PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-img-rogue-umlibs"
+>  PREFERRED_PROVIDER_virtual/libgbm ?= "ti-img-rogue-umlibs"
+>  PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
+>  
+> +# On J721e the file tiboot3.bin comes from the bootloader not ti-sci-fw
+> +do_image_wic[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy"
+> +
+> +# Default sysfw.itb on J721e is for SR1.1
+> +BBMULTICONFIG += "k3r5-sr1-1"
+
+There's a slight problem - k3r5-sr1-1 multiconfig previously only applied to 
+the HS j721e-hs-evm device, but not the GP j721e-evm, see below.
+
+Hence there's no corresponding k3r5 config j721e-evm-k3r5-sr1-1.conf exists, 
+only the one for the HS - j721e-hs-evm-k3r5-sr1-1.conf
+
+Since you moved the above BBMULTICONFIG line into the common j721e.inc, it now 
+breaks with the error:
+
+MACHINE=j721e-evm-k3r5-sr1-1 is invalid. Please set a valid MACHINE in your local.conf, environment or other configuration file.
+
+I can re-spin this series with a fix, so it's easier for Ryan to apply...
 
 
+> +do_image_wic[mcdepends] += "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
+> +IMAGE_BOOT_FILES += "sysfw.itb"
+> +
+> +# Since default sysfw.itb on J721e is for SR1.1, add a version for SR1.0
+> +IMAGE_BOOT_FILES += "sysfw-j721e-evm.itb"
+> +
+>  TFA_BOARD = "generic"
+>  
+>  OPTEEMACHINE = "k3-j721e"
 
-On 1/17/2023 22:58, Shilwant, Chirag wrote:
->> Why are we removing am62xx-lp-evm?  Is this part of the move to remove am62xx-lp-evm and merge everything into am62x-evm?
-> 
-> - The SOC for both platforms am62xx-evm and am62xx-lp-evm are same (i.e am62xx). So if we have 2 separate functions and we build am62xx-lp-evm it will execute both do_install_prepend_am62xx() and do_install_prepend_am62xx-lp-evm() resulting in build failure as we have the same
-> 		"mv am62-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f;"
-> in both function (the first function executing used to rename the ipc fw and the second function won't find it).
-> 
-> - As the content are same for both the platforms, combining them as a single function with SOC will apply the same changes to both am62xx-lp-evm (as PLAT_SFX_am62xx-lp-evm = "am62xx") and am62xx-evm.
+<snip>
 
-Thanks.
-
-
-> -----Original Message-----
-> From: Eatmon, Ryan <reatmon@ti.com>
-> Sent: Tuesday, January 17, 2023 9:02 PM
-> To: Shilwant, Chirag <c-shilwant@ti.com>; Bajjuri, Praneeth <praneeth@ti.com>; Denys Dmytriyenko <denis@denix.org>; meta-ti@lists.yoctoproject.org
-> Cc: Adivi, Sai Sree Kartheek <s-adivi@ti.com>; Bhagat, Paresh <p-bhagat@ti.com>; Gupta, Gyan <g-gupta@ti.com>
-> Subject: Re: [meta-ti][dunfell][PATCH] am62xx: Add support for secure RTOS IPC Firmware images
-> 
-> 
-> 
-> On 1/12/2023 5:27, Chirag Shilwant wrote:
->> - Let's add support for secure RTOS IPC Firmware images for am62xx.
->> This will sign RTOS IPC Firmware for all EVMs based on am62xx (i.e
->> AM62X and AM62X-LP-EVM)
->>
->> Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
->> ---
->>    recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 28 +++++++---------------
->>    1 file changed, 8 insertions(+), 20 deletions(-)
->>
->> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
->> b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
->> index 47b29632..72d85a6b 100644
->> --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
->> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
->> @@ -174,20 +174,18 @@ do_install_prepend_am64xx() {
->>            )
->>    }
->>    
->> -# Update the am62xx ipc binaries to be consistent with other
->> platforms
->> -do_install_prepend_am62xx() {
->> -        ( cd ${RTOS_IPC_FW_DIR}; \
->> -                mv am62-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f; \
->> -        )
->> -}
->> -
-> 
-> Why are we removing am62xx-lp-evm?  Is this part of the move to remove am62xx-lp-evm and merge everything into am62x-evm?
-> 
-> 
->>    # AM62Q HS-SE support
->> -do_install_prepend_am62xx-lp-evm() {
->> +do_install_prepend_am62xx() {
->>            export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
->>            ( cd ${RTOS_DM_FW_DIR}; \
->>                    mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
->>                    ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
->>            )
->> +        ( cd ${RTOS_IPC_FW_DIR}; \
->> +                mv am62-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f; \
->> +                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f \
->> +                    ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f.signed; \
->> +        )
->>    }
->>    
->>    #Install all R5 & DSP ipc echo test binaries in lib/firmware/pdk-ipc, with softlinks up a level
->> @@ -361,13 +359,8 @@ do_install_am64xx() {
->>    do_install_am62xx() {
->>        install -d ${LEGACY_IPC_FW_DIR}
->>        install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
->> -    # DM Firmware
->> -    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
->> -}
->> -
->> -do_install_am62xx-lp-evm() {
->> -    install -d ${LEGACY_IPC_FW_DIR}
->> -    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
->> +    # Signed Firmware
->> +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f.signed ${LEGACY_IPC_FW_DIR}
->>        # DM Firmware
->>        install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
->>    }
->> @@ -389,11 +382,6 @@ do_deploy_am62xx() {
->>        install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${DEPLOYDIR}
->>    }
->>    
->> -do_deploy_am62xx-lp-evm() {
->> -    install -d ${DEPLOYDIR}
->> -    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${DEPLOYDIR}
->> -}
->> -
->>    do_deploy_am62axx() {
->>        install -d ${DEPLOYDIR}
->>        install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${DEPLOYDIR}
-> 
-
--- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+> diff --git a/meta-ti-bsp/conf/machine/j721e-evm.conf b/meta-ti-bsp/conf/machine/j721e-evm.conf
+> index d28d16d1..fe28e6f5 100644
+> --- a/meta-ti-bsp/conf/machine/j721e-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/j721e-evm.conf
+> @@ -7,9 +7,6 @@ require conf/machine/include/j721e.inc
+>  SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS3"
+>  SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+>  
+> -# Since J721e does not support multi-cert tiboot3.bin add standalone sysfw.itb
+> -IMAGE_BOOT_FILES += "sysfw.itb"
+> -
+>  KERNEL_DEVICETREE = " \
+>      ti/k3-j721e-common-proc-board.dtb \
+>      ti/k3-j721e-common-proc-board-infotainment.dtbo \
+> diff --git a/meta-ti-bsp/conf/machine/j721e-hs-evm.conf b/meta-ti-bsp/conf/machine/j721e-hs-evm.conf
+> index 9ef7b86a..acd5ca18 100644
+> --- a/meta-ti-bsp/conf/machine/j721e-hs-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/j721e-hs-evm.conf
+> @@ -18,10 +18,3 @@ SPL_BINARY = "tispl.bin_HS"
+>  UBOOT_BINARY = "u-boot.img_HS"
+>  UBOOT_SYMLINK = "u-boot.img"
+>  SYSFW_SYMLINK = ""
+> -
+> -BBMULTICONFIG += "k3r5-sr1-1"
+> -
+> -# Since default sysfw.itb on J721e is for SR1.1, add a version for SR1.0
+> -IMAGE_BOOT_FILES += "sysfw-j721e-evm.itb"
+> -do_image_wic[mcdepends] += "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
+> -do_image_tar[mcdepends] += "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
 
