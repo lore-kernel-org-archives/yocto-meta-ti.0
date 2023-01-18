@@ -1,229 +1,152 @@
-Return-Path: <quaresma.jose@gmail.com>
+Return-Path: <c-shilwant@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B615EC6379F
-	for <webhook@archiver.kernel.org>; Tue, 17 Jan 2023 22:09:21 +0000 (UTC)
-Received: from mail-ua1-f46.google.com (mail-ua1-f46.google.com [209.85.222.46])
- by mx.groups.io with SMTP id smtpd.web11.612.1673993359226619862
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8EB9C004D4
+	for <webhook@archiver.kernel.org>; Wed, 18 Jan 2023 04:58:51 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.8501.1674017927306277332
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 17 Jan 2023 14:09:19 -0800
+ Tue, 17 Jan 2023 20:58:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=jo0dK0v3;
- spf=pass (domain: gmail.com, ip: 209.85.222.46, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-ua1-f46.google.com with SMTP id g25so3613436uaw.8
-        for <meta-ti@lists.yoctoproject.org>; Tue, 17 Jan 2023 14:09:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=6C3iE2I1+kKfCBOnR1yj7MvA2lJZ3jNUh5iBx7G5KSE=;
-        b=jo0dK0v38dd6szKUz36EC/Iy2V0ARpyFnrfb2X6icpT3eYFSJ6zqrPENfQO5NRd7f7
-         Cpj8+6eWDovz5LT5qkst8MdXqS+DeWxRgR84aNUmBdiltEJJkR32AnstlbdxMdxupNt2
-         LbCN6aRRK1wFnE8ESexsAdQrZXlZP481560Vzh5+/wsHC4SysvckemLInv5/cWokXvXt
-         lXwhoxzmzJMjetTF2UNuIDyyF3w+ybPJXHr7HodoqH9xdl7Ny+pLz4tyJqSRqx/BdbA7
-         k+m4TcMMKkBUIFERE8uGYosdvIlieRNm706ePmYUmhuxhOgvdblCLeDlpTEkivpnc2L9
-         qaTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=6C3iE2I1+kKfCBOnR1yj7MvA2lJZ3jNUh5iBx7G5KSE=;
-        b=J5l7xk/Nn7ZB12CVNL5Uu28v57LWkmf5/2r6FMeYA2XtXK/G/A2MLaymqtJeF494ax
-         YpoEu49FxXqE/9omybKJ9wfWkKGfVtvA119UUnxpvnPiZU1gGGCkW61KrbNhRjoDb0Y1
-         8bBUREmP6O5O6RYxx/t5JQWRUkgHQDssxqEiBK7SAtAJWIbS2ISyLHgw1P8fjbhEpaOP
-         50iwt37isYyUwfcottfKvrakl7aBA2TMCgE8hs26bq93n7967j9C95JnPDTl2HpMEzht
-         1lWK89guJZSzU6I+fdb+SeJJUJWZ3VL1Q/3kdtjXUNOJN16u2byt8YOGyODJrN3mQnh2
-         LKwA==
-X-Gm-Message-State: AFqh2kqhAwjqm8kmHzV1m/RW74bfUxhkky3jNFWXUFEvzX9jSuF9clAI
-	seOsbTM+oYrDtaVy0k4A2CvlMjtOnji6DvVYcSE=
-X-Google-Smtp-Source: AMrXdXsF9NDTqtU36jqHWa2/kVWY0VFCbqy+FENXPqjQqxw3R+NkwowErv91XsZ3lMFcULV7wkPl6aZWQ+6WHocPkbw=
-X-Received: by 2002:ab0:3155:0:b0:419:25c5:30dc with SMTP id
- e21-20020ab03155000000b0041925c530dcmr562819uam.26.1673993358254; Tue, 17 Jan
- 2023 14:09:18 -0800 (PST)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=neXvF9qL;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: c-shilwant@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30I4wgXA111828;
+	Tue, 17 Jan 2023 22:58:42 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1674017922;
+	bh=xgWg/Puj73YPVT0DTjHhx21IrdFsk9jRMGFWX/o1HII=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=neXvF9qLhWMPYnktxaAdN3xp0H0x9okgLtyXJD0GWGHkX7c7MI8+4mWpG6fCbtdzW
+	 qetbe9qxQpRoBTkszKa/w5+ntePAq6DYHaHdeU5zXkiZyhDk244UwJnetQwxCFxQFA
+	 W1BqZERGEM666cIV+xGmVZ+jQoIzSaCIKfo5JuCQ=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30I4wghN026326
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 17 Jan 2023 22:58:42 -0600
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 17
+ Jan 2023 22:58:41 -0600
+Received: from DLEE113.ent.ti.com ([fe80::a10b:711a:6ba7:e455]) by
+ DLEE113.ent.ti.com ([fe80::a10b:711a:6ba7:e455%17]) with mapi id
+ 15.01.2507.016; Tue, 17 Jan 2023 22:58:41 -0600
+From: "Shilwant, Chirag" <c-shilwant@ti.com>
+To: "Eatmon, Ryan" <reatmon@ti.com>, "Bajjuri, Praneeth" <praneeth@ti.com>,
+        Denys Dmytriyenko <denis@denix.org>,
+        "meta-ti@lists.yoctoproject.org"
+	<meta-ti@lists.yoctoproject.org>
+CC: "Adivi, Sai Sree Kartheek" <s-adivi@ti.com>,
+        "Bhagat, Paresh"
+	<p-bhagat@ti.com>, "Gupta, Gyan" <g-gupta@ti.com>
+Subject: RE: [meta-ti][dunfell][PATCH] am62xx: Add support for secure RTOS IPC
+ Firmware images
+Thread-Topic: [meta-ti][dunfell][PATCH] am62xx: Add support for secure RTOS
+ IPC Firmware images
+Thread-Index: AQHZKojodJesXMgfkEWufyhE7sfMCq6jmCKA
+Date: Wed, 18 Jan 2023 04:58:41 +0000
+Message-ID: <2d4bc9ed6f004449afcbeae33ccfdd92@ti.com>
+References: <20230112112755.10791-1-c-shilwant@ti.com>
+ <af3db8e5-bb0c-2cf3-735d-46b1c8274e48@ti.com>
+In-Reply-To: <af3db8e5-bb0c-2cf3-735d-46b1c8274e48@ti.com>
+Accept-Language: en-IN, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.250.234.225]
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20230116121626.885219-1-jose.quaresma@foundries.io> <4604d911-0dc1-9c3d-e182-95cd79ace9a7@ti.com>
-In-Reply-To: <4604d911-0dc1-9c3d-e182-95cd79ace9a7@ti.com>
-From: Jose Quaresma <quaresma.jose@gmail.com>
-Date: Tue, 17 Jan 2023 22:09:07 +0000
-Message-ID: <CANPvuRm_FOQdzG4fdMfwY_Y-Dw+XjGcxMp7XerZcXyhZcZ8F0w@mail.gmail.com>
-Subject: Re: [meta-ti][PATCH 1/3] ti-k3-secdev: move from meta-ti-extras to meta-ti-bsp
-To: Andrew Davis <afd@ti.com>
-Cc: meta-ti@lists.yoctoproject.org, Ricardo Salveti <ricardo@foundries.io>, 
-	Jose Quaresma <jose.quaresma@foundries.io>
-Content-Type: multipart/alternative; boundary="00000000000079aa4405f27cf3d4"
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 17 Jan 2023 22:09:21 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15582
+ <meta-ti@lists.yoctoproject.org>; Wed, 18 Jan 2023 04:58:51 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15583
 
---00000000000079aa4405f27cf3d4
-Content-Type: text/plain; charset="UTF-8"
-
-Gently ping.
-
-A segunda, 16/01/2023, 16:48, Andrew Davis <afd@ti.com> escreveu:
-
-> On 1/16/23 6:16 AM, Jose Quaresma wrote:
-> > The meta-ti-bsp layer is still broken for K3 HS platforms.
-> >
-> > The patch [1] makes the check-layer happy again as it does not
-> > fail any more during bitbake parsing but it will be difficult
-> > for the end user to discover this dependency on meta-ti-extras.
-> > On the other side, meta-ti-extras depends on meta-ti-bsp so
-> > this is a circular dependency.
-> >
-> > Currently the layer is broken for am62xx-evm/am64xx-evm machines:
-> >
-> > | ERROR: Nothing PROVIDES 'ti-k3-secdev-native' (but
-> mc:k3r5:/srv/oe/build/conf/../../layers/meta-ti/meta-ti-bsp/recipes-bsp/ti-sci-fw/
-> ti-sci-fw_git.bb DEPENDS on or otherwise requires it). Close matches:
-> > |  libtspi-dev-native
-> > |  makedevs-native
-> >
-> > [1] - 8e43835c ti-sci-fw: make dependency on meta-ti-extras soft
-> >
-> > Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
-> > ---
->
-> Acked-by: Andrew Davis <afd@ti.com>
->
-> >   .../recipes-ti/secdev/ti-k3-secdev_git.bb                       | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >   rename {meta-ti-extras => meta-ti-bsp}/recipes-ti/secdev/
-> ti-k3-secdev_git.bb (96%)
-> >
-> > diff --git a/meta-ti-extras/recipes-ti/secdev/ti-k3-secdev_git.bb
-> b/meta-ti-bsp/recipes-ti/secdev/ti-k3-secdev_git.bb
-> > similarity index 96%
-> > rename from meta-ti-extras/recipes-ti/secdev/ti-k3-secdev_git.bb
-> > rename to meta-ti-bsp/recipes-ti/secdev/ti-k3-secdev_git.bb
-> > index 3763c339..fd3bd120 100644
-> > --- a/meta-ti-extras/recipes-ti/secdev/ti-k3-secdev_git.bb
-> > +++ b/meta-ti-bsp/recipes-ti/secdev/ti-k3-secdev_git.bb
-> > @@ -4,7 +4,7 @@ SECTION = "devel"
-> >   LICENSE = "BSD-3-Clause"
-> >   LIC_FILES_CHKSUM =
-> "file://manifest/k3-secdev-0.2-manifest.html;md5=f632a78870cc64550078d7b3cbac0892"
-> >
-> > -require recipes-ti/includes/ti-paths.inc
-> > +include recipes-ti/includes/ti-paths.inc
-> >
-> >   # Native host tool only
-> >   COMPATIBLE_MACHINE = "null"
-> >
-> >
-> >
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#15567):
-> https://lists.yoctoproject.org/g/meta-ti/message/15567
-> > Mute This Topic: https://lists.yoctoproject.org/mt/96304962/3619733
-> > Group Owner: meta-ti+owner@lists.yoctoproject.org
-> > Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [afd@ti.com]
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> >
->
-
---00000000000079aa4405f27cf3d4
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto">Gently ping.</div><br><div class=3D"gmail_quote"><div dir=
-=3D"ltr" class=3D"gmail_attr">A segunda, 16/01/2023, 16:48, Andrew Davis &l=
-t;<a href=3D"mailto:afd@ti.com" target=3D"_blank" rel=3D"noreferrer">afd@ti=
-.com</a>&gt; escreveu:<br></div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On 1/16/23 6=
-:16 AM, Jose Quaresma wrote:<br>
-&gt; The meta-ti-bsp layer is still broken for K3 HS platforms.<br>
-&gt; <br>
-&gt; The patch [1] makes the check-layer happy again as it does not<br>
-&gt; fail any more during bitbake parsing but it will be difficult<br>
-&gt; for the end user to discover this dependency on meta-ti-extras.<br>
-&gt; On the other side, meta-ti-extras depends on meta-ti-bsp so<br>
-&gt; this is a circular dependency.<br>
-&gt; <br>
-&gt; Currently the layer is broken for am62xx-evm/am64xx-evm machines:<br>
-&gt; <br>
-&gt; | ERROR: Nothing PROVIDES &#39;ti-k3-secdev-native&#39; (but mc:k3r5:/=
-srv/oe/build/conf/../../layers/meta-ti/meta-ti-bsp/recipes-bsp/ti-sci-fw/<a=
- href=3D"http://ti-sci-fw_git.bb" rel=3D"noreferrer noreferrer noreferrer" =
-target=3D"_blank">ti-sci-fw_git.bb</a> DEPENDS on or otherwise requires it)=
-. Close matches:<br>
-&gt; |=C2=A0 libtspi-dev-native<br>
-&gt; |=C2=A0 makedevs-native<br>
-&gt; <br>
-&gt; [1] - 8e43835c ti-sci-fw: make dependency on meta-ti-extras soft<br>
-&gt; <br>
-&gt; Signed-off-by: Jose Quaresma &lt;<a href=3D"mailto:jose.quaresma@found=
-ries.io" rel=3D"noreferrer noreferrer" target=3D"_blank">jose.quaresma@foun=
-dries.io</a>&gt;<br>
-&gt; ---<br>
-<br>
-Acked-by: Andrew Davis &lt;<a href=3D"mailto:afd@ti.com" rel=3D"noreferrer =
-noreferrer" target=3D"_blank">afd@ti.com</a>&gt;<br>
-<br>
-&gt;=C2=A0 =C2=A0.../recipes-ti/secdev/<a href=3D"http://ti-k3-secdev_git.b=
-b" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blank">ti-k3-secdev_=
-git.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0| 2 +-<br>
-&gt;=C2=A0 =C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-&gt;=C2=A0 =C2=A0rename {meta-ti-extras =3D&gt; meta-ti-bsp}/recipes-ti/sec=
-dev/<a href=3D"http://ti-k3-secdev_git.bb" rel=3D"noreferrer noreferrer nor=
-eferrer" target=3D"_blank">ti-k3-secdev_git.bb</a> (96%)<br>
-&gt; <br>
-&gt; diff --git a/meta-ti-extras/recipes-ti/secdev/<a href=3D"http://ti-k3-=
-secdev_git.bb" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blank">t=
-i-k3-secdev_git.bb</a> b/meta-ti-bsp/recipes-ti/secdev/<a href=3D"http://ti=
--k3-secdev_git.bb" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blan=
-k">ti-k3-secdev_git.bb</a><br>
-&gt; similarity index 96%<br>
-&gt; rename from meta-ti-extras/recipes-ti/secdev/<a href=3D"http://ti-k3-s=
-ecdev_git.bb" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blank">ti=
--k3-secdev_git.bb</a><br>
-&gt; rename to meta-ti-bsp/recipes-ti/secdev/<a href=3D"http://ti-k3-secdev=
-_git.bb" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blank">ti-k3-s=
-ecdev_git.bb</a><br>
-&gt; index 3763c339..fd3bd120 100644<br>
-&gt; --- a/meta-ti-extras/recipes-ti/secdev/<a href=3D"http://ti-k3-secdev_=
-git.bb" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blank">ti-k3-se=
-cdev_git.bb</a><br>
-&gt; +++ b/meta-ti-bsp/recipes-ti/secdev/<a href=3D"http://ti-k3-secdev_git=
-.bb" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blank">ti-k3-secde=
-v_git.bb</a><br>
-&gt; @@ -4,7 +4,7 @@ SECTION =3D &quot;devel&quot;<br>
-&gt;=C2=A0 =C2=A0LICENSE =3D &quot;BSD-3-Clause&quot;<br>
-&gt;=C2=A0 =C2=A0LIC_FILES_CHKSUM =3D &quot;file://manifest/k3-secdev-0.2-m=
-anifest.html;md5=3Df632a78870cc64550078d7b3cbac0892&quot;<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; -require recipes-ti/includes/ti-paths.inc<br>
-&gt; +include recipes-ti/includes/ti-paths.inc<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0# Native host tool only<br>
-&gt;=C2=A0 =C2=A0COMPATIBLE_MACHINE =3D &quot;null&quot;<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#15567): <a href=3D"https://lists.yoctoproject.org/=
-g/meta-ti/message/15567" rel=3D"noreferrer noreferrer noreferrer" target=3D=
-"_blank">https://lists.yoctoproject.org/g/meta-ti/message/15567</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.yoctoproject.org/mt/96304962=
-/3619733" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blank">https:=
-//lists.yoctoproject.org/mt/96304962/3619733</a><br>
-&gt; Group Owner: <a href=3D"mailto:meta-ti%2Bowner@lists.yoctoproject.org"=
- rel=3D"noreferrer noreferrer" target=3D"_blank">meta-ti+owner@lists.yoctop=
-roject.org</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.yoctoproject.org/g/meta-ti/unsub=
-" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blank">https://lists.=
-yoctoproject.org/g/meta-ti/unsub</a> [<a href=3D"mailto:afd@ti.com" rel=3D"=
-noreferrer noreferrer" target=3D"_blank">afd@ti.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; <br>
-</blockquote></div>
-
---00000000000079aa4405f27cf3d4--
+PiBXaHkgYXJlIHdlIHJlbW92aW5nIGFtNjJ4eC1scC1ldm0/ICBJcyB0aGlzIHBhcnQgb2YgdGhl
+IG1vdmUgdG8gcmVtb3ZlIGFtNjJ4eC1scC1ldm0gYW5kIG1lcmdlIGV2ZXJ5dGhpbmcgaW50byBh
+bTYyeC1ldm0/DQoNCi0gVGhlIFNPQyBmb3IgYm90aCBwbGF0Zm9ybXMgYW02Mnh4LWV2bSBhbmQg
+YW02Mnh4LWxwLWV2bSBhcmUgc2FtZSAoaS5lIGFtNjJ4eCkuIFNvIGlmIHdlIGhhdmUgMiBzZXBh
+cmF0ZSBmdW5jdGlvbnMgYW5kIHdlIGJ1aWxkIGFtNjJ4eC1scC1ldm0gaXQgd2lsbCBleGVjdXRl
+IGJvdGggZG9faW5zdGFsbF9wcmVwZW5kX2FtNjJ4eCgpIGFuZCBkb19pbnN0YWxsX3ByZXBlbmRf
+YW02Mnh4LWxwLWV2bSgpIHJlc3VsdGluZyBpbiBidWlsZCBmYWlsdXJlIGFzIHdlIGhhdmUgdGhl
+IHNhbWUgDQoJCSJtdiBhbTYyLW1jdS1tNGYwXzAtZncgaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3Rf
+bWN1Ml8wX3JlbGVhc2Vfc3RyaXAueGVyNWY7IiANCmluIGJvdGggZnVuY3Rpb24gKHRoZSBmaXJz
+dCBmdW5jdGlvbiBleGVjdXRpbmcgdXNlZCB0byByZW5hbWUgdGhlIGlwYyBmdyBhbmQgdGhlIHNl
+Y29uZCBmdW5jdGlvbiB3b24ndCBmaW5kIGl0KS4NCg0KLSBBcyB0aGUgY29udGVudCBhcmUgc2Ft
+ZSBmb3IgYm90aCB0aGUgcGxhdGZvcm1zLCBjb21iaW5pbmcgdGhlbSBhcyBhIHNpbmdsZSBmdW5j
+dGlvbiB3aXRoIFNPQyB3aWxsIGFwcGx5IHRoZSBzYW1lIGNoYW5nZXMgdG8gYm90aCBhbTYyeHgt
+bHAtZXZtIChhcyBQTEFUX1NGWF9hbTYyeHgtbHAtZXZtID0gImFtNjJ4eCIpIGFuZCBhbTYyeHgt
+ZXZtLg0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogRWF0bW9uLCBSeWFuIDxy
+ZWF0bW9uQHRpLmNvbT4gDQpTZW50OiBUdWVzZGF5LCBKYW51YXJ5IDE3LCAyMDIzIDk6MDIgUE0N
+ClRvOiBTaGlsd2FudCwgQ2hpcmFnIDxjLXNoaWx3YW50QHRpLmNvbT47IEJhamp1cmksIFByYW5l
+ZXRoIDxwcmFuZWV0aEB0aS5jb20+OyBEZW55cyBEbXl0cml5ZW5rbyA8ZGVuaXNAZGVuaXgub3Jn
+PjsgbWV0YS10aUBsaXN0cy55b2N0b3Byb2plY3Qub3JnDQpDYzogQWRpdmksIFNhaSBTcmVlIEth
+cnRoZWVrIDxzLWFkaXZpQHRpLmNvbT47IEJoYWdhdCwgUGFyZXNoIDxwLWJoYWdhdEB0aS5jb20+
+OyBHdXB0YSwgR3lhbiA8Zy1ndXB0YUB0aS5jb20+DQpTdWJqZWN0OiBSZTogW21ldGEtdGldW2R1
+bmZlbGxdW1BBVENIXSBhbTYyeHg6IEFkZCBzdXBwb3J0IGZvciBzZWN1cmUgUlRPUyBJUEMgRmly
+bXdhcmUgaW1hZ2VzDQoNCg0KDQpPbiAxLzEyLzIwMjMgNToyNywgQ2hpcmFnIFNoaWx3YW50IHdy
+b3RlOg0KPiAtIExldCdzIGFkZCBzdXBwb3J0IGZvciBzZWN1cmUgUlRPUyBJUEMgRmlybXdhcmUg
+aW1hZ2VzIGZvciBhbTYyeHguIA0KPiBUaGlzIHdpbGwgc2lnbiBSVE9TIElQQyBGaXJtd2FyZSBm
+b3IgYWxsIEVWTXMgYmFzZWQgb24gYW02Mnh4IChpLmUgDQo+IEFNNjJYIGFuZCBBTTYyWC1MUC1F
+Vk0pDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBDaGlyYWcgU2hpbHdhbnQgPGMtc2hpbHdhbnRAdGku
+Y29tPg0KPiAtLS0NCj4gICByZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUu
+YmIgfCAyOCArKysrKysrLS0tLS0tLS0tLS0tLS0tDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDggaW5z
+ZXJ0aW9ucygrKSwgMjAgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy10
+aS90aS1ydG9zLWJpbi90aS1ydG9zLWZpcm13YXJlLmJiIA0KPiBiL3JlY2lwZXMtdGkvdGktcnRv
+cy1iaW4vdGktcnRvcy1maXJtd2FyZS5iYg0KPiBpbmRleCA0N2IyOTYzMi4uNzJkODVhNmIgMTAw
+NjQ0DQo+IC0tLSBhL3JlY2lwZXMtdGkvdGktcnRvcy1iaW4vdGktcnRvcy1maXJtd2FyZS5iYg0K
+PiArKysgYi9yZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUuYmINCj4gQEAg
+LTE3NCwyMCArMTc0LDE4IEBAIGRvX2luc3RhbGxfcHJlcGVuZF9hbTY0eHgoKSB7DQo+ICAgICAg
+ICAgICApDQo+ICAgfQ0KPiAgIA0KPiAtIyBVcGRhdGUgdGhlIGFtNjJ4eCBpcGMgYmluYXJpZXMg
+dG8gYmUgY29uc2lzdGVudCB3aXRoIG90aGVyIA0KPiBwbGF0Zm9ybXMNCj4gLWRvX2luc3RhbGxf
+cHJlcGVuZF9hbTYyeHgoKSB7DQo+IC0gICAgICAgICggY2QgJHtSVE9TX0lQQ19GV19ESVJ9OyBc
+DQo+IC0gICAgICAgICAgICAgICAgbXYgYW02Mi1tY3UtbTRmMF8wLWZ3IGlwY19lY2hvX2JhcmVt
+ZXRhbF90ZXN0X21jdTJfMF9yZWxlYXNlX3N0cmlwLnhlcjVmOyBcDQo+IC0gICAgICAgICkNCj4g
+LX0NCj4gLQ0KDQpXaHkgYXJlIHdlIHJlbW92aW5nIGFtNjJ4eC1scC1ldm0/ICBJcyB0aGlzIHBh
+cnQgb2YgdGhlIG1vdmUgdG8gcmVtb3ZlIGFtNjJ4eC1scC1ldm0gYW5kIG1lcmdlIGV2ZXJ5dGhp
+bmcgaW50byBhbTYyeC1ldm0/DQoNCg0KPiAgICMgQU02MlEgSFMtU0Ugc3VwcG9ydA0KPiAtZG9f
+aW5zdGFsbF9wcmVwZW5kX2FtNjJ4eC1scC1ldm0oKSB7DQo+ICtkb19pbnN0YWxsX3ByZXBlbmRf
+YW02Mnh4KCkgew0KPiAgICAgICAgICAgZXhwb3J0IFRJX1NFQ1VSRV9ERVZfUEtHPSR7VElfU0VD
+VVJFX0RFVl9QS0d9DQo+ICAgICAgICAgICAoIGNkICR7UlRPU19ETV9GV19ESVJ9OyBcDQo+ICAg
+ICAgICAgICAgICAgICAgIG12ICR7RE1fRklSTVdBUkV9ICR7RE1fRklSTVdBUkV9LnVuc2lnbmVk
+OyBcDQo+ICAgICAgICAgICAgICAgICAgICR7VElfU0VDVVJFX0RFVl9QS0d9L3NjcmlwdHMvc2Vj
+dXJlLWJpbmFyeS1pbWFnZS5zaCAke0RNX0ZJUk1XQVJFfS51bnNpZ25lZCAke0RNX0ZJUk1XQVJF
+fTsgXA0KPiAgICAgICAgICAgKQ0KPiArICAgICAgICAoIGNkICR7UlRPU19JUENfRldfRElSfTsg
+XA0KPiArICAgICAgICAgICAgICAgIG12IGFtNjItbWN1LW00ZjBfMC1mdyBpcGNfZWNob19iYXJl
+bWV0YWxfdGVzdF9tY3UyXzBfcmVsZWFzZV9zdHJpcC54ZXI1ZjsgXA0KPiArICAgICAgICAgICAg
+ICAgICR7VElfU0VDVVJFX0RFVl9QS0d9L3NjcmlwdHMvc2VjdXJlLWJpbmFyeS1pbWFnZS5zaCBp
+cGNfZWNob19iYXJlbWV0YWxfdGVzdF9tY3UyXzBfcmVsZWFzZV9zdHJpcC54ZXI1ZiBcDQo+ICsg
+ICAgICAgICAgICAgICAgICAgIGlwY19lY2hvX2JhcmVtZXRhbF90ZXN0X21jdTJfMF9yZWxlYXNl
+X3N0cmlwLnhlcjVmLnNpZ25lZDsgXA0KPiArICAgICAgICApDQo+ICAgfQ0KPiAgIA0KPiAgICNJ
+bnN0YWxsIGFsbCBSNSAmIERTUCBpcGMgZWNobyB0ZXN0IGJpbmFyaWVzIGluIGxpYi9maXJtd2Fy
+ZS9wZGstaXBjLCB3aXRoIHNvZnRsaW5rcyB1cCBhIGxldmVsDQo+IEBAIC0zNjEsMTMgKzM1OSw4
+IEBAIGRvX2luc3RhbGxfYW02NHh4KCkgew0KPiAgIGRvX2luc3RhbGxfYW02Mnh4KCkgew0KPiAg
+ICAgICBpbnN0YWxsIC1kICR7TEVHQUNZX0lQQ19GV19ESVJ9DQo+ICAgICAgIGluc3RhbGwgLW0g
+MDY0NCAke1JUT1NfSVBDX0ZXX0RJUn0vaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3RfbWN1Ml8wX3Jl
+bGVhc2Vfc3RyaXAueGVyNWYgJHtMRUdBQ1lfSVBDX0ZXX0RJUn0NCj4gLSAgICAjIERNIEZpcm13
+YXJlDQo+IC0gICAgaW5zdGFsbCAtbSAwNjQ0ICR7UlRPU19ETV9GV19ESVJ9L2lwY19lY2hvX3Rl
+c3RiX21jdTFfMF9yZWxlYXNlX3N0cmlwLnhlcjVmICR7TEVHQUNZX0RNX0ZXX0RJUn0NCj4gLX0N
+Cj4gLQ0KPiAtZG9faW5zdGFsbF9hbTYyeHgtbHAtZXZtKCkgew0KPiAtICAgIGluc3RhbGwgLWQg
+JHtMRUdBQ1lfSVBDX0ZXX0RJUn0NCj4gLSAgICBpbnN0YWxsIC1tIDA2NDQgJHtSVE9TX0lQQ19G
+V19ESVJ9L2lwY19lY2hvX2JhcmVtZXRhbF90ZXN0X21jdTJfMF9yZWxlYXNlX3N0cmlwLnhlcjVm
+ICR7TEVHQUNZX0lQQ19GV19ESVJ9DQo+ICsgICAgIyBTaWduZWQgRmlybXdhcmUNCj4gKyAgICBp
+bnN0YWxsIC1tIDA2NDQgJHtSVE9TX0lQQ19GV19ESVJ9L2lwY19lY2hvX2JhcmVtZXRhbF90ZXN0
+X21jdTJfMF9yZWxlYXNlX3N0cmlwLnhlcjVmLnNpZ25lZCAke0xFR0FDWV9JUENfRldfRElSfQ0K
+PiAgICAgICAjIERNIEZpcm13YXJlDQo+ICAgICAgIGluc3RhbGwgLW0gMDY0NCAke1JUT1NfRE1f
+RldfRElSfS9pcGNfZWNob190ZXN0Yl9tY3UxXzBfcmVsZWFzZV9zdHJpcC54ZXI1ZiAke0xFR0FD
+WV9ETV9GV19ESVJ9DQo+ICAgfQ0KPiBAQCAtMzg5LDExICszODIsNiBAQCBkb19kZXBsb3lfYW02
+Mnh4KCkgew0KPiAgICAgICBpbnN0YWxsIC1tIDA2NDQgJHtSVE9TX0RNX0ZXX0RJUn0vaXBjX2Vj
+aG9fdGVzdGJfbWN1MV8wX3JlbGVhc2Vfc3RyaXAueGVyNWYgJHtERVBMT1lESVJ9DQo+ICAgfQ0K
+PiAgIA0KPiAtZG9fZGVwbG95X2FtNjJ4eC1scC1ldm0oKSB7DQo+IC0gICAgaW5zdGFsbCAtZCAk
+e0RFUExPWURJUn0NCj4gLSAgICBpbnN0YWxsIC1tIDA2NDQgJHtSVE9TX0RNX0ZXX0RJUn0vaXBj
+X2VjaG9fdGVzdGJfbWN1MV8wX3JlbGVhc2Vfc3RyaXAueGVyNWYgJHtERVBMT1lESVJ9DQo+IC19
+DQo+IC0NCj4gICBkb19kZXBsb3lfYW02MmF4eCgpIHsNCj4gICAgICAgaW5zdGFsbCAtZCAke0RF
+UExPWURJUn0NCj4gICAgICAgaW5zdGFsbCAtbSAwNjQ0ICR7UlRPU19ETV9GV19ESVJ9L2lwY19l
+Y2hvX3Rlc3RiX21jdTFfMF9yZWxlYXNlX3N0cmlwLnhlcjVmICR7REVQTE9ZRElSfQ0KDQotLSAN
+ClJ5YW4gRWF0bW9uICAgICAgICAgICAgICAgIHJlYXRtb25AdGkuY29tDQotLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KVGV4YXMgSW5zdHJ1bWVudHMsIEluYy4gIC0g
+IExDUEQgIC0gIE1HVFMNCg==
 
