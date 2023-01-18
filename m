@@ -1,152 +1,173 @@
-Return-Path: <c-shilwant@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8EB9C004D4
-	for <webhook@archiver.kernel.org>; Wed, 18 Jan 2023 04:58:51 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.8501.1674017927306277332
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC592C32793
+	for <webhook@archiver.kernel.org>; Wed, 18 Jan 2023 16:55:04 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.21241.1674060903347270007
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 17 Jan 2023 20:58:47 -0800
+ Wed, 18 Jan 2023 08:55:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=neXvF9qL;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: c-shilwant@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30I4wgXA111828;
-	Tue, 17 Jan 2023 22:58:42 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=VrhEcdGz;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30IGswsn095963;
+	Wed, 18 Jan 2023 10:54:58 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1674017922;
-	bh=xgWg/Puj73YPVT0DTjHhx21IrdFsk9jRMGFWX/o1HII=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=neXvF9qLhWMPYnktxaAdN3xp0H0x9okgLtyXJD0GWGHkX7c7MI8+4mWpG6fCbtdzW
-	 qetbe9qxQpRoBTkszKa/w5+ntePAq6DYHaHdeU5zXkiZyhDk244UwJnetQwxCFxQFA
-	 W1BqZERGEM666cIV+xGmVZ+jQoIzSaCIKfo5JuCQ=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30I4wghN026326
+	s=ti-com-17Q1; t=1674060898;
+	bh=3GNZemUInlPvGEfuGFpHe/4mnLNnRHtVs6cspkNj/xY=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=VrhEcdGz2t0kRkLSFTVCo/GcRgo5m2UmThxXdFkJc2/oL060AF+QWGyZ6oywsZzAM
+	 KhZfL102A4uIIWKcnvoC7TGF/epm2tc5qQAByOf5NGIh9gzjE41ldNfAKu4E7xwFbi
+	 XY5L/9TNm57+GNw5hQgmrpSF/6JJHJD8F0OWeoE4=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30IGswsM022485
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 17 Jan 2023 22:58:42 -0600
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 17
- Jan 2023 22:58:41 -0600
-Received: from DLEE113.ent.ti.com ([fe80::a10b:711a:6ba7:e455]) by
- DLEE113.ent.ti.com ([fe80::a10b:711a:6ba7:e455%17]) with mapi id
- 15.01.2507.016; Tue, 17 Jan 2023 22:58:41 -0600
-From: "Shilwant, Chirag" <c-shilwant@ti.com>
-To: "Eatmon, Ryan" <reatmon@ti.com>, "Bajjuri, Praneeth" <praneeth@ti.com>,
+	Wed, 18 Jan 2023 10:54:58 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Wed, 18
+ Jan 2023 10:54:58 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
+ Frontend Transport; Wed, 18 Jan 2023 10:54:57 -0600
+Received: from [10.250.34.171] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 30IGsvkv009218;
+	Wed, 18 Jan 2023 10:54:57 -0600
+Message-ID: <62c188ea-03cc-662b-8419-a7d486e492b1@ti.com>
+Date: Wed, 18 Jan 2023 10:54:57 -0600
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.1
+Subject: Re: [meta-ti][dunfell][PATCH] am62xx: Add support for secure RTOS IPC
+ Firmware images
+Content-Language: en-US
+To: "Shilwant, Chirag" <c-shilwant@ti.com>,
+        "Bajjuri, Praneeth"
+	<praneeth@ti.com>,
         Denys Dmytriyenko <denis@denix.org>,
-        "meta-ti@lists.yoctoproject.org"
-	<meta-ti@lists.yoctoproject.org>
+        "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
 CC: "Adivi, Sai Sree Kartheek" <s-adivi@ti.com>,
         "Bhagat, Paresh"
 	<p-bhagat@ti.com>, "Gupta, Gyan" <g-gupta@ti.com>
-Subject: RE: [meta-ti][dunfell][PATCH] am62xx: Add support for secure RTOS IPC
- Firmware images
-Thread-Topic: [meta-ti][dunfell][PATCH] am62xx: Add support for secure RTOS
- IPC Firmware images
-Thread-Index: AQHZKojodJesXMgfkEWufyhE7sfMCq6jmCKA
-Date: Wed, 18 Jan 2023 04:58:41 +0000
-Message-ID: <2d4bc9ed6f004449afcbeae33ccfdd92@ti.com>
 References: <20230112112755.10791-1-c-shilwant@ti.com>
  <af3db8e5-bb0c-2cf3-735d-46b1c8274e48@ti.com>
-In-Reply-To: <af3db8e5-bb0c-2cf3-735d-46b1c8274e48@ti.com>
-Accept-Language: en-IN, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.250.234.225]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
+ <2d4bc9ed6f004449afcbeae33ccfdd92@ti.com>
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <2d4bc9ed6f004449afcbeae33ccfdd92@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 18 Jan 2023 04:58:51 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15583
+ <meta-ti@lists.yoctoproject.org>; Wed, 18 Jan 2023 16:55:04 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15584
 
-PiBXaHkgYXJlIHdlIHJlbW92aW5nIGFtNjJ4eC1scC1ldm0/ICBJcyB0aGlzIHBhcnQgb2YgdGhl
-IG1vdmUgdG8gcmVtb3ZlIGFtNjJ4eC1scC1ldm0gYW5kIG1lcmdlIGV2ZXJ5dGhpbmcgaW50byBh
-bTYyeC1ldm0/DQoNCi0gVGhlIFNPQyBmb3IgYm90aCBwbGF0Zm9ybXMgYW02Mnh4LWV2bSBhbmQg
-YW02Mnh4LWxwLWV2bSBhcmUgc2FtZSAoaS5lIGFtNjJ4eCkuIFNvIGlmIHdlIGhhdmUgMiBzZXBh
-cmF0ZSBmdW5jdGlvbnMgYW5kIHdlIGJ1aWxkIGFtNjJ4eC1scC1ldm0gaXQgd2lsbCBleGVjdXRl
-IGJvdGggZG9faW5zdGFsbF9wcmVwZW5kX2FtNjJ4eCgpIGFuZCBkb19pbnN0YWxsX3ByZXBlbmRf
-YW02Mnh4LWxwLWV2bSgpIHJlc3VsdGluZyBpbiBidWlsZCBmYWlsdXJlIGFzIHdlIGhhdmUgdGhl
-IHNhbWUgDQoJCSJtdiBhbTYyLW1jdS1tNGYwXzAtZncgaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3Rf
-bWN1Ml8wX3JlbGVhc2Vfc3RyaXAueGVyNWY7IiANCmluIGJvdGggZnVuY3Rpb24gKHRoZSBmaXJz
-dCBmdW5jdGlvbiBleGVjdXRpbmcgdXNlZCB0byByZW5hbWUgdGhlIGlwYyBmdyBhbmQgdGhlIHNl
-Y29uZCBmdW5jdGlvbiB3b24ndCBmaW5kIGl0KS4NCg0KLSBBcyB0aGUgY29udGVudCBhcmUgc2Ft
-ZSBmb3IgYm90aCB0aGUgcGxhdGZvcm1zLCBjb21iaW5pbmcgdGhlbSBhcyBhIHNpbmdsZSBmdW5j
-dGlvbiB3aXRoIFNPQyB3aWxsIGFwcGx5IHRoZSBzYW1lIGNoYW5nZXMgdG8gYm90aCBhbTYyeHgt
-bHAtZXZtIChhcyBQTEFUX1NGWF9hbTYyeHgtbHAtZXZtID0gImFtNjJ4eCIpIGFuZCBhbTYyeHgt
-ZXZtLg0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogRWF0bW9uLCBSeWFuIDxy
-ZWF0bW9uQHRpLmNvbT4gDQpTZW50OiBUdWVzZGF5LCBKYW51YXJ5IDE3LCAyMDIzIDk6MDIgUE0N
-ClRvOiBTaGlsd2FudCwgQ2hpcmFnIDxjLXNoaWx3YW50QHRpLmNvbT47IEJhamp1cmksIFByYW5l
-ZXRoIDxwcmFuZWV0aEB0aS5jb20+OyBEZW55cyBEbXl0cml5ZW5rbyA8ZGVuaXNAZGVuaXgub3Jn
-PjsgbWV0YS10aUBsaXN0cy55b2N0b3Byb2plY3Qub3JnDQpDYzogQWRpdmksIFNhaSBTcmVlIEth
-cnRoZWVrIDxzLWFkaXZpQHRpLmNvbT47IEJoYWdhdCwgUGFyZXNoIDxwLWJoYWdhdEB0aS5jb20+
-OyBHdXB0YSwgR3lhbiA8Zy1ndXB0YUB0aS5jb20+DQpTdWJqZWN0OiBSZTogW21ldGEtdGldW2R1
-bmZlbGxdW1BBVENIXSBhbTYyeHg6IEFkZCBzdXBwb3J0IGZvciBzZWN1cmUgUlRPUyBJUEMgRmly
-bXdhcmUgaW1hZ2VzDQoNCg0KDQpPbiAxLzEyLzIwMjMgNToyNywgQ2hpcmFnIFNoaWx3YW50IHdy
-b3RlOg0KPiAtIExldCdzIGFkZCBzdXBwb3J0IGZvciBzZWN1cmUgUlRPUyBJUEMgRmlybXdhcmUg
-aW1hZ2VzIGZvciBhbTYyeHguIA0KPiBUaGlzIHdpbGwgc2lnbiBSVE9TIElQQyBGaXJtd2FyZSBm
-b3IgYWxsIEVWTXMgYmFzZWQgb24gYW02Mnh4IChpLmUgDQo+IEFNNjJYIGFuZCBBTTYyWC1MUC1F
-Vk0pDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBDaGlyYWcgU2hpbHdhbnQgPGMtc2hpbHdhbnRAdGku
-Y29tPg0KPiAtLS0NCj4gICByZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUu
-YmIgfCAyOCArKysrKysrLS0tLS0tLS0tLS0tLS0tDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDggaW5z
-ZXJ0aW9ucygrKSwgMjAgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy10
-aS90aS1ydG9zLWJpbi90aS1ydG9zLWZpcm13YXJlLmJiIA0KPiBiL3JlY2lwZXMtdGkvdGktcnRv
-cy1iaW4vdGktcnRvcy1maXJtd2FyZS5iYg0KPiBpbmRleCA0N2IyOTYzMi4uNzJkODVhNmIgMTAw
-NjQ0DQo+IC0tLSBhL3JlY2lwZXMtdGkvdGktcnRvcy1iaW4vdGktcnRvcy1maXJtd2FyZS5iYg0K
-PiArKysgYi9yZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUuYmINCj4gQEAg
-LTE3NCwyMCArMTc0LDE4IEBAIGRvX2luc3RhbGxfcHJlcGVuZF9hbTY0eHgoKSB7DQo+ICAgICAg
-ICAgICApDQo+ICAgfQ0KPiAgIA0KPiAtIyBVcGRhdGUgdGhlIGFtNjJ4eCBpcGMgYmluYXJpZXMg
-dG8gYmUgY29uc2lzdGVudCB3aXRoIG90aGVyIA0KPiBwbGF0Zm9ybXMNCj4gLWRvX2luc3RhbGxf
-cHJlcGVuZF9hbTYyeHgoKSB7DQo+IC0gICAgICAgICggY2QgJHtSVE9TX0lQQ19GV19ESVJ9OyBc
-DQo+IC0gICAgICAgICAgICAgICAgbXYgYW02Mi1tY3UtbTRmMF8wLWZ3IGlwY19lY2hvX2JhcmVt
-ZXRhbF90ZXN0X21jdTJfMF9yZWxlYXNlX3N0cmlwLnhlcjVmOyBcDQo+IC0gICAgICAgICkNCj4g
-LX0NCj4gLQ0KDQpXaHkgYXJlIHdlIHJlbW92aW5nIGFtNjJ4eC1scC1ldm0/ICBJcyB0aGlzIHBh
-cnQgb2YgdGhlIG1vdmUgdG8gcmVtb3ZlIGFtNjJ4eC1scC1ldm0gYW5kIG1lcmdlIGV2ZXJ5dGhp
-bmcgaW50byBhbTYyeC1ldm0/DQoNCg0KPiAgICMgQU02MlEgSFMtU0Ugc3VwcG9ydA0KPiAtZG9f
-aW5zdGFsbF9wcmVwZW5kX2FtNjJ4eC1scC1ldm0oKSB7DQo+ICtkb19pbnN0YWxsX3ByZXBlbmRf
-YW02Mnh4KCkgew0KPiAgICAgICAgICAgZXhwb3J0IFRJX1NFQ1VSRV9ERVZfUEtHPSR7VElfU0VD
-VVJFX0RFVl9QS0d9DQo+ICAgICAgICAgICAoIGNkICR7UlRPU19ETV9GV19ESVJ9OyBcDQo+ICAg
-ICAgICAgICAgICAgICAgIG12ICR7RE1fRklSTVdBUkV9ICR7RE1fRklSTVdBUkV9LnVuc2lnbmVk
-OyBcDQo+ICAgICAgICAgICAgICAgICAgICR7VElfU0VDVVJFX0RFVl9QS0d9L3NjcmlwdHMvc2Vj
-dXJlLWJpbmFyeS1pbWFnZS5zaCAke0RNX0ZJUk1XQVJFfS51bnNpZ25lZCAke0RNX0ZJUk1XQVJF
-fTsgXA0KPiAgICAgICAgICAgKQ0KPiArICAgICAgICAoIGNkICR7UlRPU19JUENfRldfRElSfTsg
-XA0KPiArICAgICAgICAgICAgICAgIG12IGFtNjItbWN1LW00ZjBfMC1mdyBpcGNfZWNob19iYXJl
-bWV0YWxfdGVzdF9tY3UyXzBfcmVsZWFzZV9zdHJpcC54ZXI1ZjsgXA0KPiArICAgICAgICAgICAg
-ICAgICR7VElfU0VDVVJFX0RFVl9QS0d9L3NjcmlwdHMvc2VjdXJlLWJpbmFyeS1pbWFnZS5zaCBp
-cGNfZWNob19iYXJlbWV0YWxfdGVzdF9tY3UyXzBfcmVsZWFzZV9zdHJpcC54ZXI1ZiBcDQo+ICsg
-ICAgICAgICAgICAgICAgICAgIGlwY19lY2hvX2JhcmVtZXRhbF90ZXN0X21jdTJfMF9yZWxlYXNl
-X3N0cmlwLnhlcjVmLnNpZ25lZDsgXA0KPiArICAgICAgICApDQo+ICAgfQ0KPiAgIA0KPiAgICNJ
-bnN0YWxsIGFsbCBSNSAmIERTUCBpcGMgZWNobyB0ZXN0IGJpbmFyaWVzIGluIGxpYi9maXJtd2Fy
-ZS9wZGstaXBjLCB3aXRoIHNvZnRsaW5rcyB1cCBhIGxldmVsDQo+IEBAIC0zNjEsMTMgKzM1OSw4
-IEBAIGRvX2luc3RhbGxfYW02NHh4KCkgew0KPiAgIGRvX2luc3RhbGxfYW02Mnh4KCkgew0KPiAg
-ICAgICBpbnN0YWxsIC1kICR7TEVHQUNZX0lQQ19GV19ESVJ9DQo+ICAgICAgIGluc3RhbGwgLW0g
-MDY0NCAke1JUT1NfSVBDX0ZXX0RJUn0vaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3RfbWN1Ml8wX3Jl
-bGVhc2Vfc3RyaXAueGVyNWYgJHtMRUdBQ1lfSVBDX0ZXX0RJUn0NCj4gLSAgICAjIERNIEZpcm13
-YXJlDQo+IC0gICAgaW5zdGFsbCAtbSAwNjQ0ICR7UlRPU19ETV9GV19ESVJ9L2lwY19lY2hvX3Rl
-c3RiX21jdTFfMF9yZWxlYXNlX3N0cmlwLnhlcjVmICR7TEVHQUNZX0RNX0ZXX0RJUn0NCj4gLX0N
-Cj4gLQ0KPiAtZG9faW5zdGFsbF9hbTYyeHgtbHAtZXZtKCkgew0KPiAtICAgIGluc3RhbGwgLWQg
-JHtMRUdBQ1lfSVBDX0ZXX0RJUn0NCj4gLSAgICBpbnN0YWxsIC1tIDA2NDQgJHtSVE9TX0lQQ19G
-V19ESVJ9L2lwY19lY2hvX2JhcmVtZXRhbF90ZXN0X21jdTJfMF9yZWxlYXNlX3N0cmlwLnhlcjVm
-ICR7TEVHQUNZX0lQQ19GV19ESVJ9DQo+ICsgICAgIyBTaWduZWQgRmlybXdhcmUNCj4gKyAgICBp
-bnN0YWxsIC1tIDA2NDQgJHtSVE9TX0lQQ19GV19ESVJ9L2lwY19lY2hvX2JhcmVtZXRhbF90ZXN0
-X21jdTJfMF9yZWxlYXNlX3N0cmlwLnhlcjVmLnNpZ25lZCAke0xFR0FDWV9JUENfRldfRElSfQ0K
-PiAgICAgICAjIERNIEZpcm13YXJlDQo+ICAgICAgIGluc3RhbGwgLW0gMDY0NCAke1JUT1NfRE1f
-RldfRElSfS9pcGNfZWNob190ZXN0Yl9tY3UxXzBfcmVsZWFzZV9zdHJpcC54ZXI1ZiAke0xFR0FD
-WV9ETV9GV19ESVJ9DQo+ICAgfQ0KPiBAQCAtMzg5LDExICszODIsNiBAQCBkb19kZXBsb3lfYW02
-Mnh4KCkgew0KPiAgICAgICBpbnN0YWxsIC1tIDA2NDQgJHtSVE9TX0RNX0ZXX0RJUn0vaXBjX2Vj
-aG9fdGVzdGJfbWN1MV8wX3JlbGVhc2Vfc3RyaXAueGVyNWYgJHtERVBMT1lESVJ9DQo+ICAgfQ0K
-PiAgIA0KPiAtZG9fZGVwbG95X2FtNjJ4eC1scC1ldm0oKSB7DQo+IC0gICAgaW5zdGFsbCAtZCAk
-e0RFUExPWURJUn0NCj4gLSAgICBpbnN0YWxsIC1tIDA2NDQgJHtSVE9TX0RNX0ZXX0RJUn0vaXBj
-X2VjaG9fdGVzdGJfbWN1MV8wX3JlbGVhc2Vfc3RyaXAueGVyNWYgJHtERVBMT1lESVJ9DQo+IC19
-DQo+IC0NCj4gICBkb19kZXBsb3lfYW02MmF4eCgpIHsNCj4gICAgICAgaW5zdGFsbCAtZCAke0RF
-UExPWURJUn0NCj4gICAgICAgaW5zdGFsbCAtbSAwNjQ0ICR7UlRPU19ETV9GV19ESVJ9L2lwY19l
-Y2hvX3Rlc3RiX21jdTFfMF9yZWxlYXNlX3N0cmlwLnhlcjVmICR7REVQTE9ZRElSfQ0KDQotLSAN
-ClJ5YW4gRWF0bW9uICAgICAgICAgICAgICAgIHJlYXRtb25AdGkuY29tDQotLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KVGV4YXMgSW5zdHJ1bWVudHMsIEluYy4gIC0g
-IExDUEQgIC0gIE1HVFMNCg==
+
+
+On 1/17/2023 22:58, Shilwant, Chirag wrote:
+>> Why are we removing am62xx-lp-evm?  Is this part of the move to remove am62xx-lp-evm and merge everything into am62x-evm?
+> 
+> - The SOC for both platforms am62xx-evm and am62xx-lp-evm are same (i.e am62xx). So if we have 2 separate functions and we build am62xx-lp-evm it will execute both do_install_prepend_am62xx() and do_install_prepend_am62xx-lp-evm() resulting in build failure as we have the same
+> 		"mv am62-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f;"
+> in both function (the first function executing used to rename the ipc fw and the second function won't find it).
+> 
+> - As the content are same for both the platforms, combining them as a single function with SOC will apply the same changes to both am62xx-lp-evm (as PLAT_SFX_am62xx-lp-evm = "am62xx") and am62xx-evm.
+
+Thanks.
+
+
+> -----Original Message-----
+> From: Eatmon, Ryan <reatmon@ti.com>
+> Sent: Tuesday, January 17, 2023 9:02 PM
+> To: Shilwant, Chirag <c-shilwant@ti.com>; Bajjuri, Praneeth <praneeth@ti.com>; Denys Dmytriyenko <denis@denix.org>; meta-ti@lists.yoctoproject.org
+> Cc: Adivi, Sai Sree Kartheek <s-adivi@ti.com>; Bhagat, Paresh <p-bhagat@ti.com>; Gupta, Gyan <g-gupta@ti.com>
+> Subject: Re: [meta-ti][dunfell][PATCH] am62xx: Add support for secure RTOS IPC Firmware images
+> 
+> 
+> 
+> On 1/12/2023 5:27, Chirag Shilwant wrote:
+>> - Let's add support for secure RTOS IPC Firmware images for am62xx.
+>> This will sign RTOS IPC Firmware for all EVMs based on am62xx (i.e
+>> AM62X and AM62X-LP-EVM)
+>>
+>> Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
+>> ---
+>>    recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 28 +++++++---------------
+>>    1 file changed, 8 insertions(+), 20 deletions(-)
+>>
+>> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+>> b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+>> index 47b29632..72d85a6b 100644
+>> --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+>> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+>> @@ -174,20 +174,18 @@ do_install_prepend_am64xx() {
+>>            )
+>>    }
+>>    
+>> -# Update the am62xx ipc binaries to be consistent with other
+>> platforms
+>> -do_install_prepend_am62xx() {
+>> -        ( cd ${RTOS_IPC_FW_DIR}; \
+>> -                mv am62-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f; \
+>> -        )
+>> -}
+>> -
+> 
+> Why are we removing am62xx-lp-evm?  Is this part of the move to remove am62xx-lp-evm and merge everything into am62x-evm?
+> 
+> 
+>>    # AM62Q HS-SE support
+>> -do_install_prepend_am62xx-lp-evm() {
+>> +do_install_prepend_am62xx() {
+>>            export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
+>>            ( cd ${RTOS_DM_FW_DIR}; \
+>>                    mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
+>>                    ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
+>>            )
+>> +        ( cd ${RTOS_IPC_FW_DIR}; \
+>> +                mv am62-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f; \
+>> +                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f \
+>> +                    ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f.signed; \
+>> +        )
+>>    }
+>>    
+>>    #Install all R5 & DSP ipc echo test binaries in lib/firmware/pdk-ipc, with softlinks up a level
+>> @@ -361,13 +359,8 @@ do_install_am64xx() {
+>>    do_install_am62xx() {
+>>        install -d ${LEGACY_IPC_FW_DIR}
+>>        install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
+>> -    # DM Firmware
+>> -    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
+>> -}
+>> -
+>> -do_install_am62xx-lp-evm() {
+>> -    install -d ${LEGACY_IPC_FW_DIR}
+>> -    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
+>> +    # Signed Firmware
+>> +    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f.signed ${LEGACY_IPC_FW_DIR}
+>>        # DM Firmware
+>>        install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
+>>    }
+>> @@ -389,11 +382,6 @@ do_deploy_am62xx() {
+>>        install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${DEPLOYDIR}
+>>    }
+>>    
+>> -do_deploy_am62xx-lp-evm() {
+>> -    install -d ${DEPLOYDIR}
+>> -    install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${DEPLOYDIR}
+>> -}
+>> -
+>>    do_deploy_am62axx() {
+>>        install -d ${DEPLOYDIR}
+>>        install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${DEPLOYDIR}
+> 
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
