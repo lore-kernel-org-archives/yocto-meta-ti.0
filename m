@@ -1,113 +1,158 @@
-Return-Path: <rs@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FA0CC25B4E
-	for <webhook@archiver.kernel.org>; Fri, 20 Jan 2023 18:50:30 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.83265.1674240627505593952
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2BDEC05027
+	for <webhook@archiver.kernel.org>; Fri, 20 Jan 2023 20:51:30 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.86596.1674247885267541308
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 20 Jan 2023 10:50:27 -0800
+ Fri, 20 Jan 2023 12:51:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=lxCd+OZD;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: rs@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30KIoMjA087406;
-	Fri, 20 Jan 2023 12:50:22 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1674240622;
-	bh=5025geGtiknqMwolkcbLLBRGfQ9pcYg/jstEvoLvVdQ=;
-	h=Date:From:Subject:To:CC:In-Reply-To:References;
-	b=lxCd+OZDzi9IyffTl8WOHKXwuAIQG08l37D3N5+uoFSIYGMwiI8TmpB1CVVUd/1dl
-	 Pd7t/QpQTsGdZGQQNddrnIzPzZgX3ONjZs6qOKObAjh/7h62KG93Lm1sbqIwPr5UPr
-	 GnOVLdCIcoti8J9ZpnwVrMJdl55Y7KAZlvBHJPVE=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30KIoMLl063837
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 20 Jan 2023 12:50:22 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Fri, 20
- Jan 2023 12:50:22 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Fri, 20 Jan 2023 12:50:22 -0600
-Received: from res.dhcp.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 30KIoLNQ043267;
-	Fri, 20 Jan 2023 12:50:21 -0600
-Date: Fri, 20 Jan 2023 12:50:16 -0600
-From: "Sapp, Randolph" <rs@ti.com>
-Subject: Re: [EXTERNAL] Re: [meta-ti] [master/kirkstone][PATCH] all: Graphics
- recipe overhaul
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <denys@ti.com>, <reatmon@ti.com>, <detheridge@ti.com>,
-        <meta-ti@lists.yoctoproject.org>, <k-bhargav@ti.com>
-Message-ID: <SBSSOR.I33PHI6LU4AA@ti.com>
-In-Reply-To: <20230120182636.GP22689@denix.org>
-References: <20230119204026.1297616-1-rs@ti.com>
-	<20230120182636.GP22689@denix.org>
-X-Mailer: geary/40.0
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 2E17540C90;
+	Fri, 20 Jan 2023 20:51:24 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id SSItafcfRU64; Fri, 20 Jan 2023 20:51:24 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0A82E40C06;
+	Fri, 20 Jan 2023 20:51:22 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 99680163700; Fri, 20 Jan 2023 15:51:02 -0500 (EST)
+Date: Fri, 20 Jan 2023 15:51:02 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: afd@ti.com
+Cc: Ryan Eatmon <reatmon@ti.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][master/kirkstone][PATCH 7/7] conf: machine: Rework
+ do_image_wic dependencies
+Message-ID: <20230120205102.GQ22689@denix.org>
+References: <20221207214312.21735-1-afd@ti.com>
+ <20221207214312.21735-7-afd@ti.com>
+ <20230118183615.GH22689@denix.org>
+ <c0991227-de85-79a1-45a9-76fbce3f3e96@ti.com>
+ <173B82AA29E7A438.24231@lists.yoctoproject.org>
+ <20230118210820.GJ22689@denix.org>
+ <22286775-1f42-b72f-3a31-fd998fadd96f@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"; format=flowed
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <22286775-1f42-b72f-3a31-fd998fadd96f@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 20 Jan 2023 18:50:30 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15613
+ <meta-ti@lists.yoctoproject.org>; Fri, 20 Jan 2023 20:51:30 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15614
 
-On Fri, Jan 20 2023 at 01:26:36 PM -0500, Denys Dmytriyenko 
-<denis@denix.org> wrote:
-> E.g. if you are copying the entire Mesa set of recipes, include files 
-> and
-> patches, it should have been a separate patch with just that w/o any
-> modifications, clearly stating that this is a verbatim copy and 
-> specify which
-> repo and branch/tag they are being picked up from - openembedded-core 
-> repo,
-> kirkstone branch.
+On Wed, Jan 18, 2023 at 04:30:07PM -0600, Andrew Davis via lists.yoctoproject.org wrote:
+> On 1/18/23 3:08 PM, Denys Dmytriyenko wrote:
+> >On Wed, Jan 18, 2023 at 03:55:29PM -0500, Denys Dmytriyenko wrote:
+> >>Well, it wasn't as simple as just adding the conf file...
+> >>
+> >>Anyway, I'm beginning to suspect that J721e SR1.1 is identical to SR1 for GP
+> >>devices and only differs for HS devices. See this code in the imggen Makefile:
 > 
-> But then I would argue that a simple mesa_%.bbappend is smaller and 
-> much
-> easire to review. For example, I took your previous v4 revision of 
-> the patch
-> and dropped all copies of upstream Mesa, replacing it with a bbappend:
-> https://patchwork.yoctoproject.org/project/ti/patch/20230119010333.3414485-1-denis@denix.org/
+> Your suspicion is correct, SR1.1 is a re-spin made to fix a ROM bug relating to HS,
+> and so SR1.1 GP chips are effectively the same as SR1.0 GP.
+> 
+> >Second, do we want to go back to SR1.1 only for HS, or jump through the hoops
+> >to make it work for GP as well?
+> 
+> I'd imagine there are very few SR1.0 HS chips left out there, and none went to
+> production, might be time we drop that support instead. Then just go back to
+> one type for J721e HS and call it the same for both GP and HS, drop all the
+> _sr1_1 postfixes or add them to GP (since it doesn't matter for GP).
 
-Right, sorry about that. You are correct that the duplication of mesa 
-and mesa patches should have occurred in a separate patch, however it 
-should not be a blanket BB appends. The reason this duplication exists 
-is that upstream mesa will move faster than our modified versions (as 
-much as I would like to avoid it) and this will prevent things from 
-silently creeping forward and breaking. The umlibs are still dependent 
-on particular, patched releases of mesa.
+I've posted a re-spin of this series last night with this change:
+https://patchwork.yoctoproject.org/project/ti/list/?series=9825
 
-On Fri, Jan 20 2023 at 01:26:36 PM -0500, Denys Dmytriyenko 
-<denis@denix.org> wrote:
-> I looked at this repo - it's a personal copy of upstream Mesa with 
-> Imagination
-> PVR patches applied on top. Was it reviewed and approved by OSRB? 
-> Were the
-> patches made public before and/or permitted to be 
-> published/distributed?
+Only #7 is different:
+https://patchwork.yoctoproject.org/project/ti/patch/20230120014050.1988728-7-denis@denix.org/
 
-Those patches inherited the license of mesa and therefore did not need 
-approval from OSRB. I did, however, get IMG's grace to release them 
-anyway. The reason why it's a personal repo is there is certain 
-functionality that I believe can be upstreamed and I believe hosting 
-that process on freedesktop will help reduce friction and be a little 
-more transparent about our efforts.
+Here's the exact change between v1 and v2, dropping sr1-1 multiconfig:
 
-On Fri, Jan 20 2023 at 01:26:36 PM -0500, Denys Dmytriyenko 
-<denis@denix.org> wrote:
-> Only rogue?
 
-Only rogue. I added all the necessary hooks for sgx but it still needs 
-work before it can fall in line with my changes. The mesa layer needs 
-some TLC and the umlibs will need some packaging changes. Thankfully 
-SGX can now be disabled until we have it working by removing 
-powervr-sgx-graphics from the distro features string.
+From e06c62f5ba6e37c6a8ee513010bff794f7e1b1cf Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denis@denix.org>
+Date: Fri, 20 Jan 2023 01:08:28 +0000
+Subject: [PATCH] fixup! conf: machine: Rework do_image_wic dependencies
 
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+---
+ meta-ti-bsp/conf/machine/include/j721e.inc            |  6 ------
+ meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5-sr1-1.conf | 11 -----------
+ meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf       |  3 +--
+ meta-ti-bsp/conf/multiconfig/k3r5-sr1-1.conf          |  3 ---
+ 4 files changed, 1 insertion(+), 22 deletions(-)
+ delete mode 100644 meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5-sr1-1.conf
+ delete mode 100644 meta-ti-bsp/conf/multiconfig/k3r5-sr1-1.conf
+
+diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/conf/machine/include/j721e.inc
+index 6322fe46..eba10d8d 100644
+--- a/meta-ti-bsp/conf/machine/include/j721e.inc
++++ b/meta-ti-bsp/conf/machine/include/j721e.inc
+@@ -12,14 +12,8 @@ PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
+ # On J721e the file tiboot3.bin comes from the bootloader not ti-sci-fw
+ do_image_wic[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy"
+ 
+-# Default sysfw.itb on J721e is for SR1.1
+-BBMULTICONFIG += "k3r5-sr1-1"
+-do_image_wic[mcdepends] += "mc::k3r5-sr1-1:ti-sci-fw:do_deploy"
+ IMAGE_BOOT_FILES += "sysfw.itb"
+ 
+-# Since default sysfw.itb on J721e is for SR1.1, add a version for SR1.0
+-IMAGE_BOOT_FILES += "sysfw-j721e-evm.itb"
+-
+ TFA_BOARD = "generic"
+ 
+ OPTEEMACHINE = "k3-j721e"
+diff --git a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5-sr1-1.conf b/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5-sr1-1.conf
+deleted file mode 100644
+index 6e809f46..00000000
+--- a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5-sr1-1.conf
++++ /dev/null
+@@ -1,11 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: J721e SR1.1 HS EVM (R5F)
+-#@DESCRIPTION: Machine configuration for the TI J721e SR1.1 HS EVM (R5F core)
+-
+-# Booting SR1.1 requires different SYSFW, the rest is handled at runtime
+-
+-require conf/machine/j721e-hs-evm-k3r5.conf
+-SOC_FAMILY:append = ":k3r5-sr1-1"
+-
+-SYSFW_SOC = "j721e_sr1_1"
+-SYSFW_SYMLINK = "sysfw.itb"
+diff --git a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf b/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
+index a0d000b2..56312c0c 100644
+--- a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
+@@ -4,10 +4,9 @@
+ 
+ require conf/machine/include/k3r5.inc
+ 
+-SYSFW_SOC = "j721e"
++SYSFW_SOC = "j721e_sr1_1"
+ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "hs"
+-SYSFW_SYMLINK = ""
+ 
+ SPL_BINARY = "spl/u-boot-spl.${UBOOT_SUFFIX}"
+ SPL_SYMLINK = "u-boot-r5spl.${UBOOT_SUFFIX}"
+diff --git a/meta-ti-bsp/conf/multiconfig/k3r5-sr1-1.conf b/meta-ti-bsp/conf/multiconfig/k3r5-sr1-1.conf
+deleted file mode 100644
+index 428f2212..00000000
+--- a/meta-ti-bsp/conf/multiconfig/k3r5-sr1-1.conf
++++ /dev/null
+@@ -1,3 +0,0 @@
+-require k3r5.conf
+-
+-MACHINE:append = "-sr1-1"
+-- 
+2.25.1
 
 
