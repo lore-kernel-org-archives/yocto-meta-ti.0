@@ -2,186 +2,281 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C358C678DC
-	for <webhook@archiver.kernel.org>; Fri, 20 Jan 2023 01:41:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 218FBC004D4
+	for <webhook@archiver.kernel.org>; Fri, 20 Jan 2023 01:48:15 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.64435.1674178854877121925
+ by mx.groups.io with SMTP id smtpd.web11.64615.1674179285267023459
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 19 Jan 2023 17:40:55 -0800
+ Thu, 19 Jan 2023 17:48:05 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id CF67640C13
-	for <meta-ti@lists.yoctoproject.org>; Fri, 20 Jan 2023 01:40:53 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id AC2FF40C56;
+	Fri, 20 Jan 2023 01:48:04 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lbPKpdoTK2i0 for <meta-ti@lists.yoctoproject.org>;
-	Fri, 20 Jan 2023 01:40:53 +0000 (UTC)
+	with ESMTP id iWAlj1qx6AGI; Fri, 20 Jan 2023 01:48:04 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id AD5DC40CA2
-	for <meta-ti@lists.yoctoproject.org>; Fri, 20 Jan 2023 01:40:53 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8E20440A3D;
+	Fri, 20 Jan 2023 01:48:03 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id C9789163706
-	for <meta-ti@lists.yoctoproject.org>; Thu, 19 Jan 2023 20:40:32 -0500 (EST)
+	by mail.denix.org (Postfix) with ESMTP id E9CD41636FE;
+	Thu, 19 Jan 2023 20:47:44 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master/kirkstone][PATCH v2 5/7] conf: machine: Remove OPTEEOUTPUTMACHINE definition
-Date: Fri, 20 Jan 2023 01:40:48 +0000
-Message-Id: <20230120014050.1988728-5-denis@denix.org>
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [RFC][master/kirkstone][PATCH] meta-ti-bsp: add BeagleBone AI-64 support
+Date: Fri, 20 Jan 2023 01:48:02 +0000
+Message-Id: <20230120014802.1989155-1-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230120014050.1988728-1-denis@denix.org>
-References: <20230120014050.1988728-1-denis@denix.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 20 Jan 2023 01:41:05 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15602
+ <meta-ti@lists.yoctoproject.org>; Fri, 20 Jan 2023 01:48:15 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15608
 
-From: Andrew Davis <afd@ti.com>
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-This was used in the base Linaro optee-os_git.bb recipe, it is
-no longer used, remove it from our boards.
-
-Signed-off-by: Andrew Davis <afd@ti.com>
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
-v2 - no changes
+ .../conf/machine/beaglebone-ai64-k3r5.conf    | 22 ++++++
+ meta-ti-bsp/conf/machine/beaglebone-ai64.conf | 79 +++++++++++++++++++
+ .../recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb    |  3 +
+ .../recipes-bsp/u-boot/u-boot-bb.org_git.bb   | 14 ++++
+ .../recipes-kernel/linux/linux-bb.org_git.bb  | 35 ++++++++
+ 5 files changed, 153 insertions(+)
+ create mode 100644 meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf
+ create mode 100644 meta-ti-bsp/conf/machine/beaglebone-ai64.conf
+ create mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
 
- meta-ti-bsp/conf/machine/am437x-hs-evm.conf | 1 -
- meta-ti-bsp/conf/machine/am57xx-hs-evm.conf | 1 -
- meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf | 1 -
- meta-ti-bsp/conf/machine/include/am62xx.inc | 1 -
- meta-ti-bsp/conf/machine/include/am64xx.inc | 1 -
- meta-ti-bsp/conf/machine/include/am65xx.inc | 1 -
- meta-ti-bsp/conf/machine/include/j7200.inc  | 1 -
- meta-ti-bsp/conf/machine/include/j721e.inc  | 1 -
- meta-ti-bsp/conf/machine/include/j721s2.inc | 1 -
- meta-ti-bsp/conf/machine/include/j784s4.inc | 1 -
- 10 files changed, 10 deletions(-)
-
-diff --git a/meta-ti-bsp/conf/machine/am437x-hs-evm.conf b/meta-ti-bsp/co=
-nf/machine/am437x-hs-evm.conf
-index 68b808d2..cdd664ac 100644
---- a/meta-ti-bsp/conf/machine/am437x-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am437x-hs-evm.conf
-@@ -15,6 +15,5 @@ TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_CAT}/am4x"
+diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf b/meta-ti=
+-bsp/conf/machine/beaglebone-ai64-k3r5.conf
+new file mode 100644
+index 00000000..3cb0d006
+--- /dev/null
++++ b/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf
+@@ -0,0 +1,22 @@
++#@TYPE: Machine
++#@NAME: BeagleBone AI-64 (R5F)
++#@DESCRIPTION: Machine configuration for the TI BeagleBone AI-64 (R5F co=
+re)
++
++require conf/machine/include/k3r5.inc
++
++PREFERRED_PROVIDER_virtual/bootloader =3D "u-boot-bb.org"
++PREFERRED_PROVIDER_u-boot =3D "u-boot-bb.org"
++
++SYSFW_SOC =3D "j721e"
++SYSFW_CONFIG =3D "evm"
++SYSFW_SUFFIX =3D "gp"
++
++SPL_BINARY =3D "spl/u-boot-spl.${UBOOT_SUFFIX}"
++SPL_SYMLINK =3D "u-boot-r5spl.${UBOOT_SUFFIX}"
++UBOOT_BINARY =3D "tiboot3.${UBOOT_SUFFIX}"
++UBOOT_IMAGE =3D "tiboot3-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
++UBOOT_SYMLINK =3D "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
++
++UBOOT_MACHINE =3D "j721e_evm_r5_defconfig"
++
++TI_SECURE_DEV_PKG_K3 =3D "none"
+diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf b/meta-ti-bsp/=
+conf/machine/beaglebone-ai64.conf
+new file mode 100644
+index 00000000..ec625713
+--- /dev/null
++++ b/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
+@@ -0,0 +1,79 @@
++#@TYPE: Machine
++#@NAME: BeagleBone AI-64 machine
++#@DESCRIPTION: Machine configuration for the http://beagleboard.org/ai-6=
+4 board
++
++require conf/machine/include/j721e.inc
++
++SERIAL_CONSOLES =3D "115200;ttyS2 115200;ttyS3"
++SERIAL_CONSOLES_CHECK =3D "${SERIAL_CONSOLES}"
++
++UBOOT_MACHINE =3D "j721e_evm_a72_config"
++
++PREFERRED_PROVIDER_virtual/kernel =3D "linux-bb.org"
++PREFERRED_PROVIDER_virtual/bootloader =3D "u-boot-bb.org"
++PREFERRED_PROVIDER_u-boot =3D "u-boot-bb.org"
++
++KERNEL_DEVICETREE =3D " \
++ti/k3-j721e-beagleboneai64-no-shared-mem.dtb \
++ti/k3-j721e-proc-board-tps65917.dtb \
++ti/k3-j721e-beagleboneai64.dtb \
++ti/k3-j721e-sk.dtb \
++ti/k3-j721e-common-proc-board.dtb \
++ti/k3-j721e-fpdlink-imx390-cm-1-0.dtbo \
++ti/k3-j721e-fpdlink-imx390-cm-0-2.dtbo \
++ti/k3-j721e-fpdlink-imx390-rcm-0-3.dtbo \
++ti/k3-j721e-fpdlink-imx390-rcm-0-0.dtbo \
++ti/k3-j721e-fpdlink-imx390-cm-0-3.dtbo \
++ti/k3-j721e-common-proc-board-infotainment.dtbo \
++ti/k3-j721e-sk-rpi-cam-imx219.dtbo \
++ti/k3-j721e-fpdlink-imx390-rcm-1-2.dtbo \
++ti/k3-j721e-fpdlink-imx390-cm-1-1.dtbo \
++ti/k3-j721e-sk-rpi-hdr-ehrpwm.dtbo \
++ti/k3-j721e-fpdlink-imx390-cm-0-0.dtbo \
++ti/k3-j721e-fpdlink-imx390-rcm-0-2.dtbo \
++ti/k3-j721e-fpdlink-imx390-rcm-1-3.dtbo \
++ti/k3-j721e-cpb-csi2-ov5640.dtbo \
++ti/k3-j721e-fpdlink-sk-fusion.dtbo \
++ti/k3-j721e-sk-csi2-ov5640.dtbo \
++ti/k3-j721e-fpdlink-imx390-rcm-1-1.dtbo \
++ti/k3-j721e-fpdlink-imx390-rcm-0-1.dtbo \
++ti/k3-j721e-fpdlink-imx390-cm-1-3.dtbo \
++ti/k3-j721e-fpdlink-imx390-cm-1-2.dtbo \
++ti/k3-j721e-fpdlink-cpb-fusion.dtbo \
++ti/k3-j721e-fpdlink-imx390-cm-0-1.dtbo \
++ti/k3-j721e-quad-port-eth-exp.dtbo \
++ti/k3-j721e-fpdlink-imx390-rcm-1-0.dtbo \
++ti/k3-j721e-gesi-exp-board.dtbo \
++ti/overlays/BONE-LED_P9_11.dtbo \
++ti/overlays/BBAI64-P9_25-ehrpwm4_b.dtbo \
++ti/overlays/BONE-I2C3.dtbo \
++ti/overlays/J721E-PRU-UIO-00A0.dtbo \
++ti/overlays/BONE-PWM2.dtbo \
++ti/overlays/BONE-FAN.dtbo \
++ti/overlays/BONE-SPI0_0.dtbo \
++ti/overlays/BONE-PWM1.dtbo \
++ti/overlays/BBORG_RELAY-00A2.dtbo \
++ti/overlays/BONE-SPI0_1.dtbo \
++ti/overlays/BBAI64-P8_37-ehrpwm5_a.dtbo \
++ti/overlays/BONE-USB0-host.dtbo \
++ti/overlays/k3-j721e-beagleboneai64-RPi-7inch-panel.dtbo \
++ti/overlays/BONE-I2C1.dtbo \
++ti/overlays/BB-I2C2-MPU6050.dtbo \
++ti/overlays/BONE-I2C2.dtbo \
++ti/overlays/BONE-PWM0.dtbo \
++ti/overlays/BBORG_LOAD-00A2.dtbo \
++ti/overlays/BBORG_SERVO-00A2.dtbo \
++ti/overlays/robotics-cape.dtbo \
++ti/overlays/BBAI64-CSI1-imx219.dtbo \
++ti/overlays/BONE-UART1.dtbo \
++ti/overlays/BONE-LED_P8_03.dtbo \
++ti/overlays/BBAI64-DSI-RPi-7inch-panel.dtbo \
++ti/overlays/BBAI64-CSI0-imx219.dtbo \
++"
++
++IMAGE_BOOT_FILES +=3D "sysfw.itb"
++
++MACHINE_GUI_CLASS =3D "bigscreen"
++MACHINE_FEATURES +=3D "screen"
++
++MACHINE_ESSENTIAL_EXTRA_RDEPENDS +=3D "kernel-devicetree kernel-image-im=
+age"
+diff --git a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/meta-ti=
+-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index c99cd660..8fbb0fcb 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -9,6 +9,7 @@ DEPENDS:remove:am65xx-hs-evm-k3r5-sr2 =3D "virtual/bootlo=
+ader"
+ DEPENDS:remove:j721e-evm-k3r5 =3D "virtual/bootloader"
+ DEPENDS:remove:j721e-hs-evm-k3r5 =3D "virtual/bootloader"
+ DEPENDS:remove:j721e-hs-evm-k3r5-sr1-1 =3D "virtual/bootloader"
++DEPENDS:remove:beaglebone-ai64-k3r5 =3D "virtual/bootloader"
+ DEPENDS:append =3D "${@ '' if d.getVar('TI_SECURE_DEV_PKG_K3') else ' ti=
+-k3-secdev-native' }"
 =20
- OPTEEMACHINE =3D "ti-am43xx"
- OPTEEFLAVOR =3D "am43xx"
--OPTEEOUTPUTMACHINE =3D "ti"
+ CLEANBROKEN =3D "1"
+@@ -31,6 +32,7 @@ SYSFW_PREFIX =3D "sci"
+ SYSFW_PREFIX:j721e-evm-k3r5 =3D "fs"
+ SYSFW_PREFIX:j721e-hs-evm-k3r5 =3D "fs"
+ SYSFW_PREFIX:j721e-hs-evm-k3r5-sr1-1 =3D "fs"
++SYSFW_PREFIX:beaglebone-ai64-k3r5 =3D "fs"
+ SYSFW_PREFIX:j7200-evm-k3r5 =3D "fs"
+ SYSFW_PREFIX:j7200-hs-evm-k3r5 =3D "fs"
+ SYSFW_PREFIX:j721s2-evm-k3r5 =3D "fs"
+@@ -68,6 +70,7 @@ EXTRA_OEMAKE:remove:am65xx-hs-evm-k3r5-sr2 =3D "SBL=3D"=
+${STAGING_DIR_HOST}/boot/u-bo
+ EXTRA_OEMAKE:remove:j721e-evm-k3r5 =3D "SBL=3D"${STAGING_DIR_HOST}/boot/=
+u-boot-spl.bin""
+ EXTRA_OEMAKE:remove:j721e-hs-evm-k3r5 =3D "SBL=3D"${STAGING_DIR_HOST}/bo=
+ot/u-boot-spl.bin""
+ EXTRA_OEMAKE:remove:j721e-hs-evm-k3r5-sr1-1 =3D "SBL=3D"${STAGING_DIR_HO=
+ST}/boot/u-boot-spl.bin""
++EXTRA_OEMAKE:remove:beaglebone-ai64-k3r5 =3D "SBL=3D"${STAGING_DIR_HOST}=
+/boot/u-boot-spl.bin""
 =20
- EXTRA_IMAGEDEPENDS +=3D "optee-os"
-diff --git a/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf b/meta-ti-bsp/co=
-nf/machine/am57xx-hs-evm.conf
-index 5232cbd9..1e63f5d2 100644
---- a/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf
-@@ -15,7 +15,6 @@ TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_AUTO}/am5x"
-=20
- OPTEEMACHINE =3D "ti-am57xx"
- OPTEEFLAVOR =3D "am57xx"
--OPTEEOUTPUTMACHINE =3D "ti"
- OPTEEPAGER =3D "y"
-=20
- EXTRA_IMAGEDEPENDS +=3D "optee-os"
-diff --git a/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf b/meta-ti-bsp/co=
-nf/machine/dra7xx-hs-evm.conf
-index 49630081..810d53ed 100644
---- a/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf
-@@ -15,7 +15,6 @@ TI_SECURE_DEV_PKG =3D "${TI_SECURE_DEV_PKG_AUTO}/dra7"
-=20
- OPTEEMACHINE =3D "ti-dra7xx"
- OPTEEFLAVOR =3D "dra7xx"
--OPTEEOUTPUTMACHINE =3D "ti"
- OPTEEPAGER =3D "y"
-=20
- EXTRA_IMAGEDEPENDS +=3D "optee-os"
-diff --git a/meta-ti-bsp/conf/machine/include/am62xx.inc b/meta-ti-bsp/co=
-nf/machine/include/am62xx.inc
-index a5aad994..9d8bc87c 100644
---- a/meta-ti-bsp/conf/machine/include/am62xx.inc
-+++ b/meta-ti-bsp/conf/machine/include/am62xx.inc
-@@ -19,4 +19,3 @@ TFA_BOARD =3D "lite"
- TFA_K3_SYSTEM_SUSPEND =3D "1"
-=20
- OPTEEMACHINE =3D "k3-am62x"
--OPTEEOUTPUTMACHINE =3D "k3"
-diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/co=
-nf/machine/include/am64xx.inc
-index 055f6036..7c46b630 100644
---- a/meta-ti-bsp/conf/machine/include/am64xx.inc
-+++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
-@@ -33,4 +33,3 @@ do_image_tar[mcdepends] +=3D "mc::k3r5-sr2-hs-se:ti-sci=
--fw:do_deploy"
-=20
- TFA_BOARD =3D "lite"
- OPTEEMACHINE =3D "k3-am64x"
--OPTEEOUTPUTMACHINE =3D "k3"
-diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/co=
-nf/machine/include/am65xx.inc
-index 80aa6d27..14e0d07f 100644
---- a/meta-ti-bsp/conf/machine/include/am65xx.inc
-+++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
-@@ -38,4 +38,3 @@ do_image_wic[mcdepends] +=3D "mc::k3r5-sr2:ti-sci-fw:do=
-_deploy"
- do_image_tar[mcdepends] +=3D "mc::k3r5-sr2:ti-sci-fw:do_deploy"
-=20
- OPTEEMACHINE =3D "k3-am65x"
--OPTEEOUTPUTMACHINE =3D "k3"
-diff --git a/meta-ti-bsp/conf/machine/include/j7200.inc b/meta-ti-bsp/con=
-f/machine/include/j7200.inc
-index 3aedb3f8..1eaf7806 100644
---- a/meta-ti-bsp/conf/machine/include/j7200.inc
-+++ b/meta-ti-bsp/conf/machine/include/j7200.inc
-@@ -2,4 +2,3 @@ require conf/machine/include/k3.inc
- SOC_FAMILY:append =3D ":j7200"
-=20
- OPTEEMACHINE =3D "k3-j721e"
--OPTEEOUTPUTMACHINE =3D "k3"
-diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/con=
-f/machine/include/j721e.inc
-index 8a6c2bec..34569a01 100644
---- a/meta-ti-bsp/conf/machine/include/j721e.inc
-+++ b/meta-ti-bsp/conf/machine/include/j721e.inc
-@@ -2,7 +2,6 @@ require conf/machine/include/k3.inc
- SOC_FAMILY:append =3D ":j721e"
-=20
- OPTEEMACHINE =3D "k3-j721e"
--OPTEEOUTPUTMACHINE =3D "k3"
-=20
- MACHINE_FEATURES +=3D "gpu"
-=20
-diff --git a/meta-ti-bsp/conf/machine/include/j721s2.inc b/meta-ti-bsp/co=
-nf/machine/include/j721s2.inc
-index 4959ad8f..2a60458e 100644
---- a/meta-ti-bsp/conf/machine/include/j721s2.inc
-+++ b/meta-ti-bsp/conf/machine/include/j721s2.inc
-@@ -2,7 +2,6 @@ require conf/machine/include/k3.inc
- SOC_FAMILY:append =3D ":j721s2"
-=20
- OPTEEMACHINE =3D "k3-j721e"
--OPTEEOUTPUTMACHINE =3D "k3"
-=20
- MACHINE_FEATURES +=3D "gpu"
-=20
-diff --git a/meta-ti-bsp/conf/machine/include/j784s4.inc b/meta-ti-bsp/co=
-nf/machine/include/j784s4.inc
-index 83d7c760..e2f053ac 100644
---- a/meta-ti-bsp/conf/machine/include/j784s4.inc
-+++ b/meta-ti-bsp/conf/machine/include/j784s4.inc
-@@ -2,7 +2,6 @@ require conf/machine/include/k3.inc
- SOC_FAMILY:append =3D ":j784s4"
-=20
- OPTEEMACHINE =3D "k3-j721e"
--OPTEEOUTPUTMACHINE =3D "k3"
-=20
- MACHINE_FEATURES +=3D "gpu"
-=20
+ do_compile() {
+ 	cd ${WORKDIR}/imggen/
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb b/meta-t=
+i-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb
+new file mode 100644
+index 00000000..28a347be
+--- /dev/null
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb
+@@ -0,0 +1,14 @@
++require u-boot-ti.inc
++
++SUMMARY =3D "BeagleBoard.org U-Boot"
++
++COMPATIBLE_MACHINE =3D "beagle.*"
++
++LIC_FILES_CHKSUM =3D "file://Licenses/README;md5=3D5a7450c57ffe5ae63fd73=
+2446b988025"
++
++PV =3D "2021.01"
++
++UBOOT_GIT_URI =3D "git://git.beagleboard.org/beagleboard/u-boot.git"
++UBOOT_GIT_PROTOCOL =3D "https"
++BRANCH =3D "v2021.01-ti-08.05.00.005-SDK-8.5"
++SRCREV =3D "46ff4982b41067e5c93369bddd49b1541856d80b"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb b/meta-=
+ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
+new file mode 100644
+index 00000000..2e0f2448
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
+@@ -0,0 +1,35 @@
++SECTION =3D "kernel"
++SUMMARY =3D "BeagleBoard.org Linux kernel"
++LICENSE =3D "GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6bc538ed5bd9a7fc9398086aedcd7=
+e46"
++
++COMPATIBLE_MACHINE =3D "beagle.*"
++
++inherit kernel
++
++require recipes-kernel/linux/ti-kernel.inc
++
++DEPENDS +=3D "gmp-native libmpc-native"
++
++KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT} ${EXTRA_DTC_ARGS}=
+"
++
++S =3D "${WORKDIR}/git"
++
++# 5.10.145 version
++SRCREV =3D "9b11aaf2cdb1861ca74dc69d032a0f94cdd32bd6"
++PV =3D "5.10.145+git${SRCPV}"
++BRANCH =3D "5.10"
++
++# 5.10.153 version
++SRCREV:k3 =3D "11ebcc09f32669fac8254dff56d500f86c4c2caf"
++PV:k3 =3D "5.10.153+git${SRCPV}"
++BRANCH:k3 =3D "5.10-arm64"
++
++SRC_URI =3D "git://git.beagleboard.org/beagleboard/linux.git;protocol=3D=
+https;branch=3D${BRANCH}"
++
++DEFCONFIG_NAME =3D "bb.org_defconfig"
++KERNEL_CONFIG_COMMAND =3D "oe_runmake -C ${S} O=3D${B} ${DEFCONFIG_NAME}=
+"
++
++kernel_do_compile:append() {
++	oe_runmake dtbs CC=3D"${KERNEL_CC} $cc_extra " LD=3D"${KERNEL_LD}" ${KE=
+RNEL_EXTRA_ARGS}
++}
 --=20
 2.25.1
 
