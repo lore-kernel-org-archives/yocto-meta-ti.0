@@ -1,79 +1,135 @@
-Return-Path: <afd@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C29EAC05027
-	for <webhook@archiver.kernel.org>; Thu, 26 Jan 2023 20:12:35 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.84895.1674763955204089284
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DEC6BC54EAA
+	for <webhook@archiver.kernel.org>; Thu, 26 Jan 2023 20:46:55 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.85814.1674766009907953584
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 26 Jan 2023 12:12:35 -0800
+ Thu, 26 Jan 2023 12:46:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=FsOySrQ0;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30QKCYoe113782
-	for <meta-ti@lists.yoctoproject.org>; Thu, 26 Jan 2023 14:12:34 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1674763954;
-	bh=LvshhczaVlPk8ENWmffasAjeLzukzHtlgdH3H4WW8j4=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=FsOySrQ0tW2uBSeHjiqi3bap6idA1cOe/UJDZcEVUzLQrYuSzLwtID1A/X4ij63iC
-	 wbOayDCvusgMccxWDeys1i3dFMLnB2IVNwj4D5TRAsq8N2P3T9FpOGWIWnS06qr6o6
-	 H52E9hAiakukd0+1WlJ9Mtczgco2yLmMpU+HYAMM=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30QKCYdC012270
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 26 Jan 2023 14:12:34 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Thu, 26
- Jan 2023 14:12:34 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Thu, 26 Jan 2023 14:12:34 -0600
-Received: from [10.250.32.60] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 30QKCXZu096268;
-	Thu, 26 Jan 2023 14:12:33 -0600
-Message-ID: <17b223ed-820b-5391-eead-4c533a421c08@ti.com>
-Date: Thu, 26 Jan 2023 14:12:33 -0600
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [kirkstone PATCH 2/4] meta-ti-bsp: graphics: Resolve dependency
- chain
-Content-Language: en-US
-To: "Sapp, Randolph" <rs@ti.com>
-CC: <denys@ti.com>, <reatmon@ti.com>, <detheridge@ti.com>,
-        <meta-ti@lists.yoctoproject.org>, <k-bhargav@ti.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id BC6E840BEC;
+	Thu, 26 Jan 2023 20:46:48 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id WLfFHLPB2KXh; Thu, 26 Jan 2023 20:46:48 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 74B5B40301;
+	Thu, 26 Jan 2023 20:46:42 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 2E644163711; Thu, 26 Jan 2023 15:46:22 -0500 (EST)
+Date: Thu, 26 Jan 2023 15:46:22 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: afd@ti.com
+Cc: Randolph Sapp <rs@ti.com>, denys@ti.com, reatmon@ti.com,
+	detheridge@ti.com, meta-ti@lists.yoctoproject.org, k-bhargav@ti.com
+Subject: Re: [meta-ti] [kirkstone PATCH 0/4] Graphics, graphics, and more
+ graphics
+Message-ID: <20230126204622.GC22689@denix.org>
 References: <20230126030834.3889448-1-rs@ti.com>
- <20230126030834.3889448-3-rs@ti.com>
- <d9a4cb78-2d78-1d33-d8d9-7ffeb2c8811f@ti.com> <WJY3PR.TPQTGC21E7EJ2@ti.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <WJY3PR.TPQTGC21E7EJ2@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+ <20c385bc-b3ad-8e2f-064c-d7d932b8b88f@ti.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20c385bc-b3ad-8e2f-064c-d7d932b8b88f@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 26 Jan 2023 20:12:35 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15682
+ <meta-ti@lists.yoctoproject.org>; Thu, 26 Jan 2023 20:46:55 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15683
 
-On 1/26/23 1:38 PM, Sapp, Randolph wrote:
-> On Thu, Jan 26 2023 at 11:54:18 -06:00:00, Andrew Davis <afd@ti.com> wrote:
->>
->>     -# The actual SONAME is libGLESv2.so.2, so need to explicitly specify RPROVIDES for .so.1 here -RPROVIDES:${PN} += "libGLESv2.so.1" +RDEPENDS:${PN} += "libdrm libdrm-omap" 
->>
->> These are not runtime dependencies, libdrm is still regular built time DEPENDS. (libdrm-omap can be dropped, we don't need that at all anymore) Runtime we do need udev so this should all be now: DEPENDS += "libdrm" DEPENDS:append:libc-musl = " gcompat" RDEPENDS:${PN} += "udev" 
+On Thu, Jan 26, 2023 at 12:13:37PM -0600, Andrew Davis via lists.yoctoproject.org wrote:
+> On 1/25/23 9:08 PM, Randolph Sapp wrote:
+> >Alright, this is the 6th revision of this patch. This uses a revised
 > 
-> There should be no build dependencies for a binary package. What new dependency did you engineer?
+> I've personally had series go to v15+ and v30+ is not unheard of upstream :)
+> 
+> The subject tag look wrong, recommend something like:
+> 
+> >git format-patch origin/kirkstone -o output -C --cover-letter --subject-prefix="meta-ti][master/kirkstone][PATCH v6"
 
-If the binaries depend on a lib then yocto will detect that and set it as a runtime dependency
-for you. If not in the sysroot dir when we install the binaries then yocto will do
-the opposite and complain that it cannot find some libraries that binaries in the package
-link against. We solve both by using DEPENDS here.
+1. You can drop "meta-ti" part in the subject as the mailing list will add it
+2. I thought we wanted to go for kirkstone first to avoid duplicating upstream 
+mesa, hence "kirkstone" is more correct, instead of "master/kirkstone"
 
-Andrew
+
+> Andrew
+> 
+> >dependency chain (hopefully it's a little more logical) and some, well,
+> >interesting switching logic using the PACKAGECONFIG and
+> >virtual/gpudriver PREFERRED_PROVIDER override variable. I'm not sure how
+> >I feel about it, but it solves the issue of silently configuring things
+> >as needed without other layers manually enabling features.
+> >
+> >We basically dynamically adjust mesa's PACKAGECONFIG based on what our
+> >selected gpudriver (and display controller, thanks sgx) is. We also add
+> >a runtime recommendation on the gpudriver after this configuration.
+> >
+> >The gpudriver providers didn't change too much, they just have a runtime
+> >recommendation for the associated um components. As it stands, the um
+> >components can live alongside the software rendering components thanks
+> >to the mesa-megadriver being able to automatically switch as necessary
+> >at runtime, so we will not clobber mesa's usual packages.
+> >
+> >Then we drop all mentions of the gpu machine feature for good measure.
+> >
+> >"Why didn't you just add preferred providers for libgles2, etc, etc."
+> >Well, software rendering. If we do that we'll have to edit the
+> >PACKAGECONFIG to drop gles components from mesa, disabling software
+> >rendering. We could add a dynamic switch to do that, but honestly
+> >keeping in line with KISS, this solution has fewer lines and less logic
+> >while keeping swrast as a nice fallback for whenever anything really
+> >goes south... not that I'm expecting that or anything.
+> >
+> >Randolph Sapp (4):
+> >   meta-ti-bsp: mesa: Add current patches
+> >   meta-ti-bsp: graphics: Resolve dependency chain
+> >   meta-ti-bsp: machine: Remove all gpu features
+> >   meta-ti-bsp: machine: Attempt to update DC alias
+> >
+> >  meta-ti-bsp/conf/machine/am62xx-lp-evm.conf   |   2 -
+> >  meta-ti-bsp/conf/machine/include/am62xx.inc   |   6 +-
+> >  meta-ti-bsp/conf/machine/include/am65xx.inc   |   6 +-
+> >  meta-ti-bsp/conf/machine/include/j721e.inc    |   6 -
+> >  meta-ti-bsp/conf/machine/include/j721s2.inc   |   6 -
+> >  meta-ti-bsp/conf/machine/include/j784s4.inc   |   6 -
+> >  meta-ti-bsp/conf/machine/include/omap-a15.inc |   9 +-
+> >  meta-ti-bsp/conf/machine/include/ti33x.inc    |   9 +-
+> >  meta-ti-bsp/conf/machine/include/ti43x.inc    |   9 +-
+> >  meta-ti-bsp/conf/machine/j784s4-evm.conf      |   2 +
+> >  ...-OpenEmbedded-nodistro-internal-aarc.patch |  29 ----
+> >  ...bb => ti-img-rogue-driver_1.18.6276027.bb} |  20 +--
+> >  .../ti-sgx-ddk-km_1.17.4948957.bb             |   8 +-
+> >  .../ti-img-rogue-umlibs_1.15.6133109.bb       |  71 --------
+> >  .../ti-img-rogue-umlibs_1.18.6276027.bb       |  39 +++++
+> >  .../libgles/ti-sgx-ddk-um_1.17.4948957.bb     |  31 +---
+> >  ...nd-deprecate-drm_handle_format-and-d.patch | 158 ++++++++++++++++++
+> >  ...fine-__NR_futex-if-it-does-not-exist.patch |  34 ++++
+> >  ...sdetects-64bit-atomics-on-mips-clang.patch |  25 +++
+> >  ...k-for-all-linux-host_os-combinations.patch |  43 +++++
+> >  ...ormat-Check-for-NEON-before-using-it.patch |  47 ++++++
+> >  ...02-meson.build-make-TLS-ELF-optional.patch |  61 +++++++
+> >  .../mesa/mesa-gl_22.0.%.bbappend              |   1 +
+> >  .../mesa/mesa_22.0.%.bbappend                 |   2 +
+> >  .../recipes-graphics/mesa/pvr-mesa.inc        |  39 +++++
+> >  25 files changed, 484 insertions(+), 185 deletions(-)
+> >  delete mode 100644 meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-compiler-support-OpenEmbedded-nodistro-internal-aarc.patch
+> >  rename meta-ti-bsp/recipes-bsp/powervr-drivers/{ti-img-rogue-driver_1.15.6133109.bb => ti-img-rogue-driver_1.18.6276027.bb} (72%)
+> >  delete mode 100644 meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.15.6133109.bb
+> >  create mode 100644 meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_1.18.6276027.bb
+> >  create mode 100644 meta-ti-bsp/recipes-graphics/mesa/files/0001-Revert-egl-wayland-deprecate-drm_handle_format-and-d.patch
+> >  create mode 100644 meta-ti-bsp/recipes-graphics/mesa/files/0001-futex.h-Define-__NR_futex-if-it-does-not-exist.patch
+> >  create mode 100644 meta-ti-bsp/recipes-graphics/mesa/files/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch
+> >  create mode 100644 meta-ti-bsp/recipes-graphics/mesa/files/0001-meson.build-check-for-all-linux-host_os-combinations.patch
+> >  create mode 100644 meta-ti-bsp/recipes-graphics/mesa/files/0001-util-format-Check-for-NEON-before-using-it.patch
+> >  create mode 100644 meta-ti-bsp/recipes-graphics/mesa/files/0002-meson.build-make-TLS-ELF-optional.patch
+> >  create mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-gl_22.0.%.bbappend
+> >  create mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa_22.0.%.bbappend
+> >  create mode 100644 meta-ti-bsp/recipes-graphics/mesa/pvr-mesa.inc
 
