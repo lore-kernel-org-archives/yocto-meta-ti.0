@@ -1,77 +1,97 @@
-Return-Path: <rs@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 535AFC61D97
-	for <webhook@archiver.kernel.org>; Thu, 26 Jan 2023 22:40:56 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.88850.1674772855957877634
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66F48C05027
+	for <webhook@archiver.kernel.org>; Thu, 26 Jan 2023 23:02:46 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.89414.1674774156640394103
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 26 Jan 2023 14:40:56 -0800
+ Thu, 26 Jan 2023 15:02:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=rl9XxShY;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: rs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30QMetn7119259
-	for <meta-ti@lists.yoctoproject.org>; Thu, 26 Jan 2023 16:40:55 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1674772855;
-	bh=F1ejsBxXvq1A927sfSOthOY6pBkhMCG1jvC1wwxLbz8=;
-	h=Date:From:Subject:To:CC:In-Reply-To:References;
-	b=rl9XxShYKy7mCiQF0O4V2zjRu9+jKhc44zMYI1Nlr3Bf/Kcuwat8BQ9k8KBB6fQw8
-	 kd7fyLkFuMJF+sTYsTqxzlw8kdalKQ5+C+xefuv6MN+MmWkerpv2bhKTDHM8f2HRG5
-	 VEFB348mZckF/3/GXoLVjYIDK3ErFdbhTlCgwlaI=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30QMet8C010520
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 26 Jan 2023 16:40:55 -0600
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Thu, 26
- Jan 2023 16:40:55 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Thu, 26 Jan 2023 16:40:55 -0600
-Received: from res.dhcp.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 30QMesED086697;
-	Thu, 26 Jan 2023 16:40:54 -0600
-Date: Thu, 26 Jan 2023 16:40:49 -0600
-From: "Sapp, Randolph" <rs@ti.com>
-Subject: Re: [kirkstone PATCH 2/4] meta-ti-bsp: graphics: Resolve dependency
- chain
-To: Andrew Davis <afd@ti.com>
-CC: <denys@ti.com>, <reatmon@ti.com>, <detheridge@ti.com>,
-        <meta-ti@lists.yoctoproject.org>, <k-bhargav@ti.com>
-Message-ID: <1074PR.VEHZYO68AVXH3@ti.com>
-In-Reply-To: <17b223ed-820b-5391-eead-4c533a421c08@ti.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id BCB2040BEC;
+	Thu, 26 Jan 2023 23:02:35 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id cWi8QQpfr5oz; Thu, 26 Jan 2023 23:02:35 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8107140027;
+	Thu, 26 Jan 2023 23:02:29 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 1F471163714; Thu, 26 Jan 2023 18:02:09 -0500 (EST)
+Date: Thu, 26 Jan 2023 18:02:09 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: "Sapp, Randolph" <rs@ti.com>
+Cc: afd@ti.com, denys@ti.com, reatmon@ti.com, detheridge@ti.com,
+	meta-ti@lists.yoctoproject.org, k-bhargav@ti.com
+Subject: Re: [EXTERNAL] Re: [meta-ti] [kirkstone PATCH 1/4] meta-ti-bsp:
+ mesa: Add current patches
+Message-ID: <20230126230209.GF22689@denix.org>
 References: <20230126030834.3889448-1-rs@ti.com>
-	<20230126030834.3889448-3-rs@ti.com>
-	<d9a4cb78-2d78-1d33-d8d9-7ffeb2c8811f@ti.com> <WJY3PR.TPQTGC21E7EJ2@ti.com>
-	<17b223ed-820b-5391-eead-4c533a421c08@ti.com>
-X-Mailer: geary/40.0
+ <20230126030834.3889448-2-rs@ti.com>
+ <f3ec2279-5ce9-af82-82ac-8d7170e3dbe9@ti.com>
+ <20230126204804.GD22689@denix.org>
+ <WU64PR.Z83RZ7R0JR5O1@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"; format=flowed
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <WU64PR.Z83RZ7R0JR5O1@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 26 Jan 2023 22:40:56 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15688
+ <meta-ti@lists.yoctoproject.org>; Thu, 26 Jan 2023 23:02:46 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15689
 
-On Thu, Jan 26 2023 at 02:12:33 PM -0600, Andrew Davis <afd@ti.com> 
-wrote:
-> If the binaries depend on a lib then yocto will detect that and set 
-> it as a runtime dependency
-> for you. If not in the sysroot dir when we install the binaries then 
-> yocto will do
-> the opposite and complain that it cannot find some libraries that 
-> binaries in the package
-> link against. We solve both by using DEPENDS here.
+On Thu, Jan 26, 2023 at 04:37:44PM -0600, Sapp, Randolph wrote:
+> On Thu, Jan 26 2023 at 03:48:04 PM -0500, Denys Dmytriyenko
+> <denis@denix.org> wrote:
+> >On Thu, Jan 26, 2023 at 11:06:17AM -0600, Andrew Davis via
+> >lists.yoctoproject.org wrote:
+> >> On 1/25/23 9:08 PM, Randolph Sapp wrote:
+> >> >Copy over current patches from oe-core for mesa since we're
+> >>going to be
+> >> >overriding the SRC_URI string and we still need those.
+> >> >
+> >>
+> >> We control the repo we will be pointing at, I'd say just add these
+> >> patches over there directly so this commit would be not needed.
+> >
+> >No, these are upstream mesa patches, not the one needed for pvr.
+> >
+> >Hence, you don't need to carry them locally, since you don't copy
+> >the entire
+> >upstream mesa recipe.
+> 
+> Ah, but we do need to carry them since we clobber the mesa SRC_URI
+> to load our new source. Now, yes, these should probably be carried
+> in our mesa branch instead of in meta-ti. I'll adjust that.
 
-Nothing should be building directly against these libs so the sysroot 
-point is void. We should let yocto resolve the run-time dependencies 
-anyway.
+No, not really.
 
+In mesa*.bbappend you include the pvr-meda.inc, which has this SRC_URI:
 
++SRC_URI = "git://gitlab.freedesktop.org/StaticRocket/mesa.git;protocol=https;branch=${BRANCH} \
++           file://0001-meson.build-check-for-all-linux-host_os-combinations.patch \
++           file://0002-meson.build-make-TLS-ELF-optional.patch \
++           file://0001-meson-misdetects-64bit-atomics-on-mips-clang.patch \
++           file://0001-futex.h-Define-__NR_futex-if-it-does-not-exist.patch \
++           file://0001-util-format-Check-for-NEON-before-using-it.patch \
++           file://0001-Revert-egl-wayland-deprecate-drm_handle_format-and-d.patch \
++           "
+
+So, specifically:
+
+1. No, you don't need to carry patches locally when they are already alongside 
+the original .bb recipe, when you are doing a .bbappend
+
+2. You don't need to merge them to your own tree, as long as you specify them 
+in the SRC_URI list, when using a .bbappend
+
+-- 
+Denys
 
