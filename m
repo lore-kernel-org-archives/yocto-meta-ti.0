@@ -1,126 +1,100 @@
-Return-Path: <sabiya.d@mistralsolutions.com>
+Return-Path: <quaresma.jose@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FC5DC54EED
-	for <webhook@archiver.kernel.org>; Mon, 30 Jan 2023 14:47:58 +0000 (UTC)
-Received: from egress-ip33b.ess.de.barracuda.com (egress-ip33b.ess.de.barracuda.com [18.185.115.237])
- by mx.groups.io with SMTP id smtpd.web10.42828.1675090068943842062
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA7E3C54EAA
+	for <webhook@archiver.kernel.org>; Mon, 30 Jan 2023 15:20:48 +0000 (UTC)
+Received: from mail-il1-f182.google.com (mail-il1-f182.google.com [209.85.166.182])
+ by mx.groups.io with SMTP id smtpd.web10.43778.1675092044648288141
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 30 Jan 2023 06:47:49 -0800
+ Mon, 30 Jan 2023 07:20:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mistralsolutions.com header.s=google header.b=M+B2a0hZ;
- spf=pass (domain: mistralsolutions.com, ip: 18.185.115.237, mailfrom: sabiya.d@mistralsolutions.com)
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198]) by mx-outbound19-167.eu-central-1b.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Mon, 30 Jan 2023 14:47:46 +0000
-Received: by mail-pf1-f198.google.com with SMTP id 12-20020a62160c000000b005808c2cd0b6so5530966pfw.12
-        for <meta-ti@lists.yoctoproject.org>; Mon, 30 Jan 2023 06:47:46 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=DXRtgXfv;
+ spf=pass (domain: gmail.com, ip: 209.85.166.182, mailfrom: quaresma.jose@gmail.com)
+Received: by mail-il1-f182.google.com with SMTP id k12so196873ilv.10
+        for <meta-ti@lists.yoctoproject.org>; Mon, 30 Jan 2023 07:20:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mistralsolutions.com; s=google;
+        d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=d4TliseWoQXC0UsoVoISH7t2/vMzmHgm5LOwduGIiCs=;
-        b=M+B2a0hZuxprtz9fiE0Opf43sgxfK4tT3tUCEd1syzM6Y3s4xmH4mTcUqvCPPzibry
-         1XY4rAKsTMOtwbGxY5vgmSPBuxT6HP25TdOmsW9s0fxhFezB19d50muls/Gqocmx+NQ+
-         64aPtgM/eqy080Pt0fhatKGnUUAb9DafMNVck=
+        bh=3IAdUdEIIdtrX+Hg1oThMhszFo+Qhyb1Fa7CkAxAl4c=;
+        b=DXRtgXfv94hvkL6crRuNo0q9GIreFFQ+GXotk064CWeJi3hFSAs9FYBTizLZNqkDdg
+         3jK+CUIdn8tZpszNbe8Bml329U5y/xLGXmX3wmvJUKhUHCnI/9eoAdJPlPhLQ6vHQubW
+         pdViRfJLbKV4ZOwZO13wdRnD94mPtvw0a8xV8onWiWwnuy7G0WIxsXFJOL19mlXUCE+y
+         kVXmRZyawud0Me5aeMjLqdMGUaPyMimTMfbHknhJPhair94VmusIEy0lpLYcqHrxRL/4
+         zNG0Ug+gWCMbtl1J+2E/EX48vw1DjHcyLLVJTm3kXDwELHO812mGOpIU0c8IO7dyAR2v
+         M7fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=d4TliseWoQXC0UsoVoISH7t2/vMzmHgm5LOwduGIiCs=;
-        b=pPgWLaH+iVrtBPeRV+EQu3hCFxyKOnQrWMvcklxHKT/QBC+yvpXljs4yrp9Db6TLoz
-         7hQw7aI2w8f+ke/5bn3RdO2EKuj5OZGk/NwCEKKCx27zdrU7YR+cBMFbPePuZkW/T02a
-         ORiSSkUmvMBIkcHqB5MwCkicLCKo0gg4s6B+iSHFpIKkGUOGqaNa+PZS9BFJHT85UNSo
-         LseqzWKEvzIblzhJlMeD8AQIfWsiJvwaDxBHaZh9mpYszN8VlOHT/FOvj898KEYWXuj6
-         ipBU4PxrvyBppKK3hzfgCZ2F2UvvOhrA12Do8CNlN4PZfuYRK1d/Gp5lrnunX0yS461n
-         wxxg==
-X-Gm-Message-State: AFqh2krT1+COKEOeTk4Rh9CfcskMdV5uKgRonwSSu/Dz3xli7gD5ST8q
-	w5J1KJ4jkr9PHuVbxTfZVBW+cf0rpXdrDbUd/wMBZeoTxTiWOvq9QPMYty02NQHbRBDSsNWCc8N
-	VRtebqTbunJWyYcZ8Xun17XwgbbEOlRYrnGzRURaF023677xXmKeGIYaT4bM8DfQ=
-X-Received: by 2002:a62:2582:0:b0:58d:a7f4:9630 with SMTP id l124-20020a622582000000b0058da7f49630mr43604913pfl.16.1675090065242;
-        Mon, 30 Jan 2023 06:47:45 -0800 (PST)
-X-Google-Smtp-Source: AMrXdXvu/2F+ZrPuzqbfZmBXCnK9voHuJK2HcETSjno8kfkZilKqeWe9ePNrREV5UFIEJoKV3MhWMA==
-X-Received: by 2002:a62:2582:0:b0:58d:a7f4:9630 with SMTP id l124-20020a622582000000b0058da7f49630mr43604893pfl.16.1675090064941;
-        Mon, 30 Jan 2023 06:47:44 -0800 (PST)
-Received: from localhost.localdomain ([2401:4900:61b6:8248:9f1:b2eb:bc8f:f50f])
-        by smtp.gmail.com with ESMTPSA id b2-20020aa79502000000b0058da92f7c8dsm7756180pfp.17.2023.01.30.06.47.42
+        bh=3IAdUdEIIdtrX+Hg1oThMhszFo+Qhyb1Fa7CkAxAl4c=;
+        b=ZB03CxZNXsS5hBVFZOVK2d4GrYP1hYgG4uOqC0FDIAC7tauRfF+BdyrLCcdnioTg9n
+         NRsEikCwOlucMofzWr40SDS0LCwWF1rtMlno7YFpzTr9v8n0ICFaoK9kCxMCJlti5CL9
+         j/ggqiyQbLcd9M5B+uGOGW1lIA+CcOxjkQL4Bq8q9VybPHZDZQ0ap1GD6fllsHNBYL0i
+         1MW6Zgy/s78nS0vv2IZoRK2V219/5VDTAK0s9+JipQLovNQddYoo/OA4+wdxbYkMq56c
+         Y3QOOBnpYlOCFMZC/fQHiUWuLsF8MSwbE6HkCKkOaGyJO0M4N+mJfrr1f7X6WbAbgYwP
+         lUvQ==
+X-Gm-Message-State: AO0yUKVXEKbjV5qlw3LelyFnoahUEHNUmVv4TPooce+6Z3+se3qk0ody
+	1cagLh45aJ8LFUT+vyhdkL642YjHBxI=
+X-Google-Smtp-Source: AK7set/q7vci/VsQpyT5VYzNsoS+p5dVAl8jhbsMpmo0A1K4EST5KYYujU35qTVezsLTmTo8TUNUUg==
+X-Received: by 2002:a05:6e02:12e7:b0:310:ce1f:44fd with SMTP id l7-20020a056e0212e700b00310ce1f44fdmr10464806iln.3.1675092043831;
+        Mon, 30 Jan 2023 07:20:43 -0800 (PST)
+Received: from og-worker-dev-01.infra.foundries.io.net (51-159-19-113.rev.poneytelecom.eu. [51.159.19.113])
+        by smtp.gmail.com with ESMTPSA id m18-20020a026d12000000b003afe5e747d6sm1419828jac.126.2023.01.30.07.20.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 Jan 2023 06:47:44 -0800 (PST)
-From: sabiya.d@mistralsolutions.com
-X-Google-Original-From: sabiya.d@ti.com
-To: reatmon@ti.com,
-	denys@ti.com,
-	detheridge@ti.com
-Cc: meta-ti@lists.yoctoproject.org,
-	Dasnavis Sabiya <sabiya.d@ti.com>
-Subject: [dunfell] conf: machine: j784s4: Add FPDLink overlays for AM69 SK
-Date: Mon, 30 Jan 2023 20:17:38 +0530
-Message-Id: <20230130144738.97582-1-sabiya.d@ti.com>
-X-Mailer: git-send-email 2.25.1
+        Mon, 30 Jan 2023 07:20:43 -0800 (PST)
+From: Jose Quaresma <quaresma.jose@gmail.com>
+X-Google-Original-From: Jose Quaresma <jose.quaresma@foundries.io>
+To: meta-ti@lists.yoctoproject.org
+Cc: ricardo@foundries.io,
+	Jose Quaresma <jose.quaresma@foundries.io>
+Subject: [meta-ti][master/kirkstone][PATCH] bsp: multiconfig: k3r5: allow customization by donwstream layers
+Date: Mon, 30 Jan 2023 15:20:00 +0000
+Message-Id: <20230130152000.705123-1-jose.quaresma@foundries.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-BESS-ID: 1675090065-305031-5395-16869-1
-X-BESS-VER: 2019.1_20221214.2106
-X-BESS-Apparent-Source-IP: 209.85.210.198
-X-BESS-Outbound-Spam-Score: 0.00
-X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.245805 [from 
-	cloudscan17-30.eu-central-1b.ess.aws.cudaops.com]
-	Rule breakdown below
-	 pts rule name              description
-	---- ---------------------- --------------------------------
-	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
-	0.00 BSF_SC0_MISMATCH_TO    META: Envelope rcpt doesn't match header 
-	0.00 NO_REAL_NAME           HEADER: From: does not include a real name 
-X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS91090 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND, BSF_SC0_MISMATCH_TO, NO_REAL_NAME
-X-BESS-BRTS-Status: 1
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 30 Jan 2023 14:47:58 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15698
+ <meta-ti@lists.yoctoproject.org>; Mon, 30 Jan 2023 15:20:48 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15699
 
-From: Dasnavis Sabiya <sabiya.d@ti.com>
+This patch adds the possibility to change some bitbake variable
+that cannot be changed anywhere else, one of then is the TMPDIR.
 
-Add the overlay files for AM69 SK:
-1. Fusion board (For FPDLink-III cameras).
-2. IMX390 FPDLink-III camera module that includes both the CM and
-   RCM type of modules.
+Using the same TMPDIR it is very sensitive and prone to several errors
+when used in more complex situations.
+This configuration forces that all native packages have to be the same between all
+machines and this requirement is very easy to break.
+Suppose you use a macinhe override somewhere on a native recipe
+and this requirement is no longer met.
+Many of these anomalies can be verified with the use of the rm_work and
+create-spdx bitbake classes.
 
-Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
+A previous attempt [1] had already been made but was refused
+but this way it can be done without side effects for other users.
+
+[1] https://lists.yoctoproject.org/g/meta-ti/message/14767
+
+Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
 ---
- conf/machine/j784s4-evm.conf | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ meta-ti-bsp/conf/multiconfig/k3r5.conf | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/conf/machine/j784s4-evm.conf b/conf/machine/j784s4-evm.conf
-index 24fa3356..e892f597 100644
---- a/conf/machine/j784s4-evm.conf
-+++ b/conf/machine/j784s4-evm.conf
-@@ -16,7 +16,24 @@ KERNEL_DEVICETREE = " \
-     ti/k3-am69-sk.dtb \
-     ti/k3-am69-sk-csi2-ov5640.dtbo \
-     ti/k3-am69-sk-ddr-mem-carveout.dtbo \
-+    ti/k3-am69-sk-fpdlink-fusion.dtbo \
-     ti/k3-am69-sk-rpi-cam-imx219.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-cm-0-0.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-cm-0-1.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-cm-0-2.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-cm-0-3.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-cm-1-0.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-cm-1-1.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-cm-1-2.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-cm-1-3.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-rcm-0-0.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-rcm-0-1.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-rcm-0-2.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-rcm-0-3.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-rcm-1-0.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-rcm-1-1.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-rcm-1-2.dtbo \
-+    ti/k3-j721e-fpdlink-imx390-rcm-1-3.dtbo \
-     ti/k3-j784s4-evm.dtb \
- "
+diff --git a/meta-ti-bsp/conf/multiconfig/k3r5.conf b/meta-ti-bsp/conf/multiconfig/k3r5.conf
+index deb07210..b69c5d6d 100644
+--- a/meta-ti-bsp/conf/multiconfig/k3r5.conf
++++ b/meta-ti-bsp/conf/multiconfig/k3r5.conf
+@@ -3,3 +3,5 @@ MAINMACHINE := "${MACHINE}"
+ DEPLOY_DIR_IMAGE = "${DEPLOY_DIR}/images/${MAINMACHINE}"
  
+ MACHINE:append = "-k3r5"
++
++include conf/multiconfig/k3r5.inc
 -- 
-2.25.1
+2.34.1
 
 
