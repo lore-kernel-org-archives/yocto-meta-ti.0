@@ -2,47 +2,47 @@ Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A95ACC54EAA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CAA23C636D7
 	for <webhook@archiver.kernel.org>; Mon, 30 Jan 2023 23:20:47 +0000 (UTC)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.1294.1675120845781403174
+ by mx.groups.io with SMTP id smtpd.web11.1339.1675120845029110242
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 30 Jan 2023 15:20:46 -0800
+ Mon, 30 Jan 2023 15:20:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=dYJSTelZ;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=QnqeSzUH;
  spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: rs@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30UNKioV090055
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 30UNKiYF090057
 	for <meta-ti@lists.yoctoproject.org>; Mon, 30 Jan 2023 17:20:44 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1675120844;
-	bh=do6vWGbOQ0BwXOcTiCMHQ3Qi9YWjsRtDwgSV6cgBCxA=;
+	bh=CpAzaYe2JY1Jj8oKQocLS964A5hUPZB/+2xhhaaZ3D0=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=dYJSTelZFpcyy9tp78B/a6+LOreeBfxptWdj6wVClaAkbQviKPmDv6dEE3DaF1y38
-	 vgwGpVVUTT+grbe9Uxyk+tL0smhexBwaI8hNcUFJWgjOv1+tQXP6tfpHqT3DXL4uQK
-	 e26I+aJRvrefm7fv3/0q8dIUvFBVqtPjJg8McG+E=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30UNKiVg026498
+	b=QnqeSzUH+VsPnhh+Xn2aZkfr1DQ/yhNM9nPcA9D3M3q5AJfsfVZlgUQ+EdYvNjnLL
+	 YVXcs3iPFNYoc/pmf5HDETH/tKpUqINzZYlLJ26iQdRs90QSuYcAsAbY/zF3m12UAG
+	 1Xp9R5hqrtSUgGtiaGRYJvWep9uL3OWuvOLSB66M=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 30UNKied008924
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@lists.yoctoproject.org>; Mon, 30 Jan 2023 17:20:44 -0600
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Mon, 30
  Jan 2023 17:20:43 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
  Frontend Transport; Mon, 30 Jan 2023 17:20:43 -0600
 Received: from res.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 30UNKdM6024673;
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 30UNKdM5024673;
 	Mon, 30 Jan 2023 17:20:43 -0600
 From: Randolph Sapp <rs@ti.com>
 To: <denys@ti.com>, <reatmon@ti.com>, <detheridge@ti.com>, <afd@ti.com>
 CC: Randolph Sapp <rs@ti.com>, <meta-ti@lists.yoctoproject.org>,
         <k-bhargav@ti.com>
-Subject: [kirkstone][PATCH v7 3/3] meta-ti-bsp: machine: Attempt to update DC alias
-Date: Mon, 30 Jan 2023 17:20:07 -0600
-Message-ID: <20230130232007.2393097-4-rs@ti.com>
+Subject: [kirkstone][PATCH v7 2/3] meta-ti-bsp: machine: Remove all gpu features
+Date: Mon, 30 Jan 2023 17:20:06 -0600
+Message-ID: <20230130232007.2393097-3-rs@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230130232007.2393097-1-rs@ti.com>
 References: <20230130232007.2393097-1-rs@ti.com>
@@ -54,64 +54,203 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 30 Jan 2023 23:20:47 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15710
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15709
 
-Attempt to update the SGX display controller alias variable according to
-what Andrew told me. SGX apparently had a few different aliases across
-platforms.
+Remove all gpu machine features and instead rely on the new dependency
+chain for resolving gpu dependencies. Set preferred providers for
+virtual/gpudriver where needed.
 
 Signed-off-by: Randolph Sapp <rs@ti.com>
 ---
- meta-ti-bsp/conf/machine/include/omap-a15.inc | 3 +++
- meta-ti-bsp/conf/machine/include/ti33x.inc    | 3 +++
- meta-ti-bsp/conf/machine/include/ti43x.inc    | 3 +++
- 3 files changed, 9 insertions(+)
+ meta-ti-bsp/conf/machine/am62xx-lp-evm.conf   | 2 --
+ meta-ti-bsp/conf/machine/include/am62xx.inc   | 6 +-----
+ meta-ti-bsp/conf/machine/include/am65xx.inc   | 6 +-----
+ meta-ti-bsp/conf/machine/include/j721e.inc    | 6 ------
+ meta-ti-bsp/conf/machine/include/j721s2.inc   | 6 ------
+ meta-ti-bsp/conf/machine/include/j784s4.inc   | 6 ------
+ meta-ti-bsp/conf/machine/include/omap-a15.inc | 6 +-----
+ meta-ti-bsp/conf/machine/include/ti33x.inc    | 6 +-----
+ meta-ti-bsp/conf/machine/include/ti43x.inc    | 6 +-----
+ 9 files changed, 5 insertions(+), 45 deletions(-)
 
+diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+index ef8e8692..ec9ce596 100644
+--- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+@@ -4,8 +4,6 @@
+ 
+ require conf/machine/include/am62xx.inc
+ 
+-MACHINE_FEATURES += "gpu"
+-
+ KERNEL_DEVICETREE = " \
+     ti/k3-am62x-lp-sk.dtb \
+     ti/k3-am625-skeleton.dtb \
+diff --git a/meta-ti-bsp/conf/machine/include/am62xx.inc b/meta-ti-bsp/conf/machine/include/am62xx.inc
+index 411e5265..35f3f071 100644
+--- a/meta-ti-bsp/conf/machine/include/am62xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62xx.inc
+@@ -1,15 +1,11 @@
+ require conf/machine/include/k3.inc
+ SOC_FAMILY:append = ":am62xx"
+ 
+-MACHINE_FEATURES += "screen touchscreen gpu"
++MACHINE_FEATURES += "screen touchscreen"
+ 
+ SERIAL_CONSOLES = "115200;ttyS2"
+ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ 
+-PREFERRED_PROVIDER_virtual/egl ?= "ti-img-rogue-umlibs"
+-PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-img-rogue-umlibs"
+-PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-img-rogue-umlibs"
+-PREFERRED_PROVIDER_virtual/libgbm ?= "ti-img-rogue-umlibs"
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
+ 
+ TFA_BOARD = "lite"
+diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
+index 424864d3..385bb164 100644
+--- a/meta-ti-bsp/conf/machine/include/am65xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
+@@ -1,15 +1,11 @@
+ require conf/machine/include/k3.inc
+ SOC_FAMILY:append = ":am65xx"
+ 
+-MACHINE_FEATURES += "screen touchscreen gpu"
++MACHINE_FEATURES += "screen touchscreen"
+ 
+ SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS1"
+ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ 
+-PREFERRED_PROVIDER_virtual/egl ?= "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgbm ?= "ti-sgx-ddk-um"
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
+ 
+ KERNEL_DEVICETREE = " \
+diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/conf/machine/include/j721e.inc
+index eba10d8d..67f5fe0f 100644
+--- a/meta-ti-bsp/conf/machine/include/j721e.inc
++++ b/meta-ti-bsp/conf/machine/include/j721e.inc
+@@ -1,12 +1,6 @@
+ require conf/machine/include/k3.inc
+ SOC_FAMILY:append = ":j721e"
+ 
+-MACHINE_FEATURES += "gpu"
+-
+-PREFERRED_PROVIDER_virtual/egl ?= "ti-img-rogue-umlibs"
+-PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-img-rogue-umlibs"
+-PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-img-rogue-umlibs"
+-PREFERRED_PROVIDER_virtual/libgbm ?= "ti-img-rogue-umlibs"
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
+ 
+ # On J721e the file tiboot3.bin comes from the bootloader not ti-sci-fw
+diff --git a/meta-ti-bsp/conf/machine/include/j721s2.inc b/meta-ti-bsp/conf/machine/include/j721s2.inc
+index fc6493b8..f33a3aba 100644
+--- a/meta-ti-bsp/conf/machine/include/j721s2.inc
++++ b/meta-ti-bsp/conf/machine/include/j721s2.inc
+@@ -1,12 +1,6 @@
+ require conf/machine/include/k3.inc
+ SOC_FAMILY:append = ":j721s2"
+ 
+-MACHINE_FEATURES += "gpu"
+-
+-PREFERRED_PROVIDER_virtual/egl ?= "ti-img-rogue-umlibs"
+-PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-img-rogue-umlibs"
+-PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-img-rogue-umlibs"
+-PREFERRED_PROVIDER_virtual/libgbm ?= "ti-img-rogue-umlibs"
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
+ 
+ TFA_BOARD = "generic"
+diff --git a/meta-ti-bsp/conf/machine/include/j784s4.inc b/meta-ti-bsp/conf/machine/include/j784s4.inc
+index d268b810..df0faede 100644
+--- a/meta-ti-bsp/conf/machine/include/j784s4.inc
++++ b/meta-ti-bsp/conf/machine/include/j784s4.inc
+@@ -1,12 +1,6 @@
+ require conf/machine/include/k3.inc
+ SOC_FAMILY:append = ":j784s4"
+ 
+-MACHINE_FEATURES += "gpu"
+-
+-PREFERRED_PROVIDER_virtual/egl ?= "ti-img-rogue-umlibs"
+-PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-img-rogue-umlibs"
+-PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-img-rogue-umlibs"
+-PREFERRED_PROVIDER_virtual/libgbm ?= "ti-img-rogue-umlibs"
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
+ 
+ TFA_BOARD = "j784s4"
 diff --git a/meta-ti-bsp/conf/machine/include/omap-a15.inc b/meta-ti-bsp/conf/machine/include/omap-a15.inc
-index efa33a10..e5349134 100644
+index 0843fb28..efa33a10 100644
 --- a/meta-ti-bsp/conf/machine/include/omap-a15.inc
 +++ b/meta-ti-bsp/conf/machine/include/omap-a15.inc
-@@ -10,7 +10,10 @@ MACHINE_KERNEL_PR = "r7"
+@@ -10,10 +10,6 @@ MACHINE_KERNEL_PR = "r7"
  PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-staging"
  PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-staging"
  PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-staging"
-+
-+# Graphics providers and variables
+-PREFERRED_PROVIDER_virtual/egl ?= "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgbm ?= "ti-sgx-ddk-um"
  PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
-+PVR_DISPLAY_CONTROLLER_ALIAS ?= "omapdrm"
  
  KERNEL_IMAGETYPE = "zImage"
- KERNEL_IMAGETYPES = "zImage uImage"
+@@ -45,7 +41,7 @@ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+ UBI_VOLNAME = "rootfs"
+ 
+ # List common SoC features, may need to add touchscreen for specific machines
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet gpu mmip dsp gc320"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet mmip dsp gc320"
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
+ WKS_FILE ?= "sdimage-2part.wks"
 diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/conf/machine/include/ti33x.inc
-index e2f75359..97c7d3c8 100644
+index cfacc30d..e2f75359 100644
 --- a/meta-ti-bsp/conf/machine/include/ti33x.inc
 +++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
-@@ -11,7 +11,10 @@ MACHINE_KERNEL_PR = "r22"
+@@ -11,10 +11,6 @@ MACHINE_KERNEL_PR = "r22"
  PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-staging"
  PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-staging"
  PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-staging"
-+
-+# Graphics providers and variables
+-PREFERRED_PROVIDER_virtual/egl ?= "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgbm ?= "ti-sgx-ddk-um"
  PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
-+PVR_DISPLAY_CONTROLLER_ALIAS ?= "tilcdc"
  
  KERNEL_IMAGETYPE = "zImage"
+@@ -55,7 +51,7 @@ UBI_VOLNAME = "rootfs"
+ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
  
+ # List common SoC features, may need to add touchscreen for specific machines
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 alsa ethernet gpu"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 alsa ethernet"
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
+ WKS_FILE ?= "sdimage-2part.wks"
 diff --git a/meta-ti-bsp/conf/machine/include/ti43x.inc b/meta-ti-bsp/conf/machine/include/ti43x.inc
-index e9999910..ddd430d5 100644
+index 74a964db..e9999910 100644
 --- a/meta-ti-bsp/conf/machine/include/ti43x.inc
 +++ b/meta-ti-bsp/conf/machine/include/ti43x.inc
-@@ -11,7 +11,10 @@ MACHINE_KERNEL_PR = "r3"
+@@ -11,10 +11,6 @@ MACHINE_KERNEL_PR = "r3"
  PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-staging"
  PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-staging"
  PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-staging"
-+
-+# Graphics providers and variables
+-PREFERRED_PROVIDER_virtual/egl ?= "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-sgx-ddk-um"
+-PREFERRED_PROVIDER_virtual/libgbm ?= "ti-sgx-ddk-um"
  PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
-+PVR_DISPLAY_CONTROLLER_ALIAS ?= "omapdrm"
  
  KERNEL_IMAGETYPE = "zImage"
+@@ -54,7 +50,7 @@ UBI_VOLNAME = "rootfs"
+ EXTRA_IMAGEDEPENDS += "u-boot"
  
+ # List common SoC features, may need to add touchscreen for specific machines
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet gpu"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet"
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
+ WKS_FILE ?= "sdimage-2part.wks"
 -- 
 2.34.1
 
