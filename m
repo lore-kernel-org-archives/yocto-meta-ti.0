@@ -1,253 +1,107 @@
-Return-Path: <denis@denix.org>
+Return-Path: <w.egorov@phytec.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85381C38142
-	for <webhook@archiver.kernel.org>; Tue, 31 Jan 2023 20:31:07 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.5429.1675197065604336354
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CE8AC636CD
+	for <webhook@archiver.kernel.org>; Wed,  1 Feb 2023 14:31:42 +0000 (UTC)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ by mx.groups.io with SMTP id smtpd.web11.24883.1675261899280431620
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 31 Jan 2023 12:31:05 -0800
+ Wed, 01 Feb 2023 06:31:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 8E2B640C1C;
-	Tue, 31 Jan 2023 20:31:04 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id mbvB6BN8qGzz; Tue, 31 Jan 2023 20:31:04 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4D821406B5;
-	Tue, 31 Jan 2023 20:30:58 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id CAB05163714; Tue, 31 Jan 2023 15:30:37 -0500 (EST)
-Date: Tue, 31 Jan 2023 15:30:37 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: rs@ti.com
-Cc: denys@ti.com, reatmon@ti.com, detheridge@ti.com, afd@ti.com,
-	meta-ti@lists.yoctoproject.org, k-bhargav@ti.com
-Subject: Re: [meta-ti] [kirkstone][PATCH v7 2/3] meta-ti-bsp: machine:
- Remove all gpu features
-Message-ID: <20230131203037.GO22689@denix.org>
-References: <20230130232007.2393097-1-rs@ti.com>
- <20230130232007.2393097-3-rs@ti.com>
+ dkim=fail reason="signature has expired" header.i=@phytec.de header.s=a4 header.b=s3VBhlVa;
+ spf=pass (domain: phytec.de, ip: 91.26.50.163, mailfrom: w.egorov@phytec.de)
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+	q=dns/txt; i=@phytec.de; t=1675261896; x=1677853896;
+	h=From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=RmEXm14UQ+fHqzs3H0HB+0m3NyjwQsD+YBUkZkRJhTA=;
+	b=s3VBhlVaHmJte3YBwCsE+fa56etz0JZlL1rczyFv3/POTGMFsTWXhWkGBEqJhWl0
+	f+D+KoFx/aa24bdifbvsWCMQaoGagvkZ8DfTM2o6r5klwoKPt1X89Xc6EV4l5yTv
+	1RvrNhfCuRSa9ED7Tth8adyEtDtQKv0kRUxEgdgD8sg=;
+X-AuditID: ac14000a-923ff70000007ecb-70-63da77c81c40
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+	(using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(Client did not present a certificate)
+	by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id C3.09.32459.8C77AD36; Wed,  1 Feb 2023 15:31:36 +0100 (CET)
+Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.18; Wed, 1 Feb
+ 2023 15:31:48 +0100
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <upstream@lists.phytec.de>, <meta-ti@lists.yoctoproject.org>
+Subject: [dunfell] ti-rtos-firmware: Check if TI_SECURE_DEV is set before signing
+Date: Wed, 1 Feb 2023 15:31:26 +0100
+Message-ID: <20230201143126.3003913-1-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230130232007.2393097-3-rs@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprOLMWRmVeSWpSXmKPExsWyRpKBR/dE+a1kg1O7FSzmfrnFZtH9Tt2B
+	yaO/u4XVY+apR8wBTFFcNimpOZllqUX6dglcGXOWtLEUfBCquPh4OWsD4yq+LkZODgkBE4mH
+	TX/Yuhi5OIQEFjNJTFx5ignCecwoMX3fRiaQKjYBdYk7G76xgtgiAg4SPdu/soDYwgKBEusf
+	rGcEsVkEVCRmrj/BDmLzClhKrLm8gg1ig7zEzEvfoeKCEidnPgHrZQaKN2+dzQxhS0gcfPEC
+	zBYCir+4tJwFpnfaudfMEHaoxJFNq5kmMPLPQjJqFpJRs5CMWsDIvIpRKDczOTu1KDNbryCj
+	siQ1WS8ldRMjKPBEGLh2MPbN8TjEyMTBeIhRgoNZSYRXketmshBvSmJlVWpRfnxRaU5q8SFG
+	aQ4WJXHe+z1MiUIC6YklqdmpqQWpRTBZJg5OqQbGTa788tP4tjD2qu+5fKfXlIEntk/p9pV3
+	PMv0DtrtcX11cbkBh5c5d7BFUVwfc9IWofuh70+YGazcErt+Jm9r8cPnrEIprGsrbWInqUY9
+	nVwb3nU2Vu5Pwy87LZv3BndDQ8yUMko/m5w6bnqt5scM/ZuV7dsqZ0j/Lu1mjA52dhXVPe2n
+	elmJpTgj0VCLuag4EQCHb2zUKgIAAA==
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 31 Jan 2023 20:31:07 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15717
+ <meta-ti@lists.yoctoproject.org>; Wed, 01 Feb 2023 14:31:42 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15718
 
-On Mon, Jan 30, 2023 at 05:20:06PM -0600, Randolph Sapp via lists.yoctoproject.org wrote:
-> Remove all gpu machine features and instead rely on the new dependency
-> chain for resolving gpu dependencies.
+Check if ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh is set
+before signing firmware for am62xx based machines. Otherwise do not
+sign, instead copy the binary and warn about it.
 
-Seems unnecessary to remove this feature, even if you are not going to use it.
+Fixes
+  run.do_install: 111: /scripts/secure-binary-image.sh: not found
 
+Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+---
+ recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
 
-> Set preferred providers for virtual/gpudriver where needed.
+diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index 72d85a6b..66c6a4e4 100644
+--- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -179,12 +179,23 @@ do_install_prepend_am62xx() {
+         export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
+         ( cd ${RTOS_DM_FW_DIR}; \
+                 mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
+-                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
++                if [ -f ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ]; then \
++                    ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
++                else \
++                    echo "Warning: TI_SECURE_DEV_PKG not set, ${DM_FIRMWARE} not signed."; \
++                    cp ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
++                fi; \
+         )
+         ( cd ${RTOS_IPC_FW_DIR}; \
+                 mv am62-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f; \
+-                ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f \
+-                    ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f.signed; \
++
++                if [ -f ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ]; then \
++                    ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f \
++                        ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f.signed; \
++                else \
++                    echo "Warning: TI_SECURE_DEV_PKG not set, ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f not signed"; \
++                    cp ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f.signed; \
++                fi; \
+         )
+ }
+ 
+-- 
+2.25.1
 
-This part of the commit message does not match the code changes - there are no 
-addition to gpudriver preferences, only removal of libegl/libgles preferences.
-
-
-> Signed-off-by: Randolph Sapp <rs@ti.com>
-> ---
->  meta-ti-bsp/conf/machine/am62xx-lp-evm.conf   | 2 --
->  meta-ti-bsp/conf/machine/include/am62xx.inc   | 6 +-----
->  meta-ti-bsp/conf/machine/include/am65xx.inc   | 6 +-----
->  meta-ti-bsp/conf/machine/include/j721e.inc    | 6 ------
->  meta-ti-bsp/conf/machine/include/j721s2.inc   | 6 ------
->  meta-ti-bsp/conf/machine/include/j784s4.inc   | 6 ------
->  meta-ti-bsp/conf/machine/include/omap-a15.inc | 6 +-----
->  meta-ti-bsp/conf/machine/include/ti33x.inc    | 6 +-----
->  meta-ti-bsp/conf/machine/include/ti43x.inc    | 6 +-----
->  9 files changed, 5 insertions(+), 45 deletions(-)
-> 
-> diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-> index ef8e8692..ec9ce596 100644
-> --- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-> @@ -4,8 +4,6 @@
->  
->  require conf/machine/include/am62xx.inc
->  
-> -MACHINE_FEATURES += "gpu"
-> -
->  KERNEL_DEVICETREE = " \
->      ti/k3-am62x-lp-sk.dtb \
->      ti/k3-am625-skeleton.dtb \
-> diff --git a/meta-ti-bsp/conf/machine/include/am62xx.inc b/meta-ti-bsp/conf/machine/include/am62xx.inc
-> index 411e5265..35f3f071 100644
-> --- a/meta-ti-bsp/conf/machine/include/am62xx.inc
-> +++ b/meta-ti-bsp/conf/machine/include/am62xx.inc
-> @@ -1,15 +1,11 @@
->  require conf/machine/include/k3.inc
->  SOC_FAMILY:append = ":am62xx"
->  
-> -MACHINE_FEATURES += "screen touchscreen gpu"
-> +MACHINE_FEATURES += "screen touchscreen"
->  
->  SERIAL_CONSOLES = "115200;ttyS2"
->  SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
->  
-> -PREFERRED_PROVIDER_virtual/egl ?= "ti-img-rogue-umlibs"
-> -PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-img-rogue-umlibs"
-> -PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-img-rogue-umlibs"
-> -PREFERRED_PROVIDER_virtual/libgbm ?= "ti-img-rogue-umlibs"
->  PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
->  
->  TFA_BOARD = "lite"
-> diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
-> index 424864d3..385bb164 100644
-> --- a/meta-ti-bsp/conf/machine/include/am65xx.inc
-> +++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
-> @@ -1,15 +1,11 @@
->  require conf/machine/include/k3.inc
->  SOC_FAMILY:append = ":am65xx"
->  
-> -MACHINE_FEATURES += "screen touchscreen gpu"
-> +MACHINE_FEATURES += "screen touchscreen"
->  
->  SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS1"
->  SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
->  
-> -PREFERRED_PROVIDER_virtual/egl ?= "ti-sgx-ddk-um"
-> -PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-sgx-ddk-um"
-> -PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-sgx-ddk-um"
-> -PREFERRED_PROVIDER_virtual/libgbm ?= "ti-sgx-ddk-um"
->  PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
->  
->  KERNEL_DEVICETREE = " \
-> diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/conf/machine/include/j721e.inc
-> index eba10d8d..67f5fe0f 100644
-> --- a/meta-ti-bsp/conf/machine/include/j721e.inc
-> +++ b/meta-ti-bsp/conf/machine/include/j721e.inc
-> @@ -1,12 +1,6 @@
->  require conf/machine/include/k3.inc
->  SOC_FAMILY:append = ":j721e"
->  
-> -MACHINE_FEATURES += "gpu"
-> -
-> -PREFERRED_PROVIDER_virtual/egl ?= "ti-img-rogue-umlibs"
-> -PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-img-rogue-umlibs"
-> -PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-img-rogue-umlibs"
-> -PREFERRED_PROVIDER_virtual/libgbm ?= "ti-img-rogue-umlibs"
->  PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
->  
->  # On J721e the file tiboot3.bin comes from the bootloader not ti-sci-fw
-> diff --git a/meta-ti-bsp/conf/machine/include/j721s2.inc b/meta-ti-bsp/conf/machine/include/j721s2.inc
-> index fc6493b8..f33a3aba 100644
-> --- a/meta-ti-bsp/conf/machine/include/j721s2.inc
-> +++ b/meta-ti-bsp/conf/machine/include/j721s2.inc
-> @@ -1,12 +1,6 @@
->  require conf/machine/include/k3.inc
->  SOC_FAMILY:append = ":j721s2"
->  
-> -MACHINE_FEATURES += "gpu"
-> -
-> -PREFERRED_PROVIDER_virtual/egl ?= "ti-img-rogue-umlibs"
-> -PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-img-rogue-umlibs"
-> -PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-img-rogue-umlibs"
-> -PREFERRED_PROVIDER_virtual/libgbm ?= "ti-img-rogue-umlibs"
->  PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
->  
->  TFA_BOARD = "generic"
-> diff --git a/meta-ti-bsp/conf/machine/include/j784s4.inc b/meta-ti-bsp/conf/machine/include/j784s4.inc
-> index d268b810..df0faede 100644
-> --- a/meta-ti-bsp/conf/machine/include/j784s4.inc
-> +++ b/meta-ti-bsp/conf/machine/include/j784s4.inc
-> @@ -1,12 +1,6 @@
->  require conf/machine/include/k3.inc
->  SOC_FAMILY:append = ":j784s4"
->  
-> -MACHINE_FEATURES += "gpu"
-> -
-> -PREFERRED_PROVIDER_virtual/egl ?= "ti-img-rogue-umlibs"
-> -PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-img-rogue-umlibs"
-> -PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-img-rogue-umlibs"
-> -PREFERRED_PROVIDER_virtual/libgbm ?= "ti-img-rogue-umlibs"
->  PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
->  
->  TFA_BOARD = "j784s4"
-> diff --git a/meta-ti-bsp/conf/machine/include/omap-a15.inc b/meta-ti-bsp/conf/machine/include/omap-a15.inc
-> index 0843fb28..efa33a10 100644
-> --- a/meta-ti-bsp/conf/machine/include/omap-a15.inc
-> +++ b/meta-ti-bsp/conf/machine/include/omap-a15.inc
-> @@ -10,10 +10,6 @@ MACHINE_KERNEL_PR = "r7"
->  PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-staging"
->  PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-staging"
->  PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-staging"
-> -PREFERRED_PROVIDER_virtual/egl ?= "ti-sgx-ddk-um"
-> -PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-sgx-ddk-um"
-> -PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-sgx-ddk-um"
-> -PREFERRED_PROVIDER_virtual/libgbm ?= "ti-sgx-ddk-um"
->  PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
->  
->  KERNEL_IMAGETYPE = "zImage"
-> @@ -45,7 +41,7 @@ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
->  UBI_VOLNAME = "rootfs"
->  
->  # List common SoC features, may need to add touchscreen for specific machines
-> -MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet gpu mmip dsp gc320"
-> +MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet mmip dsp gc320"
->  
->  IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
->  WKS_FILE ?= "sdimage-2part.wks"
-> diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/conf/machine/include/ti33x.inc
-> index cfacc30d..e2f75359 100644
-> --- a/meta-ti-bsp/conf/machine/include/ti33x.inc
-> +++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
-> @@ -11,10 +11,6 @@ MACHINE_KERNEL_PR = "r22"
->  PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-staging"
->  PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-staging"
->  PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-staging"
-> -PREFERRED_PROVIDER_virtual/egl ?= "ti-sgx-ddk-um"
-> -PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-sgx-ddk-um"
-> -PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-sgx-ddk-um"
-> -PREFERRED_PROVIDER_virtual/libgbm ?= "ti-sgx-ddk-um"
->  PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
->  
->  KERNEL_IMAGETYPE = "zImage"
-> @@ -55,7 +51,7 @@ UBI_VOLNAME = "rootfs"
->  EXTRA_IMAGEDEPENDS += "virtual/bootloader"
->  
->  # List common SoC features, may need to add touchscreen for specific machines
-> -MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 alsa ethernet gpu"
-> +MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 alsa ethernet"
->  
->  IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
->  WKS_FILE ?= "sdimage-2part.wks"
-> diff --git a/meta-ti-bsp/conf/machine/include/ti43x.inc b/meta-ti-bsp/conf/machine/include/ti43x.inc
-> index 74a964db..e9999910 100644
-> --- a/meta-ti-bsp/conf/machine/include/ti43x.inc
-> +++ b/meta-ti-bsp/conf/machine/include/ti43x.inc
-> @@ -11,10 +11,6 @@ MACHINE_KERNEL_PR = "r3"
->  PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-staging"
->  PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-staging"
->  PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-staging"
-> -PREFERRED_PROVIDER_virtual/egl ?= "ti-sgx-ddk-um"
-> -PREFERRED_PROVIDER_virtual/libgles1 ?= "ti-sgx-ddk-um"
-> -PREFERRED_PROVIDER_virtual/libgles2 ?= "ti-sgx-ddk-um"
-> -PREFERRED_PROVIDER_virtual/libgbm ?= "ti-sgx-ddk-um"
->  PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
->  
->  KERNEL_IMAGETYPE = "zImage"
-> @@ -54,7 +50,7 @@ UBI_VOLNAME = "rootfs"
->  EXTRA_IMAGEDEPENDS += "u-boot"
->  
->  # List common SoC features, may need to add touchscreen for specific machines
-> -MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet gpu"
-> +MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet"
->  
->  IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
->  WKS_FILE ?= "sdimage-2part.wks"
-> -- 
-> 2.34.1
 
