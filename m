@@ -1,97 +1,101 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7AB3C636CD
-	for <webhook@archiver.kernel.org>; Tue,  7 Feb 2023 14:24:21 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.84434.1675779860913799067
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EBB5DC636CD
+	for <webhook@archiver.kernel.org>; Tue,  7 Feb 2023 14:33:41 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web11.84934.1675780419835126687
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 07 Feb 2023 06:24:21 -0800
+ Tue, 07 Feb 2023 06:33:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=onQfVYtv;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=tRLn68GO;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 317EOHq5068939;
-	Tue, 7 Feb 2023 08:24:17 -0600
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 317EXdxV053838;
+	Tue, 7 Feb 2023 08:33:39 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1675779857;
-	bh=lVsJuNHqfO1jMnrXiPdOqdI4kUsUXQnDZUg0AbmRFHw=;
-	h=From:To:Subject:Date;
-	b=onQfVYtv1Fz1iarm4fISe8XVMv2K7cHoUXueuhBnS8WSs213ExiVTEdxvU+g7w5A1
-	 5vYtnU/hAlBlL4EkyxC2aWq8J+vSZfMRmIdnbQoR+x96KsGgi+1hj0Lw1VWA8R86O7
-	 VF3GWXnE9a0sd7BoQVUSE3XVCce51nK8N2lyVmAQ=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 317EOH37038615
+	s=ti-com-17Q1; t=1675780419;
+	bh=Ie41fewFWNDTGE9ZYJKlU+mYBUbsGkyxhpmYhI9SwS0=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=tRLn68GOkY2CW2OE6C9Var42ox1x1EQkz0aUC45fedIjIYlFeIc0Y59jJL+uByPPS
+	 zUgAyljLNpPi7MYCMZvDhh+TH0+7r5cKdzgARYE5RmOlS+Ons4sgR/jSX46dKRKsxl
+	 P1k/qUQEM86E7xbAfk2JytKoGy0lYcD76BpuTAVE=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 317EXdJc045561
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 7 Feb 2023 08:24:17 -0600
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 7 Feb 2023 08:33:39 -0600
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 7
- Feb 2023 08:24:17 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2023 08:33:38 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Tue, 7 Feb 2023 08:24:17 -0600
-Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 317EOHuZ074654;
-	Tue, 7 Feb 2023 08:24:17 -0600
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1pPOtN-0003kD-5B; Tue, 07 Feb 2023 08:24:17 -0600
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] linux-bb.org: work around for too few arguments to function init_disassemble_info() error
-Date: Tue, 7 Feb 2023 08:24:17 -0600
-Message-ID: <20230207142417.14353-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ Frontend Transport; Tue, 7 Feb 2023 08:33:38 -0600
+Received: from [10.249.37.35] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 317EXcsc014811;
+	Tue, 7 Feb 2023 08:33:38 -0600
+Message-ID: <bc216d83-dfba-1b13-5e88-2a704a59f8d0@ti.com>
+Date: Tue, 7 Feb 2023 08:33:38 -0600
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Subject: Re: [meta-ti][dunfell][PATCH] conf: machine: j721s2: Add ehrpwm
+ overlay for am68-sk
+To: <sinthu.raja@mistralsolutions.com>, <recipes-eatmon@ti.com>,
+        <denys@ti.com>, <detheridge@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, Sinthu Raja <sinthu.raja@ti.com>
+References: <20230207134926.3800-1-sinthu.raja@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20230207134926.3800-1-sinthu.raja@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 07 Feb 2023 14:24:21 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15732
+ <meta-ti@lists.yoctoproject.org>; Tue, 07 Feb 2023 14:33:41 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15733
 
-binutils 2.39 changed the signature of init_disassemble_info(),
-which now causes perf and bpftool to fail to compile.
+On 2/7/23 7:49 AM, Sinthu Raja M via lists.yoctoproject.org wrote:
+> From: Sinthu Raja <sinthu.raja@ti.com>
+> 
+> The AM68 SK has PWM output pins connected to its RPi headers. Add
+> overlay file to enable PWM pins.
+> 
+> Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
+> ---
+>   conf/machine/j721s2-evm.conf | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/conf/machine/j721s2-evm.conf b/conf/machine/j721s2-evm.conf
+> index 7c120dcc..7e0f1246 100644
+> --- a/conf/machine/j721s2-evm.conf
+> +++ b/conf/machine/j721s2-evm.conf
+> @@ -17,6 +17,7 @@ KERNEL_DEVICETREE = " \
+>       ti/k3-am68-sk-bb-csi2-ov5640.dtbo \
+>       ti/k3-am68-sk-bb-rpi-cam-imx219.dtbo \
+>       ti/k3-am68-sk-fpdlink-fusion.dtbo \
+> +    ti/ k3-am68-sk-rpi-hdr-ehrpwm.dtbo \
 
-Relevant binutils commit: [1]
+           ^ extra space? have you tested this patch?
 
-There is a proper fix in development upstream[2].
-This is a work-around for older kernels.
+Andrew
 
-Inspired by a patch by Anton Antonov to fix this issue on meta-arm
-kernels. [3]
-
-[1] https://sourceware.org/git/?p=binutils-gdb.git;a=commitdiff;h=60a3da00bd5407f07d64dff82a4dae98230dfaac
-[2] https://patchwork.kernel.org/project/netdevbpf/cover/20220801013834.156015-1-andres@anarazel.de/
-[3] https://patchwork.yoctoproject.org/project/arm/patch/20220824025819.4888-1-jon.mason@arm.com/#5104
-
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-index 2e0f2448..35fb40cd 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-@@ -25,7 +25,8 @@ SRCREV:k3 = "11ebcc09f32669fac8254dff56d500f86c4c2caf"
- PV:k3 = "5.10.153+git${SRCPV}"
- BRANCH:k3 = "5.10-arm64"
- 
--SRC_URI = "git://git.beagleboard.org/beagleboard/linux.git;protocol=https;branch=${BRANCH}"
-+SRC_URI = "git://git.beagleboard.org/beagleboard/linux.git;protocol=https;branch=${BRANCH} \
-+           file://init_disassemble_info-signature-changes-causes-compile-failures.patch"
- 
- DEFCONFIG_NAME = "bb.org_defconfig"
- KERNEL_CONFIG_COMMAND = "oe_runmake -C ${S} O=${B} ${DEFCONFIG_NAME}"
--- 
-2.17.1
-
+>       ti/k3-am68-sk-som-ddr_mem_carveout.dtbo \
+>       ti/k3-j721e-fpdlink-imx390-cm-0-0.dtbo \
+>       ti/k3-j721e-fpdlink-imx390-cm-0-1.dtbo \
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#15730): https://lists.yoctoproject.org/g/meta-ti/message/15730
+> Mute This Topic: https://lists.yoctoproject.org/mt/96807109/3619733
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [afd@ti.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
