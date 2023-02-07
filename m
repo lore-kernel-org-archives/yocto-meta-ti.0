@@ -2,50 +2,48 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D616C636CD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91E86C64EC7
 	for <webhook@archiver.kernel.org>; Tue,  7 Feb 2023 23:42:45 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.6624.1675813361834959910
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.6625.1675813361890647837
  for <meta-ti@lists.yoctoproject.org>;
  Tue, 07 Feb 2023 15:42:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=sO+pCJhK;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 317NgfJm038816;
-	Tue, 7 Feb 2023 17:42:41 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1675813361;
-	bh=SmtaGGmPdeztuReFVu2M0QsttOtrF/QILNpfzVLkG8A=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=sO+pCJhKMQ0sFSb5CsmuX7SJsrtFdI5mXiZwoHGZr6Jq5xt/9Ubb9TMzYi6K35tze
-	 0nGLmF5x5EGpMMPfJdwtLENe6kGabQFh6z+B8TuJkWOWHR3QQhPyYplo+E/0UvzTQe
-	 kWn3jSLeD3vi1qrn0HcxLFZg6wgHWOOqu3orLvh0=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 317Ngfcp103824
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 7 Feb 2023 17:42:41 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 7
- Feb 2023 17:42:40 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Tue, 7 Feb 2023 17:42:40 -0600
-Received: from ula0226330.dal.design.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 317NgdTe050846;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=yNdDYbXP;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 317Nge8N008723;
 	Tue, 7 Feb 2023 17:42:40 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1675813360;
+	bh=eG7qvk7rbG5iWc4YkVZdTrnaLUwswxEYV/Y64XhFaaI=;
+	h=From:To:CC:Subject:Date;
+	b=yNdDYbXPK0uM+LqQK+LJyhorRFjm0/SkKbypAVfY7dl1ZwiLhfcg+mJARCYDjxf+H
+	 K7DNSNnJ79rMAtQvbqeg9pM8kiygIFEmmscg+HGkM/qFvIhbZFDocVCm8jbYNrM9QP
+	 Fndqa8CvWWGVSXhXBRCPhtuChLaG571UO8zxzHh0=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 317Nge2J032417
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 7 Feb 2023 17:42:40 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 7
+ Feb 2023 17:42:39 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
+ Frontend Transport; Tue, 7 Feb 2023 17:42:39 -0600
+Received: from ula0226330.dal.design.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 317NgdTc050846;
+	Tue, 7 Feb 2023 17:42:39 -0600
 From: Andrew Davis <afd@ti.com>
 To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         <meta-ti@lists.yoctoproject.org>
 CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][master/kirkstone][PATCH 3/8] ti-rtos-firmware: Fix name for AM64x and AM62x firmware
-Date: Tue, 7 Feb 2023 17:42:34 -0600
-Message-ID: <20230207234239.30720-3-afd@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH 1/8] ti-rtos-firmware: Use ti-k3-secdev if TI_SECURE_DEV_PKG_K3 not defined
+Date: Tue, 7 Feb 2023 17:42:32 -0600
+Message-ID: <20230207234239.30720-1-afd@ti.com>
 X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230207234239.30720-1-afd@ti.com>
-References: <20230207234239.30720-1-afd@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -54,93 +52,60 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Tue, 07 Feb 2023 23:42:45 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15741
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15743
 
-The firmware for AM64x and AM62x are renamed to match the other platforms,
-but we don't actually change them to match. Remove baremetal from the
-names.
-
-These are only referenced to by softlink, so this change will have no
-effect on Linux users.
+Use ti-k3-secdev native package to provide secure-binary-image.sh script
+when it is not passed on as an environment variable. This fixes and issue
+with AM64xx which is always HS but should not require TI_SECURE_DEV_PKG
+when building for HS-FS platforms.
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- .../ti-rtos-bin/ti-rtos-firmware.bb           | 36 +++++++++----------
- 1 file changed, 18 insertions(+), 18 deletions(-)
+ meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
 diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-index e0b262da..c09f67b5 100644
+index 9a6da088..6c59b8ab 100644
 --- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
 +++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -125,18 +125,18 @@ do_install:prepend:j721s2-hs-evm() {
- # Update the am64xx ipc binaries to be consistent with other platforms
- do_install:prepend:am64xx() {
-         ( cd ${RTOS_IPC_FW_DIR}; \
--                mv am64-main-r5f0_0-fw ipc_echo_baremetal_test_mcu1_0_release_strip.xer5f; \
--                mv am64-main-r5f0_1-fw ipc_echo_baremetal_test_mcu1_1_release_strip.xer5f; \
--                mv am64-main-r5f1_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f; \
--                mv am64-main-r5f1_1-fw ipc_echo_baremetal_test_mcu2_1_release_strip.xer5f; \
--                mv am64-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f; \
-+                mv am64-main-r5f0_0-fw ipc_echo_test_mcu1_0_release_strip.xer5f; \
-+                mv am64-main-r5f0_1-fw ipc_echo_test_mcu1_1_release_strip.xer5f; \
-+                mv am64-main-r5f1_0-fw ipc_echo_test_mcu2_0_release_strip.xer5f; \
-+                mv am64-main-r5f1_1-fw ipc_echo_test_mcu2_1_release_strip.xer5f; \
-+                mv am64-mcu-m4f0_0-fw ipc_echo_test_mcu3_0_release_strip.xer5f; \
-         )
- }
+@@ -31,9 +31,11 @@ CLEANBROKEN = "1"
+ PR = "${INC_PR}.0"
  
- # Update the am62xx ipc binaries to be consistent with other platforms
- do_install:prepend:am62xx() {
-         ( cd ${RTOS_IPC_FW_DIR}; \
--                mv am62-mcu-m4f0_0-fw ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f; \
-+                mv am62-mcu-m4f0_0-fw ipc_echo_test_mcu2_0_release_strip.xer5f; \
-         )
- }
+ # Secure Build
++include recipes-ti/includes/ti-paths.inc
+ DEPENDS += "openssl-native"
+-
+-TI_SECURE_DEV_PKG ?= ""
++DEPENDS:append = "${@ '' if d.getVar('TI_SECURE_DEV_PKG_K3') else ' ti-k3-secdev-native' }"
++TI_SECURE_DEV_PKG = "${@ d.getVar('TI_SECURE_DEV_PKG_K3') or d.getVar('TI_K3_SECDEV_INSTALL_DIR') }"
++export TI_SECURE_DEV_PKG
  
-@@ -270,16 +270,16 @@ do_install:am65xx() {
+ RTOS_ETH_FW_DIR = "${S}/ti-eth/${PLAT_SFX}"
+ RTOS_DM_FW_DIR = "${S}/ti-dm/${PLAT_SFX}"
+@@ -49,7 +51,6 @@ DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
  
- do_install:am64xx() {
-     install -d ${LEGACY_IPC_FW_DIR}
--    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu1_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
--    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
--    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
--    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
--    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu1_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_1_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu3_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
- }
+ # J721e HS support
+ do_install:prepend:j721e-hs-evm() {
+-        export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
+         ( cd ${RTOS_DM_FW_DIR}; \
+                 mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
+                 ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
+@@ -80,7 +81,6 @@ do_install:prepend:j721e-hs-evm() {
  
- do_install:am62xx() {
-     install -d ${LEGACY_IPC_FW_DIR}
--    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-+    install -m 0644 ${RTOS_IPC_FW_DIR}/ipc_echo_test_mcu2_0_release_strip.xer5f ${LEGACY_IPC_FW_DIR}
-     # DM Firmware
-     install -m 0644 ${RTOS_DM_FW_DIR}/ipc_echo_testb_mcu1_0_release_strip.xer5f ${LEGACY_DM_FW_DIR}
- }
-@@ -476,14 +476,14 @@ ALTERNATIVE_LINK_NAME[j784s4-c71_3-fw] = "${base_libdir}/firmware/j784s4-c71_3-f
- ALTERNATIVE_TARGET[am65x-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_0_release_strip.xer5f"
- ALTERNATIVE_TARGET[am65x-mcu-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
+ # J7200 HS support
+ do_install:prepend:j7200-hs-evm() {
+-        export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
+         ( cd ${RTOS_DM_FW_DIR}; \
+                 mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
+                 ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
+@@ -101,7 +101,6 @@ do_install:prepend:j7200-hs-evm() {
  
--ALTERNATIVE_TARGET[am64-main-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu1_0_release_strip.xer5f"
--ALTERNATIVE_TARGET[am64-main-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu1_1_release_strip.xer5f"
--ALTERNATIVE_TARGET[am64-main-r5f1_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f"
--ALTERNATIVE_TARGET[am64-main-r5f1_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_1_release_strip.xer5f"
--ALTERNATIVE_TARGET[am64-mcu-m4f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu3_0_release_strip.xer5f"
-+ALTERNATIVE_TARGET[am64-main-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_0_release_strip.xer5f"
-+ALTERNATIVE_TARGET[am64-main-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
-+ALTERNATIVE_TARGET[am64-main-r5f1_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_0_release_strip.xer5f"
-+ALTERNATIVE_TARGET[am64-main-r5f1_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f"
-+ALTERNATIVE_TARGET[am64-mcu-m4f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_0_release_strip.xer5f"
- 
- ALTERNATIVE_TARGET[am62-main-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
--ALTERNATIVE_TARGET[am62-mcu-m4f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_baremetal_test_mcu2_0_release_strip.xer5f"
-+ALTERNATIVE_TARGET[am62-mcu-m4f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_0_release_strip.xer5f"
- 
- ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
- ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw] = "${nonarch_base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
+ # J721s2 HS support
+ do_install:prepend:j721s2-hs-evm() {
+-        export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
+         ( cd ${RTOS_DM_FW_DIR}; \
+                 mv ${DM_FIRMWARE} ${DM_FIRMWARE}.unsigned; \
+                 ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${DM_FIRMWARE}.unsigned ${DM_FIRMWARE}; \
 -- 
 2.39.1
 
