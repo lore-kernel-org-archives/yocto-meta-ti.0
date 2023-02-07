@@ -1,84 +1,85 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 640F5C6379F
-	for <webhook@archiver.kernel.org>; Tue,  7 Feb 2023 16:27:32 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.88028.1675787242816266872
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D36C4C636CC
+	for <webhook@archiver.kernel.org>; Tue,  7 Feb 2023 17:31:02 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.89826.1675791052468788976
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 07 Feb 2023 08:27:22 -0800
+ Tue, 07 Feb 2023 09:30:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: list.ti.com, ip: 198.47.19.141, mailfrom: lcpdbld@list.ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 317GRKFE098497;
-	Tue, 7 Feb 2023 10:27:20 -0600
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 317GRKZl025438
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 7 Feb 2023 10:27:20 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 7
- Feb 2023 10:27:19 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Tue, 7 Feb 2023 10:27:19 -0600
-Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 317GRJ3h062702;
-	Tue, 7 Feb 2023 10:27:19 -0600
-Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
-	id C30E611221D2; Tue,  7 Feb 2023 10:27:19 -0600 (CST)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH 1/3] ti-linux-fw: CI/CD Auto-Merger: cicd.dunfell.202302070400
-Date: Tue, 7 Feb 2023 10:27:17 -0600
-Message-ID: <1675787239-91579-2-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1675787239-91579-1-git-send-email-lcpdbld@list.ti.com>
-References: <1675787239-91579-1-git-send-email-lcpdbld@list.ti.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 513D540C24;
+	Tue,  7 Feb 2023 17:30:51 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Lt1CtGEfjE_d; Tue,  7 Feb 2023 17:30:51 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 30E9D40BA8;
+	Tue,  7 Feb 2023 17:30:49 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 296B7163749; Tue,  7 Feb 2023 12:30:27 -0500 (EST)
+Date: Tue, 7 Feb 2023 12:30:27 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: reatmon@ti.com
+Cc: Praneeth Bajjuri <praneeth@ti.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][master][PATCH] linux-bb.org: work around for too few
+ arguments to function init_disassemble_info() error
+Message-ID: <20230207173027.GU22689@denix.org>
+References: <20230207142417.14353-1-reatmon@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230207142417.14353-1-reatmon@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 07 Feb 2023 16:27:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15737
+ <meta-ti@lists.yoctoproject.org>; Tue, 07 Feb 2023 17:31:02 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15739
 
-Updated the value(s) for:
-  K3_IMAGE_GEN_SRCREV
-  TI_LINUX_FW_SRCREV
+On Tue, Feb 07, 2023 at 08:24:17AM -0600, Ryan Eatmon via lists.yoctoproject.org wrote:
+> binutils 2.39 changed the signature of init_disassemble_info(),
+> which now causes perf and bpftool to fail to compile.
+> 
+> Relevant binutils commit: [1]
+> 
+> There is a proper fix in development upstream[2].
+> This is a work-around for older kernels.
+> 
+> Inspired by a patch by Anton Antonov to fix this issue on meta-arm
+> kernels. [3]
+> 
+> [1] https://sourceware.org/git/?p=binutils-gdb.git;a=commitdiff;h=60a3da00bd5407f07d64dff82a4dae98230dfaac
+> [2] https://patchwork.kernel.org/project/netdevbpf/cover/20220801013834.156015-1-andres@anarazel.de/
+> [3] https://patchwork.yoctoproject.org/project/arm/patch/20220824025819.4888-1-jon.mason@arm.com/#5104
+> 
+> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+> ---
+>  meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
+> index 2e0f2448..35fb40cd 100644
+> --- a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
+> @@ -25,7 +25,8 @@ SRCREV:k3 = "11ebcc09f32669fac8254dff56d500f86c4c2caf"
+>  PV:k3 = "5.10.153+git${SRCPV}"
+>  BRANCH:k3 = "5.10-arm64"
+>  
+> -SRC_URI = "git://git.beagleboard.org/beagleboard/linux.git;protocol=https;branch=${BRANCH}"
+> +SRC_URI = "git://git.beagleboard.org/beagleboard/linux.git;protocol=https;branch=${BRANCH} \
+> +           file://init_disassemble_info-signature-changes-causes-compile-failures.patch"
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
----
- recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Did you forget to add the patch?
 
-diff --git a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index d6ee366..5728710 100644
---- a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -20,12 +20,12 @@ IMG_DEC_FW_VERSION = "1.0"
- CNM_WAVE521_FW_VERSION = "1.0.00"
- TIFS_LPM_STUB_FW_VERSION = "08.03.02"
- 
--TI_LINUX_FW_SRCREV ?= "e13f60459c72a315ff63d9800e8abb0d88bf45fc"
-+TI_LINUX_FW_SRCREV ?= "b57df8eec37e93cf0e50017b3617080096ab3510"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
- 
- BRANCH ?= "ti-linux-firmware"
- 
--K3_IMAGE_GEN_SRCREV ?= "69250070a328f7a658a3d5cb4b8ca8f81947e8ac"
-+K3_IMAGE_GEN_SRCREV ?= "a2c62b32e43a0e663af0691fa739f9c5cdf65678"
- SRCREV_imggen = "${K3_IMAGE_GEN_SRCREV}"
- SRCREV_FORMAT = "imggen"
- 
--- 
-1.8.3.1
 
+>  DEFCONFIG_NAME = "bb.org_defconfig"
+>  KERNEL_CONFIG_COMMAND = "oe_runmake -C ${S} O=${B} ${DEFCONFIG_NAME}"
+> -- 
+> 2.17.1
 
