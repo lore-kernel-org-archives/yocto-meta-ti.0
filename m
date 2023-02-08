@@ -1,138 +1,216 @@
-Return-Path: <praneeth@ti.com>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4D3FC05027
-	for <webhook@archiver.kernel.org>; Wed,  8 Feb 2023 19:46:16 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.8681.1675885575016320767
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2E0AC636D3
+	for <webhook@archiver.kernel.org>; Wed,  8 Feb 2023 20:10:26 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.9285.1675887025525568083
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 08 Feb 2023 11:46:15 -0800
+ Wed, 08 Feb 2023 12:10:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=DzXuD2Qj;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=T94EciPX;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 318Jk7Ic062930;
-	Wed, 8 Feb 2023 13:46:07 -0600
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 318KAOMc043437;
+	Wed, 8 Feb 2023 14:10:24 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1675885567;
-	bh=x83p1oThek1J58PrMVDY41nKHrj+4ExyEqRgtp1EUOc=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=DzXuD2QjGUVbAReM61SKHdnMvR+W5VKZE3syYfRBN6B3Fy/X39dYjgahHZsPk17Wi
-	 RuBvjcDyulZRbkTvvLQiskL062Bam7djyuNvVfcQ5K+eaMmairPjvTC2gfPjaxoHbN
-	 6bggDSzveTTHe2SLQJ19Sc0+aA/qUobSpztIgQTc=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 318Jk75n022451
+	s=ti-com-17Q1; t=1675887024;
+	bh=3qX5fEEM7aB1qvriTnvtCWiW6mtLq9uMmOjRuPQe7U8=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=T94EciPXPFRQYMSe/pyD73f3ST0E4RgDk9Jwvo3iNezgemf7e1AMrwsDWMU0npSWZ
+	 1pl9DJ2tgMjTy6hlPGTzAvrjXzAuLKoGNTA8yjvn6U/cGWPrumfa9QJMI3lCc7Xgei
+	 mtz2fwTr2EBuTSnq4L+8tJsTrXwH+qhVgL9r4P/g=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 318KAOiI036610
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 8 Feb 2023 13:46:07 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 8 Feb 2023 14:10:24 -0600
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Wed, 8
- Feb 2023 13:46:07 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2023 14:10:24 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Wed, 8 Feb 2023 13:46:07 -0600
-Received: from [10.247.18.194] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 318Jk7jC001785;
-	Wed, 8 Feb 2023 13:46:07 -0600
-Message-ID: <272036f8-9958-09eb-302e-430dad1e5b06@ti.com>
-Date: Wed, 8 Feb 2023 13:46:07 -0600
+ Frontend Transport; Wed, 8 Feb 2023 14:10:24 -0600
+Received: from [10.250.32.98] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 318KANAn086047;
+	Wed, 8 Feb 2023 14:10:23 -0600
+Message-ID: <831db73d-5100-9b5c-3f7e-4c62cd055d7a@ti.com>
+Date: Wed, 8 Feb 2023 14:10:23 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.2
-Subject: Re: [meta-ti] MDIO driver bug (U-Boot:drivers/net/ti/cpsw_mdio.c)
-To: Ulf Samuelsson <meta-ti@emagii.com>, <meta-ti@lists.yoctoproject.org>,
-        "Govindarajan, Sriramakrishnan" <srk@ti.com>,
-        Kevin Hilman
-	<khilman@baylibre.com>
-References: <1ac128b2-0f38-dff7-19ee-ff7d91620431@emagii.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Subject: Re: [meta-ti][dunfell][PATCH V2] conf: machine: j721s2: Add ehrpwm
+ overlay for am68-sk
 Content-Language: en-US
-From: "Bajjuri, Praneeth" <praneeth@ti.com>
-In-Reply-To: <1ac128b2-0f38-dff7-19ee-ff7d91620431@emagii.com>
+To: Ryan Eatmon <reatmon@ti.com>, <sinthu.raja@mistralsolutions.com>,
+        "Bajjuri, Praneeth" <praneeth@ti.com>, Ryan Eatmon <reatmon@ti.com>,
+        <sinthu.raja@mistralsolutions.com>,
+        "Bajjuri, Praneeth" <praneeth@ti.com>
+CC: <denys@ti.com>, <detheridge@ti.com>, <meta-ti@lists.yoctoproject.org>,
+        Sinthu Raja <sinthu.raja@ti.com>, "Kumar, Udit" <u-kumar1@ti.com>
+References: <20230207151300.3223-1-sinthu.raja@ti.com>
+ <d5b39582-d7a8-2d0e-c6f0-8881f0f1ae7e@ti.com>
+ <d8203dbe-37ec-6bd5-7928-f6e0b93d062b@ti.com>
+ <CAEd-yTSg3gNDZSafhTYq6BEKXx3yOD7X7xgi-okq2SjDra+BCg@mail.gmail.com>
+ <4c12871e-0da5-423b-be26-6263ddc3ec03@ti.com>
+ <6de90508-7a11-18cc-60ae-fee82c0672fe@ti.com>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <6de90508-7a11-18cc-60ae-fee82c0672fe@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 318Jk7Ic062930
+X-MIME-Autoconverted: from 8bit to quoted-printable by lelv0143.ext.ti.com id 318KAOMc043437
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 08 Feb 2023 19:46:16 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15758
+ <meta-ti@lists.yoctoproject.org>; Wed, 08 Feb 2023 20:10:26 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15759
 
-+Sriram,kevin
+On 2/8/23 12:45 PM, Ryan Eatmon wrote:
+>=20
+>=20
+> On 2/8/2023 12:28, Andrew Davis wrote:
+>> On 2/8/23 11:08 AM, Sinthu Raja M via lists.yoctoproject.org wrote:
+>>> On Wed, Feb 8, 2023 at 10:31 PM Bajjuri, Praneeth <praneeth@ti.com> w=
+rote:
+>>>>
+>>>>
+>>>>
+>>>> On 2/8/2023 10:37 AM, Ryan Eatmon via lists.yoctoproject.org wrote:
+>>>>>
+>>>>>
+>>>>> On 2/7/2023 9:13, Sinthu Raja wrote:
+>>>>>> From: Sinthu Raja <sinthu.raja@ti.com>
+>>>>>>
+>>>>>> The AM68 SK has PWM output pins connected to its RPi headers. Add
+>>>>>> overlay file to enable PWM pins.
+>>>>>>
+>>>>>> Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
+>>>>>> ---
+>>>>>>
+>>>>>> Changes in v2:
+>>>>>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>>>>>> Address review comment:
+>>>>>> =C2=A0=C2=A0 - Remove extra space
+>>>>>>
+>>>>>> v1:https://lists.yoctoproject.org/g/meta-ti/message/15730
+>>>>>> =C2=A0=C2=A0 conf/machine/j721s2-evm.conf | 1 +
+>>>>>> =C2=A0=C2=A0 1 file changed, 1 insertion(+)
+>>>>>>
+>>>>>> diff --git a/conf/machine/j721s2-evm.conf b/conf/machine/j721s2-ev=
+m.conf
+>>>>>> index 7c120dcc..f1127ed5 100644
+>>>>>> --- a/conf/machine/j721s2-evm.conf
+>>>>>> +++ b/conf/machine/j721s2-evm.conf
+>>>>>> @@ -17,6 +17,7 @@ KERNEL_DEVICETREE =3D " \
+>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ti/k3-am68-sk-bb-csi2-ov5640.=
+dtbo \
+>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ti/k3-am68-sk-bb-rpi-cam-imx2=
+19.dtbo \
+>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ti/k3-am68-sk-fpdlink-fusion.=
+dtbo \
+>>>>>> +=C2=A0=C2=A0=C2=A0 ti/k3-am68-sk-rpi-hdr-ehrpwm.dtbo \
+>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ti/k3-am68-sk-som-ddr_mem_car=
+veout.dtbo \
+>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ti/k3-j721e-fpdlink-imx390-cm=
+-0-0.dtbo \
+>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ti/k3-j721e-fpdlink-imx390-cm=
+-0-1.dtbo \
+>>>>>
+>>>>>
+>>>>> This file does not exists in the kernel (yet?).=C2=A0 I'm assuming =
+that you
+>>>>> all have put in the patch for it and we are just playing a waiting =
+game?
+>>>>>
+>>>>> If that is the case, then I would appreciate (in the future) not
+>>>>> submitting these patches to the meta-ti mailing list until the kern=
+el
+>>>>> .dtb changes have been accepted into the kernel.=C2=A0 This is the =
+second
+>>>>> patch in recent weeks that I'm having to sit on until the kernel ca=
+tches
+>>>>> up...
+>>>>>
+>>>>> It makes it really hard to test these patches if the kernel part is=
+ not
+>>>>> there, and I do not have the bandwidth to keep checking daily if th=
+e
+>>>>> change has made it into the public/cicd branches.
+>>>>>
+>>>>
+>>>> Agreed here.
+>>>> Sinthu, Please post the associated meta-ti change only once the kern=
+el
+>>>> dts change is merged to cicd build.
+>>>>
+>>> Agreed.
+>>>
+>>
+>> I'm going to slightly disagree, I don't see an issue with getting some
+>> early reviews. Just as long as you only post it as an "RFC" and only
+>> post the real "PATCH" when ready.
+>=20
+> If the patch is doing more than just adding a dtb, or changing a SRCREV=
+, or anything that depends on an external repo to be updated then I would=
+ agree.=C2=A0 Posting the change under the RFC banner (and clearly statin=
+g that it will not build yet), it a great thing.
+>=20
 
-On 2/8/2023 12:45 PM, Ulf Samuelsson wrote:
-> Hi guys,
+Fair, but in this case, even this simple change had an issue
+and needed a v2, what might be trivial to us might need review
+for folks new to all this. :)
+
 >=20
-> I think I found a bug in the U-Boot drivers/net/ti/cpsw_mdio.c driver
+>> I'd also like to poke again the idea of pulling in DTB/DTBO files base=
+d
+>> on some pattern matching instead of manually adding each time. I know =
+the
+>> idea got shot down, but I think this is going to be a growing problem =
+as
+>> we start to increase our usage of DT Overlays in the near future..
 >=20
-> Sent the patch below to the u-boot mailing list with no response.
+> The one annoying with making all of the DTBs being patterns is that we =
+have to implement the logic to expand the wildcarding and set KERNEL_DEVI=
+CETREE.=C2=A0 If anyone tries to point to a different kernel (say an upst=
+ream version) then nothing from meta-ti will work.=C2=A0 And that may not=
+ be a show stopper issue, it's just the one that popped up in my head whe=
+n you first brought up the idea for doing it for all platforms.
 >=20
-> It has only been a day though, but I thought to highlight it here.
+> Maybe this would be a good feature to promote to bitbake to support? An=
+d alternative to KERNEL_DEVICETREE?=C2=A0 A different variable?
 >=20
 
-Thanks for notifying us,
+That is an option, no need to make it TI specific, I'd imagine wildcard
+filtering would be useful for many other's bsp layers.
 
-I see the patch
-https://patchwork.ozlabs.org/project/uboot/patch/20230207082527.2319-1-ul=
-f@emagii.com/
+Andrew
 
-Will monitor and handle accordingly with uboot and kirkstone update when=20
-it happens.
-
-
-> Best Regards
-> Ulf Samuelsson
->=20
->=20
->=20
-> cpsw_mdio_get_alive reads the wrong register.
-> See page 2316 in SPRUH73Q AM335x TRM
->=20
-> Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> ---
->  =C2=A0drivers/net/ti/cpsw_mdio.c | 6 +++---
->  =C2=A01 file changed, 3 insertions(+), 3 deletions(-)
->=20
-> diff --git a/drivers/net/ti/cpsw_mdio.c b/drivers/net/ti/cpsw_mdio.c
-> index a5ba73b739..ac791faa81 100644
-> --- a/drivers/net/ti/cpsw_mdio.c
-> +++ b/drivers/net/ti/cpsw_mdio.c
-> @@ -51,7 +51,7 @@ struct cpsw_mdio_regs {
->  =C2=A0#define USERACCESS_PHY_REG_SHIFT=C2=A0=C2=A0=C2=A0 (21)
->  =C2=A0#define USERACCESS_PHY_ADDR_SHIFT=C2=A0=C2=A0=C2=A0 (16)
->  =C2=A0#define USERACCESS_DATA=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 GEN=
-MASK(15, 0)
-> -=C2=A0=C2=A0=C2=A0 } user[0];
-> +=C2=A0=C2=A0=C2=A0 } user[2];
->  =C2=A0};
->=20
->  =C2=A0#define CPSW_MDIO_DIV_DEF=C2=A0=C2=A0=C2=A0 0xff
-> @@ -366,8 +366,8 @@ u32 cpsw_mdio_get_alive(struct mii_dev *bus)
->  =C2=A0=C2=A0=C2=A0=C2=A0 struct cpsw_mdio *mdio =3D bus->priv;
->  =C2=A0=C2=A0=C2=A0=C2=A0 u32 val;
->=20
-> -=C2=A0=C2=A0=C2=A0 val =3D readl(&mdio->regs->control);
-> -=C2=A0=C2=A0=C2=A0 return val & GENMASK(15, 0);
-> +=C2=A0=C2=A0=C2=A0 val =3D readl(&mdio->regs->alive);
-> +=C2=A0=C2=A0=C2=A0 return val & GENMASK(7, 0);
->  =C2=A0}
->=20
->  =C2=A0struct mii_dev *cpsw_mdio_init(const char *name, phys_addr_t mdi=
-o_base,
->=20
->=20
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#15755): https://lists.yoctoproject.org/g/meta-ti/me=
-ssage/15755
-> Mute This Topic: https://lists.yoctoproject.org/mt/96837011/2167429
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [praneeth@t=
-i.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Andrew
+>>
+>>>> from what i see, the kernel patch is still under review.
+>>>>
+>>>>>
+>>>>>
+>>>>>
+>>>>>
+>>>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>> Links: You receive all messages sent to this group.
+>>> View/Reply Online (#15752): https://lists.yoctoproject.org/g/meta-ti/=
+message/15752
+>>> Mute This Topic: https://lists.yoctoproject.org/mt/96808923/3619733
+>>> Group Owner: meta-ti+owner@lists.yoctoproject.org
+>>> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [afd@ti.c=
+om]
+>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>>
 >=20
 
