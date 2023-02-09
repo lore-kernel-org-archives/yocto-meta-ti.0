@@ -1,155 +1,211 @@
-Return-Path: <w.egorov@phytec.de>
+Return-Path: <sinthu.raja@mistralsolutions.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D6EBC61DA4
-	for <webhook@archiver.kernel.org>; Thu,  9 Feb 2023 13:52:58 +0000 (UTC)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- by mx.groups.io with SMTP id smtpd.web11.15374.1675950768348573262
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90AA8C61DA4
+	for <webhook@archiver.kernel.org>; Thu,  9 Feb 2023 15:19:58 +0000 (UTC)
+Received: from egress-ip4b.ess.de.barracuda.com (egress-ip4b.ess.de.barracuda.com [18.185.115.208])
+ by mx.groups.io with SMTP id smtpd.web11.18050.1675955987674381985
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 09 Feb 2023 05:52:49 -0800
+ Thu, 09 Feb 2023 07:19:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@phytec.de header.s=a4 header.b=mub02NEt;
- spf=pass (domain: phytec.de, ip: 91.26.50.163, mailfrom: w.egorov@phytec.de)
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
-	q=dns/txt; i=@phytec.de; t=1675950765; x=1678542765;
-	h=From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=gK2a0H7ZC1EtCXNTWZe9qLh89m2EzNiJeQ2qRmNHuRQ=;
-	b=mub02NEtXODctwjCXsVS03IO7H8o+fijH8KG1jE4BHgJXfKuI+Zkm+BAxWXE6xfl
-	NgAUhPVZ8pQRqAr95eWG3iuhW6c/pCWb/Zg6fnINebYMRA3bg8A/ZiEpR/IZPVrt
-	fi5iTZQrouWQSuVbNp7ST7RCKiE4RCShGz70ZOwQkp0=;
-X-AuditID: ac14000a-923ff70000007ecb-69-63e4faad041d
-Received: from Diagnostix.phytec.de (Diagnostix.phytec.de [172.25.0.14])
-	(using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(Client did not present a certificate)
-	by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id DF.81.32459.DAAF4E36; Thu,  9 Feb 2023 14:52:45 +0100 (CET)
-Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.18; Thu, 9 Feb
- 2023 14:52:44 +0100
-Received: from Berlix.phytec.de ([fe80::61cc:ebf0:7375:8768]) by
- berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2375.018;
- Thu, 9 Feb 2023 14:52:44 +0100
-From: Wadim Egorov <W.Egorov@phytec.de>
-To: Ryan Eatmon <reatmon@ti.com>, "afd@ti.com" <afd@ti.com>,
-	"upstream@lists.phytec.de" <upstream@lists.phytec.de>,
-	"meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [dunfell] ti-rtos-firmware: Check if TI_SECURE_DEV is
- set before signing
-Thread-Topic: [meta-ti] [dunfell] ti-rtos-firmware: Check if TI_SECURE_DEV is
- set before signing
-Thread-Index: AQHZO04n08YKFf1/R0KON83oTT/UxK7FeLUAgAEbfAA=
-Date: Thu, 9 Feb 2023 13:52:44 +0000
-Message-ID: <4d46f237-da11-a590-950d-d4b926691435@phytec.de>
-References: <20230201143126.3003913-1-w.egorov@phytec.de>
- <d68053d1-66e3-e582-a8f8-1dddc597fe6c@ti.com>
- <9d8896e2-08b3-5fc9-1eab-6d578ddaa771@ti.com>
-In-Reply-To: <9d8896e2-08b3-5fc9-1eab-6d578ddaa771@ti.com>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.25.0.11]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <8ECE3C23C2D9464A8F8FA315DBC6DEA4@phytec.de>
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@mistralsolutions.com header.s=google header.b=a3hs4r2b;
+ spf=pass (domain: mistralsolutions.com, ip: 18.185.115.208, mailfrom: sinthu.raja@mistralsolutions.com)
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199]) by mx-outbound16-204.eu-central-1b.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Thu, 09 Feb 2023 15:19:43 +0000
+Received: by mail-pf1-f199.google.com with SMTP id v23-20020aa78097000000b005748c087db1so1186465pff.2
+        for <meta-ti@lists.yoctoproject.org>; Thu, 09 Feb 2023 07:19:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mistralsolutions.com; s=google;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=1R9MJNzYz87EHL7llaZ9ewk2ObRn/IoJJQ5uRaDnOds=;
+        b=a3hs4r2bo2ogVSkZTVkP7tZETsJY4hzFegJbByAQeaI8uA+zPDtS1I1Xq62e0Yzs4V
+         00p9vpthpzjHjdTw5WIUN4DqGshfvD3+ZtVjpahknyeMmTAuaWsz/D3UxthlLyeS8Fk6
+         zR4mKCWeO7sGKSftDfFRMeey26tDtfS7dQ8Cw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=1R9MJNzYz87EHL7llaZ9ewk2ObRn/IoJJQ5uRaDnOds=;
+        b=3oYU0MRWA8HPgdFCiJXOhFR+XbhzMhvbpDMnL1/DmPLAPWD0ksMuX+Vot9ehS/PEuF
+         rhMd3O/699UENY/NxZORmzzdcCtqesmPkqXcAESlXQIvnujH5jARzFfQpjfreiNs7jQr
+         OlrqwcWsI5V/sX5XyM7NtsjYkNo1yX/vkzsZCPAhwJi9ZqjTbP3pCKw1pp5LFHvt6p+J
+         ArcKJ/5lVlvM7xhwSOE8B7mZbhXh+YfwFHX4eeU/jt0BGKuBVG5A/vcI9H9bxKwnCJo7
+         Aq9eFUvDboDbI1ABssz43/cxzhY0BcKN+5ivlVS5L+ntENjq2I6Ko9QPmpsbJP1ju9tj
+         NIJw==
+X-Gm-Message-State: AO0yUKW2KaCGM3oXvHDvSStfJGvjP9slvRO2YWXmJ+FYUIIFyDRcJmvD
+	TsTpskJdH2pijiLqo5i/OfKE05nwQjtBwrqy2nmgCBfeGCCQ8xX1xbQjn1UBYGzlJ1DTqrtqWbi
+	F3J0fa8+kFp73vKwJoBVZc/DY6FKv4yUpSETZcog8263RUKk+xMUz/Gu+7baDhTc=
+X-Received: by 2002:a17:90a:354:b0:22c:1e06:26ec with SMTP id 20-20020a17090a035400b0022c1e0626ecmr12812062pjf.44.1675955982146;
+        Thu, 09 Feb 2023 07:19:42 -0800 (PST)
+X-Google-Smtp-Source: AK7set9kNWFLecLpMyQQTFDn60iFa+/leYRvxQMua51TVWO5miSIJXDuGJktALZLwaxwm52hVg5WGA==
+X-Received: by 2002:a17:90a:354:b0:22c:1e06:26ec with SMTP id 20-20020a17090a035400b0022c1e0626ecmr12812038pjf.44.1675955981733;
+        Thu, 09 Feb 2023 07:19:41 -0800 (PST)
+Received: from LAP568U.mistral.in ([106.51.227.150])
+        by smtp.gmail.com with ESMTPSA id z11-20020a6552cb000000b0045ff216a0casm1466917pgp.3.2023.02.09.07.19.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 09 Feb 2023 07:19:41 -0800 (PST)
+From: Sinthu Raja <sinthu.raja@mistralsolutions.com>
+X-Google-Original-From: Sinthu Raja <sinthu.raja@ti.com>
+To: reatmon@ti.com,
+	denys@ti.com,
+	detheridge@ti.com
+Cc: meta-ti@lists.yoctoproject.org,
+	Sinthu Raja <sinthu.raja@ti.com>,
+	Aniket Limaye <a-limaye@ti.com>
+Subject: [meta-ti][dunfell][PATCH] conf: machine: j721s2-evm: Add support for J721S2 HS-FS
+Date: Thu,  9 Feb 2023 20:49:33 +0530
+Message-Id: <20230209151933.4735-1-sinthu.raja@ti.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprIIsWRmVeSWpSXmKPExsWyRpKBT3ftryfJBhc+8Fq8PzWR3WLul1ts
-	Fi0n2tgsut+pO7B49He3sHrMPPWI2eP4je1MAcxRXDYpqTmZZalF+nYJXBmr5tsUPNKraF2X
-	2MB4QreLkZNDQsBE4sXvSYxdjFwcQgJrmST+/l7FCuE8ZpS4sqgXKrOBUWLpztPMIC1sAuoS
-	E/+eAKsSEdjJKHHz4gywhLBAosSySe1sILaIQJLEge+XGSFsK4mpR86C1bAIqEhcWv2HBcTm
-	FbCReDj9LdS6mYwSM7+/ZwdJcAI1nPi1C6yIUUBWYsOG82DNzALiEpuefWeFOFxAYskeiLiE
-	gKjEy8f/oOLyEiduTWPqYuQAqteUWL9LH6LVQqJ1+mlWCFtRYkr3Q3aIGwQlTs58wjKBUWwW
-	kg2zELpnIemehaR7FpLuBYysqxiFcjOTs1OLMrP1CjIqS1KT9VJSNzGCok2EgWsHY98cj0OM
-	TByMhxglOJiVRHi/T3ycLMSbklhZlVqUH19UmpNafIhRmoNFSZz3fg9TopBAemJJanZqakFq
-	EUyWiYNTqoGxN3NWz92FKdeeqNhftbHc9aOfc/mCim7fOQ4G4ffmefy4J7JRVryGrdj6jNqE
-	tQW8l5iOSL60vOj9RXNmds3CmoraC1bmfdpRXltOGm1ysKzZ9LXzLY9Sz2EbaSHrQ/2McpLJ
-	bbuOcPy40RdfEbvjoO6+1vXiJ7LXTrNQOLzZ+ZKoKMfz/c+VWIozEg21mIuKEwEvTJRXpAIA
-	AA==
+Content-Transfer-Encoding: 8bit
+X-BESS-ID: 1675955982-304300-5388-15371-1
+X-BESS-VER: 2019.1_20230201.1831
+X-BESS-Apparent-Source-IP: 209.85.210.199
+X-BESS-Outbound-Spam-Score: 0.00
+X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.246029 [from 
+	cloudscan18-203.eu-central-1b.ess.aws.cudaops.com]
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------
+	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
+	0.00 BSF_SC0_MISMATCH_TO    META: Envelope rcpt doesn't match header 
+X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS91090 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND, BSF_SC0_MISMATCH_TO
+X-BESS-BRTS-Status: 1
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 09 Feb 2023 13:52:58 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15770
+ <meta-ti@lists.yoctoproject.org>; Thu, 09 Feb 2023 15:19:58 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15771
 
-QW0gMDguMDIuMjMgdW0gMjE6NTggc2NocmllYiBSeWFuIEVhdG1vbjoNCj4NCj4NCj4gT24gMi83
-LzIwMjMgMTc6NDQsIEFuZHJldyBEYXZpcyB2aWEgbGlzdHMueW9jdG9wcm9qZWN0Lm9yZyB3cm90
-ZToNCj4+IE9uIDIvMS8yMyA4OjMxIEFNLCBXYWRpbSBFZ29yb3Ygd3JvdGU6DQo+Pj4gQ2hlY2sg
-aWYgJHtUSV9TRUNVUkVfREVWX1BLR30vc2NyaXB0cy9zZWN1cmUtYmluYXJ5LWltYWdlLnNoIGlz
-IHNldA0KPj4+IGJlZm9yZSBzaWduaW5nIGZpcm13YXJlIGZvciBhbTYyeHggYmFzZWQgbWFjaGlu
-ZXMuIE90aGVyd2lzZSBkbyBub3QNCj4+PiBzaWduLCBpbnN0ZWFkIGNvcHkgdGhlIGJpbmFyeSBh
-bmQgd2FybiBhYm91dCBpdC4NCj4+Pg0KPj4+IEZpeGVzDQo+Pj4gwqDCoCBydW4uZG9faW5zdGFs
-bDogMTExOiAvc2NyaXB0cy9zZWN1cmUtYmluYXJ5LWltYWdlLnNoOiBub3QgZm91bmQNCj4+Pg0K
-Pj4+IFNpZ25lZC1vZmYtYnk6IFdhZGltIEVnb3JvdiA8dy5lZ29yb3ZAcGh5dGVjLmRlPg0KPj4+
-IC0tLQ0KPj4NCj4+IFRoaXMgcGF0Y2ggb25seSBmaXhlcyB0aGlzIGZvciBBTTYyeCwgYSBiZXR0
-ZXIgd2F5IG1pZ2h0IGJlIHRvIHVzZQ0KPj4gdGhlIHRpLWszLXNlY2Rldi1uYXRpdmUgcGFja2Fn
-ZSB0byBnZXQgdGhlIHNpZ25pbmcgdG9vbCB3aGVuIGl0IGlzDQo+PiBub3QgZGVmaW5lZC4gSSBk
-byB0aGF0IGluIHRoZSBzZXJpZXMgZm9yIEtpcmtzdG9uZSB0aGF0IGluY2x1ZGVzDQo+PiBzZXZl
-cmFsIGZpeGVzIHRvIHRoaXMgcmVjaXBlWzBdLg0KPj4NCj4+IEFuZHJldw0KPj4NCj4+IFswXSAN
-Cj4+IGh0dHBzOi8vbGlzdHMueW9jdG9wcm9qZWN0Lm9yZy9nL21ldGEtdGkvdG9waWMvbWFzdGVy
-X2tpcmtzdG9uZV9wYXRjaF8xXzgvOTY4MTk3NzENCj4NCj4gSSBoYWQgc2ltaWxhciBjb21tZW50
-cy7CoCBUaGlzIHBhdGNoIGlzIHRvbyBuYXJyb3dseSBmb2N1c2VkIHRvIGp1c3QgYSBzaW5nbGUg
-DQo+IHBsYXRmb3JtLCBJIGtub3cgaXQgd2FzIHRoZSBwbGF0Zm9ybSB5b3Ugd2VyZSBjYXJpbmcg
-YWJvdXQgYnV0IHRoZSBwYXRjaCBhcyBpcyANCj4gaXMgdG9vIG5hcnJvdy7CoCBBbmQsIHRoZSBy
-ZXF1aXJlbWVudCB3ZSBoYXZlIGlzIHRvIGdlbmVyYXRlIHRoZSBzaWduZWQgaW1hZ2VzLCANCj4g
-c28gYnlwYXNzaW5nIHRoZSBzaWduaW5nIGlzIG5vdCBnb2luZyB0byBmbHkuDQo+DQo+IEFsbCB0
-aGF0IHNhaWQsIEkgaGF2ZSBiYWNrIHBvcnRlZCB0aGUgYWJvdmUgcGF0Y2ggdGhhdCBpcyBwZW5k
-aW5nIGZvciANCj4ga2lya3N0b25lIHRvIGR1bmZlbGwuwqAgU28gdGhpcyBwYXRjaCBzaG91bGQg
-bm90IGJlIG5lZWRlZCBiZWNhdXNlIGl0IHdpbGwgdXNlIA0KPiBpbiB0aGUgaW50ZXJuYWwgcmVj
-aXBlIHRvIGZldGNoIHRoZSBzaWduaW5nIHRvb2wgaWYgeW91IGFyZSBub3QgdXNpbmcgdGhlIA0K
-PiBleHRlcm5hbCB0b29sc2V0Lg0KDQpUaGFuayB5b3UgZm9yIGJhY2twb3J0aW5nIGl0IHRvIGR1
-bmZlbGwgOikNCg0KDQo+DQo+DQo+Pj4gcmVjaXBlcy10aS90aS1ydG9zLWJpbi90aS1ydG9zLWZp
-cm13YXJlLmJiIHwgMTcgKysrKysrKysrKysrKystLS0NCj4+PiDCoCAxIGZpbGUgY2hhbmdlZCwg
-MTQgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkNCj4+Pg0KPj4+IGRpZmYgLS1naXQgYS9y
-ZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUuYmIgDQo+Pj4gYi9yZWNpcGVz
-LXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUuYmINCj4+PiBpbmRleCA3MmQ4NWE2Yi4u
-NjZjNmE0ZTQgMTAwNjQ0DQo+Pj4gLS0tIGEvcmVjaXBlcy10aS90aS1ydG9zLWJpbi90aS1ydG9z
-LWZpcm13YXJlLmJiDQo+Pj4gKysrIGIvcmVjaXBlcy10aS90aS1ydG9zLWJpbi90aS1ydG9zLWZp
-cm13YXJlLmJiDQo+Pj4gQEAgLTE3OSwxMiArMTc5LDIzIEBAIGRvX2luc3RhbGxfcHJlcGVuZF9h
-bTYyeHgoKSB7DQo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIGV4cG9ydCBUSV9TRUNVUkVfREVWX1BL
-Rz0ke1RJX1NFQ1VSRV9ERVZfUEtHfQ0KPj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAoIGNkICR7UlRP
-U19ETV9GV19ESVJ9OyBcDQo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBt
-diAke0RNX0ZJUk1XQVJFfSAke0RNX0ZJUk1XQVJFfS51bnNpZ25lZDsgXA0KPj4+IC0gJHtUSV9T
-RUNVUkVfREVWX1BLR30vc2NyaXB0cy9zZWN1cmUtYmluYXJ5LWltYWdlLnNoIA0KPj4+ICR7RE1f
-RklSTVdBUkV9LnVuc2lnbmVkICR7RE1fRklSTVdBUkV9OyBcDQo+Pj4gK8KgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCBpZiBbIC1mICR7VElfU0VDVVJFX0RFVl9QS0d9L3NjcmlwdHMvc2Vj
-dXJlLWJpbmFyeS1pbWFnZS5zaCANCj4+PiBdOyB0aGVuIFwNCj4+PiArICR7VElfU0VDVVJFX0RF
-Vl9QS0d9L3NjcmlwdHMvc2VjdXJlLWJpbmFyeS1pbWFnZS5zaCANCj4+PiAke0RNX0ZJUk1XQVJF
-fS51bnNpZ25lZCAke0RNX0ZJUk1XQVJFfTsgXA0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqAgZWxzZSBcDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIGVjaG8gIldhcm5pbmc6IFRJX1NFQ1VSRV9ERVZfUEtHIG5vdCBzZXQsIA0KPj4+ICR7RE1f
-RklSTVdBUkV9IG5vdCBzaWduZWQuIjsgXA0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCBjcCAke0RNX0ZJUk1XQVJFfS51bnNpZ25lZCAke0RNX0ZJUk1XQVJFfTsg
-XA0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZmk7IFwNCj4+PiDCoMKgwqDC
-oMKgwqDCoMKgwqAgKQ0KPj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAoIGNkICR7UlRPU19JUENfRldf
-RElSfTsgXA0KPj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbXYgYW02Mi1t
-Y3UtbTRmMF8wLWZ3IA0KPj4+IGlwY19lY2hvX2JhcmVtZXRhbF90ZXN0X21jdTJfMF9yZWxlYXNl
-X3N0cmlwLnhlcjVmOyBcDQo+Pj4gLSAke1RJX1NFQ1VSRV9ERVZfUEtHfS9zY3JpcHRzL3NlY3Vy
-ZS1iaW5hcnktaW1hZ2Uuc2ggDQo+Pj4gaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3RfbWN1Ml8wX3Jl
-bGVhc2Vfc3RyaXAueGVyNWYgXA0KPj4+IC0gaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3RfbWN1Ml8w
-X3JlbGVhc2Vfc3RyaXAueGVyNWYuc2lnbmVkOyBcDQo+Pj4gKw0KPj4+ICvCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgaWYgWyAtZiAke1RJX1NFQ1VSRV9ERVZfUEtHfS9zY3JpcHRzL3Nl
-Y3VyZS1iaW5hcnktaW1hZ2Uuc2ggDQo+Pj4gXTsgdGhlbiBcDQo+Pj4gKyAke1RJX1NFQ1VSRV9E
-RVZfUEtHfS9zY3JpcHRzL3NlY3VyZS1iaW5hcnktaW1hZ2Uuc2ggDQo+Pj4gaXBjX2VjaG9fYmFy
-ZW1ldGFsX3Rlc3RfbWN1Ml8wX3JlbGVhc2Vfc3RyaXAueGVyNWYgXA0KPj4+ICsgaXBjX2VjaG9f
-YmFyZW1ldGFsX3Rlc3RfbWN1Ml8wX3JlbGVhc2Vfc3RyaXAueGVyNWYuc2lnbmVkOyBcDQo+Pj4g
-K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBlbHNlIFwNCj4+PiArwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZWNobyAiV2FybmluZzogVElfU0VDVVJFX0RFVl9Q
-S0cgbm90IHNldCwgDQo+Pj4gaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3RfbWN1Ml8wX3JlbGVhc2Vf
-c3RyaXAueGVyNWYgbm90IHNpZ25lZCI7IFwNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgY3AgaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3RfbWN1Ml8wX3JlbGVhc2Vf
-c3RyaXAueGVyNWYgDQo+Pj4gaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3RfbWN1Ml8wX3JlbGVhc2Vf
-c3RyaXAueGVyNWYuc2lnbmVkOyBcDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCBmaTsgXA0KPj4+IMKgwqDCoMKgwqDCoMKgwqDCoCApDQo+Pj4gwqAgfQ0KPj4+DQo+Pj4NCj4+
-Pg0KPj4+DQo+Pj4NCj4+DQo+Pg0KPj4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4+IExpbmtz
-OiBZb3UgcmVjZWl2ZSBhbGwgbWVzc2FnZXMgc2VudCB0byB0aGlzIGdyb3VwLg0KPj4gVmlldy9S
-ZXBseSBPbmxpbmUgKCMxNTc0OSk6IA0KPj4gaHR0cHM6Ly9saXN0cy55b2N0b3Byb2plY3Qub3Jn
-L2cvbWV0YS10aS9tZXNzYWdlLzE1NzQ5DQo+PiBNdXRlIFRoaXMgVG9waWM6IGh0dHBzOi8vbGlz
-dHMueW9jdG9wcm9qZWN0Lm9yZy9tdC85NjY3NzMzNC82NTUxMDU0DQo+PiBHcm91cCBPd25lcjog
-bWV0YS10aStvd25lckBsaXN0cy55b2N0b3Byb2plY3Qub3JnDQo+PiBVbnN1YnNjcmliZTogaHR0
-cHM6Ly9saXN0cy55b2N0b3Byb2plY3Qub3JnL2cvbWV0YS10aS91bnN1YiBbcmVhdG1vbkB0aS5j
-b21dDQo+PiAtPS09LT0tPS09LT0tPS09LT0tPS09LQ0KPj4NCj4NCg0K
+From: Sinthu Raja <sinthu.raja@ti.com>
+
+Add the basic J721S2 HS-FS configuration.
+    - Add configurations to support both HS-FS and GP.
+    - Add ti-sci-firmware overrides for HS-FS.
+
+Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
+---
+
+Hi,
+This patch is validated locally by Aniket.
+
+RFC Link: https://lists.yoctoproject.org/g/meta-ti/message/15651
+
+ conf/machine/j721s2-evm-k3r5-gp.conf        | 20 ++++++++++++++++++++
+ conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf | 15 +++++++++++++++
+ conf/machine/j721s2-evm.conf                | 12 ++++++++++++
+ conf/multiconfig/k3r5-sr1-hs-fs.conf        |  3 +++
+ conf/multiconfig/k3r5-sr1.conf              |  3 +++
+ recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb      |  3 ++-
+ 6 files changed, 55 insertions(+), 1 deletion(-)
+ create mode 100644 conf/machine/j721s2-evm-k3r5-gp.conf
+ create mode 100644 conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf
+ create mode 100644 conf/multiconfig/k3r5-sr1-hs-fs.conf
+ create mode 100644 conf/multiconfig/k3r5-sr1.conf
+
+diff --git a/conf/machine/j721s2-evm-k3r5-gp.conf b/conf/machine/j721s2-evm-k3r5-gp.conf
+new file mode 100644
+index 00000000..06456ef7
+--- /dev/null
++++ b/conf/machine/j721s2-evm-k3r5-gp.conf
+@@ -0,0 +1,20 @@
++#@TYPE: Machine
++#@NAME: J721S2 GP EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI J721S2 GP EVM (R5F core)
++
++# Booting GP requires different SYSFW, the rest is handled at runtime
++
++require conf/machine/include/k3r5.inc
++SOC_FAMILY_append = ":k3r5-gp"
++
++SYSFW_SOC = "j721s2"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "gp"
++SYSFW_TIBOOT3_SYMLINK = "tiboot3.bin"
++
++UBOOT_MACHINE = "j721s2_evm_r5_defconfig"
++
++SPL_BINARY = ""
++UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
++UBOOT_IMAGE = "u-boot-r5spl-gp-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
++UBOOT_SYMLINK = "u-boot-r5spl-gp.${UBOOT_SUFFIX}"
+diff --git a/conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf b/conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf
+new file mode 100644
+index 00000000..786338a9
+--- /dev/null
++++ b/conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf
+@@ -0,0 +1,15 @@
++#@TYPE: Machine
++#@NAME: J721S2 HS-FS EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI J721S2 HS-FS EVM (R5F core)
++
++# Booting HS-FS requires different SYSFW, the rest is handled at runtime
++
++require conf/machine/include/k3r5.inc
++SOC_FAMILY_append = ":k3r5-sr1-hs-fs"
++
++SYSFW_SOC = "j721s2"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "hs-fs"
++SYSFW_TIBOOT3_SYMLINK = ""
++
++UBOOT_MACHINE = "j721s2_evm_r5_defconfig"
+diff --git a/conf/machine/j721s2-evm.conf b/conf/machine/j721s2-evm.conf
+index 7c120dcc..9cec9631 100644
+--- a/conf/machine/j721s2-evm.conf
++++ b/conf/machine/j721s2-evm.conf
+@@ -42,3 +42,15 @@ UBOOT_MACHINE = "j721s2_evm_a72_defconfig"
+ 
+ do_image_wic[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+ do_image_tar[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
++
++# Default tiboot3.bin on J721S2 is for SR1.0 HS-FS
++BBMULTICONFIG = "k3r5-sr1-hs-fs"
++IMAGE_BOOT_FILES += " tiboot3-j721s2-hs-fs-evm.bin"
++do_image_wic[mcdepends] = "mc::k3r5-sr1-hs-fs:ti-sci-fw:do_deploy"
++do_image_tar[mcdepends] = "mc::k3r5-sr1-hs-fs:ti-sci-fw:do_deploy"
++
++# Since default tiboot3.bin on J721S2 is for SR1.0 HS-FS, add a version for GP
++BBMULTICONFIG += "k3r5-gp"
++IMAGE_BOOT_FILES += " tiboot3-j721s2-gp-evm.bin"
++do_image_wic[mcdepends] += "mc::k3r5-gp:ti-sci-fw:do_deploy"
++do_image_tar[mcdepends] += "mc::k3r5-gp:ti-sci-fw:do_deploy"
+diff --git a/conf/multiconfig/k3r5-sr1-hs-fs.conf b/conf/multiconfig/k3r5-sr1-hs-fs.conf
+new file mode 100644
+index 00000000..2fa28c95
+--- /dev/null
++++ b/conf/multiconfig/k3r5-sr1-hs-fs.conf
+@@ -0,0 +1,3 @@
++require k3r5-sr1.conf
++
++MACHINE_append = "-hs-fs"
+diff --git a/conf/multiconfig/k3r5-sr1.conf b/conf/multiconfig/k3r5-sr1.conf
+new file mode 100644
+index 00000000..2b87de8a
+--- /dev/null
++++ b/conf/multiconfig/k3r5-sr1.conf
+@@ -0,0 +1,3 @@
++require k3r5.conf
++
++MACHINE_append = "-sr1"
+diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index 7896c366..cb197954 100644
+--- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -33,7 +33,8 @@ SYSFW_PREFIX_j7-hs-evm-k3r5 = "fs"
+ SYSFW_PREFIX_j7-hs-evm-k3r5-sr1-1 = "fs"
+ SYSFW_PREFIX_j7200-evm-k3r5 = "fs"
+ SYSFW_PREFIX_j7200-hs-evm-k3r5 = "fs"
+-SYSFW_PREFIX_j721s2-evm-k3r5 = "fs"
++SYSFW_PREFIX_j721s2-evm-k3r5-gp = "fs"
++SYSFW_PREFIX_j721s2-evm-k3r5-sr1-hs-fs = "fs"
+ SYSFW_PREFIX_j721s2-hs-evm-k3r5 = "fs"
+ SYSFW_PREFIX_j784s4-evm-k3r5 = "fs"
+ SYSFW_PREFIX_j784s4-hs-evm-k3r5 = "fs"
+-- 
+2.36.1
+
 
