@@ -1,105 +1,155 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <w.egorov@phytec.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17746C636D6
-	for <webhook@archiver.kernel.org>; Thu,  9 Feb 2023 13:29:58 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.14628.1675949388192563637
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D6EBC61DA4
+	for <webhook@archiver.kernel.org>; Thu,  9 Feb 2023 13:52:58 +0000 (UTC)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ by mx.groups.io with SMTP id smtpd.web11.15374.1675950768348573262
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 09 Feb 2023 05:29:48 -0800
+ Thu, 09 Feb 2023 05:52:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Pn+iLB0n;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 319DTkE4128784;
-	Thu, 9 Feb 2023 07:29:46 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1675949386;
-	bh=jvku5qjHOcUN8ymENqeV5zCI4ykzO4omMkWpkJNXXAw=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=Pn+iLB0nYdIkgkr0XrmnYIeBf12XnP9NmUTft9Z6mzurs9pnqIdP2eE3g+Y/590WX
-	 ZczFWKhzyhpwcRTB/tsYeguCz2QifCPPBE4G2NktiLCEIoYdEuoq7W2cZeguvIhet0
-	 Iu4re3/hL1hteP0C4dvfNAT19lZBFKeIoKE2cKGk=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 319DTkdG003490
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 9 Feb 2023 07:29:46 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Thu, 9
- Feb 2023 07:29:46 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Thu, 9 Feb 2023 07:29:46 -0600
-Received: from [10.249.38.163] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 319DTkla105401;
-	Thu, 9 Feb 2023 07:29:46 -0600
-Message-ID: <4b7c58a4-6d44-5df9-1567-7f2e1061643c@ti.com>
-Date: Thu, 9 Feb 2023 07:29:46 -0600
+ dkim=fail reason="signature has expired" header.i=@phytec.de header.s=a4 header.b=mub02NEt;
+ spf=pass (domain: phytec.de, ip: 91.26.50.163, mailfrom: w.egorov@phytec.de)
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+	q=dns/txt; i=@phytec.de; t=1675950765; x=1678542765;
+	h=From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=gK2a0H7ZC1EtCXNTWZe9qLh89m2EzNiJeQ2qRmNHuRQ=;
+	b=mub02NEtXODctwjCXsVS03IO7H8o+fijH8KG1jE4BHgJXfKuI+Zkm+BAxWXE6xfl
+	NgAUhPVZ8pQRqAr95eWG3iuhW6c/pCWb/Zg6fnINebYMRA3bg8A/ZiEpR/IZPVrt
+	fi5iTZQrouWQSuVbNp7ST7RCKiE4RCShGz70ZOwQkp0=;
+X-AuditID: ac14000a-923ff70000007ecb-69-63e4faad041d
+Received: from Diagnostix.phytec.de (Diagnostix.phytec.de [172.25.0.14])
+	(using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(Client did not present a certificate)
+	by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id DF.81.32459.DAAF4E36; Thu,  9 Feb 2023 14:52:45 +0100 (CET)
+Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.18; Thu, 9 Feb
+ 2023 14:52:44 +0100
+Received: from Berlix.phytec.de ([fe80::61cc:ebf0:7375:8768]) by
+ berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2375.018;
+ Thu, 9 Feb 2023 14:52:44 +0100
+From: Wadim Egorov <W.Egorov@phytec.de>
+To: Ryan Eatmon <reatmon@ti.com>, "afd@ti.com" <afd@ti.com>,
+	"upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+	"meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
+Subject: Re: [meta-ti] [dunfell] ti-rtos-firmware: Check if TI_SECURE_DEV is
+ set before signing
+Thread-Topic: [meta-ti] [dunfell] ti-rtos-firmware: Check if TI_SECURE_DEV is
+ set before signing
+Thread-Index: AQHZO04n08YKFf1/R0KON83oTT/UxK7FeLUAgAEbfAA=
+Date: Thu, 9 Feb 2023 13:52:44 +0000
+Message-ID: <4d46f237-da11-a590-950d-d4b926691435@phytec.de>
+References: <20230201143126.3003913-1-w.egorov@phytec.de>
+ <d68053d1-66e3-e582-a8f8-1dddc597fe6c@ti.com>
+ <9d8896e2-08b3-5fc9-1eab-6d578ddaa771@ti.com>
+In-Reply-To: <9d8896e2-08b3-5fc9-1eab-6d578ddaa771@ti.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.25.0.11]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <8ECE3C23C2D9464A8F8FA315DBC6DEA4@phytec.de>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-Subject: Re: [meta-ti][master/kirkstone][PATCH 6/8] ti-rtos-firmware: Use a
- table instead of a list of copy commands
-Content-Language: en-US
-To: Andrew Davis <afd@ti.com>, Denys Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20230207234239.30720-1-afd@ti.com>
- <20230207234239.30720-6-afd@ti.com>
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20230207234239.30720-6-afd@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprIIsWRmVeSWpSXmKPExsWyRpKBT3ftryfJBhc+8Fq8PzWR3WLul1ts
+	Fi0n2tgsut+pO7B49He3sHrMPPWI2eP4je1MAcxRXDYpqTmZZalF+nYJXBmr5tsUPNKraF2X
+	2MB4QreLkZNDQsBE4sXvSYxdjFwcQgJrmST+/l7FCuE8ZpS4sqgXKrOBUWLpztPMIC1sAuoS
+	E/+eAKsSEdjJKHHz4gywhLBAosSySe1sILaIQJLEge+XGSFsK4mpR86C1bAIqEhcWv2HBcTm
+	FbCReDj9LdS6mYwSM7+/ZwdJcAI1nPi1C6yIUUBWYsOG82DNzALiEpuefWeFOFxAYskeiLiE
+	gKjEy8f/oOLyEiduTWPqYuQAqteUWL9LH6LVQqJ1+mlWCFtRYkr3Q3aIGwQlTs58wjKBUWwW
+	kg2zELpnIemehaR7FpLuBYysqxiFcjOTs1OLMrP1CjIqS1KT9VJSNzGCok2EgWsHY98cj0OM
+	TByMhxglOJiVRHi/T3ycLMSbklhZlVqUH19UmpNafIhRmoNFSZz3fg9TopBAemJJanZqakFq
+	EUyWiYNTqoGxN3NWz92FKdeeqNhftbHc9aOfc/mCim7fOQ4G4ffmefy4J7JRVryGrdj6jNqE
+	tQW8l5iOSL60vOj9RXNmds3CmoraC1bmfdpRXltOGm1ysKzZ9LXzLY9Sz2EbaSHrQ/2McpLJ
+	bbuOcPy40RdfEbvjoO6+1vXiJ7LXTrNQOLzZ+ZKoKMfz/c+VWIozEg21mIuKEwEvTJRXpAIA
+	AA==
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 09 Feb 2023 13:29:58 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15769
+ <meta-ti@lists.yoctoproject.org>; Thu, 09 Feb 2023 13:52:58 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15770
 
-
-
-On 2/7/2023 17:42, Andrew Davis wrote:
-> Using a table makes it easier to see what firmware is included with
-> each machine build. It also helps prevent errors here.
-
-I like the table.  It makes it clearer to see what is available on which 
-platform.  Nice change.
-
-> Since the same functions run across machines we now sign all the firmware
-> without needing to add a new signing function for each new machine.
-> 
-> Another fix is that we install the DM firmware to the deploy directory
-> for all machines that use need it. This was added for J7x machines
-> but missed for AM62x.
-> 
-> Signed-off-by: Andrew Davis <afd@ti.com>
-> ---
-
-*snip*
-
-> +
-> +ETH_FW_LIST = ""
-> +ETH_FW_LIST:am65xx = ""
-> +ETH_FW_LIST:j721e =  "${ETH_FW}"
-> +ETH_FW_LIST:j7200 =  "${ETH_FW}"
-> +ETH_FW_LIST:j721s2 = "${ETH_FW}"
-
-j721s2 does not have the ETH_FW, so this line is incorrect.  The lines 
-that likely made you think it did are commented out in the current 
-version of the file.
-
-
-> +ETH_FW_LIST:am64xx = ""
-> +ETH_FW_LIST:am62xx = ""
-> +ETH_FW_LIST:j784s4 = "${ETH_FW}"
->   
-
-
--- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+QW0gMDguMDIuMjMgdW0gMjE6NTggc2NocmllYiBSeWFuIEVhdG1vbjoNCj4NCj4NCj4gT24gMi83
+LzIwMjMgMTc6NDQsIEFuZHJldyBEYXZpcyB2aWEgbGlzdHMueW9jdG9wcm9qZWN0Lm9yZyB3cm90
+ZToNCj4+IE9uIDIvMS8yMyA4OjMxIEFNLCBXYWRpbSBFZ29yb3Ygd3JvdGU6DQo+Pj4gQ2hlY2sg
+aWYgJHtUSV9TRUNVUkVfREVWX1BLR30vc2NyaXB0cy9zZWN1cmUtYmluYXJ5LWltYWdlLnNoIGlz
+IHNldA0KPj4+IGJlZm9yZSBzaWduaW5nIGZpcm13YXJlIGZvciBhbTYyeHggYmFzZWQgbWFjaGlu
+ZXMuIE90aGVyd2lzZSBkbyBub3QNCj4+PiBzaWduLCBpbnN0ZWFkIGNvcHkgdGhlIGJpbmFyeSBh
+bmQgd2FybiBhYm91dCBpdC4NCj4+Pg0KPj4+IEZpeGVzDQo+Pj4gwqDCoCBydW4uZG9faW5zdGFs
+bDogMTExOiAvc2NyaXB0cy9zZWN1cmUtYmluYXJ5LWltYWdlLnNoOiBub3QgZm91bmQNCj4+Pg0K
+Pj4+IFNpZ25lZC1vZmYtYnk6IFdhZGltIEVnb3JvdiA8dy5lZ29yb3ZAcGh5dGVjLmRlPg0KPj4+
+IC0tLQ0KPj4NCj4+IFRoaXMgcGF0Y2ggb25seSBmaXhlcyB0aGlzIGZvciBBTTYyeCwgYSBiZXR0
+ZXIgd2F5IG1pZ2h0IGJlIHRvIHVzZQ0KPj4gdGhlIHRpLWszLXNlY2Rldi1uYXRpdmUgcGFja2Fn
+ZSB0byBnZXQgdGhlIHNpZ25pbmcgdG9vbCB3aGVuIGl0IGlzDQo+PiBub3QgZGVmaW5lZC4gSSBk
+byB0aGF0IGluIHRoZSBzZXJpZXMgZm9yIEtpcmtzdG9uZSB0aGF0IGluY2x1ZGVzDQo+PiBzZXZl
+cmFsIGZpeGVzIHRvIHRoaXMgcmVjaXBlWzBdLg0KPj4NCj4+IEFuZHJldw0KPj4NCj4+IFswXSAN
+Cj4+IGh0dHBzOi8vbGlzdHMueW9jdG9wcm9qZWN0Lm9yZy9nL21ldGEtdGkvdG9waWMvbWFzdGVy
+X2tpcmtzdG9uZV9wYXRjaF8xXzgvOTY4MTk3NzENCj4NCj4gSSBoYWQgc2ltaWxhciBjb21tZW50
+cy7CoCBUaGlzIHBhdGNoIGlzIHRvbyBuYXJyb3dseSBmb2N1c2VkIHRvIGp1c3QgYSBzaW5nbGUg
+DQo+IHBsYXRmb3JtLCBJIGtub3cgaXQgd2FzIHRoZSBwbGF0Zm9ybSB5b3Ugd2VyZSBjYXJpbmcg
+YWJvdXQgYnV0IHRoZSBwYXRjaCBhcyBpcyANCj4gaXMgdG9vIG5hcnJvdy7CoCBBbmQsIHRoZSBy
+ZXF1aXJlbWVudCB3ZSBoYXZlIGlzIHRvIGdlbmVyYXRlIHRoZSBzaWduZWQgaW1hZ2VzLCANCj4g
+c28gYnlwYXNzaW5nIHRoZSBzaWduaW5nIGlzIG5vdCBnb2luZyB0byBmbHkuDQo+DQo+IEFsbCB0
+aGF0IHNhaWQsIEkgaGF2ZSBiYWNrIHBvcnRlZCB0aGUgYWJvdmUgcGF0Y2ggdGhhdCBpcyBwZW5k
+aW5nIGZvciANCj4ga2lya3N0b25lIHRvIGR1bmZlbGwuwqAgU28gdGhpcyBwYXRjaCBzaG91bGQg
+bm90IGJlIG5lZWRlZCBiZWNhdXNlIGl0IHdpbGwgdXNlIA0KPiBpbiB0aGUgaW50ZXJuYWwgcmVj
+aXBlIHRvIGZldGNoIHRoZSBzaWduaW5nIHRvb2wgaWYgeW91IGFyZSBub3QgdXNpbmcgdGhlIA0K
+PiBleHRlcm5hbCB0b29sc2V0Lg0KDQpUaGFuayB5b3UgZm9yIGJhY2twb3J0aW5nIGl0IHRvIGR1
+bmZlbGwgOikNCg0KDQo+DQo+DQo+Pj4gcmVjaXBlcy10aS90aS1ydG9zLWJpbi90aS1ydG9zLWZp
+cm13YXJlLmJiIHwgMTcgKysrKysrKysrKysrKystLS0NCj4+PiDCoCAxIGZpbGUgY2hhbmdlZCwg
+MTQgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkNCj4+Pg0KPj4+IGRpZmYgLS1naXQgYS9y
+ZWNpcGVzLXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUuYmIgDQo+Pj4gYi9yZWNpcGVz
+LXRpL3RpLXJ0b3MtYmluL3RpLXJ0b3MtZmlybXdhcmUuYmINCj4+PiBpbmRleCA3MmQ4NWE2Yi4u
+NjZjNmE0ZTQgMTAwNjQ0DQo+Pj4gLS0tIGEvcmVjaXBlcy10aS90aS1ydG9zLWJpbi90aS1ydG9z
+LWZpcm13YXJlLmJiDQo+Pj4gKysrIGIvcmVjaXBlcy10aS90aS1ydG9zLWJpbi90aS1ydG9zLWZp
+cm13YXJlLmJiDQo+Pj4gQEAgLTE3OSwxMiArMTc5LDIzIEBAIGRvX2luc3RhbGxfcHJlcGVuZF9h
+bTYyeHgoKSB7DQo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIGV4cG9ydCBUSV9TRUNVUkVfREVWX1BL
+Rz0ke1RJX1NFQ1VSRV9ERVZfUEtHfQ0KPj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAoIGNkICR7UlRP
+U19ETV9GV19ESVJ9OyBcDQo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBt
+diAke0RNX0ZJUk1XQVJFfSAke0RNX0ZJUk1XQVJFfS51bnNpZ25lZDsgXA0KPj4+IC0gJHtUSV9T
+RUNVUkVfREVWX1BLR30vc2NyaXB0cy9zZWN1cmUtYmluYXJ5LWltYWdlLnNoIA0KPj4+ICR7RE1f
+RklSTVdBUkV9LnVuc2lnbmVkICR7RE1fRklSTVdBUkV9OyBcDQo+Pj4gK8KgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCBpZiBbIC1mICR7VElfU0VDVVJFX0RFVl9QS0d9L3NjcmlwdHMvc2Vj
+dXJlLWJpbmFyeS1pbWFnZS5zaCANCj4+PiBdOyB0aGVuIFwNCj4+PiArICR7VElfU0VDVVJFX0RF
+Vl9QS0d9L3NjcmlwdHMvc2VjdXJlLWJpbmFyeS1pbWFnZS5zaCANCj4+PiAke0RNX0ZJUk1XQVJF
+fS51bnNpZ25lZCAke0RNX0ZJUk1XQVJFfTsgXA0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgZWxzZSBcDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIGVjaG8gIldhcm5pbmc6IFRJX1NFQ1VSRV9ERVZfUEtHIG5vdCBzZXQsIA0KPj4+ICR7RE1f
+RklSTVdBUkV9IG5vdCBzaWduZWQuIjsgXA0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBjcCAke0RNX0ZJUk1XQVJFfS51bnNpZ25lZCAke0RNX0ZJUk1XQVJFfTsg
+XA0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZmk7IFwNCj4+PiDCoMKgwqDC
+oMKgwqDCoMKgwqAgKQ0KPj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAoIGNkICR7UlRPU19JUENfRldf
+RElSfTsgXA0KPj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbXYgYW02Mi1t
+Y3UtbTRmMF8wLWZ3IA0KPj4+IGlwY19lY2hvX2JhcmVtZXRhbF90ZXN0X21jdTJfMF9yZWxlYXNl
+X3N0cmlwLnhlcjVmOyBcDQo+Pj4gLSAke1RJX1NFQ1VSRV9ERVZfUEtHfS9zY3JpcHRzL3NlY3Vy
+ZS1iaW5hcnktaW1hZ2Uuc2ggDQo+Pj4gaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3RfbWN1Ml8wX3Jl
+bGVhc2Vfc3RyaXAueGVyNWYgXA0KPj4+IC0gaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3RfbWN1Ml8w
+X3JlbGVhc2Vfc3RyaXAueGVyNWYuc2lnbmVkOyBcDQo+Pj4gKw0KPj4+ICvCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgaWYgWyAtZiAke1RJX1NFQ1VSRV9ERVZfUEtHfS9zY3JpcHRzL3Nl
+Y3VyZS1iaW5hcnktaW1hZ2Uuc2ggDQo+Pj4gXTsgdGhlbiBcDQo+Pj4gKyAke1RJX1NFQ1VSRV9E
+RVZfUEtHfS9zY3JpcHRzL3NlY3VyZS1iaW5hcnktaW1hZ2Uuc2ggDQo+Pj4gaXBjX2VjaG9fYmFy
+ZW1ldGFsX3Rlc3RfbWN1Ml8wX3JlbGVhc2Vfc3RyaXAueGVyNWYgXA0KPj4+ICsgaXBjX2VjaG9f
+YmFyZW1ldGFsX3Rlc3RfbWN1Ml8wX3JlbGVhc2Vfc3RyaXAueGVyNWYuc2lnbmVkOyBcDQo+Pj4g
+K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBlbHNlIFwNCj4+PiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZWNobyAiV2FybmluZzogVElfU0VDVVJFX0RFVl9Q
+S0cgbm90IHNldCwgDQo+Pj4gaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3RfbWN1Ml8wX3JlbGVhc2Vf
+c3RyaXAueGVyNWYgbm90IHNpZ25lZCI7IFwNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgY3AgaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3RfbWN1Ml8wX3JlbGVhc2Vf
+c3RyaXAueGVyNWYgDQo+Pj4gaXBjX2VjaG9fYmFyZW1ldGFsX3Rlc3RfbWN1Ml8wX3JlbGVhc2Vf
+c3RyaXAueGVyNWYuc2lnbmVkOyBcDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBmaTsgXA0KPj4+IMKgwqDCoMKgwqDCoMKgwqDCoCApDQo+Pj4gwqAgfQ0KPj4+DQo+Pj4NCj4+
+Pg0KPj4+DQo+Pj4NCj4+DQo+Pg0KPj4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4+IExpbmtz
+OiBZb3UgcmVjZWl2ZSBhbGwgbWVzc2FnZXMgc2VudCB0byB0aGlzIGdyb3VwLg0KPj4gVmlldy9S
+ZXBseSBPbmxpbmUgKCMxNTc0OSk6IA0KPj4gaHR0cHM6Ly9saXN0cy55b2N0b3Byb2plY3Qub3Jn
+L2cvbWV0YS10aS9tZXNzYWdlLzE1NzQ5DQo+PiBNdXRlIFRoaXMgVG9waWM6IGh0dHBzOi8vbGlz
+dHMueW9jdG9wcm9qZWN0Lm9yZy9tdC85NjY3NzMzNC82NTUxMDU0DQo+PiBHcm91cCBPd25lcjog
+bWV0YS10aStvd25lckBsaXN0cy55b2N0b3Byb2plY3Qub3JnDQo+PiBVbnN1YnNjcmliZTogaHR0
+cHM6Ly9saXN0cy55b2N0b3Byb2plY3Qub3JnL2cvbWV0YS10aS91bnN1YiBbcmVhdG1vbkB0aS5j
+b21dDQo+PiAtPS09LT0tPS09LT0tPS09LT0tPS09LQ0KPj4NCj4NCg0K
 
