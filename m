@@ -2,47 +2,47 @@ Return-Path: <s-adivi@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB430C05027
-	for <webhook@archiver.kernel.org>; Thu,  9 Feb 2023 23:50:21 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.145.1675986613603118924
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C37FC636D3
+	for <webhook@archiver.kernel.org>; Fri, 10 Feb 2023 00:08:52 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.626.1675987723447284958
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 09 Feb 2023 15:50:13 -0800
+ Thu, 09 Feb 2023 16:08:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=PsG7W0Xg;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: s-adivi@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 319No7Pa026720;
-	Thu, 9 Feb 2023 17:50:07 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=xjeGdy0C;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: s-adivi@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 31A08cG2107184;
+	Thu, 9 Feb 2023 18:08:38 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1675986607;
-	bh=e19OmVz2QiYUG150aAb5yuQHFukXMF3q/nTD9rgGVkg=;
+	s=ti-com-17Q1; t=1675987718;
+	bh=m+aX9IKRWOzU8yWPAIFEX/EWCJ0sQirQ+ioXnZTzwh4=;
 	h=From:To:CC:Subject:Date;
-	b=PsG7W0XgKApEXQ6eS+M542bp3Wl71gB0VCA8o0HbWhgeC2k/K5ia34H9gp+8RtIUq
-	 0RXS2p3YeleWo+NLqCIIwTS/AHhijzWjP1b76WGTWTBOwWgGAticomw6nVBlXqXdJL
-	 DpB5mHo2n1Fv2nEPH7B+H+cD+B8W/VNnBDxurx0E=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 319No7P6020387
+	b=xjeGdy0C0NyF0Y+zwrw9/m+KRaNlFzrtmrOaCdGzW+JZ9cJyly7yVpvo8ubUXW6uS
+	 rZcXZtSVf9nyGhoHRhHaaYr03dc0sB56odZv+T0k+fOlbQr77wcl6sS4PiuC9rHJwZ
+	 QWRqt9OEgEHZWfPZLjdyxRiBp8DmlnJRO2qYX4rk=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 31A08cBP038380
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 9 Feb 2023 17:50:07 -0600
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 9 Feb 2023 18:08:38 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Thu, 9
- Feb 2023 17:50:06 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2023 18:08:37 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Thu, 9 Feb 2023 17:50:06 -0600
+ Frontend Transport; Thu, 9 Feb 2023 18:08:37 -0600
 Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 319No5Zm096615;
-	Thu, 9 Feb 2023 17:50:06 -0600
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 31A08bW1048090;
+	Thu, 9 Feb 2023 18:08:37 -0600
 From: Sai Sree Kartheek Adivi <s-adivi@ti.com>
 To: <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>, <denis@denix.org>,
         <reatmon@ti.com>
 CC: <g-gupta@ti.com>, <c-shilwant@ti.com>, <khasim@ti.com>, <p-bhagat@ti.com>
-Subject: [meta-ti][dunfell][RFC PATCH] am62axx-evm: Add support for HS-FS and HS-SE platforms
-Date: Fri, 10 Feb 2023 05:20:03 +0530
-Message-ID: <20230209235003.24528-1-s-adivi@ti.com>
+Subject: [meta-ti][dunfell][RFC PATCH v2] am62axx-evm: Add support for HS-FS and HS-SE platforms
+Date: Fri, 10 Feb 2023 05:38:34 +0530
+Message-ID: <20230210000834.24783-1-s-adivi@ti.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -51,8 +51,8 @@ X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 09 Feb 2023 23:50:21 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15781
+ <meta-ti@lists.yoctoproject.org>; Fri, 10 Feb 2023 00:08:52 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15782
 
 Add support for HS-FS and HS-SE along with GP platforms and make HS-FS default.
 
@@ -77,7 +77,7 @@ Signed-off-by: Sai Sree Kartheek Adivi <s-adivi@ti.com>
 
 diff --git a/conf/machine/am62axx-evm-k3r5-gp.conf b/conf/machine/am62axx-evm-k3r5-gp.conf
 new file mode 100644
-index 00000000..990e897c
+index 00000000..898af7e8
 --- /dev/null
 +++ b/conf/machine/am62axx-evm-k3r5-gp.conf
 @@ -0,0 +1,21 @@
@@ -90,7 +90,7 @@ index 00000000..990e897c
 +require conf/machine/include/k3r5.inc
 +SOC_FAMILY_append = ":k3r5-gp"
 +
-+SYSFW_SOC = "am62a"
++SYSFW_SOC = "am62ax"
 +SYSFW_CONFIG = "evm"
 +SYSFW_SUFFIX = "gp"
 +SYSFW_TIBOOT3_SYMLINK = ""
@@ -104,7 +104,7 @@ index 00000000..990e897c
 +
 diff --git a/conf/machine/am62axx-evm-k3r5-hs-fs.conf b/conf/machine/am62axx-evm-k3r5-hs-fs.conf
 new file mode 100644
-index 00000000..cc15b01d
+index 00000000..2ecba7e4
 --- /dev/null
 +++ b/conf/machine/am62axx-evm-k3r5-hs-fs.conf
 @@ -0,0 +1,15 @@
@@ -117,7 +117,7 @@ index 00000000..cc15b01d
 +require conf/machine/include/k3r5.inc
 +SOC_FAMILY_append = ":k3r5-hs-fs"
 +
-+SYSFW_SOC = "am62a"
++SYSFW_SOC = "am62ax"
 +SYSFW_CONFIG = "evm"
 +SYSFW_SUFFIX = "hs-fs"
 +
@@ -125,7 +125,7 @@ index 00000000..cc15b01d
 +
 diff --git a/conf/machine/am62axx-evm-k3r5-hs-se.conf b/conf/machine/am62axx-evm-k3r5-hs-se.conf
 new file mode 100644
-index 00000000..94444d56
+index 00000000..76d01a0e
 --- /dev/null
 +++ b/conf/machine/am62axx-evm-k3r5-hs-se.conf
 @@ -0,0 +1,20 @@
@@ -138,7 +138,7 @@ index 00000000..94444d56
 +require conf/machine/include/k3r5.inc
 +SOC_FAMILY_append = ":k3r5-hs-se"
 +
-+SYSFW_SOC = "am62a"
++SYSFW_SOC = "am62ax"
 +SYSFW_CONFIG = "evm"
 +SYSFW_SUFFIX = "hs"
 +SYSFW_TIBOOT3_SYMLINK = ""
