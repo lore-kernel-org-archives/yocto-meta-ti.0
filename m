@@ -1,167 +1,160 @@
-Return-Path: <afd@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2321DC6379F
-	for <webhook@archiver.kernel.org>; Fri, 10 Feb 2023 19:55:35 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.4369.1676058930360345313
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C4BDC636D4
+	for <webhook@archiver.kernel.org>; Fri, 10 Feb 2023 20:16:25 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.4947.1676060180385592879
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 10 Feb 2023 11:55:30 -0800
+ Fri, 10 Feb 2023 12:16:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=CaTmnBJf;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 31AJtP60121991;
-	Fri, 10 Feb 2023 13:55:25 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1676058925;
-	bh=esX7rbGZ6i9bk0pvl+ONSOZ2tu8istoBojL7qEIry3A=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=CaTmnBJfNyfbDbWM7ObyzxVBi+ybJXkmDfK7kH6koRzuYZVeo/c9nF8iwh3IH3407
-	 Zmsmaax950xRBYSSr9Z/OvYv2Q+/kTSdf6NdMfkRyuT1KYir9CwlTCU5aqC11SGNae
-	 HJ88gul0KpW9yBT4GIWN0Dy00S4Ts08r7VGqJI+c=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 31AJtPDu038491
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 10 Feb 2023 13:55:25 -0600
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Fri, 10
- Feb 2023 13:55:24 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Fri, 10 Feb 2023 13:55:24 -0600
-Received: from [10.250.33.40] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 31AJtOhh107585;
-	Fri, 10 Feb 2023 13:55:24 -0600
-Message-ID: <b359a2d1-99ea-06e5-ef8e-3523c75b9a14@ti.com>
-Date: Fri, 10 Feb 2023 13:55:24 -0600
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 431EB40C1E;
+	Fri, 10 Feb 2023 20:16:19 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id HZLHoM3rd4kS; Fri, 10 Feb 2023 20:16:19 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id ECBE640BA8;
+	Fri, 10 Feb 2023 20:16:12 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id C0195163758; Fri, 10 Feb 2023 15:15:49 -0500 (EST)
+Date: Fri, 10 Feb 2023 15:15:49 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Chirag Shilwant <c-shilwant@ti.com>
+Cc: Praneeth Bajjuri <praneeth@ti.com>, Ryan Eatmon <reatmon@ti.com>,
+	meta-ti@lists.yoctoproject.org,
+	Sai Sree Kartheek Adivi <s-adivi@ti.com>,
+	Paresh Bhagat <p-bhagat@ti.com>, Gyan Gupta <g-gupta@ti.com>
+Subject: Re: [meta-ti][dunfell][PATCH] am62xx-lp-evm: Add AM62x LP HS-FS
+ evm configuration
+Message-ID: <20230210201549.GA22689@denix.org>
+References: <20230210125615.2607653-1-c-shilwant@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [meta-ti][master/kirkstone][PATCH 1/4] trusted-firmware-a: Use
- ti-k3-secdev if TI_SECURE_DEV_PKG_K3 is not defined
-Content-Language: en-US
-To: Denys Dmytriyenko <denis@denix.org>
-CC: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20230208231031.16363-1-afd@ti.com>
- <20230210185139.GW22689@denix.org>
- <23124d98-58b3-1cfa-7f3d-8c286638d099@ti.com>
- <20230210190508.GZ22689@denix.org>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20230210190508.GZ22689@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230210125615.2607653-1-c-shilwant@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 10 Feb 2023 19:55:35 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15801
+ <meta-ti@lists.yoctoproject.org>; Fri, 10 Feb 2023 20:16:25 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15802
 
-On 2/10/23 1:05 PM, Denys Dmytriyenko wrote:
-> On Fri, Feb 10, 2023 at 12:56:20PM -0600, Andrew Davis wrote:
->> On 2/10/23 12:51 PM, Denys Dmytriyenko wrote:
->>> On Wed, Feb 08, 2023 at 05:10:28PM -0600, Andrew Davis via lists.yoctoproject.org wrote:
->>>> Use the new ti-k3-secdev package to pull in the signing tools if they are
->>>> not provided by the environment. This allows us to use these tools
->>>> unconditionally. Remove the checks for the script and do the signing
->>>> for all K3 machines. The signature is automatically stripped from
->>>> the binaries on non-HS devices at boot time as needed so this change
->>>> is harmless for GP devices.
->>>>
->>>> Signed-off-by: Andrew Davis <afd@ti.com>
->>>> ---
->>>>   .../trusted-firmware-a_%.bbappend             | 43 ++++++-------------
->>>>   1 file changed, 12 insertions(+), 31 deletions(-)
->>>>
->>>> diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
->>>> index 5acc5c2e..95f1d2d9 100644
->>>> --- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
->>>> +++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
->>>> @@ -6,39 +6,20 @@ TFA_BUILD_TARGET:k3 = "all"
->>>>   TFA_INSTALL_TARGET:k3 = "bl31"
->>>>   TFA_SPD:k3 = "opteed"
->>>> +# Use default package TI SECDEV is one is not provided
->>>
->>> typo - *if* one is not provided
->>>
->>
->> Good catch
->>
->>>
->>>> +DEPENDS:append:k3 = "${@ '' if d.getVar('TI_SECURE_DEV_PKG_K3') else ' ti-k3-secdev-native' }"
->>>> +
->>>> +# Set a default value for TI_K3_SECDEV_INSTALL_DIR
->>>> +export TI_K3_SECDEV_INSTALL_DIR = "${STAGING_DIR_NATIVE}${datadir}/ti/ti-k3-secdev"
->>>> +include recipes-ti/includes/ti-paths.inc
->>>
->>> If you set TI_K3_SECDEV_INSTALL_DIR explicitly, why do you need to include
->>> ti-paths.inc here?
->>>
->>
->> ti-paths.inc is part of meta-ti-extras which might not be included in one's layer stack.
->> If not, this is a sane default, but ti-paths.inc can still override that path if available.
+I see all 3 patches are trying to add the same new multiconfig file:
+>  create mode 100644 conf/multiconfig/k3r5-hs-fs.conf
+
+AM62A:
+https://patchwork.yoctoproject.org/project/ti/patch/20230210000834.24783-1-s-adivi@ti.com/
+
+AM62:
+https://patchwork.yoctoproject.org/project/ti/patch/20230210124534.2607360-1-c-shilwant@ti.com/
+
+AM62 LP:
+https://patchwork.yoctoproject.org/project/ti/patch/20230210124534.2607360-1-c-shilwant@ti.com/
+
+This would cause a conflict and extra work for maintainer...
+
+
+On Fri, Feb 10, 2023 at 06:26:15PM +0530, Chirag Shilwant wrote:
+> Lets add the basic AM62x LP HS-FS configuration
+> - Add machine conf for AM62x LP HS-FS.
+> - The wic images will boot on AM62x LP HS-FS devices by default. The sysfw image for HS-SE will be packaged in the wic image as tiboot3-am62x-hs-evm.bin.
+> - Add ti-sci-firmware overrides.
 > 
-> No, we shouldn't be using ti-paths.inc here at all. The file was mostly used
-> by RTOS components back when they were built from sources. That is now only
-> used on some legacy platforms. Eventually it will be removed, no reason to
-> start using the file for K3 SECDEV. Just come up with the proper default
-> (something other than ${datadir}...) and be done with it, right?
+> Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
+> ---
+>  conf/machine/am62xx-lp-evm-k3r5-hs-fs.conf | 14 ++++++++++++++
+>  conf/machine/am62xx-lp-evm-k3r5-hs-se.conf |  7 +++++++
+>  conf/machine/include/am62xx-lp.inc         |  8 +++++++-
+>  conf/multiconfig/k3r5-hs-fs.conf           |  3 +++
+>  recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb     |  1 +
+>  5 files changed, 32 insertions(+), 1 deletion(-)
+>  create mode 100644 conf/machine/am62xx-lp-evm-k3r5-hs-fs.conf
+>  create mode 100644 conf/multiconfig/k3r5-hs-fs.conf
 > 
-
-I'm thinking ${datadir} is the right spot, do you have another spot in mind?
-
-Once we agree on a spot, then I'll go drop out the ti-paths.inc everywhere in
-a follow up patch.
-
-Andrew
-
+> diff --git a/conf/machine/am62xx-lp-evm-k3r5-hs-fs.conf b/conf/machine/am62xx-lp-evm-k3r5-hs-fs.conf
+> new file mode 100644
+> index 00000000..0178fcfc
+> --- /dev/null
+> +++ b/conf/machine/am62xx-lp-evm-k3r5-hs-fs.conf
+> @@ -0,0 +1,14 @@
+> +#@TYPE: Machine
+> +#@NAME: AM62xx LPSK HS-FS EVM (R5F)
+> +#@DESCRIPTION: Machine configuration for the TI AM62xx LP HS-FS EVM (R5F core)
+> +
+> +# Booting HS-FS requires different SYSFW, the rest is handled at runtime
+> +
+> +require conf/machine/include/k3r5.inc
+> +SOC_FAMILY_append = ":k3r5-hs-fs"
+> +
+> +SYSFW_SOC = "am62x"
+> +SYSFW_CONFIG = "evm"
+> +SYSFW_SUFFIX = "hs-fs"
+> +
+> +UBOOT_MACHINE = "am62x_lpsk_r5_defconfig"
+> diff --git a/conf/machine/am62xx-lp-evm-k3r5-hs-se.conf b/conf/machine/am62xx-lp-evm-k3r5-hs-se.conf
+> index b752ee7e..37e9760a 100644
+> --- a/conf/machine/am62xx-lp-evm-k3r5-hs-se.conf
+> +++ b/conf/machine/am62xx-lp-evm-k3r5-hs-se.conf
+> @@ -11,4 +11,11 @@ SYSFW_SOC = "am62x"
+>  SYSFW_CONFIG = "evm"
+>  SYSFW_SUFFIX = "hs"
+>  
+> +SYSFW_TIBOOT3_SYMLINK = ""
+> +
+>  UBOOT_MACHINE = "am62x_lpsk_r5_defconfig"
+> + 
+> +SPL_BINARY = ""
+> +UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
+> +UBOOT_IMAGE = "u-boot-r5spl-hs-se-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
+> +UBOOT_SYMLINK = "u-boot-r5spl-hs-se.${UBOOT_SUFFIX}"
+> diff --git a/conf/machine/include/am62xx-lp.inc b/conf/machine/include/am62xx-lp.inc
+> index c38de868..02937662 100644
+> --- a/conf/machine/include/am62xx-lp.inc
+> +++ b/conf/machine/include/am62xx-lp.inc
+> @@ -8,8 +8,14 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+>  
+>  TFA_K3_SYSTEM_SUSPEND = "1"
+>  
+> -# Default tiboot3.bin on AM62x LP is for HS-SE
+> +# Default tiboot3.bin on AM62x LP is for HS-FS
+> +BBMULTICONFIG = "k3r5-hs-fs"
+> +do_image_wic[mcdepends] = "mc::k3r5-hs-fs:ti-sci-fw:do_deploy"
+> +do_image_tar[mcdepends] = "mc::k3r5-hs-fs:ti-sci-fw:do_deploy"
+> +
+> +# Since default tiboot3.bin on AM62x LP is for HS-FS, add a version for HS-SE
+>  BBMULTICONFIG += "k3r5-hs-se"
+> +IMAGE_BOOT_FILES += " tiboot3-am62x-hs-evm.bin"
+>  do_image_wic[mcdepends] += "mc::k3r5-hs-se:ti-sci-fw:do_deploy"
+>  do_image_tar[mcdepends] += "mc::k3r5-hs-se:ti-sci-fw:do_deploy"
+>  
+> diff --git a/conf/multiconfig/k3r5-hs-fs.conf b/conf/multiconfig/k3r5-hs-fs.conf
+> new file mode 100644
+> index 00000000..c6d58ead
+> --- /dev/null
+> +++ b/conf/multiconfig/k3r5-hs-fs.conf
+> @@ -0,0 +1,3 @@
+> +require k3r5.conf
+> +
+> +MACHINE_append = "-hs-fs"
+> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> index 7896c366..24af66a2 100644
+> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> @@ -41,6 +41,7 @@ SYSFW_PREFIX_am62xx-evm-k3r5-gp = "fs"
+>  SYSFW_PREFIX_am62xx-evm-k3r5-hs-se = "fs"
+>  SYSFW_PREFIX_am62xx-lp-evm-k3r5 = "fs"
+>  SYSFW_PREFIX_am62xx-lp-evm-k3r5-hs-se = "fs"
+> +SYSFW_PREFIX_am62xx-lp-evm-k3r5-hs-fs = "fs"
+>  SYSFW_PREFIX_am62axx-evm-k3r5 = "fs"
+>  
+>  SYSFW_TISCI = "${S}/ti-sysfw/ti-${SYSFW_PREFIX}-firmware-${SYSFW_SOC}-*.bin"
+> -- 
+> 2.34.1
 > 
->>>> +TI_SECURE_DEV_PKG:k3 = "${@ d.getVar('TI_SECURE_DEV_PKG_K3') or d.getVar('TI_K3_SECDEV_INSTALL_DIR') }"
->>>> +
->>>>   EXTRA_OEMAKE:append:k3 = "${@ ' K3_USART=' + d.getVar('TFA_K3_USART') if d.getVar('TFA_K3_USART') else ''}"
->>>>   EXTRA_OEMAKE:append:k3 = "${@ ' K3_PM_SYSTEM_SUSPEND=' + d.getVar('TFA_K3_SYSTEM_SUSPEND') if d.getVar('TFA_K3_SYSTEM_SUSPEND') else ''}"
->>>> -# Signing procedure for K3 HS devices
->>>> -tfa_sign_k3hs() {
->>>> +# Signing procedure for K3 devices
->>>> +do_compile:append:k3() {
->>>>   	export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
->>>> -	( cd ${BUILD_DIR}; \
->>>> -		mv bl31.bin bl31.bin.unsigned; \
->>>> -		if [ -f ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ]; then \
->>>> -			${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh bl31.bin.unsigned bl31.bin; \
->>>> -		else \
->>>> -			echo "Warning: TI_SECURE_DEV_PKG not set, TF-A not signed."; \
->>>> -			cp bl31.bin.unsigned bl31.bin; \
->>>> -		fi; \
->>>> -	)
->>>> -}
->>>> -
->>>> -do_compile:append:am65xx-hs-evm() {
->>>> -	tfa_sign_k3hs
->>>> -}
->>>> -
->>>> -do_compile:append:am64xx-evm() {
->>>> -	tfa_sign_k3hs
->>>> -}
->>>> -
->>>> -do_compile:append:j721e-hs-evm() {
->>>> -	tfa_sign_k3hs
->>>> -}
->>>> -
->>>> -do_compile:append:j7200-hs-evm() {
->>>> -	tfa_sign_k3hs
->>>> -}
->>>> -
->>>> -do_compile:append:j721s2-hs-evm() {
->>>> -	tfa_sign_k3hs
->>>> +	mv ${BUILD_DIR}/bl31.bin ${BUILD_DIR}/bl31.bin.unsigned
->>>> +	${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${BUILD_DIR}/bl31.bin.unsigned ${BUILD_DIR}/bl31.bin
->>>>   }
->>>> -- 
->>>> 2.39.1
 
