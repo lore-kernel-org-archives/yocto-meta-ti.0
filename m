@@ -1,247 +1,273 @@
-Return-Path: <sabiya.d@mistralsolutions.com>
+Return-Path: <sinthu.raja@mistralsolutions.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 501BEC05027
-	for <webhook@archiver.kernel.org>; Tue, 14 Feb 2023 15:49:55 +0000 (UTC)
-Received: from egress-ip33b.ess.de.barracuda.com (egress-ip33b.ess.de.barracuda.com [18.185.115.237])
- by mx.groups.io with SMTP id smtpd.web11.10529.1676389789662014637
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48C82C61DA4
+	for <webhook@archiver.kernel.org>; Tue, 14 Feb 2023 17:35:07 +0000 (UTC)
+Received: from egress-ip4a.ess.de.barracuda.com (egress-ip4a.ess.de.barracuda.com [18.184.203.227])
+ by mx.groups.io with SMTP id smtpd.web10.48.1676396102212524480
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 14 Feb 2023 07:49:50 -0800
+ Tue, 14 Feb 2023 09:35:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mistralsolutions.com header.s=google header.b=N9yqd2eJ;
- spf=pass (domain: mistralsolutions.com, ip: 18.185.115.237, mailfrom: sabiya.d@mistralsolutions.com)
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198]) by mx-outbound21-231.eu-central-1b.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Tue, 14 Feb 2023 15:49:46 +0000
-Received: by mail-pf1-f198.google.com with SMTP id y28-20020a056a001c9c00b005a8c5cd5ae9so2609863pfw.22
-        for <meta-ti@lists.yoctoproject.org>; Tue, 14 Feb 2023 07:49:46 -0800 (PST)
+ dkim=pass header.i=@mistralsolutions.com header.s=google header.b=cLfG0IBl;
+ spf=pass (domain: mistralsolutions.com, ip: 18.184.203.227, mailfrom: sinthu.raja@mistralsolutions.com)
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com [209.85.208.200]) by mx-outbound14-54.eu-central-1a.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Tue, 14 Feb 2023 17:34:57 +0000
+Received: by mail-lj1-f200.google.com with SMTP id x44-20020a2ea9ac000000b0028fd85f2e0aso4127680ljq.22
+        for <meta-ti@lists.yoctoproject.org>; Tue, 14 Feb 2023 09:34:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=mistralsolutions.com; s=google;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=y2i2WzorueDBP9FRR5BP96Pxr6NNiqkinLrlBDa/9cw=;
-        b=N9yqd2eJx2tt0Rim1oqjuOIah8OcwqXPw9n40EnkE9YgC5wkBr0Mz1OuDF5OPmCr6s
-         971i08X4hacX6qY41At/ggBdmWrOYJA7wA7ME5VpIF8fdR36zFPyYebkfh110VSYnB6P
-         QPXyBf0Wiw2+xapI8QlZkCIPC+Sk6jyXxKeO4=
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=SJBXb3A1u+yPJA62J0hklJNkDH8azUUgzlmDXk+1DC8=;
+        b=cLfG0IBl/NfbzpSsIkXbWJbE1LFqF8jEoF02yAnE83HN0kq/immpSXSb2buVJw/Oad
+         KRPA1HA1CBTycSB2vD5dVsMfpdFIbnZ9i3V7Y2xRMjaH6OvfmFIv2jOtyn03sMINkFDb
+         +/Jl+nn5vx0F4qyH+A8efbi83kN8ZIG8P8nbI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=y2i2WzorueDBP9FRR5BP96Pxr6NNiqkinLrlBDa/9cw=;
-        b=QcbEPZI3Ebd/yPCA4kHUS25ucmctIudpghrL416EfKVuXfcHZlPozzvvO2WlSt1uQ8
-         pAwKc19VwUOA7M7CveE6n9gnbAO/3gjpZWcYPtWV9VfUldBHWn9dKCzN/xoW+XWutYFE
-         JImrPmNdbxpWXKEOoWFTWnBq8YFKftMtDvB9w047IzaoLvwNR6pnzhpjuqwcbermEC2Q
-         wbNsWPFGm/zAZsgP2dBdJiiNWTbcg3zMccTWLvA5wAw8eHqtKC66QGtlXotZ6XlLyDs1
-         gOIZbxLn4xs5fHrLxPr+XOPXeg3IEjmKoI8nGW7OXZWgUoZEzy396YAq5jCnZky4xRjv
-         oujg==
-X-Gm-Message-State: AO0yUKX4K1n+e17ZyDXvYCTsyXyR58PCvVTJqgqkiDfyoDOoyoOL0pj0
-	+/lzS9/2y1wsAHTKh84WfT4znqtRkLfpE7spvhYHQyBxOHkwP2fWahhh65PhTNTY1wR7HYoGktv
-	hdDh0zywCMkadFRTnd7I6vOFG3S1gasApXaXaQCVPLqmCxtBGKV6dgnT+LgLu6n6YrXZQ
-X-Received: by 2002:a17:90b:4a08:b0:233:d870:f4c7 with SMTP id kk8-20020a17090b4a0800b00233d870f4c7mr3006204pjb.21.1676389784996;
-        Tue, 14 Feb 2023 07:49:44 -0800 (PST)
-X-Google-Smtp-Source: AK7set+wwA4YkvypziSOXZPiILzdpgia2k13qVcX5Pqdrl2gAI4U0lm6jgNne+FJTuucaYcou9kB5Q==
-X-Received: by 2002:a17:90b:4a08:b0:233:d870:f4c7 with SMTP id kk8-20020a17090b4a0800b00233d870f4c7mr3006180pjb.21.1676389784641;
-        Tue, 14 Feb 2023 07:49:44 -0800 (PST)
-Received: from localhost.localdomain ([106.51.69.35])
-        by smtp.gmail.com with ESMTPSA id ei3-20020a17090ae54300b0020dc318a43esm5769239pjb.25.2023.02.14.07.49.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Feb 2023 07:49:44 -0800 (PST)
-From: sabiya.d@mistralsolutions.com
-X-Google-Original-From: sabiya.d@ti.com
-To: reatmon@ti.com,
-	denys@ti.com,
-	detheridge@ti.com
-Cc: meta-ti@lists.yoctoproject.org,
-	Dasnavis <sabiya.d@ti.com>
-Subject: [dunfell,RFC PATCH-V2] conf: machine: j784s4-evm: Add support for J784S4 HS-FS
-Date: Tue, 14 Feb 2023 21:19:39 +0530
-Message-Id: <20230214154939.340754-1-sabiya.d@ti.com>
-X-Mailer: git-send-email 2.25.1
+        bh=SJBXb3A1u+yPJA62J0hklJNkDH8azUUgzlmDXk+1DC8=;
+        b=WFUDb2Fb6+ptxQLcL1CUOMKoLdWRaCLg9MolnJ3z0Cx2qcKO3dkrc0p4iSh60S9B9C
+         gyhiUw8oc3Xxhhxw1f0Y28/s1WF27VvkZ5l16wT4maV3U7r0Kukiq5oScN6A3QgX/rh+
+         0k+fGi0ZlQgmpXZ7iYr/6Y/e0Xdhz3cTYTwQO4mZb4Pj4Qx4VZeZvUI9vVhbx8JZUbEi
+         GVZOGtK8O7lCEFwEPuvZ2Eqk16LigfLlDoS3sks6dwWsWDJ1g38qmBg2AXXNlqW5TXEn
+         rXkibfkuK4y2NtJwjGq0TyWlDfG+lR7GV+wZ31dIR7TH33Q+bZd+/e3TBjFfymKsZnA0
+         0vdw==
+X-Gm-Message-State: AO0yUKXDTh1ETSsLtdu7H6+zZq+K+F571uFQdFZT/rA2bkySMqIxPxmG
+	JxHKUNRmf/KFkyCnLbcRGbbAusu9Gprm+WEHoWOYEOp4pGOLn2BRGjSaRbDZQH3YuQ2CcLicTd5
+	xg/cmFaqJDmJ3KEj9JCiygfab5YdklFsGbyw3qL/S5cDjFUnWEJiMeZwcbYZr8yumAp5FLS7TNu
+	KEe+E=
+X-Received: by 2002:a19:6a0f:0:b0:4db:3ab7:79ca with SMTP id u15-20020a196a0f000000b004db3ab779camr461202lfu.8.1676396097271;
+        Tue, 14 Feb 2023 09:34:57 -0800 (PST)
+X-Google-Smtp-Source: AK7set93vwvVHqBqrR5JuWuyQdr/Nfx4btdIIf5O0AMSqArsANbGnz40YsUVzgeWpQZqnL6k4q6DzlRw5hh9Tgsp3eg=
+X-Received: by 2002:a19:6a0f:0:b0:4db:3ab7:79ca with SMTP id
+ u15-20020a196a0f000000b004db3ab779camr461186lfu.8.1676396096637; Tue, 14 Feb
+ 2023 09:34:56 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-BESS-ID: 1676389786-305607-5388-17238-1
+References: <20230214105642.16320-1-sinthu.raja@ti.com> <fd8350b7-ef60-f17b-283e-99e1901d8d04@ti.com>
+In-Reply-To: <fd8350b7-ef60-f17b-283e-99e1901d8d04@ti.com>
+From: Sinthu Raja M <sinthu.raja@mistralsolutions.com>
+Date: Tue, 14 Feb 2023 23:04:45 +0530
+Message-ID: <CAEd-yTRUuZmK40UBRLrDfz+r72BsZcVj+W667r=EJ5cqfhg72Q@mail.gmail.com>
+Subject: Re: [meta-ti][dunfell][PATCH V4] conf: machine: j721s2-evm: Add
+ support for J721S2 HS-FS
+To: Ryan Eatmon <reatmon@ti.com>
+Cc: denys@ti.com, detheridge@ti.com, meta-ti@lists.yoctoproject.org, 
+	Sinthu Raja <sinthu.raja@ti.com>, Aniket Limaye <a-limaye@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+X-BESS-ID: 1676396097-303638-28074-9327-1
 X-BESS-VER: 2019.1_20230201.1831
-X-BESS-Apparent-Source-IP: 209.85.210.198
+X-BESS-Apparent-Source-IP: 209.85.208.200
 X-BESS-Outbound-Spam-Score: 0.00
-X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.246146 [from 
-	cloudscan20-183.eu-central-1b.ess.aws.cudaops.com]
+X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.246148 [from 
+	cloudscan11-173.eu-central-1a.ess.aws.cudaops.com]
 	Rule breakdown below
 	 pts rule name              description
 	---- ---------------------- --------------------------------
 	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
 	0.00 BSF_SC0_MISMATCH_TO    META: Envelope rcpt doesn't match header 
-	0.00 NO_REAL_NAME           HEADER: From: does not include a real name 
-X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS91090 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND, BSF_SC0_MISMATCH_TO, NO_REAL_NAME
+X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS91090 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND, BSF_SC0_MISMATCH_TO
 X-BESS-BRTS-Status: 1
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 14 Feb 2023 15:49:55 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15840
+ <meta-ti@lists.yoctoproject.org>; Tue, 14 Feb 2023 17:35:07 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15841
 
-From: Dasnavis <sabiya.d@ti.com>
+On Tue, Feb 14, 2023 at 8:50 PM Ryan Eatmon <reatmon@ti.com> wrote:
+>
+>
+> Initial builds for both j721s2-evm and j721s2-hs-evm look good.  Thank
+> you for being patient and getting this working.
+>
+Thank you for your timely help.
+>
+> On 2/14/2023 4:56, Sinthu Raja wrote:
+> > From: Sinthu Raja <sinthu.raja@ti.com>
+> >
+> > Add the basic J721S2 HS-FS configuration.
+> >      - Add configurations to support both HS-FS and GP keeping GP
+> >        as default.
+> >      - Add ti-sci-firmware overrides for HS-FS.
+> >      - Remove evm conf file inclusion in hs-evm conf.
+> >      - Add j721s2 hs-evm specific config to hs-evm conf.
+> >
+> > Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+> > Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
+> > ---
+> >
+> > Change in V4:
+> > ============
+> > - Remove evm conf file inclusion in hs-evm conf.
+> > - Add j721s2 hs-evm specific config to hs-evm conf.
+> >
+> > Change in V3:
+> > ============
+> > Fix build issue.
+> >
+> > Changes in V2:
+> > =============
+> > Address review comment:
+> > - Keep GP as the default.
+> >
+> > V1: https://lists.yoctoproject.org/g/meta-ti/message/15771
+> > V2: https://lists.yoctoproject.org/g/meta-ti/message/15793
+> > V3: https://lists.yoctoproject.org/g/meta-ti/message/15818
+> >
+> >   conf/machine/j721s2-evm-k3r5-gp.conf        | 20 ++++++++++++++++++++
+> >   conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf | 15 +++++++++++++++
+> >   conf/machine/j721s2-evm.conf                | 12 ++++++++++--
+> >   conf/machine/j721s2-hs-evm.conf             | 18 +++++++++++++++++-
+> >   conf/multiconfig/k3r5-sr1-hs-fs.conf        |  3 +++
+> >   conf/multiconfig/k3r5-sr1.conf              |  3 +++
+> >   recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb      |  3 ++-
+> >   7 files changed, 70 insertions(+), 4 deletions(-)
+> >   create mode 100644 conf/machine/j721s2-evm-k3r5-gp.conf
+> >   create mode 100644 conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf
+> >   create mode 100644 conf/multiconfig/k3r5-sr1-hs-fs.conf
+> >   create mode 100644 conf/multiconfig/k3r5-sr1.conf
+> >
+> > diff --git a/conf/machine/j721s2-evm-k3r5-gp.conf b/conf/machine/j721s2-evm-k3r5-gp.conf
+> > new file mode 100644
+> > index 00000000..06456ef7
+> > --- /dev/null
+> > +++ b/conf/machine/j721s2-evm-k3r5-gp.conf
+> > @@ -0,0 +1,20 @@
+> > +#@TYPE: Machine
+> > +#@NAME: J721S2 GP EVM (R5F)
+> > +#@DESCRIPTION: Machine configuration for the TI J721S2 GP EVM (R5F core)
+> > +
+> > +# Booting GP requires different SYSFW, the rest is handled at runtime
+> > +
+> > +require conf/machine/include/k3r5.inc
+> > +SOC_FAMILY_append = ":k3r5-gp"
+> > +
+> > +SYSFW_SOC = "j721s2"
+> > +SYSFW_CONFIG = "evm"
+> > +SYSFW_SUFFIX = "gp"
+> > +SYSFW_TIBOOT3_SYMLINK = "tiboot3.bin"
+> > +
+> > +UBOOT_MACHINE = "j721s2_evm_r5_defconfig"
+> > +
+> > +SPL_BINARY = ""
+> > +UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
+> > +UBOOT_IMAGE = "u-boot-r5spl-gp-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
+> > +UBOOT_SYMLINK = "u-boot-r5spl-gp.${UBOOT_SUFFIX}"
+> > diff --git a/conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf b/conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf
+> > new file mode 100644
+> > index 00000000..786338a9
+> > --- /dev/null
+> > +++ b/conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf
+> > @@ -0,0 +1,15 @@
+> > +#@TYPE: Machine
+> > +#@NAME: J721S2 HS-FS EVM (R5F)
+> > +#@DESCRIPTION: Machine configuration for the TI J721S2 HS-FS EVM (R5F core)
+> > +
+> > +# Booting HS-FS requires different SYSFW, the rest is handled at runtime
+> > +
+> > +require conf/machine/include/k3r5.inc
+> > +SOC_FAMILY_append = ":k3r5-sr1-hs-fs"
+> > +
+> > +SYSFW_SOC = "j721s2"
+> > +SYSFW_CONFIG = "evm"
+> > +SYSFW_SUFFIX = "hs-fs"
+> > +SYSFW_TIBOOT3_SYMLINK = ""
+> > +
+> > +UBOOT_MACHINE = "j721s2_evm_r5_defconfig"
+> > diff --git a/conf/machine/j721s2-evm.conf b/conf/machine/j721s2-evm.conf
+> > index 7c120dcc..7d2597b5 100644
+> > --- a/conf/machine/j721s2-evm.conf
+> > +++ b/conf/machine/j721s2-evm.conf
+> > @@ -40,5 +40,13 @@ KERNEL_DEVICETREE = " \
+> >
+> >   UBOOT_MACHINE = "j721s2_evm_a72_defconfig"
+> >
+> > -do_image_wic[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+> > -do_image_tar[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+> > +# Default tiboot3.bin on J721S2 is for GP
+> > +BBMULTICONFIG = "k3r5-gp"
+> > +do_image_wic[mcdepends] = "mc::k3r5-gp:ti-sci-fw:do_deploy"
+> > +do_image_tar[mcdepends] = "mc::k3r5-gp:ti-sci-fw:do_deploy"
+> > +
+> > +# Since default tiboot3.bin on J721S2 is for GP, add a version for SR1.0 HS-FS
+> > +BBMULTICONFIG += "k3r5-sr1-hs-fs"
+> > +IMAGE_BOOT_FILES += " tiboot3-j721s2-hs-fs-evm.bin"
+> > +do_image_wic[mcdepends] += "mc::k3r5-sr1-hs-fs:ti-sci-fw:do_deploy"
+> > +do_image_tar[mcdepends] += "mc::k3r5-sr1-hs-fs:ti-sci-fw:do_deploy"
+> > diff --git a/conf/machine/j721s2-hs-evm.conf b/conf/machine/j721s2-hs-evm.conf
+> > index 3d737f44..2895787b 100644
+> > --- a/conf/machine/j721s2-hs-evm.conf
+> > +++ b/conf/machine/j721s2-hs-evm.conf
+> > @@ -2,10 +2,26 @@
+> >   #@NAME: J721S2 HS EVM
+> >   #@DESCRIPTION: Machine configuration for the TI J721S2 HS EVM
+> >
+> > -require conf/machine/j721s2-evm.conf
+> > +require conf/machine/include/j7.inc
+> > +
+> > +MACHINE_FEATURES += "gpu"
+> > +
+> > +SERIAL_CONSOLES = "115200;ttyS2"
+> > +SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+> > +TFA_K3_USART = "0x8"
+> > +OPTEEMACHINE = "k3-j784s4"
+> > +OPTEE_K3_USART = "0x8"
+> > +
+> > +KERNEL_DEVICETREE = " \
+> > +    ti/k3-j721s2-common-proc-board.dtb \
+> > +    ti/k3-j721s2-gesi-exp-board.dtbo \
+> > +"
+> >
+> >   UBOOT_MACHINE = "j721s2_hs_evm_a72_defconfig"
+> >
+> > +do_image_wic[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+> > +do_image_tar[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+> > +
+> >   SPL_BINARY = "tispl.bin_HS"
+> >   UBOOT_BINARY = "u-boot.img_HS"
+> >   UBOOT_SYMLINK = "u-boot.img"
+> > diff --git a/conf/multiconfig/k3r5-sr1-hs-fs.conf b/conf/multiconfig/k3r5-sr1-hs-fs.conf
+> > new file mode 100644
+> > index 00000000..2fa28c95
+> > --- /dev/null
+> > +++ b/conf/multiconfig/k3r5-sr1-hs-fs.conf
+> > @@ -0,0 +1,3 @@
+> > +require k3r5-sr1.conf
+> > +
+> > +MACHINE_append = "-hs-fs"
+> > diff --git a/conf/multiconfig/k3r5-sr1.conf b/conf/multiconfig/k3r5-sr1.conf
+> > new file mode 100644
+> > index 00000000..2b87de8a
+> > --- /dev/null
+> > +++ b/conf/multiconfig/k3r5-sr1.conf
+> > @@ -0,0 +1,3 @@
+> > +require k3r5.conf
+> > +
+> > +MACHINE_append = "-sr1"
+> > diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> > index 7896c366..cb197954 100644
+> > --- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> > +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> > @@ -33,7 +33,8 @@ SYSFW_PREFIX_j7-hs-evm-k3r5 = "fs"
+> >   SYSFW_PREFIX_j7-hs-evm-k3r5-sr1-1 = "fs"
+> >   SYSFW_PREFIX_j7200-evm-k3r5 = "fs"
+> >   SYSFW_PREFIX_j7200-hs-evm-k3r5 = "fs"
+> > -SYSFW_PREFIX_j721s2-evm-k3r5 = "fs"
+> > +SYSFW_PREFIX_j721s2-evm-k3r5-gp = "fs"
+> > +SYSFW_PREFIX_j721s2-evm-k3r5-sr1-hs-fs = "fs"
+> >   SYSFW_PREFIX_j721s2-hs-evm-k3r5 = "fs"
+> >   SYSFW_PREFIX_j784s4-evm-k3r5 = "fs"
+> >   SYSFW_PREFIX_j784s4-hs-evm-k3r5 = "fs"
+>
+> --
+> Ryan Eatmon                reatmon@ti.com
+> -----------------------------------------
+> Texas Instruments, Inc.  -  LCPD  -  MGTS
 
-Add the basic J784S4 HS-FS configuration.
-* Add configurations to support both HS-FS and GP keeping GP as default.
-* Add ti-sci-firmware overrides for HS-FS.
-* Remove evm conf file inclusion in hs-evm conf.
-* Add j784s4 hs-evm specific config to hs-evm conf.
 
-Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
-Signed-off-by: Dasnavis <sabiya.d@ti.com>
----
- conf/machine/j784s4-evm-k3r5-gp.conf        | 21 +++++++++++++++++++++
- conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf | 15 +++++++++++++++
- conf/machine/j784s4-evm-k3r5.conf           |  1 +
- conf/machine/j784s4-evm.conf                | 13 ++++++++++---
- conf/machine/j784s4-hs-evm-k3r5.conf        |  1 +
- conf/machine/j784s4-hs-evm.conf             | 19 ++++++++++++++++++-
- recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb      |  3 ++-
- 7 files changed, 68 insertions(+), 5 deletions(-)
- create mode 100644 conf/machine/j784s4-evm-k3r5-gp.conf
- create mode 100644 conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf
 
-diff --git a/conf/machine/j784s4-evm-k3r5-gp.conf b/conf/machine/j784s4-evm-k3r5-gp.conf
-new file mode 100644
-index 00000000..b8693655
---- /dev/null
-+++ b/conf/machine/j784s4-evm-k3r5-gp.conf
-@@ -0,0 +1,21 @@
-+#@TYPE: Machine
-+#@NAME: J784S4 GP EVM (R5F)
-+#@DESCRIPTION: Machine configuration for the TI J784S4 GP EVM (R5F core)
-+
-+# Booting GP requires different SYSFW, the rest is handled at runtime
-+
-+require conf/machine/include/k3r5.inc
-+SOC_FAMILY_append = ":k3r5-gp"
-+
-+SYSFW_SOC = "j784s4"
-+SYSFW_CONFIG = "evm"
-+SYSFW_SUFFIX = "gp"
-+SYSFW_TIBOOT3_SYMLINK = "tiboot3.bin"
-+SYSFW_SYMLINK = ""
-+
-+UBOOT_MACHINE = "j784s4_evm_r5_defconfig"
-+
-+SPL_BINARY = ""
-+UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
-+UBOOT_IMAGE = "u-boot-r5spl-gp-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
-+UBOOT_SYMLINK = "u-boot-r5spl-gp.${UBOOT_SUFFIX}"
-diff --git a/conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf b/conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf
-new file mode 100644
-index 00000000..8c77c910
---- /dev/null
-+++ b/conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf
-@@ -0,0 +1,15 @@
-+#@TYPE: Machine
-+#@NAME: J784S4 HS-FS EVM (R5F)
-+#@DESCRIPTION: Machine configuration for the TI J784S4 HS-FS EVM (R5F core)
-+
-+# Booting HS-FS requires different SYSFW, the rest is handled at runtime
-+
-+require conf/machine/include/k3r5.inc
-+SOC_FAMILY_append = ":k3r5-sr1-hs-fs"
-+
-+SYSFW_SOC = "j784s4"
-+SYSFW_CONFIG = "evm"
-+SYSFW_SUFFIX = "hs-fs"
-+SYSFW_TIBOOT3_SYMLINK = ""
-+
-+UBOOT_MACHINE = "j784s4_evm_r5_defconfig"
-diff --git a/conf/machine/j784s4-evm-k3r5.conf b/conf/machine/j784s4-evm-k3r5.conf
-index 04feebc6..3f010797 100644
---- a/conf/machine/j784s4-evm-k3r5.conf
-+++ b/conf/machine/j784s4-evm-k3r5.conf
-@@ -7,5 +7,6 @@ require conf/machine/include/k3r5.inc
- SYSFW_SOC = "j784s4"
- SYSFW_CONFIG = "evm"
- SYSFW_SUFFIX = "gp"
-+SYSFW_SYMLINK = ""
- 
- UBOOT_MACHINE = "j784s4_evm_r5_defconfig"
-diff --git a/conf/machine/j784s4-evm.conf b/conf/machine/j784s4-evm.conf
-index e892f597..c4548520 100644
---- a/conf/machine/j784s4-evm.conf
-+++ b/conf/machine/j784s4-evm.conf
-@@ -39,8 +39,15 @@ KERNEL_DEVICETREE = " \
- 
- UBOOT_MACHINE = "j784s4_evm_a72_defconfig"
- 
--do_image_wic[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
--do_image_tar[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
-+# Default tiboot3.bin on J784S4 is for GP
-+BBMULTICONFIG = "k3r5-gp"
-+do_image_wic[mcdepends] = "mc::k3r5-gp:ti-sci-fw:do_deploy"
-+do_image_tar[mcdepends] = "mc::k3r5-gp:ti-sci-fw:do_deploy"
- 
--TFA_BOARD = "j784s4"
-+# Since default tiboot3.bin on J784S4 is for GP, add a version for SR1.0 HS-FS
-+BBMULTICONFIG += "k3r5-sr1-hs-fs"
-+IMAGE_BOOT_FILES += " tiboot3-j784s4-hs-fs-evm.bin"
-+do_image_wic[mcdepends] += "mc::k3r5-sr1-hs-fs:ti-sci-fw:do_deploy"
-+do_image_tar[mcdepends] += "mc::k3r5-sr1-hs-fs:ti-sci-fw:do_deploy"
- 
-+TFA_BOARD = "j784s4"
-diff --git a/conf/machine/j784s4-hs-evm-k3r5.conf b/conf/machine/j784s4-hs-evm-k3r5.conf
-index 80a228a0..0f5e69e4 100644
---- a/conf/machine/j784s4-hs-evm-k3r5.conf
-+++ b/conf/machine/j784s4-hs-evm-k3r5.conf
-@@ -7,5 +7,6 @@ require conf/machine/include/k3r5.inc
- SYSFW_SOC = "j784s4"
- SYSFW_CONFIG = "evm"
- SYSFW_SUFFIX = "hs"
-+SYSFW_SYMLINK = ""
- 
- UBOOT_MACHINE = "j784s4_evm_r5_defconfig"
-diff --git a/conf/machine/j784s4-hs-evm.conf b/conf/machine/j784s4-hs-evm.conf
-index 62357d62..91ef3d6f 100644
---- a/conf/machine/j784s4-hs-evm.conf
-+++ b/conf/machine/j784s4-hs-evm.conf
-@@ -2,10 +2,27 @@
- #@NAME: J784S4 HS EVM
- #@DESCRIPTION: Machine configuration for the TI J784S4 HS EVM
- 
--require conf/machine/j784s4-evm.conf
-+require conf/machine/include/j7.inc
-+
-+MACHINE_FEATURES += "gpu"
-+
-+SERIAL_CONSOLES = "115200;ttyS2"
-+SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
-+TFA_K3_USART = "0x8"
-+OPTEEMACHINE = "k3-j784s4"
-+OPTEE_K3_USART = "0x8"
-+
-+KERNEL_DEVICETREE = " \
-+    ti/k3-j784s4-evm.dtb \
-+"
- 
- UBOOT_MACHINE = "j784s4_evm_a72_defconfig"
- 
-+do_image_wic[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
-+do_image_tar[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
-+
-+TFA_BOARD = "j784s4"
-+
- SPL_BINARY = "tispl.bin_HS"
- UBOOT_BINARY = "u-boot.img_HS"
- UBOOT_SYMLINK = "u-boot.img"
-diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-index c5fff3f7..cafb24e6 100644
---- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -36,7 +36,8 @@ SYSFW_PREFIX_j7200-hs-evm-k3r5 = "fs"
- SYSFW_PREFIX_j721s2-evm-k3r5-gp = "fs"
- SYSFW_PREFIX_j721s2-evm-k3r5-sr1-hs-fs = "fs"
- SYSFW_PREFIX_j721s2-hs-evm-k3r5 = "fs"
--SYSFW_PREFIX_j784s4-evm-k3r5 = "fs"
-+SYSFW_PREFIX_j784s4-evm-k3r5-gp = "fs"
-+SYSFW_PREFIX_j784s4-evm-k3r5-sr1-hs-fs = "fs"
- SYSFW_PREFIX_j784s4-hs-evm-k3r5 = "fs"
- SYSFW_PREFIX_am62xx-evm-k3r5-gp = "fs"
- SYSFW_PREFIX_am62xx-evm-k3r5-hs-se = "fs"
 -- 
-2.36.1.windows.1
-
+With Regards
+Sinthu Raja
 
