@@ -1,291 +1,248 @@
-Return-Path: <denis@denix.org>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D193AC61DA4
-	for <webhook@archiver.kernel.org>; Tue, 14 Feb 2023 18:48:47 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.2524.1676400518673518770
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7179CC61DA4
+	for <webhook@archiver.kernel.org>; Tue, 14 Feb 2023 20:41:18 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.5623.1676407277669756028
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 14 Feb 2023 10:48:39 -0800
+ Tue, 14 Feb 2023 12:41:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id ABAC740C37;
-	Tue, 14 Feb 2023 18:48:37 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kYwvXpJZBJ0g; Tue, 14 Feb 2023 18:48:37 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7CACA40A3D;
-	Tue, 14 Feb 2023 18:48:34 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 9C207163759; Tue, 14 Feb 2023 13:48:10 -0500 (EST)
-Date: Tue, 14 Feb 2023 13:48:10 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: afd@ti.com
-Cc: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][master/kirkstone][PATCH 2/4] conf: machine: Add
- proper SOC_FAMILY for R5 builds
-Message-ID: <20230214184810.GJ22689@denix.org>
-References: <20230214145352.12093-1-afd@ti.com>
- <20230214145352.12093-2-afd@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=R4qJqq6j;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 31EKfH4g050243;
+	Tue, 14 Feb 2023 14:41:17 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1676407277;
+	bh=TmcgOuIsGw8N3mg3Yz+jh/Ho+osyjcBfv1cDqBwUDz4=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=R4qJqq6jF8gJIJLcLYy020ebB71fe/ZuRLW2lx38oQWFvH94QGty2+dJClD81CxbJ
+	 bLVP+2W709PxJnQ/Y4iEzDYuan8Uh0Cmh9XK9g9d78b+inKhqyO+8GOMBkbMqViIDn
+	 TTlhN9HVmL5GjHrCpkKuSNJ4nxysGCZBDEK+MV1w=
+Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 31EKfH4N023195
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 14 Feb 2023 14:41:17 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 14
+ Feb 2023 14:41:16 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
+ Frontend Transport; Tue, 14 Feb 2023 14:41:16 -0600
+Received: from [10.249.38.163] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 31EKfG4x010895;
+	Tue, 14 Feb 2023 14:41:16 -0600
+Message-ID: <1a7f81f5-ec7b-85b0-f26a-5861fb4bf953@ti.com>
+Date: Tue, 14 Feb 2023 14:41:16 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230214145352.12093-2-afd@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.2
+Subject: Re: [dunfell,RFC PATCH-V2] conf: machine: j784s4-evm: Add support for
+ J784S4 HS-FS
+Content-Language: en-US
+To: <sabiya.d@mistralsolutions.com>, <denys@ti.com>, <detheridge@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, Dasnavis <sabiya.d@ti.com>
+References: <20230214154939.340754-1-sabiya.d@ti.com>
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20230214154939.340754-1-sabiya.d@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 14 Feb 2023 18:48:47 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15842
-
-NAK, you should not mix overrides for different archs.
-
-I also have this cleanup for R5 machine overrides pending, but using unique 
-names rather than the same ones with the main cores. I'll try to submit that 
-one shortly...
+ <meta-ti@lists.yoctoproject.org>; Tue, 14 Feb 2023 20:41:18 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15843
 
 
-On Tue, Feb 14, 2023 at 08:53:50AM -0600, Andrew Davis via lists.yoctoproject.org wrote:
-> Having our SOC_FAMILY set to our SoC name can be useful in recipes
-> that need SoC specific configuration. Add SoC names.
+
+On 2/14/2023 9:49, sabiya.d@mistralsolutions.com wrote:
+> From: Dasnavis <sabiya.d@ti.com>
 > 
-> Setting the revision and security type is less useful here and not
-> used. Remove that while here.
+> Add the basic J784S4 HS-FS configuration.
+> * Add configurations to support both HS-FS and GP keeping GP as default.
+> * Add ti-sci-firmware overrides for HS-FS.
+> * Remove evm conf file inclusion in hs-evm conf.
+> * Add j784s4 hs-evm specific config to hs-evm conf.
 > 
-> Signed-off-by: Andrew Davis <afd@ti.com>
+> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
+> Signed-off-by: Dasnavis <sabiya.d@ti.com>
 > ---
->  meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf           | 1 +
->  meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf        | 1 +
->  meta-ti-bsp/conf/machine/am64xx-evm-k3r5-gp.conf        | 2 +-
->  meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-fs.conf | 2 +-
->  meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-se.conf | 2 +-
->  meta-ti-bsp/conf/machine/am65xx-evm-k3r5-sr2.conf       | 1 -
->  meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf           | 1 +
->  meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5-sr2.conf    | 1 -
->  meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf        | 1 +
->  meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf      | 1 +
->  meta-ti-bsp/conf/machine/j7200-evm-k3r5.conf            | 1 +
->  meta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf         | 1 +
->  meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf            | 1 +
->  meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf         | 1 +
->  meta-ti-bsp/conf/machine/j721s2-evm-k3r5.conf           | 1 +
->  meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf        | 1 +
->  meta-ti-bsp/conf/machine/j784s4-evm-k3r5.conf           | 1 +
->  17 files changed, 15 insertions(+), 5 deletions(-)
+>   conf/machine/j784s4-evm-k3r5-gp.conf        | 21 +++++++++++++++++++++
+>   conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf | 15 +++++++++++++++
+>   conf/machine/j784s4-evm-k3r5.conf           |  1 +
+>   conf/machine/j784s4-evm.conf                | 13 ++++++++++---
+>   conf/machine/j784s4-hs-evm-k3r5.conf        |  1 +
+>   conf/machine/j784s4-hs-evm.conf             | 19 ++++++++++++++++++-
+>   recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb      |  3 ++-
+>   7 files changed, 68 insertions(+), 5 deletions(-)
+>   create mode 100644 conf/machine/j784s4-evm-k3r5-gp.conf
+>   create mode 100644 conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf
 > 
-> diff --git a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
-> index 724a8d4a..2fb43256 100644
-> --- a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
-> @@ -3,6 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the TI AM62xx EVM (R5F core)
->  
->  require conf/machine/include/k3r5.inc
-> +SOC_FAMILY:append = ":am62xx"
->  
->  SYSFW_SOC = "am62x"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
-> index ca4ced5a..14246300 100644
-> --- a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
-> @@ -3,6 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the TI AM62xx LP EVM (R5F core)
->  
->  require conf/machine/include/k3r5.inc
-> +SOC_FAMILY:append = ":am62xx"
->  
->  SYSFW_SOC = "am62x"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-gp.conf b/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-gp.conf
-> index 50bf6a07..e6a1a9d7 100644
-> --- a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-gp.conf
-> +++ b/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-gp.conf
-> @@ -5,7 +5,7 @@
->  # Booting GP requires different SYSFW, the rest is handled at runtime
->  
->  require conf/machine/include/k3r5.inc
-> -SOC_FAMILY:append = ":k3r5-gp"
-> +SOC_FAMILY:append = ":am64xx"
->  
->  SYSFW_SOC = "am64x"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-fs.conf b/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-fs.conf
-> index 42ddbb4c..29d000ef 100644
-> --- a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-fs.conf
-> +++ b/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-fs.conf
-> @@ -5,7 +5,7 @@
->  # Booting SR2.0 HS-FS requires different SYSFW, the rest is handled at runtime
->  
->  require conf/machine/include/k3r5.inc
-> -SOC_FAMILY:append = ":k3r5-sr2-hs-fs"
-> +SOC_FAMILY:append = ":am64xx"
->  
->  SYSFW_SOC = "am64x_sr2"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-se.conf b/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-se.conf
-> index a1c2b3e6..37457f00 100644
-> --- a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-se.conf
-> +++ b/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-se.conf
-> @@ -5,7 +5,7 @@
->  # Booting SR2.0 HS-SE requires different SYSFW, the rest is handled at runtime
->  
->  require conf/machine/include/k3r5.inc
-> -SOC_FAMILY:append = ":k3r5-sr2-hs-se"
-> +SOC_FAMILY:append = ":am64xx"
->  
->  SYSFW_SOC = "am64x_sr2"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/am65xx-evm-k3r5-sr2.conf b/meta-ti-bsp/conf/machine/am65xx-evm-k3r5-sr2.conf
-> index e74dd3ab..09625c51 100644
-> --- a/meta-ti-bsp/conf/machine/am65xx-evm-k3r5-sr2.conf
-> +++ b/meta-ti-bsp/conf/machine/am65xx-evm-k3r5-sr2.conf
-> @@ -5,7 +5,6 @@
->  # Booting SR2 requires different SYSFW, the rest is handled at runtime
->  
->  require conf/machine/am65xx-evm-k3r5.conf
-> -SOC_FAMILY:append = ":k3r5-sr2"
->  
->  SYSFW_SOC = "am65x_sr2"
->  SYSFW_SYMLINK = "sysfw.itb"
-> diff --git a/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf
-> index a484e444..f8afad9b 100644
-> --- a/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf
-> @@ -3,6 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the TI AM65xx EVM (R5F core)
->  
->  require conf/machine/include/k3r5.inc
-> +SOC_FAMILY:append = ":am65xx"
->  
->  SYSFW_SOC = "am65x"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5-sr2.conf b/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5-sr2.conf
-> index ff1645e4..90ad313b 100644
-> --- a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5-sr2.conf
-> +++ b/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5-sr2.conf
-> @@ -5,7 +5,6 @@
->  # Booting SR2 requires different SYSFW, the rest is handled at runtime
->  
->  require conf/machine/am65xx-hs-evm-k3r5.conf
-> -SOC_FAMILY:append = ":k3r5-sr2"
->  
->  SYSFW_SOC = "am65x_sr2"
->  SYSFW_SYMLINK = "sysfw.itb"
-> diff --git a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
-> index d9041c9d..49983ba9 100644
-> --- a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
-> @@ -3,6 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the TI AM65xx HS EVM (R5F core)
->  
->  require conf/machine/include/k3r5.inc
-> +SOC_FAMILY:append = ":am65xx"
->  
->  SYSFW_SOC = "am65x"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf b/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf
-> index 21b8702b..d0694122 100644
-> --- a/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf
-> @@ -3,6 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the BeagleBone AI-64 (R5F core)
->  
->  require conf/machine/include/k3r5.inc
-> +SOC_FAMILY:append = ":j721e"
->  
->  PREFERRED_PROVIDER_virtual/bootloader = "u-boot-bb.org"
->  PREFERRED_PROVIDER_u-boot = "u-boot-bb.org"
-> diff --git a/meta-ti-bsp/conf/machine/j7200-evm-k3r5.conf b/meta-ti-bsp/conf/machine/j7200-evm-k3r5.conf
-> index 68061883..4cd6accf 100644
-> --- a/meta-ti-bsp/conf/machine/j7200-evm-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/j7200-evm-k3r5.conf
-> @@ -3,6 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the TI J7200 EVM (R5F core)
->  
->  require conf/machine/include/k3r5.inc
-> +SOC_FAMILY:append = ":j7200"
->  
->  SYSFW_SOC = "j7200"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf b/meta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf
-> index 3fe06e74..c3584193 100644
-> --- a/meta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf
-> @@ -3,6 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the TI J7200 HS EVM (R5F core)
->  
->  require conf/machine/include/k3r5.inc
-> +SOC_FAMILY:append = ":j7200"
->  
->  SYSFW_SOC = "j7200_sr2"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf b/meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf
-> index 9544cdb6..678b79b1 100644
-> --- a/meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf
-> @@ -3,6 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the TI J721e EVM (R5F core)
->  
->  require conf/machine/include/k3r5.inc
-> +SOC_FAMILY:append = ":j721e"
->  
->  SYSFW_SOC = "j721e"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf b/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
-> index 56312c0c..d7f0cfcc 100644
-> --- a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
-> @@ -3,6 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the TI J721e HS EVM (R5F core)
->  
->  require conf/machine/include/k3r5.inc
-> +SOC_FAMILY:append = ":j721e"
->  
->  SYSFW_SOC = "j721e_sr1_1"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/j721s2-evm-k3r5.conf b/meta-ti-bsp/conf/machine/j721s2-evm-k3r5.conf
-> index 508e96e5..7fb6ef28 100644
-> --- a/meta-ti-bsp/conf/machine/j721s2-evm-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/j721s2-evm-k3r5.conf
-> @@ -3,6 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the TI J721S2 EVM (R5F core)
->  
->  require conf/machine/include/k3r5.inc
-> +SOC_FAMILY:append = ":j721s2"
->  
->  SYSFW_SOC = "j721s2"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf b/meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf
-> index a4d51904..fa1284c3 100644
-> --- a/meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf
-> @@ -3,6 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the TI J721S2 HS EVM (R5F core)
->  
->  require conf/machine/include/k3r5.inc
-> +SOC_FAMILY:append = ":j721s2"
->  
->  SYSFW_SOC = "j721s2"
->  SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/j784s4-evm-k3r5.conf b/meta-ti-bsp/conf/machine/j784s4-evm-k3r5.conf
-> index 04feebc6..37dad149 100644
-> --- a/meta-ti-bsp/conf/machine/j784s4-evm-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/j784s4-evm-k3r5.conf
-> @@ -3,6 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the TI J784S4 EVM (R5F core)
->  
->  require conf/machine/include/k3r5.inc
-> +SOC_FAMILY:append = ":j784s4"
->  
->  SYSFW_SOC = "j784s4"
->  SYSFW_CONFIG = "evm"
-> -- 
-> 2.39.1
+> diff --git a/conf/machine/j784s4-evm-k3r5-gp.conf b/conf/machine/j784s4-evm-k3r5-gp.conf
+> new file mode 100644
+> index 00000000..b8693655
+> --- /dev/null
+> +++ b/conf/machine/j784s4-evm-k3r5-gp.conf
+> @@ -0,0 +1,21 @@
+> +#@TYPE: Machine
+> +#@NAME: J784S4 GP EVM (R5F)
+> +#@DESCRIPTION: Machine configuration for the TI J784S4 GP EVM (R5F core)
+> +
+> +# Booting GP requires different SYSFW, the rest is handled at runtime
+> +
+> +require conf/machine/include/k3r5.inc
+> +SOC_FAMILY_append = ":k3r5-gp"
+> +
+> +SYSFW_SOC = "j784s4"
+> +SYSFW_CONFIG = "evm"
+> +SYSFW_SUFFIX = "gp"
+> +SYSFW_TIBOOT3_SYMLINK = "tiboot3.bin"
+> +SYSFW_SYMLINK = ""
+
+You do not need the SYSFW_SIMLINK = "" here.
+
+
+The rule basically is, if you have SYSFW_TIBOOT3_SYMLINK = "", then you 
+also need SYSFW_SIMLINK = "".
+
+
+> +
+> +UBOOT_MACHINE = "j784s4_evm_r5_defconfig"
+> +
+> +SPL_BINARY = ""
+> +UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
+> +UBOOT_IMAGE = "u-boot-r5spl-gp-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
+> +UBOOT_SYMLINK = "u-boot-r5spl-gp.${UBOOT_SUFFIX}"
+> diff --git a/conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf b/conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf
+> new file mode 100644
+> index 00000000..8c77c910
+> --- /dev/null
+> +++ b/conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf
+> @@ -0,0 +1,15 @@
+> +#@TYPE: Machine
+> +#@NAME: J784S4 HS-FS EVM (R5F)
+> +#@DESCRIPTION: Machine configuration for the TI J784S4 HS-FS EVM (R5F core)
+> +
+> +# Booting HS-FS requires different SYSFW, the rest is handled at runtime
+> +
+> +require conf/machine/include/k3r5.inc
+> +SOC_FAMILY_append = ":k3r5-sr1-hs-fs"
+> +
+> +SYSFW_SOC = "j784s4"
+> +SYSFW_CONFIG = "evm"
+> +SYSFW_SUFFIX = "hs-fs"
+> +SYSFW_TIBOOT3_SYMLINK = ""
+
+You do need it here....
+
+> +
+> +UBOOT_MACHINE = "j784s4_evm_r5_defconfig"
+> diff --git a/conf/machine/j784s4-evm-k3r5.conf b/conf/machine/j784s4-evm-k3r5.conf
+> index 04feebc6..3f010797 100644
+> --- a/conf/machine/j784s4-evm-k3r5.conf
+> +++ b/conf/machine/j784s4-evm-k3r5.conf
+> @@ -7,5 +7,6 @@ require conf/machine/include/k3r5.inc
+>   SYSFW_SOC = "j784s4"
+>   SYSFW_CONFIG = "evm"
+>   SYSFW_SUFFIX = "gp"
+> +SYSFW_SYMLINK = ""
+
+You do not need it here...
+
+
+>   UBOOT_MACHINE = "j784s4_evm_r5_defconfig"
+> diff --git a/conf/machine/j784s4-evm.conf b/conf/machine/j784s4-evm.conf
+> index e892f597..c4548520 100644
+> --- a/conf/machine/j784s4-evm.conf
+> +++ b/conf/machine/j784s4-evm.conf
+> @@ -39,8 +39,15 @@ KERNEL_DEVICETREE = " \
+>   
+>   UBOOT_MACHINE = "j784s4_evm_a72_defconfig"
+>   
+> -do_image_wic[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+> -do_image_tar[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+> +# Default tiboot3.bin on J784S4 is for GP
+> +BBMULTICONFIG = "k3r5-gp"
+> +do_image_wic[mcdepends] = "mc::k3r5-gp:ti-sci-fw:do_deploy"
+> +do_image_tar[mcdepends] = "mc::k3r5-gp:ti-sci-fw:do_deploy"
+>   
+> -TFA_BOARD = "j784s4"
+> +# Since default tiboot3.bin on J784S4 is for GP, add a version for SR1.0 HS-FS
+> +BBMULTICONFIG += "k3r5-sr1-hs-fs"
+> +IMAGE_BOOT_FILES += " tiboot3-j784s4-hs-fs-evm.bin"
+> +do_image_wic[mcdepends] += "mc::k3r5-sr1-hs-fs:ti-sci-fw:do_deploy"
+> +do_image_tar[mcdepends] += "mc::k3r5-sr1-hs-fs:ti-sci-fw:do_deploy"
+>   
+> +TFA_BOARD = "j784s4"
+> diff --git a/conf/machine/j784s4-hs-evm-k3r5.conf b/conf/machine/j784s4-hs-evm-k3r5.conf
+> index 80a228a0..0f5e69e4 100644
+> --- a/conf/machine/j784s4-hs-evm-k3r5.conf
+> +++ b/conf/machine/j784s4-hs-evm-k3r5.conf
+> @@ -7,5 +7,6 @@ require conf/machine/include/k3r5.inc
+>   SYSFW_SOC = "j784s4"
+>   SYSFW_CONFIG = "evm"
+>   SYSFW_SUFFIX = "hs"
+> +SYSFW_SYMLINK = ""
+
+You do not need it here either.
+
+
+>   UBOOT_MACHINE = "j784s4_evm_r5_defconfig"
+> diff --git a/conf/machine/j784s4-hs-evm.conf b/conf/machine/j784s4-hs-evm.conf
+> index 62357d62..91ef3d6f 100644
+> --- a/conf/machine/j784s4-hs-evm.conf
+> +++ b/conf/machine/j784s4-hs-evm.conf
+> @@ -2,10 +2,27 @@
+>   #@NAME: J784S4 HS EVM
+>   #@DESCRIPTION: Machine configuration for the TI J784S4 HS EVM
+>   
+> -require conf/machine/j784s4-evm.conf
+> +require conf/machine/include/j7.inc
+> +
+> +MACHINE_FEATURES += "gpu"
+> +
+> +SERIAL_CONSOLES = "115200;ttyS2"
+> +SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+> +TFA_K3_USART = "0x8"
+> +OPTEEMACHINE = "k3-j784s4"
+> +OPTEE_K3_USART = "0x8"
+> +
+> +KERNEL_DEVICETREE = " \
+> +    ti/k3-j784s4-evm.dtb \
+> +"
+>   
+>   UBOOT_MACHINE = "j784s4_evm_a72_defconfig"
+>   
+> +do_image_wic[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+> +do_image_tar[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+> +
+> +TFA_BOARD = "j784s4"
+> +
+>   SPL_BINARY = "tispl.bin_HS"
+>   UBOOT_BINARY = "u-boot.img_HS"
+>   UBOOT_SYMLINK = "u-boot.img"
+> diff --git a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> index c5fff3f7..cafb24e6 100644
+> --- a/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> +++ b/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+> @@ -36,7 +36,8 @@ SYSFW_PREFIX_j7200-hs-evm-k3r5 = "fs"
+>   SYSFW_PREFIX_j721s2-evm-k3r5-gp = "fs"
+>   SYSFW_PREFIX_j721s2-evm-k3r5-sr1-hs-fs = "fs"
+>   SYSFW_PREFIX_j721s2-hs-evm-k3r5 = "fs"
+> -SYSFW_PREFIX_j784s4-evm-k3r5 = "fs"
+> +SYSFW_PREFIX_j784s4-evm-k3r5-gp = "fs"
+> +SYSFW_PREFIX_j784s4-evm-k3r5-sr1-hs-fs = "fs"
+>   SYSFW_PREFIX_j784s4-hs-evm-k3r5 = "fs"
+>   SYSFW_PREFIX_am62xx-evm-k3r5-gp = "fs"
+>   SYSFW_PREFIX_am62xx-evm-k3r5-hs-se = "fs"
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
