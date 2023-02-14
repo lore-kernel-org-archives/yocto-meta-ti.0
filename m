@@ -2,48 +2,50 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B371C64ED6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 135AFC64EC7
 	for <webhook@archiver.kernel.org>; Tue, 14 Feb 2023 14:54:05 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.8830.1676386435768877496
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.8829.1676386435449743567
  for <meta-ti@lists.yoctoproject.org>;
  Tue, 14 Feb 2023 06:53:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=pZeA1noz;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: afd@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 31EErrm3101578;
-	Tue, 14 Feb 2023 08:53:53 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=swrU1YqM;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 31EErs2L101082;
+	Tue, 14 Feb 2023 08:53:54 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1676386433;
-	bh=TUPC9inbSw3m3u+jOCe5c4H85Ga2jvPCfr/Sd41vAbk=;
-	h=From:To:CC:Subject:Date;
-	b=pZeA1noz/mjfD4Da5Ik/84205EtmvMlpeMPTvnh06sCSDzkVNYciHk4qvE6GI30UQ
-	 8vuSlm0lr6WYoiA/nW7iHMlqsKCk8S5um3/ykJSzJU8n8Y8W9U6FWwyGwskkeG+zKr
-	 BvUVW+8QSP1PoT/cMDE0eeeGFLYK+4mf/M1Z8rZs=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 31EErrln076686
+	s=ti-com-17Q1; t=1676386434;
+	bh=a3kJmEwpVdnL6tkAejHERTgRw+I/36IAZx4GBZ6VGo8=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=swrU1YqMdn3VHeoPyJyzsfXxZQKzzM24uLEjTskPIo2c5XVFwcLj+mnOJSMGcM3Jw
+	 9+ay9qQokpPLyZDrRAgMyE8GVanEl/f3qQ6o2W2+LFcUQFMZAy9J6gnpOAWzkGyABQ
+	 FSrlGPlzi0sM9Tsl8wTwF8pbZrh3d/TLmzqp2Kns=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 31EErsth033605
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 14 Feb 2023 08:53:53 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 14 Feb 2023 08:53:54 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 14
- Feb 2023 08:53:53 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2023 08:53:54 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Tue, 14 Feb 2023 08:53:53 -0600
+ Frontend Transport; Tue, 14 Feb 2023 08:53:54 -0600
 Received: from ula0226330.dal.design.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 31EErqPd048291;
-	Tue, 14 Feb 2023 08:53:52 -0600
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 31EErqPg048291;
+	Tue, 14 Feb 2023 08:53:53 -0600
 From: Andrew Davis <afd@ti.com>
 To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         <meta-ti@lists.yoctoproject.org>
 CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][master/kirkstone][PATCH 1/4] u-boot-ti: Do not depend on DM firmware for R5 builds
-Date: Tue, 14 Feb 2023 08:53:49 -0600
-Message-ID: <20230214145352.12093-1-afd@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH 4/4] ti-sci-fw: Make split TIFS and DM the default
+Date: Tue, 14 Feb 2023 08:53:52 -0600
+Message-ID: <20230214145352.12093-4-afd@ti.com>
 X-Mailer: git-send-email 2.39.1
+In-Reply-To: <20230214145352.12093-1-afd@ti.com>
+References: <20230214145352.12093-1-afd@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -52,36 +54,39 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Tue, 14 Feb 2023 14:54:05 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15838
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15837
 
-This is not needed as the R5 builds do not use the firmware and can
-cause issues as ti-rtos-firmware does not handle MULTICONFIG well.
+Going forward, the split TIFS/DM is going to be more common. Only
+AM65x and AM64x still use the combined SYSFW.
+
+Set SYSFW_PREFIX for split "fs" firmware and override only for the
+two combined "sci" platforms. This makes it easier to add new platforms
+as no change will be needed to this recipe.
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-index ae87ec6a..866c0314 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -33,11 +33,11 @@ PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/b
- PACKAGECONFIG[dm] = "DM=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/pdk-ipc/${DM_FIRMWARE},,ti-rtos-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index e9c90a76..70311cbb 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -24,12 +24,9 @@ SYSFW_SOC ?= "unknown"
+ SYSFW_SUFFIX ?= "unknown"
+ SYSFW_CONFIG ?= "unknown"
  
- PACKAGECONFIG:append:aarch64 = " atf optee"
--PACKAGECONFIG:append:j721e = " dm"
--PACKAGECONFIG:append:j7200 = " dm"
--PACKAGECONFIG:append:j721s2 = " dm"
--PACKAGECONFIG:append:j784s4 = " dm"
--PACKAGECONFIG:append:am62xx = " dm"
-+PACKAGECONFIG:append:aarch64:j721e = " dm"
-+PACKAGECONFIG:append:aarch64:j7200 = " dm"
-+PACKAGECONFIG:append:aarch64:j721s2 = " dm"
-+PACKAGECONFIG:append:aarch64:j784s4 = " dm"
-+PACKAGECONFIG:append:aarch64:am62xx = " dm"
+-SYSFW_PREFIX = "sci"
+-SYSFW_PREFIX:j721e = "fs"
+-SYSFW_PREFIX:j7200 = "fs"
+-SYSFW_PREFIX:j721s2 = "fs"
+-SYSFW_PREFIX:j784s4 = "fs"
+-SYSFW_PREFIX:am62xx = "fs"
++SYSFW_PREFIX = "fs"
++SYSFW_PREFIX:am65xx = "sci"
++SYSFW_PREFIX:am64xx = "sci"
  
- COMPATIBLE_MACHINE = "(ti-soc)"
+ SYSFW_TISCI = "${S}/ti-sysfw/ti-${SYSFW_PREFIX}-firmware-${SYSFW_SOC}-*.bin"
  
 -- 
 2.39.1
