@@ -2,124 +2,105 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B62EEC61DA3
-	for <webhook@archiver.kernel.org>; Tue, 21 Feb 2023 21:12:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3EE6C636D7
+	for <webhook@archiver.kernel.org>; Tue, 21 Feb 2023 21:29:49 +0000 (UTC)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.54532.1677013979016512201
+ by mx.groups.io with SMTP id smtpd.web10.54957.1677014986536901818
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 21 Feb 2023 13:12:59 -0800
+ Tue, 21 Feb 2023 13:29:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=rpPVX4v6;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=b4CdBvHO;
  spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: afd@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 31LLCpIH042086;
-	Tue, 21 Feb 2023 15:12:51 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 31LLTifd045181;
+	Tue, 21 Feb 2023 15:29:44 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1677013971;
-	bh=UZJXqfE1a50GedIgVTRwyXkAHl2V5Ud/VbmqRE1OnEQ=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=rpPVX4v6eB6yMSlxQ05DoPR2S8vsaTsC0JJqfqp80+wcWOHmIia6IFtY4BHnVry81
-	 X/0EpkSPVgf5Bemr+zDLIhtGvQsVMQ18R74PmSkWBIJpedt+m4wbD0HPh+EckmGHCX
-	 uCNXGh1rfQHgfqC9KBXM7S1FfUETGZtH7sTXbvBY=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 31LLCpnf071206
+	s=ti-com-17Q1; t=1677014984;
+	bh=jB30yGCA0DWADOeOJa6ylNn07/mt5ohNSH9y/5eRppE=;
+	h=From:To:CC:Subject:Date;
+	b=b4CdBvHOpIjSKWnvhoauo2oop9itfKLs29Uh7eVK6ACOteNp4OVMTO77MPwsgmwmw
+	 CXNwewdmjpUeuFLOEMbDlofbNTNSK6sQ7Qs5B5MI/KPz34dppnSYApXCw4POKuORMq
+	 8W4W1VHUUYQZdxpzQK+kb7Dbj4OXmmsND/yg110E=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 31LLTic2034449
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 21 Feb 2023 15:12:51 -0600
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 21 Feb 2023 15:29:44 -0600
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 21
- Feb 2023 15:12:51 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2023 15:29:44 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Tue, 21 Feb 2023 15:12:51 -0600
-Received: from [10.250.33.176] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 31LLCoS2016402;
-	Tue, 21 Feb 2023 15:12:51 -0600
-Message-ID: <9554096a-a674-c0f8-b614-99677829e16a@ti.com>
-Date: Tue, 21 Feb 2023 15:12:50 -0600
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [meta-ti][master/kirkstone][PATCH v2 00/15] ti-rtos-firmware and
- secdev
-To: Denys Dmytriyenko <denis@denix.org>, Ryan Eatmon <reatmon@ti.com>
-CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-References: <20230215193355.9676-1-afd@ti.com>
- <20230217070946.GM22689@denix.org>
- <eeb5e701-947d-7dad-995b-01d309e33508@ti.com>
- <20230221205158.GP22689@denix.org>
-Content-Language: en-US
+ Frontend Transport; Tue, 21 Feb 2023 15:29:43 -0600
+Received: from ula0226330.dhcp.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 31LLThCA048397;
+	Tue, 21 Feb 2023 15:29:43 -0600
 From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20230221205158.GP22689@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
+        <meta-ti@lists.yoctoproject.org>
+CC: Andrew Davis <afd@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH] ti-linux-fw: update to the latest
+Date: Tue, 21 Feb 2023 15:29:43 -0600
+Message-ID: <20230221212943.19511-1-afd@ti.com>
+X-Mailer: git-send-email 2.39.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 21 Feb 2023 21:12:59 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15897
+ <meta-ti@lists.yoctoproject.org>; Tue, 21 Feb 2023 21:29:49 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15898
 
-On 2/21/23 2:51 PM, Denys Dmytriyenko wrote:
-> On Fri, Feb 17, 2023 at 10:09:36PM -0600, Ryan Eatmon wrote:
->>
->>
->> On 2/17/2023 1:09, Denys Dmytriyenko wrote:
->>> On Wed, Feb 15, 2023 at 01:33:40PM -0600, Andrew Davis via lists.yoctoproject.org wrote:
->>>> Hello all,
->>>>
->>>> This is a combined series that replaces my previous ones on
->>>> ti-rtos-firmware and SECDEV. There is now a small dependency
->>>> between them so I have merged them here.
->>>>
->>>> Big change is in the SECDEV series which now uses a new bbclass
->>>> to combine the SECDEV env setup in one spot. We also remove
->>>> the ti-path.inc usage.
->>>
->>> Andrew,
->>>
->>> Overall, looks very good and I like the bbclass approach! However, I tried to
->>> test the series locally (started with j721e-evm) and got these:
->>>
->>>
->>> WARNING: ti-rtos-firmware-08.02.00.04-r3.0 do_package: ti-rtos-firmware: NOT adding alternative provide /lib/firmware/j7-mcu-r5f0_1-fw: /lib/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f does not exist
->>>
->>>
->>> ERROR: mc:k3r5:ti-sci-fw-2022.01-r3.2 do_compile: oe_runmake failed
->>> ERROR: mc:k3r5:ti-sci-fw-2022.01-r3.2 do_compile: ExecutionError('/OE/arago-kirkstone/build/arago-tmp-default-glibc/work/j721e_evm_k3r5-oe-linux-gnueabi/ti-sci-fw/2022.01-r3.2/temp/run.do_compile.165613', 1, None, None)
->>> ERROR: Logfile of failure stored in: /OE/arago-kirkstone/build/arago-tmp-default-glibc/work/j721e_evm_k3r5-oe-linux-gnueabi/ti-sci-fw/2022.01-r3.2/temp/log.do_compile.165613
->>> Log data follows:
->>> | DEBUG: Executing shell function do_compile
->>> | NOTE: make -j 64 CROSS_COMPILE=arm-oe-linux-gnueabi- SOC=j721e SOC_TYPE=gp CONFIG=evm SYSFW_DIR=/OE/arago-kirkstone/build/arago-tmp-default-glibc/work/j721e_evm_k3r5-oe-linux-gnueabi/ti-sci-fw/2022.01-r3.2/git/ti-sysfw
->>> | ./gen_its.sh j721e gp evm out/soc/j721e/evm/sysfw.bin-gp out/soc/j721e/evm/board-cfg.bin out/soc/j721e/evm/pm-cfg.bin out/soc/j721e/evm/rm-cfg.bin out/soc/j721e/evm/sec-cfg.bin > out/soc/j721e/evm/sysfw-j721e-evm.its
->>> | /bin/sh: 1: cannot create out/soc/j721e/evm/sysfw-j721e-evm.its: Directory nonexistent
->>> | arm-oe-linux-gnueabi-gcc -fno-builtin -Wall -Iinclude/soc/j721e -Isoc/j721e/evm -Iinclude -c -o out/soc/j721e/evm/board-cfg.o-pre-validated ./soc/j721e/evm/board-cfg.c
->>> | Signing the SYSFW release image with ti-degenerate-key.pem key...
->>> | make: *** [Makefile:208: out/soc/j721e/evm/sysfw-j721e-evm.its] Error 2
->>> | make: *** Waiting for unfinished jobs....
->>> | ./gen_x509_cert.sh -c m3 -b /OE/arago-kirkstone/build/arago-tmp-default-glibc/work/j721e_evm_k3r5-oe-linux-gnueabi/ti-sci-fw/2022.01-r3.2/git/ti-sysfw/ti-fs-firmware-j721e-gp.bin -o out/soc/j721e/evm/sysfw.bin-gp -l 0x40000 -k ti-degenerate-key.pem -r 1;
->>> | python3 ./scripts/sysfw_boardcfg_validator.py -b out/soc/j721e/evm/board-cfg.o-pre-validated -i -o out/soc/j721e/evm/board-cfg.o -s j721e -l out/soc/j721e/evm/board-cfg.o.log
->>> | Certificate being generated :
->>> |       LOADADDR = 0x00040000
->>> |       IMAGE_SIZE = 262112
->>> |       CERT_TYPE = 2
->>> | SUCCESS: Image out/soc/j721e/evm/sysfw.bin-gp generated.
->>> | rm out/soc/j721e/evm/board-cfg.o
->>> | ERROR: oe_runmake failed
->>> | WARNING: exit code 1 from a shell command.
->>> ERROR: Task (mc:k3r5:/OE/arago-kirkstone/sources/meta-ti/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb:do_compile) failed with exit code '1'
->>>
->>
->> Odd.  I just tested the patches and did not get those errors...
-> 
-> Hmm, I wonder if what I hit was one of those race conditions in k3-image-gen?
-> Andrew, do you have any comments?
-> 
+While here update FW versions and remove those no longer used.
 
-That looks like that could be the issue, I did fix all the race conditions, but it
-seems kirkstone has some old version of ti-sci-fw from back before my fixes. I'd
-guess updating K3_IMAGE_GEN_SRCREV to the latest would fix this for you.
+Signed-off-by: Andrew Davis <afd@ti.com>
+---
+ .../recipes-bsp/ti-linux-fw/ti-linux-fw.inc      | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
 
-Andrew
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 0b2e8bd6..74c26707 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -4,28 +4,24 @@ LICENSE = "TI-TFL"
+ LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+ 
+ PV = "2022.01"
+-INC_PR = "r3"
++INC_PR = "r4"
+ 
+ # Firmware versions
+ CORESDK_RTOS_VERSION = "08.02.00.04"
+-SERDES_FW_VERSION = "3.3.0.2c"
+-NETCP_SA_FW_VERSION = "1.0.0"
+-NETCP_PA_FW_VERSION = "3.0.2.3"
+-QMSS_PDSP_FW_VERSION = "1.0.0.9"
+ PRUETH_FW_AM65X_VERSION = "08.00.00.20"
+-PRUETH_FW_AM65X_SR2_VERSION = "02.02.09.07"
++PRUETH_FW_AM65X_SR2_VERSION = "02.02.11.02"
+ GOODIX_FW_VERSION = "1.0.0.0"
+-CADENCE_MHDP_FW_VERSION = "1.2.17"
++CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+ CNM_WAVE521_FW_VERSION = "1.0.00"
+-TIFS_LPM_STUB_FW_VERSION = "08.03.02"
++TIFS_LPM_STUB_FW_VERSION = "08.06.04"
+ 
+-TI_LINUX_FW_SRCREV ?= "7875237b357ecf27300658e65e9927cef7e299ed"
++TI_LINUX_FW_SRCREV ?= "340194800a581baf976360386dfc7b5acab8d948"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+ 
+-K3_IMAGE_GEN_SRCREV ?= "a9a43d5effcd17b4f3364cc7e6d483abd7f56e0f"
++K3_IMAGE_GEN_SRCREV ?= "ffae8800a5c81c149835ed1aa5e2fbbe65a49c0d"
+ SRCREV_imggen = "${K3_IMAGE_GEN_SRCREV}"
+ SRCREV_FORMAT = "imggen"
+ 
+-- 
+2.39.1
+
 
