@@ -1,91 +1,77 @@
-Return-Path: <robertcnelson@gmail.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B63FC61DA4
-	for <webhook@archiver.kernel.org>; Thu, 23 Feb 2023 19:24:28 +0000 (UTC)
-Received: from mail-vs1-f43.google.com (mail-vs1-f43.google.com [209.85.217.43])
- by mx.groups.io with SMTP id smtpd.web11.222.1677180258191343590
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE95BC64ED8
+	for <webhook@archiver.kernel.org>; Thu, 23 Feb 2023 22:10:54 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.3105.1677190248407519851
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 23 Feb 2023 11:24:18 -0800
+ Thu, 23 Feb 2023 14:10:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=iE7Ibq7A;
- spf=pass (domain: gmail.com, ip: 209.85.217.43, mailfrom: robertcnelson@gmail.com)
-Received: by mail-vs1-f43.google.com with SMTP id j14so17368162vse.3
-        for <meta-ti@lists.yoctoproject.org>; Thu, 23 Feb 2023 11:24:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=+mkz1erIrQHiddqkmQ4b0geNuKTA58UBhzb/l0jh6gw=;
-        b=iE7Ibq7ADh9mClDKX5wGugpqAI6pAXWwb7wu6NOB4XP0Ov09aaHCmMJSQ7sn7R62zc
-         rFfhcvxcQblXrWolA9VE0deAangUJSzHheeRjqJyWCd+FOoIPXOIJ0bUM1CXPReFizcO
-         p8O2uGKW3jH5liWCTRdxGwsindB6rC/ieYpDke4QWoysAXVys6j4xkLZlbTcEdoyE10e
-         BHHfmnXOXiDAL/rzQStF/74R1B0qAQOGjq5Y5b4539dh+yZ63bFxeWguHKRknC88NR9o
-         X/Zu0M7Dl57xCz0via5kIrmdtcBLSPsqUaX1S1oT2dVNJNAw5OFFznfnJC/JndQGlNC/
-         4CKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+mkz1erIrQHiddqkmQ4b0geNuKTA58UBhzb/l0jh6gw=;
-        b=XYfSA7UKd8jk39Zm7QWMnpMrb9O6DICQv4X2F7j941V56t0Wod2GI91n4YT2LQuDRu
-         DwKl3+TU4m6GTqoeqXrfh8t0GXhA47aXNMuqD8n97HlRNo5Fhux6d6RQW8FWkI+WQys2
-         Hy2dTBTVggyJdGioGkqgpSxAsXDYyaHp57eNQq3c9j4k11tqi44vJ37Gf9wJzmd6Snbf
-         Fmumy95HW7rSv+UZc7eUBBdFTE5y9/2EFFnrcszTKmOmtAsE2qAsBgMcz7unfpOl/CxW
-         khGZR8+49aVd1chFJJM8W6htZoVPkhcmIm8sQKM08tRGQd7t9+3kqsy2Vn8wGyU/+rLo
-         KNDQ==
-X-Gm-Message-State: AO0yUKUCr+k/wSd3EKUXR1eU6HgI9OhQtRhOBqqVz2JztF/iBGsoJgZB
-	ZBkrW6qUSpHhxompOZDASPI8dBD9iF/q8Gbu+0M=
-X-Google-Smtp-Source: AK7set/AL4CH8bP3Jszk0LAKqGv/B4ORcx4+yKr380LMv/+yKzZqUsu0N1iLR0+kGMlINT5c9wCAFrD8KIprtAX1F0U=
-X-Received: by 2002:a67:d21c:0:b0:416:8ea0:7f9b with SMTP id
- y28-20020a67d21c000000b004168ea07f9bmr639653vsi.2.1677180257157; Thu, 23 Feb
- 2023 11:24:17 -0800 (PST)
+ dkim=missing; spf=pass (domain: list.ti.com, ip: 198.47.23.249, mailfrom: lcpdbld@list.ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 31NMAksG106064;
+	Thu, 23 Feb 2023 16:10:46 -0600
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 31NMAkNC032320
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 23 Feb 2023 16:10:46 -0600
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Thu, 23
+ Feb 2023 16:10:46 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
+ Frontend Transport; Thu, 23 Feb 2023 16:10:46 -0600
+Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 31NMAk3m013462;
+	Thu, 23 Feb 2023 16:10:46 -0600
+Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
+	id 885CC10FE253; Thu, 23 Feb 2023 16:10:46 -0600 (CST)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH 1/5] ti-linux-fw: CI/CD Auto-Merger: cicd.dunfell.202302231358
+Date: Thu, 23 Feb 2023 16:10:42 -0600
+Message-ID: <1677190246-156088-2-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1677190246-156088-1-git-send-email-lcpdbld@list.ti.com>
+References: <1677190246-156088-1-git-send-email-lcpdbld@list.ti.com>
 MIME-Version: 1.0
-References: <mail.63f2b04b.7701.250da99230589a6c@storage.wm.amazon.com>
- <010001866c00aa88-a006fdb2-93c0-408b-99ff-8ec3aac48d40-000000@email.amazonses.com>
- <CAOCHtYg6C_1sx+7ozKgZhdYkU_AwtkPyhyQKeOx_2UhXbPyOnQ@mail.gmail.com>
- <CADEQF5Ecc4rD5=jXnwLOCiGt6qO2iZ+zSQrNrgtJ-4DFRuvjpA@mail.gmail.com>
- <174689B75462BC7D.19957@lists.yoctoproject.org> <CAOCHtYid579_w9-X1vRC7zO1emmpwCYvcLi5xFWOjMQsFRxm9w@mail.gmail.com>
-In-Reply-To: <CAOCHtYid579_w9-X1vRC7zO1emmpwCYvcLi5xFWOjMQsFRxm9w@mail.gmail.com>
-From: Robert Nelson <robertcnelson@gmail.com>
-Date: Thu, 23 Feb 2023 13:23:50 -0600
-Message-ID: <CAOCHtYifHusHaeb7YmvRcgf7B8AfV2yyTdYAPCc3o8K5wkiyYA@mail.gmail.com>
-Subject: Re: [meta-ti] [kirkstone] trouble loading device tree overlay
- (beaglebone black, uboot, linux-ti-staging)
-To: robertcnelson@gmail.com
-Cc: Danny <dadleyy@gmail.com>, danny@sizethreestudios.com, 
-	"meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>, "denys@konsulko.com" <denys@konsulko.com>, reatmon@ti.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 23 Feb 2023 19:24:28 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15938
+ <meta-ti@lists.yoctoproject.org>; Thu, 23 Feb 2023 22:10:54 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15939
 
-On Thu, Feb 23, 2023 at 1:21 PM Robert Nelson <robertcnelson@gmail.com> wrote:
->
-> Thinking this would fix both?
->
-> ```
-> SRC_URI = "git://github.com/beagleboard/linux.git;protocol=https;tag=5.10.145-ti-r55"
-> SRCREV = "49ae123d2fee3f4ed30c5359fbb3e398e898f2a9"
-> ```
->
-> Another step could be to move 5.10.145-ti-r55 -> to a variable:
->
-> lots of tags to choose from:
-> https://git.beagleboard.org/beagleboard/linux/-/tags
+Updated the value(s) for:
+  TI_LINUX_FW_SRCREV
 
-K3 only arm64 tags can be filtered via:
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-https://git.beagleboard.org/beagleboard/linux/-/tags?sort=updated_desc&search=ti-arm64
-
-non arm64 are am335x/am57xx
-
-Regards,
+diff --git a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index e0fe1b1..f15c90f 100644
+--- a/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -20,7 +20,7 @@ IMG_DEC_FW_VERSION = "1.0"
+ CNM_WAVE521_FW_VERSION = "1.0.00"
+ TIFS_LPM_STUB_FW_VERSION = "08.03.02"
+ 
+-TI_LINUX_FW_SRCREV ?= "89d3da8a44f88343f076602627cfce7d73f73e2b"
++TI_LINUX_FW_SRCREV ?= "2944354aca1f95525c30d625cb17672930e72572"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
 -- 
-Robert Nelson
-https://rcn-ee.com/
+1.8.3.1
+
 
