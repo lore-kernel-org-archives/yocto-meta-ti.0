@@ -1,178 +1,159 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3ED08C678D4
-	for <webhook@archiver.kernel.org>; Wed,  1 Mar 2023 21:31:41 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.765.1677706299166008580
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42D76C7EE23
+	for <webhook@archiver.kernel.org>; Wed,  1 Mar 2023 21:49:01 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.1244.1677707336042797053
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 01 Mar 2023 13:31:39 -0800
+ Wed, 01 Mar 2023 13:48:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=TSjzuao7;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 321LVbab081217;
-	Wed, 1 Mar 2023 15:31:37 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=d6BaRNMN;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: afd@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 321LmfnT002577;
+	Wed, 1 Mar 2023 15:48:41 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1677706297;
-	bh=U/V4+1XegkjWRhMFX13AVwIcvl243q7UqcLdhwwg4+k=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=TSjzuao76KOPo0e+V2m+vp4pM+wbF4bVf7yIh0zRvrbS4m4tHY7xYekTDRlfp0ksW
-	 q1wXR3k+B4LHv170nav3dVU46Dc0tiz9VZwGj0IxsZ3Ccl1lUWBAkn2b1ssPlrs8/O
-	 rVRJSOheMD4ZUSp6j/1KoDw5PGy7+MU1jLsy+mW0=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 321LVbOo097163
+	s=ti-com-17Q1; t=1677707321;
+	bh=11wNw9b4b+AdBDzoTqMjk5mFrK2KwSE1XXo2OQbCDmk=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=d6BaRNMNl5/6Z+IY61CIHQs1H88uhDvSqH5qp9SSYlUMucT6qP/GXU6xBAq0FDuoB
+	 A6ukURgchhiGaYx+RntoLnl0N+3K4m9+Oj9cJLa7qcGhdvUSkmokxqABtglbERY5TD
+	 Y+3W+2n6p7pIyNLuF+WJ3Q65OG6xobxWxBbpMsSw=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 321Lmfql018710
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 1 Mar 2023 15:31:37 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Wed, 1
- Mar 2023 15:31:37 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE108.ent.ti.com
+	Wed, 1 Mar 2023 15:48:41 -0600
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE108.ent.ti.com
  (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Wed, 1
+ Mar 2023 15:48:41 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Wed, 1 Mar 2023 15:31:37 -0600
-Received: from [128.247.81.69] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 321LVbM0009303;
-	Wed, 1 Mar 2023 15:31:37 -0600
-Message-ID: <39d0027c-1c74-2d0b-fbd0-f0c6fc80c0d3@ti.com>
-Date: Wed, 1 Mar 2023 15:31:37 -0600
+ Frontend Transport; Wed, 1 Mar 2023 15:48:41 -0600
+Received: from [10.249.33.186] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 321LmemM022130;
+	Wed, 1 Mar 2023 15:48:41 -0600
+Message-ID: <e474b1dc-888c-d73e-fcb7-d87a805706a5@ti.com>
+Date: Wed, 1 Mar 2023 15:48:40 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [meta-ti][master][PATCH] graphics/weston: Update patch for weston
- 11
-To: Praneeth Bajjuri <praneeth@ti.com>,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [meta-ti] [master/kirkstone][PATCH 2/2] ti-sgx-ddk-um: use udev
+ for userspace initialization
+Content-Language: en-US
+To: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
         Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <174868EB6168E29B.6892@lists.yoctoproject.org>
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <174868EB6168E29B.6892@lists.yoctoproject.org>
+	<denis@denix.org>
+CC: <meta-ti@lists.yoctoproject.org>
+References: <20221216130139.20841-1-matthias.schiffer@ew.tq-group.com>
+ <20221216130139.20841-2-matthias.schiffer@ew.tq-group.com>
+ <20221219210029.GU22689@denix.org>
+ <38b94bc6ee2f585eddbe7461ecd1d02f4ced08ab.camel@ew.tq-group.com>
+ <20230223013826.GJ22689@denix.org>
+ <8a4e2f08109cd05d5b364b8cf716b96d745919c7.camel@ew.tq-group.com>
+ <20230301012631.GP22689@denix.org>
+ <d06ed7242d5cb5905eba0f4a98ed176eb50320bf.camel@ew.tq-group.com>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <d06ed7242d5cb5905eba0f4a98ed176eb50320bf.camel@ew.tq-group.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 01 Mar 2023 21:31:41 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15969
+ <meta-ti@lists.yoctoproject.org>; Wed, 01 Mar 2023 21:49:01 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15970
 
-
-Wrong repo and mailing list... long day.. Ignore this patch...
-
-
-On 3/1/2023 3:30 PM, Ryan Eatmon via lists.yoctoproject.org wrote:
-> The patch needed to be updated due changes in the files being patched so
-> that it would build with weston 11.
+On 3/1/23 3:01 AM, Matthias Schiffer wrote:
+> On Tue, 2023-02-28 at 20:26 -0500, Denys Dmytriyenko wrote:
+>> On Thu, Feb 23, 2023 at 10:20:12AM +0100, Matthias Schiffer wrote:
+>>> On Wed, 2023-02-22 at 20:38 -0500, Denys Dmytriyenko wrote:
+>>>> So, testing the latest patch series, I started getting breakage on all SGX
+>>>> platforms:
+>>>>
+>>>> WARNING: tisdk-default-image-1.0-r0 do_rootfs: ti-sgx-ddk-um.postinst returned 1, marking as unpacked only, configuration required on target.
+>>>> ERROR: tisdk-default-image-1.0-r0 do_rootfs: Postinstall scriptlets of ['ti-sgx-ddk-um'] have failed. If the intention is to defer them to first boot,
+>>>> then please place them into pkg_postinst_ontarget:${PN} ().
+>>>> Deferring to first boot via 'exit 1' is no longer supported.
+>>>> Details of the failure are in /OE/arago-kirkstone/build/arago-tmp-default-glibc/work/am335x_evm-oe-linux-gnueabi/tisdk-default-image/1.0-r0/temp/log.do_rootfs.
+>>>> ERROR: Logfile of failure stored in: /OE/arago-kirkstone/build/arago-tmp-default-glibc/work/am335x_evm-oe-linux-gnueabi/tisdk-default-image/1.0-r0/temp/log.do_rootfs.156835
+>>>> ERROR: Task (/OE/arago-kirkstone/sources/meta-arago/meta-arago-distro/recipes-core/images/tisdk-default-image.bb:do_rootfs) failed with exit code '1'
+>>>>
+>>>>
+>>>> WARNING: tisdk-default-image-1.0-r0 do_rootfs: ti-sgx-ddk-um.postinst returned 1, marking as unpacked only, configuration required on target.
+>>>> ERROR: tisdk-default-image-1.0-r0 do_rootfs: Postinstall scriptlets of ['ti-sgx-ddk-um'] have failed. If the intention is to defer them to first boot,
+>>>> then please place them into pkg_postinst_ontarget:${PN} ().
+>>>> Deferring to first boot via 'exit 1' is no longer supported.
+>>>> Details of the failure are in /OE/arago-kirkstone/build/arago-tmp-default-glibc/work/am57xx_evm-oe-linux-gnueabi/tisdk-default-image/1.0-r0/temp/log.do_rootfs.
+>>>> ERROR: Logfile of failure stored in: /OE/arago-kirkstone/build/arago-tmp-default-glibc/work/am57xx_evm-oe-linux-gnueabi/tisdk-default-image/1.0-r0/temp/log.do_rootfs.164346
+>>>> ERROR: Task (/OE/arago-kirkstone/sources/meta-arago/meta-arago-distro/recipes-core/images/tisdk-default-image.bb:do_rootfs) failed with exit code '1'
+>>>>
+>>>>
+>>>> WARNING: tisdk-default-image-1.0-r0 do_rootfs: ti-sgx-ddk-um.postinst returned 1, marking as unpacked only, configuration required on target.
+>>>> ERROR: tisdk-default-image-1.0-r0 do_rootfs: Postinstall scriptlets of ['ti-sgx-ddk-um'] have failed. If the intention is to defer them to first boot,
+>>>> then please place them into pkg_postinst_ontarget:${PN} ().
+>>>> Deferring to first boot via 'exit 1' is no longer supported.
+>>>> Details of the failure are in /OE/arago-kirkstone/build/arago-tmp-default-glibc/work/am65xx_evm-oe-linux/tisdk-default-image/1.0-r0/temp/log.do_rootfs.
+>>>> ERROR: Logfile of failure stored in: /OE/arago-kirkstone/build/arago-tmp-default-glibc/work/am65xx_evm-oe-linux/tisdk-default-image/1.0-r0/temp/log.do_rootfs.159785
+>>>> ERROR: Task (/OE/arago-kirkstone/sources/meta-arago/meta-arago-distro/recipes-core/images/tisdk-default-image.bb:do_rootfs) failed with exit code '1'
+>>>>
+>>>>
+>>>> Reverting this commit helps with the build:
+>>>> https://git.yoctoproject.org/meta-ti/commit/?h=kirkstone&id=f50f55102f926ba58ea22339a98e4239370af6c6
+>>>>
+>>>>
+>>>> So far I didn't have time to dig deeper, though it's not obvious right away...
+>>>>
+>>>
+>>> Hi Denys,
+>>>
+>>> I assume that the failing postinst script must come from update-
+>>> rc.d.bbclass, but without knowing what command in the script is failing
+>>> it's difficult to say anything for certain. Would it be possible for
+>>> you to make a ti-sgx-ddk-um RPM or similar from the failing build
+>>> available for us to have a look at?
+>>>
+>>> What DISTRO_FEATURES is your build using? sysvinit, no systemd?
+>>
+>> Matthias,
+>>
+>> This is default Arago distro with both systemd and sysvinit in the
+>> DISTRO_FEATURES, and it generates IPKs. I looked at the corresponding
+>> postinst scripts and didn't see anything obvious.
+>>
+>> Unfortunately, I didn't have time to debug that further and had to
+>> switch to graphics updates. Part of it was updating SGX UM recipe
+>> and forcing rebuild, so I haven't seen any breakage since then.
+>>
+>> I might try reshuffling my patch queue in order to reproduce it, if I
+>> have time, to see if it was due to stale sstate or something similar.
+>>
 > 
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-> ---
->   ...equire-GL_EXT_unpack_subimage-commit.patch | 39 ++++++++++---------
->   1 file changed, 20 insertions(+), 19 deletions(-)
+> Hi Denys,
 > 
-> diff --git a/meta-arago-distro/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch b/meta-arago-distro/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch
-> index 8b03ddd6..13ab5e98 100644
-> --- a/meta-arago-distro/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch
-> +++ b/meta-arago-distro/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch
-> @@ -19,7 +19,7 @@ diff --git a/libweston/renderer-gl/gl-renderer-internal.h b/libweston/renderer-g
->   index 72101b47..7a6e2f48 100644
->   --- a/libweston/renderer-gl/gl-renderer-internal.h
->   +++ b/libweston/renderer-gl/gl-renderer-internal.h
-> -@@ -133,6 +133,8 @@ struct gl_renderer {
-> +@@ -148,6 +148,8 @@ struct gl_renderer {
->   	PFNEGLCREATEPLATFORMWINDOWSURFACEEXTPROC create_platform_window;
->   	bool has_platform_base;
->   
-> @@ -32,42 +32,42 @@ diff --git a/libweston/renderer-gl/gl-renderer.c b/libweston/renderer-gl/gl-rend
->   index a5f5eae4..410ba85c 100644
->   --- a/libweston/renderer-gl/gl-renderer.c
->   +++ b/libweston/renderer-gl/gl-renderer.c
-> -@@ -1835,6 +1835,7 @@ gl_renderer_flush_damage(struct weston_surface *surface)
-> +@@ -1793,6 +1793,7 @@ 			 struct weston_buffer *buffer)
->    {
->   	const struct weston_testsuite_quirks *quirks =
->   		&surface->compositor->test_data.test_quirks;
->   +	struct gl_renderer *gr = get_renderer(surface->compositor);
->   	struct gl_surface_state *gs = get_surface_state(surface);
-> -	struct weston_buffer *buffer = gs->buffer_ref.buffer;
-> +	struct gl_buffer_state *gb = gs->buffer;
->   	struct weston_view *view;
-> -@@ -1872,6 +1873,24 @@ gl_renderer_flush_damage(struct weston_surface *surface)
-> +@@ -1835,6 +1836,24 @@ 			 struct weston_buffer *buffer)
->   
->   	glActiveTexture(GL_TEXTURE0);
->   
->   +	if (!gr->has_unpack_subimage) {
->   +		wl_shm_buffer_begin_access(buffer->shm_buffer);
-> -+		for (j = 0; j < gs->num_textures; j++) {
-> -+			glBindTexture(GL_TEXTURE_2D, gs->textures[j]);
-> ++		for (j = 0; j < gs->buffer->num_textures; j++) {
-> ++			glBindTexture(GL_TEXTURE_2D, gs->buffer->textures[j]);
->   +			glTexImage2D(GL_TEXTURE_2D, 0,
-> -+				     gs->gl_format[j],
-> -+				     gs->pitch / gs->hsub[j],
-> -+				     buffer->height / gs->vsub[j],
-> ++				     gs->buffer->gl_format[j],
-> ++				     gs->buffer->pitch / pixel_format_hsub(buffer->pixel_format, j),
-> ++				     buffer->height / pixel_format_vsub(buffer->pixel_format, j),
->   +				     0,
-> -+				     gl_format_from_internal(gs->gl_format[j]),
-> -+				     gs->gl_pixel_type,
-> -+				     data + gs->offset[j]);
-> ++				     gl_format_from_internal(gs->buffer->gl_format[j]),
-> ++				     gs->buffer->gl_pixel_type,
-> ++				     data + gs->buffer->offset[j]);
->   +		}
->   +		wl_shm_buffer_end_access(buffer->shm_buffer);
->   +
->   +		goto done;
->   +	}
->   +
-> -	if (gs->needs_full_upload || quirks->gl_force_full_upload) {
-> +	if (gb->needs_full_upload || quirks->gl_force_full_upload) {
->   		glPixelStorei(GL_UNPACK_SKIP_PIXELS_EXT, 0);
->   		glPixelStorei(GL_UNPACK_SKIP_ROWS_EXT, 0);
-> -@@ -3932,11 +3951,9 @@ gl_renderer_setup(struct weston_compositor *ec, EGLSurface egl_surface)
-> +@@ -3896,11 +3915,9 @@ gl_renderer_setup(struct weston_compositor *ec, EGLSurface egl_surface)
->   	else
-> -		ec->read_format = PIXMAN_a8b8g8r8;
-> +		ec->read_format = pixel_format_get_info_by_pixman(PIXMAN_a8b8g8r8);
->   
->   -	if (gr->gl_version < gr_gl_version(3, 0) &&
->   -	    !weston_check_egl_extension(extensions, "GL_EXT_unpack_subimage")) {
-> @@ -80,11 +80,12 @@ index a5f5eae4..410ba85c 100644
->   
->   	if (gr->gl_version >= gr_gl_version(3, 0) ||
->   	    weston_check_egl_extension(extensions, "GL_EXT_texture_type_2_10_10_10_REV"))
-> -@@ -3977,6 +3994,8 @@ gl_renderer_setup(struct weston_compositor *ec, EGLSurface egl_surface)
-> +@@ -3945,6 +3962,8 @@ gl_renderer_setup(struct weston_compositor *ec, EGLSurface egl_surface)
->   		   gr_gl_version_minor(gr->gl_version));
->   	weston_log_continue(STAMP_SPACE "read-back format: %s\n",
-> -		ec->read_format == PIXMAN_a8r8g8b8 ? "BGRA" : "RGBA");
-> +			    ec->read_format->drm_format_name);
->   +	weston_log_continue(STAMP_SPACE "wl_shm sub-image to texture: %s\n",
->   +			    gr->has_unpack_subimage ? "yes" : "no");
-> -	weston_log_continue(STAMP_SPACE "EGL Wayland extension: %s\n",
-> -			    gr->has_bind_display ? "yes" : "no");
-> +	weston_log_continue(STAMP_SPACE "wl_shm 10 bpc formats: %s\n",
-> +			    yesno(gr->has_texture_type_2_10_10_10_rev));
-> +	weston_log_continue(STAMP_SPACE "wl_shm 16 bpc formats: %s\n",
+> I believe I have seen stale sstate issues with postinst scripts before.
 > 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#15968): https://lists.yoctoproject.org/g/meta-ti/message/15968
-> Mute This Topic: https://lists.yoctoproject.org/mt/97326059/6551054
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/leave/10828724/6551054/1815494134/xyzzy [reatmon@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+> IIRC, something like adding "unset pkg_postinst_ontarget_${PN}" to a
+> bbappend didn't trigger a rebuild, but I never got around to check
+> whether the bug was caused by postinst(_ontarget), unset, or a
+> combination of both. According to my Git log, this must have been on
+> WRL LTS18 / Yocto Thud though, so what you're seeing might also be an
+> entirely different issue...
 > 
 
--- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+I'm getting the error with a clean sstate. Seem it is related to
+update-rc.d. We should *not* inherit this class unless we have
+something deployed to init.d/ but your patch removes those files
+in the default case and so update-rc.d fails.
+
+inherit ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'update-rc.d', '', d)}
+
+Seems to help, but only handles the case when sysvinit is not used,
+not the case when udev in PACKAGECONFIG causes the initscript to be
+removed. That might require some more complex check.
+
+Andrew
 
