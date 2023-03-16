@@ -1,543 +1,413 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 023A9C7618E
-	for <webhook@archiver.kernel.org>; Thu, 16 Mar 2023 23:44:15 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.7675.1679010245667156088
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E678EC74A5B
+	for <webhook@archiver.kernel.org>; Thu, 16 Mar 2023 23:47:24 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.7736.1679010443753340964
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 16 Mar 2023 16:44:05 -0700
+ Thu, 16 Mar 2023 16:47:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=i5dbw2LZ;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 32GNi4j5098524;
-	Thu, 16 Mar 2023 18:44:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1679010244;
-	bh=F8d/+x/mXYs5d2g0B8gOeeWCwv9C062mLwYz0YK319E=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=i5dbw2LZzOrUk6D4bK7jiVbIgzlsPP/RzcPVdVruxA+TSUNQhg0YFlwJc9ifdm8pY
-	 6PMlgRboTv0GcXueN3QMWcBkOCTMHEN3qmhya6y9knOUnElX7MyvaMVYmYEfrgca6u
-	 iV1dOpIorgeycMajjRJ+rNrIoHd6hNCV0u+aEsAc=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 32GNi4ES002212
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 16 Mar 2023 18:44:04 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Thu, 16
- Mar 2023 18:44:04 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Thu, 16 Mar 2023 18:44:03 -0500
-Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 32GNi48x096903;
-	Thu, 16 Mar 2023 18:44:04 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1pcxGN-0003bF-R3; Thu, 16 Mar 2023 18:44:03 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/kirkstone][PATCH 1/3] linux-ti-*: Add filtering for which dtb/dtbo to include
-Date: Thu, 16 Mar 2023 18:44:01 -0500
-Message-ID: <20230316234403.13792-2-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230316234403.13792-1-reatmon@ti.com>
-References: <20230316234403.13792-1-reatmon@ti.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A176D40C79;
+	Thu, 16 Mar 2023 23:47:22 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xq0wbv1MbH6k; Thu, 16 Mar 2023 23:47:22 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5BBCB40429;
+	Thu, 16 Mar 2023 23:47:18 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 2DB6D1637C4; Thu, 16 Mar 2023 19:46:47 -0400 (EDT)
+Date: Thu, 16 Mar 2023 19:46:47 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: afd@ti.com
+Cc: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
+	Praneeth Bajjuri <praneeth@ti.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][master/kirkstone][PATCH] linux-ti-staging: Add 6.1
+ recipe
+Message-ID: <20230316234647.GE18050@denix.org>
+References: <20230314162027.28974-1-afd@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230314162027.28974-1-afd@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 16 Mar 2023 23:44:15 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15994
+ <meta-ti@lists.yoctoproject.org>; Thu, 16 Mar 2023 23:47:24 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/15997
 
-We often carry more dtbs/dtbos in our kernel than we have upstreamed.
-The inclusion of all of the dtb/dtbo in the KERNEL_DEVICETREE has become
-problematic as we start testing the linux-next and 6.1 as part of our
-LTS migration.  To address this issue we are adding in two step method
-for managing the KERNEL_DEVICETREE.
+On Tue, Mar 14, 2023 at 11:20:27AM -0500, Andrew Davis via lists.yoctoproject.org wrote:
+> Remove all non-upstream Device Tree Overlays. We could have filtered them
+> out like as done in mainline and next testing. The issue would be as they
+> are added back to 6.1 and upstream we would need to conditionally
+> re-enable each. Easier to get a clean start.
+> 
+> Switch to software rendering as the Rogue kernel mode driver does not
+> build yet for kernel v6.1.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>  meta-ti-bsp/conf/machine/am57xx-evm.conf      | 10 ----
+>  meta-ti-bsp/conf/machine/am62xx-evm.conf      |  1 -
+>  meta-ti-bsp/conf/machine/am62xx-lp-evm.conf   |  1 -
+>  meta-ti-bsp/conf/machine/beaglebone-ai64.conf | 51 -------------------
+>  meta-ti-bsp/conf/machine/dra7xx-evm.conf      |  8 ---
+>  meta-ti-bsp/conf/machine/include/am62xx.inc   |  2 +-
+>  meta-ti-bsp/conf/machine/include/am64xx.inc   |  3 --
+>  meta-ti-bsp/conf/machine/include/am65xx.inc   | 10 ----
+>  meta-ti-bsp/conf/machine/include/j721e.inc    |  2 +-
+>  meta-ti-bsp/conf/machine/include/j721s2.inc   |  2 +-
+>  meta-ti-bsp/conf/machine/include/j784s4.inc   |  2 +-
+>  meta-ti-bsp/conf/machine/include/ti43x.inc    |  2 -
+>  meta-ti-bsp/conf/machine/j721e-evm.conf       |  1 -
+>  meta-ti-bsp/conf/machine/j721s2-evm.conf      |  1 -
+>  .../linux/linux-ti-staging-6.1/defconfig      |  2 +
+>  .../linux/linux-ti-staging-6.1/k3/defconfig   |  2 +
+>  .../linux-ti-staging-6.1/omapl138/defconfig   |  1 +
+>  .../linux/linux-ti-staging_6.1.bb             | 36 +++++++++++++
+>  18 files changed, 45 insertions(+), 92 deletions(-)
+>  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig
+>  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig
+>  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig
+>  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+> 
+> diff --git a/meta-ti-bsp/conf/machine/am57xx-evm.conf b/meta-ti-bsp/conf/machine/am57xx-evm.conf
+> index b3525a0b..7d190753 100644
+> --- a/meta-ti-bsp/conf/machine/am57xx-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/am57xx-evm.conf
+> @@ -13,19 +13,9 @@ KERNEL_DEVICETREE = " \
+>      am57xx-beagle-x15-revb1.dtb \
+>      am57xx-beagle-x15-revc.dtb \
+>      am5729-beagleboneai.dtb \
+> -    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'am57xx-evm.dtb', d)} \
+> -    ti/am57xx-evm-common.dtbo \
+> -    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'am57xx-evm-reva3.dtb', d)} \
+> -    ti/am57xx-evm-reva3.dtbo \
+>      am571x-idk.dtb \
+> -    ti/am571x-idk-touchscreen.dtbo \
+>      am572x-idk.dtb \
+>      am574x-idk.dtb \
+> -    ti/am57xx-idk-osd-lcd-common.dtbo \
+> -    ti/am572x-idk-touchscreen.dtbo \
+> -    ti/lcd-osd101t2587.dtbo \
+> -    ti/lcd-osd101t2045.dtbo \
+> -    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'ti/ov10635.dtbo', d)} \
+>  "
+>  
+>  KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am574x-idk-pru-excl-uio.dtb am572x-idk-pru-excl-uio.dtb am571x-idk-pru-excl-uio.dtb', '', d)}"
+> diff --git a/meta-ti-bsp/conf/machine/am62xx-evm.conf b/meta-ti-bsp/conf/machine/am62xx-evm.conf
+> index 73859d5f..35910ff3 100644
+> --- a/meta-ti-bsp/conf/machine/am62xx-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/am62xx-evm.conf
+> @@ -8,7 +8,6 @@ KERNEL_DEVICETREE = " \
+>      ti/k3-am625-sk.dtb \
+>      ti/k3-am625-skeleton.dtb \
+>      ti/k3-am625-sk-lpmdemo.dtb \
+> -    ti/k3-am625-sk-csi2-ov5640.dtbo \
+>  "
+>  
+>  UBOOT_MACHINE = "am62x_evm_a53_defconfig"
+> diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+> index ec9ce596..32ffaaa0 100644
+> --- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+> @@ -8,7 +8,6 @@ KERNEL_DEVICETREE = " \
+>      ti/k3-am62x-lp-sk.dtb \
+>      ti/k3-am625-skeleton.dtb \
+>      ti/k3-am625-sk-lpmdemo.dtb \
+> -    ti/k3-am625-sk-csi2-ov5640.dtbo \
+>  "
+>  
+>  UBOOT_MACHINE = "am62x_lpsk_a53_defconfig"
+> diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf b/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
+> index 6e8c863c..10861c63 100644
+> --- a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
+> +++ b/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
 
-Going forward we will only accept dtb/dtbo in KERNEL_DEVICETREE if it is
-available in upstream.  This way we ensure that the variable is more
-accurate for whichever kernel you might be looking at.  We have also
-added a new variable KERNEL_DEVICETREE_PREFIX which our kernel recipes
-will use to auto set KERNEL_DEVICETREE based on what files are in the
-kernel and not a fixed list in the conf files.
+Please drop this section - beaglebone-ai64 uses own linux-bb.org 5.10 kernel 
+and won't be affected by the new 6.1 recipe addition.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-Signed-off-by: Andrew Davis <afd@ti.com>
----
- meta-ti-bsp/conf/machine/am57xx-evm.conf      | 17 ++++++-------
- meta-ti-bsp/conf/machine/am62xx-evm.conf      |  5 ++--
- meta-ti-bsp/conf/machine/am62xx-lp-evm.conf   |  5 ++--
- meta-ti-bsp/conf/machine/beagle-x15.conf      |  8 ++++++-
- meta-ti-bsp/conf/machine/beaglebone.conf      | 13 +++++++---
- meta-ti-bsp/conf/machine/dra7xx-evm.conf      | 14 +++++------
- meta-ti-bsp/conf/machine/include/am64xx.inc   |  5 ++--
- meta-ti-bsp/conf/machine/include/am65xx.inc   | 12 ++--------
- meta-ti-bsp/conf/machine/include/ti33x.inc    | 15 ++++++++----
- meta-ti-bsp/conf/machine/include/ti43x.inc    | 10 +++++---
- meta-ti-bsp/conf/machine/j7200-evm.conf       |  2 ++
- meta-ti-bsp/conf/machine/j721e-evm.conf       |  3 ++-
- meta-ti-bsp/conf/machine/j721s2-evm.conf      |  3 ++-
- meta-ti-bsp/conf/machine/j784s4-evm.conf      |  6 ++---
- meta-ti-bsp/conf/machine/omapl138-lcdk.conf   |  8 ++++++-
- .../linux/linux-ti-mainline_git.bb            | 24 +------------------
- .../recipes-kernel/linux/linux-ti-next_git.bb | 16 +------------
- .../linux/linux-ti-staging_5.10.bb            |  1 +
- .../linux/ti-kernel-devicetree-prefix.inc     | 22 +++++++++++++++++
- 19 files changed, 97 insertions(+), 92 deletions(-)
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/ti-kernel-devicetree-prefix.inc
 
-diff --git a/meta-ti-bsp/conf/machine/am57xx-evm.conf b/meta-ti-bsp/conf/machine/am57xx-evm.conf
-index b3525a0b..2ecabe63 100644
---- a/meta-ti-bsp/conf/machine/am57xx-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am57xx-evm.conf
-@@ -8,24 +8,21 @@ MACHINE_FEATURES += "touchscreen"
- 
- SERIAL_CONSOLES = "115200;ttyS2"
- 
-+KERNEL_DEVICETREE_PREFIX = " \
-+    am57 \
-+    ti/am57 \
-+    ti/lcd \
-+    ti/ov10635 \
-+"
-+
- KERNEL_DEVICETREE = " \
-     am57xx-beagle-x15.dtb \
-     am57xx-beagle-x15-revb1.dtb \
-     am57xx-beagle-x15-revc.dtb \
-     am5729-beagleboneai.dtb \
--    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'am57xx-evm.dtb', d)} \
--    ti/am57xx-evm-common.dtbo \
--    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'am57xx-evm-reva3.dtb', d)} \
--    ti/am57xx-evm-reva3.dtbo \
-     am571x-idk.dtb \
--    ti/am571x-idk-touchscreen.dtbo \
-     am572x-idk.dtb \
-     am574x-idk.dtb \
--    ti/am57xx-idk-osd-lcd-common.dtbo \
--    ti/am572x-idk-touchscreen.dtbo \
--    ti/lcd-osd101t2587.dtbo \
--    ti/lcd-osd101t2045.dtbo \
--    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'ti/ov10635.dtbo', d)} \
- "
- 
- KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am574x-idk-pru-excl-uio.dtb am572x-idk-pru-excl-uio.dtb am571x-idk-pru-excl-uio.dtb', '', d)}"
-diff --git a/meta-ti-bsp/conf/machine/am62xx-evm.conf b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-index 73859d5f..c4357be3 100644
---- a/meta-ti-bsp/conf/machine/am62xx-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-@@ -4,11 +4,10 @@
- 
- require conf/machine/include/am62xx.inc
- 
-+KERNEL_DEVICETREE_PREFIX = "ti/k3-am625"
-+
- KERNEL_DEVICETREE = " \
-     ti/k3-am625-sk.dtb \
--    ti/k3-am625-skeleton.dtb \
--    ti/k3-am625-sk-lpmdemo.dtb \
--    ti/k3-am625-sk-csi2-ov5640.dtbo \
- "
- 
- UBOOT_MACHINE = "am62x_evm_a53_defconfig"
-diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-index ec9ce596..2246cfc2 100644
---- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-@@ -4,11 +4,10 @@
- 
- require conf/machine/include/am62xx.inc
- 
-+KERNEL_DEVICETREE_PREFIX = "ti/k3-am62x"
-+
- KERNEL_DEVICETREE = " \
-     ti/k3-am62x-lp-sk.dtb \
--    ti/k3-am625-skeleton.dtb \
--    ti/k3-am625-sk-lpmdemo.dtb \
--    ti/k3-am625-sk-csi2-ov5640.dtbo \
- "
- 
- UBOOT_MACHINE = "am62x_lpsk_a53_defconfig"
-diff --git a/meta-ti-bsp/conf/machine/beagle-x15.conf b/meta-ti-bsp/conf/machine/beagle-x15.conf
-index b4279ae4..8efd6e60 100644
---- a/meta-ti-bsp/conf/machine/beagle-x15.conf
-+++ b/meta-ti-bsp/conf/machine/beagle-x15.conf
-@@ -4,7 +4,13 @@
- 
- require conf/machine/include/am57xx.inc
- 
--KERNEL_DEVICETREE = "am57xx-beagle-x15.dtb am57xx-beagle-x15-revb1.dtb am57xx-beagle-x15-revc.dtb"
-+KERNEL_DEVICETREE_PREFIX = "am57xx-beagle-x15"
-+
-+KERNEL_DEVICETREE = " \
-+    am57xx-beagle-x15.dtb \
-+    am57xx-beagle-x15-revb1.dtb \
-+    am57xx-beagle-x15-revc.dtb \
-+"
- 
- MACHINE_GUI_CLASS = "bigscreen"
- 
-diff --git a/meta-ti-bsp/conf/machine/beaglebone.conf b/meta-ti-bsp/conf/machine/beaglebone.conf
-index 413a960d..2a8dc6d7 100644
---- a/meta-ti-bsp/conf/machine/beaglebone.conf
-+++ b/meta-ti-bsp/conf/machine/beaglebone.conf
-@@ -4,9 +4,16 @@
- 
- require conf/machine/include/ti33x.inc
- 
--KERNEL_DEVICETREE = "am335x-bone.dtb am335x-boneblue.dtb \
--                    am335x-boneblack.dtb am335x-boneblack-wireless.dtb \
--                    am335x-bonegreen.dtb am335x-bonegreen-wireless.dtb"
-+KERNEL_DEVICETREE_PREFIX = "am335x-bone"
-+
-+KERNEL_DEVICETREE = " \
-+    am335x-bone.dtb \
-+    am335x-boneblue.dtb \
-+    am335x-boneblack.dtb \
-+    am335x-boneblack-wireless.dtb \
-+    am335x-bonegreen.dtb \
-+    am335x-bonegreen-wireless.dtb \
-+"
- 
- MACHINE_GUI_CLASS = "bigscreen"
- MACHINE_FEATURES += "screen"
-diff --git a/meta-ti-bsp/conf/machine/dra7xx-evm.conf b/meta-ti-bsp/conf/machine/dra7xx-evm.conf
-index 813e0e06..c47a1e80 100644
---- a/meta-ti-bsp/conf/machine/dra7xx-evm.conf
-+++ b/meta-ti-bsp/conf/machine/dra7xx-evm.conf
-@@ -8,20 +8,18 @@ MACHINE_FEATURES += "touchscreen"
- 
- SERIAL_CONSOLES = "115200;ttyS0"
- 
-+KERNEL_DEVICETREE_PREFIX = " \
-+    dra7 \
-+    ti/dra7 \
-+    ti/lcd \
-+"
-+
- KERNEL_DEVICETREE = " \
-     dra7-evm.dtb \
--    ti/dra7x-evm-osd-lcd-common.dtbo \
-     dra71-evm.dtb \
--    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'dra71-evm-nand.dtb', d)} \
--    ti/dra71-evm-lcd-auo-g101evn01.0.dtbo \
-     dra72-evm.dtb \
-     dra72-evm-revc.dtb \
--    ti/dra72-evm-touchscreen.dtbo \
--    ti/dra74-evm-touchscreen.dtbo \
-     dra76-evm.dtb \
--    ti/dra76-evm-tfp410.dtbo \
--    ti/lcd-osd101t2045.dtbo \
--    ti/lcd-osd101t2587.dtbo \
- "
- 
- UBOOT_MACHINE = "dra7xx_evm_config"
-diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/conf/machine/include/am64xx.inc
-index a2e5d673..157bf5d5 100644
---- a/meta-ti-bsp/conf/machine/include/am64xx.inc
-+++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
-@@ -4,12 +4,11 @@ SOC_FAMILY:append = ":am64xx"
- SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS1"
- SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- 
-+KERNEL_DEVICETREE_PREFIX = "ti/k3-am642"
-+
- KERNEL_DEVICETREE = " \
-     ti/k3-am642-evm.dtb \
-     ti/k3-am642-sk.dtb \
--    ti/k3-am642-evm-icssg1-dualemac.dtbo \
--    ti/k3-am642-evm-icssg1-dualemac-mii.dtbo \
--    ti/k3-am642-evm-nand.dtbo \
- "
- 
- # Default tiboot3.bin on AM64x is for SR2.0 HS-FS
-diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
-index 0ae00761..564d61b0 100644
---- a/meta-ti-bsp/conf/machine/include/am65xx.inc
-+++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
-@@ -8,18 +8,10 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- 
- PREFERRED_PROVIDER_virtual/gpudriver ?= ""
- 
-+KERNEL_DEVICETREE_PREFIX = "ti/k3-am654"
-+
- KERNEL_DEVICETREE = " \
-     ti/k3-am654-base-board.dtb \
--    ti/k3-am654-base-board-sr1.dtbo \
--    ti/k3-am654-gp.dtbo \
--    ti/k3-am654-idk.dtbo \
--    ti/k3-am654-idk-sr1.dtbo \
--    ti/k3-am654-sr1.dtbo \
--    ti/k3-am654-pcie-usb2.dtbo \
--    ti/k3-am654-pcie-usb3.dtbo \
--    ti/k3-am654-evm-tc358876.dtbo \
--    ti/k3-am654-evm-oldi-lcd1evm.dtbo \
--    ti/k3-am654-evm-ov5640.dtbo \
- "
- 
- # On AM65x the file tiboot3.bin comes from the bootloader not ti-sci-fw
-diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/conf/machine/include/ti33x.inc
-index 95499552..4f6d90bf 100644
---- a/meta-ti-bsp/conf/machine/include/ti33x.inc
-+++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
-@@ -18,12 +18,19 @@ PVR_DISPLAY_CONTROLLER_ALIAS ?= "tilcdc"
- 
- KERNEL_IMAGETYPE = "zImage"
- 
-+KERNEL_DEVICETREE_PREFIX = "am335x"
-+
- KERNEL_DEVICETREE = " \
--    am335x-evm.dtb am335x-evmsk.dtb \
-+    am335x-evm.dtb \
-+    am335x-evmsk.dtb \
-     am335x-icev2.dtb \
--    am335x-pocketbeagle.dtb am335x-bone.dtb am335x-boneblue.dtb \
--    am335x-bonegreen.dtb am335x-bonegreen-wireless.dtb \
--    am335x-boneblack.dtb am335x-boneblack-wireless.dtb \
-+    am335x-pocketbeagle.dtb \
-+    am335x-bone.dtb \
-+    am335x-boneblue.dtb \
-+    am335x-bonegreen.dtb \
-+    am335x-bonegreen-wireless.dtb \
-+    am335x-boneblack.dtb \
-+    am335x-boneblack-wireless.dtb \
-     am335x-sancloud-bbe.dtb \
- "
- 
-diff --git a/meta-ti-bsp/conf/machine/include/ti43x.inc b/meta-ti-bsp/conf/machine/include/ti43x.inc
-index ec6d9c07..5b40925e 100644
---- a/meta-ti-bsp/conf/machine/include/ti43x.inc
-+++ b/meta-ti-bsp/conf/machine/include/ti43x.inc
-@@ -18,12 +18,16 @@ PVR_DISPLAY_CONTROLLER_ALIAS ?= "omapdrm"
- 
- KERNEL_IMAGETYPE = "zImage"
- 
-+KERNEL_DEVICETREE_PREFIX = " \
-+    am437x \
-+    am43x \
-+"
-+
- KERNEL_DEVICETREE = " \
-     am437x-gp-evm.dtb \
--    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'am437x-gp-evm-hdmi.dtb', d)} \
--    am437x-sk-evm.dtb am437x-idk-evm.dtb \
-+    am437x-sk-evm.dtb \
-+    am437x-idk-evm.dtb \
-     am43x-epos-evm.dtb \
--    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'am43x-epos-evm-hdmi.dtb', d)} \
- "
- 
- KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am437x-idk-pru-excl-uio.dtb', '', d)}"
-diff --git a/meta-ti-bsp/conf/machine/j7200-evm.conf b/meta-ti-bsp/conf/machine/j7200-evm.conf
-index 33c39a52..b17b65b7 100644
---- a/meta-ti-bsp/conf/machine/j7200-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j7200-evm.conf
-@@ -7,6 +7,8 @@ require conf/machine/include/j7200.inc
- SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS3"
- SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- 
-+KERNEL_DEVICETREE_PREFIX = "ti/k3-j7200"
-+
- KERNEL_DEVICETREE = " \
-     ti/k3-j7200-common-proc-board.dtb \
- "
-diff --git a/meta-ti-bsp/conf/machine/j721e-evm.conf b/meta-ti-bsp/conf/machine/j721e-evm.conf
-index fe28e6f5..fd73458d 100644
---- a/meta-ti-bsp/conf/machine/j721e-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j721e-evm.conf
-@@ -7,9 +7,10 @@ require conf/machine/include/j721e.inc
- SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS3"
- SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- 
-+KERNEL_DEVICETREE_PREFIX = "ti/k3-j721e"
-+
- KERNEL_DEVICETREE = " \
-     ti/k3-j721e-common-proc-board.dtb \
--    ti/k3-j721e-common-proc-board-infotainment.dtbo \
-     ti/k3-j721e-sk.dtb \
- "
- 
-diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/machine/j721s2-evm.conf
-index 3576414d..8ae21ac7 100644
---- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
-@@ -9,9 +9,10 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- TFA_K3_USART = "0x8"
- OPTEE_K3_USART = "0x8"
- 
-+KERNEL_DEVICETREE_PREFIX = "ti/k3-j721s2"
-+
- KERNEL_DEVICETREE = " \
-     ti/k3-j721s2-common-proc-board.dtb \
--    ti/k3-j721s2-gesi-exp-board.dtbo \
- "
- 
- UBOOT_MACHINE = "j721s2_evm_a72_defconfig"
-diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf b/meta-ti-bsp/conf/machine/j784s4-evm.conf
-index 73f3eb8c..717c36a2 100644
---- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
-@@ -9,8 +9,8 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- TFA_K3_USART = "0x8"
- OPTEE_K3_USART = "0x8"
- 
--KERNEL_DEVICETREE = " \
--    ti/k3-j784s4-evm.dtb \
--"
-+KERNEL_DEVICETREE_PREFIX = "ti/k3-j784s4"
-+
-+KERNEL_DEVICETREE = ""
- 
- UBOOT_MACHINE = "j784s4_evm_a72_defconfig"
-diff --git a/meta-ti-bsp/conf/machine/omapl138-lcdk.conf b/meta-ti-bsp/conf/machine/omapl138-lcdk.conf
-index b318f82d..244144e1 100644
---- a/meta-ti-bsp/conf/machine/omapl138-lcdk.conf
-+++ b/meta-ti-bsp/conf/machine/omapl138-lcdk.conf
-@@ -15,4 +15,10 @@ IMAGE_FSTYPES += "tar.xz"
- 
- SERIAL_CONSOLES = "115200;ttyS2"
- 
--KERNEL_DEVICETREE = "da850-evm.dtb da850-lcdk.dtb"
-+KERNEL_DEVICETREE_PREFIX = "da850"
-+
-+KERNEL_DEVICETREE = " \
-+    da850-evm.dtb \
-+    da850-lcdk.dtb \
-+"
-+
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
-index 6c1b1825..b749e232 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
-@@ -9,6 +9,7 @@ DEFCONFIG_BUILDER = "${S}/ti-upstream-tools/config/defconfig_builder.sh"
- require recipes-kernel/linux/setup-defconfig.inc
- require recipes-kernel/linux/kernel-rdepends.inc
- require recipes-kernel/linux/ti-kernel.inc
-+include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}
- 
- DEPENDS += "gmp-native libmpc-native"
- 
-@@ -39,34 +40,11 @@ SRC_URI += " \
- SRCREV_ti-upstream-tools = "0f60697843bba6f8d721b14da92b1652563ccb95"
- SRCREV_FORMAT = "linux"
- 
--KERNEL_DEVICETREE = ""
--
- kernel_do_compile:append() {
- 	oe_runmake dtbs CC="${KERNEL_CC} $cc_extra " LD="${KERNEL_LD}" ${KERNEL_EXTRA_ARGS}
- 	oe_runmake -C ${S}/ti-upstream-tools LINUX=${S} DTC=${B}/scripts/dtc/dtc O=${B} CC="${KERNEL_CC} $cc_extra " LD="${KERNEL_LD}" ${KERNEL_EXTRA_ARGS}
- }
- 
--do_install:append() {
--	for dtbf in `find arch/${ARCH}/boot/dts/ \( -name '*.dtb' -or -name '*.dtbo' \)`; do
--		dtb="$dtbf"
--		dtb_ext=${dtb##*.}
--		dtb_base_name=`basename $dtb .$dtb_ext`
--		dtb_path=`get_real_dtb_path_in_kernel "$dtb"`
--		install -m 0644 $dtbf ${D}/${KERNEL_IMAGEDEST}/$dtb_base_name.$dtb_ext
--	done
--}
--
--do_deploy:append() {
--	for dtbf in `find arch/${ARCH}/boot/dts/ \( -name '*.dtb' -or -name '*.dtbo' \) -printf '%P\n'`; do
--		dtb="$dtbf"
--		dtb_ext=${dtb##*.}
--		dtb_base_name=`basename $dtb .$dtb_ext`
--		dtb_dir=`dirname $dtb`
--		install -d ${DEPLOYDIR}
--		install -m 0644 ${D}/${KERNEL_IMAGEDEST}/$dtb_base_name.$dtb_ext ${DEPLOYDIR}/$dtb_base_name.$dtb_ext
--	done
--}
--
- do_shared_workdir:prepend() {
- 	cd ${B}
- 	echo >> Module.symvers
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb
-index e2908951..18ac86ff 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
- inherit kernel
- 
- require recipes-kernel/linux/ti-kernel.inc
-+include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}
- 
- DEPENDS += "gmp-native libmpc-native"
- 
-@@ -19,21 +20,6 @@ PV = "6.1.0-rc1+git${SRCPV}"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git;protocol=https;branch=master"
- 
--def list_dtbs(dts_dir, dts_subdir):
--    import os
--    import fnmatch
--    matches = []
--
--    for root,dirnames,filenames in os.walk(os.path.join(dts_dir, dts_subdir)):
--        for filename in fnmatch.filter(filenames, '*.dtb'):
--            matches.append(os.path.join(dts_subdir, filename))
--        for filename in fnmatch.filter(filenames, '*.dtbo'):
--            matches.append(os.path.join(dts_subdir, filename))
--    return ' '.join(matches)
--
--DTS_SUBDIR = ""
--DTS_SUBDIR:k3 = "ti"
--KERNEL_DEVICETREE = "${@list_dtbs('${B}/arch/${ARCH}/boot/dts', '${DTS_SUBDIR}')}"
- DEFCONFIG_NAME = "multi_v7_defconfig"
- DEFCONFIG_NAME:k3 = "defconfig"
- KERNEL_CONFIG_COMMAND = "oe_runmake -C ${S} O=${B} ${DEFCONFIG_NAME}"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
-index e6d4b107..3951fe60 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
-@@ -9,6 +9,7 @@ DEFCONFIG_BUILDER = "${S}/ti_config_fragments/defconfig_builder.sh"
- require recipes-kernel/linux/setup-defconfig.inc
- require recipes-kernel/linux/kernel-rdepends.inc
- require recipes-kernel/linux/ti-kernel.inc
-+include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}
- 
- DEPENDS += "gmp-native libmpc-native"
- 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-kernel-devicetree-prefix.inc b/meta-ti-bsp/recipes-kernel/linux/ti-kernel-devicetree-prefix.inc
-new file mode 100644
-index 00000000..644c4793
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/ti-kernel-devicetree-prefix.inc
-@@ -0,0 +1,22 @@
-+
-+def get_dtbs_from_kernel(dts_dir, dts_prefix):
-+    import os
-+    import glob
-+    matches = []
-+
-+    for prefix in dts_prefix.split():
-+        filenames = glob.glob(dts_dir + prefix + '*.dts')
-+        filenames += glob.glob(dts_dir + prefix + '*.dtso')
-+        for filename in filenames:
-+            # Before v6.2 kernels DTB Overlays shared the same name as DTB files
-+            # so we need to search the file to find the type
-+            with open(filename) as f:
-+                file_postfix = '.dtbo' if '/plugin/;' in f.read() else '.dtb'
-+            filename = os.path.split(filename)[1]
-+            filename = os.path.splitext(filename)[0] + file_postfix
-+            filename = os.path.join(os.path.split(prefix)[0], filename)
-+            matches.append(filename)
-+    return ' '.join(matches)
-+
-+KERNEL_DEVICETREE = "${@get_dtbs_from_kernel('${S}/arch/${ARCH}/boot/dts/', '${KERNEL_DEVICETREE_PREFIX}')}"
-+
--- 
-2.17.1
-
+> @@ -17,58 +17,7 @@ KERNEL_DEVICETREE = " \
+>  ti/k3-j721e-beagleboneai64.dtb \
+>  ti/k3-j721e-beagleboneai64-no-shared-mem.dtb \
+>  ti/k3-j721e-common-proc-board.dtb \
+> -ti/k3-j721e-common-proc-board-infotainment.dtbo \
+> -ti/k3-j721e-cpb-csi2-ov5640.dtbo \
+> -ti/k3-j721e-fpdlink-cpb-fusion.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-cm-0-0.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-cm-0-1.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-cm-0-2.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-cm-0-3.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-cm-1-0.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-cm-1-1.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-cm-1-2.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-cm-1-3.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-rcm-0-0.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-rcm-0-1.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-rcm-0-2.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-rcm-0-3.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-rcm-1-0.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-rcm-1-1.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-rcm-1-2.dtbo \
+> -ti/k3-j721e-fpdlink-imx390-rcm-1-3.dtbo \
+> -ti/k3-j721e-fpdlink-sk-fusion.dtbo \
+> -ti/k3-j721e-gesi-exp-board.dtbo \
+> -ti/k3-j721e-proc-board-tps65917.dtb \
+> -ti/k3-j721e-quad-port-eth-exp.dtbo \
+> -ti/k3-j721e-sk-csi2-ov5640.dtbo \
+>  ti/k3-j721e-sk.dtb \
+> -ti/k3-j721e-sk-rpi-cam-imx219.dtbo \
+> -ti/k3-j721e-sk-rpi-hdr-ehrpwm.dtbo \
+> -ti/overlays/BBAI64-CSI0-imx219.dtbo \
+> -ti/overlays/BBAI64-CSI1-imx219.dtbo \
+> -ti/overlays/BBAI64-DSI-RPi-7inch-panel.dtbo \
+> -ti/overlays/BBAI64-P8_37-ehrpwm5_a.dtbo \
+> -ti/overlays/BBAI64-P9_25-ehrpwm4_b.dtbo \
+> -ti/overlays/BB-I2C2-MPU6050.dtbo \
+> -ti/overlays/BBORG_LOAD-00A2.dtbo \
+> -ti/overlays/BBORG_RELAY-00A2.dtbo \
+> -ti/overlays/BBORG_SERVO-00A2.dtbo \
+> -ti/overlays/BONE-FAN.dtbo \
+> -ti/overlays/BONE-I2C1.dtbo \
+> -ti/overlays/BONE-I2C2.dtbo \
+> -ti/overlays/BONE-I2C3.dtbo \
+> -ti/overlays/BONE-LED_P8_03.dtbo \
+> -ti/overlays/BONE-LED_P9_11.dtbo \
+> -ti/overlays/BONE-PWM0.dtbo \
+> -ti/overlays/BONE-PWM1.dtbo \
+> -ti/overlays/BONE-PWM2.dtbo \
+> -ti/overlays/BONE-SPI0_0.dtbo \
+> -ti/overlays/BONE-SPI0_1.dtbo \
+> -ti/overlays/BONE-UART1.dtbo \
+> -ti/overlays/BONE-USB0-host.dtbo \
+> -ti/overlays/J721E-PRU-UIO-00A0.dtbo \
+> -ti/overlays/k3-j721e-beagleboneai64-RPi-7inch-panel.dtbo \
+> -ti/overlays/robotics-cape.dtbo \
+>  "
+>  
+>  IMAGE_BOOT_FILES += "sysfw.itb"
+> diff --git a/meta-ti-bsp/conf/machine/dra7xx-evm.conf b/meta-ti-bsp/conf/machine/dra7xx-evm.conf
+> index 813e0e06..1944792e 100644
+> --- a/meta-ti-bsp/conf/machine/dra7xx-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/dra7xx-evm.conf
+> @@ -10,18 +10,10 @@ SERIAL_CONSOLES = "115200;ttyS0"
+>  
+>  KERNEL_DEVICETREE = " \
+>      dra7-evm.dtb \
+> -    ti/dra7x-evm-osd-lcd-common.dtbo \
+>      dra71-evm.dtb \
+> -    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'dra71-evm-nand.dtb', d)} \
+> -    ti/dra71-evm-lcd-auo-g101evn01.0.dtbo \
+>      dra72-evm.dtb \
+>      dra72-evm-revc.dtb \
+> -    ti/dra72-evm-touchscreen.dtbo \
+> -    ti/dra74-evm-touchscreen.dtbo \
+>      dra76-evm.dtb \
+> -    ti/dra76-evm-tfp410.dtbo \
+> -    ti/lcd-osd101t2045.dtbo \
+> -    ti/lcd-osd101t2587.dtbo \
+>  "
+>  
+>  UBOOT_MACHINE = "dra7xx_evm_config"
+> diff --git a/meta-ti-bsp/conf/machine/include/am62xx.inc b/meta-ti-bsp/conf/machine/include/am62xx.inc
+> index 98df24b2..c0f2adb2 100644
+> --- a/meta-ti-bsp/conf/machine/include/am62xx.inc
+> +++ b/meta-ti-bsp/conf/machine/include/am62xx.inc
+> @@ -6,7 +6,7 @@ MACHINE_FEATURES += "screen gpu"
+>  SERIAL_CONSOLES = "115200;ttyS2"
+>  SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+>  
+> -PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
+> +PREFERRED_PROVIDER_virtual/gpudriver ?= ""
+>  
+>  TFA_BOARD = "lite"
+>  TFA_K3_SYSTEM_SUSPEND = "1"
+> diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/conf/machine/include/am64xx.inc
+> index a2e5d673..ff7f66e3 100644
+> --- a/meta-ti-bsp/conf/machine/include/am64xx.inc
+> +++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
+> @@ -7,9 +7,6 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+>  KERNEL_DEVICETREE = " \
+>      ti/k3-am642-evm.dtb \
+>      ti/k3-am642-sk.dtb \
+> -    ti/k3-am642-evm-icssg1-dualemac.dtbo \
+> -    ti/k3-am642-evm-icssg1-dualemac-mii.dtbo \
+> -    ti/k3-am642-evm-nand.dtbo \
+>  "
+>  
+>  # Default tiboot3.bin on AM64x is for SR2.0 HS-FS
+> diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
+> index 0ae00761..fef73da2 100644
+> --- a/meta-ti-bsp/conf/machine/include/am65xx.inc
+> +++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
+> @@ -10,16 +10,6 @@ PREFERRED_PROVIDER_virtual/gpudriver ?= ""
+>  
+>  KERNEL_DEVICETREE = " \
+>      ti/k3-am654-base-board.dtb \
+> -    ti/k3-am654-base-board-sr1.dtbo \
+> -    ti/k3-am654-gp.dtbo \
+> -    ti/k3-am654-idk.dtbo \
+> -    ti/k3-am654-idk-sr1.dtbo \
+> -    ti/k3-am654-sr1.dtbo \
+> -    ti/k3-am654-pcie-usb2.dtbo \
+> -    ti/k3-am654-pcie-usb3.dtbo \
+> -    ti/k3-am654-evm-tc358876.dtbo \
+> -    ti/k3-am654-evm-oldi-lcd1evm.dtbo \
+> -    ti/k3-am654-evm-ov5640.dtbo \
+>  "
+>  
+>  # On AM65x the file tiboot3.bin comes from the bootloader not ti-sci-fw
+> diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/conf/machine/include/j721e.inc
+> index 8f9c24e6..46f9564e 100644
+> --- a/meta-ti-bsp/conf/machine/include/j721e.inc
+> +++ b/meta-ti-bsp/conf/machine/include/j721e.inc
+> @@ -3,7 +3,7 @@ SOC_FAMILY:append = ":j721e"
+>  
+>  MACHINE_FEATURES += "screen gpu"
+>  
+> -PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
+> +PREFERRED_PROVIDER_virtual/gpudriver ?= ""
+>  
+>  # On J721e the file tiboot3.bin comes from the bootloader not ti-sci-fw
+>  do_image_wic[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy"
+> diff --git a/meta-ti-bsp/conf/machine/include/j721s2.inc b/meta-ti-bsp/conf/machine/include/j721s2.inc
+> index 70569a16..a23aed73 100644
+> --- a/meta-ti-bsp/conf/machine/include/j721s2.inc
+> +++ b/meta-ti-bsp/conf/machine/include/j721s2.inc
+> @@ -3,7 +3,7 @@ SOC_FAMILY:append = ":j721s2"
+>  
+>  MACHINE_FEATURES += "screen gpu"
+>  
+> -PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
+> +PREFERRED_PROVIDER_virtual/gpudriver ?= ""
+>  
+>  TFA_BOARD = "generic"
+>  
+> diff --git a/meta-ti-bsp/conf/machine/include/j784s4.inc b/meta-ti-bsp/conf/machine/include/j784s4.inc
+> index d03ee4a4..3066193b 100644
+> --- a/meta-ti-bsp/conf/machine/include/j784s4.inc
+> +++ b/meta-ti-bsp/conf/machine/include/j784s4.inc
+> @@ -3,7 +3,7 @@ SOC_FAMILY:append = ":j784s4"
+>  
+>  MACHINE_FEATURES += "screen gpu"
+>  
+> -PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
+> +PREFERRED_PROVIDER_virtual/gpudriver ?= ""
+>  
+>  TFA_BOARD = "j784s4"
+>  
+> diff --git a/meta-ti-bsp/conf/machine/include/ti43x.inc b/meta-ti-bsp/conf/machine/include/ti43x.inc
+> index ec6d9c07..3228418e 100644
+> --- a/meta-ti-bsp/conf/machine/include/ti43x.inc
+> +++ b/meta-ti-bsp/conf/machine/include/ti43x.inc
+> @@ -20,10 +20,8 @@ KERNEL_IMAGETYPE = "zImage"
+>  
+>  KERNEL_DEVICETREE = " \
+>      am437x-gp-evm.dtb \
+> -    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'am437x-gp-evm-hdmi.dtb', d)} \
+>      am437x-sk-evm.dtb am437x-idk-evm.dtb \
+>      am43x-epos-evm.dtb \
+> -    ${@oe.utils.conditional('PREFERRED_PROVIDER_virtual/kernel', 'linux-ti-mainline', '', 'am43x-epos-evm-hdmi.dtb', d)} \
+>  "
+>  
+>  KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am437x-idk-pru-excl-uio.dtb', '', d)}"
+> diff --git a/meta-ti-bsp/conf/machine/j721e-evm.conf b/meta-ti-bsp/conf/machine/j721e-evm.conf
+> index fe28e6f5..f6af3b6d 100644
+> --- a/meta-ti-bsp/conf/machine/j721e-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/j721e-evm.conf
+> @@ -9,7 +9,6 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+>  
+>  KERNEL_DEVICETREE = " \
+>      ti/k3-j721e-common-proc-board.dtb \
+> -    ti/k3-j721e-common-proc-board-infotainment.dtbo \
+>      ti/k3-j721e-sk.dtb \
+>  "
+>  
+> diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+> index 3576414d..740036b1 100644
+> --- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+> @@ -11,7 +11,6 @@ OPTEE_K3_USART = "0x8"
+>  
+>  KERNEL_DEVICETREE = " \
+>      ti/k3-j721s2-common-proc-board.dtb \
+> -    ti/k3-j721s2-gesi-exp-board.dtbo \
+>  "
+>  
+>  UBOOT_MACHINE = "j721s2_evm_a72_defconfig"
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig
+> new file mode 100644
+> index 00000000..24b53cf7
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig
+> @@ -0,0 +1,2 @@
+> +use-kernel-config=multi_v7_defconfig
+> +config-fragment=kernel/configs/ti_multi_v7_prune.config
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig
+> new file mode 100644
+> index 00000000..ef1d3efd
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig
+> @@ -0,0 +1,2 @@
+> +use-kernel-config=defconfig
+> +config-fragment=kernel/configs/ti_arm64_prune.config
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig
+> new file mode 100644
+> index 00000000..099493af
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig
+> @@ -0,0 +1 @@
+> +use-kernel-config=davinci_all_defconfig
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+> new file mode 100644
+> index 00000000..2b2196c7
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+> @@ -0,0 +1,36 @@
+> +SECTION = "kernel"
+> +SUMMARY = "Linux kernel for TI devices"
+> +LICENSE = "GPL-2.0-only"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
+> +
+> +inherit kernel
+> +
+> +require recipes-kernel/linux/setup-defconfig.inc
+> +require recipes-kernel/linux/kernel-rdepends.inc
+> +require recipes-kernel/linux/ti-kernel.inc
+> +
+> +DEPENDS += "gmp-native libmpc-native"
+> +
+> +# Look in the generic major.minor directory for files
+> +FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
+> +
+> +KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT} \
+> +		      ${EXTRA_DTC_ARGS}"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +BRANCH = "ti-linux-6.1.y"
+> +
+> +SRCREV = "e553069c227ddeb22ac283676f7b5a6bf9d16cb8"
+> +PV = "v6.1+git${SRCPV}"
+> +
+> +# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+> +MACHINE_KERNEL_PR:append = "b"
+> +PR = "${MACHINE_KERNEL_PR}"
+> +
+> +KERNEL_GIT_URI = "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
+> +KERNEL_GIT_PROTOCOL = "https"
+> +SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
+> +            file://defconfig"
+> +
+> +FILES:${KERNEL_PACKAGE_NAME}-devicetree += "/${KERNEL_IMAGEDEST}/*.itb"
+> -- 
+> 2.39.2
 
