@@ -2,54 +2,52 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23877C6FD1D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24B6FC7618E
 	for <webhook@archiver.kernel.org>; Fri, 17 Mar 2023 15:09:59 +0000 (UTC)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.22030.1679065788573523904
+ by mx.groups.io with SMTP id smtpd.web10.22107.1679065788587160954
  for <meta-ti@lists.yoctoproject.org>;
  Fri, 17 Mar 2023 08:09:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=vY3GgA59;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=jZWSHLg3;
  spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 32HF9kgI118405;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 32HF9kfo118401;
 	Fri, 17 Mar 2023 10:09:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1679065786;
-	bh=kCsxP2CyKrBCsApvw6LzsomchD0UxEywmKGILPzxUEU=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=vY3GgA598v/tMPcQZVy86nIdt3HOzw2bvIVYuWWpandeyGJ7ohUJUZMOtD0YCpnUr
-	 yj91ewgNcoCxjR4f71QITTf92e4vZ2jtmFvwEOsPGvuTn6IJcUraKfeiLiUeeL67gW
-	 ZIm7so/vVgEYA8it5fdsNWGxCliM2AifnTatp95k=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 32HF9kxm002862
+	bh=sZVpWB65cOxcsQ13I1DskHBQqClic7l1GUTNJAfMe3I=;
+	h=From:To:Subject:Date;
+	b=jZWSHLg3gHO/RbZrIgtcJ35NCLHWDwjPiuDSy34FmgvGbR6mv6HzeeO6uZ9c1M8Za
+	 8YQ/+zg79IXBI6kqow0dZcB8498WsKrng0uMkFphojEbfHI0nks3oSCk8vxqPnyPlE
+	 ZwITe04UBHCbswG+l2k5O1REEVzW60+R0I2kC55g=
+Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 32HF9kg8019953
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Fri, 17 Mar 2023 10:09:46 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Fri, 17
  Mar 2023 10:09:46 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
  Frontend Transport; Fri, 17 Mar 2023 10:09:46 -0500
-Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 32HF9kVG053517;
+Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 32HF9kpY103054;
 	Fri, 17 Mar 2023 10:09:46 -0500
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1pdBiE-0006Nu-4C; Fri, 17 Mar 2023 10:09:46 -0500
+	id 1pdBiD-0006Nm-Ss; Fri, 17 Mar 2023 10:09:45 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/kirkstone][PATCH v2 2/3] linux-ti-staging: Add 6.1 kernel in prep for LTS migration
-Date: Fri, 17 Mar 2023 10:09:44 -0500
-Message-ID: <20230317150945.24492-3-reatmon@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH v2 0/3] Kernel and u-boot LTS
+Date: Fri, 17 Mar 2023 10:09:42 -0500
+Message-ID: <20230317150945.24492-1-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230317150945.24492-1-reatmon@ti.com>
-References: <20230317150945.24492-1-reatmon@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -57,19 +55,39 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Fri, 17 Mar 2023 15:09:59 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16001
 
-We are preparing to migrate our kernel version to 6.1.  As we are still
-working on the migration, mark the default preference low for this
-version.  We will enable building with this kernel in a meta-arago brand
-in the near future.  Once the migration is complete, we will remove the
-5.10 kernel and make this the default.
+We are preparing for LTS migration to the 6.1 kernel and 2023.01 u-boot
+versions.  This series creates the recipes for them as well doing a
+little cleanup of how we handle specifying the DTB/DTBO files in the
+machine confs.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-Signed-off-by: Andrew Davis <afd@ti.com>
----
-v2: Added rt and systest versions of the kernel.
+Ryan Eatmon (3):
+  linux-ti-*: Add filtering for which dtb/dtbo to include
+  linux-ti-staging: Add 6.1 kernel in prep for LTS migration
+  u-boot-ti-staging: Add 2023.01 in prep for LTS migration
 
+v2: - Do not use the prefix for mainline or next kernels.
+    - Add rt and systest variations for the kernel.
+
+ meta-ti-bsp/conf/machine/am57xx-evm.conf      | 17 ++++----
+ meta-ti-bsp/conf/machine/am62xx-evm.conf      |  5 +--
+ meta-ti-bsp/conf/machine/am62xx-lp-evm.conf   |  5 +--
+ meta-ti-bsp/conf/machine/beagle-x15.conf      |  8 +++-
+ meta-ti-bsp/conf/machine/beaglebone.conf      | 13 +++++--
+ meta-ti-bsp/conf/machine/dra7xx-evm.conf      | 14 +++----
+ meta-ti-bsp/conf/machine/include/am64xx.inc   |  5 +--
+ meta-ti-bsp/conf/machine/include/am65xx.inc   | 12 +-----
+ meta-ti-bsp/conf/machine/include/ti33x.inc    | 15 +++++--
+ meta-ti-bsp/conf/machine/include/ti43x.inc    | 10 +++--
+ meta-ti-bsp/conf/machine/j7200-evm.conf       |  2 +
+ meta-ti-bsp/conf/machine/j721e-evm.conf       |  3 +-
+ meta-ti-bsp/conf/machine/j721s2-evm.conf      |  3 +-
+ meta-ti-bsp/conf/machine/j784s4-evm.conf      |  6 +--
+ meta-ti-bsp/conf/machine/omapl138-lcdk.conf   |  8 +++-
+ .../u-boot/u-boot-ti-staging_2023.01.bb       | 11 ++++++
+ .../linux/linux-ti-mainline_git.bb            | 23 -----------
+ .../recipes-kernel/linux/linux-ti-next_git.bb | 15 -------
  .../linux/linux-ti-staging-6.1/defconfig      |  2 +
  .../linux/linux-ti-staging-6.1/k3/defconfig   |  2 +
  .../linux-ti-staging-6.1/omapl138/defconfig   |  1 +
@@ -81,8 +99,11 @@ v2: Added rt and systest versions of the kernel.
  .../linux-ti-staging-systest-6.1/k3/defconfig |  2 +
  .../omapl138/defconfig                        |  1 +
  .../linux/linux-ti-staging-systest_6.1.bb     |  5 +++
+ .../linux/linux-ti-staging_5.10.bb            |  1 +
  .../linux/linux-ti-staging_6.1.bb             | 39 +++++++++++++++++++
- 12 files changed, 69 insertions(+)
+ .../linux/ti-kernel-devicetree-prefix.inc     | 22 +++++++++++
+ 32 files changed, 175 insertions(+), 92 deletions(-)
+ create mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.01.bb
  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig
  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig
  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig
@@ -95,148 +116,8 @@ v2: Added rt and systest versions of the kernel.
  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/omapl138/defconfig
  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.1.bb
  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/ti-kernel-devicetree-prefix.inc
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig
-new file mode 100644
-index 00000000..24b53cf7
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig
-@@ -0,0 +1,2 @@
-+use-kernel-config=multi_v7_defconfig
-+config-fragment=kernel/configs/ti_multi_v7_prune.config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig
-new file mode 100644
-index 00000000..ef1d3efd
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig
-@@ -0,0 +1,2 @@
-+use-kernel-config=defconfig
-+config-fragment=kernel/configs/ti_arm64_prune.config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig
-new file mode 100644
-index 00000000..099493af
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig
-@@ -0,0 +1 @@
-+use-kernel-config=davinci_all_defconfig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/defconfig
-new file mode 100644
-index 00000000..24b53cf7
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/defconfig
-@@ -0,0 +1,2 @@
-+use-kernel-config=multi_v7_defconfig
-+config-fragment=kernel/configs/ti_multi_v7_prune.config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/k3/defconfig
-new file mode 100644
-index 00000000..ef1d3efd
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/k3/defconfig
-@@ -0,0 +1,2 @@
-+use-kernel-config=defconfig
-+config-fragment=kernel/configs/ti_arm64_prune.config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/omapl138/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/omapl138/defconfig
-new file mode 100644
-index 00000000..099493af
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/omapl138/defconfig
-@@ -0,0 +1 @@
-+use-kernel-config=davinci_all_defconfig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-new file mode 100644
-index 00000000..25bcef4d
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-@@ -0,0 +1,10 @@
-+require linux-ti-staging_6.1.bb
-+
-+# Look in the generic major.minor directory for files
-+# This will have priority over generic non-rt path
-+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
-+
-+BRANCH = "ti-rt-linux-6.1.y"
-+
-+SRCREV = "b7d4fb88264d2b094035871fa676592eb8e83b25"
-+PV = "6.1+git${SRCPV}"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/defconfig
-new file mode 100644
-index 00000000..24b53cf7
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/defconfig
-@@ -0,0 +1,2 @@
-+use-kernel-config=multi_v7_defconfig
-+config-fragment=kernel/configs/ti_multi_v7_prune.config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/k3/defconfig
-new file mode 100644
-index 00000000..ef1d3efd
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/k3/defconfig
-@@ -0,0 +1,2 @@
-+use-kernel-config=defconfig
-+config-fragment=kernel/configs/ti_arm64_prune.config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/omapl138/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/omapl138/defconfig
-new file mode 100644
-index 00000000..099493af
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/omapl138/defconfig
-@@ -0,0 +1 @@
-+use-kernel-config=davinci_all_defconfig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.1.bb
-new file mode 100644
-index 00000000..9c170e65
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.1.bb
-@@ -0,0 +1,5 @@
-+require linux-ti-staging_6.1.bb
-+
-+# Look in the generic major.minor directory for files
-+# This will have priority over generic non-rt path
-+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-new file mode 100644
-index 00000000..654951eb
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-@@ -0,0 +1,39 @@
-+SECTION = "kernel"
-+SUMMARY = "Linux kernel for TI devices"
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
-+
-+inherit kernel
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+require recipes-kernel/linux/setup-defconfig.inc
-+require recipes-kernel/linux/kernel-rdepends.inc
-+require recipes-kernel/linux/ti-kernel.inc
-+include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}
-+
-+DEPENDS += "gmp-native libmpc-native"
-+
-+# Look in the generic major.minor directory for files
-+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
-+
-+KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT} \
-+		      ${EXTRA_DTC_ARGS}"
-+
-+S = "${WORKDIR}/git"
-+
-+BRANCH = "ti-linux-6.1.y"
-+
-+SRCREV = "7b7231fbf048963b434d76a3cb866165365b14e0"
-+PV = "6.1+git${SRCPV}"
-+
-+# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-+MACHINE_KERNEL_PR:append = "b"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+KERNEL_GIT_URI = "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
-+KERNEL_GIT_PROTOCOL = "https"
-+SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
-+            file://defconfig"
-+
-+FILES:${KERNEL_PACKAGE_NAME}-devicetree += "/${KERNEL_IMAGEDEST}/*.itb"
 -- 
 2.17.1
 
