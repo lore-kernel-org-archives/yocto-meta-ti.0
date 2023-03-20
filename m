@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA644C7EE45
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3EA1C7EE29
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 04:12:50 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.6790.1679285564430841094
+ by mx.groups.io with SMTP id smtpd.web11.6712.1679285565479089066
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 19 Mar 2023 21:12:44 -0700
+ Sun, 19 Mar 2023 21:12:45 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id B386340C46
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:42 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id BD72740CB7
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:43 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LrEoWPTChk_z for <meta-ti@lists.yoctoproject.org>;
-	Mon, 20 Mar 2023 04:12:42 +0000 (UTC)
+	with ESMTP id vsmX7zRYS1qu for <meta-ti@lists.yoctoproject.org>;
+	Mon, 20 Mar 2023 04:12:43 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A351840C5D
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:42 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id AFFEE40CB1
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:43 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 7A49B1637CB
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 00:12:10 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 9670C1637CF
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 00:12:11 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [kirkstone][PATCH 07/54] optee-os: Revert to lower log level for AM62x
-Date: Mon, 20 Mar 2023 04:11:54 +0000
-Message-Id: <20230320041241.1293077-8-denis@denix.org>
+Subject: [kirkstone][PATCH 30/54] conf: machine: am62axx: Add overlays for IMX390 cameras
+Date: Mon, 20 Mar 2023 04:12:17 +0000
+Message-Id: <20230320041241.1293077-31-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320041241.1293077-1-denis@denix.org>
 References: <20230320041241.1293077-1-denis@denix.org>
@@ -39,40 +39,44 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16115
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16123
 
-From: Kamlesh Gurudasani <kamlesh@ti.com>
+From: Jai Luthra <j-luthra@ti.com>
 
-While removing SOFTWARE_PRNG support
-commit:98506a4a07363a1b57012ccfaee263f47e5b46c4,
-accidently removed the changes applied
-by commit:27641e1f2d7f6696fd7bbd8f24fcac20766b6234
-(optee-os: Lower log level for AM62x).
+IMX390 is a 2MP FPDLink-III raw camera. This sensor was originally
+targeted for J7-based devices, but AM62A can re-use the existing
+overlays. Both the CM and RCM type of modules are supported.
 
-Reverting those changes back
+As AM62A only has one CSI-RX port, we only use 4 out of the 8 total
+FPDLink ports on the fusion board.
 
-Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
+Signed-off-by: Jai Luthra <j-luthra@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-security/optee/optee-os_3.16%.bbappend | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-ti-bsp/conf/machine/am62axx-evm.conf | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/meta-ti-bsp/recipes-security/optee/optee-os_3.16%.bbappend b=
-/meta-ti-bsp/recipes-security/optee/optee-os_3.16%.bbappend
-index c48c56ef..662a3c31 100644
---- a/meta-ti-bsp/recipes-security/optee/optee-os_3.16%.bbappend
-+++ b/meta-ti-bsp/recipes-security/optee/optee-os_3.16%.bbappend
-@@ -6,6 +6,8 @@ inherit ti-secdev
+diff --git a/meta-ti-bsp/conf/machine/am62axx-evm.conf b/meta-ti-bsp/conf=
+/machine/am62axx-evm.conf
+index 12492095..9dcb6e55 100644
+--- a/meta-ti-bsp/conf/machine/am62axx-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62axx-evm.conf
+@@ -12,6 +12,14 @@ KERNEL_DEVICETREE =3D " \
+     ti/k3-am62a7-fpdlink-ov2312-0-3.dtbo \
+     ti/k3-am62a7-fpdlink-sk-fusion.dtbo \
+     ti/k3-am62a7-sk-csi2-imx219.dtbo \
++    ti/k3-j721e-fpdlink-imx390-cm-0-0.dtbo \
++    ti/k3-j721e-fpdlink-imx390-cm-0-1.dtbo \
++    ti/k3-j721e-fpdlink-imx390-cm-0-2.dtbo \
++    ti/k3-j721e-fpdlink-imx390-cm-0-3.dtbo \
++    ti/k3-j721e-fpdlink-imx390-rcm-0-0.dtbo \
++    ti/k3-j721e-fpdlink-imx390-rcm-0-1.dtbo \
++    ti/k3-j721e-fpdlink-imx390-rcm-0-2.dtbo \
++    ti/k3-j721e-fpdlink-imx390-rcm-0-3.dtbo \
+ "
 =20
- EXTRA_OEMAKE:append:k3 =3D "${@ ' CFG_CONSOLE_UART=3D'+ d.getVar('OPTEE_=
-K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
-=20
-+EXTRA_OEMAKE:append:am62xx =3D " CFG_TEE_CORE_LOG_LEVEL=3D1"
-+
- do_compile:append:k3() {
-     ( cd ${B}/core/; \
-         cp tee-pager_v2.bin ${B}/bl32.bin; \
+ UBOOT_MACHINE =3D "am62ax_evm_a53_defconfig"
 --=20
 2.25.1
 
