@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EFE3BC8300C
-	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 04:12:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00C6CC87FDC
+	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 04:12:51 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.6702.1679285563307346933
+ by mx.groups.io with SMTP id smtpd.web11.6705.1679285563325992473
  for <meta-ti@lists.yoctoproject.org>;
  Sun, 19 Mar 2023 21:12:43 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 8237440C93
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 804BA40C16
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:42 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LID2ybtvCqxd for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id Mh2Yej72KsLo for <meta-ti@lists.yoctoproject.org>;
 	Mon, 20 Mar 2023 04:12:42 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6AE4F40C5D
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6822A40C46
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:42 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 535891637C7
+	by mail.denix.org (Postfix) with ESMTP id 4848B1637C5
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 00:12:10 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [kirkstone][PATCH 03/54] optee-os: Update SRCREV for OP-TEE TRNG in AM62X
-Date: Mon, 20 Mar 2023 04:11:50 +0000
-Message-Id: <20230320041241.1293077-4-denis@denix.org>
+Subject: [kirkstone][PATCH 02/54] j784s4-hs: changes to support new hs platform
+Date: Mon, 20 Mar 2023 04:11:49 +0000
+Message-Id: <20230320041241.1293077-3-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320041241.1293077-1-denis@denix.org>
 References: <20230320041241.1293077-1-denis@denix.org>
@@ -38,47 +38,37 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16108
+ <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:51 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16109
 
-From: Kamlesh Gurudasani <kamlesh@ti.com>
+From: Manorit Chawdhry <m-chawdhry@ti.com>
 
-Update the SRCREV to the commit when trng support was
-added in upstream OP-TEE for am62x platform to access rng.
+Changes to support new j784s4-hs platform in:
 
-Also, enable trng support as trng support is added now in OP-TEE
+    1) ti-sci-fw_git: Update firmware prefix for j784s4-hs
+    2) atf: sign the image
+    4) optee: sign the image
 
-Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
-Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
-Acked-by: Andrew Davis <afd@ti.com>
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-security/optee/optee-os_3.16%.bbappend | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-ti-bsp/recipes-security/optee/optee-os_3.16%.bbappend b=
-/meta-ti-bsp/recipes-security/optee/optee-os_3.16%.bbappend
-index 1e0072ef..c48c56ef 100644
---- a/meta-ti-bsp/recipes-security/optee/optee-os_3.16%.bbappend
-+++ b/meta-ti-bsp/recipes-security/optee/optee-os_3.16%.bbappend
-@@ -1,13 +1,11 @@
- PV:ti-soc =3D "3.19.0+git${SRCPV}"
--SRCREV:ti-soc =3D "afacf356f9593a7f83cae9f96026824ec242ff52"
-+SRCREV:ti-soc =3D "d6c5d0037b46f46caf71d67d7825d4b722cbcddf"
+diff --git a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/meta-ti=
+-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index 46d5111d..eb641270 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -36,6 +36,7 @@ SYSFW_PREFIX:j7200-hs-evm-k3r5 =3D "fs"
+ SYSFW_PREFIX:j721s2-evm-k3r5 =3D "fs"
+ SYSFW_PREFIX:j721s2-hs-evm-k3r5 =3D "fs"
+ SYSFW_PREFIX:j784s4-evm-k3r5 =3D "fs"
++SYSFW_PREFIX:j784s4-hs-evm-k3r5 =3D "fs"
+ SYSFW_PREFIX:am62xx-evm-k3r5 =3D "fs"
+ SYSFW_PREFIX:am62xx-lp-evm-k3r5 =3D "fs"
 =20
- # Use TI SECDEV for signing
- inherit ti-secdev
-=20
- EXTRA_OEMAKE:append:k3 =3D "${@ ' CFG_CONSOLE_UART=3D'+ d.getVar('OPTEE_=
-K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
-=20
--EXTRA_OEMAKE:append:am62xx =3D " CFG_WITH_SOFTWARE_PRNG=3Dy CFG_TEE_CORE=
-_LOG_LEVEL=3D1"
--
- do_compile:append:k3() {
-     ( cd ${B}/core/; \
-         cp tee-pager_v2.bin ${B}/bl32.bin; \
 --=20
 2.25.1
 
