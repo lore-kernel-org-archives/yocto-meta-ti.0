@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C608C761AF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AF76EC77B73
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 03:39:39 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.6439.1679283571902036506
+ by mx.groups.io with SMTP id smtpd.web10.6435.1679283571030922169
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 19 Mar 2023 20:39:32 -0700
+ Sun, 19 Mar 2023 20:39:31 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id A0FF340CC2
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 8BBAF40CB8
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:39:29 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8zAVKlLz0IUG for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id 7yqCleItnLtC for <meta-ti@lists.yoctoproject.org>;
 	Mon, 20 Mar 2023 03:39:29 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5A09C40C50
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:39:28 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id E712540CBF
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:39:27 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 6649D1637D8
+	by mail.denix.org (Postfix) with ESMTP id 02B871637CA
 	for <meta-ti@lists.yoctoproject.org>; Sun, 19 Mar 2023 23:38:56 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 50/53] ti-linux-fw: update to the latest from Dunfell
-Date: Mon, 20 Mar 2023 03:39:22 +0000
-Message-Id: <20230320033925.1306823-51-denis@denix.org>
+Subject: [master][PATCH 41/53] conf: machine: j7200-evm: Add uarts overlay for J7200
+Date: Mon, 20 Mar 2023 03:39:13 +0000
+Message-Id: <20230320033925.1306823-42-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320033925.1306823-1-denis@denix.org>
 References: <20230320033925.1306823-1-denis@denix.org>
@@ -39,37 +39,34 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:39:39 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16102
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16096
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+From: Bhavya Kapoor <b-kapoor@ti.com>
 
-Match the latest sha used in Dunfell.
+Add device tree overlay for extending support for mcu_uart0 as well as
+wkup_uart0 for boards with J7200 SoC. This overlay will mainly be used
+for the purpose of testing uart instances.
 
+Signed-off-by: Bhavya Kapoor <b-kapoor@ti.com>
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-ti-bsp/conf/machine/j7200-evm.conf | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-t=
-i-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 74c26707..1a5ea534 100644
---- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -16,12 +16,12 @@ IMG_DEC_FW_VERSION =3D "1.0"
- CNM_WAVE521_FW_VERSION =3D "1.0.00"
- TIFS_LPM_STUB_FW_VERSION =3D "08.06.04"
+diff --git a/meta-ti-bsp/conf/machine/j7200-evm.conf b/meta-ti-bsp/conf/m=
+achine/j7200-evm.conf
+index e52d6371..c01b318b 100644
+--- a/meta-ti-bsp/conf/machine/j7200-evm.conf
++++ b/meta-ti-bsp/conf/machine/j7200-evm.conf
+@@ -10,6 +10,7 @@ SERIAL_CONSOLES_CHECK =3D "${SERIAL_CONSOLES}"
+ KERNEL_DEVICETREE =3D " \
+     ti/k3-j7200-common-proc-board.dtb \
+     ti/k3-j7200-mcspi-loopback.dtbo \
++    ti/k3-j7200-common-proc-board-uarts.dtbo \
+ "
 =20
--TI_LINUX_FW_SRCREV ?=3D "340194800a581baf976360386dfc7b5acab8d948"
-+TI_LINUX_FW_SRCREV ?=3D "79c498ef6ab1558b699a2243a26c4a65a1c44d26"
- SRCREV =3D "${TI_LINUX_FW_SRCREV}"
-=20
- BRANCH ?=3D "ti-linux-firmware"
-=20
--K3_IMAGE_GEN_SRCREV ?=3D "ffae8800a5c81c149835ed1aa5e2fbbe65a49c0d"
-+K3_IMAGE_GEN_SRCREV ?=3D "1319f46f3899e62d88e0a5cedad5b454d0432ddb"
- SRCREV_imggen =3D "${K3_IMAGE_GEN_SRCREV}"
- SRCREV_FORMAT =3D "imggen"
-=20
+ UBOOT_MACHINE =3D "j7200_evm_a72_config"
 --=20
 2.25.1
 
