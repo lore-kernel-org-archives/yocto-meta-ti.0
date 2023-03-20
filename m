@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5069C7EE25
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D509EC7EE33
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 03:38:48 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.6288.1679283524439612821
+ by mx.groups.io with SMTP id smtpd.web10.6386.1679283524455414780
  for <meta-ti@lists.yoctoproject.org>;
  Sun, 19 Mar 2023 20:38:44 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 6A82D40CAA
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7A60840CB3
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:38:42 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VpONxnILJrXy for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id POonEAR--SYd for <meta-ti@lists.yoctoproject.org>;
 	Mon, 20 Mar 2023 03:38:42 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5DC3A40C62
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 63FE540C98
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:38:42 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 809421637C9
+	by mail.denix.org (Postfix) with ESMTP id 99F811637CC
 	for <meta-ti@lists.yoctoproject.org>; Sun, 19 Mar 2023 23:38:08 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [kirkstone][PATCH 05/54] conf: Remove vmlinux.gz from KERNEL_IMAGETYPES
-Date: Mon, 20 Mar 2023 03:37:51 +0000
-Message-Id: <20230320033840.1193963-6-denis@denix.org>
+Subject: [kirkstone][PATCH 08/54] optee: update optee-client, optee-test, optee-examples to 3.19 tag
+Date: Mon, 20 Mar 2023 03:37:54 +0000
+Message-Id: <20230320033840.1193963-9-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320033840.1193963-1-denis@denix.org>
 References: <20230320033840.1193963-1-denis@denix.org>
@@ -39,36 +39,57 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:38:48 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16012
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16013
 
-From: Ryan Eatmon <reatmon@ti.com>
+From: Manorit Chawdhry <m-chawdhry@ti.com>
 
-With a recent patch to the TI kernel that includes debug symbols,
-the vmlinux.gz file grew in size that impacted the testing.
-This file is not needed to be in the final image so remove it
-from the list.
+optee-os was updated to 3.19 tag but the others were still outdated.
 
+Updates other optee components to 3.19 tag
+
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/conf/machine/include/k3.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-security/optee/optee-client_3.16%.bbappend      | 6 ++++--
+ .../recipes-security/optee/optee-examples_%.bbappend        | 4 ++--
+ meta-ti-bsp/recipes-security/optee/optee-test_%.bbappend    | 4 ++--
+ 3 files changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/m=
-achine/include/k3.inc
-index 3b59645b..e4ef2f94 100644
---- a/meta-ti-bsp/conf/machine/include/k3.inc
-+++ b/meta-ti-bsp/conf/machine/include/k3.inc
-@@ -15,7 +15,7 @@ PREFERRED_PROVIDER_virtual/bootloader ?=3D "u-boot-ti-s=
-taging"
- PREFERRED_PROVIDER_u-boot ?=3D "u-boot-ti-staging"
-=20
- KERNEL_IMAGETYPE =3D "Image"
--KERNEL_IMAGETYPES =3D "Image vmlinux.gz fitImage"
-+KERNEL_IMAGETYPES =3D "Image fitImage"
- KERNEL_CLASSES +=3D "kernel-fitimage"
-=20
- UBOOT_ARCH =3D "arm"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-client_3.16%.bbappe=
+nd b/meta-ti-bsp/recipes-security/optee/optee-client_3.16%.bbappend
+index 109d451c..61760b8e 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-client_3.16%.bbappend
++++ b/meta-ti-bsp/recipes-security/optee/optee-client_3.16%.bbappend
+@@ -1,2 +1,4 @@
+-PV:ti-soc =3D "3.17.0+git${SRCPV}"
+-SRCREV:ti-soc =3D "a5c30b1277466a9bf85b62f45a6b00e79774e29c"
++PV:ti-soc =3D "3.19.0+git${SRCPV}"
++SRCREV:ti-soc =3D "140bf463046071d3ca5ebbde3fb21ee0854e1951"
++
++DEPENDS:append:ti-soc =3D "pkgconfig util-linux"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-examples_%.bbappend=
+ b/meta-ti-bsp/recipes-security/optee/optee-examples_%.bbappend
+index 98b5bea4..9c757f11 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-examples_%.bbappend
++++ b/meta-ti-bsp/recipes-security/optee/optee-examples_%.bbappend
+@@ -1,2 +1,2 @@
+-PV:ti-soc =3D "3.17.0+git${SRCPV}"
+-SRCREV:ti-soc =3D "65fc74309e12189ad5b6ce3ffec37c8011088a5a"
++PV:ti-soc =3D "3.19.0+git${SRCPV}"
++SRCREV:ti-soc =3D "f301ee9df2129c0db683e726c91dc2cefe4cdb65"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-test_%.bbappend b/m=
+eta-ti-bsp/recipes-security/optee/optee-test_%.bbappend
+index 4fbaa4c4..b9e803c5 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-test_%.bbappend
++++ b/meta-ti-bsp/recipes-security/optee/optee-test_%.bbappend
+@@ -1,3 +1,3 @@
+-PV:ti-soc =3D "3.17.0+git${SRCPV}"
+-SRCREV:ti-soc =3D "8a698baf9e8e010e4d8d52e6aded42dfc31e5b25"
++PV:ti-soc =3D "3.19.0+git${SRCPV}"
++SRCREV:ti-soc =3D "ab9863cc187724e54c032b738c28bd6e9460a4db"
+ SRC_URI:ti-soc =3D "git://github.com/OP-TEE/optee_test.git;branch=3Dmast=
+er;protocol=3Dhttps"
 --=20
 2.25.1
 
