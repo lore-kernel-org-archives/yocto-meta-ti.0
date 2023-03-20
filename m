@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A34FC7EE22
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B08FAC7EE21
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 11:25:03 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.11295.1679311498624034895
+ by mx.groups.io with SMTP id smtpd.web10.11281.1679311497407916993
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 20 Mar 2023 04:24:58 -0700
+ Mon, 20 Mar 2023 04:24:57 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 1C54140C46
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:24:57 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3920D40CB1
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:24:56 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id s9lAKx3m9ts9 for <meta-ti@lists.yoctoproject.org>;
-	Mon, 20 Mar 2023 11:24:57 +0000 (UTC)
+	with ESMTP id Ldwz6kArnWyD for <meta-ti@lists.yoctoproject.org>;
+	Mon, 20 Mar 2023 11:24:56 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0B84840C5D
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:24:56 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id DB2E540CB3
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:24:54 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 396411637FF
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 07:24:22 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 3B4781637DF
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 07:24:21 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 53/53] ti-rtos-firmware: numerous fixes and cleanups
-Date: Mon, 20 Mar 2023 11:24:52 +0000
-Message-Id: <20230320112452.2813505-54-denis@denix.org>
+Subject: [master][PATCH 27/53] conf: machine: am62axx: Add camera overlays for AM62A SK
+Date: Mon, 20 Mar 2023 11:24:26 +0000
+Message-Id: <20230320112452.2813505-28-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320112452.2813505-1-denis@denix.org>
 References: <20230320112452.2813505-1-denis@denix.org>
@@ -39,231 +39,41 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:25:03 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16206
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16176
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+From: Jai Luthra <j-luthra@ti.com>
 
-Doing multiple do_install:prepend overrides does not guarantee the
-order - it was observed that signing could fail as it was happening
-prior to symlinking to the correct name. Move signing code inside the
-main do_install, so the machine-specific do_install:prepend works
-correctly.
+Add the following overlay files on AM62A SK:
 
-Also, pass -f flag for symlinking, otherwise it could fail with "file
-already exists" error when trying to re-build the recipe again.
+1. Fusion board (For FPDLink-III cameras)
+2. OV2312 FPDLink camera module
+3. IMX219 RPi-compatible camera module
 
-Several IPC list/matrix fixes:
-* j721e was missing MCU_1_1_FW entry
-* j721s2 was also missing MCU_1_1_FW entry
-* j721s2 had a second MCU_2_0_FW in place of MCU_3_0_FW
-* j784s4 was missing MCU_4_0_FW and MCU_4_1_FW entries
-
-Other minor cleanups and indentation fixes.
-
+Signed-off-by: Jai Luthra <j-luthra@ti.com>
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- .../ti-rtos-bin/ti-rtos-firmware.bb           | 63 +++++++++----------
- 1 file changed, 31 insertions(+), 32 deletions(-)
+ meta-ti-bsp/conf/machine/am62axx-evm.conf | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/met=
-a-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-index 9b94a61e..ae7bdb81 100644
---- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-+++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -64,105 +64,103 @@ C7X_4_FW   =3D "ipc_echo_test_c7x_4_release_strip.x=
-e71"
- ETH_FW =3D "app_remoteswitchcfg_server_strip.xer5f"
+diff --git a/meta-ti-bsp/conf/machine/am62axx-evm.conf b/meta-ti-bsp/conf=
+/machine/am62axx-evm.conf
+index 5e11d19b..12492095 100644
+--- a/meta-ti-bsp/conf/machine/am62axx-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62axx-evm.conf
+@@ -6,6 +6,12 @@ require conf/machine/include/am62axx.inc
 =20
- DM_FW_LIST =3D ""
--DM_FW_LIST:am65xx =3D  ""
- DM_FW_LIST:j721e =3D   "${DM_FIRMWARE}"
- DM_FW_LIST:j7200 =3D   "${DM_FIRMWARE}"
- DM_FW_LIST:j721s2 =3D  "${DM_FIRMWARE}"
-+DM_FW_LIST:j784s4 =3D  "${DM_FIRMWARE}"
-+DM_FW_LIST:am65xx =3D  ""
- DM_FW_LIST:am64xx =3D  ""
- DM_FW_LIST:am62xx =3D  "${DM_FIRMWARE}"
- DM_FW_LIST:am62axx =3D "${DM_FIRMWARE}"
--DM_FW_LIST:j784s4 =3D  "${DM_FIRMWARE}"
+ KERNEL_DEVICETREE =3D " \
+     ti/k3-am62a7-sk.dtb \
++    ti/k3-am62a7-fpdlink-ov2312-0-0.dtbo \
++    ti/k3-am62a7-fpdlink-ov2312-0-1.dtbo \
++    ti/k3-am62a7-fpdlink-ov2312-0-2.dtbo \
++    ti/k3-am62a7-fpdlink-ov2312-0-3.dtbo \
++    ti/k3-am62a7-fpdlink-sk-fusion.dtbo \
++    ti/k3-am62a7-sk-csi2-imx219.dtbo \
+ "
 =20
- IPC_FW_LIST =3D ""
--IPC_FW_LIST:am65xx =3D  "${MCU_1_0_FW} ${MCU_1_1_FW}"
--IPC_FW_LIST:j721e =3D   "                            ${MCU_2_0_FW} ${MCU=
-_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW} ${C66_1_FW} ${C66_2_FW} ${C7X_1_FW}"
-+IPC_FW_LIST:j721e =3D   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
-_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                             ${C66_1_=
-FW} ${C66_2_FW} ${C7X_1_FW}"
- IPC_FW_LIST:j7200 =3D   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
-_2_1_FW}"
--IPC_FW_LIST:j721s2 =3D  "                            ${MCU_2_0_FW} ${MCU=
-_2_1_FW} ${MCU_2_0_FW} ${MCU_3_1_FW}                         ${C7X_1_FW} =
-${C7X_2_FW}"
-+IPC_FW_LIST:j721s2 =3D  "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
-_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                                     =
-                ${C7X_1_FW} ${C7X_2_FW}"
-+IPC_FW_LIST:j784s4 =3D  "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
-_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW} ${MCU_4_0_FW} ${MCU_4_1_FW}         =
-                ${C7X_1_FW} ${C7X_2_FW} ${C7X_3_FW} ${C7X_4_FW}"
-+IPC_FW_LIST:am65xx =3D  "${MCU_1_0_FW} ${MCU_1_1_FW}"
- IPC_FW_LIST:am64xx =3D  "${MCU_1_0_FW} ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
-_2_1_FW} ${MCU_3_0_FW}"
- IPC_FW_LIST:am62xx =3D  "                            ${MCU_2_0_FW}"
--IPC_FW_LIST:am62axx =3D "                            ${MCU_2_0_FW}      =
-                                                             ${C7X_1_FW}"
--IPC_FW_LIST:j784s4 =3D  "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
-_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                         ${C7X_1_FW} =
-${C7X_2_FW} ${C7X_3_FW} ${C7X_4_FW}"
-+IPC_FW_LIST:am62axx =3D "                            ${MCU_2_0_FW}      =
-                                                                         =
-                ${C7X_1_FW}"
-=20
- ETH_FW_LIST =3D ""
--ETH_FW_LIST:am65xx =3D  ""
- ETH_FW_LIST:j721e =3D   "${ETH_FW}"
- ETH_FW_LIST:j7200 =3D   "${ETH_FW}"
- ETH_FW_LIST:j721s2 =3D  ""
-+ETH_FW_LIST:j784s4 =3D  "${ETH_FW}"
-+ETH_FW_LIST:am65xx =3D  ""
- ETH_FW_LIST:am64xx =3D  ""
- ETH_FW_LIST:am62xx =3D  ""
- ETH_FW_LIST:am62axx =3D ""
--ETH_FW_LIST:j784s4 =3D  "${ETH_FW}"
-=20
- # Update the am64xx ipc binaries to be consistent with other platforms
- do_install:prepend:am64xx() {
-         ( cd ${RTOS_IPC_FW_DIR}; \
--                ln -s am64-main-r5f0_0-fw ${MCU_1_0_FW}; \
--                ln -s am64-main-r5f0_1-fw ${MCU_1_1_FW}; \
--                ln -s am64-main-r5f1_0-fw ${MCU_2_0_FW}; \
--                ln -s am64-main-r5f1_1-fw ${MCU_2_1_FW}; \
--                ln -s am64-mcu-m4f0_0-fw ${MCU_3_0_FW}; \
-+                ln -sf am64-main-r5f0_0-fw ${MCU_1_0_FW}; \
-+                ln -sf am64-main-r5f0_1-fw ${MCU_1_1_FW}; \
-+                ln -sf am64-main-r5f1_0-fw ${MCU_2_0_FW}; \
-+                ln -sf am64-main-r5f1_1-fw ${MCU_2_1_FW}; \
-+                ln -sf am64-mcu-m4f0_0-fw ${MCU_3_0_FW}; \
-         )
- }
-=20
- # Update the am62xx ipc binaries to be consistent with other platforms
- do_install:prepend:am62xx() {
-         ( cd ${RTOS_IPC_FW_DIR}; \
--                ln -s am62-mcu-m4f0_0-fw ${MCU_2_0_FW}; \
-+                ln -sf am62-mcu-m4f0_0-fw ${MCU_2_0_FW}; \
-         )
- }
-=20
- # Update the am62axx ipc binaries to be consistent with other platforms
- do_install:prepend:am62axx() {
-         ( cd ${RTOS_IPC_FW_DIR}; \
--                ln -s am62a-mcu-r5f0_0-fw ${MCU_1_0_FW}; \
-+                ln -sf am62a-mcu-r5f0_0-fw ${MCU_2_0_FW}; \
-         )
- }
-=20
--# Sign the firmware
--do_install:prepend() {
-+do_install() {
-+    # Sign the firmware
-     # DM Firmware
-     for FW_NAME in ${DM_FW_LIST}
-     do
--      ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_DM_FW_D=
-IR}/${FW_NAME} ${RTOS_DM_FW_DIR}/${FW_NAME}.signed
-+        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_DM_FW=
-_DIR}/${FW_NAME} ${RTOS_DM_FW_DIR}/${FW_NAME}.signed
-     done
-=20
-     # IPC Firmware
-     for FW_NAME in ${IPC_FW_LIST}
-     do
--      ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_IPC_FW_=
-DIR}/${FW_NAME} ${RTOS_IPC_FW_DIR}/${FW_NAME}.signed
-+        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_IPC_F=
-W_DIR}/${FW_NAME} ${RTOS_IPC_FW_DIR}/${FW_NAME}.signed
-     done
-=20
-     # ETH firmware
-     for FW_NAME in ${ETH_FW_LIST}
-     do
--        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_ETH_F=
-W_DIR}/${FW_NAME} ${RTOS_ETH_FW_DIR}/${FW_NAME}.signed;
-+        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_ETH_F=
-W_DIR}/${FW_NAME} ${RTOS_ETH_FW_DIR}/${FW_NAME}.signed
-     done
--}
-=20
--#Install all R5 & DSP ipc echo test binaries in lib/firmware/pdk-ipc, wi=
-th softlinks up a level
--do_install() {
-+    # Install all R5 & DSP ipc echo test binaries in lib/firmware/pdk-ip=
-c, with softlinks up a level
-     # DM Firmware
-     install -d ${LEGACY_DM_FW_DIR}
-     for FW_NAME in ${DM_FW_LIST}
-     do
--      install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}        ${LEGACY_DM_FW=
-_DIR}/${FW_NAME}.unsigned
--      install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}.signed ${LEGACY_DM_FW=
-_DIR}/${FW_NAME}
-+        install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}        ${LEGACY_DM_=
-FW_DIR}/${FW_NAME}.unsigned
-+        install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}.signed ${LEGACY_DM_=
-FW_DIR}/${FW_NAME}
-     done
-=20
-     # IPC Firmware
-     install -d ${LEGACY_IPC_FW_DIR}
-     for FW_NAME in ${IPC_FW_LIST}
-     do
--      install -m 0644 ${RTOS_IPC_FW_DIR}/${FW_NAME}        ${LEGACY_IPC_=
-FW_DIR}
--      install -m 0644 ${RTOS_IPC_FW_DIR}/${FW_NAME}.signed ${LEGACY_IPC_=
-FW_DIR}
-+        install -m 0644 ${RTOS_IPC_FW_DIR}/${FW_NAME}        ${LEGACY_IP=
-C_FW_DIR}
-+        install -m 0644 ${RTOS_IPC_FW_DIR}/${FW_NAME}.signed ${LEGACY_IP=
-C_FW_DIR}
-     done
-=20
-     # ETH firmware
-     install -d ${LEGACY_ETH_FW_DIR}
-     for FW_NAME in ${ETH_FW_LIST}
-     do
--      install -m 0644 ${RTOS_ETH_FW_DIR}/${FW_NAME}        ${LEGACY_ETH_=
-FW_DIR}
--      install -m 0644 ${RTOS_ETH_FW_DIR}/${FW_NAME}.signed ${LEGACY_ETH_=
-FW_DIR}
-+        install -m 0644 ${RTOS_ETH_FW_DIR}/${FW_NAME}        ${LEGACY_ET=
-H_FW_DIR}
-+        install -m 0644 ${RTOS_ETH_FW_DIR}/${FW_NAME}.signed ${LEGACY_ET=
-H_FW_DIR}
-     done
- }
-=20
-@@ -171,8 +169,8 @@ do_deploy() {
-     install -d ${DEPLOYDIR}
-     for FW_NAME in ${DM_FW_LIST}
-     do
--      install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}        ${DEPLOYDIR}/$=
-{FW_NAME}.unsigned
--      install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}.signed ${DEPLOYDIR}/$=
-{FW_NAME}
-+        install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}        ${DEPLOYDIR}=
-/${FW_NAME}.unsigned
-+        install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}.signed ${DEPLOYDIR}=
-/${FW_NAME}
-     done
- }
-=20
-@@ -189,6 +187,7 @@ ALTERNATIVE:${PN}:am64xx =3D "\
-                     am64-main-r5f1_1-fw \
-                     am64-mcu-m4f0_0-fw \
-                     "
-+
- ALTERNATIVE:${PN}:am62xx =3D "\
-                     am62-mcu-m4f0_0-fw \
-                     am62-main-r5f0_0-fw \
+ UBOOT_MACHINE =3D "am62ax_evm_a53_defconfig"
 --=20
 2.25.1
 
