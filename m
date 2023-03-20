@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42351C77B75
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 473D2C77B77
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 03:39:29 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.6327.1679283568868587575
+ by mx.groups.io with SMTP id smtpd.web10.6430.1679283568840484066
  for <meta-ti@lists.yoctoproject.org>;
  Sun, 19 Mar 2023 20:39:29 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9D68F40CA8
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3F2FD40CB3
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:39:27 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TlsAxV340jWN for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id HJ4m-jVU0EJ7 for <meta-ti@lists.yoctoproject.org>;
 	Mon, 20 Mar 2023 03:39:27 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 91BB540C62
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3489940CAF
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:39:27 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 7FB2D1637D1
+	by mail.denix.org (Postfix) with ESMTP id 24D681637CE
 	for <meta-ti@lists.yoctoproject.org>; Sun, 19 Mar 2023 23:38:55 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 30/53] conf: machine: j784s4: Add AM69 SK specific dtb and dtbo to KERNEL_DEVICETREE
-Date: Mon, 20 Mar 2023 03:39:02 +0000
-Message-Id: <20230320033925.1306823-31-denis@denix.org>
+Subject: [master][PATCH 22/53] ti-sci-fw: Add SYSFW_SUFFIX to sysfw.itb files
+Date: Mon, 20 Mar 2023 03:38:54 +0000
+Message-Id: <20230320033925.1306823-23-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320033925.1306823-1-denis@denix.org>
 References: <20230320033925.1306823-1-denis@denix.org>
@@ -39,45 +39,71 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:39:29 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16077
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16080
 
-From: Dasnavis Sabiya <sabiya.d@ti.com>
+From: Ryan Eatmon <reatmon@ti.com>
 
-AM69 Starter Kit is a single board designed based on TI's AM69 SOC
-providing advanced system integration in automotive ADAS applications,
-autonomous mobile robot and edge AI applications. Add support
-for the same to include the board dtb file into the root filesystem.
+With the advent of using multiconfigs to build all of the versions of
+the machines (gp, hs-se, hs-fs, etc...) the sysfw.itb has become a point
+of contention for do_deploy.  To resolve the duplicate file copy errors
+from bitbake we need to uniquify the sysfw.itb file names.  So, let's do
+the same thing we do with the tiboot3.bin file and add the SYSFW_SUFFIX
+into the name.
 
-Add DT overlays support for the following features on AM69 SK:
-* Add DTBO entry to support OV5640 camera
-* Add DTBO entry to support RPi(IMX219) camera
-* Add DTBO entry for the DDR memory carveout.
-
-[1]:https://www.ti.com/lit/zip/spruj52
-
-Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/conf/machine/j784s4-evm.conf | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb    | 20 +++++++++++++++++--
+ 1 file changed, 18 insertions(+), 2 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf b/meta-ti-bsp/conf/=
-machine/j784s4-evm.conf
-index 4e0bfba6..75ab484c 100644
---- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
-@@ -10,6 +10,10 @@ TFA_K3_USART =3D "0x8"
- OPTEE_K3_USART =3D "0x8"
+diff --git a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/meta-ti=
+-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index 75b9f8a6..b65d8502 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -51,10 +51,26 @@ SYSFW_TIBOOT3 =3D "tiboot3-${SYSFW_SOC}-${SYSFW_SUFFI=
+X}-${SYSFW_CONFIG}.bin"
+ SYSFW_TIBOOT3_SYMLINK ?=3D "tiboot3.bin"
 =20
- KERNEL_DEVICETREE =3D " \
-+    ti/k3-am69-sk.dtb \
-+    ti/k3-am69-sk-csi2-ov5640.dtbo \
-+    ti/k3-am69-sk-ddr-mem-carveout.dtbo \
-+    ti/k3-am69-sk-rpi-cam-imx219.dtbo \
-     ti/k3-j784s4-evm.dtb \
- "
+ SYSFW_BINARY =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
+-SYSFW_VBINARY =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
+-SYSFW_IMAGE =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
++SYSFW_VBINARY =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_SUFFIX}-${SYSFW_CONF=
+IG}.itb"
++SYSFW_IMAGE =3D "sysfw-${SYSFW_SOC}-${SYSFW_SUFFIX}-${SYSFW_CONFIG}.itb"
+ SYSFW_SYMLINK ?=3D "sysfw.itb"
 =20
++SYSFW_VBINARY:am65xx-evm-k3r5 =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONF=
+IG}.itb"
++SYSFW_VBINARY:am65xx-evm-k3r5-sr2 =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_=
+CONFIG}.itb"
++SYSFW_VBINARY:am65xx-hs-evm-k3r5 =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_C=
+ONFIG}.itb"
++SYSFW_VBINARY:am65xx-hs-evm-k3r5-sr2 =3D "sysfw-${PV}-${SYSFW_SOC}-${SYS=
+FW_CONFIG}.itb"
++SYSFW_VBINARY:j721e-evm-k3r5 =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONFI=
+G}.itb"
++SYSFW_VBINARY:j721e-hs-evm-k3r5 =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CO=
+NFIG}.itb"
++SYSFW_VBINARY:j721e-hs-evm-k3r5-sr1-1 =3D "sysfw-${PV}-${SYSFW_SOC}-${SY=
+SFW_CONFIG}.itb"
++
++SYSFW_IMAGE:am65xx-evm-k3r5 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
++SYSFW_IMAGE:am65xx-evm-k3r5-sr2 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.=
+itb"
++SYSFW_IMAGE:am65xx-hs-evm-k3r5 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.i=
+tb"
++SYSFW_IMAGE:am65xx-hs-evm-k3r5-sr2 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFI=
+G}.itb"
++SYSFW_IMAGE:j721e-evm-k3r5 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
++SYSFW_IMAGE:j721e-hs-evm-k3r5 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.it=
+b"
++SYSFW_IMAGE:j721e-hs-evm-k3r5-sr1-1 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONF=
+IG}.itb"
++
+ CFLAGS[unexport] =3D "1"
+ LDFLAGS[unexport] =3D "1"
+ AS[unexport] =3D "1"
 --=20
 2.25.1
 
