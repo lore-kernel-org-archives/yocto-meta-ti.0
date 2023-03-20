@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 463D7C77B6F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DBD5C77B74
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 04:12:50 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.6724.1679285566673764725
+ by mx.groups.io with SMTP id smtpd.web11.6722.1679285566427557065
  for <meta-ti@lists.yoctoproject.org>;
  Sun, 19 Mar 2023 21:12:46 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 1919340C46
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:45 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id D798B40CA5
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:44 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lJ9DSzsyuGOB for <meta-ti@lists.yoctoproject.org>;
-	Mon, 20 Mar 2023 04:12:45 +0000 (UTC)
+	with ESMTP id SgiX7SmLB8oO for <meta-ti@lists.yoctoproject.org>;
+	Mon, 20 Mar 2023 04:12:44 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0E2DE40CA7
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:44 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CBCC440CBD
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:43 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 1F3611637C3
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 00:12:12 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id DBD771637C9
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 00:12:11 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [kirkstone][PATCH 41/54] conf: machine: j784s4-evm: Add camera overlays for J784S4 EVM
-Date: Mon, 20 Mar 2023 04:12:28 +0000
-Message-Id: <20230320041241.1293077-42-denis@denix.org>
+Subject: [kirkstone][PATCH 36/54] conf: machine: am62xx-lp-evm: Add OLDI Panel overlay
+Date: Mon, 20 Mar 2023 04:12:23 +0000
+Message-Id: <20230320041241.1293077-37-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320041241.1293077-1-denis@denix.org>
 References: <20230320041241.1293077-1-denis@denix.org>
@@ -39,36 +39,33 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16148
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16143
 
-From: Vaishnav Achath <vaishnav.a@ti.com>
+From: Aradhya Bhatia <a-bhatia1@ti.com>
 
-Add the following overlay files on J784S4 EVM:
+Add the Microtips OLDI Panel DT overlay for AM62 LP SK.
 
-1. Fusion board (For FPDLink-III cameras)
-2. OV5640 camera module
-
-Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+Signed-off-by: Aradhya Bhatia <a-bhatia1@ti.com>
+Reviewed-by: Praneeth Bajjuri <praneeth@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/conf/machine/j784s4-evm.conf | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-ti-bsp/conf/machine/am62xx-lp-evm.conf | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf b/meta-ti-bsp/conf/=
-machine/j784s4-evm.conf
-index 40e71b6a..02f3f4c4 100644
---- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
-@@ -33,6 +33,8 @@ KERNEL_DEVICETREE =3D " \
-     ti/k3-j721e-fpdlink-imx390-rcm-1-2.dtbo \
-     ti/k3-j721e-fpdlink-imx390-rcm-1-3.dtbo \
-     ti/k3-j784s4-evm.dtb \
-+    ti/k3-j784s4-evm-csi2-ov5640.dtbo \
-+    ti/k3-j784s4-fpdlink-fusion.dtbo \
+diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/co=
+nf/machine/am62xx-lp-evm.conf
+index be95f33a..cba05c4b 100644
+--- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+@@ -9,6 +9,7 @@ KERNEL_DEVICETREE =3D " \
+     ti/k3-am625-skeleton.dtb \
+     ti/k3-am625-sk-lpmdemo.dtb \
+     ti/k3-am625-sk-csi2-ov5640.dtbo \
++    ti/k3-am62x-lp-sk-oldi-panel.dtbo \
  "
 =20
- UBOOT_MACHINE =3D "j784s4_evm_a72_defconfig"
+ SPL_BINARY =3D "tispl.bin_HS"
 --=20
 2.25.1
 
