@@ -1,248 +1,270 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36B61C76195
-	for <webhook@archiver.kernel.org>; Fri, 17 Mar 2023 15:20:59 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.22369.1679066457519865329
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1EBDC7618E
+	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 03:38:47 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.6409.1679283526995326936
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 17 Mar 2023 08:20:57 -0700
+ Sun, 19 Mar 2023 20:38:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=FfcG0/zy;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 32HFKuNL036944;
-	Fri, 17 Mar 2023 10:20:56 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1679066456;
-	bh=PZYALzFTVZS+GxgW3OVR3vzoYq4EGR4JqvAAResC2VU=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=FfcG0/zyw4+a9/EIEOTfcgK8mx859R3EZTy6cgsHBs8DjJLBHbVL+4U2tai6VEoho
-	 NhJZ3w0Za8sGWC6cCuiEIOTi4IyeEdmOVxUm3hZWEJiLQFzWSJhqTPeO3M/LJzxedP
-	 n1NnG7YEfohfupSWGmLAHgmVUdtVpcnQq/GEQYSk=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 32HFKuar123937
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 17 Mar 2023 10:20:56 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Fri, 17
- Mar 2023 10:20:56 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Fri, 17 Mar 2023 10:20:56 -0500
-Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 32HFKuKc015682;
-	Fri, 17 Mar 2023 10:20:56 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1pdBt2-0006iP-4l; Fri, 17 Mar 2023 10:20:56 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/kirkstone][PATCH v3 2/3] linux-ti-staging: Add 6.1 kernel in prep for LTS migration
-Date: Fri, 17 Mar 2023 10:20:54 -0500
-Message-ID: <20230317152055.25762-3-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230317152055.25762-1-reatmon@ti.com>
-References: <20230317152055.25762-1-reatmon@ti.com>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id DA88E40C98
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:38:44 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id gIheJJmdEfLW for <meta-ti@lists.yoctoproject.org>;
+	Mon, 20 Mar 2023 03:38:44 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B30C540CD8
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:38:43 +0000 (UTC)
+Received: from thorin.denix (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id 8C88A1637FB
+	for <meta-ti@lists.yoctoproject.org>; Sun, 19 Mar 2023 23:38:10 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Subject: [kirkstone][PATCH 54/54] ti-rtos-firmware: numerous fixes and cleanups
+Date: Mon, 20 Mar 2023 03:38:40 +0000
+Message-Id: <20230320033840.1193963-55-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230320033840.1193963-1-denis@denix.org>
+References: <20230320033840.1193963-1-denis@denix.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 17 Mar 2023 15:20:59 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16003
+ <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:38:47 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16053
 
-We are preparing to migrate our kernel version to 6.1.  As we are still
-working on the migration, mark the default preference low for this
-version.  We will enable building with this kernel in a meta-arago brand
-in the near future.  Once the migration is complete, we will remove the
-5.10 kernel and make this the default.
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-Signed-off-by: Andrew Davis <afd@ti.com>
+Doing multiple do_install:prepend overrides does not guarantee the
+order - it was observed that signing could fail as it was happening
+prior to symlinking to the correct name. Move signing code inside the
+main do_install, so the machine-specific do_install:prepend works
+correctly.
+
+Also, pass -f flag for symlinking, otherwise it could fail with "file
+already exists" error when trying to re-build the recipe again.
+
+Several IPC list/matrix fixes:
+* j721e was missing MCU_1_1_FW entry
+* j721s2 was also missing MCU_1_1_FW entry
+* j721s2 had a second MCU_2_0_FW in place of MCU_3_0_FW
+* j784s4 was missing MCU_4_0_FW and MCU_4_1_FW entries
+
+Other minor cleanups and indentation fixes.
+
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
-v3: Set DEFAULT_PREFERENCE for new rt and systest recipes.
-v2: Added rt and systest versions of the kernel.
+ .../ti-rtos-bin/ti-rtos-firmware.bb           | 63 +++++++++----------
+ 1 file changed, 31 insertions(+), 32 deletions(-)
 
- .../linux/linux-ti-staging-6.1/defconfig      |  2 +
- .../linux/linux-ti-staging-6.1/k3/defconfig   |  2 +
- .../linux-ti-staging-6.1/omapl138/defconfig   |  1 +
- .../linux/linux-ti-staging-rt-6.1/defconfig   |  2 +
- .../linux-ti-staging-rt-6.1/k3/defconfig      |  2 +
- .../omapl138/defconfig                        |  1 +
- .../linux/linux-ti-staging-rt_6.1.bb          | 12 ++++++
- .../linux-ti-staging-systest-6.1/defconfig    |  2 +
- .../linux-ti-staging-systest-6.1/k3/defconfig |  2 +
- .../omapl138/defconfig                        |  1 +
- .../linux/linux-ti-staging-systest_6.1.bb     |  7 ++++
- .../linux/linux-ti-staging_6.1.bb             | 39 +++++++++++++++++++
- 12 files changed, 73 insertions(+)
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/defconfig
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/k3/defconfig
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/omapl138/defconfig
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/defconfig
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/k3/defconfig
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/omapl138/defconfig
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.1.bb
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig
-new file mode 100644
-index 00000000..24b53cf7
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig
-@@ -0,0 +1,2 @@
-+use-kernel-config=multi_v7_defconfig
-+config-fragment=kernel/configs/ti_multi_v7_prune.config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig
-new file mode 100644
-index 00000000..ef1d3efd
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig
-@@ -0,0 +1,2 @@
-+use-kernel-config=defconfig
-+config-fragment=kernel/configs/ti_arm64_prune.config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig
-new file mode 100644
-index 00000000..099493af
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig
-@@ -0,0 +1 @@
-+use-kernel-config=davinci_all_defconfig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/defconfig
-new file mode 100644
-index 00000000..24b53cf7
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/defconfig
-@@ -0,0 +1,2 @@
-+use-kernel-config=multi_v7_defconfig
-+config-fragment=kernel/configs/ti_multi_v7_prune.config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/k3/defconfig
-new file mode 100644
-index 00000000..ef1d3efd
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/k3/defconfig
-@@ -0,0 +1,2 @@
-+use-kernel-config=defconfig
-+config-fragment=kernel/configs/ti_arm64_prune.config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/omapl138/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/omapl138/defconfig
-new file mode 100644
-index 00000000..099493af
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/omapl138/defconfig
-@@ -0,0 +1 @@
-+use-kernel-config=davinci_all_defconfig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-new file mode 100644
-index 00000000..8b978e09
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-@@ -0,0 +1,12 @@
-+require linux-ti-staging_6.1.bb
+diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/met=
+a-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index 9b94a61e..ae7bdb81 100644
+--- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -64,105 +64,103 @@ C7X_4_FW   =3D "ipc_echo_test_c7x_4_release_strip.x=
+e71"
+ ETH_FW =3D "app_remoteswitchcfg_server_strip.xer5f"
+=20
+ DM_FW_LIST =3D ""
+-DM_FW_LIST:am65xx =3D  ""
+ DM_FW_LIST:j721e =3D   "${DM_FIRMWARE}"
+ DM_FW_LIST:j7200 =3D   "${DM_FIRMWARE}"
+ DM_FW_LIST:j721s2 =3D  "${DM_FIRMWARE}"
++DM_FW_LIST:j784s4 =3D  "${DM_FIRMWARE}"
++DM_FW_LIST:am65xx =3D  ""
+ DM_FW_LIST:am64xx =3D  ""
+ DM_FW_LIST:am62xx =3D  "${DM_FIRMWARE}"
+ DM_FW_LIST:am62axx =3D "${DM_FIRMWARE}"
+-DM_FW_LIST:j784s4 =3D  "${DM_FIRMWARE}"
+=20
+ IPC_FW_LIST =3D ""
+-IPC_FW_LIST:am65xx =3D  "${MCU_1_0_FW} ${MCU_1_1_FW}"
+-IPC_FW_LIST:j721e =3D   "                            ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW} ${C66_1_FW} ${C66_2_FW} ${C7X_1_FW}"
++IPC_FW_LIST:j721e =3D   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                             ${C66_1_=
+FW} ${C66_2_FW} ${C7X_1_FW}"
+ IPC_FW_LIST:j7200 =3D   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
+_2_1_FW}"
+-IPC_FW_LIST:j721s2 =3D  "                            ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_2_0_FW} ${MCU_3_1_FW}                         ${C7X_1_FW} =
+${C7X_2_FW}"
++IPC_FW_LIST:j721s2 =3D  "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                                     =
+                ${C7X_1_FW} ${C7X_2_FW}"
++IPC_FW_LIST:j784s4 =3D  "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW} ${MCU_4_0_FW} ${MCU_4_1_FW}         =
+                ${C7X_1_FW} ${C7X_2_FW} ${C7X_3_FW} ${C7X_4_FW}"
++IPC_FW_LIST:am65xx =3D  "${MCU_1_0_FW} ${MCU_1_1_FW}"
+ IPC_FW_LIST:am64xx =3D  "${MCU_1_0_FW} ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_3_0_FW}"
+ IPC_FW_LIST:am62xx =3D  "                            ${MCU_2_0_FW}"
+-IPC_FW_LIST:am62axx =3D "                            ${MCU_2_0_FW}      =
+                                                             ${C7X_1_FW}"
+-IPC_FW_LIST:j784s4 =3D  "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                         ${C7X_1_FW} =
+${C7X_2_FW} ${C7X_3_FW} ${C7X_4_FW}"
++IPC_FW_LIST:am62axx =3D "                            ${MCU_2_0_FW}      =
+                                                                         =
+                ${C7X_1_FW}"
+=20
+ ETH_FW_LIST =3D ""
+-ETH_FW_LIST:am65xx =3D  ""
+ ETH_FW_LIST:j721e =3D   "${ETH_FW}"
+ ETH_FW_LIST:j7200 =3D   "${ETH_FW}"
+ ETH_FW_LIST:j721s2 =3D  ""
++ETH_FW_LIST:j784s4 =3D  "${ETH_FW}"
++ETH_FW_LIST:am65xx =3D  ""
+ ETH_FW_LIST:am64xx =3D  ""
+ ETH_FW_LIST:am62xx =3D  ""
+ ETH_FW_LIST:am62axx =3D ""
+-ETH_FW_LIST:j784s4 =3D  "${ETH_FW}"
+=20
+ # Update the am64xx ipc binaries to be consistent with other platforms
+ do_install:prepend:am64xx() {
+         ( cd ${RTOS_IPC_FW_DIR}; \
+-                ln -s am64-main-r5f0_0-fw ${MCU_1_0_FW}; \
+-                ln -s am64-main-r5f0_1-fw ${MCU_1_1_FW}; \
+-                ln -s am64-main-r5f1_0-fw ${MCU_2_0_FW}; \
+-                ln -s am64-main-r5f1_1-fw ${MCU_2_1_FW}; \
+-                ln -s am64-mcu-m4f0_0-fw ${MCU_3_0_FW}; \
++                ln -sf am64-main-r5f0_0-fw ${MCU_1_0_FW}; \
++                ln -sf am64-main-r5f0_1-fw ${MCU_1_1_FW}; \
++                ln -sf am64-main-r5f1_0-fw ${MCU_2_0_FW}; \
++                ln -sf am64-main-r5f1_1-fw ${MCU_2_1_FW}; \
++                ln -sf am64-mcu-m4f0_0-fw ${MCU_3_0_FW}; \
+         )
+ }
+=20
+ # Update the am62xx ipc binaries to be consistent with other platforms
+ do_install:prepend:am62xx() {
+         ( cd ${RTOS_IPC_FW_DIR}; \
+-                ln -s am62-mcu-m4f0_0-fw ${MCU_2_0_FW}; \
++                ln -sf am62-mcu-m4f0_0-fw ${MCU_2_0_FW}; \
+         )
+ }
+=20
+ # Update the am62axx ipc binaries to be consistent with other platforms
+ do_install:prepend:am62axx() {
+         ( cd ${RTOS_IPC_FW_DIR}; \
+-                ln -s am62a-mcu-r5f0_0-fw ${MCU_1_0_FW}; \
++                ln -sf am62a-mcu-r5f0_0-fw ${MCU_2_0_FW}; \
+         )
+ }
+=20
+-# Sign the firmware
+-do_install:prepend() {
++do_install() {
++    # Sign the firmware
+     # DM Firmware
+     for FW_NAME in ${DM_FW_LIST}
+     do
+-      ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_DM_FW_D=
+IR}/${FW_NAME} ${RTOS_DM_FW_DIR}/${FW_NAME}.signed
++        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_DM_FW=
+_DIR}/${FW_NAME} ${RTOS_DM_FW_DIR}/${FW_NAME}.signed
+     done
+=20
+     # IPC Firmware
+     for FW_NAME in ${IPC_FW_LIST}
+     do
+-      ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_IPC_FW_=
+DIR}/${FW_NAME} ${RTOS_IPC_FW_DIR}/${FW_NAME}.signed
++        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_IPC_F=
+W_DIR}/${FW_NAME} ${RTOS_IPC_FW_DIR}/${FW_NAME}.signed
+     done
+=20
+     # ETH firmware
+     for FW_NAME in ${ETH_FW_LIST}
+     do
+-        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_ETH_F=
+W_DIR}/${FW_NAME} ${RTOS_ETH_FW_DIR}/${FW_NAME}.signed;
++        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_ETH_F=
+W_DIR}/${FW_NAME} ${RTOS_ETH_FW_DIR}/${FW_NAME}.signed
+     done
+-}
+=20
+-#Install all R5 & DSP ipc echo test binaries in lib/firmware/pdk-ipc, wi=
+th softlinks up a level
+-do_install() {
++    # Install all R5 & DSP ipc echo test binaries in lib/firmware/pdk-ip=
+c, with softlinks up a level
+     # DM Firmware
+     install -d ${LEGACY_DM_FW_DIR}
+     for FW_NAME in ${DM_FW_LIST}
+     do
+-      install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}        ${LEGACY_DM_FW=
+_DIR}/${FW_NAME}.unsigned
+-      install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}.signed ${LEGACY_DM_FW=
+_DIR}/${FW_NAME}
++        install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}        ${LEGACY_DM_=
+FW_DIR}/${FW_NAME}.unsigned
++        install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}.signed ${LEGACY_DM_=
+FW_DIR}/${FW_NAME}
+     done
+=20
+     # IPC Firmware
+     install -d ${LEGACY_IPC_FW_DIR}
+     for FW_NAME in ${IPC_FW_LIST}
+     do
+-      install -m 0644 ${RTOS_IPC_FW_DIR}/${FW_NAME}        ${LEGACY_IPC_=
+FW_DIR}
+-      install -m 0644 ${RTOS_IPC_FW_DIR}/${FW_NAME}.signed ${LEGACY_IPC_=
+FW_DIR}
++        install -m 0644 ${RTOS_IPC_FW_DIR}/${FW_NAME}        ${LEGACY_IP=
+C_FW_DIR}
++        install -m 0644 ${RTOS_IPC_FW_DIR}/${FW_NAME}.signed ${LEGACY_IP=
+C_FW_DIR}
+     done
+=20
+     # ETH firmware
+     install -d ${LEGACY_ETH_FW_DIR}
+     for FW_NAME in ${ETH_FW_LIST}
+     do
+-      install -m 0644 ${RTOS_ETH_FW_DIR}/${FW_NAME}        ${LEGACY_ETH_=
+FW_DIR}
+-      install -m 0644 ${RTOS_ETH_FW_DIR}/${FW_NAME}.signed ${LEGACY_ETH_=
+FW_DIR}
++        install -m 0644 ${RTOS_ETH_FW_DIR}/${FW_NAME}        ${LEGACY_ET=
+H_FW_DIR}
++        install -m 0644 ${RTOS_ETH_FW_DIR}/${FW_NAME}.signed ${LEGACY_ET=
+H_FW_DIR}
+     done
+ }
+=20
+@@ -171,8 +169,8 @@ do_deploy() {
+     install -d ${DEPLOYDIR}
+     for FW_NAME in ${DM_FW_LIST}
+     do
+-      install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}        ${DEPLOYDIR}/$=
+{FW_NAME}.unsigned
+-      install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}.signed ${DEPLOYDIR}/$=
+{FW_NAME}
++        install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}        ${DEPLOYDIR}=
+/${FW_NAME}.unsigned
++        install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}.signed ${DEPLOYDIR}=
+/${FW_NAME}
+     done
+ }
+=20
+@@ -189,6 +187,7 @@ ALTERNATIVE:${PN}:am64xx =3D "\
+                     am64-main-r5f1_1-fw \
+                     am64-mcu-m4f0_0-fw \
+                     "
 +
-+DEFAULT_PREFERENCE = "-1"
-+
-+# Look in the generic major.minor directory for files
-+# This will have priority over generic non-rt path
-+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
-+
-+BRANCH = "ti-rt-linux-6.1.y"
-+
-+SRCREV = "b7d4fb88264d2b094035871fa676592eb8e83b25"
-+PV = "6.1+git${SRCPV}"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/defconfig
-new file mode 100644
-index 00000000..24b53cf7
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/defconfig
-@@ -0,0 +1,2 @@
-+use-kernel-config=multi_v7_defconfig
-+config-fragment=kernel/configs/ti_multi_v7_prune.config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/k3/defconfig
-new file mode 100644
-index 00000000..ef1d3efd
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/k3/defconfig
-@@ -0,0 +1,2 @@
-+use-kernel-config=defconfig
-+config-fragment=kernel/configs/ti_arm64_prune.config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/omapl138/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/omapl138/defconfig
-new file mode 100644
-index 00000000..099493af
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/omapl138/defconfig
-@@ -0,0 +1 @@
-+use-kernel-config=davinci_all_defconfig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.1.bb
-new file mode 100644
-index 00000000..1c30d27c
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.1.bb
-@@ -0,0 +1,7 @@
-+require linux-ti-staging_6.1.bb
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+# Look in the generic major.minor directory for files
-+# This will have priority over generic non-rt path
-+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-new file mode 100644
-index 00000000..654951eb
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-@@ -0,0 +1,39 @@
-+SECTION = "kernel"
-+SUMMARY = "Linux kernel for TI devices"
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
-+
-+inherit kernel
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+require recipes-kernel/linux/setup-defconfig.inc
-+require recipes-kernel/linux/kernel-rdepends.inc
-+require recipes-kernel/linux/ti-kernel.inc
-+include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}
-+
-+DEPENDS += "gmp-native libmpc-native"
-+
-+# Look in the generic major.minor directory for files
-+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
-+
-+KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT} \
-+		      ${EXTRA_DTC_ARGS}"
-+
-+S = "${WORKDIR}/git"
-+
-+BRANCH = "ti-linux-6.1.y"
-+
-+SRCREV = "7b7231fbf048963b434d76a3cb866165365b14e0"
-+PV = "6.1+git${SRCPV}"
-+
-+# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-+MACHINE_KERNEL_PR:append = "b"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+KERNEL_GIT_URI = "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
-+KERNEL_GIT_PROTOCOL = "https"
-+SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
-+            file://defconfig"
-+
-+FILES:${KERNEL_PACKAGE_NAME}-devicetree += "/${KERNEL_IMAGEDEST}/*.itb"
--- 
-2.17.1
+ ALTERNATIVE:${PN}:am62xx =3D "\
+                     am62-mcu-m4f0_0-fw \
+                     am62-main-r5f0_0-fw \
+--=20
+2.25.1
 
 
