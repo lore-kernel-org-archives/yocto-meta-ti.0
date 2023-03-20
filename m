@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C485C7EE21
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7411C7EE2F
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 03:38:48 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.6304.1679283526981442760
+ by mx.groups.io with SMTP id smtpd.web10.6389.1679283524884757757
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 19 Mar 2023 20:38:47 -0700
+ Sun, 19 Mar 2023 20:38:45 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id D022140CAA
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:38:44 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id CA4C440CBE
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:38:42 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8SI9tX0kpzD8 for <meta-ti@lists.yoctoproject.org>;
-	Mon, 20 Mar 2023 03:38:44 +0000 (UTC)
+	with ESMTP id OzzW5AwiNuSC for <meta-ti@lists.yoctoproject.org>;
+	Mon, 20 Mar 2023 03:38:42 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B0D4440CD5
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:38:43 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id BDB9E40CB7
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:38:42 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 6A8231637C4
-	for <meta-ti@lists.yoctoproject.org>; Sun, 19 Mar 2023 23:38:10 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 754561637E1
+	for <meta-ti@lists.yoctoproject.org>; Sun, 19 Mar 2023 23:38:09 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [kirkstone][PATCH 50/54] ti-k3-secdev: update to the latest from Dunfell
-Date: Mon, 20 Mar 2023 03:38:36 +0000
-Message-Id: <20230320033840.1193963-51-denis@denix.org>
+Subject: [kirkstone][PATCH 29/54] conf: machine: j721s2: Add AM68 SK specific dtb and dtbo to KERNEL_DEVICETREE
+Date: Mon, 20 Mar 2023 03:38:15 +0000
+Message-Id: <20230320033840.1193963-30-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320033840.1193963-1-denis@denix.org>
 References: <20230320033840.1193963-1-denis@denix.org>
@@ -39,33 +39,44 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 03:38:48 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16051
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16016
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+From: Sinthu Raja <sinthu.raja@ti.com>
 
-Match the latest sha used in Dunfell.
+AM68 Starter Kit is a low cost, small form factor board designed for
+TI's AM68/J721S2 SoC[1] which is optimized to provide best in class perfo=
+rmance
+for industrial applications. Add DTB entry for the same.
 
+AM68 SK features camera support with MIPI(OV5640) and RPi(IMX219) connect=
+ors.
+Add DTBO for the same. Also, add DTBO entry for the DDR memory carveout.
+
+[1]:http://www.ti.com/lit/zip/spruj28
+
+Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-ti/secdev/ti-k3-secdev_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-ti-bsp/conf/machine/j721s2-evm.conf | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-ti-bsp/recipes-ti/secdev/ti-k3-secdev_git.bb b/meta-ti-=
-bsp/recipes-ti/secdev/ti-k3-secdev_git.bb
-index b4c26f68..87987ae0 100644
---- a/meta-ti-bsp/recipes-ti/secdev/ti-k3-secdev_git.bb
-+++ b/meta-ti-bsp/recipes-ti/secdev/ti-k3-secdev_git.bb
-@@ -15,7 +15,7 @@ COMPATIBLE_MACHINE:class-nativesdk =3D "(.*)"
- GIT_URI =3D "git://git.ti.com/git/security-development-tools/core-secdev=
--k3.git"
- GIT_PROTOCOL =3D "https"
- GIT_BRANCH =3D "master"
--GIT_SRCREV =3D "eb2c4d734487e5095b94cef3fd7213ee71d9e016"
-+GIT_SRCREV =3D "bba9cabaeee96f7f287385188ff289b46769a4bf"
+diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/=
+machine/j721s2-evm.conf
+index 93efbb70..e3e52b49 100644
+--- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
++++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+@@ -10,6 +10,10 @@ TFA_K3_USART =3D "0x8"
+ OPTEE_K3_USART =3D "0x8"
 =20
- SRC_URI =3D "${GIT_URI};protocol=3D${GIT_PROTOCOL};branch=3D${GIT_BRANCH=
-}"
- SRCREV =3D "${GIT_SRCREV}"
+ KERNEL_DEVICETREE =3D " \
++    ti/k3-am68-sk-base-board.dtb \
++    ti/k3-am68-sk-bb-csi2-ov5640.dtb \
++    ti/k3-am68-sk-bb-rpi-cam-imx219.dtbo \
++    ti/k3-am68-sk-som-ddr_mem_carveout.dtbo \
+     ti/k3-j721s2-common-proc-board.dtb \
+     ti/k3-j721s2-gesi-exp-board.dtbo \
+ "
 --=20
 2.25.1
 
