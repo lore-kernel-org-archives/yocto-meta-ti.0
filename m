@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14AB2C761A6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1200CC761AF
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 04:12:50 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.6813.1679285566811711737
+ by mx.groups.io with SMTP id smtpd.web10.6815.1679285566818326308
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 19 Mar 2023 21:12:46 -0700
+ Sun, 19 Mar 2023 21:12:47 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9C15540CCA
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A92C740CB3
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:45 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FlIgjQZzyceG for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id FyrNf6bIplwQ for <meta-ti@lists.yoctoproject.org>;
 	Mon, 20 Mar 2023 04:12:45 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8C0CD40CCB
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9934A40CCE
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:44 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 9A5BA1637D2
+	by mail.denix.org (Postfix) with ESMTP id A749C1637D5
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 00:12:12 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [kirkstone][PATCH 52/54] u-boot-ti-staging: update to the latest from Dunfell
-Date: Mon, 20 Mar 2023 04:12:39 +0000
-Message-Id: <20230320041241.1293077-53-denis@denix.org>
+Subject: [kirkstone][PATCH 54/54] ti-rtos-firmware: numerous fixes and cleanups
+Date: Mon, 20 Mar 2023 04:12:41 +0000
+Message-Id: <20230320041241.1293077-55-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320041241.1293077-1-denis@denix.org>
 References: <20230320041241.1293077-1-denis@denix.org>
@@ -39,28 +39,231 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16156
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16157
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-Match the latest sha used in Dunfell.
+Doing multiple do_install:prepend overrides does not guarantee the
+order - it was observed that signing could fail as it was happening
+prior to symlinking to the correct name. Move signing code inside the
+main do_install, so the machine-specific do_install:prepend works
+correctly.
+
+Also, pass -f flag for symlinking, otherwise it could fail with "file
+already exists" error when trying to re-build the recipe again.
+
+Several IPC list/matrix fixes:
+* j721e was missing MCU_1_1_FW entry
+* j721s2 was also missing MCU_1_1_FW entry
+* j721s2 had a second MCU_2_0_FW in place of MCU_3_0_FW
+* j784s4 was missing MCU_4_0_FW and MCU_4_1_FW entries
+
+Other minor cleanups and indentation fixes.
 
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../ti-rtos-bin/ti-rtos-firmware.bb           | 63 +++++++++----------
+ 1 file changed, 31 insertions(+), 32 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb =
-b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-index 1640d042..7763d8b1 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-@@ -6,4 +6,4 @@ PR =3D "r33"
+diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/met=
+a-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index 9b94a61e..ae7bdb81 100644
+--- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -64,105 +64,103 @@ C7X_4_FW   =3D "ipc_echo_test_c7x_4_release_strip.x=
+e71"
+ ETH_FW =3D "app_remoteswitchcfg_server_strip.xer5f"
 =20
- BRANCH =3D "ti-u-boot-2021.01"
+ DM_FW_LIST =3D ""
+-DM_FW_LIST:am65xx =3D  ""
+ DM_FW_LIST:j721e =3D   "${DM_FIRMWARE}"
+ DM_FW_LIST:j7200 =3D   "${DM_FIRMWARE}"
+ DM_FW_LIST:j721s2 =3D  "${DM_FIRMWARE}"
++DM_FW_LIST:j784s4 =3D  "${DM_FIRMWARE}"
++DM_FW_LIST:am65xx =3D  ""
+ DM_FW_LIST:am64xx =3D  ""
+ DM_FW_LIST:am62xx =3D  "${DM_FIRMWARE}"
+ DM_FW_LIST:am62axx =3D "${DM_FIRMWARE}"
+-DM_FW_LIST:j784s4 =3D  "${DM_FIRMWARE}"
 =20
--SRCREV =3D "78a217ca9ea687ee5c3e7dd3a339a1f7d136e93d"
-+SRCREV =3D "2ee8efd6543648c6b8a14d93d52a6038854035c8"
+ IPC_FW_LIST =3D ""
+-IPC_FW_LIST:am65xx =3D  "${MCU_1_0_FW} ${MCU_1_1_FW}"
+-IPC_FW_LIST:j721e =3D   "                            ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW} ${C66_1_FW} ${C66_2_FW} ${C7X_1_FW}"
++IPC_FW_LIST:j721e =3D   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                             ${C66_1_=
+FW} ${C66_2_FW} ${C7X_1_FW}"
+ IPC_FW_LIST:j7200 =3D   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
+_2_1_FW}"
+-IPC_FW_LIST:j721s2 =3D  "                            ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_2_0_FW} ${MCU_3_1_FW}                         ${C7X_1_FW} =
+${C7X_2_FW}"
++IPC_FW_LIST:j721s2 =3D  "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                                     =
+                ${C7X_1_FW} ${C7X_2_FW}"
++IPC_FW_LIST:j784s4 =3D  "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW} ${MCU_4_0_FW} ${MCU_4_1_FW}         =
+                ${C7X_1_FW} ${C7X_2_FW} ${C7X_3_FW} ${C7X_4_FW}"
++IPC_FW_LIST:am65xx =3D  "${MCU_1_0_FW} ${MCU_1_1_FW}"
+ IPC_FW_LIST:am64xx =3D  "${MCU_1_0_FW} ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_3_0_FW}"
+ IPC_FW_LIST:am62xx =3D  "                            ${MCU_2_0_FW}"
+-IPC_FW_LIST:am62axx =3D "                            ${MCU_2_0_FW}      =
+                                                             ${C7X_1_FW}"
+-IPC_FW_LIST:j784s4 =3D  "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU=
+_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                         ${C7X_1_FW} =
+${C7X_2_FW} ${C7X_3_FW} ${C7X_4_FW}"
++IPC_FW_LIST:am62axx =3D "                            ${MCU_2_0_FW}      =
+                                                                         =
+                ${C7X_1_FW}"
+=20
+ ETH_FW_LIST =3D ""
+-ETH_FW_LIST:am65xx =3D  ""
+ ETH_FW_LIST:j721e =3D   "${ETH_FW}"
+ ETH_FW_LIST:j7200 =3D   "${ETH_FW}"
+ ETH_FW_LIST:j721s2 =3D  ""
++ETH_FW_LIST:j784s4 =3D  "${ETH_FW}"
++ETH_FW_LIST:am65xx =3D  ""
+ ETH_FW_LIST:am64xx =3D  ""
+ ETH_FW_LIST:am62xx =3D  ""
+ ETH_FW_LIST:am62axx =3D ""
+-ETH_FW_LIST:j784s4 =3D  "${ETH_FW}"
+=20
+ # Update the am64xx ipc binaries to be consistent with other platforms
+ do_install:prepend:am64xx() {
+         ( cd ${RTOS_IPC_FW_DIR}; \
+-                ln -s am64-main-r5f0_0-fw ${MCU_1_0_FW}; \
+-                ln -s am64-main-r5f0_1-fw ${MCU_1_1_FW}; \
+-                ln -s am64-main-r5f1_0-fw ${MCU_2_0_FW}; \
+-                ln -s am64-main-r5f1_1-fw ${MCU_2_1_FW}; \
+-                ln -s am64-mcu-m4f0_0-fw ${MCU_3_0_FW}; \
++                ln -sf am64-main-r5f0_0-fw ${MCU_1_0_FW}; \
++                ln -sf am64-main-r5f0_1-fw ${MCU_1_1_FW}; \
++                ln -sf am64-main-r5f1_0-fw ${MCU_2_0_FW}; \
++                ln -sf am64-main-r5f1_1-fw ${MCU_2_1_FW}; \
++                ln -sf am64-mcu-m4f0_0-fw ${MCU_3_0_FW}; \
+         )
+ }
+=20
+ # Update the am62xx ipc binaries to be consistent with other platforms
+ do_install:prepend:am62xx() {
+         ( cd ${RTOS_IPC_FW_DIR}; \
+-                ln -s am62-mcu-m4f0_0-fw ${MCU_2_0_FW}; \
++                ln -sf am62-mcu-m4f0_0-fw ${MCU_2_0_FW}; \
+         )
+ }
+=20
+ # Update the am62axx ipc binaries to be consistent with other platforms
+ do_install:prepend:am62axx() {
+         ( cd ${RTOS_IPC_FW_DIR}; \
+-                ln -s am62a-mcu-r5f0_0-fw ${MCU_1_0_FW}; \
++                ln -sf am62a-mcu-r5f0_0-fw ${MCU_2_0_FW}; \
+         )
+ }
+=20
+-# Sign the firmware
+-do_install:prepend() {
++do_install() {
++    # Sign the firmware
+     # DM Firmware
+     for FW_NAME in ${DM_FW_LIST}
+     do
+-      ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_DM_FW_D=
+IR}/${FW_NAME} ${RTOS_DM_FW_DIR}/${FW_NAME}.signed
++        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_DM_FW=
+_DIR}/${FW_NAME} ${RTOS_DM_FW_DIR}/${FW_NAME}.signed
+     done
+=20
+     # IPC Firmware
+     for FW_NAME in ${IPC_FW_LIST}
+     do
+-      ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_IPC_FW_=
+DIR}/${FW_NAME} ${RTOS_IPC_FW_DIR}/${FW_NAME}.signed
++        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_IPC_F=
+W_DIR}/${FW_NAME} ${RTOS_IPC_FW_DIR}/${FW_NAME}.signed
+     done
+=20
+     # ETH firmware
+     for FW_NAME in ${ETH_FW_LIST}
+     do
+-        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_ETH_F=
+W_DIR}/${FW_NAME} ${RTOS_ETH_FW_DIR}/${FW_NAME}.signed;
++        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${RTOS_ETH_F=
+W_DIR}/${FW_NAME} ${RTOS_ETH_FW_DIR}/${FW_NAME}.signed
+     done
+-}
+=20
+-#Install all R5 & DSP ipc echo test binaries in lib/firmware/pdk-ipc, wi=
+th softlinks up a level
+-do_install() {
++    # Install all R5 & DSP ipc echo test binaries in lib/firmware/pdk-ip=
+c, with softlinks up a level
+     # DM Firmware
+     install -d ${LEGACY_DM_FW_DIR}
+     for FW_NAME in ${DM_FW_LIST}
+     do
+-      install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}        ${LEGACY_DM_FW=
+_DIR}/${FW_NAME}.unsigned
+-      install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}.signed ${LEGACY_DM_FW=
+_DIR}/${FW_NAME}
++        install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}        ${LEGACY_DM_=
+FW_DIR}/${FW_NAME}.unsigned
++        install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}.signed ${LEGACY_DM_=
+FW_DIR}/${FW_NAME}
+     done
+=20
+     # IPC Firmware
+     install -d ${LEGACY_IPC_FW_DIR}
+     for FW_NAME in ${IPC_FW_LIST}
+     do
+-      install -m 0644 ${RTOS_IPC_FW_DIR}/${FW_NAME}        ${LEGACY_IPC_=
+FW_DIR}
+-      install -m 0644 ${RTOS_IPC_FW_DIR}/${FW_NAME}.signed ${LEGACY_IPC_=
+FW_DIR}
++        install -m 0644 ${RTOS_IPC_FW_DIR}/${FW_NAME}        ${LEGACY_IP=
+C_FW_DIR}
++        install -m 0644 ${RTOS_IPC_FW_DIR}/${FW_NAME}.signed ${LEGACY_IP=
+C_FW_DIR}
+     done
+=20
+     # ETH firmware
+     install -d ${LEGACY_ETH_FW_DIR}
+     for FW_NAME in ${ETH_FW_LIST}
+     do
+-      install -m 0644 ${RTOS_ETH_FW_DIR}/${FW_NAME}        ${LEGACY_ETH_=
+FW_DIR}
+-      install -m 0644 ${RTOS_ETH_FW_DIR}/${FW_NAME}.signed ${LEGACY_ETH_=
+FW_DIR}
++        install -m 0644 ${RTOS_ETH_FW_DIR}/${FW_NAME}        ${LEGACY_ET=
+H_FW_DIR}
++        install -m 0644 ${RTOS_ETH_FW_DIR}/${FW_NAME}.signed ${LEGACY_ET=
+H_FW_DIR}
+     done
+ }
+=20
+@@ -171,8 +169,8 @@ do_deploy() {
+     install -d ${DEPLOYDIR}
+     for FW_NAME in ${DM_FW_LIST}
+     do
+-      install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}        ${DEPLOYDIR}/$=
+{FW_NAME}.unsigned
+-      install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}.signed ${DEPLOYDIR}/$=
+{FW_NAME}
++        install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}        ${DEPLOYDIR}=
+/${FW_NAME}.unsigned
++        install -m 0644 ${RTOS_DM_FW_DIR}/${FW_NAME}.signed ${DEPLOYDIR}=
+/${FW_NAME}
+     done
+ }
+=20
+@@ -189,6 +187,7 @@ ALTERNATIVE:${PN}:am64xx =3D "\
+                     am64-main-r5f1_1-fw \
+                     am64-mcu-m4f0_0-fw \
+                     "
++
+ ALTERNATIVE:${PN}:am62xx =3D "\
+                     am62-mcu-m4f0_0-fw \
+                     am62-main-r5f0_0-fw \
 --=20
 2.25.1
 
