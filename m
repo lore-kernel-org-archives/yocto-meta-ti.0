@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E11E6C7EE33
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CCE4FC7EE2F
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 11:25:03 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.11360.1679311496819722697
+ by mx.groups.io with SMTP id smtpd.web11.11357.1679311496718155774
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 20 Mar 2023 04:24:57 -0700
+ Mon, 20 Mar 2023 04:24:56 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 2442A40301
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:24:56 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A820740C46
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:24:54 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id bNDBQwuqMxDi for <meta-ti@lists.yoctoproject.org>;
-	Mon, 20 Mar 2023 11:24:56 +0000 (UTC)
+	with ESMTP id hmQmK_Q19Guw for <meta-ti@lists.yoctoproject.org>;
+	Mon, 20 Mar 2023 11:24:54 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D5F9140CB1
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8864F40C60
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:24:54 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 166281637DA
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 07:24:21 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 9A9FF1637CE
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 07:24:20 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 22/53] ti-sci-fw: Add SYSFW_SUFFIX to sysfw.itb files
-Date: Mon, 20 Mar 2023 11:24:21 +0000
-Message-Id: <20230320112452.2813505-23-denis@denix.org>
+Subject: [master][PATCH 10/53] optee-os: Lower log level for am62axx
+Date: Mon, 20 Mar 2023 11:24:09 +0000
+Message-Id: <20230320112452.2813505-11-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320112452.2813505-1-denis@denix.org>
 References: <20230320112452.2813505-1-denis@denix.org>
@@ -39,71 +39,38 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:25:03 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16175
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16171
 
-From: Ryan Eatmon <reatmon@ti.com>
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-With the advent of using multiconfigs to build all of the versions of
-the machines (gp, hs-se, hs-fs, etc...) the sysfw.itb has become a point
-of contention for do_deploy.  To resolve the duplicate file copy errors
-from bitbake we need to uniquify the sysfw.itb file names.  So, let's do
-the same thing we do with the tiboot3.bin file and add the SYSFW_SUFFIX
-into the name.
+Lower the log level for am62axx platform
 
+commit 27641e1f2d7f ("optee-os: Lower log level for AM62x")
+changes the log level for am62xx platforms.
+This patch is to extend the same for am62axx
+
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+Reported-by: Sai Sree Kartheek Adivi <s-adivi@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- .../recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb    | 20 +++++++++++++++++--
- 1 file changed, 18 insertions(+), 2 deletions(-)
+ meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/meta-ti=
--bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-index 75b9f8a6..b65d8502 100644
---- a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-+++ b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
-@@ -51,10 +51,26 @@ SYSFW_TIBOOT3 =3D "tiboot3-${SYSFW_SOC}-${SYSFW_SUFFI=
-X}-${SYSFW_CONFIG}.bin"
- SYSFW_TIBOOT3_SYMLINK ?=3D "tiboot3.bin"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend b/met=
+a-ti-bsp/recipes-security/optee/optee-os_%.bbappend
+index 2bc7b409..583f1c73 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
++++ b/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
+@@ -4,6 +4,7 @@ inherit ti-secdev
+ EXTRA_OEMAKE:append:k3 =3D "${@ ' CFG_CONSOLE_UART=3D'+ d.getVar('OPTEE_=
+K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
 =20
- SYSFW_BINARY =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
--SYSFW_VBINARY =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
--SYSFW_IMAGE =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
-+SYSFW_VBINARY =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_SUFFIX}-${SYSFW_CONF=
-IG}.itb"
-+SYSFW_IMAGE =3D "sysfw-${SYSFW_SOC}-${SYSFW_SUFFIX}-${SYSFW_CONFIG}.itb"
- SYSFW_SYMLINK ?=3D "sysfw.itb"
+ EXTRA_OEMAKE:append:am62xx =3D " CFG_TEE_CORE_LOG_LEVEL=3D1"
++EXTRA_OEMAKE:append:am62axx =3D " CFG_TEE_CORE_LOG_LEVEL=3D1"
 =20
-+SYSFW_VBINARY:am65xx-evm-k3r5 =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONF=
-IG}.itb"
-+SYSFW_VBINARY:am65xx-evm-k3r5-sr2 =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_=
-CONFIG}.itb"
-+SYSFW_VBINARY:am65xx-hs-evm-k3r5 =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_C=
-ONFIG}.itb"
-+SYSFW_VBINARY:am65xx-hs-evm-k3r5-sr2 =3D "sysfw-${PV}-${SYSFW_SOC}-${SYS=
-FW_CONFIG}.itb"
-+SYSFW_VBINARY:j721e-evm-k3r5 =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CONFI=
-G}.itb"
-+SYSFW_VBINARY:j721e-hs-evm-k3r5 =3D "sysfw-${PV}-${SYSFW_SOC}-${SYSFW_CO=
-NFIG}.itb"
-+SYSFW_VBINARY:j721e-hs-evm-k3r5-sr1-1 =3D "sysfw-${PV}-${SYSFW_SOC}-${SY=
-SFW_CONFIG}.itb"
-+
-+SYSFW_IMAGE:am65xx-evm-k3r5 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
-+SYSFW_IMAGE:am65xx-evm-k3r5-sr2 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.=
-itb"
-+SYSFW_IMAGE:am65xx-hs-evm-k3r5 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.i=
-tb"
-+SYSFW_IMAGE:am65xx-hs-evm-k3r5-sr2 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFI=
-G}.itb"
-+SYSFW_IMAGE:j721e-evm-k3r5 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
-+SYSFW_IMAGE:j721e-hs-evm-k3r5 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.it=
-b"
-+SYSFW_IMAGE:j721e-hs-evm-k3r5-sr1-1 =3D "sysfw-${SYSFW_SOC}-${SYSFW_CONF=
-IG}.itb"
-+
- CFLAGS[unexport] =3D "1"
- LDFLAGS[unexport] =3D "1"
- AS[unexport] =3D "1"
+ do_compile:append:k3() {
+     ( cd ${B}/core/; \
 --=20
 2.25.1
 
