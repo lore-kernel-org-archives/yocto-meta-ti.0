@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CCE4FC7EE2F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CB869C7EE2D
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 11:25:03 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.11357.1679311496718155774
+ by mx.groups.io with SMTP id smtpd.web11.11358.1679311496738732047
  for <meta-ti@lists.yoctoproject.org>;
  Mon, 20 Mar 2023 04:24:56 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id A820740C46
+	by mailout4.zoneedit.com (Postfix) with ESMTP id AE4B340C60
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:24:54 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hmQmK_Q19Guw for <meta-ti@lists.yoctoproject.org>;
+	with ESMTP id BYWaxBwUYduc for <meta-ti@lists.yoctoproject.org>;
 	Mon, 20 Mar 2023 11:24:54 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8864F40C60
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9557240301
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:24:54 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 9A9FF1637CE
+	by mail.denix.org (Postfix) with ESMTP id B01FA1637D0
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 07:24:20 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 10/53] optee-os: Lower log level for am62axx
-Date: Mon, 20 Mar 2023 11:24:09 +0000
-Message-Id: <20230320112452.2813505-11-denis@denix.org>
+Subject: [master][PATCH 12/53] hs: Deploy the unsigned versions of bl31 and bl32
+Date: Mon, 20 Mar 2023 11:24:11 +0000
+Message-Id: <20230320112452.2813505-13-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320112452.2813505-1-denis@denix.org>
 References: <20230320112452.2813505-1-denis@denix.org>
@@ -39,38 +39,93 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:25:03 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16171
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16172
 
-From: Praneeth Bajjuri <praneeth@ti.com>
+From: Ryan Eatmon <reatmon@ti.com>
 
-Lower the log level for am62axx platform
+In addition to releasing the signed versions of the bl31.bin and
+bl32.bin files, also release the unsigned original versions.
 
-commit 27641e1f2d7f ("optee-os: Lower log level for AM62x")
-changes the log level for am62xx platforms.
-This patch is to extend the same for am62axx
-
-Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
-Reported-by: Sai Sree Kartheek Adivi <s-adivi@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend | 1 +
- 1 file changed, 1 insertion(+)
+ .../trusted-firmware-a/trusted-firmware-a_%.bbappend | 12 ++++++++++++
+ .../recipes-security/optee/optee-os_%.bbappend       | 10 +++-------
+ 2 files changed, 15 insertions(+), 7 deletions(-)
 
+diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-=
+a_%.bbappend b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmwar=
+e-a_%.bbappend
+index 01d3f7d5..13581358 100644
+--- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bba=
+ppend
++++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bba=
+ppend
+@@ -20,3 +20,15 @@ do_compile:append:k3() {
+ 	mv ${BUILD_DIR}/bl31.bin ${BUILD_DIR}/bl31.bin.unsigned
+ 	${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${BUILD_DIR}/bl31.b=
+in.unsigned ${BUILD_DIR}/bl31.bin
+ }
++
++do_install:append:k3() {
++    if [ -f ${BUILD_DIR}/bl31.bin.unsigned ]; then
++        echo "Install bl31.bin.unsigned"
++        install -m 0644 ${BUILD_DIR}/bl31.bin.unsigned \
++        ${D}/firmware/bl31.bin.unsigned
++    else
++        echo "Install bl31.bin.unsigned"
++        install -m 0644 ${BUILD_DIR}/bl31.bin \
++        ${D}/firmware/bl31.bin.unsigned
++    fi
++}
 diff --git a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend b/met=
 a-ti-bsp/recipes-security/optee/optee-os_%.bbappend
-index 2bc7b409..583f1c73 100644
+index 583f1c73..a06fe858 100644
 --- a/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
 +++ b/meta-ti-bsp/recipes-security/optee/optee-os_%.bbappend
-@@ -4,6 +4,7 @@ inherit ti-secdev
- EXTRA_OEMAKE:append:k3 =3D "${@ ' CFG_CONSOLE_UART=3D'+ d.getVar('OPTEE_=
-K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
-=20
+@@ -6,13 +6,6 @@ EXTRA_OEMAKE:append:k3 =3D "${@ ' CFG_CONSOLE_UART=3D'+ =
+d.getVar('OPTEE_K3_USART') i
  EXTRA_OEMAKE:append:am62xx =3D " CFG_TEE_CORE_LOG_LEVEL=3D1"
-+EXTRA_OEMAKE:append:am62axx =3D " CFG_TEE_CORE_LOG_LEVEL=3D1"
+ EXTRA_OEMAKE:append:am62axx =3D " CFG_TEE_CORE_LOG_LEVEL=3D1"
 =20
- do_compile:append:k3() {
+-do_compile:append:k3() {
+-    ( cd ${B}/core/; \
+-        cp tee-pager_v2.bin ${B}/bl32.bin; \
+-        cp tee.elf ${B}/bl32.elf; \
+-    )
+-}
+-
+ # Signing procedure for legacy HS devices
+ optee_sign_legacyhs() {
      ( cd ${B}/core/; \
+@@ -43,12 +36,14 @@ do_compile:append:dra7xx() {
+ # Signing procedure for K3 devices
+ do_compile:append:k3() {
+     ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${B}/core/tee-pa=
+ger_v2.bin ${B}/bl32.bin
++    cp ${B}/core/tee-pager_v2.bin ${B}/bl32.bin.unsigned
+     cp ${B}/core/tee.elf ${B}/bl32.elf
+ }
+=20
+ do_install:append:ti-soc() {
+     install -m 644 ${B}/*.optee ${D}${nonarch_base_libdir}/firmware/ || =
+true
+     install -m 644 ${B}/bl32.bin ${D}${nonarch_base_libdir}/firmware/ ||=
+ true
++    install -m 644 ${B}/bl32.bin.unsigned ${D}${nonarch_base_libdir}/fir=
+mware/ || true
+     install -m 644 ${B}/bl32.elf ${D}${nonarch_base_libdir}/firmware/ ||=
+ true
+ }
+=20
+@@ -69,6 +64,7 @@ do_deploy:append:dra7xx() {
+=20
+ do_deploy:append:k3() {
+     ln -sf optee/bl32.bin ${DEPLOYDIR}/
++    ln -sf optee/bl32.bin.unsigned ${DEPLOYDIR}/
+     ln -sf optee/bl32.elf ${DEPLOYDIR}/
+ }
+=20
 --=20
 2.25.1
 
