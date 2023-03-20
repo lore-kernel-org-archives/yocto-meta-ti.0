@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0493C7EE3A
-	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 11:25:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F072AC7618D
+	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 11:25:13 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.11271.1679311495497159693
+ by mx.groups.io with SMTP id smtpd.web10.11300.1679311505843035577
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 20 Mar 2023 04:24:55 -0700
+ Mon, 20 Mar 2023 04:25:05 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 5BD6E40CA2
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:24:54 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3562640C60
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:25:05 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FeJJYlmmxzRf for <meta-ti@lists.yoctoproject.org>;
-	Mon, 20 Mar 2023 11:24:54 +0000 (UTC)
+	with ESMTP id tAkSx5asIxkq for <meta-ti@lists.yoctoproject.org>;
+	Mon, 20 Mar 2023 11:25:05 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4910C40C5D
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9F37840CBD
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:24:54 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 4A99C1637C4
+	by mail.denix.org (Postfix) with ESMTP id C6AA01637D2
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 07:24:20 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [master][PATCH 01/53] conf: machine: Add J784S4 hs platform
-Date: Mon, 20 Mar 2023 11:24:00 +0000
-Message-Id: <20230320112452.2813505-2-denis@denix.org>
+Subject: [master][PATCH 14/53] trusted-firmware-a: upgrade to v2.8+
+Date: Mon, 20 Mar 2023 11:24:13 +0000
+Message-Id: <20230320112452.2813505-15-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320112452.2813505-1-denis@denix.org>
 References: <20230320112452.2813505-1-denis@denix.org>
@@ -38,60 +38,45 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:25:03 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16163
+ <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 11:25:13 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16213
 
-From: Manorit Chawdhry <m-chawdhry@ti.com>
+From: Judith Mendez <jm@ti.com>
 
-Machine conf for J784S4 HS platform.
-Used J721S2 hs as reference.
+Upgrade arm-trusted-firmare to v2.8-226-g2fcd408bb.
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+This upgrade picks up K3 L2 cache, snoop delayed, and EA
+handling updates from upstream master.
+
+Do not update to tip of master due to PSCI system off
+support breaking AM62x and AM62q platforms.
+
+Signed-off-by: Judith Mendez <jm@ti.com>
+Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
+Tested-by: Manorit Chawdhry <m-chawdhry@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/conf/machine/j784s4-hs-evm-k3r5.conf | 11 +++++++++++
- meta-ti-bsp/conf/machine/j784s4-hs-evm.conf      | 11 +++++++++++
- 2 files changed, 22 insertions(+)
- create mode 100644 meta-ti-bsp/conf/machine/j784s4-hs-evm-k3r5.conf
- create mode 100644 meta-ti-bsp/conf/machine/j784s4-hs-evm.conf
+ .../trusted-firmware-a/trusted-firmware-a_%.bbappend          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/machine/j784s4-hs-evm-k3r5.conf b/meta-ti-b=
-sp/conf/machine/j784s4-hs-evm-k3r5.conf
-new file mode 100644
-index 00000000..80a228a0
---- /dev/null
-+++ b/meta-ti-bsp/conf/machine/j784s4-hs-evm-k3r5.conf
-@@ -0,0 +1,11 @@
-+#@TYPE: Machine
-+#@NAME: J784S4 HS EVM (R5F)
-+#@DESCRIPTION: Machine configuration for the TI J784S4 HS EVM (R5F core)
-+
-+require conf/machine/include/k3r5.inc
-+
-+SYSFW_SOC =3D "j784s4"
-+SYSFW_CONFIG =3D "evm"
-+SYSFW_SUFFIX =3D "hs"
-+
-+UBOOT_MACHINE =3D "j784s4_evm_r5_defconfig"
-diff --git a/meta-ti-bsp/conf/machine/j784s4-hs-evm.conf b/meta-ti-bsp/co=
-nf/machine/j784s4-hs-evm.conf
-new file mode 100644
-index 00000000..62357d62
---- /dev/null
-+++ b/meta-ti-bsp/conf/machine/j784s4-hs-evm.conf
-@@ -0,0 +1,11 @@
-+#@TYPE: Machine
-+#@NAME: J784S4 HS EVM
-+#@DESCRIPTION: Machine configuration for the TI J784S4 HS EVM
-+
-+require conf/machine/j784s4-evm.conf
-+
-+UBOOT_MACHINE =3D "j784s4_evm_a72_defconfig"
-+
-+SPL_BINARY =3D "tispl.bin_HS"
-+UBOOT_BINARY =3D "u-boot.img_HS"
-+UBOOT_SYMLINK =3D "u-boot.img"
+diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-=
+a_%.bbappend b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmwar=
+e-a_%.bbappend
+index 13581358..4019a94b 100644
+--- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bba=
+ppend
++++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bba=
+ppend
+@@ -1,5 +1,5 @@
+-PV:k3 =3D "2.7"
+-SRCREV_tfa:k3 =3D "1309c6c805190bd376c0561597653f3f8ecd0f58"
++PV:k3 =3D "2.8+git${SRCPV}"
++SRCREV_tfa:k3 =3D "2fcd408bb3a6756767a43c073c597cef06e7f2d5"
+ SRC_URI:k3 =3D "git://git.trustedfirmware.org/TF-A/trusted-firmware-a.gi=
+t;protocol=3Dhttps;name=3Dtfa;branch=3Dmaster"
+ COMPATIBLE_MACHINE:k3 =3D "k3"
+ TFA_BUILD_TARGET:k3 =3D "all"
 --=20
 2.25.1
 
