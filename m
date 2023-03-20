@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71FB1C77B78
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5309C7EE23
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 04:12:50 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.6805.1679285565849826621
+ by mx.groups.io with SMTP id smtpd.web11.6726.1679285566747883484
  for <meta-ti@lists.yoctoproject.org>;
  Sun, 19 Mar 2023 21:12:46 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9CD6640C62
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:44 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3ABEA40C50
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:45 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4MzjVUVmqApg for <meta-ti@lists.yoctoproject.org>;
-	Mon, 20 Mar 2023 04:12:44 +0000 (UTC)
+	with ESMTP id 0URhwcBOMS9L for <meta-ti@lists.yoctoproject.org>;
+	Mon, 20 Mar 2023 04:12:45 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 917C140CC1
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:43 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3134240CAB
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:44 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id A21301637D3
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 00:12:11 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 3F4881637CB
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 00:12:12 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [kirkstone][PATCH 31/54] conf: machine: j784s4: Add AM69 SK specific dtb and dtbo to KERNEL_DEVICETREE
-Date: Mon, 20 Mar 2023 04:12:18 +0000
-Message-Id: <20230320041241.1293077-32-denis@denix.org>
+Subject: [kirkstone][PATCH 44/54] conf: machine: j721s2-evm: Add uarts overlay for J721S2
+Date: Mon, 20 Mar 2023 04:12:31 +0000
+Message-Id: <20230320041241.1293077-45-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320041241.1293077-1-denis@denix.org>
 References: <20230320041241.1293077-1-denis@denix.org>
@@ -39,45 +39,34 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16138
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16151
 
-From: Dasnavis Sabiya <sabiya.d@ti.com>
+From: Bhavya Kapoor <b-kapoor@ti.com>
 
-AM69 Starter Kit is a single board designed based on TI's AM69 SOC
-providing advanced system integration in automotive ADAS applications,
-autonomous mobile robot and edge AI applications. Add support
-for the same to include the board dtb file into the root filesystem.
+Add device tree overlay for extending support for mcu_uart0 as well as
+wkup_uart0 for boards with J721S2 SoC. This overlay will mainly be used
+for the purpose of testing uart instances.
 
-Add DT overlays support for the following features on AM69 SK:
-* Add DTBO entry to support OV5640 camera
-* Add DTBO entry to support RPi(IMX219) camera
-* Add DTBO entry for the DDR memory carveout.
-
-[1]:https://www.ti.com/lit/zip/spruj52
-
-Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
+Signed-off-by: Bhavya Kapoor <b-kapoor@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/conf/machine/j784s4-evm.conf | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-ti-bsp/conf/machine/j721s2-evm.conf | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf b/meta-ti-bsp/conf/=
-machine/j784s4-evm.conf
-index 4e0bfba6..75ab484c 100644
---- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
-@@ -10,6 +10,10 @@ TFA_K3_USART =3D "0x8"
- OPTEE_K3_USART =3D "0x8"
-=20
- KERNEL_DEVICETREE =3D " \
-+    ti/k3-am69-sk.dtb \
-+    ti/k3-am69-sk-csi2-ov5640.dtbo \
-+    ti/k3-am69-sk-ddr-mem-carveout.dtbo \
-+    ti/k3-am69-sk-rpi-cam-imx219.dtbo \
-     ti/k3-j784s4-evm.dtb \
+diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/=
+machine/j721s2-evm.conf
+index dacb6143..e69b5c10 100644
+--- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
++++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+@@ -36,6 +36,7 @@ KERNEL_DEVICETREE =3D " \
+     ti/k3-j721s2-cpb-csi2-ov5640.dtbo \
+     ti/k3-j721s2-fpdlink-cpb-fusion.dtbo \
+     ti/k3-j721s2-gesi-exp-board.dtbo \
++    ti/k3-j721s2-common-proc-board-uarts.dtbo \
  "
 =20
+ UBOOT_MACHINE =3D "j721s2_evm_a72_defconfig"
 --=20
 2.25.1
 
