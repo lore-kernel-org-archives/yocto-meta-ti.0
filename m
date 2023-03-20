@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D51EEC7EE37
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99157C7EE22
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 04:12:50 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.6709.1679285564736511865
+ by mx.groups.io with SMTP id smtpd.web11.6716.1679285565751231219
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 19 Mar 2023 21:12:44 -0700
+ Sun, 19 Mar 2023 21:12:45 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4428740CAA
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:43 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 0C52F40CB5
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:44 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zg74bWeTDg8F for <meta-ti@lists.yoctoproject.org>;
-	Mon, 20 Mar 2023 04:12:43 +0000 (UTC)
+	with ESMTP id mu4AFcj-w_fh for <meta-ti@lists.yoctoproject.org>;
+	Mon, 20 Mar 2023 04:12:44 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3859840C50
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:43 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0312140C62
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:42 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 1E6CB1637C7
+	by mail.denix.org (Postfix) with ESMTP id 1370B1637CB
 	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 00:12:11 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [kirkstone][PATCH 20/54] conf: machine: k3: Define RD, DTB and DTBO load address for FIT image
-Date: Mon, 20 Mar 2023 04:12:07 +0000
-Message-Id: <20230320041241.1293077-21-denis@denix.org>
+Subject: [kirkstone][PATCH 19/54] optee-os-tadevkit: update to match optee-os
+Date: Mon, 20 Mar 2023 04:12:06 +0000
+Message-Id: <20230320041241.1293077-20-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320041241.1293077-1-denis@denix.org>
 References: <20230320041241.1293077-1-denis@denix.org>
@@ -39,132 +39,28 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16116
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16130
 
-From: Sinthu Raja <sinthu.raja@ti.com>
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-K3 platforms include the FIT image-based kernel by default. The bootloade=
-r
-loads the kernel and DTB from the FIT image. The DTB/DTBOs are added to t=
-he
-FIT image but the load address is not included in the image section of
-each DTB/DTBO. This load address is determined by the LOADADDRESS macros
-in the kernel-fitmage class.
+This installs shared OPTEE-OS APIs and needs to match in order for latest
+client/test/examples to be able to build.
 
-Hence, define the RD/DTB/DTBOs LOADADDRESS and OFFSET macros in the K3 co=
-mmon
-include, and remove those macros defined in the K3 board specific config =
-files.
-
-Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
-Reviewed-by: Andrew Davis <afd@ti.com>
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/conf/machine/am65xx-hs-evm.conf | 8 --------
- meta-ti-bsp/conf/machine/include/k3.inc     | 5 +++++
- meta-ti-bsp/conf/machine/j7200-hs-evm.conf  | 8 --------
- meta-ti-bsp/conf/machine/j721e-hs-evm.conf  | 8 --------
- meta-ti-bsp/conf/machine/j721s2-hs-evm.conf | 8 --------
- 5 files changed, 5 insertions(+), 32 deletions(-)
+ .../recipes-security/optee/optee-os-tadevkit_%.bbappend       | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf b/meta-ti-bsp/co=
-nf/machine/am65xx-hs-evm.conf
-index ea1f8ff1..2c1256d0 100644
---- a/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf
-@@ -6,14 +6,6 @@ require conf/machine/include/am65xx.inc
-=20
- UBOOT_MACHINE =3D "am65x_hs_evm_a53_defconfig"
-=20
--UBOOT_ENTRYPOINT =3D       "0x80080000"
--UBOOT_LOADADDRESS =3D      "0x80080000"
--UBOOT_RD_LOADADDRESS =3D   "0x84000000"
--UBOOT_RD_ENTRYPOINT =3D    "0x84000000"
--UBOOT_DTB_LOADADDRESS =3D  "0x83000000"
--UBOOT_DTBO_LOADADDRESS =3D "0x83080000"
--UBOOT_DTBO_OFFSET =3D      "0x00010000"
--
- SPL_BINARY =3D "tispl.bin_HS"
- UBOOT_BINARY =3D "u-boot.img_HS"
- UBOOT_SYMLINK =3D "u-boot.img"
-diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/m=
-achine/include/k3.inc
-index e4ef2f94..93bcea76 100644
---- a/meta-ti-bsp/conf/machine/include/k3.inc
-+++ b/meta-ti-bsp/conf/machine/include/k3.inc
-@@ -21,6 +21,11 @@ KERNEL_CLASSES +=3D "kernel-fitimage"
- UBOOT_ARCH =3D "arm"
- UBOOT_ENTRYPOINT =3D "0x80008000"
- UBOOT_LOADADDRESS =3D "0x80008000"
-+UBOOT_RD_LOADADDRESS =3D "0x84000000"
-+UBOOT_RD_ENTRYPOINT =3D "0x84000000"
-+UBOOT_DTB_LOADADDRESS =3D "0x83000000"
-+UBOOT_DTBO_LOADADDRESS =3D "0x83080000"
-+UBOOT_DTBO_OFFSET =3D "0x00010000"
-=20
- SPL_BINARY =3D "tispl.bin"
- SPL_BINARYNAME =3D "tispl.bin"
-diff --git a/meta-ti-bsp/conf/machine/j7200-hs-evm.conf b/meta-ti-bsp/con=
-f/machine/j7200-hs-evm.conf
-index ef7268b1..dc928974 100644
---- a/meta-ti-bsp/conf/machine/j7200-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j7200-hs-evm.conf
-@@ -6,14 +6,6 @@ require conf/machine/j7200-evm.conf
-=20
- UBOOT_MACHINE =3D "j7200_hs_evm_a72_defconfig"
-=20
--UBOOT_ENTRYPOINT =3D       "0x80080000"
--UBOOT_LOADADDRESS =3D      "0x80080000"
--UBOOT_RD_LOADADDRESS =3D   "0x84000000"
--UBOOT_RD_ENTRYPOINT =3D    "0x84000000"
--UBOOT_DTB_LOADADDRESS =3D  "0x83000000"
--UBOOT_DTBO_LOADADDRESS =3D "0x83080000"
--UBOOT_DTBO_OFFSET =3D      "0x00010000"
--
- SPL_BINARY =3D "tispl.bin_HS"
- UBOOT_BINARY =3D "u-boot.img_HS"
- UBOOT_SYMLINK =3D "u-boot.img"
-diff --git a/meta-ti-bsp/conf/machine/j721e-hs-evm.conf b/meta-ti-bsp/con=
-f/machine/j721e-hs-evm.conf
-index acd5ca18..00ec1998 100644
---- a/meta-ti-bsp/conf/machine/j721e-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j721e-hs-evm.conf
-@@ -6,14 +6,6 @@ require conf/machine/j721e-evm.conf
-=20
- UBOOT_MACHINE =3D "j721e_hs_evm_a72_defconfig"
-=20
--UBOOT_ENTRYPOINT =3D       "0x80080000"
--UBOOT_LOADADDRESS =3D      "0x80080000"
--UBOOT_RD_LOADADDRESS =3D   "0x84000000"
--UBOOT_RD_ENTRYPOINT =3D    "0x84000000"
--UBOOT_DTB_LOADADDRESS =3D  "0x83000000"
--UBOOT_DTBO_LOADADDRESS =3D "0x83080000"
--UBOOT_DTBO_OFFSET =3D      "0x00010000"
--
- SPL_BINARY =3D "tispl.bin_HS"
- UBOOT_BINARY =3D "u-boot.img_HS"
- UBOOT_SYMLINK =3D "u-boot.img"
-diff --git a/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf b/meta-ti-bsp/co=
-nf/machine/j721s2-hs-evm.conf
-index 84db90bb..3d737f44 100644
---- a/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf
-@@ -6,14 +6,6 @@ require conf/machine/j721s2-evm.conf
-=20
- UBOOT_MACHINE =3D "j721s2_hs_evm_a72_defconfig"
-=20
--UBOOT_ENTRYPOINT =3D       "0x80080000"
--UBOOT_LOADADDRESS =3D      "0x80080000"
--UBOOT_RD_LOADADDRESS =3D   "0x84000000"
--UBOOT_RD_ENTRYPOINT =3D    "0x84000000"
--UBOOT_DTB_LOADADDRESS =3D  "0x83000000"
--UBOOT_DTBO_LOADADDRESS =3D "0x83080000"
--UBOOT_DTBO_OFFSET =3D      "0x00010000"
--
- SPL_BINARY =3D "tispl.bin_HS"
- UBOOT_BINARY =3D "u-boot.img_HS"
- UBOOT_SYMLINK =3D "u-boot.img"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-tadevkit_%.bbapp=
+end b/meta-ti-bsp/recipes-security/optee/optee-os-tadevkit_%.bbappend
+index 4300c1a9..7109c342 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-os-tadevkit_%.bbappend
++++ b/meta-ti-bsp/recipes-security/optee/optee-os-tadevkit_%.bbappend
+@@ -1,2 +1,2 @@
+-PV:ti-soc =3D "3.17.0+git${SRCPV}"
+-SRCREV:ti-soc =3D "15a746d28d10df3d79d72bc9fe4a5a654b88bcca"
++PV:ti-soc =3D "3.20.0+git${SRCPV}"
++SRCREV:ti-soc =3D "8e74d47616a20eaa23ca692f4bbbf917a236ed94"
 --=20
 2.25.1
 
