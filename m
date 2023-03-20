@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C06C3C7EE2D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC1A9C7EE2C
 	for <webhook@archiver.kernel.org>; Mon, 20 Mar 2023 04:12:50 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.6803.1679285565816862919
+ by mx.groups.io with SMTP id smtpd.web10.6796.1679285565375837110
  for <meta-ti@lists.yoctoproject.org>;
  Sun, 19 Mar 2023 21:12:45 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 8905340CC4
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:44 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id AA92E40CB4
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:43 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wUMI8CdDIyOP for <meta-ti@lists.yoctoproject.org>;
-	Mon, 20 Mar 2023 04:12:44 +0000 (UTC)
+	with ESMTP id GUIaZetDruIP for <meta-ti@lists.yoctoproject.org>;
+	Mon, 20 Mar 2023 04:12:43 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7C5A440CC1
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:44 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9E7C440CB1
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:42 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 5FB081637D6
-	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 00:12:12 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 616071637C9
+	for <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 00:12:10 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Subject: [kirkstone][PATCH 47/54] conf: machine: j721s2-evm: Add MCSPI loopback overlay for J721S2
-Date: Mon, 20 Mar 2023 04:12:34 +0000
-Message-Id: <20230320041241.1293077-48-denis@denix.org>
+Subject: [kirkstone][PATCH 05/54] conf: Remove vmlinux.gz from KERNEL_IMAGETYPES
+Date: Mon, 20 Mar 2023 04:11:52 +0000
+Message-Id: <20230320041241.1293077-6-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230320041241.1293077-1-denis@denix.org>
 References: <20230320041241.1293077-1-denis@denix.org>
@@ -39,35 +39,36 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 20 Mar 2023 04:12:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16135
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16122
 
-From: Vaishnav Achath <vaishnav.a@ti.com>
+From: Ryan Eatmon <reatmon@ti.com>
 
-Add the MCSPI loopback overlay file for J721S2 EVM which helps
-users to enable MCU-MAIN MCSPI loopback applications, even though
-the overlay is named j7200-mcspi-loopback.dtbo, same can be used
-for testing on other J7 platforms as well.
+With a recent patch to the TI kernel that includes debug symbols,
+the vmlinux.gz file grew in size that impacted the testing.
+This file is not needed to be in the final image so remove it
+from the list.
 
-Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/conf/machine/j721s2-evm.conf | 1 +
- 1 file changed, 1 insertion(+)
+ meta-ti-bsp/conf/machine/include/k3.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/=
-machine/j721s2-evm.conf
-index e69b5c10..5a32e1b3 100644
---- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
-@@ -37,6 +37,7 @@ KERNEL_DEVICETREE =3D " \
-     ti/k3-j721s2-fpdlink-cpb-fusion.dtbo \
-     ti/k3-j721s2-gesi-exp-board.dtbo \
-     ti/k3-j721s2-common-proc-board-uarts.dtbo \
-+    ti/k3-j7200-mcspi-loopback.dtbo \
- "
+diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/m=
+achine/include/k3.inc
+index 3b59645b..e4ef2f94 100644
+--- a/meta-ti-bsp/conf/machine/include/k3.inc
++++ b/meta-ti-bsp/conf/machine/include/k3.inc
+@@ -15,7 +15,7 @@ PREFERRED_PROVIDER_virtual/bootloader ?=3D "u-boot-ti-s=
+taging"
+ PREFERRED_PROVIDER_u-boot ?=3D "u-boot-ti-staging"
 =20
- UBOOT_MACHINE =3D "j721s2_evm_a72_defconfig"
+ KERNEL_IMAGETYPE =3D "Image"
+-KERNEL_IMAGETYPES =3D "Image vmlinux.gz fitImage"
++KERNEL_IMAGETYPES =3D "Image fitImage"
+ KERNEL_CLASSES +=3D "kernel-fitimage"
+=20
+ UBOOT_ARCH =3D "arm"
 --=20
 2.25.1
 
