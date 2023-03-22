@@ -2,54 +2,52 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FCBFC74A5B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35E4AC6FD1C
 	for <webhook@archiver.kernel.org>; Wed, 22 Mar 2023 14:32:14 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.44628.1679495525147315462
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.44626.1679495524882135867
  for <meta-ti@lists.yoctoproject.org>;
  Wed, 22 Mar 2023 07:32:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=yQK5+zW0;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 32MEW4wJ115292;
-	Wed, 22 Mar 2023 09:32:04 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=e1RLhKJC;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 32MEW3Sm062238;
+	Wed, 22 Mar 2023 09:32:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1679495524;
-	bh=gCYHaebyxKHih8XbfEZijr78UvCOpU4sPw9gvPm/JJE=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=yQK5+zW0/MXTkTZmS/G+j9CPIQpyeOWdSqOZwi0fTOxrWp7fFIyiRg8tzRW2bJ5rS
-	 5Tvr1xc9ceNMe/IfvPOlGbFs4lXUlDlF029Q3gKSmvrSUp+PutcolSScNRhOcOxHKG
-	 yWXw1eC+w0uTHiTYT3rc8aQnV+FO/UZ57fcRUmBU=
+	bh=uWtBhjL6HJ/zJohOSGce2hPUsk2I1EZKzxulSAr8n/4=;
+	h=From:To:Subject:Date;
+	b=e1RLhKJCqBH1NaUFKcxHfJ3znp/uvin9QRPL1Wo5pByUN7+LgYES1QAuOjBT28yFy
+	 hYKkd1XC9Ik2hTdGtmb8NWppSovBvkyYZudzeyW7i5zVhFF86eNt3zlMzcZ9eixk5p
+	 6kKmP46dqCEy9Xv6dlD54IMWC7QhAtq2KJd5OtMA=
 Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 32MEW4o1020523
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 32MEW362059940
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 22 Mar 2023 09:32:04 -0500
+	Wed, 22 Mar 2023 09:32:03 -0500
 Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE112.ent.ti.com
  (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Wed, 22
  Mar 2023 09:32:03 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE103.ent.ti.com
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE103.ent.ti.com
  (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
  Frontend Transport; Wed, 22 Mar 2023 09:32:03 -0500
-Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 32MEW39c073431;
+Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 32MEW3Q4007881;
 	Wed, 22 Mar 2023 09:32:03 -0500
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1pezVT-0005JO-Pw; Wed, 22 Mar 2023 09:32:03 -0500
+	id 1pezVT-0005J8-Es; Wed, 22 Mar 2023 09:32:03 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][kirkstone/master][PATCH v4 3/3] u-boot-ti-staging: Add 2023.01 in prep for LTS migration
-Date: Wed, 22 Mar 2023 09:32:03 -0500
-Message-ID: <20230322143203.20360-4-reatmon@ti.com>
+Subject: [meta-ti][kirkstone/master][PATCH v4 0/3] Kernel and u-boot LTS
+Date: Wed, 22 Mar 2023 09:32:00 -0500
+Message-ID: <20230322143203.20360-1-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230322143203.20360-1-reatmon@ti.com>
-References: <20230322143203.20360-1-reatmon@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -57,38 +55,72 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Wed, 22 Mar 2023 14:32:14 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16234
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16233
 
-We are preparing to migrate our u-boot version to 2023.01.  As we are still
-working on the migration, mark the default preference low for this
-version.  We will enable building with this u-boot in a meta-arago brand
-in the near future.  Once the migration is complete, we will remove the
-2021.01 u-boot and make this the default.
+We are preparing for LTS migration to the 6.1 kernel and 2023.01 u-boot
+versions.  This series creates the recipes for them as well doing a
+little cleanup of how we handle specifying the DTB/DTBO files in the
+machine confs.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
----
- .../recipes-bsp/u-boot/u-boot-ti-staging_2023.01.bb   | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+Ryan Eatmon (3):
+  linux-ti-*: Add filtering for which dtb/dtbo to include
+  linux-ti-staging: Add 6.1 kernel in prep for LTS migration
+  u-boot-ti-staging: Add 2023.01 in prep for LTS migration
+
+v4: Rebase on top of recent dunfell sync.
+v3: Set DEFAULT_PREFERENCE for new rt and systest recipes.
+v2: - Do not use the prefix for mainline or next kernels.
+    - Add rt and systest variations for the kernel.
+
+ meta-ti-bsp/conf/machine/am57xx-evm.conf      | 17 ++++----
+ meta-ti-bsp/conf/machine/am62axx-evm.conf     | 20 +++-------
+ meta-ti-bsp/conf/machine/am62xx-evm.conf      | 10 +----
+ meta-ti-bsp/conf/machine/am62xx-lp-evm.conf   |  9 +++--
+ meta-ti-bsp/conf/machine/beagle-x15.conf      |  8 +++-
+ meta-ti-bsp/conf/machine/beaglebone.conf      | 13 +++++--
+ meta-ti-bsp/conf/machine/dra7xx-evm.conf      | 14 +++----
+ meta-ti-bsp/conf/machine/include/am64xx.inc   |  5 +--
+ meta-ti-bsp/conf/machine/include/am65xx.inc   | 12 +-----
+ meta-ti-bsp/conf/machine/include/ti33x.inc    | 15 +++++--
+ meta-ti-bsp/conf/machine/include/ti43x.inc    | 10 +++--
+ meta-ti-bsp/conf/machine/j7200-evm.conf       |  4 +-
+ meta-ti-bsp/conf/machine/j721e-evm.conf       | 29 +++-----------
+ meta-ti-bsp/conf/machine/j721s2-evm.conf      | 32 +++------------
+ meta-ti-bsp/conf/machine/j784s4-evm.conf      | 33 +++-------------
+ meta-ti-bsp/conf/machine/omapl138-lcdk.conf   |  7 +++-
+ .../u-boot/u-boot-ti-staging_2023.01.bb       | 11 ++++++
+ .../linux/linux-ti-mainline_git.bb            | 23 -----------
+ .../recipes-kernel/linux/linux-ti-next_git.bb | 15 -------
+ .../linux/linux-ti-staging-6.1/defconfig      |  2 +
+ .../linux/linux-ti-staging-6.1/k3/defconfig   |  2 +
+ .../linux-ti-staging-6.1/omapl138/defconfig   |  1 +
+ .../linux/linux-ti-staging-rt-6.1/defconfig   |  2 +
+ .../linux-ti-staging-rt-6.1/k3/defconfig      |  2 +
+ .../omapl138/defconfig                        |  1 +
+ .../linux/linux-ti-staging-rt_6.1.bb          | 12 ++++++
+ .../linux-ti-staging-systest-6.1/defconfig    |  2 +
+ .../linux-ti-staging-systest-6.1/k3/defconfig |  2 +
+ .../omapl138/defconfig                        |  1 +
+ .../linux/linux-ti-staging-systest_6.1.bb     |  7 ++++
+ .../linux/linux-ti-staging_5.10.bb            |  1 +
+ .../linux/linux-ti-staging_6.1.bb             | 39 +++++++++++++++++++
+ .../linux/ti-kernel-devicetree-prefix.inc     | 21 ++++++++++
+ 33 files changed, 193 insertions(+), 189 deletions(-)
  create mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.01.bb
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/k3/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/omapl138/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/k3/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.1/omapl138/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.1.bb
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/ti-kernel-devicetree-prefix.inc
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.01.bb
-new file mode 100644
-index 00000000..b3f56878
---- /dev/null
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.01.bb
-@@ -0,0 +1,11 @@
-+require u-boot-ti.inc
-+
-+LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
-+
-+PR = "r0"
-+
-+BRANCH = "ti-u-boot-2023.01"
-+
-+SRCREV = "62e2ad1ceafbfdf2c44d3dc1b6efc81e768a96b9"
-+
-+DEFAULT_PREFERENCE = "-1"
 -- 
 2.17.1
 
