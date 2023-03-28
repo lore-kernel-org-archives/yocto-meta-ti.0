@@ -1,109 +1,88 @@
-Return-Path: <praneeth@ti.com>
+Return-Path: <kai.kang@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF420C6FD1D
-	for <webhook@archiver.kernel.org>; Tue, 28 Mar 2023 00:21:02 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.54367.1679962853979480512
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 583B4C76195
+	for <webhook@archiver.kernel.org>; Tue, 28 Mar 2023 02:56:33 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.57692.1679972188834691027
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 27 Mar 2023 17:20:54 -0700
+ Mon, 27 Mar 2023 19:56:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=xaXZahZS;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: praneeth@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 32S0Kq3E130829;
-	Mon, 27 Mar 2023 19:20:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1679962852;
-	bh=e22Fxp7HRfAHIAGAwxqSKIlrVhqGvXqXPOhKRGdLxb0=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=xaXZahZSgKsy70J+2lJ3CqQAa6dKgeaYUcK8mEH+RdNsczIKB3nL9a7mQZO4zlZZs
-	 6Y/zSobcTwX7K9TGSW5KU6RpAHBivuYklKSoy4AEst+1+wKTtzTSrVz7NdnBDbYbVi
-	 mkz9kiWVpXXD4HSMWj3YhW0t9tr8GFt9vMctWAHk=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 32S0KqAR022361
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 27 Mar 2023 19:20:52 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Mon, 27
- Mar 2023 19:20:52 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Mon, 27 Mar 2023 19:20:52 -0500
-Received: from [10.247.30.6] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 32S0Kqpc011604;
-	Mon, 27 Mar 2023 19:20:52 -0500
-Message-ID: <c45e7139-df38-92b0-9aba-347d54c25af6@ti.com>
-Date: Mon, 27 Mar 2023 19:20:52 -0500
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=O0EKjq0O;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2451438e97=kai.kang@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 32S1urJb008705
+	for <meta-ti@lists.yoctoproject.org>; Tue, 28 Mar 2023 02:56:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com; h=from : to :
+ subject : date : message-id : mime-version : content-type; s=PPS06212021;
+ bh=AtUfbScEDu5zdGncdrHzFrVZRyNoayWIJDbKvVUjJC8=;
+ b=O0EKjq0OMOY1HjGsH+kVHUWjw7oovfOFM/ycUsV9nupKa0YjqTvtUj4YBbj1TM44pg1q
+ RUEp8Ta1V6nQZehLsLoFM1L1LQ0bwnOvhXFlP+hYqHXWsQWhh5rA6js8jHxng5Y+tZYV
+ 0IcrO+/jB5OrsZuHEeXl1i3PC+I8vLxv2+wn49dHhA32JscF/jwCG/Ez6LdzsftUlwlq
+ IAxYoGPO8NA0cD4956deYhFC6YrtNnRATljACZnsWsXlZJtQkv8pmkGfYnxuayhGDn1T
+ kQbjGrenomwqPXiOHJp6MfRndMvSUNN5JF+LpqBCKkmcCxR3g5qOL+j1pin71S6kR7gL Kg== 
+Received: from ala-exchng02.corp.ad.wrs.com (unknown-82-254.windriver.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3php642qgg-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <meta-ti@lists.yoctoproject.org>; Tue, 28 Mar 2023 02:56:27 +0000
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.18; Mon, 27 Mar 2023 19:56:26 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.17 via Frontend Transport; Mon, 27 Mar 2023 19:56:25 -0700
+From: <kai.kang@windriver.com>
+To: <meta-ti@lists.yoctoproject.org>
+Subject: [PATCH] mesa/mesa-gl: remove version from bbappend file name
+Date: Tue, 28 Mar 2023 10:56:21 +0800
+Message-ID: <20230328025621.15198-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [meta-ti][master/kirkstone][PATCH v5 3/3] u-boot-ti-staging: Add
- 2023.01 in prep for LTS migration
-To: Ryan Eatmon <reatmon@ti.com>, Denys Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20230323225221.12918-1-reatmon@ti.com>
- <20230323225221.12918-4-reatmon@ti.com>
-Content-Language: en-US
-From: "Bajjuri, Praneeth" <praneeth@ti.com>
-In-Reply-To: <20230323225221.12918-4-reatmon@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: EryzH-IQ3G7kfR88eoqRptLbokQ9GG8M
+X-Proofpoint-GUID: EryzH-IQ3G7kfR88eoqRptLbokQ9GG8M
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-24_11,2023-03-27_02,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 suspectscore=0
+ phishscore=0 spamscore=0 bulkscore=0 mlxlogscore=847 priorityscore=1501
+ lowpriorityscore=0 clxscore=1011 mlxscore=0 adultscore=0 impostorscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2303200000
+ definitions=main-2303280022
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 28 Mar 2023 00:21:02 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16246
+ <meta-ti@lists.yoctoproject.org>; Tue, 28 Mar 2023 02:56:33 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16247
 
+From: Kai Kang <kai.kang@windriver.com>
 
+Remove version from mesa/mesa-gl bbappend file names that no need to
+rename them when mesa update.
 
-On 3/23/2023 5:52 PM, Ryan Eatmon wrote:
-> We are preparing to migrate our u-boot version to 2023.01.  As we are still
-> working on the migration, mark the default preference low for this
-> version.  We will enable building with this u-boot in a meta-arago brand
-> in the near future.  Once the migration is complete, we will remove the
-> 2021.01 u-boot and make this the default.
-> 
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
-> ---
->   .../recipes-bsp/u-boot/u-boot-ti-staging_2023.01.bb   | 11 +++++++++++
+Issue: LINUXEXEC-26101
 
-instead: meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+(LOCAL REV: NOT UPSTREAM) - Send to meta-ti on 20230328
 
-Can you switch directly to 2023.04. already created a branch.
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ .../mesa/{mesa-gl_22.%.bbappend => mesa-gl_%.bbappend}            | 0
+ .../recipes-graphics/mesa/{mesa_22.%.bbappend => mesa_%.bbappend} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-ti-bsp/recipes-graphics/mesa/{mesa-gl_22.%.bbappend => mesa-gl_%.bbappend} (100%)
+ rename meta-ti-bsp/recipes-graphics/mesa/{mesa_22.%.bbappend => mesa_%.bbappend} (100%)
 
+diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-gl_22.%.bbappend b/meta-ti-bsp/recipes-graphics/mesa/mesa-gl_%.bbappend
+similarity index 100%
+rename from meta-ti-bsp/recipes-graphics/mesa/mesa-gl_22.%.bbappend
+rename to meta-ti-bsp/recipes-graphics/mesa/mesa-gl_%.bbappend
+diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa_22.%.bbappend b/meta-ti-bsp/recipes-graphics/mesa/mesa_%.bbappend
+similarity index 100%
+rename from meta-ti-bsp/recipes-graphics/mesa/mesa_22.%.bbappend
+rename to meta-ti-bsp/recipes-graphics/mesa/mesa_%.bbappend
+-- 
+2.17.1
 
->   1 file changed, 11 insertions(+)
->   create mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.01.bb
-> 
-> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.01.bb
-> new file mode 100644
-> index 00000000..b3f56878
-> --- /dev/null
-> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.01.bb
-> @@ -0,0 +1,11 @@
-> +require u-boot-ti.inc
-> +
-> +LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
-> +
-> +PR = "r0"
-> +
-> +BRANCH = "ti-u-boot-2023.01"
-> +
-> +SRCREV = "62e2ad1ceafbfdf2c44d3dc1b6efc81e768a96b9"
-
-update BRANCH and SRCREV as follows in 2023.04.bb
-
-BRANCH = "ti-u-boot-2023.04"
-
-SRCREV = "41a88ad529b3943b1e465846eb24fe2c29203e35"
-
-
-> +
-> +DEFAULT_PREFERENCE = "-1"
 
