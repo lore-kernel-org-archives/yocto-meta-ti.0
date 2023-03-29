@@ -1,141 +1,127 @@
-Return-Path: <rs@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89D71C74A5B
-	for <webhook@archiver.kernel.org>; Wed, 29 Mar 2023 20:51:37 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.8859.1680123094802965493
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 942B0C74A5B
+	for <webhook@archiver.kernel.org>; Wed, 29 Mar 2023 21:32:27 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.9895.1680125536926966361
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 29 Mar 2023 13:51:35 -0700
+ Wed, 29 Mar 2023 14:32:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ISfNBqNL;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: rs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 32TKpW9B053859;
-	Wed, 29 Mar 2023 15:51:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1680123092;
-	bh=SLVvce4TGlZF01oOvT0oBnMeuE07AIE/8Nn5Qy4QVrg=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=ISfNBqNLsw2HTEooENmR9dqF3I/yNAvTZtCuDXXibxvOkymldDkC8NsuaJTGgz3dp
-	 AexP+CYBj6cK8ga+9tx/zRmfxk0Q+EXrPrmPQT3iJUqNHyu65PYUkVSgXRk0Xe1bRZ
-	 1CJNEGY6jSiNXlOfwpk//dPIpDU6NSgVVX/ofiIE=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 32TKpWG5058844
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 29 Mar 2023 15:51:32 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Wed, 29
- Mar 2023 15:51:31 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Wed, 29 Mar 2023 15:51:31 -0500
-Received: from [128.247.81.144] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 32TKpVO8092612;
-	Wed, 29 Mar 2023 15:51:31 -0500
-Message-ID: <d6c238f3-fc0d-e721-32f5-7d41a99c8cea@ti.com>
-Date: Wed, 29 Mar 2023 15:51:31 -0500
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id DBCFD40C46;
+	Wed, 29 Mar 2023 21:32:15 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id n9b27vPrPvfh; Wed, 29 Mar 2023 21:32:15 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B0EA540A0B;
+	Wed, 29 Mar 2023 21:32:13 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id B46D71637E6; Wed, 29 Mar 2023 17:31:38 -0400 (EDT)
+Date: Wed, 29 Mar 2023 17:31:38 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: "Theodore A. Roth" <troth@openavr.org>
+Cc: meta-ti@lists.yoctoproject.org,
+	"Theodore A . Roth" <theodore_roth@trimble.com>
+Subject: Re: [RFC][meta-ti][master][PATCH] meta-ti-bsp: Update mesa
+ bbappend files for mesa-23
+Message-ID: <20230329213138.GW18050@denix.org>
+References: <20230327170809.2115712-1-theodore_roth@trimble.com>
+ <20230328152532.GT18050@denix.org>
+ <CAFMvBt2nEG5vbwU4rWBkccP4rsS1HgQQtHmzbWowHWXt7U5Tww@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [EXTERNAL] [meta-ti] [PATCH] mesa/mesa-gl: remove version from
- bbappend file name
-Content-Language: en-US
-To: Kai Kang <kai.kang@eng.windriver.com>, <meta-ti@lists.yoctoproject.org>
-References: <20230328025621.15198-1-kai.kang@windriver.com>
-From: Randolph Sapp <rs@ti.com>
-In-Reply-To: <20230328025621.15198-1-kai.kang@windriver.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <CAFMvBt2nEG5vbwU4rWBkccP4rsS1HgQQtHmzbWowHWXt7U5Tww@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 29 Mar 2023 20:51:37 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16252
+ <meta-ti@lists.yoctoproject.org>; Wed, 29 Mar 2023 21:32:27 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16253
 
-On 3/27/23 21:56, Kai Kang wrote:
-> From: Kai Kang <kai.kang@windriver.com>
-> 
-> Remove version from mesa/mesa-gl bbappend file names that no need to
-> rename them when mesa update.
-> 
-> Issue: LINUXEXEC-26101
-> 
-> (LOCAL REV: NOT UPSTREAM) - Send to meta-ti on 20230328
-> 
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->   .../mesa/{mesa-gl_22.%.bbappend => mesa-gl_%.bbappend}            | 0
->   .../recipes-graphics/mesa/{mesa_22.%.bbappend => mesa_%.bbappend} | 0
->   2 files changed, 0 insertions(+), 0 deletions(-)
->   rename meta-ti-bsp/recipes-graphics/mesa/{mesa-gl_22.%.bbappend => mesa-gl_%.bbappend} (100%)
->   rename meta-ti-bsp/recipes-graphics/mesa/{mesa_22.%.bbappend => mesa_%.bbappend} (100%)
-> 
-> diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-gl_22.%.bbappend b/meta-ti-bsp/recipes-graphics/mesa/mesa-gl_%.bbappend
-> similarity index 100%
-> rename from meta-ti-bsp/recipes-graphics/mesa/mesa-gl_22.%.bbappend
-> rename to meta-ti-bsp/recipes-graphics/mesa/mesa-gl_%.bbappend
-> diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa_22.%.bbappend b/meta-ti-bsp/recipes-graphics/mesa/mesa_%.bbappend
-> similarity index 100%
-> rename from meta-ti-bsp/recipes-graphics/mesa/mesa_22.%.bbappend
-> rename to meta-ti-bsp/recipes-graphics/mesa/mesa_%.bbappend
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#16247): https://lists.yoctoproject.org/g/meta-ti/message/16247
-> Mute This Topic: https://lists.yoctoproject.org/mt/97898091/7094281
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [rs@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+On Tue, Mar 28, 2023 at 12:59:31PM -0600, Theodore A. Roth wrote:
+> On Tue, Mar 28, 2023 at 9:26=E2=80=AFAM Denys Dmytriyenko <denis@denix.=
+org> wrote:
+> >
+> > Thanks for the patch!
+> >
+> > Has version 23 been tested with the PowerVR patches for HW accelerati=
+on?
+>=20
+> We have not tested PowerVR stuff  as our product is headless.
+> Our builds are currently broken since we are tracking master for all
+> of the meta layer git repositories we use.
+>=20
+> My intention for the patch was to bring the breakage to the attention
+> of meta-ti since master has
+> been broken for more than a week with no comments on the mailing list
+> (hence the RFC tag).
+>=20
+> Now that the discussion has been started, I'm more than happy to help
+> out where I can to get this resolved.
 
-Yeah, alright. Here's why we didn't do that *yet*:
+So, master is currently going through the test cycle due to the recent=20
+patchset, so may take a bit longer.
 
-There's currently a handful of patches sitting outside of mesa for rogue 
-devices. Some of them are fundamental (introducing the gallium-frontend 
-shim), others are less important but are still relevant to features we 
-are requested to have for the rogue devices.
+I'll try to do some testing with this change, but so far looks good to me=
+:
 
-The upstream-ability of these patches was only recently called into 
-question so I'm trying my best to sort them out and get them upstream as 
-soon as possible, if possible, but considering some of their *unique* 
-approaches to improving performance that will take a little time to get 
-it sorted out.
+Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
 
-In the meantime we want to use those patches in yocto, and considering 
-the way we receive them (tagged to a particular release), we need to 
-update them and keep them clean rolling forward while we close the gap.
 
-If you look at the source line in the include file you'll see our 
-solution to this was to basically glob all 22.% releases and point them 
-all at a branch in a public tree I want to use as an intermediary.
 
-This was done to prevent other build issues with tools expecting 
-particular features (like a specific extension of dma buffer feedback). 
-Using this scheme, in the event of a major version drift it should 
-default to software rendering.
-
-It's a little scuffed, but this was the safest way I could think to add 
-out of tree graphics without introducing stalls for any other component 
-development. Moving forward I will attempt to track and update this 
-recipe faster.
-
-The only reason I wrote up this response instead of just forward porting 
-the mesa patches and posting my own version of this patch changing the 
-glob to 23.% is that moving forward I want to keep the graphics 
-bbappends only applicable to major versions (while they exist). These 
-will help keep backwards compatibility open for community multi-distro 
-efforts (and better compatibility with tagged yocto releases, as they 
-tend to park mesa after a little while).
-
-Hopefully this is a little clearer now. Thanks for your interest!
-
-Regards,
-Randolph Sapp
+> > On Mon, Mar 27, 2023 at 11:08:09AM -0600, Theodore A. Roth wrote:
+> > > From: "Theodore A. Roth" <troth@openavr.org>
+> > >
+> > > The mesa recipes in oe-core have been updated to mesa-23 causing th=
+e
+> > > following build error:
+> > >
+> > >     $ bitbake core-image-minimal
+> > >     Loading cache: 100% |                                          =
+     | ETA:  --:--:--
+> > >     Loaded 0 entries from dependency cache.
+> > >     Parsing recipes: 100% |########################################=
+#####| Time: 0:00:20
+> > >     Parsing of 2816 .bb files complete (0 cached, 2816 parsed). 447=
+2 targets, 484 skipped, 0 masked, 0 errors.
+> > >     ERROR: No recipes in default available for:
+> > >       /build/../oe/meta-ti/meta-ti-bsp/recipes-graphics/mesa/mesa-g=
+l_22.%.bbappend
+> > >       /build/../oe/meta-ti/meta-ti-bsp/recipes-graphics/mesa/mesa_2=
+2.%.bbappend
+> > >
+> > >     Summary: There was 1 ERROR message, returning a non-zero exit c=
+ode.
+> > >
+> > > Signed-off-by: Theodore A. Roth <troth@openavr.org>
+> > > Signed-off-by: Theodore A. Roth <theodore_roth@trimble.com>
+> > > ---
+> > >  .../mesa/{mesa-gl_22.%.bbappend =3D> mesa-gl_23.%.bbappend}       =
+  | 0
+> > >  .../mesa/{mesa_22.%.bbappend =3D> mesa_23.%.bbappend}             =
+  | 0
+> > >  2 files changed, 0 insertions(+), 0 deletions(-)
+> > >  rename meta-ti-bsp/recipes-graphics/mesa/{mesa-gl_22.%.bbappend =3D=
+> mesa-gl_23.%.bbappend} (100%)
+> > >  rename meta-ti-bsp/recipes-graphics/mesa/{mesa_22.%.bbappend =3D> =
+mesa_23.%.bbappend} (100%)
+> > >
+> > > diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-gl_22.%.bbappen=
+d b/meta-ti-bsp/recipes-graphics/mesa/mesa-gl_23.%.bbappend
+> > > similarity index 100%
+> > > rename from meta-ti-bsp/recipes-graphics/mesa/mesa-gl_22.%.bbappend
+> > > rename to meta-ti-bsp/recipes-graphics/mesa/mesa-gl_23.%.bbappend
+> > > diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa_22.%.bbappend b=
+/meta-ti-bsp/recipes-graphics/mesa/mesa_23.%.bbappend
+> > > similarity index 100%
+> > > rename from meta-ti-bsp/recipes-graphics/mesa/mesa_22.%.bbappend
+> > > rename to meta-ti-bsp/recipes-graphics/mesa/mesa_23.%.bbappend
 
