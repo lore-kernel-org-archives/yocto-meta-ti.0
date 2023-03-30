@@ -2,51 +2,51 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13C34C77B61
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03F78C761AF
 	for <webhook@archiver.kernel.org>; Thu, 30 Mar 2023 21:24:44 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.39256.1680211482948960202
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.39257.1680211483015001735
  for <meta-ti@lists.yoctoproject.org>;
  Thu, 30 Mar 2023 14:24:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=ovpl2pBK;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=GMm8GBYA;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 32ULOeeY090593;
-	Thu, 30 Mar 2023 16:24:40 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 32ULOfCo033955;
+	Thu, 30 Mar 2023 16:24:41 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1680211480;
-	bh=q2Oe0ureY2oqgEj7EHZl2Xp+uDPZjkqFqRfDW2SG+dc=;
+	s=ti-com-17Q1; t=1680211481;
+	bh=nu/t6ctT+iRtfu7j2eZEjvF1ZkCFBtS/SdFo7f8FlAc=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=ovpl2pBKFA/zmak0tx0UatSSoV5ZJkamyJnGoLbOS2uI1zbjEz5A85kvDZc7qsCfs
-	 BxtL0d/efqE05yTmDc5/+qE7MplK+otD3Caybs0VqxiMtuz9gf1VOHsvwOsCKkN7Fy
-	 tK6Fq+tOCxVzBUo1nYTbQT5QOaipY5ZcnqF9tGyc=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 32ULOej4019255
+	b=GMm8GBYAgnT8fwWyjT6ULdscoZHRLq8v4nKo6zIB9tTOtTIV9CllCmWskk4GuEdFB
+	 LqzM0ErpnF5nI8RL1kihAEpJYebWXwLza+YcJl94iCd4aBqQ46Nf8fRw/AksYCT0Sn
+	 /tKo6X6z450ROfHSzGpDFJgu2la8jwNFRO8HR1Q0=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 32ULOfiw019263
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 30 Mar 2023 16:24:40 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 30 Mar 2023 16:24:41 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Thu, 30
  Mar 2023 16:24:40 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
  Frontend Transport; Thu, 30 Mar 2023 16:24:40 -0500
-Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 32ULOexS081103;
+Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 32ULOeqW081109;
 	Thu, 30 Mar 2023 16:24:40 -0500
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1phzlA-00054J-91; Thu, 30 Mar 2023 16:24:40 -0500
+	id 1phzlA-00054c-LO; Thu, 30 Mar 2023 16:24:40 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/kirkstone][PATCH 1/4] u-boot-ti-staging: Fix u-boot configs to match oe-core fitImage
-Date: Thu, 30 Mar 2023 16:24:37 -0500
-Message-ID: <20230330212440.19437-2-reatmon@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH 4/4] kernel-fitimage: Add signing of fitImage entries for 5.10 kernel
+Date: Thu, 30 Mar 2023 16:24:40 -0500
+Message-ID: <20230330212440.19437-5-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230330212440.19437-1-reatmon@ti.com>
 References: <20230330212440.19437-1-reatmon@ti.com>
@@ -57,193 +57,257 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Thu, 30 Mar 2023 21:24:44 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16259
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16262
 
-After moving to the oe-core kernel-fitimage.bbclass we found that the
-dtb names we were searching for did not match.  This was due to the
-KERNEL_DEVICETREE entries including the vendor subdir in the section
-names of the fitImage file.  This patch updates support in 2021 so that
-we can temporarily get to a stable boot point before starting our LTS
-migration and changing a lot of things in the recipes.
+While we are mirgrating to kernel v6.1 and u-boot 2023.04, we want to
+keep kernel 5.10 and u-boot 2021.01 "working" for anyone looking at
+kirkstone.  One of the changes we are looking at changing is the signing
+of entries in the fitImage.
+
+To try and acheive a limited parity with dunfell while we work on the
+migration, this creates a class that implements the logic that was in
+dunfell and applies that class to the 5.10 kernel.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- ...e-to-support-oe-core-fitImage-naming.patch | 144 ++++++++++++++++++
- .../u-boot/u-boot-ti-staging_2021.01.bb       |   8 +-
- 2 files changed, 151 insertions(+), 1 deletion(-)
- create mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging-2021.01/0001-configs-Update-to-support-oe-core-fitImage-naming.patch
+ .../classes/kernel-fitimage-ti-u-boot.bbclass | 214 ++++++++++++++++++
+ .../linux/linux-ti-staging_5.10.bb            |   2 +
+ 2 files changed, 216 insertions(+)
+ create mode 100644 meta-ti-bsp/classes/kernel-fitimage-ti-u-boot.bbclass
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging-2021.01/0001-configs-Update-to-support-oe-core-fitImage-naming.patch b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging-2021.01/0001-configs-Update-to-support-oe-core-fitImage-naming.patch
+diff --git a/meta-ti-bsp/classes/kernel-fitimage-ti-u-boot.bbclass b/meta-ti-bsp/classes/kernel-fitimage-ti-u-boot.bbclass
 new file mode 100644
-index 00000000..9a832312
+index 00000000..503c6d25
 --- /dev/null
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging-2021.01/0001-configs-Update-to-support-oe-core-fitImage-naming.patch
-@@ -0,0 +1,144 @@
-+From 33c4b7335a39c48507a254505169df59c7a69c75 Mon Sep 17 00:00:00 2001
-+From: Ryan Eatmon <reatmon@ti.com>
-+Date: Thu, 23 Mar 2023 10:29:40 -0500
-+Subject: [PATCH] configs: Update to support oe-core fitImage naming
++++ b/meta-ti-bsp/classes/kernel-fitimage-ti-u-boot.bbclass
+@@ -0,0 +1,214 @@
 +
-+In kirkstone and forward, the values in the fitImage have been
-+standardized to include both conf- and the vender subdir in the name of
-+the dtbs.  This patch updates u-boot to support that.
++inherit ti-secdev
 +
-+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-+---
-+ include/configs/am62x_evm.h       | 6 +++---
-+ include/configs/am64x_evm.h       | 4 ++--
-+ include/configs/am65x_evm.h       | 2 +-
-+ include/configs/j721e_evm.h       | 8 ++++----
-+ include/configs/j721s2_evm.h      | 6 +++---
-+ include/configs/j784s4_evm.h      | 6 +++---
-+ include/configs/ti_armv7_common.h | 2 +-
-+ 7 files changed, 17 insertions(+), 17 deletions(-)
++# The TI u-boot requires that the kernel image is signed.  To not overload the
++# entire kernel-fitimage.bbclass from oe-core, we just overwrite one function
++# and do the signing in there.
 +
-+diff --git a/include/configs/am62x_evm.h b/include/configs/am62x_evm.h
-+index 97bd7c1fd7..6d957c906b 100644
-+--- a/include/configs/am62x_evm.h
-++++ b/include/configs/am62x_evm.h
-+@@ -122,11 +122,11 @@
-+ #define EXTRA_ENV_AM625_BOARD_SETTINGS					\
-+ 	"default_device_tree=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0"	\
-+ 	"findfdt="							\
-+-		"setenv name_fdt ${default_device_tree};"		\
-++		"setenv name_fdt ti_${default_device_tree};"		\
-+ 		"if test $board_name = am62x_skevm; then "		\
-+-			"setenv name_fdt k3-am625-sk.dtb; fi;"		\
-++			"setenv name_fdt ti_k3-am625-sk.dtb; fi;"		\
-+ 		"if test $board_name = am62x_lp_skevm; then "		\
-+-			"setenv name_fdt k3-am62x-lp-sk.dtb; fi;"	\
-++			"setenv name_fdt ti_k3-am62x-lp-sk.dtb; fi;"	\
-+ 		"setenv fdtfile ${name_fdt}\0"				\
-+ 	"name_kern=Image\0"						\
-+ 	"console=ttyS2,115200n8\0"					\
-+diff --git a/include/configs/am64x_evm.h b/include/configs/am64x_evm.h
-+index 33ba5da31f..d32b488b58 100644
-+--- a/include/configs/am64x_evm.h
-++++ b/include/configs/am64x_evm.h
-+@@ -107,9 +107,9 @@
-+ #define EXTRA_ENV_AM642_BOARD_SETTINGS					\
-+ 	"findfdt="							\
-+ 		"if test $board_name = am64x_gpevm; then " \
-+-			"setenv fdtfile k3-am642-evm.dtb; fi; " \
-++			"setenv fdtfile ti_k3-am642-evm.dtb; fi; " \
-+ 		"if test $board_name = am64x_skevm; then " \
-+-			"setenv fdtfile k3-am642-sk.dtb; fi;" \
-++			"setenv fdtfile ti_k3-am642-sk.dtb; fi;" \
-+ 		"if test $fdtfile = undefined; then " \
-+ 			"echo WARNING: Could not determine device tree to use; fi; \0" \
-+ 	"name_kern=Image\0"						\
-+diff --git a/include/configs/am65x_evm.h b/include/configs/am65x_evm.h
-+index c78e4c4493..07d234d5d3 100644
-+--- a/include/configs/am65x_evm.h
-++++ b/include/configs/am65x_evm.h
-+@@ -64,7 +64,7 @@
-+ /* U-Boot general configuration */
-+ #define EXTRA_ENV_AM65X_BOARD_SETTINGS					\
-+ 	"findfdt="							\
-+-		"setenv name_fdt k3-am654-base-board.dtb;"		\
-++		"setenv name_fdt ti_k3-am654-base-board.dtb;"		\
-+ 		"setenv fdtfile ${name_fdt}\0"				\
-+ 	"name_kern=Image\0"						\
-+ 	"console=ttyS2,115200n8\0"					\
-+diff --git a/include/configs/j721e_evm.h b/include/configs/j721e_evm.h
-+index 50b018b6ed..ad11494bd0 100644
-+--- a/include/configs/j721e_evm.h
-++++ b/include/configs/j721e_evm.h
-+@@ -77,13 +77,13 @@
-+ #define EXTRA_ENV_J721E_BOARD_SETTINGS					\
-+ 	"default_device_tree=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0"	\
-+ 	"findfdt="							\
-+-		"setenv name_fdt ${default_device_tree};"		\
-++		"setenv name_fdt ti_${default_device_tree};"		\
-+ 		"if test $board_name = J721EX-PM1-SOM; then "		\
-+-			"setenv name_fdt k3-j721e-proc-board-tps65917.dtb; fi;" \
-++			"setenv name_fdt ti_k3-j721e-proc-board-tps65917.dtb; fi;" \
-+ 		"if test $board_name = j721e; then "			\
-+-			"setenv name_fdt k3-j721e-common-proc-board.dtb; fi;" \
-++			"setenv name_fdt ti_k3-j721e-common-proc-board.dtb; fi;" \
-+ 		"if test $board_name = j721e-eaik || test $board_name = j721e-sk; then " \
-+-			"setenv name_fdt k3-j721e-sk.dtb; fi;"	\
-++			"setenv name_fdt ti_k3-j721e-sk.dtb; fi;"	\
-+ 		"setenv fdtfile ${name_fdt}\0"				\
-+ 	"name_kern=Image\0"						\
-+ 	"console=ttyS2,115200n8\0"					\
-+diff --git a/include/configs/j721s2_evm.h b/include/configs/j721s2_evm.h
-+index 2d26eb544d..4b4d4a6e37 100644
-+--- a/include/configs/j721s2_evm.h
-++++ b/include/configs/j721s2_evm.h
-+@@ -66,11 +66,11 @@
-+ #define EXTRA_ENV_J721S2_BOARD_SETTINGS					\
-+ 	"default_device_tree=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0"	\
-+ 	"findfdt="							\
-+-		"setenv name_fdt ${default_device_tree};"		\
-++		"setenv name_fdt ti_${default_device_tree};"		\
-+ 		"if test $board_name = j721s2; then "			\
-+-			"setenv name_fdt k3-j721s2-common-proc-board.dtb; fi;" \
-++			"setenv name_fdt ti_k3-j721s2-common-proc-board.dtb; fi;" \
-+ 		"if test $board_name = am68-sk; then "			\
-+-			"setenv name_fdt k3-am68-sk-base-board.dtb; fi;"\
-++			"setenv name_fdt ti_k3-am68-sk-base-board.dtb; fi;"\
-+ 		"setenv fdtfile ${name_fdt}\0"				\
-+ 	"name_kern=Image\0"						\
-+ 	"console=ttyS2,115200n8\0"					\
-+diff --git a/include/configs/j784s4_evm.h b/include/configs/j784s4_evm.h
-+index eb609100b0..30820ea1c6 100644
-+--- a/include/configs/j784s4_evm.h
-++++ b/include/configs/j784s4_evm.h
-+@@ -67,11 +67,11 @@
-+ #define EXTRA_ENV_J784S4_BOARD_SETTINGS					\
-+ 	"default_device_tree=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0"	\
-+ 	"findfdt="                                                      \
-+-		"setenv name_fdt ${default_device_tree};"               \
-++		"setenv name_fdt ti_${default_device_tree};"               \
-+ 		"if test $board_name = am69-sk; then "           \
-+-			"setenv name_fdt k3-am69-sk.dtb; fi;" \
-++			"setenv name_fdt ti_k3-am69-sk.dtb; fi;" \
-+ 		"if test $board_name = j784s4; then "                    \
-+-			"setenv name_fdt k3-j784s4-evm.dtb; fi;" \
-++			"setenv name_fdt ti_k3-j784s4-evm.dtb; fi;" \
-+ 		"setenv fdtfile ${name_fdt}\0"				\
-+ 	"name_kern=Image\0"						\
-+ 	"console=ttyS2,115200n8\0"					\
-+diff --git a/include/configs/ti_armv7_common.h b/include/configs/ti_armv7_common.h
-+index c48c4c2398..29de095729 100644
-+--- a/include/configs/ti_armv7_common.h
-++++ b/include/configs/ti_armv7_common.h
-+@@ -68,7 +68,7 @@
-+ 		"do;" \
-+ 		"setenv overlaystring ${overlaystring}'#'${overlay};" \
-+ 		"done;\0" \
-+-	"run_fit=bootm ${addr_fit}#${fdtfile}${overlaystring}\0" \
-++	"run_fit=bootm ${addr_fit}#conf-${fdtfile}${overlaystring}\0" \
-+ 
-+ /*
-+  * DDR information.  If the CONFIG_NR_DRAM_BANKS is not defined,
-+-- 
-+2.17.1
++#
++# Assemble fitImage
++#
++# $1 ... .its filename
++# $2 ... fitImage name
++# $3 ... include ramdisk
++fitimage_assemble() {
++	kernelcount=1
++	dtbcount=""
++	DTBS=""
++	ramdiskcount=$3
++	setupcount=""
++	bootscr_id=""
++	rm -f $1 arch/${ARCH}/boot/$2
 +
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-index 7763d8b1..7529ce6c 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-@@ -1,9 +1,15 @@
++	if [ -n "${UBOOT_SIGN_IMG_KEYNAME}" -a "${UBOOT_SIGN_KEYNAME}" = "${UBOOT_SIGN_IMG_KEYNAME}" ]; then
++		bbfatal "Keys used to sign images and configuration nodes must be different."
++	fi
 +
-+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${PV}:"
++	fitimage_emit_fit_header $1
 +
- require u-boot-ti.inc
++	#
++	# Step 1: Prepare a kernel image section.
++	#
++	fitimage_emit_section_maint $1 imagestart
++
++	uboot_prep_kimage
++	fitimage_ti_secure linux.bin linux.bin.sec
++	fitimage_emit_section_kernel $1 $kernelcount linux.bin.sec "$linux_comp"
++
++	#
++	# Step 2: Prepare a DTB image section
++	#
++
++	if [ -n "${KERNEL_DEVICETREE}" ]; then
++		dtbcount=1
++		for DTB in ${KERNEL_DEVICETREE}; do
++			if echo $DTB | grep -q '/dts/'; then
++				bbwarn "$DTB contains the full path to the the dts file, but only the dtb name should be used."
++				DTB=`basename $DTB | sed 's,\.dts$,.dtb,g'`
++			fi
++
++			# Skip ${DTB} if it's also provided in ${EXTERNAL_KERNEL_DEVICETREE}
++			if [ -n "${EXTERNAL_KERNEL_DEVICETREE}" ] && [ -s ${EXTERNAL_KERNEL_DEVICETREE}/${DTB} ]; then
++				continue
++			fi
++
++			DTB_PATH="arch/${ARCH}/boot/dts/$DTB"
++			if [ ! -e "$DTB_PATH" ]; then
++				DTB_PATH="arch/${ARCH}/boot/$DTB"
++			fi
++
++			DTB=$(echo "$DTB" | tr '/' '_')
++
++			# Skip DTB if we've picked it up previously
++			echo "$DTBS" | tr ' ' '\n' | grep -xq "$DTB" && continue
++
++			fitimage_ti_secure ${DTB_PATH} ${DTB_PATH}.sec
++
++            DTBS="$DTBS $DTB"
++			fitimage_emit_section_dtb $1 $DTB ${DTB_PATH}.sec
++		done
++	fi
++
++	if [ -n "${EXTERNAL_KERNEL_DEVICETREE}" ]; then
++		dtbcount=1
++		for DTB in $(find "${EXTERNAL_KERNEL_DEVICETREE}" -name '*.dtb' -printf '%P\n' | sort) \
++		$(find "${EXTERNAL_KERNEL_DEVICETREE}" -name '*.dtbo' -printf '%P\n' | sort); do
++			DTB=$(echo "$DTB" | tr '/' '_')
++
++			# Skip DTB/DTBO if we've picked it up previously
++			echo "$DTBS" | tr ' ' '\n' | grep -xq "$DTB" && continue
++
++			fitimage_ti_secure ${EXTERNAL_KERNEL_DEVICETREE}/${DTB} ${EXTERNAL_KERNEL_DEVICETREE}/${DTB}.sec
++
++			DTBS="$DTBS $DTB"
++			fitimage_emit_section_dtb $1 $DTB "${EXTERNAL_KERNEL_DEVICETREE}/${DTB}.sec"
++		done
++	fi
++
++	#
++	# Step 3: Prepare a u-boot script section
++	#
++
++	if [ -n "${UBOOT_ENV}" ] && [ -d "${STAGING_DIR_HOST}/boot" ]; then
++		if [ -e "${STAGING_DIR_HOST}/boot/${UBOOT_ENV_BINARY}" ]; then
++			cp ${STAGING_DIR_HOST}/boot/${UBOOT_ENV_BINARY} ${B}
++			bootscr_id="${UBOOT_ENV_BINARY}"
++			fitimage_emit_section_boot_script $1 "$bootscr_id" ${UBOOT_ENV_BINARY}
++		else
++			bbwarn "${STAGING_DIR_HOST}/boot/${UBOOT_ENV_BINARY} not found."
++		fi
++	fi
++
++	#
++	# Step 4: Prepare a setup section. (For x86)
++	#
++	if [ -e arch/${ARCH}/boot/setup.bin ]; then
++		setupcount=1
++		fitimage_emit_section_setup $1 $setupcount arch/${ARCH}/boot/setup.bin
++	fi
++
++	#
++	# Step 5: Prepare a ramdisk section.
++	#
++	if [ "x${ramdiskcount}" = "x1" ] && [ "${INITRAMFS_IMAGE_BUNDLE}" != "1" ]; then
++		# Find and use the first initramfs image archive type we find
++		found=
++		for img in ${FIT_SUPPORTED_INITRAMFS_FSTYPES}; do
++			initramfs_path="${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE_NAME}.$img"
++			initramfs_local="usr/${INITRAMFS_IMAGE_NAME}.$img"
++			if [ -e "$initramfs_path" ]; then
++				bbnote "Found initramfs image: $initramfs_path"
++				found=true
++				fitimage_ti_secure ${initramfs_path} ${initramfs_local}.sec
++
++				fitimage_emit_section_ramdisk $1 "$ramdiskcount" "${initramfs_local}.sec"
++				break
++			else
++				bbnote "Did not find initramfs image: $initramfs_path"
++			fi
++		done
++
++		if [ -z "$found" ]; then
++			bbfatal "Could not find a valid initramfs type for ${INITRAMFS_IMAGE_NAME}, the supported types are: ${FIT_SUPPORTED_INITRAMFS_FSTYPES}"
++		fi
++	fi
++
++	fitimage_emit_section_maint $1 sectend
++
++	# Force the first Kernel and DTB in the default config
++	kernelcount=1
++	if [ -n "$dtbcount" ]; then
++		dtbcount=1
++	fi
++
++	#
++	# Step 6: Prepare a configurations section
++	#
++	fitimage_emit_section_maint $1 confstart
++
++	# kernel-fitimage.bbclass currently only supports a single kernel (no less or
++	# more) to be added to the FIT image along with 0 or more device trees and
++	# 0 or 1 ramdisk.
++        # It is also possible to include an initramfs bundle (kernel and rootfs in one binary)
++        # When the initramfs bundle is used ramdisk is disabled.
++	# If a device tree is to be part of the FIT image, then select
++	# the default configuration to be used is based on the dtbcount. If there is
++	# no dtb present than select the default configuation to be based on
++	# the kernelcount.
++	if [ -n "$DTBS" ]; then
++		i=1
++		for DTB in ${DTBS}; do
++			dtb_ext=${DTB##*.}
++			if [ "$dtb_ext" = "dtbo" ]; then
++				fitimage_emit_section_config $1 "" "$DTB" "" "$bootscr_id" "" "`expr $i = $dtbcount`"
++			else
++				fitimage_emit_section_config $1 $kernelcount "$DTB" "$ramdiskcount" "$bootscr_id" "$setupcount" "`expr $i = $dtbcount`"
++			fi
++			i=`expr $i + 1`
++		done
++	else
++		defaultconfigcount=1
++		fitimage_emit_section_config $1 $kernelcount "" "$ramdiskcount" "$bootscr_id"  "$setupcount" $defaultconfigcount
++	fi
++
++	fitimage_emit_section_maint $1 sectend
++
++	fitimage_emit_section_maint $1 fitend
++
++	#
++	# Step 7: Assemble the image
++	#
++	${UBOOT_MKIMAGE} \
++		${@'-D "${UBOOT_MKIMAGE_DTCOPTS}"' if len('${UBOOT_MKIMAGE_DTCOPTS}') else ''} \
++		-f $1 \
++		arch/${ARCH}/boot/$2
++
++	#
++	# Step 8: Sign the image and add public key to U-Boot dtb
++	#
++	if [ "x${UBOOT_SIGN_ENABLE}" = "x1" ] ; then
++		add_key_to_u_boot=""
++		if [ -n "${UBOOT_DTB_BINARY}" ]; then
++			# The u-boot.dtb is a symlink to UBOOT_DTB_IMAGE, so we need copy
++			# both of them, and don't dereference the symlink.
++			cp -P ${STAGING_DATADIR}/u-boot*.dtb ${B}
++			add_key_to_u_boot="-K ${B}/${UBOOT_DTB_BINARY}"
++		fi
++		${UBOOT_MKIMAGE_SIGN} \
++			${@'-D "${UBOOT_MKIMAGE_DTCOPTS}"' if len('${UBOOT_MKIMAGE_DTCOPTS}') else ''} \
++			-F -k "${UBOOT_SIGN_KEYDIR}" \
++			$add_key_to_u_boot \
++			-r arch/${ARCH}/boot/$2 \
++			${UBOOT_MKIMAGE_SIGN_ARGS}
++	fi
++}
++
++fitimage_ti_secure() {
++	if test -n "${TI_SECURE_DEV_PKG}"; then
++		export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
++		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh $1 $2
++	else
++		cp $1 $2
++	fi
++}
++
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
+index cc67188a..f3793baf 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_5.10.bb
+@@ -3,6 +3,8 @@ SUMMARY = "Linux kernel for TI devices"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
- 
--PR = "r33"
-+PR = "r34"
- 
- BRANCH = "ti-u-boot-2021.01"
- 
- SRCREV = "2ee8efd6543648c6b8a14d93d52a6038854035c8"
++KERNEL_CLASSES += "${@bb.utils.contains('TFA_PLATFORM', 'k3', 'kernel-fitimage-ti-u-boot', '', d)}"
 +
-+SRC_URI += "file://0001-configs-Update-to-support-oe-core-fitImage-naming.patch"
-+
+ inherit kernel
+ 
+ DEFCONFIG_BUILDER = "${S}/ti_config_fragments/defconfig_builder.sh"
 -- 
 2.17.1
 
