@@ -1,114 +1,84 @@
-Return-Path: <afd@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D125C761A6
-	for <webhook@archiver.kernel.org>; Thu, 30 Mar 2023 15:42:42 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.29062.1680190952335842525
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02D3AC6FD1D
+	for <webhook@archiver.kernel.org>; Thu, 30 Mar 2023 21:24:44 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.39254.1680211482746998336
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 30 Mar 2023 08:42:32 -0700
+ Thu, 30 Mar 2023 14:24:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=JVpXB1w7;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=lQ4QTw8U;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 32UFgVLg087282
-	for <meta-ti@lists.yoctoproject.org>; Thu, 30 Mar 2023 10:42:31 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 32ULOeUq090589;
+	Thu, 30 Mar 2023 16:24:40 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1680190951;
-	bh=saaJbtRkedjBUPTnP0KV0FGjnijLZmF7XStZXyWR2Tw=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=JVpXB1w71bssjVFYpTK1wk6Wue442Jm2DRM7nBHZVoPbfKzFJZ8Z244rK8di2EUkF
-	 iGNaL2kIpNYXJLXIuTYcItwZJ17qfLZba3z/HetjZZfCO07bYrzGdy/bX6+lDBcpHV
-	 eRYPDtnrfArpo7M6mKnYJydMUqh5Rea4h3NKZqTA=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 32UFgVK0041540
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 30 Mar 2023 10:42:31 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1680211480;
+	bh=LtMaI1WXDFu6Qbvc+Ss4X05n40BY3SCEblQ9SqkzBG4=;
+	h=From:To:Subject:Date;
+	b=lQ4QTw8UUP3vjK0CkfJ0e+MtWiODQ08iXUceAlYuyzd9ny08i7LtRMlqgEk+XX5D5
+	 cqiRSHouSC4go+rq5YSEFg1OCbKejdZbt4uD10XOaYhL0gTfQ97WeFfX2dFymdOsOY
+	 acAjQXdc8/IS/b1Yj5N1m4jnRVh3kYCF2tVvmYVk=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 32ULOeY8112942
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 30 Mar 2023 16:24:40 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Thu, 30
- Mar 2023 10:42:30 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2023 16:24:40 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Thu, 30 Mar 2023 10:42:30 -0500
-Received: from [10.250.32.170] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 32UFgUUh007091;
-	Thu, 30 Mar 2023 10:42:30 -0500
-Message-ID: <cc63a775-7f82-d6b1-984d-a3f524afaa6b@ti.com>
-Date: Thu, 30 Mar 2023 10:42:30 -0500
+ Frontend Transport; Thu, 30 Mar 2023 16:24:40 -0500
+Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 32ULOem6015948;
+	Thu, 30 Mar 2023 16:24:40 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1phzlA-00054G-5a; Thu, 30 Mar 2023 16:24:40 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master/kirkstone][PATCH 0/4] Sync up from dunfell
+Date: Thu, 30 Mar 2023 16:24:36 -0500
+Message-ID: <20230330212440.19437-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [meta-ti][dunfell][PATCH] ti-rtos-firmware: j784s4:
- main-r5f0_0-fw should point to ethfw binary
-To: <a-limaye@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: <reatmon@ti.com>
-References: <20230330141330.1873679-1-a-limaye@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20230330141330.1873679-1-a-limaye@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 30 Mar 2023 15:42:42 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16257
+ <meta-ti@lists.yoctoproject.org>; Thu, 30 Mar 2023 21:24:44 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16258
 
-On 3/30/23 9:13 AM, Aniket Limaye via lists.yoctoproject.org wrote:
-> From: Aniket Limaye <a-limaye@ti.com>
-> 
-> main-r5f0_0-fw was pointing to pdk-ipc binary, while it should be
-> pointing to ethfw one for j784s4-evm, j784s4-hs-evm
-> 
+These changes were made to bring us to a stable sync up point with
+dunfell.  Everything (that can) can be built and boot.  From these
+patches things will begin to diverge as we start our LTS mirgration to
+Linux v6.1 and U-boot 2023.04.
 
-"Why" should it point to ethfw?
+Ryan Eatmon (4):
+  u-boot-ti-staging: Fix u-boot configs to match oe-core fitImage
+  trusted-firmware-a: Only sign files for platforms that support it
+  optee-os: Only sign files for platforms that support it
+  kernel-fitimage: Add signing of fitImage entries for 5.10 kernel
 
-If you want to switch from the default, that is what update alternatives are for.
+ .../classes/kernel-fitimage-ti-u-boot.bbclass | 214 ++++++++++++++++++
+ .../trusted-firmware-a_%.bbappend             |  40 +++-
+ ...e-to-support-oe-core-fitImage-naming.patch | 144 ++++++++++++
+ .../u-boot/u-boot-ti-staging_2021.01.bb       |   8 +-
+ .../linux/linux-ti-staging_5.10.bb            |   2 +
+ .../optee/optee-os_3.16%.bbappend             |  44 +++-
+ 6 files changed, 448 insertions(+), 4 deletions(-)
+ create mode 100644 meta-ti-bsp/classes/kernel-fitimage-ti-u-boot.bbclass
+ create mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging-2021.01/0001-configs-Update-to-support-oe-core-fitImage-naming.patch
 
-Also is this for "dunfell"? That should be frozen.
+-- 
+2.17.1
 
-Andrew
-
-> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
-> ---
->   recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> index e2703070..b161d345 100644
-> --- a/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> +++ b/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-> @@ -802,7 +802,7 @@ ALTERNATIVE_TARGET[j721s2-c71_1-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_e
->   
->   ALTERNATIVE_TARGET[j784s4-mcu-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_testb_mcu1_0_release_strip.xer5f"
->   ALTERNATIVE_TARGET[j784s4-mcu-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu1_1_release_strip.xer5f"
-> -ALTERNATIVE_TARGET[j784s4-main-r5f0_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_0_release_strip.xer5f"
-> +ALTERNATIVE_TARGET[j784s4-main-r5f0_0-fw] = "${base_libdir}/firmware/ethfw/app_remoteswitchcfg_server_strip.xer5f"
->   ALTERNATIVE_TARGET[j784s4-main-r5f0_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f"
->   ALTERNATIVE_TARGET[j784s4-main-r5f1_0-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_0_release_strip.xer5f"
->   ALTERNATIVE_TARGET[j784s4-main-r5f1_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_1_release_strip.xer5f"
-> @@ -813,7 +813,7 @@ ALTERNATIVE_TARGET[j784s4-c71_1-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_
->   ALTERNATIVE_TARGET[j784s4-c71_2-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_3_release_strip.xe71"
->   ALTERNATIVE_TARGET[j784s4-c71_3-fw] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_c7x_4_release_strip.xe71"
->   
-> -ALTERNATIVE_TARGET[j784s4-main-r5f0_0-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_0_release_strip.xer5f.signed"
-> +ALTERNATIVE_TARGET[j784s4-main-r5f0_0-fw-sec] = "${base_libdir}/firmware/ethfw/app_remoteswitchcfg_server_strip.xer5f.signed"
->   ALTERNATIVE_TARGET[j784s4-main-r5f0_1-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu2_1_release_strip.xer5f.signed"
->   ALTERNATIVE_TARGET[j784s4-main-r5f1_0-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_0_release_strip.xer5f.signed"
->   ALTERNATIVE_TARGET[j784s4-main-r5f1_1-fw-sec] = "${base_libdir}/firmware/pdk-ipc/ipc_echo_test_mcu3_1_release_strip.xer5f.signed"
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#16256): https://lists.yoctoproject.org/g/meta-ti/message/16256
-> Mute This Topic: https://lists.yoctoproject.org/mt/97951452/3619733
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [afd@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
 
