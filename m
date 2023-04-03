@@ -1,72 +1,74 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <alexandre.belloni@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F92AC7619A
-	for <webhook@archiver.kernel.org>; Mon,  3 Apr 2023 02:29:42 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.61224.1680488972107898705
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29652C761A6
+	for <webhook@archiver.kernel.org>; Mon,  3 Apr 2023 13:48:15 +0000 (UTC)
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
+ by mx.groups.io with SMTP id smtpd.web11.70868.1680529688660181539
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 02 Apr 2023 19:29:32 -0700
+ Mon, 03 Apr 2023 06:48:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: list.ti.com, ip: 198.47.19.142, mailfrom: lcpdbld@list.ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3332TTBP032272;
-	Sun, 2 Apr 2023 21:29:29 -0500
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3332TTVL128482
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Sun, 2 Apr 2023 21:29:29 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Sun, 2
- Apr 2023 21:29:29 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Sun, 2 Apr 2023 21:29:29 -0500
-Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3332TTp3011070;
-	Sun, 2 Apr 2023 21:29:29 -0500
-Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
-	id 0A5A410FE251; Sun,  2 Apr 2023 21:29:29 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][dunfell][PATCH] u-boot-ti-staging: CI/CD Auto-Merger: cicd.dunfell.202304021800
-Date: Sun, 2 Apr 2023 21:29:29 -0500
-Message-ID: <1680488969-68732-1-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@bootlin.com header.s=gm1 header.b=ME5pNu6a;
+ spf=pass (domain: bootlin.com, ip: 217.70.183.201, mailfrom: alexandre.belloni@bootlin.com)
+Received: (Authenticated sender: alexandre.belloni@bootlin.com)
+	by mail.gandi.net (Postfix) with ESMTPSA id 7F4051BF215;
+	Mon,  3 Apr 2023 13:48:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1680529687;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type;
+	bh=Du+VHAHaNLAhqp1Ko0CcPypKg3Yl+1ei9BoFe0usqDE=;
+	b=ME5pNu6aw8C6f8i84y5jP5KWwgjQT1hoq8e+zD3GX52Cyy2qE5JlEpq7blwc0wz3rU8r6H
+	GpWMl6KOmzmxoHvvOGIXYWR414NuDmLM11EF/z9044F2FMrzhBHqtyhVYk7Ymg2mNJ//Hw
+	vHRJrpTUXCt1pknxkx2t/WOCNC44wD6fB6H1JfNhjJxKwJfPOB2c6FHxVBHkACsm97AiHL
+	63HAjuIhU+rY0s5t9L/JEtetp5XbwLdoAts7hKkDv8K1veQJJcgfn505cZNr6THMp6PBB5
+	lg8b00W97zZRPBSfH4bD361XAMa5l6SPFbH5BGaR76PS+tguPc0hhPoaZ9nV2w==
+Date: Mon, 3 Apr 2023 15:48:05 +0200
+From: Alexandre Belloni <alexandre.belloni@bootlin.com>
+To: Denys Dmytriyenko <denys@konsulko.com>, meta-ti@lists.yoctoproject.org
+Subject: check-layer failures for meta-ti
+Message-ID: <202304031348055bba498e@mail.local>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 03 Apr 2023 02:29:42 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16283
+ <meta-ti@lists.yoctoproject.org>; Mon, 03 Apr 2023 13:48:15 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16284
 
-Updated the value(s) for:
-  SRCREV
+Hello,
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
----
- recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+meta-ti is currently failing check-layer-nightly:
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-index 7720c2e..7aad394 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
-@@ -6,4 +6,4 @@ PR = "r33"
- 
- BRANCH = "ti-u-boot-2021.01"
- 
--SRCREV = "28c75c2713915a122e5d39311ae7416ca35c0532"
-+SRCREV = "3a5205e9803809f18edc59a40fd9df470f98a00f"
+
+https://autobuilder.yoctoproject.org/typhoon/#/builders/121/builds/1272/steps/19/logs/stdio
+
+AssertionError: Adding layer meta-ti-bsp changed signatures.
+10 signatures changed, initial differences (first hash before, second after):
+   optee-client:do_prepare_recipe_sysroot: 3f4e44718ab8f2398d5cc145fcdd481d1813a7afb7d028aa5ff67617fec69885 -> 06b063bf17bd8534f2ffc2506780d02c221cca3273863d3ca2548f2031c3ff92
+      bitbake-diffsigs --task optee-client do_prepare_recipe_sysroot --signature 3f4e44718ab8f2398d5cc145fcdd481d1813a7afb7d028aa5ff67617fec69885 06b063bf17bd8534f2ffc2506780d02c221cca3273863d3ca2548f2031c3ff92
+      NOTE: Starting bitbake server...
+      runtaskdeps changed:
+      ['cmake/cmake-native_3.22.3.bb:do_populate_sysroot gcc/gcc-cross_11.3.bb:do_populate_sysroot gcc/gcc-runtime_11.3.bb:do_populate_sysroot glibc/glibc_2.35.bb:do_populate_sysroot ninja/ninja_1.10.2.bb:do_populate_sysroot:virtual:native optee/optee-client_3.16.0.bb:do_fetch', +pkgconfig/pkgconfig_git.bb:do_populate_sysroot:virtual:native, 'pseudo/pseudo_git.bb:do_populate_sysroot:virtual:native update-rc.d/update-rc.d_0.8.bb:do_populate_sysroot']
+      Number of task dependencies changed
+      Dependency on task pkgconfig/pkgconfig_git.bb:do_populate_sysroot:virtual:native was added with hash cf8a9ff6ed2d492aeeeeeb3972365104425b5424377cf5e4a4fc76bb53a4f628
+
+
+There as also this one over the week end:
+
+https://autobuilder.yoctoproject.org/typhoon/#/builders/121/builds/1268/steps/20/logs/stdio
+
+
+AssertionError: 3 != 0 : Found following patches with malformed or missing upstream status:
+/home/pokybuild/yocto-worker/check-layer-nightly/build/meta-ti/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw/0001-Add-Makefile-to-install-firmware-files.patch
+/home/pokybuild/yocto-worker/check-layer-nightly/build/meta-ti/meta-ti-extras/recipes-devtools/gdbc6x/gdbc6x/0001-libbfd.h-suppress-GCC9-Wstringop-truncation.patch
+/home/pokybuild/yocto-worker/check-layer-nightly/build/meta-ti/meta-ti-extras/recipes-connectivity/wl18xx-target-scripts/wl18xx-target-scripts/0001-print_stat.sh-replace-system-bin-sh-with-bin-sh.patch
+
+
 -- 
-1.8.3.1
-
+Alexandre Belloni, co-owner and COO, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
 
