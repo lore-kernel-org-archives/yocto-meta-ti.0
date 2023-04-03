@@ -1,76 +1,72 @@
-Return-Path: <denis@denix.org>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96F5AC76196
-	for <webhook@archiver.kernel.org>; Fri, 31 Mar 2023 20:29:03 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.6382.1680294538794417240
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F92AC7619A
+	for <webhook@archiver.kernel.org>; Mon,  3 Apr 2023 02:29:42 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.61224.1680488972107898705
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 31 Mar 2023 13:28:58 -0700
+ Sun, 02 Apr 2023 19:29:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 21A7140C6C;
-	Fri, 31 Mar 2023 20:28:58 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9TyMrYs4CVvH; Fri, 31 Mar 2023 20:28:58 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id F380740C24;
-	Fri, 31 Mar 2023 20:28:55 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id C1CAD1637E8; Fri, 31 Mar 2023 16:28:20 -0400 (EDT)
-Date: Fri, 31 Mar 2023 16:28:20 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Robert Nelson <robertcnelson@gmail.com>
-Cc: meta-ti@lists.yoctoproject.org, denys@konsulko.com
-Subject: Re: [meta-ti] [PATCH] meta-ti-bsp: BeagleBoard switch to GitHub
- mirror
-Message-ID: <20230331202820.GI18050@denix.org>
-References: <20230331200753.333849-1-robertcnelson@gmail.com>
+ dkim=missing; spf=pass (domain: list.ti.com, ip: 198.47.19.142, mailfrom: lcpdbld@list.ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3332TTBP032272;
+	Sun, 2 Apr 2023 21:29:29 -0500
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3332TTVL128482
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Sun, 2 Apr 2023 21:29:29 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Sun, 2
+ Apr 2023 21:29:29 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
+ Frontend Transport; Sun, 2 Apr 2023 21:29:29 -0500
+Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3332TTp3011070;
+	Sun, 2 Apr 2023 21:29:29 -0500
+Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
+	id 0A5A410FE251; Sun,  2 Apr 2023 21:29:29 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][dunfell][PATCH] u-boot-ti-staging: CI/CD Auto-Merger: cicd.dunfell.202304021800
+Date: Sun, 2 Apr 2023 21:29:29 -0500
+Message-ID: <1680488969-68732-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230331200753.333849-1-robertcnelson@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 31 Mar 2023 20:29:03 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16282
+ <meta-ti@lists.yoctoproject.org>; Mon, 03 Apr 2023 02:29:42 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16283
 
-On Fri, Mar 31, 2023 at 03:07:53PM -0500, Robert Nelson wrote:
-> BeagleBoard.org's GitLab instance: https://git.beagleboard.org/
-> easily becomes overloaded, switch to GitHub mirror.
+Updated the value(s) for:
+  SRCREV
 
-Thanks!
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+index 7720c2e..7aad394 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2021.01.bb
+@@ -6,4 +6,4 @@ PR = "r33"
+ 
+ BRANCH = "ti-u-boot-2021.01"
+ 
+-SRCREV = "28c75c2713915a122e5d39311ae7416ca35c0532"
++SRCREV = "3a5205e9803809f18edc59a40fd9df470f98a00f"
+-- 
+1.8.3.1
 
-> Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
-
-Reviewed-by: Denys Dmytriyenko <denys@konsulko.com>
-
-
-> ---
->  meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-> index 35fb40cd..07d06e21 100644
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-> @@ -25,7 +25,7 @@ SRCREV:k3 = "11ebcc09f32669fac8254dff56d500f86c4c2caf"
->  PV:k3 = "5.10.153+git${SRCPV}"
->  BRANCH:k3 = "5.10-arm64"
->  
-> -SRC_URI = "git://git.beagleboard.org/beagleboard/linux.git;protocol=https;branch=${BRANCH} \
-> +SRC_URI = "git://github.com/beagleboard/linux.git;protocol=https;branch=${BRANCH} \
->             file://init_disassemble_info-signature-changes-causes-compile-failures.patch"
->  
->  DEFCONFIG_NAME = "bb.org_defconfig"
-> -- 
-> 2.39.2
 
