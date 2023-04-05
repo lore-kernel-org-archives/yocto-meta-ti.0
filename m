@@ -2,150 +2,78 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44860C7619A
-	for <webhook@archiver.kernel.org>; Wed,  5 Apr 2023 18:59:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25EAAC7619A
+	for <webhook@archiver.kernel.org>; Wed,  5 Apr 2023 19:01:20 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.139514.1680721163705025350
+ by mx.groups.io with SMTP id smtpd.web11.139579.1680721270018553112
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 05 Apr 2023 11:59:24 -0700
+ Wed, 05 Apr 2023 12:01:10 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id BBB7140C3A;
-	Wed,  5 Apr 2023 18:59:22 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 5724340C3A;
+	Wed,  5 Apr 2023 19:01:09 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id K4672TxJMj1t; Wed,  5 Apr 2023 18:59:22 +0000 (UTC)
+	with ESMTP id f9JS-4Tkustf; Wed,  5 Apr 2023 19:01:09 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 80CE2406B5;
-	Wed,  5 Apr 2023 18:59:19 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2AF6F406B5;
+	Wed,  5 Apr 2023 19:01:06 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 9C23E1637F9; Wed,  5 Apr 2023 14:58:42 -0400 (EDT)
-Date: Wed, 5 Apr 2023 14:58:42 -0400
+	id EE4301637F9; Wed,  5 Apr 2023 15:00:29 -0400 (EDT)
+Date: Wed, 5 Apr 2023 15:00:29 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: afd@ti.com
 Cc: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
 	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][master/kirkstone][PATCH 1/4] linux-ti-mainline: Use
- upstream configs with upstream kernel
-Message-ID: <20230405185842.GF9226@denix.org>
+Subject: Re: [meta-ti][master/kirkstone][PATCH 2/4] linux-ti-mainline:
+ Update to v6.2 mainline version
+Message-ID: <20230405190029.GG9226@denix.org>
 References: <20230405184714.26036-1-afd@ti.com>
+ <20230405184714.26036-2-afd@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230405184714.26036-1-afd@ti.com>
+In-Reply-To: <20230405184714.26036-2-afd@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 05 Apr 2023 18:59:30 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16297
+ <meta-ti@lists.yoctoproject.org>; Wed, 05 Apr 2023 19:01:20 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16298
 
-On Wed, Apr 05, 2023 at 01:47:11PM -0500, Andrew Davis via lists.yoctoproject.org wrote:
-> Mainline should test the mainline kernel as it is, not with out-of-tree
-> changes like to the default configuration that one would get when using
-> a stock distro. Use only upstream configuration.
-> 
+On Wed, Apr 05, 2023 at 01:47:12PM -0500, Andrew Davis via lists.yoctoproject.org wrote:
 > Signed-off-by: Andrew Davis <afd@ti.com>
 > ---
->  .../recipes-kernel/linux/linux-ti-mainline/defconfig       | 1 -
->  .../linux/linux-ti-mainline/dra7xx/defconfig               | 1 -
->  .../recipes-kernel/linux/linux-ti-mainline/k3/defconfig    | 1 -
->  .../linux/linux-ti-mainline/omapl138/defconfig             | 1 -
->  .../recipes-kernel/linux/linux-ti-mainline/ti33x/defconfig | 1 -
->  .../recipes-kernel/linux/linux-ti-mainline/ti43x/defconfig | 1 -
->  meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb  | 7 +++++--
->  7 files changed, 5 insertions(+), 8 deletions(-)
->  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/defconfig
->  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/dra7xx/defconfig
->  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/k3/defconfig
->  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/omapl138/defconfig
->  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/ti33x/defconfig
->  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/ti43x/defconfig
+>  meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb | 8 +++-----
+>  1 file changed, 3 insertions(+), 5 deletions(-)
 > 
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/defconfig
-> deleted file mode 100644
-> index d083d182..00000000
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/defconfig
-> +++ /dev/null
-> @@ -1 +0,0 @@
-> -use-tisdk-config=ti_sdk_omap2_release
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/dra7xx/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/dra7xx/defconfig
-> deleted file mode 100644
-> index dcb53bab..00000000
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/dra7xx/defconfig
-> +++ /dev/null
-> @@ -1 +0,0 @@
-> -use-tisdk-config=ti_sdk_dra7x_release
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/k3/defconfig
-> deleted file mode 100644
-> index b9bc6137..00000000
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/k3/defconfig
-> +++ /dev/null
-> @@ -1 +0,0 @@
-> -use-tisdk-config=ti_sdk_arm64_release
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/omapl138/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/omapl138/defconfig
-> deleted file mode 100644
-> index b3467853..00000000
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/omapl138/defconfig
-> +++ /dev/null
-> @@ -1 +0,0 @@
-> -use-tisdk-config=ti_sdk_omapl138_release
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/ti33x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/ti33x/defconfig
-> deleted file mode 100644
-> index 88f80fa9..00000000
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/ti33x/defconfig
-> +++ /dev/null
-> @@ -1 +0,0 @@
-> -use-tisdk-config=ti_sdk_am3x_release
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/ti43x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/ti43x/defconfig
-> deleted file mode 100644
-> index 4b9daaf9..00000000
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline/ti43x/defconfig
-> +++ /dev/null
-> @@ -1 +0,0 @@
-> -use-tisdk-config=ti_sdk_am4x_release
 > diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
-> index be278d73..3f4b560d 100644
+> index 3f4b560d..eb8009df 100644
 > --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
 > +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
-> @@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
->  inherit kernel
+> @@ -16,12 +16,10 @@ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT} \
 >  
->  DEFCONFIG_BUILDER = "${S}/ti-upstream-tools/config/defconfig_builder.sh"
+>  S = "${WORKDIR}/git"
+>  
+> +# 6.2 Mainline version
+>  BRANCH = "master"
+> -TOOLS_BRANCH = "master"
 
-Then this ^^^ variable is also not needed any more.
-
-Semms like you are pretty much abandoning the old ti-upstream-tools concept, 
-which was supplying TI-specific defconfig fragments+script and DTB/DTBOs on 
-top of mainline kernel. In that case mainline and next recipes will be the 
-same, except for SRC_URI tree and SRCREV?
+But you haven't removed ti-upstream-tools from SRC_URI, which uses it...
 
 
-> -require recipes-kernel/linux/setup-defconfig.inc
->  require recipes-kernel/linux/kernel-rdepends.inc
->  require recipes-kernel/linux/ti-kernel.inc
+> -
+> -# 5.15 Mainline version
+> -SRCREV = "8bb7eca972ad531c9b149c0a51ab43a417385813"
+> -PV = "5.15+git${SRCPV}"
+> +SRCREV = "c9c3395d5e3dcc6daee66c6908354d47bf98cb0c"
+> +PV = "6.2+git${SRCPV}"
 >  
-> @@ -33,12 +32,16 @@ KERNEL_GIT_PROTOCOL = "https"
->  SRC_URI += " \
->      ${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH};name=linux \
->      git://git.ti.com/git/ti-linux-kernel/ti-upstream-tools.git;branch=${TOOLS_BRANCH};protocol=${KERNEL_GIT_PROTOCOL};name=ti-upstream-tools;destsuffix=git/ti-upstream-tools \
-> -    file://defconfig \
->  "
->  
->  SRCREV_ti-upstream-tools = "0f60697843bba6f8d721b14da92b1652563ccb95"
->  SRCREV_FORMAT = "linux"
->  
-> +DEFCONFIG_NAME = "multi_v7_defconfig"
-> +DEFCONFIG_NAME:omapl138 = "davinci_all_defconfig"
-> +DEFCONFIG_NAME:k3 = "defconfig"
-> +KERNEL_CONFIG_COMMAND = "oe_runmake -C ${S} O=${B} ${DEFCONFIG_NAME}"
-> +
->  kernel_do_compile:append() {
->  	oe_runmake dtbs CC="${KERNEL_CC} $cc_extra " LD="${KERNEL_LD}" ${KERNEL_EXTRA_ARGS}
->  	oe_runmake -C ${S}/ti-upstream-tools LINUX=${S} DTC=${B}/scripts/dtc/dtc O=${B} CC="${KERNEL_CC} $cc_extra " LD="${KERNEL_LD}" ${KERNEL_EXTRA_ARGS}
+>  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+>  MACHINE_KERNEL_PR:append = "b"
 > -- 
 > 2.39.2
 
