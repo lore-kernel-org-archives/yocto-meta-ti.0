@@ -1,141 +1,79 @@
-Return-Path: <denis@denix.org>
+Return-Path: <u-kumar1@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 760EEC77B6F
-	for <webhook@archiver.kernel.org>; Sun,  9 Apr 2023 16:10:34 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.23345.1681056630861103525
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6D28C77B71
+	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 09:06:58 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.39912.1681117610722548731
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 09 Apr 2023 09:10:31 -0700
+ Mon, 10 Apr 2023 02:06:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id C4F1640C68;
-	Sun,  9 Apr 2023 16:10:29 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lfZU8_a0g55N; Sun,  9 Apr 2023 16:10:29 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9466C40AC9;
-	Sun,  9 Apr 2023 16:10:27 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 0E5511637FA; Sun,  9 Apr 2023 12:09:50 -0400 (EDT)
-Date: Sun, 9 Apr 2023 12:09:50 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Robert Nelson <robertcnelson@gmail.com>
-Cc: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denys@konsulko.com>
-Subject: Re: [master/kirkstone][PATCH 1/5] linux-bb.org: update to 5.10.162
- and dedicated branches
-Message-ID: <20230409160950.GP9226@denix.org>
-References: <20230407203636.3265548-1-denis@denix.org>
- <20230407203636.3265548-2-denis@denix.org>
- <CAOCHtYjcpjOwOL-kHT7s-HhLzi1CjWx-R0pu2=qBTwWiBJmoUw@mail.gmail.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=BtbUPeCn;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: u-kumar1@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 33A96ow4031856
+	for <meta-ti@lists.yoctoproject.org>; Mon, 10 Apr 2023 04:06:50 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1681117610;
+	bh=qD6Q24ZDf6ARTfmG3yqGRkEhaA3ERUeKqclaV8bPxoQ=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=BtbUPeCnr73llvkCxmxPW3Pcy+KtSvcXmlHJi5jKNXi/+3XxuwuhaBfaTwZZzUxie
+	 EOJvAWlyBmzdX25ujusR66RQ/3hq/iHjDaVSiNxa5VA0HmsESFTfgtcdd3HCBK//lk
+	 EjL5Jdk0k00f8JkX2uUFJRJt20ViFVpQqWohLWm8=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 33A96nTh032321
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Mon, 10 Apr 2023 04:06:49 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Mon, 10
+ Apr 2023 04:06:49 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
+ Frontend Transport; Mon, 10 Apr 2023 04:06:49 -0500
+Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 33A96lXl023313;
+	Mon, 10 Apr 2023 04:06:48 -0500
+From: Udit Kumar <u-kumar1@ti.com>
+To: <praneeth@ti.com>, <reatmon@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: <m-chawdhry@ti.com>, Udit Kumar <u-kumar1@ti.com>
+Subject: [PATCH v2 0/2 kirkstone/wip] defconf update for J7200 and J721S2
+Date: Mon, 10 Apr 2023 14:36:43 +0530
+Message-ID: <20230410090645.335745-1-u-kumar1@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230407115107.839204-1-u-kumar1@ti.com>
+References: <20230407115107.839204-1-u-kumar1@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <CAOCHtYjcpjOwOL-kHT7s-HhLzi1CjWx-R0pu2=qBTwWiBJmoUw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sun, 09 Apr 2023 16:10:34 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16332
+ <meta-ti@lists.yoctoproject.org>; Mon, 10 Apr 2023 09:06:58 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16333
 
-On Fri, Apr 07, 2023 at 03:50:43PM -0500, Robert Nelson wrote:
-> On Fri, Apr 7, 2023 at 3:36=E2=80=AFPM Denys Dmytriyenko <denis@denix.o=
-rg> wrote:
-> >
-> > From: Denys Dmytriyenko <denys@konsulko.com>
-> >
-> > * Update both 32 and 64-bit trees to 5.10.162
-> > * Switch from using a common branch that gets periodically rebased to=
- using
-> >   dedicated per-merge branches
-> > * Patch 32-bit defconfig to use LZMA compression instead of LZO, that=
- is
-> >   being deprecated in OE-Core
-> >
-> > Cc: Robert Nelson <robertcnelson@gmail.com>
-> > Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> > ---
-> >  ...h-default-kernel-compression-to-LZMA.patch | 30 +++++++++++++++++=
-++
-> >  .../recipes-kernel/linux/linux-bb.org_git.bb  | 18 ++++++-----
-> >  2 files changed, 40 insertions(+), 8 deletions(-)
-> >  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-bb.org/000=
-1-defconfig-switch-default-kernel-compression-to-LZMA.patch
-> >
-> > diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org/0001-defco=
-nfig-switch-default-kernel-compression-to-LZMA.patch b/meta-ti-bsp/recipe=
-s-kernel/linux/linux-bb.org/0001-defconfig-switch-default-kernel-compress=
-ion-to-LZMA.patch
-> > new file mode 100644
-> > index 00000000..f6bff39f
-> > --- /dev/null
-> > +++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org/0001-defconfig-sw=
-itch-default-kernel-compression-to-LZMA.patch
-> > @@ -0,0 +1,30 @@
-> > +From 0ccadc7a676341bbd66eb176308c7c59931e9dd2 Mon Sep 17 00:00:00 20=
-01
-> > +From: Denys Dmytriyenko <denys@konsulko.com>
-> > +Date: Fri, 7 Apr 2023 01:44:56 +0000
-> > +Subject: [PATCH] defconfig: switch default kernel compression to LZM=
-A
-> > +
-> > +LZO compression and lzop tool haven't been maintained for long time =
-and have
-> > +been removed in recent versions of OE-Core, even though Debian may s=
-till use
-> > +them. Switch to LZMA compression that is used by default in TI kerne=
-l config.
-> > +
-> > +Upstream-Status: Inappropriate [OE-specific]
-> > +
-> > +Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> > +---
-> > + arch/arm/configs/bb.org_defconfig | 2 +-
-> > + 1 file changed, 1 insertion(+), 1 deletion(-)
-> > +
-> > +diff --git a/arch/arm/configs/bb.org_defconfig b/arch/arm/configs/bb=
-.org_defconfig
-> > +index 6bf0fb860683..7c035735172d 100644
-> > +--- a/arch/arm/configs/bb.org_defconfig
-> > ++++ b/arch/arm/configs/bb.org_defconfig
-> > +@@ -1,5 +1,5 @@
-> > + # CONFIG_LOCALVERSION_AUTO is not set
-> > +-CONFIG_KERNEL_LZO=3Dy
-> > ++CONFIG_KERNEL_LZMA=3Dy
-> > + CONFIG_SYSVIPC=3Dy
-> > + CONFIG_POSIX_MQUEUE=3Dy
-> > + CONFIG_NO_HZ_IDLE=3Dy
->=20
-> Oh! I didn't realize, lzo is in a sorry state.
+In u-boot 2023.04, HS and GP defconfig merged into one.
 
-Well, lzo is still kind of supported in OE-Core... But since lzop tool ha=
-s=20
-been removed (actually, moved to supplemental meta-openembedded layer), y=
-ou=20
-can't easily build lzo-compressed kernel w/o extra dependencies.
+This patch updates defconfig for J7200 and J721S2 HS
+platforms to align with u-boot 2023.04.
+
+v1->v2 : Change only defconfig, build target to managed by u-boot
 
 
-> Our only reason for using lzo over lzma, was purely a boot-up speed
-> race. (Thinking with the am335x single core at 1Ghz..)
->=20
-> Does OE-Core have proper support for lz4 as a replacement? Or just in
-> general lzma is the most recommended?
+Udit Kumar (2):
+  meta-ti-bsp: conf: machine: j7200: Update def config
+  meta-ti-bsp: conf: machine: j721s2: Update def config
 
-lzma, lz4, zstd are all supported, with zstd being the hot addition latel=
-y.=20
-Agree, lz4 may be the best choice for low-power devices like am335x...
+ meta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf  | 2 +-
+ meta-ti-bsp/conf/machine/j7200-hs-evm.conf       | 2 +-
+ meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf | 2 +-
+ meta-ti-bsp/conf/machine/j721s2-hs-evm.conf      | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-https://indico.fnal.gov/event/16264/contributions/36466/attachments/22610=
-/28037/Zstd__LZ4.pdf
-https://linuxreviews.org/Comparison_of_Compression_Algorithms
+-- 
+2.34.1
 
---=20
-Denys
 
