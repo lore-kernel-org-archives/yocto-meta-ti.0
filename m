@@ -1,168 +1,141 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF9C0C76196
-	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 16:41:40 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.50561.1681144896848451313
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B483C77B71
+	for <webhook@archiver.kernel.org>; Mon, 10 Apr 2023 18:48:51 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.53982.1681152527894680110
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 10 Apr 2023 09:41:37 -0700
+ Mon, 10 Apr 2023 11:48:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=vjzA7W/D;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 33AGfYHN084442;
-	Mon, 10 Apr 2023 11:41:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1681144894;
-	bh=b0/ev4X3v4C8dNssPk7NuOQz7NfDFJ0Xm5aSbS6yIq8=;
-	h=From:To:Subject:Date;
-	b=vjzA7W/DjE/AovPw3JhLlRlCFuXCB2qeNxNTjzZb/Qk99FUD1bF5+iVlRxV/LgOMd
-	 bGKjWaSuIB2Z45DwLJDuEpxoAE6LIbkBc9oF7pK1R+c72OcnEXFzT0ylniSUg47IKK
-	 +cK0aIqE6r7jqY9qtnyRyuAw6nVOomV727yQkWNY=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 33AGfYgR090826
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 10 Apr 2023 11:41:34 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Mon, 10
- Apr 2023 11:41:33 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Mon, 10 Apr 2023 11:41:34 -0500
-Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 33AGfYMu080085;
-	Mon, 10 Apr 2023 11:41:34 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1pluaE-0003r0-E6; Mon, 10 Apr 2023 11:41:34 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] patches: Add missing Upstream-Status to various patches
-Date: Mon, 10 Apr 2023 11:41:34 -0500
-Message-ID: <20230410164134.14775-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id C29EC40C2E;
+	Mon, 10 Apr 2023 18:48:46 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id DD-C8cFgVvEc; Mon, 10 Apr 2023 18:48:46 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8704340301;
+	Mon, 10 Apr 2023 18:48:43 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 8E5B31637FA; Mon, 10 Apr 2023 14:48:05 -0400 (EDT)
+Date: Mon, 10 Apr 2023 14:48:05 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Ryan Eatmon <reatmon@ti.com>
+Cc: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denys@konsulko.com>,
+	Robert Nelson <robertcnelson@gmail.com>
+Subject: Re: [meta-ti] [master/kirkstone][PATCH 1/5] linux-bb.org: update
+ to 5.10.162 and dedicated branches
+Message-ID: <20230410184805.GQ9226@denix.org>
+References: <20230407203636.3265548-1-denis@denix.org>
+ <20230407203636.3265548-2-denis@denix.org>
+ <2aad79b8-1cd6-6f66-ae7e-92a6705f3fba@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2aad79b8-1cd6-6f66-ae7e-92a6705f3fba@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 10 Apr 2023 16:41:40 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16339
+ <meta-ti@lists.yoctoproject.org>; Mon, 10 Apr 2023 18:48:51 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16340
 
-The check-layer command caught that we were missing the Upstream-Status
-on a few older patches, and I found a few new ones.
+On Mon, Apr 10, 2023 at 11:19:37AM -0500, Ryan Eatmon wrote:
+> 
+> 
+> On 4/7/2023 15:36, Denys Dmytriyenko wrote:
+> >From: Denys Dmytriyenko <denys@konsulko.com>
+> >
+> >* Update both 32 and 64-bit trees to 5.10.162
+> >* Switch from using a common branch that gets periodically rebased to using
+> >   dedicated per-merge branches
+> >* Patch 32-bit defconfig to use LZMA compression instead of LZO, that is
+> >   being deprecated in OE-Core
+> >
+> >Cc: Robert Nelson <robertcnelson@gmail.com>
+> >Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> >---
+> >  ...h-default-kernel-compression-to-LZMA.patch | 30 +++++++++++++++++++
+> >  .../recipes-kernel/linux/linux-bb.org_git.bb  | 18 ++++++-----
+> >  2 files changed, 40 insertions(+), 8 deletions(-)
+> >  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-bb.org/0001-defconfig-switch-default-kernel-compression-to-LZMA.patch
+> >
+> >diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org/0001-defconfig-switch-default-kernel-compression-to-LZMA.patch b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org/0001-defconfig-switch-default-kernel-compression-to-LZMA.patch
+> >new file mode 100644
+> >index 00000000..f6bff39f
+> >--- /dev/null
+> >+++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org/0001-defconfig-switch-default-kernel-compression-to-LZMA.patch
+> >@@ -0,0 +1,30 @@
+> >+From 0ccadc7a676341bbd66eb176308c7c59931e9dd2 Mon Sep 17 00:00:00 2001
+> >+From: Denys Dmytriyenko <denys@konsulko.com>
+> >+Date: Fri, 7 Apr 2023 01:44:56 +0000
+> >+Subject: [PATCH] defconfig: switch default kernel compression to LZMA
+> >+
+> >+LZO compression and lzop tool haven't been maintained for long time and have
+> >+been removed in recent versions of OE-Core, even though Debian may still use
+> >+them. Switch to LZMA compression that is used by default in TI kernel config.
+> >+
+> >+Upstream-Status: Inappropriate [OE-specific]
+> >+
+> >+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> >+---
+> >+ arch/arm/configs/bb.org_defconfig | 2 +-
+> >+ 1 file changed, 1 insertion(+), 1 deletion(-)
+> >+
+> >+diff --git a/arch/arm/configs/bb.org_defconfig b/arch/arm/configs/bb.org_defconfig
+> >+index 6bf0fb860683..7c035735172d 100644
+> >+--- a/arch/arm/configs/bb.org_defconfig
+> >++++ b/arch/arm/configs/bb.org_defconfig
+> >+@@ -1,5 +1,5 @@
+> >+ # CONFIG_LOCALVERSION_AUTO is not set
+> >+-CONFIG_KERNEL_LZO=y
+> >++CONFIG_KERNEL_LZMA=y
+> >+ CONFIG_SYSVIPC=y
+> >+ CONFIG_POSIX_MQUEUE=y
+> >+ CONFIG_NO_HZ_IDLE=y
+> >+--
+> >+2.25.1
+> >+
+> >diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
+> >index 2c459ce5..19664ba8 100644
+> >--- a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
+> >+++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
+> >@@ -15,18 +15,20 @@ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT} ${EXTRA_DTC_ARGS}"
+> >  S = "${WORKDIR}/git"
+> >-# 5.10.145 version
+> >-SRCREV = "9b11aaf2cdb1861ca74dc69d032a0f94cdd32bd6"
+> >-PV = "5.10.145+git${SRCPV}"
+> >-BRANCH = "5.10"
+> >+# 5.10.162 version for 32-bit
+> >+SRCREV:armv7a = "982fde4eb381f98ec8be946e8d33dd0c9f9416ab"
+> >+PV:armv7a = "5.10.162+git${SRCPV}"
+> >+BRANCH:armv7a = "v5.10.162-ti-r59"
+> >-# 5.10.153 version
+> >-SRCREV:k3 = "11ebcc09f32669fac8254dff56d500f86c4c2caf"
+> >-PV:k3 = "5.10.153+git${SRCPV}"
+> >-BRANCH:k3 = "5.10-arm64"
+> >+# 5.10.162 version for 64-bit
+> >+SRCREV:aarch64 = "a2f5d5746b6c389e58d20fda0a0fa88403da428b"
+> >+PV:aarch64 = "5.10.162+git${SRCPV}"
+> >+BRANCH:aarch64 = "v5.10.162-ti-arm64-r99"
+> >  SRC_URI = "git://github.com/beagleboard/linux.git;protocol=https;branch=${BRANCH}"
+> 
+> There is an additional patch in SRC_URI on master.  Does that patch
+> remain in the SRC_URI, or should it split out like the armv7a below?
+> I'm leaving it in the SRC_URI for my initial testing, I am just
+> looking for clarity.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- ...0001-configs-Update-to-support-oe-core-fitImage-naming.patch | 2 ++
- .../files/0001-ata-ahci-fix-enum-constants-for-gcc-13.patch     | 2 ++
- ...ssemble_info-signature-changes-causes-compile-failures.patch | 2 ++
- .../recipes-ti/ipc/ti-ipc/0001-Add-kernel-build-dir.patch       | 2 ++
- .../wl18xx-fw/0001-Add-Makefile-to-install-firmware-files.patch | 2 ++
- .../0001-print_stat.sh-replace-system-bin-sh-with-bin-sh.patch  | 2 ++
- .../0001-libbfd.h-suppress-GCC9-Wstringop-truncation.patch      | 2 ++
- 7 files changed, 14 insertions(+)
+Ah, sorry, missed that extra patch in master to fix perf - yes. that should go 
+to the common/generic SRC_URI.
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging-2021.01/0001-configs-Update-to-support-oe-core-fitImage-naming.patch b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging-2021.01/0001-configs-Update-to-support-oe-core-fitImage-naming.patch
-index 9a832312..31c7afc3 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging-2021.01/0001-configs-Update-to-support-oe-core-fitImage-naming.patch
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging-2021.01/0001-configs-Update-to-support-oe-core-fitImage-naming.patch
-@@ -7,6 +7,8 @@ In kirkstone and forward, the values in the fitImage have been
- standardized to include both conf- and the vender subdir in the name of
- the dtbs.  This patch updates u-boot to support that.
- 
-+Upstream-Status: Pending
-+
- Signed-off-by: Ryan Eatmon <reatmon@ti.com>
- ---
-  include/configs/am62x_evm.h       | 6 +++---
-diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-ata-ahci-fix-enum-constants-for-gcc-13.patch b/meta-ti-bsp/recipes-kernel/linux/files/0001-ata-ahci-fix-enum-constants-for-gcc-13.patch
-index 634b1588..063b4291 100644
---- a/meta-ti-bsp/recipes-kernel/linux/files/0001-ata-ahci-fix-enum-constants-for-gcc-13.patch
-+++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-ata-ahci-fix-enum-constants-for-gcc-13.patch
-@@ -24,6 +24,8 @@ Fix this by changing the entire enum definition to use BIT(x) in place
- of (1<<x), which results in all values being seen as 'unsigned' and
- fitting into an unsigned 32-bit type.
- 
-+Upstream-Status: Pending
-+
- Link: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=107917
- Link: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=107405
- Reported-by: Luis Machado <luis.machado@arm.com>
-diff --git a/meta-ti-bsp/recipes-kernel/linux/files/init_disassemble_info-signature-changes-causes-compile-failures.patch b/meta-ti-bsp/recipes-kernel/linux/files/init_disassemble_info-signature-changes-causes-compile-failures.patch
-index 33dee03a..e1e04c34 100644
---- a/meta-ti-bsp/recipes-kernel/linux/files/init_disassemble_info-signature-changes-causes-compile-failures.patch
-+++ b/meta-ti-bsp/recipes-kernel/linux/files/init_disassemble_info-signature-changes-causes-compile-failures.patch
-@@ -4,6 +4,8 @@ kernel we have to "adjust" the patch to match our files.
- 
- [A] https://patchwork.yoctoproject.org/project/arm/patch/20220824025819.4888-1-jon.mason@arm.com/#5104
- 
-+Upstream-Status: Pending
-+
- Signed-off-by: Ryan Eatmon <reatmon@ti.com>
- 
- 
-diff --git a/meta-ti-bsp/recipes-ti/ipc/ti-ipc/0001-Add-kernel-build-dir.patch b/meta-ti-bsp/recipes-ti/ipc/ti-ipc/0001-Add-kernel-build-dir.patch
-index 71d5b2be..cb178ee6 100644
---- a/meta-ti-bsp/recipes-ti/ipc/ti-ipc/0001-Add-kernel-build-dir.patch
-+++ b/meta-ti-bsp/recipes-ti/ipc/ti-ipc/0001-Add-kernel-build-dir.patch
-@@ -7,6 +7,8 @@ We build kernel outside of the source directory and the generated version.h
- file ends up being in a separate directory from the rest of kernel headers.
- Use another variable to point to the kernel build artifacts.
- 
-+Upstream-Status: Inappropriate [OE-specific]
-+
- Signed-off-by: Denys Dmytriyenko <denys@ti.com>
- 
- ---
-diff --git a/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw/0001-Add-Makefile-to-install-firmware-files.patch b/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw/0001-Add-Makefile-to-install-firmware-files.patch
-index a8db0770..bb05c6fe 100644
---- a/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw/0001-Add-Makefile-to-install-firmware-files.patch
-+++ b/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw/0001-Add-Makefile-to-install-firmware-files.patch
-@@ -3,6 +3,8 @@ From: Denys Dmytriyenko <denys@ti.com>
- Date: Fri, 10 Mar 2017 13:28:29 -0500
- Subject: [PATCH] Add Makefile to install firmware files
- 
-+Upstream-Status: Pending
-+
- Signed-off-by: Denys Dmytriyenko <denys@ti.com>
- ---
-  Makefile | 9 +++++++++
-diff --git a/meta-ti-extras/recipes-connectivity/wl18xx-target-scripts/wl18xx-target-scripts/0001-print_stat.sh-replace-system-bin-sh-with-bin-sh.patch b/meta-ti-extras/recipes-connectivity/wl18xx-target-scripts/wl18xx-target-scripts/0001-print_stat.sh-replace-system-bin-sh-with-bin-sh.patch
-index c0719e34..cde01541 100644
---- a/meta-ti-extras/recipes-connectivity/wl18xx-target-scripts/wl18xx-target-scripts/0001-print_stat.sh-replace-system-bin-sh-with-bin-sh.patch
-+++ b/meta-ti-extras/recipes-connectivity/wl18xx-target-scripts/wl18xx-target-scripts/0001-print_stat.sh-replace-system-bin-sh-with-bin-sh.patch
-@@ -3,6 +3,8 @@ From: Denys Dmytriyenko <denys@ti.com>
- Date: Fri, 10 Nov 2017 17:02:39 -0500
- Subject: [PATCH] print_stat.sh: replace /system/bin/sh with /bin/sh
- 
-+Upstream-Status: Pending
-+
- Signed-off-by: Denys Dmytriyenko <denys@ti.com>
- ---
-  testing/print_stat.sh | 2 +-
-diff --git a/meta-ti-extras/recipes-devtools/gdbc6x/gdbc6x/0001-libbfd.h-suppress-GCC9-Wstringop-truncation.patch b/meta-ti-extras/recipes-devtools/gdbc6x/gdbc6x/0001-libbfd.h-suppress-GCC9-Wstringop-truncation.patch
-index 1cc23b32..e52efa56 100644
---- a/meta-ti-extras/recipes-devtools/gdbc6x/gdbc6x/0001-libbfd.h-suppress-GCC9-Wstringop-truncation.patch
-+++ b/meta-ti-extras/recipes-devtools/gdbc6x/gdbc6x/0001-libbfd.h-suppress-GCC9-Wstringop-truncation.patch
-@@ -3,6 +3,8 @@ From: Denys Dmytriyenko <denys@ti.com>
- Date: Sat, 15 Feb 2020 15:59:37 -0500
- Subject: [PATCH] libbfd.h: suppress GCC9 -Wstringop-truncation
- 
-+Upstream-Status: Inappropriate [OE-specific]
-+
- Signed-off-by: Denys Dmytriyenko <denys@ti.com>
- ---
-  gdbc6x/bfd/libbfd.h | 4 ++++
--- 
-2.17.1
 
+> >+SRC_URI:append:armv7a = " file://0001-defconfig-switch-default-kernel-compression-to-LZMA.patch"
+> >+
+> >  DEFCONFIG_NAME = "bb.org_defconfig"
+> >  KERNEL_CONFIG_COMMAND = "oe_runmake -C ${S} O=${B} ${DEFCONFIG_NAME}"
 
