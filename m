@@ -2,39 +2,39 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ACFF0C77B7F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC001C77B78
 	for <webhook@archiver.kernel.org>; Tue, 25 Apr 2023 17:23:49 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.85704.1682443428533991621
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web11.85703.1682443428180390360
  for <meta-ti@lists.yoctoproject.org>;
  Tue, 25 Apr 2023 10:23:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=g0B4C0U2;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=RKfemphB;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 33PHNlWP094307;
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 33PHNlQZ052970;
 	Tue, 25 Apr 2023 12:23:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1682443427;
-	bh=CcwkgKg82bGdFJv4MfCwxGbxOQKX9NAUKIxSMUb3Fj8=;
+	bh=hph8RGwL0tZy3SBuX5emc48efWcdQ54Kr3rhv/2YEoA=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=g0B4C0U2M1cjF1YnJAf3xF5+deJwTaPXtEjkI49ECMfdWD5o0+6ne3p4LLd8T5EBU
-	 9/ae1JOPDL+qjKRZMZGGnwehQ/NcYm8lMnPdaxbTj9Zx4pUAtxW+7z95QeArDq+Z0X
-	 BPjLTfTyRKZx5q3ZtbswQxDsARZjQPLyEc1WUkP0=
+	b=RKfemphBrOXkNt5l5UuhBF6MAb/tLBtcXHqxLDWoJhqL9KbrmhVN8qCOVC68EVaP4
+	 WRlNbmwSXBmVuy85Td4vEDdPvV8a8pLG0UJMJqdECLbEdB/rI4Fx8mC9DH++T2c/Dx
+	 iHnpw7lw6NkVu+xh7aYvbPlmgc+xdEwyuidtHdms=
 Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 33PHNl4o007703
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 33PHNlBO007693
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Tue, 25 Apr 2023 12:23:47 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE112.ent.ti.com
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE112.ent.ti.com
  (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16; Tue, 25
  Apr 2023 12:23:47 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.16 via
- Frontend Transport; Tue, 25 Apr 2023 12:23:47 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 25 Apr 2023 12:23:46 -0500
 Received: from ula0226330.dal.design.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 33PHNj0q030178;
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 33PHNj0p030178;
 	Tue, 25 Apr 2023 12:23:46 -0500
 From: Andrew Davis <afd@ti.com>
 To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
@@ -42,9 +42,9 @@ To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         Neha Malcom Francis <n-francis@ti.com>,
         <meta-ti@lists.yoctoproject.org>
 CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][master/kirkstone][RFC 3/9] ti-sci-fw: Remove source package recipe
-Date: Tue, 25 Apr 2023 12:23:39 -0500
-Message-ID: <20230425172345.12293-4-afd@ti.com>
+Subject: [meta-ti][master/kirkstone][RFC 2/9] ti-eth-fw: Add recipe for TI Ethernet firmware
+Date: Tue, 25 Apr 2023 12:23:38 -0500
+Message-ID: <20230425172345.12293-3-afd@ti.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230425172345.12293-1-afd@ti.com>
 References: <20230425172345.12293-1-afd@ti.com>
@@ -56,68 +56,247 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Tue, 25 Apr 2023 17:23:49 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16420
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16419
 
-K3-image-gen is going away and we don't do SRCIPK packages like this
-anymore anyway. Remove this recipe.
+Split out the TI Ethernet firmware from ti-rtos-firmware.
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- .../ti-sci-fw/ti-sci-fw-source_git.bb         | 45 -------------------
- 1 file changed, 45 deletions(-)
- delete mode 100644 meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb
+ .../recipes-bsp/ti-eth-fw/ti-eth-fw.bb        | 118 ++++++++++++++++++
+ .../ti-rtos-bin/ti-rtos-firmware.bb           |  38 +-----
+ 2 files changed, 123 insertions(+), 33 deletions(-)
+ create mode 100644 meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb
-deleted file mode 100644
-index bab4acf0..00000000
---- a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb
-+++ /dev/null
-@@ -1,45 +0,0 @@
--# ti-sci-fw builds and packages multiple config variants via multiconfig
--# Let's take a page from gcc-source as a common recipe for all gcc stages,
--# but also to provide a single package for MAINMACHINE of all multiconfigs
+diff --git a/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb b/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
+new file mode 100644
+index 00000000..1a8d4aef
+--- /dev/null
++++ b/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
+@@ -0,0 +1,118 @@
++SUMMARY = "TI Ethernet prebuilt binary firmware images"
++
++LICENSE = "TI-TFL"
++LIC_FILES_CHKSUM = "file://${COREBASE}/../meta-ti/licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
++
++COMPATIBLE_MACHINE = "k3"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++INHIBIT_DEFAULT_DEPS = "1"
++
++inherit deploy
++inherit update-alternatives
++
++require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++
++PV = "${CORESDK_RTOS_VERSION}"
++PR = "${INC_PR}.0"
++
++CLEANBROKEN = "1"
++
++# Secure Build
++inherit ti-secdev
++
++PLAT_SFX = ""
++PLAT_SFX:j721e = "j721e"
++PLAT_SFX:j7200 = "j7200"
++PLAT_SFX:j721s2 = "j721s2"
++PLAT_SFX:j784s4 = "j784s4"
++PLAT_SFX:am65xx = "am65xx"
++PLAT_SFX:am64xx = "am64xx"
++PLAT_SFX:am62xx = "am62xx"
++PLAT_SFX:am62axx = "am62axx"
++
++ETH_FW_DIR = "ti-eth/${PLAT_SFX}"
++
++INSTALL_ETH_FW_DIR = "${nonarch_base_libdir}/firmware/${ETH_FW_DIR}"
++
++ETH_FW = "app_remoteswitchcfg_server_strip.xer5f"
++
++ETH_FW_LIST = ""
++ETH_FW_LIST:j721e =   "${ETH_FW}"
++ETH_FW_LIST:j7200 =   "${ETH_FW}"
++ETH_FW_LIST:j721s2 =  ""
++ETH_FW_LIST:j784s4 =  "${ETH_FW}"
++ETH_FW_LIST:am65xx =  ""
++ETH_FW_LIST:am64xx =  ""
++ETH_FW_LIST:am62xx =  ""
++ETH_FW_LIST:am62axx = ""
++
++do_install() {
++    # ETH firmware
++    for FW_NAME in ${ETH_FW_LIST}
++    do
++        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${S}/${ETH_FW_DIR}/${FW_NAME} ${S}/${ETH_FW_DIR}/${FW_NAME}.signed
++    done
++
++    # ETH firmware
++    install -d ${D}${INSTALL_ETH_FW_DIR}
++    for FW_NAME in ${ETH_FW_LIST}
++    do
++        install -m 0644 ${S}/${ETH_FW_DIR}/${FW_NAME}        ${D}${INSTALL_ETH_FW_DIR}
++        install -m 0644 ${S}/${ETH_FW_DIR}/${FW_NAME}.signed ${D}${INSTALL_ETH_FW_DIR}
++    done
++}
++
++# Set up names for the firmwares
++ALTERNATIVE:${PN}:j721e = "\
++                    j7-main-r5f0_0-fw \
++                    j7-main-r5f0_0-fw-sec \
++                    "
++
++ALTERNATIVE:${PN}:j7200 = "\
++                    j7200-main-r5f0_0-fw \
++                    j7200-main-r5f0_0-fw-sec \
++                    "
++
++ALTERNATIVE:${PN}:j784s4 = "\
++                    j784s4-mcu-r5f0_0-fw \
++                    j784s4-mcu-r5f0_0-fw-sec \
++                    "
++
++# Set up link names for the firmwares
++ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw]        = "${nonarch_base_libdir}/firmware/j7-main-r5f0_0-fw"
++ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw-sec]    = "${nonarch_base_libdir}/firmware/j7-main-r5f0_0-fw-sec"
++
++ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/j7200-main-r5f0_0-fw"
++ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw-sec] = "${nonarch_base_libdir}/firmware/j7200-main-r5f0_0-fw-sec"
++
++ALTERNATIVE_LINK_NAME[j784s4-mcu-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/j784s4-mcu-r5f0_0-fw"
++ALTERNATIVE_LINK_NAME[j784s4-mcu-r5f0_0-fw-sec] = "${nonarch_base_libdir}/firmware/j784s4-mcu-r5f0_0-fw-sec"
++
++# Create the firmware alternatives
++ALTERNATIVE_TARGET[j7-main-r5f0_0-fw]        = "${INSTALL_ETH_FW_DIR}/${ETH_FW}"
++ALTERNATIVE_TARGET[j7-main-r5f0_0-fw-sec]    = "${INSTALL_ETH_FW_DIR}/${ETH_FW}.signed"
++
++ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw]     = "${INSTALL_ETH_FW_DIR}/${ETH_FW}"
++ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw-sec] = "${INSTALL_ETH_FW_DIR}/${ETH_FW}.signed"
++
++ALTERNATIVE_TARGET[j784s4-mcu-r5f0_0-fw]     = "${INSTALL_ETH_FW_DIR}/${ETH_FW}"
++ALTERNATIVE_TARGET[j784s4-mcu-r5f0_0-fw-sec] = "${INSTALL_ETH_FW_DIR}/${ETH_FW}.signed"
++
++ALTERNATIVE_PRIORITY = "20"
++
++# make sure that lib/firmware, and all its contents are part of the package
++FILES:${PN} += "${nonarch_base_libdir}/firmware"
++
++# This is used to prevent the build system to_strip the executables
++INHIBIT_PACKAGE_STRIP = "1"
++INHIBIT_SYSROOT_STRIP = "1"
++# This is used to prevent the build system to split the debug info in a separate file
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
++# As it likely to be a different arch from the Yocto build, disable checking by adding "arch" to INSANE_SKIP
++INSANE_SKIP:${PN} += "arch"
++
++# we don't want to configure and build the source code
++do_compile[noexec] = "1"
++do_configure[noexec] = "1"
+diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index 55f55ed5..7958c0e6 100644
+--- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -1,4 +1,4 @@
+-SUMMARY = "TI RTOS prebuilt binary firmware images"
++SUMMARY = "TI Echo Test prebuilt binary firmware images"
+ 
+ LICENSE = "TI-TFL"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/../meta-ti/licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
+@@ -34,10 +34,8 @@ CLEANBROKEN = "1"
+ inherit ti-secdev
+ 
+ IPC_FW_DIR = "ti-ipc/${PLAT_SFX}"
+-ETH_FW_DIR = "ti-eth/${PLAT_SFX}"
+ 
+ INSTALL_IPC_FW_DIR = "${nonarch_base_libdir}/firmware/${IPC_FW_DIR}"
+-INSTALL_ETH_FW_DIR = "${nonarch_base_libdir}/firmware/${ETH_FW_DIR}"
+ 
+ MCU_1_0_FW = "ipc_echo_test_mcu1_0_release_strip.xer5f"
+ MCU_1_1_FW = "ipc_echo_test_mcu1_1_release_strip.xer5f"
+@@ -54,8 +52,6 @@ C7X_2_FW   = "ipc_echo_test_c7x_2_release_strip.xe71"
+ C7X_3_FW   = "ipc_echo_test_c7x_3_release_strip.xe71"
+ C7X_4_FW   = "ipc_echo_test_c7x_4_release_strip.xe71"
+ 
+-ETH_FW = "app_remoteswitchcfg_server_strip.xer5f"
 -
--require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+ IPC_FW_LIST = ""
+ IPC_FW_LIST:j721e =   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                             ${C66_1_FW} ${C66_2_FW} ${C7X_1_FW}"
+ IPC_FW_LIST:j7200 =   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW}"
+@@ -66,16 +62,6 @@ IPC_FW_LIST:am64xx =  "${MCU_1_0_FW} ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW} $
+ IPC_FW_LIST:am62xx =  "                            ${MCU_2_0_FW}"
+ IPC_FW_LIST:am62axx = "                            ${MCU_2_0_FW}                                                                                               ${C7X_1_FW}"
+ 
+-ETH_FW_LIST = ""
+-ETH_FW_LIST:j721e =   "${ETH_FW}"
+-ETH_FW_LIST:j7200 =   "${ETH_FW}"
+-ETH_FW_LIST:j721s2 =  ""
+-ETH_FW_LIST:j784s4 =  "${ETH_FW}"
+-ETH_FW_LIST:am65xx =  ""
+-ETH_FW_LIST:am64xx =  ""
+-ETH_FW_LIST:am62xx =  ""
+-ETH_FW_LIST:am62axx = ""
 -
--SUMMARY += "- sources"
+ # Update the am64xx ipc binaries to be consistent with other platforms
+ do_install:prepend:am64xx() {
+         ( cd ${S}/${IPC_FW_DIR}; \
+@@ -108,12 +94,6 @@ do_install() {
+         ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${S}/${IPC_FW_DIR}/${FW_NAME} ${S}/${IPC_FW_DIR}/${FW_NAME}.signed
+     done
+ 
+-    # ETH firmware
+-    for FW_NAME in ${ETH_FW_LIST}
+-    do
+-        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${S}/${ETH_FW_DIR}/${FW_NAME} ${S}/${ETH_FW_DIR}/${FW_NAME}.signed
+-    done
 -
--COMPATIBLE_MACHINE = "k3"
+     # IPC Firmware
+     install -d ${D}${INSTALL_IPC_FW_DIR}
+     for FW_NAME in ${IPC_FW_LIST}
+@@ -121,14 +101,6 @@ do_install() {
+         install -m 0644 ${S}/${IPC_FW_DIR}/${FW_NAME}        ${D}${INSTALL_IPC_FW_DIR}
+         install -m 0644 ${S}/${IPC_FW_DIR}/${FW_NAME}.signed ${D}${INSTALL_IPC_FW_DIR}
+     done
 -
--EXCLUDE_FROM_WORLD = "1"
--INHIBIT_DEFAULT_DEPS = "1"
--DEPENDS = ""
--
--PACKAGES = "${PN}"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--do_configure[noexec] = "1"
--do_compile[noexec] = "1"
--
--SRCIPK_SRC_DIR = "${WORKDIR}/imggen"
--SRCIPK_INSTALL_DIR = "board-support/k3-image-gen-${PV}"
--FILES:${PN} = "${SRCIPK_INSTALL_DIR}"
--
--do_install() {
--    # Copy sources for packaging
--    mkdir -p ${D}/${SRCIPK_INSTALL_DIR}
--    if [ -e ${SRCIPK_SRC_DIR} ]; then
--        if [ "${SRCIPK_SRC_DIR}" = "${WORKDIR}" ]; then
--            excludes='--exclude ./temp --exclude ${D}'
--        fi
--        tar -C ${SRCIPK_SRC_DIR} -cO $excludes . | tar -C ${D}/${SRCIPK_INSTALL_DIR} -xpf -
--    fi
--
--    # Fix up patches/ directory to contain actual patches instead of symlinks
--    if [ -e ${D}/${SRCIPK_INSTALL_DIR}/patches ]
--    then
--        mv ${D}/${SRCIPK_INSTALL_DIR}/patches ${D}/${SRCIPK_INSTALL_DIR}/patches-links
--        cp -rL ${D}/${SRCIPK_INSTALL_DIR}/patches-links ${D}/${SRCIPK_INSTALL_DIR}/patches
--        rm -rf ${D}/${SRCIPK_INSTALL_DIR}/patches-links
--    fi
--}
--
--# Do not perform any QA checks on source package
--INSANE_SKIP:${PN} += "${ALL_QA}"
+-    # ETH firmware
+-    install -d ${D}${INSTALL_ETH_FW_DIR}
+-    for FW_NAME in ${ETH_FW_LIST}
+-    do
+-        install -m 0644 ${S}/${ETH_FW_DIR}/${FW_NAME}        ${D}${INSTALL_ETH_FW_DIR}
+-        install -m 0644 ${S}/${ETH_FW_DIR}/${FW_NAME}.signed ${D}${INSTALL_ETH_FW_DIR}
+-    done
+ }
+ 
+ # Set up names for the firmwares
+@@ -303,7 +275,7 @@ ALTERNATIVE_TARGET[am62a-mcu-r5f0_0-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
+ ALTERNATIVE_TARGET[am62a-c71_0-fw] = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}"
+ 
+ ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_1_1_FW}"
+-ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${INSTALL_ETH_FW_DIR}/${ETH_FW}"
++ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
+ ALTERNATIVE_TARGET[j7-main-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_1_FW}"
+ ALTERNATIVE_TARGET[j7-main-r5f1_0-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_3_0_FW}"
+ ALTERNATIVE_TARGET[j7-main-r5f1_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_3_1_FW}"
+@@ -311,7 +283,7 @@ ALTERNATIVE_TARGET[j7-c66_0-fw] = "${INSTALL_IPC_FW_DIR}/${C66_1_FW}"
+ ALTERNATIVE_TARGET[j7-c66_1-fw] = "${INSTALL_IPC_FW_DIR}/${C66_2_FW}"
+ ALTERNATIVE_TARGET[j7-c71_0-fw] = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}"
+ 
+-ALTERNATIVE_TARGET[j7-main-r5f0_0-fw-sec] = "${INSTALL_ETH_FW_DIR}/${ETH_FW}.signed"
++ALTERNATIVE_TARGET[j7-main-r5f0_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}.signed"
+ ALTERNATIVE_TARGET[j7-main-r5f0_1-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_2_1_FW}.signed"
+ ALTERNATIVE_TARGET[j7-main-r5f1_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_3_0_FW}.signed"
+ ALTERNATIVE_TARGET[j7-main-r5f1_1-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_3_1_FW}.signed"
+@@ -320,10 +292,10 @@ ALTERNATIVE_TARGET[j7-c66_1-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C66_2_FW}.signed"
+ ALTERNATIVE_TARGET[j7-c71_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}.signed"
+ 
+ ALTERNATIVE_TARGET[j7200-mcu-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_1_1_FW}"
+-ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw] = "${INSTALL_ETH_FW_DIR}/${ETH_FW}"
++ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
+ ALTERNATIVE_TARGET[j7200-main-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_1_FW}"
+ 
+-ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw-sec] = "${INSTALL_ETH_FW_DIR}/${ETH_FW}.signed"
++ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}.signed"
+ ALTERNATIVE_TARGET[j7200-main-r5f0_1-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_2_1_FW}.signed"
+ 
+ ALTERNATIVE_TARGET[j721s2-mcu-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_1_1_FW}"
 -- 
 2.39.2
 
