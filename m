@@ -1,97 +1,85 @@
-Return-Path: <rs@ti.com>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE2A7C7618E
-	for <webhook@archiver.kernel.org>; Wed, 26 Apr 2023 21:55:48 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.5974.1682546145487751856
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 350E4C7618E
+	for <webhook@archiver.kernel.org>; Wed, 26 Apr 2023 23:36:19 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.8213.1682552172175044534
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 26 Apr 2023 14:55:45 -0700
+ Wed, 26 Apr 2023 16:36:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=UASTWXlu;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rs@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 33QLtfHp115575;
-	Wed, 26 Apr 2023 16:55:41 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=GMTqAH5Y;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 33QNa7qx091873;
+	Wed, 26 Apr 2023 18:36:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1682546141;
-	bh=S+nYHWklaluDi6ZhBjp2A3CrUdNOC3rJaAWbYsIQYK4=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=UASTWXluU5Mb1S11jx1CRTEWcvdJ7sd24tHY5xbIFHoGsfzbLm6TNAqtzrca7gBPo
-	 gXTMgpTF+hOj29UfN6zPtysUFp4NLlZpp9zMi4SCJk5g/Oe/pvDGYeMAK348KGAzIw
-	 3dSEE2ctvUsBlixXyrT+1Scq26cJO8WYHr4ztTMU=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 33QLtfCj011085
+	s=ti-com-17Q1; t=1682552167;
+	bh=24aG/ZHhfQqN0s6ENpjAm/lpAei/K/lTdLOV9jmlyoU=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=GMTqAH5Yy4ymQ5Q3BrOjZ8uifcjTUVQrlCB5aXThsLiyreEUoohX/136aIfG53JV8
+	 ID33pb+dHfc3aVviDFEMZB/XNtyQPXgGuVUXsSh7iODE2SMlx+GhwetEITuhS//d62
+	 hE0DsaPlincZ9G7s0X5sNbiy48CSdlQvrR7318GQ=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 33QNa7GF046396
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 26 Apr 2023 16:55:41 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 26 Apr 2023 18:36:07 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 26
- Apr 2023 16:55:41 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2023 18:36:07 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 26 Apr 2023 16:55:41 -0500
-Received: from rs-desk.dhcp.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 33QLtf4B081011;
-	Wed, 26 Apr 2023 16:55:41 -0500
-From: <rs@ti.com>
-To: <afd@ti.com>, <denis@denix.org>, <reatmon@ti.com>, <detheridge@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, Randolph Sapp <rs@ti.com>
-Subject: [meta-ti][kirkstone][PATCH 2/4] pvr-mesa: add new vulkan configuration options and wsi
-Date: Wed, 26 Apr 2023 16:55:36 -0500
-Message-ID: <20230426215538.3502212-3-rs@ti.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230426215538.3502212-1-rs@ti.com>
-References: <20230426215538.3502212-1-rs@ti.com>
+ Frontend Transport; Wed, 26 Apr 2023 18:36:07 -0500
+Received: from [10.250.35.77] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 33QNa1Ui048526;
+	Wed, 26 Apr 2023 18:36:01 -0500
+Message-ID: <3f089614-3f49-783e-1726-f344fb089c6a@ti.com>
+Date: Wed, 26 Apr 2023 18:36:01 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Subject: Re: [meta-ti][kirkstone][PATCH 0/4] Enable vulkan proper
+Content-Language: en-US
+To: <rs@ti.com>, <denis@denix.org>, <reatmon@ti.com>, <detheridge@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>
+References: <20230426215538.3502212-1-rs@ti.com>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20230426215538.3502212-1-rs@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 26 Apr 2023 21:55:48 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16435
+ <meta-ti@lists.yoctoproject.org>; Wed, 26 Apr 2023 23:36:19 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16437
 
-From: Randolph Sapp <rs@ti.com>
+On 4/26/23 4:55 PM, rs@ti.com wrote:
+> From: Randolph Sapp <rs@ti.com>
+> 
+> Properly enable Vulkan with all WSI extensions enabled. Attempt some
+> light packaging changes to the graphics umlibs recipe so we can decrease
+> the number of check we have to skip, and the checks become a little more
+> targeted.
+> 
 
-Add the required vulkan configuration options and the new PVR WSI file to
-the corresponding package.
+Nothing too crazy here, for the series,
 
-Also bump the PV to match the version of Mesa actually being shipped.
+Reviewed-by: Andrew Davis <afd@ti.com>
 
-Signed-off-by: Randolph Sapp <rs@ti.com>
----
- meta-ti-bsp/recipes-graphics/mesa/pvr-mesa.inc | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/pvr-mesa.inc b/meta-ti-bsp/recipes-graphics/mesa/pvr-mesa.inc
-index d938f41c..caf94156 100644
---- a/meta-ti-bsp/recipes-graphics/mesa/pvr-mesa.inc
-+++ b/meta-ti-bsp/recipes-graphics/mesa/pvr-mesa.inc
-@@ -38,14 +38,18 @@ PACKAGECONFIG:remove = "xvmc"
- PACKAGECONFIG[xvmc] = ""
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
--PV = "22.0.3+pvr"
-+PV = "22.3.5+pvr"
- 
- GALLIUMDRIVERS:append = "${@bb.utils.contains('PACKAGECONFIG', 'pvr', ',pvr', '', d)}"
- GALLIUMDRIVERS:append = "${@bb.utils.contains('PACKAGECONFIG', 'sgx', ',sgx', '', d)}"
- 
-+VULKAN_DRIVERS:append = "${@bb.utils.contains('PACKAGECONFIG', 'pvr', ',pvr', '', d)}"
-+
- do_install:append () {
-     # remove pvr custom pkgconfig
-     rm -rf ${D}${datadir}/pkgconfig
- }
- 
-+FILES:mesa-vulkan-drivers += " ${libdir}/libpvr_mesa_wsi.so"
-+
- RRECOMMENDS:mesa-megadriver:append:class-target = " ${@d.getVar('PREFERRED_PROVIDER_virtual/gpudriver')}"
--- 
-2.40.0
-
+> Randolph Sapp (4):
+>    ti-img-rogue-umlibs: bump srcrev, add vulkan, update deps
+>    pvr-mesa: add new vulkan configuration options and wsi
+>    cairo: resolve opengl version
+>    ti-img-rogue-umlibs: package firmware separately
+> 
+>   .../recipes-graphics/cairo/cairo_%.bbappend   |  5 +++
+>   .../ti-img-rogue-umlibs_23.1.6404501.bb       | 33 +++++++++++++++----
+>   .../recipes-graphics/mesa/pvr-mesa.inc        |  6 +++-
+>   3 files changed, 36 insertions(+), 8 deletions(-)
+>   create mode 100644 meta-ti-bsp/recipes-graphics/cairo/cairo_%.bbappend
+> 
 
