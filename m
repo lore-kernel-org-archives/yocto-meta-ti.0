@@ -2,46 +2,46 @@ Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA83BC77B73
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E93ACC77B7C
 	for <webhook@archiver.kernel.org>; Thu, 27 Apr 2023 21:08:03 +0000 (UTC)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.4092.1682629675944184328
+ by mx.groups.io with SMTP id smtpd.web10.4151.1682629675906998300
  for <meta-ti@lists.yoctoproject.org>;
  Thu, 27 Apr 2023 14:07:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=QIa0kIqb;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=un0JnfwS;
  spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: rs@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 33RL7rE4127528;
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 33RL7rvD127526;
 	Thu, 27 Apr 2023 16:07:53 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1682629673;
-	bh=TUEPgcIZZnC7JJRZj67WuimgXj6O/DDwHCfCIheF3uw=;
+	bh=S+nYHWklaluDi6ZhBjp2A3CrUdNOC3rJaAWbYsIQYK4=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=QIa0kIqbSzby8sZ5dovDDvXCRjP/pdRBKBObrWsz+pHiftwuWZhv1PvsTW0et5Z1P
-	 eFkGoBkSbO2Wc/lM5/NscvL99gskbXULSyaZff5LBmdKoXFLQlEQDNtgEPMUPCM2XL
-	 W1Pl7SiqSeT4PBKYe2kVlm5bSHkjyyDFfcGLTNCg=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 33RL7rVM052974
+	b=un0JnfwS/gMNmzDXTJrfZ6QRrLYef/YeAsZDLzmltaEdPwZ52iNo4VdhqOgo6cqHU
+	 l7gSP9fKvPdnDJMwZ3SG7aJyBEB4MoBFZ8wo6MfbqYKv61rBgUAYWGq75+ZdDHxMbK
+	 Thv10qa+fWm6sCm2SAP2nTB7G8oJXw0ZKitVvd+g=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 33RL7rCC005176
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Thu, 27 Apr 2023 16:07:53 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 27
  Apr 2023 16:07:52 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 27 Apr 2023 16:07:53 -0500
+ Frontend Transport; Thu, 27 Apr 2023 16:07:52 -0500
 Received: from rs-desk.dhcp.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 33RL7k8a002940;
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 33RL7k8Z002940;
 	Thu, 27 Apr 2023 16:07:52 -0500
 From: <rs@ti.com>
 To: <afd@ti.com>, <detheridge@ti.com>, <reatmon@ti.com>, <denis@denix.org>
 CC: <meta-ti@lists.yoctoproject.org>, Randolph Sapp <rs@ti.com>
-Subject: [meta-ti][kirkstone][PATCHv2 3/4] cairo: resolve opengl version
-Date: Thu, 27 Apr 2023 16:07:45 -0500
-Message-ID: <20230427210746.1915362-4-rs@ti.com>
+Subject: [meta-ti][kirkstone][PATCHv2 2/4] pvr-mesa: add new vulkan configuration options and wsi
+Date: Thu, 27 Apr 2023 16:07:44 -0500
+Message-ID: <20230427210746.1915362-3-rs@ti.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230427210746.1915362-1-rs@ti.com>
 References: <20230427210746.1915362-1-rs@ti.com>
@@ -53,43 +53,44 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Thu, 27 Apr 2023 21:08:03 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16449
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16446
 
 From: Randolph Sapp <rs@ti.com>
 
-Cairo can either be built for use with OpenGL or OpenGLES. By default it
-assumes it can use OpenGL if X11 is provided as a distro feature. This
-assumption is not true when using the proprietary SGX / Rogue drivers.
+Add the required vulkan configuration options and the new PVR WSI file to
+the corresponding package.
 
-Vulkan libraries need some X libs at runtime now, so we need to manually
-override the PACKAGECONFIG for cairo to use OpenGLES.
+Also bump the PV to match the version of Mesa actually being shipped.
 
 Signed-off-by: Randolph Sapp <rs@ti.com>
 ---
- meta-ti-bsp/recipes-graphics/cairo/cairo_%.bbappend | 1 +
- meta-ti-bsp/recipes-graphics/cairo/pvr-cairo.inc    | 5 +++++
- 2 files changed, 6 insertions(+)
- create mode 100644 meta-ti-bsp/recipes-graphics/cairo/cairo_%.bbappend
- create mode 100644 meta-ti-bsp/recipes-graphics/cairo/pvr-cairo.inc
+ meta-ti-bsp/recipes-graphics/mesa/pvr-mesa.inc | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/recipes-graphics/cairo/cairo_%.bbappend b/meta-ti-bsp/recipes-graphics/cairo/cairo_%.bbappend
-new file mode 100644
-index 00000000..459d8d09
---- /dev/null
-+++ b/meta-ti-bsp/recipes-graphics/cairo/cairo_%.bbappend
-@@ -0,0 +1 @@
-+require ${@bb.utils.contains_any('PREFERRED_PROVIDER_virtual/gpudriver', 'ti-img-rogue-driver ti-sgx-ddk-km', 'pvr-cairo.inc', '', d)}
-diff --git a/meta-ti-bsp/recipes-graphics/cairo/pvr-cairo.inc b/meta-ti-bsp/recipes-graphics/cairo/pvr-cairo.inc
-new file mode 100644
-index 00000000..b41f1a01
---- /dev/null
-+++ b/meta-ti-bsp/recipes-graphics/cairo/pvr-cairo.inc
-@@ -0,0 +1,5 @@
-+# This is required since cairo expects the opengl distro feature to refer to
-+# the desktop version of OpenGL. Imagination drivers only provide OpenGLES.
+diff --git a/meta-ti-bsp/recipes-graphics/mesa/pvr-mesa.inc b/meta-ti-bsp/recipes-graphics/mesa/pvr-mesa.inc
+index d938f41c..caf94156 100644
+--- a/meta-ti-bsp/recipes-graphics/mesa/pvr-mesa.inc
++++ b/meta-ti-bsp/recipes-graphics/mesa/pvr-mesa.inc
+@@ -38,14 +38,18 @@ PACKAGECONFIG:remove = "xvmc"
+ PACKAGECONFIG[xvmc] = ""
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-PV = "22.0.3+pvr"
++PV = "22.3.5+pvr"
+ 
+ GALLIUMDRIVERS:append = "${@bb.utils.contains('PACKAGECONFIG', 'pvr', ',pvr', '', d)}"
+ GALLIUMDRIVERS:append = "${@bb.utils.contains('PACKAGECONFIG', 'sgx', ',sgx', '', d)}"
+ 
++VULKAN_DRIVERS:append = "${@bb.utils.contains('PACKAGECONFIG', 'pvr', ',pvr', '', d)}"
 +
-+PACKAGECONFIG:remove = "opengl"
-+PACKAGECONFIG:append = " glesv2"
+ do_install:append () {
+     # remove pvr custom pkgconfig
+     rm -rf ${D}${datadir}/pkgconfig
+ }
+ 
++FILES:mesa-vulkan-drivers += " ${libdir}/libpvr_mesa_wsi.so"
++
+ RRECOMMENDS:mesa-megadriver:append:class-target = " ${@d.getVar('PREFERRED_PROVIDER_virtual/gpudriver')}"
 -- 
 2.40.0
 
