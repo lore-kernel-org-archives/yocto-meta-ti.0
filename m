@@ -1,124 +1,140 @@
-Return-Path: <rs@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0CF74C77B60
-	for <webhook@archiver.kernel.org>; Fri, 28 Apr 2023 16:30:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88148C77B61
+	for <webhook@archiver.kernel.org>; Fri, 28 Apr 2023 21:33:01 +0000 (UTC)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.24751.1682699411799582806
+ by mx.groups.io with SMTP id smtpd.web10.34068.1682717579327161501
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 28 Apr 2023 09:30:12 -0700
+ Fri, 28 Apr 2023 14:32:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=WEzSnAuL;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: rs@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 33SGU6md061450;
-	Fri, 28 Apr 2023 11:30:06 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=YtBsw55e;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 33SLWvDf123051;
+	Fri, 28 Apr 2023 16:32:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1682699406;
-	bh=8S6WaEKQrHGe24joBWvIERObKSL7QaIsS8pA/kuiNYs=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=WEzSnAuLj55V45rt4xSNcj2RU9LoSdiQ5mmmpm40FLN6kHWJKas6A7JQ2hKv1SB6C
-	 Cc/ir3Wz5VDZhYWaijxv6Zns073DWBKbgrNNlo9WjQa2SS5XHm/Tr7ihCqlsHoepZw
-	 zJ3xxXUa8miMwmeLMaO1D7dHkXgrsNwlsI6E5kSA=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 33SGU6jO112567
+	s=ti-com-17Q1; t=1682717577;
+	bh=223g3whcgKk18h04aOo9dZDyGjI1s4sc+oxlc1oGBDk=;
+	h=From:To:Subject:Date;
+	b=YtBsw55ei9KNNxjLQ+mgsqedwQZOXsjmkK2d6ZdXXcMPrUvdTvk2d8itiKo5DSfCI
+	 qbWPIM/9JuReAtxRlLEhIRYRCyUVgJfQp5LsqyYNkQ71i+ifoA2rJP4XrRwZUjy4KX
+	 fw2SISU8dYqwqooij/GVgqmJ6XOtjrfsauNxqcHo=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 33SLWvji083773
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 28 Apr 2023 11:30:06 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 28 Apr 2023 16:32:57 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 28
- Apr 2023 11:30:06 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2023 16:32:57 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 28 Apr 2023 11:30:06 -0500
-Received: from [128.247.81.144] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 33SGU6Sh006604;
-	Fri, 28 Apr 2023 11:30:06 -0500
-Message-ID: <5ea30022-f140-9203-c205-8d7562147d77@ti.com>
-Date: Fri, 28 Apr 2023 11:30:06 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [EXTERNAL] Re: [meta-ti][kirkstone][PATCHv2 0/4] Enable vulkan
- proper
-Content-Language: en-US, en-US-large
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <afd@ti.com>, <detheridge@ti.com>, <reatmon@ti.com>,
+ Frontend Transport; Fri, 28 Apr 2023 16:32:57 -0500
+Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 33SLWvBH021586;
+	Fri, 28 Apr 2023 16:32:57 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1psVi5-0003Po-CG; Fri, 28 Apr 2023 16:32:57 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-References: <20230427210746.1915362-1-rs@ti.com>
- <20230427215039.GQ9226@denix.org>
- <f6e872f1-982f-6d3a-9554-1385b08b77e7@ti.com>
- <20230428014234.GR9226@denix.org>
-From: Randolph Sapp <rs@ti.com>
-In-Reply-To: <20230428014234.GR9226@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: [meta-ti][kirkstone][PATCH] ti-ipc: Stop looking for rpmsg_rpc.h in the kernel
+Date: Fri, 28 Apr 2023 16:32:57 -0500
+Message-ID: <20230428213257.13088-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 28 Apr 2023 16:30:20 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16459
+ <meta-ti@lists.yoctoproject.org>; Fri, 28 Apr 2023 21:33:01 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16460
 
-On 4/27/23 20:42, Denys Dmytriyenko wrote:
-> On Thu, Apr 27, 2023 at 06:58:32PM -0500, Randolph Sapp via lists.yoctoproject.org wrote:
->> On 4/27/23 16:50, Denys Dmytriyenko wrote:
->>> On Thu, Apr 27, 2023 at 04:07:42PM -0500, rs@ti.com wrote:
->>>> From: Randolph Sapp <rs@ti.com>
->>>>
->>>> Properly enable Vulkan with all WSI extensions enabled. Attempt some
->>>> light packaging changes to the graphics umlibs recipe so we can decrease
->>>> the number of check we have to skip, and the checks become a little more
->>>> targeted.
->>>>
->>>> This version uses a cairo append that conditionally tweaks PACKAGECONFIG
->>>> flags based on the GPU driver that is selected. We're using this driver
->>>> flag instead of a machine feature because the open source driver will
->>>> add a whole new set of preferred configs that will be optimized later.
->>>
->>> LGTM. Is it kirkstone-specific? Any plans for master?
->>
->> Actually, disregard that last response. It'll apply cleanly to
->> master if you also cherry-pick the following patches from kirkstone:
->> c994d48021664d328ced52829542a3b1b86c4e02
->> 2cc7895ebfea1df4afc2229f9762f129946b0b06
->> b86fb13fb9638635bf957156833bccc10ddf5393
-> 
-> Can you please be more specific - none of these 3 commits exist in meta-ti nor
-> meta-arago...
-> 
+Stop looking for the rpmsg_rpc.h in the kernel.  While we are doing the
+LTS migration for kirkstone, this file is not going to be in the kernel
+for a bit.  This patch works in conjunction with a recipe change that
+downloads the header and adds a -I to the CFLAGS to pick it up.  This
+will be removed once the 6.1 kernel has been updated.
 
-Right, my bad. I meant this patch set: 
-https://lists.yoctoproject.org/g/meta-ti/message/16397
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ ...ooking-for-rpmsg_rpc.h-in-the-kernel.patch | 35 +++++++++++++++++++
+ meta-ti-bsp/recipes-ti/ipc/ti-ipc_git.bb      |  6 ++++
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-ti/ipc/ti-ipc/0001-MmRpc-Stop-looking-for-rpmsg_rpc.h-in-the-kernel.patch
 
-Or these commits from kirkstone:
-16a8078a43eef297449a04d6861fd9811bfeb052
-b9581a704648cb3ed70c6bcb28d5a1a89b08534d
-c8ba8aaade90101f06164aec1b393d7c8b3aa201
-
-I don't know where I got those previous hashes. Must have done something 
-goofy.
-
-
-> 
->> I must have incorrectly assumed those wouldn't apply to master when
->> I submitted them originally. My bad, they apply fine.
->>
->>>
->>>> Randolph Sapp (4):
->>>>    ti-img-rogue-umlibs: bump srcrev, add vulkan, update deps
->>>>    pvr-mesa: add new vulkan configuration options and wsi
->>>>    cairo: resolve opengl version
->>>>    ti-img-rogue-umlibs: package firmware separately
->>>>
->>>>   .../recipes-graphics/cairo/cairo_%.bbappend   |  1 +
->>>>   .../recipes-graphics/cairo/pvr-cairo.inc      |  5 +++
->>>>   .../ti-img-rogue-umlibs_23.1.6404501.bb       | 33 +++++++++++++++----
->>>>   .../recipes-graphics/mesa/pvr-mesa.inc        |  6 +++-
->>>>   4 files changed, 37 insertions(+), 8 deletions(-)
->>>>   create mode 100644 meta-ti-bsp/recipes-graphics/cairo/cairo_%.bbappend
->>>>   create mode 100644 meta-ti-bsp/recipes-graphics/cairo/pvr-cairo.inc
+diff --git a/meta-ti-bsp/recipes-ti/ipc/ti-ipc/0001-MmRpc-Stop-looking-for-rpmsg_rpc.h-in-the-kernel.patch b/meta-ti-bsp/recipes-ti/ipc/ti-ipc/0001-MmRpc-Stop-looking-for-rpmsg_rpc.h-in-the-kernel.patch
+new file mode 100644
+index 00000000..ef12af88
+--- /dev/null
++++ b/meta-ti-bsp/recipes-ti/ipc/ti-ipc/0001-MmRpc-Stop-looking-for-rpmsg_rpc.h-in-the-kernel.patch
+@@ -0,0 +1,35 @@
++From 66ca0e732c2e287814d4fc5082b818554ee42398 Mon Sep 17 00:00:00 2001
++From: Ryan Eatmon <reatmon@ti.com>
++Date: Fri, 28 Apr 2023 14:30:59 -0500
++Subject: [PATCH] MmRpc: Stop looking for rpmsg_rpc.h in the kernel
++
++Stop looking for the rpmsg_rpc.h in the kernel.  While we are doing the
++LTS migration for kirkstone, this file is not going to be in the kernel
++for a bit.  This patch works in conjunction with a recipe change that
++downloads the header and adds a -I to the CFLAGS to pick it up.  This
++will be removed once the 6.1 kernel has been updated.
++
++Signed-off-by: Ryan Eatmon <reatmon@ti.com>
++
++Upstream-Status: Inappropriate [other]
++
++---
++ packages/ti/ipc/mm/MmRpc.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/packages/ti/ipc/mm/MmRpc.c b/packages/ti/ipc/mm/MmRpc.c
++index 2df7420..10f496b 100644
++--- a/packages/ti/ipc/mm/MmRpc.c
+++++ b/packages/ti/ipc/mm/MmRpc.c
++@@ -64,7 +64,7 @@
++ #define linux_include(kd,m) <kd/include/uapi/linux/m.h>
++ #endif
++ 
++-#include linux_include(KERNEL_INSTALL_DIR,rpmsg_rpc)
+++#include "linux/rpmsg_rpc.h"
++ 
++ #ifdef _linux_
++ #define linux _linux
++-- 
++2.17.1
++
+diff --git a/meta-ti-bsp/recipes-ti/ipc/ti-ipc_git.bb b/meta-ti-bsp/recipes-ti/ipc/ti-ipc_git.bb
+index 01b857c2..1782f02a 100644
+--- a/meta-ti-bsp/recipes-ti/ipc/ti-ipc_git.bb
++++ b/meta-ti-bsp/recipes-ti/ipc/ti-ipc_git.bb
+@@ -8,12 +8,18 @@ PR = "${INC_PR}.2"
+ 
+ DEPENDS += "virtual/kernel"
+ 
++SRC_URI:append = "https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/plain/include/uapi/linux/rpmsg_rpc.h?h=ti-linux-5.10.y;name=rpmsg_rpc;subdir=linux;downloadfilename=rpmsg_rpc.h"
++SRC_URI[rpmsg_rpc.sha256sum] = "cd237f40a37520a1f2df19fbfeefd00c0a5ad68efeaba9ba0fba60ca16ea09be"
++
+ SRC_URI += "file://tiipclad-daemon.sh \
+             file://omap_remoteproc.conf \
+             file://tiipclad-daemon.service \
+             file://0001-Add-kernel-build-dir.patch \
++            file://0001-MmRpc-Stop-looking-for-rpmsg_rpc.h-in-the-kernel.patch \
+            "
+ 
++CFLAGS += "-I${WORKDIR}"
++
+ DAEMON = "UNKNOWN"
+ DAEMON:dra7xx = "lad_dra7xx"
+ DAEMON:omapl138 = "lad_omapl138"
+-- 
+2.17.1
 
 
