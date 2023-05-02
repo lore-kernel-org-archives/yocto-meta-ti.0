@@ -1,139 +1,131 @@
-Return-Path: <rs@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3727CC77B7E
-	for <webhook@archiver.kernel.org>; Tue,  2 May 2023 16:11:44 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.101.1683043898273633824
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77E63C77B78
+	for <webhook@archiver.kernel.org>; Tue,  2 May 2023 19:10:16 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.3165.1683054609954246765
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 02 May 2023 09:11:38 -0700
+ Tue, 02 May 2023 12:10:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=l+d/0IAs;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rs@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 342GBYCG050291;
-	Tue, 2 May 2023 11:11:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1683043894;
-	bh=zofWs5jiZReh47LccWeHZbNa1/0MvMxuy9s0L6QEJ1E=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=l+d/0IAsMRdJTE746VPlz6BbMLJr4s/2gRhTygsMxHljCsHoZHE+c6xV/3htBPW5O
-	 Bp5/Niumth5v2DNWjxM4atuJ1VhWqolq7LTQXQPIXzIveOYgtodHB7FSPRmS7nmfg/
-	 IbY9g7onfWb/diaUSTS3ncAV7G5tombiKwh2W01s=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 342GBYqN096688
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 2 May 2023 11:11:34 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 2
- May 2023 11:11:33 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 2 May 2023 11:11:33 -0500
-Received: from [128.247.81.144] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 342GBXmQ025353;
-	Tue, 2 May 2023 11:11:33 -0500
-Message-ID: <091df2bb-3261-c0d4-154c-21c3b8375102@ti.com>
-Date: Tue, 2 May 2023 11:11:33 -0500
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 5D9F240C61;
+	Tue,  2 May 2023 19:10:08 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 5zd_LOY7Z0Qp; Tue,  2 May 2023 19:10:08 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1BF5D40C60;
+	Tue,  2 May 2023 19:10:04 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 08B99163893; Tue,  2 May 2023 15:09:22 -0400 (EDT)
+Date: Tue, 2 May 2023 15:09:21 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Randolph Sapp <rs@ti.com>
+Cc: afd@ti.com, detheridge@ti.com, reatmon@ti.com,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [EXTERNAL] Re: [meta-ti][master/kirkstone][PATCH] all: http to
+ https everything
+Message-ID: <20230502190921.GB9226@denix.org>
+References: <20230428002809.1930898-1-rs@ti.com>
+ <3d1cd334-740c-936e-ad61-3c02131dfd09@ti.com>
+ <20230428015903.GS9226@denix.org>
+ <7f53699d-3fac-da19-2340-89cca2c668d0@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [EXTERNAL] Re: [EXTERNAL] Re: [meta-ti][kirkstone][PATCHv2 0/4]
- Enable vulkan proper
-Content-Language: en-US, en-US-large
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <afd@ti.com>, <detheridge@ti.com>, <reatmon@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20230427210746.1915362-1-rs@ti.com>
- <20230427215039.GQ9226@denix.org>
- <f6e872f1-982f-6d3a-9554-1385b08b77e7@ti.com>
- <20230428014234.GR9226@denix.org>
- <5ea30022-f140-9203-c205-8d7562147d77@ti.com>
- <20230502034617.GY9226@denix.org>
-From: Randolph Sapp <rs@ti.com>
-In-Reply-To: <20230502034617.GY9226@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <7f53699d-3fac-da19-2340-89cca2c668d0@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 02 May 2023 16:11:44 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16471
+ <meta-ti@lists.yoctoproject.org>; Tue, 02 May 2023 19:10:16 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16472
 
-On 5/1/23 22:46, Denys Dmytriyenko wrote:
-> On Fri, Apr 28, 2023 at 11:30:06AM -0500, Randolph Sapp wrote:
->> On 4/27/23 20:42, Denys Dmytriyenko wrote:
->>> On Thu, Apr 27, 2023 at 06:58:32PM -0500, Randolph Sapp via lists.yoctoproject.org wrote:
->>>> On 4/27/23 16:50, Denys Dmytriyenko wrote:
->>>>> On Thu, Apr 27, 2023 at 04:07:42PM -0500, rs@ti.com wrote:
->>>>>> From: Randolph Sapp <rs@ti.com>
->>>>>>
->>>>>> Properly enable Vulkan with all WSI extensions enabled. Attempt some
->>>>>> light packaging changes to the graphics umlibs recipe so we can decrease
->>>>>> the number of check we have to skip, and the checks become a little more
->>>>>> targeted.
->>>>>>
->>>>>> This version uses a cairo append that conditionally tweaks PACKAGECONFIG
->>>>>> flags based on the GPU driver that is selected. We're using this driver
->>>>>> flag instead of a machine feature because the open source driver will
->>>>>> add a whole new set of preferred configs that will be optimized later.
->>>>>
->>>>> LGTM. Is it kirkstone-specific? Any plans for master?
->>>>
->>>> Actually, disregard that last response. It'll apply cleanly to
->>>> master if you also cherry-pick the following patches from kirkstone:
->>>> c994d48021664d328ced52829542a3b1b86c4e02
->>>> 2cc7895ebfea1df4afc2229f9762f129946b0b06
->>>> b86fb13fb9638635bf957156833bccc10ddf5393
->>>
->>> Can you please be more specific - none of these 3 commits exist in meta-ti nor
->>> meta-arago...
->>>
->>
->> Right, my bad. I meant this patch set:
->> https://lists.yoctoproject.org/g/meta-ti/message/16397
->>
->> Or these commits from kirkstone:
->> 16a8078a43eef297449a04d6861fd9811bfeb052
->> b9581a704648cb3ed70c6bcb28d5a1a89b08534d
->> c8ba8aaade90101f06164aec1b393d7c8b3aa201
-> 
-> Thanks. The original patches for these commits were marked specifically for
-> kirkstone (same as this series) and I guess the assumption was that they won't
-> apply to master and were skipped.
-> 
-> I just cherry-picked them for master and can confirm everything applies and
-> builds cleanly - I just re-sent them to the list just in case. Once they are
-> in, this Vulkan series can also be applied to master.
-> 
+On Fri, Apr 28, 2023 at 11:24:11AM -0500, Randolph Sapp wrote:
+> On 4/27/23 20:59, Denys Dmytriyenko wrote:
+> >On Thu, Apr 27, 2023 at 07:31:16PM -0500, Randolph Sapp wrote:
+> >>On 4/27/23 19:28, rs@ti.com wrote:
+> >>>From: Randolph Sapp <rs@ti.com>
+> >>>
+> >>>All of the software-dl links 302 to https urls anyway. Just jump
+> >>>straight to the secure version.
+> >>>
+> >>>Signed-off-by: Randolph Sapp <rs@ti.com>
+> >>>---
 
-Excellent, thanks Denys!
+<snip>
 
+
+> >>>diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc b/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
+> >>>index f0992aa7..77d23b6d 100644
+> >>>--- a/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
+> >>>+++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
+> >>>@@ -11,7 +11,7 @@ require ../includes/ti-eula-unpack.inc
+> >>>  S = "${WORKDIR}/cgt470_${PV}"
+> >>>-SRC_URI = "http://install.source.dir.local/ti_cgt_tms470_${PVwithdots}_setup_linux_x86.bin;name=cgt470bin"
+> >>>+SRC_URI = "https://install.source.dir.local/ti_cgt_tms470_${PVwithdots}_setup_linux_x86.bin;name=cgt470bin"
+> >>
+> >>Don't actually merge this. Wanted to take this opportunity to ask
+> >>what on earth theses SRC_URIs are. What do these mean, what's the
+> >>story?
+> >
+> >Heh, these were placeholders for "clickwrap" packages, which at some point
+> >long time ago TI Legal considered a "great" way to distribute software...
+> >Basically, there was no direct download URL - you must have downloaded them
+> >manually by filling out an online form and signing some sort of an agreement,
+> >which would trigger the download. Then you "install the source into the local
+> >downloads dir" (hence the name) by copying what you've downloaded manually
+> >into your ${DL_DIR} and Bitbake would be able to find it there regardless of
+> >the actual SRC_URI.
+> >
 > 
->> I don't know where I got those previous hashes. Must have done
->> something goofy.
->>
->>
->>>
->>>> I must have incorrectly assumed those wouldn't apply to master when
->>>> I submitted them originally. My bad, they apply fine.
->>>>
->>>>>
->>>>>> Randolph Sapp (4):
->>>>>>    ti-img-rogue-umlibs: bump srcrev, add vulkan, update deps
->>>>>>    pvr-mesa: add new vulkan configuration options and wsi
->>>>>>    cairo: resolve opengl version
->>>>>>    ti-img-rogue-umlibs: package firmware separately
->>>>>>
->>>>>>   .../recipes-graphics/cairo/cairo_%.bbappend   |  1 +
->>>>>>   .../recipes-graphics/cairo/pvr-cairo.inc      |  5 +++
->>>>>>   .../ti-img-rogue-umlibs_23.1.6404501.bb       | 33 +++++++++++++++----
->>>>>>   .../recipes-graphics/mesa/pvr-mesa.inc        |  6 +++-
->>>>>>   4 files changed, 37 insertions(+), 8 deletions(-)
->>>>>>   create mode 100644 meta-ti-bsp/recipes-graphics/cairo/cairo_%.bbappend
+> Oh cool, I hate it. (Thanks for the explanation, I just really don't
+> like this idea.) Can we drop these (install methods or packages if
+> necessary) or will policy not allow it?
 
+Nobody likes it on the engineering side! :) But it was forced back in the day 
+by sales/marketing/legal and took a lot of effort to convince everyone that 
+this clickwrap stuff doesn't bring much benefit, but causes damage...
+
+Since then most if not all of TI packages dropped clickwrap and allowed direct 
+download. Hence you don't see a lot of these weird URLs in recipes any more.
+
+Not sure about CodeGen Tool for TMS470 MCU and if there were newer releases or 
+if it's still active - nobody cared to update this recipe in over 10 years. 
+Other CGT recipes for ARM, PRU, C6x, C7x etc. in that recipes-ti/devtools 
+directory were kept mostly up to date, but not for TMS470. Not sure if there 
+are any downstream users anymore, maybe time to remove it...
+
+
+> Also, is this URI
+> functionality baked into the http fetcher or is this just leaning on
+> bitbake being unable to resolve the domain and then falling back on
+> the local copy?
+
+This is basic Bitbake fetcher functionality and is well documented. High level 
+order of operations to locate sources:
+
+1. Check if you already have them in your local DL_DIR
+2. Go through the list of configured PREMIRRORS to locate the sources there
+3. Actually hit the upstream SRC_URI and try to download the original src
+4. If everything else fails, check through the list of "post" MIRRORS
+
+So, requiring user to pre-download the sources manually and placing them in 
+their local DL_DIR per the original documentation would shortcut the process 
+at step 1.
+
+Otherwise it would break at step 3 (and 4) and hopefully the weird URL would 
+give user some clues or at least force to read the docs...
+
+There's nothing special about the URL, besides the convention that .local is 
+reserved - https://en.wikipedia.org/wiki/.local - and the entire name 
+suggesting to install the sources in local dir :)
+
+-- 
+Denys
 
