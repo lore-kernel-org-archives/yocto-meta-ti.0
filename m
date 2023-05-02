@@ -2,129 +2,96 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77E63C77B78
-	for <webhook@archiver.kernel.org>; Tue,  2 May 2023 19:10:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49287C77B73
+	for <webhook@archiver.kernel.org>; Tue,  2 May 2023 19:38:55 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.3165.1683054609954246765
+ by mx.groups.io with SMTP id smtpd.web10.73.1683056328162398739
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 02 May 2023 12:10:10 -0700
+ Tue, 02 May 2023 12:38:48 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 5D9F240C61;
-	Tue,  2 May 2023 19:10:08 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 58D9340C61;
+	Tue,  2 May 2023 19:38:47 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5zd_LOY7Z0Qp; Tue,  2 May 2023 19:10:08 +0000 (UTC)
+	with ESMTP id X6EOF-Ad-VOP; Tue,  2 May 2023 19:38:47 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1BF5D40C60;
-	Tue,  2 May 2023 19:10:04 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1672740C60;
+	Tue,  2 May 2023 19:38:42 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 08B99163893; Tue,  2 May 2023 15:09:22 -0400 (EDT)
-Date: Tue, 2 May 2023 15:09:21 -0400
+	id A0BA2163893; Tue,  2 May 2023 15:38:00 -0400 (EDT)
+Date: Tue, 2 May 2023 15:38:00 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-To: Randolph Sapp <rs@ti.com>
-Cc: afd@ti.com, detheridge@ti.com, reatmon@ti.com,
+To: Andrew Davis <afd@ti.com>
+Cc: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
+	Praneeth Bajjuri <praneeth@ti.com>,
+	Neha Malcom Francis <n-francis@ti.com>,
 	meta-ti@lists.yoctoproject.org
-Subject: Re: [EXTERNAL] Re: [meta-ti][master/kirkstone][PATCH] all: http to
- https everything
-Message-ID: <20230502190921.GB9226@denix.org>
-References: <20230428002809.1930898-1-rs@ti.com>
- <3d1cd334-740c-936e-ad61-3c02131dfd09@ti.com>
- <20230428015903.GS9226@denix.org>
- <7f53699d-3fac-da19-2340-89cca2c668d0@ti.com>
+Subject: Re: [meta-ti][master/kirkstone][RFC 4/9] u-boot-bb.org: Remove
+ this recipe
+Message-ID: <20230502193800.GC9226@denix.org>
+References: <20230425172345.12293-1-afd@ti.com>
+ <20230425172345.12293-5-afd@ti.com>
+ <20230427203108.GO9226@denix.org>
+ <3276c7f1-37bc-c35b-5ffc-44c3e0296c42@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <7f53699d-3fac-da19-2340-89cca2c668d0@ti.com>
+In-Reply-To: <3276c7f1-37bc-c35b-5ffc-44c3e0296c42@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 02 May 2023 19:10:16 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16472
+ <meta-ti@lists.yoctoproject.org>; Tue, 02 May 2023 19:38:55 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16473
 
-On Fri, Apr 28, 2023 at 11:24:11AM -0500, Randolph Sapp wrote:
-> On 4/27/23 20:59, Denys Dmytriyenko wrote:
-> >On Thu, Apr 27, 2023 at 07:31:16PM -0500, Randolph Sapp wrote:
-> >>On 4/27/23 19:28, rs@ti.com wrote:
-> >>>From: Randolph Sapp <rs@ti.com>
-> >>>
-> >>>All of the software-dl links 302 to https urls anyway. Just jump
-> >>>straight to the secure version.
-> >>>
-> >>>Signed-off-by: Randolph Sapp <rs@ti.com>
-> >>>---
-
-<snip>
-
-
-> >>>diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc b/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
-> >>>index f0992aa7..77d23b6d 100644
-> >>>--- a/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
-> >>>+++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
-> >>>@@ -11,7 +11,7 @@ require ../includes/ti-eula-unpack.inc
-> >>>  S = "${WORKDIR}/cgt470_${PV}"
-> >>>-SRC_URI = "http://install.source.dir.local/ti_cgt_tms470_${PVwithdots}_setup_linux_x86.bin;name=cgt470bin"
-> >>>+SRC_URI = "https://install.source.dir.local/ti_cgt_tms470_${PVwithdots}_setup_linux_x86.bin;name=cgt470bin"
-> >>
-> >>Don't actually merge this. Wanted to take this opportunity to ask
-> >>what on earth theses SRC_URIs are. What do these mean, what's the
-> >>story?
+On Fri, Apr 28, 2023 at 10:13:26AM -0500, Andrew Davis wrote:
+> On 4/27/23 3:31 PM, Denys Dmytriyenko wrote:
+> >On Tue, Apr 25, 2023 at 12:23:40PM -0500, Andrew Davis via lists.yoctoproject.org wrote:
+> >>This will no longer build after we switch away from k3-image-gen. Remove
+> >>this version until it can be rebased on the latest U-Boot with binman
+> >>support.
 > >
-> >Heh, these were placeholders for "clickwrap" packages, which at some point
-> >long time ago TI Legal considered a "great" way to distribute software...
-> >Basically, there was no direct download URL - you must have downloaded them
-> >manually by filling out an online form and signing some sort of an agreement,
-> >which would trigger the download. Then you "install the source into the local
-> >downloads dir" (hence the name) by copying what you've downloaded manually
-> >into your ${DL_DIR} and Bitbake would be able to find it there regardless of
-> >the actual SRC_URI.
+> >>For now switch current users of this over to u-boot-ti v2021.01.
 > >
+> >This comment is not very clear - aren't you also removing that here?
 > 
-> Oh cool, I hate it. (Thanks for the explanation, I just really don't
-> like this idea.) Can we drop these (install methods or packages if
-> necessary) or will policy not allow it?
+> Not here, I do that in the *next* patch :)
+> 
+> I usually sort my patches from least to most controversial, so the first
+> 3-4 can be taken stopping here without breaking as much.
+> 
+> >Would it be possible to preserve at least Beagle build flows intact? Can
+> >the existing ti-sci-fw recipe that uses k3-image-gen be kept for now
+> >alongside the new one, e.g. move it to ti-sci-fw-legacy or something?
+> 
+> I have found no such way :(
+> 
+> All the multiconf and deploy logic expects k3-image-gen and now needs
+> moved over to the new way. Supporting both would mean forking almost
+> everything removed by this series.
 
-Nobody likes it on the engineering side! :) But it was forced back in the day 
-by sales/marketing/legal and took a lot of effort to convince everyone that 
-this clickwrap stuff doesn't bring much benefit, but causes damage...
-
-Since then most if not all of TI packages dropped clickwrap and allowed direct 
-download. Hence you don't see a lot of these weird URLs in recipes any more.
-
-Not sure about CodeGen Tool for TMS470 MCU and if there were newer releases or 
-if it's still active - nobody cared to update this recipe in over 10 years. 
-Other CGT recipes for ARM, PRU, C6x, C7x etc. in that recipes-ti/devtools 
-directory were kept mostly up to date, but not for TMS470. Not sure if there 
-are any downstream users anymore, maybe time to remove it...
+But on the other hand, BBAI64 and BeaglePlay only support GP and don't set any 
+additional multiconfigs besides the main k3r5. I feel like creating a separate 
+ti-sci-fw-bb.org with k3-image-gen might be possible. But I haven't tried that 
+myself yet...
 
 
-> Also, is this URI
-> functionality baked into the http fetcher or is this just leaning on
-> bitbake being unable to resolve the domain and then falling back on
-> the local copy?
+> The benefit is not there IMHO since the beagle platforms should boot
+> almost exactly the same on our TI tree as the bb.org version.
+> 
+> Moving forward, bb.org will also have to make this migration as
+> k3-image-gen will soon be deprecated. When they do, if we still want
+> their fork in meta-ti we can bring it back in.
 
-This is basic Bitbake fetcher functionality and is well documented. High level 
-order of operations to locate sources:
-
-1. Check if you already have them in your local DL_DIR
-2. Go through the list of configured PREMIRRORS to locate the sources there
-3. Actually hit the upstream SRC_URI and try to download the original src
-4. If everything else fails, check through the list of "post" MIRRORS
-
-So, requiring user to pre-download the sources manually and placing them in 
-their local DL_DIR per the original documentation would shortcut the process 
-at step 1.
-
-Otherwise it would break at step 3 (and 4) and hopefully the weird URL would 
-give user some clues or at least force to read the docs...
-
-There's nothing special about the URL, besides the convention that .local is 
-reserved - https://en.wikipedia.org/wiki/.local - and the entire name 
-suggesting to install the sources in local dir :)
+The issue is that it will take time for bb.org to switch over to the latest TI 
+6.1 kernel and 2023 U-boot with binman. Moreover, they only support Debian, so 
+don't expect timely OE recipe updates. And in all this potentially long time 
+there won't be any OE support for BB platforms. But there are active OE BB 
+users here and I'm trying to find a way to not throw them under the bus...
 
 -- 
 Denys
