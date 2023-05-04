@@ -1,112 +1,118 @@
-Return-Path: <d.schultz@phytec.de>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A310CC77B78
-	for <webhook@archiver.kernel.org>; Thu,  4 May 2023 12:51:36 +0000 (UTC)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- by mx.groups.io with SMTP id smtpd.web11.48507.1683204685547530475
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BC69C7EE21
+	for <webhook@archiver.kernel.org>; Thu,  4 May 2023 14:00:37 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.50373.1683208830280961029
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 04 May 2023 05:51:26 -0700
+ Thu, 04 May 2023 07:00:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@phytec.de header.s=a4 header.b=WoPa4d2Q;
- spf=pass (domain: phytec.de, ip: 91.26.50.163, mailfrom: d.schultz@phytec.de)
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
-	q=dns/txt; i=@phytec.de; t=1683204683; x=1685796683;
-	h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=afNfqEl18NZ+9NrDfwy239h/GtrnTaUSEK1JyOC78UU=;
-	b=WoPa4d2QpwlQpDetJsktT403GA6muSKzSRmSjMl0vOCqRcYoeWKz+elo38g76D3M
-	djKFoiMff37ln1KvF+RKVDhyV5IMaj7Lfj+IIjpbV015WX4g8oAJICExjhtbGJxl
-	+ySWYODlOsBRpfzBnVVnyp9yTX/TK+CpnQ9NtISNUso=;
-X-AuditID: ac14000a-917fe70000007ecb-76-6453aa4b32a5
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
-	(using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(Client did not present a certificate)
-	by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 64.1D.32459.B4AA3546; Thu,  4 May 2023 14:51:23 +0200 (CEST)
-Received: from ls-radium.phytec (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.18; Thu, 4 May
- 2023 14:51:22 +0200
-From: Daniel Schultz <d.schultz@phytec.de>
-To: <meta-ti@lists.yoctoproject.org>
-CC: Daniel Schultz <d.schultz@phytec.de>
-Subject: [kirkstone 2/2] recipes-graphics: ti-img-rogue-umlibs: Make -vulkan optional
-Date: Thu, 4 May 2023 05:51:07 -0700
-Message-ID: <20230504125107.1785647-2-d.schultz@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230504125107.1785647-1-d.schultz@phytec.de>
-References: <20230504125107.1785647-1-d.schultz@phytec.de>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=jW8+Zg6B;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: afd@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 344E0Ou2077396;
+	Thu, 4 May 2023 09:00:24 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1683208824;
+	bh=eRplOFDnzjJ5k7Zf+RTkahBt0KFfit/IbCFTWbraFeg=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=jW8+Zg6BXdc1xe65rvsa3BwieuCdZwFdLag6g0QSXZZfqgZf2EY7X/C5cMrAM9Sik
+	 do7Cx1EK7ioobm6dx0uLsVKKPirKEdq/Y8APJt2/RspeuOc6GwhADumPLmeSY3Pi+O
+	 JLFh2SuzJwdUOOWiSv22TaZVeF5s6U5aORZCQpSM=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 344E0Nfi048647
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 4 May 2023 09:00:23 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
+ May 2023 09:00:23 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 4 May 2023 09:00:23 -0500
+Received: from [10.250.35.77] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 344E0N7b002203;
+	Thu, 4 May 2023 09:00:23 -0500
+Message-ID: <a4efdf2f-1989-2121-22d4-513c1bba715f@ti.com>
+Date: Thu, 4 May 2023 09:00:22 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrALMWRmVeSWpSXmKPExsWyRpKBR9d7VXCKwef/ehZzv9xic2D0mHnq
-	EXMAYxSXTUpqTmZZapG+XQJXxplji5kKjvFWnDz9mamBcTF3FyMnh4SAicTL9tUsXYxcHEIC
-	S5gkNiw8zQKSEBK4zyixdj4PiM0moCVxZ8tcZhBbREBFYuK2eaxdjBwczAIaEu3PmEDCwgKh
-	Eu+mPwCzWYBKGr6eBSvnFbCS+HB1HwvELnmJmZe+s4PYnALWEm/WXmSEWGUlMeH0PyaIekGJ
-	kzOfgNUzA9U3b53NDGFLSBx88YIZol5BYva2yYwwM6ede80MYYdKHNm0mmkCo9AsJKNmIRk1
-	C8moBYzMqxiFcjOTs1OLMrP1CjIqS1KT9VJSNzGCQlWEgWsHY98cj0OMTByMhxglOJiVRHg/
-	FPqlCPGmJFZWpRblxxeV5qQWH2KU5mBREue938OUKCSQnliSmp2aWpBaBJNl4uCUamCc9yan
-	yDZp48n/3EKrYlPsWRiaa+y7RB94dHIvmfvqUk1ywelpnaeyPIyMOgxW7OzT3vHZ0IrhXNLG
-	hV1s0gZZJunflU9Uvf9RahzHJq7/rnjthNdHJO4qT777Zbb2v62CvC+FlbJm6V++cN6w7M3L
-	Q93rV1/Z1HXclXdSF9ft85nKDf4eFq+UWIozEg21mIuKEwHFbUc+QwIAAA==
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [meta-ti][master/kirkstone][RFC 4/9] u-boot-bb.org: Remove this
+ recipe
+Content-Language: en-US
+To: Denys Dmytriyenko <denis@denix.org>
+CC: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
+        Praneeth Bajjuri <praneeth@ti.com>,
+        Neha Malcom Francis <n-francis@ti.com>,
+        <meta-ti@lists.yoctoproject.org>
+References: <20230425172345.12293-1-afd@ti.com>
+ <20230425172345.12293-5-afd@ti.com> <20230427203108.GO9226@denix.org>
+ <3276c7f1-37bc-c35b-5ffc-44c3e0296c42@ti.com>
+ <20230502193800.GC9226@denix.org>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20230502193800.GC9226@denix.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 04 May 2023 12:51:36 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16484
+ <meta-ti@lists.yoctoproject.org>; Thu, 04 May 2023 14:00:37 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16485
 
-Only include the ti-img-rogue-umlibs-vulkan package if the
-DISTRO_FEATURES x11 is enabled. Right now, this recipe has a failed
-build dependency on images without x11.
+On 5/2/23 2:38 PM, Denys Dmytriyenko wrote:
+> On Fri, Apr 28, 2023 at 10:13:26AM -0500, Andrew Davis wrote:
+>> On 4/27/23 3:31 PM, Denys Dmytriyenko wrote:
+>>> On Tue, Apr 25, 2023 at 12:23:40PM -0500, Andrew Davis via lists.yoctoproject.org wrote:
+>>>> This will no longer build after we switch away from k3-image-gen. Remove
+>>>> this version until it can be rebased on the latest U-Boot with binman
+>>>> support.
+>>>
+>>>> For now switch current users of this over to u-boot-ti v2021.01.
+>>>
+>>> This comment is not very clear - aren't you also removing that here?
+>>
+>> Not here, I do that in the *next* patch :)
+>>
+>> I usually sort my patches from least to most controversial, so the first
+>> 3-4 can be taken stopping here without breaking as much.
+>>
+>>> Would it be possible to preserve at least Beagle build flows intact? Can
+>>> the existing ti-sci-fw recipe that uses k3-image-gen be kept for now
+>>> alongside the new one, e.g. move it to ti-sci-fw-legacy or something?
+>>
+>> I have found no such way :(
+>>
+>> All the multiconf and deploy logic expects k3-image-gen and now needs
+>> moved over to the new way. Supporting both would mean forking almost
+>> everything removed by this series.
+> 
+> But on the other hand, BBAI64 and BeaglePlay only support GP and don't set any
+> additional multiconfigs besides the main k3r5. I feel like creating a separate
+> ti-sci-fw-bb.org with k3-image-gen might be possible. But I haven't tried that
+> myself yet...
+> 
+> 
+>> The benefit is not there IMHO since the beagle platforms should boot
+>> almost exactly the same on our TI tree as the bb.org version.
+>>
+>> Moving forward, bb.org will also have to make this migration as
+>> k3-image-gen will soon be deprecated. When they do, if we still want
+>> their fork in meta-ti we can bring it back in.
+> 
+> The issue is that it will take time for bb.org to switch over to the latest TI
+> 6.1 kernel and 2023 U-boot with binman. Moreover, they only support Debian, so
+> don't expect timely OE recipe updates. And in all this potentially long time
+> there won't be any OE support for BB platforms. But there are active OE BB
+> users here and I'm trying to find a way to not throw them under the bus...
+> 
 
-Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
----
- .../libgles/ti-img-rogue-umlibs_23.1.6404501.bb   | 15 +++++++++++++--
- 1 file changed, 13 insertions(+), 2 deletions(-)
+This will only force them to use 2023 U-boot, which seems to boot the BB boards
+just fine already. The kernel can remain 5.10 until bb.org upgrades.
 
-diff --git a/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_23.1.6404501.bb b/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_23.1.6404501.bb
-index c33f8ae0..a6ed57f4 100644
---- a/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_23.1.6404501.bb
-+++ b/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_23.1.6404501.bb
-@@ -29,10 +29,18 @@ do_install:append() {
-         mv ${D}/lib/firmware ${D}${nonarch_base_libdir}
-         rmdir ${D}/lib
-     fi
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'false', 'true', d)}; then
-+        rm -rf ${D}${libdir}/libVK_IMG.so*
-+    fi 
-     rm -rf "${D}/etc/init.d"
- }
- 
--PACKAGES = "${PN}-vulkan ${PN}-tools ${PN}-firmware ${PN}"
-+PACKAGES = " \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "${PN}-vulkan", "", d)} \
-+    ${PN}-tools \
-+    ${PN}-firmware \
-+    ${PN} \
-+"
- 
- FILES:${PN}-vulkan = " \
-     ${datadir}/vulkan \
-@@ -56,7 +64,10 @@ RDEPENDS:${PN}-tools = "python3-core"
- FILES:${PN}-firmware = "${base_libdir}/firmware/*"
- INSANE_SKIP:${PN}-firmware += "arch"
- 
--RRECOMMENDS:${PN} += "${PN}-vulkan ${PN}-tools"
-+RRECOMMENDS:${PN} += " \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "${PN}-vulkan", "", d)} \
-+    ${PN}-tools \
-+"
- RDEPENDS:${PN} += " ${PN}-firmware"
- 
- INSANE_SKIP:${PN} += "already-stripped dev-so"
--- 
-2.25.1
-
+Andrew
 
