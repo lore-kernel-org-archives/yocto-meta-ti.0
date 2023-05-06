@@ -2,81 +2,88 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6401C77B7C
-	for <webhook@archiver.kernel.org>; Sat,  6 May 2023 01:48:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CB6ABC7EE24
+	for <webhook@archiver.kernel.org>; Sat,  6 May 2023 02:37:52 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.14598.1683337702985704066
+ by mx.groups.io with SMTP id smtpd.web11.15234.1683340666380683852
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 05 May 2023 18:48:23 -0700
+ Fri, 05 May 2023 19:37:46 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id EAB0640C61;
-	Sat,  6 May 2023 01:48:21 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id B805F40C76
+	for <meta-ti@lists.yoctoproject.org>; Sat,  6 May 2023 02:37:45 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id DyjzaBBdbKVz; Sat,  6 May 2023 01:48:21 +0000 (UTC)
+	with ESMTP id kzDEuiEoEvOa for <meta-ti@lists.yoctoproject.org>;
+	Sat,  6 May 2023 02:37:45 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C9F0C40A3D;
-	Sat,  6 May 2023 01:48:20 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 7A5FA1638C9; Fri,  5 May 2023 21:47:38 -0400 (EDT)
-Date: Fri, 5 May 2023 21:47:38 -0400
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 995E340C88
+	for <meta-ti@lists.yoctoproject.org>; Sat,  6 May 2023 02:37:43 +0000 (UTC)
+Received: from thorin.denix (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id 45AD11638CC
+	for <meta-ti@lists.yoctoproject.org>; Fri,  5 May 2023 22:37:01 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
-To: Daniel Schultz <d.schultz@phytec.de>
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [PATCH kirkstone+ 1/2] conf: machine: include: k3:
- Select correct WKS file
-Message-ID: <20230506014738.GK9226@denix.org>
-References: <20230504123736.1475746-1-d.schultz@phytec.de>
+To: meta-ti@lists.yoctoproject.org
+Subject: [master][PATCH 3/4] cairo: resolve opengl version
+Date: Sat,  6 May 2023 02:37:42 +0000
+Message-Id: <20230506023743.1259692-4-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230506023743.1259692-1-denis@denix.org>
+References: <20230506023743.1259692-1-denis@denix.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230504123736.1475746-1-d.schultz@phytec.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sat, 06 May 2023 01:48:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16491
+ <meta-ti@lists.yoctoproject.org>; Sat, 06 May 2023 02:37:52 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16496
 
-On Thu, May 04, 2023 at 05:37:35AM -0700, Daniel Schultz wrote:
-> Select the correct WKS file according to the MACHINE_FEATURE efi.
-> 
-> Right now, the sdimage-2part-efi.wks is set by default. Switch to the
-> sdimage-2part.wks file, if efi was removed from MACHINE_FEATURES to allow
-> non-efi boot methods.
-> 
-> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
-> ---
->  meta-ti-bsp/conf/machine/include/k3.inc | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/machine/include/k3.inc
-> index 31da2ca9..fff15505 100644
-> --- a/meta-ti-bsp/conf/machine/include/k3.inc
-> +++ b/meta-ti-bsp/conf/machine/include/k3.inc
-> @@ -50,7 +50,8 @@ IMAGE_EFI_BOOT_FILES ?= "${IMAGE_BOOT_FILES}"
->  EFI_PROVIDER ?= "grub-efi"
->  MACHINE_FEATURES += "efi"
->  
-> -WKS_FILE ?= "sdimage-2part-efi.wks"
-> +WKS_FILE ?= "${@bb.utils.contains("MACHINE_FEATURES", "efi", "sdimage-2part-efi.wks", "sdimage-2part.wks", d)}"
+From: Randolph Sapp <rs@ti.com>
 
-Well, "efi" gets added to MACHINE_FEATURES just one line above. So, in order 
-to disable it, you'd have to modify MACHINE_FEATURES in your configuration, at 
-which point it is even more easier to set WKS_FILE there too, as it's weakly 
-assigned here anyway...
+Cairo can either be built for use with OpenGL or OpenGLES. By default it
+assumes it can use OpenGL if X11 is provided as a distro feature. This
+assumption is not true when using the proprietary SGX / Rogue drivers.
 
-But I guess I don't mind a little bit more automation either, even if it gets 
-the code more complicated.
+Vulkan libraries need some X libs at runtime now, so we need to manually
+override the PACKAGECONFIG for cairo to use OpenGLES.
 
+Signed-off-by: Randolph Sapp <rs@ti.com>
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+---
+ meta-ti-bsp/recipes-graphics/cairo/cairo_%.bbappend | 1 +
+ meta-ti-bsp/recipes-graphics/cairo/pvr-cairo.inc    | 5 +++++
+ 2 files changed, 6 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-graphics/cairo/cairo_%.bbappend
+ create mode 100644 meta-ti-bsp/recipes-graphics/cairo/pvr-cairo.inc
 
->  do_image_wic[depends] += "virtual/bootloader:do_deploy"
->  do_image_complete[mcdepends] += "mc::k3r5:ti-sci-fw:do_deploy"
->  
-> -- 
-> 2.25.1
+diff --git a/meta-ti-bsp/recipes-graphics/cairo/cairo_%.bbappend b/meta-t=
+i-bsp/recipes-graphics/cairo/cairo_%.bbappend
+new file mode 100644
+index 00000000..459d8d09
+--- /dev/null
++++ b/meta-ti-bsp/recipes-graphics/cairo/cairo_%.bbappend
+@@ -0,0 +1 @@
++require ${@bb.utils.contains_any('PREFERRED_PROVIDER_virtual/gpudriver',=
+ 'ti-img-rogue-driver ti-sgx-ddk-km', 'pvr-cairo.inc', '', d)}
+diff --git a/meta-ti-bsp/recipes-graphics/cairo/pvr-cairo.inc b/meta-ti-b=
+sp/recipes-graphics/cairo/pvr-cairo.inc
+new file mode 100644
+index 00000000..b41f1a01
+--- /dev/null
++++ b/meta-ti-bsp/recipes-graphics/cairo/pvr-cairo.inc
+@@ -0,0 +1,5 @@
++# This is required since cairo expects the opengl distro feature to refe=
+r to
++# the desktop version of OpenGL. Imagination drivers only provide OpenGL=
+ES.
++
++PACKAGECONFIG:remove =3D "opengl"
++PACKAGECONFIG:append =3D " glesv2"
+--=20
+2.25.1
+
 
