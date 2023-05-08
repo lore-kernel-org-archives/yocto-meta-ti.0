@@ -1,102 +1,83 @@
-Return-Path: <denis@denix.org>
+Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20D40C77B75
-	for <webhook@archiver.kernel.org>; Sun,  7 May 2023 16:09:53 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.68509.1683475784391419149
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DEB23C77B7F
+	for <webhook@archiver.kernel.org>; Mon,  8 May 2023 15:33:49 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.110909.1683560022159755305
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 07 May 2023 09:09:44 -0700
+ Mon, 08 May 2023 08:33:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9C83B40C56;
-	Sun,  7 May 2023 16:09:43 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id mFgra1e5OJdY; Sun,  7 May 2023 16:09:43 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8133240ACD;
-	Sun,  7 May 2023 16:09:42 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id D4B2E1638C9; Sun,  7 May 2023 12:08:59 -0400 (EDT)
-Date: Sun, 7 May 2023 12:08:59 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Daniel Schultz <d.schultz@phytec.de>
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [PATCH kirkstone+ 2/2] recipes-graphics:
- ti-img-rogue-umlibs: Make -vulkan optional
-Message-ID: <20230507160859.GM9226@denix.org>
-References: <20230504123736.1475746-1-d.schultz@phytec.de>
- <20230504123736.1475746-2-d.schultz@phytec.de>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=tChhz6JY;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: rs@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 348FXcuZ051731;
+	Mon, 8 May 2023 10:33:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1683560018;
+	bh=o9VQOqxYWaxZo8uNS/GwNfC5w/RwCcLpC6rj1l0ATD0=;
+	h=From:To:CC:Subject:Date;
+	b=tChhz6JYj+qP1eLI6TA79cRoPBYIJdteyjcnrpVEopU6UB754lbz/4U7uU17GczUZ
+	 OswSYFWlut1XsACmUllyvGMp8srpPDD/mVJP37F9ZKIscsUYG+amu/NrWBKjDXlUbF
+	 rI7b3vhfpswCM56fWX44SiJFwNznKLhd8LyxJhYo=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 348FXcTN011766
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 8 May 2023 10:33:38 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
+ May 2023 10:33:37 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 8 May 2023 10:33:38 -0500
+Received: from rs-desk.dhcp.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 348FXbVw120982;
+	Mon, 8 May 2023 10:33:37 -0500
+From: <rs@ti.com>
+To: <reatmon@ti.com>, <denis@denix.org>, <detheridge@ti.com>, <afd@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, Randolph Sapp <rs@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH] ti-img-rogue-driver: enable bxs/8xe apm
+Date: Mon, 8 May 2023 10:33:30 -0500
+Message-ID: <20230508153330.327470-1-rs@ti.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230504123736.1475746-2-d.schultz@phytec.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sun, 07 May 2023 16:09:53 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16498
+ <meta-ti@lists.yoctoproject.org>; Mon, 08 May 2023 15:33:49 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16499
 
-On Thu, May 04, 2023 at 05:37:36AM -0700, Daniel Schultz wrote:
-> Only include the ti-img-rogue-umlibs-vulkan package if the
-> DISTRO_FEATURES x11 is enabled. Right now, this recipe has a failed
-> build dependency on images without x11.
+From: Randolph Sapp <rs@ti.com>
 
-Just to clarify - this recipe has run-time dependency from vulkan package 
-to libx11-xcb, which itself won't build w/o "x11" distro feature.
+Bump the src revision to enable the following features on Jacinto:
+	- Active power managment
+	- Power island control via firmware
 
+Signed-off-by: Randolph Sapp <rs@ti.com>
+---
+ .../powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb
+index f8489e80..daee230b 100644
+--- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb
++++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb
+@@ -22,7 +22,7 @@ SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-driver.git;protocol=https;
+ 
+ S = "${WORKDIR}/git"
+ 
+-SRCREV = "b69b689252a1158bff205603288ad12b9482770b"
++SRCREV = "84e164c11ee8c734c58594eca5e74b86a6e6c612"
+ 
+ TARGET_PRODUCT:j721e = "j721e_linux"
+ TARGET_PRODUCT:j721s2 = "j721s2_linux"
+-- 
+2.40.1
 
-Tested-by: Denys Dmytriyenko <denys@konsulko.com>
-
-
-> ---
->  .../libgles/ti-img-rogue-umlibs_23.1.6404501.bb   | 15 +++++++++++++--
->  1 file changed, 13 insertions(+), 2 deletions(-)
-> 
-> diff --git a/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_23.1.6404501.bb b/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_23.1.6404501.bb
-> index c33f8ae0..a6ed57f4 100644
-> --- a/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_23.1.6404501.bb
-> +++ b/meta-ti-bsp/recipes-graphics/libgles/ti-img-rogue-umlibs_23.1.6404501.bb
-> @@ -29,10 +29,18 @@ do_install:append() {
->          mv ${D}/lib/firmware ${D}${nonarch_base_libdir}
->          rmdir ${D}/lib
->      fi
-> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'false', 'true', d)}; then
-> +        rm -rf ${D}${libdir}/libVK_IMG.so*
-> +    fi 
->      rm -rf "${D}/etc/init.d"
->  }
->  
-> -PACKAGES = "${PN}-vulkan ${PN}-tools ${PN}-firmware ${PN}"
-> +PACKAGES = " \
-> +    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "${PN}-vulkan", "", d)} \
-> +    ${PN}-tools \
-> +    ${PN}-firmware \
-> +    ${PN} \
-> +"
->  
->  FILES:${PN}-vulkan = " \
->      ${datadir}/vulkan \
-> @@ -56,7 +64,10 @@ RDEPENDS:${PN}-tools = "python3-core"
->  FILES:${PN}-firmware = "${base_libdir}/firmware/*"
->  INSANE_SKIP:${PN}-firmware += "arch"
->  
-> -RRECOMMENDS:${PN} += "${PN}-vulkan ${PN}-tools"
-> +RRECOMMENDS:${PN} += " \
-> +    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "${PN}-vulkan", "", d)} \
-> +    ${PN}-tools \
-> +"
->  RDEPENDS:${PN} += " ${PN}-firmware"
->  
->  INSANE_SKIP:${PN} += "already-stripped dev-so"
-> -- 
-> 2.25.1
 
