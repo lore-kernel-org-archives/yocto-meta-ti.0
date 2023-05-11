@@ -2,200 +2,146 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C1ABC77B7F
-	for <webhook@archiver.kernel.org>; Thu, 11 May 2023 19:51:08 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.6653.1683834665596918292
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CDD3C77B7F
+	for <webhook@archiver.kernel.org>; Thu, 11 May 2023 19:59:18 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.6837.1683835152999664021
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 11 May 2023 12:51:05 -0700
+ Thu, 11 May 2023 12:59:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=rkEL3HPl;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=whFsqsMr;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 34BJp2vP001049;
-	Thu, 11 May 2023 14:51:02 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 34BJxBfU025050;
+	Thu, 11 May 2023 14:59:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1683834662;
-	bh=2akWmu9CvaP8/Z5rpyuO528BPY69cdtIJho4moko7Co=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=rkEL3HPljKZ+lagQgvIfrZmpZjWV5t4qKP2SDspHHm7ztwEZFzdFbn7Vl+sFZyaL6
-	 rMLhxuLijhfJuxIzIF5CanO478ku6N4IdUkST2IbJLD9wmgkM/QLAIFudwNqA9dcXT
-	 HcDTYNpJxRT0DDZDAfpSiwKlyWcLwAhB66Y1mpJk=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 34BJp2ZX074699
+	s=ti-com-17Q1; t=1683835151;
+	bh=iK/VaH5PnoDssuG4SlVReLUE/IVCSXHrRpquzFlTqy8=;
+	h=From:To:Subject:Date;
+	b=whFsqsMrLyYyBX5xvnERneQEchxLmFAZGs6myWorBZH05r2FHy/NI0F7MwJqlkLoe
+	 WS/7KI3uduXN1pZXc/lxNcdCMGUL/IBeC0bGY7YXyYKWJnG94SSoPw3x4lFIj1i739
+	 yq21DKrbOEWJ97JOVFH0JUMgEwH4U0Kp66To2XEk=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 34BJxAmb078133
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 11 May 2023 14:51:02 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 11 May 2023 14:59:11 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 11
- May 2023 14:51:02 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ May 2023 14:59:10 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 11 May 2023 14:51:02 -0500
-Received: from [128.247.81.69] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 34BJp1Zh021786;
-	Thu, 11 May 2023 14:51:01 -0500
-Message-ID: <8a94fa5f-7dd7-e7d2-f0b1-257b6d7f1f27@ti.com>
-Date: Thu, 11 May 2023 14:51:01 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.1
-Subject: Re: [meta-ti] [master/kirkstone][PATCH 2/2] trusted-firmware-a: only
- activate customizations for TI platforms
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <meta-ti@lists.yoctoproject.org>, Denys Dmytriyenko <denys@konsulko.com>
-References: <20230511184301.1075335-1-denis@denix.org>
- <20230511184301.1075335-2-denis@denix.org>
- <9470a393-2241-bf48-41cf-77d14ec79ae7@ti.com>
- <20230511194954.GC9226@denix.org>
+ Frontend Transport; Thu, 11 May 2023 14:59:10 -0500
+Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 34BJxAg0045837;
+	Thu, 11 May 2023 14:59:10 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1pxCRS-0004Uu-Gd; Thu, 11 May 2023 14:59:10 -0500
 From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20230511194954.GC9226@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master/kirkstone][PATCH] conf: machine: Add extra tiboot3.bin version that matches default
+Date: Thu, 11 May 2023 14:59:10 -0500
+Message-ID: <20230511195910.17248-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 11 May 2023 19:51:08 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16523
+ <meta-ti@lists.yoctoproject.org>; Thu, 11 May 2023 19:59:18 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16524
 
+When creating the boot partition we copy all of the images for the
+different board types (gp, hs-fs, hs-se), but one of those we consider
+to be a default.  That default is not copied with the longer name, but
+rather with the tiboot3.bin name.
 
-Already done.  No worries.
+The issue comes when someone wants to boot with a different bin file.
+They need to copy the approriate longer named .bin file to tiboot3.bin.
+But then the original name of what tiboot3.bin is lost unless the use
+backs it up.
 
+This patch just additionally copies that longer named bin file so that
+anyone who wants to look at the boot partiion and decide to boot for a
+different board can know which file to copy to tiboot3.bin and does not
+need to worry about making a backup.
 
-On 5/11/2023 2:49 PM, Denys Dmytriyenko wrote:
-> Sorry about all that - I can resend everything specifically for kirkstone
-> 
-> On Thu, May 11, 2023 at 02:46:11PM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
->>
->> This does not apply against kirkstone cleanly because of a patch
->> applied to the master recipe that is not in kirkstone.  I'll fix it
->> as I apply the patch, but I wanted to inform anyone trying it
->> themselves.
->>
->>
->> On 5/11/2023 1:43 PM, Denys Dmytriyenko wrote:
->>> From: Denys Dmytriyenko <denys@konsulko.com>
->>>
->>> Avoid inheriting ti-secdev class and adding unconditional dependency
->>> on TI_SECURE_DEV_PKG and other variables, when meta-ti-bsp is in the
->>> bblayers.conf stack, but not building for TI platforms. This solves
->>> yocto-check-layer signature test for Yocto Project compliance.
->>>
->>> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
->>> ---
->>>   ...a_%.bbappend => trusted-firmware-a-ti.inc} |  0
->>>   .../trusted-firmware-a_%.bbappend             | 72 +------------------
->>>   2 files changed, 3 insertions(+), 69 deletions(-)
->>>   copy meta-ti-bsp/recipes-bsp/trusted-firmware-a/{trusted-firmware-a_%.bbappend => trusted-firmware-a-ti.inc} (100%)
->>>
->>> diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
->>> similarity index 100%
->>> copy from meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
->>> copy to meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
->>> diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
->>> index 4ea63205..00d08a51 100644
->>> --- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
->>> +++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.bbappend
->>> @@ -1,70 +1,4 @@
->>> -PV:k3 = "2.8+git${SRCPV}"
->>> -SRCREV_tfa:k3 = "2fcd408bb3a6756767a43c073c597cef06e7f2d5"
->>> -SRC_URI:k3 = "git://git.trustedfirmware.org/TF-A/trusted-firmware-a.git;protocol=https;name=tfa;branch=master"
->>> -COMPATIBLE_MACHINE:k3 = "k3"
->>> -TFA_BUILD_TARGET:k3 = "all"
->>> -TFA_INSTALL_TARGET:k3 = "bl31"
->>> -TFA_SPD:k3 = "opteed"
->>> +TFA_TI = ""
->>> +TFA_TI:k3 = "trusted-firmware-a-ti.inc"
->>> -SRC_URI:append:k3 = " file://rwx-segments-ti.patch"
->>> -FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
->>> -
->>> -# Use TI SECDEV for signing
->>> -inherit ti-secdev
->>> -
->>> -EXTRA_OEMAKE:append:k3 = "${@ ' K3_USART=' + d.getVar('TFA_K3_USART') if d.getVar('TFA_K3_USART') else ''}"
->>> -EXTRA_OEMAKE:append:k3 = "${@ ' K3_PM_SYSTEM_SUSPEND=' + d.getVar('TFA_K3_SYSTEM_SUSPEND') if d.getVar('TFA_K3_SYSTEM_SUSPEND') else ''}"
->>> -
->>> -# Signing procedure for K3 HS devices
->>> -tfa_sign_k3hs() {
->>> -	mv ${BUILD_DIR}/bl31.bin ${BUILD_DIR}/bl31.bin.unsigned
->>> -	${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${BUILD_DIR}/bl31.bin.unsigned ${BUILD_DIR}/bl31.bin
->>> -}
->>> -
->>> -do_compile:append:am65xx-hs-evm() {
->>> -    tfa_sign_k3hs
->>> -}
->>> -
->>> -do_compile:append:am64xx-evm() {
->>> -    tfa_sign_k3hs
->>> -}
->>> -
->>> -do_compile:append:am62xx-evm() {
->>> -    tfa_sign_k3hs
->>> -}
->>> -
->>> -do_compile:append:am62xx-lp-evm() {
->>> -    tfa_sign_k3hs
->>> -}
->>> -
->>> -do_compile:append:am62axx-evm() {
->>> -    tfa_sign_k3hs
->>> -}
->>> -
->>> -do_compile:append:j721e-hs-evm() {
->>> -    tfa_sign_k3hs
->>> -}
->>> -
->>> -do_compile:append:j7200-hs-evm() {
->>> -    tfa_sign_k3hs
->>> -}
->>> -
->>> -do_compile:append:j721s2-hs-evm() {
->>> -    tfa_sign_k3hs
->>> -}
->>> -
->>> -do_compile:append:j784s4-hs-evm() {
->>> -    tfa_sign_k3hs
->>> -}
->>> -
->>> -do_install:append:k3() {
->>> -    if [ -f ${BUILD_DIR}/bl31.bin.unsigned ]; then
->>> -        echo "Install bl31.bin.unsigned"
->>> -        install -m 0644 ${BUILD_DIR}/bl31.bin.unsigned \
->>> -        ${D}/firmware/bl31.bin.unsigned
->>> -    else
->>> -        echo "Install bl31.bin.unsigned"
->>> -        install -m 0644 ${BUILD_DIR}/bl31.bin \
->>> -        ${D}/firmware/bl31.bin.unsigned
->>> -    fi
->>> -}
->>> +require ${TFA_TI}
->>>
->>>
->>>
->>>
->>>
->>
->> -- 
->> Ryan Eatmon                reatmon@ti.com
->> -----------------------------------------
->> Texas Instruments, Inc.  -  LCPD  -  MGTS
-> 
->>
->> -=-=-=-=-=-=-=-=-=-=-=-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#16521): https://lists.yoctoproject.org/g/meta-ti/message/16521
->> Mute This Topic: https://lists.yoctoproject.org/mt/98834090/3617104
->> Group Owner: meta-ti+owner@lists.yoctoproject.org
->> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/leave/6695352/3617104/1311934448/xyzzy [denis@denix.org]
->> -=-=-=-=-=-=-=-=-=-=-=-
->>
-> 
-> 
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ meta-ti-bsp/conf/machine/include/am62axx.inc   | 1 +
+ meta-ti-bsp/conf/machine/include/am62xx-lp.inc | 1 +
+ meta-ti-bsp/conf/machine/include/am62xx.inc    | 1 +
+ meta-ti-bsp/conf/machine/j721s2-evm.conf       | 1 +
+ meta-ti-bsp/conf/machine/j784s4-evm.conf       | 1 +
+ 5 files changed, 5 insertions(+)
 
+diff --git a/meta-ti-bsp/conf/machine/include/am62axx.inc b/meta-ti-bsp/conf/machine/include/am62axx.inc
+index eacfa584..e708a313 100644
+--- a/meta-ti-bsp/conf/machine/include/am62axx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62axx.inc
+@@ -7,6 +7,7 @@ TFA_K3_SYSTEM_SUSPEND = "1"
+ 
+ # Default tiboot3.bin on AM62A is for HS-FS
+ BBMULTICONFIG = "k3r5-hs-fs"
++IMAGE_BOOT_FILES += "tiboot3-am62ax-hs-fs-evm.bin"
+ do_image_complete[mcdepends] = "mc::k3r5-hs-fs:ti-sci-fw:do_deploy"
+ 
+ # Since default tiboot3.bin on AM62A is for HS-FS, add a version for GP
+diff --git a/meta-ti-bsp/conf/machine/include/am62xx-lp.inc b/meta-ti-bsp/conf/machine/include/am62xx-lp.inc
+index bcc6f493..99237a90 100644
+--- a/meta-ti-bsp/conf/machine/include/am62xx-lp.inc
++++ b/meta-ti-bsp/conf/machine/include/am62xx-lp.inc
+@@ -7,6 +7,7 @@ TFA_K3_SYSTEM_SUSPEND = "1"
+ 
+ # Default tiboot3.bin on AM62x LP is for HS-FS
+ BBMULTICONFIG = "k3r5-hs-fs"
++IMAGE_BOOT_FILES += "tiboot3-am62x-hs-fs-evm.bin"
+ do_image_complete[mcdepends] = "mc::k3r5-hs-fs:ti-sci-fw:do_deploy"
+ 
+ # Since default tiboot3.bin on AM62x LP is for HS-FS, add a version for HS-SE
+diff --git a/meta-ti-bsp/conf/machine/include/am62xx.inc b/meta-ti-bsp/conf/machine/include/am62xx.inc
+index c1e0ed0c..c98da5f5 100644
+--- a/meta-ti-bsp/conf/machine/include/am62xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62xx.inc
+@@ -8,6 +8,7 @@ PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
+ 
+ # Default tiboot3.bin on AM62x is for HS-FS
+ BBMULTICONFIG = "k3r5-hs-fs"
++IMAGE_BOOT_FILES += "tiboot3-am62x-hs-fs-evm.bin"
+ do_image_complete[mcdepends] = "mc::k3r5-hs-fs:ti-sci-fw:do_deploy"
+ 
+ # Since default tiboot3.bin on AM62x is for HS-FS, add a version for GP
+diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+index bdea7c44..78973600 100644
+--- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
++++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+@@ -21,6 +21,7 @@ UBOOT_MACHINE = "j721s2_evm_a72_defconfig"
+ 
+ # Default tiboot3.bin on J721S2 is for GP
+ BBMULTICONFIG = "k3r5-gp"
++IMAGE_BOOT_FILES += "tiboot3-j721s2-gp-evm.bin"
+ do_image_complete[mcdepends] = "mc::k3r5-gp:ti-sci-fw:do_deploy"
+ 
+ # Since default tiboot3.bin on J721S2 is for GP, add a version for SR1.0 HS-FS
+diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf b/meta-ti-bsp/conf/machine/j784s4-evm.conf
+index 4fe64d88..4274e800 100644
+--- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
++++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
+@@ -21,6 +21,7 @@ UBOOT_MACHINE = "j784s4_evm_a72_defconfig"
+ 
+ # Default tiboot3.bin on J784S4 is for GP
+ BBMULTICONFIG = "k3r5-gp"
++IMAGE_BOOT_FILES += "tiboot3-j784s4-gp-evm.bin"
+ do_image_complete[mcdepends] = "mc::k3r5-gp:ti-sci-fw:do_deploy"
+ 
+ # Since default tiboot3.bin on J784S4 is for GP, add a version for SR1.0 HS-FS
 -- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+2.17.1
+
 
