@@ -1,92 +1,87 @@
-Return-Path: <rs@ti.com>
+Return-Path: <alexandre.belloni@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F47EC77B7D
-	for <webhook@archiver.kernel.org>; Thu, 18 May 2023 23:53:05 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.7673.1684453975051959124
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CAAADC77B73
+	for <webhook@archiver.kernel.org>; Mon, 22 May 2023 10:02:58 +0000 (UTC)
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
+ by mx.groups.io with SMTP id smtpd.web10.18431.1684749775796318227
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 18 May 2023 16:52:55 -0700
+ Mon, 22 May 2023 03:02:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=byBmem3z;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: rs@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 34INqokm021156;
-	Thu, 18 May 2023 18:52:50 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1684453970;
-	bh=l+uins2G3Ij3SRhvpUrZ4nU+cTYpctGbtMi558guBoo=;
-	h=From:To:CC:Subject:Date;
-	b=byBmem3zB17XtETb2cpsAvRsOJpDlWOFixnBGrFOBicGlb1MGJGzgSG6qHpUxUgTv
-	 jgUxsEl0C4r5ye5VDtIgxVCRmuur2QbR/POY/I1ZNXfMTLYV5VAsqDu+VhKUkjERcx
-	 I4inVEy+Kamdnic2IBo2T5eta/0LstmNk0rkIRto=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 34INqoso029936
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 18 May 2023 18:52:50 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 18
- May 2023 18:52:50 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 18 May 2023 18:52:50 -0500
-Received: from rs-desk.dhcp.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 34INqotV014720;
-	Thu, 18 May 2023 18:52:50 -0500
-From: <rs@ti.com>
-To: <afd@ti.com>, <reatmon@ti.com>, <denis@denix.org>
-CC: <detheridge@ti.com>, <meta-ti@lists.yoctoproject.org>,
-        Randolph Sapp
-	<rs@ti.com>
-Subject: [meta-ti][master/kirkstone][PATCH] meta-ti-bsp: ti-img-rogue-driver: cleanup apm and add hack
-Date: Thu, 18 May 2023 18:52:40 -0500
-Message-ID: <20230518235240.841756-1-rs@ti.com>
-X-Mailer: git-send-email 2.40.1
+ dkim=pass header.i=@bootlin.com header.s=gm1 header.b=ZyDBeBxl;
+ spf=pass (domain: bootlin.com, ip: 217.70.183.201, mailfrom: alexandre.belloni@bootlin.com)
+Received: (Authenticated sender: alexandre.belloni@bootlin.com)
+	by mail.gandi.net (Postfix) with ESMTPSA id 3DAF41BF21A;
+	Mon, 22 May 2023 10:02:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1684749774;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Ufx1KuRwyi3vgStUX8caBLFeCYXpmky+7EvJT3CGxPI=;
+	b=ZyDBeBxl2LeXrRO3oviERAJg0DeIgwgiVGvrfW+N80Kluer1+qXbGzCzCaP1pVl8NqS3k8
+	w2fY35gXHvnxATR+NuwNqEC8lD+V2z28m23bz5FTXVUYvoFTCUpqMKJVRuUGqLooDBhIc3
+	W6jnLC4FHtwjwElckmrC6x8MTEwuSobOtnl1ATd+TFLAsRR9y8eFhVkdB5eynyRdEBJ/Nh
+	2J5tmOsEiNENHaT4S18tGmOkd53Nn+3dk1EQWLOtmxx+xaFjB2UCjS73JotQCdRarsTj+b
+	exSOLWSnrK8llOkuY5I7S1dCEaaDGdVw7Uflx1FUAqCVnouSc1ua/fWJK9jl8w==
+Date: Mon, 22 May 2023 12:02:52 +0200
+From: Alexandre Belloni <alexandre.belloni@bootlin.com>
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: Denys Dmytriyenko <denys@konsulko.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] check-layer failures for meta-ti
+Message-ID: <2023052210025257f03d87@mail.local>
+References: <202305021517546e066d50@mail.local>
+ <20230502194743.GD9226@denix.org>
+ <202305111450394ec6a4fb@mail.local>
+ <20230511153603.GX9226@denix.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230511153603.GX9226@denix.org>
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 18 May 2023 23:53:05 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16570
+ <meta-ti@lists.yoctoproject.org>; Mon, 22 May 2023 10:02:58 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16571
 
-From: Randolph Sapp <rs@ti.com>
+Hello,
 
-Cleanup the J* APM patch a little. Apparently I could have stood to read
-the docs a little more. Found some better runtime pm functions and also
-discovered something new about the power island definition.
+there is a remaining issue:
 
-Notes from upstream:
-	- Add the CCB coherency HACK from DDK 1.15 to improve stability
-	  on J* devices
-	- Fix power island support on J* devices
-	- Use better APM calls so user modification to power domains
-	  don't cause the device to enter a bad state
+https://autobuilder.yoctoproject.org/typhoon/#/builders/121/builds/1363/steps/19/logs/stdio
 
-Signed-off-by: Randolph Sapp <rs@ti.com>
----
- .../powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+AssertionError: Adding layer meta-ti-bsp changed signatures.
+10 signatures changed, initial differences (first hash before, second after):
+   optee-client:do_prepare_recipe_sysroot: d05547a4e057b50bff1357add7383c39c968542c7ca5027c41cd0e073196ac56 -> 8148d8a68b8570d0e1cd0d5fc2d790ab685c45a8beb18e62f227153a790b1198
+      bitbake-diffsigs --task optee-client do_prepare_recipe_sysroot --signature d05547a4e057b50bff1357add7383c39c968542c7ca5027c41cd0e073196ac56 8148d8a68b8570d0e1cd0d5fc2d790ab685c45a8beb18e62f227153a790b1198
+      NOTE: Starting bitbake server...
+      runtaskdeps changed:
+      ['cmake/cmake-native_3.22.3.bb:do_populate_sysroot gcc/gcc-cross_11.3.bb:do_populate_sysroot gcc/gcc-runtime_11.3.bb:do_populate_sysroot glibc/glibc_2.35.bb:do_populate_sysroot ninja/ninja_1.10.2.bb:do_populate_sysroot:virtual:native optee/optee-client_3.16.0.bb:do_fetch', +pkgconfig/pkgconfig_git.bb:do_populate_sysroot:virtual:native, 'pseudo/pseudo_git.bb:do_populate_sysroot:virtual:native update-rc.d/update-rc.d_0.8.bb:do_populate_sysroot']
+      Number of task dependencies changed
+      Dependency on task pkgconfig/pkgconfig_git.bb:do_populate_sysroot:virtual:native was added with hash cf8a9ff6ed2d492aeeeeeb3972365104425b5424377cf5e4a4fc76bb53a4f628
 
-diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb
-index daee230b..76e3d801 100644
---- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb
-+++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb
-@@ -22,7 +22,7 @@ SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-driver.git;protocol=https;
- 
- S = "${WORKDIR}/git"
- 
--SRCREV = "84e164c11ee8c734c58594eca5e74b86a6e6c612"
-+SRCREV = "93c66ec66136654849809132b86d3b880ee96ed6"
- 
- TARGET_PRODUCT:j721e = "j721e_linux"
- TARGET_PRODUCT:j721s2 = "j721s2_linux"
+On 11/05/2023 11:36:03-0400, Denys Dmytriyenko wrote:
+> On Thu, May 11, 2023 at 04:50:39PM +0200, Alexandre Belloni wrote:
+> > Hello,
+> > 
+> > Did you make any progress? The plan is to disable testing meta-ti next
+> > week if this isn't fixed by then.
+> 
+> Yes, I have necessary patches I'm about to send out.
+> 
+> 
+> > On 02/05/2023 15:47:43-0400, Denys Dmytriyenko wrote:
+> > > On Tue, May 02, 2023 at 05:17:54PM +0200, Alexandre Belloni via lists.yoctoproject.org wrote:
+> > > > Hello,
+> > > > 
+> > > > meta-ti is currently failing check-layer-nightly:
+> > > 
+> > > Yeah, I think I know what's going on and it's a bit more complicated... I'll 
+> > > take a look at it.
+
 -- 
-2.40.1
-
+Alexandre Belloni, co-owner and COO, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
 
