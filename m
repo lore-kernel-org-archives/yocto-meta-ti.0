@@ -2,47 +2,47 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 319B9C7EE39
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36F40C7EE3A
 	for <webhook@archiver.kernel.org>; Thu, 25 May 2023 18:11:41 +0000 (UTC)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.18760.1685038296260556040
+ by mx.groups.io with SMTP id smtpd.web10.19173.1685038296661703602
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 25 May 2023 11:11:36 -0700
+ Thu, 25 May 2023 11:11:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Er2+OQON;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=l8jhLpbB;
  spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 34PIBZIA020385;
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 34PIBZBq020389;
 	Thu, 25 May 2023 13:11:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1685038295;
-	bh=CcwkgKg82bGdFJv4MfCwxGbxOQKX9NAUKIxSMUb3Fj8=;
+	bh=vQlqC8QI22RpczZxMiuGiptunwvSIc93GvrhOSsnIUU=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=Er2+OQONT1wUnzJifbUuCjZ5hn9OtmlL779iZuF+rDww61nsLKgrC76T1brOa1AAO
-	 JFNyLKyRZ/IXkGiNrYQVzvTpZT7z4VQAiOOTkQKF5QldQDWtn6O7ZHj97d+idUh2j4
-	 CE+ZiDAxqrib6qnoC08ETQTabjOBbgZgBeYC0vMc=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 34PIBZW3059576
+	b=l8jhLpbBL4OMb9j70TH1rn+zVUZoc0mXoh6DmKGIenoGWrkU1KhAXRKnyveJmVL50
+	 k3t7rzosOQN3gCJx5eAzAOhefnRy3ynEeknUOfib8F2HTqnh/NC35MTOqIeYrDF1dJ
+	 BXxTn3lARad0v1FAl7uABOYzQ44UBYSvpChmd/1I=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 34PIBZpI085283
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Thu, 25 May 2023 13:11:35 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
  May 2023 13:11:35 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Thu, 25 May 2023 13:11:35 -0500
 Received: from lelv0326.itg.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 34PIBXGu102467;
-	Thu, 25 May 2023 13:11:34 -0500
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 34PIBXGv102467;
+	Thu, 25 May 2023 13:11:35 -0500
 From: Andrew Davis <afd@ti.com>
 To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         <meta-ti@lists.yoctoproject.org>
 CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][master/kirkstone][PATCH 3/9] ti-sci-fw: Remove source package recipe
-Date: Thu, 25 May 2023 13:11:26 -0500
-Message-ID: <20230525181132.417197-4-afd@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH 4/9] u-boot-bb.org: Remove this recipe
+Date: Thu, 25 May 2023 13:11:27 -0500
+Message-ID: <20230525181132.417197-5-afd@ti.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230525181132.417197-1-afd@ti.com>
 References: <20230525181132.417197-1-afd@ti.com>
@@ -54,68 +54,134 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Thu, 25 May 2023 18:11:41 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16587
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16588
 
-K3-image-gen is going away and we don't do SRCIPK packages like this
-anymore anyway. Remove this recipe.
+This will no longer build after we switch away from k3-image-gen. Remove
+this version until it can be rebased on the latest U-Boot with binman
+support. For now switch current users of this over to u-boot-ti v2021.01.
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- .../ti-sci-fw/ti-sci-fw-source_git.bb         | 45 -------------------
- 1 file changed, 45 deletions(-)
- delete mode 100644 meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb
+ meta-ti-bsp/conf/machine/beagle-x15.conf      |  2 --
+ .../conf/machine/beaglebone-ai64-k3r5.conf    |  3 ---
+ meta-ti-bsp/conf/machine/beaglebone-ai64.conf |  2 --
+ meta-ti-bsp/conf/machine/beaglebone.conf      |  2 --
+ meta-ti-bsp/conf/machine/beagleplay-k3r5.conf |  3 ---
+ meta-ti-bsp/conf/machine/beagleplay.conf      |  2 --
+ .../recipes-bsp/u-boot/u-boot-bb.org_git.bb   | 24 -------------------
+ 7 files changed, 38 deletions(-)
+ delete mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb
+diff --git a/meta-ti-bsp/conf/machine/beagle-x15.conf b/meta-ti-bsp/conf/machine/beagle-x15.conf
+index fb52245b..be27705c 100644
+--- a/meta-ti-bsp/conf/machine/beagle-x15.conf
++++ b/meta-ti-bsp/conf/machine/beagle-x15.conf
+@@ -5,8 +5,6 @@
+ require conf/machine/include/am57xx.inc
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-bb.org"
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-bb.org"
+-PREFERRED_PROVIDER_u-boot = "u-boot-bb.org"
+ 
+ KERNEL_DEVICETREE_PREFIX = "am57xx-beagle-x15"
+ 
+diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf b/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf
+index 7c99b5d4..b893f380 100644
+--- a/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf
+@@ -4,9 +4,6 @@
+ 
+ require conf/machine/include/k3r5.inc
+ 
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-bb.org"
+-PREFERRED_PROVIDER_u-boot = "u-boot-bb.org"
+-
+ SYSFW_SOC = "j721e"
+ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "gp"
+diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf b/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
+index 304cbb62..bd5f541f 100644
+--- a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
++++ b/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
+@@ -7,8 +7,6 @@ require conf/machine/include/j721e.inc
+ UBOOT_MACHINE = "j721e_evm_a72_config"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-bb.org"
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-bb.org"
+-PREFERRED_PROVIDER_u-boot = "u-boot-bb.org"
+ 
+ KERNEL_DEVICETREE = " \
+ ti/k3-j721e-beagleboneai64.dtb \
+diff --git a/meta-ti-bsp/conf/machine/beaglebone.conf b/meta-ti-bsp/conf/machine/beaglebone.conf
+index dceef1db..2d811d0d 100644
+--- a/meta-ti-bsp/conf/machine/beaglebone.conf
++++ b/meta-ti-bsp/conf/machine/beaglebone.conf
+@@ -5,8 +5,6 @@
+ require conf/machine/include/ti33x.inc
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-bb.org"
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-bb.org"
+-PREFERRED_PROVIDER_u-boot = "u-boot-bb.org"
+ 
+ KERNEL_DEVICETREE_PREFIX = "am335x-bone"
+ 
+diff --git a/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf b/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
+index c40615c9..f8f08d63 100644
+--- a/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
+@@ -4,9 +4,6 @@
+ 
+ require conf/machine/include/k3r5.inc
+ 
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-bb.org"
+-PREFERRED_PROVIDER_u-boot = "u-boot-bb.org"
+-
+ SYSFW_SOC = "am62x"
+ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "gp"
+diff --git a/meta-ti-bsp/conf/machine/beagleplay.conf b/meta-ti-bsp/conf/machine/beagleplay.conf
+index c7b1414a..23f44c3f 100644
+--- a/meta-ti-bsp/conf/machine/beagleplay.conf
++++ b/meta-ti-bsp/conf/machine/beagleplay.conf
+@@ -21,8 +21,6 @@ OPTEEMACHINE = "k3-am62x"
+ UBOOT_MACHINE = "am62x_evm_a53_defconfig"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-bb.org"
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-bb.org"
+-PREFERRED_PROVIDER_u-boot = "u-boot-bb.org"
+ 
+ KERNEL_DEVICETREE = " \
+ ti/k3-am625-beagleplay.dtb \
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb
 deleted file mode 100644
-index bab4acf0..00000000
---- a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw-source_git.bb
+index 4e4688aa..00000000
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb
 +++ /dev/null
-@@ -1,45 +0,0 @@
--# ti-sci-fw builds and packages multiple config variants via multiconfig
--# Let's take a page from gcc-source as a common recipe for all gcc stages,
--# but also to provide a single package for MAINMACHINE of all multiconfigs
+@@ -1,24 +0,0 @@
+-require u-boot-ti.inc
 -
--require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+-SUMMARY = "BeagleBoard.org U-Boot"
 -
--SUMMARY += "- sources"
+-COMPATIBLE_MACHINE = "beagle.*"
 -
--COMPATIBLE_MACHINE = "k3"
+-LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
 -
--EXCLUDE_FROM_WORLD = "1"
--INHIBIT_DEFAULT_DEPS = "1"
--DEPENDS = ""
+-PV = "2021.01"
 -
--PACKAGES = "${PN}"
--PACKAGE_ARCH = "${MACHINE_ARCH}"
+-UBOOT_GIT_URI = "git://github.com/beagleboard/u-boot.git"
+-UBOOT_GIT_PROTOCOL = "https"
+-BRANCH = "v2021.01-ti-08.05.00.005-SDK-8.5"
+-SRCREV = "46ff4982b41067e5c93369bddd49b1541856d80b"
 -
--do_configure[noexec] = "1"
--do_compile[noexec] = "1"
+-BRANCH:beaglebone-ai64 = "v2021.01-ti-08.05.00.001"
+-BRANCH:beaglebone-ai64-k3r5 = "v2021.01-ti-08.05.00.001"
+-SRCREV:beaglebone-ai64 = "ea96725b5156135d5875415f75d2188f6f56622a"
+-SRCREV:beaglebone-ai64-k3r5 = "ea96725b5156135d5875415f75d2188f6f56622a"
 -
--SRCIPK_SRC_DIR = "${WORKDIR}/imggen"
--SRCIPK_INSTALL_DIR = "board-support/k3-image-gen-${PV}"
--FILES:${PN} = "${SRCIPK_INSTALL_DIR}"
--
--do_install() {
--    # Copy sources for packaging
--    mkdir -p ${D}/${SRCIPK_INSTALL_DIR}
--    if [ -e ${SRCIPK_SRC_DIR} ]; then
--        if [ "${SRCIPK_SRC_DIR}" = "${WORKDIR}" ]; then
--            excludes='--exclude ./temp --exclude ${D}'
--        fi
--        tar -C ${SRCIPK_SRC_DIR} -cO $excludes . | tar -C ${D}/${SRCIPK_INSTALL_DIR} -xpf -
--    fi
--
--    # Fix up patches/ directory to contain actual patches instead of symlinks
--    if [ -e ${D}/${SRCIPK_INSTALL_DIR}/patches ]
--    then
--        mv ${D}/${SRCIPK_INSTALL_DIR}/patches ${D}/${SRCIPK_INSTALL_DIR}/patches-links
--        cp -rL ${D}/${SRCIPK_INSTALL_DIR}/patches-links ${D}/${SRCIPK_INSTALL_DIR}/patches
--        rm -rf ${D}/${SRCIPK_INSTALL_DIR}/patches-links
--    fi
--}
--
--# Do not perform any QA checks on source package
--INSANE_SKIP:${PN} += "${ALL_QA}"
+-BRANCH:beagleplay = "v2021.01-ti-BeaglePlay-Release"
+-BRANCH:beagleplay-k3r5 = "v2021.01-ti-BeaglePlay-Release"
+-SRCREV:beagleplay = "f036fbdc25941d7585182d2552c767edb9b04114"
+-SRCREV:beagleplay-k3r5 = "f036fbdc25941d7585182d2552c767edb9b04114"
 -- 
 2.39.2
 
