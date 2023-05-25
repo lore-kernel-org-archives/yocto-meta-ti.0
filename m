@@ -2,47 +2,47 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00E02C7EE2F
-	for <webhook@archiver.kernel.org>; Thu, 25 May 2023 18:11:41 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.18759.1685038295896041313
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2087C7EE29
+	for <webhook@archiver.kernel.org>; Thu, 25 May 2023 18:11:40 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.18764.1685038299555726183
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 25 May 2023 11:11:36 -0700
+ Thu, 25 May 2023 11:11:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=r9H/zsie;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 34PIBY9W020376;
-	Thu, 25 May 2023 13:11:34 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=lvNlIumu;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: afd@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 34PIBbQT077485;
+	Thu, 25 May 2023 13:11:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1685038294;
-	bh=ccuik1MJIGLrr1fEPwnWVnJodNU4LMdQWygtLpTIlM8=;
+	s=ti-com-17Q1; t=1685038297;
+	bh=qFpbTzndU8ktzHDgfjS7J7dD7a6MHTl/+/dNkjXckpo=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=r9H/zsieHaNJpIh7aVaDYNtGFUgg7u5NFX5wtBTFCL0R0r9Ns43ITjNwaJUV8fwPo
-	 LGHfUsaQ6pdpO/m7DPi+lAI7sdXwQb1cCZy31owotO6XN2/jeLS+GLnRy99n95PWef
-	 pw3G8xfjGXuAwp78PV4sj+5bLS+I1Gj1f8x1Rxsw=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 34PIBYSi011362
+	b=lvNlIumuiqcjx2NIwH/VyO74flzeARow34x1x1mHmgwkRH0B+7qpFDPQK3RUoRyKi
+	 CJxQZPDNHzZpO2TqIyoXvL7zZ2Wx4XivFW23jxGYdW5EbNrIUSCVktqUKYMwf93PFS
+	 XxZPZI1rrqMHCGwsoOGM7M1zj51UBYSu3lBNQS6Q=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 34PIBbeb016398
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 25 May 2023 13:11:34 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 25 May 2023 13:11:37 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- May 2023 13:11:34 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ May 2023 13:11:37 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 May 2023 13:11:34 -0500
+ Frontend Transport; Thu, 25 May 2023 13:11:36 -0500
 Received: from lelv0326.itg.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 34PIBXGs102467;
-	Thu, 25 May 2023 13:11:34 -0500
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 34PIBXH1102467;
+	Thu, 25 May 2023 13:11:36 -0500
 From: Andrew Davis <afd@ti.com>
 To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         <meta-ti@lists.yoctoproject.org>
 CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][master/kirkstone][PATCH 1/9] ti-dm-fw: Add recipe for TI DM firmware
-Date: Thu, 25 May 2023 13:11:24 -0500
-Message-ID: <20230525181132.417197-2-afd@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH 8/9] conf: machine: Switch all the machines over to U-Boot binman
+Date: Thu, 25 May 2023 13:11:31 -0500
+Message-ID: <20230525181132.417197-9-afd@ti.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230525181132.417197-1-afd@ti.com>
 References: <20230525181132.417197-1-afd@ti.com>
@@ -54,306 +54,481 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Thu, 25 May 2023 18:11:40 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16586
-
-Split out the TI DM firmware from ti-rtos-firmware.
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16595
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb  | 119 ++++++++++++++++++
- .../recipes-bsp/ti-linux-fw/ti-linux-fw.inc   |   1 +
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc  |   2 +-
- .../ti-rtos-bin/ti-rtos-firmware.bb           |  48 -------
- 4 files changed, 121 insertions(+), 49 deletions(-)
- create mode 100644 meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
+ meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf   | 12 ++++++++++++
+ meta-ti-bsp/conf/machine/am62axx-evm.conf        |  4 ----
+ meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf    | 11 +++++++++++
+ meta-ti-bsp/conf/machine/am62xx-evm.conf         |  4 ++--
+ meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf |  7 -------
+ meta-ti-bsp/conf/machine/am62xx-lp-evm.conf      |  4 ----
+ meta-ti-bsp/conf/machine/am64xx-evm-k3r5.conf    | 12 ++++++++++++
+ meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf    |  7 +------
+ meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf |  7 +------
+ meta-ti-bsp/conf/machine/am65xx-hs-evm.conf      |  4 ----
+ meta-ti-bsp/conf/machine/include/am62axx.inc     |  6 ------
+ meta-ti-bsp/conf/machine/include/am62xx-lp.inc   |  4 ----
+ meta-ti-bsp/conf/machine/include/am62xx.inc      |  6 ------
+ meta-ti-bsp/conf/machine/include/am64xx.inc      |  6 ------
+ meta-ti-bsp/conf/machine/include/am65xx.inc      | 13 +++++--------
+ meta-ti-bsp/conf/machine/include/j721e.inc       | 12 +++++++++---
+ meta-ti-bsp/conf/machine/include/k3.inc          |  2 +-
+ meta-ti-bsp/conf/machine/include/k3r5.inc        |  4 +++-
+ meta-ti-bsp/conf/machine/j7200-hs-evm.conf       |  4 ----
+ meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf     |  6 +-----
+ meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf  |  6 +-----
+ meta-ti-bsp/conf/machine/j721e-hs-evm.conf       |  5 -----
+ meta-ti-bsp/conf/machine/j721s2-evm.conf         |  4 ----
+ meta-ti-bsp/conf/machine/j721s2-hs-evm.conf      |  6 ------
+ meta-ti-bsp/conf/machine/j784s4-evm.conf         |  4 ----
+ meta-ti-bsp/conf/machine/j784s4-hs-evm.conf      |  2 --
+ 26 files changed, 59 insertions(+), 103 deletions(-)
+ create mode 100644 meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf
+ create mode 100644 meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
+ create mode 100644 meta-ti-bsp/conf/machine/am64xx-evm-k3r5.conf
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
+diff --git a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf
 new file mode 100644
-index 00000000..8fb40d12
+index 00000000..80b6497f
 --- /dev/null
-+++ b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
-@@ -0,0 +1,119 @@
-+SUMMARY = "TI DM prebuilt binary firmware images"
++++ b/meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf
+@@ -0,0 +1,12 @@
++#@TYPE: Machine
++#@NAME: AM62A HS-FS EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI AM62A EVM (R5F core)
 +
-+LICENSE = "TI-TFL"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/../meta-ti/licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
++require conf/machine/include/k3r5.inc
++SOC_FAMILY:append = ":k3r5-hs-fs"
 +
-+COMPATIBLE_MACHINE = "k3"
++SYSFW_SOC = "am62ax"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "hs-fs"
 +
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+INHIBIT_DEFAULT_DEPS = "1"
-+
-+inherit deploy
-+inherit update-alternatives
-+
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+
-+PV = "${TI_DM_FW_VERSION}"
-+PR = "${INC_PR}.0"
-+
-+CLEANBROKEN = "1"
-+
-+# Secure Build
-+inherit ti-secdev
-+
-+PLAT_SFX = ""
-+PLAT_SFX:j721e = "j721e"
-+PLAT_SFX:j7200 = "j7200"
-+PLAT_SFX:j721s2 = "j721s2"
-+PLAT_SFX:j784s4 = "j784s4"
-+PLAT_SFX:am65xx = "am65xx"
-+PLAT_SFX:am64xx = "am64xx"
-+PLAT_SFX:am62xx = "am62xx"
-+PLAT_SFX:am62axx = "am62axx"
-+
-+DM_FW_DIR = "ti-dm/${PLAT_SFX}"
-+
-+INSTALL_DM_FW_DIR  = "${nonarch_base_libdir}/firmware/${DM_FW_DIR}"
-+
-+DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
-+
-+DM_FW_LIST = ""
-+DM_FW_LIST:j721e =   "${DM_FIRMWARE}"
-+DM_FW_LIST:j7200 =   "${DM_FIRMWARE}"
-+DM_FW_LIST:j721s2 =  "${DM_FIRMWARE}"
-+DM_FW_LIST:j784s4 =  "${DM_FIRMWARE}"
-+DM_FW_LIST:am65xx =  ""
-+DM_FW_LIST:am64xx =  ""
-+DM_FW_LIST:am62xx =  "${DM_FIRMWARE}"
-+DM_FW_LIST:am62axx = "${DM_FIRMWARE}"
-+
-+do_install() {
-+    # Sign the firmware
-+    # DM Firmware
-+    for FW_NAME in ${DM_FW_LIST}
-+    do
-+        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${S}/${DM_FW_DIR}/${FW_NAME} ${S}/${DM_FW_DIR}/${FW_NAME}.signed
-+    done
-+
-+    # DM Firmware
-+    install -d ${D}${INSTALL_DM_FW_DIR}
-+    for FW_NAME in ${DM_FW_LIST}
-+    do
-+        install -m 0644 ${S}/${DM_FW_DIR}/${FW_NAME}        ${D}${INSTALL_DM_FW_DIR}/${FW_NAME}.unsigned
-+        install -m 0644 ${S}/${DM_FW_DIR}/${FW_NAME}.signed ${D}${INSTALL_DM_FW_DIR}/${FW_NAME}
-+    done
-+}
-+
-+do_deploy() {
-+    # DM Firmware is needed for rebuilding U-Boot
-+    install -d ${DEPLOYDIR}
-+    for FW_NAME in ${DM_FW_LIST}
-+    do
-+        install -m 0644 ${S}/${DM_FW_DIR}/${FW_NAME}        ${DEPLOYDIR}/${FW_NAME}.unsigned
-+        install -m 0644 ${S}/${DM_FW_DIR}/${FW_NAME}.signed ${DEPLOYDIR}/${FW_NAME}
-+    done
-+}
-+
-+# Set up names for the firmwares
-+ALTERNATIVE:${PN}:am62xx  = "am62-main-r5f0_0-fw"
-+ALTERNATIVE:${PN}:am62axx = "am62a-main-r5f0_0-fw"
-+ALTERNATIVE:${PN}:j721e   = "j7-mcu-r5f0_0-fw"
-+ALTERNATIVE:${PN}:j7200   = "j7200-mcu-r5f0_0-fw"
-+ALTERNATIVE:${PN}:j721s2  = "j721s2-mcu-r5f0_0-fw"
-+ALTERNATIVE:${PN}:j784s4  = "j784s4-mcu-r5f0_0-fw"
-+
-+# Set up link names for the firmwares
-+ALTERNATIVE_LINK_NAME[am62-main-r5f0_0-fw]  = "${nonarch_base_libdir}/firmware/am62-main-r5f0_0-fw"
-+ALTERNATIVE_LINK_NAME[am62a-main-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/am62a-main-r5f0_0-fw"
-+ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/j7-mcu-r5f0_0-fw"
-+ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_0-fw]  = "${nonarch_base_libdir}/firmware/j7200-mcu-r5f0_0-fw"
-+ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/j721s2-mcu-r5f0_0-fw"
-+ALTERNATIVE_LINK_NAME[j784s4-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/j784s4-mcu-r5f0_0-fw"
-+
-+# Create the firmware alternatives
-+ALTERNATIVE_TARGET[am62-main-r5f0_0-fw]  = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
-+ALTERNATIVE_TARGET[am62a-main-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
-+ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw]     = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
-+ALTERNATIVE_TARGET[j7200-mcu-r5f0_0-fw]  = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
-+ALTERNATIVE_TARGET[j721s2-mcu-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
-+ALTERNATIVE_TARGET[j784s4-mcu-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
-+
-+ALTERNATIVE_PRIORITY = "10"
-+
-+# make sure that lib/firmware, and all its contents are part of the package
-+FILES:${PN} += "${nonarch_base_libdir}/firmware"
-+
-+# This is used to prevent the build system to_strip the executables
-+INHIBIT_PACKAGE_STRIP = "1"
-+INHIBIT_SYSROOT_STRIP = "1"
-+# This is used to prevent the build system to split the debug info in a separate file
-+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-+# As it likely to be a different arch from the Yocto build, disable checking by adding "arch" to INSANE_SKIP
-+INSANE_SKIP:${PN} += "arch"
-+
-+# we don't want to configure and build the source code
-+do_compile[noexec] = "1"
-+do_configure[noexec] = "1"
-+
-+addtask deploy after do_install
-diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 4c128e8b..c971321f 100644
---- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -15,6 +15,7 @@ CADENCE_MHDP_FW_VERSION = "2.1.0"
- IMG_DEC_FW_VERSION = "1.0"
- CNM_WAVE521_FW_VERSION = "1.0.00"
- TIFS_LPM_STUB_FW_VERSION = "08.06.04"
-+TI_DM_FW_VERSION = "08.06.04"
++UBOOT_MACHINE = "am62ax_evm_r5_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am62axx-evm.conf b/meta-ti-bsp/conf/machine/am62axx-evm.conf
+index d48109ae..d5d60718 100644
+--- a/meta-ti-bsp/conf/machine/am62axx-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62axx-evm.conf
+@@ -14,7 +14,3 @@ KERNEL_DEVICETREE = " \
+ "
  
- TI_LINUX_FW_SRCREV ?= "56819cfa9e72a4575b2aef6f8b986092d7d3efa9"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-index 8e236dfe..38ce5a58 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -39,7 +39,7 @@ PLAT_SFX:am62axx = "am62axx"
- 
- PACKAGECONFIG[atf] = "ATF=${STAGING_DIR_HOST}/firmware/bl31.bin,,trusted-firmware-a"
- PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/bl32.bin,,optee-os"
--PACKAGECONFIG[dm] = "DM=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/ti-dm/${PLAT_SFX}/${DM_FIRMWARE},,ti-rtos-firmware"
-+PACKAGECONFIG[dm] = "DM=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/ti-dm/${PLAT_SFX}/${DM_FIRMWARE},,ti-dm-fw"
- 
- PACKAGECONFIG:append:aarch64 = " atf optee"
- PACKAGECONFIG:append:j721e = " dm"
-diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-index 6bd85662..55f55ed5 100644
---- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-+++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
-@@ -33,16 +33,12 @@ CLEANBROKEN = "1"
- # Secure Build
- inherit ti-secdev
- 
--DM_FW_DIR = "ti-dm/${PLAT_SFX}"
- IPC_FW_DIR = "ti-ipc/${PLAT_SFX}"
- ETH_FW_DIR = "ti-eth/${PLAT_SFX}"
- 
--INSTALL_DM_FW_DIR  = "${nonarch_base_libdir}/firmware/${DM_FW_DIR}"
- INSTALL_IPC_FW_DIR = "${nonarch_base_libdir}/firmware/${IPC_FW_DIR}"
- INSTALL_ETH_FW_DIR = "${nonarch_base_libdir}/firmware/${ETH_FW_DIR}"
- 
--DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
+ UBOOT_MACHINE = "am62ax_evm_a53_defconfig"
 -
- MCU_1_0_FW = "ipc_echo_test_mcu1_0_release_strip.xer5f"
- MCU_1_1_FW = "ipc_echo_test_mcu1_1_release_strip.xer5f"
- MCU_2_0_FW = "ipc_echo_test_mcu2_0_release_strip.xer5f"
-@@ -60,16 +56,6 @@ C7X_4_FW   = "ipc_echo_test_c7x_4_release_strip.xe71"
+-SPL_BINARY = "tispl.bin_HS"
+-UBOOT_BINARY = "u-boot.img_HS"
+-UBOOT_SYMLINK = "u-boot.img"
+diff --git a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
+new file mode 100644
+index 00000000..724a8d4a
+--- /dev/null
++++ b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
+@@ -0,0 +1,11 @@
++#@TYPE: Machine
++#@NAME: AM62XX EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI AM62xx EVM (R5F core)
++
++require conf/machine/include/k3r5.inc
++
++SYSFW_SOC = "am62x"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "gp"
++
++UBOOT_MACHINE = "am62x_evm_r5_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am62xx-evm.conf b/meta-ti-bsp/conf/machine/am62xx-evm.conf
+index d54213d4..5b86a1f5 100644
+--- a/meta-ti-bsp/conf/machine/am62xx-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62xx-evm.conf
+@@ -12,6 +12,6 @@ KERNEL_DEVICETREE = " \
  
- ETH_FW = "app_remoteswitchcfg_server_strip.xer5f"
+ UBOOT_MACHINE = "am62x_evm_a53_defconfig"
  
--DM_FW_LIST = ""
--DM_FW_LIST:j721e =   "${DM_FIRMWARE}"
--DM_FW_LIST:j7200 =   "${DM_FIRMWARE}"
--DM_FW_LIST:j721s2 =  "${DM_FIRMWARE}"
--DM_FW_LIST:j784s4 =  "${DM_FIRMWARE}"
--DM_FW_LIST:am65xx =  ""
--DM_FW_LIST:am64xx =  ""
--DM_FW_LIST:am62xx =  "${DM_FIRMWARE}"
--DM_FW_LIST:am62axx = "${DM_FIRMWARE}"
+-SPL_BINARY = "tispl.bin_HS"
+-UBOOT_BINARY = "u-boot.img_HS"
++SPL_BINARY = "tispl.bin"
++UBOOT_BINARY = "u-boot.img"
+ UBOOT_SYMLINK = "u-boot.img"
+diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
+index 15ecc677..54059dd7 100644
+--- a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
+@@ -9,11 +9,4 @@ SYSFW_SOC = "am62x"
+ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "gp"
+ 
+-SYSFW_TIBOOT3_SYMLINK = ""
 -
- IPC_FW_LIST = ""
- IPC_FW_LIST:j721e =   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                             ${C66_1_FW} ${C66_2_FW} ${C7X_1_FW}"
- IPC_FW_LIST:j7200 =   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW}"
-@@ -116,13 +102,6 @@ do_install:prepend:am62axx() {
- }
- 
- do_install() {
--    # Sign the firmware
--    # DM Firmware
--    for FW_NAME in ${DM_FW_LIST}
--    do
--        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${S}/${DM_FW_DIR}/${FW_NAME} ${S}/${DM_FW_DIR}/${FW_NAME}.signed
--    done
+ UBOOT_MACHINE = "am62x_lpsk_r5_defconfig"
 -
-     # IPC Firmware
-     for FW_NAME in ${IPC_FW_LIST}
-     do
-@@ -135,14 +114,6 @@ do_install() {
-         ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh ${S}/${ETH_FW_DIR}/${FW_NAME} ${S}/${ETH_FW_DIR}/${FW_NAME}.signed
-     done
+-SPL_BINARY = ""
+-UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
+-UBOOT_IMAGE = "u-boot-r5spl-gp-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
+-UBOOT_SYMLINK = "u-boot-r5spl-gp.${UBOOT_SUFFIX}"
+diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+index ce306a2a..1f1b47ba 100644
+--- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+@@ -13,8 +13,4 @@ KERNEL_DEVICETREE = " \
+     ti/k3-am62-lp-sk.dtb \
+ "
  
--    # DM Firmware
--    install -d ${D}${INSTALL_DM_FW_DIR}
--    for FW_NAME in ${DM_FW_LIST}
--    do
--        install -m 0644 ${S}/${DM_FW_DIR}/${FW_NAME}        ${D}${INSTALL_DM_FW_DIR}/${FW_NAME}.unsigned
--        install -m 0644 ${S}/${DM_FW_DIR}/${FW_NAME}.signed ${D}${INSTALL_DM_FW_DIR}/${FW_NAME}
--    done
+-SPL_BINARY = "tispl.bin_HS"
+-UBOOT_BINARY = "u-boot.img_HS"
+-UBOOT_SYMLINK = "u-boot.img"
 -
-     # IPC Firmware
-     install -d ${D}${INSTALL_IPC_FW_DIR}
-     for FW_NAME in ${IPC_FW_LIST}
-@@ -160,16 +131,6 @@ do_install() {
-     done
- }
+ UBOOT_MACHINE = "am62x_lpsk_a53_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am64xx-evm-k3r5.conf
+new file mode 100644
+index 00000000..4369becc
+--- /dev/null
++++ b/meta-ti-bsp/conf/machine/am64xx-evm-k3r5.conf
+@@ -0,0 +1,12 @@
++#@TYPE: Machine
++#@NAME: AM64xx EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI AM64xx EVM (R5F core)
++
++require conf/machine/include/k3r5.inc
++SOC_FAMILY:append = ":am64xx"
++
++SYSFW_SOC = "am64x_sr2"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "hs-fs"
++
++UBOOT_MACHINE = "am64x_evm_r5_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf
+index a484e444..2a7b5990 100644
+--- a/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf
+@@ -7,12 +7,7 @@ require conf/machine/include/k3r5.inc
+ SYSFW_SOC = "am65x"
+ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "gp"
+-SYSFW_SYMLINK = ""
  
--do_deploy() {
--    # DM Firmware is needed for rebuilding U-Boot
--    install -d ${DEPLOYDIR}
--    for FW_NAME in ${DM_FW_LIST}
--    do
--        install -m 0644 ${S}/${DM_FW_DIR}/${FW_NAME}        ${DEPLOYDIR}/${FW_NAME}.unsigned
--        install -m 0644 ${S}/${DM_FW_DIR}/${FW_NAME}.signed ${DEPLOYDIR}/${FW_NAME}
--    done
--}
+-SPL_BINARY = "spl/u-boot-spl.${UBOOT_SUFFIX}"
+-SPL_SYMLINK = "u-boot-r5spl.${UBOOT_SUFFIX}"
+-UBOOT_BINARY = "tiboot3.${UBOOT_SUFFIX}"
+-UBOOT_IMAGE = "tiboot3-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
+-UBOOT_SYMLINK = "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
++SPL_BINARY = "tiboot3.${SPL_SUFFIX}_unsigned"
+ 
+ UBOOT_MACHINE = "am65x_evm_r5_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
+index d9041c9d..3ca728dc 100644
+--- a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
+@@ -7,12 +7,7 @@ require conf/machine/include/k3r5.inc
+ SYSFW_SOC = "am65x"
+ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "hs"
+-SYSFW_SYMLINK = ""
+ 
+-SPL_BINARY = "spl/u-boot-spl.${UBOOT_SUFFIX}"
+-SPL_SYMLINK = "u-boot-r5spl.${UBOOT_SUFFIX}"
+-UBOOT_BINARY = "tiboot3.${UBOOT_SUFFIX}"
+-UBOOT_IMAGE = "tiboot3-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
+-UBOOT_SYMLINK = "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
++SPL_BINARY = "tiboot3.${SPL_SUFFIX}"
+ 
+ UBOOT_MACHINE = "am65x_hs_evm_r5_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf b/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf
+index 84d616a4..3c6a1574 100644
+--- a/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf
++++ b/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf
+@@ -7,7 +7,3 @@ SYSFW_SUFFIX = "hs"
+ require conf/machine/include/am65xx.inc
+ 
+ UBOOT_MACHINE = "am65x_hs_evm_a53_defconfig"
 -
- # Set up names for the firmwares
- ALTERNATIVE:${PN}:am65xx = "\
-                     am65x-mcu-r5f0_0-fw \
-@@ -265,7 +226,6 @@ ALTERNATIVE_LINK_NAME[am64-main-r5f1_0-fw] = "${nonarch_base_libdir}/firmware/am
- ALTERNATIVE_LINK_NAME[am64-main-r5f1_1-fw] = "${nonarch_base_libdir}/firmware/am64-main-r5f1_1-fw"
- ALTERNATIVE_LINK_NAME[am64-mcu-m4f0_0-fw] = "${nonarch_base_libdir}/firmware/am64-mcu-m4f0_0-fw"
+-SPL_BINARY = "tispl.bin_HS"
+-UBOOT_BINARY = "u-boot.img_HS"
+-UBOOT_SYMLINK = "u-boot.img"
+diff --git a/meta-ti-bsp/conf/machine/include/am62axx.inc b/meta-ti-bsp/conf/machine/include/am62axx.inc
+index e708a313..12889057 100644
+--- a/meta-ti-bsp/conf/machine/include/am62axx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62axx.inc
+@@ -6,19 +6,13 @@ MACHINE_FEATURES += "screen touchscreen"
+ TFA_K3_SYSTEM_SUSPEND = "1"
  
--ALTERNATIVE_LINK_NAME[am62-main-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/am62-main-r5f0_0-fw"
- ALTERNATIVE_LINK_NAME[am62-mcu-m4f0_0-fw] = "${nonarch_base_libdir}/firmware/am62-mcu-m4f0_0-fw"
+ # Default tiboot3.bin on AM62A is for HS-FS
+-BBMULTICONFIG = "k3r5-hs-fs"
+ IMAGE_BOOT_FILES += "tiboot3-am62ax-hs-fs-evm.bin"
+-do_image_complete[mcdepends] = "mc::k3r5-hs-fs:ti-sci-fw:do_deploy"
  
- ALTERNATIVE_LINK_NAME[am62a-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/am62a-mcu-r5f0_0-fw"
-@@ -337,14 +297,11 @@ ALTERNATIVE_TARGET[am64-main-r5f1_0-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
- ALTERNATIVE_TARGET[am64-main-r5f1_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_1_FW}"
- ALTERNATIVE_TARGET[am64-mcu-m4f0_0-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_3_0_FW}"
+ # Since default tiboot3.bin on AM62A is for HS-FS, add a version for GP
+-BBMULTICONFIG += "k3r5-gp"
+ IMAGE_BOOT_FILES += "tiboot3-am62ax-gp-evm.bin"
+-do_image_complete[mcdepends] += "mc::k3r5-gp:ti-sci-fw:do_deploy"
  
--ALTERNATIVE_TARGET[am62-main-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
- ALTERNATIVE_TARGET[am62-mcu-m4f0_0-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
+ # Since default tiboot3.bin on AM62A is for HS-FS, add a version for HS-SE
+-BBMULTICONFIG += "k3r5-hs-se"
+ IMAGE_BOOT_FILES += "tiboot3-am62ax-hs-evm.bin"
+-do_image_complete[mcdepends] += "mc::k3r5-hs-se:ti-sci-fw:do_deploy"
  
--ALTERNATIVE_TARGET[am62a-main-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
- ALTERNATIVE_TARGET[am62a-mcu-r5f0_0-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
- ALTERNATIVE_TARGET[am62a-c71_0-fw] = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}"
+ TFA_BOARD = "lite"
+ OPTEEMACHINE = "k3-am62x"
+diff --git a/meta-ti-bsp/conf/machine/include/am62xx-lp.inc b/meta-ti-bsp/conf/machine/include/am62xx-lp.inc
+index 99237a90..f3fe944b 100644
+--- a/meta-ti-bsp/conf/machine/include/am62xx-lp.inc
++++ b/meta-ti-bsp/conf/machine/include/am62xx-lp.inc
+@@ -6,14 +6,10 @@ MACHINE_FEATURES += "screen touchscreen"
+ TFA_K3_SYSTEM_SUSPEND = "1"
  
--ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
- ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_1_1_FW}"
- ALTERNATIVE_TARGET[j7-main-r5f0_0-fw] = "${INSTALL_ETH_FW_DIR}/${ETH_FW}"
- ALTERNATIVE_TARGET[j7-main-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_1_FW}"
-@@ -362,7 +319,6 @@ ALTERNATIVE_TARGET[j7-c66_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C66_1_FW}.signed"
- ALTERNATIVE_TARGET[j7-c66_1-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C66_2_FW}.signed"
- ALTERNATIVE_TARGET[j7-c71_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}.signed"
+ # Default tiboot3.bin on AM62x LP is for HS-FS
+-BBMULTICONFIG = "k3r5-hs-fs"
+ IMAGE_BOOT_FILES += "tiboot3-am62x-hs-fs-evm.bin"
+-do_image_complete[mcdepends] = "mc::k3r5-hs-fs:ti-sci-fw:do_deploy"
  
--ALTERNATIVE_TARGET[j7200-mcu-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
- ALTERNATIVE_TARGET[j7200-mcu-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_1_1_FW}"
- ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw] = "${INSTALL_ETH_FW_DIR}/${ETH_FW}"
- ALTERNATIVE_TARGET[j7200-main-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_1_FW}"
-@@ -370,7 +326,6 @@ ALTERNATIVE_TARGET[j7200-main-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_1_FW}"
- ALTERNATIVE_TARGET[j7200-main-r5f0_0-fw-sec] = "${INSTALL_ETH_FW_DIR}/${ETH_FW}.signed"
- ALTERNATIVE_TARGET[j7200-main-r5f0_1-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_2_1_FW}.signed"
+ # Since default tiboot3.bin on AM62x LP is for HS-FS, add a version for HS-SE
+-BBMULTICONFIG += "k3r5-hs-se"
+ IMAGE_BOOT_FILES += "tiboot3-am62x-hs-evm.bin"
+-do_image_complete[mcdepends] += "mc::k3r5-hs-se:ti-sci-fw:do_deploy"
  
--ALTERNATIVE_TARGET[j721s2-mcu-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
- ALTERNATIVE_TARGET[j721s2-mcu-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_1_1_FW}"
- ALTERNATIVE_TARGET[j721s2-main-r5f0_0-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
- ALTERNATIVE_TARGET[j721s2-main-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_1_FW}"
-@@ -386,7 +341,6 @@ ALTERNATIVE_TARGET[j721s2-main-r5f1_1-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_3_1
- ALTERNATIVE_TARGET[j721s2-c71_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}.signed"
- ALTERNATIVE_TARGET[j721s2-c71_1-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C7X_2_FW}.signed"
+ TFA_BOARD = "lite"
+ OPTEEMACHINE = "k3-am62x"
+diff --git a/meta-ti-bsp/conf/machine/include/am62xx.inc b/meta-ti-bsp/conf/machine/include/am62xx.inc
+index c98da5f5..0bd5279d 100644
+--- a/meta-ti-bsp/conf/machine/include/am62xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62xx.inc
+@@ -7,19 +7,13 @@ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
  
--ALTERNATIVE_TARGET[j784s4-mcu-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
- ALTERNATIVE_TARGET[j784s4-mcu-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_1_1_FW}"
- ALTERNATIVE_TARGET[j784s4-main-r5f0_0-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
- ALTERNATIVE_TARGET[j784s4-main-r5f0_1-fw] = "${INSTALL_IPC_FW_DIR}/${MCU_2_1_FW}"
-@@ -415,5 +369,3 @@ INSANE_SKIP:${PN} += "arch"
- # we don't want to configure and build the source code
- do_compile[noexec] = "1"
- do_configure[noexec] = "1"
+ # Default tiboot3.bin on AM62x is for HS-FS
+-BBMULTICONFIG = "k3r5-hs-fs"
+ IMAGE_BOOT_FILES += "tiboot3-am62x-hs-fs-evm.bin"
+-do_image_complete[mcdepends] = "mc::k3r5-hs-fs:ti-sci-fw:do_deploy"
+ 
+ # Since default tiboot3.bin on AM62x is for HS-FS, add a version for GP
+-BBMULTICONFIG += "k3r5-gp"
+ IMAGE_BOOT_FILES += "tiboot3-am62x-gp-evm.bin"
+-do_image_complete[mcdepends] += "mc::k3r5-gp:ti-sci-fw:do_deploy"
+ 
+ # Since default tiboot3.bin on AM62x is for HS-FS, add a version for HS-SE
+-BBMULTICONFIG += "k3r5-hs-se"
+ IMAGE_BOOT_FILES += "tiboot3-am62x-hs-evm.bin"
+-do_image_complete[mcdepends] += "mc::k3r5-hs-se:ti-sci-fw:do_deploy"
+ 
+ TFA_BOARD = "lite"
+ TFA_K3_SYSTEM_SUSPEND = "1"
+diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/conf/machine/include/am64xx.inc
+index f5f4ffe7..9112b78b 100644
+--- a/meta-ti-bsp/conf/machine/include/am64xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
+@@ -9,18 +9,12 @@ KERNEL_DEVICETREE = " \
+ "
+ 
+ # Default tiboot3.bin on AM64x is for SR2.0 HS-FS
+-BBMULTICONFIG = "k3r5-sr2-hs-fs"
+-do_image_complete[mcdepends] = "mc::k3r5-sr2-hs-fs:ti-sci-fw:do_deploy"
+ IMAGE_BOOT_FILES += "tiboot3-am64x_sr2-hs-fs-evm.bin"
+ 
+ # Since default tiboot3.bin on AM64x is for SR2.0 HS-FS, add a version for GP
+-BBMULTICONFIG += "k3r5-gp"
+-do_image_complete[mcdepends] += "mc::k3r5-gp:ti-sci-fw:do_deploy"
+ IMAGE_BOOT_FILES += "tiboot3-am64x-gp-evm.bin"
+ 
+ # Since default tiboot3.bin on AM64x is for SR2.0 HS-FS, add a version for SR2.0 HS-SE
+-BBMULTICONFIG += "k3r5-sr2-hs-se"
+-do_image_complete[mcdepends] += "mc::k3r5-sr2-hs-se:ti-sci-fw:do_deploy"
+ IMAGE_BOOT_FILES += "tiboot3-am64x_sr2-hs-evm.bin"
+ 
+ TFA_BOARD = "lite"
+diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
+index 10d2f293..548a96f2 100644
+--- a/meta-ti-bsp/conf/machine/include/am65xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
+@@ -12,16 +12,13 @@ KERNEL_DEVICETREE = " \
+     ti/k3-am654-base-board.dtb \
+ "
+ 
+-# On AM65x the file tiboot3.bin comes from the bootloader not ti-sci-fw
+-do_image_complete[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy"
++IMAGE_BOOT_FILES += "sysfw.itb"
+ 
+-# Default sysfw.itb on AM65x is for SR2.0
+-BBMULTICONFIG += "k3r5-sr2"
+-do_image_complete[mcdepends] += "mc::k3r5-sr2:ti-sci-fw:do_deploy"
+-IMAGE_BOOT_FILES += "sysfw.itb sysfw-am65x_sr2-${SYSFW_SUFFIX}-evm.itb"
++# Default sysfw.itb on AM65x is for GP
++IMAGE_BOOT_FILES += "sysfw-am65x-gp-evm.itb"
+ 
+-# Since default sysfw.itb on AM65x is for SR2.0, add a version for SR1.0
+-IMAGE_BOOT_FILES += "sysfw-am65x-${SYSFW_SUFFIX}-evm.itb"
++# Since default sysfw.itb on AM65x is for GP, add a version for HS-SE
++IMAGE_BOOT_FILES += "sysfw-am65x-hs-evm.itb"
+ 
+ TFA_BOARD = "generic"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/conf/machine/include/j721e.inc
+index f707cf26..f77099a1 100644
+--- a/meta-ti-bsp/conf/machine/include/j721e.inc
++++ b/meta-ti-bsp/conf/machine/include/j721e.inc
+@@ -6,11 +6,17 @@ MACHINE_FEATURES += "screen gpu"
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-img-rogue-driver"
+ 
+-# On J721e the file tiboot3.bin comes from the bootloader not ti-sci-fw
+-do_image_complete[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy"
 -
--addtask deploy after do_install
+ IMAGE_BOOT_FILES += "sysfw.itb"
+ 
++# Default sysfw.itb on J721e is for GP
++IMAGE_BOOT_FILES += "sysfw-j721e-gp-evm.itb"
++
++# Since default sysfw.itb on J721e is for GP, add a version for HS-FS
++IMAGE_BOOT_FILES += "sysfw-j721e_sr2-hs-fs-evm.itb"
++
++# Since default sysfw.itb on J721e is for GP, add a version for HS-SE
++IMAGE_BOOT_FILES += "sysfw-j721e_sr1_1-hs-evm.itb"
++
+ TFA_BOARD = "generic"
+ 
+ OPTEEMACHINE = "k3-j721e"
+diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/machine/include/k3.inc
+index c6b55239..f8bfb3db 100644
+--- a/meta-ti-bsp/conf/machine/include/k3.inc
++++ b/meta-ti-bsp/conf/machine/include/k3.inc
+@@ -53,7 +53,7 @@ MACHINE_FEATURES += "efi"
+ WKS_FILE ?= "${@bb.utils.contains("MACHINE_FEATURES", "efi", "sdimage-2part-efi.wks.in", "sdimage-2part.wks", d)}"
+ 
+ do_image_wic[depends] += "virtual/bootloader:do_deploy"
+-do_image_complete[mcdepends] += "mc::k3r5:ti-sci-fw:do_deploy"
++do_image_complete[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy"
+ 
+ SERIAL_CONSOLES = "115200;ttyS0 115200;ttyS2"
+ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+diff --git a/meta-ti-bsp/conf/machine/include/k3r5.inc b/meta-ti-bsp/conf/machine/include/k3r5.inc
+index 377a2b2f..3df5cf35 100644
+--- a/meta-ti-bsp/conf/machine/include/k3r5.inc
++++ b/meta-ti-bsp/conf/machine/include/k3r5.inc
+@@ -15,7 +15,9 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-dummy"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+ PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+ 
+-SPL_BINARY = ""
++SPL_SUFFIX = "bin"
++SPL_BINARY = "tiboot3-${SYSFW_SOC}-${SYSFW_SUFFIX}-${SYSFW_CONFIG}.${SPL_SUFFIX}"
++SPL_SYMLINK = "tiboot3.${SPL_SUFFIX}"
+ UBOOT_SUFFIX = "bin"
+ UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
+ UBOOT_IMAGE = "u-boot-r5spl-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
+diff --git a/meta-ti-bsp/conf/machine/j7200-hs-evm.conf b/meta-ti-bsp/conf/machine/j7200-hs-evm.conf
+index 4facbc37..54fd2b4a 100644
+--- a/meta-ti-bsp/conf/machine/j7200-hs-evm.conf
++++ b/meta-ti-bsp/conf/machine/j7200-hs-evm.conf
+@@ -5,7 +5,3 @@
+ require conf/machine/j7200-evm.conf
+ 
+ UBOOT_MACHINE = "j7200_evm_a72_defconfig"
+-
+-SPL_BINARY = "tispl.bin_HS"
+-UBOOT_BINARY = "u-boot.img_HS"
+-UBOOT_SYMLINK = "u-boot.img"
+diff --git a/meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf b/meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf
+index 9544cdb6..d54af565 100644
+--- a/meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf
+@@ -8,10 +8,6 @@ SYSFW_SOC = "j721e"
+ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "gp"
+ 
+-SPL_BINARY = "spl/u-boot-spl.${UBOOT_SUFFIX}"
+-SPL_SYMLINK = "u-boot-r5spl.${UBOOT_SUFFIX}"
+-UBOOT_BINARY = "tiboot3.${UBOOT_SUFFIX}"
+-UBOOT_IMAGE = "tiboot3-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
+-UBOOT_SYMLINK = "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
++SPL_BINARY = "tiboot3.${SPL_SUFFIX}_unsigned"
+ 
+ UBOOT_MACHINE = "j721e_evm_r5_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf b/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
+index 94c434ea..c529985f 100644
+--- a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
+@@ -8,10 +8,6 @@ SYSFW_SOC = "j721e_sr1_1"
+ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "hs"
+ 
+-SPL_BINARY = "spl/u-boot-spl.${UBOOT_SUFFIX}"
+-SPL_SYMLINK = "u-boot-r5spl.${UBOOT_SUFFIX}"
+-UBOOT_BINARY = "tiboot3.${UBOOT_SUFFIX}"
+-UBOOT_IMAGE = "tiboot3-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
+-UBOOT_SYMLINK = "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
++SPL_BINARY = "tiboot3.${SPL_SUFFIX}"
+ 
+ UBOOT_MACHINE = "j721e_evm_r5_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/j721e-hs-evm.conf b/meta-ti-bsp/conf/machine/j721e-hs-evm.conf
+index 0ed77c3d..441ca169 100644
+--- a/meta-ti-bsp/conf/machine/j721e-hs-evm.conf
++++ b/meta-ti-bsp/conf/machine/j721e-hs-evm.conf
+@@ -5,8 +5,3 @@
+ require conf/machine/j721e-evm.conf
+ 
+ UBOOT_MACHINE = "j721e_evm_a72_defconfig"
+-
+-SPL_BINARY = "tispl.bin_HS"
+-UBOOT_BINARY = "u-boot.img_HS"
+-UBOOT_SYMLINK = "u-boot.img"
+-SYSFW_SYMLINK = ""
+diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+index 78973600..4816f9cf 100644
+--- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
++++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+@@ -20,11 +20,7 @@ KERNEL_DEVICETREE = " \
+ UBOOT_MACHINE = "j721s2_evm_a72_defconfig"
+ 
+ # Default tiboot3.bin on J721S2 is for GP
+-BBMULTICONFIG = "k3r5-gp"
+ IMAGE_BOOT_FILES += "tiboot3-j721s2-gp-evm.bin"
+-do_image_complete[mcdepends] = "mc::k3r5-gp:ti-sci-fw:do_deploy"
+ 
+ # Since default tiboot3.bin on J721S2 is for GP, add a version for SR1.0 HS-FS
+-BBMULTICONFIG += "k3r5-sr1-hs-fs"
+ IMAGE_BOOT_FILES += "tiboot3-j721s2-hs-fs-evm.bin"
+-do_image_complete[mcdepends] += "mc::k3r5-sr1-hs-fs:ti-sci-fw:do_deploy"
+diff --git a/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf b/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf
+index 6a58a687..564b571d 100644
+--- a/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf
++++ b/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf
+@@ -18,9 +18,3 @@ KERNEL_DEVICETREE = " \
+ "
+ 
+ UBOOT_MACHINE = "j721s2_evm_a72_defconfig"
+-
+-do_image_complete[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+-
+-SPL_BINARY = "tispl.bin_HS"
+-UBOOT_BINARY = "u-boot.img_HS"
+-UBOOT_SYMLINK = "u-boot.img"
+diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf b/meta-ti-bsp/conf/machine/j784s4-evm.conf
+index 4274e800..47290cc0 100644
+--- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
++++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
+@@ -20,11 +20,7 @@ KERNEL_DEVICETREE = " \
+ UBOOT_MACHINE = "j784s4_evm_a72_defconfig"
+ 
+ # Default tiboot3.bin on J784S4 is for GP
+-BBMULTICONFIG = "k3r5-gp"
+ IMAGE_BOOT_FILES += "tiboot3-j784s4-gp-evm.bin"
+-do_image_complete[mcdepends] = "mc::k3r5-gp:ti-sci-fw:do_deploy"
+ 
+ # Since default tiboot3.bin on J784S4 is for GP, add a version for SR1.0 HS-FS
+-BBMULTICONFIG += "k3r5-sr1-hs-fs"
+ IMAGE_BOOT_FILES += "tiboot3-j784s4-hs-fs-evm.bin"
+-do_image_complete[mcdepends] += "mc::k3r5-sr1-hs-fs:ti-sci-fw:do_deploy"
+diff --git a/meta-ti-bsp/conf/machine/j784s4-hs-evm.conf b/meta-ti-bsp/conf/machine/j784s4-hs-evm.conf
+index 815731f8..847a26b6 100644
+--- a/meta-ti-bsp/conf/machine/j784s4-hs-evm.conf
++++ b/meta-ti-bsp/conf/machine/j784s4-hs-evm.conf
+@@ -20,8 +20,6 @@ KERNEL_DEVICETREE = " \
+ 
+ UBOOT_MACHINE = "j784s4_evm_a72_defconfig"
+ 
+-do_image_complete[mcdepends] = "mc::k3r5:ti-sci-fw:do_deploy"
+-
+ TFA_BOARD = "j784s4"
+ 
+ SPL_BINARY = "tispl.bin_HS"
 -- 
 2.39.2
 
