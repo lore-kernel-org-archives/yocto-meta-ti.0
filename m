@@ -1,580 +1,84 @@
-Return-Path: <afd@ti.com>
+Return-Path: <hnagalla@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BD1EC7EE32
-	for <webhook@archiver.kernel.org>; Thu, 25 May 2023 18:11:41 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.19177.1685038298480529223
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E174AC7EE23
+	for <webhook@archiver.kernel.org>; Fri, 26 May 2023 04:44:51 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.1626.1685076290778291778
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 25 May 2023 11:11:38 -0700
+ Thu, 25 May 2023 21:44:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=x7rhOrpM;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 34PIBb1s018746;
-	Thu, 25 May 2023 13:11:37 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=EU1kDFvy;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: hnagalla@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 34Q4ioQG025691
+	for <meta-ti@lists.yoctoproject.org>; Thu, 25 May 2023 23:44:50 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1685038297;
-	bh=EEFG2tBPzPqUYgnba3GovRstc0BW6yEUDO9f0pBlBKc=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=x7rhOrpMy9GcA3nIYXZEoPkEBqs1hL+ZKNjnCRoQMxdMW1jRpCHoAGawu3XbK7oal
-	 8+H1EuvJPMbJKjrihsDMQWVJ2oT1HPNS4HMb8HQhhqWGEPMD0xmdwBUSqG3qBztQRZ
-	 E56p7MfQ5wb0cH21L5gK7CdUIMed9MotH17zFmo0=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 34PIBbVc059596
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 25 May 2023 13:11:37 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1685076290;
+	bh=9TtyFPGLgcx1g5WxF33lZZ1vIVEvkQMTqlTeOqWuu2c=;
+	h=From:To:CC:Subject:Date;
+	b=EU1kDFvya3ImsIk9Kbze94H27NTn5UtI2/CQe7nZTOJYHRQrutdCeot20+1H9jP6h
+	 tPx0oHnT/cfCnZw6exxPfQK6FHezTgoyOj37phrx9U58kn8FAU/32CYBqWcS+mqSZn
+	 rH7MaOs4JuEMR6h9l9JnRYTvo4mvzl6qhKQrIt8g=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 34Q4io3r121360
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Thu, 25 May 2023 23:44:50 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- May 2023 13:11:37 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ May 2023 23:44:49 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 May 2023 13:11:37 -0500
-Received: from lelv0326.itg.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 34PIBXH2102467;
-	Thu, 25 May 2023 13:11:36 -0500
-From: Andrew Davis <afd@ti.com>
-To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][master/kirkstone][PATCH 9/9] conf: machine: Remove all leftover config files
-Date: Thu, 25 May 2023 13:11:32 -0500
-Message-ID: <20230525181132.417197-10-afd@ti.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230525181132.417197-1-afd@ti.com>
-References: <20230525181132.417197-1-afd@ti.com>
+ Frontend Transport; Thu, 25 May 2023 23:44:49 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 34Q4inhB020164;
+	Thu, 25 May 2023 23:44:49 -0500
+From: Hari Nagalla <hnagalla@ti.com>
+To: <meta-ti@lists.yoctoproject.org>, <reatmon@ti.com>
+CC: <praneeth@ti.com>
+Subject: [kirkstone/master PATCH] ipc: ti-rpmsg-char: Update library to 0.6.1
+Date: Thu, 25 May 2023 23:44:48 -0500
+Message-ID: <20230526044448.20318-1-hnagalla@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 25 May 2023 18:11:41 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16593
+ <meta-ti@lists.yoctoproject.org>; Fri, 26 May 2023 04:44:51 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16596
 
-Signed-off-by: Andrew Davis <afd@ti.com>
+Update the ti-rpmsg-char library to 0.6.1 version to fix rpmsg_ctlr
+id on v6.1 kernel when multiple channels are created.
+
+Signed-off-by: Hari Nagalla <hnagalla@ti.com>
 ---
- .../conf/machine/am62axx-evm-k3r5-gp.conf     | 19 ----------------
- .../conf/machine/am62axx-evm-k3r5-hs-fs.conf  | 14 ------------
- .../conf/machine/am62axx-evm-k3r5-hs-se.conf  | 22 -------------------
- .../conf/machine/am62xx-evm-k3r5-gp.conf      | 18 ---------------
- .../conf/machine/am62xx-evm-k3r5-hs-fs.conf   | 14 ------------
- .../conf/machine/am62xx-evm-k3r5-hs-se.conf   | 21 ------------------
- .../machine/am62xx-lp-evm-k3r5-hs-fs.conf     | 14 ------------
- .../machine/am62xx-lp-evm-k3r5-hs-se.conf     | 21 ------------------
- .../conf/machine/am64xx-evm-k3r5-gp.conf      | 20 -----------------
- .../machine/am64xx-evm-k3r5-sr2-hs-fs.conf    | 14 ------------
- .../machine/am64xx-evm-k3r5-sr2-hs-se.conf    | 20 -----------------
- .../conf/machine/am65xx-evm-k3r5-sr2.conf     | 11 ----------
- .../conf/machine/am65xx-hs-evm-k3r5-sr2.conf  | 11 ----------
- .../conf/machine/j721s2-evm-k3r5-gp.conf      | 20 -----------------
- .../machine/j721s2-evm-k3r5-sr1-hs-fs.conf    | 15 -------------
- .../conf/machine/j784s4-evm-k3r5-gp.conf      | 20 -----------------
- .../machine/j784s4-evm-k3r5-sr1-hs-fs.conf    | 16 --------------
- meta-ti-bsp/conf/multiconfig/k3r5-gp.conf     |  3 ---
- meta-ti-bsp/conf/multiconfig/k3r5-hs-fs.conf  |  3 ---
- meta-ti-bsp/conf/multiconfig/k3r5-hs-se.conf  |  3 ---
- .../conf/multiconfig/k3r5-sr1-hs-fs.conf      |  3 ---
- meta-ti-bsp/conf/multiconfig/k3r5-sr1.conf    |  3 ---
- .../conf/multiconfig/k3r5-sr2-hs-fs.conf      |  3 ---
- .../conf/multiconfig/k3r5-sr2-hs-se.conf      |  3 ---
- meta-ti-bsp/conf/multiconfig/k3r5-sr2.conf    |  3 ---
- 25 files changed, 314 deletions(-)
- delete mode 100644 meta-ti-bsp/conf/machine/am62axx-evm-k3r5-gp.conf
- delete mode 100644 meta-ti-bsp/conf/machine/am62axx-evm-k3r5-hs-fs.conf
- delete mode 100644 meta-ti-bsp/conf/machine/am62axx-evm-k3r5-hs-se.conf
- delete mode 100644 meta-ti-bsp/conf/machine/am62xx-evm-k3r5-gp.conf
- delete mode 100644 meta-ti-bsp/conf/machine/am62xx-evm-k3r5-hs-fs.conf
- delete mode 100644 meta-ti-bsp/conf/machine/am62xx-evm-k3r5-hs-se.conf
- delete mode 100644 meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5-hs-fs.conf
- delete mode 100644 meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5-hs-se.conf
- delete mode 100644 meta-ti-bsp/conf/machine/am64xx-evm-k3r5-gp.conf
- delete mode 100644 meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-fs.conf
- delete mode 100644 meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-se.conf
- delete mode 100644 meta-ti-bsp/conf/machine/am65xx-evm-k3r5-sr2.conf
- delete mode 100644 meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5-sr2.conf
- delete mode 100644 meta-ti-bsp/conf/machine/j721s2-evm-k3r5-gp.conf
- delete mode 100644 meta-ti-bsp/conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf
- delete mode 100644 meta-ti-bsp/conf/machine/j784s4-evm-k3r5-gp.conf
- delete mode 100644 meta-ti-bsp/conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf
- delete mode 100644 meta-ti-bsp/conf/multiconfig/k3r5-gp.conf
- delete mode 100644 meta-ti-bsp/conf/multiconfig/k3r5-hs-fs.conf
- delete mode 100644 meta-ti-bsp/conf/multiconfig/k3r5-hs-se.conf
- delete mode 100644 meta-ti-bsp/conf/multiconfig/k3r5-sr1-hs-fs.conf
- delete mode 100644 meta-ti-bsp/conf/multiconfig/k3r5-sr1.conf
- delete mode 100644 meta-ti-bsp/conf/multiconfig/k3r5-sr2-hs-fs.conf
- delete mode 100644 meta-ti-bsp/conf/multiconfig/k3r5-sr2-hs-se.conf
- delete mode 100644 meta-ti-bsp/conf/multiconfig/k3r5-sr2.conf
+ meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5-gp.conf b/meta-ti-bsp/conf/machine/am62axx-evm-k3r5-gp.conf
-deleted file mode 100644
-index 962413c3..00000000
---- a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5-gp.conf
-+++ /dev/null
-@@ -1,19 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM62A GP EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM62A GP EVM (R5F core)
--
--require conf/machine/include/k3r5.inc
--
--SYSFW_SOC = "am62ax"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "gp"
--
--SYSFW_TIBOOT3_SYMLINK = ""
--SYSFW_SYMLINK = ""
--
--UBOOT_MACHINE = "am62ax_evm_r5_defconfig"
--
--SPL_BINARY = ""
--UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
--UBOOT_IMAGE = "u-boot-r5spl-gp-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
--UBOOT_SYMLINK = "u-boot-r5spl-gp.${UBOOT_SUFFIX}"
-diff --git a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5-hs-fs.conf b/meta-ti-bsp/conf/machine/am62axx-evm-k3r5-hs-fs.conf
-deleted file mode 100644
-index 256f021a..00000000
---- a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5-hs-fs.conf
-+++ /dev/null
-@@ -1,14 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM62A HS-FS EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM62A HS-FS EVM (R5F core)
--
--# Booting HS-FS requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-hs-fs"
--
--SYSFW_SOC = "am62ax"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "hs-fs"
--
--UBOOT_MACHINE = "am62ax_evm_r5_defconfig"
-diff --git a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5-hs-se.conf b/meta-ti-bsp/conf/machine/am62axx-evm-k3r5-hs-se.conf
-deleted file mode 100644
-index c7cb0681..00000000
---- a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5-hs-se.conf
-+++ /dev/null
-@@ -1,22 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM62A HS-SE EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM62A HS-SE EVM (R5F core)
--
--# Booting HS-SE requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-hs-se"
--
--SYSFW_SOC = "am62ax"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "hs"
--
--SYSFW_TIBOOT3_SYMLINK = ""
--SYSFW_SYMLINK = ""
--
--UBOOT_MACHINE = "am62ax_evm_r5_defconfig"
--
--SPL_BINARY = ""
--UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
--UBOOT_IMAGE = "u-boot-r5spl-hs-se-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
--UBOOT_SYMLINK = "u-boot-r5spl-hs-se.${UBOOT_SUFFIX}"
-diff --git a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5-gp.conf b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5-gp.conf
-deleted file mode 100644
-index ab18301a..00000000
---- a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5-gp.conf
-+++ /dev/null
-@@ -1,18 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM62XX EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM62xx EVM (R5F core)
--
--require conf/machine/include/k3r5.inc
--
--SYSFW_SOC = "am62x"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "gp"
--
--SYSFW_TIBOOT3_SYMLINK = ""
--
--UBOOT_MACHINE = "am62x_evm_r5_defconfig"
--
--SPL_BINARY = ""
--UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
--UBOOT_IMAGE = "u-boot-r5spl-gp-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
--UBOOT_SYMLINK = "u-boot-r5spl-gp.${UBOOT_SUFFIX}"
-diff --git a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5-hs-fs.conf b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5-hs-fs.conf
-deleted file mode 100644
-index 0dad1104..00000000
---- a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5-hs-fs.conf
-+++ /dev/null
-@@ -1,14 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM62xx HS-FS EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM62xx HS-FS EVM (R5F core)
--
--# Booting HS-FS requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-hs-fs"
--
--SYSFW_SOC = "am62x"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "hs-fs"
--
--UBOOT_MACHINE = "am62x_evm_r5_defconfig"
-diff --git a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5-hs-se.conf b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5-hs-se.conf
-deleted file mode 100644
-index 7bca513a..00000000
---- a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5-hs-se.conf
-+++ /dev/null
-@@ -1,21 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM62xx HS-SE EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM62xx HS-SE EVM (R5F core)
--
--# Booting HS-SE requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-hs-se"
--
--SYSFW_SOC = "am62x"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "hs"
--
--SYSFW_TIBOOT3_SYMLINK = ""
--
--UBOOT_MACHINE = "am62x_evm_r5_defconfig"
--
--SPL_BINARY = ""
--UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
--UBOOT_IMAGE = "u-boot-r5spl-hs-se-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
--UBOOT_SYMLINK = "u-boot-r5spl-hs-se.${UBOOT_SUFFIX}"
-diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5-hs-fs.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5-hs-fs.conf
-deleted file mode 100644
-index 9026b67c..00000000
---- a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5-hs-fs.conf
-+++ /dev/null
-@@ -1,14 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM62xx LPSK HS-FS EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM62xx LP HS-FS EVM (R5F core)
--
--# Booting HS-FS requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-hs-fs"
--
--SYSFW_SOC = "am62x"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "hs-fs"
--
--UBOOT_MACHINE = "am62x_lpsk_r5_defconfig"
-diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5-hs-se.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5-hs-se.conf
-deleted file mode 100644
-index c126de0f..00000000
---- a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5-hs-se.conf
-+++ /dev/null
-@@ -1,21 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM62xx LPSK HS-SE EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM62xx LP HS-SE EVM (R5F core)
--
--# Booting HS-SE requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-hs-se"
--
--SYSFW_SOC = "am62x"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "hs"
--
--SYSFW_TIBOOT3_SYMLINK = ""
--
--UBOOT_MACHINE = "am62x_lpsk_r5_defconfig"
--
--SPL_BINARY = ""
--UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
--UBOOT_IMAGE = "u-boot-r5spl-hs-se-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
--UBOOT_SYMLINK = "u-boot-r5spl-hs-se.${UBOOT_SUFFIX}"
-diff --git a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-gp.conf b/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-gp.conf
-deleted file mode 100644
-index 50bf6a07..00000000
---- a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-gp.conf
-+++ /dev/null
-@@ -1,20 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM64xx GP EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM64xx GP EVM (R5F core)
--
--# Booting GP requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-gp"
--
--SYSFW_SOC = "am64x"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "gp"
--SYSFW_TIBOOT3_SYMLINK = ""
--
--UBOOT_MACHINE = "am64x_evm_r5_defconfig"
--
--SPL_BINARY = ""
--UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
--UBOOT_IMAGE = "u-boot-r5spl-gp-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
--UBOOT_SYMLINK = "u-boot-r5spl-gp.${UBOOT_SUFFIX}"
-diff --git a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-fs.conf b/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-fs.conf
-deleted file mode 100644
-index 42ddbb4c..00000000
---- a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-fs.conf
-+++ /dev/null
-@@ -1,14 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM64xx SR2.0 HS-FS EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM64xx SR2.0 HS-FS EVM (R5F core)
--
--# Booting SR2.0 HS-FS requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-sr2-hs-fs"
--
--SYSFW_SOC = "am64x_sr2"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "hs-fs"
--
--UBOOT_MACHINE = "am64x_evm_r5_defconfig"
-diff --git a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-se.conf b/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-se.conf
-deleted file mode 100644
-index a1c2b3e6..00000000
---- a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5-sr2-hs-se.conf
-+++ /dev/null
-@@ -1,20 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM64xx SR2.0 HS-SE EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM64xx SR2.0 HS-SE EVM (R5F core)
--
--# Booting SR2.0 HS-SE requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-sr2-hs-se"
--
--SYSFW_SOC = "am64x_sr2"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "hs"
--SYSFW_TIBOOT3_SYMLINK = ""
--
--UBOOT_MACHINE = "am64x_evm_r5_defconfig"
--
--SPL_BINARY = ""
--UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
--UBOOT_IMAGE = "u-boot-r5spl-sr2-hs-se-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
--UBOOT_SYMLINK = "u-boot-r5spl-sr2-hs-se.${UBOOT_SUFFIX}"
-diff --git a/meta-ti-bsp/conf/machine/am65xx-evm-k3r5-sr2.conf b/meta-ti-bsp/conf/machine/am65xx-evm-k3r5-sr2.conf
-deleted file mode 100644
-index e74dd3ab..00000000
---- a/meta-ti-bsp/conf/machine/am65xx-evm-k3r5-sr2.conf
-+++ /dev/null
-@@ -1,11 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM65xx SR2.0 EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM65xx SR2.0 EVM (R5F core)
--
--# Booting SR2 requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/am65xx-evm-k3r5.conf
--SOC_FAMILY:append = ":k3r5-sr2"
--
--SYSFW_SOC = "am65x_sr2"
--SYSFW_SYMLINK = "sysfw.itb"
-diff --git a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5-sr2.conf b/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5-sr2.conf
-deleted file mode 100644
-index ff1645e4..00000000
---- a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5-sr2.conf
-+++ /dev/null
-@@ -1,11 +0,0 @@
--#@TYPE: Machine
--#@NAME: AM65xx SR2.0 HS EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI AM65xx SR2.0 HS EVM (R5F core)
--
--# Booting SR2 requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/am65xx-hs-evm-k3r5.conf
--SOC_FAMILY:append = ":k3r5-sr2"
--
--SYSFW_SOC = "am65x_sr2"
--SYSFW_SYMLINK = "sysfw.itb"
-diff --git a/meta-ti-bsp/conf/machine/j721s2-evm-k3r5-gp.conf b/meta-ti-bsp/conf/machine/j721s2-evm-k3r5-gp.conf
-deleted file mode 100644
-index 95771139..00000000
---- a/meta-ti-bsp/conf/machine/j721s2-evm-k3r5-gp.conf
-+++ /dev/null
-@@ -1,20 +0,0 @@
--#@TYPE: Machine
--#@NAME: J721S2 GP EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI J721S2 GP EVM (R5F core)
--
--# Booting GP requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-gp"
--
--SYSFW_SOC = "j721s2"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "gp"
--SYSFW_TIBOOT3_SYMLINK = "tiboot3.bin"
--
--UBOOT_MACHINE = "j721s2_evm_r5_defconfig"
--
--SPL_BINARY = ""
--UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
--UBOOT_IMAGE = "u-boot-r5spl-gp-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
--UBOOT_SYMLINK = "u-boot-r5spl-gp.${UBOOT_SUFFIX}"
-diff --git a/meta-ti-bsp/conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf b/meta-ti-bsp/conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf
-deleted file mode 100644
-index 1a77830d..00000000
---- a/meta-ti-bsp/conf/machine/j721s2-evm-k3r5-sr1-hs-fs.conf
-+++ /dev/null
-@@ -1,15 +0,0 @@
--#@TYPE: Machine
--#@NAME: J721S2 HS-FS EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI J721S2 HS-FS EVM (R5F core)
--
--# Booting HS-FS requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-sr1-hs-fs"
--
--SYSFW_SOC = "j721s2"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "hs-fs"
--SYSFW_TIBOOT3_SYMLINK = ""
--
--UBOOT_MACHINE = "j721s2_evm_r5_defconfig"
-diff --git a/meta-ti-bsp/conf/machine/j784s4-evm-k3r5-gp.conf b/meta-ti-bsp/conf/machine/j784s4-evm-k3r5-gp.conf
-deleted file mode 100644
-index 6f7ef92e..00000000
---- a/meta-ti-bsp/conf/machine/j784s4-evm-k3r5-gp.conf
-+++ /dev/null
-@@ -1,20 +0,0 @@
--#@TYPE: Machine
--#@NAME: J784S4 GP EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI J784S4 GP EVM (R5F core)
--
--# Booting GP requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-gp"
--
--SYSFW_SOC = "j784s4"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "gp"
--SYSFW_TIBOOT3_SYMLINK = "tiboot3.bin"
--
--UBOOT_MACHINE = "j784s4_evm_r5_defconfig"
--
--SPL_BINARY = ""
--UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
--UBOOT_IMAGE = "u-boot-r5spl-gp-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
--UBOOT_SYMLINK = "u-boot-r5spl-gp.${UBOOT_SUFFIX}"
-diff --git a/meta-ti-bsp/conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf b/meta-ti-bsp/conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf
-deleted file mode 100644
-index 18b38305..00000000
---- a/meta-ti-bsp/conf/machine/j784s4-evm-k3r5-sr1-hs-fs.conf
-+++ /dev/null
-@@ -1,16 +0,0 @@
--#@TYPE: Machine
--#@NAME: J784S4 HS-FS EVM (R5F)
--#@DESCRIPTION: Machine configuration for the TI J784S4 HS-FS EVM (R5F core)
--
--# Booting HS-FS requires different SYSFW, the rest is handled at runtime
--
--require conf/machine/include/k3r5.inc
--SOC_FAMILY:append = ":k3r5-sr1-hs-fs"
--
--SYSFW_SOC = "j784s4"
--SYSFW_CONFIG = "evm"
--SYSFW_SUFFIX = "hs-fs"
--SYSFW_TIBOOT3_SYMLINK = ""
--SYSFW_SYMLINK = ""
--
--UBOOT_MACHINE = "j784s4_evm_r5_defconfig"
-diff --git a/meta-ti-bsp/conf/multiconfig/k3r5-gp.conf b/meta-ti-bsp/conf/multiconfig/k3r5-gp.conf
-deleted file mode 100644
-index 80491e35..00000000
---- a/meta-ti-bsp/conf/multiconfig/k3r5-gp.conf
-+++ /dev/null
-@@ -1,3 +0,0 @@
--require k3r5.conf
--
--MACHINE:append = "-gp"
-diff --git a/meta-ti-bsp/conf/multiconfig/k3r5-hs-fs.conf b/meta-ti-bsp/conf/multiconfig/k3r5-hs-fs.conf
-deleted file mode 100644
-index e22204ee..00000000
---- a/meta-ti-bsp/conf/multiconfig/k3r5-hs-fs.conf
-+++ /dev/null
-@@ -1,3 +0,0 @@
--require k3r5.conf
--
--MACHINE:append = "-hs-fs"
-diff --git a/meta-ti-bsp/conf/multiconfig/k3r5-hs-se.conf b/meta-ti-bsp/conf/multiconfig/k3r5-hs-se.conf
-deleted file mode 100644
-index 7e3d7dae..00000000
---- a/meta-ti-bsp/conf/multiconfig/k3r5-hs-se.conf
-+++ /dev/null
-@@ -1,3 +0,0 @@
--require k3r5.conf
--
--MACHINE:append = "-hs-se"
-diff --git a/meta-ti-bsp/conf/multiconfig/k3r5-sr1-hs-fs.conf b/meta-ti-bsp/conf/multiconfig/k3r5-sr1-hs-fs.conf
-deleted file mode 100644
-index 505f08d5..00000000
---- a/meta-ti-bsp/conf/multiconfig/k3r5-sr1-hs-fs.conf
-+++ /dev/null
-@@ -1,3 +0,0 @@
--require k3r5-sr1.conf
--
--MACHINE:append = "-hs-fs"
-diff --git a/meta-ti-bsp/conf/multiconfig/k3r5-sr1.conf b/meta-ti-bsp/conf/multiconfig/k3r5-sr1.conf
-deleted file mode 100644
-index 1c8098cd..00000000
---- a/meta-ti-bsp/conf/multiconfig/k3r5-sr1.conf
-+++ /dev/null
-@@ -1,3 +0,0 @@
--require k3r5.conf
--
--MACHINE:append = "-sr1"
-diff --git a/meta-ti-bsp/conf/multiconfig/k3r5-sr2-hs-fs.conf b/meta-ti-bsp/conf/multiconfig/k3r5-sr2-hs-fs.conf
-deleted file mode 100644
-index 98972326..00000000
---- a/meta-ti-bsp/conf/multiconfig/k3r5-sr2-hs-fs.conf
-+++ /dev/null
-@@ -1,3 +0,0 @@
--require k3r5-sr2.conf
--
--MACHINE:append = "-hs-fs"
-diff --git a/meta-ti-bsp/conf/multiconfig/k3r5-sr2-hs-se.conf b/meta-ti-bsp/conf/multiconfig/k3r5-sr2-hs-se.conf
-deleted file mode 100644
-index 8b98fc0a..00000000
---- a/meta-ti-bsp/conf/multiconfig/k3r5-sr2-hs-se.conf
-+++ /dev/null
-@@ -1,3 +0,0 @@
--require k3r5-sr2.conf
--
--MACHINE:append = "-hs-se"
-diff --git a/meta-ti-bsp/conf/multiconfig/k3r5-sr2.conf b/meta-ti-bsp/conf/multiconfig/k3r5-sr2.conf
-deleted file mode 100644
-index e933b9cc..00000000
---- a/meta-ti-bsp/conf/multiconfig/k3r5-sr2.conf
-+++ /dev/null
-@@ -1,3 +0,0 @@
--require k3r5.conf
--
--MACHINE:append = "-sr2"
+diff --git a/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc b/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc
+index bff55258..84873923 100644
+--- a/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc
++++ b/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc
+@@ -7,10 +7,10 @@ PROTOCOL = "https"
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/git/rpmsg/ti-rpmsg-char.git;protocol=${PROTOCOL};branch=${BRANCH};"
+ 
+-# 0.6.0 release
+-SRCREV = "600ec4dd56d73cc7ad62082c63244183b34f77a5"
++# 0.6.1 release
++SRCREV = "510e90d0a75bc21d79020669d2ea03f8222f3b8d"
+ 
+-PV = "0.6.0+git${SRCPV}"
++PV = "0.6.1+git${SRCPV}"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.39.2
+2.34.1
 
 
