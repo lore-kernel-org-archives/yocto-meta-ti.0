@@ -1,94 +1,163 @@
-Return-Path: <afd@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2C21C7EE39
-	for <webhook@archiver.kernel.org>; Fri, 26 May 2023 18:27:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFCC2C77B7A
+	for <webhook@archiver.kernel.org>; Fri, 26 May 2023 18:34:00 +0000 (UTC)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.1414.1685125656412053227
+ by mx.groups.io with SMTP id smtpd.web10.1552.1685126037133377069
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 26 May 2023 11:27:36 -0700
+ Fri, 26 May 2023 11:33:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=lJYM4dAH;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: afd@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 34QIRY1x022773;
-	Fri, 26 May 2023 13:27:34 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=E2TzEIWb;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 34QIXnXD023808;
+	Fri, 26 May 2023 13:33:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1685125654;
-	bh=fMVQFE3Fe1RhCcn+diRxQK2mHdDeXY8hCpEFvwuFx94=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=lJYM4dAHRIrigVQazuoRCSTmZnc1zze7QgJyrisRD7oMf5Mj4yt1xVBjop4WLDTKS
-	 7+NGf4zZ9yn4pFJ7NvONTJJBoZhiCVV9PFlhL0tqUd/q+PCF6FbBXkoM/2W4N1euTW
-	 tpazDTkabct2CvnWpEG5zJAtxVSnQtCEpcAq1LQk=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 34QIRY4b054622
+	s=ti-com-17Q1; t=1685126029;
+	bh=HLV1Muq1+PjZNa4qCQy86WRRcrNCaDDaYkfgf6RA+Xk=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=E2TzEIWbYYnnVu/3UNOnoe/lzpjJyNioSAA60Vfp8iXKRjBWxkLiiY9NazRCeG1RW
+	 L18u5sXzccXGnZ5Sevystt0EPiYz1aYivLjQetzNtmzSLN1GcpQMy9oOjbSxPv8/hK
+	 T2XwLdIzd34iRZAWTPfDvhRO3AmrKflTflQuAN0U=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 34QIXnON112654
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 26 May 2023 13:27:34 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 26 May 2023 13:33:49 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 26
- May 2023 13:27:33 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ May 2023 13:33:48 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 26 May 2023 13:27:34 -0500
-Received: from fllv0040.itg.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 34QIRWlr013297;
-	Fri, 26 May 2023 13:27:33 -0500
-From: Andrew Davis <afd@ti.com>
-To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][master/kirkstone][PATCH 3/8] conf: machine: j721s2: Include the non-HS config in the HS config
-Date: Fri, 26 May 2023 13:27:26 -0500
-Message-ID: <20230526182731.284783-3-afd@ti.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230526182731.284783-1-afd@ti.com>
-References: <20230526182731.284783-1-afd@ti.com>
+ Frontend Transport; Fri, 26 May 2023 13:33:49 -0500
+Received: from [10.249.39.16] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 34QIXm5P042714;
+	Fri, 26 May 2023 13:33:48 -0500
+Message-ID: <07c29f45-3368-a3f8-5579-cef44c99d0c4@ti.com>
+Date: Fri, 26 May 2023 13:33:48 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [meta-ti] check-layer failures for meta-ti
+Content-Language: en-US
+To: <alexandre.belloni@bootlin.com>, Denys Dmytriyenko <denis@denix.org>
+CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
+References: <202305021517546e066d50@mail.local>
+ <20230502194743.GD9226@denix.org> <202305111450394ec6a4fb@mail.local>
+ <20230511153603.GX9226@denix.org> <2023052210025257f03d87@mail.local>
+ <20230526182211e8b9af02@mail.local>
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20230526182211e8b9af02@mail.local>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 26 May 2023 18:27:40 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16603
+ <meta-ti@lists.yoctoproject.org>; Fri, 26 May 2023 18:34:00 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16607
 
-Everything is the same, so just include the non-HS config to set vars.
 
-Signed-off-by: Andrew Davis <afd@ti.com>
----
- meta-ti-bsp/conf/machine/j721s2-hs-evm.conf | 17 +----------------
- 1 file changed, 1 insertion(+), 16 deletions(-)
+The new failure is due to a patch that Richard added in oe-core.  I sent 
+an email to the mailing list asking about it, but no one has responded yet.
 
-diff --git a/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf b/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf
-index 564b571d..4cf32a28 100644
---- a/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf
-+++ b/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf
-@@ -2,19 +2,4 @@
- #@NAME: J721S2 HS EVM
- #@DESCRIPTION: Machine configuration for the TI J721S2 HS EVM
- 
--require conf/machine/include/j721s2.inc
--
--TFA_K3_USART = "0x8"
--OPTEE_K3_USART = "0x8"
--
--KERNEL_DEVICETREE_PREFIX = " \
--    ti/k3-j721s2 \
--    ti/k3-j7200-mcspi-loopback \
--    ti/k3-am68-sk \
--"
--
--KERNEL_DEVICETREE = " \
--    ti/k3-j721s2-common-proc-board.dtb \
--"
--
--UBOOT_MACHINE = "j721s2_evm_a72_defconfig"
-+require conf/machine/j721s2-evm.conf
+I think the patch is invalid, but there was little info in the commit 
+about why it was being made nor could I find a post on the mailing list 
+about it.
+
+Should I send a revert patch to the mailing list to spark discussion?
+
+
+On 5/26/2023 13:22, Alexandre Belloni via lists.yoctoproject.org wrote:
+> This still fails:
+> 
+> https://autobuilder.yoctoproject.org/typhoon/#/builders/121/builds/1369/steps/19/logs/stdio
+> 
+> Should we stop testing kirkstone for meta-ti?
+> 
+> Also, new failure:
+> 
+> https://autobuilder.yoctoproject.org/typhoon/#/builders/121/builds/1370/steps/20/logs/stdio
+> 
+> ERROR: ExpansionError during parsing /home/pokybuild/yocto-worker/check-layer-nightly/build/meta-ti/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+> Traceback (most recent call last):
+>    File "/home/pokybuild/yocto-worker/check-layer-nightly/build/bitbake/lib/bb/data_smart.py", line 460, in DataSmart.expandWithRefs(s='${@bb.fetch2.get_srcrev(d)}', varname='SRCPV'):
+>                       try:
+>      >                    s = __expand_python_regexp__.sub(varparse.python_sub, s)
+>                       except SyntaxError as e:
+>    File "/home/pokybuild/yocto-worker/check-layer-nightly/build/bitbake/lib/bb/data_smart.py", line 150, in VariableParse.python_sub(match=<re.Match object; span=(0, 27), match='${@bb.fetch2.get_srcrev(d)}'>):
+>                           self.contains[k].update(parser.contains[k])
+>      >            value = utils.better_eval(codeobj, DataContext(self.d), {'d' : self.d})
+>                   return str(value)
+>    File "/home/pokybuild/yocto-worker/check-layer-nightly/build/bitbake/lib/bb/utils.py", line 434, in better_eval(source=<code object <module> at 0x7ff4056a9b60, file "Var <SRCPV>", line 1>, locals={'d': <bb.data_smart.DataSmart object at 0x7ff4055ce7d0>}, extraglobals={'d': <bb.data_smart.DataSmart object at 0x7ff4055ce7d0>}):
+>                   ctx[g] = extraglobals[g]
+>      >    return eval(source, ctx, locals)
+>       
+>    File "Var <SRCPV>", line 1, in <module>
+>    File "/home/pokybuild/yocto-worker/check-layer-nightly/build/bitbake/lib/bb/fetch2/__init__.py", line 784, in get_srcrev(d=<bb.data_smart.DataSmart object at 0x7ff4055ce7d0>, method_name='sortable_revision'):
+>           if not scms:
+>      >        raise FetchError("SRCREV was used yet no valid SCM was found in SRC_URI")
+>       
+> bb.data_smart.ExpansionError: Failure expanding variable SRCPV, expression was ${@bb.fetch2.get_srcrev(d)} which triggered exception FetchError: Fetcher failure: SRCREV was used yet no valid SCM was found in SRC_URI
+> The variable dependency chain for the failure is: SRCPV -> KERNEL_LOCALVERSION -> do_configure
+> 
+> On 22/05/2023 12:02:54+0200, Alexandre Belloni wrote:
+>> Hello,
+>>
+>> there is a remaining issue:
+>>
+>> https://autobuilder.yoctoproject.org/typhoon/#/builders/121/builds/1363/steps/19/logs/stdio
+>>
+>> AssertionError: Adding layer meta-ti-bsp changed signatures.
+>> 10 signatures changed, initial differences (first hash before, second after):
+>>     optee-client:do_prepare_recipe_sysroot: d05547a4e057b50bff1357add7383c39c968542c7ca5027c41cd0e073196ac56 -> 8148d8a68b8570d0e1cd0d5fc2d790ab685c45a8beb18e62f227153a790b1198
+>>        bitbake-diffsigs --task optee-client do_prepare_recipe_sysroot --signature d05547a4e057b50bff1357add7383c39c968542c7ca5027c41cd0e073196ac56 8148d8a68b8570d0e1cd0d5fc2d790ab685c45a8beb18e62f227153a790b1198
+>>        NOTE: Starting bitbake server...
+>>        runtaskdeps changed:
+>>        ['cmake/cmake-native_3.22.3.bb:do_populate_sysroot gcc/gcc-cross_11.3.bb:do_populate_sysroot gcc/gcc-runtime_11.3.bb:do_populate_sysroot glibc/glibc_2.35.bb:do_populate_sysroot ninja/ninja_1.10.2.bb:do_populate_sysroot:virtual:native optee/optee-client_3.16.0.bb:do_fetch', +pkgconfig/pkgconfig_git.bb:do_populate_sysroot:virtual:native, 'pseudo/pseudo_git.bb:do_populate_sysroot:virtual:native update-rc.d/update-rc.d_0.8.bb:do_populate_sysroot']
+>>        Number of task dependencies changed
+>>        Dependency on task pkgconfig/pkgconfig_git.bb:do_populate_sysroot:virtual:native was added with hash cf8a9ff6ed2d492aeeeeeb3972365104425b5424377cf5e4a4fc76bb53a4f628
+>>
+>> On 11/05/2023 11:36:03-0400, Denys Dmytriyenko wrote:
+>>> On Thu, May 11, 2023 at 04:50:39PM +0200, Alexandre Belloni wrote:
+>>>> Hello,
+>>>>
+>>>> Did you make any progress? The plan is to disable testing meta-ti next
+>>>> week if this isn't fixed by then.
+>>>
+>>> Yes, I have necessary patches I'm about to send out.
+>>>
+>>>
+>>>> On 02/05/2023 15:47:43-0400, Denys Dmytriyenko wrote:
+>>>>> On Tue, May 02, 2023 at 05:17:54PM +0200, Alexandre Belloni via lists.yoctoproject.org wrote:
+>>>>>> Hello,
+>>>>>>
+>>>>>> meta-ti is currently failing check-layer-nightly:
+>>>>>
+>>>>> Yeah, I think I know what's going on and it's a bit more complicated... I'll
+>>>>> take a look at it.
+>>
+>> -- 
+>> Alexandre Belloni, co-owner and COO, Bootlin
+>> Embedded Linux and Kernel engineering
+>> https://bootlin.com
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#16598): https://lists.yoctoproject.org/g/meta-ti/message/16598
+> Mute This Topic: https://lists.yoctoproject.org/mt/98641101/6551054
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [reatmon@ti.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
+
 -- 
-2.39.2
-
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
