@@ -1,139 +1,152 @@
-Return-Path: <rs@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 74B76C7EE43
-	for <webhook@archiver.kernel.org>; Tue,  6 Jun 2023 19:35:37 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.6491.1686080129597470600
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B1B0C7EE37
+	for <webhook@archiver.kernel.org>; Tue,  6 Jun 2023 21:03:38 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.628.1686085412870364056
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 06 Jun 2023 12:35:29 -0700
+ Tue, 06 Jun 2023 14:03:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Swt8tAEN;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 356JZRJ1060301;
-	Tue, 6 Jun 2023 14:35:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1686080127;
-	bh=K02+AweeKEfaeBYTVWwxnW9WfIa0ve3cMieszgcSoIU=;
-	h=From:To:CC:Subject:Date;
-	b=Swt8tAENXCXT91rTgswkqwM5edsJ4Xx3yX7R0lAOMXqrFzusThq3YDgkFIVriLJ3P
-	 SXaalM9X+Jzp0aoRkaR1wLy02Fb2DdO4dbI2UVC2+2Qqj9HVt8l1LUtUX7AT6Y1Zo9
-	 9zVa6BvCw1DN/igd1tFuYxokA9CxXF4ayeKdqxmU=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 356JZRbu008204
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 6 Jun 2023 14:35:27 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 6
- Jun 2023 14:35:27 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 6 Jun 2023 14:35:27 -0500
-Received: from rs-desk.dhcp.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 356JZREN085073;
-	Tue, 6 Jun 2023 14:35:27 -0500
-From: <rs@ti.com>
-To: <reatmon@ti.com>, <denis@denix.org>, <afd@ti.com>, <detheridge@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, Randolph Sapp <rs@ti.com>
-Subject: [meta-ti][master/kirkstone][PATCH] ti-img-rogue-umlibs: drop the api specific dev packages
-Date: Tue, 6 Jun 2023 14:35:25 -0500
-Message-ID: <20230606193525.910177-1-rs@ti.com>
-X-Mailer: git-send-email 2.40.1
+ dkim=missing; spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id D810840C37;
+	Tue,  6 Jun 2023 21:03:31 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rM5A5lphig_4; Tue,  6 Jun 2023 21:03:31 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A0D8B40AE9;
+	Tue,  6 Jun 2023 21:03:27 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id AB94516394E; Tue,  6 Jun 2023 17:02:39 -0400 (EDT)
+Date: Tue, 6 Jun 2023 17:02:39 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: xulin.sun@windriver.com
+Cc: reatmon@ti.com, denys@konsulko.com, meta-ti@lists.yoctoproject.org,
+	rs@ti.com
+Subject: Re: [meta-ti][meta-ti master][PATCH] ti-img-rogue-driver: add
+ KERNEL_CC to make
+Message-ID: <20230606210239.GS9226@denix.org>
+References: <20230606033706.32554-1-xulin.sun@windriver.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230606033706.32554-1-xulin.sun@windriver.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 06 Jun 2023 19:35:37 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16679
+ <meta-ti@lists.yoctoproject.org>; Tue, 06 Jun 2023 21:03:38 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16680
 
-From: Randolph Sapp <rs@ti.com>
+On Tue, Jun 06, 2023 at 11:37:06AM +0800, Xulin Sun via lists.yoctoproject.org wrote:
+> Bring in KERNEL_CC variable to avoid below building issue:
+> 
+> WARNING: ti-img-rogue-driver-23.1.6404501-b do_package_qa: QA Issue:
+> File /lib/modules/6.1.31-rt10-yocto-preempt-rt/extra/pvrsrvkm.ko in package
+> kernel-module-pvrsrvkm-6.1.31-rt10-yocto-preempt-rt contains reference to TMPDIR [buildpaths]
+> 
+> Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+> ---
+>  ...0001-kbuild-wrap-cc-in-double-quotes.patch | 47 +++++++++++++++++++
+>  .../ti-img-rogue-driver_23.1.6404501.bb       |  6 ++-
+>  2 files changed, 52 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-kbuild-wrap-cc-in-double-quotes.patch
+> 
+> diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-kbuild-wrap-cc-in-double-quotes.patch b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-kbuild-wrap-cc-in-double-quotes.patch
+> new file mode 100644
+> index 00000000..6faf6fe2
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-kbuild-wrap-cc-in-double-quotes.patch
+> @@ -0,0 +1,47 @@
+> +From 48ac628f0c6e679c165f08fec18818f802b535d1 Mon Sep 17 00:00:00 2001
+> +From: Xulin Sun <xulin.sun@windriver.com>
+> +Date: Tue, 6 Jun 2023 01:28:31 +0000
+> +Subject: [PATCH] kbuild: wrap cc in double quotes
+> +
+> +Set the CC variable correctly, to avoid below building issue:
+> +make[1]: aarch64-wrs-linux-aarch64-wrs-linux-gcc: No such file or directory
 
-Well, flew a bit too close to the sun on that last patch. Apparently
-there are a few hidden runtime dependencies on the API devlinks that
-make things like EGL upset when they aren't present.
+Upstream-status?
 
-We may circle back to this at some point but for now we're fine shipping
-the devlinks in the base API packages as these links don't step on any
-other package.
+Anyway, it seems quotation should be applied not just to CC, but to other vars 
+like AR, LD, NM and OBJCOPY. And CROSS_COMPILE and EXTRA_CFLAGS are already 
+doing it correctly just above...
 
-Fixes: 1899f5ea (ti-img-rogue-umlibs: bump version and explicitly
-package, 2023-06-01)
 
-Signed-off-by: Randolph Sapp <rs@ti.com>
----
- .../ti-img-rogue-umlibs_23.1.6404501.bb       | 30 +++++++------------
- 1 file changed, 11 insertions(+), 19 deletions(-)
+Randolph,
 
-diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb
-index 26090038..b166736c 100644
---- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb
-+++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb
-@@ -36,11 +36,11 @@ do_install:append() {
- }
- 
- PACKAGES = " \
--    libgles1-rogue libgles1-rogue-dev \
--    libgles2-rogue libgles2-rogue-dev \
--    libgles3-rogue libgles3-rogue-dev \
--    libvk-rogue libvk-rogue-dev \
--    libopencl-rogue libopencl-rogue-dev \
-+    libgles1-rogue \
-+    libgles2-rogue \
-+    libgles3-rogue \
-+    libvk-rogue \
-+    libopencl-rogue \
-     libopencl-rogue-tools \
-     ${PN}-tools \
-     ${PN}-firmware \
-@@ -64,34 +64,26 @@ python __anonymous() {
-         mlprefix = d.getVar("MLPREFIX")
-         pkgs = " " + " ".join(mlprefix + x + suffix for x in p[1:])
-         d.setVar("DEBIAN_NOAUTONAME:" + fullp, "1")
-+        d.setVar("INSANE_SKIP:" + fullp, "dev-so")
-         d.appendVar("RRECOMMENDS:" + fullp, " ${MLPREFIX}ti-img-rogue-umlibs" + suffix)
--
--        # For -dev, the first element is both the Debian and original name
--        fullp = mlprefix + p[1] + "-rogue-dev" + suffix
--        pkgs = " " + mlprefix + p[1] + "-dev" + suffix
--        d.setVar("DEBIAN_NOAUTONAME:" + fullp, "1")
- }
- 
- # gles specific shared objects
--FILES:libgles1-rogue = "${libdir}/libGLESv1*.so.*"
--FILES:libgles1-rogue-dev = "${libdir}/libGLESv1*.so"
--FILES:libgles2-rogue = "${libdir}/libGLESv2*.so.*"
--FILES:libgles2-rogue-dev = "${libdir}/libGLESv2*.so"
-+FILES:libgles1-rogue = "${libdir}/libGLESv1*.so*"
-+FILES:libgles2-rogue = "${libdir}/libGLESv2*.so*"
- RDEPENDS:libgles1-rogue += "mesa-megadriver"
- RDEPENDS:libgles2-rogue += "mesa-megadriver"
--RDEPENDS:libgles3-rogue-dev += "libgles2-rogue-dev"
- 
- # vulkan specific shared objects and configs
--FILES:libvk-rogue = "${libdir}/libVK_IMG.so.* ${datadir}/vulkan"
--FILES:libvk-rogue-dev = "${libdir}/libVK_IMG.so"
-+FILES:libvk-rogue = "${libdir}/libVK_IMG.so* ${datadir}/vulkan"
- RDEPENDS:libvk-rogue += "vulkan-loader libx11-xcb wayland libdrm"
- 
- # opencl specific shared objects and configs
--FILES:libopencl-rogue = "${libdir}/libPVROCL.so.* ${sysconfdir}/OpenCL"
--FILES:libopencl-rogue-dev = "${libdir}/libPVROCL.so"
-+FILES:libopencl-rogue = "${libdir}/libPVROCL.so* ${sysconfdir}/OpenCL"
- RDEPENDS:libopencl-rogue += "opencl-icd-loader"
- RRECOMMENDS:libopencl-rogue += "libopencl-rogue-tools"
- FILES:libopencl-rogue-tools += "${bindir}/ocl*"
-+DEBIAN_NOAUTONAME:libopencl-rogue-tools = "1"
- 
- # optional tools and tests
- FILES:${PN}-tools = "${bindir}/"
--- 
-2.40.1
+Can you take these changes to upstream repo so this patch is not needed in 
+meta-ti? Thanks.
 
+
+> +Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+> +---
+> + build/linux/kbuild/kbuild.mk | 6 +++---
+> + 1 file changed, 3 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/build/linux/kbuild/kbuild.mk b/build/linux/kbuild/kbuild.mk
+> +index f65d6a4..2085766 100644
+> +--- a/build/linux/kbuild/kbuild.mk
+> ++++ b/build/linux/kbuild/kbuild.mk
+> +@@ -97,7 +97,7 @@ kbuild: kbuild_check $(TARGET_PRIMARY_OUT)/kbuild/Makefile bridges
+> + 		%-android,%-gnu,$(CROSS_TRIPLE)))- \
+> + 		CROSS_COMPILE="$(CCACHE) $(KERNEL_CROSS_COMPILE)" \
+> + 		EXTRA_CFLAGS="$(ALL_KBUILD_CFLAGS)" \
+> +-		CC=$(if $(KERNEL_CC),$(KERNEL_CC),$(KERNEL_CROSS_COMPILE)gcc) \
+> ++		CC="$(if $(KERNEL_CC),$(KERNEL_CC),$(KERNEL_CROSS_COMPILE)gcc)" \
+> + 		AR=$(if $(KERNEL_AR),$(KERNEL_AR),$(KERNEL_CROSS_COMPILE)ar) \
+> + 		LD=$(if $(KERNEL_LD),$(KERNEL_LD),$(KERNEL_CROSS_COMPILE)ld) \
+> + 		NM=$(if $(KERNEL_NM),$(KERNEL_NM),$(KERNEL_CROSS_COMPILE)nm) \
+> +@@ -133,7 +133,7 @@ kbuild_clean: kbuild_check $(TARGET_PRIMARY_OUT)/kbuild/Makefile
+> + 		%-android,%-gnu,$(CROSS_TRIPLE)))- \
+> + 		CROSS_COMPILE="$(CCACHE) $(KERNEL_CROSS_COMPILE)" \
+> + 		EXTRA_CFLAGS="$(ALL_KBUILD_CFLAGS)" \
+> +-		CC=$(if $(KERNEL_CC),$(KERNEL_CC),$(KERNEL_CROSS_COMPILE)gcc) \
+> ++		CC="$(if $(KERNEL_CC),$(KERNEL_CC),$(KERNEL_CROSS_COMPILE)gcc)" \
+> + 		LD=$(if $(KERNEL_LD),$(KERNEL_LD),$(KERNEL_CROSS_COMPILE)ld) \
+> + 		NM=$(if $(KERNEL_NM),$(KERNEL_NM),$(KERNEL_CROSS_COMPILE)nm) \
+> + 		OBJCOPY=$(if $(KERNEL_OBJCOPY),$(KERNEL_OBJCOPY),$(KERNEL_CROSS_COMPILE)objcopy) \
+> +@@ -160,7 +160,7 @@ kbuild_modules_install: kbuild_check $(TARGET_PRIMARY_OUT)/kbuild/Makefile
+> + 		%-android,%-gnu,$(CROSS_TRIPLE)))- \
+> + 		CROSS_COMPILE="$(CCACHE) $(KERNEL_CROSS_COMPILE)" \
+> + 		EXTRA_CFLAGS="$(ALL_KBUILD_CFLAGS)" \
+> +-		CC=$(if $(KERNEL_CC),$(KERNEL_CC),$(KERNEL_CROSS_COMPILE)gcc) \
+> ++		CC="$(if $(KERNEL_CC),$(KERNEL_CC),$(KERNEL_CROSS_COMPILE)gcc)" \
+> + 		LD=$(if $(KERNEL_LD),$(KERNEL_LD),$(KERNEL_CROSS_COMPILE)ld) \
+> + 		NM=$(if $(KERNEL_NM),$(KERNEL_NM),$(KERNEL_CROSS_COMPILE)nm) \
+> + 		OBJCOPY=$(if $(KERNEL_OBJCOPY),$(KERNEL_OBJCOPY),$(KERNEL_CROSS_COMPILE)objcopy) \
+> +-- 
+> +2.35.5
+> +
+> diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb
+> index 76e3d801..b3fba3c4 100644
+> --- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb
+> +++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.1.6404501.bb
+> @@ -20,6 +20,10 @@ BRANCH = "linuxws/kirkstone/k6.1/${PV}"
+>  
+>  SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-driver.git;protocol=https;branch=${BRANCH}"
+>  
+> +SRC_URI += " \
+> +	file://0001-kbuild-wrap-cc-in-double-quotes.patch \
+> +"
+> +
+>  S = "${WORKDIR}/git"
+>  
+>  SRCREV = "93c66ec66136654849809132b86d3b880ee96ed6"
+> @@ -31,7 +35,7 @@ TARGET_PRODUCT:am62xx = "am62_linux"
+>  PVR_BUILD = "release"
+>  PVR_WS = "lws-generic"
+>  
+> -EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" BUILD=${PVR_BUILD} PVR_BUILD_DIR=${TARGET_PRODUCT} WINDOW_SYSTEM=${PVR_WS}'
+> +EXTRA_OEMAKE += 'KERNEL_CC="${KERNEL_CC}" KERNELDIR="${STAGING_KERNEL_DIR}" BUILD=${PVR_BUILD} PVR_BUILD_DIR=${TARGET_PRODUCT} WINDOW_SYSTEM=${PVR_WS}'
+>  
+>  do_install() {
+>      make -C ${STAGING_KERNEL_DIR} M=${B}/binary_${TARGET_PRODUCT}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
+> -- 
+> 2.40.1
 
