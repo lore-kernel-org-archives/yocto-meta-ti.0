@@ -2,42 +2,42 @@ Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 622F2C7EE23
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EAF8C83005
 	for <webhook@archiver.kernel.org>; Wed,  7 Jun 2023 12:09:27 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.6772.1686139766473934752
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.6771.1686139766411526852
  for <meta-ti@lists.yoctoproject.org>;
  Wed, 07 Jun 2023 05:09:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: list.ti.com, ip: 198.47.19.142, mailfrom: lcpdbld@list.ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 357C9O8f128538;
-	Wed, 7 Jun 2023 07:09:24 -0500
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 357C9OKX020237
+ dkim=missing; spf=pass (domain: list.ti.com, ip: 198.47.19.141, mailfrom: lcpdbld@list.ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 357C9Pg5021437;
+	Wed, 7 Jun 2023 07:09:25 -0500
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 357C9O7T009858
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Wed, 7 Jun 2023 07:09:24 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 7
  Jun 2023 07:09:24 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Wed, 7 Jun 2023 07:09:24 -0500
 Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 357C9Oov018652;
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 357C9OA0029871;
 	Wed, 7 Jun 2023 07:09:24 -0500
 Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
-	id 836091149999; Wed,  7 Jun 2023 07:09:24 -0500 (CDT)
+	id 7D14510FE247; Wed,  7 Jun 2023 07:09:24 -0500 (CDT)
 From: LCPD Automation Script <lcpdbld@list.ti.com>
 To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
         Denys
  Dmytriyenko <denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][kirkstone][PATCH 3/4] linux-ti-staging-rt_6.1: CI/CD Auto-Merger: cicd.kirkstone.202306061627
-Date: Wed, 7 Jun 2023 07:09:23 -0500
-Message-ID: <1686139764-22022-4-git-send-email-lcpdbld@list.ti.com>
+Subject: [meta-ti][kirkstone][PATCH 1/4] ti-linux-fw: CI/CD Auto-Merger: cicd.kirkstone.202306061627
+Date: Wed, 7 Jun 2023 07:09:21 -0500
+Message-ID: <1686139764-22022-2-git-send-email-lcpdbld@list.ti.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1686139764-22022-1-git-send-email-lcpdbld@list.ti.com>
 References: <1686139764-22022-1-git-send-email-lcpdbld@list.ti.com>
@@ -48,27 +48,30 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Wed, 07 Jun 2023 12:09:27 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16690
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16689
 
 Updated the value(s) for:
-  SRCREV
+  K3_IMAGE_GEN_SRCREV
+  TI_LINUX_FW_SRCREV
 
 Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
 ---
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb | 2 +-
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-index c441168..a4f1192 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index a0c2f79..bc1ef1c 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -18,7 +18,7 @@ TIFS_LPM_STUB_FW_VERSION = "08.06.04"
+ TI_DM_FW_VERSION = "08.06.04"
+ TI_SYSFW_VERSION = "08.06.04"
  
- BRANCH = "ti-rt-linux-6.1.y"
+-TI_LINUX_FW_SRCREV ?= "56819cfa9e72a4575b2aef6f8b986092d7d3efa9"
++TI_LINUX_FW_SRCREV ?= "8f76bc7eee552f5885b8a8efb78ab045239cde83"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
  
--SRCREV = "32976314e444c21881e683ec47ed633ba4360e67"
-+SRCREV = "ac4b77a441a3a0d745ea4c7b2112d99d5ed1628f"
- PV = "6.1.26+git${SRCPV}"
+ BRANCH ?= "ti-linux-firmware"
 -- 
 1.8.3.1
 
