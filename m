@@ -1,138 +1,97 @@
-Return-Path: <afd@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D95AC7EE29
-	for <webhook@archiver.kernel.org>; Fri,  9 Jun 2023 14:48:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C578C7EE29
+	for <webhook@archiver.kernel.org>; Sun, 11 Jun 2023 01:05:43 +0000 (UTC)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.15288.1686322082814653615
+ by mx.groups.io with SMTP id smtpd.web10.29170.1686445540785563331
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 09 Jun 2023 07:48:03 -0700
+ Sat, 10 Jun 2023 18:05:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=SrrwldJG;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 359Em1vA010020;
-	Fri, 9 Jun 2023 09:48:01 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=D+nxHvPN;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35B15dOH009806;
+	Sat, 10 Jun 2023 20:05:39 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1686322081;
-	bh=c4BdC2LBp/Sxyst9ic7C8sN7UFz7gFYfyT1O1j6vtL0=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=SrrwldJGyNtDGOhd72bNIDZc6kri7apZNfu1Mpz5t+1U/kmuztwPZ+2Zc2rPvaf4s
-	 pGURnD6guHdX29vgkgZ37CDO+aNyPb2sgsJHygQ9k/nOmPnmAIN+oPUYnRsufM9dmO
-	 DvJG7kJK0BhmwB3kA+v3bZEQPL3kQOl+Al1qDkWE=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 359Em1dW021843
+	s=ti-com-17Q1; t=1686445539;
+	bh=SwMkwFHRNPwO2wyqmQjhqsZyJxzHOaGF9OjzBkwoGdc=;
+	h=From:To:Subject:Date;
+	b=D+nxHvPNEXeO7EI4oFUhxJ/4cjmEp/sh4FWWkde2ujl1uqKs1n/98HoTJ+AOvm5XW
+	 Gmss5thRzICo2L12LShOd5PgU6aMryu1jFnYoyjt9so9j1IfUkm/Atq67oovWyw+WS
+	 1ats9M8kN9vzWcIdSOE1M9w2F/f5wvYHZxmpX+Dc=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35B15dd5036072
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 9 Jun 2023 09:48:01 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 9
- Jun 2023 09:48:01 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+	Sat, 10 Jun 2023 20:05:39 -0500
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 10
+ Jun 2023 20:05:38 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 9 Jun 2023 09:48:01 -0500
-Received: from [10.250.37.94] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 359Em0s0029096;
-	Fri, 9 Jun 2023 09:48:00 -0500
-Message-ID: <b80ed67d-6b84-41c5-3106-01145e4c08ba@ti.com>
-Date: Fri, 9 Jun 2023 09:48:00 -0500
+ Frontend Transport; Sat, 10 Jun 2023 20:05:38 -0500
+Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35B15cFb086791;
+	Sat, 10 Jun 2023 20:05:38 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1q89WU-0005eb-G1; Sat, 10 Jun 2023 20:05:38 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master/kirkstone][PATCH] conf: am335x-evm and am437x-evm: bump max_leb_cnt
+Date: Sat, 10 Jun 2023 20:05:38 -0500
+Message-ID: <20230611010538.21692-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [meta-ti] [kirkstone] [PATCH 1/2] u-boot-ti-staging_2023.04: Copy
- bitmap file to boot partition for AM62x
-Content-Language: en-US
-To: Devarsh Thakkar <devarsht@ti.com>, <reatmon@ti.com>,
-        <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>,
-        <denys@konsulko.com>
-CC: <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>, <j-luthra@ti.com>,
-        <khasim@ti.com>, <nsekhar@ti.com>, <rs@ti.com>
-References: <20230609142901.2958733-1-devarsht@ti.com>
- <20230609142901.2958733-2-devarsht@ti.com>
- <e1371f0a-3dbe-6039-022b-d1b5ce403028@ti.com>
- <4bd83e0d-2678-8e0f-824e-7f58472346bf@ti.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <4bd83e0d-2678-8e0f-824e-7f58472346bf@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by lelv0143.ext.ti.com id 359Em1vA010020
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 09 Jun 2023 14:48:09 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16705
+ <meta-ti@lists.yoctoproject.org>; Sun, 11 Jun 2023 01:05:43 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16706
 
-On 6/9/23 9:40 AM, Devarsh Thakkar wrote:
-> Hi Andrew,
->=20
-> Thanks for the quick review.
->=20
-> On 09/06/23 20:05, Andrew Davis wrote:
->> On 6/9/23 9:29 AM, Devarsh Thakkar wrote:
->>> Early splash screen support for AM62x has been enabled in u-boot
->>> and it requires ti.gz bitmap file to be present in boot partition
->>> as per the default environment settings done in u-boot [1].
->>>
->>> Copy ti.gz [2] to boot partition to enable out of box early display o=
-n
->>> AM62x when it is flashed with the wic image compiled using TI's
->>> bsp.
->>>
->>> [1]
->>> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/board/ti/am62x/am62x=
-.env?h=3D09.00.00.001#n34
->>> [2]
->>> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/tools/logos/ti.gz?h=3D=
-ti-u-boot-2023.04
->>>
->>> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
->>> ---
->>>  =C2=A0 .../recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 | 9 +++++++++
->>>  =C2=A0 1 file changed, 9 insertions(+)
->>>
->>> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04=
-.bb
->>> b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
->>> index 4bbb6433..5067e3c8 100644
->>> --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
->>> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
->>> @@ -8,3 +8,12 @@ BRANCH =3D "ti-u-boot-2023.04"
->>>  =C2=A0 =C2=A0 SRCREV =3D "d8e6f9178f6c80abff4ed2e9094001357bda40d4"
->>>  =C2=A0 +do_install:append:am62xx() {
->>> +=C2=A0=C2=A0=C2=A0 install -d ${D}/boot
->>> +=C2=A0=C2=A0=C2=A0 install -m 0644 ${S}/tools/logos/ti.gz ${D}/boot
->>
->> Could you copy this over as ti_logo.gz or similar so we have some idea=
- of the
->> contents.
->>
->=20
-> I agree with you regarding naming convention, but unfortunately I think=
- this
-> file is already present in upstream as ti.gz [1] so we thought to stick=
- with
-> it and rather not change it in ti-u-boot.
->=20
+New features added require an increase to max_leb_cnt.
 
-In u-boot it is in a folder called "logos", you are moving it into the
-generic "boot" partition. Could you put it in /boot/logo/ti.gz instead?
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ meta-ti-bsp/conf/machine/am335x-evm.conf | 2 +-
+ meta-ti-bsp/conf/machine/am437x-evm.conf | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-> [1] https://github.com/u-boot/u-boot/blob/master/tools/logos/ti.gz
->=20
-> Regards
-> Devarsh
->=20
->> Andrew
->>
->>> +}
->>> +
->>> +do_deploy:append:am62xx() {
->>> +=C2=A0=C2=A0=C2=A0 install -d ${DEPLOYDIR}
->>> +=C2=A0=C2=A0=C2=A0 install -m 0644 ${S}/tools/logos/ti.gz ${DEPLOYDI=
-R}
->>> +}
+diff --git a/meta-ti-bsp/conf/machine/am335x-evm.conf b/meta-ti-bsp/conf/machine/am335x-evm.conf
+index 9301406b..266f1f20 100644
+--- a/meta-ti-bsp/conf/machine/am335x-evm.conf
++++ b/meta-ti-bsp/conf/machine/am335x-evm.conf
+@@ -23,7 +23,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS ?= "-F -m 2048 -e 126976 -c 9900"
++MKUBIFS_ARGS ?= "-F -m 2048 -e 126976 -c 10300"
+ 
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
+diff --git a/meta-ti-bsp/conf/machine/am437x-evm.conf b/meta-ti-bsp/conf/machine/am437x-evm.conf
+index 98602add..6501a3ef 100644
+--- a/meta-ti-bsp/conf/machine/am437x-evm.conf
++++ b/meta-ti-bsp/conf/machine/am437x-evm.conf
+@@ -21,7 +21,7 @@ SERIAL_CONSOLES = "115200;ttyS0"
+ # UBI: logical eraseblock size:    253952 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 994 LEBs
+-MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 4800"
++MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 5000"
+ 
+ # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
+ # from dmesg:
+-- 
+2.17.1
+
 
