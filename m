@@ -2,241 +2,210 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F10F7C7EE2E
-	for <webhook@archiver.kernel.org>; Sun, 11 Jun 2023 19:54:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE954C7EE23
+	for <webhook@archiver.kernel.org>; Mon, 12 Jun 2023 03:25:00 +0000 (UTC)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.43388.1686513286012219420
+ by mx.groups.io with SMTP id smtpd.web10.51061.1686540298165921842
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 11 Jun 2023 12:54:46 -0700
+ Sun, 11 Jun 2023 20:24:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=lgkZu94M;
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=yzNwVSyo;
  spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35BJsif4112010;
-	Sun, 11 Jun 2023 14:54:44 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35C3OuC5078410;
+	Sun, 11 Jun 2023 22:24:56 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1686513284;
-	bh=y1Iv5yQ1rtsjVQIsLXu50JMc0Q14HPp6mRbKSlObPHI=;
-	h=From:To:Subject:Date;
-	b=lgkZu94Mg5FdHU3svLgjE6akKg2b/f2W96h2AcCNq3wB7Bl1zynODpQL+rImpjBi2
-	 Qxy3md4iWZ0z4q+N27uxISRxMJi3r0CrZPSeTEx2m0Dr6qYv7pTn1uGQOcTfYjCg0z
-	 R+JJX7hKhI3sFUqHmi/IWH9mIIm3VwwcV7n1iBZ8=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35BJsiM3033612
+	s=ti-com-17Q1; t=1686540296;
+	bh=C9B2ArvUWqEgdJO0kcUIOuaFsiYh+9sWhlq7EFW7mZY=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To;
+	b=yzNwVSyonWwjikd+2kMDwTGC4QsE1vdBShMQM04H1o5OB27WVvPzWXvKWKVBhp4dQ
+	 P8/s9UYrdKrFaEUkkJEq6jK/RiIph2RrOoslYwCPeG0RCtIrUDpbGNNloDfTfxlbyX
+	 +29v8EcykGUMGT1wwSlpY2b2caVlltI0+P772128=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35C3OuNe021966
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Sun, 11 Jun 2023 14:54:44 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+	Sun, 11 Jun 2023 22:24:56 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 11
- Jun 2023 14:54:44 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 11 Jun 2023 14:54:44 -0500
-Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35BJsiDp030984;
-	Sun, 11 Jun 2023 14:54:44 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1q8R9A-0001c6-E7; Sun, 11 Jun 2023 14:54:44 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
+ Jun 2023 22:24:55 -0500
+Received: from DFLE104.ent.ti.com ([fe80::44c:e883:6f6f:384d]) by
+ DFLE104.ent.ti.com ([fe80::44c:e883:6f6f:384d%17]) with mapi id
+ 15.01.2507.023; Sun, 11 Jun 2023 22:24:55 -0500
+From: "Eatmon, Ryan" <reatmon@ti.com>
+To: "Eatmon, Ryan" <reatmon@ti.com>
+CC: "Bajjuri, Praneeth" <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/kirkstone][RFC] ti-extras: Add support for extra kernel/u-boot features
-Date: Sun, 11 Jun 2023 14:54:44 -0500
-Message-ID: <20230611195444.6162-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+        "meta-ti@lists.yoctoproject.org"
+	<meta-ti@lists.yoctoproject.org>
+Subject: Re: [meta-ti][master/kirkstone][RFC] ti-extras: Add support for extra
+ kernel/u-boot features
+Thread-Topic: [meta-ti][master/kirkstone][RFC] ti-extras: Add support for
+ extra kernel/u-boot features
+Thread-Index: AQHZnJ6cY9AV0nCxNkiA7kc3QYFQua+Gga2y
+Date: Mon, 12 Jun 2023 03:24:55 +0000
+Message-ID: <7C37EA18-E2D4-472C-A72A-6D7F94D9050A@ti.com>
+References: <1767B2E60E2714B2.4582@lists.yoctoproject.org>
+In-Reply-To: <1767B2E60E2714B2.4582@lists.yoctoproject.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sun, 11 Jun 2023 19:54:48 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16707
+ <meta-ti@lists.yoctoproject.org>; Mon, 12 Jun 2023 03:25:00 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16708
 
-From: Paresh Bhagat <p-bhagat@ti.com>
-
-There are some features that will either never be accepted into the
-upstream kernel, or are not ready to be accepted.  ti-extras allows for
-controlling the kernel and u-boot repos, breanches, and srcrevs to gain
-access to those features via the TI_EXTRAS variable in the local.conf
-file.
-
-Initial support for TI_EXTRAS=tie-jailhouse is being added by this
-patch.
-
-Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
-
-RFC
-
-This is a pass at reworking the logic for adding support for jailhouse
-behind a more extensible TI_EXTRAS system.  Please comment on it.
-
-
-
-
- meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf      |  1 +
- meta-ti-bsp/conf/machine/am62xx-evm.conf           |  1 +
- meta-ti-bsp/conf/machine/include/ti-extras.inc     |  5 +++++
- meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc       | 11 +++++++++++
- .../u-boot/u-boot-ti-staging_2023.04.bb            |  2 ++
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc       |  2 +-
- .../recipes-kernel/linux/linux-ti-staging_6.1.bb   |  7 ++++---
- meta-ti-bsp/recipes-kernel/linux/ti-extras.inc     | 14 ++++++++++++++
- .../recipes-ti/jailhouse/jailhouse_git.bb          |  2 ++
- 9 files changed, 41 insertions(+), 4 deletions(-)
- create mode 100644 meta-ti-bsp/conf/machine/include/ti-extras.inc
- create mode 100644 meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
-
-diff --git a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
-index 9889ae38..548369ca 100644
---- a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
-@@ -3,6 +3,7 @@
- #@DESCRIPTION: Machine configuration for the TI AM62xx EVM (R5F core)
- 
- require conf/machine/include/k3r5.inc
-+require conf/machine/include/ti-extras.inc
- 
- SYSFW_SOC = "am62x"
- SYSFW_CONFIG = "evm"
-diff --git a/meta-ti-bsp/conf/machine/am62xx-evm.conf b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-index c4357be3..082a1ae7 100644
---- a/meta-ti-bsp/conf/machine/am62xx-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-@@ -3,6 +3,7 @@
- #@DESCRIPTION: Machine configuration for the TI AM62XX EVM
- 
- require conf/machine/include/am62xx.inc
-+require conf/machine/include/ti-extras.inc
- 
- KERNEL_DEVICETREE_PREFIX = "ti/k3-am625"
- 
-diff --git a/meta-ti-bsp/conf/machine/include/ti-extras.inc b/meta-ti-bsp/conf/machine/include/ti-extras.inc
-new file mode 100644
-index 00000000..59eef952
---- /dev/null
-+++ b/meta-ti-bsp/conf/machine/include/ti-extras.inc
-@@ -0,0 +1,5 @@
-+# Add TI_EXTRAS to machine overrides so we get access to e.g. 'jailhouse'
-+
-+TI_EXTRAS ??= ""
-+MACHINEOVERRIDES =. "${@['', '${TI_EXTRAS}:']['${TI_EXTRAS}' != '']}"
-+
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc b/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
-new file mode 100644
-index 00000000..e5e1cc10
---- /dev/null
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
-@@ -0,0 +1,11 @@
-+
-+# This will have priority over generic uboot path
-+
-+BRANCH = "ti-u-boot-2023.04"
-+BRANCH:tie-jailhouse = "ti-u-boot-2023.04-jailhouse"
-+
-+SRCREV = "010afc1fe7a1412f92363c8af69c848d76a53e42"
-+SRCREV:tie-jailhouse = "79615e1c99b9aa73948f811f5f866cff2e34dc37"
-+
-+UBOOT_GIT_URI = "git://git.ti.com/git/processor-sdk/u-boot.git"
-+
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-index f4c5e88c..4bde0256 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-@@ -1,5 +1,7 @@
- require u-boot-ti.inc
- 
-+include ${@ 'recipes-bsp/u-boot/ti-extras.inc' if d.getVar('TI_EXTRAS') else ''}
-+
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
- 
- PR = "r0"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-index f29b089e..f3285c23 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -16,7 +16,7 @@ LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
- 
- BRANCH ?= "master"
--UBOOT_GIT_URI = "git://git.ti.com/git/ti-u-boot/ti-u-boot.git"
-+UBOOT_GIT_URI ?= "git://git.ti.com/git/ti-u-boot/ti-u-boot.git"
- UBOOT_GIT_PROTOCOL = "https"
- SRC_URI = "${UBOOT_GIT_URI};protocol=${UBOOT_GIT_PROTOCOL};branch=${BRANCH}"
- 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-index 0b36575b..2b84b6b5 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-@@ -9,6 +9,7 @@ require recipes-kernel/linux/setup-defconfig.inc
- require recipes-kernel/linux/kernel-rdepends.inc
- require recipes-kernel/linux/ti-kernel.inc
- include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}
-+include ${@ 'recipes-kernel/linux/ti-extras.inc' if d.getVar('TI_EXTRAS') else ''}
- 
- DEPENDS += "gmp-native libmpc-native"
- 
-@@ -20,16 +21,16 @@ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT} \
- 
- S = "${WORKDIR}/git"
- 
--BRANCH = "ti-linux-6.1.y"
-+BRANCH ?= "ti-linux-6.1.y"
- 
--SRCREV = "7124dee9779a40c52c52331c3ba6ccc84f357380"
-+SRCREV ?= "7124dee9779a40c52c52331c3ba6ccc84f357380"
- PV = "6.1.26+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR:append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
--KERNEL_GIT_URI = "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
-+KERNEL_GIT_URI ??= "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
- KERNEL_GIT_PROTOCOL = "https"
- SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
-             file://defconfig"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc b/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
-new file mode 100644
-index 00000000..f9fdd57a
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
-@@ -0,0 +1,14 @@
-+
-+# Use different commit, repo and branch for TI extras build
-+# This will have priority over generic rt path
-+
-+COMPATIBLE_MACHINE = "am62xx-evm"
-+
-+BRANCH = "ti-linux-6.1.y"
-+BRANCH:tie-jailhouse = "ti-linux-6.1.y-jailhouse"
-+
-+SRCREV = "30bcc25e7cb1b25667db88d61828728f0f0b5f4b"
-+SRCREV:tie-jailhouse = "0ed0dec2462b805b0188fe080895adc437871549"
-+
-+KERNEL_GIT_URI = "git://git.ti.com/git/processor-sdk/linux.git"
-+
-diff --git a/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb b/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-index 05cc21b3..eb4a98f7 100644
---- a/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-+++ b/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-@@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = " \
-     file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
- "
- 
-+COMPATIBLE_MACHINE = "am62xx-evm"
-+
- TARGET_CC_ARCH += "${LDFLAGS}"
- 
- PV = "0.12+git${SRCPV}"
--- 
-2.17.1
-
+T25lIHRoaW5nIHRvIGJlYXIgbWluZC4gIFRoaXMgcGF0Y2ggd2lsbCBub3QgYnVpbGQgY2xlYW5s
+eSBiZWNhdXNlIHRoZSB1Ym9vdCB2ZXJzaW9uIGhhcyBtb3ZlZCBvbiBhbmQgdGhlIGZvcmtlZCBy
+ZXBvIGlzIG5vdCB1cCB0byBkYXRlIHdpdGggdGhlIGxhdGVzdCBjaGFuZ2VzIHRoYXQgbWV0YSB0
+byByZXF1aXJlcy4NCg0KU2VudCBmcm9tIG15IGlQYWQNCg0KPiBPbiBKdW4gMTEsIDIwMjMsIGF0
+IDE0OjU1LCBSeWFuIEVhdG1vbiB2aWEgbGlzdHMueW9jdG9wcm9qZWN0Lm9yZyA8cmVhdG1vbj10
+aS5jb21AbGlzdHMueW9jdG9wcm9qZWN0Lm9yZz4gd3JvdGU6DQo+IA0KPiDvu79Gcm9tOiBQYXJl
+c2ggQmhhZ2F0IDxwLWJoYWdhdEB0aS5jb20+DQo+IA0KPiBUaGVyZSBhcmUgc29tZSBmZWF0dXJl
+cyB0aGF0IHdpbGwgZWl0aGVyIG5ldmVyIGJlIGFjY2VwdGVkIGludG8gdGhlDQo+IHVwc3RyZWFt
+IGtlcm5lbCwgb3IgYXJlIG5vdCByZWFkeSB0byBiZSBhY2NlcHRlZC4gIHRpLWV4dHJhcyBhbGxv
+d3MgZm9yDQo+IGNvbnRyb2xsaW5nIHRoZSBrZXJuZWwgYW5kIHUtYm9vdCByZXBvcywgYnJlYW5j
+aGVzLCBhbmQgc3JjcmV2cyB0byBnYWluDQo+IGFjY2VzcyB0byB0aG9zZSBmZWF0dXJlcyB2aWEg
+dGhlIFRJX0VYVFJBUyB2YXJpYWJsZSBpbiB0aGUgbG9jYWwuY29uZg0KPiBmaWxlLg0KPiANCj4g
+SW5pdGlhbCBzdXBwb3J0IGZvciBUSV9FWFRSQVM9dGllLWphaWxob3VzZSBpcyBiZWluZyBhZGRl
+ZCBieSB0aGlzDQo+IHBhdGNoLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogUGFyZXNoIEJoYWdhdCA8
+cC1iaGFnYXRAdGkuY29tPg0KPiBTaWduZWQtb2ZmLWJ5OiBSeWFuIEVhdG1vbiA8cmVhdG1vbkB0
+aS5jb20+DQo+IC0tLQ0KPiANCj4gUkZDDQo+IA0KPiBUaGlzIGlzIGEgcGFzcyBhdCByZXdvcmtp
+bmcgdGhlIGxvZ2ljIGZvciBhZGRpbmcgc3VwcG9ydCBmb3IgamFpbGhvdXNlDQo+IGJlaGluZCBh
+IG1vcmUgZXh0ZW5zaWJsZSBUSV9FWFRSQVMgc3lzdGVtLiAgUGxlYXNlIGNvbW1lbnQgb24gaXQu
+DQo+IA0KPiANCj4gDQo+IA0KPiBtZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02Mnh4LWV2bS1r
+M3I1LmNvbmYgICAgICB8ICAxICsNCj4gbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJ4eC1l
+dm0uY29uZiAgICAgICAgICAgfCAgMSArDQo+IG1ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9pbmNs
+dWRlL3RpLWV4dHJhcy5pbmMgICAgIHwgIDUgKysrKysNCj4gbWV0YS10aS1ic3AvcmVjaXBlcy1i
+c3AvdS1ib290L3RpLWV4dHJhcy5pbmMgICAgICAgfCAxMSArKysrKysrKysrKw0KPiAuLi4vdS1i
+b290L3UtYm9vdC10aS1zdGFnaW5nXzIwMjMuMDQuYmIgICAgICAgICAgICB8ICAyICsrDQo+IG1l
+dGEtdGktYnNwL3JlY2lwZXMtYnNwL3UtYm9vdC91LWJvb3QtdGkuaW5jICAgICAgIHwgIDIgKy0N
+Cj4gLi4uL3JlY2lwZXMta2VybmVsL2xpbnV4L2xpbnV4LXRpLXN0YWdpbmdfNi4xLmJiICAgfCAg
+NyArKysrLS0tDQo+IG1ldGEtdGktYnNwL3JlY2lwZXMta2VybmVsL2xpbnV4L3RpLWV4dHJhcy5p
+bmMgICAgIHwgMTQgKysrKysrKysrKysrKysNCj4gLi4uL3JlY2lwZXMtdGkvamFpbGhvdXNlL2ph
+aWxob3VzZV9naXQuYmIgICAgICAgICAgfCAgMiArKw0KPiA5IGZpbGVzIGNoYW5nZWQsIDQxIGlu
+c2VydGlvbnMoKyksIDQgZGVsZXRpb25zKC0pDQo+IGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLXRp
+LWJzcC9jb25mL21hY2hpbmUvaW5jbHVkZS90aS1leHRyYXMuaW5jDQo+IGNyZWF0ZSBtb2RlIDEw
+MDY0NCBtZXRhLXRpLWJzcC9yZWNpcGVzLWJzcC91LWJvb3QvdGktZXh0cmFzLmluYw0KPiBjcmVh
+dGUgbW9kZSAxMDA2NDQgbWV0YS10aS1ic3AvcmVjaXBlcy1rZXJuZWwvbGludXgvdGktZXh0cmFz
+LmluYw0KPiANCj4gZGlmZiAtLWdpdCBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTYyeHgt
+ZXZtLWszcjUuY29uZiBiL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTYyeHgtZXZtLWszcjUu
+Y29uZg0KPiBpbmRleCA5ODg5YWUzOC4uNTQ4MzY5Y2EgMTAwNjQ0DQo+IC0tLSBhL21ldGEtdGkt
+YnNwL2NvbmYvbWFjaGluZS9hbTYyeHgtZXZtLWszcjUuY29uZg0KPiArKysgYi9tZXRhLXRpLWJz
+cC9jb25mL21hY2hpbmUvYW02Mnh4LWV2bS1rM3I1LmNvbmYNCj4gQEAgLTMsNiArMyw3IEBADQo+
+ICNAREVTQ1JJUFRJT046IE1hY2hpbmUgY29uZmlndXJhdGlvbiBmb3IgdGhlIFRJIEFNNjJ4eCBF
+Vk0gKFI1RiBjb3JlKQ0KPiANCj4gcmVxdWlyZSBjb25mL21hY2hpbmUvaW5jbHVkZS9rM3I1Lmlu
+Yw0KPiArcmVxdWlyZSBjb25mL21hY2hpbmUvaW5jbHVkZS90aS1leHRyYXMuaW5jDQo+IA0KPiBT
+WVNGV19TT0MgPSAiYW02MngiDQo+IFNZU0ZXX0NPTkZJRyA9ICJldm0iDQo+IGRpZmYgLS1naXQg
+YS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02Mnh4LWV2bS5jb25mIGIvbWV0YS10aS1ic3Av
+Y29uZi9tYWNoaW5lL2FtNjJ4eC1ldm0uY29uZg0KPiBpbmRleCBjNDM1N2JlMy4uMDgyYTFhZTcg
+MTAwNjQ0DQo+IC0tLSBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTYyeHgtZXZtLmNvbmYN
+Cj4gKysrIGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJ4eC1ldm0uY29uZg0KPiBAQCAt
+Myw2ICszLDcgQEANCj4gI0BERVNDUklQVElPTjogTWFjaGluZSBjb25maWd1cmF0aW9uIGZvciB0
+aGUgVEkgQU02MlhYIEVWTQ0KPiANCj4gcmVxdWlyZSBjb25mL21hY2hpbmUvaW5jbHVkZS9hbTYy
+eHguaW5jDQo+ICtyZXF1aXJlIGNvbmYvbWFjaGluZS9pbmNsdWRlL3RpLWV4dHJhcy5pbmMNCj4g
+DQo+IEtFUk5FTF9ERVZJQ0VUUkVFX1BSRUZJWCA9ICJ0aS9rMy1hbTYyNSINCj4gDQo+IGRpZmYg
+LS1naXQgYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvaW5jbHVkZS90aS1leHRyYXMuaW5jIGIv
+bWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2luY2x1ZGUvdGktZXh0cmFzLmluYw0KPiBuZXcgZmls
+ZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMC4uNTllZWY5NTINCj4gLS0tIC9kZXYvbnVs
+bA0KPiArKysgYi9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvaW5jbHVkZS90aS1leHRyYXMuaW5j
+DQo+IEBAIC0wLDAgKzEsNSBAQA0KPiArIyBBZGQgVElfRVhUUkFTIHRvIG1hY2hpbmUgb3ZlcnJp
+ZGVzIHNvIHdlIGdldCBhY2Nlc3MgdG8gZS5nLiAnamFpbGhvdXNlJw0KPiArDQo+ICtUSV9FWFRS
+QVMgPz89ICIiDQo+ICtNQUNISU5FT1ZFUlJJREVTID0uICIke0BbJycsICcke1RJX0VYVFJBU306
+J11bJyR7VElfRVhUUkFTfScgIT0gJyddfSINCj4gKw0KPiBkaWZmIC0tZ2l0IGEvbWV0YS10aS1i
+c3AvcmVjaXBlcy1ic3AvdS1ib290L3RpLWV4dHJhcy5pbmMgYi9tZXRhLXRpLWJzcC9yZWNpcGVz
+LWJzcC91LWJvb3QvdGktZXh0cmFzLmluYw0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRl
+eCAwMDAwMDAwMC4uZTVlMWNjMTANCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9tZXRhLXRpLWJz
+cC9yZWNpcGVzLWJzcC91LWJvb3QvdGktZXh0cmFzLmluYw0KPiBAQCAtMCwwICsxLDExIEBADQo+
+ICsNCj4gKyMgVGhpcyB3aWxsIGhhdmUgcHJpb3JpdHkgb3ZlciBnZW5lcmljIHVib290IHBhdGgN
+Cj4gKw0KPiArQlJBTkNIID0gInRpLXUtYm9vdC0yMDIzLjA0Ig0KPiArQlJBTkNIOnRpZS1qYWls
+aG91c2UgPSAidGktdS1ib290LTIwMjMuMDQtamFpbGhvdXNlIg0KPiArDQo+ICtTUkNSRVYgPSAi
+MDEwYWZjMWZlN2ExNDEyZjkyMzYzYzhhZjY5Yzg0OGQ3NmE1M2U0MiINCj4gK1NSQ1JFVjp0aWUt
+amFpbGhvdXNlID0gIjc5NjE1ZTFjOTliOWFhNzM5NDhmODExZjVmODY2Y2ZmMmUzNGRjMzciDQo+
+ICsNCj4gK1VCT09UX0dJVF9VUkkgPSAiZ2l0Oi8vZ2l0LnRpLmNvbS9naXQvcHJvY2Vzc29yLXNk
+ay91LWJvb3QuZ2l0Ig0KPiArDQo+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWJzcC9yZWNpcGVzLWJz
+cC91LWJvb3QvdS1ib290LXRpLXN0YWdpbmdfMjAyMy4wNC5iYiBiL21ldGEtdGktYnNwL3JlY2lw
+ZXMtYnNwL3UtYm9vdC91LWJvb3QtdGktc3RhZ2luZ18yMDIzLjA0LmJiDQo+IGluZGV4IGY0YzVl
+ODhjLi40YmRlMDI1NiAxMDA2NDQNCj4gLS0tIGEvbWV0YS10aS1ic3AvcmVjaXBlcy1ic3AvdS1i
+b290L3UtYm9vdC10aS1zdGFnaW5nXzIwMjMuMDQuYmINCj4gKysrIGIvbWV0YS10aS1ic3AvcmVj
+aXBlcy1ic3AvdS1ib290L3UtYm9vdC10aS1zdGFnaW5nXzIwMjMuMDQuYmINCj4gQEAgLTEsNSAr
+MSw3IEBADQo+IHJlcXVpcmUgdS1ib290LXRpLmluYw0KPiANCj4gK2luY2x1ZGUgJHtAICdyZWNp
+cGVzLWJzcC91LWJvb3QvdGktZXh0cmFzLmluYycgaWYgZC5nZXRWYXIoJ1RJX0VYVFJBUycpIGVs
+c2UgJyd9DQo+ICsNCj4gTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vTGljZW5zZXMvUkVBRE1F
+O21kNT0yY2E1ZjJjMzVjOGNjMzM1ZjBhMTk3NTY2MzQ3ODJmMSINCj4gDQo+IFBSID0gInIwIg0K
+PiBkaWZmIC0tZ2l0IGEvbWV0YS10aS1ic3AvcmVjaXBlcy1ic3AvdS1ib290L3UtYm9vdC10aS5p
+bmMgYi9tZXRhLXRpLWJzcC9yZWNpcGVzLWJzcC91LWJvb3QvdS1ib290LXRpLmluYw0KPiBpbmRl
+eCBmMjliMDg5ZS4uZjMyODVjMjMgMTAwNjQ0DQo+IC0tLSBhL21ldGEtdGktYnNwL3JlY2lwZXMt
+YnNwL3UtYm9vdC91LWJvb3QtdGkuaW5jDQo+ICsrKyBiL21ldGEtdGktYnNwL3JlY2lwZXMtYnNw
+L3UtYm9vdC91LWJvb3QtdGkuaW5jDQo+IEBAIC0xNiw3ICsxNiw3IEBAIExJQ0VOU0UgPSAiR1BM
+LTIuMC1vci1sYXRlciINCj4gTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vTGljZW5zZXMvUkVB
+RE1FO21kNT0zMDUwM2ZkMzIxNDMyZmM3MTMyMzhmNTgyMTkzYjc4ZSINCj4gDQo+IEJSQU5DSCA/
+PSAibWFzdGVyIg0KPiAtVUJPT1RfR0lUX1VSSSA9ICJnaXQ6Ly9naXQudGkuY29tL2dpdC90aS11
+LWJvb3QvdGktdS1ib290LmdpdCINCj4gK1VCT09UX0dJVF9VUkkgPz0gImdpdDovL2dpdC50aS5j
+b20vZ2l0L3RpLXUtYm9vdC90aS11LWJvb3QuZ2l0Ig0KPiBVQk9PVF9HSVRfUFJPVE9DT0wgPSAi
+aHR0cHMiDQo+IFNSQ19VUkkgPSAiJHtVQk9PVF9HSVRfVVJJfTtwcm90b2NvbD0ke1VCT09UX0dJ
+VF9QUk9UT0NPTH07YnJhbmNoPSR7QlJBTkNIfSINCj4gDQo+IGRpZmYgLS1naXQgYS9tZXRhLXRp
+LWJzcC9yZWNpcGVzLWtlcm5lbC9saW51eC9saW51eC10aS1zdGFnaW5nXzYuMS5iYiBiL21ldGEt
+dGktYnNwL3JlY2lwZXMta2VybmVsL2xpbnV4L2xpbnV4LXRpLXN0YWdpbmdfNi4xLmJiDQo+IGlu
+ZGV4IDBiMzY1NzViLi4yYjg0YjZiNSAxMDA2NDQNCj4gLS0tIGEvbWV0YS10aS1ic3AvcmVjaXBl
+cy1rZXJuZWwvbGludXgvbGludXgtdGktc3RhZ2luZ182LjEuYmINCj4gKysrIGIvbWV0YS10aS1i
+c3AvcmVjaXBlcy1rZXJuZWwvbGludXgvbGludXgtdGktc3RhZ2luZ182LjEuYmINCj4gQEAgLTks
+NiArOSw3IEBAIHJlcXVpcmUgcmVjaXBlcy1rZXJuZWwvbGludXgvc2V0dXAtZGVmY29uZmlnLmlu
+Yw0KPiByZXF1aXJlIHJlY2lwZXMta2VybmVsL2xpbnV4L2tlcm5lbC1yZGVwZW5kcy5pbmMNCj4g
+cmVxdWlyZSByZWNpcGVzLWtlcm5lbC9saW51eC90aS1rZXJuZWwuaW5jDQo+IGluY2x1ZGUgJHtA
+ICdyZWNpcGVzLWtlcm5lbC9saW51eC90aS1rZXJuZWwtZGV2aWNldHJlZS1wcmVmaXguaW5jJyBp
+ZiBkLmdldFZhcignS0VSTkVMX0RFVklDRVRSRUVfUFJFRklYJykgZWxzZSAnJ30NCj4gK2luY2x1
+ZGUgJHtAICdyZWNpcGVzLWtlcm5lbC9saW51eC90aS1leHRyYXMuaW5jJyBpZiBkLmdldFZhcign
+VElfRVhUUkFTJykgZWxzZSAnJ30NCj4gDQo+IERFUEVORFMgKz0gImdtcC1uYXRpdmUgbGlibXBj
+LW5hdGl2ZSINCj4gDQo+IEBAIC0yMCwxNiArMjEsMTYgQEAgS0VSTkVMX0VYVFJBX0FSR1MgKz0g
+IkxPQURBRERSPSR7VUJPT1RfRU5UUllQT0lOVH0gXA0KPiANCj4gUyA9ICIke1dPUktESVJ9L2dp
+dCINCj4gDQo+IC1CUkFOQ0ggPSAidGktbGludXgtNi4xLnkiDQo+ICtCUkFOQ0ggPz0gInRpLWxp
+bnV4LTYuMS55Ig0KPiANCj4gLVNSQ1JFViA9ICI3MTI0ZGVlOTc3OWE0MGM1MmM1MjMzMWMzYmE2
+Y2NjODRmMzU3MzgwIg0KPiArU1JDUkVWID89ICI3MTI0ZGVlOTc3OWE0MGM1MmM1MjMzMWMzYmE2
+Y2NjODRmMzU3MzgwIg0KPiBQViA9ICI2LjEuMjYrZ2l0JHtTUkNQVn0iDQo+IA0KPiAjIEFwcGVu
+ZCB0byB0aGUgTUFDSElORV9LRVJORUxfUFIgc28gdGhhdCBhIG5ldyBTUkNSRVYgd2lsbCBjYXVz
+ZSBhIHJlYnVpbGQNCj4gTUFDSElORV9LRVJORUxfUFI6YXBwZW5kID0gImIiDQo+IFBSID0gIiR7
+TUFDSElORV9LRVJORUxfUFJ9Ig0KPiANCj4gLUtFUk5FTF9HSVRfVVJJID0gImdpdDovL2dpdC50
+aS5jb20vZ2l0L3RpLWxpbnV4LWtlcm5lbC90aS1saW51eC1rZXJuZWwuZ2l0Ig0KPiArS0VSTkVM
+X0dJVF9VUkkgPz89ICJnaXQ6Ly9naXQudGkuY29tL2dpdC90aS1saW51eC1rZXJuZWwvdGktbGlu
+dXgta2VybmVsLmdpdCINCj4gS0VSTkVMX0dJVF9QUk9UT0NPTCA9ICJodHRwcyINCj4gU1JDX1VS
+SSArPSAiJHtLRVJORUxfR0lUX1VSSX07cHJvdG9jb2w9JHtLRVJORUxfR0lUX1BST1RPQ09MfTti
+cmFuY2g9JHtCUkFOQ0h9IFwNCj4gICAgICAgICAgICAgZmlsZTovL2RlZmNvbmZpZyINCj4gZGlm
+ZiAtLWdpdCBhL21ldGEtdGktYnNwL3JlY2lwZXMta2VybmVsL2xpbnV4L3RpLWV4dHJhcy5pbmMg
+Yi9tZXRhLXRpLWJzcC9yZWNpcGVzLWtlcm5lbC9saW51eC90aS1leHRyYXMuaW5jDQo+IG5ldyBm
+aWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAwMDAwMDAwLi5mOWZkZDU3YQ0KPiAtLS0gL2Rldi9u
+dWxsDQo+ICsrKyBiL21ldGEtdGktYnNwL3JlY2lwZXMta2VybmVsL2xpbnV4L3RpLWV4dHJhcy5p
+bmMNCj4gQEAgLTAsMCArMSwxNCBAQA0KPiArDQo+ICsjIFVzZSBkaWZmZXJlbnQgY29tbWl0LCBy
+ZXBvIGFuZCBicmFuY2ggZm9yIFRJIGV4dHJhcyBidWlsZA0KPiArIyBUaGlzIHdpbGwgaGF2ZSBw
+cmlvcml0eSBvdmVyIGdlbmVyaWMgcnQgcGF0aA0KPiArDQo+ICtDT01QQVRJQkxFX01BQ0hJTkUg
+PSAiYW02Mnh4LWV2bSINCj4gKw0KPiArQlJBTkNIID0gInRpLWxpbnV4LTYuMS55Ig0KPiArQlJB
+TkNIOnRpZS1qYWlsaG91c2UgPSAidGktbGludXgtNi4xLnktamFpbGhvdXNlIg0KPiArDQo+ICtT
+UkNSRVYgPSAiMzBiY2MyNWU3Y2IxYjI1NjY3ZGI4OGQ2MTgyODcyOGYwZjBiNWY0YiINCj4gK1NS
+Q1JFVjp0aWUtamFpbGhvdXNlID0gIjBlZDBkZWMyNDYyYjgwNWIwMTg4ZmUwODA4OTVhZGM0Mzc4
+NzE1NDkiDQo+ICsNCj4gK0tFUk5FTF9HSVRfVVJJID0gImdpdDovL2dpdC50aS5jb20vZ2l0L3By
+b2Nlc3Nvci1zZGsvbGludXguZ2l0Ig0KPiArDQo+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWV4dHJh
+cy9yZWNpcGVzLXRpL2phaWxob3VzZS9qYWlsaG91c2VfZ2l0LmJiIGIvbWV0YS10aS1leHRyYXMv
+cmVjaXBlcy10aS9qYWlsaG91c2UvamFpbGhvdXNlX2dpdC5iYg0KPiBpbmRleCAwNWNjMjFiMy4u
+ZWI0YTk4ZjcgMTAwNjQ0DQo+IC0tLSBhL21ldGEtdGktZXh0cmFzL3JlY2lwZXMtdGkvamFpbGhv
+dXNlL2phaWxob3VzZV9naXQuYmINCj4gKysrIGIvbWV0YS10aS1leHRyYXMvcmVjaXBlcy10aS9q
+YWlsaG91c2UvamFpbGhvdXNlX2dpdC5iYg0KPiBAQCAtMTAsNiArMTAsOCBAQCBMSUNfRklMRVNf
+Q0hLU1VNID0gIiBcDQo+ICAgICBmaWxlOi8vQ09QWUlORzttZDU9OWZhN2Y4OTVmOTZiZGUyZDQ3
+ZmQ1YjdkOTViNmJhNGQgXA0KPiAiDQo+IA0KPiArQ09NUEFUSUJMRV9NQUNISU5FID0gImFtNjJ4
+eC1ldm0iDQo+ICsNCj4gVEFSR0VUX0NDX0FSQ0ggKz0gIiR7TERGTEFHU30iDQo+IA0KPiBQViA9
+ICIwLjEyK2dpdCR7U1JDUFZ9Ig0KPiAtLSANCj4gMi4xNy4xDQo+IA0KPiANCj4gLT0tPS09LT0t
+PS09LT0tPS09LT0tPS0NCj4gTGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdlcyBzZW50IHRv
+IHRoaXMgZ3JvdXAuDQo+IFZpZXcvUmVwbHkgT25saW5lICgjMTY3MDcpOiBodHRwczovL2xpc3Rz
+LnlvY3RvcHJvamVjdC5vcmcvZy9tZXRhLXRpL21lc3NhZ2UvMTY3MDcNCj4gTXV0ZSBUaGlzIFRv
+cGljOiBodHRwczovL2xpc3RzLnlvY3RvcHJvamVjdC5vcmcvbXQvOTk0Njk4MjAvNjU1MTA1NA0K
+PiBHcm91cCBPd25lcjogbWV0YS10aStvd25lckBsaXN0cy55b2N0b3Byb2plY3Qub3JnDQo+IFVu
+c3Vic2NyaWJlOiBodHRwczovL2xpc3RzLnlvY3RvcHJvamVjdC5vcmcvZy9tZXRhLXRpL2xlYXZl
+LzEwODI4NzI0LzY1NTEwNTQvMTgxNTQ5NDEzNC94eXp6eSBbcmVhdG1vbkB0aS5jb21dDQo+IC09
+LT0tPS09LT0tPS09LT0tPS09LT0tDQo+IA0K
 
