@@ -1,255 +1,181 @@
-Return-Path: <p-bhagat@ti.com>
+Return-Path: <devarsht@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 467FBC7EE29
-	for <webhook@archiver.kernel.org>; Tue, 13 Jun 2023 10:51:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C3B8C88CB6
+	for <webhook@archiver.kernel.org>; Tue, 13 Jun 2023 11:50:36 +0000 (UTC)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.10068.1686653509337290257
+ by mx.groups.io with SMTP id smtpd.web11.11150.1686657030419592585
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 13 Jun 2023 03:51:49 -0700
+ Tue, 13 Jun 2023 04:50:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=C+QwRegc;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: p-bhagat@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35DAplK1042514;
-	Tue, 13 Jun 2023 05:51:47 -0500
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=UW+q1Qh/;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: devarsht@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35DBoTLg054993;
+	Tue, 13 Jun 2023 06:50:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1686653507;
-	bh=nAZfm3hKKedRKIRL8F0S9OY8Bfm0Fcm3W2d1t4uSyDY=;
-	h=Date:Subject:To:References:CC:From:In-Reply-To;
-	b=C+QwRegcOfukEgCleDJ6KtSUU9fznLhJavTG7bRxE/uRE2sHcwArU6g+5XmN55hDz
-	 wu5Am/yy7gbh2zaPTplFZuMxSLuVJolm2hHBpdGnNthr3MKkqUnrhTuVN4GJlekgT8
-	 Z0aIdHnmpt23+HhJ7H3YhDvHRWOTZ7Ln3m1W6UKk=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35DApl40052640
+	s=ti-com-17Q1; t=1686657029;
+	bh=uK9e4Bi0FKratMYvex+gjRmXth/9oYjnHRh2ujv8RZw=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=UW+q1Qh/r8fUWe3cZ+Pf15OPWw3zi9sqjBiA2Rw4KWt6sn2BI4QQj7abpx168vVJP
+	 u3HUiu/KBp+G4MJMkYgba9EhQzN0kQ5c9QIrBn+w89X68vewX/gBxc4cSzjw6RQGOz
+	 6wLJff6cmgGkWpcDB0cCbizrCfQF4yxRp4b7/lMU=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35DBoT8I030393
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 13 Jun 2023 05:51:47 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 13 Jun 2023 06:50:29 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 13
- Jun 2023 05:51:47 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2023 06:50:28 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 13 Jun 2023 05:51:47 -0500
-Received: from [172.24.145.229] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35DApiuB013686;
-	Tue, 13 Jun 2023 05:51:45 -0500
-Message-ID: <3bbba138-a929-3789-1b4c-ab7d38423810@ti.com>
-Date: Tue, 13 Jun 2023 16:21:44 +0530
+ Frontend Transport; Tue, 13 Jun 2023 06:50:29 -0500
+Received: from [172.24.145.199] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35DBoOWP022668;
+	Tue, 13 Jun 2023 06:50:25 -0500
+Message-ID: <694f763e-6e33-5acc-1d6c-f6bdb4f506c1@ti.com>
+Date: Tue, 13 Jun 2023 17:20:24 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-Subject: Re: [EXTERNAL] [meta-ti][master/kirkstone][RFC] ti-extras: Add
- support for extra kernel/u-boot features
+Subject: Re: [meta-ti] [kirkstone] [PATCH 1/2] u-boot-ti-staging_2023.04: Copy
+ bitmap file to boot partition for AM62x
 Content-Language: en-US
-To: <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20230611195444.6162-1-reatmon@ti.com>
-CC: <g-gupta@ti.com>, <khasim@ti.com>, "Shilwant, Chirag" <c-shilwant@ti.com>,
-        <s-adivi@ti.com>
-From: Paresh Bhagat <p-bhagat@ti.com>
-In-Reply-To: <20230611195444.6162-1-reatmon@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+To: Andrew Davis <afd@ti.com>, <reatmon@ti.com>,
+        <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>,
+        <denys@konsulko.com>
+CC: <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>, <j-luthra@ti.com>,
+        <khasim@ti.com>, <nsekhar@ti.com>, <rs@ti.com>,
+        Nikhil <n-jain1@ti.com>
+References: <20230609142901.2958733-1-devarsht@ti.com>
+ <20230609142901.2958733-2-devarsht@ti.com>
+ <e1371f0a-3dbe-6039-022b-d1b5ce403028@ti.com>
+ <4bd83e0d-2678-8e0f-824e-7f58472346bf@ti.com>
+ <b80ed67d-6b84-41c5-3106-01145e4c08ba@ti.com>
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <b80ed67d-6b84-41c5-3106-01145e4c08ba@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 35DBoTLg054993
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 13 Jun 2023 10:51:56 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16712
+ <meta-ti@lists.yoctoproject.org>; Tue, 13 Jun 2023 11:50:36 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16713
+
+Hi Andrew,
+
+Thanks for the suggestions.
+
+On 09/06/23 20:18, Andrew Davis wrote:
+> On 6/9/23 9:40 AM, Devarsh Thakkar wrote:
+>> Hi Andrew,
+>>
+>> Thanks for the quick review.
+>>
+>> On 09/06/23 20:05, Andrew Davis wrote:
+>>> On 6/9/23 9:29 AM, Devarsh Thakkar wrote:
+>>>> Early splash screen support for AM62x has been enabled in u-boot
+>>>> and it requires ti.gz bitmap file to be present in boot partition
+>>>> as per the default environment settings done in u-boot [1].
+>>>>
+>>>> Copy ti.gz [2] to boot partition to enable out of box early display =
+on
+>>>> AM62x when it is flashed with the wic image compiled using TI's
+>>>> bsp.
+>>>>
+>>>> [1]
+>>>> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/board/ti/am62x/am62=
+x.env?h=3D09.00.00.001#n34
+>>>> [2]
+>>>> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/tools/logos/ti.gz?h=
+=3Dti-u-boot-2023.04
+>>>>
+>>>> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+>>>> ---
+>>>> =C2=A0=C2=A0 .../recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 | 9 +++++++++
+>>>> =C2=A0=C2=A0 1 file changed, 9 insertions(+)
+>>>>
+>>>> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.0=
+4.bb
+>>>> b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+>>>> index 4bbb6433..5067e3c8 100644
+>>>> --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+>>>> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+>>>> @@ -8,3 +8,12 @@ BRANCH =3D "ti-u-boot-2023.04"
+>>>> =C2=A0=C2=A0 =C2=A0 SRCREV =3D "d8e6f9178f6c80abff4ed2e9094001357bda=
+40d4"
+>>>> =C2=A0=C2=A0 +do_install:append:am62xx() {
+>>>> +=C2=A0=C2=A0=C2=A0 install -d ${D}/boot
+>>>> +=C2=A0=C2=A0=C2=A0 install -m 0644 ${S}/tools/logos/ti.gz ${D}/boot
+>>>
+>>> Could you copy this over as ti_logo.gz or similar so we have some ide=
+a of the
+>>> contents.
+>>>
+>>
+>> I agree with you regarding naming convention, but unfortunately I thin=
+k this
+>> file is already present in upstream as ti.gz [1] so we thought to stic=
+k with
+>> it and rather not change it in ti-u-boot.
+>>
+>=20
+> In u-boot it is in a folder called "logos", you are moving it into the
+> generic "boot" partition. Could you put it in /boot/logo/ti.gz instead?
+>=20
+
+Yeah, that also makes sense to me to have a logos directory if there is a
+possibility of having multiple logos with different resolutions so that u=
+ser
+can choose based upon the connector being used.
+
+But this as well will require a change in u-boot's am62x.env file's splas=
+hfile
+variable, moreover I had to make a change in oe-core to allow installatio=
+n of
+directories in boot partition for the same [1].
 
 
-On 12/06/23 01:24, Ryan Eatmon via lists.yoctoproject.org wrote:
-> From: Paresh Bhagat <p-bhagat@ti.com>
->
-> There are some features that will either never be accepted into the
-> upstream kernel, or are not ready to be accepted.  ti-extras allows for
-> controlling the kernel and u-boot repos, breanches, and srcrevs to gain
-> access to those features via the TI_EXTRAS variable in the local.conf
-> file.
->
-> Initial support for TI_EXTRAS=tie-jailhouse is being added by this
-> patch.
->
-> Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-> ---
->
-> RFC
->
-> This is a pass at reworking the logic for adding support for jailhouse
-> behind a more extensible TI_EXTRAS system.  Please comment on it.
->
-Acked-by: Paresh Bhagat <p-bhagat@ti.com>
->
->
->   meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf      |  1 +
->   meta-ti-bsp/conf/machine/am62xx-evm.conf           |  1 +
->   meta-ti-bsp/conf/machine/include/ti-extras.inc     |  5 +++++
->   meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc       | 11 +++++++++++
->   .../u-boot/u-boot-ti-staging_2023.04.bb            |  2 ++
->   meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc       |  2 +-
->   .../recipes-kernel/linux/linux-ti-staging_6.1.bb   |  7 ++++---
->   meta-ti-bsp/recipes-kernel/linux/ti-extras.inc     | 14 ++++++++++++++
->   .../recipes-ti/jailhouse/jailhouse_git.bb          |  2 ++
->   9 files changed, 41 insertions(+), 4 deletions(-)
->   create mode 100644 meta-ti-bsp/conf/machine/include/ti-extras.inc
->   create mode 100644 meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
->   create mode 100644 meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
->
-> diff --git a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
-> index 9889ae38..548369ca 100644
-> --- a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
-> @@ -3,6 +3,7 @@
->   #@DESCRIPTION: Machine configuration for the TI AM62xx EVM (R5F core)
->   
->   require conf/machine/include/k3r5.inc
-> +require conf/machine/include/ti-extras.inc
->   
->   SYSFW_SOC = "am62x"
->   SYSFW_CONFIG = "evm"
-> diff --git a/meta-ti-bsp/conf/machine/am62xx-evm.conf b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-> index c4357be3..082a1ae7 100644
-> --- a/meta-ti-bsp/conf/machine/am62xx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-> @@ -3,6 +3,7 @@
->   #@DESCRIPTION: Machine configuration for the TI AM62XX EVM
->   
->   require conf/machine/include/am62xx.inc
-> +require conf/machine/include/ti-extras.inc
->   
->   KERNEL_DEVICETREE_PREFIX = "ti/k3-am625"
->   
-> diff --git a/meta-ti-bsp/conf/machine/include/ti-extras.inc b/meta-ti-bsp/conf/machine/include/ti-extras.inc
-> new file mode 100644
-> index 00000000..59eef952
-> --- /dev/null
-> +++ b/meta-ti-bsp/conf/machine/include/ti-extras.inc
-> @@ -0,0 +1,5 @@
-> +# Add TI_EXTRAS to machine overrides so we get access to e.g. 'jailhouse'
-> +
-> +TI_EXTRAS ??= ""
-> +MACHINEOVERRIDES =. "${@['', '${TI_EXTRAS}:']['${TI_EXTRAS}' != '']}"
-> +
-> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc b/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
-> new file mode 100644
-> index 00000000..e5e1cc10
-> --- /dev/null
-> +++ b/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
-> @@ -0,0 +1,11 @@
-> +
-> +# This will have priority over generic uboot path
-> +
-> +BRANCH = "ti-u-boot-2023.04"
-> +BRANCH:tie-jailhouse = "ti-u-boot-2023.04-jailhouse"
-> +
-> +SRCREV = "010afc1fe7a1412f92363c8af69c848d76a53e42"
-> +SRCREV:tie-jailhouse = "79615e1c99b9aa73948f811f5f866cff2e34dc37"
-> +
-> +UBOOT_GIT_URI = "git://git.ti.com/git/processor-sdk/u-boot.git"
-> +
-> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-> index f4c5e88c..4bde0256 100644
-> --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-> @@ -1,5 +1,7 @@
->   require u-boot-ti.inc
->   
-> +include ${@ 'recipes-bsp/u-boot/ti-extras.inc' if d.getVar('TI_EXTRAS') else ''}
-> +
->   LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
->   
->   PR = "r0"
-> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-> index f29b089e..f3285c23 100644
-> --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-> @@ -16,7 +16,7 @@ LICENSE = "GPL-2.0-or-later"
->   LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
->   
->   BRANCH ?= "master"
-> -UBOOT_GIT_URI = "git://git.ti.com/git/ti-u-boot/ti-u-boot.git"
-> +UBOOT_GIT_URI ?= "git://git.ti.com/git/ti-u-boot/ti-u-boot.git"
->   UBOOT_GIT_PROTOCOL = "https"
->   SRC_URI = "${UBOOT_GIT_URI};protocol=${UBOOT_GIT_PROTOCOL};branch=${BRANCH}"
->   
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-> index 0b36575b..2b84b6b5 100644
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-> @@ -9,6 +9,7 @@ require recipes-kernel/linux/setup-defconfig.inc
->   require recipes-kernel/linux/kernel-rdepends.inc
->   require recipes-kernel/linux/ti-kernel.inc
->   include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}
-> +include ${@ 'recipes-kernel/linux/ti-extras.inc' if d.getVar('TI_EXTRAS') else ''}
->   
->   DEPENDS += "gmp-native libmpc-native"
->   
-> @@ -20,16 +21,16 @@ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT} \
->   
->   S = "${WORKDIR}/git"
->   
-> -BRANCH = "ti-linux-6.1.y"
-> +BRANCH ?= "ti-linux-6.1.y"
->   
-> -SRCREV = "7124dee9779a40c52c52331c3ba6ccc84f357380"
-> +SRCREV ?= "7124dee9779a40c52c52331c3ba6ccc84f357380"
->   PV = "6.1.26+git${SRCPV}"
->   
->   # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
->   MACHINE_KERNEL_PR:append = "b"
->   PR = "${MACHINE_KERNEL_PR}"
->   
-> -KERNEL_GIT_URI = "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
-> +KERNEL_GIT_URI ??= "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
->   KERNEL_GIT_PROTOCOL = "https"
->   SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
->               file://defconfig"
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc b/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
-> new file mode 100644
-> index 00000000..f9fdd57a
-> --- /dev/null
-> +++ b/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
-> @@ -0,0 +1,14 @@
-> +
-> +# Use different commit, repo and branch for TI extras build
-> +# This will have priority over generic rt path
-> +
-> +COMPATIBLE_MACHINE = "am62xx-evm"
-> +
-> +BRANCH = "ti-linux-6.1.y"
-> +BRANCH:tie-jailhouse = "ti-linux-6.1.y-jailhouse"
-> +
-> +SRCREV = "30bcc25e7cb1b25667db88d61828728f0f0b5f4b"
-> +SRCREV:tie-jailhouse = "0ed0dec2462b805b0188fe080895adc437871549"
-> +
-> +KERNEL_GIT_URI = "git://git.ti.com/git/processor-sdk/linux.git"
-> +
-> diff --git a/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb b/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-> index 05cc21b3..eb4a98f7 100644
-> --- a/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-> +++ b/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-> @@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = " \
->       file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
->   "
->   
-> +COMPATIBLE_MACHINE = "am62xx-evm"
-> +
->   TARGET_CC_ARCH += "${LDFLAGS}"
->   
->   PV = "0.12+git${SRCPV}"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#16707): https://lists.yoctoproject.org/g/meta-ti/message/16707
-> Mute This Topic: https://lists.yoctoproject.org/mt/99469820/7067447
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/leave/11872989/7067447/425310138/xyzzy [p-bhagat@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Meanwhile I discussed with team here (Vignesh and Nikhil) and we agreed t=
+o
+both rename the logo and have it in logos directory but we thought to do =
+the
+latter as a separate patch when [1] is available in kirkstone, until then=
+ we
+thought it is better to just rename it as ti_logo_414x97.gz in boot parti=
+tion
+
+[1]
+https://lists.openembedded.org/g/openembedded-core/topic/patch_v2_wic_boo=
+timg_add/99501427?p=3D,,,20,0,0,0::recentpostdate/sticky,,,20,2,0,9950142=
+7,previd%3D1686655986349989245,nextid%3D1686587607620747491&previd=3D1686=
+655986349989245&nextid=3D1686587607620747491
+
+So is it ok to go ahead with ti_logo_414x97.gz in boot partition for now
+and take logos directory change as a separate patch in future when [1] is
+available ?
+
+Regards
+Devarsh
+
+>> [1] https://github.com/u-boot/u-boot/blob/master/tools/logos/ti.gz
+>>
+>> Regards
+>> Devarsh
+>>
+>>> Andrew
+>>>
+>>>> +}
+>>>> +
+>>>> +do_deploy:append:am62xx() {
+>>>> +=C2=A0=C2=A0=C2=A0 install -d ${DEPLOYDIR}
+>>>> +=C2=A0=C2=A0=C2=A0 install -m 0644 ${S}/tools/logos/ti.gz ${DEPLOYD=
+IR}
+>>>> +}
 
