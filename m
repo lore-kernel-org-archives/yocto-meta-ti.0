@@ -1,79 +1,88 @@
-Return-Path: <devarsht@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 184CEEB64D8
-	for <webhook@archiver.kernel.org>; Wed, 14 Jun 2023 14:33:16 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.13951.1686753189149123534
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 628A4EB64D9
+	for <webhook@archiver.kernel.org>; Wed, 14 Jun 2023 14:55:46 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.14435.1686754540544573777
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 14 Jun 2023 07:33:09 -0700
+ Wed, 14 Jun 2023 07:55:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Nk9PSxjW;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: devarsht@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35EEX7SB058985;
-	Wed, 14 Jun 2023 09:33:07 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1686753187;
-	bh=cYQTlKzEz37b/WSaCvrXE3qClwoAHByOEo5eIA4HcV8=;
-	h=From:To:CC:Subject:Date;
-	b=Nk9PSxjWtSjNpQZR1FAAuAety0mq0ZdgC6ZawgboyNR8vA2YoenEBg7u1tvk9lPU2
-	 7dv8JdOsWtrCClT9go4rigACZ62ZWyl6SniqyGyCEY3WyYOYmVqSM30Ny6LUtr+kRK
-	 ndqhEqDqBIFXO6xlBIjAr6OpQ0230ib/xR3Ho56M=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35EEX7I8084843
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 14 Jun 2023 09:33:07 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 14
- Jun 2023 09:33:07 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 14 Jun 2023 09:33:07 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35EEX6Bg008154;
-	Wed, 14 Jun 2023 09:33:06 -0500
-From: Devarsh Thakkar <devarsht@ti.com>
-To: <reatmon@ti.com>, <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>,
-        <denys@konsulko.com>
-CC: <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>, <j-luthra@ti.com>,
-        <khasim@ti.com>, <nsekhar@ti.com>, <afd@ti.com>, <rs@ti.com>,
-        <n-jain1@ti.com>, <devarsht@ti.com>
-Subject: [meta-ti] [kirkstone] [PATCH v2 0/2] Early splash screen on
-Date: Wed, 14 Jun 2023 20:03:04 +0530
-Message-ID: <20230614143306.1502763-1-devarsht@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=missing; spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 68F6240BD4;
+	Wed, 14 Jun 2023 14:55:39 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id bqGX2Dk2kotK; Wed, 14 Jun 2023 14:55:39 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C9BD540A46;
+	Wed, 14 Jun 2023 14:55:25 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 72F7E163A60; Wed, 14 Jun 2023 10:54:36 -0400 (EDT)
+Date: Wed, 14 Jun 2023 10:54:36 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: devarsht@ti.com
+Cc: reatmon@ti.com, meta-ti@lists.yoctoproject.org, praneeth@ti.com,
+	denys@konsulko.com, nm@ti.com, vigneshr@ti.com, a-bhatia1@ti.com,
+	j-luthra@ti.com, khasim@ti.com, nsekhar@ti.com, afd@ti.com,
+	rs@ti.com, n-jain1@ti.com
+Subject: Re: [meta-ti] [kirkstone] [PATCH v2 1/2]
+ u-boot-ti-staging_2023.04: Copy bitmap file to boot partition for AM62x
+Message-ID: <20230614145436.GW9226@denix.org>
+References: <20230614143306.1502763-1-devarsht@ti.com>
+ <20230614143306.1502763-2-devarsht@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230614143306.1502763-2-devarsht@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 14 Jun 2023 14:33:16 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16718
+ <meta-ti@lists.yoctoproject.org>; Wed, 14 Jun 2023 14:55:46 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16721
 
-This series is to enable out-of-box early splash screen on AM62x devices
-with wic images compiled using meta-ti.
+On Wed, Jun 14, 2023 at 08:03:05PM +0530, Devarsh Thakkar via lists.yoctoproject.org wrote:
+> Early splash screen support for AM62x has been enabled in u-boot
+> and it requires bitmap tarball to be present in boot partition
+> as per the default environment settings done in u-boot [1].
+> 
+> Copy the ti logo bitmap tarball to boot partition of wic image in order
+> to enable out of box early display on AM62x.
+> 
+> [1] https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/board/ti/am62x/am62x.env
+> 
+> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+> ---
+> V2: Rename ti logo tarball as per suggested changes (same is being
+>     done in ti-u-boot too)
+> ---
+>  .../recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb      | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+> 
+> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+> index e6da84cb..c948e1ed 100644
+> --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+> @@ -8,3 +8,12 @@ BRANCH = "ti-u-boot-2023.04"
+>  
+>  SRCREV = "1f510931dcc90e6f28f7fed757ad5000d4382e22"
+>  
+> +do_install:append:am62xx() {
+> +	install -d ${D}/boot
+> +	install -m 0644 ${S}/tools/logos/ti_logo_414x97_32bpp.bmp.gz ${D}/boot
+> +}
+> +
+> +do_deploy:append:am62xx() {
+> +	install -d ${DEPLOYDIR}
+> +	install -m 0644 ${S}/tools/logos/ti_logo_414x97_32bpp.bmp.gz ${DEPLOYDIR}
 
-With this, u-boot SPL or u-boot proper can load TI logo from boot
-partition
-and display it while board is being booted.
+Any specific reason you also need to deploy this loose file?
 
-Devarsh Thakkar (2):
-  u-boot-ti-staging_2023.04: Copy bitmap file to boot partition for
-    AM62x
-  conf: machine: am62xx: Add TI logo as image boot file
-
- meta-ti-bsp/conf/machine/include/am62xx.inc              | 3 +++
- .../recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb      | 9 +++++++++
- 2 files changed, 12 insertions(+)
----
-V2: Rename ti logo file to include metadata
 -- 
-2.34.1
-
+Denys
 
