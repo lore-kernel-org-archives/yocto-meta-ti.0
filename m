@@ -1,176 +1,119 @@
-Return-Path: <denis@denix.org>
+Return-Path: <m-chawdhry@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A4FEEB64D9
-	for <webhook@archiver.kernel.org>; Wed, 14 Jun 2023 23:18:57 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.6274.1686784731212293175
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96CFCEB64D9
+	for <webhook@archiver.kernel.org>; Thu, 15 Jun 2023 04:47:58 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.11265.1686804470303126103
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 14 Jun 2023 16:18:52 -0700
+ Wed, 14 Jun 2023 21:47:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 78FDE40C30;
-	Wed, 14 Jun 2023 23:18:50 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id F8vyhKQWEPWE; Wed, 14 Jun 2023 23:18:50 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CF23640A46;
-	Wed, 14 Jun 2023 23:18:36 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id E0059163A6A; Wed, 14 Jun 2023 19:17:53 -0400 (EDT)
-Date: Wed, 14 Jun 2023 19:17:53 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Ryan Eatmon <reatmon@ti.com>
-Cc: Devarsh Thakkar <devarsht@ti.com>, meta-ti@lists.yoctoproject.org,
-	praneeth@ti.com, denys@konsulko.com, nm@ti.com, vigneshr@ti.com,
-	a-bhatia1@ti.com, j-luthra@ti.com, khasim@ti.com, nsekhar@ti.com,
-	afd@ti.com, rs@ti.com, n-jain1@ti.com
-Subject: Re: [meta-ti] [kirkstone] [PATCH v2 1/2]
- u-boot-ti-staging_2023.04: Copy bitmap file to boot partition for AM62x
-Message-ID: <20230614231753.GA1518@denix.org>
-References: <20230614143306.1502763-1-devarsht@ti.com>
- <20230614143306.1502763-2-devarsht@ti.com>
- <20230614145436.GW9226@denix.org>
- <3edc9efe-20b4-bb49-09a4-6df4cd39ca1a@ti.com>
- <20230614155146.GX9226@denix.org>
- <e9d8598c-5718-2fb7-5e05-dd517467d20c@ti.com>
- <6baddf54-c8c7-669f-53dc-5e952ba3d2fa@ti.com>
+ dkim=fail reason="body hash did not verify" header.i=@ti.com header.s=ti-com-17q1 header.b=Le6b/Nxi;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: m-chawdhry@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35F4ll3f085571;
+	Wed, 14 Jun 2023 23:47:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1686804467;
+	bh=a8mpwXngesjApp2Za9gFiKa2waw7Qz/woEDuzKu9YhI=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To;
+	b=Le6b/NxiDz3IoSUwBBRRYtl+LABZm42B55ykZK+ZSd77uJQW/y3+V5S74I9WrcAAa
+	 zUNTs8K2pvzIXD25CMujYwoZzNS1HdKP4g96bCAc9/uKoCtZRLXlwZ97Ty0obKtIIh
+	 2kb7WQOXhzXL19AMicwqm79uV/KoRPRZ17hi63Q8=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35F4lllB026038
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 14 Jun 2023 23:47:47 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 14
+ Jun 2023 23:47:47 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 14 Jun 2023 23:47:47 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35F4lkdQ019784;
+	Wed, 14 Jun 2023 23:47:46 -0500
+Date: Thu, 15 Jun 2023 10:17:45 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Ricardo Salveti <ricardo@foundries.io>
+CC: <meta-ti@lists.yoctoproject.org>, Andrew Davis <afd@ti.com>,
+        Ryan Eatmon
+	<reatmon@ti.com>, Denys Dmytriyenko <denys@ti.com>,
+        Udit Kumar
+	<u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Vignesh Raghavendra
+	<vigneshr@ti.com>,
+        Kamlesh Gurudasani <kamlesh@ti.com>
+Subject: Re: [meta-ti][master/kirkstone][PATCH] conf: machine: include: k3
+ enable fit signing for uboot
+Message-ID: <20230615044745.qu7rxapm2x5ykeq2@ula0497581>
+References: <20230613-b4-internal-core-secdev-fit-v1-1-c344639b5be1@ti.com>
+ <CAAaKDhEHSsRE7rY75-Db7_eFfjfHmrA4awJXgpj0QW6Q2WWCgQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <6baddf54-c8c7-669f-53dc-5e952ba3d2fa@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+In-Reply-To: <CAAaKDhEHSsRE7rY75-Db7_eFfjfHmrA4awJXgpj0QW6Q2WWCgQ@mail.gmail.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id 35F4ll3f085571
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 14 Jun 2023 23:18:57 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16728
+ <meta-ti@lists.yoctoproject.org>; Thu, 15 Jun 2023 04:47:58 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16729
 
-On Wed, Jun 14, 2023 at 01:16:13PM -0500, Ryan Eatmon wrote:
->=20
->=20
-> On 6/14/2023 11:57 AM, Devarsh Thakkar wrote:
+Hi Ricardo,
+
+On 12:13-20230614, Ricardo Salveti wrote:
+> On Wed, Jun 14, 2023 at 4:41=E2=80=AFAM Manorit Chawdhry via
+> lists.yoctoproject.org <m-chawdhry=3Dti.com@lists.yoctoproject.org>
+> wrote:
 > >
+> > Enables FIT Image signing for K3 platforms
 > >
-> >On 14/06/23 21:21, Denys Dmytriyenko wrote:
-> >>On Wed, Jun 14, 2023 at 08:53:07PM +0530, Devarsh Thakkar wrote:
-> >>>Hi Denys,
-> >>>
-> >>>Thanks for the review,
-> >>>
-> >>>On 14/06/23 20:24, Denys Dmytriyenko wrote:
-> >>>>On Wed, Jun 14, 2023 at 08:03:05PM +0530, Devarsh Thakkar
-> >>>>via lists.yoctoproject.org wrote:
-> >>>>>Early splash screen support for AM62x has been enabled in u-boot
-> >>>>>and it requires bitmap tarball to be present in boot partition
-> >>>>>as per the default environment settings done in u-boot [1].
-> >>>>>
-> >>>>>Copy the ti logo bitmap tarball to boot partition of wic
-> >>>>>image in order
-> >>>>>to enable out of box early display on AM62x.
-> >>>>>
-> >>>>>[1] https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/board/ti/am62=
-x/am62x.env
-> >>>>>
-> >>>>>Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
-> >>>>>---
-> >>>>>V2: Rename ti logo tarball as per suggested changes (same is being
-> >>>>>=A0=A0=A0=A0 done in ti-u-boot too)
-> >>>>>---
-> >>>>>=A0 .../recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb=A0=A0=A0=A0=
-=A0
-> >>>>>| 9 +++++++++
-> >>>>>=A0 1 file changed, 9 insertions(+)
-> >>>>>
-> >>>>>diff --git
-> >>>>>a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-> >>>>>b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-> >>>>>index e6da84cb..c948e1ed 100644
-> >>>>>--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-> >>>>>+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-> >>>>>@@ -8,3 +8,12 @@ BRANCH =3D "ti-u-boot-2023.04"
-> >>>>>=A0 SRCREV =3D "1f510931dcc90e6f28f7fed757ad5000d4382e22"
-> >>>>>+do_install:append:am62xx() {
-> >>>>>+=A0=A0=A0 install -d ${D}/boot
-> >>>>>+=A0=A0=A0 install -m 0644
-> >>>>>${S}/tools/logos/ti_logo_414x97_32bpp.bmp.gz ${D}/boot
-> >>>>>+}
-> >>>>>+
-> >>>>>+do_deploy:append:am62xx() {
-> >>>>>+=A0=A0=A0 install -d ${DEPLOYDIR}
-> >>>>>+=A0=A0=A0 install -m 0644
-> >>>>>${S}/tools/logos/ti_logo_414x97_32bpp.bmp.gz ${DEPLOYDIR}
-> >>>>
-> >>>>Any specific reason you also need to deploy this loose file?
-> >>>>
-> >>>
-> >>>I think the boot partition script which is ran as part of
-> >>>do_image_wic expects
-> >>>IMAGE_BOOTFILES to be present in deploy directory, I remember
-> >>>getting below
-> >>>error without doing so :
-> >>>
-> >>>| ERROR: _exec_cmd: install -m 0644 -D
-> >>>/home/devarsht/ti/yocto_sdk_am62/oe-layersetup/build/arago-tmp-defau=
-lt-glibc/deploy/images/am62xx-evm/ti.gz
-> >>>/home/devarsht/ti/yocto_sdk_am62/oe-layersetup/build/arago-tmp-defau=
-lt-glibc/work/am62xx_evm-oe-linux/tisdk-default-image/1.0-r0/tmp-wic/hdd/=
-boot/ti.gz
-> >>>returned '1' instead of 0
-> >>>| output: install: cannot stat
-> >>>'/home/devarsht/ti/yocto_sdk_am62/oe-layersetup/build/arago-tmp-defa=
-ult-glibc/deploy/images/am62xx-evm/ti.gz':
-> >>>No such file or directory
-> >>>| WARNING:
-> >>>/home/devarsht/ti/yocto_sdk_am62/oe-layersetup/build/arago-tmp-defau=
-lt-glibc/work/am62xx_evm-oe-linux/tisdk-default-image/1.0-r0/temp/run.do_=
-image_wic.1581619:162
-> >>>exit 1 from
-> >>>'BUILDDIR=3D"/home/devarsht/ti/yocto_sdk_am62/oe-layersetup/build"
-> >>>PSEUDO_UNLOAD=3D1 wic create "$wks" --vars
-> >>>"/home/devarsht/ti/yocto_sdk_am62/oe-layersetup/build/arago-tmp-defa=
-ult-glibc/sysroots/am62xx-evm/imgdata/"
-> >>>-e "tisdk-default-image" -o "$build_wic/" -w "$tmp_wic"'
-> >>
-> >>So, is this logo expected by U-boot to reside in the boot partition o=
-f SD
-> >>card, or in the /boot directory of the rootfs?
-> >>The first is handled by do_deploy and IMAGE_BOOTFILES, while the
-> >>second is
-> >>handled by do_install. I wonder if doing both is going to be confusin=
-g...
-> >>
-> >>
+> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > ---
+> >  meta-ti-bsp/conf/machine/include/k3.inc                  | 7 +++++++
+> >  meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb | 1 +
+> >  2 files changed, 8 insertions(+)
 > >
-> >Yes, this logo is expected to reside in boot partition of SD only
-> >per current implementation in ti-u-boot.
+> > diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/co=
+nf/machine/include/k3.inc
+> > index f8bfb3dbcafc..eb25fa780407 100644
+> > --- a/meta-ti-bsp/conf/machine/include/k3.inc
+> > +++ b/meta-ti-bsp/conf/machine/include/k3.inc
+> > @@ -31,6 +31,13 @@ SPL_BINARY =3D "tispl.bin"
+> >  SPL_BINARYNAME =3D "tispl.bin"
+> >  UBOOT_SUFFIX =3D "img"
+> >
+> > +UBOOT_SIGN_ENABLE =3D "1"
+> > +UBOOT_MKIMAGE_DTCOPTS =3D "-I dts -O dtb"
+> > +UBOOT_SIGN_KEYNAME ?=3D "custMpk"
+> > +UBOOT_SIGN_KEYDIR ?=3D "${TI_SECURE_DEV_PKG}/keys"
 >=20
-> So then it only requires do_deploy and IMAGE_BOOTFILES since that
-> puts items into the boot partition... Do we need the do_install?
+> Did you verify that this won't cause a build failure when the key is
+> not available at runtime (e.g. users not defining TI_SECURE_DEV_PKG)?
+>=20
+> Just because UBOOT_SIGN_ENABLE is being forced to 1.
+>=20
 
-Well, thinking a bit more about this, we do the same for all other binari=
-es=20
-from U-boot build in u-boot-ti.inc and even upstream u-boot.inc - we inst=
-all=20
-and deploy them. The installed files go into /boot directory and end up i=
-n=20
-corresponding IPK package, but we do not install it, hence the files are =
-not=20
-in the rootfs. So this should be fine as is...
+TI_SECURE_DEV_PKG will always be set whenever we inherit ti-secdev
+recipe and that is being done in the linux recipe in the same patch.
+The kernel recipe internally uses this variable so no one should be=20
+required to set this explicitely and the build had passed.
 
+Though on the other hand, the build still passes even in we provide a
+wrong folder if I understand correctly and the generate images don't
+have the signature. Though I had validated this change on my local setup
+and could see the things working as expected.
 
-> >>>One more reason to do so was to allow user ease of use, to
-> >>>copy the logo too
-> >>>from deploy folder along with other boot files (if not flashing from=
- wic
-> >>>image) since the same is set in am62x.env and if logo is not
-> >>>present in boot
-> >>>partition then it throws some error message although the
-> >>>device still boots.
+Regards,
+Manorit
+
+> Thanks,
+> --=20
+> Ricardo Salveti
 
