@@ -1,75 +1,82 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F948EB64DC
-	for <webhook@archiver.kernel.org>; Fri, 16 Jun 2023 20:07:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EF7FEB64DB
+	for <webhook@archiver.kernel.org>; Tue, 20 Jun 2023 17:09:28 +0000 (UTC)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.8268.1686946063739519242
+ by mx.groups.io with SMTP id smtpd.web11.1586.1687280967436436322
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 16 Jun 2023 13:07:44 -0700
+ Tue, 20 Jun 2023 10:09:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: list.ti.com, ip: 198.47.19.142, mailfrom: lcpdbld@list.ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=Svkt95pU;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35GK7gie115720;
-	Fri, 16 Jun 2023 15:07:42 -0500
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35GK7gN1073801
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35KH9PxO069873;
+	Tue, 20 Jun 2023 12:09:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1687280965;
+	bh=IxTGC7BX3Ff388/QU4U0vFdQ0TNNBAWSW9/gLGnbmec=;
+	h=From:To:Subject:Date;
+	b=Svkt95pUhXoZPrqjf6H8r3972/sozNTUyp0rZ/DCkBK95X4BodT8nt4GZd1eVIQo0
+	 6f39JmTJazqFOYpBFVjcTpLnQ8JP8p6ThJvp6ZibGGzjryQC5lP6UyONDq1ZW8Gle6
+	 XCJ0p31knUaZmhxlQyxwE7d8jAiOVzT7N/OfDD0Y=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35KH9POE091081
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 16 Jun 2023 15:07:42 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 16
- Jun 2023 15:07:42 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 20 Jun 2023 12:09:25 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 20
+ Jun 2023 12:09:25 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 16 Jun 2023 15:07:42 -0500
-Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35GK7gYK128208;
-	Fri, 16 Jun 2023 15:07:42 -0500
-Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
-	id 259C410FCF6B; Fri, 16 Jun 2023 15:07:42 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
+ Frontend Transport; Tue, 20 Jun 2023 12:09:25 -0500
+Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35KH9PTb019525;
+	Tue, 20 Jun 2023 12:09:25 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1qBer7-0004xW-Cd; Tue, 20 Jun 2023 12:09:25 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][kirkstone][PATCH 3/4] linux-ti-staging-rt_6.1: CI/CD Auto-Merger: cicd.kirkstone.202306161212
-Date: Fri, 16 Jun 2023 15:07:41 -0500
-Message-ID: <1686946062-54870-4-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1686946062-54870-1-git-send-email-lcpdbld@list.ti.com>
-References: <1686946062-54870-1-git-send-email-lcpdbld@list.ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH] kernel-rdepends: Add ti-eth-fw as an RDEPENDS
+Date: Tue, 20 Jun 2023 12:09:25 -0500
+Message-ID: <20230620170925.19023-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 16 Jun 2023 20:07:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16742
+ <meta-ti@lists.yoctoproject.org>; Tue, 20 Jun 2023 17:09:28 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16743
 
-Updated the value(s) for:
-  SRCREV
+When the ti-eth-fw recipe was split out from the ti-rtos-firmware recipe
+we forgot to add it as a dependency.
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-index 0038215..4bb11b6 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-@@ -6,5 +6,5 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
- 
- BRANCH = "ti-rt-linux-6.1.y"
- 
--SRCREV = "9745edfc822376108888d3de7bb53e063a7be888"
-+SRCREV = "409b8947dd9ba2a864c41ec645317eb14c33c123"
- PV = "6.1.26+git${SRCPV}"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc b/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
+index 18984e80..1f0c1ee8 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
++++ b/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
+@@ -31,3 +31,6 @@ RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j721e = " vxd-dec-fw"
+ RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j721s2 = " cnm-wave-fw"
+ RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j784s4 = " cnm-wave-fw"
+ RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:am62axx = " cnm-wave-fw"
++
++# Add run-time dependency for TI ETH firmware to the rootfs
++RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:k3 = " ti-eth-fw"
 -- 
-1.8.3.1
+2.17.1
 
 
