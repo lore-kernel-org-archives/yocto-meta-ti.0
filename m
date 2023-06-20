@@ -1,145 +1,86 @@
-Return-Path: <denis@denix.org>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C4C1EB64D7
-	for <webhook@archiver.kernel.org>; Tue, 20 Jun 2023 20:58:19 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.1227.1687294694187701261
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25098EB64D7
+	for <webhook@archiver.kernel.org>; Tue, 20 Jun 2023 21:18:40 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.1659.1687295917557337757
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 20 Jun 2023 13:58:15 -0700
+ Tue, 20 Jun 2023 14:18:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 590AB40C88;
-	Tue, 20 Jun 2023 20:58:13 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fdVii3TxtIYw; Tue, 20 Jun 2023 20:58:13 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-88-116.washdc.fios.verizon.net [100.15.88.116])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id E1F7F40A47;
-	Tue, 20 Jun 2023 20:58:08 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id A357E163B14; Tue, 20 Jun 2023 16:58:08 -0400 (EDT)
-Date: Tue, 20 Jun 2023 16:58:08 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Andrew Davis <afd@ti.com>
-Cc: reatmon@ti.com, Praneeth Bajjuri <praneeth@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][master/kirkstone][PATCH] kernel-rdepends: Add
- ti-eth-fw as an RDEPENDS
-Message-ID: <20230620205808.GL1518@denix.org>
-References: <20230620170925.19023-1-reatmon@ti.com>
- <20230620180537.GJ1518@denix.org>
- <9f070406-bc65-bfa1-b718-4fe935594183@ti.com>
- <68317d6f-8c87-a0db-12ab-232d2b7403c8@ti.com>
- <20230620203929.GK1518@denix.org>
- <545bf734-961c-4386-9cb9-9a316822f4db@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=eHsROLqH;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35KLIaVQ000864;
+	Tue, 20 Jun 2023 16:18:36 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1687295916;
+	bh=ArjqZdsAtModMNr3RMAgxOvA7wT4siB8DIIiuq53k+g=;
+	h=From:To:Subject:Date;
+	b=eHsROLqHYJHFwquKHw4EpfL7KKxPBh06gj97Q6OYqIaWhBL1FsACm9CKUFxpavgIT
+	 6SBgFxULZGl4dwbVmhTOBm26bmDqoDqQq06IDofmsd/QY+7/qoCJRSrzOSqaNpPvHh
+	 +cw5wrPTDoe0K3i/D+x0I2mymIgFKsE/9LqS3gBI=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35KLIa6l019123
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 20 Jun 2023 16:18:36 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 20
+ Jun 2023 16:18:35 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 20 Jun 2023 16:18:35 -0500
+Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35KLIZvw121133;
+	Tue, 20 Jun 2023 16:18:35 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1qBikF-0008IZ-Po; Tue, 20 Jun 2023 16:18:35 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master/kirkstone][PATCH v2] kernel-rdepends: Add ti-eth-fw as an RDEPENDS
+Date: Tue, 20 Jun 2023 16:18:35 -0500
+Message-ID: <20230620211835.31859-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-In-Reply-To: <545bf734-961c-4386-9cb9-9a316822f4db@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 20 Jun 2023 20:58:19 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16751
+ <meta-ti@lists.yoctoproject.org>; Tue, 20 Jun 2023 21:18:40 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16752
 
-On Tue, Jun 20, 2023 at 03:42:29PM -0500, Andrew Davis wrote:
-> On 6/20/23 3:39 PM, Denys Dmytriyenko wrote:
-> >On Tue, Jun 20, 2023 at 03:06:01PM -0500, Andrew Davis wrote:
-> >>On 6/20/23 2:17 PM, Ryan Eatmon via lists.yoctoproject.org wrote:
-> >>>
-> >>>
-> >>>On 6/20/2023 1:05 PM, Denys Dmytriyenko wrote:
-> >>>>On Tue, Jun 20, 2023 at 12:09:25PM -0500, Ryan Eatmon via lists.yoc=
-toproject.org wrote:
-> >>>>>When the ti-eth-fw recipe was split out from the ti-rtos-firmware =
-recipe
-> >>>>>we forgot to add it as a dependency.
-> >>>>>
-> >>>>>Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-> >>>>>---
-> >>>>> =A0 meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc | 3 +++
-> >>>>> =A0 1 file changed, 3 insertions(+)
-> >>>>>
-> >>>>>diff --git a/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc =
-b/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
-> >>>>>index 18984e80..1f0c1ee8 100644
-> >>>>>--- a/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
-> >>>>>+++ b/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
-> >>>>>@@ -31,3 +31,6 @@ RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j721=
-e =3D " vxd-dec-fw"
-> >>>>> =A0 RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j721s2 =3D " cnm-=
-wave-fw"
-> >>>>> =A0 RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j784s4 =3D " cnm-=
-wave-fw"
-> >>>>> =A0 RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:am62axx =3D " cnm=
--wave-fw"
-> >>>>>+
-> >>>>>+# Add run-time dependency for TI ETH firmware to the rootfs
-> >>>>>+RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:k3 =3D " ti-eth-fw"
-> >>>>
-> >>>>Though, ETH FW is only enabled on j721e, j7200 and j784s4:
-> >>>>
-> >>>>https://git.yoctoproject.org/meta-ti/commit/?id=3D91e5a1ca6541012e3=
-d4285479ecf5a9f353307f9
-> >>>>
-> >>>>ETH_FW_LIST =3D ""
-> >>>>ETH_FW_LIST:j721e =3D=A0=A0 "${ETH_FW}"
-> >>>>ETH_FW_LIST:j7200 =3D=A0=A0 "${ETH_FW}"
-> >>>>ETH_FW_LIST:j721s2 =3D=A0 ""
-> >>>>ETH_FW_LIST:j784s4 =3D=A0 "${ETH_FW}"
-> >>>>ETH_FW_LIST:am65xx =3D=A0 ""
-> >>>>ETH_FW_LIST:am64xx =3D=A0 ""
-> >>>>ETH_FW_LIST:am62xx =3D=A0 ""
-> >>>>ETH_FW_LIST:am62axx =3D ""
-> >>>>
-> >>>>Other platforms generate an empty package w/o the binary in it. So =
-I guess for
-> >>>>simpler dependency pulling it for all K3 platforms is an option? On=
- one hand
-> >>>>it makes kernel dependencies simpler, but executes build/packaging =
-process for
-> >>>>the firmware that ends up being no-op and produce an empty output..=
-.
-> >>>
-> >>>Andrew and I talked about.=A0 It seems annoying to have to update tw=
-o files to add a platform, BUT doing it this way does mean we execute the=
- recipe when the recipe does nothing...
-> >>>
-> >>>This is sort of a holdover from the ti-rtos-firmware way of doing th=
-ings.
-> >>>
-> >>>Let me think about it...
-> >>>
-> >>
-> >>Another thing we may want to do is not have this recipe be device spe=
-cific,
-> >>it is just a small firmware, no good reason to only deploy one per de=
-vice.
-> >>I'd say we ship all unconditionally in this package, then it won't ha=
-ve to
-> >>be re-built for each device either.
-> >
-> >Is the binary identical between the platforms?
-> >
->=20
-> No, but the binaries are named differently for each platform, so they d=
-o not conflict.
-> Same as most other firmware packages, ship all the related firmware in =
-the same package,
-> and let the kernel pick the firmware it actually needs based on name fo=
-r the platform
-> currently running.
+When the ti-eth-fw recipe was split out from the ti-rtos-firmware recipe
+we forgot to add it as a dependency.
 
-Ah, I see. Yeah, that could work.
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+v2: Changed the overrides to just the platforms that match and not k3.
 
---=20
-Denys
+ meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc b/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
+index 18984e80..d2dcc3e5 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
++++ b/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
+@@ -31,3 +31,8 @@ RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j721e = " vxd-dec-fw"
+ RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j721s2 = " cnm-wave-fw"
+ RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j784s4 = " cnm-wave-fw"
+ RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:am62axx = " cnm-wave-fw"
++
++# Add run-time dependency for TI ETH firmware to the rootfs
++RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j721e = " ti-eth-fw"
++RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j7200 = " ti-eth-fw"
++RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:j784s4 = " ti-eth-fw"
+-- 
+2.17.1
+
 
