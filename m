@@ -1,101 +1,92 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <jpanis@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF97CEB64D8
-	for <webhook@archiver.kernel.org>; Wed, 21 Jun 2023 02:17:33 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.185.1687313850124641049
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F0BCEB64D7
+	for <webhook@archiver.kernel.org>; Wed, 21 Jun 2023 06:31:05 +0000 (UTC)
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web10.5018.1687329056546484369
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 20 Jun 2023 19:17:30 -0700
+ Tue, 20 Jun 2023 23:30:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=P3bx/5IZ;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35L2HSLk059275;
-	Tue, 20 Jun 2023 21:17:28 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1687313848;
-	bh=1h4Oz7OfvpEhr/Wk8juJVvQxFedRFj1TfCy5JWTLoxU=;
-	h=From:To:Subject:Date;
-	b=P3bx/5IZqJBtiNi0jZTbMi3x5gVqJdm47pXp80Fu5++DSvKcDtWTt1wg2ksBz2H8C
-	 GQiqJvwVJgPPe5LJ6WppgaXtdwGyn5mWrHIhyT/1Sfu1IQ1ekbym0qKJLI2demd2gI
-	 3m8NEz4eGEqfBcxxzAqWiwtgF676yVpGIgQX6AtU=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35L2HSKV030861
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 20 Jun 2023 21:17:28 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 20
- Jun 2023 21:17:27 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 20 Jun 2023 21:17:28 -0500
-Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35L2HRP7028418;
-	Tue, 20 Jun 2023 21:17:27 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1qBnPT-0004GL-JX; Tue, 20 Jun 2023 21:17:27 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/kirkstone][PATCH v2] conf: am335x-evm and am437x-evm: bump max_leb_cnt
-Date: Tue, 20 Jun 2023 21:17:27 -0500
-Message-ID: <20230621021727.16310-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=fail reason="signature has expired" header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=4ubkdrJU;
+ spf=pass (domain: baylibre.com, ip: 209.85.218.41, mailfrom: jpanis@baylibre.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-988a5383fd4so568237566b.0
+        for <meta-ti@lists.yoctoproject.org>; Tue, 20 Jun 2023 23:30:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1687329054; x=1689921054;
+        h=content-transfer-encoding:in-reply-to:from:references:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=nBRfa/8iuhrIWfxcT0DK40OBWm9NAySWq/iM0YeCIe0=;
+        b=4ubkdrJUlBMbANYgRoiKb05K3/Yvti/XiC3ZY5B9lugt6qamvjsjQg1yk1yESqHuJe
+         xGezCMWlmf6OYoaX0YiKqPpNAF0+yb8LzPscfd8ipYn5gNgZlLSCnGLg4MjpstAgQ/Pd
+         puh+HcSgmK/q3cyrmK9z3gl3/E03rzDairLzrvF6iia9cH+sDh86kqs5U64ID0/p3wiW
+         DpfHuJ1InBfBx3CUyb9k6YWNmnBcJ6RwxSiMJS7/BVvO1HiC/wjGVvkYTi25rfpKZeRd
+         2TOGPOpku5/2UozPXXaLIwVbRNtTuvAF4TxHmMcDCqJIPWqG144jYkoJ9hMQffZEb4dG
+         Lcaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1687329054; x=1689921054;
+        h=content-transfer-encoding:in-reply-to:from:references:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=nBRfa/8iuhrIWfxcT0DK40OBWm9NAySWq/iM0YeCIe0=;
+        b=Z2V650avzLoJguvPTdb9XshFGLFsQ0xHzWbcFUmfEwwmkE+tigkhNqSyH38S5D/rL9
+         Kc0RK8pvBvdmvaeyelYPKoo2oM73DT5xwvvvgpx0R6FDe352CgloQPR7tpK9lEMdzMd+
+         VM75L6NwVXOgTIPzsNU9PJm2Bx64ytPVu3Efi9k1apLHX/ffBRbjyLTHWTF76frb5v1F
+         a/pEenkDI1KHzXsyfJcV1ZWPXcaGu5IfbkBbu87Epaq9gpIYJLU8HIDRdMk88OfD4tSb
+         WiTMW1h2VnXDEtAZ50pylVmfND2gsfNJGu/+gAaQ9kxPUnl6Iy/LcA9Nt7OA8SWbm9d/
+         iJ5w==
+X-Gm-Message-State: AC+VfDyPDf01/cxMUH5963ZOveNlE912KysL2B9xm2jSYRWGg7FeRBXR
+	0wsymUpVfvz/Q2bpM5flpUV61g==
+X-Google-Smtp-Source: ACHHUZ4VWVEkYFm27j1oaPQBSYpNGyEoTvlHv/wmUD1W2JxT6qUFpC+TYEYsYZZ9T+Qb+S69846SXg==
+X-Received: by 2002:a17:907:868d:b0:982:8bd5:4229 with SMTP id qa13-20020a170907868d00b009828bd54229mr18504050ejc.25.1687329054620;
+        Tue, 20 Jun 2023 23:30:54 -0700 (PDT)
+Received: from [192.168.31.121] (135.21.205.77.rev.sfr.net. [77.205.21.135])
+        by smtp.gmail.com with ESMTPSA id a6-20020a1709063a4600b00987e76827b2sm2513333ejf.53.2023.06.20.23.30.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 20 Jun 2023 23:30:54 -0700 (PDT)
+Message-ID: <b4c70bf5-a04c-b5b7-933c-477d71032a98@baylibre.com>
+Date: Wed, 21 Jun 2023 08:30:52 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [meta-ti][master/kirkstone][PATCH] conf: am335x-evm and
+ am437x-evm: bump max_leb_cnt
+Content-Language: en-US
+To: "Bajjuri, Praneeth" <praneeth@ti.com>, Ryan Eatmon <reatmon@ti.com>,
+ Denys Dmytriyenko <denys@konsulko.com>, meta-ti@lists.yoctoproject.org
+References: <20230620170932.19093-1-reatmon@ti.com>
+ <6cee690d-ccc6-7a5d-671a-9152632d3cab@ti.com>
+From: Julien Panis <jpanis@baylibre.com>
+In-Reply-To: <6cee690d-ccc6-7a5d-671a-9152632d3cab@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 21 Jun 2023 02:17:33 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16755
+ <meta-ti@lists.yoctoproject.org>; Wed, 21 Jun 2023 06:31:05 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16756
 
-New features added require another increase to max_leb_cnt.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
-v2: Another feature got added that necessitated a bump in the count
-again.  Rather than create another patch just push a v2 before this is
-accepted.
 
- meta-ti-bsp/conf/machine/am335x-evm.conf | 2 +-
- meta-ti-bsp/conf/machine/am437x-evm.conf | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+On 6/20/23 21:25, Bajjuri, Praneeth wrote:
+>
+>
+> On 6/20/2023 12:09 PM, Ryan Eatmon wrote:
+>> New features added require another increase to max_leb_cnt.
+>
+> Julien,
+>
+> Please review.
+>
+>
+>>
+>> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+>> ---
+>>   meta-ti-bsp/conf/machine/am335x-evm.conf | 2 +-
+>>   meta-ti-bsp/conf/machine/am437x-evm.conf | 2 +-
+>>   2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/machine/am335x-evm.conf b/meta-ti-bsp/conf/machine/am335x-evm.conf
-index 266f1f20..f19cc441 100644
---- a/meta-ti-bsp/conf/machine/am335x-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am335x-evm.conf
-@@ -23,7 +23,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS ?= "-F -m 2048 -e 126976 -c 10300"
-+MKUBIFS_ARGS ?= "-F -m 2048 -e 126976 -c 10800"
- 
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
-diff --git a/meta-ti-bsp/conf/machine/am437x-evm.conf b/meta-ti-bsp/conf/machine/am437x-evm.conf
-index 6501a3ef..d70d591b 100644
---- a/meta-ti-bsp/conf/machine/am437x-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am437x-evm.conf
-@@ -21,7 +21,7 @@ SERIAL_CONSOLES = "115200;ttyS0"
- # UBI: logical eraseblock size:    253952 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 994 LEBs
--MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 5000"
-+MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 5200"
- 
- # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
- # from dmesg:
--- 
-2.17.1
-
+Reviewed-by: Julien Panis <jpanis@baylibre.com>
 
