@@ -1,97 +1,185 @@
-Return-Path: <d.schultz@phytec.de>
+Return-Path: <quaresma.jose@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E983EB64D7
-	for <webhook@archiver.kernel.org>; Wed, 21 Jun 2023 07:58:35 +0000 (UTC)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- by mx.groups.io with SMTP id smtpd.web10.5849.1687334310305063117
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEBB6EB64D7
+	for <webhook@archiver.kernel.org>; Wed, 21 Jun 2023 12:11:36 +0000 (UTC)
+Received: from mail-vs1-f48.google.com (mail-vs1-f48.google.com [209.85.217.48])
+ by mx.groups.io with SMTP id smtpd.web11.9158.1687349486516982588
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 21 Jun 2023 00:58:31 -0700
+ Wed, 21 Jun 2023 05:11:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@phytec.de header.s=a4 header.b=K8x9b8E3;
- spf=pass (domain: phytec.de, ip: 91.26.50.163, mailfrom: d.schultz@phytec.de)
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
-	q=dns/txt; i=@phytec.de; t=1687334307; x=1689926307;
-	h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=a04ZUPVk1KbmLtkHUqIO2iL8kD2uYbvOJvN0acfP5i0=;
-	b=K8x9b8E3UfCCRWPeF621cKpmeud9E1Io4YbC/LcinyPi9rQgdPdsLRj0Y7+EXtRN
-	ZJ1X0KQORRlTPwAQz6DPANQ5iAg9pg98Ltk7hP1gfDHSpmwIsVzZOsESaVQHutjT
-	0ZhB36071K4zO4+oyeyP5GeTBZknRCgbNoJ71JOqPvk=;
-X-AuditID: ac14000a-923ff70000007ecb-5f-6492ada33584
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
-	(using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(Client did not present a certificate)
-	by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 8C.BB.32459.3ADA2946; Wed, 21 Jun 2023 09:58:27 +0200 (CEST)
-Received: from ls-radium.phytec (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.18; Wed, 21 Jun
- 2023 09:58:26 +0200
-From: Daniel Schultz <d.schultz@phytec.de>
-To: <meta-ti@lists.yoctoproject.org>
-CC: Daniel Schultz <d.schultz@phytec.de>
-Subject: [kirkstone+][PATCH] ti-img-rogue-umlibs: Make x11 dependency optional
-Date: Wed, 21 Jun 2023 00:58:11 -0700
-Message-ID: <20230621075811.1998481-1-d.schultz@phytec.de>
-X-Mailer: git-send-email 2.25.1
+ dkim=fail reason="signature has expired" header.i=@gmail.com header.s=20221208 header.b=Zf4UN0pc;
+ spf=pass (domain: gmail.com, ip: 209.85.217.48, mailfrom: quaresma.jose@gmail.com)
+Received: by mail-vs1-f48.google.com with SMTP id ada2fe7eead31-440cff7870aso638863137.1
+        for <meta-ti@lists.yoctoproject.org>; Wed, 21 Jun 2023 05:11:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1687349485; x=1689941485;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=Fnx2RbgM2ulAksod1rsj7Ez9TPFpc1Yx/iO8fp2WNO4=;
+        b=Zf4UN0pcyX09YqJ4takvJEaUkmxNiDhtSX2znq91CIMlpu3ZLeqkeOlc9C6TgE6zzL
+         +oTbp/Xn6vMSJ03qOKCKfVmN+9ZuY1v7oKkgNFl9BdqzCeI1YtpGdZxcYyiIgCmhV7Z/
+         gQyepnhRwn3zjPEgZv1KDaV9JoTmvTdXWU6e7cxWiYXCRxflBGMnTAkmaJkvNcn6GLyI
+         FVhHhnKNJ1wT8hvmDUJIhR2kz1fXK3HL6fhbtg8VUF+UVZ4qFb8ROS9m3BOQ8a0WZRum
+         mR9S/fHcP/yVTYHvjeD/D0zWAB38Trk5UpW44drZkgCSib0try2ab/eePBePouAmVb41
+         Qamw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1687349485; x=1689941485;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Fnx2RbgM2ulAksod1rsj7Ez9TPFpc1Yx/iO8fp2WNO4=;
+        b=VvjayHGTSMXwlWP32BKoloAzcyzIVJB1MuDXqdPncF4CcoEfPeVdyhyUmiG8zp/sle
+         tJfnDPfSofjHIIMnzPqVxnZ8dtMmUfZc//4aVrfbRbVan8BHkcHEJ3P8K2VALM9qFUQX
+         eG7DL0q8k5zqo1f7azJxy6jYCVPnYp3HNcsgbHAuoO25bBW3ssT5ZQ0XOzo9b8SWWrKu
+         FeixA8r9CQGFHrDdWg05yaj5m+B8WYlVFgJyp8F+GElDFnA1DkXNbEIy0nHKH5dlsDNn
+         q/AsChehHkzmJ+fLfr4nw0DJd+auxvTRd++tAP6SUohR3HW96MdjWc7YJ8Ff2YWv/XLY
+         wKGw==
+X-Gm-Message-State: AC+VfDwD2NbLnJj7+xfTylBrsMF6pWiv0M87wb5ufETh6IhLpZBAqdRl
+	aMf7hIIJRVQ6CnpgvxOs69CbGq1l4iC0247C9v8=
+X-Google-Smtp-Source: ACHHUZ7jyfDESJWoGLAZXtb+nPD+bcBjQuPzHPywfonVXLBkar4uKLE2QyyOYrePb+EHJXCrCQMgEh5NT53QJ+577ag=
+X-Received: by 2002:a05:6102:3d9f:b0:440:ce13:1eff with SMTP id
+ h31-20020a0561023d9f00b00440ce131effmr1242491vsv.17.1687349485365; Wed, 21
+ Jun 2023 05:11:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprJLMWRmVeSWpSXmKPExsWyRpKBR3fx2kkpBhs28lvM/XKLzYHRY+ap
-	R8wBjFFcNimpOZllqUX6dglcGVNnHGcu2MFdcfHENKYGxsOcXYycHBICJhIPnlxi7GLk4hAS
-	WMIkseb+DFYI5wGjxP6TK5hAqtgEtCTubJnLDGKLCKhITNw2D6iIg4NZQEOi/RlYibCAn0TP
-	6pOMIDaLgKrE4vfnwGxeASuJj51/WCCWyUvMvPSdHSIuKHFy5hOwODNQvHnrbGYIW0Li4IsX
-	YLaQgILE7G2TGWF6p517zQxhh0ps/bKdaQKjwCwko2YhGTULyagFjMyrGIVyM5OzU4sys/UK
-	MipLUpP1UlI3MYKCT4SBawdj3xyPQ4xMHIyHGCU4mJVEeIP29qUI8aYkVlalFuXHF5XmpBYf
-	YpTmYFES573fw5QoJJCeWJKanZpakFoEk2Xi4JRqYPSqYu1bV3gvc7a0FNeGgNKfjTO+2awI
-	+f7KOIzzpcqhq4ciFIvn5c9lfH+4arvvLr2DAhNvh5YE2F5XYdp6XeuLlqG2iJ3OhN/c2Tw9
-	mo9+bAziC8t3jZ2dN3v25jOpvvxfFzAlSERpz55n0Bh5IXdOxgT3Hk25CEWm9PWsn1Sn87eV
-	bUh9pMRSnJFoqMVcVJwIAPOkjDQsAgAA
+References: <20230530154218.21641-1-afd@ti.com>
+In-Reply-To: <20230530154218.21641-1-afd@ti.com>
+From: Jose Quaresma <quaresma.jose@gmail.com>
+Date: Wed, 21 Jun 2023 13:11:14 +0100
+Message-ID: <CANPvuR=hzxhywNxt13TW-Qio5VRZxXGCaE4=zzsbbtY=najPhg@mail.gmail.com>
+Subject: Re: [meta-ti][master/kirkstone][PATCH 1/2] conf: machine: am62xx:
+ Default to HS-FS instead of GP
+To: afd@ti.com
+Cc: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>, meta-ti@lists.yoctoproject.org
+Content-Type: multipart/alternative; boundary="000000000000afedab05fea2aa32"
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 21 Jun 2023 07:58:35 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16757
+ <meta-ti@lists.yoctoproject.org>; Wed, 21 Jun 2023 12:11:36 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16758
 
-libx11-xcb has a hard dependency for x11 but is included by the
-libvk-rogue package. Only include libvk-rogue when the
-DISTRO_FEATURES "vulkan x11 wayland" are enabled, which is identical
-to the RRECOMMENDS variable.
+--000000000000afedab05fea2aa32
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
----
- .../powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb       | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+Hi Andrew,
 
-diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb
-index 26090038..23596895 100644
---- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb
-+++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb
-@@ -33,13 +33,16 @@ do_install:append() {
-         mv ${D}/lib/firmware ${D}${nonarch_base_libdir}
-         rmdir ${D}/lib
-     fi
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'false', 'true', d)}; then
-+        rm -rf ${D}${libdir}/libVK_IMG.so*
-+    fi
- }
- 
- PACKAGES = " \
-     libgles1-rogue libgles1-rogue-dev \
-     libgles2-rogue libgles2-rogue-dev \
-     libgles3-rogue libgles3-rogue-dev \
--    libvk-rogue libvk-rogue-dev \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "vulkan x11 wayland", "libvk-rogue libvk-rogue-dev", "", d)} \
-     libopencl-rogue libopencl-rogue-dev \
-     libopencl-rogue-tools \
-     ${PN}-tools \
--- 
-2.25.1
+Andrew Davis via lists.yoctoproject.org <afd=3Dti.com@lists.yoctoproject.or=
+g>
+escreveu no dia ter=C3=A7a, 30/05/2023 =C3=A0(s) 16:47:
 
+> This matches how we had the symlink for tiboot3.bin before binman.
+>
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>  meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
+> b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
+> index 724a8d4a..9889ae38 100644
+> --- a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
+> +++ b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
+> @@ -6,6 +6,6 @@ require conf/machine/include/k3r5.inc
+>
+>  SYSFW_SOC =3D "am62x"
+>  SYSFW_CONFIG =3D "evm"
+> -SYSFW_SUFFIX =3D "gp"
+> +SYSFW_SUFFIX =3D "hs-fs"
+>
+
+Should we use a default assignment ? so it will be easier to change for
+folks using the gp.
+Currently there is no way without using the :remove override.
+
+Jose
+
+
+>
+>  UBOOT_MACHINE =3D "am62x_evm_r5_defconfig"
+> --
+> 2.39.2
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#16623):
+> https://lists.yoctoproject.org/g/meta-ti/message/16623
+> Mute This Topic: https://lists.yoctoproject.org/mt/99222576/5052612
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [
+> quaresma.jose@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--=20
+Best regards,
+
+Jos=C3=A9 Quaresma
+
+--000000000000afedab05fea2aa32
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi Andrew,</div><br><div class=3D"gmail_quote"><div d=
+ir=3D"ltr" class=3D"gmail_attr">Andrew Davis via <a href=3D"http://lists.yo=
+ctoproject.org" target=3D"_blank">lists.yoctoproject.org</a> &lt;afd=3D<a h=
+ref=3D"mailto:ti.com@lists.yoctoproject.org" target=3D"_blank">ti.com@lists=
+.yoctoproject.org</a>&gt; escreveu no dia ter=C3=A7a, 30/05/2023 =C3=A0(s) =
+16:47:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
+px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">This matc=
+hes how we had the symlink for tiboot3.bin before binman.<br>
+<br>
+Signed-off-by: Andrew Davis &lt;<a href=3D"mailto:afd@ti.com" target=3D"_bl=
+ank">afd@ti.com</a>&gt;<br>
+---<br>
+=C2=A0meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf b/meta-ti-bsp/co=
+nf/machine/am62xx-evm-k3r5.conf<br>
+index 724a8d4a..9889ae38 100644<br>
+--- a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf<br>
++++ b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf<br>
+@@ -6,6 +6,6 @@ require conf/machine/include/k3r5.inc<br>
+<br>
+=C2=A0SYSFW_SOC =3D &quot;am62x&quot;<br>
+=C2=A0SYSFW_CONFIG =3D &quot;evm&quot;<br>
+-SYSFW_SUFFIX =3D &quot;gp&quot;<br>
++SYSFW_SUFFIX =3D &quot;hs-fs&quot;<br></blockquote><div><br>Should we use =
+a default assignment=C2=A0? so it will be easier=C2=A0to change for folks u=
+sing the gp.<br></div><div>Currently there is no way without using the :rem=
+ove override.</div><div><br></div><div>Jose<br>=C2=A0</div><blockquote clas=
+s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
+gb(204,204,204);padding-left:1ex">
+<br>
+=C2=A0UBOOT_MACHINE =3D &quot;am62x_evm_r5_defconfig&quot;<br>
+-- <br>
+2.39.2<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#16623): <a href=3D"https://lists.yoctoproject.org/g/met=
+a-ti/message/16623" rel=3D"noreferrer" target=3D"_blank">https://lists.yoct=
+oproject.org/g/meta-ti/message/16623</a><br>
+Mute This Topic: <a href=3D"https://lists.yoctoproject.org/mt/99222576/5052=
+612" rel=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/mt=
+/99222576/5052612</a><br>
+Group Owner: <a href=3D"mailto:meta-ti%2Bowner@lists.yoctoproject.org" targ=
+et=3D"_blank">meta-ti+owner@lists.yoctoproject.org</a><br>
+Unsubscribe: <a href=3D"https://lists.yoctoproject.org/g/meta-ti/unsub" rel=
+=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/meta-ti/=
+unsub</a> [<a href=3D"mailto:quaresma.jose@gmail.com" target=3D"_blank">qua=
+resma.jose@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div><br clear=3D"all"><div><br></div><span class=3D"gmail_si=
+gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
+iv dir=3D"ltr">Best regards,<div><br>Jos=C3=A9 Quaresma</div></div></div></=
+div>
+
+--000000000000afedab05fea2aa32--
 
