@@ -1,153 +1,112 @@
-Return-Path: <ricardo@foundries.io>
+Return-Path: <a-limaye@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5734EB64D7
-	for <webhook@archiver.kernel.org>; Thu, 29 Jun 2023 02:43:32 +0000 (UTC)
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
- by mx.groups.io with SMTP id smtpd.web10.218.1688006607800911703
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A858EB64D9
+	for <webhook@archiver.kernel.org>; Thu, 29 Jun 2023 08:04:34 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.3664.1688025868973666272
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 28 Jun 2023 19:43:28 -0700
+ Thu, 29 Jun 2023 01:04:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@foundries.io header.s=google header.b=L5DAkTYD;
- spf=pass (domain: foundries.io, ip: 209.85.167.42, mailfrom: ricardo@foundries.io)
-Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-4fb8574a3a1so314436e87.1
-        for <meta-ti@lists.yoctoproject.org>; Wed, 28 Jun 2023 19:43:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=foundries.io; s=google; t=1688006605; x=1690598605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+JAwsyb3YbQBmZCQSADRiENuGfQ2/vg0YhrOj69tdy8=;
-        b=L5DAkTYDMYRo80JO1cVo2k46LoyZnb5QRBNR7kbtBbQNuXK1w3b2Dc7zc2oT1+O9jI
-         lsHQma75BQ9irXi0sMJ8YxdHRhU6PL0eaWRE2jZoK4BMBqzVGd/deK/aCxVu3aDQSMFG
-         LGbaQYwNzJvRvi2i0v3Kazih+AjgnSgMggQwMPuj1ilaVSRfmk9uYOb1hmYOLFxRhm4F
-         XiuAhkdM2W7Re6nbogQiUJs0pnU0BKka0S4wNcyMhEJVLm/RHWuTDLPwhNxio5rkafvK
-         P3jMplADUIk7w4qnlTLjutZv1gUXXAaIDBZfR7uXr7NXjBv6qSJpw+v/mFxpnk6alGka
-         s3Iw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1688006605; x=1690598605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=+JAwsyb3YbQBmZCQSADRiENuGfQ2/vg0YhrOj69tdy8=;
-        b=kneGsIVmLSdkm0MNxI+0oDbGOKArBUAsurFlopp1acf/AvxfIg1erkuuurCDRf2h24
-         KiwGTiA1iqvJmarfh5G20OEHS36r+EszxhfSLkhu1u0SfxNu7kJBVq+I0HuXgcgN5rgQ
-         M/liZFyStbUyBx1lrkMZitDr7tldNGLACJq6mW+xzQpgQuSmnIYPzB34s5UXvL+0pb9d
-         1kQ9x8Q+lRE4lKc648Ac6yerg5X3j8m5xfWFkWevudy+gIobd+D1i2KiTr7j4NqeOTRZ
-         M1AGLbq+pr1ArUFn7/MC0h488Lcf6PMOYUM0DZy4LV0/Na/cDgiMq0hMwf0L76CNeME9
-         QcYw==
-X-Gm-Message-State: AC+VfDy5X3p7Jb77Ulgr+1C9CKE/0q9SEoude3/Lu5r5Ydf9BJna6u5J
-	VLNC352jAXXtKZDddlV9uvSFaFAEwrEJgB1Ptx6G
-X-Google-Smtp-Source: ACHHUZ7+VPZ+Y5kSIN1S1poZDh+Rf7LA2ZPcDRvSJZP+XZehQNM9TTqtFqfprLgbs7X4SVhdKGr/l141cIT0KqvvmO8=
-X-Received: by 2002:a2e:90d4:0:b0:2b6:a084:b52d with SMTP id
- o20-20020a2e90d4000000b002b6a084b52dmr7315889ljg.29.1688006605151; Wed, 28
- Jun 2023 19:43:25 -0700 (PDT)
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=E6LJzPIP;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: a-limaye@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 35T84ROf078828
+	for <meta-ti@lists.yoctoproject.org>; Thu, 29 Jun 2023 03:04:27 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1688025867;
+	bh=7z+MBvEDvnSgDdDWtmM8L85AgHXSlfl2AIW5RfxGz1E=;
+	h=From:To:CC:Subject:Date;
+	b=E6LJzPIPrdtTEeMV3lIsnFwD76NcXlqApTb8fM+Yen0nhyUDJVUi+//t7+389c1CD
+	 +pINNBspgmCSM1h5Y7Z81UUj/qDkJl90UBAgzpGU4rdxx5/xxSTiqI5XF8ovj04uEH
+	 8ythJdSzhQEjGQn8SVI059BaDL/QNQuRcHf+sUQw=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 35T84Rnk020166
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Thu, 29 Jun 2023 03:04:27 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 29
+ Jun 2023 03:04:27 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 29 Jun 2023 03:04:27 -0500
+Received: from PSDKL-Workstation0.dhcp.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 35T84Pre020123;
+	Thu, 29 Jun 2023 03:04:25 -0500
+From: Aniket Limaye <a-limaye@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <l-weaver@ti.com>, <u-kumar1@ti.com>, <reatmon@ti.com>,
+        <a-chirania@ti.com>, Aniket Limaye <a-limaye@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH] conf: machine: j7*: Update KERNERL_DEVICETREE_PREFIX to match latest filenames
+Date: Thu, 29 Jun 2023 13:34:22 +0530
+Message-ID: <20230629080422.379634-1-a-limaye@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230629012145.407276-1-ricardo@foundries.io> <f601ff40-4022-7a7a-cc3a-d0744bbd471f@ti.com>
-In-Reply-To: <f601ff40-4022-7a7a-cc3a-d0744bbd471f@ti.com>
-From: Ricardo Salveti <ricardo@foundries.io>
-Date: Wed, 28 Jun 2023 23:42:48 -0300
-Message-ID: <CAAaKDhEtsqtR+OQurgnnqimopHgGDweCLaj3dZYYwytUcKp=dA@mail.gmail.com>
-Subject: Re: [EXTERNAL] [PATCH] ti-img-rogue-umlibs: use image path to avoid
- local path expansion
-To: Randolph Sapp <rs@ti.com>
-Cc: meta-ti@lists.yoctoproject.org, jose.quaresma@foundries.io
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 29 Jun 2023 02:43:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16800
+ <meta-ti@lists.yoctoproject.org>; Thu, 29 Jun 2023 08:04:34 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16801
 
-On Wed, Jun 28, 2023 at 10:48=E2=80=AFPM Randolph Sapp <rs@ti.com> wrote:
->
-> On 6/28/23 20:21, Ricardo Salveti wrote:
-> > Provide a package file list based on the image path to avoid it later b=
-e
-> > expanded by using the host system path.
-> >
-> > Fixes a package QA error when files named similarly are provided by the
-> > host system (e.g. /usr/bin/oclock is a match for /usr/bin/ocl*).
-> >
-> > Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
-> > ---
-> >   .../ti-img-rogue-umlibs_23.1.6404501.bb       | 21 ++++++++++++------=
--
-> >   1 file changed, 14 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-u=
-mlibs_23.1.6404501.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-=
-rogue-umlibs_23.1.6404501.bb
-> > index c012859f..229fc081 100644
-> > --- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_2=
-3.1.6404501.bb
-> > +++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_2=
-3.1.6404501.bb
-> > @@ -38,32 +38,39 @@ PACKAGECONFIG[vulkan] =3D ",,,${VULKAN_LIB_PACKAGES=
-}"
-> >   PACKAGECONFIG[opencl] =3D ",,,${OPENCL_LIB_PACKAGES},libopencl-rogue-=
-tools"
-> >
-> >   def get_file_list(package_list_var, d):
-> > +    import os
-> > +    image_dir =3D d.getVar("D")
-> >       file_list =3D []
-> >       package_list =3D d.getVar(package_list_var)
-> >       if package_list:
-> >           for package in package_list.split():
-> >               package_files =3D d.getVar(f"FILES:{package}")
-> >               if package_files:
-> > -                file_list.append(package_files)
-> > +                for f in package_files.split():
-> > +                    if os.path.isabs(f):
-> > +                        f =3D '.' + f
-> > +                    if not f.startswith("./"):
-> > +                        f =3D './' + f
-> > +                    file_list.append(os.path.join(image_dir, f))
-> >       return " ".join(file_list)
-> >
-> >   do_install:append() {
-> >       if ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'false', 'true=
-', d)}; then
-> >           for file in ${@get_file_list('GLES_PACKAGES', d)}; do
-> > -            rm -rf ${D}/${file}
-> > -            rmdir --ignore-fail-on-non-empty $(dirname ${D}/${file})
-> > +            rm -rf ${file}
-> > +            rmdir --ignore-fail-on-non-empty $(dirname ${file})
-> >           done
-> >       fi
-> >       if ${@bb.utils.contains('PACKAGECONFIG', 'vulkan', 'false', 'true=
-', d)}; then
-> >           for file in ${@get_file_list('VULKAN_PACKAGES', d)}; do
-> > -            rm -rf ${D}/${file}
-> > -            rmdir --ignore-fail-on-non-empty $(dirname ${D}/${file})
-> > +            rm -rf ${file}
-> > +            rmdir --ignore-fail-on-non-empty $(dirname ${file})
-> >           done
-> >       fi
-> >       if ${@bb.utils.contains('PACKAGECONFIG', 'opencl', 'false', 'true=
-', d)}; then
-> >           for file in ${@get_file_list('OPENCL_PACKAGES', d)}; do
-> > -            rm -rf ${D}/${file}
-> > -            rmdir --ignore-fail-on-non-empty $(dirname ${D}/${file})
-> > +            rm -rf ${file}
-> > +            rmdir --ignore-fail-on-non-empty $(dirname ${file})
-> >           done
-> >       fi
-> >       if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'f=
-alse', d)}; then
->
-> Hey, thanks for the patch. I believe this patch I submitted earlier
-> should also solve the issue you were facing. It's still in the -next
-> branches though.
->
-> https://lists.yoctoproject.org/g/meta-ti/message/16790
+1) The k3-fpdlink-* dtbs were missing.
+2) k3-j7200-mcspi-loopback.dts -> k3-j7200-evm-mcspi-loopback.dtso
 
-Cool, didn't notice this one, and yeah, should also solve the same issue.
+Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+---
+ meta-ti-bsp/conf/machine/j721e-evm.conf  | 3 ++-
+ meta-ti-bsp/conf/machine/j721s2-evm.conf | 3 ++-
+ meta-ti-bsp/conf/machine/j784s4-evm.conf | 3 ++-
+ 3 files changed, 6 insertions(+), 3 deletions(-)
 
-Thanks!
---
-Ricardo Salveti
+diff --git a/meta-ti-bsp/conf/machine/j721e-evm.conf b/meta-ti-bsp/conf/machine/j721e-evm.conf
+index 8682ad60..5e1f6dca 100644
+--- a/meta-ti-bsp/conf/machine/j721e-evm.conf
++++ b/meta-ti-bsp/conf/machine/j721e-evm.conf
+@@ -6,7 +6,8 @@ require conf/machine/include/j721e.inc
+ 
+ KERNEL_DEVICETREE_PREFIX = " \
+     ti/k3-j721e \
+-    ti/k3-j7200-mcspi-loopback \
++    ti/k3-fpdlink \
++    ti/k3-j7200-evm-mcspi-loopback \
+ "
+ 
+ KERNEL_DEVICETREE = " \
+diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+index 4816f9cf..56a949e5 100644
+--- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
++++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+@@ -9,7 +9,8 @@ OPTEE_K3_USART = "0x8"
+ 
+ KERNEL_DEVICETREE_PREFIX = " \
+     ti/k3-j721s2 \
+-    ti/k3-j7200-mcspi-loopback \
++    ti/k3-fpdlink \
++    ti/k3-j7200-evm-mcspi-loopback \
+     ti/k3-am68-sk \
+ "
+ 
+diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf b/meta-ti-bsp/conf/machine/j784s4-evm.conf
+index 47290cc0..2421b0b9 100644
+--- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
++++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
+@@ -9,7 +9,8 @@ OPTEE_K3_USART = "0x8"
+ 
+ KERNEL_DEVICETREE_PREFIX = " \
+     ti/k3-j784s4 \
+-    ti/k3-j7200-mcspi-loopback \
++    ti/k3-fpdlink \
++    ti/k3-j7200-evm-mcspi-loopback \
+     ti/k3-am69-sk \
+ "
+ 
+-- 
+2.34.1
+
 
