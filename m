@@ -1,165 +1,138 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <matthias.schiffer@ew.tq-group.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F4C9EB64D9
-	for <webhook@archiver.kernel.org>; Fri,  7 Jul 2023 22:16:16 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.7477.1688768168961085609
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1CB3EB64D9
+	for <webhook@archiver.kernel.org>; Mon, 10 Jul 2023 14:20:50 +0000 (UTC)
+Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
+ by mx.groups.io with SMTP id smtpd.web10.40961.1688998840686017626
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 07 Jul 2023 15:16:09 -0700
+ Mon, 10 Jul 2023 07:20:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=n01vv9Zm;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 367MG5QB097256;
-	Fri, 7 Jul 2023 17:16:05 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1688768165;
-	bh=TWhXFXJMf26nVwkWZgYO3EfLjgTIGPfb/OFFoVfryls=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=n01vv9ZmhAE10AHLKuoO/wLVh57x6usu93+/fAIoLhMQ8vxwfM7jlDTQBZ6f8S8T2
-	 Pq8Ou620xX1OjR8banwJbgF00V8elSKVsJkkHrzWFyymxsjDh2eXxEc3OZ0sGD97Nh
-	 UigKGr7b/ROrEpgDpVC4u34ZDBHRPylPP/VDcNQ4=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 367MG5b3040026
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 7 Jul 2023 17:16:05 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
- Jul 2023 17:16:04 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 7 Jul 2023 17:16:04 -0500
-Received: from [10.249.33.12] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 367MG4S3010488;
-	Fri, 7 Jul 2023 17:16:04 -0500
-Message-ID: <08d3256c-e4e4-7d3f-0cf4-d5683cc6a0c5@ti.com>
-Date: Fri, 7 Jul 2023 17:16:04 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [meta-ti] [master/kirkstone][PATCH] conf: switch k3r5 multiconfig
- to baremetal
-Content-Language: en-US
+ dkim=fail reason="signature has expired" header.i=@tq-group.com header.s=key1 header.b=ny76Kg3g;
+ spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81, mailfrom: matthias.schiffer@ew.tq-group.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1688998840; x=1720534840;
+  h=message-id:subject:from:to:cc:date:in-reply-to:
+   references:content-transfer-encoding:mime-version;
+  bh=eruqRWCaGd1Qus28hHlNjrKgm6RCeJd8YPrKm1ndYSk=;
+  b=ny76Kg3gyF3IM5DrlJzAjuFDqgrzWUDNZ0qly4SWt+0p0R3DYy1HA5/z
+   FBGY/U6iBV71pCWutYo14DAjjpDnfYXkslm8TtzQp5qP64ZnYPsLo8RKv
+   W8FejaDtOp4p0M/MSFm1hb3sSP0GkYrvLj4v7M8UPLwuyzA3h1bd6msI9
+   IDH/QaxzcJaEDO3//xraqeRI52GY2DupUOIxyiDpjkZjCNzhAASiSIqvK
+   0jmM2m5++iwSYZ5yI6QugrO3lZ9iRejYhI/PxUtOAK7igbG1l2RrCDivu
+   CS45PAsWrdb6W1htKDcV2w86l7DqPlmuAP6jkJlNUwbha/3mEMLhRA4UC
+   A==;
+X-IronPort-AV: E=Sophos;i="6.01,194,1684792800"; 
+   d="scan'208";a="31843573"
+Received: from vtuxmail01.tq-net.de ([10.115.0.20])
+  by mx1.tq-group.com with ESMTP; 10 Jul 2023 16:20:37 +0200
+Received: from [192.168.2.129] (SCHIFFERM-M2.tq-net.de [10.121.49.20])
+	by vtuxmail01.tq-net.de (Postfix) with ESMTPA id B9826280078;
+	Mon, 10 Jul 2023 16:20:37 +0200 (CEST)
+Message-ID: <805ad6ac0921231338d2e29ca9cc0a4b461e004f.camel@ew.tq-group.com>
+Subject: Re: [meta-ti] [master/kirkstone][PATCH] meta-ti-bsp: add mesa to
+ SIGGEN_EXCLUDERECIPES_ABISAFE list
+From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
 To: Denys Dmytriyenko <denis@denix.org>
-CC: <meta-ti@lists.yoctoproject.org>, Denys Dmytriyenko <denys@konsulko.com>
-References: <20230706193122.1891075-1-denis@denix.org>
- <778da68c-e71d-5305-121a-51d0ab704ace@ti.com>
- <20230707205122.GH1518@denix.org>
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20230707205122.GH1518@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: Denys Dmytriyenko <denys@konsulko.com>, Andrew Davis <afd@ti.com>, 
+	meta-ti@lists.yoctoproject.org
+Date: Mon, 10 Jul 2023 16:20:37 +0200
+In-Reply-To: <20230418200217.301038-1-denis@denix.org>
+References: <20230418200217.301038-1-denis@denix.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.4-0ubuntu1 
+MIME-Version: 1.0
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 07 Jul 2023 22:16:16 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16837
+ <meta-ti@lists.yoctoproject.org>; Mon, 10 Jul 2023 14:20:50 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16838
+
+On Tue, 2023-04-18 at 20:02 +0000, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@konsulko.com>
+>=20
+> For TI platforms with SGX and Rogue graphics we patch upstream Mesa with
+> PVR support and conditionally enable features based on virtual/gpudriver
+> preference. This makes Mesa package platform-specific and it contains the
+> corresponding PACKAGE_ARCH =3D "${MACHINE_ARCH}" line.
+>=20
+> In order to get greater re-use from generic non-machine-speciofic package=
+s
+> down the dependency chain, such as Wayland, Weston, Qt5 modules, etc. we
+> need to mark mesa recipe as still providing stable OpenGL ABIs, such as
+> EGL, GLES, GBM, etc. - add it to SIGGEN_EXCLUDERECIPES_ABISAFE list.
+>=20
+> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> ---
+>  meta-ti-bsp/conf/layer.conf | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
+> index 948db4f9..e9b7f92c 100644
+> --- a/meta-ti-bsp/conf/layer.conf
+> +++ b/meta-ti-bsp/conf/layer.conf
+> @@ -19,6 +19,7 @@ LAYERDEPENDS_meta-ti-bsp =3D " \
+>  "
+> =20
+>  SIGGEN_EXCLUDERECIPES_ABISAFE +=3D " \
+> +    mesa \
+
+We found that excluding mesa (or now mesa-pvr) from signature
+generation can lead to build breakage when updating meta-ti. As
+previous meta-ti versions excluded "ti-sgx-ddk-um" and new version
+excludes "mesa-pvr", this can result in builds of dependent packages
+that differ in these specific runtime dependencies, but that have the
+same sstate hash!
+
+The build failures look like the following (we're seeing it for
+multiple packages):
+
+Problem 2: package packagegroup-testutils-1.0-r0.tqma335x_mba335x
+requires glmark2, but none of the providers can be installed
+   - conflicting requests
+   - nothing provides ti-sgx-ddk-um >=3D 1.17.4948957 needed by glmark2-
+2021.12-r0.armv7at2hf_neon
+
+Here, Bitbake omitted to rebuild glmark2 because of the sstate
+equivalence, picking up an older build that depends on ti-sgx-ddk-um,
+even though ti-sgx-ddk-um is not selected anymore in the current
+configuration. Rebuilding glmark2 with a clean sstate cache results in
+a package that has a "libgbm1 >=3D 22.3.5" dependency instead of "ti-sgx-
+ddk-um >=3D 1.17.4948957" (as shown by 'rpm -qpR'; the rest of the
+dependencies are unchanged).
+
+I think we can work around the issue this time by forcing a change of
+sstate hash by other means in our TQ-Systems layer when updating for
+the current meta-ti, but this whole game with
+SIGGEN_EXCLUDERECIPES_ABISAFE seems very fragile to me...
+
+Regards,
+Matthias
 
 
 
-On 7/7/2023 3:51 PM, Denys Dmytriyenko wrote:
-> On Fri, Jul 07, 2023 at 11:33:33AM -0500, Ryan Eatmon wrote:
->>
->>
->> On 7/6/2023 2:31 PM, Denys Dmytriyenko wrote:
->>> From: Denys Dmytriyenko <denys@konsulko.com>
->>>
->>> There are couple of k3r5 components that need to be built for the target
->>> and they are self-contained and don't use glibc. Moreover, when building
->>> a cross-compile toolchain for k3r5, there's no need to build glibc and
->>> all its dependencies. While build-time speed up is nice, the main benefit
->>> comes when packaging a nativesdk toolchain for distribution, reducing the
->>> number of packages and the resulting size of the toolchain installer.
->>>
->>> To avoid potential namespace conflict in package feeds between nativesdk
->>> binary packages of Linux glibc and k3r5 baremetal toolchains, adjust the
->>> package suffix accordingly.
->>>
->>> This also requires a rather impactful change in the deployment structure,
-> 
-> Should have said disruptive here instead of impactful - may have caught more
-> attention...
-> 
-> 
->>> which affects CIs and user experience. By default different TCLIBC builds
->>> (e.g. glibc and baremetal in this case) are built in separate TMPDIRs to
->>> avoid conflicts, especially on the nativesdk side. Also the default config
->>> has DEPLOY_DIR residing under corresponding TMPDIR. Of course, this can be
->>> changed by local.conf or <distro>.conf, which meta-ti-bsp has no control
->>> over. Unlike multiconfig-image-packager example that can access deployed
->>> artifacts across multiconfigs to package in an image, we use wic and its
->>> IMAGE_BOOT_FILES list to package a final image. Unfortunately, wic cannot
->>> access deployed artifacts across multiconfigs in separate TMPDIRs, as it
->>> uses DEPLOY_DIR_IMAGE to collect the artifacts. To overcome this, we need
->>> to set up a "common" deploy directory for images and sdks produced by
->>> multiconfigs, which is located outside of TMPDIRs, set by TI_COMMON_DEPLOY
->>> variable that can be changed or adjusted by distros as needed.
->>>
->>> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
->>> ---
->>>   meta-ti-bsp/conf/layer.conf            | 4 ++++
->>>   meta-ti-bsp/conf/multiconfig/k3r5.conf | 4 +++-
->>>   2 files changed, 7 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
->>> index bb286c2b..db6f9de9 100644
->>> --- a/meta-ti-bsp/conf/layer.conf
->>> +++ b/meta-ti-bsp/conf/layer.conf
->>> @@ -23,3 +23,7 @@ SIGGEN_EXCLUDERECIPES_ABISAFE += " \
->>>   "
->>>   HOSTTOOLS_NONFATAL += "truncate xxd comm"
->>> +
->>> +TI_COMMON_DEPLOY ?= "${TOPDIR}/deploy-ti"
->>
->> During testing, this one threw me for a bit.  None of the build
->> scripts were copying anything...
-> 
-> Heh, that's the lengthy explanation in the commit log above... I guess nobody
-> reads that anyway :)
+>  "
+> =20
+>  HOSTTOOLS_NONFATAL +=3D "truncate xxd comm"
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#16410): https://lists.yoctoproject.org/g/meta-ti/mess=
+age/16410
+> Mute This Topic: https://lists.yoctoproject.org/mt/98352641/4454427
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/leave/10992514/4454=
+427/2074109644/xyzzy [matthias.schiffer@ew.tq-group.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>=20
 
-I read the comment.  But knowing a wave is coming and experiencing the 
-wave wash over you are two different things. =)
-
-> 
->> I can deal with that.  But, we
->> pull a few things out of the deploy dir.  Images, sdk, ipk...
->> should we also have something that uses this new TI_COMMON_DEPLOY
->> for the ipk and licenses?
-> 
-> I only wanted to do the bare minimum here in meta-ti for all distros to work
-> out of the box w/o breaking. As mentioned in the description above the correct
-> place for this stuff is either in the distro configuration or local.conf. And
-> I didn't want to get in the way of that. That said, it should be perfectly
-> fine to completely switch over to this "combined" deploy dir for all the
-> remaining pieces, but should be done in the distro, not here.
-
-Agreed.  I was more asking from the stand point of should we pursue 
-moving everything into deploy-ti.  Which is sounds like you are in 
-support of it.  And I agree, that change belongs in meta-arago.
-
-
-> 
->>> +DEPLOY_DIR_IMAGE:ti-soc = "${TI_COMMON_DEPLOY}/images/${MACHINE}"
->>> +SDK_DEPLOY:ti-soc = "${TI_COMMON_DEPLOY}/sdk"
->>> diff --git a/meta-ti-bsp/conf/multiconfig/k3r5.conf b/meta-ti-bsp/conf/multiconfig/k3r5.conf
->>> index deb07210..04b9a746 100644
->>> --- a/meta-ti-bsp/conf/multiconfig/k3r5.conf
->>> +++ b/meta-ti-bsp/conf/multiconfig/k3r5.conf
->>> @@ -1,5 +1,7 @@
->>>   MAINMACHINE := "${MACHINE}"
->>> -DEPLOY_DIR_IMAGE = "${DEPLOY_DIR}/images/${MAINMACHINE}"
->>> +DEPLOY_DIR_IMAGE:k3r5 = "${TI_COMMON_DEPLOY}/images/${MAINMACHINE}"
->>>   MACHINE:append = "-k3r5"
->>> +TCLIBC = "baremetal"
->>> +SDKPKGSUFFIX = "k3r5-nativesdk"
-
--- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+--=20
+TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Germ=
+any
+Amtsgericht M=C3=BCnchen, HRB 105018
+Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan Sch=
+neider
+https://www.tq-group.com/
 
