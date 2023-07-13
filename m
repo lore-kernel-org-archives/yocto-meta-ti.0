@@ -1,138 +1,100 @@
-Return-Path: <matthias.schiffer@ew.tq-group.com>
+Return-Path: <kamlesh@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B1CB3EB64D9
-	for <webhook@archiver.kernel.org>; Mon, 10 Jul 2023 14:20:50 +0000 (UTC)
-Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
- by mx.groups.io with SMTP id smtpd.web10.40961.1688998840686017626
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A1B7FC001B0
+	for <webhook@archiver.kernel.org>; Thu, 13 Jul 2023 15:18:04 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.11221.1689261483858975660
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 10 Jul 2023 07:20:41 -0700
+ Thu, 13 Jul 2023 08:18:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@tq-group.com header.s=key1 header.b=ny76Kg3g;
- spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81, mailfrom: matthias.schiffer@ew.tq-group.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
-  t=1688998840; x=1720534840;
-  h=message-id:subject:from:to:cc:date:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=eruqRWCaGd1Qus28hHlNjrKgm6RCeJd8YPrKm1ndYSk=;
-  b=ny76Kg3gyF3IM5DrlJzAjuFDqgrzWUDNZ0qly4SWt+0p0R3DYy1HA5/z
-   FBGY/U6iBV71pCWutYo14DAjjpDnfYXkslm8TtzQp5qP64ZnYPsLo8RKv
-   W8FejaDtOp4p0M/MSFm1hb3sSP0GkYrvLj4v7M8UPLwuyzA3h1bd6msI9
-   IDH/QaxzcJaEDO3//xraqeRI52GY2DupUOIxyiDpjkZjCNzhAASiSIqvK
-   0jmM2m5++iwSYZ5yI6QugrO3lZ9iRejYhI/PxUtOAK7igbG1l2RrCDivu
-   CS45PAsWrdb6W1htKDcV2w86l7DqPlmuAP6jkJlNUwbha/3mEMLhRA4UC
-   A==;
-X-IronPort-AV: E=Sophos;i="6.01,194,1684792800"; 
-   d="scan'208";a="31843573"
-Received: from vtuxmail01.tq-net.de ([10.115.0.20])
-  by mx1.tq-group.com with ESMTP; 10 Jul 2023 16:20:37 +0200
-Received: from [192.168.2.129] (SCHIFFERM-M2.tq-net.de [10.121.49.20])
-	by vtuxmail01.tq-net.de (Postfix) with ESMTPA id B9826280078;
-	Mon, 10 Jul 2023 16:20:37 +0200 (CEST)
-Message-ID: <805ad6ac0921231338d2e29ca9cc0a4b461e004f.camel@ew.tq-group.com>
-Subject: Re: [meta-ti] [master/kirkstone][PATCH] meta-ti-bsp: add mesa to
- SIGGEN_EXCLUDERECIPES_ABISAFE list
-From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: Denys Dmytriyenko <denys@konsulko.com>, Andrew Davis <afd@ti.com>, 
-	meta-ti@lists.yoctoproject.org
-Date: Mon, 10 Jul 2023 16:20:37 +0200
-In-Reply-To: <20230418200217.301038-1-denis@denix.org>
-References: <20230418200217.301038-1-denis@denix.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu1 
+ dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=NRc4o26F;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: kamlesh@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 36DFI2Rd043876;
+	Thu, 13 Jul 2023 10:18:02 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1689261482;
+	bh=budrmSAoMvZd5YLBmX3kn17aeE4AtDKhk8paujp5hYU=;
+	h=From:Date:Subject:To:CC;
+	b=NRc4o26F6JzdaWS7JXFKdY+7T5zyb87SBIrEBzbAj7JgJOIeBW8RPoEcZYd+Fr67+
+	 eMz2wUO2H7Boev18WzLe7QcZuXwt4iOLL8o/nnwg/3T/vrs4cGhIGoRqqlYwzAII+G
+	 BrafaQ+DhaKNL4kvmLLjHpDb/mTH//D9aD63OVXE=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 36DFI2TL054970
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 13 Jul 2023 10:18:02 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
+ Jul 2023 10:18:02 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 13 Jul 2023 10:18:02 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 36DFI11s022044;
+	Thu, 13 Jul 2023 10:18:01 -0500
+From: Kamlesh Gurudasani <kamlesh@ti.com>
+Date: Thu, 13 Jul 2023 20:47:43 +0530
+Subject: [PATCH ][meta-ti] [kirkstone/master] trusted-firmware-a: Update to
+ v2.9 release tag
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20230713-atf-bump-kirk-v1-1-f23cdc4f7f66@ti.com>
+X-B4-Tracking: v=1; b=H4sIAJYVsGQC/z2NQQqDMBAAvyJ77lKNFaFfCTmsZq2LGGWTFkH8e
+ 5MeehyYYU6IrMIRntUJyh+JsoUMza2CcabwYhSfGUxt2rpvWqQ04fBed1xEF/QPY3j0fdt1HeR
+ moMg4KIVxLlVxYtoCY+AjFWFXnuT4DS04u3IiTOIq+1fvK8XECu66vq4hJwSeAAAA
+To: <vigneshr@ti.com>, <praneeth@ti.com>, <u-kumar1@ti.com>, <afd@ti.com>,
+        <m-chawdhry@ti.com>, <reatmon@ti.com>, <denys@konsulko.com>
+CC: <meta-ti@lists.yoctoproject.org>, <jm@ti.com>,
+        Kamlesh Gurudasani
+	<kamlesh@ti.com>
+X-Mailer: b4 0.12.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1689261481; l=1224;
+ i=kamlesh@ti.com; s=20230614; h=from:subject:message-id;
+ bh=asbHT0f2BQdrqXLGdFRWmo1mdZAUkeDIzuFKYGiXIZ0=;
+ b=sXbApziv9u6Q0yOqqLA0piA5NPgH/FubW6csfcVJBrRkduxZGtV5SfoXOWxaoDMJgtunYyFnT
+ 30LFSPjpr7sAEd/yftXfDQzp6XeIJCgRuLSu7nU586Y+a3lx/CCSYMg
+X-Developer-Key: i=kamlesh@ti.com; a=ed25519;
+ pk=db9XKPVWDGJVqj2jDqgnPQd6uQf3GZ3oaQa4bq1odGo=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 10 Jul 2023 14:20:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16838
+ <meta-ti@lists.yoctoproject.org>; Thu, 13 Jul 2023 15:18:04 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16839
 
-On Tue, 2023-04-18 at 20:02 +0000, Denys Dmytriyenko wrote:
-> From: Denys Dmytriyenko <denys@konsulko.com>
->=20
-> For TI platforms with SGX and Rogue graphics we patch upstream Mesa with
-> PVR support and conditionally enable features based on virtual/gpudriver
-> preference. This makes Mesa package platform-specific and it contains the
-> corresponding PACKAGE_ARCH =3D "${MACHINE_ARCH}" line.
->=20
-> In order to get greater re-use from generic non-machine-speciofic package=
-s
-> down the dependency chain, such as Wayland, Weston, Qt5 modules, etc. we
-> need to mark mesa recipe as still providing stable OpenGL ABIs, such as
-> EGL, GLES, GBM, etc. - add it to SIGGEN_EXCLUDERECIPES_ABISAFE list.
->=20
-> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> ---
->  meta-ti-bsp/conf/layer.conf | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
-> index 948db4f9..e9b7f92c 100644
-> --- a/meta-ti-bsp/conf/layer.conf
-> +++ b/meta-ti-bsp/conf/layer.conf
-> @@ -19,6 +19,7 @@ LAYERDEPENDS_meta-ti-bsp =3D " \
->  "
-> =20
->  SIGGEN_EXCLUDERECIPES_ABISAFE +=3D " \
-> +    mesa \
+Update to latest release tag, i.e. v2.9
 
-We found that excluding mesa (or now mesa-pvr) from signature
-generation can lead to build breakage when updating meta-ti. As
-previous meta-ti versions excluded "ti-sgx-ddk-um" and new version
-excludes "mesa-pvr", this can result in builds of dependent packages
-that differ in these specific runtime dependencies, but that have the
-same sstate hash!
+https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/commit/?id=d3e71ead6ea5bc3555ac90a446efec84ef6c6122
 
-The build failures look like the following (we're seeing it for
-multiple packages):
+Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
+---
+ meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Problem 2: package packagegroup-testutils-1.0-r0.tqma335x_mba335x
-requires glmark2, but none of the providers can be installed
-   - conflicting requests
-   - nothing provides ti-sgx-ddk-um >=3D 1.17.4948957 needed by glmark2-
-2021.12-r0.armv7at2hf_neon
+diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
+index cc99f50c..64bfec67 100644
+--- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
++++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
+@@ -1,5 +1,5 @@
+-PV:k3 = "2.8+git${SRCPV}"
+-SRCREV_tfa:k3 = "2fcd408bb3a6756767a43c073c597cef06e7f2d5"
++PV:k3 = "2.9+git${SRCPV}"
++SRCREV_tfa:k3 = "d3e71ead6ea5bc3555ac90a446efec84ef6c6122"
+ SRC_URI:k3 = "git://git.trustedfirmware.org/TF-A/trusted-firmware-a.git;protocol=https;name=tfa;branch=master"
+ COMPATIBLE_MACHINE:k3 = "k3"
+ TFA_BUILD_TARGET:k3 = "all"
 
-Here, Bitbake omitted to rebuild glmark2 because of the sstate
-equivalence, picking up an older build that depends on ti-sgx-ddk-um,
-even though ti-sgx-ddk-um is not selected anymore in the current
-configuration. Rebuilding glmark2 with a clean sstate cache results in
-a package that has a "libgbm1 >=3D 22.3.5" dependency instead of "ti-sgx-
-ddk-um >=3D 1.17.4948957" (as shown by 'rpm -qpR'; the rest of the
-dependencies are unchanged).
+---
+base-commit: 30c3aed3641c80f514801fce33baa502d1bc508c
+change-id: 20230713-atf-bump-kirk-d422ecd73555
 
-I think we can work around the issue this time by forcing a change of
-sstate hash by other means in our TQ-Systems layer when updating for
-the current meta-ti, but this whole game with
-SIGGEN_EXCLUDERECIPES_ABISAFE seems very fragile to me...
+Best regards,
+-- 
+Kamlesh Gurudasani <kamlesh@ti.com>
 
-Regards,
-Matthias
-
-
-
->  "
-> =20
->  HOSTTOOLS_NONFATAL +=3D "truncate xxd comm"
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#16410): https://lists.yoctoproject.org/g/meta-ti/mess=
-age/16410
-> Mute This Topic: https://lists.yoctoproject.org/mt/98352641/4454427
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/leave/10992514/4454=
-427/2074109644/xyzzy [matthias.schiffer@ew.tq-group.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->=20
-
---=20
-TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Germ=
-any
-Amtsgericht M=C3=BCnchen, HRB 105018
-Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan Sch=
-neider
-https://www.tq-group.com/
 
