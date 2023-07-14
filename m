@@ -1,122 +1,77 @@
-Return-Path: <rs@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A82FCC001DE
-	for <webhook@archiver.kernel.org>; Thu, 13 Jul 2023 19:47:58 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.523.1689277671451975183
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 43F3CEB64DC
+	for <webhook@archiver.kernel.org>; Fri, 14 Jul 2023 04:38:51 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.11777.1689309526127656274
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 13 Jul 2023 12:47:51 -0700
+ Thu, 13 Jul 2023 21:38:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17q1 header.b=nGZ3EVM9;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rs@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 36DJlo7q101107
-	for <meta-ti@lists.yoctoproject.org>; Thu, 13 Jul 2023 14:47:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1689277671;
-	bh=jt9RV7NMQluLsKIeWhKDYtgWZesnmBsDMtkLpWp364I=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=nGZ3EVM9Q/IdM8R5l5/z61PgOa6HYODDcdAeimda8grb+NSb0qHvOWm39rVMULUGt
-	 kfzFaPN1k7uzSRynjvyz63zFa5Asi24alaMIF2nwN+6Y2gRZfwAfNM8bbbsP6sujZo
-	 NpqIGX4DC28YkHvfLqtx+pW+WPf373mbzsvfFUOQ=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 36DJlown002349
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 13 Jul 2023 14:47:50 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ dkim=missing; spf=pass (domain: list.ti.com, ip: 198.47.23.249, mailfrom: lcpdbld@list.ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 36E4ciF7095605;
+	Thu, 13 Jul 2023 23:38:44 -0500
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 36E4ciad130435
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 13 Jul 2023 23:38:44 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
- Jul 2023 14:47:50 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2023 23:38:44 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 13 Jul 2023 14:47:50 -0500
-Received: from [128.247.81.144] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 36DJlo2j024334;
-	Thu, 13 Jul 2023 14:47:50 -0500
-Message-ID: <4941628c-de7d-69e3-7230-c321944c85e3@ti.com>
-Date: Thu, 13 Jul 2023 14:47:50 -0500
+ Frontend Transport; Thu, 13 Jul 2023 23:38:44 -0500
+Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 36E4ci8f118366;
+	Thu, 13 Jul 2023 23:38:44 -0500
+Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
+	id 44E1810FCF42; Thu, 13 Jul 2023 23:38:44 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][kirkstone][PATCH 2/2] linux-ti-staging_6.1: CI/CD Auto-Merger: cicd.kirkstone.202307132041
+Date: Thu, 13 Jul 2023 23:38:44 -0500
+Message-ID: <1689309524-17092-3-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1689309524-17092-1-git-send-email-lcpdbld@list.ti.com>
+References: <1689309524-17092-1-git-send-email-lcpdbld@list.ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [kirkstone PATCH] meta-ti: conf: am62xx-lp-evm: Use common
- include am62xx.inc
-Content-Language: en-US, en-US-large
-To: <praneeth@ti.com>, Ryan Eatmon <reatmon@ti.com>,
-        Chirag Shilwant
-	<c-shilwant@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>
-References: <20230713193702.10578-1-praneeth@ti.com>
-From: Randolph Sapp <rs@ti.com>
-In-Reply-To: <20230713193702.10578-1-praneeth@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 13 Jul 2023 19:47:58 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16845
+ <meta-ti@lists.yoctoproject.org>; Fri, 14 Jul 2023 04:38:51 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16846
 
-On 7/13/23 14:37, praneeth@ti.com wrote:
-> From: Praneeth Bajjuri <praneeth@ti.com>
-> 
-> commit 5f9be228390b ("machine: Add AM62Q HS-SE evm configuration")
-> has added am62xx-lp.inc which is used by am62xx-lp-evm machine.
-> 
-> The features listed in am62xx.inc are common between machines
-> am62xx-evm and am62xx-lp-evm. (Ex: MACHINE_FEATURES = "gpu")
-> 
-> Hence updating the necessary include file to have
-> common features to be enabled between these two platform variants.
-> 
-> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
-> Suggested-by: Randolph Sapp <rs@ti.com>
-> ---
->   meta-ti-bsp/conf/machine/am62xx-lp-evm.conf    |  2 +-
->   meta-ti-bsp/conf/machine/include/am62xx-lp.inc | 15 ---------------
->   2 files changed, 1 insertion(+), 16 deletions(-)
->   delete mode 100644 meta-ti-bsp/conf/machine/include/am62xx-lp.inc
-> 
-> diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-> index 1f1b47ba..5c235c29 100644
-> --- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-> @@ -2,7 +2,7 @@
->   #@NAME: AM62XX LP EVM
->   #@DESCRIPTION: Machine configuration for the TI AM62XX LP EVM
->   
-> -require conf/machine/include/am62xx-lp.inc
-> +require conf/machine/include/am62xx.inc
->   
->   KERNEL_DEVICETREE_PREFIX = " \
->       ti/k3-am62-lp \
-> diff --git a/meta-ti-bsp/conf/machine/include/am62xx-lp.inc b/meta-ti-bsp/conf/machine/include/am62xx-lp.inc
-> deleted file mode 100644
-> index f3fe944b..00000000
-> --- a/meta-ti-bsp/conf/machine/include/am62xx-lp.inc
-> +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -require conf/machine/include/k3.inc
-> -SOC_FAMILY:append = ":am62xx"
-> -
-> -MACHINE_FEATURES += "screen touchscreen"
-> -
-> -TFA_K3_SYSTEM_SUSPEND = "1"
-> -
-> -# Default tiboot3.bin on AM62x LP is for HS-FS
-> -IMAGE_BOOT_FILES += "tiboot3-am62x-hs-fs-evm.bin"
-> -
-> -# Since default tiboot3.bin on AM62x LP is for HS-FS, add a version for HS-SE
-> -IMAGE_BOOT_FILES += "tiboot3-am62x-hs-evm.bin"
-> -
-> -TFA_BOARD = "lite"
-> -OPTEEMACHINE = "k3-am62x"
+Updated the value(s) for:
+  SRCREV
 
-I'm not sure what takes priority here but I'll add it anyway. LGTM. 
-Applies cleanly to master as well.
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Randolph Sapp <rs@ti.com>
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+index c800b9b..ed1cd61 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+@@ -24,7 +24,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.1.y"
+ 
+-SRCREV ?= "6aad0284013ee20a4d49c19e5d992191511a9be2"
++SRCREV ?= "8f7f371be250809e9c4af879cfa31d5f1839257d"
+ PV = "6.1.33+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-- 
+1.8.3.1
+
 
