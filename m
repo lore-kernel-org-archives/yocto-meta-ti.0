@@ -1,88 +1,141 @@
-Return-Path: <twoerner@gmail.com>
+Return-Path: <perezmeyer@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CD5EC001E0
-	for <webhook@archiver.kernel.org>; Wed, 16 Aug 2023 14:22:59 +0000 (UTC)
-Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com [209.85.222.180])
- by mx.groups.io with SMTP id smtpd.web11.161826.1692195776236666291
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4015C71148
+	for <webhook@archiver.kernel.org>; Fri, 18 Aug 2023 13:32:02 +0000 (UTC)
+Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
+ by mx.groups.io with SMTP id smtpd.web11.11415.1692365519487979849
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 16 Aug 2023 07:22:56 -0700
+ Fri, 18 Aug 2023 06:31:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=rhYbehtM;
- spf=pass (domain: gmail.com, ip: 209.85.222.180, mailfrom: twoerner@gmail.com)
-Received: by mail-qk1-f180.google.com with SMTP id af79cd13be357-76d5352bdb0so253798385a.0
-        for <meta-ti@lists.yoctoproject.org>; Wed, 16 Aug 2023 07:22:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=jChX4g2x;
+ spf=pass (domain: gmail.com, ip: 209.85.210.44, mailfrom: perezmeyer@gmail.com)
+Received: by mail-ot1-f44.google.com with SMTP id 46e09a7af769-6bd6a34474cso692560a34.3
+        for <meta-ti@lists.yoctoproject.org>; Fri, 18 Aug 2023 06:31:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1692195774; x=1692800574;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=O1um7Ry2tOTW9LgWJOxj7h4fKdBy4aK3xIk2MSK0+f4=;
-        b=rhYbehtMWj6gsvL8DGeE3hqJrui/milKCDh+rkHxlAfIyqUGMWGbPQM4mHAwp4DtBE
-         pd1usGm2S/fR6ob+sNSy8X0hzFc7EWfMjlPE9wTIxIuQBEEr+xg0LxBN7kW9lC1m8kUk
-         2/sOQBOD27ivMAJD7F4pqsgY1GIQX3MTHwfCXAMWtwX4juEJbYFAKj39KYuZ/0JV9Aox
-         7q1MXeuhHWQBMC5Yiaz1eW1Jdgo4l6brNgs2eFiAZJMQ0Y09lRNzKGPlUg1AHAU8SXlh
-         wUi3ON2l0uWm0g7kCIvl2G01eKr/qWjw1kRFznHeV51my2V3idzmz0T7j3dj26BgQxfd
-         f2JQ==
+        d=gmail.com; s=20221208; t=1692365518; x=1692970318;
+        h=mime-version:message-id:date:subject:to:from:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=IG79/MewycXqVUEVhW+rheWIIvAyqZWqU8dOwoaGEqo=;
+        b=jChX4g2xUH35Q/mPjq6F19/vSDThpPfsHQkSDDWf76X7Z8ZAlm4+frdAYgF5ngaiQ2
+         Eu+gEHTEt8OTjjEi1tH/S4OfyEZbaI3W8IHJv+Enw9aONEyWYz4LVeA76cC+V1T09Q3+
+         q3Ljw3ymnd3jyu2h343zjK7vI4GmySV+yw5WN1Z38mOPQDj1/zliX+VQN05sAeqhHceR
+         bo/xLPdAz3wz5O7LUOtyl8ce6XwUzklsqfodnSx4Q8qPhEOCKgc8GgmD/by9TdN4HIy4
+         B5wh3IqXDi5x7bgdKhavX+npt9yDp+G7jVlGoGo49daYXJ/5c1zDNEWuUC8JqDGITo5g
+         nsPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692195774; x=1692800574;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=O1um7Ry2tOTW9LgWJOxj7h4fKdBy4aK3xIk2MSK0+f4=;
-        b=MbGknYzBTBRkkQT63ULdWfZ67GOLa0Xw72NULGVTGTPAwXSrkxOI8op79oI+Kgs8VU
-         vsZUgBgdnW19cGPuyqcpIVZbcaENe2iRSMCXeP9nr3U1GeNKJwdFNT6HodHogwUAqnUu
-         IFe6FH+hfnOtIY21eEn0Vje5i9AKL8y2eGo0UxMCJqAZUcILCPij+ZWgaYqP/MgDuLkr
-         +zeJQzN1YCA65+dmi7b97tgD5wlVwR/wdrKBigzyndGRt443MyUtuvL0RhPztKraGXt8
-         m1Q8cxvBGdAGg/mxpvxCYZ/L32LrF8nYMTiFoFO3AtF9zW4Nn4YcDwAOwBWbyq10I6AW
-         okrQ==
-X-Gm-Message-State: AOJu0YzG8XYnjURwigqFsFPP0e/ehq8fbxY8U7K72hqetjosCWvcDSlZ
-	tVFZ8sXL4h75Du7qaihwiAE0Gm4S+e8=
-X-Google-Smtp-Source: AGHT+IHSu9HH1qVlnB0Zg91svjbFaOhZqbJ09e5UmQJy8cwjQvqSnkGu26q6pDpQmRQSef61Qkk6Sg==
-X-Received: by 2002:a05:620a:17a9:b0:76c:c0bc:bfe0 with SMTP id ay41-20020a05620a17a900b0076cc0bcbfe0mr2762743qkb.39.1692195774453;
-        Wed, 16 Aug 2023 07:22:54 -0700 (PDT)
-Received: from localhost.localdomain (pppoe-209-91-167-254.vianet.ca. [209.91.167.254])
-        by smtp.gmail.com with ESMTPSA id p6-20020a05620a112600b00767303dc070sm4446520qkk.8.2023.08.16.07.22.53
+        d=1e100.net; s=20221208; t=1692365518; x=1692970318;
+        h=mime-version:message-id:date:subject:to:from:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=IG79/MewycXqVUEVhW+rheWIIvAyqZWqU8dOwoaGEqo=;
+        b=hoWy6RFFgxcdB/WS72Yk4kROzRM+W6AVa767KZfNNOmQucSV0/ixkpNGM0PV7WPd7u
+         +T6QBoG920XX/4oI91VqiXagsAxzCHMGaoaowck4YE5FKxnhh7px0Z6Roqm5vX6nBJWk
+         HytvG7kDevj3snndLGwI74IKnlUUaDpEvX75EmEDbKjxVXq/M8RgKN4cAW9qeJ1cATbE
+         jwZ2+saBgHEFn+EH7hArfe/txlSX1gkVX6tOrV5m//Ug7wfln6IjvbaZpsMwvWZ+CCb+
+         ceE9BEDxWcMn6cLu37z9I9t87c4bl3VodfWrGnZqvJJnutcHRBI4hjrGcsdB2buHH9oG
+         aHlg==
+X-Gm-Message-State: AOJu0YxqekNwNI2mHpi5YdHwrpbGU5PHiM6WtJwyY6IPvipJUe0yN5oj
+	mRyET6HuQJ0ipe3x5DTbMOF/cPsIT5g=
+X-Google-Smtp-Source: AGHT+IHpRi5VIZmwglc7SfpOuGTRBon4tiL3dHvbWEMTLEcSaDTOJTPj3QXf7p21CnpRwuMYSWubXA==
+X-Received: by 2002:a05:6871:82a:b0:1a6:b183:b0ab with SMTP id q42-20020a056871082a00b001a6b183b0abmr3004070oap.40.1692365517597;
+        Fri, 18 Aug 2023 06:31:57 -0700 (PDT)
+Received: from gryffindor.localnet ([181.197.222.104])
+        by smtp.gmail.com with ESMTPSA id i5-20020a056870344500b001bb919237cesm1018805oah.3.2023.08.18.06.31.55
         for <meta-ti@lists.yoctoproject.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Aug 2023 07:22:53 -0700 (PDT)
-From: Trevor Woerner <twoerner@gmail.com>
+        Fri, 18 Aug 2023 06:31:55 -0700 (PDT)
+From: 
+ Lisandro =?ISO-8859-1?Q?Dami=E1n_Nicanor_P=E9rez?= Meyer
+ <perezmeyer@gmail.com>
 To: meta-ti@lists.yoctoproject.org
-Subject: [PATCH] pru-icss: update QA checks
-Date: Wed, 16 Aug 2023 10:22:49 -0400
-Message-ID: <20230816142249.22378-1-twoerner@gmail.com>
-X-Mailer: git-send-email 2.41.0.327.gaa9166bcc0ba
+Subject: beaglebone-ai64: i2c errors ooting with u-boot-ti-staging
+Date: Fri, 18 Aug 2023 10:31:54 -0300
+Message-ID: <3074167.fKoSnE5vHq@gryffindor>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; boundary="nextPart3994152.GEWAqshInZ";
+ micalg="pgp-sha256"; protocol="application/pgp-signature"
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 16 Aug 2023 14:22:59 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16877
+ <meta-ti@lists.yoctoproject.org>; Fri, 18 Aug 2023 13:32:02 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16878
 
-Update the QA checks done on the build artifacts to include [buildpaths] since
-the PRU linker includes these paths in its output. This avoids build warnings
-or errors of the type:
+--nextPart3994152.GEWAqshInZ
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"; protected-headers="v1"
+To: meta-ti@lists.yoctoproject.org
+Subject: beaglebone-ai64: i2c errors ooting with u-boot-ti-staging
+Date: Fri, 18 Aug 2023 10:31:54 -0300
+Message-ID: <3074167.fKoSnE5vHq@gryffindor>
+MIME-Version: 1.0
 
-	pru-icss-6.2.0-r1 do_package_qa: QA Issue: File /lib/firmware/pru/PRU_Halt.out in package pru-icss-halt contains reference to TMPDIR [buildpaths]
+Hi, and hope I get the right list for this.
 
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
----
- meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+I have built poky's core-image-minimal for the BeagleBone AI64 using meta-t=
+i's kirkstone layer, current HEAD. When I boot I get stuff like:
 
-diff --git a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb b/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
-index e73e0e7e9483..6acce94b6fd1 100644
---- a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
-+++ b/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
-@@ -380,5 +380,5 @@ ALTERNATIVE_PRIORITY_pru-icss-rpmsg-echo = "100"
- ALLOW_EMPTY:${PN} = "1"
- 
- # This installs PRU firmware, so skip "arch" QA check
--INSANE_SKIP:${PN}-halt = "arch"
--INSANE_SKIP:${PN}-rpmsg-echo = "arch"
-+INSANE_SKIP:${PN}-halt = "arch buildpaths"
-+INSANE_SKIP:${PN}-rpmsg-echo = "arch buildpaths"
--- 
-2.41.0.327.gaa9166bcc0ba
+```
+Hit any key to stop autoboot:  2 =08=08=08 1 =08=08=08 0=20
+i2c_write: error waiting for data ACK (status=3D0x116)
+pca953x gpio@22: Error reading output register
+switch to partitions #0, OK
+mmc1 is current device
+i2c_write: error waiting for data ACK (status=3D0x116)
+pca953x gpio@22: Error reading output register
+SD/MMC found on device 1
+=46ailed to load 'boot.scr'
+=46ailed to load 'uEnv.txt'
+i2c_write: error waiting for data ACK (status=3D0x116)
+pca953x gpio@20: Error reading output register
+i2c_write: error waiting for data ACK (status=3D0x116)
+pca953x gpio@22: Error reading output register
+```
+and then I get stuck at=20
+
+```
+Waiting for root device PARTUUID=3D18b27b92-02
+```
+
+I rebooted, entered u-boot's prompt and run fuinduuid manually, which also =
+causes an I=B2C-related error:
+
+```
+=3D> run finduuid
+i2c_write: error waiting for data ACK (status=3D0x116)
+pca953x gpio@22: Error reading output register
+```
+
+Am I doing something wrong here, or should I be filing a bug somewhere? Of =
+course feel free to ask me for more details.
+
+Thanks in advance, Lisandro.
+
+
+--nextPart3994152.GEWAqshInZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEEt36hKwjsrvwSzE8q2RfQGKGp9AFAmTfcsoACgkQq2RfQGKG
+p9DXUA/9HuIbEYgls7rYWzMcFowPUthimdYYEUy6dTFbH8bh3T/BSa3B0WNvpxzC
+a/sehT+ounCkCysyW1wXabH7ddWg9dO7bVzO7O2NR/9iuNeyWLcNWIYofI7JBC9V
+O1hrbIjtdG7rANUTT1hCZpfp5Z5XEWmhd0PAqUV/C6WwQ6phjXwsFpl0cTcAgY6N
+DSydaQibDoCE4XQHA88eNHeTeBcDWZzr0O+pf8BT15Fa5Sacol7Vs4v/fiZ4h6nE
+eDYzKfVAETKSTkGQQ+RAD8m8QZvXLc2cpMW5Cn2PqAoZfUvGHrwkTnVIx2tjEuR3
++MoVHXwCTctu116vVO3tA4HnbhQAUlYF4EP4g/vbbbdCP7/IIlNLXKidUJqqhJwx
+JUOb0joFMFp5kGEfXgVAx7/as63AdgQBpZsfR7010ERk54rmYCgCFX+ApBVMdf5Y
+ZzjO8WD9oIkleAt1/CAKcJj5/q3jHR40h1gRUUb5aK7MREx0JRUav58lulxTbUMH
+3NA0QGjWFwozwMmkEFIlt8eYsIfdagj69B2PrGje252T8Wx5wEWWCZr4ZsOu7XX5
+u5JOfS/iYoGZg0gw8mqEHXG5hfUMRDr76ojEPf8MVEa4PKtxCPMmipNBsDm3+NWo
+yHWVexrOWOyzx4d/9Fo6uYmhTwWXICc7wpopZLXoNB1S0p7iSqE=
+=0aEk
+-----END PGP SIGNATURE-----
+
+--nextPart3994152.GEWAqshInZ--
+
+
 
 
