@@ -1,65 +1,86 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <jpanis@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89AEFEE49A0
-	for <webhook@archiver.kernel.org>; Mon, 21 Aug 2023 05:22:07 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.4671.1692595326566685477
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 80D18EE4996
+	for <webhook@archiver.kernel.org>; Mon, 21 Aug 2023 12:36:24 +0000 (UTC)
+Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com [209.85.208.182])
+ by mx.groups.io with SMTP id smtpd.web10.9895.1692621375078701524
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 20 Aug 2023 22:22:06 -0700
+ Mon, 21 Aug 2023 05:36:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: list.ti.com, ip: 198.47.23.249, mailfrom: lcpdbld@list.ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37L5M4x8024421;
-	Mon, 21 Aug 2023 00:22:04 -0500
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37L5M45W029809
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 21 Aug 2023 00:22:04 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 21
- Aug 2023 00:22:04 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 21 Aug 2023 00:22:04 -0500
-Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37L5M4Io114873;
-	Mon, 21 Aug 2023 00:22:04 -0500
-Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
-	id 01F4E10FCF50; Mon, 21 Aug 2023 00:22:04 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][kirkstone][PATCH 0/2] Update to cicd.kirkstone.202308201800
-Date: Mon, 21 Aug 2023 00:22:01 -0500
-Message-ID: <1692595323-8020-1-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@baylibre-com.20221208.gappssmtp.com header.s=20221208 header.b=z0g3kat9;
+ spf=pass (domain: baylibre.com, ip: 209.85.208.182, mailfrom: jpanis@baylibre.com)
+Received: by mail-lj1-f182.google.com with SMTP id 38308e7fff4ca-2bcc187e0b5so11451041fa.1
+        for <meta-ti@lists.yoctoproject.org>; Mon, 21 Aug 2023 05:36:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1692621373; x=1693226173;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=uXpaJHJLkstFPAHRzCzGjH5HCvg0lPeFUpmGZLHUEhs=;
+        b=z0g3kat9fL7ZczJzVaQKMPlQi2aYSDBcEph9cG8NgFaHfO+aee5TSEtzolRiSH2Qdp
+         vJtCuLZc3ykMsVJUtXZwDAA7sAriXGaGI4pKJeNxKGLPsfU2Tnht7hIPOg+X9HuGAlWy
+         dHbuxyuiywrn+R3ekM0zX8oLeNBtirTjRBZ2oi8k9vMEFLZ3kZpOLw0WJjoz6yEB6zu7
+         LN/+9eEkBSQZci/geliFSYOxK5Avyq+azGQa3vsWNsv3+ztksNvPJ99jr5+CbfvuwMZs
+         3ebN26y8vo6bNG2RlB79lE/Kub9nV05l6J7iu/Og8HfuVcuZj5VLBxumfIR74OXJsrZp
+         fykw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1692621373; x=1693226173;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=uXpaJHJLkstFPAHRzCzGjH5HCvg0lPeFUpmGZLHUEhs=;
+        b=USHynjJI21VFZ/SdAGYAFLcIgqZUbdhV5eiaQhooih2K6oEKUoernTcy6vhR7zii1f
+         aYSxe0Ly1lSVlNx0/4j4ft7a2y5ai5WEEH6LBfBIY/3MhfmLV3rle0XfdaCdHqHADnPE
+         jW8gzfNv4o5Bhc+00dlys/7WpclanDjoygMJcQlV5r5C/INusbXxFUa5zHRyI//OxIwK
+         3S2wq/W0dmYXzLoJduTBRnSklBsrE4Wg04j3uGA05lWcacPQIog++m4vlG4HJ9n0ElVn
+         AgOOvqZrpWDXLCkjjFo/PFMYo0LymyGQOC0hu++RBg4o2Xo6akIV+uGKj1rN6NU2aio+
+         ozfA==
+X-Gm-Message-State: AOJu0YyywxXM8Nbzo/5vyxt7XZJ/B7BqsnW1fk/hOLOdt96sufjxghhL
+	7YBzPI11JEBSXjisEvlS/GmBvlJyuA0TyyQlkBk=
+X-Google-Smtp-Source: AGHT+IEk6KdoUK1cChK3frF3zynYGPAuB6duLXpJw96Kh/mwal/EVL6AS8D+LTRcr/3OXDNc5F7s5g==
+X-Received: by 2002:a2e:8246:0:b0:2b9:3523:6f20 with SMTP id j6-20020a2e8246000000b002b935236f20mr4515465ljh.51.1692621372310;
+        Mon, 21 Aug 2023 05:36:12 -0700 (PDT)
+Received: from baylibre-ThinkPad-T14s-Gen-2i.. ([86.71.62.228])
+        by smtp.gmail.com with ESMTPSA id jw11-20020a17090776ab00b0099d0a8ccb5fsm6492695ejc.152.2023.08.21.05.36.11
+        for <meta-ti@lists.yoctoproject.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 21 Aug 2023 05:36:12 -0700 (PDT)
+From: Julien Panis <jpanis@baylibre.com>
+To: meta-ti@lists.yoctoproject.org
+Subject: [master/kirkstone] conf: ti33x: Add earlycon parameter to kernel command line
+Date: Mon, 21 Aug 2023 14:36:10 +0200
+Message-Id: <20230821123610.16394-1-jpanis@baylibre.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 21 Aug 2023 05:22:07 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16882
+ <meta-ti@lists.yoctoproject.org>; Mon, 21 Aug 2023 12:36:24 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16883
 
-Update linux-ti-staging_6.1 and linux-ti-staging-rt_6.1 to cicd.kirkstone.202308201800 tag
+Sometimes on am335x devices, no more output is printed after
+"Starting kernel..." message. Modify UBOOT_EXTLINUX_KERNEL_ARGS
+to enable the console before standard serial driver is probed.
 
-LCPD Automation Script (2):
-  linux-ti-staging-rt_6.1: CI/CD Auto-Merger:
-    cicd.kirkstone.202308201800
-  linux-ti-staging_6.1: CI/CD Auto-Merger: cicd.kirkstone.202308201800
+Signed-off-by: Julien Panis <jpanis@baylibre.com>
+---
+ meta-ti-bsp/conf/machine/include/ti33x.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
+diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/conf/machine/include/ti33x.inc
+index bc61a77389ef..ad19798dac10 100644
+--- a/meta-ti-bsp/conf/machine/include/ti33x.inc
++++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
+@@ -47,6 +47,7 @@ UBOOT_LOADADDRESS = "0x80008000"
+ # Generate an extlinux.conf file
+ UBOOT_EXTLINUX = "1"
+ UBOOT_EXTLINUX_ROOT = "root=PARTUUID=${uuid}"
++UBOOT_EXTLINUX_KERNEL_ARGS = "rootwait rw earlycon"
+ UBOOT_EXTLINUX_BOOT_FILES = " \
+     extlinux.conf;extlinux/extlinux.conf \
+     ${KERNEL_IMAGETYPE} \
 -- 
-1.8.3.1
+2.37.3
 
 
