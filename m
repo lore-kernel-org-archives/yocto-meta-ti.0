@@ -1,84 +1,77 @@
-Return-Path: <blake.lapum@spindance.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63902EE499E
-	for <webhook@archiver.kernel.org>; Fri, 18 Aug 2023 22:57:04 +0000 (UTC)
-Subject: beaglebone: root=PARTUUID=${uuid} not expanding in extlinux.conf
-To: meta-ti@lists.yoctoproject.org
-From: blake.lapum@spindance.com
-X-Originating-Location: South Haven, Michigan, US (24.128.128.79)
-X-Originating-Platform: Linux Chrome 116
-User-Agent: GROUPS.IO Web Poster
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98525EE49A5
+	for <webhook@archiver.kernel.org>; Mon, 21 Aug 2023 05:22:07 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.4761.1692595326220003199
+ for <meta-ti@lists.yoctoproject.org>;
+ Sun, 20 Aug 2023 22:22:06 -0700
+Authentication-Results: mx.groups.io;
+ dkim=none (message not signed); spf=pass (domain: list.ti.com, ip: 198.47.23.249, mailfrom: lcpdbld@list.ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37L5M4wr024425;
+	Mon, 21 Aug 2023 00:22:04 -0500
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37L5M401029815
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 21 Aug 2023 00:22:04 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 21
+ Aug 2023 00:22:04 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 21 Aug 2023 00:22:04 -0500
+Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37L5M4FN007379;
+	Mon, 21 Aug 2023 00:22:04 -0500
+Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
+	id 070EB10FCF52; Mon, 21 Aug 2023 00:22:04 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][kirkstone][PATCH 2/2] linux-ti-staging_6.1: CI/CD Auto-Merger: cicd.kirkstone.202308201800
+Date: Mon, 21 Aug 2023 00:22:03 -0500
+Message-ID: <1692595323-8020-3-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1692595323-8020-1-git-send-email-lcpdbld@list.ti.com>
+References: <1692595323-8020-1-git-send-email-lcpdbld@list.ti.com>
 MIME-Version: 1.0
-Date: Fri, 18 Aug 2023 15:56:56 -0700
-Message-ID: <oEDO.1692399416443479492.aIOL@lists.yoctoproject.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 18 Aug 2023 22:57:04 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16879
+ <meta-ti@lists.yoctoproject.org>; Mon, 21 Aug 2023 05:22:07 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16881
 
-Hello and thank you for any help in advance:
+Updated the value(s) for:
+  SRCREV
 
-I am working with Yocto/poky for the first time. I am able to successfully =
-build the `core-image-base` for the `beaglebone` machine using the followin=
-g layers:
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-- meta-arm: origin/kirkstone (c39bb4ce3b60b73d35c5fb06af012432e70d6b38)
-    - "meta-arm-toolchain" layer
-    - "meta-arm" layer
-- meta-ti: origin/kirkstone (7e1a048bc0f116842a6076cd284d80dc0eae01f8)
-    - "meta-ti-bsp" layer
-- poky: origin/kirkstone (d6b8790370500b99ca11f0d8a05c39b661ab2ba6)
-    - "meta" layer
-    - "meta-poky" layer
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+index ecde9c6..672dece 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+@@ -24,7 +24,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.1.y"
+ 
+-SRCREV ?= "ca6a775097f0c879eaa7a2ddfe79c09fd08dffb6"
++SRCREV ?= "86d8150c199de609f6cf611864f2e29296040673"
+ PV = "6.1.38+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-- 
+1.8.3.1
 
-I did not modify any layers, the layers have been added successfully to BBL=
-AYERS, and I am simply adding MACHINE ?=3D "beaglebone" and IMAGE_FSTYPES +=
-=3D "wic" to my local.conf.=20
-
-However, after flashing (sudo dd if=3D$IMAGE of=3D$DEVICE status=3Dprogress=
- conv=3Dfsync) the generated .wic image, there is a kernel panic due to inv=
-alid an PARTUUID:
-
-[    5.458363] VFS: PARTUUID=3D is invalid.
-[    5.458363] Expected PARTUUID=3D<valid-uuid-id>[/PARTNROFF=3D%d]
-[    5.468094] Disabling rootwait; root=3D is invalid.
-[    5.473129] VFS: Cannot open root device "PARTUUID=3D" or unknown-block(=
-0,0): error -6
-[    5.481011] Please append a correct "root=3D" boot option; here are the =
-available partitions:
-[    5.489480] b300         3735552 mmcblk1=20
-[    5.489488]  driver: mmcblk
-[    5.496351]   b301         3731456 mmcblk1p1 d0be457f-01
-[    5.496356]=20
-[    5.503209] 0b3:00300   61798400 mmcblk0=20
-[    5.503215]  driver: mmcblk
-[    5.510078]   0b3:00301     131072 mmcblk0p1 e9fc2e52-01
-[    5.510083]=20
-[    5.516943]   0b3:00302     267378 mmcblk0p2 e9fc2e52-02
-[    5.516948]=20
-[    5.523795] Kernel panic - not syncing: VFS: Unable to mount root fs on =
-unknown-block(0,0)
-[    5.532120] ---[ end Kernel panic - not syncing: VFS: Unable to mount ro=
-ot fs on unknown-block(0,0) ]---
-
-I see that the generated extlinux/extlinux.conf file sets "root=3DPARTUUID=
-=3D${uuid}". I thought this variable was to be replaced when preparing the =
-wic image, but I also validated that $uuid is unset in the u-boot environme=
-nt.=20
-
-I am able to get around this issue if I hardcode my PARTUUID (root=3DPARTUU=
-ID=3D<blkid PARTUUID of my root partition>) in the extlinux.conf. This may =
-be a naive question, but is this expected - is it standard practice to set =
-the correct root=3DPARTUUID=3D${uuid} after the extlinux.conf is generated?=
- I am assuming not, but I have not been able to find a workaround without p=
-atching meta-ti/meta-ti-bsp/conf/machine/include/ti33x.inc (UBOOT_EXTLINUX_=
-ROOT =3D "root=3D/dev/mmcblk0p2") or hardcoding my PARTUUID.=20
-
-Any direction is appreciated, and again, I thank you in advance for any rep=
-lies.=20
 
