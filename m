@@ -1,126 +1,117 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 83F99C71133
-	for <webhook@archiver.kernel.org>; Fri, 25 Aug 2023 17:15:08 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.495.1692983703797709765
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2D34C83F12
+	for <webhook@archiver.kernel.org>; Mon, 28 Aug 2023 14:57:49 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.16253.1693234660129184747
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 25 Aug 2023 10:15:04 -0700
+ Mon, 28 Aug 2023 07:57:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=xxQk+aTj;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37PHF2mj108963;
-	Fri, 25 Aug 2023 12:15:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1692983702;
-	bh=nmKYZc6OyPzv7QAM4hkEjQLIzOUSfJoLsfT/cZmEY4I=;
-	h=From:To:Subject:Date;
-	b=xxQk+aTjwIU34hxHLcDwQIub/4CglhirbrhfwPdUZoiddimSTAt65JxCEBXv4F8BI
-	 sUi3DzJiVhpygXzfM08zySQ0+Jcd4W823mmynZog4o8An2u+A0icGd9yHa2UozB8Il
-	 kAgPx5HABR0ZtY6ZZl9PdfCDlWHCDbIoHOEtq/MY=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37PHF1tF015962
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 25 Aug 2023 12:15:01 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Aug 2023 12:15:01 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Aug 2023 12:15:01 -0500
-Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37PHF1eK069193;
-	Fri, 25 Aug 2023 12:15:01 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1qZaOj-0006fn-Ag; Fri, 25 Aug 2023 12:15:01 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/kirkstone][PATCH]  conf/machine/include/am65xx,omap-a15,ti33x,ti43x: Enable gpudriver
-Date: Fri, 25 Aug 2023 12:15:01 -0500
-Message-ID: <20230825171501.25609-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 5FACD40C53;
+	Mon, 28 Aug 2023 14:57:39 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id mNcgz_2Vgv4S; Mon, 28 Aug 2023 14:57:39 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-110-236.washdc.fios.verizon.net [100.15.110.236])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0F7DC40C3A;
+	Mon, 28 Aug 2023 14:57:35 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id C21BF163C82; Mon, 28 Aug 2023 10:57:34 -0400 (EDT)
+Date: Mon, 28 Aug 2023 10:57:34 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: rs@ti.com
+Cc: reatmon@ti.com, k-bhargav@ti.com, detheridge@ti.com,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][kirkstone/master][PATCH] mesa-pvr: add dynamic-layer
+ append for llvmpipe
+Message-ID: <20230828145734.GN3359@denix.org>
+References: <20230822011137.3183727-2-rs@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230822011137.3183727-2-rs@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 25 Aug 2023 17:15:08 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16893
+ <meta-ti@lists.yoctoproject.org>; Mon, 28 Aug 2023 14:57:49 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16894
 
-Now that we have a solution for the SGX parts we can enable gpudriver
-support for the affected platforms.
+On Mon, Aug 21, 2023 at 08:11:38PM -0500, rs@ti.com wrote:
+> From: Randolph Sapp <rs@ti.com>
+> 
+> Meta-clang provides a bbappend for mesa to use clang to accelerate it's
+> rasterization with runtime code generation through the use of llvmpipe.
+> With the addition of mesa-pvr we no longer get this for free with the
+> blanket mesa bbappend on the devices that explicitly request mesa-pvr so
+> lets add a dynamic layer to append the same args meta-clang does.
+> 
+> Though the number of devices that would select pvr-mesa and still want
+> to use software rendering is small, it's not zero due to debug and
+> testing purposes.
+> 
+> Signed-off-by: Randolph Sapp <rs@ti.com>
+> ---
+> 
+> Please let me know if I'm overlooking some specification like some reason bsp
+> layers shouldn't have dynamic-layers or something like that. The
+> yocto-check-layer didn't seem to care.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- meta-ti-bsp/conf/machine/include/am65xx.inc   | 2 +-
- meta-ti-bsp/conf/machine/include/omap-a15.inc | 2 +-
- meta-ti-bsp/conf/machine/include/ti33x.inc    | 2 +-
- meta-ti-bsp/conf/machine/include/ti43x.inc    | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+Well, normally you wouldn't want a pure BSP layer to depend on anything extra 
+besides OE-Core. But compiler and toolchain dependencies are rather special 
+and there were and still are such cases. Plus bigger plan for clang is to get 
+into OE-Core eventually, similar to how Rust has been handled. So, a dynamic 
+dependency for meta-clang is probably fine for now, just need to make sure it 
+works both ways and gets validated with and w/o such dependency...
 
-diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
-index 405d82ad..2c427b88 100644
---- a/meta-ti-bsp/conf/machine/include/am65xx.inc
-+++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
-@@ -4,7 +4,7 @@ SOC_FAMILY:append = ":am65xx"
- MACHINE_FEATURES += "screen touchscreen gpu"
- 
- require conf/machine/include/mesa-pvr.inc
--PREFERRED_PROVIDER_virtual/gpudriver ?= ""
-+PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
- 
- KERNEL_DEVICETREE_PREFIX = "ti/k3-am654"
- 
-diff --git a/meta-ti-bsp/conf/machine/include/omap-a15.inc b/meta-ti-bsp/conf/machine/include/omap-a15.inc
-index c9d16f3c..c1eb659b 100644
---- a/meta-ti-bsp/conf/machine/include/omap-a15.inc
-+++ b/meta-ti-bsp/conf/machine/include/omap-a15.inc
-@@ -13,7 +13,7 @@ PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-staging"
- 
- # Graphics providers and variables
- require conf/machine/include/mesa-pvr.inc
--PREFERRED_PROVIDER_virtual/gpudriver ?= ""
-+PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
- PVR_DISPLAY_CONTROLLER_ALIAS ?= "omapdrm"
- 
- KERNEL_IMAGETYPE = "zImage"
-diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/conf/machine/include/ti33x.inc
-index ad19798d..567cf128 100644
---- a/meta-ti-bsp/conf/machine/include/ti33x.inc
-+++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
-@@ -14,7 +14,7 @@ PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-staging"
- 
- # Graphics providers and variables
- require conf/machine/include/mesa-pvr.inc
--PREFERRED_PROVIDER_virtual/gpudriver ?= ""
-+PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
- PVR_DISPLAY_CONTROLLER_ALIAS ?= "tilcdc"
- 
- KERNEL_IMAGETYPE = "zImage"
-diff --git a/meta-ti-bsp/conf/machine/include/ti43x.inc b/meta-ti-bsp/conf/machine/include/ti43x.inc
-index ea5d1505..c70a8363 100644
---- a/meta-ti-bsp/conf/machine/include/ti43x.inc
-+++ b/meta-ti-bsp/conf/machine/include/ti43x.inc
-@@ -14,7 +14,7 @@ PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-staging"
- 
- # Graphics providers and variables
- require conf/machine/include/mesa-pvr.inc
--PREFERRED_PROVIDER_virtual/gpudriver ?= ""
-+PREFERRED_PROVIDER_virtual/gpudriver ?= "ti-sgx-ddk-km"
- PVR_DISPLAY_CONTROLLER_ALIAS ?= "omapdrm"
- 
- KERNEL_IMAGETYPE = "zImage"
--- 
-2.17.1
 
+>  meta-ti-bsp/conf/layer.conf                        |  4 ++++
+>  .../recipes-graphics/mesa/mesa-pvr_%.bbappend      | 14 ++++++++++++++
+>  2 files changed, 18 insertions(+)
+>  create mode 100644 meta-ti-bsp/dynamic-layers/clang-layer/recipes-graphics/mesa/mesa-pvr_%.bbappend
+> 
+> diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
+> index 26cbb4b5..56ca392b 100644
+> --- a/meta-ti-bsp/conf/layer.conf
+> +++ b/meta-ti-bsp/conf/layer.conf
+> @@ -18,6 +18,10 @@ LAYERDEPENDS_meta-ti-bsp = " \
+>      meta-arm \
+>  "
+>  
+> +BBFILES_DYNAMIC += " \
+> +    clang-layer:${LAYERDIR}/dynamic-layers/clang-layer/recipes*/*/*.bbappend \
+> +"
+> +
+>  SIGGEN_EXCLUDERECIPES_ABISAFE += " \
+>      mesa-pvr \
+>  "
+> diff --git a/meta-ti-bsp/dynamic-layers/clang-layer/recipes-graphics/mesa/mesa-pvr_%.bbappend b/meta-ti-bsp/dynamic-layers/clang-layer/recipes-graphics/mesa/mesa-pvr_%.bbappend
+> new file mode 100644
+> index 00000000..7e5c36fd
+> --- /dev/null
+> +++ b/meta-ti-bsp/dynamic-layers/clang-layer/recipes-graphics/mesa/mesa-pvr_%.bbappend
+> @@ -0,0 +1,14 @@
+> +# This is a copy of meta-clang/recipes-graphics/mesa/mesa_%.bbappend required
+> +# for llvmpipe when using pvr-mesa since we aren't caught by that glob.
+> +
+> +FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+> +
+> +LDFLAGS:append:toolchain-clang = " -latomic -lm"
+> +DEPENDS:append:toolchain-clang = " libatomic-ops"
+> +
+> +EXTRA_OEMASON:append:toolchain-clang:x86 = " -Dasm=false"
+> +EXTRA_OEMASON:append:toolchain-clang:x86-64 = " -Dasm=false"
+> +
+> +export YOCTO_ALTERNATE_EXE_PATH = "${STAGING_LIBDIR}/llvm-config"
+> +
+> +PACKAGECONFIG[gallium-llvm] = "-Dllvm=true -Dshared-llvm=true -Ddraw-use-llvm=true,-Dllvm=false,clang clang-native elfutils"
+> -- 
+> 2.41.0
+> 
 
