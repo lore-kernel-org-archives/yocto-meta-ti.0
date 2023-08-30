@@ -1,77 +1,93 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E9F9C83F1A
-	for <webhook@archiver.kernel.org>; Tue, 29 Aug 2023 19:56:50 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.825.1693339007977165830
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A1D38C83F01
+	for <webhook@archiver.kernel.org>; Wed, 30 Aug 2023 15:27:13 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.16986.1693409231553469176
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 29 Aug 2023 12:56:48 -0700
+ Wed, 30 Aug 2023 08:27:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: list.ti.com, ip: 198.47.23.249, mailfrom: lcpdbld@list.ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37TJukt7037840;
-	Tue, 29 Aug 2023 14:56:46 -0500
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37TJukMk030666
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=MBs3jAR2;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37UFRA80068750;
+	Wed, 30 Aug 2023 10:27:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1693409230;
+	bh=Sc02N9Ndl3B1ZhVhy92jnJaJMVPeMBhjMbFQjKlkSI0=;
+	h=From:To:Subject:Date;
+	b=MBs3jAR2WaqlHRwjeIW8h6aZxVNiXptEnDeAJSDti9Dr3+ZJOZ8HgUCrHKbdChB7R
+	 EW9rIMRGB9ztFAC9XL60+ri4HI12GSPUDzpVY8Nnn3CG3cN/YWJKM1YiIFtDpLZVcM
+	 yhNxwaMzpwM9hmkCCQeMkebiMICMKMgFsDGYWMGA=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37UFRARl101416
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 29 Aug 2023 14:56:46 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 29
- Aug 2023 14:56:46 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 30 Aug 2023 10:27:10 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 30
+ Aug 2023 10:27:09 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 29 Aug 2023 14:56:46 -0500
-Received: from fllvdckhpci028.itg.ti.com (fllvdckhpci028.itg.ti.com [10.248.130.161])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37TJukdo005052;
-	Tue, 29 Aug 2023 14:56:46 -0500
-Received: by fllvdckhpci028.itg.ti.com (Postfix, from userid 60899)
-	id 51282115ED39; Tue, 29 Aug 2023 14:56:46 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
+ Frontend Transport; Wed, 30 Aug 2023 10:27:09 -0500
+Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37UFR9HR027074;
+	Wed, 30 Aug 2023 10:27:09 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1qbN65-0005mD-KA; Wed, 30 Aug 2023 10:27:09 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH 2/4] u-boot-ti-staging_2023.04: CI/CD Auto-Merger: cicd.master.202308290957
-Date: Tue, 29 Aug 2023 14:56:44 -0500
-Message-ID: <1693339006-51698-3-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1693339006-51698-1-git-send-email-lcpdbld@list.ti.com>
-References: <1693339006-51698-1-git-send-email-lcpdbld@list.ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH] conf/am65xx-hs-evm: Fix UBOOT_MACHINE to match u-boot config
+Date: Wed, 30 Aug 2023 10:27:09 -0500
+Message-ID: <20230830152709.20767-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 29 Aug 2023 19:56:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16904
+ <meta-ti@lists.yoctoproject.org>; Wed, 30 Aug 2023 15:27:13 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16907
 
-Updated the value(s) for:
-  SRCREV
+The uboot config for am65 is moving to a merged build for both GP and
+HS.  Until the yocto configs catch up, we need to keep am65xx-hs-evm
+working.
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf | 2 +-
+ meta-ti-bsp/conf/machine/am65xx-hs-evm.conf      | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-index aaea0c7..e8dbe24 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-@@ -8,7 +8,7 @@ PR = "r0"
+diff --git a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
+index 4fb2bf50..337c8413 100644
+--- a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
+@@ -8,4 +8,4 @@ SYSFW_SOC = "am65x_sr2"
+ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "hs"
  
- BRANCH = "ti-u-boot-2023.04"
+-UBOOT_MACHINE = "am65x_hs_evm_r5_defconfig"
++UBOOT_MACHINE = "am65x_evm_r5_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf b/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf
+index 0addec90..f8221f31 100644
+--- a/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf
++++ b/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf
+@@ -4,4 +4,4 @@
  
--SRCREV = "e80134b56ded30edfa1b44095f4db062d3a701c9"
-+SRCREV = "e0d1dc8de02c8d4de7f49501fed75e31ed09ee74"
+ require conf/machine/include/am65xx.inc
  
- do_install:append:am62xx() {
- 	install -d ${D}/boot
+-UBOOT_MACHINE = "am65x_hs_evm_a53_defconfig"
++UBOOT_MACHINE = "am65x_evm_a53_defconfig"
 -- 
-1.8.3.1
+2.17.1
 
 
