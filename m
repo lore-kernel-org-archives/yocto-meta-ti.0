@@ -1,78 +1,75 @@
-Return-Path: <anthony@ajmartinez.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8704ECA0FEE
-	for <webhook@archiver.kernel.org>; Fri,  1 Sep 2023 17:48:26 +0000 (UTC)
-Subject: Re: poky [kirkstone] + systemd fails to mount /boot on beaglebone machine - missing nls_ascii?
-To: meta-ti@lists.yoctoproject.org
-From: "Anthony Martinez" <anthony@ajmartinez.com>
-X-Originating-Location: Damon, Texas, US (135.26.88.21)
-X-Originating-Platform: Linux Firefox 102
-User-Agent: GROUPS.IO Web Poster
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E633C71153
+	for <webhook@archiver.kernel.org>; Tue,  5 Sep 2023 02:09:29 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.12772.1693879762153983474
+ for <meta-ti@lists.yoctoproject.org>;
+ Mon, 04 Sep 2023 19:09:22 -0700
+Authentication-Results: mx.groups.io;
+ dkim=none (message not signed); spf=pass (domain: list.ti.com, ip: 198.47.23.249, mailfrom: lcpdbld@list.ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38529KEZ055675;
+	Mon, 4 Sep 2023 21:09:20 -0500
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38529Ki0001360
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 4 Sep 2023 21:09:20 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 4
+ Sep 2023 21:09:20 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 4 Sep 2023 21:09:19 -0500
+Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38529JSL097262;
+	Mon, 4 Sep 2023 21:09:19 -0500
+Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
+	id DF58710F5A66; Mon,  4 Sep 2023 21:09:19 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][kirkstone][PATCH 2/3] linux-ti-staging-rt_6.1: CI/CD Auto-Merger: cicd.kirkstone.202309041800
+Date: Mon, 4 Sep 2023 21:09:18 -0500
+Message-ID: <1693879759-83137-3-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1693879759-83137-1-git-send-email-lcpdbld@list.ti.com>
+References: <1693879759-83137-1-git-send-email-lcpdbld@list.ti.com>
 MIME-Version: 1.0
-Date: Fri, 01 Sep 2023 10:48:20 -0700
-References: <16486.1693574479250247115@lists.yoctoproject.org>
-In-Reply-To: <16486.1693574479250247115@lists.yoctoproject.org>
-Message-ID: <18904.1693590500533966350@lists.yoctoproject.org>
-Content-Type: text/plain; charset="utf-8"; markup=markdown
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 01 Sep 2023 17:48:26 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16915
+ <meta-ti@lists.yoctoproject.org>; Tue, 05 Sep 2023 02:09:29 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16916
 
-A SRCREV mismatch stopped me from using `devtool` to modify the layer, but =
-the following changes in meta-ti got me up and running:
+Updated the value(s) for:
+  SRCREV
 
-```
-meta-ti$ git diff
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb b/meta-ti=
--bsp/recipes-kernel/linux/linux-bb.org_git.bb
-index e134fb84..144cb07f 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-@@ -16,10 +16,10 @@ KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT} =
-${EXTRA_DTC_ARGS}"
-=20
- S =3D "${WORKDIR}/git"
-=20
--# 5.10.162 version for 32-bit
--SRCREV:armv7a =3D "982fde4eb381f98ec8be946e8d33dd0c9f9416ab"
--PV:armv7a =3D "5.10.162+git${SRCPV}"
--BRANCH:armv7a =3D "v5.10.162-ti-r59"
-+# 5.10.168 version for 32-bit
-+SRCREV:armv7a =3D "a943fc1987e1b8057b0b5219ecd3c5a85285d62a"
-+PV:armv7a =3D "5.10.168+git${SRCPV}"
-+BRANCH:armv7a =3D "v5.10.168-ti-r70"
-=20
- # 5.10.162 version for 64-bit
- SRCREV:aarch64 =3D "a2f5d5746b6c389e58d20fda0a0fa88403da428b"
-@@ -30,5 +30,5 @@ SRC_URI =3D " \
-     git://github.com/beagleboard/linux.git;protocol=3Dhttps;branch=3D${BRA=
-NCH} \
-     file://defconfig \
- "
--
--SRC_URI:append:armv7a =3D " file://0001-defconfig-switch-default-kernel-co=
-mpression-to-LZMA.patch"
-+# This patch does not appear to be needed
-+#SRC_URI:append:armv7a =3D " file://0001-defconfig-switch-default-kernel-c=
-ompression-to-LZMA.patch"
-```
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-After running `bitbake core-image-base` and flashing my SD card, booting wi=
-th systemd works great.
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+index a5ed931..1c4f294 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+@@ -6,5 +6,5 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
+ 
+ BRANCH = "ti-rt-linux-6.1.y"
+ 
+-SRCREV = "dd944f14304d2ce6d26c9cdc3d2d2d6d373a322c"
++SRCREV = "12887ba38dafb36e03a9f5201493ce46f903f0d4"
+ PV = "6.1.46+git${SRCPV}"
+-- 
+1.8.3.1
 
-It's probably cleaner to just remove the LZMA patch that is no longer neede=
-d in the newer kernel, than to comment it out as I did but what I posted is=
- exactly what was in place when I built. There's also no change made for th=
-e 64-bit target, as I don't know what that ought to be (or if it should be =
-changed or not).
-
-Thanks for the help!
-
-Regards,
-Anthony Martinez
 
