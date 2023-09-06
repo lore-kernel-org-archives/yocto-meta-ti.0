@@ -2,127 +2,92 @@ Return-Path: <max.oss.09@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53195EB8FBB
-	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 12:42:52 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.web11.7326.1694004169561973954
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C429AEE14A5
+	for <webhook@archiver.kernel.org>; Wed,  6 Sep 2023 15:06:00 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web11.703.1694012757836708602
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 06 Sep 2023 05:42:49 -0700
+ Wed, 06 Sep 2023 08:05:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20221208 header.b=sLMyfzBg;
- spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: max.oss.09@gmail.com)
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-31c4d5bd69cso3197789f8f.3
-        for <meta-ti@lists.yoctoproject.org>; Wed, 06 Sep 2023 05:42:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20221208 header.b=lTUwDqFW;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: max.oss.09@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-9a21b6d105cso559256466b.3
+        for <meta-ti@lists.yoctoproject.org>; Wed, 06 Sep 2023 08:05:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1694004168; x=1694608968; darn=lists.yoctoproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VIck7CI2Xop6N9yE8qBWPKdxY2kBVtwzrAvlR4LiYD4=;
-        b=sLMyfzBg2SuhRUIJWh7AcImt/2Cp2QS9Hi9lUgWT8Ao5NrqEGEzOedL+3HxYPNkCiw
-         LdoatprWrFASmyGH8KydBsMWG05sOkJwIXmMQ45cu8jPnGiq0sr3ln6KBVp9akrVrI48
-         6FNo0LNoEfjUwDWLKa3mhgNX6W9ei/oKLccQbwOARfnFL/+IEbOTLLNZ/q4hA0RbXTmE
-         UoFEZw/1Hw0sr6l0LcvaSm91jNtiMByrBxbh+LitYmQVXxBlUhA+Cu8h79Js8aSf5bDe
-         ggT439T/Uot8M0sL4LHaP7UNF4uyLX+GynyK94DxgOVeBoykrce0yE7ZLA3kRn5DFj+L
-         kMlg==
+        d=gmail.com; s=20221208; t=1694012756; x=1694617556; darn=lists.yoctoproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=rAkC2sxGK3Dh8yLb0h3egX99b8s+DI4mq7rbfBbAi2Q=;
+        b=lTUwDqFWFwvdRk1pbCfm1cLKxOY+XgGgRIOpiZNkeT9XXRf2Ctj4VD5huHdr0Yh/rz
+         SWbTpGsQWoYG0I6PrzSjwqgNdbB0oQGHyoXbt3E7gd3dDdM4PpvxHJdaN+FL1ieCQ2yF
+         x7YjNiMbzK/5YK0cNl8tcwi9N7IHPJhSyoqqOGuQFyuyHdm9zW07HBlWP/CFUbM5Vkw/
+         VsWs2fqbOdlhh3gGrbbVMrnlzqneCU20rUkALw+8l+AbeudxKASKrDSkJBOwigZFm1Rl
+         6ppWc6u8XgM41gkyj9rXy1S7LW52Z581KTBz89s+MRnl3kVLbF9x1rkCzebnCkhnusnB
+         8GVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1694004168; x=1694608968;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VIck7CI2Xop6N9yE8qBWPKdxY2kBVtwzrAvlR4LiYD4=;
-        b=jtK1IVrovxxcZ7UGS4B+673mfVppyr75nIXzFmqQRjtuig9U+Mh6HGM/a9EVbhb1vq
-         XwetAB+2aODQ0r6PXFyU+WPdwLd908ir/UIzvPG+ApiJrCzCGHactIsAK5cjG1bIC1Ka
-         esUuUYW+8uQhcQh72XJO3yDjTDhBYElS0ckFDkbBhNGuJhCfGe3d3GQ3gFbJtf4TmFsW
-         SOvLJD6gyChPKHan1CrNULxSbeoZUznuDDYggtqYT4bbwxwBG4xtvAZlyifZIRcaurIQ
-         RsD3yTC/lgb4vHFyycvkDm0lKBWl88f42Sp/7+t2LIuYlRB3HWGDRsuULGUAjohNoOxG
-         qyCw==
-X-Gm-Message-State: AOJu0YyyO+EYi21ifHkRi3B7LHCeCkMydNpweLc7ocw3EDgIojJMOzii
-	LYm5ZZDYjiTp+lyeBZQbbWfQiB1EyQSRFqj+Wmk=
-X-Google-Smtp-Source: AGHT+IGGmEMw/mS/eEm5tmGOrivcl53N9ogKC1LNmAW1EjAM2aKbVIUb1Rrbqtd/XfOXvWqGgKHiFpHSa9BTNOfIDbc=
-X-Received: by 2002:a5d:4c92:0:b0:319:89ce:da0b with SMTP id
- z18-20020a5d4c92000000b0031989ceda0bmr2277202wrs.68.1694004167587; Wed, 06
- Sep 2023 05:42:47 -0700 (PDT)
-MIME-Version: 1.0
-References: <178243D22841CBE5.5484@lists.yoctoproject.org>
-In-Reply-To: <178243D22841CBE5.5484@lists.yoctoproject.org>
+        d=1e100.net; s=20221208; t=1694012756; x=1694617556;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=rAkC2sxGK3Dh8yLb0h3egX99b8s+DI4mq7rbfBbAi2Q=;
+        b=Rp9N6ObmTyPdsEZV/H+/qP2qolJ3HDUk66MLa957N9OF7pSmjVUiFQ6S/e6b9aGnuH
+         nznxTqicUD0ch6wii29yRxlQObppXj3AnzyIU0+TrQMbA71GbuOQP5bcaeLF5CTWJ87B
+         t1aCRDcafO1I5WHo8QN+ld04epZBW5k4ULg/45AkcxftEfokehwA6l91dKAGB+lvFED6
+         VZE/N1u37VaTGHUk283d/AwsvRdA1UmvmPKSpbHz5eTnu//DyXiRn9KjWsOZmyeeFCZ2
+         X8nLRn7ywrwI8GchRej+i45o0KC+vOfb3D6gqUTWDKP49+ZZk2bKv8QvEYCWSbucUAXw
+         /4Zg==
+X-Gm-Message-State: AOJu0YwsUJainz6LmywT9uXJpH2tXQw4gHcxUa8n7daZre/o7uu4DWRO
+	AcUl1VlkwHlrDX/Sy0xTCCMqAt1XM3s=
+X-Google-Smtp-Source: AGHT+IGedsiNZjNN/9uG/6kqkWn98x4xChZujnfP7f2I4OSMC/eadOhbo8shT2+J0a8d0eE95vbeWA==
+X-Received: by 2002:a17:907:272a:b0:99d:f2dc:97e3 with SMTP id d10-20020a170907272a00b0099df2dc97e3mr2451742ejl.20.1694012755902;
+        Wed, 06 Sep 2023 08:05:55 -0700 (PDT)
+Received: from linuxdev2.toradex.int (31-10-206-125.static.upc.ch. [31.10.206.125])
+        by smtp.gmail.com with ESMTPSA id fx4-20020a170906b74400b009887f4e0291sm9077690ejb.27.2023.09.06.08.05.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 06 Sep 2023 08:05:55 -0700 (PDT)
 From: Max Krummenacher <max.oss.09@gmail.com>
-Date: Wed, 6 Sep 2023 14:42:36 +0200
-Message-ID: <CAEHkU3V56Ez2fETV9o+VBOSj3Aa_7C22-G8wHC902fArWLQA-g@mail.gmail.com>
-Subject: Re: [meta-ti][PATCH] ti-img-rogue-umlibs: drop handling of usrmerge
-To: max.oss.09@gmail.com
-Cc: meta-ti@lists.yoctoproject.org, 
-	Max Krummenacher <max.krummenacher@toradex.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: meta-ti@lists.yoctoproject.org
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Subject: [meta-ti][PATCH v2] ti-img-rogue-umlibs: harden handling of usrmerge
+Date: Wed,  6 Sep 2023 12:05:51 -0300
+Message-Id: <20230906150551.2362062-1-max.oss.09@gmail.com>
+X-Mailer: git-send-email 2.35.3
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 06 Sep 2023 12:42:52 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16921
+ <meta-ti@lists.yoctoproject.org>; Wed, 06 Sep 2023 15:06:00 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16922
 
-Hi
+From: Max Krummenacher <max.krummenacher@toradex.com>
 
-On Wed, Sep 6, 2023 at 11:03=E2=80=AFAM Max Krummenacher via
-lists.yoctoproject.org <max.oss.09=3Dgmail.com@lists.yoctoproject.org>
-wrote:
->
-> From: Max Krummenacher <max.krummenacher@toradex.com>
->
-> If usrmerge is set the do_rootfs task creates symlinks for the base
-> directories to their equivalent /usr/ directories and thus installs
-> the files in /usr/{bin|lib|...} by following the symlinks.
-> There is no need to do the move already here.
->
-> This prevents a build error should a subsequent bitbake execution
-> rerun do_install where the sources to 'mv' no longer exist.
-> | mv: cannot stat 'ti-img-rogue-umlibs/23.1.6404501/git/targetfs/am62_lin=
-ux/lws-generic/release/lib/firmware': No such file or directory
->
-> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
-> ---
->  .../powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb         | 3 ---
->  1 file changed, 3 deletions(-)
->
-> diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-uml=
-ibs_23.1.6404501.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-ro=
-gue-umlibs_23.1.6404501.bb
-> index 9b45a91f..8033322c 100644
-> --- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.=
-1.6404501.bb
-> +++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.=
-1.6404501.bb
-> @@ -67,9 +67,6 @@ do_install:prepend() {
->              rm -rf ${file}
->          done
->      fi
-> -    if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'fals=
-e', d)}; then
-> -        mv ${S}/lib/firmware ${S}${nonarch_base_libdir}
-> -    fi
+Only move directories which haven't already been moved.
+This prevents a build error should a subsequent bitbake execution
+rerun do_install where the sources to 'mv' no longer exist.
+| mv: cannot stat 'ti-img-rogue-umlibs/23.1.6404501/git/targetfs/am62_linux/lws-generic/release/lib/firmware': No such file or directory
 
-While the described issue is real, this is not the fix. When building
-from scratch I now get a QA error about usrmerge.
-Will send a V2 with a better tested solution.
-Sorry about the noise.
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
+ .../powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb        | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Max
+diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb
+index 9b45a91f..2cf13c60 100644
+--- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb
++++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.1.6404501.bb
+@@ -68,7 +68,9 @@ do_install:prepend() {
+         done
+     fi
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'false', d)}; then
+-        mv ${S}/lib/firmware ${S}${nonarch_base_libdir}
++        if [ -e ${S}/lib/firmware ]; then
++            mv ${S}/lib/firmware ${S}${nonarch_base_libdir}
++        fi
+     fi
+ 
+     # clean up any empty directories
+-- 
+2.35.3
 
->
->      # clean up any empty directories
->      find "${S}" -empty -type d -delete
-> --
-> 2.35.3
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#16920): https://lists.yoctoproject.org/g/meta-ti/mess=
-age/16920
-> Mute This Topic: https://lists.yoctoproject.org/mt/101188984/3617484
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [max.oss.09@g=
-mail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
