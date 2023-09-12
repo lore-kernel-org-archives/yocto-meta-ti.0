@@ -2,137 +2,252 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 485ECCA0EF7
-	for <webhook@archiver.kernel.org>; Tue, 12 Sep 2023 17:17:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D0E5EE3F0B
+	for <webhook@archiver.kernel.org>; Tue, 12 Sep 2023 18:32:43 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.163.1694539049055734534
+ by mx.groups.io with SMTP id smtpd.web11.2423.1694543554533993956
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 12 Sep 2023 10:17:30 -0700
+ Tue, 12 Sep 2023 11:32:35 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4283940C2A;
-	Tue, 12 Sep 2023 17:17:28 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 58F5040C2A;
+	Tue, 12 Sep 2023 18:32:33 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HcHd99NjZpx0; Tue, 12 Sep 2023 17:17:28 +0000 (UTC)
+	with ESMTP id h6cp6Vp-77RI; Tue, 12 Sep 2023 18:32:33 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-110-236.washdc.fios.verizon.net [100.15.110.236])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B8B36409AE;
-	Tue, 12 Sep 2023 17:17:21 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id D0A4F163CAA; Tue, 12 Sep 2023 13:17:20 -0400 (EDT)
-Date: Tue, 12 Sep 2023 13:17:20 -0400
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9DF0540952;
+	Tue, 12 Sep 2023 18:32:31 +0000 (UTC)
+Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id A6494163CA7;
+	Tue, 12 Sep 2023 14:32:30 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
-To: Ravi Gunasekaran <r-gunasekaran@ti.com>
-Cc: Andrew Davis <afd@ti.com>, meta-ti@lists.yoctoproject.org,
-	reatmon@ti.com, praneeth@ti.com, srk@ti.com
-Subject: Re: [meta-ti][kirkstone][PATCH v2] kernel-rdepends: Remove PRU
- Ethernet firmwares for legacy devices
-Message-ID: <20230912171720.GG3359@denix.org>
-References: <20230908114439.13213-1-r-gunasekaran@ti.com>
- <3bce9ebc-90ba-e525-67da-fda1b8ce95a4@ti.com>
- <c318dc95-5177-9bc1-645e-08feba12d7aa@ti.com>
- <20230911170552.GC3359@denix.org>
- <a7a82135-4cee-12c5-3324-19e14c882519@ti.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [kirkstone/master][PATCH] ti-rtos-firmware: cleanup leftover alternative entries for Jacinto
+Date: Tue, 12 Sep 2023 18:32:29 +0000
+Message-Id: <20230912183229.199368-1-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-In-Reply-To: <a7a82135-4cee-12c5-3324-19e14c882519@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
 Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 12 Sep 2023 17:17:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16954
+ <meta-ti@lists.yoctoproject.org>; Tue, 12 Sep 2023 18:32:43 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16955
 
-On Tue, Sep 12, 2023 at 10:25:38AM +0530, Ravi Gunasekaran wrote:
->=20
->=20
-> On 9/11/23 10:35 PM, Denys Dmytriyenko wrote:
-> > On Mon, Sep 11, 2023 at 09:58:23AM +0530, Ravi Gunasekaran via lists.=
-yoctoproject.org wrote:
-> >> Andrew,
-> >>
-> >> On 9/8/23 7:49 PM, Andrew Davis wrote:
-> >>> On 9/8/23 6:44 AM, Ravi Gunasekaran via lists.yoctoproject.org wrot=
-e:
-> >>>> Remove the PRU Ethernet firmwares from being packaged for
-> >>>> AM33x, AM43x and AM57x.
-> >>>>
-> >>>
-> >>> Commit messages should give the "why", we can read the code.
-> >>
-> >> I will provide reasoning in the v2.
-> >>
-> >>>
-> >>> Are we dropping support for PRUETH from these boards? I still
-> >>> use this, I'm sure others do too.
-> >>>
-> >>
-> >> PRUETH drivers for these devices are not upstreamed and PRUTETH will=
- not
-> >> be supported in SDK 9.1 as well. Plan to upstream and port to SDK is=
- still
-> >> being worked on. So I wanted to remove these firmwares from being pa=
-ckaged.
-> >=20
-> > So, besides PRU ETH, what about SW, HSR and PRP firmwares that are be=
-ing=20
-> > removed here?
->=20
-> Ah ok. I get your perspective.
->=20
-> SW, HSR and PRP are different ethernet modes and they have their respec=
-tive firmwares.
-> In driver space, it is just PRUETH driver and it loads different types =
-of ethernet
-> firmware based on the configuration. I used PRUETH as an umbrella term =
-as that's what
-> is used in our documentation.=20
->=20
-> Based on Ryan's feedback on the approach to remove these firmwares,
-> I will reword the commit message to give this view in v2
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-Thanks for the explanation - indeed, a bit more details in the commit mes=
-sage=20
-would help.
+Jacinto platforms use first R5 MCU core for DM firmware. When DM firmware=
+ was
+split out into own recipe[1], ALTERNATIVE_TARGET entries got removed from
+ti-rtos-firmware recipe, but corresponding ALTERNATIVE_LINK_NAME entries
+remained, causing warnings. Clean up those now.
 
+[1] https://git.yoctoproject.org/meta-ti/commit/meta-ti-bsp/recipes-ti/ti=
+-rtos-bin/ti-rtos-firmware.bb?id=3Db21d29d94694ac49b97a1f4ba428c7d8cd6fb6=
+4a
 
-> >>>> Signed-off-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
-> >>>> ---
-> >>>> Changes from v1:
-> >>>> --------------
-> >>>> * Corrected the commit message.
-> >>>>
-> >>>> =A0 meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc | 3 ---
-> >>>> =A0 1 file changed, 3 deletions(-)
-> >>>>
-> >>>> diff --git a/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc =
-b/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
-> >>>> index 266a7ef5..317ab1b1 100644
-> >>>> --- a/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
-> >>>> +++ b/meta-ti-bsp/recipes-kernel/linux/kernel-rdepends.inc
-> >>>> @@ -12,9 +12,6 @@ RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:dra7=
-xx =3D " vpdma-fw"
-> >>>> =A0 RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:dra7xx =3D " goodi=
-x-fw"
-> >>>> =A0 =A0 # Add run-time dependency for PRU Ethernet firmware to the=
- rootfs
-> >>>> -RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:am57xx =3D " prueth-f=
-w prusw-fw pruhsr-fw pruprp-fw"
-> >>>> -RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:ti43x =3D " prueth-fw=
- pruhsr-fw pruprp-fw"
-> >>>> -RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:ti33x =3D " prueth-fw=
- pruhsr-fw pruprp-fw"
-> >>>> =A0 RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:am65xx =3D " pruet=
-h-fw-am65x"
-> >>>> =A0 RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:am65xx-evm =3D " p=
-rueth-fw-am65x-sr2 pruhsr-fw-am65x-sr2 prusw-fw-am65x-sr2"
-> >>>> =A0 RDEPENDS:${KERNEL_PACKAGE_NAME}-base:append:am64xx =3D " pruet=
-h-fw-am65x-sr2 pruhsr-fw-am65x-sr2 prusw-fw-am65x-sr2"
-> >>>>
-> >>>> base-commit: c3916324a01fe96c68a78ef9ed0070d6b1fc8f2f
+Fixes these warnings:
+
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alternative target (/usr/lib/firmware/j7-mcu-r5f0_0-fw or /usr/lib/firm=
+ware/j7-mcu-r5f0_0-fw.ti-rtos-firmware) does not exist, skipping...
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alternative target (/usr/lib/firmware/j7-mcu-r5f0_0-fw-sec or /usr/lib/=
+firmware/j7-mcu-r5f0_0-fw-sec.ti-rtos-firmware) does not exist, skipping.=
+..
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: NOT adding alternative provide /usr/lib/firmware/j7-mcu-r5f0_0-fw: /usr=
+/lib/firmware/j7-mcu-r5f0_0-fw.ti-rtos-firmware does not exist
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: NOT adding alternative provide /usr/lib/firmware/j7-mcu-r5f0_0-fw-sec: =
+/usr/lib/firmware/j7-mcu-r5f0_0-fw-sec.ti-rtos-firmware does not exist
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alt_link =3D=3D alt_target: /usr/lib/firmware/j7-mcu-r5f0_0-fw =3D=3D /=
+usr/lib/firmware/j7-mcu-r5f0_0-fw
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alt_link =3D=3D alt_target: /usr/lib/firmware/j7-mcu-r5f0_0-fw-sec =3D=3D=
+ /usr/lib/firmware/j7-mcu-r5f0_0-fw-sec
+
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alternative target (/usr/lib/firmware/j7200-mcu-r5f0_0-fw or /usr/lib/f=
+irmware/j7200-mcu-r5f0_0-fw.ti-rtos-firmware) does not exist, skipping...
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alternative target (/usr/lib/firmware/j7200-mcu-r5f0_0-fw-sec or /usr/l=
+ib/firmware/j7200-mcu-r5f0_0-fw-sec.ti-rtos-firmware) does not exist, ski=
+pping...
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: NOT adding alternative provide /usr/lib/firmware/j7200-mcu-r5f0_0-fw: /=
+usr/lib/firmware/j7200-mcu-r5f0_0-fw.ti-rtos-firmware does not exist
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: NOT adding alternative provide /usr/lib/firmware/j7200-mcu-r5f0_0-fw-se=
+c: /usr/lib/firmware/j7200-mcu-r5f0_0-fw-sec.ti-rtos-firmware does not ex=
+ist
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alt_link =3D=3D alt_target: /usr/lib/firmware/j7200-mcu-r5f0_0-fw =3D=3D=
+ /usr/lib/firmware/j7200-mcu-r5f0_0-fw
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alt_link =3D=3D alt_target: /usr/lib/firmware/j7200-mcu-r5f0_0-fw-sec =3D=
+=3D /usr/lib/firmware/j7200-mcu-r5f0_0-fw-sec
+
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alternative target (/usr/lib/firmware/j721s2-mcu-r5f0_0-fw or /usr/lib/=
+firmware/j721s2-mcu-r5f0_0-fw.ti-rtos-firmware) does not exist, skipping.=
+..
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alternative target (/usr/lib/firmware/j721s2-mcu-r5f0_0-fw-sec or /usr/=
+lib/firmware/j721s2-mcu-r5f0_0-fw-sec.ti-rtos-firmware) does not exist, s=
+kipping...
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: NOT adding alternative provide /usr/lib/firmware/j721s2-mcu-r5f0_0-fw: =
+/usr/lib/firmware/j721s2-mcu-r5f0_0-fw.ti-rtos-firmware does not exist
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: NOT adding alternative provide /usr/lib/firmware/j721s2-mcu-r5f0_0-fw-s=
+ec: /usr/lib/firmware/j721s2-mcu-r5f0_0-fw-sec.ti-rtos-firmware does not =
+exist
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alt_link =3D=3D alt_target: /usr/lib/firmware/j721s2-mcu-r5f0_0-fw =3D=3D=
+ /usr/lib/firmware/j721s2-mcu-r5f0_0-fw
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alt_link =3D=3D alt_target: /usr/lib/firmware/j721s2-mcu-r5f0_0-fw-sec =
+=3D=3D /usr/lib/firmware/j721s2-mcu-r5f0_0-fw-sec
+
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alternative target (/usr/lib/firmware/j784s4-mcu-r5f0_0-fw or /usr/lib/=
+firmware/j784s4-mcu-r5f0_0-fw.ti-rtos-firmware) does not exist, skipping.=
+..
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alternative target (/usr/lib/firmware/j784s4-mcu-r5f0_0-fw-sec or /usr/=
+lib/firmware/j784s4-mcu-r5f0_0-fw-sec.ti-rtos-firmware) does not exist, s=
+kipping...
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: NOT adding alternative provide /usr/lib/firmware/j784s4-mcu-r5f0_0-fw: =
+/usr/lib/firmware/j784s4-mcu-r5f0_0-fw.ti-rtos-firmware does not exist
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: NOT adding alternative provide /usr/lib/firmware/j784s4-mcu-r5f0_0-fw-s=
+ec: /usr/lib/firmware/j784s4-mcu-r5f0_0-fw-sec.ti-rtos-firmware does not =
+exist
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alt_link =3D=3D alt_target: /usr/lib/firmware/j784s4-mcu-r5f0_0-fw =3D=3D=
+ /usr/lib/firmware/j784s4-mcu-r5f0_0-fw
+| WARNING: ti-rtos-firmware-08.02.00.04-r4.1 do_package: ti-rtos-firmware=
+: alt_link =3D=3D alt_target: /usr/lib/firmware/j784s4-mcu-r5f0_0-fw-sec =
+=3D=3D /usr/lib/firmware/j784s4-mcu-r5f0_0-fw-sec
+
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+---
+ .../recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb       | 12 ------------
+ 1 file changed, 12 deletions(-)
+
+diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/met=
+a-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index c560e7b4..751b10d6 100644
+--- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -128,7 +128,6 @@ ALTERNATIVE:${PN}:am62axx =3D "\
+                     "
+=20
+ ALTERNATIVE:${PN}:j721e =3D "\
+-                    j7-mcu-r5f0_0-fw    j7-mcu-r5f0_0-fw-sec \
+                     j7-mcu-r5f0_1-fw    j7-mcu-r5f0_1-fw-sec \
+                     j7-main-r5f0_0-fw   j7-main-r5f0_0-fw-sec \
+                     j7-main-r5f0_1-fw   j7-main-r5f0_1-fw-sec \
+@@ -140,14 +139,12 @@ ALTERNATIVE:${PN}:j721e =3D "\
+                     "
+=20
+ ALTERNATIVE:${PN}:j7200 =3D "\
+-                    j7200-mcu-r5f0_0-fw    j7200-mcu-r5f0_0-fw-sec \
+                     j7200-mcu-r5f0_1-fw    j7200-mcu-r5f0_1-fw-sec \
+                     j7200-main-r5f0_0-fw   j7200-main-r5f0_0-fw-sec \
+                     j7200-main-r5f0_1-fw   j7200-main-r5f0_1-fw-sec \
+                     "
+=20
+ ALTERNATIVE:${PN}:j721s2 =3D "\
+-                    j721s2-mcu-r5f0_0-fw    j721s2-mcu-r5f0_0-fw-sec \
+                     j721s2-mcu-r5f0_1-fw    j721s2-mcu-r5f0_1-fw-sec \
+                     j721s2-main-r5f0_0-fw   j721s2-main-r5f0_0-fw-sec \
+                     j721s2-main-r5f0_1-fw   j721s2-main-r5f0_1-fw-sec \
+@@ -158,7 +155,6 @@ ALTERNATIVE:${PN}:j721s2 =3D "\
+                     "
+=20
+ ALTERNATIVE:${PN}:j784s4 =3D "\
+-                    j784s4-mcu-r5f0_0-fw    j784s4-mcu-r5f0_0-fw-sec \
+                     j784s4-mcu-r5f0_1-fw    j784s4-mcu-r5f0_1-fw-sec \
+                     j784s4-main-r5f0_0-fw   j784s4-main-r5f0_0-fw-sec \
+                     j784s4-main-r5f0_1-fw   j784s4-main-r5f0_1-fw-sec \
+@@ -200,8 +196,6 @@ ALTERNATIVE_LINK_NAME[am62a-mcu-r5f0_0-fw-sec] =3D "$=
+{nonarch_base_libdir}/firmwar
+ ALTERNATIVE_LINK_NAME[am62a-c71_0-fw]     =3D "${nonarch_base_libdir}/fi=
+rmware/am62a-c71_0-fw"
+ ALTERNATIVE_LINK_NAME[am62a-c71_0-fw-sec] =3D "${nonarch_base_libdir}/fi=
+rmware/am62a-c71_0-fw-sec"
+=20
+-ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_0-fw]     =3D "${nonarch_base_libdir}/=
+firmware/j7-mcu-r5f0_0-fw"
+-ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_0-fw-sec] =3D "${nonarch_base_libdir}/=
+firmware/j7-mcu-r5f0_0-fw-sec"
+ ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw]     =3D "${nonarch_base_libdir}/=
+firmware/j7-mcu-r5f0_1-fw"
+ ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw-sec] =3D "${nonarch_base_libdir}/=
+firmware/j7-mcu-r5f0_1-fw-sec"
+ ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw]     =3D "${nonarch_base_libdir}=
+/firmware/j7-main-r5f0_0-fw"
+@@ -219,8 +213,6 @@ ALTERNATIVE_LINK_NAME[j7-c66_1-fw-sec] =3D "${nonarch=
+_base_libdir}/firmware/j7-c66
+ ALTERNATIVE_LINK_NAME[j7-c71_0-fw]     =3D "${nonarch_base_libdir}/firmw=
+are/j7-c71_0-fw"
+ ALTERNATIVE_LINK_NAME[j7-c71_0-fw-sec] =3D "${nonarch_base_libdir}/firmw=
+are/j7-c71_0-fw-sec"
+=20
+-ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_0-fw]     =3D "${nonarch_base_libdi=
+r}/firmware/j7200-mcu-r5f0_0-fw"
+-ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_0-fw-sec] =3D "${nonarch_base_libdi=
+r}/firmware/j7200-mcu-r5f0_0-fw-sec"
+ ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_1-fw]     =3D "${nonarch_base_libdi=
+r}/firmware/j7200-mcu-r5f0_1-fw"
+ ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_1-fw-sec] =3D "${nonarch_base_libdi=
+r}/firmware/j7200-mcu-r5f0_1-fw-sec"
+ ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw]     =3D "${nonarch_base_libd=
+ir}/firmware/j7200-main-r5f0_0-fw"
+@@ -228,8 +220,6 @@ ALTERNATIVE_LINK_NAME[j7200-main-r5f0_0-fw-sec] =3D "=
+${nonarch_base_libdir}/firmwa
+ ALTERNATIVE_LINK_NAME[j7200-main-r5f0_1-fw]     =3D "${nonarch_base_libd=
+ir}/firmware/j7200-main-r5f0_1-fw"
+ ALTERNATIVE_LINK_NAME[j7200-main-r5f0_1-fw-sec] =3D "${nonarch_base_libd=
+ir}/firmware/j7200-main-r5f0_1-fw-sec"
+=20
+-ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_0-fw]     =3D "${nonarch_base_libd=
+ir}/firmware/j721s2-mcu-r5f0_0-fw"
+-ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_0-fw-sec] =3D "${nonarch_base_libd=
+ir}/firmware/j721s2-mcu-r5f0_0-fw-sec"
+ ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_1-fw]     =3D "${nonarch_base_libd=
+ir}/firmware/j721s2-mcu-r5f0_1-fw"
+ ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_1-fw-sec] =3D "${nonarch_base_libd=
+ir}/firmware/j721s2-mcu-r5f0_1-fw-sec"
+ ALTERNATIVE_LINK_NAME[j721s2-main-r5f0_0-fw]     =3D "${nonarch_base_lib=
+dir}/firmware/j721s2-main-r5f0_0-fw"
+@@ -245,8 +235,6 @@ ALTERNATIVE_LINK_NAME[j721s2-c71_0-fw-sec] =3D "${non=
+arch_base_libdir}/firmware/j7
+ ALTERNATIVE_LINK_NAME[j721s2-c71_1-fw]     =3D "${nonarch_base_libdir}/f=
+irmware/j721s2-c71_1-fw"
+ ALTERNATIVE_LINK_NAME[j721s2-c71_1-fw-sec] =3D "${nonarch_base_libdir}/f=
+irmware/j721s2-c71_1-fw-sec"
+=20
+-ALTERNATIVE_LINK_NAME[j784s4-mcu-r5f0_0-fw]     =3D "${nonarch_base_libd=
+ir}/firmware/j784s4-mcu-r5f0_0-fw"
+-ALTERNATIVE_LINK_NAME[j784s4-mcu-r5f0_0-fw-sec] =3D "${nonarch_base_libd=
+ir}/firmware/j784s4-mcu-r5f0_0-fw-sec"
+ ALTERNATIVE_LINK_NAME[j784s4-mcu-r5f0_1-fw]     =3D "${nonarch_base_libd=
+ir}/firmware/j784s4-mcu-r5f0_1-fw"
+ ALTERNATIVE_LINK_NAME[j784s4-mcu-r5f0_1-fw-sec] =3D "${nonarch_base_libd=
+ir}/firmware/j784s4-mcu-r5f0_1-fw-sec"
+ ALTERNATIVE_LINK_NAME[j784s4-main-r5f0_0-fw]     =3D "${nonarch_base_lib=
+dir}/firmware/j784s4-main-r5f0_0-fw"
+--=20
+2.25.1
+
 
