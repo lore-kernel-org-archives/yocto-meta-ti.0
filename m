@@ -1,54 +1,54 @@
-Return-Path: <afd@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B26C2EEAA68
-	for <webhook@archiver.kernel.org>; Thu, 14 Sep 2023 19:09:12 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.3186.1694718543229452482
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0CCC2EEAA68
+	for <webhook@archiver.kernel.org>; Thu, 14 Sep 2023 19:31:03 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.3783.1694719858747090959
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 14 Sep 2023 12:09:03 -0700
+ Thu, 14 Sep 2023 12:30:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Jffh0DjW;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: afd@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38EJ92rp124449
-	for <meta-ti@lists.yoctoproject.org>; Thu, 14 Sep 2023 14:09:02 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=d5bQop98;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38EJUvwZ070022
+	for <meta-ti@lists.yoctoproject.org>; Thu, 14 Sep 2023 14:30:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1694718542;
-	bh=2wdDN6foWhlD4t/UwfVdUY3W8xbSYTgvQIGawAm2yGQ=;
+	s=ti-com-17Q1; t=1694719857;
+	bh=o8vkC8oxJck0bU+Vhqd/yGDgTcIpf50tEymNxF39hHc=;
 	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=Jffh0DjWG48JdW7I40lgQWOtZYEsywXIBYyTyuDBSHaYoHR3JOVspHC4WZWNPljNz
-	 zR2bzCCOG540HMgSxzGiMnmhgKvmEqwblCWIxMyuk/yVfrGIdPX0ueAr4l9JIvnG/y
-	 lD41iRAbqdQZfMPtbXwUWI4gijoKAPdjc+cJV+VU=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38EJ92ut111428
+	b=d5bQop98JJCgJyomNqUJoskFtOLrd/dFCF806EcynDziJtPt6OQXc69E20v7LKIAR
+	 RE/5XrNPTJIxMlY7bM899uoQEOcQBvUYjXpPLlkxO1gFXQ3NNI2xjwGoI1Ey9twi89
+	 +7lSHRoqFz0OQVczlcZRAEAkYPgWaAKmV235qh3g=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38EJUv71016017
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 14 Sep 2023 14:09:02 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Thu, 14 Sep 2023 14:30:57 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 14
- Sep 2023 14:09:02 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 14:30:57 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 14 Sep 2023 14:09:02 -0500
-Received: from [10.250.38.120] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38EJ91s7038779;
-	Thu, 14 Sep 2023 14:09:02 -0500
-Message-ID: <28250f86-bf86-2629-f96d-2442acac6c10@ti.com>
-Date: Thu, 14 Sep 2023 14:09:01 -0500
+ Frontend Transport; Thu, 14 Sep 2023 14:30:57 -0500
+Received: from [10.249.36.233] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38EJUvHR016461;
+	Thu, 14 Sep 2023 14:30:57 -0500
+Message-ID: <73039b8b-2a2f-5dd7-afbf-be3066ef3387@ti.com>
+Date: Thu, 14 Sep 2023 14:30:56 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
-Subject: Re: [meta-ti] [RFC|kirkstone] linux-ti-staging: add config preempt
- for am335x and am437x
-To: <anandb@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: <reatmon@ti.com>, <s-adivi@ti.com>, <g-gupta@ti.com>, <khasim@ti.com>,
-        <vijayp@ti.com>, <praneeth@ti.com>
-References: <20230914171026.3014887-1-anandb@ti.com>
+Subject: Re: [RFC|kirkstone] linux-ti-staging: add config preempt for am335x
+ and am437x
 Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
+To: Anand Balagopalakrishnan <anandb@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: <s-adivi@ti.com>, <g-gupta@ti.com>, <khasim@ti.com>, <vijayp@ti.com>,
+        <praneeth@ti.com>
+References: <20230914171026.3014887-1-anandb@ti.com>
+From: Ryan Eatmon <reatmon@ti.com>
 In-Reply-To: <20230914171026.3014887-1-anandb@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
@@ -56,10 +56,12 @@ X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 14 Sep 2023 19:09:12 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16972
+ <meta-ti@lists.yoctoproject.org>; Thu, 14 Sep 2023 19:31:03 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16973
 
-On 9/14/23 12:10 PM, Anand Balagopalakrishnan via lists.yoctoproject.org wrote:
+
+
+On 9/14/2023 12:10 PM, Anand Balagopalakrishnan wrote:
 > SGX needs a preemptible kernel. CONFIG_PREEMPT has always been enabled
 > on TI Linux kernels upto K5.1.
 > 
@@ -68,12 +70,6 @@ On 9/14/23 12:10 PM, Anand Balagopalakrishnan via lists.yoctoproject.org wrote:
 > 
 > Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
 > ---
-
-Do not add configs to Yocto, add them to the kernel as normal patches using LPR
-like everyone else.
-
-Andrew
-
 >   .../linux/files/configs/config-preempt.cfg           | 12 ++++++++++++
 >   .../recipes-kernel/linux/linux-ti-staging_6.1.bb     |  1 +
 >   2 files changed, 13 insertions(+)
@@ -109,15 +105,61 @@ Andrew
 >   SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
 >               file://defconfig"
 >   
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#16968): https://lists.yoctoproject.org/g/meta-ti/message/16968
-> Mute This Topic: https://lists.yoctoproject.org/mt/101362535/3619733
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [afd@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+
+I'm going to provide comments just as a learning moment for those paying 
+attention.
+
+1) The location of where you stuck KERNEL_CONFIG_FRAGMENTS is out of 
+place.  It just there in the middle of the SRC_URI variables.
+
+2) We do not need to add this for ALL platforms, just the ones that you 
+identified (am3, am4, am57, etc...)  So you should use the SOC_FAMILY 
+override syntax to limit the change to just those families:
+
+KERNEL_CONFIG_FRAGMENTS:append:ti33x = " ${WORKDIR}/config-preempt.cfg"
+KERNEL_CONFIG_FRAGMENTS:append:ti43x = " ${WORKDIR}/config-preempt.cfg"
+KERNEL_CONFIG_FRAGMENTS:append:dra7x = " ${WORKDIR}/config-preempt.cfg"
+
+3) As this patch is adding the RT prempt stuff, it does not need to be 
+present for building the RT kernel.  But the RT recipe includes this 
+recipe and just changes the branch and SRCREV.  So this change would 
+conflict with what the RT kernel recipe is doing.
+
+4) All of the RT stuff is done with config fragments.  You can look in 
+meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/defconfig:
+
+use-kernel-config=multi_v7_defconfig
+config-fragment=kernel/configs/ti_multi_v7_prune.config 
+kernel/configs/ti_rt.config
+
+So this patch should be done using the existing method fragments, not 
+just setting the variable.  A new config fragment needs to be added to 
+the kernel that sets CONFIG_PREMPT=y (maybe 
+kernel/configs/ti_preempt.config).
+
+And then create three new files:
+
+meta-ti-bsp/recipes-linux/linux/linux-ti-staging-6.1/ti33x/defconfig
+--------------------------------------------------------------------
+use-kernel-config=multi_v7_defconfig
+config-fragment=kernel/configs/ti_multi_v7_prune.config 
+kernel/configs/ti_preempt.config
+
+meta-ti-bsp/recipes-linux/linux/linux-ti-staging-6.1/ti43x/defconfig
+--------------------------------------------------------------------
+use-kernel-config=multi_v7_defconfig
+config-fragment=kernel/configs/ti_multi_v7_prune.config 
+kernel/configs/ti_preempt.config
+
+meta-ti-bsp/recipes-linux/linux/linux-ti-staging-6.1/dra7x/defconfig
+--------------------------------------------------------------------
+use-kernel-config=multi_v7_defconfig
+config-fragment=kernel/configs/ti_multi_v7_prune.config 
+kernel/configs/ti_preempt.config
+
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
