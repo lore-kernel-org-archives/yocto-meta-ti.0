@@ -1,156 +1,185 @@
-Return-Path: <anandb@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 779A9CD3439
-	for <webhook@archiver.kernel.org>; Tue, 19 Sep 2023 04:35:47 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.522.1695098137092751728
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7FEFCE79A8
+	for <webhook@archiver.kernel.org>; Tue, 19 Sep 2023 18:14:00 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.17373.1695147232044349410
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 18 Sep 2023 21:35:37 -0700
+ Tue, 19 Sep 2023 11:13:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=K2YFG4BX;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: anandb@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38J4ZVtk026387;
-	Mon, 18 Sep 2023 23:35:31 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1695098131;
-	bh=bkSwrxCAMAXwobY5rh9lEZOuv8RKZozBxZcstdxlNpk=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To;
-	b=K2YFG4BXodDaxCQIFOPyWRsWu6ZMMUq7prUDInSHvHKOBIH+QnU2rQaNOyXBJeKWi
-	 UNyLpO7pP3u1L5OCAQbUGXaR+4wqScvrnieXbybdP5nQk2S7RN5gdShDy52nOqzCbx
-	 u83TF19LOLkqpCGBBWifVnHE3L1AbyFee4aC5q7o=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38J4ZVfT016794
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 18 Sep 2023 23:35:31 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 18
- Sep 2023 23:35:30 -0500
-Received: from DLEE106.ent.ti.com ([fe80::8d93:1ed8:6156:7891]) by
- DLEE106.ent.ti.com ([fe80::8d93:1ed8:6156:7891%17]) with mapi id
- 15.01.2507.023; Mon, 18 Sep 2023 23:35:31 -0500
-From: "Balagopalakrishnan, Anand" <anandb@ti.com>
-To: "Bajjuri, Praneeth" <praneeth@ti.com>, Denys Dmytriyenko <denis@denix.org>
-CC: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>,
-        "Eatmon, Ryan" <reatmon@ti.com>,
-        "Adivi, Sai Sree Kartheek" <s-adivi@ti.com>,
-        "Gupta, Gyan" <g-gupta@ti.com>,
-        "Khasim, Syed Mohammed" <khasim@ti.com>,
-        "Pothukuchi, Vijay" <vijayp@ti.com>
-Subject: RE: [EXTERNAL] Re: [meta-ti] [RFC|kirkstone] linux-ti-staging: add
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id ECA6C40C2C;
+	Tue, 19 Sep 2023 18:13:50 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id HEDLa-c5iH2F; Tue, 19 Sep 2023 18:13:50 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-110-236.washdc.fios.verizon.net [100.15.110.236])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 01EF140C2B;
+	Tue, 19 Sep 2023 18:13:42 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 00322163CAB; Tue, 19 Sep 2023 14:13:41 -0400 (EDT)
+Date: Tue, 19 Sep 2023 14:13:41 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: "Balagopalakrishnan, Anand" <anandb@ti.com>
+Cc: "Bajjuri, Praneeth" <praneeth@ti.com>,
+	"meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>,
+	"Eatmon, Ryan" <reatmon@ti.com>,
+	"Adivi, Sai Sree Kartheek" <s-adivi@ti.com>,
+	"Gupta, Gyan" <g-gupta@ti.com>,
+	"Khasim, Syed Mohammed" <khasim@ti.com>,
+	"Pothukuchi, Vijay" <vijayp@ti.com>
+Subject: Re: [EXTERNAL] Re: [meta-ti] [RFC|kirkstone] linux-ti-staging: add
  config preempt for am335x and am437x
-Thread-Topic: [EXTERNAL] Re: [meta-ti] [RFC|kirkstone] linux-ti-staging: add
- config preempt for am335x and am437x
-Thread-Index: AQHZ5y5neqGv50s820uRzkLhur8+NbAavHOJgABhWECAAUfTgIAFMKAg
-Date: Tue, 19 Sep 2023 04:35:30 +0000
-Message-ID: <cfe86ebae4374412817e3c4c2c4fc423@ti.com>
+Message-ID: <20230919181341.GC7013@denix.org>
 References: <20230914171026.3014887-1-anandb@ti.com>
  <1784DB091C7C28F5.22721@lists.yoctoproject.org>
- <20230914195514.GO3359@denix.org> <2cf51220b2cd4976bb8531d3cceced5a@ti.com>
+ <20230914195514.GO3359@denix.org>
+ <2cf51220b2cd4976bb8531d3cceced5a@ti.com>
  <b0597336-8bd5-027e-4e96-c86463189e96@ti.com>
-In-Reply-To: <b0597336-8bd5-027e-4e96-c86463189e96@ti.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.250.64.104]
-x-exclaimer-md-config: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ <cfe86ebae4374412817e3c4c2c4fc423@ti.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cfe86ebae4374412817e3c4c2c4fc423@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 19 Sep 2023 04:35:47 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16990
+ <meta-ti@lists.yoctoproject.org>; Tue, 19 Sep 2023 18:14:00 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16991
 
-UHJhbmVldGgsDQoNCnNyY3JldiBpbiBrZXJuZWwgcmVjaXBlIGZvciBraXJrc3RvbmUgYnJhbmNo
-IG5lZWRzIHRvIGJlIGJ1bXBlZC4gVGhlIGxhc3QgQ0lDRCBidWlsZCB3YXMgNi1TZXAgLSBhbHNv
-IGEgZ29vZCBpZGVhIHRvIHRyaWdnZXIgYW5vdGhlciBmdWxsIGJ1aWxkLg0KDQpSZWdhcmRzLA0K
-QW5hbmQNCg0KLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCkZyb206IEJhamp1cmksIFByYW5l
-ZXRoIDxwcmFuZWV0aEB0aS5jb20+IA0KU2VudDogRnJpZGF5LCBTZXB0ZW1iZXIgMTUsIDIwMjMg
-OTo0NyBQTQ0KVG86IEJhbGFnb3BhbGFrcmlzaG5hbiwgQW5hbmQgPGFuYW5kYkB0aS5jb20+OyBE
-ZW55cyBEbXl0cml5ZW5rbyA8ZGVuaXNAZGVuaXgub3JnPg0KQ2M6IG1ldGEtdGlAbGlzdHMueW9j
-dG9wcm9qZWN0Lm9yZzsgRWF0bW9uLCBSeWFuIDxyZWF0bW9uQHRpLmNvbT47IEFkaXZpLCBTYWkg
-U3JlZSBLYXJ0aGVlayA8cy1hZGl2aUB0aS5jb20+OyBHdXB0YSwgR3lhbiA8Zy1ndXB0YUB0aS5j
-b20+OyBLaGFzaW0sIFN5ZWQgTW9oYW1tZWQgPGtoYXNpbUB0aS5jb20+OyBQb3RodWt1Y2hpLCBW
-aWpheSA8dmlqYXlwQHRpLmNvbT4NClN1YmplY3Q6IFJlOiBbRVhURVJOQUxdIFJlOiBbbWV0YS10
-aV0gW1JGQ3xraXJrc3RvbmVdIGxpbnV4LXRpLXN0YWdpbmc6IGFkZCBjb25maWcgcHJlZW1wdCBm
-b3IgYW0zMzV4IGFuZCBhbTQzN3gNCg0KDQoNCk9uIDkvMTQvMjAyMyA4OjQ3IFBNLCBCYWxhZ29w
-YWxha3Jpc2huYW4sIEFuYW5kIHdyb3RlOg0KPiBIaSBEZW55cywNCj4gDQo+IFRoaXMgaXMgb25s
-eSBuZWVkZWQgZm9yIHY3IHBsYXRmb3JtcyBsaWtlIEFNMyAvIEFNNCBhbmQgcG9zc2libHkgQU01
-N3ggYWxzby4gQ09ORklHX1BSRUVNUFQgaXMgZW5hYmxlZCBieSBkZWZhdWx0IG9uIGFybTY0IHBs
-YXRmb3JtcyBsaWtlIEFNNjV4Lg0KPiANCj4gUHJhbmVldGggd2lsbCBzZW5kIGEga2VybmVsIHBh
-dGNoIGZvciBUSSBrZXJuZWwuIFRoaXMgbWV0YS10aSBwYXRjaCBpcyBtZWFudCB0byB1bmJsb2Nr
-IGFueW9uZSB3aG8gd2FudHMgdG8gZW5hYmxlIFNHWCBkcml2ZSBpbiB0aGUgbWVhbndoaWxlLg0K
-DQoNClRoaXMgcGF0Y2ggY2FuIGJlIGFiYW5kb25lZCAuDQpodHRwczovL2dpdC50aS5jb20vY2dp
-dC90aS1saW51eC1rZXJuZWwvdGktbGludXgta2VybmVsL2NvbW1pdC8/aD10aS1saW51eC02LjEu
-eS1jaWNkJmlkPWUwMjVlMzExMjZmZmYwMWRlZDU5ZDkwMWFmOTE2YWJlODc2NDZjYTYgDQplbmFi
-bGVzIENPTkZJR19QUkVFTVBUDQoNCg0KPiANCj4gUmVnYXJkcywNCj4gQW5hbmQNCj4gDQo+IC0t
-LS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IERlbnlzIERteXRyaXllbmtvIDxkZW5p
-c0BkZW5peC5vcmc+DQo+IFNlbnQ6IEZyaWRheSwgU2VwdGVtYmVyIDE1LCAyMDIzIDE6MjUgQU0N
-Cj4gVG86IEJhbGFnb3BhbGFrcmlzaG5hbiwgQW5hbmQgPGFuYW5kYkB0aS5jb20+DQo+IENjOiBt
-ZXRhLXRpQGxpc3RzLnlvY3RvcHJvamVjdC5vcmc7IEVhdG1vbiwgUnlhbiA8cmVhdG1vbkB0aS5j
-b20+OyBBZGl2aSwgU2FpIFNyZWUgS2FydGhlZWsgPHMtYWRpdmlAdGkuY29tPjsgR3VwdGEsIEd5
-YW4gPGctZ3VwdGFAdGkuY29tPjsgS2hhc2ltLCBTeWVkIE1vaGFtbWVkIDxraGFzaW1AdGkuY29t
-PjsgUG90aHVrdWNoaSwgVmlqYXkgPHZpamF5cEB0aS5jb20+OyBCYWpqdXJpLCBQcmFuZWV0aCA8
-cHJhbmVldGhAdGkuY29tPg0KPiBTdWJqZWN0OiBbRVhURVJOQUxdIFJlOiBbbWV0YS10aV0gW1JG
-Q3xraXJrc3RvbmVdIGxpbnV4LXRpLXN0YWdpbmc6IGFkZCBjb25maWcgcHJlZW1wdCBmb3IgYW0z
-MzV4IGFuZCBhbTQzN3gNCj4gDQo+IE9uIFRodSwgU2VwIDE0LCAyMDIzIGF0IDAzOjM2OjE4UE0g
-LTA0MDAsIERlbnlzIERteXRyaXllbmtvIHdyb3RlOg0KPj4gT24gVGh1LCBTZXAgMTQsIDIwMjMg
-YXQgMTA6NDA6MjZQTSArMDUzMCwgQW5hbmQgQmFsYWdvcGFsYWtyaXNobmFuIHZpYSBsaXN0cy55
-b2N0b3Byb2plY3Qub3JnIHdyb3RlOg0KPj4+IFNHWCBuZWVkcyBhIHByZWVtcHRpYmxlIGtlcm5l
-bC4gQ09ORklHX1BSRUVNUFQgaGFzIGFsd2F5cyBiZWVuDQo+Pj4gZW5hYmxlZCBvbiBUSSBMaW51
-eCBrZXJuZWxzIHVwdG8gSzUuMS4NCj4+Pg0KPj4+IFRoaXMgaXMgZW5hYmxlZCBvbiBBTTY1eCBi
-eSBkZWZhdWx0IGJ1dCBtaXNzZWQgb3V0IEFNMzM1eCBhbmQgQU00Mzd4Lg0KPj4+IEFkZCBhIGtl
-cm5lbCBjb25maWcgZnJhZ21lbnQgdG8gZW5hYmxlIGNvbmZpZyBwcmVlbXB0Lg0KPj4NCj4+IEhp
-LCBBbmFuZCwNCj4+DQo+PiBJcyB0aGlzIG9ubHkgbmVlZGVkIGZvciBhbTMzNXggYW5kIGFtNDM3
-eCwgYXMgdGhlIHN1YmplY3Qgc3VnZ2VzdHM/IElmDQo+PiBzbywgd2h5IHRoZSBjb2RlIGFkZHMg
-dGhlIGNvbmZpZyBmcmFnbWVudCB0byBhbGwgcGxhdGZvcm1zPw0KPj4NCj4+IFNlY29uZCBxdWVz
-dGlvbiAtIGhpc3RvcmljYWxseSB0aGlzIGhhcyBiZWVuIGVuYWJsZWQgaW4gdGhlIFRJIGtlcm5l
-bCBpdHNlbGYuDQo+PiBXaHkgbm90IGRvIGl0IGxpa2UgdGhhdCBhZ2Fpbiwgd2h5IGFkZCB0aGUg
-ZnJhZ21lbnQgdG8gdGhlIE9FIG1ldGFkYXRhDQo+PiBpbnN0ZWFkIG9mIGtlZXBpbmcgaXQgaW4t
-dHJlZT8gSG93IHRoZSBkaXN0cm8tYWdub3N0aWMgYXBwcm9hY2ggd291bGQgYmUgaGFuZGxlZD8N
-Cj4+DQo+Pg0KPj4+IFNpZ25lZC1vZmYtYnk6IEFuYW5kIEJhbGFnb3BhbGFrcmlzaG5hbiA8YW5h
-bmRiQHRpLmNvbT4NCj4+PiAtLS0NCj4+PiAgIC4uLi9saW51eC9maWxlcy9jb25maWdzL2NvbmZp
-Zy1wcmVlbXB0LmNmZyAgICAgICAgICAgfCAxMiArKysrKysrKysrKysNCj4+PiAgIC4uLi9yZWNp
-cGVzLWtlcm5lbC9saW51eC9saW51eC10aS1zdGFnaW5nXzYuMS5iYiAgICAgfCAgMSArDQo+Pj4g
-ICAyIGZpbGVzIGNoYW5nZWQsIDEzIGluc2VydGlvbnMoKykNCj4+PiAgIGNyZWF0ZSBtb2RlIDEw
-MDY0NA0KPj4+IG1ldGEtdGktYnNwL3JlY2lwZXMta2VybmVsL2xpbnV4L2ZpbGVzL2NvbmZpZ3Mv
-Y29uZmlnLXByZWVtcHQuY2ZnDQo+Pj4NCj4+PiBkaWZmIC0tZ2l0DQo+Pj4gYS9tZXRhLXRpLWJz
-cC9yZWNpcGVzLWtlcm5lbC9saW51eC9maWxlcy9jb25maWdzL2NvbmZpZy1wcmVlbXB0LmNmZw0K
-Pj4+IGIvbWV0YS10aS1ic3AvcmVjaXBlcy1rZXJuZWwvbGludXgvZmlsZXMvY29uZmlncy9jb25m
-aWctcHJlZW1wdC5jZmcNCj4+PiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPj4+IGluZGV4IDAwMDAw
-MDAwLi5jMWU1YWQ3ZA0KPj4+IC0tLSAvZGV2L251bGwNCj4+PiArKysgYi9tZXRhLXRpLWJzcC9y
-ZWNpcGVzLWtlcm5lbC9saW51eC9maWxlcy9jb25maWdzL2NvbmZpZy1wcmVlbXB0Lg0KPj4+ICsr
-KyBjZmcNCj4+DQo+PiBUaGlzIGlzIG5vdCB0aGUgcmlnaHQgbG9jYXRpb24gZm9yIHRoZSBmaWxl
-LiBZb3Ugd2FudCB0byBhZGQgdG8gdGhlDQo+PiBsaW51eC10aS1zdGFnaW5nLXJ0LTYuMS8gZGly
-ZWN0b3J5LCBzaW5jZSB5b3UgYXJlIG9ubHkgdXNpbmcgaXQgZnJvbQ0KPj4gdGhlIGNvcnJlc3Bv
-bmRpbmcgbGludXgtdGktc3RhZ2luZ182LjEuYmIgcmVjaXBlLg0KPiANCj4gU29ycnksIHR5cG8g
-aGVyZSAtIGxpbnV4LXRpLXN0YWdpbmctNi4xLyBkaXJlY3RvcnksIGlmIGl0J3Mgbm90IFJULXNw
-ZWNpZmljLg0KPiANCj4+DQo+Pj4gQEAgLTAsMCArMSwxMiBAQA0KPj4+ICtDT05GSUdfUFJFRU1Q
-VF9CVUlMRD15DQo+Pj4gKyMgQ09ORklHX1BSRUVNUFRfTk9ORSBpcyBub3Qgc2V0DQo+Pj4gK0NP
-TkZJR19QUkVFTVBUPXkNCj4+PiArQ09ORklHX1BSRUVNUFRfQ09VTlQ9eQ0KPj4+ICtDT05GSUdf
-UFJFRU1QVElPTj15DQo+Pj4gK0NPTkZJR19QUkVFTVBUX1JDVT15DQo+Pj4gK0NPTkZJR19UQVNL
-U19SQ1VfR0VORVJJQz15DQo+Pj4gK0NPTkZJR19UQVNLU19SQ1U9eQ0KPj4+ICtDT05GSUdfVU5J
-TkxJTkVfU1BJTl9VTkxPQ0s9eQ0KPj4+ICsjIENPTkZJR19DRUNfR1BJTyBpcyBub3Qgc2V0DQo+
-Pj4gK0NPTkZJR19ERUJVR19QUkVFTVBUPXkNCj4+PiArIyBDT05GSUdfUFJFRU1QVF9UUkFDRVIg
-aXMgbm90IHNldA0KPj4+IGRpZmYgLS1naXQNCj4+PiBhL21ldGEtdGktYnNwL3JlY2lwZXMta2Vy
-bmVsL2xpbnV4L2xpbnV4LXRpLXN0YWdpbmdfNi4xLmJiDQo+Pj4gYi9tZXRhLXRpLWJzcC9yZWNp
-cGVzLWtlcm5lbC9saW51eC9saW51eC10aS1zdGFnaW5nXzYuMS5iYg0KPj4+IGluZGV4IDhhODgz
-ODc4Li4wZWU2MzM1OCAxMDA2NDQNCj4+PiAtLS0gYS9tZXRhLXRpLWJzcC9yZWNpcGVzLWtlcm5l
-bC9saW51eC9saW51eC10aS1zdGFnaW5nXzYuMS5iYg0KPj4+ICsrKyBiL21ldGEtdGktYnNwL3Jl
-Y2lwZXMta2VybmVsL2xpbnV4L2xpbnV4LXRpLXN0YWdpbmdfNi4xLmJiDQo+Pj4gQEAgLTMzLDYg
-KzMzLDcgQEAgUFIgPSAiJHtNQUNISU5FX0tFUk5FTF9QUn0iDQo+Pj4gICANCj4+PiAgIEtFUk5F
-TF9HSVRfVVJJID89ICJnaXQ6Ly9naXQudGkuY29tL2dpdC90aS1saW51eC1rZXJuZWwvdGktbGlu
-dXgta2VybmVsLmdpdCINCj4+PiAgIEtFUk5FTF9HSVRfUFJPVE9DT0wgPSAiaHR0cHMiDQo+Pj4g
-K0tFUk5FTF9DT05GSUdfRlJBR01FTlRTICs9ICIke1dPUktESVJ9L2NvbmZpZy1wcmVlbXB0LmNm
-ZyINCj4+DQo+PiBTaW5jZSB0aGlzIGZpbGUgaXMgb3V0LW9mLXRyZWUgYW5kIGluIHRoZSBPRSBt
-ZXRhZGF0YSwgaXQgd291bGQgYWxzbw0KPj4gcmVxdWlyZSBsaXN0aW5nIGl0IGluIFNSQ19VUkku
-DQo+Pg0KPj4NCj4+PiAgIFNSQ19VUkkgKz0gIiR7S0VSTkVMX0dJVF9VUkl9O3Byb3RvY29sPSR7
-S0VSTkVMX0dJVF9QUk9UT0NPTH07YnJhbmNoPSR7QlJBTkNIfSBcDQo+Pj4gICAgICAgICAgICAg
-ICBmaWxlOi8vZGVmY29uZmlnIg0KPj4+ICAgDQo+Pj4gLS0NCj4+PiAyLjM0LjENCg==
+Anand,
+
+Please check corresponding -next branches (master/kirkstone) - CICD automerges 
+and SRCREV bumps are queued up there and I'm guessing they are going through 
+the build and boot-test cycles now. If everything's green, they should be 
+merged back to main kirkstone and master branches automatically. Ryan can 
+definitely explain the entire CICD process in more detail.
+
+-- 
+Denys
+
+
+On Tue, Sep 19, 2023 at 04:35:30AM +0000, Balagopalakrishnan, Anand wrote:
+> Praneeth,
+> 
+> srcrev in kernel recipe for kirkstone branch needs to be bumped. The last CICD build was 6-Sep - also a good idea to trigger another full build.
+> 
+> Regards,
+> Anand
+> 
+> -----Original Message-----
+> From: Bajjuri, Praneeth <praneeth@ti.com> 
+> Sent: Friday, September 15, 2023 9:47 PM
+> To: Balagopalakrishnan, Anand <anandb@ti.com>; Denys Dmytriyenko <denis@denix.org>
+> Cc: meta-ti@lists.yoctoproject.org; Eatmon, Ryan <reatmon@ti.com>; Adivi, Sai Sree Kartheek <s-adivi@ti.com>; Gupta, Gyan <g-gupta@ti.com>; Khasim, Syed Mohammed <khasim@ti.com>; Pothukuchi, Vijay <vijayp@ti.com>
+> Subject: Re: [EXTERNAL] Re: [meta-ti] [RFC|kirkstone] linux-ti-staging: add config preempt for am335x and am437x
+> 
+> 
+> 
+> On 9/14/2023 8:47 PM, Balagopalakrishnan, Anand wrote:
+> > Hi Denys,
+> > 
+> > This is only needed for v7 platforms like AM3 / AM4 and possibly AM57x also. CONFIG_PREEMPT is enabled by default on arm64 platforms like AM65x.
+> > 
+> > Praneeth will send a kernel patch for TI kernel. This meta-ti patch is meant to unblock anyone who wants to enable SGX drive in the meanwhile.
+> 
+> 
+> This patch can be abandoned .
+> https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/?h=ti-linux-6.1.y-cicd&id=e025e31126fff01ded59d901af916abe87646ca6 
+> enables CONFIG_PREEMPT
+> 
+> 
+> > 
+> > Regards,
+> > Anand
+> > 
+> > -----Original Message-----
+> > From: Denys Dmytriyenko <denis@denix.org>
+> > Sent: Friday, September 15, 2023 1:25 AM
+> > To: Balagopalakrishnan, Anand <anandb@ti.com>
+> > Cc: meta-ti@lists.yoctoproject.org; Eatmon, Ryan <reatmon@ti.com>; Adivi, Sai Sree Kartheek <s-adivi@ti.com>; Gupta, Gyan <g-gupta@ti.com>; Khasim, Syed Mohammed <khasim@ti.com>; Pothukuchi, Vijay <vijayp@ti.com>; Bajjuri, Praneeth <praneeth@ti.com>
+> > Subject: [EXTERNAL] Re: [meta-ti] [RFC|kirkstone] linux-ti-staging: add config preempt for am335x and am437x
+> > 
+> > On Thu, Sep 14, 2023 at 03:36:18PM -0400, Denys Dmytriyenko wrote:
+> >> On Thu, Sep 14, 2023 at 10:40:26PM +0530, Anand Balagopalakrishnan via lists.yoctoproject.org wrote:
+> >>> SGX needs a preemptible kernel. CONFIG_PREEMPT has always been
+> >>> enabled on TI Linux kernels upto K5.1.
+> >>>
+> >>> This is enabled on AM65x by default but missed out AM335x and AM437x.
+> >>> Add a kernel config fragment to enable config preempt.
+> >>
+> >> Hi, Anand,
+> >>
+> >> Is this only needed for am335x and am437x, as the subject suggests? If
+> >> so, why the code adds the config fragment to all platforms?
+> >>
+> >> Second question - historically this has been enabled in the TI kernel itself.
+> >> Why not do it like that again, why add the fragment to the OE metadata
+> >> instead of keeping it in-tree? How the distro-agnostic approach would be handled?
+> >>
+> >>
+> >>> Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
+> >>> ---
+> >>>   .../linux/files/configs/config-preempt.cfg           | 12 ++++++++++++
+> >>>   .../recipes-kernel/linux/linux-ti-staging_6.1.bb     |  1 +
+> >>>   2 files changed, 13 insertions(+)
+> >>>   create mode 100644
+> >>> meta-ti-bsp/recipes-kernel/linux/files/configs/config-preempt.cfg
+> >>>
+> >>> diff --git
+> >>> a/meta-ti-bsp/recipes-kernel/linux/files/configs/config-preempt.cfg
+> >>> b/meta-ti-bsp/recipes-kernel/linux/files/configs/config-preempt.cfg
+> >>> new file mode 100644
+> >>> index 00000000..c1e5ad7d
+> >>> --- /dev/null
+> >>> +++ b/meta-ti-bsp/recipes-kernel/linux/files/configs/config-preempt.
+> >>> +++ cfg
+> >>
+> >> This is not the right location for the file. You want to add to the
+> >> linux-ti-staging-rt-6.1/ directory, since you are only using it from
+> >> the corresponding linux-ti-staging_6.1.bb recipe.
+> > 
+> > Sorry, typo here - linux-ti-staging-6.1/ directory, if it's not RT-specific.
+> > 
+> >>
+> >>> @@ -0,0 +1,12 @@
+> >>> +CONFIG_PREEMPT_BUILD=y
+> >>> +# CONFIG_PREEMPT_NONE is not set
+> >>> +CONFIG_PREEMPT=y
+> >>> +CONFIG_PREEMPT_COUNT=y
+> >>> +CONFIG_PREEMPTION=y
+> >>> +CONFIG_PREEMPT_RCU=y
+> >>> +CONFIG_TASKS_RCU_GENERIC=y
+> >>> +CONFIG_TASKS_RCU=y
+> >>> +CONFIG_UNINLINE_SPIN_UNLOCK=y
+> >>> +# CONFIG_CEC_GPIO is not set
+> >>> +CONFIG_DEBUG_PREEMPT=y
+> >>> +# CONFIG_PREEMPT_TRACER is not set
+> >>> diff --git
+> >>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+> >>> b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+> >>> index 8a883878..0ee63358 100644
+> >>> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+> >>> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+> >>> @@ -33,6 +33,7 @@ PR = "${MACHINE_KERNEL_PR}"
+> >>>   
+> >>>   KERNEL_GIT_URI ?= "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
+> >>>   KERNEL_GIT_PROTOCOL = "https"
+> >>> +KERNEL_CONFIG_FRAGMENTS += "${WORKDIR}/config-preempt.cfg"
+> >>
+> >> Since this file is out-of-tree and in the OE metadata, it would also
+> >> require listing it in SRC_URI.
+> >>
+> >>
+> >>>   SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
+> >>>               file://defconfig"
+> >>>   
+> >>> --
+> >>> 2.34.1
 
