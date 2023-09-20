@@ -1,185 +1,77 @@
-Return-Path: <denis@denix.org>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7FEFCE79A8
-	for <webhook@archiver.kernel.org>; Tue, 19 Sep 2023 18:14:00 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.17373.1695147232044349410
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0B4CCE79AB
+	for <webhook@archiver.kernel.org>; Wed, 20 Sep 2023 09:11:34 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.33245.1695201088372205578
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 19 Sep 2023 11:13:52 -0700
+ Wed, 20 Sep 2023 02:11:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id ECA6C40C2C;
-	Tue, 19 Sep 2023 18:13:50 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HEDLa-c5iH2F; Tue, 19 Sep 2023 18:13:50 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-110-236.washdc.fios.verizon.net [100.15.110.236])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 01EF140C2B;
-	Tue, 19 Sep 2023 18:13:42 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 00322163CAB; Tue, 19 Sep 2023 14:13:41 -0400 (EDT)
-Date: Tue, 19 Sep 2023 14:13:41 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: "Balagopalakrishnan, Anand" <anandb@ti.com>
-Cc: "Bajjuri, Praneeth" <praneeth@ti.com>,
-	"meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>,
-	"Eatmon, Ryan" <reatmon@ti.com>,
-	"Adivi, Sai Sree Kartheek" <s-adivi@ti.com>,
-	"Gupta, Gyan" <g-gupta@ti.com>,
-	"Khasim, Syed Mohammed" <khasim@ti.com>,
-	"Pothukuchi, Vijay" <vijayp@ti.com>
-Subject: Re: [EXTERNAL] Re: [meta-ti] [RFC|kirkstone] linux-ti-staging: add
- config preempt for am335x and am437x
-Message-ID: <20230919181341.GC7013@denix.org>
-References: <20230914171026.3014887-1-anandb@ti.com>
- <1784DB091C7C28F5.22721@lists.yoctoproject.org>
- <20230914195514.GO3359@denix.org>
- <2cf51220b2cd4976bb8531d3cceced5a@ti.com>
- <b0597336-8bd5-027e-4e96-c86463189e96@ti.com>
- <cfe86ebae4374412817e3c4c2c4fc423@ti.com>
+ dkim=none (message not signed); spf=pass (domain: list.ti.com, ip: 198.47.19.141, mailfrom: lcpdbld@list.ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38K9BRvR114774;
+	Wed, 20 Sep 2023 04:11:27 -0500
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38K9BQMr003659
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 20 Sep 2023 04:11:26 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 20
+ Sep 2023 04:11:26 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 20 Sep 2023 04:11:26 -0500
+Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
+	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38K9BQGf026745;
+	Wed, 20 Sep 2023 04:11:26 -0500
+Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
+	id 83A4410F5A51; Wed, 20 Sep 2023 04:11:26 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH 1/3] u-boot-ti-staging_2023.04: CI/CD Auto-Merger: cicd.master.202309200100
+Date: Wed, 20 Sep 2023 04:11:24 -0500
+Message-ID: <1695201086-106054-2-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1695201086-106054-1-git-send-email-lcpdbld@list.ti.com>
+References: <1695201086-106054-1-git-send-email-lcpdbld@list.ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cfe86ebae4374412817e3c4c2c4fc423@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 19 Sep 2023 18:14:00 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16991
+ <meta-ti@lists.yoctoproject.org>; Wed, 20 Sep 2023 09:11:34 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16993
 
-Anand,
+Updated the value(s) for:
+  SRCREV
 
-Please check corresponding -next branches (master/kirkstone) - CICD automerges 
-and SRCREV bumps are queued up there and I'm guessing they are going through 
-the build and boot-test cycles now. If everything's green, they should be 
-merged back to main kirkstone and master branches automatically. Ryan can 
-definitely explain the entire CICD process in more detail.
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+index e8dbe24..ffec994 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+@@ -8,7 +8,7 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2023.04"
+ 
+-SRCREV = "e0d1dc8de02c8d4de7f49501fed75e31ed09ee74"
++SRCREV = "bd74e615a689936981342a3bd0b018a3da125a66"
+ 
+ do_install:append:am62xx() {
+ 	install -d ${D}/boot
 -- 
-Denys
+1.8.3.1
 
-
-On Tue, Sep 19, 2023 at 04:35:30AM +0000, Balagopalakrishnan, Anand wrote:
-> Praneeth,
-> 
-> srcrev in kernel recipe for kirkstone branch needs to be bumped. The last CICD build was 6-Sep - also a good idea to trigger another full build.
-> 
-> Regards,
-> Anand
-> 
-> -----Original Message-----
-> From: Bajjuri, Praneeth <praneeth@ti.com> 
-> Sent: Friday, September 15, 2023 9:47 PM
-> To: Balagopalakrishnan, Anand <anandb@ti.com>; Denys Dmytriyenko <denis@denix.org>
-> Cc: meta-ti@lists.yoctoproject.org; Eatmon, Ryan <reatmon@ti.com>; Adivi, Sai Sree Kartheek <s-adivi@ti.com>; Gupta, Gyan <g-gupta@ti.com>; Khasim, Syed Mohammed <khasim@ti.com>; Pothukuchi, Vijay <vijayp@ti.com>
-> Subject: Re: [EXTERNAL] Re: [meta-ti] [RFC|kirkstone] linux-ti-staging: add config preempt for am335x and am437x
-> 
-> 
-> 
-> On 9/14/2023 8:47 PM, Balagopalakrishnan, Anand wrote:
-> > Hi Denys,
-> > 
-> > This is only needed for v7 platforms like AM3 / AM4 and possibly AM57x also. CONFIG_PREEMPT is enabled by default on arm64 platforms like AM65x.
-> > 
-> > Praneeth will send a kernel patch for TI kernel. This meta-ti patch is meant to unblock anyone who wants to enable SGX drive in the meanwhile.
-> 
-> 
-> This patch can be abandoned .
-> https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/?h=ti-linux-6.1.y-cicd&id=e025e31126fff01ded59d901af916abe87646ca6 
-> enables CONFIG_PREEMPT
-> 
-> 
-> > 
-> > Regards,
-> > Anand
-> > 
-> > -----Original Message-----
-> > From: Denys Dmytriyenko <denis@denix.org>
-> > Sent: Friday, September 15, 2023 1:25 AM
-> > To: Balagopalakrishnan, Anand <anandb@ti.com>
-> > Cc: meta-ti@lists.yoctoproject.org; Eatmon, Ryan <reatmon@ti.com>; Adivi, Sai Sree Kartheek <s-adivi@ti.com>; Gupta, Gyan <g-gupta@ti.com>; Khasim, Syed Mohammed <khasim@ti.com>; Pothukuchi, Vijay <vijayp@ti.com>; Bajjuri, Praneeth <praneeth@ti.com>
-> > Subject: [EXTERNAL] Re: [meta-ti] [RFC|kirkstone] linux-ti-staging: add config preempt for am335x and am437x
-> > 
-> > On Thu, Sep 14, 2023 at 03:36:18PM -0400, Denys Dmytriyenko wrote:
-> >> On Thu, Sep 14, 2023 at 10:40:26PM +0530, Anand Balagopalakrishnan via lists.yoctoproject.org wrote:
-> >>> SGX needs a preemptible kernel. CONFIG_PREEMPT has always been
-> >>> enabled on TI Linux kernels upto K5.1.
-> >>>
-> >>> This is enabled on AM65x by default but missed out AM335x and AM437x.
-> >>> Add a kernel config fragment to enable config preempt.
-> >>
-> >> Hi, Anand,
-> >>
-> >> Is this only needed for am335x and am437x, as the subject suggests? If
-> >> so, why the code adds the config fragment to all platforms?
-> >>
-> >> Second question - historically this has been enabled in the TI kernel itself.
-> >> Why not do it like that again, why add the fragment to the OE metadata
-> >> instead of keeping it in-tree? How the distro-agnostic approach would be handled?
-> >>
-> >>
-> >>> Signed-off-by: Anand Balagopalakrishnan <anandb@ti.com>
-> >>> ---
-> >>>   .../linux/files/configs/config-preempt.cfg           | 12 ++++++++++++
-> >>>   .../recipes-kernel/linux/linux-ti-staging_6.1.bb     |  1 +
-> >>>   2 files changed, 13 insertions(+)
-> >>>   create mode 100644
-> >>> meta-ti-bsp/recipes-kernel/linux/files/configs/config-preempt.cfg
-> >>>
-> >>> diff --git
-> >>> a/meta-ti-bsp/recipes-kernel/linux/files/configs/config-preempt.cfg
-> >>> b/meta-ti-bsp/recipes-kernel/linux/files/configs/config-preempt.cfg
-> >>> new file mode 100644
-> >>> index 00000000..c1e5ad7d
-> >>> --- /dev/null
-> >>> +++ b/meta-ti-bsp/recipes-kernel/linux/files/configs/config-preempt.
-> >>> +++ cfg
-> >>
-> >> This is not the right location for the file. You want to add to the
-> >> linux-ti-staging-rt-6.1/ directory, since you are only using it from
-> >> the corresponding linux-ti-staging_6.1.bb recipe.
-> > 
-> > Sorry, typo here - linux-ti-staging-6.1/ directory, if it's not RT-specific.
-> > 
-> >>
-> >>> @@ -0,0 +1,12 @@
-> >>> +CONFIG_PREEMPT_BUILD=y
-> >>> +# CONFIG_PREEMPT_NONE is not set
-> >>> +CONFIG_PREEMPT=y
-> >>> +CONFIG_PREEMPT_COUNT=y
-> >>> +CONFIG_PREEMPTION=y
-> >>> +CONFIG_PREEMPT_RCU=y
-> >>> +CONFIG_TASKS_RCU_GENERIC=y
-> >>> +CONFIG_TASKS_RCU=y
-> >>> +CONFIG_UNINLINE_SPIN_UNLOCK=y
-> >>> +# CONFIG_CEC_GPIO is not set
-> >>> +CONFIG_DEBUG_PREEMPT=y
-> >>> +# CONFIG_PREEMPT_TRACER is not set
-> >>> diff --git
-> >>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-> >>> b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-> >>> index 8a883878..0ee63358 100644
-> >>> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-> >>> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-> >>> @@ -33,6 +33,7 @@ PR = "${MACHINE_KERNEL_PR}"
-> >>>   
-> >>>   KERNEL_GIT_URI ?= "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
-> >>>   KERNEL_GIT_PROTOCOL = "https"
-> >>> +KERNEL_CONFIG_FRAGMENTS += "${WORKDIR}/config-preempt.cfg"
-> >>
-> >> Since this file is out-of-tree and in the OE metadata, it would also
-> >> require listing it in SRC_URI.
-> >>
-> >>
-> >>>   SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
-> >>>               file://defconfig"
-> >>>   
-> >>> --
-> >>> 2.34.1
 
