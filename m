@@ -2,196 +2,186 @@ Return-Path: <joel.winarske@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D2DAC05021
-	for <webhook@archiver.kernel.org>; Wed, 20 Sep 2023 20:17:21 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web11.6342.1695241033820577458
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D4DDCD4937
+	for <webhook@archiver.kernel.org>; Thu, 21 Sep 2023 00:08:12 +0000 (UTC)
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web10.5083.1695254890531889224
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 20 Sep 2023 13:17:13 -0700
+ Wed, 20 Sep 2023 17:08:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eaylsn6Y;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: joel.winarske@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1c46b30a1ceso1429205ad.3
-        for <meta-ti@lists.yoctoproject.org>; Wed, 20 Sep 2023 13:17:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=B6uC2qnh;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: joel.winarske@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-690f7bf73ddso285642b3a.2
+        for <meta-ti@lists.yoctoproject.org>; Wed, 20 Sep 2023 17:08:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695241033; x=1695845833; darn=lists.yoctoproject.org;
+        d=gmail.com; s=20230601; t=1695254890; x=1695859690; darn=lists.yoctoproject.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=pOkwhaPv5IdnhAypmmgK0jscR4uh2H2Uxd+2u/xaoVA=;
-        b=eaylsn6YFP6sAb1IQHDw/JWdN49xSapusU8tmRGQ7PO8FRowtp7QGwmJnPq+2bTcxF
-         sVkdCgFw6mQGBP6Fuib+gAIwWg4BLCYdlGjNHIQkQuhxuba4Z8N+bDQHHxC8NrZ2sQNu
-         rP0ebTYrnWPTMk2p7VK+oSWJNu3wDWX3+i/l4t7agvx7iijaQrF5mqPm/C1lKA5rnFYv
-         rqA/pAwj601as11yOD+hqNrpQPuDD1Inju5W3fbjKie5JoLXYCAnz7RlR5tI9zZ5dRLJ
-         8jW9jOYbmB+YZaWX3j903wNaoIgK3EDEb8ZLi81BXS/VEnT3gopPDRkdDjwGco3mWkOc
-         jlOg==
+        bh=r8YbNksXz1Rnmx15higsWBBeeZJI2A8MKu7TQpdIeIs=;
+        b=B6uC2qnhlN56V84aLIoEeHeEO6GX8+K1TgVa/Z0nbuJijsht5Hs9YjpQ33tMI03Aqd
+         Fhj5Y4stHxHt2SIFEAQ4dY22JbXzzSfeA/+2g8E6rx7nVU6MPeoxF2NLfHThSBRTwtD2
+         5FhVg3iccuhv/vo68D9kJ01lNG4OtauZ3QaChZlQ7m5ILq7cgN+ZYqAvlj7djT4rx1yX
+         d7z5I+LKT4iajG/fFWRLd+5C8/bsoAwjrNt8VMJ6XDoh6+cdhjFFir8cSALdCuPui8fd
+         oVqVK7Tf9xap6MhpfIdAoUMaoxg1z14oRkIle7W++ktYiJ3WaKqWf2S+8QoZs7aOjxbD
+         lb2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695241033; x=1695845833;
+        d=1e100.net; s=20230601; t=1695254890; x=1695859690;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=pOkwhaPv5IdnhAypmmgK0jscR4uh2H2Uxd+2u/xaoVA=;
-        b=CUu+ne20HZBBiDPJTDrjzE69DJXrDyBDZWmYW+7oHeQGzu4YJ7iAOwFrMOM0jXZ+N8
-         KfB5wW8FRV/tRilEN2lQxFardbH6t9z8jWKzHwOYTU/hDqznHgGgHjqi8knauC/90mNf
-         tPo5UnA6c/Xb/Bx6RjqwA8iFNxYIR9qqfX5FX3HieR1F91yv1UReUy1hXCCVwmIzx3hd
-         ZaABpiGtTIvqqCErhPwY5kYPx8+j9afGgySDqUOvhjQvG01aMBGOfEj2RSaY4cgv/AmJ
-         8lplcgJwce1Zgac2YcMH5mh77y3ZLsNRm5f1GxnilsTieZ5umNfyyde2L8g1xbOv3W8k
-         HlXw==
-X-Gm-Message-State: AOJu0YwZzgmM0yvOvK1R1lCP+mJzZNtztqHe7RzToy4+7M6r0Lhgja1+
-	RGNldB+UlNpyUo74A2JxInkMu/vbaH7wKj118Bg=
-X-Google-Smtp-Source: AGHT+IHijbIxD7C5VbXtLfvLkTqU4AjLZR7vnkQ5DjaW5HuKZCECkt7GtxYp1pRKMP7zOxyV9AdER0ilOdChYnqm4zE=
-X-Received: by 2002:a17:90a:bb86:b0:268:2164:dc93 with SMTP id
- v6-20020a17090abb8600b002682164dc93mr3523751pjr.13.1695241032934; Wed, 20 Sep
- 2023 13:17:12 -0700 (PDT)
+        bh=r8YbNksXz1Rnmx15higsWBBeeZJI2A8MKu7TQpdIeIs=;
+        b=Ch4nCUKD6UCTJNy2VQL/RtY4J6tOizx+ykdEG893q+CpY1mE4CcWMGo68b+qDYRsha
+         fqCLlCriqW7YPEnLOJ53n2oDMGr+y/5RWgZG9DEsDgHym7coyzDtaXqrcJtyurn+19GU
+         KiXwU3S7N7hULVZoO2W1S9kcryqr8TRb4s2uEEqI+r/omEwQnqq+6q63j2BltxxtEMaN
+         3UiM079ONpu//RZGRKFscgOazrnyEHIDjHHYYOXMKvSbcPQHwTevmDdq2gfFRUdROjK0
+         9ntMfZT2gCrQgWbRBg1vme6OMhkU6UrpZRPhVoSjW9G/WK+GyeCV2LLJwoWNLIQlYZM5
+         3NeQ==
+X-Gm-Message-State: AOJu0Yw7RWuEmzaEUq3YqBjJx/+N5VRmfs1HwS3+KkDlpRjnxalZZPM0
+	xHlsrxEFw5l6vMW04VsWua3v9Fv59IF5qm6POSA=
+X-Google-Smtp-Source: AGHT+IE9D0xAqcJKymObYVNbmk4TJU2Fx9f+hpzDxcaoe9yge6GUUaLHaByquPgInN9G/prU54Vt0BdJ0r7wgWTBRY0=
+X-Received: by 2002:a05:6a21:2702:b0:154:b4cb:2e95 with SMTP id
+ rm2-20020a056a21270200b00154b4cb2e95mr2897874pzb.62.1695254889236; Wed, 20
+ Sep 2023 17:08:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <cJr9.1694721437908350278.lV3S@lists.yoctoproject.org> <4944740.qmqfjKhsMY@gryffindor>
-In-Reply-To: <4944740.qmqfjKhsMY@gryffindor>
+References: <cJr9.1694721437908350278.lV3S@lists.yoctoproject.org>
+ <4944740.qmqfjKhsMY@gryffindor> <1786B4BD16070DE7.17733@lists.yoctoproject.org>
+In-Reply-To: <1786B4BD16070DE7.17733@lists.yoctoproject.org>
 From: Joel Winarske <joel.winarske@gmail.com>
-Date: Wed, 20 Sep 2023 13:17:02 -0700
-Message-ID: <CABKMkPLY5i72rZd8vQw8iGXnif=ctHWZq-6geAXU-OkY9TrAgA@mail.gmail.com>
+Date: Wed, 20 Sep 2023 17:07:58 -0700
+Message-ID: <CABKMkP+97wPKOxKd4b5HOA5PjrkbbRreW9VGCqBLbpq70RqeYQ@mail.gmail.com>
 Subject: Re: [meta-ti] [kirkstone] beaglebone-ai64
-To: =?UTF-8?Q?Lisandro_Dami=C3=A1n_Nicanor_P=C3=A9rez_Meyer?= <perezmeyer@gmail.com>
-Cc: meta-ti@lists.yoctoproject.org
-Content-Type: multipart/alternative; boundary="00000000000093ac560605d00f3e"
+To: joel.winarske@gmail.com
+Cc: =?UTF-8?Q?Lisandro_Dami=C3=A1n_Nicanor_P=C3=A9rez_Meyer?= <perezmeyer@gmail.com>, 
+	meta-ti@lists.yoctoproject.org
+Content-Type: multipart/alternative; boundary="0000000000007a0d0a0605d34901"
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 20 Sep 2023 20:17:21 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16997
+ <meta-ti@lists.yoctoproject.org>; Thu, 21 Sep 2023 00:08:12 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/16998
 
---00000000000093ac560605d00f3e
+--0000000000007a0d0a0605d34901
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-My serial interface cables just arrived.  Looks like a kernel panic due
-to pvrsrvkm.  Anyone aware of this one?
+Today's limited progress:
 
-[    7.408257] pvrsrvkm: loading out-of-tree module taints kernel.
-[    7.428045] PVR_K:  268: Device: 4e20000000.gpu
-[    7.432837] SError Interrupt on CPU1, code 0xbf000000 -- SError
-[    7.432840] CPU: 1 PID: 268 Comm: systemd-udevd Tainted: G           O
-   5.10.162+ #1
-[    7.432841] Hardware name:  /, BIOS 2021.01-gf65a2b8f 08/10/2022
-[    7.432842] pstate: 60000005 (nZCv daif -PAN -UAO -TCO BTYPE=3D--)
-[    7.432843] pc : _RGXReadBVNCFromReg.isra.0+0x20/0x140 [pvrsrvkm]
-[    7.432844] lr : RGXBvncInitialiseConfiguration+0x274/0x9c0 [pvrsrvkm]
-[    7.432845] sp : ffff8000132cb740
-[    7.432846] x29: ffff8000132cb740 x28: ffff800011a97000
-[    7.432849] x27: 0000000000000000 x26: ffff8000132cb7a8
-[    7.432851] x25: ffff000812d7c000 x24: ffff0008137c29a0
-[    7.432853] x23: 0000000000000000 x22: ffff8000092ae000
-[    7.432855] x21: ffff0008137c2808 x20: ffff8000092557c0
-[    7.432857] x19: 0000000000000000 x18: ffff8000092030f4
-[    7.432859] x17: 000000ffc0000000 x16: ffff800009203460
-[    7.432862] x15: ffff8000092030e0 x14: ffff800009201050
-[    7.432863] x13: ffff80000920c3a4 x12: 0000000000000000
-[    7.432866] x11: ffff0008137c2808 x10: 0000000000000020
-[    7.432868] x9 : 0000000000000000 x8 : 0000000000000024
-[    7.432870] x7 : 0000000000000000 x6 : ffff800013a00000
-[    7.432872] x5 : ffff8000132cb7b0 x4 : ffff8000132cb7ac
-[    7.432874] x3 : ffff8000132cb7a8 x2 : ffff8000132cb7a4
-[    7.432876] x1 : 0000000000000000 x0 : ffff0008137c2808
-[    7.432878] Kernel panic - not syncing: Asynchronous SError Interrupt
+1. U-Boot from eMMC is used by default.  Shipping devices have outdated
+U-Boot.
+2. Rule out U-Boot, and use Yocto built U-Boot by pressing RST + BOOT,
+wait, release RST, then release BOOT.  Boot flow will use all boot bits
+from the SD card with this approach.
+3. Update `linux-bb.org_git.bb` to use tip of tree:
+# 5.10.168 version for 32-bit
+SRCREV:armv7a = "0f40ca5e749e9176ad4ea30c68be4fb2340647db"
+PV:armv7a = "5.10.168+git${SRCPV}"
+BRANCH:armv7a = "5.10.168-ti-r71"
+
+# 5.10.168 version for 64-bit
+SRCREV:aarch64 = "ac2750dbf3a3b9078feff995e6754d5c5f609c19"
+PV:aarch64 = "5.10.168+git${SRCPV}"
+BRANCH:aarch64 = "v5.10.168-ti-arm64-r110"
 
 
-On Mon, Sep 18, 2023 at 1:16=E2=80=AFPM Lisandro Dami=C3=A1n Nicanor P=C3=
-=A9rez Meyer <
-perezmeyer@gmail.com> wrote:
 
-> Hi!
->
-> El jueves, 14 de septiembre de 2023 16:57:17 -03 Joel Winarske escribi=C3=
-=B3:
-> > Hi folks,
-> >
-> > I've built core-image-weston for beaglebone-ai64.
-> >
-> > I'm imaging sdcard using:
-> >     sudo bmaptool copy ./core-image-weston-beaglebone-ai64.wic.xz
-> /dev/sda
-> >
-> > The image is not booting.
-> >
-> > Are there any known issues with this layer on kirkstone tip of tree?
-> >
-> >
-> > (I'm looking into making flutter-auto (AGL) run on this device; I'm the
-> author of flutter-auto)
->
-> Yes, I could only run the image by booting from the SD card. I'm trying t=
-o
-> add Balena support to it.
->
-> I've compared BeagleBone's and meta-ti's u-boot and they differ in a few
-> places which seem to be related to the eMMC, so my guess is that the issu=
-e
-> needs to be solved there first.
->
+Updating kernel has no impact on kernel panic:
 
---00000000000093ac560605d00f3e
+[    6.621063] pvrsrvkm: loading out-of-tree module taints kernel.
+[    6.637510] PVR_K:  251: Device: 4e20000000.gpu
+[    6.642337] SError Interrupt on CPU0, code 0xbf000000 -- SError
+[    6.642339] CPU: 0 PID: 251 Comm: systemd-udevd Tainted: G           O
+   5.10.168+ #1
+[    6.642340] Hardware name: BeagleBoard.org BeagleBone AI-64 (DT)
+[    6.642341] pstate: 60000005 (nZCv daif -PAN -UAO -TCO BTYPE=--)
+[    6.642343] pc : _RGXReadBVNCFromReg.isra.0+0x20/0x140 [pvrsrvkm]
+[    6.642343] lr : RGXBvncInitialiseConfiguration+0x274/0x9c0 [pvrsrvkm]
+[    6.642344] sp : ffff8000143db740
+[    6.642345] x29: ffff8000143db740 x28: ffff8000091e4548
+[    6.642349] x27: 0000000000000000 x26: ffff8000143db7a8
+[    6.642351] x25: ffff0008132da000 x24: ffff000813c741a0
+[    6.642353] x23: 0000000000000000 x22: ffff8000091ed000
+[    6.642355] x21: ffff000813c74008 x20: ffff8000091947c0
+[    6.642357] x19: 0000000000000000 x18: ffff800009142e74
+[    6.642359] x17: 000000ffc0000000 x16: ffff8000091431e0
+[    6.642361] x15: ffff800009142e60 x14: ffff800009140dd0
+[    6.642363] x13: ffff80000914c124 x12: 0000000000000000
+[    6.642365] x11: ffff000813c74008 x10: 0000000000000020
+[    6.642367] x9 : 0000000000000000 x8 : 0000000000000024
+[    6.642369] x7 : 0000000000000000 x6 : ffff800012500000
+[    6.642371] x5 : ffff8000143db7b0 x4 : ffff8000143db7ac
+[    6.642373] x3 : ffff8000143db7a8 x2 : ffff8000143db7a4
+[    6.642375] x1 : 0000000000000000 x0 : ffff000813c74008
+[    6.642377] Kernel panic - not syncing: Asynchronous SError Interrupt
+
+--0000000000007a0d0a0605d34901
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">My serial interface cables just arrived.=C2=A0 Looks like =
-a kernel panic due to=C2=A0pvrsrvkm.=C2=A0 Anyone aware of this one?<br><br=
->[ =C2=A0 =C2=A07.408257] pvrsrvkm: loading out-of-tree module taints kerne=
-l.<br>[ =C2=A0 =C2=A07.428045] PVR_K: =C2=A0268: Device: 4e20000000.gpu<br>=
-[ =C2=A0 =C2=A07.432837] SError Interrupt on CPU1, code 0xbf000000 -- SErro=
-r<br>[ =C2=A0 =C2=A07.432840] CPU: 1 PID: 268 Comm: systemd-udevd Tainted: =
-G =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 O =C2=A0 =C2=A0 =C2=A05.10.162+ #1<br>=
-[ =C2=A0 =C2=A07.432841] Hardware name: =C2=A0/, BIOS 2021.01-gf65a2b8f 08/=
-10/2022<br>[ =C2=A0 =C2=A07.432842] pstate: 60000005 (nZCv daif -PAN -UAO -=
-TCO BTYPE=3D--)<br>[ =C2=A0 =C2=A07.432843] pc : _RGXReadBVNCFromReg.isra.0=
-+0x20/0x140 [pvrsrvkm]<br>[ =C2=A0 =C2=A07.432844] lr : RGXBvncInitialiseCo=
-nfiguration+0x274/0x9c0 [pvrsrvkm]<br>[ =C2=A0 =C2=A07.432845] sp : ffff800=
-0132cb740<br>[ =C2=A0 =C2=A07.432846] x29: ffff8000132cb740 x28: ffff800011=
-a97000 <br>[ =C2=A0 =C2=A07.432849] x27: 0000000000000000 x26: ffff8000132c=
-b7a8 <br>[ =C2=A0 =C2=A07.432851] x25: ffff000812d7c000 x24: ffff0008137c29=
-a0 <br>[ =C2=A0 =C2=A07.432853] x23: 0000000000000000 x22: ffff8000092ae000=
- <br>[ =C2=A0 =C2=A07.432855] x21: ffff0008137c2808 x20: ffff8000092557c0 <=
-br>[ =C2=A0 =C2=A07.432857] x19: 0000000000000000 x18: ffff8000092030f4 <br=
->[ =C2=A0 =C2=A07.432859] x17: 000000ffc0000000 x16: ffff800009203460 <br>[=
- =C2=A0 =C2=A07.432862] x15: ffff8000092030e0 x14: ffff800009201050 <br>[ =
-=C2=A0 =C2=A07.432863] x13: ffff80000920c3a4 x12: 0000000000000000 <br>[ =
-=C2=A0 =C2=A07.432866] x11: ffff0008137c2808 x10: 0000000000000020 <br>[ =
-=C2=A0 =C2=A07.432868] x9 : 0000000000000000 x8 : 0000000000000024 <br>[ =
-=C2=A0 =C2=A07.432870] x7 : 0000000000000000 x6 : ffff800013a00000 <br>[ =
-=C2=A0 =C2=A07.432872] x5 : ffff8000132cb7b0 x4 : ffff8000132cb7ac <br>[ =
-=C2=A0 =C2=A07.432874] x3 : ffff8000132cb7a8 x2 : ffff8000132cb7a4 <br>[ =
-=C2=A0 =C2=A07.432876] x1 : 0000000000000000 x0 : ffff0008137c2808 <br><div=
->[ =C2=A0 =C2=A07.432878] Kernel panic - not syncing: Asynchronous SError I=
-nterrupt</div><div><br></div></div><br><div class=3D"gmail_quote"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Mon, Sep 18, 2023 at 1:16=E2=80=AFPM Lisan=
-dro Dami=C3=A1n Nicanor P=C3=A9rez Meyer &lt;<a href=3D"mailto:perezmeyer@g=
-mail.com">perezmeyer@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D=
-"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(2=
-04,204,204);padding-left:1ex">Hi!<br>
-<br>
-El jueves, 14 de septiembre de 2023 16:57:17 -03 Joel Winarske escribi=C3=
-=B3:<br>
-&gt; Hi folks,<br>
-&gt; <br>
-&gt; I&#39;ve built core-image-weston for beaglebone-ai64.<br>
-&gt; <br>
-&gt; I&#39;m imaging sdcard using:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0sudo bmaptool copy ./core-image-weston-beaglebone-a=
-i64.wic.xz /dev/sda<br>
-&gt; <br>
-&gt; The image is not booting.<br>
-&gt; <br>
-&gt; Are there any known issues with this layer on kirkstone tip of tree?<b=
-r>
-&gt; <br>
-&gt; <br>
-&gt; (I&#39;m looking into making flutter-auto (AGL) run on this device; I&=
-#39;m the author of flutter-auto)<br>
-<br>
-Yes, I could only run the image by booting from the SD card. I&#39;m trying=
- to add Balena support to it.<br>
-<br>
-I&#39;ve compared BeagleBone&#39;s and meta-ti&#39;s u-boot and they differ=
- in a few places which seem to be related to the eMMC, so my guess is that =
-the issue needs to be solved there first.<br>
-</blockquote></div>
+<div dir=3D"ltr"><div dir=3D"ltr"><div><div><div>Today&#39;s limited progre=
+ss:<br><br></div>1. U-Boot from eMMC is used by default.=C2=A0 Shipping dev=
+ices have outdated U-Boot.<br></div><div>2. Rule out U-Boot, and use Yocto =
+built U-Boot by pressing RST + BOOT, wait, release RST, then release BOOT.=
+=C2=A0 Boot flow will use all boot bits from the SD card with this approach=
+.</div></div>3. Update `<a href=3D"http://linux-bb.org_git.bb">linux-bb.org=
+_git.bb</a>` to use tip of tree:<br><div></div><div><div style=3D"color:rgb=
+(204,204,204);background-color:rgb(31,31,31);font-family:&quot;Droid Sans M=
+ono&quot;,&quot;monospace&quot;,monospace;font-weight:normal;font-size:14px=
+;line-height:19px;white-space:pre"><div><span style=3D"color:rgb(106,153,85=
+)"># 5.10.168 version for 32-bit</span></div><div><span style=3D"color:rgb(=
+156,220,254)">SRCREV:armv7a</span><span style=3D"color:rgb(204,204,204)"> <=
+/span><span style=3D"color:rgb(212,212,212)">=3D</span><span style=3D"color=
+:rgb(204,204,204)"> </span><span style=3D"color:rgb(206,145,120)">&quot;0f4=
+0ca5e749e9176ad4ea30c68be4fb2340647db&quot;</span></div><div><span style=3D=
+"color:rgb(156,220,254)">PV:armv7a</span><span style=3D"color:rgb(204,204,2=
+04)"> </span><span style=3D"color:rgb(212,212,212)">=3D</span><span style=
+=3D"color:rgb(204,204,204)"> </span><span style=3D"color:rgb(206,145,120)">=
+&quot;5.10.168+git</span><span style=3D"color:rgb(86,156,214)">${SRCPV}</sp=
+an><span style=3D"color:rgb(206,145,120)">&quot;</span></div><div><span sty=
+le=3D"color:rgb(156,220,254)">BRANCH:armv7a</span><span style=3D"color:rgb(=
+204,204,204)"> </span><span style=3D"color:rgb(212,212,212)">=3D</span><spa=
+n style=3D"color:rgb(204,204,204)"> </span><span style=3D"color:rgb(206,145=
+,120)">&quot;5.10.168-ti-r71&quot;</span></div><br><div><span style=3D"colo=
+r:rgb(106,153,85)"># 5.10.168 version for 64-bit</span></div><div><span sty=
+le=3D"color:rgb(156,220,254)">SRCREV:aarch64</span><span style=3D"color:rgb=
+(204,204,204)"> </span><span style=3D"color:rgb(212,212,212)">=3D</span><sp=
+an style=3D"color:rgb(204,204,204)"> </span><span style=3D"color:rgb(206,14=
+5,120)">&quot;ac2750dbf3a3b9078feff995e6754d5c5f609c19&quot;</span></div><d=
+iv><span style=3D"color:rgb(156,220,254)">PV:aarch64</span><span style=3D"c=
+olor:rgb(204,204,204)"> </span><span style=3D"color:rgb(212,212,212)">=3D</=
+span><span style=3D"color:rgb(204,204,204)"> </span><span style=3D"color:rg=
+b(206,145,120)">&quot;5.10.168+git</span><span style=3D"color:rgb(86,156,21=
+4)">${SRCPV}</span><span style=3D"color:rgb(206,145,120)">&quot;</span></di=
+v><div><span style=3D"color:rgb(156,220,254)">BRANCH:aarch64</span><span st=
+yle=3D"color:rgb(204,204,204)"> </span><span style=3D"color:rgb(212,212,212=
+)">=3D</span><span style=3D"color:rgb(204,204,204)"> </span><span style=3D"=
+color:rgb(206,145,120)">&quot;v5.10.168-ti-arm64-r110&quot;</span></div><br=
+><br></div></div><div><br></div><div>Updating kernel has no impact on kerne=
+l panic:<br><br>[ =C2=A0 =C2=A06.621063] pvrsrvkm: loading out-of-tree modu=
+le taints kernel.<br>[ =C2=A0 =C2=A06.637510] PVR_K: =C2=A0251: Device: 4e2=
+0000000.gpu<br>[ =C2=A0 =C2=A06.642337] SError Interrupt on CPU0, code 0xbf=
+000000 -- SError<br>[ =C2=A0 =C2=A06.642339] CPU: 0 PID: 251 Comm: systemd-=
+udevd Tainted: G =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 O =C2=A0 =C2=A0 =C2=A05=
+.10.168+ #1<br>[ =C2=A0 =C2=A06.642340] Hardware name: BeagleBoard.org Beag=
+leBone AI-64 (DT)<br>[ =C2=A0 =C2=A06.642341] pstate: 60000005 (nZCv daif -=
+PAN -UAO -TCO BTYPE=3D--)<br>[ =C2=A0 =C2=A06.642343] pc : _RGXReadBVNCFrom=
+Reg.isra.0+0x20/0x140 [pvrsrvkm]<br>[ =C2=A0 =C2=A06.642343] lr : RGXBvncIn=
+itialiseConfiguration+0x274/0x9c0 [pvrsrvkm]<br>[ =C2=A0 =C2=A06.642344] sp=
+ : ffff8000143db740<br>[ =C2=A0 =C2=A06.642345] x29: ffff8000143db740 x28: =
+ffff8000091e4548 <br>[ =C2=A0 =C2=A06.642349] x27: 0000000000000000 x26: ff=
+ff8000143db7a8 <br>[ =C2=A0 =C2=A06.642351] x25: ffff0008132da000 x24: ffff=
+000813c741a0 <br>[ =C2=A0 =C2=A06.642353] x23: 0000000000000000 x22: ffff80=
+00091ed000 <br>[ =C2=A0 =C2=A06.642355] x21: ffff000813c74008 x20: ffff8000=
+091947c0 <br>[ =C2=A0 =C2=A06.642357] x19: 0000000000000000 x18: ffff800009=
+142e74 <br>[ =C2=A0 =C2=A06.642359] x17: 000000ffc0000000 x16: ffff80000914=
+31e0 <br>[ =C2=A0 =C2=A06.642361] x15: ffff800009142e60 x14: ffff800009140d=
+d0 <br>[ =C2=A0 =C2=A06.642363] x13: ffff80000914c124 x12: 0000000000000000=
+ <br>[ =C2=A0 =C2=A06.642365] x11: ffff000813c74008 x10: 0000000000000020 <=
+br>[ =C2=A0 =C2=A06.642367] x9 : 0000000000000000 x8 : 0000000000000024 <br=
+>[ =C2=A0 =C2=A06.642369] x7 : 0000000000000000 x6 : ffff800012500000 <br>[=
+ =C2=A0 =C2=A06.642371] x5 : ffff8000143db7b0 x4 : ffff8000143db7ac <br>[ =
+=C2=A0 =C2=A06.642373] x3 : ffff8000143db7a8 x2 : ffff8000143db7a4 <br>[ =
+=C2=A0 =C2=A06.642375] x1 : 0000000000000000 x0 : ffff000813c74008 <br>[ =
+=C2=A0 =C2=A06.642377] Kernel panic - not syncing: Asynchronous SError Inte=
+rrupt<br></div></div><br></div>
 
---00000000000093ac560605d00f3e--
+--0000000000007a0d0a0605d34901--
 
