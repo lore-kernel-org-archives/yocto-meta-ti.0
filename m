@@ -1,77 +1,114 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9087CD494F
-	for <webhook@archiver.kernel.org>; Thu, 21 Sep 2023 16:27:48 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.22802.1695313659197279744
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BDA77E7D0D0
+	for <webhook@archiver.kernel.org>; Fri, 22 Sep 2023 06:34:20 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.15508.1695364455488825176
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 21 Sep 2023 09:27:39 -0700
+ Thu, 21 Sep 2023 23:34:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: list.ti.com, ip: 198.47.19.142, mailfrom: lcpdbld@list.ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38LGRbBY003934;
-	Thu, 21 Sep 2023 11:27:37 -0500
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38LGRbAs041786
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 21 Sep 2023 11:27:37 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
- Sep 2023 11:27:36 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 21 Sep 2023 11:27:36 -0500
-Received: from fllvdckhpci028.itg.ti.com (fllvdckhpci028.itg.ti.com [10.248.130.161])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38LGRa6X006627;
-	Thu, 21 Sep 2023 11:27:36 -0500
-Received: by fllvdckhpci028.itg.ti.com (Postfix, from userid 60899)
-	id 83DDA10D55B3; Thu, 21 Sep 2023 11:27:36 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][kirkstone][PATCH 3/5] k3conf: CI/CD Auto-Merger: cicd.kirkstone.202309210400
-Date: Thu, 21 Sep 2023 11:27:34 -0500
-Message-ID: <1695313656-69438-4-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1695313656-69438-1-git-send-email-lcpdbld@list.ti.com>
-References: <1695313656-69438-1-git-send-email-lcpdbld@list.ti.com>
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 6313840C3E;
+	Fri, 22 Sep 2023 06:34:14 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4LjOm7pfoPJ1; Fri, 22 Sep 2023 06:34:14 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-110-236.washdc.fios.verizon.net [100.15.110.236])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 47A6C40C16;
+	Fri, 22 Sep 2023 06:34:13 +0000 (UTC)
+Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id 5063E163CAB;
+	Fri, 22 Sep 2023 02:34:12 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [master/kirkstone][PATCH] k3r5: u-boot: prevent overlapping deployed SPL symlinks
+Date: Fri, 22 Sep 2023 06:34:09 +0000
+Message-Id: <20230922063409.3061-1-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 21 Sep 2023 16:27:48 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17008
+ <meta-ti@lists.yoctoproject.org>; Fri, 22 Sep 2023 06:34:20 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17009
 
-Updated the value(s) for:
-  SRCREV
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+Make sure shortname R5 SPL symlink is not the same as the main K3 SPL
+one, as they will overlap/overwrite each other when deployed into a
+common location. Latest code in master now checks for this and errors
+out.
+
+Also remove unused UBOOT_SPI_* variables.
+
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-ti-bsp/conf/machine/include/k3r5.inc    |  4 ++--
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc | 15 +--------------
+ 2 files changed, 3 insertions(+), 16 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
-index 987055b..bb0b232 100644
---- a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
-+++ b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
-@@ -10,7 +10,7 @@ PV = "0.2+git${SRCPV}"
- COMPATIBLE_MACHINE = "k3"
- 
- BRANCH ?= "master"
--SRCREV = "859e1cc105a01a8a4a58318679f92e2135a03a99"
-+SRCREV = "9f4b2409b7a844e74214716ad63d76eee0ab6fb6"
- 
- SRC_URI = "git://git.ti.com/git/k3conf/k3conf.git;protocol=https;branch=${BRANCH}"
- 
--- 
-1.8.3.1
+diff --git a/meta-ti-bsp/conf/machine/include/k3r5.inc b/meta-ti-bsp/conf=
+/machine/include/k3r5.inc
+index 3619d300..184d3a09 100644
+--- a/meta-ti-bsp/conf/machine/include/k3r5.inc
++++ b/meta-ti-bsp/conf/machine/include/k3r5.inc
+@@ -19,9 +19,9 @@ SPL_SUFFIX =3D "bin"
+ SPL_BINARY =3D "tiboot3-${SYSFW_SOC}-${SYSFW_SUFFIX}-${SYSFW_CONFIG}.${S=
+PL_SUFFIX}"
+ SPL_SYMLINK =3D "tiboot3.${SPL_SUFFIX}"
+ UBOOT_SUFFIX =3D "bin"
+-UBOOT_BINARY =3D "u-boot-spl.${UBOOT_SUFFIX}"
++UBOOT_BINARY =3D "u-boot-r5spl.${UBOOT_SUFFIX}"
+ UBOOT_IMAGE =3D "u-boot-r5spl-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}=
+"
+-UBOOT_SYMLINK =3D "u-boot-r5spl.${UBOOT_SUFFIX}"
++UBOOT_SYMLINK =3D "u-boot-r5spl-${MAINMACHINE}.${UBOOT_SUFFIX}"
+=20
+ PACKAGECONFIG:pn-u-boot-ti-staging =3D ""
+ PACKAGECONFIG:pn-u-boot-ti-mainline =3D ""
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/r=
+ecipes-bsp/u-boot/u-boot-ti.inc
+index 92eaf0cc..4f72c867 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -82,19 +82,6 @@ SPL_UART_BINARY:k3r5 =3D ""
+ SPL_UART_IMAGE ?=3D "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
+ SPL_UART_SYMLINK ?=3D "${SPL_UART_BINARY}-${MACHINE}"
+=20
+-# SPI NOR Flash binaries
+-UBOOT_SPI_SPL_BINARY =3D "u-boot-spl.bin"
+-UBOOT_SPI_BINARY =3D "u-boot.img"
+-UBOOT_SPI_GPH_BINARY =3D "u-boot-spi.gph"
+-
+-# SPI NOR Flash deployed images
+-UBOOT_SPI_SPL_IMAGE =3D "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
+-UBOOT_SPI_SPL_SYMLINK =3D "u-boot-spl-${MACHINE}.bin"
+-UBOOT_SPI_IMAGE =3D "u-boot-${MACHINE}-${PV}-${PR}.img"
+-UBOOT_SPI_SYMLINK =3D "u-boot-${MACHINE}.img"
+-UBOOT_SPI_GPH_IMAGE =3D "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
+-UBOOT_SPI_GPH_SYMLINK =3D "u-boot-spi-${MACHINE}.gph"
+-
+ # HS XLD
+ UBOOT_HS_XLD_BINARY =3D "u-boot-spl_HS_X-LOADER"
+ UBOOT_HS_XLD_IMAGE =3D "u-boot-spl_HS_X-LOADER-${MACHINE}-${PV}-${PR}"
+@@ -117,7 +104,7 @@ UBOOT_HS_2ND_SYMLINK =3D "u-boot-spl_HS_2ND-${MACHINE=
+}"
+=20
+ do_compile:append:k3r5 () {
+ 	if ! [ -f ${B}/${UBOOT_BINARY} ]; then
+-		ln -s spl/${UBOOT_BINARY} ${B}/${UBOOT_BINARY}
++		ln -s spl/u-boot-spl.${UBOOT_SUFFIX} ${B}/${UBOOT_BINARY}
+ 	fi
+ }
+=20
+--=20
+2.25.1
 
 
