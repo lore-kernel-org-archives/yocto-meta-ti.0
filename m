@@ -1,77 +1,94 @@
-Return-Path: <denis@denix.org>
+Return-Path: <a-limaye@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62F82E7AD46
-	for <webhook@archiver.kernel.org>; Tue,  3 Oct 2023 13:40:00 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.108150.1696340395769219274
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58EB9E8FDD0
+	for <webhook@archiver.kernel.org>; Wed,  4 Oct 2023 06:34:57 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.12578.1696401294105641280
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 03 Oct 2023 06:39:56 -0700
+ Tue, 03 Oct 2023 23:34:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 039A140CBA;
-	Tue,  3 Oct 2023 13:39:55 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id G7tY_ir-875F; Tue,  3 Oct 2023 13:39:54 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-110-236.washdc.fios.verizon.net [100.15.110.236])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8778940CB8;
-	Tue,  3 Oct 2023 13:39:53 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id D107C163CC9; Tue,  3 Oct 2023 09:39:52 -0400 (EDT)
-Date: Tue, 3 Oct 2023 09:39:52 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: "Boettger, Heiko" <heiko.boettger@karlstorz.com>
-Cc: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] Unable to mirror meta-ti due to branch-name HEAD
- forbidden in git since Nov 2019
-Message-ID: <20231003133952.GB26382@denix.org>
-References: <AM9PR01MB841284A902CEE0B9B199666F97C4A@AM9PR01MB8412.eurprd01.prod.exchangelabs.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=iUQtXEbb;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: a-limaye@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3946YrQU078602
+	for <meta-ti@lists.yoctoproject.org>; Wed, 4 Oct 2023 01:34:53 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1696401293;
+	bh=CV4FAmOe0vhq8nX7kQgy8Q2CLDWth2BvfcxUFU4wvGM=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=iUQtXEbbdz+kMGo+clBK/PRkILpMBaLAQSDZCTNM5+TQzrYNhYn82GsJ++rlRoveJ
+	 D9WYOkYwx2zOHsI1iNDCHd5Ie8WkI8CGkpz3ZLT2WEB5aWZfmmiSDn1nmMemy3rPex
+	 HvZn2Uvt58BEs/o+GsgtYIQIWoWNlbH8vHYNkyGQ=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3946Yr9T009699
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Wed, 4 Oct 2023 01:34:53 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
+ Oct 2023 01:34:52 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 4 Oct 2023 01:34:52 -0500
+Received: from PSDKL-Workstation0.dhcp.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3946Yn19024388;
+	Wed, 4 Oct 2023 01:34:51 -0500
+From: Aniket Limaye <a-limaye@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <reatmon@ti.com>, Aniket Limaye <a-limaye@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH 1/2] ti-sci-fw: Deploy the fw binaries to the deploy directory
+Date: Wed, 4 Oct 2023 12:04:29 +0530
+Message-ID: <20231004063430.703304-2-a-limaye@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231004063430.703304-1-a-limaye@ti.com>
+References: <20231004063430.703304-1-a-limaye@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <AM9PR01MB841284A902CEE0B9B199666F97C4A@AM9PR01MB8412.eurprd01.prod.exchangelabs.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 03 Oct 2023 13:40:00 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17046
+ <meta-ti@lists.yoctoproject.org>; Wed, 04 Oct 2023 06:34:57 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17048
 
-On Tue, Oct 03, 2023 at 09:23:13AM +0000, Boettger, Heiko wrote:
-> Hi,
-> 
-> there was a recent change in git that doesn't allow to use `HEAD` as a 
-> branch name . Is it possible to remove the branch? The ref HEAD should still 
-> be there. No other repository seems to have such a branch and we currently 
-> face issues mirroring the meta-ti repository where GitLab refuses to accept 
-> `HEAD` as a valid branch name.
-> 
-> See also 
-> https://docs.gitlab.com/ee/user/project/repository/branches/#error-ambiguous-head-branch-exists 
-> where GitLab states that this change was introduced in git 2.16.0 (around 4 
-> years ago).
+Deploy the sysfw binaries to the DEPLOYDIR, to be picked up by the
+tisdk-core-bundle... for the prebuilt binaries directory
 
-meta-ti already has many official public and non-public mirrors - from 
-git.yoctoproject.org, to git.ti.com, to internal bitbucket, etc.
+Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+---
+ meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-What you are doing is a local clone or even a fork, even if you are using 
-it as a local mirror for your project. I would refrain from calling it a 
-mirror in public due to possible confusion.
-
-The existing official mirrors are all push based and are always up-to-date. 
-Where your copy is pull based and depends on how often and for how long 
-you are going to update it.
-
-This has happened in the past, where people would make claims in public 
-that meta-ti is dead and no longer maintained, as it hasn't been updated 
-in years, linking to some obscure fork on github or gitlab that they came 
-across somehow...
-
+diff --git a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+index ab9356b6..801c8768 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
++++ b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb
+@@ -1,5 +1,7 @@
+ SUMMARY = "TI SYSFW/TIFS Firmware"
+ 
++inherit deploy
++
+ require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+ 
+ COMPATIBLE_MACHINE = "k3r5"
+@@ -23,3 +25,12 @@ do_install() {
+ }
+ 
+ FILES:${PN} = "${nonarch_base_libdir}/firmware"
++
++do_deploy() {
++	install -d ${DEPLOYDIR}/ti-sysfw
++	install -m 644 ${S}/ti-sysfw/ti-sci-firmware-* ${DEPLOYDIR}/ti-sysfw
++	install -m 644 ${S}/ti-sysfw/ti-fs-firmware-* ${DEPLOYDIR}/ti-sysfw
++	install -m 644 ${S}/ti-sysfw/ti-fs-stub-firmware-* ${DEPLOYDIR}/ti-sysfw
++}
++
++addtask deploy before do_build after do_compile
 -- 
-Denys
+2.34.1
+
 
