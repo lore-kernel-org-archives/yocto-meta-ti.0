@@ -1,329 +1,338 @@
-Return-Path: <kbaker@gmail.com>
+Return-Path: <joel.winarske@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B53DE9271C
-	for <webhook@archiver.kernel.org>; Thu,  5 Oct 2023 17:41:11 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web10.21969.1696527668343445875
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4F76E92725
+	for <webhook@archiver.kernel.org>; Thu,  5 Oct 2023 18:09:11 +0000 (UTC)
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.web10.22911.1696529346918634448
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 05 Oct 2023 10:41:08 -0700
+ Thu, 05 Oct 2023 11:09:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mfKac2DT;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: kbaker@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-40566f89f6eso12061505e9.3
-        for <meta-ti@lists.yoctoproject.org>; Thu, 05 Oct 2023 10:41:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IzcL/QX+;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: joel.winarske@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-578d0d94986so898643a12.2
+        for <meta-ti@lists.yoctoproject.org>; Thu, 05 Oct 2023 11:09:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696527667; x=1697132467; darn=lists.yoctoproject.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=XDligQG4QDG753dSvI6ytfGaYYcyeRLIKkjxc2yfAFg=;
-        b=mfKac2DT8MPDf+veEq1ges8nQ/v+gl4bClEcdA7+h5yQuPuiOATCQiGtvtuMPSeyeP
-         xCLONFga30KgWfJub+qa9A+BRrYgwTmU1cBsoh2kM7c7wlTIKFzewjBMHxoAR1zyTW+D
-         iKdCVvC4IwiPkeOofrDpvZKTPuF7S6hTGHsRz7g7KtH0+LEfY3NSE/mAMB8LsAQPACiA
-         J0u7rPO9lng4vVU5OVOx3BcKqp8sLviWX1wgxGfhc3htcLsVOUVVvB4MoGVXO/JZ5kDV
-         RwFeXJ/CqpBHUdshpE+76OWCjiUpFLuet0dT/T+RpzfQ0TorHIWWmTWhY2bVgUPf/kqe
-         fwYg==
+        d=gmail.com; s=20230601; t=1696529346; x=1697134146; darn=lists.yoctoproject.org;
+        h=cc:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=i8eQLOSrDwCEnkRU/Ll/8y3jq8jkbv+suArsB4iu7k4=;
+        b=IzcL/QX+hjZ19Dc4DidLAaxXyaObiIyxQyHZrDA9/XugfGl4/URUKMmwN7vbS79Evh
+         4ASceltpRbSBHWa1aR4LHCk0YDyQLSK57Obf8uAmuefl6GOz7Yr4bnenWOO/khu4AFf3
+         5f5A93AwIvdZlhW7mhrkClQEFMPnKRm5Y41ymqraGp1rxGazmYXARzy3oCWIhF0MSJb1
+         suADpAt7klIRlWX8Od0oIf1d9A80dM2MydpuZwNrlS+FmzqLe4dyfRqKCgYzCeQIc7dv
+         1H02t+cXlVduzMiahxsWcf1luLEmpzSAJScvpPRUTJqfPer2VR2LZ+tGsRK8ewsf8Y0P
+         7wPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696527667; x=1697132467;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XDligQG4QDG753dSvI6ytfGaYYcyeRLIKkjxc2yfAFg=;
-        b=uYbyO9DPXxq5CwWGOIjYHTaX20hxNW+wxa2WhjYE2kV5/QuI1UMboqrmXsOM4i+XeY
-         tXUX9TfZiAWXJd3ZISUj1B71ci5EKlOFgaeRJxAJ6Nq+uAo/GRnx/UcnbRzDhB3snB89
-         8iFPO0xAotUaznvgvVM4e1R49BAYmiCLTHlP7U5rNBQhdOC2YGof0LSP9fwbuG4RJ0B4
-         5s2Q6teAiH/XRlQVrdTzRjuJiA/HbiL6I7H2caBo9spH+R1L5jFWx2jlQUBc0ufevZ0b
-         4iO3KXwxVt0B+gBqkFmJcXX45sb46q830wEv8aAQzpnSwJr6z014SF/zO7aLznL1aiF/
-         /qQQ==
-X-Gm-Message-State: AOJu0Yx590s7k/H7Pl40n8cj58NzmtZBv2wETwRaBXyPUZFhOuhV5uYz
-	chW3QHMF+W6IrhrTwkOtywTvX4xiW5k8nGUUCkg=
-X-Google-Smtp-Source: AGHT+IErigUjVGUgIbXp6XWO0DXE1ol/jiKMYtI+mDuLr3E9dnsRT4gxSBZ911hVB6ZlLvgU1pFYa2il0sV8ZbaOl98=
-X-Received: by 2002:a5d:4d12:0:b0:316:efb9:101d with SMTP id
- z18-20020a5d4d12000000b00316efb9101dmr5462721wrt.25.1696527666376; Thu, 05
- Oct 2023 10:41:06 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1696529346; x=1697134146;
+        h=cc:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=i8eQLOSrDwCEnkRU/Ll/8y3jq8jkbv+suArsB4iu7k4=;
+        b=N8d+LwPCndmwBirxahYQWjGKdGZ9RbGbQambZ0CaKU89j4xNrTHjjZrYUr4TnDwVCj
+         h+UMzdxoKWwr/9TyvvuejcqdjI2aEx1gI2ncrcxPK/lqqTEdRPwg2htRm45bMw97bvEQ
+         u10Pscq0ep2KAAeD2ZD/h9x17rQVFEIxTybihr5x/rz6G/vDZabAdJkSsdos3FiS63qn
+         UX7RkuxNronhyyet/VFZwwP2aE0yZlTzyiHctMrWJAVklxOdvgHuiblqMIjijXIbPoVH
+         Im0+OXHZqc8LuZ1wJuVpeYaIHD94pVE9Yf9T8lXKLp1t/D6Y/aC/J3y+b25SvIcCK1Mx
+         VoeQ==
+X-Gm-Message-State: AOJu0YzNNzp7M8lR2RM3/eyXlak6o198C1HA1tEB0sFRNJWVmR9hhF9/
+	E/hy+ruamQmQCuEOB/yYoyFJc19PIDrRotwK5r67fdSvnrE=
+X-Google-Smtp-Source: AGHT+IGDlHhHH5OAzecVWzMwCyeIPWOYpmBdYVZdaDxjioNnrTPQ5R693l2QmOVdtyaDB9jJAbovzyCJlcAH9332z7o=
+X-Received: by 2002:a17:90b:2015:b0:27b:2459:6ae4 with SMTP id
+ hs21-20020a17090b201500b0027b24596ae4mr1724440pjb.40.1696529345707; Thu, 05
+ Oct 2023 11:09:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <AM9PR01MB841284A902CEE0B9B199666F97C4A@AM9PR01MB8412.eurprd01.prod.exchangelabs.com>
- <20231003133952.GB26382@denix.org> <AM9PR01MB8412B2FB6744978623CA47D197CBA@AM9PR01MB8412.eurprd01.prod.exchangelabs.com>
-In-Reply-To: <AM9PR01MB8412B2FB6744978623CA47D197CBA@AM9PR01MB8412.eurprd01.prod.exchangelabs.com>
-From: Kevin Baker <kbaker@gmail.com>
-Date: Thu, 5 Oct 2023 12:40:48 -0500
-Message-ID: <CA+NaiT8g3W1Pp=C6ov51EfiQ_xNC2RZGpRMwW6rANSodn978FA@mail.gmail.com>
-Subject: Re: [meta-ti] Unable to mirror meta-ti due to branch-name HEAD
- forbidden in git since Nov 2019
-To: "Boettger, Heiko" <heiko.boettger@karlstorz.com>
-Cc: Denys Dmytriyenko <denis@denix.org>, 
-	"meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000e7f8590606fba082"
+References: <cJr9.1694721437908350278.lV3S@lists.yoctoproject.org>
+ <4944740.qmqfjKhsMY@gryffindor> <1786B4BD16070DE7.17733@lists.yoctoproject.org>
+ <1786C15758510F16.1961@lists.yoctoproject.org> <1788393BCE69D553.9831@lists.yoctoproject.org>
+ <178B3E94B0590274.3256@lists.yoctoproject.org>
+In-Reply-To: <178B3E94B0590274.3256@lists.yoctoproject.org>
+From: Joel Winarske <joel.winarske@gmail.com>
+Date: Thu, 5 Oct 2023 11:08:54 -0700
+Message-ID: <CABKMkP+mW7gB+M9rkGP6fkqZ9yVHDtnkg=gPrGtHWcYOk=sBKA@mail.gmail.com>
+Subject: Re: [meta-ti] [kirkstone] beaglebone-ai64
+Cc: meta-ti@lists.yoctoproject.org
+Content-Type: multipart/alternative; boundary="0000000000000084a80606fc0534"
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 05 Oct 2023 17:41:11 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17061
+ <meta-ti@lists.yoctoproject.org>; Thu, 05 Oct 2023 18:09:11 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17062
 
---000000000000e7f8590606fba082
+--0000000000000084a80606fc0534
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Denys,
+Nevermind on BeagleBoard-DeviceTree.  I just compared the kernel and
+BeagleBoard-DeviceTree;
+they are at parity.  BeagleBoard-DeviceTree is not needed.  The thing that
+was throwing me off what the older kernel/dt.
 
-There does seem to be a branch confusingly named 'HEAD' in the official
-repo on git.yoctoproject.org. It is not like this in other repos hosted on
-git.yoctoproject.org, as far as I can tell, or in the arago-project repo on
-git.ti.com. Could it be from some sort of CI/CD that has added it? Or is
-meta-ti actually using it for something?
+I'll submit a patch for rolling the kernel forward.
 
-A branch named HEAD is listed here:
+On Thu, Oct 5, 2023 at 8:08=E2=80=AFAM Joel Winarske via lists.yoctoproject=
+.org
+<joel.winarske=3Dgmail.com@lists.yoctoproject.org> wrote:
 
-https://git.yoctoproject.org/meta-ti/refs/
-
-Which does not exist here:
-
-https://git.ti.com/cgit/arago-project/meta-ti/refs/
-
-Thanks,
-Kevin
-
-On Wed, Oct 4, 2023 at 6:31=E2=80=AFAM Boettger, Heiko <heiko.boettger@karl=
-storz.com>
-wrote:
-
-> I don't get what you want to say about the repository being old, we are c=
-loning
-> from git://git.yoctoproject.org/meta-ti.
+> I'm narrowing in on the issue.
 >
+> I have a BeagleBoard.org OS image release where I can see PowerVR running=
+,
+> and PCIe (WiFi/BT) works:
+> * bbai64-emmc-flasher-debian-11.7-xfce-edgeai-arm64-2023-09-02-10gb.img
+> Rescue option 1 (default image panics when booting with PCIe populated):
+> [    0.000000] Linux version 5.10.168-ti-arm64-r111 (voodoo@AM69-SK-32g-0=
+1)
+> (gcc (Debian 10.2.1-6) 10.2.1u3
 >
+> These images use a device tree from a different repo than the ti-kernel
+> repo:
+>     kernel: https://github.com/beagleboard/linux.git
+>     dt:
+> https://git.beagleboard.org/beagleboard/BeagleBoard-DeviceTrees
 >
-> ------------------------------
-> *Von:* meta-ti@lists.yoctoproject.org <meta-ti@lists.yoctoproject.org> im
-> Auftrag von Denys Dmytriyenko <denis@denix.org>
-> *Gesendet:* Dienstag, 3. Oktober 2023 15:39
-> *An:* Boettger, Heiko <Heiko.Boettger@karlstorz.com>
-> *Cc:* meta-ti@lists.yoctoproject.org <meta-ti@lists.yoctoproject.org>
-> *Betreff:* [Ext] Re: [meta-ti] Unable to mirror meta-ti due to
-> branch-name HEAD forbidden in git since Nov 2019
+> Dumping the DT from Yocto linux-bb and BeagleBoard.org the output is not
+> the same.
 >
-> On Tue, Oct 03, 2023 at 09:23:13AM +0000, Boettger, Heiko wrote:
-> > Hi,
-> >
-> > there was a recent change in git that doesn't allow to use `HEAD` as a
-> > branch name . Is it possible to remove the branch? The ref HEAD should
-> still
-> > be there. No other repository seems to have such a branch and we
-> currently
-> > face issues mirroring the meta-ti repository where GitLab refuses to
-> accept
-> > `HEAD` as a valid branch name.
-> >
-> > See also
-> >
-> https://urldefense.com/v3/__https://docs.gitlab.com/ee/user/project/repos=
-itory/branches/*error-ambiguous-head-branch-exists__;Iw!!Lw1uGqvHvtJ_psGG2E=
-t-1voSwbo!cgQTL5gAfQDW2rjVe-STfnMn7ciE__hTinZmRKZOS0XG_vsvyKtq0jDMl4TUN4WQ0=
-syNzTxUcVVfniHAMYrb$
+> Proposed minimum changes:
+> * add option for BeagleBoard-DeviceTree
+> * update kernel versions in linux-bb
+> * update PowerVR version to match kernel/DT
 >
-> > where GitLab states that this change was introduced in git 2.16.0
-> (around 4
-> > years ago).
+> Thoughts?
 >
-> meta-ti already has many official public and non-public mirrors - from
+> On Mon, Sep 25, 2023 at 11:56=E2=80=AFAM Joel Winarske via lists.yoctopro=
+ject.org
+> <joel.winarske=3Dgmail.com@lists.yoctoproject.org> wrote:
 >
-> https://urldefense.com/v3/__http://git.yoctoproject.org__;!!Lw1uGqvHvtJ_p=
-sGG2Et-1voSwbo!cgQTL5gAfQDW2rjVe-STfnMn7ciE__hTinZmRKZOS0XG_vsvyKtq0jDMl4TU=
-N4WQ0syNzTxUcVVfnp3ytjCP$
-> , to
-> https://urldefense.com/v3/__http://git.ti.com__;!!Lw1uGqvHvtJ_psGG2Et-1vo=
-Swbo!cgQTL5gAfQDW2rjVe-STfnMn7ciE__hTinZmRKZOS0XG_vsvyKtq0jDMl4TUN4WQ0syNzT=
-xUcVVfnkZYHCwN$
-> , to internal bitbucket, etc.
->
-> What you are doing is a local clone or even a fork, even if you are using
-> it as a local mirror for your project. I would refrain from calling it a
-> mirror in public due to possible confusion.
->
-> The existing official mirrors are all push based and are always
-> up-to-date.
-> Where your copy is pull based and depends on how often and for how long
-> you are going to update it.
->
-> This has happened in the past, where people would make claims in public
-> that meta-ti is dead and no longer maintained, as it hasn't been updated
-> in years, linking to some obscure fork on github or gitlab that they came
-> across somehow...
->
-> --
-> Denys
->
+>> Update on issue.
+>>
+>> I can boot a kirkstone core-image-base (headless) without any issue.
+>>
+>> Randolph at TI has indicated the panic is related to an outdated gpu
+>> definition in DT.  The gpu DT def defines two power domains, only one is
+>> required.  I have not yet successfully confirmed this change.
+>>
+>>
+>>
+>> On Wed, Sep 20, 2023 at 5:08=E2=80=AFPM Joel Winarske via lists.yoctopro=
+ject.org
+>> <joel.winarske=3Dgmail.com@lists.yoctoproject.org> wrote:
+>>
+>>> Today's limited progress:
+>>>
+>>> 1. U-Boot from eMMC is used by default.  Shipping devices have outdated
+>>> U-Boot.
+>>> 2. Rule out U-Boot, and use Yocto built U-Boot by pressing RST + BOOT,
+>>> wait, release RST, then release BOOT.  Boot flow will use all boot bits
+>>> from the SD card with this approach.
+>>> 3. Update `linux-bb.org_git.bb` to use tip of tree:
+>>> # 5.10.168 version for 32-bit
+>>> SRCREV:armv7a =3D "0f40ca5e749e9176ad4ea30c68be4fb2340647db"
+>>> PV:armv7a =3D "5.10.168+git${SRCPV}"
+>>> BRANCH:armv7a =3D "5.10.168-ti-r71"
+>>>
+>>> # 5.10.168 version for 64-bit
+>>> SRCREV:aarch64 =3D "ac2750dbf3a3b9078feff995e6754d5c5f609c19"
+>>> PV:aarch64 =3D "5.10.168+git${SRCPV}"
+>>> BRANCH:aarch64 =3D "v5.10.168-ti-arm64-r110"
+>>>
+>>>
+>>>
+>>> Updating kernel has no impact on kernel panic:
+>>>
+>>> [    6.621063] pvrsrvkm: loading out-of-tree module taints kernel.
+>>> [    6.637510] PVR_K:  251: Device: 4e20000000.gpu
+>>> [    6.642337] SError Interrupt on CPU0, code 0xbf000000 -- SError
+>>> [    6.642339] CPU: 0 PID: 251 Comm: systemd-udevd Tainted: G
+>>> O      5.10.168+ #1
+>>> [    6.642340] Hardware name: BeagleBoard.org BeagleBone AI-64 (DT)
+>>> [    6.642341] pstate: 60000005 (nZCv daif -PAN -UAO -TCO BTYPE=3D--)
+>>> [    6.642343] pc : _RGXReadBVNCFromReg.isra.0+0x20/0x140 [pvrsrvkm]
+>>> [    6.642343] lr : RGXBvncInitialiseConfiguration+0x274/0x9c0 [pvrsrvk=
+m]
+>>> [    6.642344] sp : ffff8000143db740
+>>> [    6.642345] x29: ffff8000143db740 x28: ffff8000091e4548
+>>> [    6.642349] x27: 0000000000000000 x26: ffff8000143db7a8
+>>> [    6.642351] x25: ffff0008132da000 x24: ffff000813c741a0
+>>> [    6.642353] x23: 0000000000000000 x22: ffff8000091ed000
+>>> [    6.642355] x21: ffff000813c74008 x20: ffff8000091947c0
+>>> [    6.642357] x19: 0000000000000000 x18: ffff800009142e74
+>>> [    6.642359] x17: 000000ffc0000000 x16: ffff8000091431e0
+>>> [    6.642361] x15: ffff800009142e60 x14: ffff800009140dd0
+>>> [    6.642363] x13: ffff80000914c124 x12: 0000000000000000
+>>> [    6.642365] x11: ffff000813c74008 x10: 0000000000000020
+>>> [    6.642367] x9 : 0000000000000000 x8 : 0000000000000024
+>>> [    6.642369] x7 : 0000000000000000 x6 : ffff800012500000
+>>> [    6.642371] x5 : ffff8000143db7b0 x4 : ffff8000143db7ac
+>>> [    6.642373] x3 : ffff8000143db7a8 x2 : ffff8000143db7a4
+>>> [    6.642375] x1 : 0000000000000000 x0 : ffff000813c74008
+>>> [    6.642377] Kernel panic - not syncing: Asynchronous SError Interrup=
+t
+>>>
+>>>
+>>>
+>>>
+>>>
+>>
+>>
+>>
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#17050):
-> https://lists.yoctoproject.org/g/meta-ti/message/17050
-> Mute This Topic: https://lists.yoctoproject.org/mt/101730551/3619781
+> View/Reply Online (#17058):
+> https://lists.yoctoproject.org/g/meta-ti/message/17058
+> Mute This Topic: https://lists.yoctoproject.org/mt/101366039/2167248
 > Group Owner: meta-ti+owner@lists.yoctoproject.org
 > Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [
-> kbaker+mail@gmail.com]
+> joel.winarske@gmail.com]
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 >
 
---000000000000e7f8590606fba082
+--0000000000000084a80606fc0534
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>Hi Denys,</div><div><br></div><div>There does seem to=
- be a branch confusingly named &#39;HEAD&#39; in the official repo on <a hr=
-ef=3D"http://git.yoctoproject.org">git.yoctoproject.org</a>. It is not like=
- this in other repos hosted on <a href=3D"http://git.yoctoproject.org">git.=
-yoctoproject.org</a>, as far as I can tell, or in the arago-project repo on=
- <a href=3D"http://git.ti.com">git.ti.com</a>. Could it be from some sort o=
-f CI/CD that has added it? Or is meta-ti actually using it for something?<b=
-r></div><div><br></div><div>A branch named HEAD is listed here:<br></div><d=
-iv><br></div><div><a href=3D"https://git.yoctoproject.org/meta-ti/refs/">ht=
-tps://git.yoctoproject.org/meta-ti/refs/</a></div><div><br></div><div>Which=
- does not exist here:</div><div><br></div><div><a href=3D"https://git.ti.co=
-m/cgit/arago-project/meta-ti/refs/">https://git.ti.com/cgit/arago-project/m=
-eta-ti/refs/</a></div><div><br></div><div>Thanks,<br></div><div>Kevin<br></=
-div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_at=
-tr">On Wed, Oct 4, 2023 at 6:31=E2=80=AFAM Boettger, Heiko &lt;<a href=3D"m=
-ailto:heiko.boettger@karlstorz.com">heiko.boettger@karlstorz.com</a>&gt; wr=
-ote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div class=
-=3D"msg8879021204976663469">
-
-
-
-
-<div dir=3D"ltr">
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
-<span style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cal=
-ibri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">I don&#39;t get =
-what you want to say about the repository being old, we are=C2=A0</span><sp=
-an style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Calibr=
-i,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">cloning
- from=C2=A0</span><span style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos=
-_MSFontService,Calibri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)=
-">git://<a href=3D"http://git.yoctoproject.org/meta-ti" target=3D"_blank">g=
-it.yoctoproject.org/meta-ti</a>.</span></div>
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
-<span style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cal=
-ibri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)"><br>
-</span></div>
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+<div dir=3D"ltr"><div>Nevermind on <span class=3D"gmail-im">BeagleBoard-Dev=
+iceTree.=C2=A0 I just compared the kernel and </span><span class=3D"gmail-i=
+m">BeagleBoard-DeviceTree; they are </span><span class=3D"gmail-im">at pari=
+ty.=C2=A0 </span><span class=3D"gmail-im">BeagleBoard-DeviceTree is not nee=
+ded.=C2=A0 The thing that was throwing me off what the older kernel/dt.<br>=
+<br></span></div><span class=3D"gmail-im">I&#39;ll submit a patch for rolli=
+ng the kernel forward.<br></span></div><br><div class=3D"gmail_quote"><div =
+dir=3D"ltr" class=3D"gmail_attr">On Thu, Oct 5, 2023 at 8:08=E2=80=AFAM Joe=
+l Winarske via <a href=3D"http://lists.yoctoproject.org">lists.yoctoproject=
+.org</a> &lt;joel.winarske=3D<a href=3D"mailto:gmail.com@lists.yoctoproject=
+.org">gmail.com@lists.yoctoproject.org</a>&gt; wrote:<br></div><blockquote =
+class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
+id rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div>I&#39;m narrowi=
+ng in on the issue.<br><br>I have a BeagleBoard.org OS image release where =
+I can see PowerVR running, and PCIe (WiFi/BT) works:<div>* bbai64-emmc-flas=
+her-debian-11.7-xfce-edgeai-arm64-2023-09-02-10gb.img<br>Rescue option 1 (d=
+efault image panics when booting with PCIe populated):<br>[ =C2=A0 =C2=A00.=
+000000] Linux version 5.10.168-ti-arm64-r111 (voodoo@AM69-SK-32g-01) (gcc (=
+Debian 10.2.1-6) 10.2.1u3<br></div><div></div><div><br></div><div>These ima=
+ges use a device tree from a different repo than the ti-kernel repo:</div><=
+div></div><div>=C2=A0=C2=A0=C2=A0 kernel: <a href=3D"https://github.com/bea=
+gleboard/linux.git" target=3D"_blank">https://github.com/beagleboard/linux.=
+git</a></div><div>=C2=A0=C2=A0=C2=A0 dt:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 <a href=3D"https://git.beagleboard.org/beagleboard/BeagleBoard-De=
+viceTrees" target=3D"_blank">https://git.beagleboard.org/beagleboard/Beagle=
+Board-DeviceTrees</a><br><br>Dumping the DT from Yocto linux-bb and BeagleB=
+oard.org the output is not the same.<br></div><div><br>Proposed minimum cha=
+nges:<br>* add option for BeagleBoard-DeviceTree<br>* update kernel version=
+s in linux-bb<br></div><div>* update PowerVR version to match kernel/DT<br>=
+</div><div><br></div>Thoughts?<br></div></div><br><div class=3D"gmail_quote=
+"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Sep 25, 2023 at 11:56=E2=80=
+=AFAM Joel Winarske via <a href=3D"http://lists.yoctoproject.org" target=3D=
+"_blank">lists.yoctoproject.org</a> &lt;joel.winarske=3D<a href=3D"mailto:g=
+mail.com@lists.yoctoproject.org" target=3D"_blank">gmail.com@lists.yoctopro=
+ject.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D=
+"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
+ft:1ex"><div dir=3D"ltr"><div>Update on issue.</div><div><br>I can boot a k=
+irkstone core-image-base (headless) without any=20
+issue.<br><br></div><div>Randolph at TI has indicated the panic is related =
+to an outdated gpu definition in DT.=C2=A0 The gpu DT def defines two power=
+ domains, only one is required.=C2=A0 I have not yet successfully confirmed=
+ this change.<br><br></div><div><br></div></div><br><div class=3D"gmail_quo=
+te"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Sep 20, 2023 at 5:08=E2=
+=80=AFPM Joel Winarske via <a href=3D"http://lists.yoctoproject.org" target=
+=3D"_blank">lists.yoctoproject.org</a> &lt;joel.winarske=3D<a href=3D"mailt=
+o:gmail.com@lists.yoctoproject.org" target=3D"_blank">gmail.com@lists.yocto=
+project.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr"><div><div><div>Today&#39;s lim=
+ited progress:<br><br></div>1. U-Boot from eMMC is used by default.=C2=A0 S=
+hipping devices have outdated U-Boot.<br></div><div>2. Rule out U-Boot, and=
+ use Yocto built U-Boot by pressing RST + BOOT, wait, release RST, then rel=
+ease BOOT.=C2=A0 Boot flow will use all boot bits from the SD card with thi=
+s approach.</div></div>3. Update `<a href=3D"http://linux-bb.org_git.bb" ta=
+rget=3D"_blank">linux-bb.org_git.bb</a>` to use tip of tree:<br><div></div>=
+<div><div style=3D"color:rgb(204,204,204);background-color:rgb(31,31,31);fo=
+nt-family:&quot;Droid Sans Mono&quot;,&quot;monospace&quot;,monospace;font-=
+weight:normal;font-size:14px;line-height:19px;white-space:pre-wrap"><div><s=
+pan style=3D"color:rgb(106,153,85)"># 5.10.168 version for 32-bit</span></d=
+iv><div><span style=3D"color:rgb(156,220,254)">SRCREV:armv7a</span><span st=
+yle=3D"color:rgb(204,204,204)"> </span><span style=3D"color:rgb(212,212,212=
+)">=3D</span><span style=3D"color:rgb(204,204,204)"> </span><span style=3D"=
+color:rgb(206,145,120)">&quot;0f40ca5e749e9176ad4ea30c68be4fb2340647db&quot=
+;</span></div><div><span style=3D"color:rgb(156,220,254)">PV:armv7a</span><=
+span style=3D"color:rgb(204,204,204)"> </span><span style=3D"color:rgb(212,=
+212,212)">=3D</span><span style=3D"color:rgb(204,204,204)"> </span><span st=
+yle=3D"color:rgb(206,145,120)">&quot;5.10.168+git</span><span style=3D"colo=
+r:rgb(86,156,214)">${SRCPV}</span><span style=3D"color:rgb(206,145,120)">&q=
+uot;</span></div><div><span style=3D"color:rgb(156,220,254)">BRANCH:armv7a<=
+/span><span style=3D"color:rgb(204,204,204)"> </span><span style=3D"color:r=
+gb(212,212,212)">=3D</span><span style=3D"color:rgb(204,204,204)"> </span><=
+span style=3D"color:rgb(206,145,120)">&quot;5.10.168-ti-r71&quot;</span></d=
+iv><br><div><span style=3D"color:rgb(106,153,85)"># 5.10.168 version for 64=
+-bit</span></div><div><span style=3D"color:rgb(156,220,254)">SRCREV:aarch64=
+</span><span style=3D"color:rgb(204,204,204)"> </span><span style=3D"color:=
+rgb(212,212,212)">=3D</span><span style=3D"color:rgb(204,204,204)"> </span>=
+<span style=3D"color:rgb(206,145,120)">&quot;ac2750dbf3a3b9078feff995e6754d=
+5c5f609c19&quot;</span></div><div><span style=3D"color:rgb(156,220,254)">PV=
+:aarch64</span><span style=3D"color:rgb(204,204,204)"> </span><span style=
+=3D"color:rgb(212,212,212)">=3D</span><span style=3D"color:rgb(204,204,204)=
+"> </span><span style=3D"color:rgb(206,145,120)">&quot;5.10.168+git</span><=
+span style=3D"color:rgb(86,156,214)">${SRCPV}</span><span style=3D"color:rg=
+b(206,145,120)">&quot;</span></div><div><span style=3D"color:rgb(156,220,25=
+4)">BRANCH:aarch64</span><span style=3D"color:rgb(204,204,204)"> </span><sp=
+an style=3D"color:rgb(212,212,212)">=3D</span><span style=3D"color:rgb(204,=
+204,204)"> </span><span style=3D"color:rgb(206,145,120)">&quot;v5.10.168-ti=
+-arm64-r110&quot;</span></div><br><br></div></div><div><br></div><div>Updat=
+ing kernel has no impact on kernel panic:<br><br>[ =C2=A0 =C2=A06.621063] p=
+vrsrvkm: loading out-of-tree module taints kernel.<br>[ =C2=A0 =C2=A06.6375=
+10] PVR_K: =C2=A0251: Device: 4e20000000.gpu<br>[ =C2=A0 =C2=A06.642337] SE=
+rror Interrupt on CPU0, code 0xbf000000 -- SError<br>[ =C2=A0 =C2=A06.64233=
+9] CPU: 0 PID: 251 Comm: systemd-udevd Tainted: G =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 O =C2=A0 =C2=A0 =C2=A05.10.168+ #1<br>[ =C2=A0 =C2=A06.642340] H=
+ardware name: BeagleBoard.org BeagleBone AI-64 (DT)<br>[ =C2=A0 =C2=A06.642=
+341] pstate: 60000005 (nZCv daif -PAN -UAO -TCO BTYPE=3D--)<br>[ =C2=A0 =C2=
+=A06.642343] pc : _RGXReadBVNCFromReg.isra.0+0x20/0x140 [pvrsrvkm]<br>[ =C2=
+=A0 =C2=A06.642343] lr : RGXBvncInitialiseConfiguration+0x274/0x9c0 [pvrsrv=
+km]<br>[ =C2=A0 =C2=A06.642344] sp : ffff8000143db740<br>[ =C2=A0 =C2=A06.6=
+42345] x29: ffff8000143db740 x28: ffff8000091e4548 <br>[ =C2=A0 =C2=A06.642=
+349] x27: 0000000000000000 x26: ffff8000143db7a8 <br>[ =C2=A0 =C2=A06.64235=
+1] x25: ffff0008132da000 x24: ffff000813c741a0 <br>[ =C2=A0 =C2=A06.642353]=
+ x23: 0000000000000000 x22: ffff8000091ed000 <br>[ =C2=A0 =C2=A06.642355] x=
+21: ffff000813c74008 x20: ffff8000091947c0 <br>[ =C2=A0 =C2=A06.642357] x19=
+: 0000000000000000 x18: ffff800009142e74 <br>[ =C2=A0 =C2=A06.642359] x17: =
+000000ffc0000000 x16: ffff8000091431e0 <br>[ =C2=A0 =C2=A06.642361] x15: ff=
+ff800009142e60 x14: ffff800009140dd0 <br>[ =C2=A0 =C2=A06.642363] x13: ffff=
+80000914c124 x12: 0000000000000000 <br>[ =C2=A0 =C2=A06.642365] x11: ffff00=
+0813c74008 x10: 0000000000000020 <br>[ =C2=A0 =C2=A06.642367] x9 : 00000000=
+00000000 x8 : 0000000000000024 <br>[ =C2=A0 =C2=A06.642369] x7 : 0000000000=
+000000 x6 : ffff800012500000 <br>[ =C2=A0 =C2=A06.642371] x5 : ffff8000143d=
+b7b0 x4 : ffff8000143db7ac <br>[ =C2=A0 =C2=A06.642373] x3 : ffff8000143db7=
+a8 x2 : ffff8000143db7a4 <br>[ =C2=A0 =C2=A06.642375] x1 : 0000000000000000=
+ x0 : ffff000813c74008 <br>[ =C2=A0 =C2=A06.642377] Kernel panic - not sync=
+ing: Asynchronous SError Interrupt<br></div></div><br></div>
 <br>
-</div>
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
 <br>
-</div>
-<div id=3D"m_8879021204976663469appendonsend"></div>
-<hr style=3D"display:inline-block;width:98%">
-<div id=3D"m_8879021204976663469divRplyFwdMsg" dir=3D"ltr"><font face=3D"Ca=
-libri, sans-serif" style=3D"font-size:11pt" color=3D"#000000"><b>Von:</b> <=
-a href=3D"mailto:meta-ti@lists.yoctoproject.org" target=3D"_blank">meta-ti@=
-lists.yoctoproject.org</a> &lt;<a href=3D"mailto:meta-ti@lists.yoctoproject=
-.org" target=3D"_blank">meta-ti@lists.yoctoproject.org</a>&gt; im Auftrag v=
-on Denys Dmytriyenko &lt;<a href=3D"mailto:denis@denix.org" target=3D"_blan=
-k">denis@denix.org</a>&gt;<br>
-<b>Gesendet:</b> Dienstag, 3. Oktober 2023 15:39<br>
-<b>An:</b> Boettger, Heiko &lt;<a href=3D"mailto:Heiko.Boettger@karlstorz.c=
-om" target=3D"_blank">Heiko.Boettger@karlstorz.com</a>&gt;<br>
-<b>Cc:</b> <a href=3D"mailto:meta-ti@lists.yoctoproject.org" target=3D"_bla=
-nk">meta-ti@lists.yoctoproject.org</a> &lt;<a href=3D"mailto:meta-ti@lists.=
-yoctoproject.org" target=3D"_blank">meta-ti@lists.yoctoproject.org</a>&gt;<=
-br>
-<b>Betreff:</b> [Ext] Re: [meta-ti] Unable to mirror meta-ti due to branch-=
-name HEAD forbidden in git since Nov 2019</font>
-<div>=C2=A0</div>
-</div>
-<div><font size=3D"2"><span style=3D"font-size:11pt">
-<div>On Tue, Oct 03, 2023 at 09:23:13AM +0000, Boettger, Heiko wrote:<br>
-&gt; Hi,<br>
-&gt; <br>
-&gt; there was a recent change in git that doesn&#39;t allow to use `HEAD` =
-as a <br>
-&gt; branch name . Is it possible to remove the branch? The ref HEAD should=
- still <br>
-&gt; be there. No other repository seems to have such a branch and we curre=
-ntly <br>
-&gt; face issues mirroring the meta-ti repository where GitLab refuses to a=
-ccept <br>
-&gt; `HEAD` as a valid branch name.<br>
-&gt; <br>
-&gt; See also <br>
-&gt; <a href=3D"https://urldefense.com/v3/__https://docs.gitlab.com/ee/user=
-/project/repository/branches/*error-ambiguous-head-branch-exists__;Iw!!Lw1u=
-GqvHvtJ_psGG2Et-1voSwbo!cgQTL5gAfQDW2rjVe-STfnMn7ciE__hTinZmRKZOS0XG_vsvyKt=
-q0jDMl4TUN4WQ0syNzTxUcVVfniHAMYrb$" target=3D"_blank">
-https://urldefense.com/v3/__https://docs.gitlab.com/ee/user/project/reposit=
-ory/branches/*error-ambiguous-head-branch-exists__;Iw!!Lw1uGqvHvtJ_psGG2Et-=
-1voSwbo!cgQTL5gAfQDW2rjVe-STfnMn7ciE__hTinZmRKZOS0XG_vsvyKtq0jDMl4TUN4WQ0sy=
-NzTxUcVVfniHAMYrb$</a>=C2=A0
 <br>
-&gt; where GitLab states that this change was introduced in git 2.16.0 (aro=
-und 4 <br>
-&gt; years ago).<br>
+</blockquote></div>
 <br>
-meta-ti already has many official public and non-public mirrors - from <br>
-<a href=3D"https://urldefense.com/v3/__http://git.yoctoproject.org__;!!Lw1u=
-GqvHvtJ_psGG2Et-1voSwbo!cgQTL5gAfQDW2rjVe-STfnMn7ciE__hTinZmRKZOS0XG_vsvyKt=
-q0jDMl4TUN4WQ0syNzTxUcVVfnp3ytjCP$" target=3D"_blank">https://urldefense.co=
-m/v3/__http://git.yoctoproject.org__;!!Lw1uGqvHvtJ_psGG2Et-1voSwbo!cgQTL5gA=
-fQDW2rjVe-STfnMn7ciE__hTinZmRKZOS0XG_vsvyKtq0jDMl4TUN4WQ0syNzTxUcVVfnp3ytjC=
-P$</a>
- , to <a href=3D"https://urldefense.com/v3/__http://git.ti.com__;!!Lw1uGqvH=
-vtJ_psGG2Et-1voSwbo!cgQTL5gAfQDW2rjVe-STfnMn7ciE__hTinZmRKZOS0XG_vsvyKtq0jD=
-Ml4TUN4WQ0syNzTxUcVVfnkZYHCwN$" target=3D"_blank">
-https://urldefense.com/v3/__http://git.ti.com__;!!Lw1uGqvHvtJ_psGG2Et-1voSw=
-bo!cgQTL5gAfQDW2rjVe-STfnMn7ciE__hTinZmRKZOS0XG_vsvyKtq0jDMl4TUN4WQ0syNzTxU=
-cVVfnkZYHCwN$</a> , to internal bitbucket, etc.<br>
 <br>
-What you are doing is a local clone or even a fork, even if you are using <=
-br>
-it as a local mirror for your project. I would refrain from calling it a <b=
-r>
-mirror in public due to possible confusion.<br>
 <br>
-The existing official mirrors are all push based and are always up-to-date.=
- <br>
-Where your copy is pull based and depends on how often and for how long <br=
->
-you are going to update it.<br>
-<br>
-This has happened in the past, where people would make claims in public <br=
->
-that meta-ti is dead and no longer maintained, as it hasn&#39;t been update=
-d <br>
-in years, linking to some obscure fork on github or gitlab that they came <=
-br>
-across somehow...<br>
-<br>
--- <br>
-Denys<br>
-</div>
-</span></font></div>
-</div>
-
+</blockquote></div>
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#17050): <a href=3D"https://lists.yoctoproject.org/g/met=
-a-ti/message/17050" rel=3D"noreferrer" target=3D"_blank">https://lists.yoct=
-oproject.org/g/meta-ti/message/17050</a><br>
-Mute This Topic: <a href=3D"https://lists.yoctoproject.org/mt/101730551/361=
-9781" rel=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/m=
-t/101730551/3619781</a><br>
+View/Reply Online (#17058): <a href=3D"https://lists.yoctoproject.org/g/met=
+a-ti/message/17058" rel=3D"noreferrer" target=3D"_blank">https://lists.yoct=
+oproject.org/g/meta-ti/message/17058</a><br>
+Mute This Topic: <a href=3D"https://lists.yoctoproject.org/mt/101366039/216=
+7248" rel=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/m=
+t/101366039/2167248</a><br>
 Group Owner: <a href=3D"mailto:meta-ti%2Bowner@lists.yoctoproject.org" targ=
 et=3D"_blank">meta-ti+owner@lists.yoctoproject.org</a><br>
 Unsubscribe: <a href=3D"https://lists.yoctoproject.org/g/meta-ti/unsub" rel=
 =3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/meta-ti/=
-unsub</a> [<a href=3D"mailto:kbaker%2Bmail@gmail.com" target=3D"_blank">kba=
-ker+mail@gmail.com</a>]<br>
+unsub</a> [<a href=3D"mailto:joel.winarske@gmail.com" target=3D"_blank">joe=
+l.winarske@gmail.com</a>]<br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 <br>
-</div></blockquote></div>
+</blockquote></div>
 
---000000000000e7f8590606fba082--
+--0000000000000084a80606fc0534--
 
