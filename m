@@ -1,91 +1,110 @@
-Return-Path: <kamlesh@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E905DE7AD44
-	for <webhook@archiver.kernel.org>; Thu,  5 Oct 2023 16:53:40 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.20899.1696524816841786008
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B3A6E92717
+	for <webhook@archiver.kernel.org>; Thu,  5 Oct 2023 17:09:21 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.21215.1696525753776749419
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 05 Oct 2023 09:53:37 -0700
+ Thu, 05 Oct 2023 10:09:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=kWtgR9i5;
- spf=none, err=SPF record not found (domain: ti.com, ip: 198.47.19.142, mailfrom: kamlesh@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 395GrZcB057533;
-	Thu, 5 Oct 2023 11:53:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1696524815;
-	bh=TM4zJFmkkXkE8h8EXku8bZsDL0zxs+N5aC4vmjDQeHQ=;
-	h=From:To:CC:Subject:In-Reply-To:References:Date;
-	b=kWtgR9i5n1c7zNMor/ikcAb9Ssv30utdURne4WW5EEBtNQsxaRREXycD1uDk54vNJ
-	 gtPC/ImudO37AKNB9LA9sRHq8U1kHFUM++hNk/XykDYwD9fSuOdJe644rrMB/BpFr0
-	 QbVlgcwzOJCbg+l4pA3USLADJUUzvdoOs7aMpUBE=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 395GrZCa033491
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 5 Oct 2023 11:53:35 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 5
- Oct 2023 11:53:35 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 5 Oct 2023 11:53:35 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 395GrYJI009985;
-	Thu, 5 Oct 2023 11:53:34 -0500
-From: Kamlesh Gurudasani <kamlesh@ti.com>
-To: "Bajjuri, Praneeth" <praneeth@ti.com>, <vigneshr@ti.com>,
-        <u-kumar1@ti.com>, <afd@ti.com>, <m-chawdhry@ti.com>, <reatmon@ti.com>,
-        <denys@konsulko.com>
-CC: <meta-ti@lists.yoctoproject.org>, <vibhore@ti.com>, <vishalm@ti.com>
-Subject: Re: [EXTERNAL] Re: [meta-ti] [PATCH] trusted-firmware-a: Update to
- sha fixing deep sleep on AM62x
-In-Reply-To: <178AF40DE1DB41A9.4010@lists.yoctoproject.org>
-References: <20231004-atf-bump-lpm-v1-1-66ebc652e365@ti.com>
- <8a935839-1f62-db96-2ee6-c1e01bf0c53b@ti.com>
- <87r0mafke6.fsf@kamlesh.i-did-not-set--mail-host-address--so-tickle-me>
- <60330cdb-8bfe-6c80-1afb-7a0fcbe9d8a1@ti.com>
- <178AF40DE1DB41A9.4010@lists.yoctoproject.org>
-Date: Thu, 5 Oct 2023 22:23:33 +0530
-Message-ID: <87lechf1te.fsf@kamlesh.i-did-not-set--mail-host-address--so-tickle-me>
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A83B240CF7;
+	Thu,  5 Oct 2023 17:09:12 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Xdh3wvDjkpl3; Thu,  5 Oct 2023 17:09:12 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8FF1B40BA7;
+	Thu,  5 Oct 2023 17:09:11 +0000 (UTC)
+Received: from thorin.denix (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id A0B85163CC7;
+	Thu,  5 Oct 2023 13:09:10 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [master/kirkstone][PATCH] u-boot: set the correct latest LIC_FILES_CHKSUM generically
+Date: Thu,  5 Oct 2023 17:09:09 +0000
+Message-Id: <20231005170909.4285-1-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 05 Oct 2023 16:53:40 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17059
+ <meta-ti@lists.yoctoproject.org>; Thu, 05 Oct 2023 17:09:21 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17060
 
-"Gurudasani, Kamlesh via lists.yoctoproject.org"
-<kamlesh=ti.com@lists.yoctoproject.org> writes:
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-...
->>> Yes, Manorit has sanity tested this on all K3 devices
->>> 
->>> http://lcpdresults.itg.ti.com/launcher/results/16114
->>
->> For future reference, no internal links for mainline lists please:)
->>
->> Looking at the log, doesnt look like some platforms are booting . (AM62 
->> LP, AM65,AM62 GP)
->>
->> Can you clarify if the failures seen are regression related to ATF update.
-> AM62X LP-SE is passing, FS is failing because of some infrastructure
-> reasons
->
-> TF-A is same for SE/FS/GP, so should not be an issue.
->
-> Same for AM62x.
->
-> AM65 is not tested at all.
-Sanity tested on GP AM65x succesfully.
+The common u-boot-ti.inc file still uses the old license checksum
+from 2021 U-boot. There were formatting changes in the license text
+between 2021 and 2023 and version-specific recipes had the license
+checksum updated to the new value. Since there are no 2021 recipes
+remaining, the new license checksum can be set in the common .inc
+file generically.
 
-https://gist.github.com/ti-kamlesh/b28a001aa3d868df83b0f6180eddf168
+Note: U-boot license hasn't changed and the same checksum is simply
+being moved from the recipes to the common .inc file.
 
-Regards,
-Kamlesh
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+---
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb    | 2 --
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb | 2 --
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc                | 2 +-
+ 3 files changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb b/m=
+eta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
+index 64bb1441..e98d584a 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
+@@ -1,7 +1,5 @@
+ require u-boot-ti.inc
+=20
+-LIC_FILES_CHKSUM =3D "file://Licenses/README;md5=3D2ca5f2c35c8cc335f0a19=
+756634782f1"
+-
+ PR =3D "r0"
+=20
+ PV =3D "2023.07"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb =
+b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+index 10bcc475..7e8b973e 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+@@ -2,8 +2,6 @@ require u-boot-ti.inc
+=20
+ include ${@ 'recipes-bsp/u-boot/ti-extras.inc' if d.getVar('TI_EXTRAS') =
+else ''}
+=20
+-LIC_FILES_CHKSUM =3D "file://Licenses/README;md5=3D2ca5f2c35c8cc335f0a19=
+756634782f1"
+-
+ PR =3D "r0"
+=20
+ BRANCH =3D "ti-u-boot-2023.04"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/r=
+ecipes-bsp/u-boot/u-boot-ti.inc
+index 2c4ddcc2..21b2d3bb 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -14,7 +14,7 @@ FILESEXTRAPATHS:prepend :=3D "${THISDIR}/u-boot:"
+ SUMMARY =3D "u-boot bootloader for TI devices"
+=20
+ LICENSE =3D "GPL-2.0-or-later"
+-LIC_FILES_CHKSUM =3D "file://Licenses/README;md5=3D30503fd321432fc713238=
+f582193b78e"
++LIC_FILES_CHKSUM =3D "file://Licenses/README;md5=3D2ca5f2c35c8cc335f0a19=
+756634782f1"
+=20
+ BRANCH ?=3D "master"
+ UBOOT_GIT_URI ?=3D "git://git.ti.com/git/ti-u-boot/ti-u-boot.git"
+--=20
+2.25.1
+
 
