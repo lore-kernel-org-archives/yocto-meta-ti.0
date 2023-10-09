@@ -1,98 +1,116 @@
-Return-Path: <praneeth@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 633D2CD6114
-	for <webhook@archiver.kernel.org>; Mon,  9 Oct 2023 17:23:11 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.69403.1696872190000824477
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7CD5CD6131
+	for <webhook@archiver.kernel.org>; Mon,  9 Oct 2023 19:58:32 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.73764.1696881507515000053
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 09 Oct 2023 10:23:10 -0700
+ Mon, 09 Oct 2023 12:58:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Fu1igJDK;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: praneeth@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 399HN9WH123024
-	for <meta-ti@lists.yoctoproject.org>; Mon, 9 Oct 2023 12:23:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1696872189;
-	bh=6VF4zAGlQZ69Ku/P9t2P2p/nTJ1ZHCVNjWO8KZ974j8=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=Fu1igJDKxyOHOoTamLENkUwNFDEvgXglrN134Gu/qhjZtwV/IZpJjuY12s55XXtv9
-	 8h0jhtdOrfzYNRG8L+097lH6No2sPpb4YipMtaXuDDVljvkwM9S0JEcWeA6Std6/iG
-	 l3AUHLeZtMgLbcYNYA0U/trR0mItl/Ufhh46UhEU=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 399HN9q4023263
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 9 Oct 2023 12:23:09 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 9
- Oct 2023 12:23:08 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 9 Oct 2023 12:23:08 -0500
-Received: from [10.247.18.57] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 399HN8oC020309;
-	Mon, 9 Oct 2023 12:23:08 -0500
-Message-ID: <41d3e554-c95b-470a-97a5-04e46aa5fca1@ti.com>
-Date: Mon, 9 Oct 2023 12:23:08 -0500
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 8253740C86;
+	Mon,  9 Oct 2023 19:58:26 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id EKy8jMsQk5Yt; Mon,  9 Oct 2023 19:58:26 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B3EDD40C81;
+	Mon,  9 Oct 2023 19:58:22 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 43B81163CD8; Mon,  9 Oct 2023 15:58:21 -0400 (EDT)
+Date: Mon, 9 Oct 2023 15:58:21 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: reatmon@ti.com
+Cc: afd@ti.com, Julien Panis <jpanis@baylibre.com>,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] [master/kirkstone] u-boot-ti: Fix SPL binary name
+ for SD/MMC media on HS boards
+Message-ID: <20231009195821.GB2408@denix.org>
+References: <20230929122555.10794-1-jpanis@baylibre.com>
+ <0f34de43-bdd5-47cf-bcff-b0e0dbb666aa@baylibre.com>
+ <34336d8c-86e3-df50-ff28-3c5632e4479e@ti.com>
+ <a167fb89-d2bb-42f4-8bfa-62dfb389e79f@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [kirkstone][PATCH v3 0/2] Remove PRU Ethernet firmwares for
- legacy devices
-Content-Language: en-US
-To: Ravi Gunasekaran <r-gunasekaran@ti.com>, <meta-ti@lists.yoctoproject.org>,
-        <reatmon@ti.com>
-CC: <srk@ti.com>
-References: <20231009070926.21629-1-r-gunasekaran@ti.com>
-From: "Bajjuri, Praneeth" <praneeth@ti.com>
-In-Reply-To: <20231009070926.21629-1-r-gunasekaran@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+In-Reply-To: <a167fb89-d2bb-42f4-8bfa-62dfb389e79f@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 09 Oct 2023 17:23:11 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17081
+ <meta-ti@lists.yoctoproject.org>; Mon, 09 Oct 2023 19:58:32 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17082
 
+On Mon, Oct 02, 2023 at 11:44:42AM -0500, Ryan Eatmon via lists.yoctoproj=
+ect.org wrote:
+>=20
+>=20
+> On 10/2/2023 10:30 AM, Andrew Davis via lists.yoctoproject.org wrote:
+> >On 10/2/23 9:06 AM, Julien Panis wrote:
+> >>On 9/29/23 14:25, Julien Panis wrote:
+> >>>The SPL binary built by u-boot for SD/MMC/eMMC media on HS platforms=
+ is
+> >>>u-boot-spl_HS_MLO. Thanks to this fix, the binary is properly instal=
+led
+> >>>and deployed.
+> >>>
+> >>>Signed-off-by: Julien Panis <jpanis@baylibre.com>
+> >>>---
+> >>>=A0 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc | 6 +++---
+> >>>=A0 1 file changed, 3 insertions(+), 3 deletions(-)
+> >>>
+> >>>diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+> >>>b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+> >>>index d9a3a520e857..9ca0fb44d127 100644
+> >>>--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+> >>>+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+> >>>@@ -100,9 +100,9 @@ UBOOT_HS_XLD_IMAGE =3D
+> >>>"u-boot-spl_HS_X-LOADER-${MACHINE}-${PV}-${PR}"
+> >>>=A0 UBOOT_HS_XLD_SYMLINK =3D "u-boot-spl_HS_X-LOADER-${MACHINE}"
+> >>>=A0 # HS MLO
+> >>>-UBOOT_HS_MLO_BINARY =3D "u-boot_HS_MLO"
+> >>>-UBOOT_HS_MLO_IMAGE =3D "u-boot_HS_MLO-${MACHINE}-${PV}-${PR}"
+> >>>-UBOOT_HS_MLO_SYMLINK =3D "u-boot_HS_MLO-${MACHINE}"
+> >>>+UBOOT_HS_MLO_BINARY =3D "u-boot-spl_HS_MLO"
+> >>>+UBOOT_HS_MLO_IMAGE =3D "u-boot-spl_HS_MLO-${MACHINE}-${PV}-${PR}"
+> >>>+UBOOT_HS_MLO_SYMLINK =3D "u-boot-spl_HS_MLO-${MACHINE}"
+> >>>=A0 # HS ISSW
+> >>>=A0 UBOOT_HS_ISSW_BINARY =3D "u-boot-spl_HS_ISSW"
+> >>
+> >>I'm not sure that this patch should be applied actually.
+> >>In doc/README.ti-secure, u-boot_HS_MLO is mentioned for
+> >>Keystone2 Secure Devices.
+> >>So, maybe this name was used intentionally...(?)
+> >>
+> >
+> >On Keystone2 HS, we do not use SPL, so the ROM loaded image (MLO) is t=
+he
+> >normal U-Boot image, we name it u-boot_HS_MLO. For others that do use =
+SPL
+> >the ROM image is the SPL, and it is called u-boot-spl_HS_MLO.
+> >
+> >So this patch has the right idea, just we should add another deployed =
+image
+> >var in addition to this one, not replace it, maybe:
+> >
+> >SPL_HS_MLO_BINARY =3D "u-boot-spl_HS_MLO"
+> >...
+>=20
+> And add the appropriate install code later in the file as well.
 
+Was this supposed to be changed from UBOOT_HS_MLO_* -> SPL_HS_MLO_* per t=
+he=20
+discussion above? Or did I miss something and the old patch got merged:
 
-On 10/9/2023 2:09 AM, Ravi Gunasekaran wrote:
-> Linux kernel 6.1 does not have support for PRU-ICSSM driver.
-> So remove packaging of all the PRU-ICSSM firmwares for kernel 6.1
-> based SDKs.
-> 
-> In the v2 version, it was suggested to have the changes in the SDK layer.
-> But after discussion with meta-ti(Ryan) and meta-processor-sdk(Gyan)
-> maintainers, it was decided to introduce a new .inc file that removes the
-> packaging of the firmware and include it in the kernel recipes that don't
-> have support for PRU-ICSSM in meta-ti. This series attempts to take that
-> approach.
-> 
-> The support for PRU-ICSSM driver will be available in mainline and TI kernel
-> towards the end of 2024. So until such time, this approach will be followed.
-> 
-> v2:https://serenity.dal.design.ti.com/patchwork/project/meta-ti/patch/20230908113836.12413-1-r-gunasekaran@ti.com/
-> v1:https://serenity.dal.design.ti.com/patchwork/project/meta-ti/patch/20230908114439.13213-1-r-gunasekaran@ti.com/
+https://git.yoctoproject.org/meta-ti/commit/?id=3D5306d61211edecf3d04cd9e=
+8c0b64cd4a0ef3549
 
-For future reference, please do not post internal links.
-Instead, use https://lists.yoctoproject.org/g/meta-ti/messages
-
-
-
-> 
-> Ravi Gunasekaran (2):
->    preuth-fw: Remove packaging of PRU-ICSSM firmwares
->    linux-ti-staging_6.1: Remove packaging of PRU-ICSSM firmwares
-> 
->   meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb | 1 +
->   meta-ti-bsp/recipes-kernel/linux/prueth-fw.inc           | 3 +++
->   2 files changed, 4 insertions(+)
->   create mode 100644 meta-ti-bsp/recipes-kernel/linux/prueth-fw.inc
-> 
-> 
-> base-commit: 041271c30496bd1457cd2bd38e7d9b2f7b14372f
+--=20
+Denys
 
