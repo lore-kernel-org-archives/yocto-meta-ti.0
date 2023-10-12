@@ -1,74 +1,74 @@
-Return-Path: <danismostlikely@gmail.com>
+Return-Path: <a-limaye@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15267CDB482
-	for <webhook@archiver.kernel.org>; Thu, 12 Oct 2023 16:20:03 +0000 (UTC)
-Received: from mail-io1-f47.google.com (mail-io1-f47.google.com [209.85.166.47])
- by mx.groups.io with SMTP id smtpd.web10.16394.1697127594459120998
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76A13CDB46E
+	for <webhook@archiver.kernel.org>; Thu, 12 Oct 2023 17:30:13 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.18596.1697131810157745725
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 12 Oct 2023 09:19:54 -0700
+ Thu, 12 Oct 2023 10:30:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.47, mailfrom: danismostlikely@gmail.com)
-Received: by mail-io1-f47.google.com with SMTP id ca18e2360f4ac-79faba5fe12so42138739f.3
-        for <meta-ti@lists.yoctoproject.org>; Thu, 12 Oct 2023 09:19:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697127593; x=1697732393;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Rj3E9xf+x/Ti9MaWcCLRwR9gMLZK0x1RFACISslwnsw=;
-        b=UClDujYNaSQhHsyayEA0w7XTV49cnU68Vlk/l/9nFO8Qhx8rVaSQID+I8BFF3/7xim
-         huq/+UcotEdW6OiMkuAjjuaCxrZW2IDwYpPhrjtsPJDJpDMT3ZmqiCTdX90pwNTowIXv
-         w5OZRgXXpbzaiNf0GcziWrbmcoVwh6MlhxVuPwF8ElnycZlYWM6QP19udT7FI9lO9INW
-         NRIcaNulcu3q5fpZkzUYcWEaeqjyKEjM8M/XV/cSOwbNpy1wfGKMr0Kuavoce0q5BZeJ
-         UOh1gbI8fvwLN+JUoDTr08blNGqyYQF0h6hcGaROws/ov0DOevLpgn9lw5wMN+6TGYnX
-         W6Tg==
-X-Gm-Message-State: AOJu0Yxpg8RblTna+CYT7MbIlTDNs/IzZA8/aEuNi+T0VNpo+DSscl1I
-	q+N54PXz84Jwv1/+T+zBIt4REF1PMTcx1A==
-X-Google-Smtp-Source: AGHT+IG1eLd5POBIfTAUPyydpZDQucIqD3LkGsPMMe3Yotew6/im/5GzFu/j6jItSGPFkAfH2of6lg==
-X-Received: by 2002:a05:6602:22d8:b0:794:c9a2:5fe3 with SMTP id e24-20020a05660222d800b00794c9a25fe3mr27542872ioe.4.1697127593592;
-        Thu, 12 Oct 2023 09:19:53 -0700 (PDT)
-Received: from nebuchadnezzar.home.dankm.pro ([204.83.204.143])
-        by smtp.gmail.com with ESMTPSA id u6-20020a05660229a600b0079f9f7a2565sm4288946ios.38.2023.10.12.09.19.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Oct 2023 09:19:53 -0700 (PDT)
-From: Dan McGregor <dan.mcgregor@usask.ca>
-To: meta-ti@lists.yoctoproject.org
-Cc: Dan McGregor <dan.mcgregor@usask.ca>
-Subject: [meta-ti][PATCH] amx3-cm3: use debug-prefix-map
-Date: Thu, 12 Oct 2023 10:19:50 -0600
-Message-ID: <20231012161950.2566182-1-dan.mcgregor@usask.ca>
-X-Mailer: git-send-email 2.41.0
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=QU4PTmFO;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: a-limaye@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39CHU97w052798
+	for <meta-ti@lists.yoctoproject.org>; Thu, 12 Oct 2023 12:30:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1697131809;
+	bh=+FH1JarckntHs20V6vT3bT9koZHTxD5Ot0E2CyTeeoE=;
+	h=From:To:CC:Subject:Date;
+	b=QU4PTmFOc5h8YaywSJOAigsz5pYad6UtnckhuW7Z/vZ79oVpWHbubsFymMZYtXAZz
+	 N3BtujBnFmrgp0D3sKThcXqBy0wvT7xfEYiAgxtvCm+iyPvfGcVatEajqzMV1SOxMJ
+	 MBt2v3mvQfD2KFPAvOvYRzL/yW+HBHcJgcIDT/CE=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39CHU9sA126210
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Thu, 12 Oct 2023 12:30:09 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 12
+ Oct 2023 12:30:08 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 12 Oct 2023 12:30:08 -0500
+Received: from PSDKL-Workstation0.dhcp.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39CHU544065173;
+	Thu, 12 Oct 2023 12:30:06 -0500
+From: Aniket Limaye <a-limaye@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <reatmon@ti.com>, <d-gole@ti.com>, <c-shilwant@ti.com>, <s-adivi@ti.com>,
+        <vigneshr@ti.com>, Aniket Limaye <a-limaye@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH 0/2] Fix build for tispl.bin
+Date: Thu, 12 Oct 2023 22:59:45 +0530
+Message-ID: <20231012172947.1359231-1-a-limaye@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 12 Oct 2023 16:20:03 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17095
+ <meta-ti@lists.yoctoproject.org>; Thu, 12 Oct 2023 17:30:13 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17096
 
-Fixes the QA warnings about package contains reference to TMPDIR.
+ti-fs-stub-* firmware is packaged at tispl.bin and is needed for u-boot
+aarch64 build. Revert previous commits that removed u-boot dependency on
+ti-sci-fw while preserving deploy logic for ti-sci-fw with multiconfig
+builds
 
-Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
----
- meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Aniket Limaye (2):
+  ti-sci-fw: Remove COMPATIBLE_MACHINE and extend recipe to k3 machines
+  Revert "recipes-bsp: u-boot-ti.inc: Remove ti-sci-fw from DEPENDS for
+    k3 machine"
 
-diff --git a/meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-index 691ff156073..ecdae1231be 100644
---- a/meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-+++ b/meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-@@ -14,7 +14,7 @@ SRC_URI = "git://git.ti.com/git/processor-firmware/ti-amx3-cm3-pm-firmware.git;p
- S = "${WORKDIR}/git"
- 
- do_compile() {
--	make CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${SECURITY_NOPIE_CFLAGS}"
-+	make CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${SECURITY_NOPIE_CFLAGS} ${DEBUG_PREFIX_MAP}"
- }
- 
- do_install() {
+ meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb | 6 ++++--
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc       | 1 +
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
 -- 
-2.41.0
+2.34.1
 
 
