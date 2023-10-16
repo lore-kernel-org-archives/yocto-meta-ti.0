@@ -1,70 +1,72 @@
-Return-Path: <c-shilwant@ti.com>
+Return-Path: <a-limaye@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5363CDB474
-	for <webhook@archiver.kernel.org>; Mon, 16 Oct 2023 10:40:29 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.117514.1697452821962860467
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2C22CDB483
+	for <webhook@archiver.kernel.org>; Mon, 16 Oct 2023 11:19:29 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.118011.1697455159825670497
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 16 Oct 2023 03:40:22 -0700
+ Mon, 16 Oct 2023 04:19:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=piCvV/Oq;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: c-shilwant@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=Bv4eYMeJ;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: a-limaye@ti.com)
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39GAeK4I068414
-	for <meta-ti@lists.yoctoproject.org>; Mon, 16 Oct 2023 05:40:20 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39GBJJpD119634
+	for <meta-ti@lists.yoctoproject.org>; Mon, 16 Oct 2023 06:19:19 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1697452820;
-	bh=TuUKRiEGbJKF/0JJySZYTfSzA2Udw6iLhelSgxSbHV8=;
+	s=ti-com-17Q1; t=1697455159;
+	bh=OUnYAyCy1ualPAEt/eHto1XQDcGSMvam+L5w8FRNf6A=;
 	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=piCvV/OqDVBp01+sQMU6ZO/Yq96dEntCgwLl6zL6tw1NwR8lpCMyx5IwsdcNg8QVK
-	 uQht0bb2YxfbEdU6uIcgRpKAJQRnAszRI98Q8WYyMdGvU+n9uA0H8xifvNHr7U2fsI
-	 TroWeE+OJx03wCkZOz/uCaJkWfsv6piSAatIsvKA=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39GAeKlM034872
+	b=Bv4eYMeJVowXzIGE3NsoMc9Q4Paen5EQNlC3vA/LlbTFy9xrlEbaoh8q3YKxxUcuT
+	 1jcZcm88bOBPDyrFd+DT5EgTbEoaZpvH3mDjCN9j6R5ZlFLRXNNONf2g4QsQ+6GZcf
+	 o2CJxdjZcXwZVE7jvLhJ7NFo8Y9QHCG5BVSmVgds=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39GBJJWQ058596
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 16 Oct 2023 05:40:20 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Mon, 16 Oct 2023 06:19:19 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 16
- Oct 2023 05:40:20 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 06:19:18 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 16 Oct 2023 05:40:20 -0500
-Received: from [172.24.227.238] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39GAeHE8015811;
-	Mon, 16 Oct 2023 05:40:18 -0500
-Message-ID: <f0fa3178-148b-4e75-9ccd-18e779e22f96@ti.com>
-Date: Mon, 16 Oct 2023 16:10:17 +0530
+ Frontend Transport; Mon, 16 Oct 2023 06:19:18 -0500
+Received: from [10.24.68.161] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39GBJFUx092092;
+	Mon, 16 Oct 2023 06:19:16 -0500
+Message-ID: <c71cba20-6c28-4283-8315-94407246491b@ti.com>
+Date: Mon, 16 Oct 2023 16:49:15 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [meta-ti][master/kirkstone][PATCH 1/2] ti-sci-fw: Remove
  COMPATIBLE_MACHINE and extend recipe to k3 machines
 Content-Language: en-US
-To: Andrew Davis <afd@ti.com>, "Limaye, Aniket" <a-limaye@ti.com>,
-        "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
+To: Andrew Davis <afd@ti.com>,
+        "meta-ti@lists.yoctoproject.org"
+	<meta-ti@lists.yoctoproject.org>
 CC: "Eatmon, Ryan" <reatmon@ti.com>, "Gole, Dhruva" <d-gole@ti.com>,
-        "Adivi,
- Sai Sree Kartheek" <s-adivi@ti.com>,
+        "Shilwant, Chirag" <c-shilwant@ti.com>,
+        "Adivi, Sai Sree Kartheek"
+	<s-adivi@ti.com>,
         "Raghavendra, Vignesh" <vigneshr@ti.com>
 References: <20231012172947.1359231-1-a-limaye@ti.com>
  <20231012172947.1359231-2-a-limaye@ti.com>
  <8a2741b3-6fc5-46fc-bed2-c1528c407308@ti.com>
  <f902e28bfd21435a9b11abd44af2425f@ti.com>
  <56a62a33-87b3-4dea-a090-47e98ca93ba7@ti.com>
-From: Chirag Shilwant <c-shilwant@ti.com>
+From: Aniket Limaye <a-limaye@ti.com>
 In-Reply-To: <56a62a33-87b3-4dea-a090-47e98ca93ba7@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id 39GAeK4I068414
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 39GBJJpD119634
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 16 Oct 2023 10:40:29 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17114
+ <meta-ti@lists.yoctoproject.org>; Mon, 16 Oct 2023 11:19:29 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17115
 
 
 On 13/10/23 20:34, Andrew Davis wrote:
@@ -81,6 +83,42 @@ On 13/10/23 20:34, Andrew Davis wrote:
 >
 > Andrew
 >
+Hi Andrew,
+
+I am not sure what you meant by the normal install directory. If you=20
+meant the "image" directory, the tisdk-core-bundle recipe cannot access=20
+the image directory of another recipe... I don't see a straightforward=20
+way of having the core-bundle recipe pick up these images from the=20
+ti-sci-fw recipe.
+
+Secondly, the tisdk-core-bundle always was and still is picking boot=20
+images, among other things, from the deploy directory [1].
+
+ti-sci-fw itself was deploying these images in meta-ti up until 8.6=20
+release and up until this commit in kirkstone [2], not sure what the=20
+reasoning was to remove it there either... we did need the deployed=20
+binaries in the core-bundle and handled it through a bbappend in both=20
+Proc SDK layers in 9.0.
+
+Lastly, ti-dm-fw also was always deploying the firmware [3]. Unless that=20
+was done for some special usecase that I am not aware of, I think that=20
+one was also needed for the same reason... to put it in the=20
+tisdk-core-bundle?
+
+[1]:=20
+https://git.ti.com/cgit/arago-project/meta-arago/tree/meta-arago-distro/c=
+lasses/tisdk-bundle.bbclass?h=3Dkirkstone#n272
+[2]:=20
+https://git.ti.com/cgit/arago-project/meta-ti/commit/meta-ti-bsp/recipes-=
+bsp/ti-sci-fw/ti-sci-fw_git.bb?h=3Dkirkstone&id=3D7b797da2ef43f4f450a5468=
+16b43b28f9379305a
+[3]:=20
+https://git.ti.com/cgit/arago-project/meta-ti/tree/meta-ti-bsp/recipes-bs=
+p/ti-dm-fw/ti-dm-fw.bb?h=3Dkirkstone#n68
+
+
+Aniket
+
 >> Regards,
 >> Aniket
 >>
@@ -142,14 +180,7 @@ fs-firmware-*=20
 >>
 >> Andrew
 >>
->>
-
-This will deploy all ti-sci-* & ti-fs-* firmwares present in=20
-ti-linux-firmware repository
-in the deploy directory irrespective of the yocto machine which is=20
-redundant. It's better if
-we deploy based on yocto machine.
-
+>>>
 >>>
 >>>
 >>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
