@@ -1,132 +1,117 @@
-Return-Path: <denis@denix.org>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C23B9C001DF
-	for <webhook@archiver.kernel.org>; Fri, 20 Oct 2023 20:45:31 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.65451.1697834725596738979
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6877CC0032E
+	for <webhook@archiver.kernel.org>; Fri, 20 Oct 2023 22:20:12 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.67221.1697840407241894494
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 20 Oct 2023 13:45:26 -0700
+ Fri, 20 Oct 2023 15:20:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9D9F741222;
-	Fri, 20 Oct 2023 20:45:24 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JjCzhxpmlpCq; Fri, 20 Oct 2023 20:45:24 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id EA77E41220;
-	Fri, 20 Oct 2023 20:45:22 +0000 (UTC)
-Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 74582163D17;
-	Fri, 20 Oct 2023 16:45:20 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master/kirkstone][PATCH 1/5] conf: beaglebone-ai64: trim down the DTB list
-Date: Fri, 20 Oct 2023 20:44:54 +0000
-Message-Id: <20231020204458.546852-1-denis@denix.org>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Sfu3GTgB;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39KMK0ZB066625;
+	Fri, 20 Oct 2023 17:20:00 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1697840400;
+	bh=lxfmtfJ8vAKeaH5H9oUSrX/6QJqcgCWCFv692mXGn7E=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=Sfu3GTgByCEgV9bgfyX0YsGUmDVGkP8o50Zr/DzL0yklphGc6LDZyKEV1ElI4b192
+	 jC8r3sfGG67TVPyBkCb66RBHRpGdJx+wEfBTebRKGPFemS3sBKBW8gORxUHcTvan9u
+	 60JlIUVYcazaaSF3UCr2VZ7xfVIRMgnJDucDiL7Q=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39KMK0Ys106349
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 20 Oct 2023 17:20:00 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 20
+ Oct 2023 17:20:00 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 20 Oct 2023 17:20:00 -0500
+Received: from [10.249.38.142] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39KMK04b052899;
+	Fri, 20 Oct 2023 17:20:00 -0500
+Message-ID: <2ddee779-2ede-4ff0-8c20-fe8675fc8206@ti.com>
+Date: Fri, 20 Oct 2023 17:20:00 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti] [kirkstone][PATCH v3 1/2] preuth-fw: Remove packaging
+ of PRU-ICSSM firmwares
+Content-Language: en-US
+To: Denys Dmytriyenko <denis@denix.org>, <r-gunasekaran@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>, <srk@ti.com>,
+        <afd@ti.com>
+References: <20231009070926.21629-1-r-gunasekaran@ti.com>
+ <20231009070926.21629-2-r-gunasekaran@ti.com>
+ <20231009202027.GD2408@denix.org>
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20231009202027.GD2408@denix.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 20 Oct 2023 20:45:31 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17162
+ <meta-ti@lists.yoctoproject.org>; Fri, 20 Oct 2023 22:20:12 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17163
 
-From: Denys Dmytriyenko <denys@konsulko.com>
 
-Update DTB/DTBO list to only upstreamed devicetrees and overlays. This
-help with migration to kernel 6.1, which doesn't have BB.org specific
-overlays.
 
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
----
- meta-ti-bsp/conf/machine/beaglebone-ai64.conf | 61 +++----------------
- 1 file changed, 8 insertions(+), 53 deletions(-)
+On 10/9/2023 3:20 PM, Denys Dmytriyenko wrote:
+> On Mon, Oct 09, 2023 at 12:39:25PM +0530, Ravi Gunasekaran via lists.yoctoproject.org wrote:
+>> PRU-ICSS on AM33x, AM43x, supports different ethernet modes such
+>> as Ethernet, HSR and PRP by means of different firmwares and the
+>> driver loads one of the these firmware. The PRU-ICSS linux driver
+>> may not be available for all kernel versions.
+>>
+>> So add an .inc file that avoids the packaging of such firmwares
+>> in the SDK, so that it can be referenced by kernel recipes that
+>> don't support PRU-ICSS.
+>>
+>> Signed-off-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
+>> ---
+>>   meta-ti-bsp/recipes-kernel/linux/prueth-fw.inc | 3 +++
+>>   1 file changed, 3 insertions(+)
+>>   create mode 100644 meta-ti-bsp/recipes-kernel/linux/prueth-fw.inc
+>>
+>> diff --git a/meta-ti-bsp/recipes-kernel/linux/prueth-fw.inc b/meta-ti-bsp/recipes-kernel/linux/prueth-fw.inc
+>> new file mode 100644
+>> index 00000000..6698c9ed
+>> --- /dev/null
+>> +++ b/meta-ti-bsp/recipes-kernel/linux/prueth-fw.inc
+>> @@ -0,0 +1,3 @@
+>> +# Do not package firmwares for kernels that don't support PRUETH
+>> +RDEPENDS:${KERNEL_PACKAGE_NAME}-base:remove:ti43x = " prueth-fw pruhsr-fw pruprp-fw"
+>> +RDEPENDS:${KERNEL_PACKAGE_NAME}-base:remove:ti33x = " prueth-fw pruhsr-fw pruprp-fw"
+> 
+> This is asking for trouble - there's no way to un-do :remove downstream (e.g.
+> any of the Distro, SDK, Product Line or Customer layers)
+> 
+> It is not recommended to use :remove (and :append to a lesser degree) on a
+> regular basis when it can be done differently.
+> 
+> Moreover, what is a difference from v2? It is a more convoluted way to drop
+> those FW images from getting installed, but it is still done unconditionally
+> here in meta-ti - are there any benefits of doing it this way?
 
-diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf b/meta-ti-bsp/=
-conf/machine/beaglebone-ai64.conf
-index bd5f541f..2f9c7288 100644
---- a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
-+++ b/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
-@@ -10,62 +10,17 @@ PREFERRED_PROVIDER_virtual/kernel =3D "linux-bb.org"
-=20
- KERNEL_DEVICETREE =3D " \
- ti/k3-j721e-beagleboneai64.dtb \
--ti/k3-j721e-beagleboneai64-no-shared-mem.dtb \
- ti/k3-j721e-common-proc-board.dtb \
--ti/k3-j721e-common-proc-board-infotainment.dtbo \
--ti/k3-j721e-common-proc-board-uarts.dtbo \
--ti/k3-j721e-cpb-csi2-ov5640.dtbo \
--ti/k3-j721e-fpdlink-cpb-fusion.dtbo \
--ti/k3-j721e-fpdlink-imx390-cm-0-0.dtbo \
--ti/k3-j721e-fpdlink-imx390-cm-0-1.dtbo \
--ti/k3-j721e-fpdlink-imx390-cm-0-2.dtbo \
--ti/k3-j721e-fpdlink-imx390-cm-0-3.dtbo \
--ti/k3-j721e-fpdlink-imx390-cm-1-0.dtbo \
--ti/k3-j721e-fpdlink-imx390-cm-1-1.dtbo \
--ti/k3-j721e-fpdlink-imx390-cm-1-2.dtbo \
--ti/k3-j721e-fpdlink-imx390-cm-1-3.dtbo \
--ti/k3-j721e-fpdlink-imx390-rcm-0-0.dtbo \
--ti/k3-j721e-fpdlink-imx390-rcm-0-1.dtbo \
--ti/k3-j721e-fpdlink-imx390-rcm-0-2.dtbo \
--ti/k3-j721e-fpdlink-imx390-rcm-0-3.dtbo \
--ti/k3-j721e-fpdlink-imx390-rcm-1-0.dtbo \
--ti/k3-j721e-fpdlink-imx390-rcm-1-1.dtbo \
--ti/k3-j721e-fpdlink-imx390-rcm-1-2.dtbo \
--ti/k3-j721e-fpdlink-imx390-rcm-1-3.dtbo \
--ti/k3-j721e-fpdlink-sk-fusion.dtbo \
--ti/k3-j721e-gesi-exp-board.dtbo \
--ti/k3-j721e-proc-board-tps65917.dtb \
--ti/k3-j721e-quad-port-eth-exp.dtbo \
-+ti/k3-j721e-evm-csi2-ov5640.dtbo \
-+ti/k3-j721e-evm-fusion.dtbo \
-+ti/k3-j721e-evm-gesi-exp-board.dtbo \
-+ti/k3-j721e-evm-quad-port-eth-exp.dtbo \
-+ti/k3-j721e-evm-virt-mac-client.dtbo \
- ti/k3-j721e-sk-csi2-ov5640.dtbo \
--ti/k3-j721e-sk.dtb \
--ti/k3-j721e-sk-rpi-cam-imx219.dtbo \
-+ti/k3-j721e-sk-csi2-rpi-imx219.dtbo \
-+ti/k3-j721e-sk-fusion.dtbo \
- ti/k3-j721e-sk-rpi-hdr-ehrpwm.dtbo \
--ti/overlays/BBAI64-CSI0-imx219.dtbo \
--ti/overlays/BBAI64-CSI1-imx219.dtbo \
--ti/overlays/BBAI64-DSI-RPi-7inch-panel.dtbo \
--ti/overlays/BBAI64-P8_37-ehrpwm5_a.dtbo \
--ti/overlays/BBAI64-P9_25-ehrpwm4_b.dtbo \
--ti/overlays/BB-I2C2-MPU6050.dtbo \
--ti/overlays/BBORG_LOAD-00A2.dtbo \
--ti/overlays/BBORG_RELAY-00A2.dtbo \
--ti/overlays/BBORG_SERVO-00A2.dtbo \
--ti/overlays/BONE-FAN.dtbo \
--ti/overlays/BONE-I2C1.dtbo \
--ti/overlays/BONE-I2C2.dtbo \
--ti/overlays/BONE-I2C3.dtbo \
--ti/overlays/BONE-LED_P8_03.dtbo \
--ti/overlays/BONE-LED_P9_11.dtbo \
--ti/overlays/BONE-PWM0.dtbo \
--ti/overlays/BONE-PWM1.dtbo \
--ti/overlays/BONE-PWM2.dtbo \
--ti/overlays/BONE-SPI0_0.dtbo \
--ti/overlays/BONE-SPI0_1.dtbo \
--ti/overlays/BONE-SPI1_0.dtbo \
--ti/overlays/BONE-UART1.dtbo \
--ti/overlays/BONE-USB0-host.dtbo \
--ti/overlays/J721E-PRU-UIO-00A0.dtbo \
--ti/overlays/k3-j721e-beagleboneai64-RPi-7inch-panel.dtbo \
--ti/overlays/robotics-cape.dtbo \
-+ti/k3-j721e-sk.dtb \
- "
-=20
- MACHINE_GUI_CLASS =3D "bigscreen"
---=20
-2.25.1
 
+Ravi, I hate to ask this of you as most of the waffling is from me.
+
+But I agree with Denys.  I think what we need is the v2 patch, but with 
+better wording (like what you have in v3) that explains the situation.
+
+Can you put together a new v4 that looks like that?
+
+
+
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
