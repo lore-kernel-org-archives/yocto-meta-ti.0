@@ -1,96 +1,105 @@
-Return-Path: <matthias.schiffer@ew.tq-group.com>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5644ACDB474
-	for <webhook@archiver.kernel.org>; Fri, 20 Oct 2023 12:15:48 +0000 (UTC)
-Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
- by mx.groups.io with SMTP id smtpd.web10.52717.1697804144063220705
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13E06CDB474
+	for <webhook@archiver.kernel.org>; Fri, 20 Oct 2023 14:29:09 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.55693.1697812142242983307
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 20 Oct 2023 05:15:45 -0700
+ Fri, 20 Oct 2023 07:29:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@tq-group.com header.s=key1 header.b=G1xdS0wH;
- spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81, mailfrom: matthias.schiffer@ew.tq-group.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
-  t=1697804144; x=1729340144;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=XRFW3bU48E26ceeVFRUjnIxJ0OuXJamx5iUcGvSIHQ8=;
-  b=G1xdS0wHSPJCGv/ppzkEjnrIgGfK0diljyGd6Qc5Ixyo5itWaG/jDPs+
-   /XS8kaGC15u6OOPzoNaJKF7ZGeAsYO2xecLbBXeEef1309DyzKa46+1+s
-   HagbQwKauSKl3lM/nEGIzYavNfH+V99vOo/5AP8zyKB9uvEZ80vL1TXZn
-   Yja6C/RS0XzY69/8WsPG0aLDgVCVIs72BmvbDDqOdRbdEUX1Ncg1nBzh2
-   wSntgpiUEJPlUQHK54FhGFWztmqg/2pFcRWC2C+SbeY1Qx/sXoEQliQaM
-   8lu3+eDu3YeKXzTOEb3hkpweV+7TO7WOXZ9L1JtRZPXwck7OgjLeE+qSG
-   w==;
-X-IronPort-AV: E=Sophos;i="6.03,238,1694728800"; 
-   d="scan'208";a="33574620"
-Received: from vtuxmail01.tq-net.de ([10.115.0.20])
-  by mx1.tq-group.com with ESMTP; 20 Oct 2023 14:15:42 +0200
-Received: from localhost.localdomain (SCHIFFERM-M2.tq-net.de [10.121.49.20])
-	by vtuxmail01.tq-net.de (Postfix) with ESMTPA id 1CCDA28007F;
-	Fri, 20 Oct 2023 14:15:42 +0200 (CEST)
-From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-To: meta-ti@lists.yoctoproject.org
-Cc: oss@ew.tq-group.com,
-	Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-Subject: [master][kirkstone][PATCH] conf: include TI_COMMON_DEPLOY in PSEUDO_IGNORE_PATHS
-Date: Fri, 20 Oct 2023 14:15:30 +0200
-Message-Id: <20231020121530.351358-1-matthias.schiffer@ew.tq-group.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=gP1wu8C3;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39KET1ur030577;
+	Fri, 20 Oct 2023 09:29:01 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1697812141;
+	bh=3/q4G/UglSm/7bfSFbDPHhoHTH0/SfsXX4NR4vsI1N8=;
+	h=From:To:CC:Subject:Date;
+	b=gP1wu8C3DqSnCBa6OGF+vbZl+5eH935KISbeuWXlNEgkAn4NVBfWYw9G46Wz+uWkI
+	 ulFXJZRS5f+9OUF7j2fCgGuRV5c211URUHMcOSqiPbgHmU9ykYw2IehldOzCiqe4Te
+	 Zj9YHKKFwec71ypoTx6oUZU0WCxcE/6nwDURsU3A=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39KET1Kq092541
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 20 Oct 2023 09:29:01 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 20
+ Oct 2023 09:28:59 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 20 Oct 2023 09:28:59 -0500
+Received: from ula0226330.dhcp.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39KESxka114681;
+	Fri, 20 Oct 2023 09:28:59 -0500
+From: Andrew Davis <afd@ti.com>
+To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
+        <meta-ti@lists.yoctoproject.org>
+CC: Andrew Davis <afd@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH] ti-pru-sw-edma-driver: Remove this recipe
+Date: Fri, 20 Oct 2023 09:28:59 -0500
+Message-ID: <20231020142859.147560-1-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 20 Oct 2023 12:15:48 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17155
+ <meta-ti@lists.yoctoproject.org>; Fri, 20 Oct 2023 14:29:09 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17156
 
-Since the introduction of TI_COMMON_DEPLOY, we've been seeing frequent
-Pseudo errors [1] breaking image build during development, in particular
-with partial rebuilds due to the externalsrc bbclass.
+Not used and the source is gone anyway, remove.
 
-The relevant part of the error log seems to be the following:
-
-    ERROR: Task (/home/schifferm/Devel/src/ci-meta-tq-kirkstone/sources/meta
-        -tq/meta-dumpling/recipes-images/images/tq-image-generic-debug.bb:do
-	_rootfs) failed with exit code '1'
-    Pseudo log:
-    path mismatch [1 link]: ino 12215614 db '/home/schifferm/Devel/src/ci-me
-        ta-tq-kirkstone/build-mba64xx/deploy-ti/images/tqma64xxl-mbax4xxl/tq
-	-image-generic-debug-tqma64xxl-mbax4xxl-20231020091917.testdata.json
-	' req '/home/schifferm/Devel/src/ci-meta-tq-kirkstone/build-mba64xx/
-	tmp/work/tqma64xxl_mbax4xxl-tq-linux/tq-image-generic-debug/1.0-r0/r
-	ootfs/usr/share/stress-ng/example-jobs/device.job;65324e26'.
-
-My understanding is that all deploy dirs should be ignored by Pseudo, as
-openembedded-core/meta/bitbake.conf includes the whole of DEPLOY_DIR in
-PSEUDO_IGNORE_PATHS. With the introduction of TI_COMMON_DEPLOY,
-DEPLOY_DIR_IMAGE is not covered by that setting anymore, so we add it in
-meta-ti to avoid the issue.
-
-[1] https://wiki.yoctoproject.org/wiki/Pseudo_Abort
-
-Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- meta-ti-bsp/conf/layer.conf | 1 +
- 1 file changed, 1 insertion(+)
+ .../pru/ti-pru-sw-edma-driver_1.00.00.bb      | 31 -------------------
+ 1 file changed, 31 deletions(-)
+ delete mode 100644 meta-ti-extras/recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb
 
-diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
-index 460be02a..ffa47ae6 100644
---- a/meta-ti-bsp/conf/layer.conf
-+++ b/meta-ti-bsp/conf/layer.conf
-@@ -31,3 +31,4 @@ HOSTTOOLS_NONFATAL += "truncate xxd comm"
- TI_COMMON_DEPLOY ?= "${TOPDIR}/deploy-ti"
- DEPLOY_DIR_IMAGE:ti-soc = "${TI_COMMON_DEPLOY}/images/${MACHINE}"
- SDK_DEPLOY:ti-soc = "${TI_COMMON_DEPLOY}/sdk"
-+PSEUDO_IGNORE_PATHS:append:ti-soc = ",${TI_COMMON_DEPLOY}"
+diff --git a/meta-ti-extras/recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb b/meta-ti-extras/recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb
+deleted file mode 100644
+index 449a9095..00000000
+--- a/meta-ti-extras/recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb
++++ /dev/null
+@@ -1,31 +0,0 @@
+-DESCRIPTION = "Builds eDMA module used by eDMA libraries for PRU sw example applications"
+-HOMEPAGE = "https://gforge.ti.com/gf/project/pru_sw/"
+-LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://edmautils.c;beginline=1;endline=23;md5=312e9cb8a37a044c617c98a9e980ad1b"
+-
+-COMPATIBLE_MACHINE = "omapl138"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-
+-MACHINE_KERNEL_PR:append = "b"
+-PR = "${MACHINE_KERNEL_PR}"
+-PV:append = "+svn${SRCPV}"
+-
+-SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;protocol=https;user=anonymous;pswd=''"
+-
+-SRCREV = "33"
+-
+-S = "${WORKDIR}/trunk/peripheral_lib/edma_driver/module"
+-
+-inherit module
+-
+-EXTRA_OEMAKE += "KERNEL_DIR='${STAGING_KERNEL_DIR}'"
+-
+-do_compile:prepend () {
+-        export CCTOOL_PREFIX="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}"
+-}
+-
+-do_install () {
+-        install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/pru
+-        install -m 0755 ${S}/edmautils.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/pru/
+-}
 -- 
-TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
-Amtsgericht München, HRB 105018
-Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
-https://www.tq-group.com/
+2.39.2
 
 
