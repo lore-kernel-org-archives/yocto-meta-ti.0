@@ -1,132 +1,148 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <max.oss.09@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BDF6C004C0
-	for <webhook@archiver.kernel.org>; Mon, 23 Oct 2023 15:54:02 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.124361.1698076438794023168
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D04AAC004C0
+	for <webhook@archiver.kernel.org>; Mon, 23 Oct 2023 16:15:52 +0000 (UTC)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+ by mx.groups.io with SMTP id smtpd.web10.125006.1698077743490871766
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 23 Oct 2023 08:53:58 -0700
+ Mon, 23 Oct 2023 09:15:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=pEde4fH/;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39NFrt6Y089447;
-	Mon, 23 Oct 2023 10:53:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1698076435;
-	bh=YbhF03E3VhITFY6d3UYVU6QyKlEffGjXpx0BoPs/Dg0=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=pEde4fH/xXdcPjltHgpnfWvsTiLIfYzVDLSDKYf/abhIEEcntHs5F9P9znB1L0PCf
-	 L0YWUBOPf/jN2gyh5JX9zRp743SEXuSjyCWaDJx/eB/te34fFWShkILn5nbkmX4+mM
-	 ICnupve3ljeqo49SDlfTpUEfwXIiBusdkkk9AXf0=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39NFrtI2018255
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 23 Oct 2023 10:53:55 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 23
- Oct 2023 10:53:55 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 23 Oct 2023 10:53:55 -0500
-Received: from [10.249.38.142] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39NFqnf3022158;
-	Mon, 23 Oct 2023 10:53:55 -0500
-Message-ID: <57734958-cb3c-4165-93dc-6645df9bfa04@ti.com>
-Date: Mon, 23 Oct 2023 10:53:55 -0500
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=UMi28bcr;
+ spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: max.oss.09@gmail.com)
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-53dd752685fso5384429a12.3
+        for <meta-ti@lists.yoctoproject.org>; Mon, 23 Oct 2023 09:15:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1698077742; x=1698682542; darn=lists.yoctoproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=oe8a6WD/Vg7xPQPmD5mwxscO4nlXc0x2/Qt1hr93wIg=;
+        b=UMi28bcrKUZiuUM2s0+qSx23jLxz063UOnqGoVI0fk/Oy2zvQcEz2w7jU5jtnTXMxc
+         N+6XtiCJ2bgiDi/EJ5yZfxzNfD2fvgad2tdZhVX10404w1MdgfwXw5oNve7+iZBp5+gg
+         CFQ6jUIB/cq5p3E5v2RA1dGEZG5w8aFIcog54ZrOkVYPxNzehhTshUyb60UpRB6NCrpg
+         S+DF3BlSw6ftSyJRYJxliHNhbOSjHQbOwERscHiSZp6HlqHv5qWNppr/WIQswwP6sBi2
+         v9HMKl5DrIWDKdv9RwUUK7kUaFBmqiQYivj7dswG/Rupc0Xe78Eynxi2CXLoYLJ7of4a
+         s7ag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1698077742; x=1698682542;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=oe8a6WD/Vg7xPQPmD5mwxscO4nlXc0x2/Qt1hr93wIg=;
+        b=c/jIWqBgFG3ps6bW50fD505TCY2sWemtZmF2kocLuYDBn7/er5/kf7vybjvS46u7CX
+         KzQLzeZfWvL+6lkL2Juwp/MI4M4WDC/I9E992DMs5yDFXO86wyBQ1b2jEpUDthEX5CST
+         cFGFw3IeLAHPIoMS2WiSJoHs+lxCHdljkqH/OvLeXDm8s2UMSwr2xxog/5W9zACTiphd
+         9kUZZeK+V4CU9J5CzuIhdiyKhJc7cZR90HxLWtQt4Jl5Rc3NUP3kgJLxuROl6i4nOIBl
+         tj4LpOLMHJOTKxL3Q4uUwEdO3ckq6sXO5N/AMWRbmnVy+3+MfV9ZeulnvT/oz1oZSjTT
+         L2cQ==
+X-Gm-Message-State: AOJu0YyuQM9HFDK2NMUF8CAOB4pkMLjykGBoRLhmR/mKilXRuAPVbTeS
+	qcIn9aEDWvSpikG+a8SKiwY=
+X-Google-Smtp-Source: AGHT+IHn7fhHProeHQSIrXg2HoVM/vRJMT6/wu5hWFrkKRg/vVsyQ7iiflYxvLHf55knj0y2JyBSjg==
+X-Received: by 2002:a05:6402:3493:b0:53e:f321:e6fd with SMTP id v19-20020a056402349300b0053ef321e6fdmr7739291edc.9.1698077741534;
+        Mon, 23 Oct 2023 09:15:41 -0700 (PDT)
+Received: from linuxdev2.toradex.int (31-10-206-125.static.upc.ch. [31.10.206.125])
+        by smtp.gmail.com with ESMTPSA id s21-20020a056402037500b0053e0395059csm6421445edw.21.2023.10.23.09.15.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Oct 2023 09:15:41 -0700 (PDT)
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: max.krummenacher@toradex.com,
+	meta-ti@lists.yoctoproject.org
+Subject: [meta-ti][kirkstone] regression with rogue gpu
+Date: Mon, 23 Oct 2023 13:15:38 -0300
+Message-Id: <20231023161538.1798206-1-max.oss.09@gmail.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti] [master/kirkstone][PATCH 3/5] linux-bb.org: update
- kernel to 6.1 for Beagle devices
-Content-Language: en-US
-To: Denys Dmytriyenko <denis@denix.org>, <meta-ti@lists.yoctoproject.org>
-CC: Denys Dmytriyenko <denys@konsulko.com>
-References: <20231020204458.546852-1-denis@denix.org>
- <20231020204458.546852-3-denis@denix.org>
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20231020204458.546852-3-denis@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 23 Oct 2023 15:54:02 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17169
+ <meta-ti@lists.yoctoproject.org>; Mon, 23 Oct 2023 16:15:52 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17170
+
+From: Max Krummenacher <max.krummenacher@toradex.com>
+
+Hi
+
+On our weekly CI build we see glmark segfaulting on our AM625 based SoM.
+
+Reverting commit 9b6bce2c ("mesa-pvr: bump srcrev for sgx support") on
+top of meta-ti @ 59edb4e8 ("linux-ti-staging_6.1: CI/CD Auto-Merger: cicd.kirkstone.202310191725")
+fixes the segfault and glmark shows similar performance as before.
+
+It looks like the addition of the SGX GPU introduced a regression with
+the Rogue GPU.
+
+Any comments?
+
+Regards
+Max
 
 
-I just sent a patch for master only against this recipe that removes all 
-of the patches.  Not sure if you want a v2 series that includes that 
-change, or just have a follow on patch.
+Image with meta-ti @ 59edb4e8 (tag: cicd.kirkstone.202310191725, tag: 09.01.00.001) linux-ti-staging_6.1: CI/CD Auto-Merger: cicd.kirkstone.202310191725:
+```
+root@verdin-am62-15133510:~# glmark2-es2-wayland 
+=======================================================
+    glmark2 2021.12
+=======================================================
+    OpenGL Information
+    GL_VENDOR:     Imagination Technologies
+    GL_RENDERER:   PowerVR A-Series AXE-1-16M
+    GL_VERSION:    OpenGL ES 3.1 build 23.1@6404501
+=======================================================
+[build] use-vbo=false:
+[   30.700147] kauditd_printk_skb: 12 callbacks suppressed
+[   30.700219] audit: type=1701 audit(1698075022.084:20): auid=4294967295 uid=0 gid=0 ses=4294967295 pid=701 comm="glmark2-es2-way" 
+exe="/usr/bin/glmark2-es2-wayland" sig=11 res=1
+Segmentation fault
+```
 
-
-On 10/20/2023 3:44 PM, Denys Dmytriyenko wrote:
-> From: Denys Dmytriyenko <denys@konsulko.com>
-> 
-> Update both 32-bit and 64-bit configs to use the latest 6.1 Linux kernel
-> from beagleboard.org repository, which is based on ti-linux-kernel repo
-> used in linux-ti-staging, but with extra Beagle-specific features on top.
-> 
-> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> ---
->   .../recipes-kernel/linux/linux-bb.org_git.bb  | 19 +++++++++++--------
->   1 file changed, 11 insertions(+), 8 deletions(-)
-> 
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-> index f4c1775d..4048e106 100644
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-> @@ -10,21 +10,24 @@ inherit kernel
->   require recipes-kernel/linux/setup-defconfig.inc
->   require recipes-kernel/linux/ti-kernel.inc
->   
-> +# BB.org hasn't switched to "vendored" DTB layout by default yet
-> +KERNEL_DTBVENDORED = "0"
-> +
->   DEPENDS += "gmp-native libmpc-native"
->   
->   KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT} ${EXTRA_DTC_ARGS}"
->   
->   S = "${WORKDIR}/git"
->   
-> -# 5.10.168 version for 32-bit
-> -SRCREV:armv7a = "a943fc1987e1b8057b0b5219ecd3c5a85285d62a"
-> -PV:armv7a = "5.10.168+git${SRCPV}"
-> -BRANCH:armv7a = "v5.10.168-ti-r70"
-> +# 6.1.33 version for 32-bit
-> +SRCREV:armv7a = "feb1c153a9693d44dec5772d134bd2c7986ff95d"
-> +PV:armv7a = "6.1.33+git${SRCPV}"
-> +BRANCH:armv7a = "v6.1.33-ti-r7"
->   
-> -# 5.10.162 version for 64-bit
-> -SRCREV:aarch64 = "a2f5d5746b6c389e58d20fda0a0fa88403da428b"
-> -PV:aarch64 = "5.10.162+git${SRCPV}"
-> -BRANCH:aarch64 = "v5.10.162-ti-arm64-r99"
-> +# 6.1.46 version for 64-bit
-> +SRCREV:aarch64 = "0a1e93a38c699fdd3c629d57f5cd015f90ab0d36"
-> +PV:aarch64 = "6.1.46+git${SRCPV}"
-> +BRANCH:aarch64 = "v6.1.46-ti-arm64-r9"
->   
->   SRC_URI = " \
->       git://github.com/beagleboard/linux.git;protocol=https;branch=${BRANCH} \
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#17158): https://lists.yoctoproject.org/g/meta-ti/message/17158
-> Mute This Topic: https://lists.yoctoproject.org/mt/102089682/6551054
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/leave/10828724/6551054/1815494134/xyzzy [reatmon@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
--- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+Last weeks build looks fine:
+meta-ti @ 1690e3fe (tag: cicd.kirkstone.202310121800) linux-ti-staging_6.1: CI/CD Auto-Merger: cicd.kirkstone.202310121800
+```
+root@verdin-am62-15133510:~# glmark2-es2-wayland 
+=======================================================
+    glmark2 2021.12
+=======================================================
+    OpenGL Information
+    GL_VENDOR:     Imagination Technologies
+    GL_RENDERER:   PowerVR A-Series AXE-1-16M
+    GL_VERSION:    OpenGL ES 3.1 build 23.1@6404501
+=======================================================
+[build] use-vbo=false: FPS: 175 FrameTime: 5.714 ms
+[build] use-vbo=true: FPS: 298 FrameTime: 3.356 ms
+[texture] texture-filter=nearest: FPS: 309 FrameTime: 3.236 ms
+[texture] texture-filter=linear: FPS: 302 FrameTime: 3.311 ms
+[texture] texture-filter=mipmap: FPS: 279 FrameTime: 3.584 ms
+[shading] shading=gouraud: FPS: 214 FrameTime: 4.673 ms
+[shading] shading=blinn-phong-inf: FPS: 198 FrameTime: 5.051 ms
+[shading] shading=phong: FPS: 144 FrameTime: 6.944 ms
+[shading] shading=cel: FPS: 142 FrameTime: 7.042 ms
+[bump] bump-render=high-poly: FPS: 107 FrameTime: 9.346 ms
+[bump] bump-render=normals: FPS: 310 FrameTime: 3.226 ms
+[bump] bump-render=height: FPS: 259 FrameTime: 3.861 ms
+[effect2d] kernel=0,1,0;1,-4,1;0,1,0;: FPS: 117 FrameTime: 8.547 ms
+[effect2d] kernel=1,1,1,1,1;1,1,1,1,1;1,1,1,1,1;: FPS: 44 FrameTime: 22.727 ms
+[pulsar] light=false:quads=5:texture=false: FPS: 389 FrameTime: 2.571 ms
+[desktop] blur-radius=5:effect=blur:passes=1:separable=true:windows=4: FPS: 42 FrameTime: 23.810 ms
+[desktop] effect=shadow:windows=4: FPS: 126 FrameTime: 7.937 ms
+[buffer] columns=200:interleave=false:update-dispersion=0.9:update-fraction=0.5:update-method=map: FPS: 52 FrameTime: 19.231 ms
+[buffer] columns=200:interleave=false:update-dispersion=0.9:update-fraction=0.5:update-method=subdata: FPS: 52 FrameTime: 19.231 ms
+[buffer] columns=200:interleave=true:update-dispersion=0.9:update-fraction=0.5:update-method=map: FPS: 77 FrameTime: 12.987 ms
+[ideas] speed=duration: FPS: 232 FrameTime: 4.310 ms
+[jellyfish] <default>: FPS: 75 FrameTime: 13.333 ms
+[terrain] <default>: FPS: 5 FrameTime: 200.000 ms
+[shadow] <default>: FPS: 85 FrameTime: 11.765 ms
+[refract] <default>: FPS: 11 FrameTime: 90.909 ms
+[conditionals] fragment-steps=0:vertex-steps=0: FPS: 392 FrameTime: 2.551 ms
+[conditionals] fragment-steps=5:vertex-steps=0: FPS: 238 FrameTime: 4.202 ms
+[conditionals] fragment-steps=0:vertex-steps=5: FPS: 397 FrameTime: 2.519 ms
+[function] fragment-complexity=low:fragment-steps=5: FPS: 310 FrameTime: 3.226 ms
+[function] fragment-complexity=medium:fragment-steps=5: FPS: 102 FrameTime: 9.804 ms
+[loop] fragment-loop=false:fragment-steps=5:vertex-steps=5: FPS: 305 FrameTime: 3.279 ms
+[loop] fragment-steps=5:fragment-uniform=false:vertex-steps=5: FPS: 305 FrameTime: 3.279 ms
+[loop] fragment-steps=5:fragment-uniform=true:vertex-steps=5: FPS: 293 FrameTime: 3.413 ms
+=======================================================
+                                  glmark2 Score: 193 
+=======================================================
+```
 
