@@ -1,274 +1,323 @@
-Return-Path: <afd@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5777FC25B67
-	for <webhook@archiver.kernel.org>; Thu, 26 Oct 2023 14:00:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6DB6C25B48
+	for <webhook@archiver.kernel.org>; Thu, 26 Oct 2023 22:39:43 +0000 (UTC)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.71305.1698328824999758362
+ by mx.groups.io with SMTP id smtpd.web10.214122.1698359973556877697
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 26 Oct 2023 07:00:25 -0700
+ Thu, 26 Oct 2023 15:39:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=BGoeLGi9;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: afd@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Z+shucMO;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39QE0I06129200;
-	Thu, 26 Oct 2023 09:00:18 -0500
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39QMdVi3017377;
+	Thu, 26 Oct 2023 17:39:31 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1698328818;
-	bh=4b9I4YQA7ehJ9Alz8M8vg5y9onIMcXvf6Sm7/RB0D+w=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=BGoeLGi9+fAV1+pQ9SY/bLpisMsPqH0u/gZe4Ct6CUxKx0ypnIsgpcMko2KUGRzig
-	 0bf51H6iHNCq6rS5ZWAuIHjRqFydHstM8cA4AjJA5Vd2Ixycf9ruKTYbxUZCTxnGye
-	 pVVDnCGDtPug/VRnI+i+kYF0tna+654P8ec6JNis=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39QE0Iug004961
+	s=ti-com-17Q1; t=1698359971;
+	bh=ou//goaAiR5C6CfMNJa3SRSnlYCXqbdZ5pRpTpA+wPU=;
+	h=From:To:Subject:Date;
+	b=Z+shucMOpghZAtErBoUobVcDCaq9Pg7VCtmZVrOblsuYchsfzYfN8PExnaRDl2B2Q
+	 To+pE1GLgburNJtb5zOiXPwFWBnfT768dm4kPZK5qxTLzYcWydUxjj9aDcHcqXGlnI
+	 ri8HErKb30+f9xh8D9lqFVmFdH0zpy+Pc8QBdbLU=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39QMdVNm048068
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 26 Oct 2023 09:00:18 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 26 Oct 2023 17:39:31 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 26
- Oct 2023 09:00:18 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE102.ent.ti.com
+ Oct 2023 17:39:31 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE102.ent.ti.com
  (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 26 Oct 2023 09:00:18 -0500
-Received: from [10.250.38.120] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39QE0HHh017444;
-	Thu, 26 Oct 2023 09:00:17 -0500
-Message-ID: <eed601f5-9a84-48c8-80a7-ac03bf48ed72@ti.com>
-Date: Thu, 26 Oct 2023 09:00:17 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][master/kirkstone][PATCH 8/8] recipes-bsp: Do not use
- MACHINE_ARCH when package is not machine specific
-Content-Language: en-US
-To: Denys Dmytriyenko <denis@denix.org>
-CC: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
+ Frontend Transport; Thu, 26 Oct 2023 17:39:31 -0500
+Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39QMdVrr114367;
+	Thu, 26 Oct 2023 17:39:31 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1qw90k-0001mP-VS; Thu, 26 Oct 2023 17:39:31 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-References: <20231025165630.2274889-1-afd@ti.com>
- <20231025165630.2274889-8-afd@ti.com> <20231026032740.GD2408@denix.org>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20231026032740.GD2408@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: [meta-ti][master/kirkstone][PATCH] meta-ti-bsp: Add Support for am62pxx-evm
+Date: Thu, 26 Oct 2023 17:39:30 -0500
+Message-ID: <20231026223930.5086-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 26 Oct 2023 14:00:27 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17197
+ <meta-ti@lists.yoctoproject.org>; Thu, 26 Oct 2023 22:39:43 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17198
 
-On 10/25/23 10:27 PM, Denys Dmytriyenko wrote:
-> On Wed, Oct 25, 2023 at 11:56:30AM -0500, Andrew Davis via lists.yoctoproject.org wrote:
->> Signed-off-by: Andrew Davis <afd@ti.com>
->> ---
->>   meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb | 2 --
->>   meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb         | 2 --
->>   meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb     | 1 -
->>   meta-ti-bsp/recipes-bsp/goodix-fw/goodix-fw_git.bb             | 2 --
->>   meta-ti-bsp/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb   | 2 --
->>   meta-ti-bsp/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb       | 2 --
->>   meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw-am65x-sr2_git.bb   | 2 --
->>   meta-ti-bsp/recipes-bsp/prusw-fw/prusw-fw-am65x-sr2_git.bb     | 2 --
->>   meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb | 2 --
->>   meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb              | 1 -
->>   meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb           | 1 -
->>   11 files changed, 19 deletions(-)
-> 
-> Overall I agree and fully support the first 7 patches in this series.
-> 
-> But for this last one I wanted to open a discussion.
-> 
+From: Chirag Shilwant <c-shilwant@ti.com>
 
-I try to sort my series in least-to-most likely to be controversial, I was
-just wondering how far we would get down the list, glad we got to 8 :)
+- Add A53 and R5 machine configurations for am62pxx-evm.
+- Add firmware overrides.
+- Add u-boot overrides.
+- Add cnm-wave support.
 
-> On one hand I understand the desire to make components as generic as possible
-> and reduce the number of machine-specific components to a bare minimum.
-> 
-> But on another hand, marking the resulting package as machine-specific when it
-> has a short list of compatible machines is a standard practice. The reason is
-> that the list of compatible machines controls only compile time filtering, but
-> doesn't have any effect on run time. And marking packages as machine specific
-> helps with that. That closes the loophole of installing incompatible packages.
-> 
-> For example, first recipe below specifies that Cadence MHDP firmware is
-> compatible with 3 J7 platforms only (or their SoC families, to be exact).
-> But w/o marking resulting binary package as machine-specific (therefore
-> producing separate packages for those platforms), there will be a single
-> generic Aarch64 package made. And there's no protection from installing
-> this generic package on non-compatible platforms, like J7200 or AM65xx,
-> either manullay or by pulling it into a rootfs for those incompatible
-> platforms.
-> 
-> And you normally want to prevent this for regular components. But I guess
-> this doesn't fully apply to FW images that are loaded by corresponding
-> drivers anyway. Moreover, there's no compilation involved, just packaging
-> the binary blob.
-> 
-> In that case, should we also remove COMPATIBLE_MACHINE from these firmware
-> recipes?
-> 
+Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Signed-off-by: Brandon Brnich <b-brnich@ti.com>
+---
+ .../conf/machine/am62pxx-evm-k3r5.conf        | 11 +++++++++++
+ meta-ti-bsp/conf/machine/am62pxx-evm.conf     | 13 +++++++++++++
+ meta-ti-bsp/conf/machine/include/am62pxx.inc  | 19 +++++++++++++++++++
+ .../cnm-wave-fw/cnm-wave-fw_git.bb            |  2 +-
+ meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb  |  5 +++++
+ .../recipes-bsp/ti-eth-fw/ti-eth-fw.bb        |  2 ++
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc  |  2 ++
+ .../recipes-security/optee/optee-os-ti.inc    |  1 +
+ .../ti-rtos-bin/ti-rtos-firmware.bb           | 19 +++++++++++++++++++
+ 9 files changed, 73 insertions(+), 1 deletion(-)
+ create mode 100644 meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf
+ create mode 100644 meta-ti-bsp/conf/machine/am62pxx-evm.conf
+ create mode 100644 meta-ti-bsp/conf/machine/include/am62pxx.inc
 
-That is exactly where I was going to go next. These firmware packages are
-not technically incompatible with the other machines.
+diff --git a/meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf
+new file mode 100644
+index 00000000..33254bf2
+--- /dev/null
++++ b/meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf
+@@ -0,0 +1,11 @@
++#@TYPE: Machine
++#@NAME: AM62PX EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI AM62Px EVM (R5F core)
++
++require conf/machine/include/k3r5.inc
++
++SYSFW_SOC = "am62px"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "hs-fs"
++
++UBOOT_MACHINE = "am62px_evm_r5_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am62pxx-evm.conf b/meta-ti-bsp/conf/machine/am62pxx-evm.conf
+new file mode 100644
+index 00000000..c0c62592
+--- /dev/null
++++ b/meta-ti-bsp/conf/machine/am62pxx-evm.conf
+@@ -0,0 +1,13 @@
++#@TYPE: Machine
++#@NAME: AM62PX EVM
++#@DESCRIPTION: Machine configuration for the TI AM62PX EVM
++
++require conf/machine/include/am62pxx.inc
++
++KERNEL_DEVICETREE_PREFIX = "ti/k3-am62p5"
++
++KERNEL_DEVICETREE = " \
++    ti/k3-am62p5-sk.dtb \
++"
++
++UBOOT_MACHINE = "am62px_evm_a53_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/include/am62pxx.inc b/meta-ti-bsp/conf/machine/include/am62pxx.inc
+new file mode 100644
+index 00000000..d61ad62b
+--- /dev/null
++++ b/meta-ti-bsp/conf/machine/include/am62pxx.inc
+@@ -0,0 +1,19 @@
++require conf/machine/include/k3.inc
++SOC_FAMILY:append = ":am62pxx"
++
++MACHINE_FEATURES += "screen gpu"
++
++require conf/machine/include/mesa-pvr.inc
++PREFERRED_PROVIDER_virtual/gpudriver ?= ""
++
++# Default tiboot3.bin on AM62Px is for HS-FS
++IMAGE_BOOT_FILES += "tiboot3-am62px-hs-fs-evm.bin"
++
++TFA_BOARD = "lite"
++TFA_K3_SYSTEM_SUSPEND = "1"
++
++OPTEEMACHINE = "k3-am62px"
++
++MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "cnm-wave-fw"
++
++SERIAL_CONSOLES = "115200;ttyS2"
+diff --git a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+index a667d335..e35decee 100644
+--- a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
++++ b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+@@ -13,7 +13,7 @@ PR = "${INC_PR}.1"
+ 
+ CLEANBROKEN = "1"
+ 
+-COMPATIBLE_MACHINE = "j721s2|j784s4|am62axx"
++COMPATIBLE_MACHINE = "j721s2|j784s4|am62axx|am62pxx"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+diff --git a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
+index 49638ee9..8a52a800 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
++++ b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
+@@ -31,6 +31,7 @@ PLAT_SFX:am65xx = "am65xx"
+ PLAT_SFX:am64xx = "am64xx"
+ PLAT_SFX:am62xx = "am62xx"
+ PLAT_SFX:am62axx = "am62axx"
++PLAT_SFX:am62pxx = "am62pxx"
+ 
+ DM_FW_DIR = "ti-dm/${PLAT_SFX}"
+ 
+@@ -47,6 +48,7 @@ DM_FW_LIST:am65xx =  ""
+ DM_FW_LIST:am64xx =  ""
+ DM_FW_LIST:am62xx =  "${DM_FIRMWARE}"
+ DM_FW_LIST:am62axx = "${DM_FIRMWARE}"
++DM_FW_LIST:am62pxx = "${DM_FIRMWARE}"
+ 
+ do_install() {
+     # Sign the firmware
+@@ -77,6 +79,7 @@ do_deploy() {
+ 
+ # Set up names for the firmwares
+ ALTERNATIVE:${PN}:am62xx  = "am62-main-r5f0_0-fw"
++ALTERNATIVE:${PN}:am62pxx  = "am62p-main-r5f0_0-fw"
+ ALTERNATIVE:${PN}:am62axx = "am62a-main-r5f0_0-fw"
+ ALTERNATIVE:${PN}:j721e   = "j7-mcu-r5f0_0-fw"
+ ALTERNATIVE:${PN}:j7200   = "j7200-mcu-r5f0_0-fw"
+@@ -85,6 +88,7 @@ ALTERNATIVE:${PN}:j784s4  = "j784s4-mcu-r5f0_0-fw"
+ 
+ # Set up link names for the firmwares
+ ALTERNATIVE_LINK_NAME[am62-main-r5f0_0-fw]  = "${nonarch_base_libdir}/firmware/am62-main-r5f0_0-fw"
++ALTERNATIVE_LINK_NAME[am62p-main-r5f0_0-fw]  = "${nonarch_base_libdir}/firmware/am62p-main-r5f0_0-fw"
+ ALTERNATIVE_LINK_NAME[am62a-main-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/am62a-main-r5f0_0-fw"
+ ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/j7-mcu-r5f0_0-fw"
+ ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_0-fw]  = "${nonarch_base_libdir}/firmware/j7200-mcu-r5f0_0-fw"
+@@ -93,6 +97,7 @@ ALTERNATIVE_LINK_NAME[j784s4-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/j
+ 
+ # Create the firmware alternatives
+ ALTERNATIVE_TARGET[am62-main-r5f0_0-fw]  = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
++ALTERNATIVE_TARGET[am62p-main-r5f0_0-fw]  = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
+ ALTERNATIVE_TARGET[am62a-main-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
+ ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw]     = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
+ ALTERNATIVE_TARGET[j7200-mcu-r5f0_0-fw]  = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
+diff --git a/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb b/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
+index e1d442d3..b343d268 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
++++ b/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
+@@ -30,6 +30,7 @@ PLAT_SFX:j784s4 = "j784s4"
+ PLAT_SFX:am65xx = "am65xx"
+ PLAT_SFX:am64xx = "am64xx"
+ PLAT_SFX:am62xx = "am62xx"
++PLAT_SFX:am62pxx = "am62pxx"
+ PLAT_SFX:am62axx = "am62axx"
+ 
+ ETH_FW_DIR = "ti-eth/${PLAT_SFX}"
+@@ -46,6 +47,7 @@ ETH_FW_LIST:j784s4 =  "${ETH_FW}"
+ ETH_FW_LIST:am65xx =  ""
+ ETH_FW_LIST:am64xx =  ""
+ ETH_FW_LIST:am62xx =  ""
++ETH_FW_LIST:am62pxx =  ""
+ ETH_FW_LIST:am62axx = ""
+ 
+ do_install() {
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+index 80e0e8df..2f15c4fb 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -44,6 +44,7 @@ PLAT_SFX:am65xx = "am65xx"
+ PLAT_SFX:am64xx = "am64xx"
+ PLAT_SFX:am62xx = "am62xx"
+ PLAT_SFX:am62axx = "am62axx"
++PLAT_SFX:am62pxx = "am62pxx"
+ 
+ PACKAGECONFIG[atf] = "BL31=${STAGING_DIR_HOST}/firmware/bl31.bin,,trusted-firmware-a"
+ PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/bl32.bin,,optee-os"
+@@ -56,6 +57,7 @@ PACKAGECONFIG:append:j721s2 = " dm"
+ PACKAGECONFIG:append:j784s4 = " dm"
+ PACKAGECONFIG:append:am62xx = " dm"
+ PACKAGECONFIG:append:am62axx = " dm"
++PACKAGECONFIG:append:am62pxx = " dm"
+ 
+ COMPATIBLE_MACHINE = "(ti-soc)"
+ 
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-ti.inc b/meta-ti-bsp/recipes-security/optee/optee-os-ti.inc
+index 763dd1d5..91b66a36 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-os-ti.inc
++++ b/meta-ti-bsp/recipes-security/optee/optee-os-ti.inc
+@@ -7,6 +7,7 @@ inherit ti-secdev
+ EXTRA_OEMAKE:append:k3 = "${@ ' CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
+ 
+ EXTRA_OEMAKE:append:am62xx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
++EXTRA_OEMAKE:append:am62pxx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
+ EXTRA_OEMAKE:append:am62axx = " CFG_TEE_CORE_LOG_LEVEL=1"
+ 
+ do_compile:append:k3() {
+diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index 751b10d6..3e2e2ada 100644
+--- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -21,6 +21,7 @@ PLAT_SFX:am65xx = "am65xx"
+ PLAT_SFX:am64xx = "am64xx"
+ PLAT_SFX:am62xx = "am62xx"
+ PLAT_SFX:am62axx = "am62axx"
++PLAT_SFX:am62pxx = "am62pxx"
+ 
+ FILESEXTRAPATHS:prepend := "${METATIBASE}/recipes-bsp/ti-sci-fw/files/:"
+ require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -56,6 +57,7 @@ IPC_FW_LIST = ""
+ IPC_FW_LIST:am65xx =  "${MCU_1_0_FW} ${MCU_1_1_FW}"
+ IPC_FW_LIST:am64xx =  "${MCU_1_0_FW} ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW} ${MCU_3_0_FW}"
+ IPC_FW_LIST:am62xx =  "                            ${MCU_2_0_FW}"
++IPC_FW_LIST:am62pxx =  "                            ${MCU_2_0_FW}"
+ IPC_FW_LIST:am62axx = "                            ${MCU_2_0_FW}                                                                                               ${C7X_1_FW}"
+ IPC_FW_LIST:j721e =   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                             ${C66_1_FW} ${C66_2_FW} ${C7X_1_FW}"
+ IPC_FW_LIST:j7200 =   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW}"
+@@ -80,6 +82,13 @@ do_install:prepend:am62xx() {
+         )
+ }
+ 
++# Update the am62pxx ipc binaries to be consistent with other platforms
++do_install:prepend:am62pxx() {
++        ( cd ${S}/${IPC_FW_DIR}; \
++                ln -sf am62p-mcu-r5f0_0-fw ${MCU_2_0_FW}; \
++        )
++}
++
+ # Update the am62axx ipc binaries to be consistent with other platforms
+ do_install:prepend:am62axx() {
+         ( cd ${S}/${IPC_FW_DIR}; \
+@@ -122,6 +131,10 @@ ALTERNATIVE:${PN}:am62xx = "\
+                     am62-main-r5f0_0-fw   am62-main-r5f0_0-fw-sec \
+                     "
+ 
++ALTERNATIVE:${PN}:am62pxx = "\
++                    am62p-mcu-r5f0_0-fw   am62p-mcu-r5f0_0-fw-sec \
++                    "
++
+ ALTERNATIVE:${PN}:am62axx = "\
+                     am62a-mcu-r5f0_0-fw   am62a-mcu-r5f0_0-fw-sec \
+                     am62a-c71_0-fw        am62a-c71_0-fw-sec \
+@@ -191,6 +204,9 @@ ALTERNATIVE_LINK_NAME[am62-mcu-m4f0_0-fw-sec] = "${nonarch_base_libdir}/firmware
+ ALTERNATIVE_LINK_NAME[am62-main-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/am62-main-r5f0_0-fw"
+ ALTERNATIVE_LINK_NAME[am62-main-r5f0_0-fw-sec] = "${nonarch_base_libdir}/firmware/am62-main-r5f0_0-fw-sec"
+ 
++ALTERNATIVE_LINK_NAME[am62p-mcu-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/am62p-mcu-r5f0_0-fw"
++ALTERNATIVE_LINK_NAME[am62p-mcu-r5f0_0-fw-sec] = "${nonarch_base_libdir}/firmware/am62p-mcu-r5f0_0-fw-sec"
++
+ ALTERNATIVE_LINK_NAME[am62a-mcu-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/am62a-mcu-r5f0_0-fw"
+ ALTERNATIVE_LINK_NAME[am62a-mcu-r5f0_0-fw-sec] = "${nonarch_base_libdir}/firmware/am62a-mcu-r5f0_0-fw-sec"
+ ALTERNATIVE_LINK_NAME[am62a-c71_0-fw]     = "${nonarch_base_libdir}/firmware/am62a-c71_0-fw"
+@@ -281,6 +297,9 @@ ALTERNATIVE_TARGET[am62-mcu-m4f0_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW
+ ALTERNATIVE_TARGET[am62-main-r5f0_0-fw]     = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
+ ALTERNATIVE_TARGET[am62-main-r5f0_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}.signed"
+ 
++ALTERNATIVE_TARGET[am62p-mcu-r5f0_0-fw]     = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
++ALTERNATIVE_TARGET[am62p-mcu-r5f0_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}.signed"
++
+ ALTERNATIVE_TARGET[am62a-mcu-r5f0_0-fw]     = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
+ ALTERNATIVE_TARGET[am62a-mcu-r5f0_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}.signed"
+ ALTERNATIVE_TARGET[am62a-c71_0-fw]     = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}"
+-- 
+2.17.1
 
-We just use COMPATIBLE_MACHINE checks here to keep us from accidentily bundling
-them with images where they wouldn't add any value (which you did with prusw-fw
-which is what stated me thinking on all this). But since they don't break
-anything either, forcing them to be machine specific seemed like overkill also.
-
-Only place where we still need this is firmware recipes that only ship some of
-the firmware based on machine (see prueth-fw for instance). I'd like to get
-that cleaned up next. If we only want some of the firmware then we should split
-it into different packages (prueth-fw-am57xx, etc.) and only install the one
-we want for that platform.
-
-Andrew
-
-> 
-> 
->> diff --git a/meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb b/meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
->> index d88bca6e..ed1c7817 100644
->> --- a/meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
->> +++ b/meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
->> @@ -10,8 +10,6 @@ PR = "${INC_PR}.0"
->>   
->>   COMPATIBLE_MACHINE = "j721e|j721s2|j784s4"
->>   
->> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->> -
->>   TARGET = "mhdp8546.bin"
->>   
->>   do_install() {
->> diff --git a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
->> index 5b1d8be1..ef7bc2ad 100644
->> --- a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
->> +++ b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
->> @@ -12,8 +12,6 @@ PR = "${INC_PR}.1"
->>   
->>   COMPATIBLE_MACHINE = "j721s2|j784s4|am62axx"
->>   
->> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->> -
->>   TARGET_WAVE521C = "wave521c_codec_fw.bin"
->>   
->>   SOURCE_WAVE521C = "wave521c_k3_codec_fw.bin"
->> diff --git a/meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb b/meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
->> index 6e2996ce..e333d212 100755
->> --- a/meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
->> +++ b/meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
->> @@ -4,7 +4,6 @@ LICENSE = "TI-TFL"
->>   LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=04ad0a015d4bb63c2b9e7b112debf3db"
->>   
->>   PV = "6.2+git${SRCPV}"
->> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->>   
->>   inherit update-alternatives
->>   
->> diff --git a/meta-ti-bsp/recipes-bsp/goodix-fw/goodix-fw_git.bb b/meta-ti-bsp/recipes-bsp/goodix-fw/goodix-fw_git.bb
->> index e58f2d58..ee3a94dc 100644
->> --- a/meta-ti-bsp/recipes-bsp/goodix-fw/goodix-fw_git.bb
->> +++ b/meta-ti-bsp/recipes-bsp/goodix-fw/goodix-fw_git.bb
->> @@ -10,8 +10,6 @@ PR = "${INC_PR}.0"
->>   
->>   COMPATIBLE_MACHINE = "dra7xx"
->>   
->> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->> -
->>   ORIGIN = "DRA71x-RevA-GT9271_SpecDig_Config.bin"
->>   TARGET = "goodix_9271_cfg.bin"
->>   
->> diff --git a/meta-ti-bsp/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb b/meta-ti-bsp/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
->> index 2c0736ed..4b6ef75d 100644
->> --- a/meta-ti-bsp/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
->> +++ b/meta-ti-bsp/recipes-bsp/prueth-fw/prueth-fw-am65x-sr2_git.bb
->> @@ -7,8 +7,6 @@ PR = "${INC_PR}.0"
->>   
->>   COMPATIBLE_MACHINE = "am65xx-evm|am64xx"
->>   
->> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->> -
->>   TARGET = " \
->>       am65x-sr2-pru0-prueth-fw.elf \
->>       am65x-sr2-pru1-prueth-fw.elf \
->> diff --git a/meta-ti-bsp/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb b/meta-ti-bsp/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
->> index 8b15ab7f..20b2bfb9 100644
->> --- a/meta-ti-bsp/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
->> +++ b/meta-ti-bsp/recipes-bsp/prueth-fw/prueth-fw-am65x_git.bb
->> @@ -7,8 +7,6 @@ PR = "${INC_PR}.0"
->>   
->>   COMPATIBLE_MACHINE = "am65xx"
->>   
->> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->> -
->>   TARGET = " \
->>       am65x-pru0-prueth-fw.elf \
->>       am65x-pru1-prueth-fw.elf \
->> diff --git a/meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw-am65x-sr2_git.bb b/meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw-am65x-sr2_git.bb
->> index ea39d73d..bc731094 100644
->> --- a/meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw-am65x-sr2_git.bb
->> +++ b/meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw-am65x-sr2_git.bb
->> @@ -7,8 +7,6 @@ PR = "${INC_PR}.0"
->>   
->>   COMPATIBLE_MACHINE = "am65xx-evm|am64xx"
->>   
->> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->> -
->>   TARGET = " \
->>       am65x-sr2-pru0-pruhsr-fw.elf \
->>       am65x-sr2-pru1-pruhsr-fw.elf \
->> diff --git a/meta-ti-bsp/recipes-bsp/prusw-fw/prusw-fw-am65x-sr2_git.bb b/meta-ti-bsp/recipes-bsp/prusw-fw/prusw-fw-am65x-sr2_git.bb
->> index 63c2d311..6e296e7c 100644
->> --- a/meta-ti-bsp/recipes-bsp/prusw-fw/prusw-fw-am65x-sr2_git.bb
->> +++ b/meta-ti-bsp/recipes-bsp/prusw-fw/prusw-fw-am65x-sr2_git.bb
->> @@ -7,8 +7,6 @@ PR = "${INC_PR}.0"
->>   
->>   COMPATIBLE_MACHINE = "am65xx-evm|am64xx"
->>   
->> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->> -
->>   TARGET = " \
->>       am65x-sr2-pru0-prusw-fw.elf \
->>       am65x-sr2-pru1-prusw-fw.elf \
->> diff --git a/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb b/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
->> index d295a1c1..74729c16 100644
->> --- a/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
->> +++ b/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
->> @@ -9,8 +9,6 @@ PR = "${INC_PR}.0"
->>   
->>   COMPATIBLE_MACHINE = "j721e"
->>   
->> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->> -
->>   TARGET = "pvdec_full_bin.fw"
->>   
->>   do_install() {
->> diff --git a/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb b/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb
->> index 7d16ae39..4ec09a70 100644
->> --- a/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb
->> +++ b/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb
->> @@ -3,7 +3,6 @@ LICENSE = "TI-TSPA"
->>   LIC_FILES_CHKSUM = "file://${S}/J6_VIS_DEMO_LINUX_BINARY_01.50.07.15-Manifest.html;md5=a59aa54b9470f555cf086b91dca0afa3"
->>   
->>   COMPATIBLE_MACHINE = "dra7xx"
->> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->>   
->>   PR = "r1"
->>   
->> diff --git a/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb b/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
->> index 2452d111..8af49577 100644
->> --- a/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
->> +++ b/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
->> @@ -4,7 +4,6 @@ LICENSE = "TI-TSPA"
->>   LIC_FILES_CHKSUM = "file://COPYING;md5=fd463c9500441ed91d07a0331baa635c"
->>   
->>   COMPATIBLE_MACHINE = "dra7xx"
->> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->>   
->>   SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/vpdma-fw/03-2012/exports/vpdma-fw_03-2012.tar.gz;protocol=http;name=dra7xx-evm"
->>   SRC_URI[dra7xx-evm.md5sum] = "80176df1350c21d9efa90171789c546e"
->> -- 
->> 2.39.2
 
