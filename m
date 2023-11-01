@@ -1,172 +1,131 @@
-Return-Path: <a-bhatia1@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 086CDC4332F
-	for <webhook@archiver.kernel.org>; Tue, 31 Oct 2023 19:13:24 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.4398.1698779603362240984
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4AEBC4332F
+	for <webhook@archiver.kernel.org>; Wed,  1 Nov 2023 18:11:32 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.1379.1698862286895465058
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 31 Oct 2023 12:13:23 -0700
+ Wed, 01 Nov 2023 11:11:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=y+IVqYH3;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: a-bhatia1@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VJDLTY027546;
-	Tue, 31 Oct 2023 14:13:21 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=cGzTyV9v;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A1IBPVO011736;
+	Wed, 1 Nov 2023 13:11:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1698779601;
-	bh=qy7U+m0MEzWusdulRDamusnWCQ6f8vuc5U14H5jOdQ4=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=y+IVqYH36Gd60oFI8P6h21ZR/Ie9Ez+jYM7kJveXaOg34jrxFwK8g2+KS2GxJy8V5
-	 D+I2yORxU+IxJoz3Muh3/Z8V8qYwt70XWU678mp6dfUXHlhcXj7/kkiKexakYyv1PN
-	 xxRK5fm33yt9aZUIdeG9X97xjP10rkdvrB4qmcGM=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VJDLDq058176
+	s=ti-com-17Q1; t=1698862285;
+	bh=km4kWsXemRDoZ+kLQFvdLODSRs8O8BG5vhlU62RmdD4=;
+	h=From:To:Subject:Date;
+	b=cGzTyV9vfqVcZfmr7tPXijL90gncf4NGs/jERKKTJNKf6qDbdOPUmCyJ7B1VqgjIc
+	 LFUck3To7EXnl4OCnqZ2+cdyOefSu2B+7umey/gelN0S2bkdysH7r/67Z6hXNhIaQL
+	 bpmd8t1WTrhFsMvAz4lHjh6Ud9Fz3lgae9zP0dp4=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A1IBPF7026679
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 31 Oct 2023 14:13:21 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 31
- Oct 2023 14:13:21 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 1 Nov 2023 13:11:25 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 1
+ Nov 2023 13:11:25 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 31 Oct 2023 14:13:21 -0500
-Received: from [10.249.132.69] (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VJDIVA060472;
-	Tue, 31 Oct 2023 14:13:19 -0500
-Message-ID: <7e40e9f0-edaa-6694-5337-93a87450f569@ti.com>
-Date: Wed, 1 Nov 2023 00:43:17 +0530
+ Frontend Transport; Wed, 1 Nov 2023 13:11:25 -0500
+Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A1IBPjN070442;
+	Wed, 1 Nov 2023 13:11:25 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1qyFga-00069w-S1; Wed, 01 Nov 2023 13:11:24 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH] ti-img-rogue-driver: Fix build error due to .SECONDARY/.NOTINTERMEDIATE
+Date: Wed, 1 Nov 2023 13:11:24 -0500
+Message-ID: <20231101181124.23636-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [master/kirkstone][PATCH] conf: machine: am62*: Pick common
- overlays by prefix
-Content-Language: en-US
-To: Jai Luthra <j-luthra@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: Ryan Eatmon <reatmon@ti.com>, Denys Dmytriyenko <denys@konsulko.com>,
-        Gyan
- Gupta <g-gupta@ti.com>, Chirag Shilwant <c-shilwant@ti.com>,
-        Devarsh Thakkar
-	<devarsht@ti.com>, Praneeth <praneeth@ti.com>
-References: <20231027152836.2985618-1-j-luthra@ti.com>
-From: Aradhya Bhatia <a-bhatia1@ti.com>
-In-Reply-To: <20231027152836.2985618-1-j-luthra@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 31 Oct 2023 19:13:23 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17219
+ <meta-ti@lists.yoctoproject.org>; Wed, 01 Nov 2023 18:11:32 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17220
 
+There is a build error under master that is not present in kirkstone
+related to .SECONDARY/.NOTINTERMEDIATE being set differently between the
+ti-img-rogue-driver repo and the kernel.  The long term solution to
+allow this code to be built on both kirkstone/master is being
+investigated.  In the meantime, this patch gets things building on
+master.
 
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ ...uild-Makefile.template-use-SECONDARY.patch | 35 +++++++++++++++++++
+ .../ti-img-rogue-driver_23.2.6460340.bb       |  2 ++
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-build-kbuild-Makefile.template-use-SECONDARY.patch
 
-On 27-Oct-23 20:58, Jai Luthra wrote:
-> SK boards of AM62 SoC family share peripheral expansions for camera
-> and audio-over-HDMI.
-> 
-> The HDMI bridge is common across all SK-AM62* boards. The CSI2 FFC
-> camera connector is common across all except SK-AM62-LP which only has a
-> B2B Samtec connector.
-> 
-> As the kernel now uses the same prefix "k3-am62x-sk-" for the devicetree
-> overlays for these peripherals, make sure we pick them by prefix for
-> applicable boards.
-> 
-> Link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit?id=b50ccab9e07c
-> Link: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/?&id=0432df3d2ae7
-> Signed-off-by: Jai Luthra <j-luthra@ti.com>
+diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-build-kbuild-Makefile.template-use-SECONDARY.patch b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-build-kbuild-Makefile.template-use-SECONDARY.patch
+new file mode 100644
+index 00000000..0989116e
+--- /dev/null
++++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-build-kbuild-Makefile.template-use-SECONDARY.patch
+@@ -0,0 +1,35 @@
++From 738dfc1b33a83e9995ed7f65ec41ebe2fc6a90ed Mon Sep 17 00:00:00 2001
++From: Ryan Eatmon <reatmon@ti.com>
++Date: Wed, 1 Nov 2023 10:04:29 -0500
++Subject: [PATCH] build: kbuild: Makefile.template: use SECONDARY
++
++For some reason on master we are seeing an error:
++
++| make[5]: *** .NOTINTERMEDIATE and .SECONDARY are mutually exclusive.  Stop.
++
++Flip this back to .SECONDARY to fix this build issue.
++
++Signed-off-by: Ryan Eatmon <reatmon@ti.com>
++
++Upstream-Status: Pending
++
++---
++ build/linux/kbuild/Makefile.template | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/build/linux/kbuild/Makefile.template b/build/linux/kbuild/Makefile.template
++index aa19d66..31e37fb 100644
++--- a/build/linux/kbuild/Makefile.template
+++++ b/build/linux/kbuild/Makefile.template
++@@ -54,7 +54,7 @@
++ 
++ include $(OUT)/config_kernel.mk
++ 
++-.NOTINTERMEDIATE:
+++.SECONDARY:
++ 
++ define symlink-source-file
++ @if [ ! -e $(dir $@) ]; then mkdir -p $(dir $@); fi
++-- 
++2.17.1
++
+diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb
+index a74cc7b8..e47a1175 100644
+--- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb
++++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb
+@@ -20,6 +20,8 @@ BRANCH = "linuxws/kirkstone/k6.1/${PV}"
+ 
+ SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-driver.git;protocol=https;branch=${BRANCH}"
+ 
++SRC_URI:append = " file://0001-build-kbuild-Makefile.template-use-SECONDARY.patch"
++
+ S = "${WORKDIR}/git"
+ 
+ SRCREV = "778aa5d1e104f36c7f7c1f50e99f8499cbbdadbb"
+-- 
+2.17.1
 
-Reviewed-by: Aradhya Bhatia <a-bhatia1@ti.com>
-
-Regards
-Aradhya
-
-> ---
->  meta-ti-bsp/conf/machine/am62axx-evm.conf   | 2 ++
->  meta-ti-bsp/conf/machine/am62pxx-evm.conf   | 6 +++++-
->  meta-ti-bsp/conf/machine/am62xx-evm.conf    | 6 +++++-
->  meta-ti-bsp/conf/machine/am62xx-lp-evm.conf | 1 +
->  meta-ti-bsp/conf/machine/am62xxsip-evm.conf | 6 +++++-
->  5 files changed, 18 insertions(+), 3 deletions(-)
-> 
-> diff --git a/meta-ti-bsp/conf/machine/am62axx-evm.conf b/meta-ti-bsp/conf/machine/am62axx-evm.conf
-> index d5d60718..ef60e9d1 100644
-> --- a/meta-ti-bsp/conf/machine/am62axx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62axx-evm.conf
-> @@ -6,6 +6,8 @@ require conf/machine/include/am62axx.inc
->  
->  KERNEL_DEVICETREE_PREFIX = " \
->      ti/k3-am62a7 \
-> +    ti/k3-am62x-sk-csi2 \
-> +    ti/k3-am62x-sk-hdmi \
->      ti/k3-fpdlink \
->  "
->  
-> diff --git a/meta-ti-bsp/conf/machine/am62pxx-evm.conf b/meta-ti-bsp/conf/machine/am62pxx-evm.conf
-> index c0c62592..931de953 100644
-> --- a/meta-ti-bsp/conf/machine/am62pxx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62pxx-evm.conf
-> @@ -4,7 +4,11 @@
->  
->  require conf/machine/include/am62pxx.inc
->  
-> -KERNEL_DEVICETREE_PREFIX = "ti/k3-am62p5"
-> +KERNEL_DEVICETREE_PREFIX = " \
-> +    ti/k3-am62p5 \
-> +    ti/k3-am62x-sk-csi2 \
-> +    ti/k3-am62x-sk-hdmi \
-> +"
->  
->  KERNEL_DEVICETREE = " \
->      ti/k3-am62p5-sk.dtb \
-> diff --git a/meta-ti-bsp/conf/machine/am62xx-evm.conf b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-> index 082a1ae7..b60ba156 100644
-> --- a/meta-ti-bsp/conf/machine/am62xx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62xx-evm.conf
-> @@ -5,7 +5,11 @@
->  require conf/machine/include/am62xx.inc
->  require conf/machine/include/ti-extras.inc
->  
-> -KERNEL_DEVICETREE_PREFIX = "ti/k3-am625"
-> +KERNEL_DEVICETREE_PREFIX = " \
-> +    ti/k3-am625 \
-> +    ti/k3-am62x-sk-csi2 \
-> +    ti/k3-am62x-sk-hdmi \
-> +"
->  
->  KERNEL_DEVICETREE = " \
->      ti/k3-am625-sk.dtb \
-> diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-> index 5c235c29..0d2f89ca 100644
-> --- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
-> @@ -7,6 +7,7 @@ require conf/machine/include/am62xx.inc
->  KERNEL_DEVICETREE_PREFIX = " \
->      ti/k3-am62-lp \
->      ti/k3-am625-sk \
-> +    ti/k3-am62x-sk-hdmi \
->  "
->  
->  KERNEL_DEVICETREE = " \
-> diff --git a/meta-ti-bsp/conf/machine/am62xxsip-evm.conf b/meta-ti-bsp/conf/machine/am62xxsip-evm.conf
-> index dc4f3b77..b3bda44a 100644
-> --- a/meta-ti-bsp/conf/machine/am62xxsip-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62xxsip-evm.conf
-> @@ -4,7 +4,11 @@
->  
->  require conf/machine/include/am62xx.inc
->  
-> -KERNEL_DEVICETREE_PREFIX = "ti/k3-am625"
-> +KERNEL_DEVICETREE_PREFIX = " \
-> +    ti/k3-am625 \
-> +    ti/k3-am62x-sk-csi2 \
-> +    ti/k3-am62x-sk-hdmi \
-> +"
->  
->  KERNEL_DEVICETREE = " \
->      ti/k3-am625-sk.dtb \
 
