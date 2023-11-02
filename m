@@ -1,131 +1,96 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <massimiliano.minella@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4AEBC4332F
-	for <webhook@archiver.kernel.org>; Wed,  1 Nov 2023 18:11:32 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.1379.1698862286895465058
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A12EC4332F
+	for <webhook@archiver.kernel.org>; Thu,  2 Nov 2023 10:48:47 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web11.27789.1698922121597467899
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 01 Nov 2023 11:11:27 -0700
+ Thu, 02 Nov 2023 03:48:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=cGzTyV9v;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A1IBPVO011736;
-	Wed, 1 Nov 2023 13:11:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1698862285;
-	bh=km4kWsXemRDoZ+kLQFvdLODSRs8O8BG5vhlU62RmdD4=;
-	h=From:To:Subject:Date;
-	b=cGzTyV9vfqVcZfmr7tPXijL90gncf4NGs/jERKKTJNKf6qDbdOPUmCyJ7B1VqgjIc
-	 LFUck3To7EXnl4OCnqZ2+cdyOefSu2B+7umey/gelN0S2bkdysH7r/67Z6hXNhIaQL
-	 bpmd8t1WTrhFsMvAz4lHjh6Ud9Fz3lgae9zP0dp4=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A1IBPF7026679
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 1 Nov 2023 13:11:25 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 1
- Nov 2023 13:11:25 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 1 Nov 2023 13:11:25 -0500
-Received: from uda0214219 (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A1IBPjN070442;
-	Wed, 1 Nov 2023 13:11:25 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1qyFga-00069w-S1; Wed, 01 Nov 2023 13:11:24 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] ti-img-rogue-driver: Fix build error due to .SECONDARY/.NOTINTERMEDIATE
-Date: Wed, 1 Nov 2023 13:11:24 -0500
-Message-ID: <20231101181124.23636-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=f/lhZJxo;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: massimiliano.minella@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-408425c7c10so5898585e9.0
+        for <meta-ti@lists.yoctoproject.org>; Thu, 02 Nov 2023 03:48:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1698922120; x=1699526920; darn=lists.yoctoproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=R4lJd/7mErpgYe3UbSlmPVV9Y87Fv8nFUAA3Cyy4ICg=;
+        b=f/lhZJxo1negop2c0WKDvycFSZ99XWTwt10S5d6CD95E4ezjZxRgl2CAGgpopGYmi7
+         jVY5xEkD8vxvx+mJQI7MuQdA2buSMcrJSQWiYlh4jwTGEYgJwrbZnaBzT/HEma7aq2LJ
+         UnBUmqMprdS9PdypJth3V1rOJLXE24yVJivCeIMOHkFyvjIKBstmYn2bP01IRLTCyWc9
+         tX4/Z3qYeAVoYr5usPnc/qct1WFvMbk7cd06zHEKTiVYCspzJqJCbYJAg77BbT9YDhqC
+         um/jabpzOpU4ZhJb/ISudmymRMUUYzejYaU4nRC8cigf4aWa00Gjpq7iVWfNAQ7HsNlo
+         Dswg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1698922120; x=1699526920;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=R4lJd/7mErpgYe3UbSlmPVV9Y87Fv8nFUAA3Cyy4ICg=;
+        b=d8ukGrWQaLAxW5oXFhB9YVmb/G+D1vn3gduLBcIKnKj4iF6gtEjS86h957KyYRpDrA
+         rxf32HHyCkRhzx9RXAIYwW5VJej6d/fgjHGwPOqW6ovG04Xg4sXsxVDXvreKSqYvdACi
+         lZUFX40xlOw0HAvu1lCNoVBSs1Tcipv8pyEjwtBJnGjGXyvuavGvGkvf7bentIvtydS6
+         qyYshgY/omlVe/5/5imyk9wM+PJ469JbPQl4odu09JR75ughlfi6+P3EYJW1DsjQ3HNv
+         +vwCl6h6Oqly6rtDlayOoh4VbiU6ah1XnkoJm6E1CW/xrnYOLeSfWSUu+X+2VNWmc5Ta
+         d6LQ==
+X-Gm-Message-State: AOJu0Ywh9uDJ9/1B3O8z9p91b6zY8Zyr+0tTqp52vYl4WJNfEBk9Ufjv
+	/Ga/LDuxIwEGxg9eu0iRAd7PKXrGIsG+7Q==
+X-Google-Smtp-Source: AGHT+IHZiW3P/gts8gcId/SyIAiMNvsoxtvrQDTF21NiksPP0STqM5whJBF2ZVsjKEMFhOuUhZxzRg==
+X-Received: by 2002:a05:6000:2c8:b0:32f:869e:b24b with SMTP id o8-20020a05600002c800b0032f869eb24bmr12601960wry.14.1698922119499;
+        Thu, 02 Nov 2023 03:48:39 -0700 (PDT)
+Received: from localhost ([147.161.152.103])
+        by smtp.gmail.com with ESMTPSA id u18-20020a5d5152000000b00327b5ca093dsm2069523wrt.117.2023.11.02.03.48.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 02 Nov 2023 03:48:39 -0700 (PDT)
+From: Massimiliano Minella <massimiliano.minella@gmail.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: Ryan Eatmon <reatmon@ti.com>,
+	Massimiliano Minella <massimiliano.minella@se.com>
+Subject: [kirkstone][PATCH] k3r5: Use the ?= default assignment to allow for overrides
+Date: Thu,  2 Nov 2023 11:48:28 +0100
+Message-ID: <20231102104828.100681-1-massimiliano.minella@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 01 Nov 2023 18:11:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17220
+ <meta-ti@lists.yoctoproject.org>; Thu, 02 Nov 2023 10:48:47 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17221
 
-There is a build error under master that is not present in kirkstone
-related to .SECONDARY/.NOTINTERMEDIATE being set differently between the
-ti-img-rogue-driver repo and the kernel.  The long term solution to
-allow this code to be built on both kirkstone/master is being
-investigated.  In the meantime, this patch gets things building on
-master.
+From: Ryan Eatmon <reatmon@ti.com>
+
+Move to setting the values for PREFERRED_PROVIDER using the
+?= default assignment so that we can override the setting if
+we would like to.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Signed-off-by: Massimiliano Minella <massimiliano.minella@se.com>
 ---
- ...uild-Makefile.template-use-SECONDARY.patch | 35 +++++++++++++++++++
- .../ti-img-rogue-driver_23.2.6460340.bb       |  2 ++
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-build-kbuild-Makefile.template-use-SECONDARY.patch
+ meta-ti-bsp/conf/machine/include/k3r5.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-build-kbuild-Makefile.template-use-SECONDARY.patch b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-build-kbuild-Makefile.template-use-SECONDARY.patch
-new file mode 100644
-index 00000000..0989116e
---- /dev/null
-+++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver/0001-build-kbuild-Makefile.template-use-SECONDARY.patch
-@@ -0,0 +1,35 @@
-+From 738dfc1b33a83e9995ed7f65ec41ebe2fc6a90ed Mon Sep 17 00:00:00 2001
-+From: Ryan Eatmon <reatmon@ti.com>
-+Date: Wed, 1 Nov 2023 10:04:29 -0500
-+Subject: [PATCH] build: kbuild: Makefile.template: use SECONDARY
-+
-+For some reason on master we are seeing an error:
-+
-+| make[5]: *** .NOTINTERMEDIATE and .SECONDARY are mutually exclusive.  Stop.
-+
-+Flip this back to .SECONDARY to fix this build issue.
-+
-+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-+
-+Upstream-Status: Pending
-+
-+---
-+ build/linux/kbuild/Makefile.template | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/build/linux/kbuild/Makefile.template b/build/linux/kbuild/Makefile.template
-+index aa19d66..31e37fb 100644
-+--- a/build/linux/kbuild/Makefile.template
-++++ b/build/linux/kbuild/Makefile.template
-+@@ -54,7 +54,7 @@
-+ 
-+ include $(OUT)/config_kernel.mk
-+ 
-+-.NOTINTERMEDIATE:
-++.SECONDARY:
-+ 
-+ define symlink-source-file
-+ @if [ ! -e $(dir $@) ]; then mkdir -p $(dir $@); fi
-+-- 
-+2.17.1
-+
-diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb
-index a74cc7b8..e47a1175 100644
---- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb
-+++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb
-@@ -20,6 +20,8 @@ BRANCH = "linuxws/kirkstone/k6.1/${PV}"
+diff --git a/meta-ti-bsp/conf/machine/include/k3r5.inc b/meta-ti-bsp/conf/machine/include/k3r5.inc
+index c5c03cbf..184d3a09 100644
+--- a/meta-ti-bsp/conf/machine/include/k3r5.inc
++++ b/meta-ti-bsp/conf/machine/include/k3r5.inc
+@@ -11,9 +11,9 @@ require conf/machine/include/arm/armv7a/tune-cortexa8.inc
+ # https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/doc/board/ti/j721e_evm.rst
+ # https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/doc/board/ti/am62x_sk.rst
+ # https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/doc/board/ti/k3.rst
+-PREFERRED_PROVIDER_virtual/kernel = "linux-dummy"
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+-PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
++PREFERRED_PROVIDER_virtual/kernel ?= "linux-dummy"
++PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-staging"
++PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-staging"
  
- SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-driver.git;protocol=https;branch=${BRANCH}"
- 
-+SRC_URI:append = " file://0001-build-kbuild-Makefile.template-use-SECONDARY.patch"
-+
- S = "${WORKDIR}/git"
- 
- SRCREV = "778aa5d1e104f36c7f7c1f50e99f8499cbbdadbb"
+ SPL_SUFFIX = "bin"
+ SPL_BINARY = "tiboot3-${SYSFW_SOC}-${SYSFW_SUFFIX}-${SYSFW_CONFIG}.${SPL_SUFFIX}"
 -- 
-2.17.1
+2.42.0
 
 
