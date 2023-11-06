@@ -1,85 +1,97 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <kamlesh@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3AC90C4332F
-	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 22:16:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E78D7C4167B
+	for <webhook@archiver.kernel.org>; Mon,  6 Nov 2023 11:26:19 +0000 (UTC)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.67725.1699049799402358845
+ by mx.groups.io with SMTP id smtpd.web11.51511.1699269973845319915
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 03 Nov 2023 15:16:39 -0700
+ Mon, 06 Nov 2023 03:26:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=k2TZFqTa;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=HnA0Fl65;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: kamlesh@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A3MGbb4032692;
-	Fri, 3 Nov 2023 17:16:37 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A6BQBFg058790;
+	Mon, 6 Nov 2023 05:26:11 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1699049797;
-	bh=X+XnLaXb8isk6rS7v3AWUsQgWZ4O8Qz1Pn6qoyo0TCw=;
-	h=From:To:Subject:Date;
-	b=k2TZFqTaLB5MavqUFO5ykU+55uzhKUKvQhEb/TSUvye/ZMO3bEyS0TSRO7TtMD1Rv
-	 bblBqkTyvls8XdC75T4vHlOp6/jjoRnUc/lRNlkMO/lSoK/GBvlh3mYK6n9I0y3zyL
-	 Y100SXmDziOHdvI3W5mu7ei6+lQfKuZD3WqIZPvI=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A3MGbrI093975
+	s=ti-com-17Q1; t=1699269971;
+	bh=/ltlKl1fNu6/OGDcVXdqPn6KNJPksJZ0KHlYzN7+3Q0=;
+	h=From:Date:Subject:To:CC;
+	b=HnA0Fl65avVSWTF3e+ZDWID/9vpcHbnKqbWxyDv1IZ615+J6/laJlf9Zv636NV8Z8
+	 w+CJXTcbyOGujR9Gm8pVYkb17DVJNPq2DJcpgeup4kCO2yiumUiOZUJoMAULhC9t+t
+	 7X8NFlVGDwcz+WSFe2KfV4PvNA4tbIm5zQmgq2rU=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A6BQB2m099666
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 3 Nov 2023 17:16:37 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 3
- Nov 2023 17:16:37 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+	Mon, 6 Nov 2023 05:26:11 -0600
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
+ Nov 2023 05:26:11 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 3 Nov 2023 17:16:37 -0500
-Received: from uda0214219 (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A3MGbrI049274;
-	Fri, 3 Nov 2023 17:16:37 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1qz2Sz-0003i8-2e; Fri, 03 Nov 2023 17:16:37 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/kirkstone][PATCH] k3r5: Remove ?= default assignment for the kernel
-Date: Fri, 3 Nov 2023 17:16:37 -0500
-Message-ID: <20231103221637.14224-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ Frontend Transport; Mon, 6 Nov 2023 05:26:11 -0600
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A6BQAoO005659;
+	Mon, 6 Nov 2023 05:26:11 -0600
+From: Kamlesh Gurudasani <kamlesh@ti.com>
+Date: Mon, 6 Nov 2023 16:55:50 +0530
+Subject: [PATCH] optee-os: Enable OP-TEE TRNG in AM62X
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20231106-enable-trng-v1-1-59cb0b4f9bcb@ti.com>
+X-B4-Tracking: v=1; b=H4sIAD3NSGUC/x2NwQqDMBAFf0X23AVjaWr7K8VDok9dLGvZhCKI/
+ 97Y48AMs1OCCRI9q50MX0myagF3qaifg05gGQpTUzdX52rP0BDf4Gw6MW5+vD8G71u0VIoYEjh
+ a0H4+m0VsSXlVsGLLp/AxjLL9d6/uOH7bDJ2HfgAAAA==
+To: <vigneshr@ti.com>, <praneeth@ti.com>, <u-kumar1@ti.com>, <afd@ti.com>,
+        <m-chawdhry@ti.com>, <reatmon@ti.com>, <denys@konsulko.com>
+CC: <meta-ti@lists.yoctoproject.org>, <vibhore@ti.com>, <vishalm@ti.com>,
+        Kamlesh Gurudasani <kamlesh@ti.com>
+X-Mailer: b4 0.12.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1699269970; l=1123;
+ i=kamlesh@ti.com; s=20230614; h=from:subject:message-id;
+ bh=B2T9CQe+2X2ewszJ/Qev2s7+XDl6big1OL6XBSHyS5I=;
+ b=6Kd+S1m4vHbMbHeSeYI3Qrlw4zGHohf5ShaIzaT4vaYFv4pQXh9qP3561nH2+VupLFUyAIKHh
+ 4ilpTttEPPvDkdMd52EMjASAPQYoJss2GWIQk3wEfaHt2HFZqXWsIeK
+X-Developer-Key: i=kamlesh@ti.com; a=ed25519;
+ pk=db9XKPVWDGJVqj2jDqgnPQd6uQf3GZ3oaQa4bq1odGo=
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 03 Nov 2023 22:16:40 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17242
+ <meta-ti@lists.yoctoproject.org>; Mon, 06 Nov 2023 11:26:19 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17243
 
-The previous allowance for overriding the value for the kernel is
-incorrect.  The kernel should not be changed from linux-dummy for the
-k3r5 multiconfigs.
+Enable TRNG in AM62X, as bugs related to TRNG has been fixed now.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
 ---
- meta-ti-bsp/conf/machine/include/k3r5.inc | 2 +-
+ meta-ti-bsp/recipes-security/optee/optee-os-ti.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/conf/machine/include/k3r5.inc b/meta-ti-bsp/conf/machine/include/k3r5.inc
-index 184d3a09..63267a5e 100644
---- a/meta-ti-bsp/conf/machine/include/k3r5.inc
-+++ b/meta-ti-bsp/conf/machine/include/k3r5.inc
-@@ -11,7 +11,7 @@ require conf/machine/include/arm/armv7a/tune-cortexa8.inc
- # https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/doc/board/ti/j721e_evm.rst
- # https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/doc/board/ti/am62x_sk.rst
- # https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/doc/board/ti/k3.rst
--PREFERRED_PROVIDER_virtual/kernel ?= "linux-dummy"
-+PREFERRED_PROVIDER_virtual/kernel = "linux-dummy"
- PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-staging"
- PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-staging"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-ti.inc b/meta-ti-bsp/recipes-security/optee/optee-os-ti.inc
+index 91b66a36..d1c15cb2 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-os-ti.inc
++++ b/meta-ti-bsp/recipes-security/optee/optee-os-ti.inc
+@@ -6,7 +6,7 @@ inherit ti-secdev
  
+ EXTRA_OEMAKE:append:k3 = "${@ ' CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
+ 
+-EXTRA_OEMAKE:append:am62xx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
++EXTRA_OEMAKE:append:am62xx = " CFG_TEE_CORE_LOG_LEVEL=1"
+ EXTRA_OEMAKE:append:am62pxx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
+ EXTRA_OEMAKE:append:am62axx = " CFG_TEE_CORE_LOG_LEVEL=1"
+ 
+
+---
+base-commit: d5e768e29b3f8091cbdedb702ff4185f73af4f3d
+change-id: 20231106-enable-trng-e56f79d668e8
+
+Best regards,
 -- 
-2.17.1
+Kamlesh Gurudasani <kamlesh@ti.com>
 
 
