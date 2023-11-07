@@ -1,115 +1,130 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5309C4167D
-	for <webhook@archiver.kernel.org>; Tue,  7 Nov 2023 19:35:00 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.4096.1699385697862799723
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C46FC4332F
+	for <webhook@archiver.kernel.org>; Tue,  7 Nov 2023 20:31:01 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.5464.1699389051166247947
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 07 Nov 2023 11:34:58 -0800
+ Tue, 07 Nov 2023 12:30:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ckBjka+z;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A7JYudc130872;
-	Tue, 7 Nov 2023 13:34:56 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1699385696;
-	bh=YfX1R+63WBGmAX8ARlO5pA+oOqz7n2VwvJoPwm0UxXE=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=ckBjka+zxCpxAVZhll9nGgMtP/zCkN8d3mlSIVLb0wJ4bgdKcjsmEjHPi+S9Z4Fco
-	 D/JXpK7rkqPi/TwL4wQAS+sgYVvTQkvlSIiy1A73F4A22YiATTTK6w8wpu+o8EtYnj
-	 xr5deN2rzUBxGyrtrnjZjigObdpzLWI/2760yue8=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A7JYunm042273
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 7 Nov 2023 13:34:56 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 7
- Nov 2023 13:34:56 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 7 Nov 2023 13:34:56 -0600
-Received: from [128.247.81.69] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A7JYu1S096839;
-	Tue, 7 Nov 2023 13:34:56 -0600
-Message-ID: <f7858798-40da-4db6-a7b2-33b32df3d392@ti.com>
-Date: Tue, 7 Nov 2023 13:34:56 -0600
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id CB70940CC8;
+	Tue,  7 Nov 2023 20:30:49 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id o-pBLM7yyDsu; Tue,  7 Nov 2023 20:30:49 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0357040CAF;
+	Tue,  7 Nov 2023 20:30:39 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 9A5F0163D4C; Tue,  7 Nov 2023 15:30:38 -0500 (EST)
+Date: Tue, 7 Nov 2023 15:30:38 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: reatmon@ti.com
+Cc: Paresh Bhagat <p-bhagat@ti.com>, meta-ti@lists.yoctoproject.org,
+	praneeth@ti.com, denys@konsulko.com, c-shilwant@ti.com,
+	s-adivi@ti.com, khasim@ti.com, g-gupta@ti.com
+Subject: Re: [meta-ti] [kirkstone][RFC] ti-extras: Add support for extra
+ kernel features for RT
+Message-ID: <20231107203038.GS2408@denix.org>
+References: <20231107160558.2661070-1-p-bhagat@ti.com>
+ <b52f8875-e6f7-4686-b279-1009cdd5a66d@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] optee-os: Enable OP-TEE TRNG in AM62X
-Content-Language: en-US
-To: Vibhore Vardhan <vibhore@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>
-CC: "Bajjuri, Praneeth" <praneeth@ti.com>, <vigneshr@ti.com>,
-        <u-kumar1@ti.com>, <afd@ti.com>, <m-chawdhry@ti.com>,
-        <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>,
-        <vishalm@ti.com>
-References: <20231106-enable-trng-v1-1-59cb0b4f9bcb@ti.com>
- <b4ec0bc6-7f32-4ae2-bac2-e3339557ecaf@ti.com>
- <871qd2t1wu.fsf@kamlesh.i-did-not-set--mail-host-address--so-tickle-me>
- <20231107095249.u3j5ncwrg2egczal@ult0866455>
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20231107095249.u3j5ncwrg2egczal@ult0866455>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <b52f8875-e6f7-4686-b279-1009cdd5a66d@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 07 Nov 2023 19:35:00 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17260
+ <meta-ti@lists.yoctoproject.org>; Tue, 07 Nov 2023 20:31:01 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17261
 
-
-
-On 11/7/2023 3:52 AM, Vibhore Vardhan wrote:
-> On 13:45-20231107, Kamlesh Gurudasani wrote:
-> Hi Kamlesh,
+On Tue, Nov 07, 2023 at 10:28:11AM -0600, Ryan Eatmon via lists.yoctoproject.org wrote:
 > 
->> "Bajjuri, Praneeth" <praneeth@ti.com> writes:
->>
->> ...
->>>> ---
->>>>    meta-ti-bsp/recipes-security/optee/optee-os-ti.inc | 2 +-
->>>>    1 file changed, 1 insertion(+), 1 deletion(-)
->>>>
->>>> diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-ti.inc b/meta-ti-bsp/recipes-security/optee/optee-os-ti.inc
->>>> index 91b66a36..d1c15cb2 100644
->>>> --- a/meta-ti-bsp/recipes-security/optee/optee-os-ti.inc
->>>> +++ b/meta-ti-bsp/recipes-security/optee/optee-os-ti.inc
->>>> @@ -6,7 +6,7 @@ inherit ti-secdev
->>>>    
->>>>    EXTRA_OEMAKE:append:k3 = "${@ ' CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
->>>>    
->>>> -EXTRA_OEMAKE:append:am62xx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
->>>> +EXTRA_OEMAKE:append:am62xx = " CFG_TEE_CORE_LOG_LEVEL=1"
->>>>    EXTRA_OEMAKE:append:am62pxx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
->>>
->>> How about doing the same for am62p ?
->> @vibhore, Considering instabilities with AM62a, let me know if I should
->> enable it for AM62p. Will send v2 accordingly.
-
-
-When you send the V2 series, can you base the commit off of the 
-kirkstone-wip branch.  I have applied some changes to the file you are 
-changing above (renamed it in this case) so your patch would not apply 
-currently.  Thanks.
-
-
-
-
-> As discussed offline, the instabilities we are seeing on AM62a are only
-> after a Deep Sleep cycle. The system is stable unless LPM is tried.
-> Also, AM62p does not have Deep Sleep support. So, I do not have any
-> objections to having TRNG support enabled for AM62p.
 > 
-> Regards,
-> Vibhore
+> On 11/7/2023 10:05 AM, Paresh Bhagat wrote:
+> >Add support for ti-extras features for rt as it was added for non
+> >rt kernel and u-boot earlier. It will also be accessible via the
+> >TI_EXTRAS variable in the local.conf file.
+> >
+> >Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+> >---
+> >  .../recipes-kernel/linux/linux-ti-staging-rt_6.1.bb   |  5 +++--
+> >  meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc     | 11 +++++++++++
+> >  2 files changed, 14 insertions(+), 2 deletions(-)
+> >  create mode 100644 meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc
+> >
+> >diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+> >index a600630e..93e1be39 100644
+> >--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+> >+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+> >@@ -1,10 +1,11 @@
+> >  require linux-ti-staging_6.1.bb
+> >+include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+> >  # Look in the generic major.minor directory for files
+> >  # This will have priority over generic non-rt path
+> >  FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
+> >-BRANCH = "ti-rt-linux-6.1.y"
+> >+BRANCH ?= "ti-rt-linux-6.1.y"
+> >-SRCREV = "eda9974e8513cdd2c5cc20c3c6b851f9977acd4d"
+> >+SRCREV ?= "eda9974e8513cdd2c5cc20c3c6b851f9977acd4d"
+> 
+> I may need Denys to weigh on these comments:
+> 
+> You cannot use the ?= here.  This recipe includes the
+> linux-ti-staging_6.1.bb recipe which has the default lines already
+> in there.  And the ?= is a soft default which will only set the
+> value IF it is not already set.  So this will break RT builds.
+> 
+> Bitbake also processes the = at the moment you see it.  So the
+> "last" time a variable is set with = it will be the value that wins.
+> 
+> So for the RT recipe, you will likely need to move the include to
+> AFTER the above BRANCH/SRCREV settings.
+> 
+> Basically, I think you need:
+> 
+>   BRANCH = "ti-rt-linux-6.1.y"
+> 
+>   SRCREV = "eda9974e8513cdd2c5cc20c3c6b851f9977acd4d"
+> 
+>   include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if
+> d.getVar('TI_EXTRAS') else ''}
+> 
+> 
+> So this inclusion of the extra will need to be different in the RT
+> recipe versus the non-RT recipe.  All because the RT recipe includes
+> the non-RT recipe.
 
--- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+Yes, this explanation is correct. Some re-ordering is required. Simply making 
+those assignments as weak at the end of -rt recipe is incorrect - that will 
+break -rt recipe regardless of whether ti-extras is enabled or not.
+
+
+> >  PV = "6.1.46+git${SRCPV}"
+> >diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc b/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc
+> >new file mode 100644
+> >index 00000000..1fc40934
+> >--- /dev/null
+> >+++ b/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc
+> >@@ -0,0 +1,11 @@
+> >+
+> >+# Use different commit, repo and branch for TI extras build
+> >+# This will have priority over generic rt path
+> >+
+> >+COMPATIBLE_MACHINE = "am62xx"
+> >+
+> >+BRANCH = "ti-rt-linux-6.1.y"
+> >+BRANCH:tie-jailhouse = "ti-rt-linux-6.1.y-jailhouse"
+> >+
+> >+SRCREV = "685e77152461bd6b791500f717bec62d17c1b36d"
+> >+SRCREV:tie-jailhouse = "a74088b40b4d27478a2af5c20cdc0b4ec8ed9470"
+> 
+> This file should be fine.
 
