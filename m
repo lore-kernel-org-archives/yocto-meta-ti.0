@@ -1,290 +1,125 @@
-Return-Path: <afd@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24223C4332F
-	for <webhook@archiver.kernel.org>; Fri, 10 Nov 2023 15:03:36 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.29350.1699628606772430660
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC336C4332F
+	for <webhook@archiver.kernel.org>; Sun, 12 Nov 2023 19:08:03 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.21214.1699816073012136003
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 10 Nov 2023 07:03:27 -0800
+ Sun, 12 Nov 2023 11:07:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=wRyDromg;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: afd@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AAF3POD087063;
-	Fri, 10 Nov 2023 09:03:25 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1699628605;
-	bh=vJyOXIMc958/Xsg4bV0bfDH6MZvXYnGoHghvfOHrPqY=;
-	h=From:To:CC:Subject:Date;
-	b=wRyDromgh1Kx92MJ4eE+JQ2hwjxydHr4ltJ7666ZiU8p2EaxB54TZkINadoTQAYYz
-	 FxhTZL6dnuJNLGYNwDRc4/hkw250wW/6ZFevTO7w9CSNSebYIlRclvOGpfUM7TvC+6
-	 lwgOIVyzyo9m/FVj7jVfiaHbviJ7XHeTSnxcc7tQ=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AAF3PIG038127
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 10 Nov 2023 09:03:25 -0600
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 10
- Nov 2023 09:03:25 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 10 Nov 2023 09:03:25 -0600
-Received: from fllv0039.itg.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AAF3OtZ048648;
-	Fri, 10 Nov 2023 09:03:24 -0600
-From: Andrew Davis <afd@ti.com>
-To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][master/kirkstone][PATCH] kernel-fitimage: Remove signing of fitImage entries for 5.10 kernel
-Date: Fri, 10 Nov 2023 09:03:23 -0600
-Message-ID: <20231110150323.8774-1-afd@ti.com>
-X-Mailer: git-send-email 2.39.2
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 0932440BD4;
+	Sun, 12 Nov 2023 19:07:52 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id fuxhY0HmMGk7; Sun, 12 Nov 2023 19:07:52 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6CD2E40ACD;
+	Sun, 12 Nov 2023 19:07:49 +0000 (UTC)
+Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id 256C9163D5B;
+	Sun, 12 Nov 2023 14:07:49 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [master/kirkstone][PATCH] k3r5: ensure separate TMPDIR used for this multiconfig
+Date: Sun, 12 Nov 2023 19:07:43 +0000
+Message-Id: <20231112190743.1496752-1-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 10 Nov 2023 15:03:36 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17292
+ <meta-ti@lists.yoctoproject.org>; Sun, 12 Nov 2023 19:08:03 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17293
 
-This was a temporary class to help with the v5.10 to v6.1 kernel
-migration, now that we have completed that, remove this class.
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-Suggested-by: Ryan Eatmon <reatmon@ti.com>
-Signed-off-by: Andrew Davis <afd@ti.com>
+This k3r5 multiconfig builds baremetal components (and corresponding nati=
+ve,
+nativesdk and cross tools) and sets TCLIBC accordingly to "baremetal". Th=
+e
+expectation is that those components and tools will use a separate TMPDIR
+to isolate from the main Linux build that uses "glibc" TCLIBC and to avoi=
+d
+potential conflicts.
+
+OE-Core "nodistro" default configuration already sets TCLIBCAPPEND facili=
+ty
+to automatically add a suffix to TMPDIR, resulting in "tmp-baremetal" tem=
+p
+directory for this multiconfig and "tmp-glibc" for the main Linux one. Ot=
+her
+distros like Arago follow this convention and even extend a bit (e.g. Ara=
+go
+also adds TCMODE suffix to TMPDIR for external toolchain support separati=
+on).
+
+But Poky (and derivative distros, like AGL or YoE) disable TCLIBCAPPEND a=
+nd
+result in a combined TMPDIR, leading to potential conflicts, such as:
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D15273
+
+And that's just the beginning, there were other conflicts observed later =
+in
+the build, e.g. during nativesdk builds - that's why we also set a unique
+SDKPKGSUFFIX here.
+
+To force a separate TMPDIR for k3r5 multiconfig, we have to directly appe=
+nd
+a suffix to it. Multiple other options were tested in hopes of making it
+slightly cleaner, but they either didn't work or were dismissed. For exam=
+ple,
+trying to override TCLIBCAPPEND getting cleared by a distro would require
+using a machine/soc-override, which doesn't have enough scope (nativesdk)
+or forcing it with :forcevariable would also change the main Linux TMPDIR
+and affect existing CI flows. Also, using TCLIBC itself as a suffix to ad=
+d
+to TMPDIR may result in getting it appended twice (tmp-baremetal-baremeta=
+l)
+when normal TCLIBCAPPEND facility is used. Hence the least invasive/confu=
+sing
+option is to always append "-k3r5" suffix to this multiconfig TMPDIR. Tha=
+t
+results in "tmp-k3r5" in Poky (leaving main TMPDIR as "tmp"), while OE-Co=
+re
+"nodistro" and Arago would end up with "tmp-baremetal-k3r5" (and "tmp-gli=
+bc"
+for the main).
+
+Also note, meta-ti-bsp layer.conf sets up images and sdks to be deployed
+into a common location outside of TMPDIRs, but TI_COMMON_DEPLOY variable
+that controls it is set weakly, allowing to be modified from a distro
+configuration or local.conf. It means that all images and sdks can be
+deployed into the main TMPDIR if one's CI flow expects tmp/deploy/ as
+the final destination, by using :=3D for immediate variable expansion:
+TI_COMMON_DEPLOY :=3D "${TMPDIR}/deploy"
+
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- .../classes/kernel-fitimage-ti-u-boot.bbclass | 214 ------------------
- 1 file changed, 214 deletions(-)
- delete mode 100644 meta-ti-bsp/classes/kernel-fitimage-ti-u-boot.bbclass
+ meta-ti-bsp/conf/multiconfig/k3r5.conf | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-ti-bsp/classes/kernel-fitimage-ti-u-boot.bbclass b/meta-ti-bsp/classes/kernel-fitimage-ti-u-boot.bbclass
-deleted file mode 100644
-index 503c6d25..00000000
---- a/meta-ti-bsp/classes/kernel-fitimage-ti-u-boot.bbclass
-+++ /dev/null
-@@ -1,214 +0,0 @@
--
--inherit ti-secdev
--
--# The TI u-boot requires that the kernel image is signed.  To not overload the
--# entire kernel-fitimage.bbclass from oe-core, we just overwrite one function
--# and do the signing in there.
--
--#
--# Assemble fitImage
--#
--# $1 ... .its filename
--# $2 ... fitImage name
--# $3 ... include ramdisk
--fitimage_assemble() {
--	kernelcount=1
--	dtbcount=""
--	DTBS=""
--	ramdiskcount=$3
--	setupcount=""
--	bootscr_id=""
--	rm -f $1 arch/${ARCH}/boot/$2
--
--	if [ -n "${UBOOT_SIGN_IMG_KEYNAME}" -a "${UBOOT_SIGN_KEYNAME}" = "${UBOOT_SIGN_IMG_KEYNAME}" ]; then
--		bbfatal "Keys used to sign images and configuration nodes must be different."
--	fi
--
--	fitimage_emit_fit_header $1
--
--	#
--	# Step 1: Prepare a kernel image section.
--	#
--	fitimage_emit_section_maint $1 imagestart
--
--	uboot_prep_kimage
--	fitimage_ti_secure linux.bin linux.bin.sec
--	fitimage_emit_section_kernel $1 $kernelcount linux.bin.sec "$linux_comp"
--
--	#
--	# Step 2: Prepare a DTB image section
--	#
--
--	if [ -n "${KERNEL_DEVICETREE}" ]; then
--		dtbcount=1
--		for DTB in ${KERNEL_DEVICETREE}; do
--			if echo $DTB | grep -q '/dts/'; then
--				bbwarn "$DTB contains the full path to the the dts file, but only the dtb name should be used."
--				DTB=`basename $DTB | sed 's,\.dts$,.dtb,g'`
--			fi
--
--			# Skip ${DTB} if it's also provided in ${EXTERNAL_KERNEL_DEVICETREE}
--			if [ -n "${EXTERNAL_KERNEL_DEVICETREE}" ] && [ -s ${EXTERNAL_KERNEL_DEVICETREE}/${DTB} ]; then
--				continue
--			fi
--
--			DTB_PATH="arch/${ARCH}/boot/dts/$DTB"
--			if [ ! -e "$DTB_PATH" ]; then
--				DTB_PATH="arch/${ARCH}/boot/$DTB"
--			fi
--
--			DTB=$(echo "$DTB" | tr '/' '_')
--
--			# Skip DTB if we've picked it up previously
--			echo "$DTBS" | tr ' ' '\n' | grep -xq "$DTB" && continue
--
--			fitimage_ti_secure ${DTB_PATH} ${DTB_PATH}.sec
--
--            DTBS="$DTBS $DTB"
--			fitimage_emit_section_dtb $1 $DTB ${DTB_PATH}.sec
--		done
--	fi
--
--	if [ -n "${EXTERNAL_KERNEL_DEVICETREE}" ]; then
--		dtbcount=1
--		for DTB in $(find "${EXTERNAL_KERNEL_DEVICETREE}" -name '*.dtb' -printf '%P\n' | sort) \
--		$(find "${EXTERNAL_KERNEL_DEVICETREE}" -name '*.dtbo' -printf '%P\n' | sort); do
--			DTB=$(echo "$DTB" | tr '/' '_')
--
--			# Skip DTB/DTBO if we've picked it up previously
--			echo "$DTBS" | tr ' ' '\n' | grep -xq "$DTB" && continue
--
--			fitimage_ti_secure ${EXTERNAL_KERNEL_DEVICETREE}/${DTB} ${EXTERNAL_KERNEL_DEVICETREE}/${DTB}.sec
--
--			DTBS="$DTBS $DTB"
--			fitimage_emit_section_dtb $1 $DTB "${EXTERNAL_KERNEL_DEVICETREE}/${DTB}.sec"
--		done
--	fi
--
--	#
--	# Step 3: Prepare a u-boot script section
--	#
--
--	if [ -n "${UBOOT_ENV}" ] && [ -d "${STAGING_DIR_HOST}/boot" ]; then
--		if [ -e "${STAGING_DIR_HOST}/boot/${UBOOT_ENV_BINARY}" ]; then
--			cp ${STAGING_DIR_HOST}/boot/${UBOOT_ENV_BINARY} ${B}
--			bootscr_id="${UBOOT_ENV_BINARY}"
--			fitimage_emit_section_boot_script $1 "$bootscr_id" ${UBOOT_ENV_BINARY}
--		else
--			bbwarn "${STAGING_DIR_HOST}/boot/${UBOOT_ENV_BINARY} not found."
--		fi
--	fi
--
--	#
--	# Step 4: Prepare a setup section. (For x86)
--	#
--	if [ -e arch/${ARCH}/boot/setup.bin ]; then
--		setupcount=1
--		fitimage_emit_section_setup $1 $setupcount arch/${ARCH}/boot/setup.bin
--	fi
--
--	#
--	# Step 5: Prepare a ramdisk section.
--	#
--	if [ "x${ramdiskcount}" = "x1" ] && [ "${INITRAMFS_IMAGE_BUNDLE}" != "1" ]; then
--		# Find and use the first initramfs image archive type we find
--		found=
--		for img in ${FIT_SUPPORTED_INITRAMFS_FSTYPES}; do
--			initramfs_path="${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE_NAME}.$img"
--			initramfs_local="usr/${INITRAMFS_IMAGE_NAME}.$img"
--			if [ -e "$initramfs_path" ]; then
--				bbnote "Found initramfs image: $initramfs_path"
--				found=true
--				fitimage_ti_secure ${initramfs_path} ${initramfs_local}.sec
--
--				fitimage_emit_section_ramdisk $1 "$ramdiskcount" "${initramfs_local}.sec"
--				break
--			else
--				bbnote "Did not find initramfs image: $initramfs_path"
--			fi
--		done
--
--		if [ -z "$found" ]; then
--			bbfatal "Could not find a valid initramfs type for ${INITRAMFS_IMAGE_NAME}, the supported types are: ${FIT_SUPPORTED_INITRAMFS_FSTYPES}"
--		fi
--	fi
--
--	fitimage_emit_section_maint $1 sectend
--
--	# Force the first Kernel and DTB in the default config
--	kernelcount=1
--	if [ -n "$dtbcount" ]; then
--		dtbcount=1
--	fi
--
--	#
--	# Step 6: Prepare a configurations section
--	#
--	fitimage_emit_section_maint $1 confstart
--
--	# kernel-fitimage.bbclass currently only supports a single kernel (no less or
--	# more) to be added to the FIT image along with 0 or more device trees and
--	# 0 or 1 ramdisk.
--        # It is also possible to include an initramfs bundle (kernel and rootfs in one binary)
--        # When the initramfs bundle is used ramdisk is disabled.
--	# If a device tree is to be part of the FIT image, then select
--	# the default configuration to be used is based on the dtbcount. If there is
--	# no dtb present than select the default configuation to be based on
--	# the kernelcount.
--	if [ -n "$DTBS" ]; then
--		i=1
--		for DTB in ${DTBS}; do
--			dtb_ext=${DTB##*.}
--			if [ "$dtb_ext" = "dtbo" ]; then
--				fitimage_emit_section_config $1 "" "$DTB" "" "$bootscr_id" "" "`expr $i = $dtbcount`"
--			else
--				fitimage_emit_section_config $1 $kernelcount "$DTB" "$ramdiskcount" "$bootscr_id" "$setupcount" "`expr $i = $dtbcount`"
--			fi
--			i=`expr $i + 1`
--		done
--	else
--		defaultconfigcount=1
--		fitimage_emit_section_config $1 $kernelcount "" "$ramdiskcount" "$bootscr_id"  "$setupcount" $defaultconfigcount
--	fi
--
--	fitimage_emit_section_maint $1 sectend
--
--	fitimage_emit_section_maint $1 fitend
--
--	#
--	# Step 7: Assemble the image
--	#
--	${UBOOT_MKIMAGE} \
--		${@'-D "${UBOOT_MKIMAGE_DTCOPTS}"' if len('${UBOOT_MKIMAGE_DTCOPTS}') else ''} \
--		-f $1 \
--		arch/${ARCH}/boot/$2
--
--	#
--	# Step 8: Sign the image and add public key to U-Boot dtb
--	#
--	if [ "x${UBOOT_SIGN_ENABLE}" = "x1" ] ; then
--		add_key_to_u_boot=""
--		if [ -n "${UBOOT_DTB_BINARY}" ]; then
--			# The u-boot.dtb is a symlink to UBOOT_DTB_IMAGE, so we need copy
--			# both of them, and don't dereference the symlink.
--			cp -P ${STAGING_DATADIR}/u-boot*.dtb ${B}
--			add_key_to_u_boot="-K ${B}/${UBOOT_DTB_BINARY}"
--		fi
--		${UBOOT_MKIMAGE_SIGN} \
--			${@'-D "${UBOOT_MKIMAGE_DTCOPTS}"' if len('${UBOOT_MKIMAGE_DTCOPTS}') else ''} \
--			-F -k "${UBOOT_SIGN_KEYDIR}" \
--			$add_key_to_u_boot \
--			-r arch/${ARCH}/boot/$2 \
--			${UBOOT_MKIMAGE_SIGN_ARGS}
--	fi
--}
--
--fitimage_ti_secure() {
--	if test -n "${TI_SECURE_DEV_PKG}"; then
--		export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
--		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh $1 $2
--	else
--		cp $1 $2
--	fi
--}
--
--- 
-2.39.2
+diff --git a/meta-ti-bsp/conf/multiconfig/k3r5.conf b/meta-ti-bsp/conf/mu=
+lticonfig/k3r5.conf
+index 04b9a746..e36c87ed 100644
+--- a/meta-ti-bsp/conf/multiconfig/k3r5.conf
++++ b/meta-ti-bsp/conf/multiconfig/k3r5.conf
+@@ -4,4 +4,6 @@ DEPLOY_DIR_IMAGE:k3r5 =3D "${TI_COMMON_DEPLOY}/images/${M=
+AINMACHINE}"
+=20
+ MACHINE:append =3D "-k3r5"
+ TCLIBC =3D "baremetal"
++TMPDIR:append =3D "-k3r5"
++
+ SDKPKGSUFFIX =3D "k3r5-nativesdk"
+--=20
+2.25.1
 
 
