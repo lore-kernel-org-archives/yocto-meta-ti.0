@@ -1,117 +1,93 @@
-Return-Path: <kamlesh@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D983BC197A0
-	for <webhook@archiver.kernel.org>; Mon, 20 Nov 2023 05:11:36 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.44530.1700457096312099653
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FF85C54E76
+	for <webhook@archiver.kernel.org>; Mon, 20 Nov 2023 09:42:18 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.46895.1700473336153612392
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 19 Nov 2023 21:11:36 -0800
+ Mon, 20 Nov 2023 01:42:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=a6DCVpOb;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: kamlesh@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AK5BYcG050540;
-	Sun, 19 Nov 2023 23:11:34 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1700457094;
-	bh=xK6vwdntpjqcxthUUsCAZRjZbsACIrv3A4Wvdp8vP7A=;
-	h=From:Date:Subject:To:CC;
-	b=a6DCVpOblDeGs6BC6ObikTDgKJYMS9EEu+Jerr+1LgGmZT8JRPq7cgBH+MTtrJco5
-	 Vpk56FBjiq+4FR9ZqhWRYQXF7zQsY07z4u5qdg3xf5Pk+dnH2Cv9lbZfLXasHTbVJB
-	 3Yp9IujMKxOfU+qAKb7/kNfmd5wYzh2WCKmQTkvA=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AK5BYxx021664
+ dkim=none (message not signed); spf=pass (domain: list.ti.com, ip: 198.47.23.248, mailfrom: lcpdbld@list.ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AK9gEAE100253;
+	Mon, 20 Nov 2023 03:42:14 -0600
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AK9gEMv007056
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Sun, 19 Nov 2023 23:11:34 -0600
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 19
- Nov 2023 23:11:34 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+	Mon, 20 Nov 2023 03:42:14 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 20
+ Nov 2023 03:42:14 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 19 Nov 2023 23:11:34 -0600
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AK5BXpu054230;
-	Sun, 19 Nov 2023 23:11:34 -0600
-From: Kamlesh Gurudasani <kamlesh@ti.com>
-Date: Mon, 20 Nov 2023 10:41:28 +0530
-Subject: [PATCH v5] optee-os: Enable OP-TEE TRNG in AM62X
+ Frontend Transport; Mon, 20 Nov 2023 03:42:14 -0600
+Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AK9gEti024926;
+	Mon, 20 Nov 2023 03:42:14 -0600
+Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
+	id 562A610F50C3; Mon, 20 Nov 2023 03:42:14 -0600 (CST)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH 1/4] ti-linux-fw: CI/CD Auto-Merger: cicd.master.202311200100
+Date: Mon, 20 Nov 2023 03:42:11 -0600
+Message-ID: <1700473334-48951-2-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1700473334-48951-1-git-send-email-lcpdbld@list.ti.com>
+References: <1700473334-48951-1-git-send-email-lcpdbld@list.ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20231108-wip-enable-trng-v5-1-3cf3e216a4fc@ti.com>
-X-B4-Tracking: v=1; b=H4sIAH/qWmUC/3WOQQ6DIBREr2JY9zciaMVV79G4APzqjy0aMLaN8
- e4F912+mbzM7CygJwysyXbmcaNAs4tQXjJmR+0GBOoisyIvBOd5DW9aAJ02T4TVuwFQCdNXteA
- obyxaRgcE47WzY/Im8lNYZ4dJTP3isafPufhoI48Ua/89D2wypf+3NgkcKiWVwtx2pdD3la52f
- rH2OI4f/+I6BssAAAA=
-To: <vigneshr@ti.com>, <praneeth@ti.com>, <afd@ti.com>, <m-chawdhry@ti.com>,
-        <reatmon@ti.com>, <denys@konsulko.com>
-CC: <meta-ti@lists.yoctoproject.org>, <vibhore@ti.com>, <vishalm@ti.com>,
-        Kamlesh Gurudasani <kamlesh@ti.com>
-X-Mailer: b4 0.12.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1700457093; l=1638;
- i=kamlesh@ti.com; s=20230614; h=from:subject:message-id;
- bh=wNoYfvZhEZamlWdCw5TRqxzvtJ18L0sUTJIrH7C6e3U=;
- b=9gyC7IMo5V1tD3btcAJ9LBxu8RnCiwaXQ+u8FE9o5aSehbrc9zb2Obcl+j1gJMkbSBv6cefjS
- JuVn9pP684aCe6f1XvxxNhXboYiSN4JWNLvaYslYvMQuX9Fnn0E8iVq
-X-Developer-Key: i=kamlesh@ti.com; a=ed25519;
- pk=db9XKPVWDGJVqj2jDqgnPQd6uQf3GZ3oaQa4bq1odGo=
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 20 Nov 2023 05:11:36 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17310
+ <meta-ti@lists.yoctoproject.org>; Mon, 20 Nov 2023 09:42:18 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17311
 
-Enable TRNG in AM62X, as bugs related to TRNG has been fixed now.
+Updated the value(s) for:
+  CNM_WAVE521_FW_VERSION
+  PRUETH_FW_AM65X_SR2_VERSION
+  TI_DM_FW_VERSION
+  TI_LINUX_FW_SRCREV
+  TI_SYSFW_VERSION
 
-TF-A fix:
-https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/commit/?id=d7a7135d32a8c7da004c0c19b75bd4e2813f9759
-
-OP-TEE fix:
-https://github.com/OP-TEE/optee_os/commit/e313f4765fd0478bb66985827441411793433773
-
-Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
 ---
-Changes in V5:
--drop changes for AM62px due to boot failure
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-Changes in V4:
--rebase on kirkstone-wip
-
-Changes in V3:
--updated commit title and message
-
-Changes in V2:
--updated commit message
--included changes for AM62p
----
- meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
-index b1846cad..62d6b4f9 100644
---- a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
-+++ b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
-@@ -3,7 +3,7 @@ inherit ti-secdev
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 5def5ad..821492f 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -9,15 +9,15 @@ INC_PR = "r4"
+ # Firmware versions
+ CORESDK_RTOS_VERSION = "08.02.00.04"
+ PRUETH_FW_AM65X_VERSION = "08.00.00.20"
+-PRUETH_FW_AM65X_SR2_VERSION = "02.02.11.02"
++PRUETH_FW_AM65X_SR2_VERSION = "02.02.12.05"
+ GOODIX_FW_VERSION = "1.0.0.0"
+ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+-CNM_WAVE521_FW_VERSION = "1.0.00"
+-TI_DM_FW_VERSION = "08.06.04"
+-TI_SYSFW_VERSION = "08.06.04"
++CNM_WAVE521_FW_VERSION = "1.0.3"
++TI_DM_FW_VERSION = "09.01.02"
++TI_SYSFW_VERSION = "09.01.06"
  
- EXTRA_OEMAKE:append:k3 = "${@ ' CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
+-TI_LINUX_FW_SRCREV ?= "fc8e9ddf23ba6cf071c1c225e78c2bd8733d7780"
++TI_LINUX_FW_SRCREV ?= "a2d8865df39e9021001fcf06e5daaeab81ba608c"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
  
--EXTRA_OEMAKE:append:am62xx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
-+EXTRA_OEMAKE:append:am62xx = " CFG_TEE_CORE_LOG_LEVEL=1"
- EXTRA_OEMAKE:append:am62pxx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
- EXTRA_OEMAKE:append:am62axx = " CFG_TEE_CORE_LOG_LEVEL=1"
- 
-
----
-base-commit: 63dd9c4e39c90c367293a77a76b74c099abc1015
-change-id: 20231108-wip-enable-trng-e93bf6831e47
-
-Best regards,
+ BRANCH ?= "ti-linux-firmware"
 -- 
-Kamlesh Gurudasani <kamlesh@ti.com>
+1.8.3.1
 
 
