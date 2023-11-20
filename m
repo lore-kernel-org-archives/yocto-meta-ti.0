@@ -1,77 +1,117 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <kamlesh@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE0E4C5AE4A
-	for <webhook@archiver.kernel.org>; Thu, 16 Nov 2023 21:29:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D983BC197A0
+	for <webhook@archiver.kernel.org>; Mon, 20 Nov 2023 05:11:36 +0000 (UTC)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.18593.1700170189292206465
+ by mx.groups.io with SMTP id smtpd.web11.44530.1700457096312099653
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 16 Nov 2023 13:29:49 -0800
+ Sun, 19 Nov 2023 21:11:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: list.ti.com, ip: 198.47.19.141, mailfrom: lcpdbld@list.ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AGLTmw4009692;
-	Thu, 16 Nov 2023 15:29:48 -0600
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AGLTlLp005326
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=a6DCVpOb;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: kamlesh@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AK5BYcG050540;
+	Sun, 19 Nov 2023 23:11:34 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1700457094;
+	bh=xK6vwdntpjqcxthUUsCAZRjZbsACIrv3A4Wvdp8vP7A=;
+	h=From:Date:Subject:To:CC;
+	b=a6DCVpOblDeGs6BC6ObikTDgKJYMS9EEu+Jerr+1LgGmZT8JRPq7cgBH+MTtrJco5
+	 Vpk56FBjiq+4FR9ZqhWRYQXF7zQsY07z4u5qdg3xf5Pk+dnH2Cv9lbZfLXasHTbVJB
+	 3Yp9IujMKxOfU+qAKb7/kNfmd5wYzh2WCKmQTkvA=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AK5BYxx021664
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 16 Nov 2023 15:29:47 -0600
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 16
- Nov 2023 15:29:47 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	Sun, 19 Nov 2023 23:11:34 -0600
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 19
+ Nov 2023 23:11:34 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 16 Nov 2023 15:29:47 -0600
-Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
-	by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AGLTlhH025586;
-	Thu, 16 Nov 2023 15:29:47 -0600
-Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
-	id 30B041112A29; Thu, 16 Nov 2023 15:29:47 -0600 (CST)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][kirkstone][PATCH 2/4] u-boot-ti-staging_2023.04: CI/CD Auto-Merger: cicd.kirkstone.202311161200
-Date: Thu, 16 Nov 2023 15:29:45 -0600
-Message-ID: <1700170187-132967-3-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1700170187-132967-1-git-send-email-lcpdbld@list.ti.com>
-References: <1700170187-132967-1-git-send-email-lcpdbld@list.ti.com>
+ Frontend Transport; Sun, 19 Nov 2023 23:11:34 -0600
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AK5BXpu054230;
+	Sun, 19 Nov 2023 23:11:34 -0600
+From: Kamlesh Gurudasani <kamlesh@ti.com>
+Date: Mon, 20 Nov 2023 10:41:28 +0530
+Subject: [PATCH v5] optee-os: Enable OP-TEE TRNG in AM62X
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20231108-wip-enable-trng-v5-1-3cf3e216a4fc@ti.com>
+X-B4-Tracking: v=1; b=H4sIAH/qWmUC/3WOQQ6DIBREr2JY9zciaMVV79G4APzqjy0aMLaN8
+ e4F912+mbzM7CygJwysyXbmcaNAs4tQXjJmR+0GBOoisyIvBOd5DW9aAJ02T4TVuwFQCdNXteA
+ obyxaRgcE47WzY/Im8lNYZ4dJTP3isafPufhoI48Ua/89D2wypf+3NgkcKiWVwtx2pdD3la52f
+ rH2OI4f/+I6BssAAAA=
+To: <vigneshr@ti.com>, <praneeth@ti.com>, <afd@ti.com>, <m-chawdhry@ti.com>,
+        <reatmon@ti.com>, <denys@konsulko.com>
+CC: <meta-ti@lists.yoctoproject.org>, <vibhore@ti.com>, <vishalm@ti.com>,
+        Kamlesh Gurudasani <kamlesh@ti.com>
+X-Mailer: b4 0.12.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1700457093; l=1638;
+ i=kamlesh@ti.com; s=20230614; h=from:subject:message-id;
+ bh=wNoYfvZhEZamlWdCw5TRqxzvtJ18L0sUTJIrH7C6e3U=;
+ b=9gyC7IMo5V1tD3btcAJ9LBxu8RnCiwaXQ+u8FE9o5aSehbrc9zb2Obcl+j1gJMkbSBv6cefjS
+ JuVn9pP684aCe6f1XvxxNhXboYiSN4JWNLvaYslYvMQuX9Fnn0E8iVq
+X-Developer-Key: i=kamlesh@ti.com; a=ed25519;
+ pk=db9XKPVWDGJVqj2jDqgnPQd6uQf3GZ3oaQa4bq1odGo=
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 16 Nov 2023 21:29:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17309
+ <meta-ti@lists.yoctoproject.org>; Mon, 20 Nov 2023 05:11:36 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17310
 
-Updated the value(s) for:
-  SRCREV
+Enable TRNG in AM62X, as bugs related to TRNG has been fixed now.
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+TF-A fix:
+https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/commit/?id=d7a7135d32a8c7da004c0c19b75bd4e2813f9759
+
+OP-TEE fix:
+https://github.com/OP-TEE/optee_os/commit/e313f4765fd0478bb66985827441411793433773
+
+Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
 ---
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb | 2 +-
+Changes in V5:
+-drop changes for AM62px due to boot failure
+
+Changes in V4:
+-rebase on kirkstone-wip
+
+Changes in V3:
+-updated commit title and message
+
+Changes in V2:
+-updated commit message
+-included changes for AM62p
+---
+ meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-index 8e88f03..4456a17 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-@@ -6,7 +6,7 @@ PR = "r0"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+index b1846cad..62d6b4f9 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
++++ b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+@@ -3,7 +3,7 @@ inherit ti-secdev
  
- BRANCH = "ti-u-boot-2023.04"
+ EXTRA_OEMAKE:append:k3 = "${@ ' CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
  
--SRCREV = "09b2c79a8df8b3c01c9ea77ee09265963725fdea"
-+SRCREV = "8c121e6e3c7fd7be6e727ddd41880c202fb6e223"
+-EXTRA_OEMAKE:append:am62xx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
++EXTRA_OEMAKE:append:am62xx = " CFG_TEE_CORE_LOG_LEVEL=1"
+ EXTRA_OEMAKE:append:am62pxx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
+ EXTRA_OEMAKE:append:am62axx = " CFG_TEE_CORE_LOG_LEVEL=1"
  
- do_install:append:am62xx() {
- 	install -d ${D}/boot
+
+---
+base-commit: 63dd9c4e39c90c367293a77a76b74c099abc1015
+change-id: 20231108-wip-enable-trng-e93bf6831e47
+
+Best regards,
 -- 
-1.8.3.1
+Kamlesh Gurudasani <kamlesh@ti.com>
 
 
