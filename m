@@ -1,106 +1,95 @@
-Return-Path: <denis@denix.org>
+Return-Path: <praneeth@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6408BC61D85
-	for <webhook@archiver.kernel.org>; Tue, 21 Nov 2023 21:58:49 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web10.6137.1700603919486254455
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD2BCC61D85
+	for <webhook@archiver.kernel.org>; Tue, 21 Nov 2023 23:24:39 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.11122.1700609077860105339
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 21 Nov 2023 13:58:39 -0800
+ Tue, 21 Nov 2023 15:24:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=oExmllIH;
- spf=pass (domain: konsulko.com, ip: 209.85.221.41, mailfrom: denys.dmytriyenko@konsulko.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-332cc1f176bso1211312f8f.2
-        for <meta-ti@lists.yoctoproject.org>; Tue, 21 Nov 2023 13:58:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1700603918; x=1701208718; darn=lists.yoctoproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=eO2v/PGurN7T0b8QvOo6FN+71KjxxyBKCevPKWq2E7s=;
-        b=oExmllIH5JVkbVr8lNY83bRluWvpI3/IXMmNYagCaQb7pRYvA4B4vlDktT1j5PjsgZ
-         2iLBKlVYgYhODRuHhZ2o/cvXqufnyHtfLCiX1DKGkbe9GBkmIOqA/4y4Xvuam2x9x7QH
-         WmdG2RAhwzybf4FqVFI0EFWwseogVgKFKRU84=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700603918; x=1701208718;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=eO2v/PGurN7T0b8QvOo6FN+71KjxxyBKCevPKWq2E7s=;
-        b=HMUX2yjeUPTrTt2Wf7/PEVVsncoH0uRAoblR5C0Zteu7MI4MsyqbEKephoTR5dbGOE
-         J7uXMbGqE6y3rEkOQZadeygx0Eo+P6Z5BAxzQMBIHbvrYTGCs9nUONVH2iM3yWXBknVD
-         WRtvzLTADwq5C/w4/c8RCaRoZKNzEO/f5rFxWOisDy7g4zihlXteeG9+2gU3T+2mA4wm
-         IYJB9MMmaHi+iuZ2fRsvO3SCWaOdNGNRVOZi3JwVKK8lK0NMPaw0tIVyyMRBxMkay6Y6
-         sjbrgTDlWoiLGD1pbmOPNOlLMn06LyRU+5Er7140tpKqzj4SdbL5Q7hAIZnJ0qz/J9y8
-         8Xig==
-X-Gm-Message-State: AOJu0Yy4T1Zx3iWB9rYnKT6IPGp50AbQbTkjNjqHbWn0wwLwwRnXwYra
-	0Xgg/axmZJngPdjVV/0wnlpE7/w2/LKU74DyKyWe8A==
-X-Google-Smtp-Source: AGHT+IEL7eY3FIVTiHrlXoP8h97EpLuaoqtk6bpcp+R5eowIvutYZT9Jq0s7EaKR3LB6mZdgiob773U/hhOCnkvlftw=
-X-Received: by 2002:adf:d1c7:0:b0:32f:83e4:50e5 with SMTP id
- b7-20020adfd1c7000000b0032f83e450e5mr235279wrd.6.1700603917851; Tue, 21 Nov
- 2023 13:58:37 -0800 (PST)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Sw6BBdaY;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: praneeth@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ALNOa33087241
+	for <meta-ti@lists.yoctoproject.org>; Tue, 21 Nov 2023 17:24:36 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1700609076;
+	bh=7YbiCDzse2dDhTJjVQcUaUyn7DXZJ6/7eosOTCQFDW8=;
+	h=From:To:CC:Subject:Date;
+	b=Sw6BBdaYmfcfxglOrg9kcRXNskqsfX4Xc7ZKJnhMnyvDhQR56AxpZd31gi52Vggqb
+	 xDjlfBNN5SmMasqYWftpA4riLDdUnciplJ9QUDvRhaK2/rArC60G7KD/JRUABuc0Hs
+	 8zY+iuqwRpOmxoD+dOfbaMA+qgz5t0ohd46XvEEw=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ALNOaUh103749
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Tue, 21 Nov 2023 17:24:36 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 21
+ Nov 2023 17:24:36 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 21 Nov 2023 17:24:36 -0600
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ALNOa78003563;
+	Tue, 21 Nov 2023 17:24:36 -0600
+From: Praneeth Bajjuri <praneeth@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: Ryan Eatmon <reatmon@ti.com>, Nick Saulnier <nsaulnier@ti.com>
+Subject: [kirkstone PATCH] pru-icss_git.bb: update to PSSP v6.3.0
+Date: Tue, 21 Nov 2023 17:24:36 -0600
+Message-ID: <20231121232436.3701-1-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20231121165038.6088-1-detheridge@ti.com>
-In-Reply-To: <20231121165038.6088-1-detheridge@ti.com>
-From: Denys Dmytriyenko <denys@konsulko.com>
-Date: Tue, 21 Nov 2023 16:58:27 -0500
-Message-ID: <CAB2aN6Nsu7kJJmrC+v4NB=wg7h7CKxdkqGxDGQvnpydZsFUN3g@mail.gmail.com>
-Subject: Re: [meta-ti][kirkstone][PATCH] mesa-pvr: rollback srcrev to unbreak
- Rogue GPU based platforms
-To: Darren Etheridge <detheridge@ti.com>
-Cc: max.krummenacher@toradex.com, anandb@ti.com, reatmon@ti.com, rs@ti.com, 
-	meta-ti@lists.yoctoproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 21 Nov 2023 21:58:49 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17321
+ <meta-ti@lists.yoctoproject.org>; Tue, 21 Nov 2023 23:24:39 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17322
 
-I haven't seen this on the list - was this blocked?
+Upgrade to v6.3.0 version.
 
-As of the change itself - is this essentially unbreaking Rogue by
-breaking back SGX?
+This release adds resources for using AM243x & AM64x PRU cores with cores
+running FreeRTOS:
+ * The RTOS Getting Started Labs
+ * Examples for using PRU GPIO and the broadside interface
+ * SORTE_G example (a custom networking interface)
 
-On Tue, Nov 21, 2023 at 11:50=E2=80=AFAM Darren Etheridge <detheridge@ti.co=
-m> wrote:
->
-> A bug was introduced while trying to unify the Mesa version that is used
-> on SGX GPU's and Rogue GPU's.   It manifests itself as an immediate segfa=
-ult
-> whenever you try and run something like glmark2-es2-wayland or
-> weston-simple-egl on certain Rogue based platforms (specifically am62x).
->
-> Rollback the SRCREV to a version before the Mesa SGX changes were added.
-> While we figure out what the underlying issue is with the unified
-> version.
->
-> This reverts the mesa-pvr recipe back to be the equivalent of commit id:
->         21fb9cbc01390f362ca376891b9f96f2ad24f344
->
-> Signed-off-by: Darren Etheridge <detheridge@ti.com>
-> ---
->  meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb b/meta-=
-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb
-> index 98d30c5b..281d6a21 100644
-> --- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb
-> +++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb
-> @@ -23,7 +23,7 @@ SRC_URI =3D " \
->
->  S =3D "${WORKDIR}/git"
->
-> -SRCREV =3D "7c9522a4147836064f582278e4f7115735c16868"
-> +SRCREV =3D "54fd9d7dea098b6f11c2a244b0c6763dc8c5690c"
->
->  PACKAGECONFIG:append =3D " \
->      ${@bb.utils.contains('PREFERRED_PROVIDER_virtual/gpudriver', 'ti-img=
--rogue-driver', 'pvr', '', d)} \
-> --
-> 2.17.1
->
+Bug fixes:
+ * AM64x & AM65x header files, fix the names of extended sections to be in the
+   format of
+   ConstantsTableName_0x100
+
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+Signed-off-by: Nick Saulnier <nsaulnier@ti.com>
+---
+ meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb b/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
+index 6acce94b..4c76ccfd 100644
+--- a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
++++ b/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
+@@ -8,10 +8,10 @@ inherit update-alternatives
+ 
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/git/pru-software-support-package/pru-software-support-package.git;protocol=https;branch=${BRANCH}"
+-SRCREV = "3d0e311580d8967d0854ca789e9069e2810e9c1a"
++SRCREV = "00a5efa5157feb84cb2e4bf50b481f7082acca82"
+ 
+-PV = "6.2.0"
+-PR = "r1"
++PV = "6.3.0"
++PR = "r2"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ 
+-- 
+2.17.1
+
 
