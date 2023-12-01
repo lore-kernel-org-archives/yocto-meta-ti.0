@@ -1,123 +1,115 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <d-gole@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A443C46CA3
-	for <webhook@archiver.kernel.org>; Fri,  1 Dec 2023 02:17:03 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.13609.1701397014848182296
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E483C4167B
+	for <webhook@archiver.kernel.org>; Fri,  1 Dec 2023 11:22:56 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.20474.1701429774986374748
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 30 Nov 2023 18:16:55 -0800
+ Fri, 01 Dec 2023 03:22:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: list.ti.com, ip: 198.47.19.141, mailfrom: lcpdbld@list.ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=nwJiD9nJ;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: d-gole@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B12Grts022843;
-	Thu, 30 Nov 2023 20:16:53 -0600
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B12Gr29042389
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 30 Nov 2023 20:16:53 -0600
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
- Nov 2023 20:16:53 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B1BMs7A125397
+	for <meta-ti@lists.yoctoproject.org>; Fri, 1 Dec 2023 05:22:54 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1701429774;
+	bh=y1RajX3ctlLfa307+dkkGK1VNIz5AMzFdCVbo7TX2pA=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=nwJiD9nJd0U+nmpifAtjOKyynIA5/OwnSEqXOsuIzjcQ31cIZ2C39wR0Xh5tBGQrA
+	 4ip6w1Awk4lx0hWoS54B6zQee+A65roDrFNYCmT2V1VQn3FfKE2Ge22KvytmImc39y
+	 zrqmqh7BWio0SA3QO/wUPFmzKC3M3WhiOU6wLIeA=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B1BMsPS127431
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Fri, 1 Dec 2023 05:22:54 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 1
+ Dec 2023 05:22:53 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 30 Nov 2023 20:16:53 -0600
-Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B12Grg6127597;
-	Thu, 30 Nov 2023 20:16:53 -0600
-Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
-	id 08C5F10F46B0; Thu, 30 Nov 2023 20:16:53 -0600 (CST)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][kirkstone][PATCH] CI/CD Auto-Merger: cicd.kirkstone.202311301712
-Date: Thu, 30 Nov 2023 20:16:53 -0600
-Message-ID: <1701397013-5207-1-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
+ Frontend Transport; Fri, 1 Dec 2023 05:22:53 -0600
+Received: from [10.249.140.226] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B1BMoQt000744;
+	Fri, 1 Dec 2023 05:22:51 -0600
+Message-ID: <e707701f-3250-31f5-2176-d043a378ff50@ti.com>
+Date: Fri, 1 Dec 2023 16:52:50 +0530
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Subject: Re: [meta-ti] [kirkstone PATCH] conf: machine: am62xx-lp-evm.conf:
+ Pick LPM wkup sources overlay
+To: <praneeth@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: Ryan Eatmon <reatmon@ti.com>, Judith Mendez <jm@ti.com>,
+        Vibhore Vardhan
+	<vibhore@ti.com>, <d-gole@ti.com>
+References: <20231129214059.11612-1-praneeth@ti.com>
+Content-Language: en-US
+From: "Gole, Dhruva" <d-gole@ti.com>
+Organization: Texas Instruments Incorporated
+In-Reply-To: <20231129214059.11612-1-praneeth@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 01 Dec 2023 02:17:03 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17340
+ <meta-ti@lists.yoctoproject.org>; Fri, 01 Dec 2023 11:22:56 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17341
 
-Updated the value(s) for:
-  ti-linux-fw: TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
-  u-boot-ti-staging_2023.04: SRCREV
-  linux-ti-staging-rt_6.1: SRCREV
-  linux-ti-staging_6.1: SRCREV
+Hi!
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
----
- meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 4 ++--
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb    | 2 +-
- 4 files changed, 5 insertions(+), 5 deletions(-)
+On 11/30/2023 3:10 AM, praneeth via lists.yoctoproject.org wrote:
+> commit [1] created a common LPM wkup sources overlay and removes
+> k3-am62x-sk-mcu-gpio-wakeup.dtso for am62 device family.
+> k3-am62x-sk prefix picks this overlay for am62xx, am62axx and am62xxsip already.
+>
+> This patch picks the necessary overlay for am62xx-lp-evm since it doesnt use
+> the same prefix as other am62 platforms.
+>
+> [1]: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/?&id=4ba1886b886d
+>
+> Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
+> ---
+>  meta-ti-bsp/conf/machine/am62xx-lp-evm.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+> index dfb9cbfa..229b74bc 100644
+> --- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+> @@ -8,8 +8,8 @@ KERNEL_DEVICETREE_PREFIX = " \
+>      ti/k3-am62-lp \
+>      ti/k3-am625-sk \
+>      ti/k3-am62x-sk-hdmi \
+> +    ti/k3-am62x-sk-lpm \
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index cee23b1..a5f1eb4 100644
---- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -15,9 +15,9 @@ CADENCE_MHDP_FW_VERSION = "2.1.0"
- IMG_DEC_FW_VERSION = "1.0"
- CNM_WAVE521_FW_VERSION = "1.0.3"
- TI_DM_FW_VERSION = "09.01.02"
--TI_SYSFW_VERSION = "09.01.07"
-+TI_SYSFW_VERSION = "09.01.08"
- 
--TI_LINUX_FW_SRCREV ?= "6dc47e330f11d01493d24e3ffb8ab369c15068eb"
-+TI_LINUX_FW_SRCREV ?= "9ee2fedb1fb4815f54310dd872d34faf9948c7c1"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
- 
- BRANCH ?= "ti-linux-firmware"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-index 23dee3e..2e350a6 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-@@ -6,7 +6,7 @@ PR = "r0"
- 
- BRANCH = "ti-u-boot-2023.04"
- 
--SRCREV = "71b8c840ca61a4e11b2cdf63b0e6580ecb427912"
-+SRCREV = "c1c2bdf272561724f531fe8e7a649ef687d1a67e"
- 
- do_install:append:am62xx() {
- 	install -d ${D}/boot
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-index 7f0df73..e839c12 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-@@ -6,7 +6,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
- 
- BRANCH = "ti-rt-linux-6.1.y"
- 
--SRCREV = "a135c15322cfd7f341bde5de4df28208c1784d59"
-+SRCREV = "b4f1767f9ebaadcb85e2b10eadc5b168a2a7cdb4"
- 
- include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
- 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-index e1ab980..8d8189a 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH ?= "ti-linux-6.1.y"
- 
--SRCREV ?= "5892b80d6b7786cb1a78aba8147c3f844e063119"
-+SRCREV ?= "5da2f861d7d06b97ea386294469e1644b18666fc"
- PV = "6.1.46+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+
+For the change,
+
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
+
+
+>      ti/k3-am62x-sk-mcan \
+> -    ti/k3-am62x-sk-mcu \
+>  "
+>  
+>  KERNEL_DEVICETREE = " \
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#17338): https://lists.yoctoproject.org/g/meta-ti/message/17338
+> Mute This Topic: https://lists.yoctoproject.org/mt/102881701/7412672
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/leave/11962887/7412672/717869840/xyzzy [d-gole@ti.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 -- 
-1.8.3.1
+Regards,
+Dhruva Gole <d-gole@ti.com>
 
 
