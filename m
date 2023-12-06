@@ -1,117 +1,130 @@
-Return-Path: <denis@denix.org>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BAF7C4167B
-	for <webhook@archiver.kernel.org>; Fri,  1 Dec 2023 23:38:03 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.7460.1701473879155193108
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B77F3C4167B
+	for <webhook@archiver.kernel.org>; Wed,  6 Dec 2023 09:46:26 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.28154.1701855983259787260
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 01 Dec 2023 15:38:00 -0800
+ Wed, 06 Dec 2023 01:46:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id E19B840C52;
-	Fri,  1 Dec 2023 23:37:57 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ldAoZaep5PiM; Fri,  1 Dec 2023 23:37:57 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B6F8D40C3A;
-	Fri,  1 Dec 2023 23:37:56 +0000 (UTC)
-Received: from gimli.cabin (argonath.cabin [172.16.1.2])
-	by mail.denix.org (Postfix) with ESMTP id 59013163D7E;
-	Fri,  1 Dec 2023 18:37:56 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master/kirkstone][PATCH] linux-bb.org: update to the latest
-Date: Fri,  1 Dec 2023 18:37:55 -0500
-Message-Id: <20231201233755.17721-1-denis@denix.org>
-X-Mailer: git-send-email 2.35.3
+ dkim=none (message not signed); spf=pass (domain: list.ti.com, ip: 198.47.23.249, mailfrom: lcpdbld@list.ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B69kLh8050771;
+	Wed, 6 Dec 2023 03:46:21 -0600
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B69kLde008678
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 6 Dec 2023 03:46:21 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
+ Dec 2023 03:46:21 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 6 Dec 2023 03:46:21 -0600
+Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
+	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B69kLZg120934;
+	Wed, 6 Dec 2023 03:46:21 -0600
+Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
+	id 5724810AC0F2; Wed,  6 Dec 2023 03:46:21 -0600 (CST)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202312060100
+Date: Wed, 6 Dec 2023 03:46:21 -0600
+Message-ID: <1701855981-139230-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 01 Dec 2023 23:38:03 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17342
+ <meta-ti@lists.yoctoproject.org>; Wed, 06 Dec 2023 09:46:26 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17343
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+Updated the value(s) for:
+  ti-linux-fw: PRUETH_FW_AM65X_SR2_VERSION,TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
+  u-boot-ti-staging_2023.04: SRCREV
+  linux-ti-staging-rt_6.1: SRCREV
+  linux-ti-staging_6.1: SRCREV
 
-Update the BB.org kernel to the latest. Also update BeaglePlay device
-tree list, as there were some renames and new additions.
-
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
 ---
- meta-ti-bsp/conf/machine/beagleplay.conf            | 13 +++++++++----
- .../recipes-kernel/linux/linux-bb.org_git.bb        | 12 ++++++------
- 2 files changed, 15 insertions(+), 10 deletions(-)
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 6 +++---
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb    | 2 +-
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/machine/beagleplay.conf b/meta-ti-bsp/conf/=
-machine/beagleplay.conf
-index 978bbc5a..ac4a202a 100644
---- a/meta-ti-bsp/conf/machine/beagleplay.conf
-+++ b/meta-ti-bsp/conf/machine/beagleplay.conf
-@@ -28,17 +28,22 @@ KERNEL_DEVICETREE =3D " \
- ti/k3-am625-beagleplay.dtb \
- ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
- ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
-+ti/k3-am625-beagleplay-lincolntech-lcd185-panel.dtbo \
- ti/k3-am625-sk.dtb \
--ti/k3-am625-sk-csi2-ov5640.dtbo \
--ti/k3-am625-sk-csi2-tevi-ov5640.dtbo \
- ti/k3-am625-sk-dmtimer-pwm.dtbo \
- ti/k3-am625-sk-ecap-capture.dtbo \
--ti/k3-am625-sk-hdmi-audio.dtbo \
-+ti/k3-am625-sk-lincolntech-lcd185-panel.dtbo \
- ti/k3-am625-sk-mcan.dtbo \
- ti/k3-am625-sk-mcspi-loopback.dtbo \
- ti/k3-am625-sk-mcu-gpio-wakeup.dtbo \
- ti/k3-am625-sk-microtips-mf101hie-panel.dtbo \
--ti/k3-am625-sk-rpi-hdr-pwm.dtbo \
-+ti/k3-am625-sk-microtips-mf103hie-lcd2.dtbo \
-+ti/k3-am625-sk-pwm.dtbo \
-+ti/k3-am625-sk-rpi-hdr-ehrpwm.dtbo \
-+ti/k3-am62x-sk-csi2-imx219.dtbo \
-+ti/k3-am62x-sk-csi2-ov5640.dtbo \
-+ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
-+ti/k3-am62x-sk-hdmi-audio.dtbo \
- "
-=20
- MACHINE_GUI_CLASS =3D "bigscreen"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb b/meta-=
-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-index 4048e106..9d798b9f 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-@@ -19,15 +19,15 @@ KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT=
-} ${EXTRA_DTC_ARGS}"
-=20
- S =3D "${WORKDIR}/git"
-=20
--# 6.1.33 version for 32-bit
--SRCREV:armv7a =3D "feb1c153a9693d44dec5772d134bd2c7986ff95d"
--PV:armv7a =3D "6.1.33+git${SRCPV}"
--BRANCH:armv7a =3D "v6.1.33-ti-r7"
-+# 6.1.46 version for 32-bit
-+SRCREV:armv7a =3D "0df74a0c083222077e8def3ec7e52c75f7eff2f0"
-+PV:armv7a =3D "6.1.46+git${SRCPV}"
-+BRANCH:armv7a =3D "v6.1.46-ti-r13"
-=20
- # 6.1.46 version for 64-bit
--SRCREV:aarch64 =3D "0a1e93a38c699fdd3c629d57f5cd015f90ab0d36"
-+SRCREV:aarch64 =3D "f47f74d11b19d8ae2f146de92c258f40e0930d86"
- PV:aarch64 =3D "6.1.46+git${SRCPV}"
--BRANCH:aarch64 =3D "v6.1.46-ti-arm64-r9"
-+BRANCH:aarch64 =3D "v6.1.46-ti-arm64-r13"
-=20
- SRC_URI =3D " \
-     git://github.com/beagleboard/linux.git;protocol=3Dhttps;branch=3D${B=
-RANCH} \
---=20
-2.35.3
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 821492f..a5f1eb4 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -9,15 +9,15 @@ INC_PR = "r4"
+ # Firmware versions
+ CORESDK_RTOS_VERSION = "08.02.00.04"
+ PRUETH_FW_AM65X_VERSION = "08.00.00.20"
+-PRUETH_FW_AM65X_SR2_VERSION = "02.02.12.05"
++PRUETH_FW_AM65X_SR2_VERSION = "02.02.12.08"
+ GOODIX_FW_VERSION = "1.0.0.0"
+ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+ CNM_WAVE521_FW_VERSION = "1.0.3"
+ TI_DM_FW_VERSION = "09.01.02"
+-TI_SYSFW_VERSION = "09.01.06"
++TI_SYSFW_VERSION = "09.01.08"
+ 
+-TI_LINUX_FW_SRCREV ?= "a2d8865df39e9021001fcf06e5daaeab81ba608c"
++TI_LINUX_FW_SRCREV ?= "9ee2fedb1fb4815f54310dd872d34faf9948c7c1"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+index 4456a17..2e350a6 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+@@ -6,7 +6,7 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2023.04"
+ 
+-SRCREV = "8c121e6e3c7fd7be6e727ddd41880c202fb6e223"
++SRCREV = "c1c2bdf272561724f531fe8e7a649ef687d1a67e"
+ 
+ do_install:append:am62xx() {
+ 	install -d ${D}/boot
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+index 3c82270..e839c12 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+@@ -6,7 +6,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
+ 
+ BRANCH = "ti-rt-linux-6.1.y"
+ 
+-SRCREV = "2f5db0e70b5e1ea128754128ff87560ff0c7ffbb"
++SRCREV = "b4f1767f9ebaadcb85e2b10eadc5b168a2a7cdb4"
+ 
+ include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+index 45a43a9..8d8189a 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.1.y"
+ 
+-SRCREV ?= "3db9a45004a01caba21d64b397814abadcc841b0"
++SRCREV ?= "5da2f861d7d06b97ea386294469e1644b18666fc"
+ PV = "6.1.46+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-- 
+1.8.3.1
 
 
