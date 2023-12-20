@@ -1,1289 +1,1033 @@
-Return-Path: <afd@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B2F6C3DA6E
-	for <webhook@archiver.kernel.org>; Wed, 20 Dec 2023 16:54:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBAAEC3DA6E
+	for <webhook@archiver.kernel.org>; Wed, 20 Dec 2023 17:40:42 +0000 (UTC)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.26173.1703091273439414646
+ by mx.groups.io with SMTP id smtpd.web10.27910.1703094041979879310
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 20 Dec 2023 08:54:33 -0800
+ Wed, 20 Dec 2023 09:40:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=pn3kALRj;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=MEVbdPTi;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BKGsUGu012498;
-	Wed, 20 Dec 2023 10:54:30 -0600
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BKHedGd025288;
+	Wed, 20 Dec 2023 11:40:39 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1703091270;
-	bh=zIMWYv+SrSO2R0UcAQp6HG97AB1EJAgcl3xdQd38Wqk=;
+	s=ti-com-17Q1; t=1703094039;
+	bh=8qslpIlFhzyb81i8XG2eZTNMgP/0hde38JiNLVUTK4M=;
 	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=pn3kALRjKE1mmFiaK5dU9FM2zJy6ToYbdkVJIkurYFLJCrvZkTT8bwla5b9FCDew9
-	 mQEFlqqnelMLL72s6pWF62hZuJ9oJJLNzkp2Gj4hhXsgpjblnfVPdXcJkUHsxv5OMX
-	 KCGRPtmS6T5wKufNDvJ06bfdYHHYu4dIZW3vCc8E=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BKGsUcU075046
+	b=MEVbdPTi6q6twb3Yznf92gh5fcyaZ+O8pMUBN4ZK4gen9XhgKxRIywE7DFE1ECBOT
+	 mGk+S6YCwqGXw7/5RAOlmoK9bW86oBiMPNOw9Pk/zjBGPt19bnkUTBctdYARO4QXR7
+	 ViwpRRKEnI8VoNV5reyZlMKkeYh0CNzQofDR9qf8=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BKHedtY110586
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 20 Dec 2023 10:54:30 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 20 Dec 2023 11:40:39 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 20
- Dec 2023 10:54:30 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 11:40:39 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 20 Dec 2023 10:54:30 -0600
-Received: from [10.249.40.136] ([10.249.40.136])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BKGsTwn090236;
-	Wed, 20 Dec 2023 10:54:29 -0600
-Message-ID: <d069e36e-8e07-41cd-b378-22903917272b@ti.com>
-Date: Wed, 20 Dec 2023 10:54:29 -0600
+ Frontend Transport; Wed, 20 Dec 2023 11:40:39 -0600
+Received: from [10.249.38.142] ([10.249.38.142])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BKHed0L016426;
+	Wed, 20 Dec 2023 11:40:39 -0600
+Message-ID: <e50b548c-025a-4f08-b01f-3928225aaaa7@ti.com>
+Date: Wed, 20 Dec 2023 11:40:38 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [meta-ti][master/kirkstone][RFC] meta-ti-bsp: Build R5 bootloader
  without multiconfig
 Content-Language: en-US
-To: Jose Quaresma <quaresma.jose@gmail.com>, <reatmon@ti.com>
+To: Andrew Davis <afd@ti.com>, Jose Quaresma <quaresma.jose@gmail.com>
 CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>,
         Ricardo Salveti <ricardo@foundries.io>
 References: <20231220160737.40535-1-afd@ti.com>
  <dd3accba-30ea-4f0c-afe9-04475209c381@ti.com>
  <CANPvuRkzkVt=PeknKaFaQ6URoeJ--U2SF59pYF+XH0_0tmD-ag@mail.gmail.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <CANPvuRkzkVt=PeknKaFaQ6URoeJ--U2SF59pYF+XH0_0tmD-ag@mail.gmail.com>
+ <d069e36e-8e07-41cd-b378-22903917272b@ti.com>
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <d069e36e-8e07-41cd-b378-22903917272b@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by lelv0143.ext.ti.com id 3BKGsUGu012498
+Content-Transfer-Encoding: base64
+X-MIME-Autoconverted: from 8bit to base64 by lelv0143.ext.ti.com id 3BKHedGd025288
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 20 Dec 2023 16:54:42 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17355
+ <meta-ti@lists.yoctoproject.org>; Wed, 20 Dec 2023 17:40:42 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17356
 
-On 12/20/23 10:43 AM, Jose Quaresma wrote:
-> Hi Andrew,
->=20
-> I believe=C2=A0this patchset can help fix some of the remaining=C2=A0is=
-sues mainly in the kirstone branch.
-
-I hope so, I was thinking of the troubles you have been having when
-puting this together. (plus several others on E2E with multiconf issues)
-
-> I will test it but maybe only next year.
-
-This is a very early RFC so no guarantee it even boots on all platforms.
-Denys and Ryan put a lot of work into keeping multiconf working so just
-wanted to make sure they are okay with dropping it back out before I do
-too much work on getting all the exact details right.
-
-There is also a change needed up in the meta-arago layer so this all
-will probably end up targeting only master/scarthgap and not kirkstone.
-
-Andrew
-
->=20
-> Jose
->=20
-> Ryan Eatmon via lists.yoctoproject.org <http://lists.yoctoproject.org> =
-<reatmon=3Dti.com@lists.yoctoproject.org <mailto:ti.com@lists.yoctoprojec=
-t.org>> escreveu no dia quarta, 20/12/2023 =C3=A0(s) 16:14:
->=20
->=20
->=20
->     On 12/20/2023 10:07 AM, Andrew Davis wrote:
->      > The R5 SPL bootloader is the only software we build using the R5=
- (arm32)
->      > multiconfig environment. Using multiconfig pulls in a large numb=
-er of
->      > build dependencies (see the -native environment in baremetal tmp=
- dir)
->      > this increases build time and space.
->      >
->      > Using multiconfig for a deploy target also leads to several oddi=
-ties in
->      > the bitbake build system forcing use of a non-standard deploy di=
-rectory
->      > and careful checks that no recipe built in both configuration de=
-ploy
->      > the same files.
->      >
->      > While I believe we will get more use out of multiconfig for futu=
-re
->      > devices, today let's simplify the K3 build infrastructure here b=
-y
->      > building R5 SPL like a normal firmware using a foreign targeting=
- cross
->      > compiler. This is the technique meta-arm uses to build firmware =
-(see
->      > scp-firmware and trusted-firmware-m recipes). Add a new tiboot3 =
-firmware
->      > recipe here.
->      >
->      > With that we can also drop all the related k3r5 multiconfig file=
-s and
->      > definitions. Do that here.
->=20
->     On first glance, this looks good.=C2=A0 Let me do some test builds.
->=20
->=20
->      > Signed-off-by: Andrew Davis <afd@ti.com <mailto:afd@ti.com>>
->      > ---
->      >=C2=A0 =C2=A0meta-ti-bsp/classes/ti-secdev.bbclass=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0|=C2=A0 3 -
->      >=C2=A0 =C2=A0.../conf/machine/am62axx-evm-k3r5.conf=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 | 11 ----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/am62axx-evm.conf=C2=A0 =C2=A0=
- =C2=A0|=C2=A0 5 ++
->      >=C2=A0 =C2=A0.../conf/machine/am62pxx-evm-k3r5.conf=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 | 12 ----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/am62pxx-evm.conf=C2=A0 =C2=A0=
- =C2=A0|=C2=A0 5 ++
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf | 12 -=
----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/am62xx-evm.conf=C2=A0 =C2=A0=
- =C2=A0 |=C2=A0 5 ++
->      >=C2=A0 =C2=A0.../conf/machine/am62xx-lp-evm-k3r5.conf=C2=A0 =C2=A0=
- =C2=A0 | 11 ----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/am62xx-lp-evm.conf=C2=A0 =C2=
-=A0|=C2=A0 5 ++
->      >=C2=A0 =C2=A0.../conf/machine/am62xxsip-evm-k3r5.conf=C2=A0 =C2=A0=
- =C2=A0 | 16 -----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/am62xxsip-evm.conf=C2=A0 =C2=
-=A0| 10 +++
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/am64xx-evm-k3r5.conf | 11 -=
----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/am64xx-evm.conf=C2=A0 =C2=A0=
- =C2=A0 |=C2=A0 5 ++
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf | 11 -=
----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/am65xx-evm.conf=C2=A0 =C2=A0=
- =C2=A0 |=C2=A0 5 ++
->      >=C2=A0 =C2=A0.../conf/machine/am65xx-hs-evm-k3r5.conf=C2=A0 =C2=A0=
- =C2=A0 | 11 ----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/am65xx-hs-evm.conf=C2=A0 =C2=
-=A0|=C2=A0 5 ++
->      >=C2=A0 =C2=A0.../conf/machine/beaglebone-ai64-k3r5.conf=C2=A0 =C2=
-=A0 | 17 -----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/beaglebone-ai64.conf |=C2=A0=
- 5 ++
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/beagleplay-k3r5.conf | 14 -=
----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/beagleplay.conf=C2=A0 =C2=A0=
- =C2=A0 |=C2=A0 5 ++
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/include/k3.inc=C2=A0 =C2=A0=
- =C2=A0 =C2=A0|=C2=A0 4 +-
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/include/k3r5.inc=C2=A0 =C2=A0=
- =C2=A0| 27 --------
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/j7200-evm-k3r5.conf=C2=A0 |=
- 11 ----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/j7200-evm.conf=C2=A0 =C2=A0=
- =C2=A0 =C2=A0|=C2=A0 5 ++
->      >=C2=A0 =C2=A0.../conf/machine/j7200-hs-evm-k3r5.conf=C2=A0 =C2=A0=
- =C2=A0 =C2=A0| 11 ----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/j7200-hs-evm.conf=C2=A0 =C2=
-=A0 |=C2=A0 5 ++
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf=C2=A0 |=
- 11 ----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/j721e-evm.conf=C2=A0 =C2=A0=
- =C2=A0 =C2=A0|=C2=A0 5 ++
->      >=C2=A0 =C2=A0.../conf/machine/j721e-hs-evm-k3r5.conf=C2=A0 =C2=A0=
- =C2=A0 =C2=A0| 11 ----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/j721e-hs-evm.conf=C2=A0 =C2=
-=A0 |=C2=A0 3 +-
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/j721s2-evm-k3r5.conf | 11 -=
----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/j721s2-evm.conf=C2=A0 =C2=A0=
- =C2=A0 |=C2=A0 5 ++
->      >=C2=A0 =C2=A0.../conf/machine/j721s2-hs-evm-k3r5.conf=C2=A0 =C2=A0=
- =C2=A0 | 11 ----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/j721s2-hs-evm.conf=C2=A0 =C2=
-=A0|=C2=A0 2 +
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/j784s4-evm-k3r5.conf | 11 -=
----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/j784s4-evm.conf=C2=A0 =C2=A0=
- =C2=A0 |=C2=A0 5 ++
->      >=C2=A0 =C2=A0.../conf/machine/j784s4-hs-evm-k3r5.conf=C2=A0 =C2=A0=
- =C2=A0 | 11 ----
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/machine/j784s4-hs-evm.conf=C2=A0 =C2=
-=A0|=C2=A0 2 +
->      >=C2=A0 =C2=A0meta-ti-bsp/conf/multiconfig/k3r5.conf=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 | 10 ---
->      >=C2=A0 =C2=A0.../recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb <http://t=
-i-sci-fw_git.bb>=C2=A0 =C2=A0 |=C2=A0 3 -
->      >=C2=A0 =C2=A0.../u-boot/tiboot3-staging_2023.5.bb <http://tiboot3=
--staging_2023.5.bb>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 65 ++++++++++++++=
-+++++
->      >=C2=A0 =C2=A0.../recipes-bsp/u-boot/u-boot-bb.org_git.bb <http://=
-u-boot-bb.org_git.bb>=C2=A0 =C2=A0|=C2=A0 2 -
->      >=C2=A0 =C2=A0meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc=C2=A0 |=
- 40 ------------
->      >=C2=A0 =C2=A044 files changed, 152 insertions(+), 303 deletions(-=
-)
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/am62axx-=
-evm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/am62pxx-=
-evm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/am62xx-e=
-vm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/am62xx-l=
-p-evm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/am62xxsi=
-p-evm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/am64xx-e=
-vm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/am65xx-e=
-vm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/am65xx-h=
-s-evm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/beaglebo=
-ne-ai64-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/beaglepl=
-ay-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/include/=
-k3r5.inc
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/j7200-ev=
-m-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/j7200-hs=
--evm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/j721e-ev=
-m-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/j721e-hs=
--evm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/j721s2-e=
-vm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/j721s2-h=
-s-evm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/j784s4-e=
-vm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/machine/j784s4-h=
-s-evm-k3r5.conf
->      >=C2=A0 =C2=A0delete mode 100644 meta-ti-bsp/conf/multiconfig/k3r5=
-.conf
->      >=C2=A0 =C2=A0create mode 100644 meta-ti-bsp/recipes-bsp/u-boot/ti=
-boot3-staging_2023.5.bb <http://tiboot3-staging_2023.5.bb>
->      >
->      > diff --git a/meta-ti-bsp/classes/ti-secdev.bbclass b/meta-ti-bsp=
-/classes/ti-secdev.bbclass
->      > index b3d70e5c..18d15269 100644
->      > --- a/meta-ti-bsp/classes/ti-secdev.bbclass
->      > +++ b/meta-ti-bsp/classes/ti-secdev.bbclass
->      > @@ -2,14 +2,11 @@
->      >
->      >=C2=A0 =C2=A0# K3 SECDEV scripts use OpenSSL
->      >=C2=A0 =C2=A0DEPENDS:append:k3 =3D " openssl-native"
->      > -DEPENDS:append:k3r5 =3D " openssl-native"
->      >
->      >=C2=A0 =C2=A0# Use package version of TI SECDEV for K3 if one is =
-not provided through the environment
->      >=C2=A0 =C2=A0DEPENDS:append:k3 =3D "${@ '' if d.getVar('TI_SECURE=
-_DEV_PKG_K3') else ' ti-k3-secdev-native' }"
->      > -DEPENDS:append:k3r5 =3D "${@ '' if d.getVar('TI_SECURE_DEV_PKG_=
-K3') else ' ti-k3-secdev-native' }"
->      >=C2=A0 =C2=A0TI_K3_SECDEV_INSTALL_DIR =3D "${STAGING_DIR_NATIVE}$=
-{datadir}/ti/ti-k3-secdev"
->      >=C2=A0 =C2=A0TI_SECURE_DEV_PKG:k3 =3D "${@ d.getVar('TI_SECURE_DE=
-V_PKG_K3') or d.getVar('TI_K3_SECDEV_INSTALL_DIR') }"
->      > -TI_SECURE_DEV_PKG:k3r5 =3D "${@ d.getVar('TI_SECURE_DEV_PKG_K3'=
-) or d.getVar('TI_K3_SECDEV_INSTALL_DIR') }"
->      >
->      >=C2=A0 =C2=A0# For non-K3 we require the SECDEV tools be provided=
- through the environment with the following vars
->      >=C2=A0 =C2=A0TI_SECURE_DEV_PKG:ti33x =3D "${TI_SECURE_DEV_PKG_CAT=
-}/am3x"
->      > diff --git a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf b/me=
-ta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 2af3317e..00000000
->      > --- a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: AM62A HS-FS EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI AM62A EVM (R5F =
-core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "am62ax"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "hs-fs"
->      > -
->      > -UBOOT_MACHINE =3D "am62ax_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/am62axx-evm.conf b/meta-ti=
--bsp/conf/machine/am62axx-evm.conf
->      > index 22f61401..59884629 100644
->      > --- a/meta-ti-bsp/conf/machine/am62axx-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/am62axx-evm.conf
->      > @@ -14,4 +14,9 @@ KERNEL_DEVICETREE =3D " \
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0ti/k3-am62a7-sk.dtb \
->      >=C2=A0 =C2=A0"
->      >
->      > +SYSFW_SOC =3D "am62ax"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "hs-fs"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "am62ax_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "am62ax_evm_a53_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf b/me=
-ta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 36915381..00000000
->      > --- a/meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,12 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: AM62PX EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI AM62Px EVM (R5F=
- core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -require conf/machine/include/ti-extras.inc
->      > -
->      > -SYSFW_SOC =3D "am62px"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "hs-fs"
->      > -
->      > -UBOOT_MACHINE =3D "am62px_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/am62pxx-evm.conf b/meta-ti=
--bsp/conf/machine/am62pxx-evm.conf
->      > index d7c9f589..116d819b 100644
->      > --- a/meta-ti-bsp/conf/machine/am62pxx-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/am62pxx-evm.conf
->      > @@ -15,4 +15,9 @@ KERNEL_DEVICETREE =3D " \
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0ti/k3-am62p5-sk.dtb \
->      >=C2=A0 =C2=A0"
->      >
->      > +SYSFW_SOC =3D "am62px"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "hs-fs"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "am62px_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "am62px_evm_a53_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf b/met=
-a-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 548369ca..00000000
->      > --- a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,12 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: AM62XX EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI AM62xx EVM (R5F=
- core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -require conf/machine/include/ti-extras.inc
->      > -
->      > -SYSFW_SOC =3D "am62x"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "hs-fs"
->      > -
->      > -UBOOT_MACHINE =3D "am62x_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/am62xx-evm.conf b/meta-ti-=
-bsp/conf/machine/am62xx-evm.conf
->      > index fadbc6f4..6f234811 100644
->      > --- a/meta-ti-bsp/conf/machine/am62xx-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/am62xx-evm.conf
->      > @@ -14,4 +14,9 @@ KERNEL_DEVICETREE =3D " \
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0ti/k3-am625-sk.dtb \
->      >=C2=A0 =C2=A0"
->      >
->      > +SYSFW_SOC =3D "am62x"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "hs-fs"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "am62x_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "am62x_evm_a53_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf b/=
-meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
->      > deleted file mode 100644
->      > index aa9422cd..00000000
->      > --- a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: AM62XX LP GP EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI AM62xx LP GP EV=
-M (R5F core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "am62x"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "hs-fs"
->      > -
->      > -UBOOT_MACHINE =3D "am62x_lpsk_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-=
-ti-bsp/conf/machine/am62xx-lp-evm.conf
->      > index 229b74bc..e33b60e2 100644
->      > --- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
->      > @@ -16,4 +16,9 @@ KERNEL_DEVICETREE =3D " \
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0ti/k3-am62-lp-sk.dtb \
->      >=C2=A0 =C2=A0"
->      >
->      > +SYSFW_SOC =3D "am62x"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "hs-fs"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "am62x_lpsk_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "am62x_lpsk_a53_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/am62xxsip-evm-k3r5.conf b/=
-meta-ti-bsp/conf/machine/am62xxsip-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 0daff2b9..00000000
->      > --- a/meta-ti-bsp/conf/machine/am62xxsip-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,16 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: AM62XX SIP EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI AM62xx SIP EVM =
-(R5F core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "am62x"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "hs-fs"
->      > -
->      > -UBOOT_MACHINE =3D "am62x_evm_r5_defconfig"
->      > -
->      > -# UBOOT_CONFIG_FRAGMENTS holds the list of u-boot config fragme=
-nts which has to be build
->      > -# along with the base defconfig mentioned in UBOOT_MACHINE. Ref=
-er u-boot-mergeconfig.inc
->      > -# under meta-ti-bsp/recipes-bsp/u-boot/ for more details.
->      > -UBOOT_CONFIG_FRAGMENTS =3D "am62xsip_sk_r5.config"
->      > diff --git a/meta-ti-bsp/conf/machine/am62xxsip-evm.conf b/meta-=
-ti-bsp/conf/machine/am62xxsip-evm.conf
->      > index b5dd18f1..2e077f75 100644
->      > --- a/meta-ti-bsp/conf/machine/am62xxsip-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/am62xxsip-evm.conf
->      > @@ -13,4 +13,14 @@ KERNEL_DEVICETREE =3D " \
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0ti/k3-am625-sk.dtb \
->      >=C2=A0 =C2=A0"
->      >
->      > +SYSFW_SOC =3D "am62x"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "hs-fs"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "am62x_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "am62x_evm_a53_defconfig"
->      > +
->      > +# UBOOT_CONFIG_FRAGMENTS holds the list of u-boot config fragme=
-nts which has to be build
->      > +# along with the base defconfig mentioned in UBOOT_MACHINE. Ref=
-er u-boot-mergeconfig.inc
->      > +# under meta-ti-bsp/recipes-bsp/u-boot/ for more details.
->      > +UBOOT_CONFIG_FRAGMENTS_R5 =3D "am62xsip_sk_r5.config"
->      > diff --git a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5.conf b/met=
-a-ti-bsp/conf/machine/am64xx-evm-k3r5.conf
->      > deleted file mode 100644
->      > index e932928a..00000000
->      > --- a/meta-ti-bsp/conf/machine/am64xx-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: AM64xx EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI AM64xx EVM (R5F=
- core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "am64x_sr2"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "hs-fs"
->      > -
->      > -UBOOT_MACHINE =3D "am64x_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/am64xx-evm.conf b/meta-ti-=
-bsp/conf/machine/am64xx-evm.conf
->      > index c6ba2a87..dc21c174 100644
->      > --- a/meta-ti-bsp/conf/machine/am64xx-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/am64xx-evm.conf
->      > @@ -4,4 +4,9 @@
->      >
->      >=C2=A0 =C2=A0require conf/machine/include/am64xx.inc
->      >
->      > +SYSFW_SOC =3D "am64x_sr2"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "hs-fs"
->      > +
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "am64x_evm_a53_defconfig"
->      > +UBOOT_MACHINE_R5 =3D "am64x_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf b/met=
-a-ti-bsp/conf/machine/am65xx-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 8744ac3e..00000000
->      > --- a/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: AM65xx EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI AM65xx EVM (R5F=
- core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "am65x_sr2"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "gp"
->      > -
->      > -UBOOT_MACHINE =3D "am65x_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/am65xx-evm.conf b/meta-ti-=
-bsp/conf/machine/am65xx-evm.conf
->      > index f6eb6f0c..9b050b03 100644
->      > --- a/meta-ti-bsp/conf/machine/am65xx-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/am65xx-evm.conf
->      > @@ -4,6 +4,11 @@
->      >
->      >=C2=A0 =C2=A0require conf/machine/include/am65xx.inc
->      >
->      > +SYSFW_SOC =3D "am65x_sr2"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "gp"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "am65x_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "am65x_evm_a53_defconfig"
->      >
->      >=C2=A0 =C2=A0MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "prueth-fw-=
-am65x-sr2 pruhsr-fw-am65x-sr2 prusw-fw-am65x-sr2"
->      > diff --git a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf b/=
-meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 337c8413..00000000
->      > --- a/meta-ti-bsp/conf/machine/am65xx-hs-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: AM65xx HS EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI AM65xx HS EVM (=
-R5F core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "am65x_sr2"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "hs"
->      > -
->      > -UBOOT_MACHINE =3D "am65x_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf b/meta-=
-ti-bsp/conf/machine/am65xx-hs-evm.conf
->      > index f8221f31..4164ae53 100644
->      > --- a/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/am65xx-hs-evm.conf
->      > @@ -4,4 +4,9 @@
->      >
->      >=C2=A0 =C2=A0require conf/machine/include/am65xx.inc
->      >
->      > +SYSFW_SOC =3D "am65x_sr2"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "hs"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "am65x_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "am65x_evm_a53_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf =
-b/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf
->      > deleted file mode 100644
->      > index b893f380..00000000
->      > --- a/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,17 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: BeagleBone AI-64 (R5F)
->      > -#@DESCRIPTION: Machine configuration for the BeagleBone AI-64 (=
-R5F core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "j721e"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "gp"
->      > -
->      > -SPL_BINARY =3D "spl/u-boot-spl.${UBOOT_SUFFIX}"
->      > -SPL_SYMLINK =3D "u-boot-r5spl.${UBOOT_SUFFIX}"
->      > -UBOOT_BINARY =3D "tiboot3.${UBOOT_SUFFIX}"
->      > -UBOOT_IMAGE =3D "tiboot3-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUF=
-FIX}"
->      > -UBOOT_SYMLINK =3D "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
->      > -
->      > -UBOOT_MACHINE =3D "j721e_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf b/met=
-a-ti-bsp/conf/machine/beaglebone-ai64.conf
->      > index e529f565..bad86a22 100644
->      > --- a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
->      > +++ b/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
->      > @@ -4,6 +4,11 @@
->      >
->      >=C2=A0 =C2=A0require conf/machine/include/j721e.inc
->      >
->      > +SYSFW_SOC =3D "j721e"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "gp"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "j721e_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "j721e_evm_a72_config"
->      >
->      >=C2=A0 =C2=A0PREFERRED_PROVIDER_virtual/kernel =3D "linux-bb.org =
-<http://linux-bb.org>"
->      > diff --git a/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf b/met=
-a-ti-bsp/conf/machine/beagleplay-k3r5.conf
->      > deleted file mode 100644
->      > index c40615c9..00000000
->      > --- a/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,14 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: BeaglePlay (R5F)
->      > -#@DESCRIPTION: Machine configuration for the BeaglePlay (R5F co=
-re)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -PREFERRED_PROVIDER_virtual/bootloader =3D "u-boot-bb.org <http:=
-//u-boot-bb.org>"
->      > -PREFERRED_PROVIDER_u-boot =3D "u-boot-bb.org <http://u-boot-bb.=
-org>"
->      > -
->      > -SYSFW_SOC =3D "am62x"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "gp"
->      > -
->      > -UBOOT_MACHINE =3D "am62x_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/beagleplay.conf b/meta-ti-=
-bsp/conf/machine/beagleplay.conf
->      > index ac4a202a..312fc503 100644
->      > --- a/meta-ti-bsp/conf/machine/beagleplay.conf
->      > +++ b/meta-ti-bsp/conf/machine/beagleplay.conf
->      > @@ -18,6 +18,11 @@ TFA_K3_SYSTEM_SUSPEND =3D "1"
->      >
->      >=C2=A0 =C2=A0OPTEEMACHINE =3D "k3-am62x"
->      >
->      > +SYSFW_SOC =3D "am62x"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "gp"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "am62x_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "am62x_evm_a53_defconfig"
->      >
->      >=C2=A0 =C2=A0PREFERRED_PROVIDER_virtual/kernel =3D "linux-bb.org =
-<http://linux-bb.org>"
->      > diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-b=
-sp/conf/machine/include/k3.inc
->      > index 2415f0ba..84feee08 100644
->      > --- a/meta-ti-bsp/conf/machine/include/k3.inc
->      > +++ b/meta-ti-bsp/conf/machine/include/k3.inc
->      > @@ -5,8 +5,6 @@ SOC_FAMILY:append =3D ":k3"
->      >
->      >=C2=A0 =C2=A0require conf/machine/include/arm/arch-arm64.inc
->      >
->      > -BBMULTICONFIG +=3D "k3r5"
->      > -
->      >=C2=A0 =C2=A0# Increase this everytime you change something in th=
-e kernel
->      >=C2=A0 =C2=A0MACHINE_KERNEL_PR =3D "r0"
->      >
->      > @@ -62,7 +60,7 @@ MACHINE_FEATURES +=3D "efi"
->      >=C2=A0 =C2=A0WKS_FILE ?=3D "${@bb.utils.contains("MACHINE_FEATURE=
-S", "efi", "sdimage-2part-efi.wks.in <http://sdimage-2part-efi.wks.in>", =
-"sdimage-2part.wks", d)}"
->      >
->      >=C2=A0 =C2=A0do_image_wic[depends] +=3D "virtual/bootloader:do_de=
-ploy"
->      > -do_image[mcdepends] +=3D "mc::k3r5:virtual/bootloader:do_deploy=
-"
->      > +do_image[depends] +=3D "tiboot3-staging:do_deploy"
->      >
->      >=C2=A0 =C2=A0SERIAL_CONSOLES =3D "115200;ttyS0 115200;ttyS2"
->      >=C2=A0 =C2=A0SERIAL_CONSOLES_CHECK =3D "${SERIAL_CONSOLES}"
->      > diff --git a/meta-ti-bsp/conf/machine/include/k3r5.inc b/meta-ti=
--bsp/conf/machine/include/k3r5.inc
->      > deleted file mode 100644
->      > index 63267a5e..00000000
->      > --- a/meta-ti-bsp/conf/machine/include/k3r5.inc
->      > +++ /dev/null
->      > @@ -1,27 +0,0 @@
->      > -# TI K3 Armv7 profile for Cortex-R5F cores
->      > -
->      > -require conf/machine/include/ti-soc.inc
->      > -SOC_FAMILY:append =3D ":k3r5"
->      > -
->      > -# The closest of existing tunes for Cortex-R5F
->      > -DEFAULTTUNE =3D "armv7athf"
->      > -require conf/machine/include/arm/armv7a/tune-cortexa8.inc
->      > -
->      > -# R5 runs early bootloader and loads SYSFW
->      > -# https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/doc/board/ti=
-/j721e_evm.rst <https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/doc/boar=
-d/ti/j721e_evm.rst>
->      > -# https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/doc/board/ti=
-/am62x_sk.rst <https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/doc/board=
-/ti/am62x_sk.rst>
->      > -# https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/doc/board/ti=
-/k3.rst <https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/doc/board/ti/k3=
-.rst>
->      > -PREFERRED_PROVIDER_virtual/kernel =3D "linux-dummy"
->      > -PREFERRED_PROVIDER_virtual/bootloader ?=3D "u-boot-ti-staging"
->      > -PREFERRED_PROVIDER_u-boot ?=3D "u-boot-ti-staging"
->      > -
->      > -SPL_SUFFIX =3D "bin"
->      > -SPL_BINARY =3D "tiboot3-${SYSFW_SOC}-${SYSFW_SUFFIX}-${SYSFW_CO=
-NFIG}.${SPL_SUFFIX}"
->      > -SPL_SYMLINK =3D "tiboot3.${SPL_SUFFIX}"
->      > -UBOOT_SUFFIX =3D "bin"
->      > -UBOOT_BINARY =3D "u-boot-r5spl.${UBOOT_SUFFIX}"
->      > -UBOOT_IMAGE =3D "u-boot-r5spl-${MAINMACHINE}-${PV}-${PR}.${UBOO=
-T_SUFFIX}"
->      > -UBOOT_SYMLINK =3D "u-boot-r5spl-${MAINMACHINE}.${UBOOT_SUFFIX}"
->      > -
->      > -PACKAGECONFIG:pn-u-boot-ti-staging =3D ""
->      > -PACKAGECONFIG:pn-u-boot-ti-mainline =3D ""
->      > diff --git a/meta-ti-bsp/conf/machine/j7200-evm-k3r5.conf b/meta=
--ti-bsp/conf/machine/j7200-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 68061883..00000000
->      > --- a/meta-ti-bsp/conf/machine/j7200-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: J7200 EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI J7200 EVM (R5F =
-core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "j7200"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "gp"
->      > -
->      > -UBOOT_MACHINE =3D "j7200_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/j7200-evm.conf b/meta-ti-b=
-sp/conf/machine/j7200-evm.conf
->      > index dff1da69..e733d15a 100644
->      > --- a/meta-ti-bsp/conf/machine/j7200-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/j7200-evm.conf
->      > @@ -10,4 +10,9 @@ KERNEL_DEVICETREE =3D " \
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0ti/k3-j7200-common-proc-board.dtb \
->      >=C2=A0 =C2=A0"
->      >
->      > +SYSFW_SOC =3D "j7200"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "gp"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "j7200_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "j7200_evm_a72_config"
->      > diff --git a/meta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf b/m=
-eta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 1922d5c8..00000000
->      > --- a/meta-ti-bsp/conf/machine/j7200-hs-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: J7200 HS EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI J7200 HS EVM (R=
-5F core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "j7200_sr2"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "hs"
->      > -
->      > -UBOOT_MACHINE =3D "j7200_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/j7200-hs-evm.conf b/meta-t=
-i-bsp/conf/machine/j7200-hs-evm.conf
->      > index 54fd2b4a..fc33106c 100644
->      > --- a/meta-ti-bsp/conf/machine/j7200-hs-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/j7200-hs-evm.conf
->      > @@ -4,4 +4,9 @@
->      >
->      >=C2=A0 =C2=A0require conf/machine/j7200-evm.conf
->      >
->      > +SYSFW_SOC =3D "j7200_sr2"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "hs"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "j7200_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "j7200_evm_a72_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf b/meta=
--ti-bsp/conf/machine/j721e-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 070bf7aa..00000000
->      > --- a/meta-ti-bsp/conf/machine/j721e-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: J721e EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI J721e EVM (R5F =
-core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "j721e"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "gp"
->      > -
->      > -UBOOT_MACHINE =3D "j721e_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/j721e-evm.conf b/meta-ti-b=
-sp/conf/machine/j721e-evm.conf
->      > index 5e1f6dca..ca23e3e3 100644
->      > --- a/meta-ti-bsp/conf/machine/j721e-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/j721e-evm.conf
->      > @@ -15,4 +15,9 @@ KERNEL_DEVICETREE =3D " \
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0ti/k3-j721e-sk.dtb \
->      >=C2=A0 =C2=A0"
->      >
->      > +SYSFW_SOC =3D "j721e"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "gp"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "j721e_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "j721e_evm_a72_config"
->      > diff --git a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf b/m=
-eta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 7904c660..00000000
->      > --- a/meta-ti-bsp/conf/machine/j721e-hs-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: J721e HS EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI J721e HS EVM (R=
-5F core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "j721e_sr1_1"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "hs"
->      > -
->      > -UBOOT_MACHINE =3D "j721e_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/j721e-hs-evm.conf b/meta-t=
-i-bsp/conf/machine/j721e-hs-evm.conf
->      > index 441ca169..3d4bedb6 100644
->      > --- a/meta-ti-bsp/conf/machine/j721e-hs-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/j721e-hs-evm.conf
->      > @@ -4,4 +4,5 @@
->      >
->      >=C2=A0 =C2=A0require conf/machine/j721e-evm.conf
->      >
->      > -UBOOT_MACHINE =3D "j721e_evm_a72_defconfig"
->      > +SYSFW_SOC =3D "j721e_sr1_1"
->      > +SYSFW_SUFFIX =3D "hs"
->      > diff --git a/meta-ti-bsp/conf/machine/j721s2-evm-k3r5.conf b/met=
-a-ti-bsp/conf/machine/j721s2-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 508e96e5..00000000
->      > --- a/meta-ti-bsp/conf/machine/j721s2-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: J721S2 EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI J721S2 EVM (R5F=
- core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "j721s2"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "gp"
->      > -
->      > -UBOOT_MACHINE =3D "j721s2_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-=
-bsp/conf/machine/j721s2-evm.conf
->      > index ecb1836f..63d86af0 100644
->      > --- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
->      > @@ -18,4 +18,9 @@ KERNEL_DEVICETREE =3D " \
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0ti/k3-j721s2-common-proc-board.dtb \
->      >=C2=A0 =C2=A0"
->      >
->      > +SYSFW_SOC =3D "j721s2"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "gp"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "j721s2_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "j721s2_evm_a72_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf b/=
-meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 58cd92c4..00000000
->      > --- a/meta-ti-bsp/conf/machine/j721s2-hs-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: J721S2 HS EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI J721S2 HS EVM (=
-R5F core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "j721s2"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "hs"
->      > -
->      > -UBOOT_MACHINE =3D "j721s2_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf b/meta-=
-ti-bsp/conf/machine/j721s2-hs-evm.conf
->      > index 4cf32a28..1129a189 100644
->      > --- a/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/j721s2-hs-evm.conf
->      > @@ -3,3 +3,5 @@
->      >=C2=A0 =C2=A0#@DESCRIPTION: Machine configuration for the TI J721=
-S2 HS EVM
->      >
->      >=C2=A0 =C2=A0require conf/machine/j721s2-evm.conf
->      > +
->      > +SYSFW_SUFFIX =3D "hs"
->      > diff --git a/meta-ti-bsp/conf/machine/j784s4-evm-k3r5.conf b/met=
-a-ti-bsp/conf/machine/j784s4-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 04feebc6..00000000
->      > --- a/meta-ti-bsp/conf/machine/j784s4-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: J784S4 EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI J784S4 EVM (R5F=
- core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "j784s4"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "gp"
->      > -
->      > -UBOOT_MACHINE =3D "j784s4_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf b/meta-ti-=
-bsp/conf/machine/j784s4-evm.conf
->      > index 40a63651..a242ef8a 100644
->      > --- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
->      > @@ -18,4 +18,9 @@ KERNEL_DEVICETREE =3D " \
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0ti/k3-j784s4-evm.dtb \
->      >=C2=A0 =C2=A0"
->      >
->      > +SYSFW_SOC =3D "j784s4"
->      > +SYSFW_CONFIG =3D "evm"
->      > +SYSFW_SUFFIX =3D "gp"
->      > +
->      > +UBOOT_MACHINE_R5 =3D "j784s4_evm_r5_defconfig"
->      >=C2=A0 =C2=A0UBOOT_MACHINE =3D "j784s4_evm_a72_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/j784s4-hs-evm-k3r5.conf b/=
-meta-ti-bsp/conf/machine/j784s4-hs-evm-k3r5.conf
->      > deleted file mode 100644
->      > index 80a228a0..00000000
->      > --- a/meta-ti-bsp/conf/machine/j784s4-hs-evm-k3r5.conf
->      > +++ /dev/null
->      > @@ -1,11 +0,0 @@
->      > -#@TYPE: Machine
->      > -#@NAME: J784S4 HS EVM (R5F)
->      > -#@DESCRIPTION: Machine configuration for the TI J784S4 HS EVM (=
-R5F core)
->      > -
->      > -require conf/machine/include/k3r5.inc
->      > -
->      > -SYSFW_SOC =3D "j784s4"
->      > -SYSFW_CONFIG =3D "evm"
->      > -SYSFW_SUFFIX =3D "hs"
->      > -
->      > -UBOOT_MACHINE =3D "j784s4_evm_r5_defconfig"
->      > diff --git a/meta-ti-bsp/conf/machine/j784s4-hs-evm.conf b/meta-=
-ti-bsp/conf/machine/j784s4-hs-evm.conf
->      > index 8fa1c1fd..42468088 100644
->      > --- a/meta-ti-bsp/conf/machine/j784s4-hs-evm.conf
->      > +++ b/meta-ti-bsp/conf/machine/j784s4-hs-evm.conf
->      > @@ -3,3 +3,5 @@
->      >=C2=A0 =C2=A0#@DESCRIPTION: Machine configuration for the TI J784=
-S4 HS EVM
->      >
->      >=C2=A0 =C2=A0require conf/machine/j784s4-evm.conf
->      > +
->      > +SYSFW_SUFFIX =3D "hs"
->      > diff --git a/meta-ti-bsp/conf/multiconfig/k3r5.conf b/meta-ti-bs=
-p/conf/multiconfig/k3r5.conf
->      > deleted file mode 100644
->      > index 936bce2f..00000000
->      > --- a/meta-ti-bsp/conf/multiconfig/k3r5.conf
->      > +++ /dev/null
->      > @@ -1,10 +0,0 @@
->      > -MAINMACHINE :=3D "${MACHINE}"
->      > -
->      > -DEPLOY_DIR_IMAGE:k3r5 =3D "${TI_COMMON_DEPLOY}/images/${MAINMAC=
-HINE}"
->      > -
->      > -MACHINE:append =3D "-k3r5"
->      > -TCLIBC =3D "baremetal"
->      > -TI_TMPDIR_APPEND ?=3D "-k3r5"
->      > -TMPDIR:append =3D "${TI_TMPDIR_APPEND}"
->      > -
->      > -SDKPKGSUFFIX =3D "k3r5-nativesdk"
->      > diff --git a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb =
-<http://ti-sci-fw_git.bb> b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_g=
-it.bb <http://ti-sci-fw_git.bb>
->      > index 12292c88..0597d9bb 100644
->      > --- a/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb <http:/=
-/ti-sci-fw_git.bb>
->      > +++ b/meta-ti-bsp/recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb <http:/=
-/ti-sci-fw_git.bb>
->      > @@ -17,9 +17,6 @@ do_install() {
->      >=C2=A0 =C2=A0}
->      >
->      >=C2=A0 =C2=A0do_deploy(){
->      > -}
->      > -
->      > -do_deploy:k3r5() {
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${DEPLOYDIR}/ti-sysfw
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 644 ${S}/ti-sysfw/ti-sci-fi=
-rmware-* ${DEPLOYDIR}/ti-sysfw
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 644 ${S}/ti-sysfw/ti-fs-fir=
-mware-* ${DEPLOYDIR}/ti-sysfw
->      > diff --git a/meta-ti-bsp/recipes-bsp/u-boot/tiboot3-staging_2023=
-.5.bb <http://tiboot3-staging_2023.5.bb> b/meta-ti-bsp/recipes-bsp/u-boot=
-/tiboot3-staging_2023.5.bb <http://tiboot3-staging_2023.5.bb>
->      > new file mode 100644
->      > index 00000000..0f1929b5
->      > --- /dev/null
->      > +++ b/meta-ti-bsp/recipes-bsp/u-boot/tiboot3-staging_2023.5.bb <=
-http://tiboot3-staging_2023.5.bb>
->      > @@ -0,0 +1,65 @@
->      > +require u-boot-ti.inc
->      > +
->      > +include ${@ 'recipes-bsp/u-boot/ti-extras.inc' if d.getVar('TI_=
-EXTRAS') else ''}
->      > +
->      > +PR =3D "r0"
->      > +BRANCH =3D "ti-u-boot-2023.04"
->      > +SRCREV =3D "b0d717b732ee28e446baf94522b3491e590f7fbb"
->      > +
->      > +PROVIDES:remove =3D "virtual/bootloader"
->      > +PROVIDES:remove =3D "u-boot"
->      > +
->      > +# Using gcc-cross-arm-native here would have been ideal
->      > +# as the compiler version would match between R5 and
->      > +# main ARM core builds. arm-oe-linux-gnueabi-
->      > +DEPENDS +=3D "gcc-arm-none-eabi-native"
->      > +
->      > +EXTRA_OEMAKE +=3D "CROSS_COMPILE=3Darm-none-eabi- CC=3Darm-none=
--eabi-gcc"
->      > +
->      > +UBOOT_MACHINE =3D "${UBOOT_MACHINE_R5}"
->      > +
->      > +SPL_SUFFIX =3D "bin"
->      > +SPL_BINARY =3D "tiboot3-${SYSFW_SOC}-${SYSFW_SUFFIX}-${SYSFW_CO=
-NFIG}.${SPL_SUFFIX}"
->      > +SPL_SYMLINK =3D "tiboot3.${SPL_SUFFIX}"
->      > +UBOOT_SUFFIX =3D "bin"
->      > +UBOOT_BINARY =3D "u-boot-r5spl.${UBOOT_SUFFIX}"
->      > +UBOOT_IMAGE =3D "u-boot-r5spl-${MAINMACHINE}-${PV}-${PR}.${UBOO=
-T_SUFFIX}"
->      > +UBOOT_SYMLINK =3D "u-boot-r5spl-${MAINMACHINE}.${UBOOT_SUFFIX}"
->      > +
->      > +do_compile:append () {
->      > +=C2=A0 =C2=A0 =C2=A0if [ -n "${UBOOT_CONFIG}" ];
->      > +=C2=A0 =C2=A0 =C2=A0then
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0for config in $=
-{UBOOT_MACHINE}; do
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0i=3D$(expr $i + 1);
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0for type in ${UBOOT_CONFIG}; do
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0j=3D$(expr $j + 1);
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if [ $j -eq $i ];
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0then
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if !=
- [ -L ${B}/${config}/${UBOOT_BINARY} ] && ! [ -f ${B}/${config}/${UBOOT_B=
-INARY} ]; then
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0ln -s ${B}/${config}/spl/u-boot-spl.${UBOOT_SUFFI=
-X} ${B}/${config}/${UBOOT_BINARY}
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0done
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0unset=C2=A0 j
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0done
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0unset=C2=A0 i
->      > +=C2=A0 =C2=A0 =C2=A0else
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if ! [ -f ${B}/=
-${UBOOT_BINARY} ]; then
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0ln -s spl/u-boot-spl.${UBOOT_SUFFIX} ${B}/${UBOOT_BINARY}
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
->      > +=C2=A0 =C2=A0 =C2=A0fi
->      > +}
->      > +
->      > +do_deploy:append () {
->      > +=C2=A0 =C2=A0 =C2=A0for f in ${B}/tiboot3-*.bin; do
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if [ -f "$f" ];=
- then
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0install -m 644 $f ${DEPLOYDIR}/
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
->      > +=C2=A0 =C2=A0 =C2=A0done
->      > +
->      > +=C2=A0 =C2=A0 =C2=A0for f in ${B}/sysfw*.itb; do
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if [ -f "$f" ];=
- then
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0install -m 644 $f ${DEPLOYDIR}/
->      > +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
->      > +=C2=A0 =C2=A0 =C2=A0done
->      > +}
->      > diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb=
- <http://u-boot-bb.org_git.bb> b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb=
-.org_git.bb <http://u-boot-bb.org_git.bb>
->      > index 5bb20213..1ec5f9bf 100644
->      > --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb <http:=
-//u-boot-bb.org_git.bb>
->      > +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb <http:=
-//u-boot-bb.org_git.bb>
->      > @@ -12,6 +12,4 @@ BRANCH =3D "v2023.04-ti-09.00.00.011"
->      >=C2=A0 =C2=A0SRCREV =3D "4b8f8be8870f03d92a2b01d0d30ab912118adc82=
-"
->      >
->      >=C2=A0 =C2=A0BRANCH:beagleplay =3D "v2023.04-ti-09.00.00.011-Beag=
-lePlay"
->      > -BRANCH:beagleplay-k3r5 =3D "v2023.04-ti-09.00.00.011-BeaglePlay=
-"
->      >=C2=A0 =C2=A0SRCREV:beagleplay =3D "10afea462ea1113701f6f0f8853fd=
-ff985aa275d"
->      > -SRCREV:beagleplay-k3r5 =3D "10afea462ea1113701f6f0f8853fdff985a=
-a275d"
->      > diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta=
--ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
->      > index 2f15c4fb..b0f88a5a 100644
->      > --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
->      > +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
->      > @@ -31,7 +31,6 @@ DEPENDS +=3D "python3-pyelftools-native python=
-3-pyyaml-native python3-jsonschema-n
->      >
->      >=C2=A0 =C2=A0# SYSFW/TIFS Firmware
->      >=C2=A0 =C2=A0DEPENDS:append:k3 =3D " ti-sci-fw"
->      > -DEPENDS:append:k3r5 =3D " ti-sci-fw"
->      >
->      >=C2=A0 =C2=A0DM_FIRMWARE =3D "ipc_echo_testb_mcu1_0_release_strip=
-.xer5f"
->      >
->      > @@ -79,7 +78,6 @@ SYSROOT_DIRS +=3D "/boot"
->      >
->      >=C2=A0 =C2=A0# SPL (Second Program Loader) to be loaded over UART
->      >=C2=A0 =C2=A0SPL_UART_BINARY =3D "u-boot-spl.bin"
->      > -SPL_UART_BINARY:k3r5 =3D ""
->      >
->      >=C2=A0 =C2=A0SPL_UART_IMAGE ?=3D "${SPL_UART_BINARY}-${MACHINE}-$=
-{PV}-${PR}"
->      >=C2=A0 =C2=A0SPL_UART_SYMLINK ?=3D "${SPL_UART_BINARY}-${MACHINE}=
-"
->      > @@ -108,30 +106,6 @@ UBOOT_HS_2ND_BINARY =3D "u-boot-spl_HS_2ND"
->      >=C2=A0 =C2=A0UBOOT_HS_2ND_IMAGE =3D "u-boot-spl_HS_2ND-${MACHINE}=
--${PV}-${PR}"
->      >=C2=A0 =C2=A0UBOOT_HS_2ND_SYMLINK =3D "u-boot-spl_HS_2ND-${MACHIN=
-E}"
->      >
->      > -do_compile:append:k3r5 () {
->      > -=C2=A0 =C2=A0 =C2=A0if [ -n "${UBOOT_CONFIG}" ];
->      > -=C2=A0 =C2=A0 =C2=A0then
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0for config in $=
-{UBOOT_MACHINE}; do
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0i=3D$(expr $i + 1);
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0for type in ${UBOOT_CONFIG}; do
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0j=3D$(expr $j + 1);
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if [ $j -eq $i ];
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0then
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if !=
- [ -L ${B}/${config}/${UBOOT_BINARY} ] && ! [ -f ${B}/${config}/${UBOOT_B=
-INARY} ]; then
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0ln -s ${B}/${config}/spl/u-boot-spl.${UBOOT_SUFFI=
-X} ${B}/${config}/${UBOOT_BINARY}
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0done
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0unset=C2=A0 j
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0done
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0unset=C2=A0 i
->      > -=C2=A0 =C2=A0 =C2=A0else
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if ! [ -f ${B}/=
-${UBOOT_BINARY} ]; then
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0ln -s spl/u-boot-spl.${UBOOT_SUFFIX} ${B}/${UBOOT_BINARY}
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
->      > -=C2=A0 =C2=A0 =C2=A0fi
->      > -}
->      > -
->      >=C2=A0 =C2=A0do_install:append () {
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0if [ -n "${UBOOT_CONFIG}" ]
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0then
->      > @@ -204,20 +178,6 @@ do_install:append () {
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0fi
->      >=C2=A0 =C2=A0}
->      >
->      > -do_deploy:append:k3r5 () {
->      > -=C2=A0 =C2=A0 =C2=A0for f in ${B}/tiboot3-*.bin; do
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if [ -f "$f" ];=
- then
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0install -m 644 $f ${DEPLOYDIR}/
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
->      > -=C2=A0 =C2=A0 =C2=A0done
->      > -
->      > -=C2=A0 =C2=A0 =C2=A0for f in ${B}/sysfw*.itb; do
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if [ -f "$f" ];=
- then
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0install -m 644 $f ${DEPLOYDIR}/
->      > -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
->      > -=C2=A0 =C2=A0 =C2=A0done
->      > -}
->      > -
->      >=C2=A0 =C2=A0do_deploy:append () {
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0if [ -n "${UBOOT_CONFIG}" ]
->      >=C2=A0 =C2=A0 =C2=A0 =C2=A0then
->=20
->     --=20
->     Ryan Eatmon reatmon@ti.com <mailto:reatmon@ti.com>
->     -----------------------------------------
->     Texas Instruments, Inc.=C2=A0 -=C2=A0 LCPD=C2=A0 -=C2=A0 MGTS
->=20
->     -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->     Links: You receive all messages sent to this group.
->     View/Reply Online (#17353): https://lists.yoctoproject.org/g/meta-t=
-i/message/17353 <https://lists.yoctoproject.org/g/meta-ti/message/17353>
->     Mute This Topic: https://lists.yoctoproject.org/mt/103283292/505261=
-2 <https://lists.yoctoproject.org/mt/103283292/5052612>
->     Group Owner: meta-ti+owner@lists.yoctoproject.org <mailto:meta-ti%2=
-Bowner@lists.yoctoproject.org>
->     Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/leave/1136986=
-5/5052612/926574700/xyzzy <https://lists.yoctoproject.org/g/meta-ti/leave=
-/11369865/5052612/926574700/xyzzy> [quaresma.jose@gmail.com <mailto:quare=
-sma.jose@gmail.com>]
->     -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->=20
->=20
->=20
-> --=20
-> Best regards,
->=20
-> Jos=C3=A9 Quaresma
+DQoNCk9uIDEyLzIwLzIwMjMgMTA6NTQgQU0sIEFuZHJldyBEYXZpcyB3cm90ZToNCj4gT24g
+MTIvMjAvMjMgMTA6NDMgQU0sIEpvc2UgUXVhcmVzbWEgd3JvdGU6DQo+PiBIaSBBbmRyZXcs
+DQo+Pg0KPj4gSSBiZWxpZXZlwqB0aGlzIHBhdGNoc2V0IGNhbiBoZWxwIGZpeCBzb21lIG9m
+IHRoZSByZW1haW5pbmfCoGlzc3VlcyANCj4+IG1haW5seSBpbiB0aGUga2lyc3RvbmUgYnJh
+bmNoLg0KPiANCj4gSSBob3BlIHNvLCBJIHdhcyB0aGlua2luZyBvZiB0aGUgdHJvdWJsZXMg
+eW91IGhhdmUgYmVlbiBoYXZpbmcgd2hlbg0KPiBwdXRpbmcgdGhpcyB0b2dldGhlci4gKHBs
+dXMgc2V2ZXJhbCBvdGhlcnMgb24gRTJFIHdpdGggbXVsdGljb25mIGlzc3VlcykNCj4gDQo+
+PiBJIHdpbGwgdGVzdCBpdCBidXQgbWF5YmUgb25seSBuZXh0IHllYXIuDQo+IA0KPiBUaGlz
+IGlzIGEgdmVyeSBlYXJseSBSRkMgc28gbm8gZ3VhcmFudGVlIGl0IGV2ZW4gYm9vdHMgb24g
+YWxsIHBsYXRmb3Jtcy4NCj4gRGVueXMgYW5kIFJ5YW4gcHV0IGEgbG90IG9mIHdvcmsgaW50
+byBrZWVwaW5nIG11bHRpY29uZiB3b3JraW5nIHNvIGp1c3QNCj4gd2FudGVkIHRvIG1ha2Ug
+c3VyZSB0aGV5IGFyZSBva2F5IHdpdGggZHJvcHBpbmcgaXQgYmFjayBvdXQgYmVmb3JlIEkg
+ZG8NCj4gdG9vIG11Y2ggd29yayBvbiBnZXR0aW5nIGFsbCB0aGUgZXhhY3QgZGV0YWlscyBy
+aWdodC4NCj4gDQo+IFRoZXJlIGlzIGFsc28gYSBjaGFuZ2UgbmVlZGVkIHVwIGluIHRoZSBt
+ZXRhLWFyYWdvIGxheWVyIHNvIHRoaXMgYWxsDQo+IHdpbGwgcHJvYmFibHkgZW5kIHVwIHRh
+cmdldGluZyBvbmx5IG1hc3Rlci9zY2FydGhnYXAgYW5kIG5vdCBraXJrc3RvbmUuDQoNCldo
+YXQncyB0aGUgY2hhbmdlIGluIGFyYWdvPyAgV2lsbCBteSB0ZXN0IGJ1aWxkcyBldmVuIHdv
+cmsgd2l0aG91dCB0aGF0IA0KY2hhbmdlPw0KDQoNCj4gQW5kcmV3DQo+IA0KPj4NCj4+IEpv
+c2UNCj4+DQo+PiBSeWFuIEVhdG1vbiB2aWEgbGlzdHMueW9jdG9wcm9qZWN0Lm9yZyA8aHR0
+cDovL2xpc3RzLnlvY3RvcHJvamVjdC5vcmc+IA0KPj4gPHJlYXRtb249dGkuY29tQGxpc3Rz
+LnlvY3RvcHJvamVjdC5vcmcgDQo+PiA8bWFpbHRvOnRpLmNvbUBsaXN0cy55b2N0b3Byb2pl
+Y3Qub3JnPj4gZXNjcmV2ZXUgbm8gZGlhIHF1YXJ0YSwgDQo+PiAyMC8xMi8yMDIzIMOgKHMp
+IDE2OjE0Og0KPj4NCj4+DQo+Pg0KPj4gwqDCoMKgIE9uIDEyLzIwLzIwMjMgMTA6MDcgQU0s
+IEFuZHJldyBEYXZpcyB3cm90ZToNCj4+IMKgwqDCoMKgID4gVGhlIFI1IFNQTCBib290bG9h
+ZGVyIGlzIHRoZSBvbmx5IHNvZnR3YXJlIHdlIGJ1aWxkIHVzaW5nIHRoZSANCj4+IFI1IChh
+cm0zMikNCj4+IMKgwqDCoMKgID4gbXVsdGljb25maWcgZW52aXJvbm1lbnQuIFVzaW5nIG11
+bHRpY29uZmlnIHB1bGxzIGluIGEgbGFyZ2UgDQo+PiBudW1iZXIgb2YNCj4+IMKgwqDCoMKg
+ID4gYnVpbGQgZGVwZW5kZW5jaWVzIChzZWUgdGhlIC1uYXRpdmUgZW52aXJvbm1lbnQgaW4g
+YmFyZW1ldGFsIA0KPj4gdG1wIGRpcikNCj4+IMKgwqDCoMKgID4gdGhpcyBpbmNyZWFzZXMg
+YnVpbGQgdGltZSBhbmQgc3BhY2UuDQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKgwqDCoCA+IFVz
+aW5nIG11bHRpY29uZmlnIGZvciBhIGRlcGxveSB0YXJnZXQgYWxzbyBsZWFkcyB0byBzZXZl
+cmFsIA0KPj4gb2RkaXRpZXMgaW4NCj4+IMKgwqDCoMKgID4gdGhlIGJpdGJha2UgYnVpbGQg
+c3lzdGVtIGZvcmNpbmcgdXNlIG9mIGEgbm9uLXN0YW5kYXJkIGRlcGxveSANCj4+IGRpcmVj
+dG9yeQ0KPj4gwqDCoMKgwqAgPiBhbmQgY2FyZWZ1bCBjaGVja3MgdGhhdCBubyByZWNpcGUg
+YnVpbHQgaW4gYm90aCBjb25maWd1cmF0aW9uIA0KPj4gZGVwbG95DQo+PiDCoMKgwqDCoCA+
+IHRoZSBzYW1lIGZpbGVzLg0KPj4gwqDCoMKgwqAgPg0KPj4gwqDCoMKgwqAgPiBXaGlsZSBJ
+IGJlbGlldmUgd2Ugd2lsbCBnZXQgbW9yZSB1c2Ugb3V0IG9mIG11bHRpY29uZmlnIGZvciBm
+dXR1cmUNCj4+IMKgwqDCoMKgID4gZGV2aWNlcywgdG9kYXkgbGV0J3Mgc2ltcGxpZnkgdGhl
+IEszIGJ1aWxkIGluZnJhc3RydWN0dXJlIGhlcmUgYnkNCj4+IMKgwqDCoMKgID4gYnVpbGRp
+bmcgUjUgU1BMIGxpa2UgYSBub3JtYWwgZmlybXdhcmUgdXNpbmcgYSBmb3JlaWduIA0KPj4g
+dGFyZ2V0aW5nIGNyb3NzDQo+PiDCoMKgwqDCoCA+IGNvbXBpbGVyLiBUaGlzIGlzIHRoZSB0
+ZWNobmlxdWUgbWV0YS1hcm0gdXNlcyB0byBidWlsZCBmaXJtd2FyZSANCj4+IChzZWUNCj4+
+IMKgwqDCoMKgID4gc2NwLWZpcm13YXJlIGFuZCB0cnVzdGVkLWZpcm13YXJlLW0gcmVjaXBl
+cykuIEFkZCBhIG5ldyB0aWJvb3QzIA0KPj4gZmlybXdhcmUNCj4+IMKgwqDCoMKgID4gcmVj
+aXBlIGhlcmUuDQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKgwqDCoCA+IFdpdGggdGhhdCB3ZSBj
+YW4gYWxzbyBkcm9wIGFsbCB0aGUgcmVsYXRlZCBrM3I1IG11bHRpY29uZmlnIA0KPj4gZmls
+ZXMgYW5kDQo+PiDCoMKgwqDCoCA+IGRlZmluaXRpb25zLiBEbyB0aGF0IGhlcmUuDQo+Pg0K
+Pj4gwqDCoMKgIE9uIGZpcnN0IGdsYW5jZSwgdGhpcyBsb29rcyBnb29kLsKgIExldCBtZSBk
+byBzb21lIHRlc3QgYnVpbGRzLg0KPj4NCj4+DQo+PiDCoMKgwqDCoCA+IFNpZ25lZC1vZmYt
+Ynk6IEFuZHJldyBEYXZpcyA8YWZkQHRpLmNvbSA8bWFpbHRvOmFmZEB0aS5jb20+Pg0KPj4g
+wqDCoMKgwqAgPiAtLS0NCj4+IMKgwqDCoMKgID7CoCDCoG1ldGEtdGktYnNwL2NsYXNzZXMv
+dGktc2VjZGV2LmJiY2xhc3PCoCDCoCDCoCDCoCDCoHzCoCAzIC0NCj4+IMKgwqDCoMKgID7C
+oCDCoC4uLi9jb25mL21hY2hpbmUvYW02MmF4eC1ldm0tazNyNS5jb25mwqAgwqAgwqAgwqAg
+fCAxMSAtLS0tDQo+PiDCoMKgwqDCoCA+wqAgwqBtZXRhLXRpLWJzcC9jb25mL21hY2hpbmUv
+YW02MmF4eC1ldm0uY29uZsKgIMKgIMKgfMKgIDUgKysNCj4+IMKgwqDCoMKgID7CoCDCoC4u
+Li9jb25mL21hY2hpbmUvYW02MnB4eC1ldm0tazNyNS5jb25mwqAgwqAgwqAgwqAgfCAxMiAt
+LS0tDQo+PiDCoMKgwqDCoCA+wqAgwqBtZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02MnB4
+eC1ldm0uY29uZsKgIMKgIMKgfMKgIDUgKysNCj4+IMKgwqDCoMKgID7CoCDCoG1ldGEtdGkt
+YnNwL2NvbmYvbWFjaGluZS9hbTYyeHgtZXZtLWszcjUuY29uZiB8IDEyIC0tLS0NCj4+IMKg
+wqDCoMKgID7CoCDCoG1ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTYyeHgtZXZtLmNvbmbC
+oCDCoCDCoCB8wqAgNSArKw0KPj4gwqDCoMKgwqAgPsKgIMKgLi4uL2NvbmYvbWFjaGluZS9h
+bTYyeHgtbHAtZXZtLWszcjUuY29uZsKgIMKgIMKgIHwgMTEgLS0tLQ0KPj4gwqDCoMKgwqAg
+PsKgIMKgbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJ4eC1scC1ldm0uY29uZsKgIMKg
+fMKgIDUgKysNCj4+IMKgwqDCoMKgID7CoCDCoC4uLi9jb25mL21hY2hpbmUvYW02Mnh4c2lw
+LWV2bS1rM3I1LmNvbmbCoCDCoCDCoCB8IDE2IC0tLS0tDQo+PiDCoMKgwqDCoCA+wqAgwqBt
+ZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02Mnh4c2lwLWV2bS5jb25mwqAgwqB8IDEwICsr
+Kw0KPj4gwqDCoMKgwqAgPsKgIMKgbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjR4eC1l
+dm0tazNyNS5jb25mIHwgMTEgLS0tLQ0KPj4gwqDCoMKgwqAgPsKgIMKgbWV0YS10aS1ic3Av
+Y29uZi9tYWNoaW5lL2FtNjR4eC1ldm0uY29uZsKgIMKgIMKgIHzCoCA1ICsrDQo+PiDCoMKg
+wqDCoCA+wqAgwqBtZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02NXh4LWV2bS1rM3I1LmNv
+bmYgfCAxMSAtLS0tDQo+PiDCoMKgwqDCoCA+wqAgwqBtZXRhLXRpLWJzcC9jb25mL21hY2hp
+bmUvYW02NXh4LWV2bS5jb25mwqAgwqAgwqAgfMKgIDUgKysNCj4+IMKgwqDCoMKgID7CoCDC
+oC4uLi9jb25mL21hY2hpbmUvYW02NXh4LWhzLWV2bS1rM3I1LmNvbmbCoCDCoCDCoCB8IDEx
+IC0tLS0NCj4+IMKgwqDCoMKgID7CoCDCoG1ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTY1
+eHgtaHMtZXZtLmNvbmbCoCDCoHzCoCA1ICsrDQo+PiDCoMKgwqDCoCA+wqAgwqAuLi4vY29u
+Zi9tYWNoaW5lL2JlYWdsZWJvbmUtYWk2NC1rM3I1LmNvbmbCoCDCoCB8IDE3IC0tLS0tDQo+
+PiDCoMKgwqDCoCA+wqAgwqBtZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYmVhZ2xlYm9uZS1h
+aTY0LmNvbmYgfMKgIDUgKysNCj4+IMKgwqDCoMKgID7CoCDCoG1ldGEtdGktYnNwL2NvbmYv
+bWFjaGluZS9iZWFnbGVwbGF5LWszcjUuY29uZiB8IDE0IC0tLS0NCj4+IMKgwqDCoMKgID7C
+oCDCoG1ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9iZWFnbGVwbGF5LmNvbmbCoCDCoCDCoCB8
+wqAgNSArKw0KPj4gwqDCoMKgwqAgPsKgIMKgbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2lu
+Y2x1ZGUvazMuaW5jwqAgwqAgwqAgwqB8wqAgNCArLQ0KPj4gwqDCoMKgwqAgPsKgIMKgbWV0
+YS10aS1ic3AvY29uZi9tYWNoaW5lL2luY2x1ZGUvazNyNS5pbmPCoCDCoCDCoHwgMjcgLS0t
+LS0tLS0NCj4+IMKgwqDCoMKgID7CoCDCoG1ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIw
+MC1ldm0tazNyNS5jb25mwqAgfCAxMSAtLS0tDQo+PiDCoMKgwqDCoCA+wqAgwqBtZXRhLXRp
+LWJzcC9jb25mL21hY2hpbmUvajcyMDAtZXZtLmNvbmbCoCDCoCDCoCDCoHzCoCA1ICsrDQo+
+PiDCoMKgwqDCoCA+wqAgwqAuLi4vY29uZi9tYWNoaW5lL2o3MjAwLWhzLWV2bS1rM3I1LmNv
+bmbCoCDCoCDCoCDCoHwgMTEgLS0tLQ0KPj4gwqDCoMKgwqAgPsKgIMKgbWV0YS10aS1ic3Av
+Y29uZi9tYWNoaW5lL2o3MjAwLWhzLWV2bS5jb25mwqAgwqAgfMKgIDUgKysNCj4+IMKgwqDC
+oMKgID7CoCDCoG1ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIxZS1ldm0tazNyNS5jb25m
+wqAgfCAxMSAtLS0tDQo+PiDCoMKgwqDCoCA+wqAgwqBtZXRhLXRpLWJzcC9jb25mL21hY2hp
+bmUvajcyMWUtZXZtLmNvbmbCoCDCoCDCoCDCoHzCoCA1ICsrDQo+PiDCoMKgwqDCoCA+wqAg
+wqAuLi4vY29uZi9tYWNoaW5lL2o3MjFlLWhzLWV2bS1rM3I1LmNvbmbCoCDCoCDCoCDCoHwg
+MTEgLS0tLQ0KPj4gwqDCoMKgwqAgPsKgIMKgbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3
+MjFlLWhzLWV2bS5jb25mwqAgwqAgfMKgIDMgKy0NCj4+IMKgwqDCoMKgID7CoCDCoG1ldGEt
+dGktYnNwL2NvbmYvbWFjaGluZS9qNzIxczItZXZtLWszcjUuY29uZiB8IDExIC0tLS0NCj4+
+IMKgwqDCoMKgID7CoCDCoG1ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIxczItZXZtLmNv
+bmbCoCDCoCDCoCB8wqAgNSArKw0KPj4gwqDCoMKgwqAgPsKgIMKgLi4uL2NvbmYvbWFjaGlu
+ZS9qNzIxczItaHMtZXZtLWszcjUuY29uZsKgIMKgIMKgIHwgMTEgLS0tLQ0KPj4gwqDCoMKg
+wqAgPsKgIMKgbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3MjFzMi1ocy1ldm0uY29uZsKg
+IMKgfMKgIDIgKw0KPj4gwqDCoMKgwqAgPsKgIMKgbWV0YS10aS1ic3AvY29uZi9tYWNoaW5l
+L2o3ODRzNC1ldm0tazNyNS5jb25mIHwgMTEgLS0tLQ0KPj4gwqDCoMKgwqAgPsKgIMKgbWV0
+YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3ODRzNC1ldm0uY29uZsKgIMKgIMKgIHzCoCA1ICsr
+DQo+PiDCoMKgwqDCoCA+wqAgwqAuLi4vY29uZi9tYWNoaW5lL2o3ODRzNC1ocy1ldm0tazNy
+NS5jb25mwqAgwqAgwqAgfCAxMSAtLS0tDQo+PiDCoMKgwqDCoCA+wqAgwqBtZXRhLXRpLWJz
+cC9jb25mL21hY2hpbmUvajc4NHM0LWhzLWV2bS5jb25mwqAgwqB8wqAgMiArDQo+PiDCoMKg
+wqDCoCA+wqAgwqBtZXRhLXRpLWJzcC9jb25mL211bHRpY29uZmlnL2szcjUuY29uZsKgIMKg
+IMKgIMKgIHwgMTAgLS0tDQo+PiDCoMKgwqDCoCA+wqAgwqAuLi4vcmVjaXBlcy1ic3AvdGkt
+c2NpLWZ3L3RpLXNjaS1md19naXQuYmIgDQo+PiA8aHR0cDovL3RpLXNjaS1md19naXQuYmI+
+wqAgwqAgfMKgIDMgLQ0KPj4gwqDCoMKgwqAgPsKgIMKgLi4uL3UtYm9vdC90aWJvb3QzLXN0
+YWdpbmdfMjAyMy41LmJiIA0KPj4gPGh0dHA6Ly90aWJvb3QzLXN0YWdpbmdfMjAyMy41LmJi
+PsKgIMKgIMKgIMKgIMKgIHwgNjUgKysrKysrKysrKysrKysrKysrKw0KPj4gwqDCoMKgwqAg
+PsKgIMKgLi4uL3JlY2lwZXMtYnNwL3UtYm9vdC91LWJvb3QtYmIub3JnX2dpdC5iYiANCj4+
+IDxodHRwOi8vdS1ib290LWJiLm9yZ19naXQuYmI+wqAgwqB8wqAgMiAtDQo+PiDCoMKgwqDC
+oCA+wqAgwqBtZXRhLXRpLWJzcC9yZWNpcGVzLWJzcC91LWJvb3QvdS1ib290LXRpLmluY8Kg
+IHwgNDAgLS0tLS0tLS0tLS0tDQo+PiDCoMKgwqDCoCA+wqAgwqA0NCBmaWxlcyBjaGFuZ2Vk
+LCAxNTIgaW5zZXJ0aW9ucygrKSwgMzAzIGRlbGV0aW9ucygtKQ0KPj4gwqDCoMKgwqAgPsKg
+IMKgZGVsZXRlIG1vZGUgMTAwNjQ0IA0KPj4gbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2Ft
+NjJheHgtZXZtLWszcjUuY29uZg0KPj4gwqDCoMKgwqAgPsKgIMKgZGVsZXRlIG1vZGUgMTAw
+NjQ0IA0KPj4gbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJweHgtZXZtLWszcjUuY29u
+Zg0KPj4gwqDCoMKgwqAgPsKgIMKgZGVsZXRlIG1vZGUgMTAwNjQ0IG1ldGEtdGktYnNwL2Nv
+bmYvbWFjaGluZS9hbTYyeHgtZXZtLWszcjUuY29uZg0KPj4gwqDCoMKgwqAgPsKgIMKgZGVs
+ZXRlIG1vZGUgMTAwNjQ0IA0KPj4gbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJ4eC1s
+cC1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+wqAgwqBkZWxldGUgbW9kZSAxMDA2NDQg
+DQo+PiBtZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02Mnh4c2lwLWV2bS1rM3I1LmNvbmYN
+Cj4+IMKgwqDCoMKgID7CoCDCoGRlbGV0ZSBtb2RlIDEwMDY0NCBtZXRhLXRpLWJzcC9jb25m
+L21hY2hpbmUvYW02NHh4LWV2bS1rM3I1LmNvbmYNCj4+IMKgwqDCoMKgID7CoCDCoGRlbGV0
+ZSBtb2RlIDEwMDY0NCBtZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02NXh4LWV2bS1rM3I1
+LmNvbmYNCj4+IMKgwqDCoMKgID7CoCDCoGRlbGV0ZSBtb2RlIDEwMDY0NCANCj4+IG1ldGEt
+dGktYnNwL2NvbmYvbWFjaGluZS9hbTY1eHgtaHMtZXZtLWszcjUuY29uZg0KPj4gwqDCoMKg
+wqAgPsKgIMKgZGVsZXRlIG1vZGUgMTAwNjQ0IA0KPj4gbWV0YS10aS1ic3AvY29uZi9tYWNo
+aW5lL2JlYWdsZWJvbmUtYWk2NC1rM3I1LmNvbmYNCj4+IMKgwqDCoMKgID7CoCDCoGRlbGV0
+ZSBtb2RlIDEwMDY0NCBtZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYmVhZ2xlcGxheS1rM3I1
+LmNvbmYNCj4+IMKgwqDCoMKgID7CoCDCoGRlbGV0ZSBtb2RlIDEwMDY0NCBtZXRhLXRpLWJz
+cC9jb25mL21hY2hpbmUvaW5jbHVkZS9rM3I1LmluYw0KPj4gwqDCoMKgwqAgPsKgIMKgZGVs
+ZXRlIG1vZGUgMTAwNjQ0IG1ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIwMC1ldm0tazNy
+NS5jb25mDQo+PiDCoMKgwqDCoCA+wqAgwqBkZWxldGUgbW9kZSAxMDA2NDQgDQo+PiBtZXRh
+LXRpLWJzcC9jb25mL21hY2hpbmUvajcyMDAtaHMtZXZtLWszcjUuY29uZg0KPj4gwqDCoMKg
+wqAgPsKgIMKgZGVsZXRlIG1vZGUgMTAwNjQ0IG1ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9q
+NzIxZS1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+wqAgwqBkZWxldGUgbW9kZSAxMDA2
+NDQgDQo+PiBtZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajcyMWUtaHMtZXZtLWszcjUuY29u
+Zg0KPj4gwqDCoMKgwqAgPsKgIMKgZGVsZXRlIG1vZGUgMTAwNjQ0IG1ldGEtdGktYnNwL2Nv
+bmYvbWFjaGluZS9qNzIxczItZXZtLWszcjUuY29uZg0KPj4gwqDCoMKgwqAgPsKgIMKgZGVs
+ZXRlIG1vZGUgMTAwNjQ0IA0KPj4gbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3MjFzMi1o
+cy1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+wqAgwqBkZWxldGUgbW9kZSAxMDA2NDQg
+bWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3ODRzNC1ldm0tazNyNS5jb25mDQo+PiDCoMKg
+wqDCoCA+wqAgwqBkZWxldGUgbW9kZSAxMDA2NDQgDQo+PiBtZXRhLXRpLWJzcC9jb25mL21h
+Y2hpbmUvajc4NHM0LWhzLWV2bS1rM3I1LmNvbmYNCj4+IMKgwqDCoMKgID7CoCDCoGRlbGV0
+ZSBtb2RlIDEwMDY0NCBtZXRhLXRpLWJzcC9jb25mL211bHRpY29uZmlnL2szcjUuY29uZg0K
+Pj4gwqDCoMKgwqAgPsKgIMKgY3JlYXRlIG1vZGUgMTAwNjQ0IA0KPj4gbWV0YS10aS1ic3Av
+cmVjaXBlcy1ic3AvdS1ib290L3RpYm9vdDMtc3RhZ2luZ18yMDIzLjUuYmIgDQo+PiA8aHR0
+cDovL3RpYm9vdDMtc3RhZ2luZ18yMDIzLjUuYmI+DQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKg
+wqDCoCA+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWJzcC9jbGFzc2VzL3RpLXNlY2Rldi5iYmNs
+YXNzIA0KPj4gYi9tZXRhLXRpLWJzcC9jbGFzc2VzL3RpLXNlY2Rldi5iYmNsYXNzDQo+PiDC
+oMKgwqDCoCA+IGluZGV4IGIzZDcwZTVjLi4xOGQxNTI2OSAxMDA2NDQNCj4+IMKgwqDCoMKg
+ID4gLS0tIGEvbWV0YS10aS1ic3AvY2xhc3Nlcy90aS1zZWNkZXYuYmJjbGFzcw0KPj4gwqDC
+oMKgwqAgPiArKysgYi9tZXRhLXRpLWJzcC9jbGFzc2VzL3RpLXNlY2Rldi5iYmNsYXNzDQo+
+PiDCoMKgwqDCoCA+IEBAIC0yLDE0ICsyLDExIEBADQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKg
+wqDCoCA+wqAgwqAjIEszIFNFQ0RFViBzY3JpcHRzIHVzZSBPcGVuU1NMDQo+PiDCoMKgwqDC
+oCA+wqAgwqBERVBFTkRTOmFwcGVuZDprMyA9ICIgb3BlbnNzbC1uYXRpdmUiDQo+PiDCoMKg
+wqDCoCA+IC1ERVBFTkRTOmFwcGVuZDprM3I1ID0gIiBvcGVuc3NsLW5hdGl2ZSINCj4+IMKg
+wqDCoMKgID4NCj4+IMKgwqDCoMKgID7CoCDCoCMgVXNlIHBhY2thZ2UgdmVyc2lvbiBvZiBU
+SSBTRUNERVYgZm9yIEszIGlmIG9uZSBpcyBub3QgDQo+PiBwcm92aWRlZCB0aHJvdWdoIHRo
+ZSBlbnZpcm9ubWVudA0KPj4gwqDCoMKgwqAgPsKgIMKgREVQRU5EUzphcHBlbmQ6azMgPSAi
+JHtAICcnIGlmIA0KPj4gZC5nZXRWYXIoJ1RJX1NFQ1VSRV9ERVZfUEtHX0szJykgZWxzZSAn
+IHRpLWszLXNlY2Rldi1uYXRpdmUnIH0iDQo+PiDCoMKgwqDCoCA+IC1ERVBFTkRTOmFwcGVu
+ZDprM3I1ID0gIiR7QCAnJyBpZiANCj4+IGQuZ2V0VmFyKCdUSV9TRUNVUkVfREVWX1BLR19L
+MycpIGVsc2UgJyB0aS1rMy1zZWNkZXYtbmF0aXZlJyB9Ig0KPj4gwqDCoMKgwqAgPsKgIMKg
+VElfSzNfU0VDREVWX0lOU1RBTExfRElSID0gDQo+PiAiJHtTVEFHSU5HX0RJUl9OQVRJVkV9
+JHtkYXRhZGlyfS90aS90aS1rMy1zZWNkZXYiDQo+PiDCoMKgwqDCoCA+wqAgwqBUSV9TRUNV
+UkVfREVWX1BLRzprMyA9ICIke0AgZC5nZXRWYXIoJ1RJX1NFQ1VSRV9ERVZfUEtHX0szJykg
+DQo+PiBvciBkLmdldFZhcignVElfSzNfU0VDREVWX0lOU1RBTExfRElSJykgfSINCj4+IMKg
+wqDCoMKgID4gLVRJX1NFQ1VSRV9ERVZfUEtHOmszcjUgPSAiJHtAIGQuZ2V0VmFyKCdUSV9T
+RUNVUkVfREVWX1BLR19LMycpIA0KPj4gb3IgZC5nZXRWYXIoJ1RJX0szX1NFQ0RFVl9JTlNU
+QUxMX0RJUicpIH0iDQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKgwqDCoCA+wqAgwqAjIEZvciBu
+b24tSzMgd2UgcmVxdWlyZSB0aGUgU0VDREVWIHRvb2xzIGJlIHByb3ZpZGVkIHRocm91Z2gg
+DQo+PiB0aGUgZW52aXJvbm1lbnQgd2l0aCB0aGUgZm9sbG93aW5nIHZhcnMNCj4+IMKgwqDC
+oMKgID7CoCDCoFRJX1NFQ1VSRV9ERVZfUEtHOnRpMzN4ID0gIiR7VElfU0VDVVJFX0RFVl9Q
+S0dfQ0FUfS9hbTN4Ig0KPj4gwqDCoMKgwqAgPiBkaWZmIC0tZ2l0IGEvbWV0YS10aS1ic3Av
+Y29uZi9tYWNoaW5lL2FtNjJheHgtZXZtLWszcjUuY29uZiANCj4+IGIvbWV0YS10aS1ic3Av
+Y29uZi9tYWNoaW5lL2FtNjJheHgtZXZtLWszcjUuY29uZg0KPj4gwqDCoMKgwqAgPiBkZWxl
+dGVkIGZpbGUgbW9kZSAxMDA2NDQNCj4+IMKgwqDCoMKgID4gaW5kZXggMmFmMzMxN2UuLjAw
+MDAwMDAwDQo+PiDCoMKgwqDCoCA+IC0tLSBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9h
+bTYyYXh4LWV2bS1rM3I1LmNvbmYNCj4+IMKgwqDCoMKgID4gKysrIC9kZXYvbnVsbA0KPj4g
+wqDCoMKgwqAgPiBAQCAtMSwxMSArMCwwIEBADQo+PiDCoMKgwqDCoCA+IC0jQFRZUEU6IE1h
+Y2hpbmUNCj4+IMKgwqDCoMKgID4gLSNATkFNRTogQU02MkEgSFMtRlMgRVZNIChSNUYpDQo+
+PiDCoMKgwqDCoCA+IC0jQERFU0NSSVBUSU9OOiBNYWNoaW5lIGNvbmZpZ3VyYXRpb24gZm9y
+IHRoZSBUSSBBTTYyQSBFVk0gKFI1RiANCj4+IGNvcmUpDQo+PiDCoMKgwqDCoCA+IC0NCj4+
+IMKgwqDCoMKgID4gLXJlcXVpcmUgY29uZi9tYWNoaW5lL2luY2x1ZGUvazNyNS5pbmMNCj4+
+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtU1lTRldfU09DID0gImFtNjJheCINCj4+
+IMKgwqDCoMKgID4gLVNZU0ZXX0NPTkZJRyA9ICJldm0iDQo+PiDCoMKgwqDCoCA+IC1TWVNG
+V19TVUZGSVggPSAiaHMtZnMiDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKgwqDCoMKgID4gLVVC
+T09UX01BQ0hJTkUgPSAiYW02MmF4X2V2bV9yNV9kZWZjb25maWciDQo+PiDCoMKgwqDCoCA+
+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02MmF4eC1ldm0uY29u
+ZiANCj4+IGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJheHgtZXZtLmNvbmYNCj4+
+IMKgwqDCoMKgID4gaW5kZXggMjJmNjE0MDEuLjU5ODg0NjI5IDEwMDY0NA0KPj4gwqDCoMKg
+wqAgPiAtLS0gYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02MmF4eC1ldm0uY29uZg0K
+Pj4gwqDCoMKgwqAgPiArKysgYi9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02MmF4eC1l
+dm0uY29uZg0KPj4gwqDCoMKgwqAgPiBAQCAtMTQsNCArMTQsOSBAQCBLRVJORUxfREVWSUNF
+VFJFRSA9ICIgXA0KPj4gwqDCoMKgwqAgPsKgIMKgIMKgIMKgdGkvazMtYW02MmE3LXNrLmR0
+YiBcDQo+PiDCoMKgwqDCoCA+wqAgwqAiDQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKgwqDCoCA+
+ICtTWVNGV19TT0MgPSAiYW02MmF4Ig0KPj4gwqDCoMKgwqAgPiArU1lTRldfQ09ORklHID0g
+ImV2bSINCj4+IMKgwqDCoMKgID4gK1NZU0ZXX1NVRkZJWCA9ICJocy1mcyINCj4+IMKgwqDC
+oMKgID4gKw0KPj4gwqDCoMKgwqAgPiArVUJPT1RfTUFDSElORV9SNSA9ICJhbTYyYXhfZXZt
+X3I1X2RlZmNvbmZpZyINCj4+IMKgwqDCoMKgID7CoCDCoFVCT09UX01BQ0hJTkUgPSAiYW02
+MmF4X2V2bV9hNTNfZGVmY29uZmlnIg0KPj4gwqDCoMKgwqAgPiBkaWZmIC0tZ2l0IGEvbWV0
+YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJweHgtZXZtLWszcjUuY29uZiANCj4+IGIvbWV0
+YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJweHgtZXZtLWszcjUuY29uZg0KPj4gwqDCoMKg
+wqAgPiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQNCj4+IMKgwqDCoMKgID4gaW5kZXggMzY5
+MTUzODEuLjAwMDAwMDAwDQo+PiDCoMKgwqDCoCA+IC0tLSBhL21ldGEtdGktYnNwL2NvbmYv
+bWFjaGluZS9hbTYycHh4LWV2bS1rM3I1LmNvbmYNCj4+IMKgwqDCoMKgID4gKysrIC9kZXYv
+bnVsbA0KPj4gwqDCoMKgwqAgPiBAQCAtMSwxMiArMCwwIEBADQo+PiDCoMKgwqDCoCA+IC0j
+QFRZUEU6IE1hY2hpbmUNCj4+IMKgwqDCoMKgID4gLSNATkFNRTogQU02MlBYIEVWTSAoUjVG
+KQ0KPj4gwqDCoMKgwqAgPiAtI0BERVNDUklQVElPTjogTWFjaGluZSBjb25maWd1cmF0aW9u
+IGZvciB0aGUgVEkgQU02MlB4IEVWTSANCj4+IChSNUYgY29yZSkNCj4+IMKgwqDCoMKgID4g
+LQ0KPj4gwqDCoMKgwqAgPiAtcmVxdWlyZSBjb25mL21hY2hpbmUvaW5jbHVkZS9rM3I1Lmlu
+Yw0KPj4gwqDCoMKgwqAgPiAtcmVxdWlyZSBjb25mL21hY2hpbmUvaW5jbHVkZS90aS1leHRy
+YXMuaW5jDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKgwqDCoMKgID4gLVNZU0ZXX1NPQyA9ICJh
+bTYycHgiDQo+PiDCoMKgwqDCoCA+IC1TWVNGV19DT05GSUcgPSAiZXZtIg0KPj4gwqDCoMKg
+wqAgPiAtU1lTRldfU1VGRklYID0gImhzLWZzIg0KPj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKg
+wqDCoCA+IC1VQk9PVF9NQUNISU5FID0gImFtNjJweF9ldm1fcjVfZGVmY29uZmlnIg0KPj4g
+wqDCoMKgwqAgPiBkaWZmIC0tZ2l0IGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJw
+eHgtZXZtLmNvbmYgDQo+PiBiL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTYycHh4LWV2
+bS5jb25mDQo+PiDCoMKgwqDCoCA+IGluZGV4IGQ3YzlmNTg5Li4xMTZkODE5YiAxMDA2NDQN
+Cj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJweHgt
+ZXZtLmNvbmYNCj4+IMKgwqDCoMKgID4gKysrIGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5l
+L2FtNjJweHgtZXZtLmNvbmYNCj4+IMKgwqDCoMKgID4gQEAgLTE1LDQgKzE1LDkgQEAgS0VS
+TkVMX0RFVklDRVRSRUUgPSAiIFwNCj4+IMKgwqDCoMKgID7CoCDCoCDCoCDCoHRpL2szLWFt
+NjJwNS1zay5kdGIgXA0KPj4gwqDCoMKgwqAgPsKgIMKgIg0KPj4gwqDCoMKgwqAgPg0KPj4g
+wqDCoMKgwqAgPiArU1lTRldfU09DID0gImFtNjJweCINCj4+IMKgwqDCoMKgID4gK1NZU0ZX
+X0NPTkZJRyA9ICJldm0iDQo+PiDCoMKgwqDCoCA+ICtTWVNGV19TVUZGSVggPSAiaHMtZnMi
+DQo+PiDCoMKgwqDCoCA+ICsNCj4+IMKgwqDCoMKgID4gK1VCT09UX01BQ0hJTkVfUjUgPSAi
+YW02MnB4X2V2bV9yNV9kZWZjb25maWciDQo+PiDCoMKgwqDCoCA+wqAgwqBVQk9PVF9NQUNI
+SU5FID0gImFtNjJweF9ldm1fYTUzX2RlZmNvbmZpZyINCj4+IMKgwqDCoMKgID4gZGlmZiAt
+LWdpdCBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTYyeHgtZXZtLWszcjUuY29uZiAN
+Cj4+IGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJ4eC1ldm0tazNyNS5jb25mDQo+
+PiDCoMKgwqDCoCA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPj4gwqDCoMKgwqAgPiBp
+bmRleCA1NDgzNjljYS4uMDAwMDAwMDANCj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10aS1i
+c3AvY29uZi9tYWNoaW5lL2FtNjJ4eC1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+ICsr
+KyAvZGV2L251bGwNCj4+IMKgwqDCoMKgID4gQEAgLTEsMTIgKzAsMCBAQA0KPj4gwqDCoMKg
+wqAgPiAtI0BUWVBFOiBNYWNoaW5lDQo+PiDCoMKgwqDCoCA+IC0jQE5BTUU6IEFNNjJYWCBF
+Vk0gKFI1RikNCj4+IMKgwqDCoMKgID4gLSNAREVTQ1JJUFRJT046IE1hY2hpbmUgY29uZmln
+dXJhdGlvbiBmb3IgdGhlIFRJIEFNNjJ4eCBFVk0gDQo+PiAoUjVGIGNvcmUpDQo+PiDCoMKg
+wqDCoCA+IC0NCj4+IMKgwqDCoMKgID4gLXJlcXVpcmUgY29uZi9tYWNoaW5lL2luY2x1ZGUv
+azNyNS5pbmMNCj4+IMKgwqDCoMKgID4gLXJlcXVpcmUgY29uZi9tYWNoaW5lL2luY2x1ZGUv
+dGktZXh0cmFzLmluYw0KPj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKgwqDCoCA+IC1TWVNGV19T
+T0MgPSAiYW02MngiDQo+PiDCoMKgwqDCoCA+IC1TWVNGV19DT05GSUcgPSAiZXZtIg0KPj4g
+wqDCoMKgwqAgPiAtU1lTRldfU1VGRklYID0gImhzLWZzIg0KPj4gwqDCoMKgwqAgPiAtDQo+
+PiDCoMKgwqDCoCA+IC1VQk9PVF9NQUNISU5FID0gImFtNjJ4X2V2bV9yNV9kZWZjb25maWci
+DQo+PiDCoMKgwqDCoCA+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUv
+YW02Mnh4LWV2bS5jb25mIA0KPj4gYi9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02Mnh4
+LWV2bS5jb25mDQo+PiDCoMKgwqDCoCA+IGluZGV4IGZhZGJjNmY0Li42ZjIzNDgxMSAxMDA2
+NDQNCj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJ4
+eC1ldm0uY29uZg0KPj4gwqDCoMKgwqAgPiArKysgYi9tZXRhLXRpLWJzcC9jb25mL21hY2hp
+bmUvYW02Mnh4LWV2bS5jb25mDQo+PiDCoMKgwqDCoCA+IEBAIC0xNCw0ICsxNCw5IEBAIEtF
+Uk5FTF9ERVZJQ0VUUkVFID0gIiBcDQo+PiDCoMKgwqDCoCA+wqAgwqAgwqAgwqB0aS9rMy1h
+bTYyNS1zay5kdGIgXA0KPj4gwqDCoMKgwqAgPsKgIMKgIg0KPj4gwqDCoMKgwqAgPg0KPj4g
+wqDCoMKgwqAgPiArU1lTRldfU09DID0gImFtNjJ4Ig0KPj4gwqDCoMKgwqAgPiArU1lTRldf
+Q09ORklHID0gImV2bSINCj4+IMKgwqDCoMKgID4gK1NZU0ZXX1NVRkZJWCA9ICJocy1mcyIN
+Cj4+IMKgwqDCoMKgID4gKw0KPj4gwqDCoMKgwqAgPiArVUJPT1RfTUFDSElORV9SNSA9ICJh
+bTYyeF9ldm1fcjVfZGVmY29uZmlnIg0KPj4gwqDCoMKgwqAgPsKgIMKgVUJPT1RfTUFDSElO
+RSA9ICJhbTYyeF9ldm1fYTUzX2RlZmNvbmZpZyINCj4+IMKgwqDCoMKgID4gZGlmZiAtLWdp
+dCBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTYyeHgtbHAtZXZtLWszcjUuY29uZiAN
+Cj4+IGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJ4eC1scC1ldm0tazNyNS5jb25m
+DQo+PiDCoMKgwqDCoCA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPj4gwqDCoMKgwqAg
+PiBpbmRleCBhYTk0MjJjZC4uMDAwMDAwMDANCj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10
+aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJ4eC1scC1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDC
+oCA+ICsrKyAvZGV2L251bGwNCj4+IMKgwqDCoMKgID4gQEAgLTEsMTEgKzAsMCBAQA0KPj4g
+wqDCoMKgwqAgPiAtI0BUWVBFOiBNYWNoaW5lDQo+PiDCoMKgwqDCoCA+IC0jQE5BTUU6IEFN
+NjJYWCBMUCBHUCBFVk0gKFI1RikNCj4+IMKgwqDCoMKgID4gLSNAREVTQ1JJUFRJT046IE1h
+Y2hpbmUgY29uZmlndXJhdGlvbiBmb3IgdGhlIFRJIEFNNjJ4eCBMUCBHUCANCj4+IEVWTSAo
+UjVGIGNvcmUpDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKgwqDCoMKgID4gLXJlcXVpcmUgY29u
+Zi9tYWNoaW5lL2luY2x1ZGUvazNyNS5pbmMNCj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKg
+wqAgPiAtU1lTRldfU09DID0gImFtNjJ4Ig0KPj4gwqDCoMKgwqAgPiAtU1lTRldfQ09ORklH
+ID0gImV2bSINCj4+IMKgwqDCoMKgID4gLVNZU0ZXX1NVRkZJWCA9ICJocy1mcyINCj4+IMKg
+wqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtVUJPT1RfTUFDSElORSA9ICJhbTYyeF9scHNr
+X3I1X2RlZmNvbmZpZyINCj4+IMKgwqDCoMKgID4gZGlmZiAtLWdpdCBhL21ldGEtdGktYnNw
+L2NvbmYvbWFjaGluZS9hbTYyeHgtbHAtZXZtLmNvbmYgDQo+PiBiL21ldGEtdGktYnNwL2Nv
+bmYvbWFjaGluZS9hbTYyeHgtbHAtZXZtLmNvbmYNCj4+IMKgwqDCoMKgID4gaW5kZXggMjI5
+Yjc0YmMuLmUzM2I2MGUyIDEwMDY0NA0KPj4gwqDCoMKgwqAgPiAtLS0gYS9tZXRhLXRpLWJz
+cC9jb25mL21hY2hpbmUvYW02Mnh4LWxwLWV2bS5jb25mDQo+PiDCoMKgwqDCoCA+ICsrKyBi
+L21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTYyeHgtbHAtZXZtLmNvbmYNCj4+IMKgwqDC
+oMKgID4gQEAgLTE2LDQgKzE2LDkgQEAgS0VSTkVMX0RFVklDRVRSRUUgPSAiIFwNCj4+IMKg
+wqDCoMKgID7CoCDCoCDCoCDCoHRpL2szLWFtNjItbHAtc2suZHRiIFwNCj4+IMKgwqDCoMKg
+ID7CoCDCoCINCj4+IMKgwqDCoMKgID4NCj4+IMKgwqDCoMKgID4gK1NZU0ZXX1NPQyA9ICJh
+bTYyeCINCj4+IMKgwqDCoMKgID4gK1NZU0ZXX0NPTkZJRyA9ICJldm0iDQo+PiDCoMKgwqDC
+oCA+ICtTWVNGV19TVUZGSVggPSAiaHMtZnMiDQo+PiDCoMKgwqDCoCA+ICsNCj4+IMKgwqDC
+oMKgID4gK1VCT09UX01BQ0hJTkVfUjUgPSAiYW02MnhfbHBza19yNV9kZWZjb25maWciDQo+
+PiDCoMKgwqDCoCA+wqAgwqBVQk9PVF9NQUNISU5FID0gImFtNjJ4X2xwc2tfYTUzX2RlZmNv
+bmZpZyINCj4+IMKgwqDCoMKgID4gZGlmZiAtLWdpdCBhL21ldGEtdGktYnNwL2NvbmYvbWFj
+aGluZS9hbTYyeHhzaXAtZXZtLWszcjUuY29uZiANCj4+IGIvbWV0YS10aS1ic3AvY29uZi9t
+YWNoaW5lL2FtNjJ4eHNpcC1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+IGRlbGV0ZWQg
+ZmlsZSBtb2RlIDEwMDY0NA0KPj4gwqDCoMKgwqAgPiBpbmRleCAwZGFmZjJiOS4uMDAwMDAw
+MDANCj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJ4
+eHNpcC1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+ICsrKyAvZGV2L251bGwNCj4+IMKg
+wqDCoMKgID4gQEAgLTEsMTYgKzAsMCBAQA0KPj4gwqDCoMKgwqAgPiAtI0BUWVBFOiBNYWNo
+aW5lDQo+PiDCoMKgwqDCoCA+IC0jQE5BTUU6IEFNNjJYWCBTSVAgRVZNIChSNUYpDQo+PiDC
+oMKgwqDCoCA+IC0jQERFU0NSSVBUSU9OOiBNYWNoaW5lIGNvbmZpZ3VyYXRpb24gZm9yIHRo
+ZSBUSSBBTTYyeHggU0lQIEVWTSANCj4+IChSNUYgY29yZSkNCj4+IMKgwqDCoMKgID4gLQ0K
+Pj4gwqDCoMKgwqAgPiAtcmVxdWlyZSBjb25mL21hY2hpbmUvaW5jbHVkZS9rM3I1LmluYw0K
+Pj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKgwqDCoCA+IC1TWVNGV19TT0MgPSAiYW02MngiDQo+
+PiDCoMKgwqDCoCA+IC1TWVNGV19DT05GSUcgPSAiZXZtIg0KPj4gwqDCoMKgwqAgPiAtU1lT
+RldfU1VGRklYID0gImhzLWZzIg0KPj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKgwqDCoCA+IC1V
+Qk9PVF9NQUNISU5FID0gImFtNjJ4X2V2bV9yNV9kZWZjb25maWciDQo+PiDCoMKgwqDCoCA+
+IC0NCj4+IMKgwqDCoMKgID4gLSMgVUJPT1RfQ09ORklHX0ZSQUdNRU5UUyBob2xkcyB0aGUg
+bGlzdCBvZiB1LWJvb3QgY29uZmlnIA0KPj4gZnJhZ21lbnRzIHdoaWNoIGhhcyB0byBiZSBi
+dWlsZA0KPj4gwqDCoMKgwqAgPiAtIyBhbG9uZyB3aXRoIHRoZSBiYXNlIGRlZmNvbmZpZyBt
+ZW50aW9uZWQgaW4gVUJPT1RfTUFDSElORS4gDQo+PiBSZWZlciB1LWJvb3QtbWVyZ2Vjb25m
+aWcuaW5jDQo+PiDCoMKgwqDCoCA+IC0jIHVuZGVyIG1ldGEtdGktYnNwL3JlY2lwZXMtYnNw
+L3UtYm9vdC8gZm9yIG1vcmUgZGV0YWlscy4NCj4+IMKgwqDCoMKgID4gLVVCT09UX0NPTkZJ
+R19GUkFHTUVOVFMgPSAiYW02MnhzaXBfc2tfcjUuY29uZmlnIg0KPj4gwqDCoMKgwqAgPiBk
+aWZmIC0tZ2l0IGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJ4eHNpcC1ldm0uY29u
+ZiANCj4+IGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJ4eHNpcC1ldm0uY29uZg0K
+Pj4gwqDCoMKgwqAgPiBpbmRleCBiNWRkMThmMS4uMmUwNzdmNzUgMTAwNjQ0DQo+PiDCoMKg
+wqDCoCA+IC0tLSBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTYyeHhzaXAtZXZtLmNv
+bmYNCj4+IMKgwqDCoMKgID4gKysrIGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjJ4
+eHNpcC1ldm0uY29uZg0KPj4gwqDCoMKgwqAgPiBAQCAtMTMsNCArMTMsMTQgQEAgS0VSTkVM
+X0RFVklDRVRSRUUgPSAiIFwNCj4+IMKgwqDCoMKgID7CoCDCoCDCoCDCoHRpL2szLWFtNjI1
+LXNrLmR0YiBcDQo+PiDCoMKgwqDCoCA+wqAgwqAiDQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKg
+wqDCoCA+ICtTWVNGV19TT0MgPSAiYW02MngiDQo+PiDCoMKgwqDCoCA+ICtTWVNGV19DT05G
+SUcgPSAiZXZtIg0KPj4gwqDCoMKgwqAgPiArU1lTRldfU1VGRklYID0gImhzLWZzIg0KPj4g
+wqDCoMKgwqAgPiArDQo+PiDCoMKgwqDCoCA+ICtVQk9PVF9NQUNISU5FX1I1ID0gImFtNjJ4
+X2V2bV9yNV9kZWZjb25maWciDQo+PiDCoMKgwqDCoCA+wqAgwqBVQk9PVF9NQUNISU5FID0g
+ImFtNjJ4X2V2bV9hNTNfZGVmY29uZmlnIg0KPj4gwqDCoMKgwqAgPiArDQo+PiDCoMKgwqDC
+oCA+ICsjIFVCT09UX0NPTkZJR19GUkFHTUVOVFMgaG9sZHMgdGhlIGxpc3Qgb2YgdS1ib290
+IGNvbmZpZyANCj4+IGZyYWdtZW50cyB3aGljaCBoYXMgdG8gYmUgYnVpbGQNCj4+IMKgwqDC
+oMKgID4gKyMgYWxvbmcgd2l0aCB0aGUgYmFzZSBkZWZjb25maWcgbWVudGlvbmVkIGluIFVC
+T09UX01BQ0hJTkUuIA0KPj4gUmVmZXIgdS1ib290LW1lcmdlY29uZmlnLmluYw0KPj4gwqDC
+oMKgwqAgPiArIyB1bmRlciBtZXRhLXRpLWJzcC9yZWNpcGVzLWJzcC91LWJvb3QvIGZvciBt
+b3JlIGRldGFpbHMuDQo+PiDCoMKgwqDCoCA+ICtVQk9PVF9DT05GSUdfRlJBR01FTlRTX1I1
+ID0gImFtNjJ4c2lwX3NrX3I1LmNvbmZpZyINCj4+IMKgwqDCoMKgID4gZGlmZiAtLWdpdCBh
+L21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTY0eHgtZXZtLWszcjUuY29uZiANCj4+IGIv
+bWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjR4eC1ldm0tazNyNS5jb25mDQo+PiDCoMKg
+wqDCoCA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPj4gwqDCoMKgwqAgPiBpbmRleCBl
+OTMyOTI4YS4uMDAwMDAwMDANCj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10aS1ic3AvY29u
+Zi9tYWNoaW5lL2FtNjR4eC1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+ICsrKyAvZGV2
+L251bGwNCj4+IMKgwqDCoMKgID4gQEAgLTEsMTEgKzAsMCBAQA0KPj4gwqDCoMKgwqAgPiAt
+I0BUWVBFOiBNYWNoaW5lDQo+PiDCoMKgwqDCoCA+IC0jQE5BTUU6IEFNNjR4eCBFVk0gKFI1
+RikNCj4+IMKgwqDCoMKgID4gLSNAREVTQ1JJUFRJT046IE1hY2hpbmUgY29uZmlndXJhdGlv
+biBmb3IgdGhlIFRJIEFNNjR4eCBFVk0gDQo+PiAoUjVGIGNvcmUpDQo+PiDCoMKgwqDCoCA+
+IC0NCj4+IMKgwqDCoMKgID4gLXJlcXVpcmUgY29uZi9tYWNoaW5lL2luY2x1ZGUvazNyNS5p
+bmMNCj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtU1lTRldfU09DID0gImFtNjR4
+X3NyMiINCj4+IMKgwqDCoMKgID4gLVNZU0ZXX0NPTkZJRyA9ICJldm0iDQo+PiDCoMKgwqDC
+oCA+IC1TWVNGV19TVUZGSVggPSAiaHMtZnMiDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKgwqDC
+oMKgID4gLVVCT09UX01BQ0hJTkUgPSAiYW02NHhfZXZtX3I1X2RlZmNvbmZpZyINCj4+IMKg
+wqDCoMKgID4gZGlmZiAtLWdpdCBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTY0eHgt
+ZXZtLmNvbmYgDQo+PiBiL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTY0eHgtZXZtLmNv
+bmYNCj4+IMKgwqDCoMKgID4gaW5kZXggYzZiYTJhODcuLmRjMjFjMTc0IDEwMDY0NA0KPj4g
+wqDCoMKgwqAgPiAtLS0gYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02NHh4LWV2bS5j
+b25mDQo+PiDCoMKgwqDCoCA+ICsrKyBiL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTY0
+eHgtZXZtLmNvbmYNCj4+IMKgwqDCoMKgID4gQEAgLTQsNCArNCw5IEBADQo+PiDCoMKgwqDC
+oCA+DQo+PiDCoMKgwqDCoCA+wqAgwqByZXF1aXJlIGNvbmYvbWFjaGluZS9pbmNsdWRlL2Ft
+NjR4eC5pbmMNCj4+IMKgwqDCoMKgID4NCj4+IMKgwqDCoMKgID4gK1NZU0ZXX1NPQyA9ICJh
+bTY0eF9zcjIiDQo+PiDCoMKgwqDCoCA+ICtTWVNGV19DT05GSUcgPSAiZXZtIg0KPj4gwqDC
+oMKgwqAgPiArU1lTRldfU1VGRklYID0gImhzLWZzIg0KPj4gwqDCoMKgwqAgPiArDQo+PiDC
+oMKgwqDCoCA+wqAgwqBVQk9PVF9NQUNISU5FID0gImFtNjR4X2V2bV9hNTNfZGVmY29uZmln
+Ig0KPj4gwqDCoMKgwqAgPiArVUJPT1RfTUFDSElORV9SNSA9ICJhbTY0eF9ldm1fcjVfZGVm
+Y29uZmlnIg0KPj4gwqDCoMKgwqAgPiBkaWZmIC0tZ2l0IGEvbWV0YS10aS1ic3AvY29uZi9t
+YWNoaW5lL2FtNjV4eC1ldm0tazNyNS5jb25mIA0KPj4gYi9tZXRhLXRpLWJzcC9jb25mL21h
+Y2hpbmUvYW02NXh4LWV2bS1rM3I1LmNvbmYNCj4+IMKgwqDCoMKgID4gZGVsZXRlZCBmaWxl
+IG1vZGUgMTAwNjQ0DQo+PiDCoMKgwqDCoCA+IGluZGV4IDg3NDRhYzNlLi4wMDAwMDAwMA0K
+Pj4gwqDCoMKgwqAgPiAtLS0gYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02NXh4LWV2
+bS1rM3I1LmNvbmYNCj4+IMKgwqDCoMKgID4gKysrIC9kZXYvbnVsbA0KPj4gwqDCoMKgwqAg
+PiBAQCAtMSwxMSArMCwwIEBADQo+PiDCoMKgwqDCoCA+IC0jQFRZUEU6IE1hY2hpbmUNCj4+
+IMKgwqDCoMKgID4gLSNATkFNRTogQU02NXh4IEVWTSAoUjVGKQ0KPj4gwqDCoMKgwqAgPiAt
+I0BERVNDUklQVElPTjogTWFjaGluZSBjb25maWd1cmF0aW9uIGZvciB0aGUgVEkgQU02NXh4
+IEVWTSANCj4+IChSNUYgY29yZSkNCj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAt
+cmVxdWlyZSBjb25mL21hY2hpbmUvaW5jbHVkZS9rM3I1LmluYw0KPj4gwqDCoMKgwqAgPiAt
+DQo+PiDCoMKgwqDCoCA+IC1TWVNGV19TT0MgPSAiYW02NXhfc3IyIg0KPj4gwqDCoMKgwqAg
+PiAtU1lTRldfQ09ORklHID0gImV2bSINCj4+IMKgwqDCoMKgID4gLVNZU0ZXX1NVRkZJWCA9
+ICJncCINCj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtVUJPT1RfTUFDSElORSA9
+ICJhbTY1eF9ldm1fcjVfZGVmY29uZmlnIg0KPj4gwqDCoMKgwqAgPiBkaWZmIC0tZ2l0IGEv
+bWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjV4eC1ldm0uY29uZiANCj4+IGIvbWV0YS10
+aS1ic3AvY29uZi9tYWNoaW5lL2FtNjV4eC1ldm0uY29uZg0KPj4gwqDCoMKgwqAgPiBpbmRl
+eCBmNmViNmYwYy4uOWIwNTBiMDMgMTAwNjQ0DQo+PiDCoMKgwqDCoCA+IC0tLSBhL21ldGEt
+dGktYnNwL2NvbmYvbWFjaGluZS9hbTY1eHgtZXZtLmNvbmYNCj4+IMKgwqDCoMKgID4gKysr
+IGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2FtNjV4eC1ldm0uY29uZg0KPj4gwqDCoMKg
+wqAgPiBAQCAtNCw2ICs0LDExIEBADQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKgwqDCoCA+wqAg
+wqByZXF1aXJlIGNvbmYvbWFjaGluZS9pbmNsdWRlL2FtNjV4eC5pbmMNCj4+IMKgwqDCoMKg
+ID4NCj4+IMKgwqDCoMKgID4gK1NZU0ZXX1NPQyA9ICJhbTY1eF9zcjIiDQo+PiDCoMKgwqDC
+oCA+ICtTWVNGV19DT05GSUcgPSAiZXZtIg0KPj4gwqDCoMKgwqAgPiArU1lTRldfU1VGRklY
+ID0gImdwIg0KPj4gwqDCoMKgwqAgPiArDQo+PiDCoMKgwqDCoCA+ICtVQk9PVF9NQUNISU5F
+X1I1ID0gImFtNjV4X2V2bV9yNV9kZWZjb25maWciDQo+PiDCoMKgwqDCoCA+wqAgwqBVQk9P
+VF9NQUNISU5FID0gImFtNjV4X2V2bV9hNTNfZGVmY29uZmlnIg0KPj4gwqDCoMKgwqAgPg0K
+Pj4gwqDCoMKgwqAgPsKgIMKgTUFDSElORV9FU1NFTlRJQUxfRVhUUkFfUlJFQ09NTUVORFMg
+Kz0gInBydWV0aC1mdy1hbTY1eC1zcjIgDQo+PiBwcnVoc3ItZnctYW02NXgtc3IyIHBydXN3
+LWZ3LWFtNjV4LXNyMiINCj4+IMKgwqDCoMKgID4gZGlmZiAtLWdpdCBhL21ldGEtdGktYnNw
+L2NvbmYvbWFjaGluZS9hbTY1eHgtaHMtZXZtLWszcjUuY29uZiANCj4+IGIvbWV0YS10aS1i
+c3AvY29uZi9tYWNoaW5lL2FtNjV4eC1ocy1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+
+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPj4gwqDCoMKgwqAgPiBpbmRleCAzMzdjODQx
+My4uMDAwMDAwMDANCj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10aS1ic3AvY29uZi9tYWNo
+aW5lL2FtNjV4eC1ocy1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+ICsrKyAvZGV2L251
+bGwNCj4+IMKgwqDCoMKgID4gQEAgLTEsMTEgKzAsMCBAQA0KPj4gwqDCoMKgwqAgPiAtI0BU
+WVBFOiBNYWNoaW5lDQo+PiDCoMKgwqDCoCA+IC0jQE5BTUU6IEFNNjV4eCBIUyBFVk0gKFI1
+RikNCj4+IMKgwqDCoMKgID4gLSNAREVTQ1JJUFRJT046IE1hY2hpbmUgY29uZmlndXJhdGlv
+biBmb3IgdGhlIFRJIEFNNjV4eCBIUyBFVk0gDQo+PiAoUjVGIGNvcmUpDQo+PiDCoMKgwqDC
+oCA+IC0NCj4+IMKgwqDCoMKgID4gLXJlcXVpcmUgY29uZi9tYWNoaW5lL2luY2x1ZGUvazNy
+NS5pbmMNCj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtU1lTRldfU09DID0gImFt
+NjV4X3NyMiINCj4+IMKgwqDCoMKgID4gLVNZU0ZXX0NPTkZJRyA9ICJldm0iDQo+PiDCoMKg
+wqDCoCA+IC1TWVNGV19TVUZGSVggPSAiaHMiDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKgwqDC
+oMKgID4gLVVCT09UX01BQ0hJTkUgPSAiYW02NXhfZXZtX3I1X2RlZmNvbmZpZyINCj4+IMKg
+wqDCoMKgID4gZGlmZiAtLWdpdCBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTY1eHgt
+aHMtZXZtLmNvbmYgDQo+PiBiL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9hbTY1eHgtaHMt
+ZXZtLmNvbmYNCj4+IMKgwqDCoMKgID4gaW5kZXggZjgyMjFmMzEuLjQxNjRhZTUzIDEwMDY0
+NA0KPj4gwqDCoMKgwqAgPiAtLS0gYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYW02NXh4
+LWhzLWV2bS5jb25mDQo+PiDCoMKgwqDCoCA+ICsrKyBiL21ldGEtdGktYnNwL2NvbmYvbWFj
+aGluZS9hbTY1eHgtaHMtZXZtLmNvbmYNCj4+IMKgwqDCoMKgID4gQEAgLTQsNCArNCw5IEBA
+DQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKgwqDCoCA+wqAgwqByZXF1aXJlIGNvbmYvbWFjaGlu
+ZS9pbmNsdWRlL2FtNjV4eC5pbmMNCj4+IMKgwqDCoMKgID4NCj4+IMKgwqDCoMKgID4gK1NZ
+U0ZXX1NPQyA9ICJhbTY1eF9zcjIiDQo+PiDCoMKgwqDCoCA+ICtTWVNGV19DT05GSUcgPSAi
+ZXZtIg0KPj4gwqDCoMKgwqAgPiArU1lTRldfU1VGRklYID0gImhzIg0KPj4gwqDCoMKgwqAg
+PiArDQo+PiDCoMKgwqDCoCA+ICtVQk9PVF9NQUNISU5FX1I1ID0gImFtNjV4X2V2bV9yNV9k
+ZWZjb25maWciDQo+PiDCoMKgwqDCoCA+wqAgwqBVQk9PVF9NQUNISU5FID0gImFtNjV4X2V2
+bV9hNTNfZGVmY29uZmlnIg0KPj4gwqDCoMKgwqAgPiBkaWZmIC0tZ2l0IGEvbWV0YS10aS1i
+c3AvY29uZi9tYWNoaW5lL2JlYWdsZWJvbmUtYWk2NC1rM3I1LmNvbmYgDQo+PiBiL21ldGEt
+dGktYnNwL2NvbmYvbWFjaGluZS9iZWFnbGVib25lLWFpNjQtazNyNS5jb25mDQo+PiDCoMKg
+wqDCoCA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPj4gwqDCoMKgwqAgPiBpbmRleCBi
+ODkzZjM4MC4uMDAwMDAwMDANCj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10aS1ic3AvY29u
+Zi9tYWNoaW5lL2JlYWdsZWJvbmUtYWk2NC1rM3I1LmNvbmYNCj4+IMKgwqDCoMKgID4gKysr
+IC9kZXYvbnVsbA0KPj4gwqDCoMKgwqAgPiBAQCAtMSwxNyArMCwwIEBADQo+PiDCoMKgwqDC
+oCA+IC0jQFRZUEU6IE1hY2hpbmUNCj4+IMKgwqDCoMKgID4gLSNATkFNRTogQmVhZ2xlQm9u
+ZSBBSS02NCAoUjVGKQ0KPj4gwqDCoMKgwqAgPiAtI0BERVNDUklQVElPTjogTWFjaGluZSBj
+b25maWd1cmF0aW9uIGZvciB0aGUgQmVhZ2xlQm9uZSBBSS02NCANCj4+IChSNUYgY29yZSkN
+Cj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtcmVxdWlyZSBjb25mL21hY2hpbmUv
+aW5jbHVkZS9rM3I1LmluYw0KPj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKgwqDCoCA+IC1TWVNG
+V19TT0MgPSAiajcyMWUiDQo+PiDCoMKgwqDCoCA+IC1TWVNGV19DT05GSUcgPSAiZXZtIg0K
+Pj4gwqDCoMKgwqAgPiAtU1lTRldfU1VGRklYID0gImdwIg0KPj4gwqDCoMKgwqAgPiAtDQo+
+PiDCoMKgwqDCoCA+IC1TUExfQklOQVJZID0gInNwbC91LWJvb3Qtc3BsLiR7VUJPT1RfU1VG
+RklYfSINCj4+IMKgwqDCoMKgID4gLVNQTF9TWU1MSU5LID0gInUtYm9vdC1yNXNwbC4ke1VC
+T09UX1NVRkZJWH0iDQo+PiDCoMKgwqDCoCA+IC1VQk9PVF9CSU5BUlkgPSAidGlib290My4k
+e1VCT09UX1NVRkZJWH0iDQo+PiDCoMKgwqDCoCA+IC1VQk9PVF9JTUFHRSA9IA0KPj4gInRp
+Ym9vdDMtJHtNQUlOTUFDSElORX0tJHtQVn0tJHtQUn0uJHtVQk9PVF9TVUZGSVh9Ig0KPj4g
+wqDCoMKgwqAgPiAtVUJPT1RfU1lNTElOSyA9ICJ0aWJvb3QzLSR7TUFJTk1BQ0hJTkV9LiR7
+VUJPT1RfU1VGRklYfSINCj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtVUJPT1Rf
+TUFDSElORSA9ICJqNzIxZV9ldm1fcjVfZGVmY29uZmlnIg0KPj4gwqDCoMKgwqAgPiBkaWZm
+IC0tZ2l0IGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2JlYWdsZWJvbmUtYWk2NC5jb25m
+IA0KPj4gYi9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYmVhZ2xlYm9uZS1haTY0LmNvbmYN
+Cj4+IMKgwqDCoMKgID4gaW5kZXggZTUyOWY1NjUuLmJhZDg2YTIyIDEwMDY0NA0KPj4gwqDC
+oMKgwqAgPiAtLS0gYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvYmVhZ2xlYm9uZS1haTY0
+LmNvbmYNCj4+IMKgwqDCoMKgID4gKysrIGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2Jl
+YWdsZWJvbmUtYWk2NC5jb25mDQo+PiDCoMKgwqDCoCA+IEBAIC00LDYgKzQsMTEgQEANCj4+
+IMKgwqDCoMKgID4NCj4+IMKgwqDCoMKgID7CoCDCoHJlcXVpcmUgY29uZi9tYWNoaW5lL2lu
+Y2x1ZGUvajcyMWUuaW5jDQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKgwqDCoCA+ICtTWVNGV19T
+T0MgPSAiajcyMWUiDQo+PiDCoMKgwqDCoCA+ICtTWVNGV19DT05GSUcgPSAiZXZtIg0KPj4g
+wqDCoMKgwqAgPiArU1lTRldfU1VGRklYID0gImdwIg0KPj4gwqDCoMKgwqAgPiArDQo+PiDC
+oMKgwqDCoCA+ICtVQk9PVF9NQUNISU5FX1I1ID0gImo3MjFlX2V2bV9yNV9kZWZjb25maWci
+DQo+PiDCoMKgwqDCoCA+wqAgwqBVQk9PVF9NQUNISU5FID0gImo3MjFlX2V2bV9hNzJfY29u
+ZmlnIg0KPj4gwqDCoMKgwqAgPg0KPj4gwqDCoMKgwqAgPsKgIMKgUFJFRkVSUkVEX1BST1ZJ
+REVSX3ZpcnR1YWwva2VybmVsID0gImxpbnV4LWJiLm9yZyANCj4+IDxodHRwOi8vbGludXgt
+YmIub3JnPiINCj4+IMKgwqDCoMKgID4gZGlmZiAtLWdpdCBhL21ldGEtdGktYnNwL2NvbmYv
+bWFjaGluZS9iZWFnbGVwbGF5LWszcjUuY29uZiANCj4+IGIvbWV0YS10aS1ic3AvY29uZi9t
+YWNoaW5lL2JlYWdsZXBsYXktazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+IGRlbGV0ZWQgZmls
+ZSBtb2RlIDEwMDY0NA0KPj4gwqDCoMKgwqAgPiBpbmRleCBjNDA2MTVjOS4uMDAwMDAwMDAN
+Cj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2JlYWdsZXBs
+YXktazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+ICsrKyAvZGV2L251bGwNCj4+IMKgwqDCoMKg
+ID4gQEAgLTEsMTQgKzAsMCBAQA0KPj4gwqDCoMKgwqAgPiAtI0BUWVBFOiBNYWNoaW5lDQo+
+PiDCoMKgwqDCoCA+IC0jQE5BTUU6IEJlYWdsZVBsYXkgKFI1RikNCj4+IMKgwqDCoMKgID4g
+LSNAREVTQ1JJUFRJT046IE1hY2hpbmUgY29uZmlndXJhdGlvbiBmb3IgdGhlIEJlYWdsZVBs
+YXkgKFI1RiANCj4+IGNvcmUpDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKgwqDCoMKgID4gLXJl
+cXVpcmUgY29uZi9tYWNoaW5lL2luY2x1ZGUvazNyNS5pbmMNCj4+IMKgwqDCoMKgID4gLQ0K
+Pj4gwqDCoMKgwqAgPiAtUFJFRkVSUkVEX1BST1ZJREVSX3ZpcnR1YWwvYm9vdGxvYWRlciA9
+ICJ1LWJvb3QtYmIub3JnIA0KPj4gPGh0dHA6Ly91LWJvb3QtYmIub3JnPiINCj4+IMKgwqDC
+oMKgID4gLVBSRUZFUlJFRF9QUk9WSURFUl91LWJvb3QgPSAidS1ib290LWJiLm9yZyANCj4+
+IDxodHRwOi8vdS1ib290LWJiLm9yZz4iDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKgwqDCoMKg
+ID4gLVNZU0ZXX1NPQyA9ICJhbTYyeCINCj4+IMKgwqDCoMKgID4gLVNZU0ZXX0NPTkZJRyA9
+ICJldm0iDQo+PiDCoMKgwqDCoCA+IC1TWVNGV19TVUZGSVggPSAiZ3AiDQo+PiDCoMKgwqDC
+oCA+IC0NCj4+IMKgwqDCoMKgID4gLVVCT09UX01BQ0hJTkUgPSAiYW02MnhfZXZtX3I1X2Rl
+ZmNvbmZpZyINCj4+IMKgwqDCoMKgID4gZGlmZiAtLWdpdCBhL21ldGEtdGktYnNwL2NvbmYv
+bWFjaGluZS9iZWFnbGVwbGF5LmNvbmYgDQo+PiBiL21ldGEtdGktYnNwL2NvbmYvbWFjaGlu
+ZS9iZWFnbGVwbGF5LmNvbmYNCj4+IMKgwqDCoMKgID4gaW5kZXggYWM0YTIwMmEuLjMxMmZj
+NTAzIDEwMDY0NA0KPj4gwqDCoMKgwqAgPiAtLS0gYS9tZXRhLXRpLWJzcC9jb25mL21hY2hp
+bmUvYmVhZ2xlcGxheS5jb25mDQo+PiDCoMKgwqDCoCA+ICsrKyBiL21ldGEtdGktYnNwL2Nv
+bmYvbWFjaGluZS9iZWFnbGVwbGF5LmNvbmYNCj4+IMKgwqDCoMKgID4gQEAgLTE4LDYgKzE4
+LDExIEBAIFRGQV9LM19TWVNURU1fU1VTUEVORCA9ICIxIg0KPj4gwqDCoMKgwqAgPg0KPj4g
+wqDCoMKgwqAgPsKgIMKgT1BURUVNQUNISU5FID0gImszLWFtNjJ4Ig0KPj4gwqDCoMKgwqAg
+Pg0KPj4gwqDCoMKgwqAgPiArU1lTRldfU09DID0gImFtNjJ4Ig0KPj4gwqDCoMKgwqAgPiAr
+U1lTRldfQ09ORklHID0gImV2bSINCj4+IMKgwqDCoMKgID4gK1NZU0ZXX1NVRkZJWCA9ICJn
+cCINCj4+IMKgwqDCoMKgID4gKw0KPj4gwqDCoMKgwqAgPiArVUJPT1RfTUFDSElORV9SNSA9
+ICJhbTYyeF9ldm1fcjVfZGVmY29uZmlnIg0KPj4gwqDCoMKgwqAgPsKgIMKgVUJPT1RfTUFD
+SElORSA9ICJhbTYyeF9ldm1fYTUzX2RlZmNvbmZpZyINCj4+IMKgwqDCoMKgID4NCj4+IMKg
+wqDCoMKgID7CoCDCoFBSRUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL2tlcm5lbCA9ICJsaW51
+eC1iYi5vcmcgDQo+PiA8aHR0cDovL2xpbnV4LWJiLm9yZz4iDQo+PiDCoMKgwqDCoCA+IGRp
+ZmYgLS1naXQgYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvaW5jbHVkZS9rMy5pbmMgDQo+
+PiBiL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9pbmNsdWRlL2szLmluYw0KPj4gwqDCoMKg
+wqAgPiBpbmRleCAyNDE1ZjBiYS4uODRmZWVlMDggMTAwNjQ0DQo+PiDCoMKgwqDCoCA+IC0t
+LSBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9pbmNsdWRlL2szLmluYw0KPj4gwqDCoMKg
+wqAgPiArKysgYi9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvaW5jbHVkZS9rMy5pbmMNCj4+
+IMKgwqDCoMKgID4gQEAgLTUsOCArNSw2IEBAIFNPQ19GQU1JTFk6YXBwZW5kID0gIjprMyIN
+Cj4+IMKgwqDCoMKgID4NCj4+IMKgwqDCoMKgID7CoCDCoHJlcXVpcmUgY29uZi9tYWNoaW5l
+L2luY2x1ZGUvYXJtL2FyY2gtYXJtNjQuaW5jDQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKgwqDC
+oCA+IC1CQk1VTFRJQ09ORklHICs9ICJrM3I1Ig0KPj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKg
+wqDCoCA+wqAgwqAjIEluY3JlYXNlIHRoaXMgZXZlcnl0aW1lIHlvdSBjaGFuZ2Ugc29tZXRo
+aW5nIGluIHRoZSBrZXJuZWwNCj4+IMKgwqDCoMKgID7CoCDCoE1BQ0hJTkVfS0VSTkVMX1BS
+ID0gInIwIg0KPj4gwqDCoMKgwqAgPg0KPj4gwqDCoMKgwqAgPiBAQCAtNjIsNyArNjAsNyBA
+QCBNQUNISU5FX0ZFQVRVUkVTICs9ICJlZmkiDQo+PiDCoMKgwqDCoCA+wqAgwqBXS1NfRklM
+RSA/PSAiJHtAYmIudXRpbHMuY29udGFpbnMoIk1BQ0hJTkVfRkVBVFVSRVMiLCAiZWZpIiwg
+DQo+PiAic2RpbWFnZS0ycGFydC1lZmkud2tzLmluIDxodHRwOi8vc2RpbWFnZS0ycGFydC1l
+Zmkud2tzLmluPiIsIA0KPj4gInNkaW1hZ2UtMnBhcnQud2tzIiwgZCl9Ig0KPj4gwqDCoMKg
+wqAgPg0KPj4gwqDCoMKgwqAgPsKgIMKgZG9faW1hZ2Vfd2ljW2RlcGVuZHNdICs9ICJ2aXJ0
+dWFsL2Jvb3Rsb2FkZXI6ZG9fZGVwbG95Ig0KPj4gwqDCoMKgwqAgPiAtZG9faW1hZ2VbbWNk
+ZXBlbmRzXSArPSAibWM6OmszcjU6dmlydHVhbC9ib290bG9hZGVyOmRvX2RlcGxveSINCj4+
+IMKgwqDCoMKgID4gK2RvX2ltYWdlW2RlcGVuZHNdICs9ICJ0aWJvb3QzLXN0YWdpbmc6ZG9f
+ZGVwbG95Ig0KPj4gwqDCoMKgwqAgPg0KPj4gwqDCoMKgwqAgPsKgIMKgU0VSSUFMX0NPTlNP
+TEVTID0gIjExNTIwMDt0dHlTMCAxMTUyMDA7dHR5UzIiDQo+PiDCoMKgwqDCoCA+wqAgwqBT
+RVJJQUxfQ09OU09MRVNfQ0hFQ0sgPSAiJHtTRVJJQUxfQ09OU09MRVN9Ig0KPj4gwqDCoMKg
+wqAgPiBkaWZmIC0tZ2l0IGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2luY2x1ZGUvazNy
+NS5pbmMgDQo+PiBiL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9pbmNsdWRlL2szcjUuaW5j
+DQo+PiDCoMKgwqDCoCA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPj4gwqDCoMKgwqAg
+PiBpbmRleCA2MzI2N2E1ZS4uMDAwMDAwMDANCj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10
+aS1ic3AvY29uZi9tYWNoaW5lL2luY2x1ZGUvazNyNS5pbmMNCj4+IMKgwqDCoMKgID4gKysr
+IC9kZXYvbnVsbA0KPj4gwqDCoMKgwqAgPiBAQCAtMSwyNyArMCwwIEBADQo+PiDCoMKgwqDC
+oCA+IC0jIFRJIEszIEFybXY3IHByb2ZpbGUgZm9yIENvcnRleC1SNUYgY29yZXMNCj4+IMKg
+wqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtcmVxdWlyZSBjb25mL21hY2hpbmUvaW5jbHVk
+ZS90aS1zb2MuaW5jDQo+PiDCoMKgwqDCoCA+IC1TT0NfRkFNSUxZOmFwcGVuZCA9ICI6azNy
+NSINCj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtIyBUaGUgY2xvc2VzdCBvZiBl
+eGlzdGluZyB0dW5lcyBmb3IgQ29ydGV4LVI1Rg0KPj4gwqDCoMKgwqAgPiAtREVGQVVMVFRV
+TkUgPSAiYXJtdjdhdGhmIg0KPj4gwqDCoMKgwqAgPiAtcmVxdWlyZSBjb25mL21hY2hpbmUv
+aW5jbHVkZS9hcm0vYXJtdjdhL3R1bmUtY29ydGV4YTguaW5jDQo+PiDCoMKgwqDCoCA+IC0N
+Cj4+IMKgwqDCoMKgID4gLSMgUjUgcnVucyBlYXJseSBib290bG9hZGVyIGFuZCBsb2FkcyBT
+WVNGVw0KPj4gwqDCoMKgwqAgPiAtIyANCj4+IGh0dHBzOi8vZ2l0LnRpLmNvbS9jZ2l0L3Rp
+LXUtYm9vdC90aS11LWJvb3QvdHJlZS9kb2MvYm9hcmQvdGkvajcyMWVfZXZtLnJzdCA8aHR0
+cHM6Ly9naXQudGkuY29tL2NnaXQvdGktdS1ib290L3RpLXUtYm9vdC90cmVlL2RvYy9ib2Fy
+ZC90aS9qNzIxZV9ldm0ucnN0Pg0KPj4gwqDCoMKgwqAgPiAtIyANCj4+IGh0dHBzOi8vZ2l0
+LnRpLmNvbS9jZ2l0L3RpLXUtYm9vdC90aS11LWJvb3QvdHJlZS9kb2MvYm9hcmQvdGkvYW02
+Mnhfc2sucnN0IDxodHRwczovL2dpdC50aS5jb20vY2dpdC90aS11LWJvb3QvdGktdS1ib290
+L3RyZWUvZG9jL2JvYXJkL3RpL2FtNjJ4X3NrLnJzdD4NCj4+IMKgwqDCoMKgID4gLSMgDQo+
+PiBodHRwczovL2dpdC50aS5jb20vY2dpdC90aS11LWJvb3QvdGktdS1ib290L3RyZWUvZG9j
+L2JvYXJkL3RpL2szLnJzdCANCj4+IDxodHRwczovL2dpdC50aS5jb20vY2dpdC90aS11LWJv
+b3QvdGktdS1ib290L3RyZWUvZG9jL2JvYXJkL3RpL2szLnJzdD4NCj4+IMKgwqDCoMKgID4g
+LVBSRUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL2tlcm5lbCA9ICJsaW51eC1kdW1teSINCj4+
+IMKgwqDCoMKgID4gLVBSRUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL2Jvb3Rsb2FkZXIgPz0g
+InUtYm9vdC10aS1zdGFnaW5nIg0KPj4gwqDCoMKgwqAgPiAtUFJFRkVSUkVEX1BST1ZJREVS
+X3UtYm9vdCA/PSAidS1ib290LXRpLXN0YWdpbmciDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKg
+wqDCoMKgID4gLVNQTF9TVUZGSVggPSAiYmluIg0KPj4gwqDCoMKgwqAgPiAtU1BMX0JJTkFS
+WSA9IA0KPj4gInRpYm9vdDMtJHtTWVNGV19TT0N9LSR7U1lTRldfU1VGRklYfS0ke1NZU0ZX
+X0NPTkZJR30uJHtTUExfU1VGRklYfSINCj4+IMKgwqDCoMKgID4gLVNQTF9TWU1MSU5LID0g
+InRpYm9vdDMuJHtTUExfU1VGRklYfSINCj4+IMKgwqDCoMKgID4gLVVCT09UX1NVRkZJWCA9
+ICJiaW4iDQo+PiDCoMKgwqDCoCA+IC1VQk9PVF9CSU5BUlkgPSAidS1ib290LXI1c3BsLiR7
+VUJPT1RfU1VGRklYfSINCj4+IMKgwqDCoMKgID4gLVVCT09UX0lNQUdFID0gDQo+PiAidS1i
+b290LXI1c3BsLSR7TUFJTk1BQ0hJTkV9LSR7UFZ9LSR7UFJ9LiR7VUJPT1RfU1VGRklYfSIN
+Cj4+IMKgwqDCoMKgID4gLVVCT09UX1NZTUxJTksgPSAidS1ib290LXI1c3BsLSR7TUFJTk1B
+Q0hJTkV9LiR7VUJPT1RfU1VGRklYfSINCj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAg
+PiAtUEFDS0FHRUNPTkZJRzpwbi11LWJvb3QtdGktc3RhZ2luZyA9ICIiDQo+PiDCoMKgwqDC
+oCA+IC1QQUNLQUdFQ09ORklHOnBuLXUtYm9vdC10aS1tYWlubGluZSA9ICIiDQo+PiDCoMKg
+wqDCoCA+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajcyMDAtZXZt
+LWszcjUuY29uZiANCj4+IGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3MjAwLWV2bS1r
+M3I1LmNvbmYNCj4+IMKgwqDCoMKgID4gZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0DQo+PiDC
+oMKgwqDCoCA+IGluZGV4IDY4MDYxODgzLi4wMDAwMDAwMA0KPj4gwqDCoMKgwqAgPiAtLS0g
+YS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajcyMDAtZXZtLWszcjUuY29uZg0KPj4gwqDC
+oMKgwqAgPiArKysgL2Rldi9udWxsDQo+PiDCoMKgwqDCoCA+IEBAIC0xLDExICswLDAgQEAN
+Cj4+IMKgwqDCoMKgID4gLSNAVFlQRTogTWFjaGluZQ0KPj4gwqDCoMKgwqAgPiAtI0BOQU1F
+OiBKNzIwMCBFVk0gKFI1RikNCj4+IMKgwqDCoMKgID4gLSNAREVTQ1JJUFRJT046IE1hY2hp
+bmUgY29uZmlndXJhdGlvbiBmb3IgdGhlIFRJIEo3MjAwIEVWTSAoUjVGIA0KPj4gY29yZSkN
+Cj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtcmVxdWlyZSBjb25mL21hY2hpbmUv
+aW5jbHVkZS9rM3I1LmluYw0KPj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKgwqDCoCA+IC1TWVNG
+V19TT0MgPSAiajcyMDAiDQo+PiDCoMKgwqDCoCA+IC1TWVNGV19DT05GSUcgPSAiZXZtIg0K
+Pj4gwqDCoMKgwqAgPiAtU1lTRldfU1VGRklYID0gImdwIg0KPj4gwqDCoMKgwqAgPiAtDQo+
+PiDCoMKgwqDCoCA+IC1VQk9PVF9NQUNISU5FID0gImo3MjAwX2V2bV9yNV9kZWZjb25maWci
+DQo+PiDCoMKgwqDCoCA+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUv
+ajcyMDAtZXZtLmNvbmYgDQo+PiBiL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIwMC1l
+dm0uY29uZg0KPj4gwqDCoMKgwqAgPiBpbmRleCBkZmYxZGE2OS4uZTczM2QxNWEgMTAwNjQ0
+DQo+PiDCoMKgwqDCoCA+IC0tLSBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIwMC1l
+dm0uY29uZg0KPj4gwqDCoMKgwqAgPiArKysgYi9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUv
+ajcyMDAtZXZtLmNvbmYNCj4+IMKgwqDCoMKgID4gQEAgLTEwLDQgKzEwLDkgQEAgS0VSTkVM
+X0RFVklDRVRSRUUgPSAiIFwNCj4+IMKgwqDCoMKgID7CoCDCoCDCoCDCoHRpL2szLWo3MjAw
+LWNvbW1vbi1wcm9jLWJvYXJkLmR0YiBcDQo+PiDCoMKgwqDCoCA+wqAgwqAiDQo+PiDCoMKg
+wqDCoCA+DQo+PiDCoMKgwqDCoCA+ICtTWVNGV19TT0MgPSAiajcyMDAiDQo+PiDCoMKgwqDC
+oCA+ICtTWVNGV19DT05GSUcgPSAiZXZtIg0KPj4gwqDCoMKgwqAgPiArU1lTRldfU1VGRklY
+ID0gImdwIg0KPj4gwqDCoMKgwqAgPiArDQo+PiDCoMKgwqDCoCA+ICtVQk9PVF9NQUNISU5F
+X1I1ID0gImo3MjAwX2V2bV9yNV9kZWZjb25maWciDQo+PiDCoMKgwqDCoCA+wqAgwqBVQk9P
+VF9NQUNISU5FID0gImo3MjAwX2V2bV9hNzJfY29uZmlnIg0KPj4gwqDCoMKgwqAgPiBkaWZm
+IC0tZ2l0IGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3MjAwLWhzLWV2bS1rM3I1LmNv
+bmYgDQo+PiBiL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIwMC1ocy1ldm0tazNyNS5j
+b25mDQo+PiDCoMKgwqDCoCA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPj4gwqDCoMKg
+wqAgPiBpbmRleCAxOTIyZDVjOC4uMDAwMDAwMDANCj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0
+YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3MjAwLWhzLWV2bS1rM3I1LmNvbmYNCj4+IMKgwqDC
+oMKgID4gKysrIC9kZXYvbnVsbA0KPj4gwqDCoMKgwqAgPiBAQCAtMSwxMSArMCwwIEBADQo+
+PiDCoMKgwqDCoCA+IC0jQFRZUEU6IE1hY2hpbmUNCj4+IMKgwqDCoMKgID4gLSNATkFNRTog
+SjcyMDAgSFMgRVZNIChSNUYpDQo+PiDCoMKgwqDCoCA+IC0jQERFU0NSSVBUSU9OOiBNYWNo
+aW5lIGNvbmZpZ3VyYXRpb24gZm9yIHRoZSBUSSBKNzIwMCBIUyBFVk0gDQo+PiAoUjVGIGNv
+cmUpDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKgwqDCoMKgID4gLXJlcXVpcmUgY29uZi9tYWNo
+aW5lL2luY2x1ZGUvazNyNS5pbmMNCj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAt
+U1lTRldfU09DID0gImo3MjAwX3NyMiINCj4+IMKgwqDCoMKgID4gLVNZU0ZXX0NPTkZJRyA9
+ICJldm0iDQo+PiDCoMKgwqDCoCA+IC1TWVNGV19TVUZGSVggPSAiaHMiDQo+PiDCoMKgwqDC
+oCA+IC0NCj4+IMKgwqDCoMKgID4gLVVCT09UX01BQ0hJTkUgPSAiajcyMDBfZXZtX3I1X2Rl
+ZmNvbmZpZyINCj4+IMKgwqDCoMKgID4gZGlmZiAtLWdpdCBhL21ldGEtdGktYnNwL2NvbmYv
+bWFjaGluZS9qNzIwMC1ocy1ldm0uY29uZiANCj4+IGIvbWV0YS10aS1ic3AvY29uZi9tYWNo
+aW5lL2o3MjAwLWhzLWV2bS5jb25mDQo+PiDCoMKgwqDCoCA+IGluZGV4IDU0ZmQyYjRhLi5m
+YzMzMTA2YyAxMDA2NDQNCj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10aS1ic3AvY29uZi9t
+YWNoaW5lL2o3MjAwLWhzLWV2bS5jb25mDQo+PiDCoMKgwqDCoCA+ICsrKyBiL21ldGEtdGkt
+YnNwL2NvbmYvbWFjaGluZS9qNzIwMC1ocy1ldm0uY29uZg0KPj4gwqDCoMKgwqAgPiBAQCAt
+NCw0ICs0LDkgQEANCj4+IMKgwqDCoMKgID4NCj4+IMKgwqDCoMKgID7CoCDCoHJlcXVpcmUg
+Y29uZi9tYWNoaW5lL2o3MjAwLWV2bS5jb25mDQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKgwqDC
+oCA+ICtTWVNGV19TT0MgPSAiajcyMDBfc3IyIg0KPj4gwqDCoMKgwqAgPiArU1lTRldfQ09O
+RklHID0gImV2bSINCj4+IMKgwqDCoMKgID4gK1NZU0ZXX1NVRkZJWCA9ICJocyINCj4+IMKg
+wqDCoMKgID4gKw0KPj4gwqDCoMKgwqAgPiArVUJPT1RfTUFDSElORV9SNSA9ICJqNzIwMF9l
+dm1fcjVfZGVmY29uZmlnIg0KPj4gwqDCoMKgwqAgPsKgIMKgVUJPT1RfTUFDSElORSA9ICJq
+NzIwMF9ldm1fYTcyX2RlZmNvbmZpZyINCj4+IMKgwqDCoMKgID4gZGlmZiAtLWdpdCBhL21l
+dGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIxZS1ldm0tazNyNS5jb25mIA0KPj4gYi9tZXRh
+LXRpLWJzcC9jb25mL21hY2hpbmUvajcyMWUtZXZtLWszcjUuY29uZg0KPj4gwqDCoMKgwqAg
+PiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQNCj4+IMKgwqDCoMKgID4gaW5kZXggMDcwYmY3
+YWEuLjAwMDAwMDAwDQo+PiDCoMKgwqDCoCA+IC0tLSBhL21ldGEtdGktYnNwL2NvbmYvbWFj
+aGluZS9qNzIxZS1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+ICsrKyAvZGV2L251bGwN
+Cj4+IMKgwqDCoMKgID4gQEAgLTEsMTEgKzAsMCBAQA0KPj4gwqDCoMKgwqAgPiAtI0BUWVBF
+OiBNYWNoaW5lDQo+PiDCoMKgwqDCoCA+IC0jQE5BTUU6IEo3MjFlIEVWTSAoUjVGKQ0KPj4g
+wqDCoMKgwqAgPiAtI0BERVNDUklQVElPTjogTWFjaGluZSBjb25maWd1cmF0aW9uIGZvciB0
+aGUgVEkgSjcyMWUgRVZNIChSNUYgDQo+PiBjb3JlKQ0KPj4gwqDCoMKgwqAgPiAtDQo+PiDC
+oMKgwqDCoCA+IC1yZXF1aXJlIGNvbmYvbWFjaGluZS9pbmNsdWRlL2szcjUuaW5jDQo+PiDC
+oMKgwqDCoCA+IC0NCj4+IMKgwqDCoMKgID4gLVNZU0ZXX1NPQyA9ICJqNzIxZSINCj4+IMKg
+wqDCoMKgID4gLVNZU0ZXX0NPTkZJRyA9ICJldm0iDQo+PiDCoMKgwqDCoCA+IC1TWVNGV19T
+VUZGSVggPSAiZ3AiDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKgwqDCoMKgID4gLVVCT09UX01B
+Q0hJTkUgPSAiajcyMWVfZXZtX3I1X2RlZmNvbmZpZyINCj4+IMKgwqDCoMKgID4gZGlmZiAt
+LWdpdCBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIxZS1ldm0uY29uZiANCj4+IGIv
+bWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3MjFlLWV2bS5jb25mDQo+PiDCoMKgwqDCoCA+
+IGluZGV4IDVlMWY2ZGNhLi5jYTIzZTNlMyAxMDA2NDQNCj4+IMKgwqDCoMKgID4gLS0tIGEv
+bWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3MjFlLWV2bS5jb25mDQo+PiDCoMKgwqDCoCA+
+ICsrKyBiL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIxZS1ldm0uY29uZg0KPj4gwqDC
+oMKgwqAgPiBAQCAtMTUsNCArMTUsOSBAQCBLRVJORUxfREVWSUNFVFJFRSA9ICIgXA0KPj4g
+wqDCoMKgwqAgPsKgIMKgIMKgIMKgdGkvazMtajcyMWUtc2suZHRiIFwNCj4+IMKgwqDCoMKg
+ID7CoCDCoCINCj4+IMKgwqDCoMKgID4NCj4+IMKgwqDCoMKgID4gK1NZU0ZXX1NPQyA9ICJq
+NzIxZSINCj4+IMKgwqDCoMKgID4gK1NZU0ZXX0NPTkZJRyA9ICJldm0iDQo+PiDCoMKgwqDC
+oCA+ICtTWVNGV19TVUZGSVggPSAiZ3AiDQo+PiDCoMKgwqDCoCA+ICsNCj4+IMKgwqDCoMKg
+ID4gK1VCT09UX01BQ0hJTkVfUjUgPSAiajcyMWVfZXZtX3I1X2RlZmNvbmZpZyINCj4+IMKg
+wqDCoMKgID7CoCDCoFVCT09UX01BQ0hJTkUgPSAiajcyMWVfZXZtX2E3Ml9jb25maWciDQo+
+PiDCoMKgwqDCoCA+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajcy
+MWUtaHMtZXZtLWszcjUuY29uZiANCj4+IGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3
+MjFlLWhzLWV2bS1rM3I1LmNvbmYNCj4+IMKgwqDCoMKgID4gZGVsZXRlZCBmaWxlIG1vZGUg
+MTAwNjQ0DQo+PiDCoMKgwqDCoCA+IGluZGV4IDc5MDRjNjYwLi4wMDAwMDAwMA0KPj4gwqDC
+oMKgwqAgPiAtLS0gYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajcyMWUtaHMtZXZtLWsz
+cjUuY29uZg0KPj4gwqDCoMKgwqAgPiArKysgL2Rldi9udWxsDQo+PiDCoMKgwqDCoCA+IEBA
+IC0xLDExICswLDAgQEANCj4+IMKgwqDCoMKgID4gLSNAVFlQRTogTWFjaGluZQ0KPj4gwqDC
+oMKgwqAgPiAtI0BOQU1FOiBKNzIxZSBIUyBFVk0gKFI1RikNCj4+IMKgwqDCoMKgID4gLSNA
+REVTQ1JJUFRJT046IE1hY2hpbmUgY29uZmlndXJhdGlvbiBmb3IgdGhlIFRJIEo3MjFlIEhT
+IEVWTSANCj4+IChSNUYgY29yZSkNCj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAt
+cmVxdWlyZSBjb25mL21hY2hpbmUvaW5jbHVkZS9rM3I1LmluYw0KPj4gwqDCoMKgwqAgPiAt
+DQo+PiDCoMKgwqDCoCA+IC1TWVNGV19TT0MgPSAiajcyMWVfc3IxXzEiDQo+PiDCoMKgwqDC
+oCA+IC1TWVNGV19DT05GSUcgPSAiZXZtIg0KPj4gwqDCoMKgwqAgPiAtU1lTRldfU1VGRklY
+ID0gImhzIg0KPj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKgwqDCoCA+IC1VQk9PVF9NQUNISU5F
+ID0gImo3MjFlX2V2bV9yNV9kZWZjb25maWciDQo+PiDCoMKgwqDCoCA+IGRpZmYgLS1naXQg
+YS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajcyMWUtaHMtZXZtLmNvbmYgDQo+PiBiL21l
+dGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIxZS1ocy1ldm0uY29uZg0KPj4gwqDCoMKgwqAg
+PiBpbmRleCA0NDFjYTE2OS4uM2Q0YmVkYjYgMTAwNjQ0DQo+PiDCoMKgwqDCoCA+IC0tLSBh
+L21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIxZS1ocy1ldm0uY29uZg0KPj4gwqDCoMKg
+wqAgPiArKysgYi9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajcyMWUtaHMtZXZtLmNvbmYN
+Cj4+IMKgwqDCoMKgID4gQEAgLTQsNCArNCw1IEBADQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKg
+wqDCoCA+wqAgwqByZXF1aXJlIGNvbmYvbWFjaGluZS9qNzIxZS1ldm0uY29uZg0KPj4gwqDC
+oMKgwqAgPg0KPj4gwqDCoMKgwqAgPiAtVUJPT1RfTUFDSElORSA9ICJqNzIxZV9ldm1fYTcy
+X2RlZmNvbmZpZyINCj4+IMKgwqDCoMKgID4gK1NZU0ZXX1NPQyA9ICJqNzIxZV9zcjFfMSIN
+Cj4+IMKgwqDCoMKgID4gK1NZU0ZXX1NVRkZJWCA9ICJocyINCj4+IMKgwqDCoMKgID4gZGlm
+ZiAtLWdpdCBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIxczItZXZtLWszcjUuY29u
+ZiANCj4+IGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3MjFzMi1ldm0tazNyNS5jb25m
+DQo+PiDCoMKgwqDCoCA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPj4gwqDCoMKgwqAg
+PiBpbmRleCA1MDhlOTZlNS4uMDAwMDAwMDANCj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10
+aS1ic3AvY29uZi9tYWNoaW5lL2o3MjFzMi1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+
+ICsrKyAvZGV2L251bGwNCj4+IMKgwqDCoMKgID4gQEAgLTEsMTEgKzAsMCBAQA0KPj4gwqDC
+oMKgwqAgPiAtI0BUWVBFOiBNYWNoaW5lDQo+PiDCoMKgwqDCoCA+IC0jQE5BTUU6IEo3MjFT
+MiBFVk0gKFI1RikNCj4+IMKgwqDCoMKgID4gLSNAREVTQ1JJUFRJT046IE1hY2hpbmUgY29u
+ZmlndXJhdGlvbiBmb3IgdGhlIFRJIEo3MjFTMiBFVk0gDQo+PiAoUjVGIGNvcmUpDQo+PiDC
+oMKgwqDCoCA+IC0NCj4+IMKgwqDCoMKgID4gLXJlcXVpcmUgY29uZi9tYWNoaW5lL2luY2x1
+ZGUvazNyNS5pbmMNCj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtU1lTRldfU09D
+ID0gImo3MjFzMiINCj4+IMKgwqDCoMKgID4gLVNZU0ZXX0NPTkZJRyA9ICJldm0iDQo+PiDC
+oMKgwqDCoCA+IC1TWVNGV19TVUZGSVggPSAiZ3AiDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKg
+wqDCoMKgID4gLVVCT09UX01BQ0hJTkUgPSAiajcyMXMyX2V2bV9yNV9kZWZjb25maWciDQo+
+PiDCoMKgwqDCoCA+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajcy
+MXMyLWV2bS5jb25mIA0KPj4gYi9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajcyMXMyLWV2
+bS5jb25mDQo+PiDCoMKgwqDCoCA+IGluZGV4IGVjYjE4MzZmLi42M2Q4NmFmMCAxMDA2NDQN
+Cj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3MjFzMi1l
+dm0uY29uZg0KPj4gwqDCoMKgwqAgPiArKysgYi9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUv
+ajcyMXMyLWV2bS5jb25mDQo+PiDCoMKgwqDCoCA+IEBAIC0xOCw0ICsxOCw5IEBAIEtFUk5F
+TF9ERVZJQ0VUUkVFID0gIiBcDQo+PiDCoMKgwqDCoCA+wqAgwqAgwqAgwqB0aS9rMy1qNzIx
+czItY29tbW9uLXByb2MtYm9hcmQuZHRiIFwNCj4+IMKgwqDCoMKgID7CoCDCoCINCj4+IMKg
+wqDCoMKgID4NCj4+IMKgwqDCoMKgID4gK1NZU0ZXX1NPQyA9ICJqNzIxczIiDQo+PiDCoMKg
+wqDCoCA+ICtTWVNGV19DT05GSUcgPSAiZXZtIg0KPj4gwqDCoMKgwqAgPiArU1lTRldfU1VG
+RklYID0gImdwIg0KPj4gwqDCoMKgwqAgPiArDQo+PiDCoMKgwqDCoCA+ICtVQk9PVF9NQUNI
+SU5FX1I1ID0gImo3MjFzMl9ldm1fcjVfZGVmY29uZmlnIg0KPj4gwqDCoMKgwqAgPsKgIMKg
+VUJPT1RfTUFDSElORSA9ICJqNzIxczJfZXZtX2E3Ml9kZWZjb25maWciDQo+PiDCoMKgwqDC
+oCA+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajcyMXMyLWhzLWV2
+bS1rM3I1LmNvbmYgDQo+PiBiL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIxczItaHMt
+ZXZtLWszcjUuY29uZg0KPj4gwqDCoMKgwqAgPiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQN
+Cj4+IMKgwqDCoMKgID4gaW5kZXggNThjZDkyYzQuLjAwMDAwMDAwDQo+PiDCoMKgwqDCoCA+
+IC0tLSBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzIxczItaHMtZXZtLWszcjUuY29u
+Zg0KPj4gwqDCoMKgwqAgPiArKysgL2Rldi9udWxsDQo+PiDCoMKgwqDCoCA+IEBAIC0xLDEx
+ICswLDAgQEANCj4+IMKgwqDCoMKgID4gLSNAVFlQRTogTWFjaGluZQ0KPj4gwqDCoMKgwqAg
+PiAtI0BOQU1FOiBKNzIxUzIgSFMgRVZNIChSNUYpDQo+PiDCoMKgwqDCoCA+IC0jQERFU0NS
+SVBUSU9OOiBNYWNoaW5lIGNvbmZpZ3VyYXRpb24gZm9yIHRoZSBUSSBKNzIxUzIgSFMgRVZN
+IA0KPj4gKFI1RiBjb3JlKQ0KPj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKgwqDCoCA+IC1yZXF1
+aXJlIGNvbmYvbWFjaGluZS9pbmNsdWRlL2szcjUuaW5jDQo+PiDCoMKgwqDCoCA+IC0NCj4+
+IMKgwqDCoMKgID4gLVNZU0ZXX1NPQyA9ICJqNzIxczIiDQo+PiDCoMKgwqDCoCA+IC1TWVNG
+V19DT05GSUcgPSAiZXZtIg0KPj4gwqDCoMKgwqAgPiAtU1lTRldfU1VGRklYID0gImhzIg0K
+Pj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKgwqDCoCA+IC1VQk9PVF9NQUNISU5FID0gImo3MjFz
+Ml9ldm1fcjVfZGVmY29uZmlnIg0KPj4gwqDCoMKgwqAgPiBkaWZmIC0tZ2l0IGEvbWV0YS10
+aS1ic3AvY29uZi9tYWNoaW5lL2o3MjFzMi1ocy1ldm0uY29uZiANCj4+IGIvbWV0YS10aS1i
+c3AvY29uZi9tYWNoaW5lL2o3MjFzMi1ocy1ldm0uY29uZg0KPj4gwqDCoMKgwqAgPiBpbmRl
+eCA0Y2YzMmEyOC4uMTEyOWExODkgMTAwNjQ0DQo+PiDCoMKgwqDCoCA+IC0tLSBhL21ldGEt
+dGktYnNwL2NvbmYvbWFjaGluZS9qNzIxczItaHMtZXZtLmNvbmYNCj4+IMKgwqDCoMKgID4g
+KysrIGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3MjFzMi1ocy1ldm0uY29uZg0KPj4g
+wqDCoMKgwqAgPiBAQCAtMywzICszLDUgQEANCj4+IMKgwqDCoMKgID7CoCDCoCNAREVTQ1JJ
+UFRJT046IE1hY2hpbmUgY29uZmlndXJhdGlvbiBmb3IgdGhlIFRJIEo3MjFTMiBIUyBFVk0N
+Cj4+IMKgwqDCoMKgID4NCj4+IMKgwqDCoMKgID7CoCDCoHJlcXVpcmUgY29uZi9tYWNoaW5l
+L2o3MjFzMi1ldm0uY29uZg0KPj4gwqDCoMKgwqAgPiArDQo+PiDCoMKgwqDCoCA+ICtTWVNG
+V19TVUZGSVggPSAiaHMiDQo+PiDCoMKgwqDCoCA+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWJz
+cC9jb25mL21hY2hpbmUvajc4NHM0LWV2bS1rM3I1LmNvbmYgDQo+PiBiL21ldGEtdGktYnNw
+L2NvbmYvbWFjaGluZS9qNzg0czQtZXZtLWszcjUuY29uZg0KPj4gwqDCoMKgwqAgPiBkZWxl
+dGVkIGZpbGUgbW9kZSAxMDA2NDQNCj4+IMKgwqDCoMKgID4gaW5kZXggMDRmZWViYzYuLjAw
+MDAwMDAwDQo+PiDCoMKgwqDCoCA+IC0tLSBhL21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9q
+Nzg0czQtZXZtLWszcjUuY29uZg0KPj4gwqDCoMKgwqAgPiArKysgL2Rldi9udWxsDQo+PiDC
+oMKgwqDCoCA+IEBAIC0xLDExICswLDAgQEANCj4+IMKgwqDCoMKgID4gLSNAVFlQRTogTWFj
+aGluZQ0KPj4gwqDCoMKgwqAgPiAtI0BOQU1FOiBKNzg0UzQgRVZNIChSNUYpDQo+PiDCoMKg
+wqDCoCA+IC0jQERFU0NSSVBUSU9OOiBNYWNoaW5lIGNvbmZpZ3VyYXRpb24gZm9yIHRoZSBU
+SSBKNzg0UzQgRVZNIA0KPj4gKFI1RiBjb3JlKQ0KPj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKg
+wqDCoCA+IC1yZXF1aXJlIGNvbmYvbWFjaGluZS9pbmNsdWRlL2szcjUuaW5jDQo+PiDCoMKg
+wqDCoCA+IC0NCj4+IMKgwqDCoMKgID4gLVNZU0ZXX1NPQyA9ICJqNzg0czQiDQo+PiDCoMKg
+wqDCoCA+IC1TWVNGV19DT05GSUcgPSAiZXZtIg0KPj4gwqDCoMKgwqAgPiAtU1lTRldfU1VG
+RklYID0gImdwIg0KPj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKgwqDCoCA+IC1VQk9PVF9NQUNI
+SU5FID0gImo3ODRzNF9ldm1fcjVfZGVmY29uZmlnIg0KPj4gwqDCoMKgwqAgPiBkaWZmIC0t
+Z2l0IGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3ODRzNC1ldm0uY29uZiANCj4+IGIv
+bWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3ODRzNC1ldm0uY29uZg0KPj4gwqDCoMKgwqAg
+PiBpbmRleCA0MGE2MzY1MS4uYTI0MmVmOGEgMTAwNjQ0DQo+PiDCoMKgwqDCoCA+IC0tLSBh
+L21ldGEtdGktYnNwL2NvbmYvbWFjaGluZS9qNzg0czQtZXZtLmNvbmYNCj4+IMKgwqDCoMKg
+ID4gKysrIGIvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3ODRzNC1ldm0uY29uZg0KPj4g
+wqDCoMKgwqAgPiBAQCAtMTgsNCArMTgsOSBAQCBLRVJORUxfREVWSUNFVFJFRSA9ICIgXA0K
+Pj4gwqDCoMKgwqAgPsKgIMKgIMKgIMKgdGkvazMtajc4NHM0LWV2bS5kdGIgXA0KPj4gwqDC
+oMKgwqAgPsKgIMKgIg0KPj4gwqDCoMKgwqAgPg0KPj4gwqDCoMKgwqAgPiArU1lTRldfU09D
+ID0gImo3ODRzNCINCj4+IMKgwqDCoMKgID4gK1NZU0ZXX0NPTkZJRyA9ICJldm0iDQo+PiDC
+oMKgwqDCoCA+ICtTWVNGV19TVUZGSVggPSAiZ3AiDQo+PiDCoMKgwqDCoCA+ICsNCj4+IMKg
+wqDCoMKgID4gK1VCT09UX01BQ0hJTkVfUjUgPSAiajc4NHM0X2V2bV9yNV9kZWZjb25maWci
+DQo+PiDCoMKgwqDCoCA+wqAgwqBVQk9PVF9NQUNISU5FID0gImo3ODRzNF9ldm1fYTcyX2Rl
+ZmNvbmZpZyINCj4+IMKgwqDCoMKgID4gZGlmZiAtLWdpdCBhL21ldGEtdGktYnNwL2NvbmYv
+bWFjaGluZS9qNzg0czQtaHMtZXZtLWszcjUuY29uZiANCj4+IGIvbWV0YS10aS1ic3AvY29u
+Zi9tYWNoaW5lL2o3ODRzNC1ocy1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+IGRlbGV0
+ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPj4gwqDCoMKgwqAgPiBpbmRleCA4MGEyMjhhMC4uMDAw
+MDAwMDANCj4+IMKgwqDCoMKgID4gLS0tIGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3
+ODRzNC1ocy1ldm0tazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+ICsrKyAvZGV2L251bGwNCj4+
+IMKgwqDCoMKgID4gQEAgLTEsMTEgKzAsMCBAQA0KPj4gwqDCoMKgwqAgPiAtI0BUWVBFOiBN
+YWNoaW5lDQo+PiDCoMKgwqDCoCA+IC0jQE5BTUU6IEo3ODRTNCBIUyBFVk0gKFI1RikNCj4+
+IMKgwqDCoMKgID4gLSNAREVTQ1JJUFRJT046IE1hY2hpbmUgY29uZmlndXJhdGlvbiBmb3Ig
+dGhlIFRJIEo3ODRTNCBIUyBFVk0gDQo+PiAoUjVGIGNvcmUpDQo+PiDCoMKgwqDCoCA+IC0N
+Cj4+IMKgwqDCoMKgID4gLXJlcXVpcmUgY29uZi9tYWNoaW5lL2luY2x1ZGUvazNyNS5pbmMN
+Cj4+IMKgwqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtU1lTRldfU09DID0gImo3ODRzNCIN
+Cj4+IMKgwqDCoMKgID4gLVNZU0ZXX0NPTkZJRyA9ICJldm0iDQo+PiDCoMKgwqDCoCA+IC1T
+WVNGV19TVUZGSVggPSAiaHMiDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKgwqDCoMKgID4gLVVC
+T09UX01BQ0hJTkUgPSAiajc4NHM0X2V2bV9yNV9kZWZjb25maWciDQo+PiDCoMKgwqDCoCA+
+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajc4NHM0LWhzLWV2bS5j
+b25mIA0KPj4gYi9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajc4NHM0LWhzLWV2bS5jb25m
+DQo+PiDCoMKgwqDCoCA+IGluZGV4IDhmYTFjMWZkLi40MjQ2ODA4OCAxMDA2NDQNCj4+IMKg
+wqDCoMKgID4gLS0tIGEvbWV0YS10aS1ic3AvY29uZi9tYWNoaW5lL2o3ODRzNC1ocy1ldm0u
+Y29uZg0KPj4gwqDCoMKgwqAgPiArKysgYi9tZXRhLXRpLWJzcC9jb25mL21hY2hpbmUvajc4
+NHM0LWhzLWV2bS5jb25mDQo+PiDCoMKgwqDCoCA+IEBAIC0zLDMgKzMsNSBAQA0KPj4gwqDC
+oMKgwqAgPsKgIMKgI0BERVNDUklQVElPTjogTWFjaGluZSBjb25maWd1cmF0aW9uIGZvciB0
+aGUgVEkgSjc4NFM0IEhTIEVWTQ0KPj4gwqDCoMKgwqAgPg0KPj4gwqDCoMKgwqAgPsKgIMKg
+cmVxdWlyZSBjb25mL21hY2hpbmUvajc4NHM0LWV2bS5jb25mDQo+PiDCoMKgwqDCoCA+ICsN
+Cj4+IMKgwqDCoMKgID4gK1NZU0ZXX1NVRkZJWCA9ICJocyINCj4+IMKgwqDCoMKgID4gZGlm
+ZiAtLWdpdCBhL21ldGEtdGktYnNwL2NvbmYvbXVsdGljb25maWcvazNyNS5jb25mIA0KPj4g
+Yi9tZXRhLXRpLWJzcC9jb25mL211bHRpY29uZmlnL2szcjUuY29uZg0KPj4gwqDCoMKgwqAg
+PiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQNCj4+IMKgwqDCoMKgID4gaW5kZXggOTM2YmNl
+MmYuLjAwMDAwMDAwDQo+PiDCoMKgwqDCoCA+IC0tLSBhL21ldGEtdGktYnNwL2NvbmYvbXVs
+dGljb25maWcvazNyNS5jb25mDQo+PiDCoMKgwqDCoCA+ICsrKyAvZGV2L251bGwNCj4+IMKg
+wqDCoMKgID4gQEAgLTEsMTAgKzAsMCBAQA0KPj4gwqDCoMKgwqAgPiAtTUFJTk1BQ0hJTkUg
+Oj0gIiR7TUFDSElORX0iDQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKgwqDCoMKgID4gLURFUExP
+WV9ESVJfSU1BR0U6azNyNSA9IA0KPj4gIiR7VElfQ09NTU9OX0RFUExPWX0vaW1hZ2VzLyR7
+TUFJTk1BQ0hJTkV9Ig0KPj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKgwqDCoCA+IC1NQUNISU5F
+OmFwcGVuZCA9ICItazNyNSINCj4+IMKgwqDCoMKgID4gLVRDTElCQyA9ICJiYXJlbWV0YWwi
+DQo+PiDCoMKgwqDCoCA+IC1USV9UTVBESVJfQVBQRU5EID89ICItazNyNSINCj4+IMKgwqDC
+oMKgID4gLVRNUERJUjphcHBlbmQgPSAiJHtUSV9UTVBESVJfQVBQRU5EfSINCj4+IMKgwqDC
+oMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtU0RLUEtHU1VGRklYID0gImszcjUtbmF0aXZlc2Rr
+Ig0KPj4gwqDCoMKgwqAgPiBkaWZmIC0tZ2l0IGEvbWV0YS10aS1ic3AvcmVjaXBlcy1ic3Av
+dGktc2NpLWZ3L3RpLXNjaS1md19naXQuYmIgDQo+PiA8aHR0cDovL3RpLXNjaS1md19naXQu
+YmI+IA0KPj4gYi9tZXRhLXRpLWJzcC9yZWNpcGVzLWJzcC90aS1zY2ktZncvdGktc2NpLWZ3
+X2dpdC5iYiANCj4+IDxodHRwOi8vdGktc2NpLWZ3X2dpdC5iYj4NCj4+IMKgwqDCoMKgID4g
+aW5kZXggMTIyOTJjODguLjA1OTdkOWJiIDEwMDY0NA0KPj4gwqDCoMKgwqAgPiAtLS0gYS9t
+ZXRhLXRpLWJzcC9yZWNpcGVzLWJzcC90aS1zY2ktZncvdGktc2NpLWZ3X2dpdC5iYiANCj4+
+IDxodHRwOi8vdGktc2NpLWZ3X2dpdC5iYj4NCj4+IMKgwqDCoMKgID4gKysrIGIvbWV0YS10
+aS1ic3AvcmVjaXBlcy1ic3AvdGktc2NpLWZ3L3RpLXNjaS1md19naXQuYmIgDQo+PiA8aHR0
+cDovL3RpLXNjaS1md19naXQuYmI+DQo+PiDCoMKgwqDCoCA+IEBAIC0xNyw5ICsxNyw2IEBA
+IGRvX2luc3RhbGwoKSB7DQo+PiDCoMKgwqDCoCA+wqAgwqB9DQo+PiDCoMKgwqDCoCA+DQo+
+PiDCoMKgwqDCoCA+wqAgwqBkb19kZXBsb3koKXsNCj4+IMKgwqDCoMKgID4gLX0NCj4+IMKg
+wqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtZG9fZGVwbG95OmszcjUoKSB7DQo+PiDCoMKg
+wqDCoCA+wqAgwqAgwqAgwqBpbnN0YWxsIC1kICR7REVQTE9ZRElSfS90aS1zeXNmdw0KPj4g
+wqDCoMKgwqAgPsKgIMKgIMKgIMKgaW5zdGFsbCAtbSA2NDQgJHtTfS90aS1zeXNmdy90aS1z
+Y2ktZmlybXdhcmUtKiANCj4+ICR7REVQTE9ZRElSfS90aS1zeXNmdw0KPj4gwqDCoMKgwqAg
+PsKgIMKgIMKgIMKgaW5zdGFsbCAtbSA2NDQgJHtTfS90aS1zeXNmdy90aS1mcy1maXJtd2Fy
+ZS0qIA0KPj4gJHtERVBMT1lESVJ9L3RpLXN5c2Z3DQo+PiDCoMKgwqDCoCA+IGRpZmYgLS1n
+aXQgDQo+PiBhL21ldGEtdGktYnNwL3JlY2lwZXMtYnNwL3UtYm9vdC90aWJvb3QzLXN0YWdp
+bmdfMjAyMy41LmJiIA0KPj4gPGh0dHA6Ly90aWJvb3QzLXN0YWdpbmdfMjAyMy41LmJiPiAN
+Cj4+IGIvbWV0YS10aS1ic3AvcmVjaXBlcy1ic3AvdS1ib290L3RpYm9vdDMtc3RhZ2luZ18y
+MDIzLjUuYmIgDQo+PiA8aHR0cDovL3RpYm9vdDMtc3RhZ2luZ18yMDIzLjUuYmI+DQo+PiDC
+oMKgwqDCoCA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+PiDCoMKgwqDCoCA+IGluZGV4IDAw
+MDAwMDAwLi4wZjE5MjliNQ0KPj4gwqDCoMKgwqAgPiAtLS0gL2Rldi9udWxsDQo+PiDCoMKg
+wqDCoCA+ICsrKyBiL21ldGEtdGktYnNwL3JlY2lwZXMtYnNwL3UtYm9vdC90aWJvb3QzLXN0
+YWdpbmdfMjAyMy41LmJiIA0KPj4gPGh0dHA6Ly90aWJvb3QzLXN0YWdpbmdfMjAyMy41LmJi
+Pg0KPj4gwqDCoMKgwqAgPiBAQCAtMCwwICsxLDY1IEBADQo+PiDCoMKgwqDCoCA+ICtyZXF1
+aXJlIHUtYm9vdC10aS5pbmMNCj4+IMKgwqDCoMKgID4gKw0KPj4gwqDCoMKgwqAgPiAraW5j
+bHVkZSAke0AgJ3JlY2lwZXMtYnNwL3UtYm9vdC90aS1leHRyYXMuaW5jJyBpZiANCj4+IGQu
+Z2V0VmFyKCdUSV9FWFRSQVMnKSBlbHNlICcnfQ0KPj4gwqDCoMKgwqAgPiArDQo+PiDCoMKg
+wqDCoCA+ICtQUiA9ICJyMCINCj4+IMKgwqDCoMKgID4gK0JSQU5DSCA9ICJ0aS11LWJvb3Qt
+MjAyMy4wNCINCj4+IMKgwqDCoMKgID4gK1NSQ1JFViA9ICJiMGQ3MTdiNzMyZWUyOGU0NDZi
+YWY5NDUyMmIzNDkxZTU5MGY3ZmJiIg0KPj4gwqDCoMKgwqAgPiArDQo+PiDCoMKgwqDCoCA+
+ICtQUk9WSURFUzpyZW1vdmUgPSAidmlydHVhbC9ib290bG9hZGVyIg0KPj4gwqDCoMKgwqAg
+PiArUFJPVklERVM6cmVtb3ZlID0gInUtYm9vdCINCj4+IMKgwqDCoMKgID4gKw0KPj4gwqDC
+oMKgwqAgPiArIyBVc2luZyBnY2MtY3Jvc3MtYXJtLW5hdGl2ZSBoZXJlIHdvdWxkIGhhdmUg
+YmVlbiBpZGVhbA0KPj4gwqDCoMKgwqAgPiArIyBhcyB0aGUgY29tcGlsZXIgdmVyc2lvbiB3
+b3VsZCBtYXRjaCBiZXR3ZWVuIFI1IGFuZA0KPj4gwqDCoMKgwqAgPiArIyBtYWluIEFSTSBj
+b3JlIGJ1aWxkcy4gYXJtLW9lLWxpbnV4LWdudWVhYmktDQo+PiDCoMKgwqDCoCA+ICtERVBF
+TkRTICs9ICJnY2MtYXJtLW5vbmUtZWFiaS1uYXRpdmUiDQo+PiDCoMKgwqDCoCA+ICsNCj4+
+IMKgwqDCoMKgID4gK0VYVFJBX09FTUFLRSArPSAiQ1JPU1NfQ09NUElMRT1hcm0tbm9uZS1l
+YWJpLSANCj4+IENDPWFybS1ub25lLWVhYmktZ2NjIg0KPj4gwqDCoMKgwqAgPiArDQo+PiDC
+oMKgwqDCoCA+ICtVQk9PVF9NQUNISU5FID0gIiR7VUJPT1RfTUFDSElORV9SNX0iDQo+PiDC
+oMKgwqDCoCA+ICsNCj4+IMKgwqDCoMKgID4gK1NQTF9TVUZGSVggPSAiYmluIg0KPj4gwqDC
+oMKgwqAgPiArU1BMX0JJTkFSWSA9IA0KPj4gInRpYm9vdDMtJHtTWVNGV19TT0N9LSR7U1lT
+RldfU1VGRklYfS0ke1NZU0ZXX0NPTkZJR30uJHtTUExfU1VGRklYfSINCj4+IMKgwqDCoMKg
+ID4gK1NQTF9TWU1MSU5LID0gInRpYm9vdDMuJHtTUExfU1VGRklYfSINCj4+IMKgwqDCoMKg
+ID4gK1VCT09UX1NVRkZJWCA9ICJiaW4iDQo+PiDCoMKgwqDCoCA+ICtVQk9PVF9CSU5BUlkg
+PSAidS1ib290LXI1c3BsLiR7VUJPT1RfU1VGRklYfSINCj4+IMKgwqDCoMKgID4gK1VCT09U
+X0lNQUdFID0gDQo+PiAidS1ib290LXI1c3BsLSR7TUFJTk1BQ0hJTkV9LSR7UFZ9LSR7UFJ9
+LiR7VUJPT1RfU1VGRklYfSINCj4+IMKgwqDCoMKgID4gK1VCT09UX1NZTUxJTksgPSAidS1i
+b290LXI1c3BsLSR7TUFJTk1BQ0hJTkV9LiR7VUJPT1RfU1VGRklYfSINCj4+IMKgwqDCoMKg
+ID4gKw0KPj4gwqDCoMKgwqAgPiArZG9fY29tcGlsZTphcHBlbmQgKCkgew0KPj4gwqDCoMKg
+wqAgPiArwqAgwqAgwqBpZiBbIC1uICIke1VCT09UX0NPTkZJR30iIF07DQo+PiDCoMKgwqDC
+oCA+ICvCoCDCoCDCoHRoZW4NCj4+IMKgwqDCoMKgID4gK8KgIMKgIMKgIMKgIMKgIMKgIMKg
+Zm9yIGNvbmZpZyBpbiAke1VCT09UX01BQ0hJTkV9OyBkbw0KPj4gwqDCoMKgwqAgPiArwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBpPSQoZXhwciAkaSArIDEpOw0KPj4gwqDC
+oMKgwqAgPiArwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBmb3IgdHlwZSBpbiAk
+e1VCT09UX0NPTkZJR307IGRvDQo+PiDCoMKgwqDCoCA+ICvCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoGo9JChleHByICRqICsgMSk7DQo+PiDCoMKgwqDC
+oCA+ICvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoGlmIFsg
+JGogLWVxICRpIF07DQo+PiDCoMKgwqDCoCA+ICvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoHRoZW4NCj4+IMKgwqDCoMKgID4gK8KgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgaWYgISBbIC1MIA0K
+Pj4gJHtCfS8ke2NvbmZpZ30vJHtVQk9PVF9CSU5BUll9IF0gJiYgISBbIC1mIA0KPj4gJHtC
+fS8ke2NvbmZpZ30vJHtVQk9PVF9CSU5BUll9IF07IHRoZW4NCj4+IMKgwqDCoMKgID4gK8Kg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgbG4gLXMgDQo+PiAke0J9LyR7Y29uZmlnfS9zcGwvdS1ib290LXNwbC4k
+e1VCT09UX1NVRkZJWH0gDQo+PiAke0J9LyR7Y29uZmlnfS8ke1VCT09UX0JJTkFSWX0NCj4+
+IMKgwqDCoMKgID4gK8KgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgZmkNCj4+IMKgwqDCoMKgID4gK8KgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgZmkNCj4+IMKgwqDCoMKgID4gK8KgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgZG9uZQ0KPj4gwqDCoMKgwqAgPiArwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqB1bnNldMKgIGoNCj4+IMKgwqDCoMKgID4gK8KgIMKgIMKg
+IMKgIMKgIMKgIMKgZG9uZQ0KPj4gwqDCoMKgwqAgPiArwqAgwqAgwqAgwqAgwqAgwqAgwqB1
+bnNldMKgIGkNCj4+IMKgwqDCoMKgID4gK8KgIMKgIMKgZWxzZQ0KPj4gwqDCoMKgwqAgPiAr
+wqAgwqAgwqAgwqAgwqAgwqAgwqBpZiAhIFsgLWYgJHtCfS8ke1VCT09UX0JJTkFSWX0gXTsg
+dGhlbg0KPj4gwqDCoMKgwqAgPiArwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBs
+biAtcyBzcGwvdS1ib290LXNwbC4ke1VCT09UX1NVRkZJWH0gDQo+PiAke0J9LyR7VUJPT1Rf
+QklOQVJZfQ0KPj4gwqDCoMKgwqAgPiArwqAgwqAgwqAgwqAgwqAgwqAgwqBmaQ0KPj4gwqDC
+oMKgwqAgPiArwqAgwqAgwqBmaQ0KPj4gwqDCoMKgwqAgPiArfQ0KPj4gwqDCoMKgwqAgPiAr
+DQo+PiDCoMKgwqDCoCA+ICtkb19kZXBsb3k6YXBwZW5kICgpIHsNCj4+IMKgwqDCoMKgID4g
+K8KgIMKgIMKgZm9yIGYgaW4gJHtCfS90aWJvb3QzLSouYmluOyBkbw0KPj4gwqDCoMKgwqAg
+PiArwqAgwqAgwqAgwqAgwqAgwqAgwqBpZiBbIC1mICIkZiIgXTsgdGhlbg0KPj4gwqDCoMKg
+wqAgPiArwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBpbnN0YWxsIC1tIDY0NCAk
+ZiAke0RFUExPWURJUn0vDQo+PiDCoMKgwqDCoCA+ICvCoCDCoCDCoCDCoCDCoCDCoCDCoGZp
+DQo+PiDCoMKgwqDCoCA+ICvCoCDCoCDCoGRvbmUNCj4+IMKgwqDCoMKgID4gKw0KPj4gwqDC
+oMKgwqAgPiArwqAgwqAgwqBmb3IgZiBpbiAke0J9L3N5c2Z3Ki5pdGI7IGRvDQo+PiDCoMKg
+wqDCoCA+ICvCoCDCoCDCoCDCoCDCoCDCoCDCoGlmIFsgLWYgIiRmIiBdOyB0aGVuDQo+PiDC
+oMKgwqDCoCA+ICvCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoGluc3RhbGwgLW0g
+NjQ0ICRmICR7REVQTE9ZRElSfS8NCj4+IMKgwqDCoMKgID4gK8KgIMKgIMKgIMKgIMKgIMKg
+IMKgZmkNCj4+IMKgwqDCoMKgID4gK8KgIMKgIMKgZG9uZQ0KPj4gwqDCoMKgwqAgPiArfQ0K
+Pj4gwqDCoMKgwqAgPiBkaWZmIC0tZ2l0IA0KPj4gYS9tZXRhLXRpLWJzcC9yZWNpcGVzLWJz
+cC91LWJvb3QvdS1ib290LWJiLm9yZ19naXQuYmIgDQo+PiA8aHR0cDovL3UtYm9vdC1iYi5v
+cmdfZ2l0LmJiPiANCj4+IGIvbWV0YS10aS1ic3AvcmVjaXBlcy1ic3AvdS1ib290L3UtYm9v
+dC1iYi5vcmdfZ2l0LmJiIA0KPj4gPGh0dHA6Ly91LWJvb3QtYmIub3JnX2dpdC5iYj4NCj4+
+IMKgwqDCoMKgID4gaW5kZXggNWJiMjAyMTMuLjFlYzVmOWJmIDEwMDY0NA0KPj4gwqDCoMKg
+wqAgPiAtLS0gYS9tZXRhLXRpLWJzcC9yZWNpcGVzLWJzcC91LWJvb3QvdS1ib290LWJiLm9y
+Z19naXQuYmIgDQo+PiA8aHR0cDovL3UtYm9vdC1iYi5vcmdfZ2l0LmJiPg0KPj4gwqDCoMKg
+wqAgPiArKysgYi9tZXRhLXRpLWJzcC9yZWNpcGVzLWJzcC91LWJvb3QvdS1ib290LWJiLm9y
+Z19naXQuYmIgDQo+PiA8aHR0cDovL3UtYm9vdC1iYi5vcmdfZ2l0LmJiPg0KPj4gwqDCoMKg
+wqAgPiBAQCAtMTIsNiArMTIsNCBAQCBCUkFOQ0ggPSAidjIwMjMuMDQtdGktMDkuMDAuMDAu
+MDExIg0KPj4gwqDCoMKgwqAgPsKgIMKgU1JDUkVWID0gIjRiOGY4YmU4ODcwZjAzZDkyYTJi
+MDFkMGQzMGFiOTEyMTE4YWRjODIiDQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKgwqDCoCA+wqAg
+wqBCUkFOQ0g6YmVhZ2xlcGxheSA9ICJ2MjAyMy4wNC10aS0wOS4wMC4wMC4wMTEtQmVhZ2xl
+UGxheSINCj4+IMKgwqDCoMKgID4gLUJSQU5DSDpiZWFnbGVwbGF5LWszcjUgPSAidjIwMjMu
+MDQtdGktMDkuMDAuMDAuMDExLUJlYWdsZVBsYXkiDQo+PiDCoMKgwqDCoCA+wqAgwqBTUkNS
+RVY6YmVhZ2xlcGxheSA9ICIxMGFmZWE0NjJlYTExMTM3MDFmNmYwZjg4NTNmZGZmOTg1YWEy
+NzVkIg0KPj4gwqDCoMKgwqAgPiAtU1JDUkVWOmJlYWdsZXBsYXktazNyNSA9IA0KPj4gIjEw
+YWZlYTQ2MmVhMTExMzcwMWY2ZjBmODg1M2ZkZmY5ODVhYTI3NWQiDQo+PiDCoMKgwqDCoCA+
+IGRpZmYgLS1naXQgYS9tZXRhLXRpLWJzcC9yZWNpcGVzLWJzcC91LWJvb3QvdS1ib290LXRp
+LmluYyANCj4+IGIvbWV0YS10aS1ic3AvcmVjaXBlcy1ic3AvdS1ib290L3UtYm9vdC10aS5p
+bmMNCj4+IMKgwqDCoMKgID4gaW5kZXggMmYxNWM0ZmIuLmIwZjg4YTVhIDEwMDY0NA0KPj4g
+wqDCoMKgwqAgPiAtLS0gYS9tZXRhLXRpLWJzcC9yZWNpcGVzLWJzcC91LWJvb3QvdS1ib290
+LXRpLmluYw0KPj4gwqDCoMKgwqAgPiArKysgYi9tZXRhLXRpLWJzcC9yZWNpcGVzLWJzcC91
+LWJvb3QvdS1ib290LXRpLmluYw0KPj4gwqDCoMKgwqAgPiBAQCAtMzEsNyArMzEsNiBAQCBE
+RVBFTkRTICs9ICJweXRob24zLXB5ZWxmdG9vbHMtbmF0aXZlIA0KPj4gcHl0aG9uMy1weXlh
+bWwtbmF0aXZlIHB5dGhvbjMtanNvbnNjaGVtYS1uDQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKg
+wqDCoCA+wqAgwqAjIFNZU0ZXL1RJRlMgRmlybXdhcmUNCj4+IMKgwqDCoMKgID7CoCDCoERF
+UEVORFM6YXBwZW5kOmszID0gIiB0aS1zY2ktZnciDQo+PiDCoMKgwqDCoCA+IC1ERVBFTkRT
+OmFwcGVuZDprM3I1ID0gIiB0aS1zY2ktZnciDQo+PiDCoMKgwqDCoCA+DQo+PiDCoMKgwqDC
+oCA+wqAgwqBETV9GSVJNV0FSRSA9ICJpcGNfZWNob190ZXN0Yl9tY3UxXzBfcmVsZWFzZV9z
+dHJpcC54ZXI1ZiINCj4+IMKgwqDCoMKgID4NCj4+IMKgwqDCoMKgID4gQEAgLTc5LDcgKzc4
+LDYgQEAgU1lTUk9PVF9ESVJTICs9ICIvYm9vdCINCj4+IMKgwqDCoMKgID4NCj4+IMKgwqDC
+oMKgID7CoCDCoCMgU1BMIChTZWNvbmQgUHJvZ3JhbSBMb2FkZXIpIHRvIGJlIGxvYWRlZCBv
+dmVyIFVBUlQNCj4+IMKgwqDCoMKgID7CoCDCoFNQTF9VQVJUX0JJTkFSWSA9ICJ1LWJvb3Qt
+c3BsLmJpbiINCj4+IMKgwqDCoMKgID4gLVNQTF9VQVJUX0JJTkFSWTprM3I1ID0gIiINCj4+
+IMKgwqDCoMKgID4NCj4+IMKgwqDCoMKgID7CoCDCoFNQTF9VQVJUX0lNQUdFID89ICIke1NQ
+TF9VQVJUX0JJTkFSWX0tJHtNQUNISU5FfS0ke1BWfS0ke1BSfSINCj4+IMKgwqDCoMKgID7C
+oCDCoFNQTF9VQVJUX1NZTUxJTksgPz0gIiR7U1BMX1VBUlRfQklOQVJZfS0ke01BQ0hJTkV9
+Ig0KPj4gwqDCoMKgwqAgPiBAQCAtMTA4LDMwICsxMDYsNiBAQCBVQk9PVF9IU18yTkRfQklO
+QVJZID0gInUtYm9vdC1zcGxfSFNfMk5EIg0KPj4gwqDCoMKgwqAgPsKgIMKgVUJPT1RfSFNf
+Mk5EX0lNQUdFID0gInUtYm9vdC1zcGxfSFNfMk5ELSR7TUFDSElORX0tJHtQVn0tJHtQUn0i
+DQo+PiDCoMKgwqDCoCA+wqAgwqBVQk9PVF9IU18yTkRfU1lNTElOSyA9ICJ1LWJvb3Qtc3Bs
+X0hTXzJORC0ke01BQ0hJTkV9Ig0KPj4gwqDCoMKgwqAgPg0KPj4gwqDCoMKgwqAgPiAtZG9f
+Y29tcGlsZTphcHBlbmQ6azNyNSAoKSB7DQo+PiDCoMKgwqDCoCA+IC3CoCDCoCDCoGlmIFsg
+LW4gIiR7VUJPT1RfQ09ORklHfSIgXTsNCj4+IMKgwqDCoMKgID4gLcKgIMKgIMKgdGhlbg0K
+Pj4gwqDCoMKgwqAgPiAtwqAgwqAgwqAgwqAgwqAgwqAgwqBmb3IgY29uZmlnIGluICR7VUJP
+T1RfTUFDSElORX07IGRvDQo+PiDCoMKgwqDCoCA+IC3CoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoCDCoGk9JChleHByICRpICsgMSk7DQo+PiDCoMKgwqDCoCA+IC3CoCDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCDCoCDCoCDCoGZvciB0eXBlIGluICR7VUJPT1RfQ09ORklHfTsgZG8N
+Cj4+IMKgwqDCoMKgID4gLcKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgaj0kKGV4cHIgJGogKyAxKTsNCj4+IMKgwqDCoMKgID4gLcKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgaWYgWyAkaiAtZXEgJGkgXTsNCj4+IMKg
+wqDCoMKgID4gLcKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+dGhlbg0KPj4gwqDCoMKgwqAgPiAtwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBpZiAhIFsgLUwgDQo+PiAke0J9LyR7Y29uZmlnfS8k
+e1VCT09UX0JJTkFSWX0gXSAmJiAhIFsgLWYgDQo+PiAke0J9LyR7Y29uZmlnfS8ke1VCT09U
+X0JJTkFSWX0gXTsgdGhlbg0KPj4gwqDCoMKgwqAgPiAtwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBsbiAtcyAN
+Cj4+ICR7Qn0vJHtjb25maWd9L3NwbC91LWJvb3Qtc3BsLiR7VUJPT1RfU1VGRklYfSANCj4+
+ICR7Qn0vJHtjb25maWd9LyR7VUJPT1RfQklOQVJZfQ0KPj4gwqDCoMKgwqAgPiAtwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBmaQ0K
+Pj4gwqDCoMKgwqAgPiAtwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqBmaQ0KPj4gwqDCoMKgwqAgPiAtwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqBkb25lDQo+PiDCoMKgwqDCoCA+IC3CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oHVuc2V0wqAgag0KPj4gwqDCoMKgwqAgPiAtwqAgwqAgwqAgwqAgwqAgwqAgwqBkb25lDQo+
+PiDCoMKgwqDCoCA+IC3CoCDCoCDCoCDCoCDCoCDCoCDCoHVuc2V0wqAgaQ0KPj4gwqDCoMKg
+wqAgPiAtwqAgwqAgwqBlbHNlDQo+PiDCoMKgwqDCoCA+IC3CoCDCoCDCoCDCoCDCoCDCoCDC
+oGlmICEgWyAtZiAke0J9LyR7VUJPT1RfQklOQVJZfSBdOyB0aGVuDQo+PiDCoMKgwqDCoCA+
+IC3CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoGxuIC1zIHNwbC91LWJvb3Qtc3Bs
+LiR7VUJPT1RfU1VGRklYfSANCj4+ICR7Qn0vJHtVQk9PVF9CSU5BUll9DQo+PiDCoMKgwqDC
+oCA+IC3CoCDCoCDCoCDCoCDCoCDCoCDCoGZpDQo+PiDCoMKgwqDCoCA+IC3CoCDCoCDCoGZp
+DQo+PiDCoMKgwqDCoCA+IC19DQo+PiDCoMKgwqDCoCA+IC0NCj4+IMKgwqDCoMKgID7CoCDC
+oGRvX2luc3RhbGw6YXBwZW5kICgpIHsNCj4+IMKgwqDCoMKgID7CoCDCoCDCoCDCoGlmIFsg
+LW4gIiR7VUJPT1RfQ09ORklHfSIgXQ0KPj4gwqDCoMKgwqAgPsKgIMKgIMKgIMKgdGhlbg0K
+Pj4gwqDCoMKgwqAgPiBAQCAtMjA0LDIwICsxNzgsNiBAQCBkb19pbnN0YWxsOmFwcGVuZCAo
+KSB7DQo+PiDCoMKgwqDCoCA+wqAgwqAgwqAgwqBmaQ0KPj4gwqDCoMKgwqAgPsKgIMKgfQ0K
+Pj4gwqDCoMKgwqAgPg0KPj4gwqDCoMKgwqAgPiAtZG9fZGVwbG95OmFwcGVuZDprM3I1ICgp
+IHsNCj4+IMKgwqDCoMKgID4gLcKgIMKgIMKgZm9yIGYgaW4gJHtCfS90aWJvb3QzLSouYmlu
+OyBkbw0KPj4gwqDCoMKgwqAgPiAtwqAgwqAgwqAgwqAgwqAgwqAgwqBpZiBbIC1mICIkZiIg
+XTsgdGhlbg0KPj4gwqDCoMKgwqAgPiAtwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqBpbnN0YWxsIC1tIDY0NCAkZiAke0RFUExPWURJUn0vDQo+PiDCoMKgwqDCoCA+IC3CoCDC
+oCDCoCDCoCDCoCDCoCDCoGZpDQo+PiDCoMKgwqDCoCA+IC3CoCDCoCDCoGRvbmUNCj4+IMKg
+wqDCoMKgID4gLQ0KPj4gwqDCoMKgwqAgPiAtwqAgwqAgwqBmb3IgZiBpbiAke0J9L3N5c2Z3
+Ki5pdGI7IGRvDQo+PiDCoMKgwqDCoCA+IC3CoCDCoCDCoCDCoCDCoCDCoCDCoGlmIFsgLWYg
+IiRmIiBdOyB0aGVuDQo+PiDCoMKgwqDCoCA+IC3CoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCDCoCDCoGluc3RhbGwgLW0gNjQ0ICRmICR7REVQTE9ZRElSfS8NCj4+IMKgwqDCoMKgID4g
+LcKgIMKgIMKgIMKgIMKgIMKgIMKgZmkNCj4+IMKgwqDCoMKgID4gLcKgIMKgIMKgZG9uZQ0K
+Pj4gwqDCoMKgwqAgPiAtfQ0KPj4gwqDCoMKgwqAgPiAtDQo+PiDCoMKgwqDCoCA+wqAgwqBk
+b19kZXBsb3k6YXBwZW5kICgpIHsNCj4+IMKgwqDCoMKgID7CoCDCoCDCoCDCoGlmIFsgLW4g
+IiR7VUJPT1RfQ09ORklHfSIgXQ0KPj4gwqDCoMKgwqAgPsKgIMKgIMKgIMKgdGhlbg0KPj4N
+Cj4+IMKgwqDCoCAtLSDCoMKgwqAgUnlhbiBFYXRtb24gcmVhdG1vbkB0aS5jb20gPG1haWx0
+bzpyZWF0bW9uQHRpLmNvbT4NCj4+IMKgwqDCoCAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLQ0KPj4gwqDCoMKgIFRleGFzIEluc3RydW1lbnRzLCBJbmMuwqAg
+LcKgIExDUETCoCAtwqAgTUdUUw0KPj4NCj4+IMKgwqDCoCAtPS09LT0tPS09LT0tPS09LT0t
+PS09LQ0KPj4gwqDCoMKgIExpbmtzOiBZb3UgcmVjZWl2ZSBhbGwgbWVzc2FnZXMgc2VudCB0
+byB0aGlzIGdyb3VwLg0KPj4gwqDCoMKgIFZpZXcvUmVwbHkgT25saW5lICgjMTczNTMpOiAN
+Cj4+IGh0dHBzOi8vbGlzdHMueW9jdG9wcm9qZWN0Lm9yZy9nL21ldGEtdGkvbWVzc2FnZS8x
+NzM1MyANCj4+IDxodHRwczovL2xpc3RzLnlvY3RvcHJvamVjdC5vcmcvZy9tZXRhLXRpL21l
+c3NhZ2UvMTczNTM+DQo+PiDCoMKgwqAgTXV0ZSBUaGlzIFRvcGljOiANCj4+IGh0dHBzOi8v
+bGlzdHMueW9jdG9wcm9qZWN0Lm9yZy9tdC8xMDMyODMyOTIvNTA1MjYxMiANCj4+IDxodHRw
+czovL2xpc3RzLnlvY3RvcHJvamVjdC5vcmcvbXQvMTAzMjgzMjkyLzUwNTI2MTI+DQo+PiDC
+oMKgwqAgR3JvdXAgT3duZXI6IG1ldGEtdGkrb3duZXJAbGlzdHMueW9jdG9wcm9qZWN0Lm9y
+ZyANCj4+IDxtYWlsdG86bWV0YS10aSUyQm93bmVyQGxpc3RzLnlvY3RvcHJvamVjdC5vcmc+
+DQo+PiDCoMKgwqAgVW5zdWJzY3JpYmU6IA0KPj4gaHR0cHM6Ly9saXN0cy55b2N0b3Byb2pl
+Y3Qub3JnL2cvbWV0YS10aS9sZWF2ZS8xMTM2OTg2NS81MDUyNjEyLzkyNjU3NDcwMC94eXp6
+eSA8aHR0cHM6Ly9saXN0cy55b2N0b3Byb2plY3Qub3JnL2cvbWV0YS10aS9sZWF2ZS8xMTM2
+OTg2NS81MDUyNjEyLzkyNjU3NDcwMC94eXp6eT4gW3F1YXJlc21hLmpvc2VAZ21haWwuY29t
+IDxtYWlsdG86cXVhcmVzbWEuam9zZUBnbWFpbC5jb20+XQ0KPj4gwqDCoMKgIC09LT0tPS09
+LT0tPS09LT0tPS09LT0tDQo+Pg0KPj4NCj4+DQo+PiAtLSANCj4+IEJlc3QgcmVnYXJkcywN
+Cj4+DQo+PiBKb3PDqSBRdWFyZXNtYQ0KDQotLSANClJ5YW4gRWF0bW9uICAgICAgICAgICAg
+ICAgIHJlYXRtb25AdGkuY29tDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLQ0KVGV4YXMgSW5zdHJ1bWVudHMsIEluYy4gIC0gIExDUEQgIC0gIE1HVFMNCg==
 
