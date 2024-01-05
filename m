@@ -1,323 +1,330 @@
-Return-Path: <bremenpl@gmail.com>
+Return-Path: <a-limaye@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A272DC46CD2
-	for <webhook@archiver.kernel.org>; Tue,  2 Jan 2024 16:05:08 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web11.32198.1704211506246832689
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83CACC3DA6E
+	for <webhook@archiver.kernel.org>; Fri,  5 Jan 2024 07:58:34 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.19163.1704441511772683281
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 02 Jan 2024 08:05:06 -0800
+ Thu, 04 Jan 2024 23:58:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LlE27vBE;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: bremenpl@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-40b5155e154so126089425e9.3
-        for <meta-ti@lists.yoctoproject.org>; Tue, 02 Jan 2024 08:05:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704211505; x=1704816305; darn=lists.yoctoproject.org;
-        h=mime-version:user-agent:reply-to:references:in-reply-to:message-id
-         :date:cc:subject:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=uzpVOkqAnxyNKVqfRlGaHN7apGLW0O5mwoBIpmaGSh4=;
-        b=LlE27vBEdKBuNZww2fpeAAZgQ4yqeWeLFST2wrhX6LbyVez3My6chT1fpGrDMiJ0ZV
-         FB+OejGIgMouO8cmt8RS0F77/gD2HQuvPaVwchTYWfGXnW4jTsceqRPNoG/sfMWkfy3k
-         yRozWMZq+qRT+5Mb3lL+Ad6QZZOHtNzeLvUeUCaf/mSnClBs1LhKhGkvqaO1FiSPSyWh
-         FmLtru4zTAK51kCeifp35QEkoDb6TiTqCxUpmunc1a/13Q2NYSLJ09+t4Sswrg9a6u5A
-         5I0OMBonITCKm7LlC7fHjEAYASSPvTRNFNQiL3fb701Cl4x1quLmvy1j5OYorIHXnMhB
-         +YOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704211505; x=1704816305;
-        h=mime-version:user-agent:reply-to:references:in-reply-to:message-id
-         :date:cc:subject:to:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uzpVOkqAnxyNKVqfRlGaHN7apGLW0O5mwoBIpmaGSh4=;
-        b=LsCOWnXqPQUX8/830GG2eDsziKBIUwyukKH/NWLaf2aemjWSWzBxl2J/bLnT3izCQF
-         4S3e5Ltu7V75oE3n2UrwM2KjdbszpVa3W2tUChPx67K6qVYvhkmba6Od50OAir+NtOlo
-         EN5oatK2/N/7N1+9pykau4/X3xphRfVXdIQi8c50Fo6yaGp884UtlVtT75A6Gx7DhzL4
-         kbK9jmoAxjyg5+XioYf4ievwXlNvRi2qTvux2Myu/iE+MGB3n7n0n9sB25xTSMsE+I9i
-         KTT3xOqGQqPPROzrul31x7g5kxWjvusCQ1i12zAJuL0mvsHtFFxmiJaxrexoPFwQ3Vzq
-         w1lA==
-X-Gm-Message-State: AOJu0Yxq1OqzTuRXJC0txy2f/3V5s9197TRFOpwLMTWhkPiV9biEhdEz
-	Bwfs7vap7Z34yaO97/6dPGU=
-X-Google-Smtp-Source: AGHT+IEQYcyXYimgf6kh0m2cXlWmBn0GugkGpnAvIDJv38kv0+UOgAss/F5r0cVYi3OC6NPddsD2Gw==
-X-Received: by 2002:a05:600c:468c:b0:40d:4a7f:2768 with SMTP id p12-20020a05600c468c00b0040d4a7f2768mr9235417wmo.237.1704211504396;
-        Tue, 02 Jan 2024 08:05:04 -0800 (PST)
-Received: from [192.168.7.17] (epe193.neoplus.adsl.tpnet.pl. [83.20.46.193])
-        by smtp.gmail.com with ESMTPSA id r12-20020a05600c35cc00b0040d2dfb10e0sm50572741wmq.11.2024.01.02.08.05.03
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 02 Jan 2024 08:05:03 -0800 (PST)
-From: =?utf-8?q?=c5=81ukasz=20Przenios=c5=82o?= <bremenpl@gmail.com>
-To: "Jon Cormier" <jcormier@criticallink.com>
-Subject: Re[2]: [meta-ti] Custom dts recipe
-Cc: meta-ti@lists.yoctoproject.org
-Date: Tue, 02 Jan 2024 16:04:59 +0000
-Message-Id: <em43d72f75-9c13-4eaf-b5c1-722f8a25fa3e@c5cd1fef.com>
-In-Reply-To: <CADL8D3YkVLQ-6N3g38OUX4ykp6KY3VipT4m8=8ZbHr6Zz9WBag@mail.gmail.com>
-References: <tcKd.1703779596370036081.fG9M@lists.yoctoproject.org>
- <CADL8D3YkVLQ-6N3g38OUX4ykp6KY3VipT4m8=8ZbHr6Zz9WBag@mail.gmail.com>
-Reply-To: =?utf-8?q?=c5=81ukasz=20Przenios=c5=82o?= <bremenpl@gmail.com>
-User-Agent: eM_Client/9.2.2157.0
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=YkezHZn7;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: a-limaye@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4057wUGS050746
+	for <meta-ti@lists.yoctoproject.org>; Fri, 5 Jan 2024 01:58:30 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1704441510;
+	bh=70V1BBsHUsXTuw3Zl/QONbEzuIgKBp5YXk9Q7BbJl+k=;
+	h=From:To:CC:Subject:Date;
+	b=YkezHZn7QZnj8Tyqu5+KrgPSBDzQurZ3AsHT3NuROhe8bVfAKjBRIYWzaxBHR86U5
+	 dOCozhL7tfajFQsTBO6oDOxPNWCCI92RvaHajP+iSlagSnPg6KssSuVS68nYrZZzmi
+	 QX0E0z57bneSgznxSprEIYP7baw7N8gVMfgnxT6w=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4057wUV6091785
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Fri, 5 Jan 2024 01:58:30 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 5
+ Jan 2024 01:58:29 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 5 Jan 2024 01:58:29 -0600
+Received: from PSDKL-Workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com [10.24.68.244])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4057wRSs074717;
+	Fri, 5 Jan 2024 01:58:28 -0600
+From: Aniket Limaye <a-limaye@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <reatmon@ti.com>, <u-kumar1@ti.com>, <j-choudhary@ti.com>,
+        Aniket Limaye
+	<a-limaye@ti.com>
+Subject: [meta-ti][master/kirkstone][PATCH] meta-ti-bsp: Add Support for j722s-evm
+Date: Fri, 5 Jan 2024 13:28:08 +0530
+Message-ID: <20240105075808.875816-1-a-limaye@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="------=_MB0607EBC7-767A-4932-8894-24EAECC7311C"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 02 Jan 2024 16:05:08 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17375
+ <meta-ti@lists.yoctoproject.org>; Fri, 05 Jan 2024 07:58:34 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17376
 
---------=_MB0607EBC7-767A-4932-8894-24EAECC7311C
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+From: Ryan Eatmon <reatmon@ti.com>
 
-Hi Jon,
-Thank you for the answer.
+- Add A53 and R5 machine configurations for j722s-evm.
+- Add firmware overrides.
+- Add u-boot overrides.
+- Add cnm-wave support.
 
-When making any custom changes in Yocto, your always going to want to
-create your own meta layer so that you can keep your changes separate
-and so you can revision control your stuff.
-Yes, this was sort of intuitive to me. That is how I started to manage=20
-my custom project based on Yocto here:=20
-https://github.com/Beaglenode/BeagleNodeOs/tree/setup_config
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
+Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+---
+ meta-ti-bsp/conf/machine/include/j722s.inc    | 19 ++++++++++++
+ meta-ti-bsp/conf/machine/j722s-evm-k3r5.conf  | 11 +++++++
+ meta-ti-bsp/conf/machine/j722s-evm.conf       | 11 +++++++
+ .../cnm-wave-fw/cnm-wave-fw_git.bb            |  2 +-
+ meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb  |  5 ++++
+ .../recipes-bsp/ti-eth-fw/ti-eth-fw.bb        |  4 ++-
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc  |  2 ++
+ .../optee/optee-os-ti-overrides.inc           |  1 +
+ .../ti-rtos-bin/ti-rtos-firmware.bb           | 29 ++++++++++++++++++-
+ 9 files changed, 81 insertions(+), 3 deletions(-)
+ create mode 100644 meta-ti-bsp/conf/machine/include/j722s.inc
+ create mode 100644 meta-ti-bsp/conf/machine/j722s-evm-k3r5.conf
+ create mode 100644 meta-ti-bsp/conf/machine/j722s-evm.conf
 
-I have created this short script (still under development) that does the=20
-preconfigurations (adding or removing layers and so on):=20
-https://github.com/Beaglenode/BeagleNodeOs/blob/setup_config/setup.sh
-
-I am not sure whether this is the way to go, but could not figure out=20
-any better way with this approach, in which I have my own repo and just=20
-use Poky (and 3rd party layers) as git submodules.
-
-The other "method" I have stumbled upon is how it is done with for=20
-instance openbmc: https://github.com/openbmc/openbmc
-
-The way I see it, its a fork of Poky which is detached from the yocto=20
-repo. This way, any changes can be easily implemented by editing any=20
-needed files. Its more feasible when it comes to changes, but it felt=20
-somehow "not right" to me.
-
-How do you see this topic and the approach I have taken?
-
-This guide from Toradex seems to do a decent job explaining it all.
-Though the names of different recipes will have to be adjusted for the
-boneblack.
-I will check this out, thank you!
-
---
-=C5=81ukasz Przenios=C5=82o
-
-
------- Original Message ------
-From "Jon Cormier" <jcormier@criticallink.com>
-To "Lukasz Przenioslo" <bremenpl@gmail.com>
-Cc meta-ti@lists.yoctoproject.org
-Date 2024-01-02 16:54:49
-Subject Re: [meta-ti] Custom dts recipe
-
->When making any custom changes in Yocto, your always going to want to
->create your own meta layer so that you can keep your changes separate
->and so you can revision control your stuff.
->
->This guide from Toradex seems to do a decent job explaining it all.
->Though the names of different recipes will have to be adjusted for the
->boneblack.
->
->https://developer.toradex.com/linux-bsp/os-development/build-yocto/custom-=
-meta-layers-recipes-and-images-in-yocto-project-hello-world-examples/#custo=
-mize-the-kernel
->
->On Thu, Dec 28, 2023 at 11:06=E2=80=AFAM Lukasz Przenioslo <bremenpl@gmail=
-.com> wrote:
->>
->>  Hello,
->>  For a while now I am trying to create a custom device tree overlay for=
- the BBB/ BBG. It doesn't go so well. I started to think whether it would no=
-t be more feasible to have a custom base dts file instead (just like `am335=
-x-bonegreen.dts` or `am335x-boneblack.dts`. Based on one of these 2 files I =
-could create, say, `am335x-bonepink.dts`. Assuming this `am335x-bonepink.d=
-ts` would reside in some dir I have access to, what would be the preffered=
- Poky way of implementing it into the build? By that I mean that during bitb=
-ake it would be compiled to a *.dtb and placed in the boot directory along=
- with the other dtb files. Do I need to create a custom recipe/ layer for th=
-at and add it to the build via `bitbake-layers add-layer`? If yes, how woul=
-d the steps look like in practice (I am quite new to Yocto/ Poky)?
->>
->>  I would appreciate all feedback!
->>
->>  -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>  Links: You receive all messages sent to this group.
->>  View/Reply Online (#17373): https://lists.yoctoproject.org/g/meta-ti/me=
-ssage/17373
->>  Mute This Topic: https://lists.yoctoproject.org/mt/103402787/7902621
->>  Group Owner: meta-ti+owner@lists.yoctoproject.org
->>  Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [jcormier@c=
-riticallink.com]
->>  -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
->
->
->--
->Jonathan Cormier
->Software Engineer
->
->Voice:  315.425.4045 x222
->
->
->
->http://www.CriticalLink.com
->6712 Brooklawn Parkway, Syracuse, NY 13211
---------=_MB0607EBC7-767A-4932-8894-24EAECC7311C
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-<html><head>
-
-<style id=3D"css_styles" type=3D"text/css"><!--blockquote.cite { margin-lef=
-t: 5px; margin-right: 0px; padding-left: 10px; padding-right:0px; border-le=
-ft: 1px solid #cccccc }
-blockquote.cite2 {margin-left: 5px; margin-right: 0px; padding-left: 10px;=
- padding-right:0px; border-left: 1px solid #cccccc; margin-top: 3px; padding=
--top: 0px; }
-a img { border: 0px; }
-li[style=3D'text-align: center;'], li[style=3D'text-align: center; '], li[s=
-tyle=3D'text-align: right;'], li[style=3D'text-align: right; '] {  list-sty=
-le-position: inside;}
-body { font-family: Verdana; font-size: 12pt; }
-.quote { margin-left: 1em; margin-right: 1em; border-left: 5px #ebebeb soli=
-d; padding-left: 0.3em; }
---></style></head>
-<body><div>Hi Jon,</div><div>Thank you for the answer.</div><div><br /><div =
-class=3D"quote"><div id=3D"x527516da88794978a5506606d1c1ff83"><div class=
-=3D"plain_line" style=3D"background-color:rgba(0,0,0,0);margin:3px 0px 16px =
-5px;">When making any custom changes in Yocto, your always going to want t=
-o</div>
-<div class=3D"plain_line" style=3D"background-color:rgba(0,0,0,0);margin:3p=
-x 0px 16px 5px;">create your own meta layer so that you can keep your chang=
-es separate</div>
-<div class=3D"plain_line" style=3D"background-color:rgba(0,0,0,0);margin:3p=
-x 0px 16px 5px;">and so you can revision control your stuff.</div></div></d=
-iv></div><div>Yes, this was sort of intuitive to me. That is how I started=
- to manage my custom project based on Yocto here:=C2=A0<a href=3D"https://gi=
-thub.com/Beaglenode/BeagleNodeOs/tree/setup_config" style=3D"font-size: 12p=
-t;">https://github.com/Beaglenode/BeagleNodeOs/tree/setup_config</a></div><=
-div><br /></div><div>I have created this short script (still under developm=
-ent) that does the preconfigurations (adding or removing layers and so on):=
-=C2=A0<a href=3D"https://github.com/Beaglenode/BeagleNodeOs/blob/setup_conf=
-ig/setup.sh" style=3D"font-size: 12pt;">https://github.com/Beaglenode/Beagl=
-eNodeOs/blob/setup_config/setup.sh</a></div><div><br /></div><div>I am not=
- sure whether this is the way to go, but could not figure out any better way =
-with this approach, in which I have my own repo and just use Poky (and 3rd =
-party layers) as git submodules.</div><div><br /></div><div>The other "met=
-hod" I have stumbled upon is how it is done with for instance openbmc:=C2=
-=A0<a href=3D"https://github.com/openbmc/openbmc" style=3D"font-size: 12pt;=
-">https://github.com/openbmc/openbmc</a></div><div><br /></div><div>The way =
-I see it, its a fork of Poky which is detached from the yocto repo. This w=
-ay, any changes can be easily implemented by editing any needed files. Its=
- more feasible when it comes to changes, but it felt somehow "not right" to=
- me.</div><div><br /></div><div>How do you see this topic and the approach I =
-have taken?=C2=A0</div><div><br /><div class=3D"quote"><div id=3D"x69c79ee=
-6bac243b8afccec89aeda830c"><div class=3D"plain_line" style=3D"background-co=
-lor:rgba(0,0,0,0);margin:3px 0px 16px 5px;">This guide from Toradex seems t=
-o do a decent job explaining it all.</div>
-<div class=3D"plain_line" style=3D"background-color:rgba(0,0,0,0);margin:3p=
-x 0px 16px 5px;">Though the names of different recipes will have to be adju=
-sted for the</div>
-<div class=3D"plain_line" style=3D"background-color:rgba(0,0,0,0);margin:3p=
-x 0px 16px 5px;">boneblack.</div></div></div></div>
-<div>I will check this out, thank you!</div><div><br /></div><div id=3D"sig=
-nature_old" style=3D"clear:both">--<div>=C5=81ukasz Przenios=C5=82o</div></=
-div><div style=3D"clear:both"><br /></div>
-<div><br /></div>
-<div>
-<div>------ Original Message ------</div>
-<div>From "Jon Cormier" &lt;<a href=3D"mailto:jcormier@criticallink.com">jc=
-ormier@criticallink.com</a>&gt;</div>
-<div>To "Lukasz Przenioslo" &lt;<a href=3D"mailto:bremenpl@gmail.com">breme=
-npl@gmail.com</a>&gt;</div>
-<div>Cc <a href=3D"mailto:meta-ti@lists.yoctoproject.org">meta-ti@lists.yoc=
-toproject.org</a></div>
-<div>Date 2024-01-02 16:54:49</div>
-<div>Subject Re: [meta-ti] Custom dts recipe</div></div><div><br /></div>
-<div id=3D"x3a68179002514c7" class=3D"plain"><blockquote cite=3D"CADL8D3YkV=
-LQ-6N3g38OUX4ykp6KY3VipT4m8=3D8ZbHr6Zz9WBag@mail.gmail.com" type=3D"cite" c=
-lass=3D"cite2">
-
-<div class=3D"plain_line">When making any custom changes in Yocto, your alw=
-ays going to want to</div>
-<div class=3D"plain_line">create your own meta layer so that you can keep y=
-our changes separate</div>
-<div class=3D"plain_line">and so you can revision control your stuff.</div>
-<div class=3D"plain_line">=C2=A0</div>
-<div class=3D"plain_line">This guide from Toradex seems to do a decent job=
- explaining it all.</div>
-<div class=3D"plain_line">Though the names of different recipes will have t=
-o be adjusted for the</div>
-<div class=3D"plain_line">boneblack.</div>
-<div class=3D"plain_line">=C2=A0</div>
-<div class=3D"plain_line"><a href=3D"https://developer.toradex.com/linux-bs=
-p/os-development/build-yocto/custom-meta-layers-recipes-and-images-in-yocto=
--project-hello-world-examples/#customize-the-kernel">https://developer.tora=
-dex.com/linux-bsp/os-development/build-yocto/custom-meta-layers-recipes-and=
--images-in-yocto-project-hello-world-examples/#customize-the-kernel</a></di=
-v>
-<div class=3D"plain_line">=C2=A0</div>
-<div class=3D"plain_line">On Thu, Dec 28, 2023 at 11:06=E2=80=AFAM Lukasz P=
-rzenioslo &lt;<a href=3D"mailto:bremenpl@gmail.com">bremenpl@gmail.com</a>&=
-gt; wrote:</div>
-<blockquote type=3D"cite" class=3D"cite">
-<div class=3D"plain_line">=C2=A0</div>
-<div class=3D"plain_line"> Hello,</div>
-<div class=3D"plain_line"> For a while now I am trying to create a custom d=
-evice tree overlay for the BBB/ BBG. It doesn't go so well. I started to th=
-ink whether it would not be more feasible to have a custom base dts file in=
-stead (just like `am335x-bonegreen.dts` or `am335x-boneblack.dts`. Based on =
-one of these 2 files I could create, say, `am335x-bonepink.dts`. Assuming=
- this `am335x-bonepink.dts` would reside in some dir I have access to, what=
- would be the preffered Poky way of implementing it into the build? By that=
- I mean that during bitbake it would be compiled to a *.dtb and placed in th=
-e boot directory along with the other dtb files. Do I need to create a cust=
-om recipe/ layer for that and add it to the build via `bitbake-layers add-l=
-ayer`? If yes, how would the steps look like in practice (I am quite new to =
-Yocto/ Poky)?</div>
-<div class=3D"plain_line">=C2=A0</div>
-<div class=3D"plain_line"> I would appreciate all feedback!</div>
-<div class=3D"plain_line">=C2=A0</div>
-<div class=3D"plain_line"> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-</d=
-iv>
-<div class=3D"plain_line"> Links: You receive all messages sent to this gro=
-up.</div>
-<div class=3D"plain_line"> View/Reply Online (#17373): <a href=3D"https://l=
-ists.yoctoproject.org/g/meta-ti/message/17373">https://lists.yoctoproject.o=
-rg/g/meta-ti/message/17373</a></div>
-<div class=3D"plain_line"> Mute This Topic: <a href=3D"https://lists.yoctop=
-roject.org/mt/103402787/7902621">https://lists.yoctoproject.org/mt/10340278=
-7/7902621</a></div>
-<div class=3D"plain_line"> Group Owner: <a href=3D"mailto:meta-ti+owner@lis=
-ts.yoctoproject.org">meta-ti+owner@lists.yoctoproject.org</a></div>
-<div class=3D"plain_line"> Unsubscribe: <a href=3D"https://lists.yoctoproje=
-ct.org/g/meta-ti/unsub">https://lists.yoctoproject.org/g/meta-ti/unsub</a>=
- [<a href=3D"mailto:jcormier@criticallink.com">jcormier@criticallink.com</a>=
-]</div>
-<div class=3D"plain_line"> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-</d=
-iv>
-<div class=3D"plain_line">=C2=A0</div>
-</blockquote>
-<div class=3D"plain_line">=C2=A0</div>
-<div class=3D"plain_line">=C2=A0</div>
-<div class=3D"plain_line">--</div>
-<div class=3D"plain_line">Jonathan Cormier</div>
-<div class=3D"plain_line">Software Engineer</div>
-<div class=3D"plain_line">=C2=A0</div>
-<div class=3D"plain_line">Voice:  315.425.4045 x222</div>
-<div class=3D"plain_line">=C2=A0</div>
-<div class=3D"plain_line">=C2=A0</div>
-<div class=3D"plain_line">=C2=A0</div>
-<div class=3D"plain_line"><a href=3D"http://www.CriticalLink.com">http://ww=
-w.CriticalLink.com</a></div>
-<div class=3D"plain_line">6712 Brooklawn Parkway, Syracuse, NY 13211</div>
-</blockquote></div>
-
-
-</body></html>
---------=_MB0607EBC7-767A-4932-8894-24EAECC7311C--
+diff --git a/meta-ti-bsp/conf/machine/include/j722s.inc b/meta-ti-bsp/conf/machine/include/j722s.inc
+new file mode 100644
+index 00000000..59f45c93
+--- /dev/null
++++ b/meta-ti-bsp/conf/machine/include/j722s.inc
+@@ -0,0 +1,19 @@
++require conf/machine/include/k3.inc
++SOC_FAMILY:append = ":j722s"
++
++MACHINE_FEATURES += "screen gpu"
++
++require conf/machine/include/mesa-pvr.inc
++PREFERRED_PROVIDER_virtual/gpudriver ?= ""
++
++# Default tiboot3.bin on J722S is for HS-FS
++IMAGE_BOOT_FILES += "tiboot3-j722s-hs-fs-evm.bin"
++
++TFA_BOARD = "lite"
++TFA_K3_SYSTEM_SUSPEND = "1"
++
++OPTEEMACHINE = "k3-am62x"
++
++MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "cnm-wave-fw"
++
++SERIAL_CONSOLES = "115200;ttyS2"
+diff --git a/meta-ti-bsp/conf/machine/j722s-evm-k3r5.conf b/meta-ti-bsp/conf/machine/j722s-evm-k3r5.conf
+new file mode 100644
+index 00000000..2c884ffd
+--- /dev/null
++++ b/meta-ti-bsp/conf/machine/j722s-evm-k3r5.conf
+@@ -0,0 +1,11 @@
++#@TYPE: Machine
++#@NAME: J722S EVM (R5F)
++#@DESCRIPTION: Machine configuration for the TI J722S EVM (R5F core)
++
++require conf/machine/include/k3r5.inc
++
++SYSFW_SOC = "j722s"
++SYSFW_CONFIG = "evm"
++SYSFW_SUFFIX = "hs-fs"
++
++UBOOT_MACHINE = "j722s_evm_r5_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/j722s-evm.conf b/meta-ti-bsp/conf/machine/j722s-evm.conf
+new file mode 100644
+index 00000000..7e5874ab
+--- /dev/null
++++ b/meta-ti-bsp/conf/machine/j722s-evm.conf
+@@ -0,0 +1,11 @@
++#@TYPE: Machine
++#@NAME: J722S EVM
++#@DESCRIPTION: Machine configuration for the TI J722S EVM
++
++require conf/machine/include/j722s.inc
++
++KERNEL_DEVICETREE_PREFIX = "ti/k3-j722s"
++
++KERNEL_DEVICETREE = ""
++
++UBOOT_MACHINE = "j722s_evm_a53_defconfig"
+diff --git a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+index 965db336..d1b99979 100644
+--- a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
++++ b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENCE.cnm;md5=93b67e6bac7f8fec22b96b8ad0a1a9d0"
+ PV = "${CNM_WAVE521_FW_VERSION}"
+ PR = "${INC_PR}.1"
+ 
+-COMPATIBLE_MACHINE = "j721s2|j784s4|am62axx|am62pxx"
++COMPATIBLE_MACHINE = "j721s2|j784s4|j722s|am62axx|am62pxx"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+diff --git a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
+index 1851297f..1ad236ce 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
++++ b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
+@@ -25,6 +25,7 @@ PLAT_SFX:j721e = "j721e"
+ PLAT_SFX:j7200 = "j7200"
+ PLAT_SFX:j721s2 = "j721s2"
+ PLAT_SFX:j784s4 = "j784s4"
++PLAT_SFX:j722s = "j722s"
+ PLAT_SFX:am65xx = "am65xx"
+ PLAT_SFX:am64xx = "am64xx"
+ PLAT_SFX:am62xx = "am62xx"
+@@ -42,6 +43,7 @@ DM_FW_LIST:j721e =   "${DM_FIRMWARE}"
+ DM_FW_LIST:j7200 =   "${DM_FIRMWARE}"
+ DM_FW_LIST:j721s2 =  "${DM_FIRMWARE}"
+ DM_FW_LIST:j784s4 =  "${DM_FIRMWARE}"
++DM_FW_LIST:j722s =   "${DM_FIRMWARE}"
+ DM_FW_LIST:am65xx =  ""
+ DM_FW_LIST:am64xx =  ""
+ DM_FW_LIST:am62xx =  "${DM_FIRMWARE}"
+@@ -83,6 +85,7 @@ ALTERNATIVE:${PN}:j721e   = "j7-mcu-r5f0_0-fw"
+ ALTERNATIVE:${PN}:j7200   = "j7200-mcu-r5f0_0-fw"
+ ALTERNATIVE:${PN}:j721s2  = "j721s2-mcu-r5f0_0-fw"
+ ALTERNATIVE:${PN}:j784s4  = "j784s4-mcu-r5f0_0-fw"
++ALTERNATIVE:${PN}:j722s   = "j722s-wkup-r5f0_0-fw"
+ 
+ # Set up link names for the firmwares
+ ALTERNATIVE_LINK_NAME[am62-main-r5f0_0-fw]  = "${nonarch_base_libdir}/firmware/am62-main-r5f0_0-fw"
+@@ -92,6 +95,7 @@ ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/j
+ ALTERNATIVE_LINK_NAME[j7200-mcu-r5f0_0-fw]  = "${nonarch_base_libdir}/firmware/j7200-mcu-r5f0_0-fw"
+ ALTERNATIVE_LINK_NAME[j721s2-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/j721s2-mcu-r5f0_0-fw"
+ ALTERNATIVE_LINK_NAME[j784s4-mcu-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/j784s4-mcu-r5f0_0-fw"
++ALTERNATIVE_LINK_NAME[j722s-wkup-r5f0_0-fw] = "${nonarch_base_libdir}/firmware/j722s-wkup-r5f0_0-fw"
+ 
+ # Create the firmware alternatives
+ ALTERNATIVE_TARGET[am62-main-r5f0_0-fw]  = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
+@@ -101,6 +105,7 @@ ALTERNATIVE_TARGET[j7-mcu-r5f0_0-fw]     = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
+ ALTERNATIVE_TARGET[j7200-mcu-r5f0_0-fw]  = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
+ ALTERNATIVE_TARGET[j721s2-mcu-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
+ ALTERNATIVE_TARGET[j784s4-mcu-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
++ALTERNATIVE_TARGET[j722s-wkup-r5f0_0-fw] = "${INSTALL_DM_FW_DIR}/${DM_FIRMWARE}"
+ 
+ ALTERNATIVE_PRIORITY = "10"
+ 
+diff --git a/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb b/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
+index 6c961844..6bcc824b 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
++++ b/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
+@@ -24,6 +24,7 @@ PLAT_SFX:j721e = "j721e"
+ PLAT_SFX:j7200 = "j7200"
+ PLAT_SFX:j721s2 = "j721s2"
+ PLAT_SFX:j784s4 = "j784s4"
++PLAT_SFX:j722s = "j722s"
+ PLAT_SFX:am65xx = "am65xx"
+ PLAT_SFX:am64xx = "am64xx"
+ PLAT_SFX:am62xx = "am62xx"
+@@ -41,10 +42,11 @@ ETH_FW_LIST:j721e =   "${ETH_FW}"
+ ETH_FW_LIST:j7200 =   "${ETH_FW}"
+ ETH_FW_LIST:j721s2 =  ""
+ ETH_FW_LIST:j784s4 =  "${ETH_FW}"
++ETH_FW_LIST:j722s =   ""
+ ETH_FW_LIST:am65xx =  ""
+ ETH_FW_LIST:am64xx =  ""
+ ETH_FW_LIST:am62xx =  ""
+-ETH_FW_LIST:am62pxx =  ""
++ETH_FW_LIST:am62pxx = ""
+ ETH_FW_LIST:am62axx = ""
+ 
+ do_install() {
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+index 2f15c4fb..7e2e2011 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -40,6 +40,7 @@ PLAT_SFX:j721e = "j721e"
+ PLAT_SFX:j7200 = "j7200"
+ PLAT_SFX:j721s2 = "j721s2"
+ PLAT_SFX:j784s4 = "j784s4"
++PLAT_SFX:j722s = "j722s"
+ PLAT_SFX:am65xx = "am65xx"
+ PLAT_SFX:am64xx = "am64xx"
+ PLAT_SFX:am62xx = "am62xx"
+@@ -55,6 +56,7 @@ PACKAGECONFIG:append:j721e = " dm"
+ PACKAGECONFIG:append:j7200 = " dm"
+ PACKAGECONFIG:append:j721s2 = " dm"
+ PACKAGECONFIG:append:j784s4 = " dm"
++PACKAGECONFIG:append:j722s = " dm"
+ PACKAGECONFIG:append:am62xx = " dm"
+ PACKAGECONFIG:append:am62axx = " dm"
+ PACKAGECONFIG:append:am62pxx = " dm"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+index 62d6b4f9..a6c17359 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
++++ b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+@@ -6,6 +6,7 @@ EXTRA_OEMAKE:append:k3 = "${@ ' CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') i
+ EXTRA_OEMAKE:append:am62xx = " CFG_TEE_CORE_LOG_LEVEL=1"
+ EXTRA_OEMAKE:append:am62pxx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
+ EXTRA_OEMAKE:append:am62axx = " CFG_TEE_CORE_LOG_LEVEL=1"
++EXTRA_OEMAKE:append:j722s = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
+ 
+ do_compile:append:k3() {
+     cp ${B}/core/tee-pager_v2.bin ${B}/bl32.bin
+diff --git a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+index 786c2834..7bf5030a 100644
+--- a/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
++++ b/meta-ti-bsp/recipes-ti/ti-rtos-bin/ti-rtos-firmware.bb
+@@ -16,6 +16,7 @@ PLAT_SFX:j721e = "j721e"
+ PLAT_SFX:j7200 = "j7200"
+ PLAT_SFX:j721s2 = "j721s2"
+ PLAT_SFX:j784s4 = "j784s4"
++PLAT_SFX:j722s = "j722s"
+ PLAT_SFX:am65xx = "am65xx"
+ PLAT_SFX:am64xx = "am64xx"
+ PLAT_SFX:am62xx = "am62xx"
+@@ -54,12 +55,13 @@ IPC_FW_LIST = ""
+ IPC_FW_LIST:am65xx =  "${MCU_1_0_FW} ${MCU_1_1_FW}"
+ IPC_FW_LIST:am64xx =  "${MCU_1_0_FW} ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW} ${MCU_3_0_FW}"
+ IPC_FW_LIST:am62xx =  "                            ${MCU_2_0_FW}"
+-IPC_FW_LIST:am62pxx =  "                            ${MCU_2_0_FW}"
++IPC_FW_LIST:am62pxx = "                            ${MCU_2_0_FW}"
+ IPC_FW_LIST:am62axx = "                            ${MCU_2_0_FW}                                                                                               ${C7X_1_FW}"
+ IPC_FW_LIST:j721e =   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                             ${C66_1_FW} ${C66_2_FW} ${C7X_1_FW}"
+ IPC_FW_LIST:j7200 =   "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW}"
+ IPC_FW_LIST:j721s2 =  "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW}                                                     ${C7X_1_FW} ${C7X_2_FW}"
+ IPC_FW_LIST:j784s4 =  "              ${MCU_1_1_FW} ${MCU_2_0_FW} ${MCU_2_1_FW} ${MCU_3_0_FW} ${MCU_3_1_FW} ${MCU_4_0_FW} ${MCU_4_1_FW}                         ${C7X_1_FW} ${C7X_2_FW} ${C7X_3_FW} ${C7X_4_FW}"
++IPC_FW_LIST:j722s =   "                            ${MCU_2_0_FW}               ${MCU_3_0_FW}                                                                   ${C7X_1_FW} ${C7X_2_FW}"
+ 
+ # Update the am64xx ipc binaries to be consistent with other platforms
+ do_install:prepend:am64xx() {
+@@ -178,6 +180,13 @@ ALTERNATIVE:${PN}:j784s4 = "\
+                     j784s4-c71_3-fw         j784s4-c71_3-fw-sec \
+                     "
+ 
++ALTERNATIVE:${PN}:j722s = "\
++                    j722s-mcu-r5f0_0-fw   j722s-mcu-r5f0_0-fw-sec \
++                    j722s-main-r5f0_0-fw  j722s-main-r5f0_0-fw-sec \
++                    j722s-c71_0-fw        j722s-c71_0-fw-sec \
++                    j722s-c71_1-fw        j722s-c71_1-fw-sec \
++                    "
++
+ # Set up link names for the firmwares
+ 
+ ALTERNATIVE_LINK_NAME[am65x-mcu-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/am65x-mcu-r5f0_0-fw"
+@@ -271,6 +280,15 @@ ALTERNATIVE_LINK_NAME[j784s4-c71_2-fw-sec] = "${nonarch_base_libdir}/firmware/j7
+ ALTERNATIVE_LINK_NAME[j784s4-c71_3-fw]     = "${nonarch_base_libdir}/firmware/j784s4-c71_3-fw"
+ ALTERNATIVE_LINK_NAME[j784s4-c71_3-fw-sec] = "${nonarch_base_libdir}/firmware/j784s4-c71_3-fw-sec"
+ 
++ALTERNATIVE_LINK_NAME[j722s-mcu-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/j722s-mcu-r5f0_0-fw"
++ALTERNATIVE_LINK_NAME[j722s-mcu-r5f0_0-fw-sec] = "${nonarch_base_libdir}/firmware/j722s-mcu-r5f0_0-fw-sec"
++ALTERNATIVE_LINK_NAME[j722s-main-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/j722s-main-r5f0_0-fw"
++ALTERNATIVE_LINK_NAME[j722s-main-r5f0_0-fw-sec] = "${nonarch_base_libdir}/firmware/j722s-main-r5f0_0-fw-sec"
++ALTERNATIVE_LINK_NAME[j722s-c71_0-fw]     = "${nonarch_base_libdir}/firmware/j722s-c71_0-fw"
++ALTERNATIVE_LINK_NAME[j722s-c71_0-fw-sec] = "${nonarch_base_libdir}/firmware/j722s-c71_0-fw-sec"
++ALTERNATIVE_LINK_NAME[j722s-c71_1-fw]     = "${nonarch_base_libdir}/firmware/j722s-c71_1-fw"
++ALTERNATIVE_LINK_NAME[j722s-c71_1-fw-sec] = "${nonarch_base_libdir}/firmware/j722s-c71_1-fw-sec"
++
+ # Create the firmware alternatives
+ 
+ ALTERNATIVE_TARGET[am65x-mcu-r5f0_0-fw]     = "${INSTALL_IPC_FW_DIR}/${MCU_1_0_FW}"
+@@ -364,4 +382,13 @@ ALTERNATIVE_TARGET[j784s4-c71_2-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C7X_3_FW}.sig
+ ALTERNATIVE_TARGET[j784s4-c71_3-fw]     = "${INSTALL_IPC_FW_DIR}/${C7X_4_FW}"
+ ALTERNATIVE_TARGET[j784s4-c71_3-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C7X_4_FW}.signed"
+ 
++ALTERNATIVE_TARGET[j722s-mcu-r5f0_0-fw]     = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
++ALTERNATIVE_TARGET[j722s-mcu-r5f0_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}.signed"
++ALTERNATIVE_TARGET[j722s-main-r5f0_0-fw]     = "${INSTALL_IPC_FW_DIR}/${MCU_3_0_FW}"
++ALTERNATIVE_TARGET[j722s-main-r5f0_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_3_0_FW}.signed"
++ALTERNATIVE_TARGET[j722s-c71_0-fw]     = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}"
++ALTERNATIVE_TARGET[j722s-c71_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}.signed"
++ALTERNATIVE_TARGET[j722s-c71_1-fw]     = "${INSTALL_IPC_FW_DIR}/${C7X_2_FW}"
++ALTERNATIVE_TARGET[j722s-c71_1-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C7X_2_FW}.signed"
++
+ ALTERNATIVE_PRIORITY = "10"
+-- 
+2.34.1
 
 
