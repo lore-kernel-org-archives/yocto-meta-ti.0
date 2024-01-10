@@ -2,42 +2,42 @@ Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AD42C46CD2
-	for <webhook@archiver.kernel.org>; Tue,  9 Jan 2024 17:31:52 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.23076.1704821510271604184
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41252C4725D
+	for <webhook@archiver.kernel.org>; Wed, 10 Jan 2024 13:26:49 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.11329.1704893205399841190
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 09 Jan 2024 09:31:50 -0800
+ Wed, 10 Jan 2024 05:26:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: list.ti.com, ip: 198.47.19.142, mailfrom: lcpdbld@list.ti.com)
+ dkim=none (message not signed); spf=pass (domain: list.ti.com, ip: 198.47.19.141, mailfrom: lcpdbld@list.ti.com)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409HVm5k028172;
-	Tue, 9 Jan 2024 11:31:48 -0600
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409HVm95031968
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40ADQha4001772;
+	Wed, 10 Jan 2024 07:26:43 -0600
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40ADQhnH015831
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 9 Jan 2024 11:31:48 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
- Jan 2024 11:31:48 -0600
-Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 10 Jan 2024 07:26:43 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 10
+ Jan 2024 07:26:43 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 9 Jan 2024 11:31:48 -0600
-Received: from fllvdckhpci028.itg.ti.com (fllvdckhpci028.itg.ti.com [10.248.130.161])
-	by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409HVmrb024437;
-	Tue, 9 Jan 2024 11:31:48 -0600
-Received: by fllvdckhpci028.itg.ti.com (Postfix, from userid 60899)
-	id 4CD7610B5969; Tue,  9 Jan 2024 11:31:48 -0600 (CST)
+ Frontend Transport; Wed, 10 Jan 2024 07:26:43 -0600
+Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40ADQhDd100687;
+	Wed, 10 Jan 2024 07:26:43 -0600
+Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
+	id 57F4710AC0D4; Wed, 10 Jan 2024 07:26:43 -0600 (CST)
 From: LCPD Automation Script <lcpdbld@list.ti.com>
 To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
         Denys
  Dmytriyenko <denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][kirkstone][PATCH] CI/CD Auto-Merger: cicd.kirkstone.202401090400
-Date: Tue, 9 Jan 2024 11:31:48 -0600
-Message-ID: <1704821508-51532-1-git-send-email-lcpdbld@list.ti.com>
+Subject: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202401100100
+Date: Wed, 10 Jan 2024 07:26:43 -0600
+Message-ID: <1704893203-55210-1-git-send-email-lcpdbld@list.ti.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -45,8 +45,8 @@ X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 09 Jan 2024 17:31:52 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17395
+ <meta-ti@lists.yoctoproject.org>; Wed, 10 Jan 2024 13:26:49 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17396
 
 Updated the value(s) for:
   ti-linux-fw: TI_LINUX_FW_SRCREV
