@@ -1,105 +1,98 @@
-Return-Path: <rs@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CADDC47258
-	for <webhook@archiver.kernel.org>; Thu, 18 Jan 2024 00:20:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 583D6C4725D
+	for <webhook@archiver.kernel.org>; Fri, 19 Jan 2024 22:28:12 +0000 (UTC)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.3847.1705537219390400523
+ by mx.groups.io with SMTP id smtpd.web11.1197.1705703281880606406
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 17 Jan 2024 16:20:19 -0800
+ Fri, 19 Jan 2024 14:28:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=sMQL0fQm;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rs@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40I0KHLN117757;
-	Wed, 17 Jan 2024 18:20:17 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ebqK1p0E;
+ spf=pass (domain: list.ti.com, ip: 198.47.19.141, mailfrom: lcpdbld@list.ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40JMS0je127163;
+	Fri, 19 Jan 2024 16:28:00 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1705537217;
-	bh=K/eE49GZKtYZZyB2MuCT62YaDnBeEg8zyTjUfcNMCgc=;
-	h=From:To:CC:Subject:Date;
-	b=sMQL0fQmEek02TbyDc9D0nn3IQdw0gTR9ovXtM++Mpb79G3ltsQRJPvZ2+0Efwx42
-	 gtEyuaxV4f18FcIVMohjyiraWJI0wrtFGT1A5h6kuFrZ0uhUTn0qX236PFZthSEtka
-	 9qsbRwInw/lGfKkIXxJ6/H9Y0oURm19kX/aeLbMo=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40I0KHjM002503
+	s=ti-com-17Q1; t=1705703280; i=@ti.com;
+	bh=p2Av+r1TgXD0AhqKkkoJXaqAXZPgmg2jw47YNz02oNQ=;
+	h=From:To:Subject:Date;
+	b=ebqK1p0ET3GJPBdMW+LjGaetFaz0OZhAONCdh9wQkZ5tlHNMNC8tYP9A0v/sfD0qO
+	 P52QhuKDd6rSQ15mRb6yq9sE3drD2pG4TB5k/lixOUdFA2U8/NHkOVa/hHtbk1l696
+	 YbB0B3mSKmfyu4hw5dcDdAkW+AXg86u3PsjbQv8c=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40JMS0po121153
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 17 Jan 2024 18:20:17 -0600
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 17
- Jan 2024 18:20:17 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 19 Jan 2024 16:28:00 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
+ Jan 2024 16:28:00 -0600
+Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 17 Jan 2024 18:20:17 -0600
-Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40I0KHiT019918;
-	Wed, 17 Jan 2024 18:20:17 -0600
-From: <rs@ti.com>
-To: <denys@konsulko.com>, <reatmon@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, <detheridge@ti.com>,
-        Randolph Sapp
-	<rs@ti.com>
-Subject: [meta-ti][kirkstone/master][PATCH] ti-img-rogue-*: stability update
-Date: Wed, 17 Jan 2024 18:19:56 -0600
-Message-ID: <20240118001956.978968-1-rs@ti.com>
-X-Mailer: git-send-email 2.43.0
+ Frontend Transport; Fri, 19 Jan 2024 16:28:00 -0600
+Received: from fllvdckhpci028.itg.ti.com (fllvdckhpci028.itg.ti.com [10.248.130.161])
+	by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40JMS0w0078908;
+	Fri, 19 Jan 2024 16:28:00 -0600
+Received: by fllvdckhpci028.itg.ti.com (Postfix, from userid 60899)
+	id 0E2AE10AA2AB; Fri, 19 Jan 2024 16:28:00 -0600 (CST)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][kirkstone][PATCH] CI/CD Auto-Merger: cicd.kirkstone.202401191036
+Date: Fri, 19 Jan 2024 16:28:00 -0600
+Message-ID: <1705703280-124707-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 18 Jan 2024 00:20:24 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17404
+ <meta-ti@lists.yoctoproject.org>; Fri, 19 Jan 2024 22:28:12 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17405
 
-From: Randolph Sapp <rs@ti.com>
+Updated the value(s) for:
+  linux-ti-staging-rt_6.1: SRCREV
+  linux-ti-staging_6.1: SRCREV
 
-Bump SRCREV to include the following changes in UM and KM:
-
-	- Rebuild all releases with external memory wrap disabled due to
-	  some incompatibility with certain Qt use cases.
-	- Add a watchdog change that prevents an occasional false
-	  timeout when servicing long DM processes.
-	- Rely on snooping to perform certain cache operations and
-	  results in decreased overhead for device -> cpu
-	  communications.
-
-Signed-off-by: Randolph Sapp <rs@ti.com>
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
 ---
- .../powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb         | 2 +-
- .../powervr-umlibs/ti-img-rogue-umlibs_23.2.6460340.bb          | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb    | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb
-index 3b5d51ec..f86f4f21 100644
---- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb
-+++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.2.6460340.bb
-@@ -22,7 +22,7 @@ SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-driver.git;protocol=https;
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+index de38350..a0534ca 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+@@ -6,7 +6,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
  
- S = "${WORKDIR}/git"
+ BRANCH = "ti-rt-linux-6.1.y"
  
--SRCREV = "64d1cac11363888b7a071b62d71b563568d483f1"
-+SRCREV = "2595524729c5acbabcbdee2185de64e7fcd6b36a"
+-SRCREV = "0f8de5c40f576fc34dc80b3a32508d9990fd79d4"
++SRCREV = "95b5a09669edc6d3a5216ab8155a621ac28dd6ca"
  
- TARGET_PRODUCT:j721e = "j721e_linux"
- TARGET_PRODUCT:j721s2 = "j721s2_linux"
-diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.2.6460340.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.2.6460340.bb
-index 58cd6c37..1dcfc039 100644
---- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.2.6460340.bb
-+++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.2.6460340.bb
-@@ -12,7 +12,7 @@ PR = "r2"
+ include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
  
- BRANCH = "linuxws/kirkstone/k6.1/${PV}"
- SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-umlibs.git;protocol=https;branch=${BRANCH}"
--SRCREV = "7c853b0c75b7c5c4fa30ded608588850d429f306"
-+SRCREV = "c2671c6eaf85ec6a1183c023bbb4d6e9e288fc10"
- S = "${WORKDIR}/git/targetfs/${TARGET_PRODUCT}/${PVR_WS}/${PVR_BUILD}"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+index c3d280a..1290d98 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
  
- TARGET_PRODUCT:j721e = "j721e_linux"
+ BRANCH ?= "ti-linux-6.1.y"
+ 
+-SRCREV ?= "82d2b827840254248a0444a9c50ab3dc395876cc"
++SRCREV ?= "edc768299f200ad01fcb51d9fc68f329fa62936f"
+ PV = "6.1.69+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -- 
-2.43.0
+1.8.3.1
 
 
