@@ -1,77 +1,115 @@
-Return-Path: <francesco@dolcini.it>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55A7FC47DD9
-	for <webhook@archiver.kernel.org>; Mon, 22 Jan 2024 15:42:32 +0000 (UTC)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- by mx.groups.io with SMTP id smtpd.web11.77569.1705938149591626865
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B803CC47DAF
+	for <webhook@archiver.kernel.org>; Mon, 22 Jan 2024 18:33:24 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.759.1705948398226059331
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 22 Jan 2024 07:42:29 -0800
+ Mon, 22 Jan 2024 10:33:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@dolcini.it header.s=default header.b=Q3z626bM;
- spf=pass (domain: dolcini.it, ip: 217.194.8.81, mailfrom: francesco@dolcini.it)
-Received: from francesco-nb (31-10-206-125.static.upc.ch [31.10.206.125])
-	by mail11.truemail.it (Postfix) with ESMTPA id D68E222C0B;
-	Mon, 22 Jan 2024 16:42:26 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
-	s=default; t=1705938147;
-	bh=N9wJuylIgo9RlF158bzljMea5Hv7ejqK3ipFv6/vJ+Q=; h=From:To:Subject;
-	b=Q3z626bMv8BVlEILCy6jEvFPYKA+Ww0UcaGQwY0/nLftmLdoqdP7w4B/9y4UZKdLk
-	 JBN/oc2uZ5+DDLt9jvSJoDEnraRc7MIRZoeSXso/nVnWqz26gN6PVwQownKjX6JfkX
-	 uiyfX39tYfObY5eIF37VMasiQc3ZsU5bdHtRcCjsDfAzxvlAy3kWDKz2xLXjny8WTd
-	 JAHYbQ5FoxzNRwxVJqPSVkcNTWFkSPj/2pk6p5ptMPuKOH7WnoqnT84ejmaXjWqlsE
-	 bQe1qK1ZkCitw8/yZ2UMlVcdV6zjSR1CYsD6ozVPsZOqo/l609Zf+4rjEnR98rPuTo
-	 8z5zibpWpZ/Ew==
-Date: Mon, 22 Jan 2024 16:42:22 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Randolph Sapp <rs@ti.com>
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [EXTERNAL] [meta-ti] AM62, GPU driver on OE master
-Message-ID: <20240122154222.GA29452@francesco-nb>
-References: <20230906152257.2362602-1-max.oss.09@gmail.com>
- <e59adfac-e7f1-4a41-936d-95776a33c761@ti.com>
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id E4AA340C2E;
+	Mon, 22 Jan 2024 18:33:16 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id dTDR-8xvSsxe; Mon, 22 Jan 2024 18:33:16 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B3CE640BE6;
+	Mon, 22 Jan 2024 18:33:13 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id EA44B163DDD; Mon, 22 Jan 2024 13:33:12 -0500 (EST)
+Date: Mon, 22 Jan 2024 13:33:12 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Ross Burton <ross.burton@arm.com>
+Cc: Michael Lynch <mlynch@hi-techniques.com>,
+	"meta-arm@lists.yoctoproject.org" <meta-arm@lists.yoctoproject.org>,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-arm] optee failing to build on head of dunfell branch
+ for j7-evm
+Message-ID: <20240122183312.GF18608@denix.org>
+References: <UuhE.1705687266596590169.nYL6@lists.yoctoproject.org>
+ <EF84BE17-CEE6-45A8-9FCC-0CDD4BB6F111@arm.com>
+ <CADSA=uHnkpYGXfiK-u5NkHgqLutFh=Fy75Uurv4Zw7HcAMqCcg@mail.gmail.com>
+ <797DCC01-1255-43F0-9596-85E7F173A6F0@arm.com>
+ <CADSA=uFgpA6E=m2XvGuu-oSG+_BcXbGz04=Hf2bpN0vVN4=SgQ@mail.gmail.com>
+ <2EB56308-5017-42DE-B55F-92AF772AE1E2@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <e59adfac-e7f1-4a41-936d-95776a33c761@ti.com>
+In-Reply-To: <2EB56308-5017-42DE-B55F-92AF772AE1E2@arm.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 22 Jan 2024 15:42:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17406
+ <meta-ti@lists.yoctoproject.org>; Mon, 22 Jan 2024 18:33:24 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17407
 
-Hello Randolph,
+On Mon, Jan 22, 2024 at 02:25:34PM +0000, Ross Burton wrote:
+> On 22 Jan 2024, at 14:11, Michael Lynch <mlynch@hi-techniques.com> wrot=
+e:
+> >=20
+> > Meta-ti branch is head of dunfell.
+> >=20
+> > Ok I believe see what's going on.  The dunfell branch of the meta-ti =
+layer=20
+> > appends optee_os such that it updates optee_os to the 3.20.0 git vers=
+ion=20
+> > but does NOT supply a replacement patch file that works with the=20
+> > "mk/gcc.mk" file that comes with 3.20.0 nor does TI's optee_os append=
+=20
+> > override do_patch and I believe this is why the build ends up failing=
+? =20
+> > Maybe time to ask on the meta-ti forum?
+>=20
+> Absolutely.  They don=E2=80=99t appear to be testing that combination.
 
-On Wed, Sep 06, 2023 at 11:18:38AM -0500, Randolph Sapp wrote:
-> On 9/6/23 10:22, Max Krummenacher wrote:
-> > I'm trying to build and run latest OE master for a AM62 based machine
-> > All builds fine.
-> > I don't have the GPU working at runtime while the GPU works fine
-> > using the 'same' configuration with kirkstone branches.
-> > Apart from the GPU I did not (yet) see any regression as compared
-> > with kirkstone. Note that the kernel is based on
-> > ti-linux-6.1.y, 09.00.00.008.
-> > 
-> > 
-> > First issue found is the shared objects in ti-img-rogue-umlibs are not
-> > versioned shared objects, but the *.so files are packaged into the
-> > ti-img-rogue-umlibs-dev package and thus not installed by default:
-> > 
-> > In that state OpenGL falls back to software rendering which works,
-> > albeit slowly.
+Well, TI historically have been using stable/LTS releases even for adding=
+ new=20
+platforms, hence bumping BSP components to newer versions, often backport=
+ing=20
+them from master, but sometimes even updating OPTEE/TFA before meta-arm d=
+oes.=20
+Those combinations are always being tested for TI platforms, as overrides=
+ in=20
+those bbappends are specific to TI SoC platforms.
 
-> Hey Max, thanks for the update. Unfortunately I haven't had any time to
-> verify the master branch lately. I'll kick up a build later today if I get
-> time and see if I can unblock you.
-> 
-> We should be skipping the dev-so check and shipping the required links
-> regardless, but I know upstream has been having some fun with the binary
-> package class so I may need to move this recipe to something more stable.
+Now, the issue is with the libgcc sysroot patch that's been there forever=
+,=20
+until just several days ago when it got replaced with CFLAGS in master. A=
+nd=20
+passing sysroot is required for OE-built toolchain.
 
+Anyway, I've done some digging - in the past TI was using external toolch=
+ain=20
+for their products, so when optee-os got bumped to 3.20, the issue with t=
+he=20
+patch was missed, as external toolchain has no issue finding libgcc, e.g.=
+:
 
-Any update on this? This is broken since quite some time now.
+TCMODE =3D "external-arm"
+EXTERNAL_TOOLCHAIN =3D "<path-to-the-toolchain>"
 
-Francesco
+And switching TI products to OE-built toolchain (TOOLCHAIN_TYPE=3Dinterna=
+l)=20
+surely exposes this issue:
 
+| aarch64-oe-linux-ld.bfd: cannot find libgcc.a: No such file or director=
+y
+
+TI products have switched to Kirkstone about a year ago and also changed =
+the=20
+default toolchain to OE-built one, so no issues there or in master.
+
+And Dunfell branch hasn't seen any updates in meta-ti since then, but I g=
+uess=20
+this can be fixed, as apparently there are people still using Dunfell...
+
+--=20
+Denys
 
