@@ -1,148 +1,114 @@
-Return-Path: <c-shilwant@ti.com>
+Return-Path: <sinthu.raja@mistralsolutions.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC422C47258
-	for <webhook@archiver.kernel.org>; Sun, 28 Jan 2024 11:46:49 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.36039.1706442405738647301
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D50BC47DA9
+	for <webhook@archiver.kernel.org>; Mon, 29 Jan 2024 11:53:56 +0000 (UTC)
+Received: from egress-ip12b.ess.de.barracuda.com (egress-ip12b.ess.de.barracuda.com [18.185.115.216])
+ by mx.groups.io with SMTP id smtpd.web11.12696.1706529232825350632
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 28 Jan 2024 03:46:46 -0800
+ Mon, 29 Jan 2024 03:53:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=GmZkH/9y;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: c-shilwant@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40SBkiDS068021;
-	Sun, 28 Jan 2024 05:46:44 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1706442404;
-	bh=ODZMvjwoPtSIhsQgaNrdYKczlVlfvtvuzVEXio3maaQ=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=GmZkH/9y0bzN0y3Mh1jRhBQc2PVay7kbMd4GGWZ9LHpKvHtZ4gcZ0c275eHw7d9Uv
-	 drm/SFJuMmi/AUXtEm4BOzwjn+Py9LIQiHHsBkPtPqtuir7opOB1vqAsdsj7tsyl9t
-	 kKxTDDjOATe0MyB3DxPEnMnFfN7ux1n4Z9Lx50iM=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40SBkiN4014488
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Sun, 28 Jan 2024 05:46:44 -0600
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 28
- Jan 2024 05:46:43 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 28 Jan 2024 05:46:43 -0600
-Received: from [172.24.227.238] (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.238])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40SBkftm039398;
-	Sun, 28 Jan 2024 05:46:42 -0600
-Message-ID: <8a0aa5d1-cedc-4541-b023-1603bd242c0c@ti.com>
-Date: Sun, 28 Jan 2024 17:16:41 +0530
+ dkim=pass header.i=@mistralsolutions.com header.s=google header.b=PsKMemP0;
+ spf=pass (domain: mistralsolutions.com, ip: 18.185.115.216, mailfrom: sinthu.raja@mistralsolutions.com)
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197]) by mx-outbound21-231.eu-central-1b.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Mon, 29 Jan 2024 11:53:48 +0000
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-1d8cd8315fbso15424595ad.1
+        for <meta-ti@lists.yoctoproject.org>; Mon, 29 Jan 2024 03:53:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mistralsolutions.com; s=google; t=1706529227; x=1707134027; darn=lists.yoctoproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=tpAApPnT4lUjFULSD6bRYk5mmtYLQnPkDO55vSXaUsA=;
+        b=PsKMemP0OwoBlnA0OngEnWf/gPPy0dIw1TujHfPWlDZhnRE3Yoe7/Tvvyo4/2+idz+
+         O0kJmulSY/fc9TDHsp48MlGZ2u0n+VNivVKae06YqPUz3nH1HH86YtjdRysc0hYk/DuF
+         kQNre8IIhV5rA52XVDmb5iczRM7RHta0n3kR0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1706529227; x=1707134027;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=tpAApPnT4lUjFULSD6bRYk5mmtYLQnPkDO55vSXaUsA=;
+        b=KKMROgZZH1KDsO6I5peED7QyeL9xkQFU0y89S9B2cb4WPyKsDapUI0F30KrAuTu+6c
+         AvMDnMBvSwYkxvx5rVtziNRJijuneNQYK5S8rhSZDsIr2cLX6+oiPXDNz6tWfBNhUOwB
+         XI2x0joZnK8rf6R60ukIoapEKJmbgSEQcvtVRTwygJVRXKC906qxU6xSW0z/cds2REaF
+         8sDhKRoMDd/cELEs2GmWjTJPYaJkK7YBh9hyJ32wQcSGn29g/UDqxf+YGLjQvcj6O5TI
+         /LssvcTOiSpICvgpANDXTM2aEiAfgolYs2PzG0V80ie0+TkOD55UHaR6eYDRraC0bDmd
+         RpMA==
+X-Gm-Message-State: AOJu0YyPKhaIKBFx1PtphJ2zGU2GlGqDK2F3QjJ1lUb9SRvlwTnerh8+
+	WuKJHQXZ6eIL8UFOqXpm24rVYaOOLZKMPz2c3IKZFUHMWIu+p7W8dW7HRugYe045SVK1PdpZt3l
+	FhE8H0gG8tX9CzMV9MJlB/YX3P50w4NTVaKD5kxi119ak8aPPppWZUTYd+NwlVkrvAgLFnQL4V8
+	ybD2h3roa05DIonWGOnnAqkf4=
+X-Received: by 2002:a17:902:d484:b0:1d8:ee30:aaac with SMTP id c4-20020a170902d48400b001d8ee30aaacmr1017303plg.69.1706529227674;
+        Mon, 29 Jan 2024 03:53:47 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF3AeC+KEHUBl8K7tt1YbNf482MtpVvDEXO+r76LPunhrIiqa+qnrr0pmnGWltJyrhwPLdU5A==
+X-Received: by 2002:a17:902:d484:b0:1d8:ee30:aaac with SMTP id c4-20020a170902d48400b001d8ee30aaacmr1017291plg.69.1706529227316;
+        Mon, 29 Jan 2024 03:53:47 -0800 (PST)
+Received: from LAP568U.mistral.in ([106.51.227.150])
+        by smtp.gmail.com with ESMTPSA id az10-20020a170902a58a00b001d7274cbd33sm5096391plb.121.2024.01.29.03.53.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 29 Jan 2024 03:53:46 -0800 (PST)
+From: Sinthu Raja <sinthu.raja@mistralsolutions.com>
+X-Google-Original-From: Sinthu Raja <sinthu.raja@ti.com>
+To: reatmon@ti.com,
+	Denys Dmytriyenko <denis@denix.org>
+Cc: meta-ti@lists.yoctoproject.org,
+	Sinthu Raja <sinthu.raja@ti.com>
+Subject: [meta-ti][kirkstone][PATCH 0/4] Add gstreamer 1.20
+Date: Mon, 29 Jan 2024 17:23:38 +0530
+Message-Id: <20240129115342.9321-1-sinthu.raja@ti.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [EXTERNAL] [meta-ti][master][PATCH] Revert "python3-yamllint:
- Temporarily carry this new recipe"
-To: <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20240126192526.15795-1-reatmon@ti.com>
-Content-Language: en-US
-From: Chirag Shilwant <c-shilwant@ti.com>
-In-Reply-To: <20240126192526.15795-1-reatmon@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 40SBkiDS068021
+Content-Transfer-Encoding: 8bit
+X-BESS-ID: 1706529228-305607-12458-3191-1
+X-BESS-VER: 2019.1_20240125.1952
+X-BESS-Apparent-Source-IP: 209.85.214.197
+X-BESS-Parts: H4sIAAAAAAACA4uuVkqtKFGyUirNy1bSUcovVrIyNDExALIygILJqYlmqeaWRs
+	mp5mZp5iYpycaWZskGpgZm5hapZhYWaUq1sQCvVy3rQQAAAA==
+X-BESS-Outbound-Spam-Score: 0.40
+X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.253837 [from 
+	cloudscan13-231.eu-central-1a.ess.aws.cudaops.com]
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------
+	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
+	0.40 BSF_SC0_SA085b         META: Custom Rule SA085b 
+	0.00 BSF_SC0_MISMATCH_TO    META: Envelope rcpt doesn't match header 
+X-BESS-Outbound-Spam-Status: SCORE=0.40 using account:ESS91090 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND, BSF_SC0_SA085b, BSF_SC0_MISMATCH_TO
+X-BESS-BRTS-Status: 1
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sun, 28 Jan 2024 11:46:49 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17423
+ <meta-ti@lists.yoctoproject.org>; Mon, 29 Jan 2024 11:53:56 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17424
 
+From: Sinthu Raja <sinthu.raja@ti.com>
 
-On 27/01/24 00:55, Ryan Eatmon via lists.yoctoproject.org wrote:
-> This reverts commit 04c2204c11cb3ee5eee84f2d213037b763954786. oe-core=20
-> master branch picked up this patch [1], so we no longer need it in=20
-> meta-ti. [1]=20
-> https:=E2=80=8A//urldefense.=E2=80=8Acom/v3/__https:=E2=80=8A//git.=E2=80=
-=8Aopenembedded.=E2=80=8Aorg/openembedded-core/commit/?id=3D128cfc5222752=
-a6337a9cbb9bc9023c13ee19f2f__;!!G3vK!XgvfybGwc6e4N18jPzO0DkGffqB5uxx8A9Nv=
-alQ9VwVs8kdvcXHXZOntXxpRasmIwLWq3kope5pRZSgWjnkmF09p6nTeAlZP6A$
-> ZjQcmQRYFpfptBannerStart
-> This message was sent from outside of Texas Instruments.
-> Do not click links or open attachments unless you recognize the source=20
-> of this email and know the content is safe.
-> ZjQcmQRYFpfptBannerEnd
-> This reverts commit 04c2204c11cb3ee5eee84f2d213037b763954786.
->
-> oe-core master branch picked up this patch [1], so we no longer need it
-> in meta-ti.
->
-> [1]https://urldefense.com/v3/__https://git.openembedded.org/openembedde=
-d-core/commit/?id=3D128cfc5222752a6337a9cbb9bc9023c13ee19f2f__;!!G3vK!Xgv=
-fybGwc6e4N18jPzO0DkGffqB5uxx8A9NvalQ9VwVs8kdvcXHXZOntXxpRasmIwLWq3kope5pR=
-ZSgWjnkmF09p6nTeAlZP6A$
->
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Hi All,
+This patch series add supports to gstreamer 1.20 plugins-bad for AM57x
+platform and also it enables the mmip along with VPE and Ducati plugins.
 
+RFC Patch: https://www.mail-archive.com/meta-arago@lists.yoctoproject.org/msg01680.html
 
-Acked-by: Chirag Shilwant <c-shilwant@ti.com>
+Sinthu Raja (4):
+  gstreamer1.0-plugins-bad: Add patches to support DRM allocator
+  gst-plugins-ti: fetch gstreamer common project sources
+  ti-test: Remove OAMP-DRM test
+  branding-core: enable mmip for AM57x platform
 
+ .../conf/distro/include/branding-core.inc     |   3 -
+ .../conf/distro/include/branding-ltsprep.inc  |   3 -
+ .../gstreamer1.0-plugins-ducati_git.bb        |   4 +
+ .../gstreamer1.0-plugins-vpe_git.bb           |   4 +
+ ...mallocator-Add-DRM-allocator-support.patch | 367 ++++++++++++++++++
+ ...drm-and-tidss-in-the-list-of-drivers.patch | 160 ++++++++
+ .../gstreamer1.0-plugins-bad_1.20.%.bbappend  |  15 +
+ .../recipes-core/packagegroups/ti-test.bb     |   3 -
+ 8 files changed, 550 insertions(+), 9 deletions(-)
+ create mode 100644 meta-arago-extras/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad/0001-gstdrmallocator-Add-DRM-allocator-support.patch
+ create mode 100644 meta-arago-extras/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad/0002-kmssink-Add-omapdrm-and-tidss-in-the-list-of-drivers.patch
+ create mode 100644 meta-arago-extras/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_1.20.%.bbappend
 
-> ---
->   .../python-yamllint/python3-yamllint_1.33.0.bb    | 15 --------------=
--
->   1 file changed, 15 deletions(-)
->   delete mode 100644 meta-ti-extras/recipes-devtools/python-yamllint/py=
-thon3-yamllint_1.33.0.bb
->
-> diff --git a/meta-ti-extras/recipes-devtools/python-yamllint/python3-ya=
-mllint_1.33.0.bb b/meta-ti-extras/recipes-devtools/python-yamllint/python=
-3-yamllint_1.33.0.bb
-> deleted file mode 100644
-> index 4b7bd065..00000000
-> --- a/meta-ti-extras/recipes-devtools/python-yamllint/python3-yamllint_=
-1.33.0.bb
-> +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -SUMMARY =3D "A linter for YAML files."
-> -HOMEPAGE =3D "https://urldefense.com/v3/__https://github.com/adrienver=
-ge/yamllint__;!!G3vK!XgvfybGwc6e4N18jPzO0DkGffqB5uxx8A9NvalQ9VwVs8kdvcXHX=
-ZOntXxpRasmIwLWq3kope5pRZSgWjnkmF09p6nRPUSLbJw$"
-> -LICENSE =3D "GPL-3.0-only"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D1ebbd3e34237af26da5dc08a4e4=
-40464"
-> -
-> -inherit pypi setuptools3
-> -
-> -PYPI_PACKAGE =3D "yamllint"
-> -
-> -SRC_URI[sha256sum] =3D "2dceab9ef2d99518a2fcf4ffc964d44250ac4459be1ba3=
-ca315118e4a1a81f7d"
-> -
-> -DEPENDS +=3D "${PYTHON_PN}-setuptools-scm-native"
-> -RDEPENDS:${PN} +=3D "${PYTHON_PN}-pyyaml"
-> -
-> -BBCLASSEXTEND =3D "native nativesdk"
-> --=20
-> 2.17.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#17422): https://urldefense.com/v3/__https://lists.y=
-octoproject.org/g/meta-ti/message/17422__;!!G3vK!XgvfybGwc6e4N18jPzO0DkGf=
-fqB5uxx8A9NvalQ9VwVs8kdvcXHXZOntXxpRasmIwLWq3kope5pRZSgWjnkmF09p6nQSaKXBR=
-A$
-> Mute This Topic: https://urldefense.com/v3/__https://lists.yoctoproject=
-.org/mt/103983388/7030289__;!!G3vK!XgvfybGwc6e4N18jPzO0DkGffqB5uxx8A9Nval=
-Q9VwVs8kdvcXHXZOntXxpRasmIwLWq3kope5pRZSgWjnkmF09p6nRDzjxx_g$
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://urldefense.com/v3/__https://lists.yoctoproject.org=
-/g/meta-ti/leave/11470056/7030289/1265141306/xyzzy__;!!G3vK!XgvfybGwc6e4N=
-18jPzO0DkGffqB5uxx8A9NvalQ9VwVs8kdvcXHXZOntXxpRasmIwLWq3kope5pRZSgWjnkmF0=
-9p6nTs3UsRuA$  [c-shilwant@ti.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+-- 
+2.36.1
+
 
