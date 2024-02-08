@@ -1,140 +1,226 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <c-shilwant@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E43F7C4828F
-	for <webhook@archiver.kernel.org>; Thu,  8 Feb 2024 01:07:12 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.7568.1707354423101754330
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BB48C48260
+	for <webhook@archiver.kernel.org>; Thu,  8 Feb 2024 10:09:36 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.14663.1707386970922366815
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 07 Feb 2024 17:07:03 -0800
+ Thu, 08 Feb 2024 02:09:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=qR/BtW3A;
- spf=pass (domain: list.ti.com, ip: 198.47.19.141, mailfrom: lcpdbld@list.ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 418171VA044846;
-	Wed, 7 Feb 2024 19:07:01 -0600
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=odFd7Q7o;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: c-shilwant@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 418A9TtE126869;
+	Thu, 8 Feb 2024 04:09:29 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1707354421; i=@ti.com;
-	bh=Eq5ITCVLGtAMsx7+elm7Ajezr+Yl/pssXYapYa9h+PM=;
-	h=From:To:Subject:Date;
-	b=qR/BtW3ARMVH/yzI46GNFHxuGe1p0wooPyPJYm8MueBlt2mFZ3PBjyaazWL80K1P6
-	 HefbBtr6CKNLWKKGyGeXhY9R7Uei5j4iGuJXFTCcspxaxfHX5CNd8NrwITvusmwT9t
-	 QHxnw5RtO4gPlJaFF81wvdKj9pqzJPDMzLNnaaVk=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 418171Hj005433
+	s=ti-com-17Q1; t=1707386969;
+	bh=oylBHMNKDdgVDbtnJbfoKM+LjzdBSrPuphkx9UCETjo=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=odFd7Q7ox7wSgTaG0gmzLERbyMUKXZ1Ov56cmZA+q6/B01qSbjByg2wLpxNnzRpsO
+	 t5X8uNd1zThuZYRgOT3u/c2ZiaHsAI95oihHUC3c7Pjw5xIjZxx0RQlEx5NNRVgEss
+	 VB4ZiMdbY0+KNZe1yK6g21Z45Uzr0j2B2QtUUhWI=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 418A9TGD124918
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 7 Feb 2024 19:07:01 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 7
- Feb 2024 19:07:01 -0600
-Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 8 Feb 2024 04:09:29 -0600
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 8
+ Feb 2024 04:09:29 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 7 Feb 2024 19:07:00 -0600
-Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
-	by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 418170Ru012302;
-	Wed, 7 Feb 2024 19:07:01 -0600
-Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
-	id E16E61134DBC; Wed,  7 Feb 2024 19:07:00 -0600 (CST)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][kirkstone][PATCH] CI/CD Auto-Merger: cicd.kirkstone.202402071239
-Date: Wed, 7 Feb 2024 19:07:00 -0600
-Message-ID: <1707354420-80943-1-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
+ Frontend Transport; Thu, 8 Feb 2024 04:09:29 -0600
+Received: from [172.24.227.238] (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.238])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 418A9PE5096068;
+	Thu, 8 Feb 2024 04:09:26 -0600
+Message-ID: <a2778449-6c21-4bd2-b667-9dc22ad15b21@ti.com>
+Date: Thu, 8 Feb 2024 15:39:24 +0530
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [EXTERNAL] Re: [meta-ti] [kirkstone] [PATCH v2] meta-ti-bsp: Add
+ bootsplash image file for AM62P
+Content-Language: en-US
+To: "Bajjuri, Praneeth" <praneeth@ti.com>, Devarsh Thakkar <devarsht@ti.com>,
+        Ryan Eatmon <reatmon@ti.com>, <meta-ti@lists.yoctoproject.org>,
+        <denys@konsulko.com>
+CC: <vigneshr@ti.com>, <a-bhatia1@ti.com>, <j-luthra@ti.com>,
+        Gyan Gupta
+	<g-gupta@ti.com>, Khasim <khasim@ti.com>
+References: <20240203070525.1728676-1-devarsht@ti.com>
+ <6c7d7efe-7816-48f1-808c-7f3e686de8a2@ti.com>
+ <a7da287c-c38e-8171-bbcd-42158d42e68e@ti.com>
+ <13511ef8-4953-409c-aa30-522a934f54d3@ti.com>
+ <3ece8988-7e18-4e0a-adbb-9de0897578cf@ti.com>
+ <17B183A9980B38E6.2925@lists.yoctoproject.org>
+From: Chirag Shilwant <c-shilwant@ti.com>
+In-Reply-To: <17B183A9980B38E6.2925@lists.yoctoproject.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by lelv0142.ext.ti.com id 418A9TtE126869
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 08 Feb 2024 01:07:12 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17452
+ <meta-ti@lists.yoctoproject.org>; Thu, 08 Feb 2024 10:09:36 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17453
 
-Updated the value(s) for:
-  ti-linux-fw: TI_LINUX_FW_SRCREV
-  u-boot-ti-staging_2023.04: SRCREV
-  k3conf: SRCREV
-  linux-ti-staging-rt_6.1: SRCREV
-  linux-ti-staging_6.1: SRCREV
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
----
- meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 2 +-
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb | 2 +-
- meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb           | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb    | 2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
+On 07/02/24 12:51, Chirag Shilwant via lists.yoctoproject.org wrote:
+> On 06/02/24 03:=E2=80=8A20, Bajjuri, Praneeth wrote: > > > On 2/5/2024 =
+10:=E2=80=8A06=20
+> AM, Chirag Shilwant wrote: >> >> On 05/02/24 21:=E2=80=8A13, Devarsh Th=
+akkar=20
+> wrote: >>> >>> >>> On 05/02/24 20:=E2=80=8A44, Ryan Eatmon wrote:=E2=80=
+=8A
+> ZjQcmQRYFpfptBannerStart
+> This message was sent from outside of Texas Instruments.
+> Do not click links or open attachments unless you recognize the source=20
+> of this email and know the content is safe.
+> ZjQcmQRYFpfptBannerEnd
+> On 06/02/24 03:20, Bajjuri, Praneeth wrote:
+> >
+> >
+> > On 2/5/2024 10:06 AM, Chirag Shilwant wrote:
+> >>
+> >> On 05/02/24 21:13, Devarsh Thakkar wrote:
+> >>>
+> >>>
+> >>> On 05/02/24 20:44, Ryan Eatmon wrote:
+> >>>>
+> >>>>
+> >>>> On 2/3/2024 1:05 AM, Devarsh Thakkar wrote:
+> >>>>> Add TI logo image as bootsplash image file for AM62P and install=20
+> >>>>> it in
+> >>>>> boot directory from where u-boot can read from and display during
+> >>>>> boot-up time.
+> >>>>
+> >>>>
+> >>>> Thank you for the rebase.=C2=A0 Was the config fragment that Chira=
+g=20
+> >>>> asked about ever sent to uboot to avoid an issue with the recipe i=
+n=20
+> >>>> the processor-sdk?
+> >>>>
+> >>>
+> >>> Yes, I had submitted a patch to ti-u-boot.=20
+> >
+> > pulled the patch in -next branch.
+> > https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=3Dti-u-boot-202=
+3.04-next&id=3De7d2df2ecfb3591938087335d81ebf0498dc8ece=20
+> >
+> >
+> >
+>
+> Thanks Praneeth.
+>
+>
+> Hi Ryan,
+>
+> As the ti-u-boot config dependencies are pulled in next branches, we ca=
+n
+> go ahead and integrate this patch.
+> I will send out a patch soon to update the am62pxx-evm.conf to include
+> the config fragment which is needed
+> for the tisdk-display-cluster wic image.
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 910f53c..fa7659d 100644
---- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -17,7 +17,7 @@ CNM_WAVE521_FW_VERSION = "1.0.3"
- TI_DM_FW_VERSION = "09.01.02"
- TI_SYSFW_VERSION = "09.01.08"
- 
--TI_LINUX_FW_SRCREV ?= "4cb22050117b5688c3a995eae87e9377101b358e"
-+TI_LINUX_FW_SRCREV ?= "0350c2edecabc4c828eb28dc993a3059f33b4262"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
- 
- BRANCH ?= "ti-linux-firmware"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-index 2f111f3..6f4bf64 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
-@@ -6,4 +6,4 @@ PR = "r0"
- 
- BRANCH = "ti-u-boot-2023.04"
- 
--SRCREV = "40cc7d7e0382cece400e74b4972e998ffa03c74d"
-+SRCREV = "28eaa6eb15204cb3e3cc8ed938341392c62dc218"
-diff --git a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
-index 9c359fe..c284b59 100644
---- a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
-+++ b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
-@@ -10,7 +10,7 @@ PV = "0.3+git${SRCPV}"
- COMPATIBLE_MACHINE = "k3"
- 
- BRANCH ?= "master"
--SRCREV = "de06befe878be061a40540d2127d4273320b35bc"
-+SRCREV = "f4dd78ab6d3372e6326f90639b5f8f57607369d0"
- 
- SRC_URI = "git://git.ti.com/git/k3conf/k3conf.git;protocol=https;branch=${BRANCH}"
- 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-index 13d8b03..2c5c2e6 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
-@@ -6,7 +6,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
- 
- BRANCH = "ti-rt-linux-6.1.y"
- 
--SRCREV = "a3301d5cd75f78159753d3c59d2e70ee78e74e58"
-+SRCREV = "3dace366de06c5b1927ed082fbeac0b4bee29cbc"
- 
- include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
- 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-index 3cce5b8..4842ad3 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
-@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH ?= "ti-linux-6.1.y"
- 
--SRCREV ?= "f98180658f0879f350e9dc17855dd452134fdbcb"
-+SRCREV ?= "2233af66faf7b81b6c286285e50cda5595dc410d"
- PV = "6.1.69+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--- 
-1.8.3.1
 
+Well, we can handle this in processor sdk builds. So, no follow up patch=20
+is needed on meta-ti to handle tisdk-display-cluster image.
+We can go ahead & integrate this patch.
+
+Thanks Chirag.
+
+
+>
+>
+> > I have sent you the link
+> >>> offline.
+> >>>
+> >>> Regards
+> >>> Devarsh
+> >>
+> >>
+> >> Thanks Devarsh for sending a v2. What's the status on the config=20
+> >> fragment patch in ti-u-boot as well as upstream?
+> >>
+> >
+> > Devarsh, can you comment on this one .
+> >
+> >
+> >>
+> >>>
+> >>>>
+> >>>>
+> >>>>> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+>
+>
+> Acked-by: Chirag Shilwant <c-shilwant@ti.com>
+>
+>
+> >>>>>
+> >>>>> ---
+> >>>>> V2: Rebase to updated uboot recipes
+> >>>>> ---
+> >>>>> =C2=A0 meta-ti-bsp/conf/machine/include/am62pxx.inc |=C2=A0 3 +++
+> >>>>> =C2=A0 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc | 10 ++++++++=
+++
+> >>>>> =C2=A0 2 files changed, 13 insertions(+)
+> >>>>>
+> >>>>> diff --git a/meta-ti-bsp/conf/machine/include/am62pxx.inc=20
+> >>>>> b/meta-ti-bsp/conf/machine/include/am62pxx.inc
+> >>>>> index bac68253..38e35851 100644
+> >>>>> --- a/meta-ti-bsp/conf/machine/include/am62pxx.inc
+> >>>>> +++ b/meta-ti-bsp/conf/machine/include/am62pxx.inc
+> >>>>> @@ -17,3 +17,6 @@ OPTEEMACHINE =3D "k3-am62x"
+> >>>>> =C2=A0 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "cnm-wave-fw"
+> >>>>> =C2=A0 SERIAL_CONSOLES =3D "115200;ttyS2"
+> >>>>> +
+> >>>>> +# Bitmap image tarball for early splashscreen
+> >>>>> +IMAGE_BOOT_FILES +=3D "ti_logo_414x97_32bpp.bmp.gz"
+> >>>>> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc=20
+> >>>>> b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+> >>>>> index 493c1c31..42ddf40f 100644
+> >>>>> --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+> >>>>> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+> >>>>> @@ -341,4 +341,14 @@ do_deploy:append:am62xx() {
+> >>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 install -m 0644 ${S}/tools/logos/t=
+i_logo_414x97_32bpp.bmp.gz=20
+> >>>>> ${DEPLOYDIR}
+> >>>>> =C2=A0 }
+> >>>>> +do_install:append:am62pxx() {
+> >>>>> +=C2=A0=C2=A0=C2=A0 install -d ${D}/boot
+> >>>>> +=C2=A0=C2=A0=C2=A0 install -m 0644 ${S}/tools/logos/ti_logo_414x=
+97_32bpp.bmp.gz=20
+> >>>>> ${D}/boot
+> >>>>> +}
+> >>>>> +
+> >>>>> +do_deploy:append:am62pxx() {
+> >>>>> +=C2=A0=C2=A0=C2=A0 install -d ${DEPLOYDIR}
+> >>>>> +=C2=A0=C2=A0=C2=A0 install -m 0644 ${S}/tools/logos/ti_logo_414x=
+97_32bpp.bmp.gz=20
+> >>>>> ${DEPLOYDIR}
+> >>>>> +}
+> >>>>> +
+> >>>>> =C2=A0 TOOLCHAIN =3D "gcc"
+> >>>>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#17451): https://urldefense.com/v3/__https://lists.y=
+octoproject.org/g/meta-ti/message/17451__;!!G3vK!V6suywddREI9UgEzo-aB2xsT=
+y8h2XljYIjm8Stf_B_vxWFGidif6toctt3P3Rde3zleaK0iPXf8TEEj4LPC6S_21q8-DC5ocj=
+jqV$
+> Mute This Topic: https://urldefense.com/v3/__https://lists.yoctoproject=
+.org/mt/104135441/7030289__;!!G3vK!V6suywddREI9UgEzo-aB2xsTy8h2XljYIjm8St=
+f_B_vxWFGidif6toctt3P3Rde3zleaK0iPXf8TEEj4LPC6S_21q8-DCwmdOIc_$
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://urldefense.com/v3/__https://lists.yoctoproject.org=
+/g/meta-ti/unsub__;!!G3vK!V6suywddREI9UgEzo-aB2xsTy8h2XljYIjm8Stf_B_vxWFG=
+idif6toctt3P3Rde3zleaK0iPXf8TEEj4LPC6S_21q8-DC_OPa7UF$  [c-shilwant@ti.co=
+m]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
