@@ -1,335 +1,145 @@
-Return-Path: <a-limaye@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78FBAC48BEC
-	for <webhook@archiver.kernel.org>; Fri, 16 Feb 2024 07:07:58 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.13767.1708067277044774088
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 785A7C48BEC
+	for <webhook@archiver.kernel.org>; Fri, 16 Feb 2024 07:13:38 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.13811.1708067615560564507
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 15 Feb 2024 23:07:57 -0800
+ Thu, 15 Feb 2024 23:13:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=ZUKK89rh;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: a-limaye@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41G77uar126239
-	for <meta-ti@lists.yoctoproject.org>; Fri, 16 Feb 2024 01:07:56 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=qNRUpTxZ;
+ spf=pass (domain: list.ti.com, ip: 198.47.23.249, mailfrom: lcpdbld@list.ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41G7DY1D007535;
+	Fri, 16 Feb 2024 01:13:34 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1708067276;
-	bh=R9CXhHcm4n2uFs79dob79vUwO9EKuP8mJwo6wFChmJI=;
-	h=Date:Subject:To:References:CC:From:In-Reply-To;
-	b=ZUKK89rhDYAyeaQXDb2PVu7hM56p0TkE3FT/LF7b9N6qaKAm38rrZLDPDfnsU1oji
-	 /MPMXJSIZtKHsBxvrQnjx2sIyd4wCpMI2zzt0w01uYe1AQfuNRONgj+jBjhcAVXMab
-	 1+2gsKVShmTCW+WGiUUMaeZ9dfO7ePSgYlyTqTY4=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41G77uqV017980
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Fri, 16 Feb 2024 01:07:56 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1708067614; i=@ti.com;
+	bh=AhXfRxJDFcygPAwGkPJxNUVti6kP7+XKpjxcg1ULgJo=;
+	h=From:To:Subject:Date;
+	b=qNRUpTxZTx8AW9o6ldwnJfNigUAsaTHFtNI9io+MvxSbZI6BDP3WVQJuvguy9fMWD
+	 bnX0QvoSa6Y+dHoHNhNVJaZJVbqxE5fwaMM9893FIRiDiUMnJ3XlhEXV21t5I6PCsj
+	 1RwuymoG+wkDBhVKxNiN2WT6sunoHWUy+QH6UzIE=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41G7DYZA040546
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 16 Feb 2024 01:13:34 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 16
- Feb 2024 01:07:55 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2024 01:13:33 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 16 Feb 2024 01:07:55 -0600
-Received: from [172.24.17.33] (lt5cd112gt3k.dhcp.ti.com [172.24.17.33])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41G77sHp105417;
-	Fri, 16 Feb 2024 01:07:55 -0600
-Content-Type: multipart/alternative;
-	boundary="------------wX6o9to5oaiKX32IbjyNxA0Q"
-Message-ID: <b8512c7d-2c1a-42b7-a803-e1c4fa76eeba@ti.com>
-Date: Fri, 16 Feb 2024 12:37:53 +0530
+ Frontend Transport; Fri, 16 Feb 2024 01:13:33 -0600
+Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41G7DXef113928;
+	Fri, 16 Feb 2024 01:13:33 -0600
+Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
+	id B772310AC0E7; Fri, 16 Feb 2024 01:13:33 -0600 (CST)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][kirkstone][PATCH] CI/CD Auto-Merger: cicd.kirkstone.202402152125
+Date: Fri, 16 Feb 2024 01:13:33 -0600
+Message-ID: <1708067613-128658-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [EXTERNAL] [meta-ti][master/kirkstone][PATCH] conf: machine: k3:
- Use Cortex-A53/A72 CPU tune
-Content-Language: en-US
-To: <meta-ti@lists.yoctoproject.org>
-References: <20240215212613.57012-1-afd@ti.com>
-CC: "Kumar, Udit" <u-kumar1@ti.com>
-From: "Limaye, Aniket" <a-limaye@ti.com>
-In-Reply-To: <20240215212613.57012-1-afd@ti.com>
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 16 Feb 2024 07:07:58 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17483
+ <meta-ti@lists.yoctoproject.org>; Fri, 16 Feb 2024 07:13:38 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17484
 
---------------wX6o9to5oaiKX32IbjyNxA0Q
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 41G77uar126239
+Updated the value(s) for:
+  ti-linux-fw: TI_DM_FW_VERSION,TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
+  u-boot-ti-staging_2023.04: SRCREV
+  k3conf: SRCREV
+  linux-ti-staging-rt_6.1: SRCREV
+  linux-ti-staging_6.1: SRCREV
 
-Hi Andrew,
-
-I was testing this patch locally, and wanted to see if we get some perf=20
-improvements with some benchmarks available on the default image. What=20
-benchmark do you recommend testing this against?
-
-I ran '/runLinpack/' on the tisdk-default-image on j7200 and did not see=20
-any difference in the reported performance with and without this=20
-patch... is this expected?
-
-With the default image built on latest SDK, WITHOUT the patch:
-Unrolled Single=C2=A0 Precision 1845878 Kflops ; 10 Reps
-
-With default image built WITH the patch:
-Unrolled Single=C2=A0 Precision 1857362 Kflops ; 10 Reps
-
-Thanks,
-Aniket
-
-On 2/16/2024 2:56 AM, Andrew Davis via lists.yoctoproject.org wrote:
-> All current K3 devices use either A53 or A72. Use the compile tune=20
-> configuration specific for these to allow the compiler to make better=20
-> optimizations. Signed-off-by: Andrew Davis <afd@=E2=80=8Ati.=E2=80=8Aco=
-m> ---=20
-> meta-ti-bsp/conf/machine/include/k3.=E2=80=8Ainc
-> ZjQcmQRYFpfptBannerStart
-> This message was sent from outside of Texas Instruments.
-> Do not click links or open attachments unless you recognize the source=20
-> of this email and know the content is safe.
-> ZjQcmQRYFpfptBannerEnd
-> All current K3 devices use either A53 or A72. Use the compile tune
-> configuration specific for these to allow the compiler to make
-> better optimizations.
->
-> Signed-off-by: Andrew Davis<afd@ti.com>
-> ---
->   meta-ti-bsp/conf/machine/include/k3.inc | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf=
-/machine/include/k3.inc
-> index 2415f0ba..7c3579af 100644
-> --- a/meta-ti-bsp/conf/machine/include/k3.inc
-> +++ b/meta-ti-bsp/conf/machine/include/k3.inc
-> @@ -3,7 +3,7 @@
->   require conf/machine/include/ti-soc.inc
->   SOC_FAMILY:append =3D ":k3"
->  =20
-> -require conf/machine/include/arm/arch-arm64.inc
-> +require conf/machine/include/arm/armv8a/tune-cortexa72-cortexa53.inc
->  =20
->   BBMULTICONFIG +=3D "k3r5"
->  =20
-> --=20
-> 2.39.2
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#17482):https://urldefense.com/v3/__https://lists.yo=
-ctoproject.org/g/meta-ti/message/17482__;!!G3vK!T21e4UwMAwqmb2WXp3iTH2w5z=
-s9CtoI5wX4pmvJQk3-F9H6FDcANpOSFX7ctu-yvXLL-_io6FQngJ72BANL844OMEXw$ =20
-> Mute This Topic:https://urldefense.com/v3/__https://lists.yoctoproject.=
-org/mt/104381861/6607860__;!!G3vK!T21e4UwMAwqmb2WXp3iTH2w5zs9CtoI5wX4pmvJ=
-Qk3-F9H6FDcANpOSFX7ctu-yvXLL-_io6FQngJ72BANL8UKq3aCI$ =20
-> Group Owner:meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe:https://urldefense.com/v3/__https://lists.yoctoproject.org/=
-g/meta-ti/unsub__;!!G3vK!T21e4UwMAwqmb2WXp3iTH2w5zs9CtoI5wX4pmvJQk3-F9H6F=
-DcANpOSFX7ctu-yvXLL-_io6FQngJ72BANL8aX0fg_c$   [a-limaye@ti.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
---------------wX6o9to5oaiKX32IbjyNxA0Q
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 41G77uar126239
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF=
--8">
-  </head>
-  <body>
-    <p>Hi Andrew,<br>
-      <br>
-      I was testing this patch locally, and wanted to see if we get some
-      perf improvements with some benchmarks available on the default
-      image. What benchmark do you recommend testing this against?</p>
-    <p>I ran '<i>runLinpack</i>' on the tisdk-default-image on j7200 and
-      did not see any difference in the reported performance with and
-      without this patch... is this expected?<br>
-      <br>
-      With the default image built on latest SDK, WITHOUT the patch: <br>
-      Unrolled Single=C2=A0 Precision 1845878 Kflops ; 10 Reps<br>
-      <br>
-      With default image built WITH the patch: <br>
-      Unrolled Single=C2=A0 Precision 1857362 Kflops ; 10 Reps<br>
-    </p>
-    <p>Thanks,<br>
-      Aniket<br>
-    </p>
-    <div class=3D"moz-cite-prefix">On 2/16/2024 2:56 AM, Andrew Davis via
-      lists.yoctoproject.org wrote:<br>
-    </div>
-    <blockquote type=3D"cite" cite=3D"mid:20240215212613.57012-1-afd@ti.c=
-om">
-      <!-- BaNnErBlUrFlE-BoDy-start -->
-      <!-- Preheader Text : BEGIN -->
-      <meta http-equiv=3D"content-type" content=3D"text/html; charset=3DU=
-TF-8">
-      <div
-style=3D"display:none !important;display:none;visibility:hidden;mso-hide:=
-all;font-size:1px;color:#ffffff;line-height:1px;height:0px;max-height:0px=
-;opacity:0;overflow:hidden;">
-        All current K3 devices use either A53 or A72. Use the compile
-        tune configuration specific for these to allow the compiler to
-        make better optimizations. Signed-off-by: Andrew Davis
-        <a class=3D"moz-txt-link-rfc2396E" href=3D"mailto:afd@=E2=80=8Ati=
-.=E2=80=8Acom">&lt;afd@=E2=80=8Ati.=E2=80=8Acom&gt;</a> ---
-        meta-ti-bsp/conf/machine/include/k3.=E2=80=8Ainc
-      </div>
-      <!-- Preheader Text : END -->
-      <!-- Email Banner : BEGIN -->
-      <div
-style=3D"display:none !important;display:none;visibility:hidden;mso-hide:=
-all;font-size:1px;color:#ffffff;line-height:1px;height:0px;max-height:0px=
-;opacity:0;overflow:hidden;">ZjQcmQRYFpfptBannerStart</div>
-      <!--[if ((ie)|(mso))]>
-  <table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" =
-style=3D"padding: 16px 0px 16px 0px; direction: ltr" lang=3D"en"><tr><td>
-    <table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"padd=
-ing: 0px 10px 5px 6px; width: 100%; border-radius:4px; border-top:4px sol=
-id #90a4ae;background-color:#D0D8DC;"><tr><td valign=3D"top">
-      <table align=3D"left" border=3D"0" cellspacing=3D"0" cellpadding=3D=
-"0" style=3D"padding: 4px 8px 4px 8px">
-	<tr><td style=3D"color:#000000; font-family: 'Arial', sans-serif; font-w=
-eight:bold; font-size:14px; direction: ltr">
-	  This message was sent from outside of Texas Instruments.
-	</td></tr>
-	<tr><td style=3D"color:#000000; font-weight:normal; font-family: 'Arial'=
-, sans-serif; font-size:12px; direction: ltr">
-          Do not click links or open attachments unless you recognize the=
- source of this email and know the content is safe.
-	</td></tr>
-
-      </table>
-
-    </td></tr></table>
-  </td></tr></table>
-<![endif]-->
-      <!--[if !((ie)|(mso))]-->
-      <div dir=3D"ltr" id=3D"pfptBannernwvz33m"
-style=3D"all: revert !important; display:block !important; text-align: le=
-ft !important; margin:16px 0px 16px 0px !important; padding:8px 16px 8px =
-16px !important; border-radius: 4px !important; min-width: 200px !importa=
-nt; background-color: #D0D8DC !important; background-color: #D0D8DC; bord=
-er-top: 4px solid #90a4ae !important; border-top: 4px solid #90a4ae;"
-        lang=3D"en">
-        <div id=3D"pfptBannernwvz33m"
-style=3D"all: unset !important; float:left !important; display:block !imp=
-ortant; margin: 0px 0px 1px 0px !important; max-width: 600px !important;"=
->
-          <div id=3D"pfptBannernwvz33m"
-style=3D"all: unset !important; display:block !important; visibility: vis=
-ible !important; background-color: #D0D8DC !important; color:#000000 !imp=
-ortant; color:#000000; font-family: 'Arial', sans-serif !important; font-=
-family: 'Arial', sans-serif; font-weight:bold !important; font-weight:bol=
-d; font-size:14px !important; line-height:18px !important; line-height:18=
-px">
-            This message was sent from outside of Texas Instruments. </di=
-v>
-          <div id=3D"pfptBannernwvz33m"
-style=3D"all: unset !important; display:block !important; visibility: vis=
-ible !important; background-color: #D0D8DC !important; color:#000000 !imp=
-ortant; color:#000000; font-weight:normal; font-family: 'Arial', sans-ser=
-if !important; font-family: 'Arial', sans-serif; font-size:12px !importan=
-t; line-height:18px !important; line-height:18px; margin-top:2px !importa=
-nt;">
-            Do not click links or open attachments unless you recognize
-            the source of this email and know the content is safe. </div>
-        </div>
-        <div
-style=3D"clear: both !important; display: block !important; visibility: h=
-idden !important; line-height: 0 !important; font-size: 0.01px !important=
-; height: 0px">=C2=A0</div>
-      </div>
-      <!--[endif]-->
-      <div
-style=3D"display:none !important;display:none;visibility:hidden;mso-hide:=
-all;font-size:1px;color:#ffffff;line-height:1px;height:0px;max-height:0px=
-;opacity:0;overflow:hidden;">ZjQcmQRYFpfptBannerEnd</div>
-      <!-- Email Banner : END -->
-      <!-- BaNnErBlUrFlE-BoDy-end -->
-      <!-- BaNnErBlUrFlE-HeAdEr-start -->
-      <style>#pfptBannernwvz33m { all: revert !important; display: block =
-!important;=20
-    visibility: visible !important; opacity: 1 !important;=20
-    background-color: #D0D8DC !important;=20
-    max-width: none !important; max-height: none !important }.pfptPrimary=
-Buttonnwvz33m:hover, .pfptPrimaryButtonnwvz33m:focus {
-    background-color: #b4c1c7 !important; }.pfptPrimaryButtonnwvz33m:acti=
-ve {
-    background-color: #90a4ae !important; }</style>
-      <!-- BaNnErBlUrFlE-HeAdEr-end -->
-      <pre
-style=3D"font-family: sans-serif; font-size: 100%; white-space: pre-wrap;=
- word-wrap: break-word">All current K3 devices use either A53 or A72. Use=
- the compile tune
-configuration specific for these to allow the compiler to make
-better optimizations.
-
-Signed-off-by: Andrew Davis <a class=3D"moz-txt-link-rfc2396E" href=3D"ma=
-ilto:afd@ti.com">&lt;afd@ti.com&gt;</a>
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
 ---
- meta-ti-bsp/conf/machine/include/k3.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 6 +++---
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb | 2 +-
+ meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb           | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb    | 2 +-
+ 5 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/m=
-achine/include/k3.inc
-index 2415f0ba..7c3579af 100644
---- a/meta-ti-bsp/conf/machine/include/k3.inc
-+++ b/meta-ti-bsp/conf/machine/include/k3.inc
-@@ -3,7 +3,7 @@
- require conf/machine/include/ti-soc.inc
- SOC_FAMILY:append =3D ":k3"
-=20
--require conf/machine/include/arm/arch-arm64.inc
-+require conf/machine/include/arm/armv8a/tune-cortexa72-cortexa53.inc
-=20
- BBMULTICONFIG +=3D "k3r5"
-=20
---=20
-2.39.2
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index fa7659d..a051adb 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -14,10 +14,10 @@ GOODIX_FW_VERSION = "1.0.0.0"
+ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+ CNM_WAVE521_FW_VERSION = "1.0.3"
+-TI_DM_FW_VERSION = "09.01.02"
+-TI_SYSFW_VERSION = "09.01.08"
++TI_DM_FW_VERSION = "09.02.01"
++TI_SYSFW_VERSION = "09.02.01"
+ 
+-TI_LINUX_FW_SRCREV ?= "0350c2edecabc4c828eb28dc993a3059f33b4262"
++TI_LINUX_FW_SRCREV ?= "2f2a82ba41dfb724ffd82104ca2bbb5afc756a25"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+index 6f4bf64..73147d1 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+@@ -6,4 +6,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2023.04"
+ 
+-SRCREV = "28eaa6eb15204cb3e3cc8ed938341392c62dc218"
++SRCREV = "7d050099177240f6cdf8992310f2cf4941e954af"
+diff --git a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
+index c284b59..f7a38da 100644
+--- a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
++++ b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
+@@ -10,7 +10,7 @@ PV = "0.3+git${SRCPV}"
+ COMPATIBLE_MACHINE = "k3"
+ 
+ BRANCH ?= "master"
+-SRCREV = "f4dd78ab6d3372e6326f90639b5f8f57607369d0"
++SRCREV = "cadf72379c7eec7e69031cc939d5a85f209017d6"
+ 
+ SRC_URI = "git://git.ti.com/git/k3conf/k3conf.git;protocol=https;branch=${BRANCH}"
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+index 2c5c2e6..1c4f51d 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+@@ -6,7 +6,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
+ 
+ BRANCH = "ti-rt-linux-6.1.y"
+ 
+-SRCREV = "3dace366de06c5b1927ed082fbeac0b4bee29cbc"
++SRCREV = "bdebf4319d95b46edd39be72d937d1e0086865fe"
+ 
+ include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+index 4842ad3..778b17a 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.1.y"
+ 
+-SRCREV ?= "2233af66faf7b81b6c286285e50cda5595dc410d"
++SRCREV ?= "77aa27cbdca359bf0735b36ada464ec65b520943"
+ PV = "6.1.69+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-- 
+1.8.3.1
 
-</pre>
-      <br>
-      <fieldset class=3D"moz-mime-attachment-header"></fieldset>
-      <pre class=3D"moz-quote-pre" wrap=3D"">
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-Links: You receive all messages sent to this group.
-View/Reply Online (#17482): <a class=3D"moz-txt-link-freetext" href=3D"ht=
-tps://urldefense.com/v3/__https://lists.yoctoproject.org/g/meta-ti/messag=
-e/17482__;!!G3vK!T21e4UwMAwqmb2WXp3iTH2w5zs9CtoI5wX4pmvJQk3-F9H6FDcANpOSF=
-X7ctu-yvXLL-_io6FQngJ72BANL844OMEXw$">https://urldefense.com/v3/__https:/=
-/lists.yoctoproject.org/g/meta-ti/message/17482__;!!G3vK!T21e4UwMAwqmb2WX=
-p3iTH2w5zs9CtoI5wX4pmvJQk3-F9H6FDcANpOSFX7ctu-yvXLL-_io6FQngJ72BANL844OME=
-Xw$</a>=20
-Mute This Topic: <a class=3D"moz-txt-link-freetext" href=3D"https://urlde=
-fense.com/v3/__https://lists.yoctoproject.org/mt/104381861/6607860__;!!G3=
-vK!T21e4UwMAwqmb2WXp3iTH2w5zs9CtoI5wX4pmvJQk3-F9H6FDcANpOSFX7ctu-yvXLL-_i=
-o6FQngJ72BANL8UKq3aCI$">https://urldefense.com/v3/__https://lists.yoctopr=
-oject.org/mt/104381861/6607860__;!!G3vK!T21e4UwMAwqmb2WXp3iTH2w5zs9CtoI5w=
-X4pmvJQk3-F9H6FDcANpOSFX7ctu-yvXLL-_io6FQngJ72BANL8UKq3aCI$</a>=20
-Group Owner: <a class=3D"moz-txt-link-abbreviated" href=3D"mailto:meta-ti=
-+owner@lists.yoctoproject.org">meta-ti+owner@lists.yoctoproject.org</a>
-Unsubscribe: <a class=3D"moz-txt-link-freetext" href=3D"https://urldefens=
-e.com/v3/__https://lists.yoctoproject.org/g/meta-ti/unsub__;!!G3vK!T21e4U=
-wMAwqmb2WXp3iTH2w5zs9CtoI5wX4pmvJQk3-F9H6FDcANpOSFX7ctu-yvXLL-_io6FQngJ72=
-BANL8aX0fg_c$">https://urldefense.com/v3/__https://lists.yoctoproject.org=
-/g/meta-ti/unsub__;!!G3vK!T21e4UwMAwqmb2WXp3iTH2w5zs9CtoI5wX4pmvJQk3-F9H6=
-FDcANpOSFX7ctu-yvXLL-_io6FQngJ72BANL8aX0fg_c$</a>  [<a class=3D"moz-txt-l=
-ink-abbreviated" href=3D"mailto:a-limaye@ti.com">a-limaye@ti.com</a>]
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------wX6o9to5oaiKX32IbjyNxA0Q--
 
