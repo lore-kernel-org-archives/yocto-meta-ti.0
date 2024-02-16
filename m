@@ -1,109 +1,99 @@
-Return-Path: <c-shilwant@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9742C48260
-	for <webhook@archiver.kernel.org>; Fri, 16 Feb 2024 17:23:40 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.2693.1708104216698089056
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D31C3C48260
+	for <webhook@archiver.kernel.org>; Fri, 16 Feb 2024 20:23:11 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.8576.1708114987198593204
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 16 Feb 2024 09:23:36 -0800
+ Fri, 16 Feb 2024 12:23:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=GmLNaoTH;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: c-shilwant@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41GHNXw8020386;
-	Fri, 16 Feb 2024 11:23:33 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1708104213;
-	bh=TG7GmphKhAa5TLhs6FZRWKwdK6JZrScQKya8t/W+nl4=;
-	h=From:To:CC:Subject:Date;
-	b=GmLNaoTHLCDRYnzOpavDaYmij9CghlYGur4PEB1vtmJ7JD3oU9RRqPvvLxAPcB9/Y
-	 9Hpc3pZoAAAOzXnCClrxB/Ymzp02/O+UXJgoYNEq8B0PsRNTQ+czvFKEFp7pGG689i
-	 oyNLVwsdfftG1SFhpe6Oep7P6KghkLrxomcUavTQ=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41GHNXx2008023
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 16 Feb 2024 11:23:33 -0600
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 16
- Feb 2024 11:23:32 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 16 Feb 2024 11:23:33 -0600
-Received: from localhost (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.238])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41GHNWLv085245;
-	Fri, 16 Feb 2024 11:23:32 -0600
-From: Chirag Shilwant <c-shilwant@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-CC: Ryan Eatmon <reatmon@ti.com>, Sai Sree Kartheek Adivi <s-adivi@ti.com>,
-        Denys <denis@denix.org>, Gyan Gupta <g-gupta@ti.com>,
-        Khasim <khasim@ti.com>
-Subject: [meta-ti][kirkstone/master][PATCH] conf: beagleplay: Apply U-boot defconfig fragments
-Date: Fri, 16 Feb 2024 22:53:24 +0530
-Message-ID: <20240216172324.2555581-1-c-shilwant@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 13E7B40C81;
+	Fri, 16 Feb 2024 20:23:06 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id jocjhQCgw5WS; Fri, 16 Feb 2024 20:23:06 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 76B5F40C21;
+	Fri, 16 Feb 2024 20:23:01 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 829C3163EB4; Fri, 16 Feb 2024 15:23:00 -0500 (EST)
+Date: Fri, 16 Feb 2024 15:23:00 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: afd@ti.com
+Cc: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][master/kirkstone][PATCH] conf: machine: k3: Use
+ Cortex-A53/A72 CPU tune
+Message-ID: <20240216202300.GC1572@denix.org>
+References: <20240215212613.57012-1-afd@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240215212613.57012-1-afd@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 16 Feb 2024 17:23:40 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17485
+ <meta-ti@lists.yoctoproject.org>; Fri, 16 Feb 2024 20:23:11 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17486
 
-- Apply am625_beagleplay_a53.config which is maintained in U-boot tree & is intended
-to be applied on top of am62x_evm_a53_defconfig [1].
+Unfortunately, NAK.
 
-- Apply am625_beagleplay_r5.config which is maintained in U-boot tree & is intended
-to be applied on top of am62x_evm_r5_defconfig [2].
+This is considered an antisocial behavior for a BSP in the Yocto Project 
+world. And the performance benefit is questionable with 1%-2%, if at all.
 
-References
-----------
+The proper place for any extra optimization tunes is in a distro config. Maybe 
+even by end customer's final product, not a reference distro.
 
-[1] https://github.com/beagleboard/u-boot/blob/v2023.04-ti-09.01.00.008-BeaglePlay/configs/am625_beagleplay_a53.config
+Consider a distro that supports multiple HW platforms and uses multiple BSPs 
+besides meta-ti - YoE, AGL, etc. You do want a common denominator tunes in 
+order to get the most binary re-use across the platforms.
 
-[2] https://github.com/beagleboard/u-boot/blob/v2023.04-ti-09.01.00.008-BeaglePlay/configs/am625_beagleplay_r5.config
+For example, AGL goes to some extreme lengths to override such custom tunes 
+set by misbehaving BSPs and it's quite ugly.
 
-Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
----
- meta-ti-bsp/conf/machine/beagleplay-k3r5.conf | 5 +++++
- meta-ti-bsp/conf/machine/beagleplay.conf      | 5 +++++
- 2 files changed, 10 insertions(+)
+And moreover, we've gone through this motion in the past many years ago when 
+we had our ARMv7 platforms set to their corresponding cortex-a8/a9/a15 tunes 
+by default, but eventually ended up setting a common ARMv7 tune:
 
-diff --git a/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf b/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
-index c40615c9..601cbbf7 100644
---- a/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
-@@ -12,3 +12,8 @@ SYSFW_CONFIG = "evm"
- SYSFW_SUFFIX = "gp"
- 
- UBOOT_MACHINE = "am62x_evm_r5_defconfig"
-+
-+# UBOOT_CONFIG_FRAGMENTS holds the list of u-boot config fragments which has to be build
-+# along with the base defconfig mentioned in UBOOT_MACHINE. Refer u-boot-mergeconfig.inc
-+# under meta-ti-bsp/recipes-bsp/u-boot/ for more details.
-+UBOOT_CONFIG_FRAGMENTS = "am625_beagleplay_r5.config"
-diff --git a/meta-ti-bsp/conf/machine/beagleplay.conf b/meta-ti-bsp/conf/machine/beagleplay.conf
-index dc6947d1..9ea7ff75 100644
---- a/meta-ti-bsp/conf/machine/beagleplay.conf
-+++ b/meta-ti-bsp/conf/machine/beagleplay.conf
-@@ -20,6 +20,11 @@ OPTEEMACHINE = "k3-am62x"
- 
- UBOOT_MACHINE = "am62x_evm_a53_defconfig"
- 
-+# UBOOT_CONFIG_FRAGMENTS holds the list of u-boot config fragments which has to be build
-+# along with the base defconfig mentioned in UBOOT_MACHINE. Refer u-boot-mergeconfig.inc
-+# under meta-ti-bsp/recipes-bsp/u-boot/ for more details.
-+UBOOT_CONFIG_FRAGMENTS = "am625_beagleplay_a53.config"
-+
- PREFERRED_PROVIDER_virtual/kernel = "linux-bb.org"
- PREFERRED_PROVIDER_virtual/bootloader = "u-boot-bb.org"
- PREFERRED_PROVIDER_u-boot = "u-boot-bb.org"
--- 
-2.34.1
+DEFAULTTUNE ?= "armv7athf-neon"
 
+So, you should either leave the current arch-arm64.inc inclusion as is, or if 
+you insist on including tune-cortexa72-cortexa53.inc, set the default tune 
+back to plain aarch64:
+
+DEFAULTTUNE ?= "aarch64"
+
+
+On Thu, Feb 15, 2024 at 03:26:13PM -0600, Andrew Davis via lists.yoctoproject.org wrote:
+> All current K3 devices use either A53 or A72. Use the compile tune
+> configuration specific for these to allow the compiler to make
+> better optimizations.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>  meta-ti-bsp/conf/machine/include/k3.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/machine/include/k3.inc
+> index 2415f0ba..7c3579af 100644
+> --- a/meta-ti-bsp/conf/machine/include/k3.inc
+> +++ b/meta-ti-bsp/conf/machine/include/k3.inc
+> @@ -3,7 +3,7 @@
+>  require conf/machine/include/ti-soc.inc
+>  SOC_FAMILY:append = ":k3"
+>  
+> -require conf/machine/include/arm/arch-arm64.inc
+> +require conf/machine/include/arm/armv8a/tune-cortexa72-cortexa53.inc
+>  
+>  BBMULTICONFIG += "k3r5"
+>  
+> -- 
+> 2.39.2
 
