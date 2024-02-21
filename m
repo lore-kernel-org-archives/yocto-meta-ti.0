@@ -1,183 +1,344 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <p-bhagat@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26F96C48BC3
-	for <webhook@archiver.kernel.org>; Tue, 20 Feb 2024 15:00:26 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.15166.1708441218103517825
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B87C2C48BC3
+	for <webhook@archiver.kernel.org>; Wed, 21 Feb 2024 11:22:46 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.10868.1708514558792832711
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 20 Feb 2024 07:00:18 -0800
+ Wed, 21 Feb 2024 03:22:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=MeZ5hYXj;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41KF0CJH020372;
-	Tue, 20 Feb 2024 09:00:12 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=GQWIJwae;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: p-bhagat@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41LBMcRi037577
+	for <meta-ti@lists.yoctoproject.org>; Wed, 21 Feb 2024 05:22:38 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1708441212;
-	bh=K3aKLYRaof3w5iMRSbfCpZbuhCqvASF8en2S0KAMsS8=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=MeZ5hYXj0KetvoG0IFjnZsRR4f71ARayPsSleZ3s4tkjM7+lHJ6GZ2uvRGCLavXAv
-	 edpQukgPWB6KGFniHCWNl5BRirWQCgkOqMG2CkqgD6BN2NljIwbvzVQ1rkjSdB2dsx
-	 n7VIV6Q9R+r9ZXzbqFwMxS8MVrIK6jSA21BmAXO8=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41KF0CJ8076046
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 20 Feb 2024 09:00:12 -0600
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 20
- Feb 2024 09:00:12 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
+	s=ti-com-17Q1; t=1708514558;
+	bh=O1vjYjZQq33by1P9Qh3QYX5MbKCuPDJsxo3TGwOL0Zo=;
+	h=From:To:CC:Subject:Date;
+	b=GQWIJwaeOpj3G9UfZVjjdSo565X7y6snEYClL+TD5IXN4e0UvKlnYbRFY6BFcitR9
+	 O6LTL3EitB9H1CJ9rbChtERLOAkdD7mBzXHCfJQh7xPtCoq9eehSy43V94awXsrLEa
+	 u9p6HCPwXZRsFKINWOW3AnoMEYGrwakIQFbFtBCo=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41LBMcdV079749
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Wed, 21 Feb 2024 05:22:38 -0600
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE100.ent.ti.com
  (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 21
+ Feb 2024 05:22:37 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 20 Feb 2024 09:00:12 -0600
-Received: from [10.249.39.53] ([10.249.39.53])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41KF0CWH054995;
-	Tue, 20 Feb 2024 09:00:12 -0600
-Message-ID: <853c4cbd-aed8-44f0-85e4-5a8a8362a424@ti.com>
-Date: Tue, 20 Feb 2024 09:00:12 -0600
+ Frontend Transport; Wed, 21 Feb 2024 05:22:37 -0600
+Received: from localhost (ula0502350.dhcp.ti.com [172.24.227.38])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41LBMaND080474;
+	Wed, 21 Feb 2024 05:22:37 -0600
+From: Paresh Bhagat <p-bhagat@ti.com>
+To: <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>, <reatmon@ti.com>
+CC: <c-shilwant@ti.com>, <s-adivi@ti.com>, <khasim@ti.com>, <g-gupta@ti.com>
+Subject: [kirkstone][PATCH] Rework jailhouse recipe to support different image build
+Date: Wed, 21 Feb 2024 16:52:18 +0530
+Message-ID: <20240221112218.321332-1-p-bhagat@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][master/kirkstone][PATCH] conf: machine: k3: Use
- Cortex-A53/A72 CPU tune
-Content-Language: en-US
-To: Andrew Davis <afd@ti.com>, Denys Dmytriyenko <denis@denix.org>
-CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-References: <20240215212613.57012-1-afd@ti.com>
- <20240216202300.GC1572@denix.org>
- <d7c539d7-f9ff-46e4-9ae8-ca825e8f3fd1@ti.com>
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <d7c539d7-f9ff-46e4-9ae8-ca825e8f3fd1@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by lelv0142.ext.ti.com id 41KF0CJH020372
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 20 Feb 2024 15:00:26 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17489
+ <meta-ti@lists.yoctoproject.org>; Wed, 21 Feb 2024 11:22:46 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17490
 
+This patch moves the jailhouse recipe general variables to a
+ti-jailhouse.inc file along with fetch and compile task.
+Jailhouse repo also contains some demo applications which can
+be packaged alone in filesytem and does not require packaging
+jailhouse module, firmware and tool.
 
+So add a new recipe jailhouse-inmate which can be used to only
+package those demos. The existing jailhouse recipe will contain
+variables and other dependencies needed for do_install task for
+jailhouse module, tools, demos etc. The do_install of jailhouse
+inmate recipe will only package demo applications.
 
-On 2/20/2024 8:31 AM, Andrew Davis wrote:
-> On 2/16/24 2:23 PM, Denys Dmytriyenko wrote:
->> Unfortunately, NAK.
->>
->> This is considered an antisocial behavior for a BSP in the Yocto Proje=
-ct
->> world. And the performance benefit is questionable with 1%-2%, if at a=
-ll.
->>
->=20
-> This stated when a potential customer noticed building and running some
-> benchmarks (linpack for instance) on our SDK were being out-performed b=
-y
-> some other vendors. Even though on paper our platforms should have been
-> the better performing ones.
->=20
-> After investigating it turns out these other vendors have these tune
-> options in=C2=A0 their BSP layers, causing the performance discrepancy.
->=20
-> So the performance here, even of a couple percent, is very important.
->=20
->> The proper place for any extra optimization tunes is in a distro=20
->> config. Maybe
->> even by end customer's final product, not a reference distro.
->>
->> Consider a distro that supports multiple HW platforms and uses=20
->> multiple BSPs
->> besides meta-ti - YoE, AGL, etc. You do want a common denominator=20
->> tunes in
->> order to get the most binary re-use across the platforms.
->>
->=20
-> If one wants binary re-use they can override the tune. Otherwise maybe
-> they should be using Debian or some other binary distro. The main selli=
-ng
-> point for Yocto IMHO is customizing like this. The best part of rebuild=
-ing
-> everything from scratch every time for every machine is we can have the=
-se
-> machine specific tunings.
->=20
->> For example, AGL goes to some extreme lengths to override such custom=20
->> tunes
->> set by misbehaving BSPs and it's quite ugly.
->>
->=20
-> Then we should work to make it easier to override for those folks, not=20
-> simply
-> leave this performance on the table.
->=20
->> And moreover, we've gone through this motion in the past many years=20
->> ago when
->> we had our ARMv7 platforms set to their corresponding cortex-a8/a9/a15=
-=20
->> tunes
->> by default, but eventually ended up setting a common ARMv7 tune:
->>
->> DEFAULTTUNE ?=3D "armv7athf-neon"
->>
->> So, you should either leave the current arch-arm64.inc inclusion as=20
->> is, or if
->> you insist on including tune-cortexa72-cortexa53.inc, set the default=20
->> tune
->> back to plain aarch64:
->>
->> DEFAULTTUNE ?=3D "aarch64"
->>
->=20
-> I see our friends over in meta-xilinx are doing machine specific=20
-> DEFAULTTUNEs.
-> I was thinking of matching that to keep our BSP performance competitive=
-.=20
-> But
-> as a compromise and to avoid "antisocial behavior" as you say, I think =
-I=20
-> can
-> live with DEFAULTTUNE ?=3D "aarch64".
->=20
-> Will resend with that.
+This new recipe(jailhouse-inmate) will be added to a new image
+in meta-arago. The new image will be used for jailhouse second
+linux instance or cell.
 
-So, if we include the more targeted tuning file, but set DEFAULTUNE to=20
-the generic, then how do our builds use the more targeted tuning?  Is=20
-that something we have to set in the local.conf as part of our builds?=20
-Or is this some sort of magic that occurs that gets the correct thing?
+Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+---
+ .../recipes-ti/jailhouse/jailhouse-arch.inc   | 22 -----
+ .../recipes-ti/jailhouse/jailhouse-inmate.bb  | 12 +++
+ .../recipes-ti/jailhouse/jailhouse_git.bb     | 78 ++---------------
+ .../recipes-ti/jailhouse/ti-jailhouse.inc     | 87 +++++++++++++++++++
+ 4 files changed, 104 insertions(+), 95 deletions(-)
+ delete mode 100644 meta-ti-extras/recipes-ti/jailhouse/jailhouse-arch.inc
+ create mode 100644 meta-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb
+ create mode 100644 meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
 
+diff --git a/meta-ti-extras/recipes-ti/jailhouse/jailhouse-arch.inc b/meta-ti-extras/recipes-ti/jailhouse/jailhouse-arch.inc
+deleted file mode 100644
+index 498b25ed..00000000
+--- a/meta-ti-extras/recipes-ti/jailhouse/jailhouse-arch.inc
++++ /dev/null
+@@ -1,22 +0,0 @@
+-# Set jailhouse architecture JH_ARCH variable
+-#
+-# return value must match one of architectures supported by jailhouse
+-#
+-valid_jh_archs = "x86 arm"
+-
+-def map_jh_arch(a, d):
+-    import re
+-
+-    valid_jh_archs = d.getVar('valid_jh_archs', True).split()
+-
+-    if   re.match('(i.86|athlon|x86.64)$', a):  return 'x86'
+-    elif re.match('armeb$', a):                 return 'arm'
+-    elif re.match('aarch64$', a):               return 'arm64'
+-    elif re.match('aarch64_be$', a):            return 'arm64'
+-    elif a in valid_jh_archs:                   return a
+-    else:
+-        bb.error("cannot map '%s' to a jailhouse supported architecture" % a)
+-
+-export JH_ARCH = "${@map_jh_arch(d.getVar('TARGET_ARCH', True), d)}"
+-
+-COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
+diff --git a/meta-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb b/meta-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb
+new file mode 100644
+index 00000000..39654a53
+--- /dev/null
++++ b/meta-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb
+@@ -0,0 +1,12 @@
++require ti-jailhouse.inc
++
++do_install() {
++
++	install -d ${D}${bindir}
++	install -m 0755 ${TOOLS_SRC_DIR}/demos/ivshmem-demo ${D}${bindir}
++
++}
++
++FILES:${PN} = " \
++    ${bindir}/ivshmem-demo \
++"
+diff --git a/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb b/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
+index 70d6a0b6..98ec0e9e 100644
+--- a/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
++++ b/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
+@@ -1,49 +1,11 @@
+-SUMMARY = "Linux-based partitioning hypervisor"
+-DESCRIPTION = "Jailhouse is a partitioning Hypervisor based on Linux. It is able to run bare-metal applications or (adapted) \
+-operating systems besides Linux. For this purpose, it configures CPU and device virtualization features of the hardware \
+-platform in a way that none of these domains, called 'cells' here, can interfere with each other in an unacceptable way."
+-HOMEPAGE = "https://github.com/siemens/jailhouse"
+-SECTION = "jailhouse"
+-LICENSE = "GPL-2.0-only & BSD-2-Clause"
+-
+-LIC_FILES_CHKSUM = " \
+-    file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
+-"
+-
+-COMPATIBLE_MACHINE = "am62xx|am62pxx"
+-
+-TARGET_CC_ARCH += "${LDFLAGS}"
+-
+-PV = "0.12+git${SRCPV}"
+-SRCREV = "0b29ad90f6f54105b98d6bbf35cc47fb244f7799"
+-BRANCH = "master"
+-
+-SRC_URI = " \
+-    git://git.ti.com/git/jailhouse/ti-jailhouse.git;protocol=https;branch=${BRANCH} \
+-"
++require ti-jailhouse.inc
+ 
+-DEPENDS = "virtual/kernel dtc-native python3-mako-native python3-mako make-native"
+ RDEPENDS:${PN} += "\
+-	python3-curses\
+-	python3-datetime\
+-	python3-mmap\
++        python3-curses\
++        python3-datetime\
++        python3-mmap\
+ "
+ 
+-require jailhouse-arch.inc
+-inherit module python3native bash-completion deploy setuptools3
+-
+-S = "${WORKDIR}/git"
+-B = "${S}"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-COMPATIBLE_MACHINE = "(ti-soc)"
+-
+-JH_DATADIR ?= "${datadir}/jailhouse"
+-JH_EXEC_DIR ?= "${libexecdir}/jailhouse"
+-CELL_DIR ?= "${JH_DATADIR}/cells"
+-CELLCONF_DIR ?= "${JH_DATADIR}/configs"
+-INMATES_DIR ?= "${JH_DATADIR}/inmates"
+-
+ JH_CELL_FILES ?= "*.cell"
+ JH_CELL_FILES:k3 ?= "k3-*.cell"
+ JH_CELL_FILES:am62xx ?= "k3-am625-*.cell"
+@@ -63,13 +25,6 @@ JH_LINUX_DEMO_CELL:am62pxx ?= "k3-am62p5-sk-linux-demo.cell"
+ JH_LINUX_DEMO_CELL:j7 ?= "k3-j721e-evm-linux-demo.cell"
+ JH_LINUX_DEMO_CELL:j7200-evm ?= "k3-j7200-evm-linux-demo.cell"
+ 
+-JH_SYSCONFIG_CELL ?= ""
+-JH_SYSCONFIG_CELL:am62xx ?= "k3-am625-sk.cell"
+-JH_SYSCONFIG_CELL:am65xx ?= "k3-am654-idk.cell"
+-JH_SYSCONFIG_CELL:am62pxx ?= "k3-am62p5-sk.cell"
+-JH_SYSCONFIG_CELL:j7 ?= "k3-j721e-evm.cell"
+-JH_SYSCONFIG_CELL:j7200-evm ?= "k3-j7200-evm.cell"
+-
+ INITRAMFS_IMAGE ?= ""
+ JH_RAMFS_IMAGE ?= "${INITRAMFS_IMAGE}"
+ 
+@@ -80,29 +35,7 @@ JH_CMDLINE:am65xx ?= "console=ttyS1,115200n8"
+ JH_CMDLINE:j7 ?= "console=ttyS3,115200n8"
+ JH_CMDLINE:j7200-evm ?= "console=ttyS3,115200n8"
+ 
+-do_configure() {
+-	if [ -d ${STAGING_DIR_HOST}/${CELLCONF_DIR} ];
+-	then
+-		cp ${STAGING_DIR_HOST}/${CELLCONF_DIR}/*.c ${S}/configs/
+-	fi
+-}
+-
+-USER_SPACE_CFLAGS = '${CFLAGS} -DLIBEXECDIR=\\\"${libexecdir}\\\" \
+-                    -DJAILHOUSE_VERSION=\\\"$JAILHOUSE_VERSION\\\" \
+-                    -Wall -Wextra -Wmissing-declarations -Wmissing-prototypes -Werror \
+-                    -I../driver'
+-
+-TOOLS_SRC_DIR = "${S}/tools"
+-
+-EXTRA_OEMAKE = "ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}" KDIR=${STAGING_KERNEL_BUILDDIR}"
+-
+-do_compile() {
+-	oe_runmake V=1
+-}
+-
+ do_install() {
+-	# Install pyjailhouse python modules needed by the tools
+-	# distutils3_do_install
+ 
+ 	# We want to install the python tools, but we do not want to use pip...
+ 	# At least with v0.10, we can work around this with
+@@ -154,7 +87,7 @@ do_install() {
+ }
+ 
+ PACKAGE_BEFORE_PN = "kernel-module-jailhouse pyjailhouse ${PN}-tools"
+-FILES:${PN} = "${base_libdir}/firmware ${libexecdir} ${sbindir} ${JH_DATADIR} /boot"
++
+ FILES:pyjailhouse = "${PYTHON_SITEPACKAGES_DIR}"
+ FILES:${PN}-tools = "${libexecdir}/${BPN}/${BPN}-*"
+ 
+@@ -183,7 +116,6 @@ python __anonymous () {
+         d.appendVar('RDEPENDS_${PN}', ' ' + cell)
+ }
+ 
+-
+ FILES:${PN} = " \
+     /boot/* \
+     /usr/libexec \
+diff --git a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
+new file mode 100644
+index 00000000..a63891bf
+--- /dev/null
++++ b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
+@@ -0,0 +1,87 @@
++SUMMARY = "Linux-based partitioning hypervisor"
++DESCRIPTION = "Jailhouse is a partitioning Hypervisor based on Linux. It is able to run bare-metal applications or (adapted) \
++operating systems besides Linux. For this purpose, it configures CPU and device virtualization features of the hardware \
++platform in a way that none of these domains, called 'cells' here, can interfere with each other in an unacceptable way."
++HOMEPAGE = "https://github.com/siemens/jailhouse"
++SECTION = "jailhouse"
++
++LICENSE = "GPL-2.0-only & BSD-2-Clause"
++
++LIC_FILES_CHKSUM = " \
++    file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
++"
++
++COMPATIBLE_MACHINE = "am62xx|am62pxx"
++TARGET_CC_ARCH += "${LDFLAGS}"
++PV = "0.12+git${SRCPV}"
++SRCREV = "0b29ad90f6f54105b98d6bbf35cc47fb244f7799"
++BRANCH = "master"
++SRC_URI = " \
++    git://git.ti.com/git/jailhouse/ti-jailhouse.git;protocol=https;branch=${BRANCH} \
++"
++
++# Set jailhouse architecture JH_ARCH variable
++#
++# return value must match one of architectures supported by jailhouse
++#
++valid_jh_archs = "x86 arm"
++
++def map_jh_arch(a, d):
++    import re
++
++    valid_jh_archs = d.getVar('valid_jh_archs', True).split()
++
++    if   re.match('(i.86|athlon|x86.64)$', a):  return 'x86'
++    elif re.match('armeb$', a):                 return 'arm'
++    elif re.match('aarch64$', a):               return 'arm64'
++    elif re.match('aarch64_be$', a):            return 'arm64'
++    elif a in valid_jh_archs:                   return a
++    else:
++        bb.error("cannot map '%s' to a jailhouse supported architecture" % a)
++
++export JH_ARCH = "${@map_jh_arch(d.getVar('TARGET_ARCH', True), d)}"
++
++COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
++
++S = "${WORKDIR}/git"
++B = "${S}"
++
++DEPENDS = "virtual/kernel dtc-native python3-mako-native python3-mako make-native"
++
++inherit module python3native bash-completion deploy setuptools3
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++COMPATIBLE_MACHINE = "(ti-soc)"
++
++JH_DATADIR ?= "${datadir}/jailhouse"
++JH_EXEC_DIR ?= "${libexecdir}/jailhouse"
++CELL_DIR ?= "${JH_DATADIR}/cells"
++CELLCONF_DIR ?= "${JH_DATADIR}/configs"
++INMATES_DIR ?= "${JH_DATADIR}/inmates"
++
++JH_SYSCONFIG_CELL ?= ""
++JH_SYSCONFIG_CELL:am62xx ?= "k3-am625-sk.cell"
++JH_SYSCONFIG_CELL:am65xx ?= "k3-am654-idk.cell"
++JH_SYSCONFIG_CELL:am62pxx ?= "k3-am62p5-sk.cell"
++JH_SYSCONFIG_CELL:j7 ?= "k3-j721e-evm.cell"
++JH_SYSCONFIG_CELL:j7200-evm ?= "k3-j7200-evm.cell"
++
++do_configure() {
++        if [ -d ${STAGING_DIR_HOST}/${CELLCONF_DIR} ];
++        then
++            cp ${STAGING_DIR_HOST}/${CELLCONF_DIR}/*.c ${S}/configs/
++        fi
++}
++
++USER_SPACE_CFLAGS = '${CFLAGS} -DLIBEXECDIR=\\\"${libexecdir}\\\" \
++                    -DJAILHOUSE_VERSION=\\\"$JAILHOUSE_VERSION\\\" \
++                    -Wall -Wextra -Wmissing-declarations -Wmissing-prototypes -Werror \
++                    -I../driver'
++
++TOOLS_SRC_DIR = "${S}/tools"
++
++EXTRA_OEMAKE = "ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}" KDIR=${STAGING_KERNEL_BUILDDIR}"
++
++do_compile() {
++        oe_runmake V=1
++}
+-- 
+2.34.1
 
-> Andrew
->=20
->>
->> On Thu, Feb 15, 2024 at 03:26:13PM -0600, Andrew Davis via=20
->> lists.yoctoproject.org wrote:
->>> All current K3 devices use either A53 or A72. Use the compile tune
->>> configuration specific for these to allow the compiler to make
->>> better optimizations.
->>>
->>> Signed-off-by: Andrew Davis <afd@ti.com>
->>> ---
->>> =C2=A0 meta-ti-bsp/conf/machine/include/k3.inc | 2 +-
->>> =C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/meta-ti-bsp/conf/machine/include/k3.inc=20
->>> b/meta-ti-bsp/conf/machine/include/k3.inc
->>> index 2415f0ba..7c3579af 100644
->>> --- a/meta-ti-bsp/conf/machine/include/k3.inc
->>> +++ b/meta-ti-bsp/conf/machine/include/k3.inc
->>> @@ -3,7 +3,7 @@
->>> =C2=A0 require conf/machine/include/ti-soc.inc
->>> =C2=A0 SOC_FAMILY:append =3D ":k3"
->>> -require conf/machine/include/arm/arch-arm64.inc
->>> +require conf/machine/include/arm/armv8a/tune-cortexa72-cortexa53.inc
->>> =C2=A0 BBMULTICONFIG +=3D "k3r5"
->>> --=20
->>> 2.39.2
-
---=20
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
 
