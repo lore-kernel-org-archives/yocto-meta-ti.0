@@ -1,93 +1,118 @@
-Return-Path: <c-shilwant@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7EE7C48BF6
-	for <webhook@archiver.kernel.org>; Thu, 29 Feb 2024 08:33:01 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.19712.1709195576397514795
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD5F4C54798
+	for <webhook@archiver.kernel.org>; Fri,  1 Mar 2024 02:48:51 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.13959.1709261330177990220
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 29 Feb 2024 00:32:56 -0800
+ Thu, 29 Feb 2024 18:48:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=TvCmlQ6o;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: c-shilwant@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41T8WtCG079682;
-	Thu, 29 Feb 2024 02:32:55 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=EoLZACJ9;
+ spf=pass (domain: list.ti.com, ip: 198.47.19.142, mailfrom: lcpdbld@list.ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4212mm9m031190;
+	Thu, 29 Feb 2024 20:48:48 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1709195575;
-	bh=oGitxGyFjIkAcbf7LetkMtv16dWcXLBDrp83KJ4zG/8=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=TvCmlQ6oHVb3XF7o/U6U5/4QQOX2cX925dEGd3jjNT07x0GZMbqyA8w1acjaQcePV
-	 1cZu/D60HvsoMg9Bn3NrVcHr70XESX2r9U6hnahTdSqJwQgOxQ8cJO5CJx4HTTb52t
-	 f1YRKYw0jlqnDVRJOIjWV7cogPJSx7x4ZiADLfqM=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41T8WtRP118955
+	s=ti-com-17Q1; t=1709261328; i=@ti.com;
+	bh=xB77/sTatqy3ninXUPqK+y44/RKRaWgumGcWLrhN7PI=;
+	h=From:To:Subject:Date;
+	b=EoLZACJ9nHISqMBCxKX9HDOVMCDLKwtcq66F/KSOY9jF6r+S2BNSOAOLZx/SJCYCg
+	 V9wai36ExnUDB89Mc5J5a1k+58SJLAqkKdpY8Vr/iIBD1t37MeGMjDzF4J6rr75C60
+	 Cp0o5hmQqhpUnHFpuvwYUXL3RYdcosqTOkzzLmwE=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4212mmiP056163
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 29 Feb 2024 02:32:55 -0600
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 29 Feb 2024 20:48:48 -0600
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 29
- Feb 2024 02:32:54 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2024 20:48:47 -0600
+Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 29 Feb 2024 02:32:54 -0600
-Received: from [172.24.227.238] (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.238])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41T8WqAA063174;
-	Thu, 29 Feb 2024 02:32:52 -0600
-Message-ID: <4004fdc8-7e82-4c0a-85a8-7475a55e51a8@ti.com>
-Date: Thu, 29 Feb 2024 14:02:51 +0530
+ Frontend Transport; Thu, 29 Feb 2024 20:48:47 -0600
+Received: from fllvdckhpci039.itg.ti.com (fllvdckhpci039.itg.ti.com [10.248.132.250])
+	by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4212mlrQ020272;
+	Thu, 29 Feb 2024 20:48:47 -0600
+Received: by fllvdckhpci039.itg.ti.com (Postfix, from userid 60899)
+	id CD07510BAD89; Thu, 29 Feb 2024 20:48:47 -0600 (CST)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][kirkstone][PATCH] CI/CD Auto-Merger: cicd.kirkstone.202402291453
+Date: Thu, 29 Feb 2024 20:48:47 -0600
+Message-ID: <1709261327-119108-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [master/kirkstone][PATCH] conf: machine: am62axx: Pick overlays
- for V3Link cameras
-To: Jai Luthra <j-luthra@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: Ryan Eatmon <reatmon@ti.com>, Denys Dmytriyenko <denys@konsulko.com>,
-        Gyan
- Gupta <g-gupta@ti.com>, Devarsh Thakkar <devarsht@ti.com>,
-        Aradhya Bhatia
-	<a-bhatia1@ti.com>
-References: <20240229081201.3850832-1-j-luthra@ti.com>
-Content-Language: en-US
-From: Chirag Shilwant <c-shilwant@ti.com>
-In-Reply-To: <20240229081201.3850832-1-j-luthra@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 29 Feb 2024 08:33:01 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17498
+ <meta-ti@lists.yoctoproject.org>; Fri, 01 Mar 2024 02:48:51 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17499
 
-On 29/02/24 13:42, Jai Luthra wrote:
-> The new V3Link camera fusion board [1] comes with a CSI to FPDLink
-> serializer board, which allows interfacing multiple 22-pin FFC
-> compatible sensors with SK-AM62A.
->
-> Currently overlays for interfacing IMX219 sensor with V3Link are built
-> as part of the TI linux kernel, so pick these in the BSP filesystem.
->
-> [1]: https://www.arducam.com/fpd-link-3-cameras/
->
-> Signed-off-by: Jai Luthra <j-luthra@ti.com>
-Acked-by: Chirag Shilwant <c-shilwant@ti.com>
+Updated the value(s) for:
+  ti-linux-fw: TI_DM_FW_VERSION,TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
+  linux-ti-staging-rt_6.1: SRCREV
+  linux-ti-staging_6.1: SRCREV
 
-> ---
->   meta-ti-bsp/conf/machine/am62axx-evm.conf | 1 +
->   1 file changed, 1 insertion(+)
->
-> diff --git a/meta-ti-bsp/conf/machine/am62axx-evm.conf b/meta-ti-bsp/conf/machine/am62axx-evm.conf
-> index 22f61401..238718d0 100644
-> --- a/meta-ti-bsp/conf/machine/am62axx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62axx-evm.conf
-> @@ -8,6 +8,7 @@ KERNEL_DEVICETREE_PREFIX = " \
->       ti/k3-am62a7 \
->       ti/k3-am62x-sk \
->       ti/k3-fpdlink \
-> +    ti/k3-v3link \
->   "
->   
->   KERNEL_DEVICETREE = " \
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 6 +++---
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb    | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 49e8e80..09ab514 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -14,10 +14,10 @@ GOODIX_FW_VERSION = "1.0.0.0"
+ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+ CNM_WAVE521_FW_VERSION = "1.0.3"
+-TI_DM_FW_VERSION = "09.02.03"
+-TI_SYSFW_VERSION = "09.02.01"
++TI_DM_FW_VERSION = "09.02.04"
++TI_SYSFW_VERSION = "09.02.05"
+ 
+-TI_LINUX_FW_SRCREV ?= "ef9fc0897907e7febba7bec70db0f3249b1bc124"
++TI_LINUX_FW_SRCREV ?= "0ac29b7745bfa507b07fd99237b916497113ac9d"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+index 7efe3bd..0c83754 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+@@ -6,7 +6,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
+ 
+ BRANCH = "ti-rt-linux-6.1.y"
+ 
+-SRCREV = "8bb1c6ab769ed7f58c8c415fc0b7efa3b32658da"
++SRCREV = "16683766adce1c66579c8071a1db8c70c1ab0758"
+ 
+ include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+index 9620f42..6175350 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.1.y"
+ 
+-SRCREV ?= "457fff614143954bb5d16ef7b425e276b32aeb0c"
++SRCREV ?= "0ccfdb3fe66551031a7a112f6ff668f9683ef725"
+ PV = "6.1.69+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-- 
+1.8.3.1
+
 
