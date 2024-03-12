@@ -1,98 +1,164 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BD68C54E58
-	for <webhook@archiver.kernel.org>; Tue, 12 Mar 2024 08:51:07 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.4064.1710233460783101454
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9216FC54E5D
+	for <webhook@archiver.kernel.org>; Tue, 12 Mar 2024 15:42:49 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web11.13345.1710258166616426382
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 12 Mar 2024 01:51:01 -0700
+ Tue, 12 Mar 2024 08:42:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=VU96UIFo;
- spf=pass (domain: list.ti.com, ip: 198.47.19.142, mailfrom: lcpdbld@list.ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=o2dPK42L;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: afd@ti.com)
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42C8owkr058414;
-	Tue, 12 Mar 2024 03:50:59 -0500
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42CFgjbc027260;
+	Tue, 12 Mar 2024 10:42:45 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1710233459; i=@ti.com;
-	bh=B9AVsRB/Eknm3O1LhHS1dD/Gbr9yXovK74W5oU2twZo=;
-	h=From:To:Subject:Date;
-	b=VU96UIFocpCadErRBoffsCjTQOh6Gy4RqbwVHpNncF8sbABEy2SZPcdkVSnBJy0X1
-	 qoKBj+ZgTB1N08jKE8oaW4XfLpArqKfYpwwWiJ86iX6CNHGEwGEo/41su/e0k0FSki
-	 hQXTkoOtNWu3l+1922Bm7WRpcAZ2opkmMJ8+Q+x8=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42C8owfJ083008
+	s=ti-com-17Q1; t=1710258165;
+	bh=PVQbsHjdB71TqhAdEv/pHvNctJGZMIkbrya1jjwLqe0=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=o2dPK42LZRN2yZ4M4FQ2DUgz9FXOroWNurBQUi8hoP+vQ54F6UhBnOFzspv0YLAmC
+	 MqlmTmZt7S7xQ5iy0K6P6JyowTwt9LKMFV9IVEex/hga6lYag230HNqdiBEAOWNAVE
+	 mPFJGDi+w5QFZAJH1wV95EtDrILuWLQiLatfU5o0=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42CFgj58055531
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 12 Mar 2024 03:50:58 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 12 Mar 2024 10:42:45 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 12
- Mar 2024 03:50:58 -0500
-Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2024 10:42:44 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 12 Mar 2024 03:50:58 -0500
-Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.248.130.8])
-	by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42C8owW9115449;
-	Tue, 12 Mar 2024 03:50:58 -0500
-Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
-	id 9874610AC0F3; Tue, 12 Mar 2024 03:50:58 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
+ Frontend Transport; Tue, 12 Mar 2024 10:42:44 -0500
+Received: from lelvsmtp6.itg.ti.com ([10.249.42.149])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42CFgixI010046;
+	Tue, 12 Mar 2024 10:42:45 -0500
+From: Andrew Davis <afd@ti.com>
+To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202403120100
-Date: Tue, 12 Mar 2024 03:50:58 -0500
-Message-ID: <1710233458-115729-1-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
+CC: Andrew Davis <afd@ti.com>
+Subject: [meta-ti][master][PATCH 3/5] pruhsr-fw: Combine PRU-HSR firmwares into single package
+Date: Tue, 12 Mar 2024 10:42:41 -0500
+Message-ID: <20240312154243.17627-3-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240312154243.17627-1-afd@ti.com>
+References: <20240312154243.17627-1-afd@ti.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 12 Mar 2024 08:51:07 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17513
+ <meta-ti@lists.yoctoproject.org>; Tue, 12 Mar 2024 15:42:49 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17514
 
-Updated the value(s) for:
-  linux-ti-staging-rt_6.6: SRCREV
-  linux-ti-staging_6.6: SRCREV
+The firmware for different machines and versions are named differently so
+there is no need to have machine specific packages for each of these
+firmwares. Move all the PRU-HSR firmwares into single package.
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meta-ti-bsp/conf/machine/am65xx-evm.conf      |  2 +-
+ meta-ti-bsp/conf/machine/include/am64xx.inc   |  2 +-
+ .../pruhsr-fw/pruhsr-fw-am65x-sr2_git.bb      | 24 -------------------
+ .../pruhsr-fw/pruhsr-fw_2.17.25.bb            | 24 ++++++++++++-------
+ 4 files changed, 18 insertions(+), 34 deletions(-)
+ delete mode 100644 meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw-am65x-sr2_git.bb
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-index e3aedce..235a5a9 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-@@ -10,7 +10,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:"
+diff --git a/meta-ti-bsp/conf/machine/am65xx-evm.conf b/meta-ti-bsp/conf/machine/am65xx-evm.conf
+index 3d8e11b4..7df93db7 100644
+--- a/meta-ti-bsp/conf/machine/am65xx-evm.conf
++++ b/meta-ti-bsp/conf/machine/am65xx-evm.conf
+@@ -6,4 +6,4 @@ require conf/machine/include/am65xx.inc
  
- BRANCH = "ti-rt-linux-6.6.y"
+ UBOOT_MACHINE = "am65x_evm_a53_defconfig"
  
--SRCREV = "7a7ad8a0b720d8c9d7bf85b897814cf8500a4c50"
-+SRCREV = "280ec6b126cf337d787b398b5717f55599ecb91f"
+-MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "prueth-fw pruhsr-fw-am65x-sr2 prusw-fw-am65x-sr2"
++MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "prueth-fw pruhsr-fw prusw-fw-am65x-sr2"
+diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/conf/machine/include/am64xx.inc
+index fb71d271..de65829c 100644
+--- a/meta-ti-bsp/conf/machine/include/am64xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
+@@ -21,4 +21,4 @@ TFA_BOARD = "lite"
  
- include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+ OPTEEMACHINE = "k3-am64x"
  
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-index 34acd9c..c72f899 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-@@ -25,7 +25,7 @@ S = "${WORKDIR}/git"
+-MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "prueth-fw pruhsr-fw-am65x-sr2 prusw-fw-am65x-sr2"
++MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "prueth-fw pruhsr-fw prusw-fw-am65x-sr2"
+diff --git a/meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw-am65x-sr2_git.bb b/meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw-am65x-sr2_git.bb
+deleted file mode 100644
+index bc731094..00000000
+--- a/meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw-am65x-sr2_git.bb
++++ /dev/null
+@@ -1,24 +0,0 @@
+-SUMMARY = "PRU HSR firmware for AM65xx SR2.0"
+-
+-require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+-
+-PV = "${PRUETH_FW_AM65X_SR2_VERSION}"
+-PR = "${INC_PR}.0"
+-
+-COMPATIBLE_MACHINE = "am65xx-evm|am64xx"
+-
+-TARGET = " \
+-    am65x-sr2-pru0-pruhsr-fw.elf \
+-    am65x-sr2-pru1-pruhsr-fw.elf \
+-    am65x-sr2-rtu0-pruhsr-fw.elf \
+-    am65x-sr2-rtu1-pruhsr-fw.elf \
+-    am65x-sr2-txpru0-pruhsr-fw.elf \
+-    am65x-sr2-txpru1-pruhsr-fw.elf \
+-"
+-
+-do_install() {
+-	install -d ${D}${nonarch_base_libdir}/firmware/ti-pruss
+-	for f in ${TARGET}; do
+-		install -m 0644 ${S}/ti-pruss/$f ${D}${nonarch_base_libdir}/firmware/ti-pruss/$f
+-	done
+-}
+diff --git a/meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw_2.17.25.bb b/meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw_2.17.25.bb
+index fe99cb3e..3b06de9c 100644
+--- a/meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw_2.17.25.bb
++++ b/meta-ti-bsp/recipes-bsp/pruhsr-fw/pruhsr-fw_2.17.25.bb
+@@ -1,18 +1,26 @@
+-SUMMARY = "PRU HSR firmware for AM335x/AM437x/AM57xx"
++SUMMARY = "PRU HSR firmware"
  
- BRANCH ?= "ti-linux-6.6.y"
+ require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
  
--SRCREV ?= "249ce2af44d246bda52703d3066e21f56c0ddb12"
-+SRCREV ?= "83b86d0fb4afa43229844c77df29890de5d7b8d1"
- PV = "6.6.20+git${SRCPV}"
+ PE = "1"
+ PR = "${INC_PR}.0"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx"
++COMPATIBLE_MACHINE = "ti33x|ti43x|am57xx|am65xx|am64xx"
+ 
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-TARGET = ""
+-TARGET:ti33x = "am335x-pru0-pruhsr-fw.elf am335x-pru1-pruhsr-fw.elf"
+-TARGET:ti43x = "am437x-pru0-pruhsr-fw.elf am437x-pru1-pruhsr-fw.elf"
+-TARGET:am57xx = "am57xx-pru0-pruhsr-fw.elf am57xx-pru1-pruhsr-fw.elf"
++TARGET = " \
++    am335x-pru0-pruhsr-fw.elf \
++    am335x-pru1-pruhsr-fw.elf \
++    am437x-pru0-pruhsr-fw.elf \
++    am437x-pru1-pruhsr-fw.elf \
++    am57xx-pru0-pruhsr-fw.elf \
++    am57xx-pru1-pruhsr-fw.elf \
++    am65x-sr2-pru0-pruhsr-fw.elf \
++    am65x-sr2-pru1-pruhsr-fw.elf \
++    am65x-sr2-rtu0-pruhsr-fw.elf \
++    am65x-sr2-rtu1-pruhsr-fw.elf \
++    am65x-sr2-txpru0-pruhsr-fw.elf \
++    am65x-sr2-txpru1-pruhsr-fw.elf \
++"
+ 
+ do_install() {
+ 	install -d ${D}${nonarch_base_libdir}/firmware/ti-pruss
 -- 
-1.8.3.1
+2.39.2
 
 
