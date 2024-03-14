@@ -1,115 +1,128 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD461C54E60
-	for <webhook@archiver.kernel.org>; Thu, 14 Mar 2024 18:51:41 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.857.1710442294226745930
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23462C54E68
+	for <webhook@archiver.kernel.org>; Thu, 14 Mar 2024 21:26:16 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.4604.1710451569972908444
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 14 Mar 2024 11:51:34 -0700
+ Thu, 14 Mar 2024 14:26:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=M/9iRVUF;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42EIpTrb029211;
-	Thu, 14 Mar 2024 13:51:29 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=M2EX294S;
+ spf=pass (domain: list.ti.com, ip: 198.47.23.248, mailfrom: lcpdbld@list.ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42ELQ8kl129611;
+	Thu, 14 Mar 2024 16:26:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1710442289;
-	bh=eJk55PK9GydcIbwyerXdDuH3CPtn7hpw+p1XQD/4Fo4=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=M/9iRVUFkTPyILyxXFOd/tABYjUSjzPvm4D7hnO/p5KmJEbNMZhrW/HgwQPaRkJYQ
-	 lKAupl53AizhnLfTabtZdTa3ha8AwQ6tPc+zw8g/vkqIby8a/BSfiWO0OqTCrGhq/x
-	 8t6Yq/LJALgs8pwbLD/RBaHxHHiqSbM4sZIQ4qZI=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42EIpTUr111969
+	s=ti-com-17Q1; t=1710451568; i=@ti.com;
+	bh=c9gKt8oo1W7ErfizaC1KMbThpYyb5erAUnFkaGWVniI=;
+	h=From:To:Subject:Date;
+	b=M2EX294SblgCwHalc93Hjcm8K09vDnigfGBOCKRMm9jq9iLZ3u790sV5bmrctW9Z7
+	 9gXh9AapkRxte1R/Kp14m1ED8+jSmmtoelO+JuO+u6ZHRNX3P+lXwODtkYscBat9EF
+	 EGKkTff1tQB7zeQg/G3fFsLThB1zEEualpd/gJUg=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42ELQ86m028450
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 14 Mar 2024 13:51:29 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 14 Mar 2024 16:26:08 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 14
- Mar 2024 13:51:28 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2024 16:26:08 -0500
+Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 14 Mar 2024 13:51:28 -0500
-Received: from [128.247.81.222] (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42EIpSik057422;
-	Thu, 14 Mar 2024 13:51:28 -0500
-Message-ID: <542fd913-da1d-38c4-084a-a8c36b51d668@ti.com>
-Date: Thu, 14 Mar 2024 13:51:28 -0500
+ Frontend Transport; Thu, 14 Mar 2024 16:26:08 -0500
+Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.248.130.8])
+	by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42ELQ83P126948;
+	Thu, 14 Mar 2024 16:26:08 -0500
+Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
+	id 6064310AC0F3; Thu, 14 Mar 2024 16:26:08 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][kirkstone][PATCH] CI/CD Auto-Merger: cicd.kirkstone.202403141157
+Date: Thu, 14 Mar 2024 16:26:08 -0500
+Message-ID: <1710451568-120769-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [meta-ti][kirkstone][PATCH v2] conf: machine: am57xx: export
- ov10635 camera device tree overlay
-Content-Language: en-US
-To: Denys Dmytriyenko <denis@denix.org>, "Kumar, Udit" <u-kumar1@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, <sbellary@baylibre.com>,
-        <sinthu.raja@mistralsolutions.com>
-References: <20240312171132.1330699-1-u-kumar1@ti.com>
- <20240312215009.GL6072@denix.org>
- <712e0516-202a-4a47-905b-6edb5ab4f079@ti.com>
- <20240314183015.GN6072@denix.org>
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20240314183015.GN6072@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 42EIpTrb029211
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 14 Mar 2024 18:51:41 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17533
+ <meta-ti@lists.yoctoproject.org>; Thu, 14 Mar 2024 21:26:16 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17534
 
+Updated the value(s) for:
+  ti-linux-fw: TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
+  u-boot-ti-staging_2023.04: SRCREV
+  linux-ti-staging-rt_6.1: SRCREV
+  linux-ti-staging_6.1: SRCREV
 
-On 3/14/24 13:30, Denys Dmytriyenko wrote:
-> On Wed, Mar 13, 2024 at 10:13:47AM +0530, Kumar, Udit wrote:
->> On 3/13/2024 3:20 AM, Denys Dmytriyenko wrote:
->>> On Tue, Mar 12, 2024 at 10:41:32PM +0530, Udit Kumar via lists.yoctop=
-roject.org wrote:
->>>> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
->>>> ---
->>>> Changelog:
->>>> Changes in v2:
->>>> 1) Updated subject of patch
->>>> 2) moved overlay to KERNEL_DEVICETREE_PREFIX
->>>> link to v1:
->>>> https://lore.kernel.org/all/20240311111359.1556157-1-u-kumar1@ti.com=
-/
->>>>
->>>>   meta-ti-bsp/conf/machine/am57xx-evm.conf | 1 +
->>>>   1 file changed, 1 insertion(+)
->>>>
->>>> diff --git a/meta-ti-bsp/conf/machine/am57xx-evm.conf b/meta-ti-bsp/=
-conf/machine/am57xx-evm.conf
->>>> index 43a6a833..8bcf20ea 100644
->>>> --- a/meta-ti-bsp/conf/machine/am57xx-evm.conf
->>>> +++ b/meta-ti-bsp/conf/machine/am57xx-evm.conf
->>>> @@ -10,6 +10,7 @@ SERIAL_CONSOLES =3D "115200;ttyS2"
->>>>   KERNEL_DEVICETREE_PREFIX =3D " \
->>>>       am57 \
->>>> +    ov10635 \
->>>>       ti/ov10635 \
->>> What is the difference between these 2 entries? Which one is correct?
->>
->> Kernel 5.10 is hosting inside ti folder (arch/arm/boot/dts/ti/ov10635.=
-dts)
->>
->> whereas in 6.1 moved to base folder. (./arch/arm/boot/dts/ov10635.dtso=
-)
-> There's no 5.10 kernel in meta-ti any more.
->
-That is very true.=C2=A0 I need to go through all of the machines and see=
- if=20
-we can clean up anything as we move through the kernels. I'll take a=20
-note to do that next week.
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 4 ++--
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb    | 2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
-
---=20
-Ryan Eatmon reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.=C2=A0 -=C2=A0 LCPD=C2=A0 -=C2=A0 MGTS
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 347a97f..47b1013 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -15,9 +15,9 @@ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+ CNM_WAVE521_FW_VERSION = "1.0.3"
+ TI_DM_FW_VERSION = "09.02.04"
+-TI_SYSFW_VERSION = "09.02.05"
++TI_SYSFW_VERSION = "09.02.07"
+ 
+-TI_LINUX_FW_SRCREV ?= "1ab38f4882f0b257377dbd22bbf544b046d7faac"
++TI_LINUX_FW_SRCREV ?= "edbfc3e540c9f426feb51db6a466a9015ada4dd0"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+index be1fb85..f9a93ee 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+@@ -6,4 +6,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2023.04"
+ 
+-SRCREV = "dbb6e4280dfa53faaa1c04f5ddd22f9f068d0428"
++SRCREV = "d2612223375a25f81068d7a7abd86c08cd129a2c"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+index a4aa2cd..16f8cca 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+@@ -8,7 +8,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
+ 
+ BRANCH = "ti-rt-linux-6.1.y"
+ 
+-SRCREV = "31dc6b6f9309afec8555a584ff1ea5e3f18a30e9"
++SRCREV = "871d5629a0ee4ae82d0caf8d57d4f711d54e1465"
+ 
+ include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+index e168c92..3c5272a 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.1.y"
+ 
+-SRCREV ?= "a6174d6c4ff531039c677079321888a9a3f9951c"
++SRCREV ?= "1c154b1fe4c462d8b383515bb388e289816e4b01"
+ PV = "6.1.80+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-- 
+1.8.3.1
 
 
