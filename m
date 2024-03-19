@@ -1,88 +1,97 @@
-Return-Path: <c-shilwant@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F50FC54E58
-	for <webhook@archiver.kernel.org>; Mon, 18 Mar 2024 11:01:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AC39CD11BF
+	for <webhook@archiver.kernel.org>; Tue, 19 Mar 2024 15:25:50 +0000 (UTC)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.40565.1710759687489053273
+ by mx.groups.io with SMTP id smtpd.web10.18598.1710861946740396374
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 18 Mar 2024 04:01:27 -0700
+ Tue, 19 Mar 2024 08:25:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ARVDNumq;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: c-shilwant@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42IB1Qc7086518
-	for <meta-ti@lists.yoctoproject.org>; Mon, 18 Mar 2024 06:01:26 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=HtOqvlum;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42JFPjYu022334;
+	Tue, 19 Mar 2024 10:25:45 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1710759686;
-	bh=tMOqIuJkzxbT00fLRURCEypQ89N7BVdL4TxVrx/0l1U=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=ARVDNumqec9MQZ/u/nzyD2J/SZXyJkJWTOFVcWihfw3zBH/vjmmdtVIcY5rFnDAt6
-	 z9XA1op2YCO8kRfe2I4xHuF6J74iH+WwrSJBndW8I2jCxzHHq4vOI+EuejVxk/Kj0h
-	 X7CHJKxMPGATKUB+KzZxfsEug6IjAGBPbwUaDrTc=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42IB1QV0019737
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 18 Mar 2024 06:01:26 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 18
- Mar 2024 06:01:25 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1710861945;
+	bh=kHXrKq0rCR5brA0MMfwymTA60w9GlElYlFXXTyTQOAY=;
+	h=From:To:Subject:Date;
+	b=HtOqvlumhnJR/FR8rn6788cZQv92JBNkk1JXo1lmWDP8XbTkmOQmvFlq0HM2JspCh
+	 7uEdAGDG+sszxZVg5GORzQq8eBbj2xsjDENOXBiAZHPvAmTePdIDseWYRmnVN7Jll0
+	 5JgmR8KBMYhlry6tsS6n4LDAjZjxzWZLaZoU46Kk=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42JFPjUu052331
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 19 Mar 2024 10:25:45 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
+ Mar 2024 10:25:45 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 18 Mar 2024 06:01:26 -0500
-Received: from [172.24.227.238] (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.238])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42IB1MwA011493;
-	Mon, 18 Mar 2024 06:01:23 -0500
-Message-ID: <f22533db-ff66-4ecf-833b-28e47735d2fc@ti.com>
-Date: Mon, 18 Mar 2024 16:31:22 +0530
+ Frontend Transport; Tue, 19 Mar 2024 10:25:45 -0500
+Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42JFPjaw088316;
+	Tue, 19 Mar 2024 10:25:45 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1rmbLU-0002S7-Ur; Tue, 19 Mar 2024 10:25:44 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] layer.conf: Update LAYERSERIES
+Date: Tue, 19 Mar 2024 10:25:44 -0500
+Message-ID: <20240319152544.9387-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [kirkstone][PATCH] Update SRCREV for jailhouse recipe
-To: <meta-ti@lists.yoctoproject.org>
-CC: <s-adivi@ti.com>, <khasim@ti.com>, <g-gupta@ti.com>,
-        Paresh Bhagat
-	<p-bhagat@ti.com>, <reatmon@ti.com>, <praneeth@ti.com>
-References: <20240318105253.1067209-1-p-bhagat@ti.com>
-Content-Language: en-US
-From: Chirag Shilwant <c-shilwant@ti.com>
-In-Reply-To: <20240318105253.1067209-1-p-bhagat@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 18 Mar 2024 11:01:34 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17539
+ <meta-ti@lists.yoctoproject.org>; Tue, 19 Mar 2024 15:25:50 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17540
 
-On 18/03/24 16:22, Paresh Bhagat wrote:
-> Update SRCREV for jailhouse recipe which will add changes for Out of Box
-> demo and also a new application to test whether the linux inmate cell has
-> crashed or not.
->
-> Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+Update the compatibility to just scarthgap.
 
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ meta-ti-bsp/conf/layer.conf    | 2 +-
+ meta-ti-extras/conf/layer.conf | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-Acked-by: Chirag Shilwant <c-shilwant@ti.com>
+diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
+index 502e355f..462bf763 100644
+--- a/meta-ti-bsp/conf/layer.conf
++++ b/meta-ti-bsp/conf/layer.conf
+@@ -9,7 +9,7 @@ BBFILE_COLLECTIONS += "meta-ti-bsp"
+ BBFILE_PATTERN_meta-ti-bsp := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-ti-bsp = "6"
+ 
+-LAYERSERIES_COMPAT_meta-ti-bsp = "kirkstone langdale mickledore nanbield scarthgap"
++LAYERSERIES_COMPAT_meta-ti-bsp = "scarthgap"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+diff --git a/meta-ti-extras/conf/layer.conf b/meta-ti-extras/conf/layer.conf
+index a05dbe5f..9c39fc6a 100644
+--- a/meta-ti-extras/conf/layer.conf
++++ b/meta-ti-extras/conf/layer.conf
+@@ -9,7 +9,7 @@ BBFILE_COLLECTIONS += "meta-ti-extras"
+ BBFILE_PATTERN_meta-ti-extras := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-ti-extras = "6"
+ 
+-LAYERSERIES_COMPAT_meta-ti-extras = "kirkstone langdale mickledore nanbield scarthgap"
++LAYERSERIES_COMPAT_meta-ti-extras = "scarthgap"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+-- 
+2.17.1
 
-> ---
->   meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-> index a63891bf..af94a780 100644
-> --- a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-> +++ b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-> @@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = " \
->   COMPATIBLE_MACHINE = "am62xx|am62pxx"
->   TARGET_CC_ARCH += "${LDFLAGS}"
->   PV = "0.12+git${SRCPV}"
-> -SRCREV = "0b29ad90f6f54105b98d6bbf35cc47fb244f7799"
-> +SRCREV = "603819ef9a771a3c253a141220daab8e61751a43"
->   BRANCH = "master"
->   SRC_URI = " \
->       git://git.ti.com/git/jailhouse/ti-jailhouse.git;protocol=https;branch=${BRANCH} \
 
