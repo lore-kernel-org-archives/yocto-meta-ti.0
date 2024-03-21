@@ -1,127 +1,158 @@
-Return-Path: <sasikumar.e@fdss.co.in>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90377C54E68
-	for <webhook@archiver.kernel.org>; Thu, 21 Mar 2024 12:48:58 +0000 (UTC)
-Received: from repost.tmes-in.trendmicro.com (repost.tmes-in.trendmicro.com [3.110.59.158])
- by mx.groups.io with SMTP id smtpd.web10.6530.1711025331399297519
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA0E2C54E68
+	for <webhook@archiver.kernel.org>; Thu, 21 Mar 2024 13:43:38 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.7821.1711028615339930332
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 21 Mar 2024 05:48:52 -0700
+ Thu, 21 Mar 2024 06:43:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fdss.co.in, ip: 3.110.59.158, mailfrom: sasikumar.e@fdss.co.in)
-Received: from 115.111.183.33_.trendmicro.com (unknown [172.26.26.191])
-	by repost.tmes-in.trendmicro.com (Postfix) with SMTP id D4CD310000AFB;
-	Thu, 21 Mar 2024 12:48:47 +0000 (UTC)
-X-TM-MAIL-RECEIVED-TIME: 1711025326.321000
-X-TM-MAIL-UUID: af207324-fe61-4c9c-b124-c8feb96e4bb5
-Received: from mail.fldec.com (unknown [115.111.183.33])
-	by repre.tmes-in.trendmicro.com (Trend Micro Email Security) with ESMTPS id 4E7A41000058B;
-	Thu, 21 Mar 2024 12:48:46 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.fldec.com (Postfix) with ESMTP id 6B36558B9BF7;
-	Thu, 21 Mar 2024 18:18:54 +0530 (IST)
-Received: from mail.fldec.com ([127.0.0.1])
- by localhost (mail.fldec.com [127.0.0.1]) (amavis, port 10032) with ESMTP
- id 5eQPrWmdX_Tw; Thu, 21 Mar 2024 18:18:53 +0530 (IST)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.fldec.com (Postfix) with ESMTP id D800058B9BE3;
-	Thu, 21 Mar 2024 18:18:53 +0530 (IST)
-X-Virus-Scanned: amavis at mail.fldec.com
-Received: from mail.fldec.com ([127.0.0.1])
- by localhost (mail.fldec.com [127.0.0.1]) (amavis, port 10026) with ESMTP
- id SzMiR9RHr7EC; Thu, 21 Mar 2024 18:18:53 +0530 (IST)
-Received: from mail.fldec.com (mail.fldec.com [192.168.10.20])
-	by mail.fldec.com (Postfix) with ESMTP id B60DC58B9BF7;
-	Thu, 21 Mar 2024 18:18:53 +0530 (IST)
-Date: Thu, 21 Mar 2024 18:18:53 +0530 (IST)
-From: SasiKumar E <sasikumar.e@fdss.co.in>
-To: meta-ti <meta-ti@lists.yoctoproject.org>, 
-	yocto <yocto@lists.yoctoproject.org>, 
-	meta-arm <meta-arm@lists.yoctoproject.org>, 
-	meta-arm+subscribe <meta-arm+subscribe@lists.yoctoproject.org>
-Message-ID: <127024843.2728485.1711025333711.JavaMail.zimbra@fdss.co.in>
-In-Reply-To: <1449786643.2727845.1711024835387.JavaMail.zimbra@fdss.co.in>
-References: <1449786643.2727845.1711024835387.JavaMail.zimbra@fdss.co.in>
-Subject: Subscribe
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=kGGy566X;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42LDhYga078866;
+	Thu, 21 Mar 2024 08:43:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1711028614;
+	bh=DadVmSdtlHeE3uPp2a5yurRA6+zNIz1QUkzLPcICoHo=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=kGGy566XOhE3Qduht7JrdHd79HPErUf1RpimgANBkIjp06ferlLC/PNWR1T+rhIvl
+	 wxBO5xNaP1U08udozs2MeWMV2WmGlsR+QAiwPY+nAhTMxMUMVuPDE77Shxj8wC6K3d
+	 g3tXJXSjGqEAj9VNrIvtn72JOZyk9fpaRTcC+6b8=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42LDhYUl097677
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 21 Mar 2024 08:43:34 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
+ Mar 2024 08:43:34 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 21 Mar 2024 08:43:33 -0500
+Received: from [10.249.33.218] ([10.249.33.218])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42LDgNvm060882;
+	Thu, 21 Mar 2024 08:43:33 -0500
+Message-ID: <1cbc062e-4c18-4a75-9983-e2a568aae94d@ti.com>
+Date: Thu, 21 Mar 2024 08:43:33 -0500
 MIME-Version: 1.0
-Content-Type: multipart/alternative; 
-	boundary="=_7dc16f58-6e5d-4905-876e-82b5ac99d847"
-X-Originating-IP: [192.168.10.20]
-X-Mailer: Zimbra 8.8.15_GA_4581 (ZimbraWebClient - GC122 (Linux)/8.8.15_GA_4581)
-Thread-Topic: Subscribe
-Thread-Index: TjnG6CqplzVMs+eFVmteKyG8OUmX+cy+jK7J
-X-TM-AS-ERS: 115.111.183.33-0.0.0.0
-X-TMASE-Version: StarCloud-1.3-9.1.1015-28264.007
-X-TMASE-Result: 10--7.474200-7.000000
-X-TMASE-MatchedRID: SYZoHxignaZ8vbXVg0ePD7oLCoN4YJzMlc327ujvqByuO2t5R2Fsoz+z
-	0S2PWR7I5MrTKS84v0JS+gaCeXpFI98CIqxAH44mx8CWJ6aNC+lZmKyjEVxRgk83xKJtuvA77AI
-	n5hx14Jp8Hv8rf7LYL24uCZmLnDd6UJMq4RJ2EuCpSoJx15avkdZEjr6xrP/hp4CNnrLeMtDHX/
-	bq3KraL8rRQK3JZgKcAa55s1jNZgU7fRAop7ocurBarTma7z9DIcgFRwiTScVv8x/gekDHg/Oh/
-	j6C3YkATH+YV8VQySWV1h6ijsb1eJGY0Q/hfv/WES46qCSbf/V8LgjA4u/K5w2h/xVLZG6HfaBw
-	ESN6ffu/GrcZ48r5CzTMjv56JlnwTSHLDhClExQeRwDU1r/wvWlGYuG9k3uSWZh9iRzGVJVyEcC
-	/GFaDvg==
-X-TMASE-XGENCLOUD: ac78d27b-ca6b-43df-851d-1cc145653848-0-0-200-0
-X-TM-Deliver-Signature: 06AF06D0BE3420EFBD85281C7FD7193F
-X-TM-Addin-Auth: dfKBtIrJek9qLUBc6heyCfSMOXq8n68mY+meH+hjDyE9So0sM6IeOwkhSfR
-	1OI7e4Zu/snn3jDP1jqQo/0alnfKIeHZtzO1EP23LNeip0GtPNouEXaC6HehzkrVFdV2qGaMxXi
-	OjLpbGdkiCkYRu8UlW/Z/8Ok7OI3XZXLh8gYd4uTTosRs9ywBKPGFp2eNrSVwBecgHAV6n6YETZ
-	KKuJeqbF/FHmY7n4UX8nPDLFEhLFLAJWNQLNcqFuHo0YE9DdzCEkwaPOio+suY2MG1Sp6XsBpDF
-	XLkiZeeOwR3L8h+g7Fhevsu6r3P/ubwa9A4A.VzMBFamFqTqvoem8W99xHBszu0eH13mQGhTsL1
-	OKRXkTXX+Ib7zh7EeqRCZs1+AvlRUVONxlxFmgOYSpG8KcRgXWgNY5LFdpMRpDXzXnaxFDrQ5Ps
-	Xrj1ALr1zrUAHZgswJKm8hAyTWece0tUFXrxbnEf4hgx7wy5+u7etzVkNXt/TbCEWMdoaEMMH5f
-	CsAxK9pHXKQxy0NVj/xL8DlJfCOVrhrJGJq00ybIvqhpr9Hyak3EdhCdndorXh30RQTMkgrUlnD
-	Ujz3ID1wjjHr+3LHDWwwhUSFfonCdi5GEANiyS0ldP3JSNkvSHd2yJ4BVrW39xokkdSIjhXURZX
-	HaUA==
-X-TM-Addin-ProductCode: EMS
+User-Agent: Mozilla Thunderbird
+Subject: Re: [EXTERNAL] [meta-ti][scarthgap][PATCH] README: update with
+ scarthgap specific info
+Content-Language: en-US
+To: Chirag Shilwant <c-shilwant@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: Denys Dmytriyenko <denys@konsulko.com>, Praneeth Bajjuri <praneeth@ti.com>
+References: <20240320200539.24116-1-reatmon@ti.com>
+ <55c50dc9-1b6f-4d55-a2d5-713ed10a2219@ti.com>
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <55c50dc9-1b6f-4d55-a2d5-713ed10a2219@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by lelv0143.ext.ti.com id 42LDhYga078866
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 21 Mar 2024 12:48:58 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17544
-
---=_7dc16f58-6e5d-4905-876e-82b5ac99d847
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-Subscribe to yocto 
-
-
-Thanks & Regards 
-Sasikumar E 
-Embedded Design Engineer 
+ <meta-ti@lists.yoctoproject.org>; Thu, 21 Mar 2024 13:43:38 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17545
 
 
 
---=_7dc16f58-6e5d-4905-876e-82b5ac99d847
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On 3/20/2024 11:29 PM, Chirag Shilwant wrote:
+>=20
+> On 21/03/24 01:35, Ryan Eatmon via lists.yoctoproject.org wrote:
+>> All READMEs were still mentioning master, update that. Signed-off-by:=20
+>> Ryan Eatmon <reatmon@=E2=80=8Ati.=E2=80=8Acom> --- meta-ti-bsp/README =
+| 4 ++--=20
+>> meta-ti-extras/README | 6 +++--- 2 files changed, 5 insertions(+), 5=20
+>> deletions(-) diff --git a/meta-ti-bsp/README
+>> ZjQcmQRYFpfptBannerStart
+>> This message was sent from outside of Texas Instruments.
+>> Do not click links or open attachments unless you recognize the source=
+=20
+>> of this email and know the content is safe.
+>> ZjQcmQRYFpfptBannerEnd
+>> All READMEs were still mentioning master, update that.
+>>
+>> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+>> ---
+>> =C2=A0 meta-ti-bsp/README=C2=A0=C2=A0=C2=A0 | 4 ++--
+>> =C2=A0 meta-ti-extras/README | 6 +++---
+>> =C2=A0 2 files changed, 5 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/meta-ti-bsp/README b/meta-ti-bsp/README
+>> index c5780531..70c40d4e 100644
+>> --- a/meta-ti-bsp/README
+>> +++ b/meta-ti-bsp/README
+>> @@ -8,11 +8,11 @@ This layer depends on:
+>> =C2=A0 URI: git://git.openembedded.org/openembedded-core
+>> =C2=A0 layers: meta
+>> -branch: master
+>> +branch: scarthgap
+>> =C2=A0 URI: git://git.yoctoproject.org/meta-arm
+>> =C2=A0 layers: meta-arm
+>> -branch: master
+>> +branch: scarthgap
+>=20
+>=20
+> meta-arm:scratchgap is yet to be created -=20
+> https://git.yoctoproject.org/meta-arm/log/?h=3Dscratchgap
+> Maybe they are waiting for April to start :) -=20
+> https://wiki.yoctoproject.org/wiki/Releases
 
-<html><body><div style=3D"font-family: arial, helvetica, sans-serif; font-s=
-ize: 12pt; color: #000000"><div><span style=3D"color: #000000; font-family:=
- arial, helvetica, sans-serif; font-size: 16px; font-style: normal; font-va=
-riant-ligatures: normal; font-variant-caps: normal; font-weight: 400; lette=
-r-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-tr=
-ansform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px=
-; white-space: normal; background-color: #ffffff; text-decoration-thickness=
-: initial; text-decoration-style: initial; text-decoration-color: initial; =
-display: inline !important; float: none;" data-mce-style=3D"color: #000000;=
- font-family: arial, helvetica, sans-serif; font-size: 16px; font-style: no=
-rmal; font-variant-ligatures: normal; font-variant-caps: normal; font-weigh=
-t: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent:=
- 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stro=
-ke-width: 0px; white-space: normal; background-color: #ffffff; text-decorat=
-ion-thickness: initial; text-decoration-style: initial; text-decoration-col=
-or: initial; display: inline !important; float: none;">Subscribe to yocto</=
-span><div style=3D"clear: both;" data-mce-style=3D"clear: both;"><br data-m=
-ce-bogus=3D"1"></div></div><div><br></div><div data-marker=3D"__SIG_PRE__">=
-<div><div><strong><span style=3D"color:#003300">Thanks &amp; Regards</span>=
-</strong></div><div><strong><span style=3D"color:#003300">Sasikumar E</span=
-></strong></div><div><strong><span style=3D"color:#003300">Embedded Design =
-Engineer</span></strong></div></div><div><br></div><div><img src=3D"https:/=
-/www.fdss.co.in/signature/efooter.png" data-mce-src=3D"https://www.fdss.co.=
-in/signature/efooter.png"></div></div><div data-marker=3D"__QUOTED_TEXT__">=
-<br data-mce-bogus=3D"1"></div></div></body></html>
---=_7dc16f58-6e5d-4905-876e-82b5ac99d847--
+Yes.  I'm just staging the commits so we can roll them out when ready=20
+and so other folks don't feel the need to send patches that are already=20
+in the queue.
 
+
+>=20
+>> =C2=A0 The base BSP part of meta-ti should work with different=20
+>> OpenEmbedded/Yocto
+>> diff --git a/meta-ti-extras/README b/meta-ti-extras/README
+>> index 1b38921a..c6c058e0 100644
+>> --- a/meta-ti-extras/README
+>> +++ b/meta-ti-extras/README
+>> @@ -8,14 +8,14 @@ This layer depends on:
+>> =C2=A0 URI: git://git.openembedded.org/openembedded-core
+>> =C2=A0 layers: meta
+>> -branch: master
+>> +branch: scarthgap
+>> =C2=A0 URI: git://git.yoctoproject.org/meta-arm
+>> =C2=A0 layers: meta-arm
+>> -branch: master
+>> +branch: scarthgap
+>> =C2=A0 URI: git://git.yoctoproject.org/meta-ti
+>> -branch: master
+>> +branch: scarthgap
+>> =C2=A0 revision: HEAD
+>> =C2=A0 layers: meta-ti-bsp
+>> --=20
+>> 2.17.1
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#17541):=20
+>> https://urldefense.com/v3/__https://lists.yoctoproject.org/g/meta-ti/m=
+essage/17541__;!!G3vK!TLlNUd7I6GKmFoyFWQDpjEqfq0fdzq1haDDMGHUgFqHg-8wP1gx=
+07t-gHXmZU56vssHGAhZx0SkT5-u3Wqr82qAQ799Alq8lSQ$
+>> Mute This Topic:=20
+>> https://urldefense.com/v3/__https://lists.yoctoproject.org/mt/10505243=
+6/7030289__;!!G3vK!TLlNUd7I6GKmFoyFWQDpjEqfq0fdzq1haDDMGHUgFqHg-8wP1gx07t=
+-gHXmZU56vssHGAhZx0SkT5-u3Wqr82qAQ79_YXsJPEA$
+>> Group Owner: meta-ti+owner@lists.yoctoproject.org
+>> Unsubscribe:=20
+>> https://urldefense.com/v3/__https://lists.yoctoproject.org/g/meta-ti/u=
+nsub__;!!G3vK!TLlNUd7I6GKmFoyFWQDpjEqfq0fdzq1haDDMGHUgFqHg-8wP1gx07t-gHXm=
+ZU56vssHGAhZx0SkT5-u3Wqr82qAQ79_lwXlpkg$=C2=A0 [c-shilwant@ti.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
+
+--=20
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
