@@ -1,105 +1,80 @@
-Return-Path: <denis@denix.org>
+Return-Path: <b-brnich@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3D5EC4345F
-	for <webhook@archiver.kernel.org>; Sun, 21 Apr 2024 19:15:06 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.2375.1713726903094204310
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 572B0C4345F
+	for <webhook@archiver.kernel.org>; Tue, 23 Apr 2024 20:12:40 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.59.1713903150537316180
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 21 Apr 2024 12:15:03 -0700
+ Tue, 23 Apr 2024 13:12:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4983440C6C;
-	Sun, 21 Apr 2024 19:15:02 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GumX6YgHoFEN; Sun, 21 Apr 2024 19:15:02 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 28AB340C2B;
-	Sun, 21 Apr 2024 19:14:59 +0000 (UTC)
-Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id E9CA2163F00;
-	Sun, 21 Apr 2024 15:14:58 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master/scarthgap/kirkstone][PATCH] wic: prevent boot FAT partition mounting under /boot
-Date: Sun, 21 Apr 2024 15:14:58 -0400
-Message-Id: <20240421191458.2221303-1-denis@denix.org>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=unoFsCaA;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: b-brnich@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43NKCTSx084398
+	for <meta-ti@lists.yoctoproject.org>; Tue, 23 Apr 2024 15:12:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1713903149;
+	bh=YN8bBbI/kWV6lMCIGqpchKW8x/3KyJh67FXrZY0T3vM=;
+	h=From:To:CC:Subject:Date;
+	b=unoFsCaAya8divHJnJFr1GT9+VahzQeEnQt+7bBiiUBzwKsCC9w51ihHWbeS0d12x
+	 84YMl0/5D3lSH6jRAoaS8tjOS2LKHFaI5Hjj/c75vLTC79JIpLSAE9absffXZ9fe0J
+	 g41T2Xo1u+NZjg0fwxVAqv7rbGS/K3Z3V5eInWrA=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43NKCTfx070626
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Tue, 23 Apr 2024 15:12:29 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 23
+ Apr 2024 15:12:29 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 23 Apr 2024 15:12:29 -0500
+Received: from udba0500997.dhcp.ti.com (udba0500997.dhcp.ti.com [128.247.81.249])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43NKCTSK027197;
+	Tue, 23 Apr 2024 15:12:29 -0500
+From: Brandon Brnich <b-brnich@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: Ryan Eatmon <reatmon@ti.com>, Brandon Brnich <b-brnich@ti.com>
+Subject: [master/scarthgap] meta-ti-bsp: cnm-wave-fw: Change target firmware name
+Date: Tue, 23 Apr 2024 15:12:17 -0500
+Message-ID: <20240423201217.3561252-1-b-brnich@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sun, 21 Apr 2024 19:15:06 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17594
+ <meta-ti@lists.yoctoproject.org>; Tue, 23 Apr 2024 20:12:40 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17595
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+Upstream driver expects Wave5 firmware to be named "wave521c_k3_codec_fw.bin".
+Driver probe fails because this compatible isn't being found.
 
-Separate FAT boot partition holds SPL, SYSFW and U-boot images, while
-rootfs places kernel images and DTBs into /boot directory. So it is not
-desirable to mount boot FAT partition into /boot directory of the rootfs
-and shadow its original content - adjust corresponding entry in wic
-templates.
-
-While at it, remove unused ondisk parameter when using use-uuid, which
-takes precedence and is more flexible.
-
-Note: boot FAT partition will be automounted at /run/media/boot-mmcblk0p1=
-/
-
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+Signed-off-by: Brandon Brnich <b-brnich@ti.com>
 ---
- meta-ti-bsp/wic/sdimage-2part-efi.wks.in | 3 ++-
- meta-ti-bsp/wic/sdimage-2part.wks        | 4 ++--
- 2 files changed, 4 insertions(+), 3 deletions(-)
+ meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/wic/sdimage-2part-efi.wks.in b/meta-ti-bsp/wic/s=
-dimage-2part-efi.wks.in
-index 2213a348..bcd08a62 100644
---- a/meta-ti-bsp/wic/sdimage-2part-efi.wks.in
-+++ b/meta-ti-bsp/wic/sdimage-2part-efi.wks.in
-@@ -2,6 +2,7 @@
- # long-description: Creates a partitioned SD card image for TI platforms=
- that
- # supports EFI.  Boot files are located in the first vfat partition with=
- extra
- # reserved space.  We cannot use a GPT here.
-+
- bootloader --timeout=3D3 --append=3D"rootfstype=3Dext4"
--part /boot --source bootimg-efi --sourceparams=3D"loader=3D${EFI_PROVIDE=
-R}" --fstype=3Dvfat --label boot --active --align 1024 --use-uuid --fixed=
--size 128M
-+part boot --source bootimg-efi --sourceparams=3D"loader=3D${EFI_PROVIDER=
-}" --fstype=3Dvfat --label boot --active --align 1024 --use-uuid --fixed-=
-size 128M
- part / --source rootfs --fstype=3Dext4 --label root --align 1024 --use-u=
-uid
-diff --git a/meta-ti-bsp/wic/sdimage-2part.wks b/meta-ti-bsp/wic/sdimage-=
-2part.wks
-index 3eab9407..247002a0 100644
---- a/meta-ti-bsp/wic/sdimage-2part.wks
-+++ b/meta-ti-bsp/wic/sdimage-2part.wks
-@@ -2,5 +2,5 @@
- # long-description: Creates a partitioned SD card image for TI platforms=
-.
- # Boot files are located in the first vfat partition with extra reserved=
- space.
-=20
--part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=3Dvfat -=
--label boot --active --align 1024 --fixed-size 128 --use-uuid
--part / --source rootfs --ondisk mmcblk0 --fstype=3Dext4 --label root --a=
-lign 1024 --use-uuid
-+part boot --source bootimg-partition --fstype=3Dvfat --label boot --acti=
-ve --align 1024 --use-uuid --fixed-size 128
-+part / --source rootfs --fstype=3Dext4 --label root --align 1024 --use-u=
-uid
---=20
-2.25.1
+diff --git a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+index 1a2e911c..b28bea92 100644
+--- a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
++++ b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+@@ -12,7 +12,7 @@ PR = "${INC_PR}.1"
+ 
+ COMPATIBLE_MACHINE = "j721s2|j784s4|j722s|am62axx|am62pxx"
+ 
+-TARGET_WAVE521C = "wave521c_codec_fw.bin"
++TARGET_WAVE521C = "wave521c_k3_codec_fw.bin"
+ 
+ SOURCE_WAVE521C = "wave521c_k3_codec_fw.bin"
+ 
+-- 
+2.34.1
 
 
