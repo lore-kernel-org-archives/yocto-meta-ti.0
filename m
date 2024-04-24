@@ -1,148 +1,109 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9D1DC10F15
-	for <webhook@archiver.kernel.org>; Wed, 24 Apr 2024 13:23:46 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web10.16322.1713965017884661616
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ABD6FC19F4E
+	for <webhook@archiver.kernel.org>; Wed, 24 Apr 2024 22:36:36 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.3086.1713998190730623297
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 24 Apr 2024 06:23:38 -0700
+ Wed, 24 Apr 2024 15:36:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=CRYZ8FKT;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43ODNb5b080775
-	for <meta-ti@lists.yoctoproject.org>; Wed, 24 Apr 2024 08:23:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1713965017;
-	bh=2FDD/bQcshqk9wSCBejtZavMiyl5zX82UPFTEG8ozK4=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=CRYZ8FKTN7wYbngEA4bV/5nNP93WK+CcEfatd41QQs6Rt/OrG4SLjeEkl/kecENcx
-	 kKVi2dTsjehd1ShhcsBXIeCdLrF0XVvnyXbexEeTbWMkmyHF75PsLrDtiBAYWE+j4o
-	 PqfriCjbhdUj4egWBw2KOUin2U4vCgHHFKgnb6w0=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43ODNbB7024434
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Wed, 24 Apr 2024 08:23:37 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 24
- Apr 2024 08:23:36 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 24 Apr 2024 08:23:36 -0500
-Received: from [10.249.35.173] ([10.249.35.173])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43ODNakg112515;
-	Wed, 24 Apr 2024 08:23:36 -0500
-Message-ID: <33f34e2b-ab8b-469e-b2f3-6261a5067428@ti.com>
-Date: Wed, 24 Apr 2024 08:23:36 -0500
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id C2F4640CAB;
+	Wed, 24 Apr 2024 22:36:29 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id zLRaPZJwbVFo; Wed, 24 Apr 2024 22:36:29 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CE6D5408CD;
+	Wed, 24 Apr 2024 22:36:26 +0000 (UTC)
+Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id 4AC84163F37;
+	Wed, 24 Apr 2024 18:36:25 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [master/scarthgap/kirkstone][PATCH v2] wic: prevent boot FAT partition mounting under /boot
+Date: Wed, 24 Apr 2024 18:36:24 -0400
+Message-Id: <20240424223624.1938639-1-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][master/scarthgap][PATCH] conf: machine: add AM69-SK
- machine configuration
-To: Aniket Limaye <a-limaye@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: <b-padhi@ti.com>
-References: <20240424083546.2190336-1-a-limaye@ti.com>
-Content-Language: en-US
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20240424083546.2190336-1-a-limaye@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 24 Apr 2024 13:23:46 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17597
+ <meta-ti@lists.yoctoproject.org>; Wed, 24 Apr 2024 22:36:36 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17598
 
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-We have consistently named the machines with -evm and not -sk.  Is there 
-a good reason to not name this am69-evm?
+Separate FAT boot partition holds SPL, SYSFW and U-boot images, while
+rootfs places kernel images and DTBs into /boot directory. So it is not
+desirable to mount boot FAT partition into /boot directory of the rootfs
+and shadow its original content - adjust corresponding entry in wic
+templates.
 
+While at it, remove unused ondisk parameter when using use-uuid, which
+takes precedence and is more flexible.
 
+Note: boot FAT partition will be automounted at /run/media/boot-mmcblk0p1=
+/
 
-On 4/24/2024 3:35 AM, Aniket Limaye wrote:
-> From: Beleswar Padhi <b-padhi@ti.com>
-> 
-> As of commits [1] and [2] in ti-u-boot-2024.04 and upstream respectively
-> there is a separate defconfig to build u-boot for j784s4-evm and am69-sk
-> 
-> Hence, introduce new yocto machine configs for am69-sk. Also remove am69
-> devicetree builds from the j784s4-evm conf
-> 
-> [1]: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2024.04&id=8a46af7a39e6218e4de5c6195697af36201c778c
-> [2]: https://source.denx.de/u-boot/u-boot/-/commit/740759d558e632e1540d620baadbcc46fdf24db2
-> 
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
-> ---
->   meta-ti-bsp/conf/machine/am69-sk-k3r5.conf | 11 +++++++++++
->   meta-ti-bsp/conf/machine/am69-sk.conf      | 20 ++++++++++++++++++++
->   meta-ti-bsp/conf/machine/j784s4-evm.conf   |  1 -
->   3 files changed, 31 insertions(+), 1 deletion(-)
->   create mode 100644 meta-ti-bsp/conf/machine/am69-sk-k3r5.conf
->   create mode 100644 meta-ti-bsp/conf/machine/am69-sk.conf
-> 
-> diff --git a/meta-ti-bsp/conf/machine/am69-sk-k3r5.conf b/meta-ti-bsp/conf/machine/am69-sk-k3r5.conf
-> new file mode 100644
-> index 00000000..9d2b4cd6
-> --- /dev/null
-> +++ b/meta-ti-bsp/conf/machine/am69-sk-k3r5.conf
-> @@ -0,0 +1,11 @@
-> +#@TYPE: Machine
-> +#@NAME: AM69 SK (R5F)
-> +#@DESCRIPTION: Machine configuration for the TI AM69 SK (R5F core)
-> +
-> +require conf/machine/include/k3r5.inc
-> +
-> +SYSFW_SOC = "j784s4"
-> +SYSFW_CONFIG = "evm"
-> +SYSFW_SUFFIX = "hs-fs"
-> +
-> +UBOOT_MACHINE = "am69_sk_r5_defconfig"
-> diff --git a/meta-ti-bsp/conf/machine/am69-sk.conf b/meta-ti-bsp/conf/machine/am69-sk.conf
-> new file mode 100644
-> index 00000000..233a4618
-> --- /dev/null
-> +++ b/meta-ti-bsp/conf/machine/am69-sk.conf
-> @@ -0,0 +1,20 @@
-> +#@TYPE: Machine
-> +#@NAME: AM69 SK
-> +#@DESCRIPTION: Machine configuration for the TI AM69 SK
-> +
-> +require conf/machine/include/j784s4.inc
-> +
-> +TFA_K3_USART = "0x8"
-> +OPTEE_K3_USART = "0x8"
-> +
-> +KERNEL_DEVICETREE_PREFIX = " \
-> +    ti/k3-am69-sk \
-> +    ti/k3-fpdlink \
-> +    ti/k3-v3link \
-> +"
-> +
-> +KERNEL_DEVICETREE = " \
-> +    ti/k3-am69-sk.dtb \
-> +"
-> +
-> +UBOOT_MACHINE = "am69_sk_a72_defconfig"
-> diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf b/meta-ti-bsp/conf/machine/j784s4-evm.conf
-> index e451bf47..6573e5c5 100644
-> --- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
-> @@ -11,7 +11,6 @@ KERNEL_DEVICETREE_PREFIX = " \
->       ti/k3-j784s4 \
->       ti/k3-fpdlink \
->       ti/k3-j7200-evm-mcspi-loopback \
-> -    ti/k3-am69-sk \
->       ti/k3-v3link \
->   "
->   
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+---
+v2 changes:
+* remove <mountpoint> from boot partition to avoid undocumented behavior
+* add explicit size specifier to --fixed-size 128M
 
--- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+ meta-ti-bsp/wic/sdimage-2part-efi.wks.in | 3 ++-
+ meta-ti-bsp/wic/sdimage-2part.wks        | 4 ++--
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/meta-ti-bsp/wic/sdimage-2part-efi.wks.in b/meta-ti-bsp/wic/s=
+dimage-2part-efi.wks.in
+index 2213a348..ca042be1 100644
+--- a/meta-ti-bsp/wic/sdimage-2part-efi.wks.in
++++ b/meta-ti-bsp/wic/sdimage-2part-efi.wks.in
+@@ -2,6 +2,7 @@
+ # long-description: Creates a partitioned SD card image for TI platforms=
+ that
+ # supports EFI.  Boot files are located in the first vfat partition with=
+ extra
+ # reserved space.  We cannot use a GPT here.
++
+ bootloader --timeout=3D3 --append=3D"rootfstype=3Dext4"
+-part /boot --source bootimg-efi --sourceparams=3D"loader=3D${EFI_PROVIDE=
+R}" --fstype=3Dvfat --label boot --active --align 1024 --use-uuid --fixed=
+-size 128M
++part --source bootimg-efi --sourceparams=3D"loader=3D${EFI_PROVIDER}" --=
+fstype=3Dvfat --label boot --active --align 1024 --use-uuid --fixed-size =
+128M
+ part / --source rootfs --fstype=3Dext4 --label root --align 1024 --use-u=
+uid
+diff --git a/meta-ti-bsp/wic/sdimage-2part.wks b/meta-ti-bsp/wic/sdimage-=
+2part.wks
+index 3eab9407..5073176e 100644
+--- a/meta-ti-bsp/wic/sdimage-2part.wks
++++ b/meta-ti-bsp/wic/sdimage-2part.wks
+@@ -2,5 +2,5 @@
+ # long-description: Creates a partitioned SD card image for TI platforms=
+.
+ # Boot files are located in the first vfat partition with extra reserved=
+ space.
+=20
+-part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=3Dvfat -=
+-label boot --active --align 1024 --fixed-size 128 --use-uuid
+-part / --source rootfs --ondisk mmcblk0 --fstype=3Dext4 --label root --a=
+lign 1024 --use-uuid
++part --source bootimg-partition --fstype=3Dvfat --label boot --active --=
+align 1024 --use-uuid --fixed-size 128M
++part / --source rootfs --fstype=3Dext4 --label root --align 1024 --use-u=
+uid
+--=20
+2.25.1
+
 
