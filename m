@@ -1,174 +1,182 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E7BCC10F15
-	for <webhook@archiver.kernel.org>; Thu, 25 Apr 2024 22:58:21 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.1257.1714085896204590336
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EC87C4345F
+	for <webhook@archiver.kernel.org>; Fri, 26 Apr 2024 19:01:08 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.4098.1714158066430340555
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 25 Apr 2024 15:58:16 -0700
+ Fri, 26 Apr 2024 12:01:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=D1nf61Pu;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PMwDmV054684;
-	Thu, 25 Apr 2024 17:58:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1714085893;
-	bh=JXGHIYe/8iwB/cK8da6E4cJNe89rjywwuPARV3zJ7ec=;
-	h=From:To:Subject:Date;
-	b=D1nf61PucH1KwEKgPl/LZPfD4sJ+3vvMZlZFf7NhsUsFUtv13fey2YYVWXZxuyH+k
-	 5DN09n2f4RMxfojlXFBelu4quI5IgxEgS3+tQ4mAft0fdiIE8HagUe4juglZcTFXUV
-	 domFGqXgNdofNBTf4jiGvokgl40hEO2Rrn3pm6Ko=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PMwDrS107443
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 25 Apr 2024 17:58:13 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- Apr 2024 17:58:13 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 Apr 2024 17:58:13 -0500
-Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PMwDB3018041;
-	Thu, 25 Apr 2024 17:58:13 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1s082f-00075e-8G; Thu, 25 Apr 2024 17:58:13 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/scarthgap][PATCH] conf: machine: Update KERNEL_DEVICETREE for mainline 32bit platforms
-Date: Thu, 25 Apr 2024 17:58:13 -0500
-Message-ID: <20240425225813.27215-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 388C540CBE;
+	Fri, 26 Apr 2024 19:01:05 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id o_af1GPteh0H; Fri, 26 Apr 2024 19:01:05 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4EC1240BE6;
+	Fri, 26 Apr 2024 19:01:01 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 0C399163F49; Fri, 26 Apr 2024 15:01:01 -0400 (EDT)
+Date: Fri, 26 Apr 2024 15:01:00 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: reatmon@ti.com
+Cc: "Limaye, Aniket" <a-limaye@ti.com>, meta-ti@lists.yoctoproject.org,
+	b-padhi@ti.com
+Subject: Re: [meta-ti][master/scarthgap][PATCH] conf: machine: add AM69-SK
+ machine configuration
+Message-ID: <20240426190100.GJ28791@denix.org>
+References: <20240424083546.2190336-1-a-limaye@ti.com>
+ <33f34e2b-ab8b-469e-b2f3-6261a5067428@ti.com>
+ <8309620e-3aed-4bae-b0f2-b6b0a98b33ca@ti.com>
+ <7e4668e3-d834-4d55-bd17-9a6a98f96251@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+In-Reply-To: <7e4668e3-d834-4d55-bd17-9a6a98f96251@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 25 Apr 2024 22:58:21 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17602
+ <meta-ti@lists.yoctoproject.org>; Fri, 26 Apr 2024 19:01:08 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17603
 
-We missed that the KERNEL_DEVICETREE should have been updated for the
-32bit platforms with the change in linux-ti-mainline to v6.6.  The new
-directory structure under arch/arm/boot/dts is in effect for that
-version.
+On Thu, Apr 25, 2024 at 02:36:10PM -0500, Ryan Eatmon via lists.yoctoproj=
+ect.org wrote:
+>=20
+>=20
+> On 4/24/2024 10:59 PM, Limaye, Aniket wrote:
+> >On 4/24/2024 6:53 PM, Ryan Eatmon wrote:
+> >>
+> >>We have consistently named the machines with -evm and not -sk.=A0
+> >>Is there a good reason to not name this am69-evm?
+> >>
+> >Well this is just following the naming convention that got
+> >accepted in u-boot:
+> >
+> >https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/configs?h=3Dti-u-boot=
+-2024.04
+> >
+> >Yeah other parts have been like "am62x_evm_*_defconfig" and such,
+> >but for am69 we have gone with "am69_sk_*_defconfig"
+> >
+> >Even the dts files for these, everywhere, have -sk suffixes.
+> >
+> >Hence the change here as well.
+>=20
+> Just because the configs in uboot have sk does not imply that the
+> machine name in meta-ti needs to have sk.  From my understanding,
+> generally the sk comes first and latest a full up evm.  But the
+> Yocto machine usually supports all of the variations and so they
+> were named with -evm to be the broadest possible name.
+>=20
+> My personal preference would be to eliminate the -evm for all of the
+> machines and just go with the soc name.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- meta-ti-bsp/conf/machine/am57xx-evm.conf   | 14 +++++++-------
- meta-ti-bsp/conf/machine/dra7xx-evm.conf   | 10 +++++-----
- meta-ti-bsp/conf/machine/include/ti33x.inc | 22 +++++++++++-----------
- meta-ti-bsp/conf/machine/include/ti43x.inc |  8 ++++----
- 4 files changed, 27 insertions(+), 27 deletions(-)
+Just make sure that won't conflict with the SoC family name, as currently=
+=20
+the part of the machine name w/o -evm is what's used for SoC name...
 
-diff --git a/meta-ti-bsp/conf/machine/am57xx-evm.conf b/meta-ti-bsp/conf/machine/am57xx-evm.conf
-index 8bcf20ea..09eb4705 100644
---- a/meta-ti-bsp/conf/machine/am57xx-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am57xx-evm.conf
-@@ -25,13 +25,13 @@ KERNEL_DEVICETREE_DTBMERGE = " \
- "
- 
- KERNEL_DEVICETREE = " \
--    am57xx-beagle-x15.dtb \
--    am57xx-beagle-x15-revb1.dtb \
--    am57xx-beagle-x15-revc.dtb \
--    am5729-beagleboneai.dtb \
--    am571x-idk.dtb \
--    am572x-idk.dtb \
--    am574x-idk.dtb \
-+    ti/omap/am57xx-beagle-x15.dtb \
-+    ti/omap/am57xx-beagle-x15-revb1.dtb \
-+    ti/omap/am57xx-beagle-x15-revc.dtb \
-+    ti/omap/am5729-beagleboneai.dtb \
-+    ti/omap/am571x-idk.dtb \
-+    ti/omap/am572x-idk.dtb \
-+    ti/omap/am574x-idk.dtb \
- "
- 
- UBOOT_MACHINE = "am57xx_evm_config"
-diff --git a/meta-ti-bsp/conf/machine/dra7xx-evm.conf b/meta-ti-bsp/conf/machine/dra7xx-evm.conf
-index 30884ae1..f9a3dd0b 100644
---- a/meta-ti-bsp/conf/machine/dra7xx-evm.conf
-+++ b/meta-ti-bsp/conf/machine/dra7xx-evm.conf
-@@ -16,11 +16,11 @@ KERNEL_DEVICETREE_PREFIX = " \
- "
- 
- KERNEL_DEVICETREE = " \
--    dra7-evm.dtb \
--    dra71-evm.dtb \
--    dra72-evm.dtb \
--    dra72-evm-revc.dtb \
--    dra76-evm.dtb \
-+    ti/omap/dra7-evm.dtb \
-+    ti/omap/dra71-evm.dtb \
-+    ti/omap/dra72-evm.dtb \
-+    ti/omap/dra72-evm-revc.dtb \
-+    ti/omap/dra76-evm.dtb \
- "
- 
- UBOOT_MACHINE = "dra7xx_evm_config"
-diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/conf/machine/include/ti33x.inc
-index d6a70895..6cd7e568 100644
---- a/meta-ti-bsp/conf/machine/include/ti33x.inc
-+++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
-@@ -25,17 +25,17 @@ KERNEL_DEVICETREE_PREFIX = " \
- "
- 
- KERNEL_DEVICETREE = " \
--    am335x-evm.dtb \
--    am335x-evmsk.dtb \
--    am335x-icev2.dtb \
--    am335x-pocketbeagle.dtb \
--    am335x-bone.dtb \
--    am335x-boneblue.dtb \
--    am335x-bonegreen.dtb \
--    am335x-bonegreen-wireless.dtb \
--    am335x-boneblack.dtb \
--    am335x-boneblack-wireless.dtb \
--    am335x-sancloud-bbe.dtb \
-+    ti/omap/am335x-evm.dtb \
-+    ti/omap/am335x-evmsk.dtb \
-+    ti/omap/am335x-icev2.dtb \
-+    ti/omap/am335x-pocketbeagle.dtb \
-+    ti/omap/am335x-bone.dtb \
-+    ti/omap/am335x-boneblue.dtb \
-+    ti/omap/am335x-bonegreen.dtb \
-+    ti/omap/am335x-bonegreen-wireless.dtb \
-+    ti/omap/am335x-boneblack.dtb \
-+    ti/omap/am335x-boneblack-wireless.dtb \
-+    ti/omap/am335x-sancloud-bbe.dtb \
- "
- 
- UBOOT_ARCH = "arm"
-diff --git a/meta-ti-bsp/conf/machine/include/ti43x.inc b/meta-ti-bsp/conf/machine/include/ti43x.inc
-index 05a28b77..ec4bd115 100644
---- a/meta-ti-bsp/conf/machine/include/ti43x.inc
-+++ b/meta-ti-bsp/conf/machine/include/ti43x.inc
-@@ -27,10 +27,10 @@ KERNEL_DEVICETREE_PREFIX = " \
- "
- 
- KERNEL_DEVICETREE = " \
--    am437x-gp-evm.dtb \
--    am437x-sk-evm.dtb \
--    am437x-idk-evm.dtb \
--    am43x-epos-evm.dtb \
-+    ti/omap/am437x-gp-evm.dtb \
-+    ti/omap/am437x-sk-evm.dtb \
-+    ti/omap/am437x-idk-evm.dtb \
-+    ti/omap/am43x-epos-evm.dtb \
- "
- 
- KERNEL_DEVICETREE += "${@oe.utils.conditional('ENABLE_TI_UIO_DEVICES', '1', 'am437x-idk-pru-excl-uio.dtb', '', d)}"
--- 
-2.17.1
 
+> But if we are going to have
+> it then I think they should be consistent.
+>=20
+>=20
+> >Regards,
+> >Aniket
+> >
+> >>
+> >>
+> >>On 4/24/2024 3:35 AM, Aniket Limaye wrote:
+> >>>From: Beleswar Padhi <b-padhi@ti.com>
+> >>>
+> >>>As of commits [1] and [2] in ti-u-boot-2024.04 and upstream respecti=
+vely
+> >>>there is a separate defconfig to build u-boot for j784s4-evm and am6=
+9-sk
+> >>>
+> >>>Hence, introduce new yocto machine configs for am69-sk. Also remove =
+am69
+> >>>devicetree builds from the j784s4-evm conf
+> >>>
+> >>>[1]: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=3Dti-u-bo=
+ot-2024.04&id=3D8a46af7a39e6218e4de5c6195697af36201c778c
+> >>>[2]: https://source.denx.de/u-boot/u-boot/-/commit/740759d558e632e15=
+40d620baadbcc46fdf24db2
+> >>>
+> >>>Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> >>>Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+> >>>---
+> >>>=A0 meta-ti-bsp/conf/machine/am69-sk-k3r5.conf | 11 +++++++++++
+> >>>=A0 meta-ti-bsp/conf/machine/am69-sk.conf=A0=A0=A0=A0=A0 | 20 ++++++=
+++++++++++++++
+> >>>=A0 meta-ti-bsp/conf/machine/j784s4-evm.conf=A0=A0 |=A0 1 -
+> >>>=A0 3 files changed, 31 insertions(+), 1 deletion(-)
+> >>>=A0 create mode 100644 meta-ti-bsp/conf/machine/am69-sk-k3r5.conf
+> >>>=A0 create mode 100644 meta-ti-bsp/conf/machine/am69-sk.conf
+> >>>
+> >>>diff --git a/meta-ti-bsp/conf/machine/am69-sk-k3r5.conf
+> >>>b/meta-ti-bsp/conf/machine/am69-sk-k3r5.conf
+> >>>new file mode 100644
+> >>>index 00000000..9d2b4cd6
+> >>>--- /dev/null
+> >>>+++ b/meta-ti-bsp/conf/machine/am69-sk-k3r5.conf
+> >>>@@ -0,0 +1,11 @@
+> >>>+#@TYPE: Machine
+> >>>+#@NAME: AM69 SK (R5F)
+> >>>+#@DESCRIPTION: Machine configuration for the TI AM69 SK (R5F core)
+> >>>+
+> >>>+require conf/machine/include/k3r5.inc
+> >>>+
+> >>>+SYSFW_SOC =3D "j784s4"
+> >>>+SYSFW_CONFIG =3D "evm"
+> >>>+SYSFW_SUFFIX =3D "hs-fs"
+> >>>+
+> >>>+UBOOT_MACHINE =3D "am69_sk_r5_defconfig"
+> >>>diff --git a/meta-ti-bsp/conf/machine/am69-sk.conf
+> >>>b/meta-ti-bsp/conf/machine/am69-sk.conf
+> >>>new file mode 100644
+> >>>index 00000000..233a4618
+> >>>--- /dev/null
+> >>>+++ b/meta-ti-bsp/conf/machine/am69-sk.conf
+> >>>@@ -0,0 +1,20 @@
+> >>>+#@TYPE: Machine
+> >>>+#@NAME: AM69 SK
+> >>>+#@DESCRIPTION: Machine configuration for the TI AM69 SK
+> >>>+
+> >>>+require conf/machine/include/j784s4.inc
+> >>>+
+> >>>+TFA_K3_USART =3D "0x8"
+> >>>+OPTEE_K3_USART =3D "0x8"
+> >>>+
+> >>>+KERNEL_DEVICETREE_PREFIX =3D " \
+> >>>+=A0=A0=A0 ti/k3-am69-sk \
+> >>>+=A0=A0=A0 ti/k3-fpdlink \
+> >>>+=A0=A0=A0 ti/k3-v3link \
+> >>>+"
+> >>>+
+> >>>+KERNEL_DEVICETREE =3D " \
+> >>>+=A0=A0=A0 ti/k3-am69-sk.dtb \
+> >>>+"
+> >>>+
+> >>>+UBOOT_MACHINE =3D "am69_sk_a72_defconfig"
+> >>>diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf
+> >>>b/meta-ti-bsp/conf/machine/j784s4-evm.conf
+> >>>index e451bf47..6573e5c5 100644
+> >>>--- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
+> >>>+++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
+> >>>@@ -11,7 +11,6 @@ KERNEL_DEVICETREE_PREFIX =3D " \
+> >>>=A0=A0=A0=A0=A0 ti/k3-j784s4 \
+> >>>=A0=A0=A0=A0=A0 ti/k3-fpdlink \
+> >>>=A0=A0=A0=A0=A0 ti/k3-j7200-evm-mcspi-loopback \
+> >>>-=A0=A0=A0 ti/k3-am69-sk \
+> >>>=A0=A0=A0=A0=A0 ti/k3-v3link \
+> >>>=A0 "
+> >>
 
