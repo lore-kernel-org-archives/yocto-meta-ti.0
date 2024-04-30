@@ -2,46 +2,46 @@ Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 095A3C10F16
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A3FCC19F53
 	for <webhook@archiver.kernel.org>; Tue, 30 Apr 2024 21:38:39 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.545.1714513111476832374
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web11.560.1714513111416430326
  for <meta-ti@lists.yoctoproject.org>;
  Tue, 30 Apr 2024 14:38:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Yz30RQQ8;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rs@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=NN0HlTmu;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: rs@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43ULcUcV050215;
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43ULcURC030657;
 	Tue, 30 Apr 2024 16:38:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1714513110;
-	bh=BGL7NmeYCtKqa9eNVrce5b1hT+r1ukNJs/8AJe1LHpk=;
+	bh=bRf6QGP7t/GyHV+S3zU43395kH6Lvu0YpfyW50/nBKw=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=Yz30RQQ8P3+NyCP+ajsfuJx4OFLFXQqVFJUQr8bTfUMSwQIZPMaJVLAiN6J6GHx5i
-	 hN75f3XEqsvsZiBVJdeOwXSSR6rjG0vARhATJHtaSTTIYwFFoBSjYIqTu7M9qAkuri
-	 XypKH1cdKEDL42a0huAk3BlTzPOZMCeFgKmuKTr0=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43ULcUMJ093864
+	b=NN0HlTmu5ZcEQSKUA900A0aajmYVx1TyDqYnYgYrIb4PEAhVkeG4z4BxXBWHWuRFD
+	 dqeQvEoS1tqwHGVwJwM1idULPaMd0B0Zuz2j+9hKWZTEAj/Cehw38w7ebCAvQaEgJE
+	 6lZjz5YopX24kTGzlVgMJHYe1XLXrz7kkZ8S4lnk=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43ULcUXc093867
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Tue, 30 Apr 2024 16:38:30 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 30
- Apr 2024 16:38:29 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 16:38:30 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Tue, 30 Apr 2024 16:38:29 -0500
 Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43ULcT63017153;
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43ULcT62017153;
 	Tue, 30 Apr 2024 16:38:29 -0500
 From: <rs@ti.com>
 To: <reatmon@ti.com>, <denys@konsulko.com>, <detheridge@ti.com>
 CC: <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/scarthgap][PATCH 2/3] mesa-pvr_23.2.1: import mesa patches from oe-core/master
-Date: Tue, 30 Apr 2024 16:38:20 -0500
-Message-ID: <20240430213821.3697267-3-rs@ti.com>
+Subject: [meta-ti][master/scarthgap][PATCH 1/3] ti-img-rogue-*: add ddk 24.1 recipes for ltsprep
+Date: Tue, 30 Apr 2024 16:38:19 -0500
+Message-ID: <20240430213821.3697267-2-rs@ti.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240430213821.3697267-1-rs@ti.com>
 References: <20240430213821.3697267-1-rs@ti.com>
@@ -53,201 +53,227 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Tue, 30 Apr 2024 21:38:39 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17619
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17618
 
 From: Randolph Sapp <rs@ti.com>
 
-Locally overlay verbatim copies of mesa 22.3.5 patches from
-oe-core/master, so we get whatever QoL patches from core relevant to the
-current release.
+Add these recipes but lock them behind ltsprep tags because they require
+device tree changes that does not work on the current default kernel for
+this layer.
 
 Signed-off-by: Randolph Sapp <rs@ti.com>
 ---
- .../0001-gallium-Fix-build-with-llvm-17.patch | 41 ++++++++++++++++++
- ...e-cmake-dependency-detector-for-llvm.patch | 42 ++++++++++++++++++
- ...sdetects-64bit-atomics-on-mips-clang.patch | 25 +++++++++++
- ...k-for-all-linux-host_os-combinations.patch | 43 +++++++++++++++++++
- 4 files changed, 151 insertions(+)
- create mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-gallium-Fix-build-with-llvm-17.patch
- create mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-meson-Disable-cmake-dependency-detector-for-llvm.patch
- create mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch
- create mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-meson.build-check-for-all-linux-host_os-combinations.patch
+ .../ti-img-rogue-driver_24.1.6554834.bb       |  44 ++++++
+ .../ti-img-rogue-umlibs_24.1.6554834.bb       | 149 ++++++++++++++++++
+ 2 files changed, 193 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb
+ create mode 100644 meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb
 
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-gallium-Fix-build-with-llvm-17.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-gallium-Fix-build-with-llvm-17.patch
+diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb
 new file mode 100644
-index 00000000..237f940f
+index 00000000..a1b76d27
 --- /dev/null
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-gallium-Fix-build-with-llvm-17.patch
-@@ -0,0 +1,41 @@
-+From 6d07f6aa7f92f40d78a2db645f16f0f3e7d3c2e8 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 23 Jun 2023 01:20:38 -0700
-+Subject: [PATCH] gallium: Fix build with llvm 17
++++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb
+@@ -0,0 +1,44 @@
++DESCRIPTION =  "Kernel drivers for the PowerVR Rogue GPU found in the TI SoCs"
++HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-driver"
++LICENSE = "MIT | GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://README;beginline=14;endline=19;md5=0403c7dea01a2b8232261e805325fac2"
 +
-+These headers are not available for C files in llvm 17+
-+and they seem to be not needed to compile after all with llvm 17
-+so add conditions to exclude them for llvm >= 17
++DEFAULT_PREFERENCE = "-1"
 +
-+Upstream-Status: Submitted [https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/23827]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++inherit module
 +
-+---
-+ src/gallium/auxiliary/gallivm/lp_bld_init.c | 6 +++++-
-+ 1 file changed, 5 insertions(+), 1 deletion(-)
++PROVIDES = "virtual/gpudriver"
 +
-+diff --git a/src/gallium/auxiliary/gallivm/lp_bld_init.c b/src/gallium/auxiliary/gallivm/lp_bld_init.c
-+index cd2108f..b1a4d03 100644
-+--- a/src/gallium/auxiliary/gallivm/lp_bld_init.c
-++++ b/src/gallium/auxiliary/gallivm/lp_bld_init.c
-+@@ -46,15 +46,19 @@
-+ #if GALLIVM_USE_NEW_PASS == 1
-+ #include <llvm-c/Transforms/PassBuilder.h>
-+ #elif GALLIVM_HAVE_CORO == 1
-++#if LLVM_VERSION_MAJOR < 17
-+ #include <llvm-c/Transforms/Scalar.h>
-+-#if LLVM_VERSION_MAJOR >= 7
-++#endif
-++#if LLVM_VERSION_MAJOR >= 7 && LLVM_VERSION_MAJOR < 17
-+ #include <llvm-c/Transforms/Utils.h>
-+ #endif
-+ #if LLVM_VERSION_MAJOR <= 8 && (DETECT_ARCH_AARCH64 || DETECT_ARCH_ARM || DETECT_ARCH_S390 || DETECT_ARCH_MIPS64)
-+ #include <llvm-c/Transforms/IPO.h>
-+ #endif
-++#if LLVM_VERSION_MAJOR < 17
-+ #include <llvm-c/Transforms/Coroutines.h>
-+ #endif
-++#endif
-+ 
-+ unsigned gallivm_perf = 0;
-+ 
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-meson-Disable-cmake-dependency-detector-for-llvm.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-meson-Disable-cmake-dependency-detector-for-llvm.patch
++MACHINE_KERNEL_PR:append = "b"
++PR = "${MACHINE_KERNEL_PR}"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|am62xx|am62pxx|j722s"
++
++DEPENDS = "virtual/kernel"
++
++BRANCH = "linuxws/scarthgap/k6.6/${PV}"
++
++SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-driver.git;protocol=https;branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
++
++SRCREV = "e2dfdfee991dadc18175f27fe9e8676e910a2f8d"
++
++TARGET_PRODUCT:j721e = "j721e_linux"
++TARGET_PRODUCT:j721s2 = "j721s2_linux"
++TARGET_PRODUCT:j784s4 = "j784s4_linux"
++TARGET_PRODUCT:am62xx = "am62_linux"
++TARGET_PRODUCT:am62pxx = "am62p_linux"
++TARGET_PRODUCT:j722s = "j722s_linux"
++PVR_BUILD = "release"
++PVR_WS = "lws-generic"
++
++EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" BUILD=${PVR_BUILD} PVR_BUILD_DIR=${TARGET_PRODUCT} WINDOW_SYSTEM=${PVR_WS}'
++
++do_install() {
++    make -C ${STAGING_KERNEL_DIR} M=${B}/binary_${TARGET_PRODUCT}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
++}
++
++RRECOMMENDS:${PN} += "ti-img-rogue-umlibs"
+diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb
 new file mode 100644
-index 00000000..4cded054
+index 00000000..df426d1a
 --- /dev/null
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-meson-Disable-cmake-dependency-detector-for-llvm.patch
-@@ -0,0 +1,42 @@
-+From 00d41cd5aa3f4b494dc276c9b4ccdc096310c91f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 28 Sep 2023 15:34:22 -0700
-+Subject: [PATCH] meson: use llvm-config instead of cmake to fix linking errors with meson 1.2.1
++++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb
+@@ -0,0 +1,149 @@
++DESCRIPTION = "Userspace libraries for PowerVR Rogue GPU on TI SoCs"
++HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-umlibs"
++LICENSE = "TI-TFL"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=7232b98c1c58f99e3baa03de5207e76f"
 +
-+meson dependency auto dependency detection uses cmake and then
-+config-tool to process dependencies, in mesa the logic to detect llvm is
-+using auto detection which means if it finds cmake then it will try to
-+use cmake method. Cmake method works ok except a case when llvm-dev
-+package is installed on the build host then it generates its own
-+native.meson file and ignores OE supplied meson.native file which has
-+correct llvm-config tool specified which is pointing to llvm-config from
-+native sysroot. The generated meson.native file points to one found in
-+/usr/bin and there onwards detector finds native install of llvm and
-+configures that into building native mesa package.
++DEFAULT_PREFERENCE = "-1"
 +
-+Since cmake detector does not always work, disable it by default and use
-+config-tool which works in all cases. This is suggested in below issues
-+too
++inherit bin_package
 +
-+A similar issue is open in meson upstream [1] and mesa [2]
++INHIBIT_DEFAULT_DEPS = ""
 +
-+[1] https://github.com/mesonbuild/meson/issues/10483
-+[2] https://gitlab.freedesktop.org/mesa/mesa/-/issues/6738
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|am62xx|am62pxx|j722s"
 +
-+Upstream-Status: Submitted [https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/25438]
++PR = "r3"
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ meson.build | 1 +
-+ 1 file changed, 1 insertion(+)
++BRANCH = "linuxws/scarthgap/k6.6/${PV}"
++SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-umlibs.git;protocol=https;branch=${BRANCH}"
++SRCREV = "e473234158c736248cf71a60080b7faf76fca561"
++S = "${WORKDIR}/git/targetfs/${TARGET_PRODUCT}/${PVR_WS}/${PVR_BUILD}"
 +
-+--- a/meson.build
-++++ b/meson.build
-+@@ -1659,6 +1659,7 @@ with_llvm = false
-+ if _llvm.allowed()
-+   dep_llvm = dependency(
-+     'llvm',
-++    method : host_machine.system() == 'windows' ? 'auto' : 'config-tool',
-+     version : _llvm_version,
-+     modules : llvm_modules,
-+     optional_modules : llvm_optional_modules,
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch
-new file mode 100644
-index 00000000..9cd9bee2
---- /dev/null
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch
-@@ -0,0 +1,25 @@
-+From 3ef37c63f03ad6f2af407de350486fdd25e9132a Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 13 Jan 2020 15:23:47 -0800
-+Subject: [PATCH] meson misdetects 64bit atomics on mips/clang
++TARGET_PRODUCT:j721e = "j721e_linux"
++TARGET_PRODUCT:j721s2 = "j721s2_linux"
++TARGET_PRODUCT:j784s4 = "j784s4_linux"
++TARGET_PRODUCT:am62xx = "am62_linux"
++TARGET_PRODUCT:am62pxx = "am62p_linux"
++TARGET_PRODUCT:j722s = "j722s_linux"
++PVR_BUILD = "release"
++PVR_WS = "lws-generic"
 +
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++RDEPENDS:${PN} = " \
++    libdrm \
++    ti-img-rogue-driver \
++    ${PN}-firmware \
++"
 +
-+---
-+ src/util/u_atomic.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++PACKAGECONFIG ?= " \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'vulkan wayland', 'vulkan', '', d)} \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl opencl', d)} \
++"
 +
-+diff --git a/src/util/u_atomic.c b/src/util/u_atomic.c
-+index 5a5eab4..e499516 100644
-+--- a/src/util/u_atomic.c
-++++ b/src/util/u_atomic.c
-+@@ -21,7 +21,7 @@
-+  * IN THE SOFTWARE.
-+  */
-+ 
-+-#if defined(MISSING_64BIT_ATOMICS) && defined(HAVE_PTHREAD)
-++#if !defined(__clang__) && defined(MISSING_64BIT_ATOMICS) && defined(HAVE_PTHREAD)
-+ 
-+ #include <stdint.h>
-+ #include <pthread.h>
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-meson.build-check-for-all-linux-host_os-combinations.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-meson.build-check-for-all-linux-host_os-combinations.patch
-new file mode 100644
-index 00000000..a555c5f8
---- /dev/null
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1/0001-meson.build-check-for-all-linux-host_os-combinations.patch
-@@ -0,0 +1,43 @@
-+From b251af67df5a6840d2e9cc06edae2c387f8778f1 Mon Sep 17 00:00:00 2001
-+From: Alistair Francis <alistair@alistair23.me>
-+Date: Thu, 14 Nov 2019 13:04:49 -0800
-+Subject: [PATCH] meson.build: check for all linux host_os combinations
++PACKAGECONFIG[opengl] = ",,,,${GLES_PACKAGES}"
++PACKAGECONFIG[vulkan] = ",,,,${VULKAN_PACKAGES}"
++PACKAGECONFIG[opencl] = ",,,,${OPENCL_PACKAGES}"
 +
-+Make sure that we are also looking for our host_os combinations like
-+linux-musl etc. when assuming support for DRM/KMS.
++def get_file_list(package_list_var, d):
++    file_list = []
++    package_list = d.getVar(package_list_var)
++    prefix = f"{d.getVar('S')}/"
++    if package_list:
++        for package in package_list.split():
++            package_file_string = d.getVar(f"FILES:{package}")
++            if package_file_string:
++                for package_file in package_file_string.split():
++                    file_list.append(f"{prefix}{package_file}")
++    return " ".join(file_list)
 +
-+Also delete a duplicate line.
++do_install:prepend() {
++    if ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'false', 'true', d)}; then
++        for file in ${@get_file_list('GLES_PACKAGES',  d)}; do
++            rm -rf ${file}
++        done
++    fi
++    if ${@bb.utils.contains('PACKAGECONFIG', 'vulkan', 'false', 'true', d)}; then
++        for file in ${@get_file_list('VULKAN_PACKAGES', d)}; do
++            rm -rf ${file}
++        done
++    fi
++    if ${@bb.utils.contains('PACKAGECONFIG', 'opencl', 'false', 'true', d)}; then
++        for file in ${@get_file_list('OPENCL_PACKAGES', d)}; do
++            rm -rf ${file}
++        done
++    fi
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'false', d)}; then
++        if [ -e ${S}/lib/firmware ]; then
++            mv ${S}/lib/firmware ${S}${nonarch_base_libdir}
++        fi
++    fi
 +
-+Upstream-Status: Pending
++    # clean up any empty directories
++    find "${S}" -empty -type d -delete
++}
 +
-+Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
-+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-+Signed-off-by: Alistair Francis <alistair@alistair23.me>
++GLES_PACKAGES = "libgles1-rogue libgles2-rogue libgles3-rogue"
++VULKAN_PACKAGES = "libvk-rogue"
++OPENCL_PACKAGES = "libopencl-rogue libopencl-rogue-tools"
 +
-+---
-+ meson.build | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++PACKAGES = " \
++    ${@bb.utils.contains('PACKAGECONFIG', 'opengl', d.getVar('GLES_PACKAGES'), '', d)} \
++    ${@bb.utils.contains('PACKAGECONFIG', 'vulkan', d.getVar('VULKAN_PACKAGES'), '', d)} \
++    ${@bb.utils.contains('PACKAGECONFIG', 'opencl', d.getVar('OPENCL_PACKAGES'), '', d)} \
++    ${PN}-tools \
++    ${PN}-firmware \
++    ${PN} \
++"
 +
-+diff --git a/meson.build b/meson.build
-+index 22385d8..15f48a6 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -121,7 +121,7 @@ with_any_opengl = with_opengl or with_gles1 or with_gles2
-+ # Only build shared_glapi if at least one OpenGL API is enabled
-+ with_shared_glapi = with_shared_glapi and with_any_opengl
-+ 
-+-system_has_kms_drm = ['openbsd', 'netbsd', 'freebsd', 'gnu/kfreebsd', 'dragonfly', 'linux', 'sunos', 'android'].contains(host_machine.system())
-++system_has_kms_drm = ['openbsd', 'netbsd', 'freebsd', 'gnu/kfreebsd', 'dragonfly', 'linux', 'sunos', 'android'].contains(host_machine.system()) or host_machine.system().startswith('linux')
-+ 
-+ gallium_drivers = get_option('gallium-drivers')
-+ if gallium_drivers.contains('auto')
-+@@ -909,7 +909,7 @@ if cc.has_function('fmemopen')
-+ endif
-+ 
-+ # TODO: this is very incomplete
-+-if ['linux', 'cygwin', 'gnu', 'freebsd', 'gnu/kfreebsd', 'haiku', 'android'].contains(host_machine.system())
-++if ['linux', 'cygwin', 'gnu', 'freebsd', 'gnu/kfreebsd', 'haiku'].contains(host_machine.system()) or host_machine.system().startswith('linux')
-+   pre_args += '-D_GNU_SOURCE'
-+ elif host_machine.system() == 'sunos'
-+   pre_args += '-D__EXTENSIONS__'
++# Inject variables so that packages don't get Debian-renamed (which would
++# remove the -rogue suffix), but don't RPROVIDEs/RCONFLICTs on the generic
++# libgl name to prevent colliding with swrast libs
++python __anonymous() {
++    suffix = ""
++    if "-native" in d.getVar("PN"):
++        suffix = "-native"
++    for p in (("vulkan", "libvk",),
++              ("gles", "libgles1", "libglesv1-cm1"),
++              ("gles", "libgles2", "libglesv2-2"),
++              ("gles", "libgles3",),
++              ("opencl", "libopencl",)):
++        mlprefix = d.getVar("MLPREFIX")
++        fullp = mlprefix + p[1] + "-rogue" + suffix
++        mlprefix = d.getVar("MLPREFIX")
++        pkgs = " " + " ".join(mlprefix + x + suffix for x in p[1:])
++        d.setVar("DEBIAN_NOAUTONAME:" + fullp, "1")
++        d.setVar("INSANE_SKIP:" + fullp, "dev-so ldflags")
++        d.appendVar("RRECOMMENDS:" + fullp, " ${MLPREFIX}ti-img-rogue-umlibs" + suffix)
++}
++
++# gles specific shared objects
++FILES:libgles1-rogue = "${libdir}/libGLESv1*.so*"
++FILES:libgles2-rogue = "${libdir}/libGLESv2*.so*"
++RDEPENDS:libgles1-rogue += "mesa-megadriver"
++RDEPENDS:libgles2-rogue += "mesa-megadriver"
++
++# vulkan specific shared objects and configs
++FILES:libvk-rogue = "${libdir}/libVK_IMG.so* ${datadir}/vulkan"
++RDEPENDS:libvk-rogue += "vulkan-loader wayland libdrm"
++
++# opencl specific shared objects and configs
++FILES:libopencl-rogue = "${libdir}/libPVROCL.so* ${sysconfdir}/OpenCL"
++RDEPENDS:libopencl-rogue += "opencl-icd-loader"
++RRECOMMENDS:libopencl-rogue += "libopencl-rogue-tools"
++FILES:libopencl-rogue-tools += "${bindir}/ocl*"
++DEBIAN_NOAUTONAME:libopencl-rogue-tools = "1"
++
++# optional tools and tests
++FILES:${PN}-tools = "${bindir}/"
++RDEPENDS:${PN}-tools = "python3-core ${PN}"
++INSANE_SKIP:${PN}-tools = "ldflags"
++RDEPENDS:${PN}-tools = "libdrm"
++
++# required firmware
++FILES:${PN}-firmware = "${base_libdir}/firmware/*"
++INSANE_SKIP:${PN}-firmware += "arch"
++
++RRECOMMENDS:${PN} += " \
++    ${PN}-tools \
++"
++
++INSANE_SKIP:${PN} += "already-stripped dev-so ldflags"
 -- 
 2.44.0
 
