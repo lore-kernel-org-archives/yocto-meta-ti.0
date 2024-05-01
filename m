@@ -1,143 +1,178 @@
-Return-Path: <denis@denix.org>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDC37C4345F
-	for <webhook@archiver.kernel.org>; Wed,  1 May 2024 16:47:15 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.1396.1714582034616049618
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87E93C4345F
+	for <webhook@archiver.kernel.org>; Wed,  1 May 2024 19:53:16 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web11.6271.1714593190489364932
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 01 May 2024 09:47:15 -0700
+ Wed, 01 May 2024 12:53:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id A0E0E40C79;
-	Wed,  1 May 2024 16:47:13 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id mcxPkEV2rbgO; Wed,  1 May 2024 16:47:13 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 56B4540BE6;
-	Wed,  1 May 2024 16:47:08 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id EBEB2163F54; Wed,  1 May 2024 12:47:07 -0400 (EDT)
-Date: Wed, 1 May 2024 12:47:07 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: rs@ti.com
-Cc: reatmon@ti.com, denys@konsulko.com, detheridge@ti.com,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][master/scarthgap][PATCH 3/3] mesa-pvr_23.2.1: add
- recipe for 23.2.1
-Message-ID: <20240501164707.GR28791@denix.org>
-References: <20240430213821.3697267-1-rs@ti.com>
- <20240430213821.3697267-4-rs@ti.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=PNAp/ftd;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: afd@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 441Jr5jf074879;
+	Wed, 1 May 2024 14:53:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1714593185;
+	bh=tTTQ+FY/jRX73wnImUmFAubPWj64AiJdjVLk5Zs8v28=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=PNAp/ftdWL+EwIHdS3gvRy1g2U2GXFDO/XdFIHCPOZ7K1wP7kgqW4zWksu9ZZ7k96
+	 5m5qkBnCJSd09qlp6+CtNnXABVhjRTokxwqHSavfJwXDg0/U6lghFkmU6lOBx5F1IW
+	 sGOJJrHOBMoj8HujRSLeRZJF6NtKGrO+NFBOVZIY=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 441Jr4uA122801
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 1 May 2024 14:53:04 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 1
+ May 2024 14:53:04 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 1 May 2024 14:53:04 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 441Jr442128615;
+	Wed, 1 May 2024 14:53:04 -0500
+Message-ID: <f961021c-eaba-4aad-bce5-9f63c9571349@ti.com>
+Date: Wed, 1 May 2024 14:53:04 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240430213821.3697267-4-rs@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti][master/scarthgap][PATCH v2] conf: machine: am69-sk:
+ Create a new am69.inc file
+To: <reatmon@ti.com>, Denys Dmytriyenko <denis@denix.org>
+CC: Praneeth Bajjuri <praneeth@ti.com>, <meta-ti@lists.yoctoproject.org>
+References: <20240430195811.2512-1-reatmon@ti.com>
+ <20240430204730.GQ28791@denix.org>
+ <0befc90e-4107-4a27-90c8-09caa961cce7@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <0befc90e-4107-4a27-90c8-09caa961cce7@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0015.ext.ti.com id 441Jr5jf074879
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 01 May 2024 16:47:15 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17621
+ <meta-ti@lists.yoctoproject.org>; Wed, 01 May 2024 19:53:16 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17622
 
-On Tue, Apr 30, 2024 at 04:38:21PM -0500, Randolph Sapp via lists.yoctoproject.org wrote:
-> From: Randolph Sapp <rs@ti.com>
-> 
-> Add a recipe for mesa-pvr to use a newer branch based on mesa 23.2.1.
-> This branch does not currently contain SGX patches so it is also being
-> masked by the ltsprep branding to prevent regressing those devices
-> currently.
-> 
-> Please note that because this recipe is currently in
-> SIGGEN_EXCLUDERECIPES_ABISAFE you may run into sstate errors when
-> switching away from the ltsprep tag.
-
-This is less specific to SIGGEN_EXCLUDERECIPES_ABISAFE and more generic to 
-any time you downgrade a component version while having a local sstate with 
-a new version (and use a PR server as well) - it will show "Version going 
-backwards" errors.
-
-
-> Please issue a clean to mesa and
-> ti-img-rogue-umlibs if you get warnings from either package's
-> do_create_runtime_spdx step.
-> 
-> Signed-off-by: Randolph Sapp <rs@ti.com>
+On 4/30/24 4:03 PM, Ryan Eatmon via lists.yoctoproject.org wrote:
+>=20
+>=20
+> On 4/30/2024 3:47 PM, Denys Dmytriyenko wrote:
+>> On Tue, Apr 30, 2024 at 02:58:11PM -0500, Ryan Eatmon via lists.yoctop=
+roject.org wrote:
+>>> Reusing the j784s4.inc file presents problems as the am69-sk platform
+>>> does not support GP.=C2=A0 So copy the j784s4.inc to am69.inc and upd=
+ate
+>>> accordingly.
+>>
+>> Any chance to get this as a diff against j784s4.inc to simplify the re=
+view?
+>> Maybe by playing with -C and -M options?
+>=20
+> Here is the diff:
+>=20
+>  > diff meta-ti-bsp/conf/machine/include/am69.inc meta-ti-bsp/conf/mach=
+ine/include/j784s4.inc
+> 9c9,12
+> < # Default tiboot3.bin on AM69 is for SR1.0 HS-FS
 > ---
->  .../recipes-graphics/mesa/mesa-pvr_23.2.1.bb  | 59 +++++++++++++++++++
->  1 file changed, 59 insertions(+)
->  create mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-> 
-> diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-> new file mode 100644
-> index 00000000..c83ba87d
-> --- /dev/null
-> +++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-> @@ -0,0 +1,59 @@
-> +# PowerVR Graphics require several patches that have not made their way
-> +# upstream yet. This allows us to build the shims we need without completely
-> +# clobbering mesa.
-> +
-> +DEFAULT_PREFERENCE = "-1"
-> +FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}_${PV}:"
-> +
-> +require recipes-graphics/mesa/mesa.inc
-> +
-> +SUMMARY += " (with PowerVR support for TI platforms)"
-> +
-> +LIC_FILES_CHKSUM = "file://docs/license.rst;md5=63779ec98d78d823a9dc533a0735ef10"
-> +
-> +BRANCH = "powervr/${PV}"
-> +
-> +SRC_URI = " \
-> +    git://gitlab.freedesktop.org/StaticRocket/mesa.git;protocol=https;branch=${BRANCH} \
-> +    file://0001-meson.build-check-for-all-linux-host_os-combinations.patch \
-> +    file://0001-meson-misdetects-64bit-atomics-on-mips-clang.patch \
-> +    file://0001-gallium-Fix-build-with-llvm-17.patch \
-> +    file://0001-meson-Disable-cmake-dependency-detector-for-llvm.patch \
-> +"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +PACKAGECONFIG:append = " \
-> +    ${@bb.utils.contains('PREFERRED_PROVIDER_virtual/gpudriver', 'ti-img-rogue-driver', 'pvr', '', d)} \
-> +    ${@bb.utils.contains('PREFERRED_PROVIDER_virtual/gpudriver', 'ti-sgx-ddk-km', 'sgx', '', d)} \
-> +"
-> +
-> +SRCREV = "b12290126ba6a154f0e8b0a8c8b2b0d64f98e427"
-> +
-> +PVR_DISPLAY_CONTROLLER_ALIAS ??= "tidss"
-> +PACKAGECONFIG[pvr] = "-Dgallium-pvr-alias=${PVR_DISPLAY_CONTROLLER_ALIAS},"
-> +PACKAGECONFIG[sgx] = "-Dgallium-sgx-alias=${PVR_DISPLAY_CONTROLLER_ALIAS},"
-> +
-> +PACKAGECONFIG:remove = "video-codecs"
-> +PACKAGECONFIG[video-codecs] = ""
-> +PACKAGECONFIG:remove = "elf-tls"
-> +PACKAGECONFIG[elf-tls] = ""
-> +PACKAGECONFIG:remove = "xvmc"
-> +PACKAGECONFIG[xvmc] = ""
-> +
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +GALLIUMDRIVERS:append = "${@bb.utils.contains('PACKAGECONFIG', 'pvr', ',pvr', '', d)}"
-> +GALLIUMDRIVERS:append = "${@bb.utils.contains('PACKAGECONFIG', 'sgx', ',sgx', '', d)}"
-> +
-> +VULKAN_DRIVERS:append = "${@bb.utils.contains('PACKAGECONFIG', 'pvr', ',pvr', '', d)}"
-> +
-> +do_install:append () {
-> +    # remove pvr custom pkgconfig
-> +    rm -rf ${D}${datadir}/pkgconfig
-> +}
-> +
-> +FILES:${PN}-dev += "${datadir}/mesa/wayland-drm.xml"
-> +FILES:mesa-vulkan-drivers += "${libdir}/libpvr_mesa_wsi.so"
-> +
-> +RRECOMMENDS:mesa-megadriver:append:class-target = " ${@d.getVar('PREFERRED_PROVIDER_virtual/gpudriver')}"
-> -- 
-> 2.44.0
-> 
+>  > # Default tiboot3.bin on J784S4 is for GP
+>  > IMAGE_BOOT_FILES +=3D "tiboot3-j784s4-gp-evm.bin"
+
+Could we include j784s4.inc from am69.inc, should be some way to remove t=
+hat one
+item from IMAGE_BOOT_FILES (maybe?).
+
+Andrew
+
+>  >
+>  > # Since default tiboot3.bin on J784S4 is for GP, add a version for S=
+R1.0 HS-FS
+> 12c15
+> < # Since default tiboot3.bin on AM69 is for HS-FS, add a version for S=
+R1.0 HS-SE
+> ---
+>  > # Since default tiboot3.bin on J784S4 is for GP, add a version for S=
+R1.0 HS-SE
+>=20
+>=20
+> Effectively removing a line and changing some of the comments.
+>=20
+>=20
+>=20
+>=20
+>=20
+>>
+>>> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+>>> ---
+>>> v2: Fix commit message.
+>>>
+>>> =C2=A0 meta-ti-bsp/conf/machine/am69-sk.conf=C2=A0=C2=A0=C2=A0=C2=A0 =
+|=C2=A0 2 +-
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/am69.inc | 19 +++++++++++++++=
+++++
+>>> =C2=A0 2 files changed, 20 insertions(+), 1 deletion(-)
+>>> =C2=A0 create mode 100644 meta-ti-bsp/conf/machine/include/am69.inc
+>>>
+>>> diff --git a/meta-ti-bsp/conf/machine/am69-sk.conf b/meta-ti-bsp/conf=
+/machine/am69-sk.conf
+>>> index 233a4618..6341a6fa 100644
+>>> --- a/meta-ti-bsp/conf/machine/am69-sk.conf
+>>> +++ b/meta-ti-bsp/conf/machine/am69-sk.conf
+>>> @@ -2,7 +2,7 @@
+>>> =C2=A0 #@NAME: AM69 SK
+>>> =C2=A0 #@DESCRIPTION: Machine configuration for the TI AM69 SK
+>>> -require conf/machine/include/j784s4.inc
+>>> +require conf/machine/include/am69.inc
+>>> =C2=A0 TFA_K3_USART =3D "0x8"
+>>> =C2=A0 OPTEE_K3_USART =3D "0x8"
+>>> diff --git a/meta-ti-bsp/conf/machine/include/am69.inc b/meta-ti-bsp/=
+conf/machine/include/am69.inc
+>>> new file mode 100644
+>>> index 00000000..81be1397
+>>> --- /dev/null
+>>> +++ b/meta-ti-bsp/conf/machine/include/am69.inc
+>>> @@ -0,0 +1,19 @@
+>>> +require conf/machine/include/k3.inc
+>>> +SOC_FAMILY:append =3D ":j784s4"
+>>> +
+>>> +MACHINE_FEATURES +=3D "screen gpu"
+>>> +
+>>> +require conf/machine/include/mesa-pvr.inc
+>>> +PREFERRED_PROVIDER_virtual/gpudriver ?=3D "ti-img-rogue-driver"
+>>> +
+>>> +# Default tiboot3.bin on AM69 is for SR1.0 HS-FS
+>>> +IMAGE_BOOT_FILES +=3D "tiboot3-j784s4-hs-fs-evm.bin"
+>>> +
+>>> +# Since default tiboot3.bin on AM69 is for HS-FS, add a version for =
+SR1.0 HS-SE
+>>> +IMAGE_BOOT_FILES +=3D "tiboot3-j784s4-hs-evm.bin"
+>>> +
+>>> +TFA_BOARD =3D "j784s4"
+>>> +
+>>> +OPTEEMACHINE =3D "k3-j784s4"
+>>> +
+>>> +MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "cadence-mhdp-fw cnm-wave-f=
+w ti-eth-fw"
+>>> --=20
+>>> 2.17.1
+>=20
+>=20
+>=20
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#17616): https://lists.yoctoproject.org/g/meta-ti/me=
+ssage/17616
+> Mute This Topic: https://lists.yoctoproject.org/mt/105828549/3619733
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [afd@ti.com=
+]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>=20
 
