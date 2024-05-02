@@ -2,180 +2,214 @@ Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9451AC4345F
-	for <webhook@archiver.kernel.org>; Thu,  2 May 2024 18:30:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B65A4C4345F
+	for <webhook@archiver.kernel.org>; Thu,  2 May 2024 18:38:40 +0000 (UTC)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web10.2242.1714674644441060819
+ by mx.groups.io with SMTP id smtpd.web10.2442.1714675116003299212
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 02 May 2024 11:30:44 -0700
+ Thu, 02 May 2024 11:38:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=K9vCPyXq;
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=EshZIwRL;
  spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: rs@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 442IUeYl106048;
-	Thu, 2 May 2024 13:30:40 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 442IcWan108807;
+	Thu, 2 May 2024 13:38:32 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1714674640;
-	bh=YQfLcm5nu65nDm8+cQwwBNRYgorK/z451SzG5uMcJ84=;
-	h=Date:Subject:From:To:CC:References:In-Reply-To;
-	b=K9vCPyXqxwFZVdnfLThBOoy3M3J4fvTbRX4odHTydvZiPnS8qt0AZwaTkaGoG/Gvb
-	 G1aPKlVV5qHCFFd9RLV+MQFZMUhZtusSA9tDb44pHwI8765y87+uPPYVzQLCosVx16
-	 HSSoWuCJibDhE7R2EDnrnHw5wY204Uy+sz9iqPDQ=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 442IUeil033874
+	s=ti-com-17Q1; t=1714675112;
+	bh=bhl6M0E2Lzqj4FoZVRdiUOJkC1jeKuNsuRWEH4fCa8I=;
+	h=Date:Subject:From:To:References:In-Reply-To;
+	b=EshZIwRLZG6ifWxd6PJYv60xzXrNf+PVGy2BH8abj9/N/f3QF0fneJMns2JI9/Xss
+	 Mjvxe80Ea5EeOv1hfxbFmGHQH4D4uGa0+x7qRbt9fAJPuzV64/+LFkif+0tWk6QlP6
+	 JIIwInoGoGrD1Cjrv7loYDEjGflnB5HU+7bm5wc8=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 442IcWoG005517
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 2 May 2024 13:30:40 -0500
-Received: from flwvowa02.ent.ti.com (10.64.41.53) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 2 May 2024 13:38:32 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 2
- May 2024 13:30:40 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by flwvowa02.ent.ti.com
- (10.64.41.53) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2507.34; Thu, 2 May
- 2024 13:30:40 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ May 2024 13:38:32 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 2 May 2024 13:30:40 -0500
+ Frontend Transport; Thu, 2 May 2024 13:38:32 -0500
 Received: from localhost ([10.249.35.9])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 442IUdZb103734;
-	Thu, 2 May 2024 13:30:40 -0500
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 442IcWUZ116601;
+	Thu, 2 May 2024 13:38:32 -0500
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="UTF-8"
-Date: Thu, 2 May 2024 13:30:39 -0500
-Message-ID: <D0ZDFJ3S2QWY.28B324X3VV6XF@ti.com>
-Subject: Re: [meta-ti] [master/scarthgap][PATCH 3/3] mesa-pvr_23.2.1: add
- recipe for 23.2.1
+Date: Thu, 2 May 2024 13:38:32 -0500
+Message-ID: <D0ZDLK4PIYPK.2XGBECV3OKLZ9@ti.com>
+Subject: Re: [meta-ti] [master/scarthgap][PATCH 1/3] ti-img-rogue-*: add ddk
+ 24.1 recipes for ltsprep
 From: Randolph Sapp <rs@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <meta-ti@lists.yoctoproject.org>
+To: <rs@ti.com>, Denys Dmytriyenko <denis@denix.org>,
+        <meta-ti@lists.yoctoproject.org>
 X-Mailer: aerc 0.17.0
-References: <20240502002621.3456112-1-denis@denix.org>
- <17CB845523E152B6.4497@lists.yoctoproject.org>
- <20240502030616.GU28791@denix.org> <D0ZCJSP19XGP.20XFQ3HQIS1X6@ti.com>
- <20240502182023.GV28791@denix.org>
-In-Reply-To: <20240502182023.GV28791@denix.org>
+References: <17CB8455266768D4.4497@lists.yoctoproject.org>
+ <20240502030152.GT28791@denix.org>
+ <17CBBDC7EBB3B94C.12650@lists.yoctoproject.org>
+In-Reply-To: <17CBBDC7EBB3B94C.12650@lists.yoctoproject.org>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 02 May 2024 18:30:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17634
+ <meta-ti@lists.yoctoproject.org>; Thu, 02 May 2024 18:38:40 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17635
 
-On Thu May 2, 2024 at 1:20 PM CDT, Denys Dmytriyenko wrote:
-> On Thu, May 02, 2024 at 12:49:13PM -0500, Randolph Sapp wrote:
-> > On Wed May 1, 2024 at 10:06 PM CDT, Denys Dmytriyenko wrote:
-> > > On Wed, May 01, 2024 at 08:26:21PM -0400, Denys Dmytriyenko wrote:
-> > > > From: Randolph Sapp <rs@ti.com>
-> > > >=20
-> > > > Add a recipe for mesa-pvr to use a newer branch based on mesa 23.2.=
-1.
-> > > > This branch does not currently contain SGX patches so it is also be=
-ing
-> > > > masked by the ltsprep branding to prevent regressing those devices
-> > > > currently.
-> > > >=20
-> > > > Please note that because this recipe is currently in
-> > > > SIGGEN_EXCLUDERECIPES_ABISAFE you may run into sstate errors when
-> > > > switching away from the ltsprep tag. Please issue a clean to mesa a=
-nd
-> > > > ti-img-rogue-umlibs if you get warnings from either package's
-> > > > do_create_runtime_spdx step.
-> > > >=20
-> > > > Signed-off-by: Randolph Sapp <rs@ti.com>
-> > > > Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> > > > ---
-> > > >  .../mesa/{mesa-pvr_22.3.5.bb =3D> mesa-pvr_23.2.1.bb}  | 12 ++++++=
-------
-> > > >  1 file changed, 6 insertions(+), 6 deletions(-)
-> > > >  copy meta-ti-bsp/recipes-graphics/mesa/{mesa-pvr_22.3.5.bb =3D> me=
-sa-pvr_23.2.1.bb} (83%)
-> > > >=20
-> > > > diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb b=
-/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-> > > > similarity index 83%
-> > > > copy from meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb
-> > > > copy to meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-> > > > index 5abd0793..c83ba87d 100644
-> > > > --- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb
-> > > > +++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-> > > > @@ -2,23 +2,23 @@
-> > > >  # upstream yet. This allows us to build the shims we need without =
-completely
-> > > >  # clobbering mesa.
-> > > > =20
-> > > > +DEFAULT_PREFERENCE =3D "-1"
-> > > > +FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}_${PV}:"
-> > >
-> > > This is wrong - ${PN}-${PV} is one of the default locations for patch=
-es,=20
-> > > not ${PN}_${PV}.
-> > >
-> >=20
-> >=20
-> > Huh. Checking oe-core/meta/classes-global/base.bbclass and the document=
-ation it
-> > doesn't look like it but dumping the variables at runtime, you seem to =
-be
-> > right...
-> >=20
-> > Wonder what's appending that. I'll spin up a new revision.
+On Thu May 2, 2024 at 12:59 PM CDT, Randolph Sapp via lists.yoctoproject.or=
+g wrote:
+> On Wed May 1, 2024 at 10:01 PM CDT, Denys Dmytriyenko wrote:
+> > Reformatted to be a diff against the previous version to spot the actua=
+l=20
+> > changes and spot any issues. See below.
+> >
+> >
+> > On Wed, May 01, 2024 at 08:26:19PM -0400, Denys Dmytriyenko wrote:
+> > > From: Randolph Sapp <rs@ti.com>
+> > >=20
+> > > Add these recipes but lock them behind ltsprep tags because they requ=
+ire
+> > > device tree changes that does not work on the current default kernel =
+for
+> > > this layer.
+> > >=20
+> > > Signed-off-by: Randolph Sapp <rs@ti.com>
+> > > Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> > > ---
+> > >  ....6512818.bb =3D> ti-img-rogue-driver_24.1.6554834.bb} |  4 +++-
+> > >  ....6512818.bb =3D> ti-img-rogue-umlibs_24.1.6554834.bb} | 10 ++++++=
++---
+> > >  2 files changed, 10 insertions(+), 4 deletions(-)
+> > >  copy meta-ti-bsp/recipes-bsp/powervr-drivers/{ti-img-rogue-driver_23=
+.3.6512818.bb =3D> ti-img-rogue-driver_24.1.6554834.bb} (94%)
+> > >  copy meta-ti-bsp/recipes-graphics/powervr-umlibs/{ti-img-rogue-umlib=
+s_23.3.6512818.bb =3D> ti-img-rogue-umlibs_24.1.6554834.bb} (94%)
+> > >=20
+> > > diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-dri=
+ver_23.3.6512818.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-=
+driver_24.1.6554834.bb
+> > > similarity index 94%
+> > > copy from meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver=
+_23.3.6512818.bb
+> > > copy to meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_2=
+4.1.6554834.bb
+> > > index 02ec9fe9..a1b76d27 100644
+> > > --- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.=
+3.6512818.bb
+> > > +++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.=
+1.6554834.bb
+> > > @@ -3,6 +3,8 @@ HOMEPAGE =3D "http://git.ti.com/graphics/ti-img-rogue=
+-driver"
+> > >  LICENSE =3D "MIT | GPL-2.0-only"
+> > >  LIC_FILES_CHKSUM =3D "file://README;beginline=3D14;endline=3D19;md5=
+=3D0403c7dea01a2b8232261e805325fac2"
+> > > =20
+> > > +DEFAULT_PREFERENCE =3D "-1"
+> > > +
+> > >  inherit module
+> > > =20
+> > >  PROVIDES =3D "virtual/gpudriver"
+> > > @@ -22,7 +24,7 @@ SRC_URI =3D "git://git.ti.com/git/graphics/ti-img-r=
+ogue-driver.git;protocol=3Dhttps;
+> > > =20
+> > >  S =3D "${WORKDIR}/git"
+> > > =20
+> > > -SRCREV =3D "2f409b4dd2540e896b54bff02219d4fc51129b81"
+> > > +SRCREV =3D "e2dfdfee991dadc18175f27fe9e8676e910a2f8d"
+> > > =20
+> > >  TARGET_PRODUCT:j721e =3D "j721e_linux"
+> > >  TARGET_PRODUCT:j721s2 =3D "j721s2_linux"
+> > > diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue=
+-umlibs_23.3.6512818.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-im=
+g-rogue-umlibs_24.1.6554834.bb
+> > > similarity index 94%
+> > > copy from meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-um=
+libs_23.3.6512818.bb
+> > > copy to meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umli=
+bs_24.1.6554834.bb
+> > > index a0a9a295..df426d1a 100644
+> > > --- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs=
+_23.3.6512818.bb
+> > > +++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs=
+_24.1.6554834.bb
+> > > @@ -3,6 +3,8 @@ HOMEPAGE =3D "http://git.ti.com/graphics/ti-img-rogue=
+-umlibs"
+> > >  LICENSE =3D "TI-TFL"
+> > >  LIC_FILES_CHKSUM =3D "file://${WORKDIR}/git/LICENSE;md5=3D7232b98c1c=
+58f99e3baa03de5207e76f"
+> > > =20
+> > > +DEFAULT_PREFERENCE =3D "-1"
+> > > +
+> > >  inherit bin_package
+> > > =20
+> > >  INHIBIT_DEFAULT_DEPS =3D ""
+> > > @@ -14,7 +16,7 @@ PR =3D "r3"
+> > > =20
+> > >  BRANCH =3D "linuxws/scarthgap/k6.6/${PV}"
+> > >  SRC_URI =3D "git://git.ti.com/git/graphics/ti-img-rogue-umlibs.git;p=
+rotocol=3Dhttps;branch=3D${BRANCH}"
+> > > -SRCREV =3D "0b9e64254269be2fa95c4f3e1dd925d6e4d58199"
+> > > +SRCREV =3D "e473234158c736248cf71a60080b7faf76fca561"
+> > >  S =3D "${WORKDIR}/git/targetfs/${TARGET_PRODUCT}/${PVR_WS}/${PVR_BUI=
+LD}"
+> > > =20
+> > >  TARGET_PRODUCT:j721e =3D "j721e_linux"
+> > > @@ -109,7 +111,7 @@ python __anonymous() {
+> > >          mlprefix =3D d.getVar("MLPREFIX")
+> > >          pkgs =3D " " + " ".join(mlprefix + x + suffix for x in p[1:]=
+)
+> > >          d.setVar("DEBIAN_NOAUTONAME:" + fullp, "1")
+> > > -        d.setVar("INSANE_SKIP:" + fullp, "dev-so")
+> > > +        d.setVar("INSANE_SKIP:" + fullp, "dev-so ldflags")
+> > >          d.appendVar("RRECOMMENDS:" + fullp, " ${MLPREFIX}ti-img-rogu=
+e-umlibs" + suffix)
+> > >  }
+> > > =20
+> > > @@ -133,6 +135,8 @@ DEBIAN_NOAUTONAME:libopencl-rogue-tools =3D "1"
+> > >  # optional tools and tests
+> > >  FILES:${PN}-tools =3D "${bindir}/"
+> > >  RDEPENDS:${PN}-tools =3D "python3-core ${PN}"
+> >
+> > ^^^
+> >
+> > > +INSANE_SKIP:${PN}-tools =3D "ldflags"
+> > > +RDEPENDS:${PN}-tools =3D "libdrm"
+> >
+> > This overrides/replaces earlier RDEPENDS
 >
-> P =3D "${PN}-${PV}"
-> BP is "base" P w/o any prefixes/suffixes like "nativesdk-" or "-native"
-> And base.bbclass adds both ${BP}, ${BPN} and files to FILESPATH (from mos=
-t=20
-> to least specific):
-> https://git.openembedded.org/openembedded-core/tree/meta/classes-global/b=
-ase.bbclass#n59
+> Good catch.
+>
+> > > =20
+> > >  # required firmware
+> > >  FILES:${PN}-firmware =3D "${base_libdir}/firmware/*"
+> > > @@ -142,4 +146,4 @@ RRECOMMENDS:${PN} +=3D " \
+> > >      ${PN}-tools \
+> > >  "
+> > > =20
+> > > -INSANE_SKIP:${PN} +=3D "already-stripped dev-so"
+> > > +INSANE_SKIP:${PN} +=3D "already-stripped dev-so ldflags"
+> >
+> > Why is ldflags QA check needs to be skipped now?
+>
+> QA was tripping up on new issues. We are now using the Yocto toolchains w=
+ith
+> some other tricks to produce these binaries. This provides enough metadat=
+a to
+> trigger extra stages in the qa checks. One of these checks an internal ha=
+sh
+> variable that is not currently being set by the IMG build system, so it w=
+ill
+> fail.
 
+The explicit message was:
 
-Ah, rats. I didn't realize BP was "${PN}-${PV}", I figured it base the base
-package name. Thanks for the info.
+File [binary] in package ti-img-rogue-umlibs-tools doesn't have GNU_HASH (d=
+idn't pass LDFLAGS?)
 
+https://docs.yoctoproject.org/ref-manual/qa-checks.html#qa-check-ldflags
 
-> > > >  require recipes-graphics/mesa/mesa.inc
-> > > > =20
-> > > >  SUMMARY +=3D " (with PowerVR support for TI platforms)"
-> > > > =20
-> > > >  LIC_FILES_CHKSUM =3D "file://docs/license.rst;md5=3D63779ec98d78d8=
-23a9dc533a0735ef10"
-> > > > =20
-> > > > -BRANCH =3D "powervr/kirkstone/${PV}"
-> > > > +BRANCH =3D "powervr/${PV}"
-> > > > =20
-> > > >  SRC_URI =3D " \
-> > > >      git://gitlab.freedesktop.org/StaticRocket/mesa.git;protocol=3D=
-https;branch=3D${BRANCH} \
-> > > >      file://0001-meson.build-check-for-all-linux-host_os-combinatio=
-ns.patch \
-> > > >      file://0001-meson-misdetects-64bit-atomics-on-mips-clang.patch=
- \
-> > > > -    file://0001-util-format-Check-for-NEON-before-using-it.patch \
-> > > > -    file://0001-gbm-backend-fix-gbm-compile-without-dri.patch \
-> > > > -    file://0001-freedreno-pm4-Use-unsigned-instead-of-uint-to-fix-=
-mu.patch \
-> > > >      file://0001-gallium-Fix-build-with-llvm-17.patch \
-> > > > -    file://0001-fix-gallivm-limit-usage-of-LLVMContextSetOpaquePoi=
-nt.patch \
-> > > > +    file://0001-meson-Disable-cmake-dependency-detector-for-llvm.p=
-atch \
-> > > >  "
-> > > > =20
-> > > >  S =3D "${WORKDIR}/git"
-> > > > @@ -28,7 +28,7 @@ PACKAGECONFIG:append =3D " \
-> > > >      ${@bb.utils.contains('PREFERRED_PROVIDER_virtual/gpudriver', '=
-ti-sgx-ddk-km', 'sgx', '', d)} \
-> > > >  "
-> > > > =20
-> > > > -SRCREV =3D "1be98ba80452ebe38546a7fca26b5a70f2629083"
-> > > > +SRCREV =3D "b12290126ba6a154f0e8b0a8c8b2b0d64f98e427"
-> > > > =20
-> > > >  PVR_DISPLAY_CONTROLLER_ALIAS ??=3D "tidss"
-> > > >  PACKAGECONFIG[pvr] =3D "-Dgallium-pvr-alias=3D${PVR_DISPLAY_CONTRO=
-LLER_ALIAS},"
-> > > > --=20
-> > > > 2.25.1
-
+We can't exactly pass all the LD flags as written when building outside of
+Yocto.
 
