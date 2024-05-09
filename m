@@ -1,86 +1,110 @@
-Return-Path: <denis@denix.org>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2BCEC04FFE
-	for <webhook@archiver.kernel.org>; Wed,  8 May 2024 22:17:18 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.167.1715206634288330209
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F7C5C25B4F
+	for <webhook@archiver.kernel.org>; Thu,  9 May 2024 01:10:59 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.3617.1715217042368703894
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 08 May 2024 15:17:15 -0700
+ Wed, 08 May 2024 18:10:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 522AE40C81;
-	Wed,  8 May 2024 22:17:13 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YgU-OFA_Lq3M; Wed,  8 May 2024 22:17:13 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1917940A2F;
-	Wed,  8 May 2024 22:17:09 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 02BD5163F66; Wed,  8 May 2024 18:17:08 -0400 (EDT)
-Date: Wed, 8 May 2024 18:17:07 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: alexandre.belloni@bootlin.com
-Cc: Denys Dmytriyenko <denys@konsulko.com>, meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] check-layer failures for meta-ti
-Message-ID: <20240508221707.GD21287@denix.org>
-References: <20240508215222b967f0db@mail.local>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=pP2VwIMb;
+ spf=pass (domain: list.ti.com, ip: 198.47.23.248, mailfrom: lcpdbld@list.ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4491AeLo033469;
+	Wed, 8 May 2024 20:10:40 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1715217040; i=@ti.com;
+	bh=kXkIVA77DySLWilQgx47ip5vkoLJcjld+rGl0bl6HRE=;
+	h=From:To:Subject:Date;
+	b=pP2VwIMbfxtXR43ebAtByEUdPWr/zNw4aQdyHjI9SAU7+BJapzAMcWWNfTk/uGVcB
+	 sX4werI4UVC0RAJsA7bJv75sU0jf7oyufZsCT2pX9NurJfIye7PnN7UPMcUkpIDiT6
+	 UCQNJjG1QgYAf2zwRYKR1BukJaEShDoUZtumku0w=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4491AeA8012989
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 8 May 2024 20:10:40 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 8
+ May 2024 20:10:40 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 8 May 2024 20:10:40 -0500
+Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.248.130.8])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4491Ae0Z052429;
+	Wed, 8 May 2024 20:10:40 -0500
+Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
+	id 86CF710C35C6; Wed,  8 May 2024 20:10:40 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202405081800
+Date: Wed, 8 May 2024 20:10:40 -0500
+Message-ID: <1715217040-30859-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240508215222b967f0db@mail.local>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 08 May 2024 22:17:18 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17649
+ <meta-ti@lists.yoctoproject.org>; Thu, 09 May 2024 01:10:59 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17650
 
-On Wed, May 08, 2024 at 11:52:22PM +0200, Alexandre Belloni via lists.yoctoproject.org wrote:
-> Hello,
-> 
-> meta-ti is currently failing check-layer-nightly:
-> 
-> https://autobuilder.yoctoproject.org/typhoon/#/builders/121/builds/2063/steps/20/logs/stdio
+Updated the value(s) for:
+  u-boot-ti-staging_2024.04: SRCREV
+  linux-ti-staging-rt_6.6: SRCREV
+  linux-ti-staging_6.6: SRCREV
 
-Thanks, Alexandre,
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb    | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-This issue is master-specific and is due to python3-yamllint - the new package 
-was added to OE-Core before Scarthgap, but wasn't backported to Nanbield. Due 
-to resource constraints, meta-ti only branches off for LTS releases, while 
-master tries to provide limited compatibility with the last intermediate 
-stable release, which is Nanbield. Since Nanbield is expected to EOL this 
-month, the idea was to keep the local copy of python3-yamllint in meta-ti 
-master a bit longer until the corresponding compatibility with that release 
-can be safely dropped. But I can take a look if we can easily adjust something 
-to avoid the issue for now...
-
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
+index fbf3b41..90917d4 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
+@@ -8,4 +8,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2024.04"
+ 
+-SRCREV = "243d0c74704df56b1fab4e7989805adb45142070"
++SRCREV = "6dddecde23592b71b9a7e9cb4e47d809ce59dd39"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
+index 8ea4ca0..bccd856 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
+@@ -10,7 +10,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:"
+ 
+ BRANCH = "ti-rt-linux-6.6.y"
+ 
+-SRCREV = "de1e0f90de78b391c98f02bb8e178e89cb81e1a8"
++SRCREV = "7cceac93947da35755935827cd675925400d0102"
+ 
+ include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
+index 9a78701..14fabb8 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
+@@ -25,7 +25,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.6.y"
+ 
+-SRCREV ?= "9478b0bdd90a0df151c1cba3c90cab74a8d98009"
++SRCREV ?= "f7f73d9d344c89081db499a2968d9033d7cac45c"
+ PV = "6.6.25+git"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -- 
-Denys
+1.8.3.1
 
-
-> INFO: ======================================================================
-> INFO: FAIL: test_signatures (common.CommonCheckLayer.test_signatures)
-> INFO: ----------------------------------------------------------------------
-> INFO: Traceback (most recent call last):
->   File "/home/pokybuild/yocto-worker/check-layer-nightly/build/scripts/lib/checklayer/cases/common.py", line 99, in test_signatures
->     self.fail('Adding layer %s changed signatures.\n%s' % (self.tc.layer['name'], msg))
-> AssertionError: Adding layer meta-ti-extras changed signatures.
-> 19 signatures changed, initial differences (first hash before, second after):
->    python3-yamllint:do_recipe_qa: 8ee2e91624905aa91d611870e9d8cf0d1fb6bc248f181cb9f9f9c35198cd2ec6 -> 7d43e16b2e61b0e319270b32ff19a39960e99a77af1fdabbd2f3610066344a3f
->       bitbake-diffsigs --task python3-yamllint do_recipe_qa --signature 8ee2e91624905aa91d611870e9d8cf0d1fb6bc248f181cb9f9f9c35198cd2ec6 7d43e16b2e61b0e319270b32ff19a39960e99a77af1fdabbd2f3610066344a3f
->       NOTE: Starting bitbake server...
->       basehash changed from 8a578aebd04ba58b12e29b5eef3f92aaafba21aed33f40ab80f6d93689da0241 to 842db39ba0f9c7db1959bf577c83fb1455216b8c38f8e9822b3be7275048d240
->       Variable ERROR_QA value changed:
->       @@ -1,2 +1,2 @@
->       -dev-so debug-deps dev-deps debug-files arch pkgconfig la             perms dep-cmp pkgvarcheck perm-config perm-line perm-link             split-strip packages-list pkgv-undefined var-undefined             version-going-backwards expanded-d invalid-chars             license-checksum dev-elf file-rdeps configure-unsafe             configure-gettext perllocalpod shebang-size             already-stripped installed-vs-shipped ldflags compile-host-path             install-host-path pn-overrides unknown-configure-option             useless-rpaths rpaths staticdev empty-dirs             patch-fuzz             ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', ' usrmerge', '', d)} patch-status
->       +dev-so debug-deps dev-deps debug-files arch pkgconfig la             perms dep-cmp pkgvarcheck perm-config perm-line perm-link             split-strip packages-list pkgv-undefined var-undefined             version-going-backwards expanded-d invalid-chars             license-checksum dev-elf file-rdeps configure-unsafe             configure-gettext perllocalpod shebang-size             already-stripped installed-vs-shipped ldflags compile-host-path             install-host-path pn-overrides unknown-configure-option             useless-rpaths rpaths staticdev empty-dirs             patch-fuzz             ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', ' usrmerge', '', d)}
->        DISTRO_FEATURES{usrmerge} = Unset
->       Variable PV value changed from '1.35.1' to '1.33.0'
->       Variable SRC_URI[sha256sum] value changed from '7a003809f88324fd2c877734f2d575ee7881dd9043360657cc8049c809eba6cd' to '2dceab9ef2d99518a2fcf4ffc964d44250ac4459be1ba3ca315118e4a1a81f7d'
 
