@@ -1,168 +1,146 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3220CC25B7A
-	for <webhook@archiver.kernel.org>; Thu, 23 May 2024 17:59:00 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.600.1716487138695791340
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02762C25B74
+	for <webhook@archiver.kernel.org>; Fri, 24 May 2024 03:46:27 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.8031.1716522386254256659
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 23 May 2024 10:58:58 -0700
+ Thu, 23 May 2024 20:46:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Pq31zlsB;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44NHwv3w079565;
-	Thu, 23 May 2024 12:58:57 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1716487137;
-	bh=8Jrg1isKzEOnxmaTaxY7jlOx61aPPXUfsa5D1nlXrrw=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=Pq31zlsBRTGqKj7HASV8Vg+srMCINLc45bd25RLcTspa85ZjacBsuZbypnmj3JFiI
-	 +xOQ/EYn/Lzv5Okg/MIBkoO/hIu/fFq8aQTEef95jXySlYX3fYHnnkDie6WAetGzYt
-	 6BHCHurcR/yc1L8lJfN0WedrezjIP36sQZxAx2ZA=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44NHwvLq051013
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 23 May 2024 12:58:57 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 23
- May 2024 12:58:56 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 23 May 2024 12:58:56 -0500
-Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44NHwuAk046453;
-	Thu, 23 May 2024 12:58:56 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1sACiO-0000AZ-JZ; Thu, 23 May 2024 12:58:56 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/scarthgap][PATCH 2/2] recipes: Remove DEFAULT_PREFERENCE
-Date: Thu, 23 May 2024 12:58:56 -0500
-Message-ID: <20240523175856.602-2-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240523175856.602-1-reatmon@ti.com>
-References: <20240523175856.602-1-reatmon@ti.com>
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 68A2140BA8;
+	Fri, 24 May 2024 03:46:25 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id VB1c-rGw27BR; Fri, 24 May 2024 03:46:25 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C6EB5408CD;
+	Fri, 24 May 2024 03:46:23 +0000 (UTC)
+Received: from thorin.denix (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id B9F22163F67;
+	Thu, 23 May 2024 23:46:22 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [master/scarthgap/kirkstone][PATCH] meta-ti-bsp: update BeagleBoard.org BSP to the latest
+Date: Thu, 23 May 2024 23:46:20 -0400
+Message-Id: <20240524034620.4048281-1-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 23 May 2024 17:59:00 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17679
+ <meta-ti@lists.yoctoproject.org>; Fri, 24 May 2024 03:46:27 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17680
 
-Now that are past the inital stages of our LTS migration, we can remove
-the DEFAULT_PREFERENCE settings that prevented these recipes from being
-the default.
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+* Update linux-bb.org to 6.1.80 for both 32 and 64 bit platforms
+* Update DTB/DTBO lists to include latest renames and additions
+* Re-enable vendored DTB layout by default
+
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- .../powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb         | 2 --
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb     | 2 --
- meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb            | 2 --
- .../powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb          | 2 --
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb     | 2 --
- .../recipes-kernel/linux/linux-ti-staging-systest_6.6.bb        | 2 --
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb        | 2 --
- 7 files changed, 14 deletions(-)
+ meta-ti-bsp/conf/machine/beaglebone-ai64.conf |  1 +
+ meta-ti-bsp/conf/machine/beagleplay.conf      | 16 ++++++++++++++++
+ .../recipes-kernel/linux/linux-bb.org_git.bb  | 19 ++++++++-----------
+ 3 files changed, 25 insertions(+), 11 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb
-index a1b76d27..fdb8b51d 100644
---- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb
-+++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb
-@@ -3,8 +3,6 @@ HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-driver"
- LICENSE = "MIT | GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://README;beginline=14;endline=19;md5=0403c7dea01a2b8232261e805325fac2"
- 
--DEFAULT_PREFERENCE = "-1"
--
- inherit module
- 
- PROVIDES = "virtual/gpudriver"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-index d268c8a5..fa8a790c 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-@@ -1,7 +1,5 @@
- require u-boot-ti.inc
- 
--DEFAULT_PREFERENCE = "-1"
--
- include ${@ 'recipes-bsp/u-boot/ti-extras.inc' if d.getVar('TI_EXTRAS') else ''}
- 
- PR = "r0"
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-index 1e66acd2..a137f452 100644
---- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-@@ -2,8 +2,6 @@
- # upstream yet. This allows us to build the shims we need without completely
- # clobbering mesa.
- 
--DEFAULT_PREFERENCE = "-1"
--
- require recipes-graphics/mesa/mesa.inc
- 
- SUMMARY += " (with PowerVR support for TI platforms)"
-diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb
-index d43d1635..6d8e65ff 100644
---- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb
-+++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb
-@@ -3,8 +3,6 @@ HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-umlibs"
- LICENSE = "TI-TFL"
- LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=7232b98c1c58f99e3baa03de5207e76f"
- 
--DEFAULT_PREFERENCE = "-1"
--
- inherit bin_package
- 
- INHIBIT_DEFAULT_DEPS = ""
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-index bccd856c..3870f9be 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-@@ -1,7 +1,5 @@
- require linux-ti-staging_6.6.bb
- 
--DEFAULT_PREFERENCE = "-1"
--
- KERNEL_LOCALVERSION:append = "-rt"
- 
- # Look in the generic major.minor directory for files
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.6.bb
-index 21090904..a17b744b 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.6.bb
-@@ -1,7 +1,5 @@
- require linux-ti-staging_6.6.bb
- 
--DEFAULT_PREFERENCE = "-1"
--
- # Look in the generic major.minor directory for files
- # This will have priority over generic non-rt path
- FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-index 14fabb81..3adf9b7f 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-@@ -6,8 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
- inherit ti-secdev
- inherit kernel
- 
--DEFAULT_PREFERENCE = "-1"
--
+diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf b/meta-ti-bsp/=
+conf/machine/beaglebone-ai64.conf
+index a19a3e29..7e0fb4f1 100644
+--- a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
++++ b/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
+@@ -18,6 +18,7 @@ KERNEL_DEVICETREE =3D " \
+ ti/k3-j721e-beagleboneai64.dtb \
+ ti/k3-j721e-common-proc-board.dtb \
+ ti/k3-j721e-beagleboneai64-dsi-rpi-7inch-panel.dtbo \
++ti/k3-j721e-common-proc-board-infotainment.dtbo \
+ ti/k3-j721e-evm-csi2-ov5640.dtbo \
+ ti/k3-j721e-evm-fusion.dtbo \
+ ti/k3-j721e-evm-gesi-exp-board.dtbo \
+diff --git a/meta-ti-bsp/conf/machine/beagleplay.conf b/meta-ti-bsp/conf/=
+machine/beagleplay.conf
+index 9ea7ff75..fae67f98 100644
+--- a/meta-ti-bsp/conf/machine/beagleplay.conf
++++ b/meta-ti-bsp/conf/machine/beagleplay.conf
+@@ -34,6 +34,21 @@ ti/k3-am625-beagleplay.dtb \
+ ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
+ ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
+ ti/k3-am625-beagleplay-lincolntech-lcd185-panel.dtbo \
++ti/k3-am625-beaglemod.dtb \
++ti/k3-am625-beaglemod-audio.dtbo \
++ti/k3-am625-beaglemod-can0.dtbo \
++ti/k3-am625-beaglemod-can1.dtbo \
++ti/k3-am625-beaglemod-csi0-ov5640.dtbo \
++ti/k3-am625-beaglemod-eeprom.dtbo \
++ti/k3-am625-beaglemod-eth.dtbo \
++ti/k3-am625-beaglemod-hdmi.dtbo \
++ti/k3-am625-beaglemod-io-expand.dtbo \
++ti/k3-am625-beaglemod-lt-lcd185.dtbo \
++ti/k3-am625-beaglemod-ospi-flash.dtbo \
++ti/k3-am625-beaglemod-rs485-1.dtbo \
++ti/k3-am625-beaglemod-rs485-2.dtbo \
++ti/k3-am625-beaglemod-rtc.dtbo \
++ti/k3-am625-beaglemod-wl1835.dtbo \
+ ti/k3-am625-sk.dtb \
+ ti/k3-am625-sk-dmtimer-pwm.dtbo \
+ ti/k3-am625-sk-ecap-capture.dtbo \
+@@ -49,6 +64,7 @@ ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
+ ti/k3-am62x-sk-csi2-v3link-fusion.dtbo \
+ ti/k3-am62x-sk-eqep.dtbo \
+ ti/k3-am62x-sk-hdmi-audio.dtbo \
++ti/k3-am62x-sk-hdmi-disable-fastboot.dtbo \
+ ti/k3-am62x-sk-lpm-wkup-sources.dtbo \
+ ti/k3-am62x-sk-mcan.dtbo \
+ "
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb b/meta-=
+ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
+index d6c4b993..81a26783 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
+@@ -10,24 +10,21 @@ inherit kernel
  require recipes-kernel/linux/setup-defconfig.inc
  require recipes-kernel/linux/ti-kernel.inc
- include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}
--- 
-2.17.1
+=20
+-# BB.org hasn't switched to "vendored" DTB layout by default yet
+-KERNEL_DTBVENDORED =3D "0"
+-
+ DEPENDS +=3D "gmp-native libmpc-native"
+=20
+ KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT} ${EXTRA_DTC_ARGS}=
+"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+-# 6.1.69 version for 32-bit
+-SRCREV:armv7a =3D "a1f26a19581970f76220c68c438981796ce5b767"
+-PV:armv7a =3D "6.1.69+git${SRCPV}"
+-BRANCH:armv7a =3D "v6.1.69-ti-r22"
++# 6.1.80 version for 32-bit
++SRCREV:armv7a =3D "4ca9ea30768d58c8d4d56d03dd1eaf8c8feb7ef9"
++PV:armv7a =3D "6.1.80+git${SRCPV}"
++BRANCH:armv7a =3D "v6.1.80-ti-r34"
+=20
+-# 6.1.69 version for 64-bit
+-SRCREV:aarch64 =3D "bc76b5d278271f66a6faeb2d09cb09fc6c57dd3c"
+-PV:aarch64 =3D "6.1.69+git${SRCPV}"
+-BRANCH:aarch64 =3D "v6.1.69-ti-arm64-r24"
++# 6.1.80 version for 64-bit
++SRCREV:aarch64 =3D "977c75e082620f15c06c72bcced30f787c14b390"
++PV:aarch64 =3D "6.1.80+git${SRCPV}"
++BRANCH:aarch64 =3D "v6.1.80-ti-arm64-r49"
+=20
+ SRC_URI =3D " \
+     git://github.com/beagleboard/linux.git;protocol=3Dhttps;branch=3D${B=
+RANCH} \
+--=20
+2.25.1
 
 
