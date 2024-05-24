@@ -1,146 +1,84 @@
-Return-Path: <denis@denix.org>
+Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02762C25B74
-	for <webhook@archiver.kernel.org>; Fri, 24 May 2024 03:46:27 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.8031.1716522386254256659
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B20CDC25B74
+	for <webhook@archiver.kernel.org>; Fri, 24 May 2024 21:07:11 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.6003.1716584823429575756
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 23 May 2024 20:46:27 -0700
+ Fri, 24 May 2024 14:07:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 68A2140BA8;
-	Fri, 24 May 2024 03:46:25 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VB1c-rGw27BR; Fri, 24 May 2024 03:46:25 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C6EB5408CD;
-	Fri, 24 May 2024 03:46:23 +0000 (UTC)
-Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id B9F22163F67;
-	Thu, 23 May 2024 23:46:22 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master/scarthgap/kirkstone][PATCH] meta-ti-bsp: update BeagleBoard.org BSP to the latest
-Date: Thu, 23 May 2024 23:46:20 -0400
-Message-Id: <20240524034620.4048281-1-denis@denix.org>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=jKciTwJA;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: rs@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 44OL6wdZ020458;
+	Fri, 24 May 2024 16:06:58 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1716584818;
+	bh=UvqQkhclYgpwkRCpg1TtXFa98vpR8DLq/2lm3/wt0f0=;
+	h=From:To:CC:Subject:Date;
+	b=jKciTwJA0Ookx4dFNf8Bu5n54fUECACzBVcnXrlsI/Zo2r/ZLR1JjYY5Af2uAEuF4
+	 LTFM/KPoixM4T4q/RuNwcD5sh1VsYCHWsS2EaMAEkKnZdWeaChGT0LCiXuU+6DMtNI
+	 aHjrOiFwP08mgYTMJ818lt1mkjJruGOxSJZZJ9gE=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 44OL6wnM015242
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 24 May 2024 16:06:58 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 24
+ May 2024 16:06:58 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 24 May 2024 16:06:58 -0500
+Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 44OL6wgE063344;
+	Fri, 24 May 2024 16:06:58 -0500
+From: <rs@ti.com>
+To: <reatmon@ti.com>, <denis@denix.org>, <detheridge@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap/master] ti-img-rogue-umlibs: bump SRCREV for alloc patch
+Date: Fri, 24 May 2024 16:06:53 -0500
+Message-ID: <20240524210653.39569-1-rs@ti.com>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 24 May 2024 03:46:27 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17680
+ <meta-ti@lists.yoctoproject.org>; Fri, 24 May 2024 21:07:11 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17681
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+From: Randolph Sapp <rs@ti.com>
 
-* Update linux-bb.org to 6.1.80 for both 32 and 64 bit platforms
-* Update DTB/DTBO lists to include latest renames and additions
-* Re-enable vendored DTB layout by default
+Bump the SRCREV to pick up rebuilt binaries. Upstream release notes:
 
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+Regenerate all binaries with a fix for exportable buffer allocations
+that should improve Chromium compatibility.
+
+Signed-off-by: Randolph Sapp <rs@ti.com>
 ---
- meta-ti-bsp/conf/machine/beaglebone-ai64.conf |  1 +
- meta-ti-bsp/conf/machine/beagleplay.conf      | 16 ++++++++++++++++
- .../recipes-kernel/linux/linux-bb.org_git.bb  | 19 ++++++++-----------
- 3 files changed, 25 insertions(+), 11 deletions(-)
+ .../powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf b/meta-ti-bsp/=
-conf/machine/beaglebone-ai64.conf
-index a19a3e29..7e0fb4f1 100644
---- a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
-+++ b/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
-@@ -18,6 +18,7 @@ KERNEL_DEVICETREE =3D " \
- ti/k3-j721e-beagleboneai64.dtb \
- ti/k3-j721e-common-proc-board.dtb \
- ti/k3-j721e-beagleboneai64-dsi-rpi-7inch-panel.dtbo \
-+ti/k3-j721e-common-proc-board-infotainment.dtbo \
- ti/k3-j721e-evm-csi2-ov5640.dtbo \
- ti/k3-j721e-evm-fusion.dtbo \
- ti/k3-j721e-evm-gesi-exp-board.dtbo \
-diff --git a/meta-ti-bsp/conf/machine/beagleplay.conf b/meta-ti-bsp/conf/=
-machine/beagleplay.conf
-index 9ea7ff75..fae67f98 100644
---- a/meta-ti-bsp/conf/machine/beagleplay.conf
-+++ b/meta-ti-bsp/conf/machine/beagleplay.conf
-@@ -34,6 +34,21 @@ ti/k3-am625-beagleplay.dtb \
- ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
- ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
- ti/k3-am625-beagleplay-lincolntech-lcd185-panel.dtbo \
-+ti/k3-am625-beaglemod.dtb \
-+ti/k3-am625-beaglemod-audio.dtbo \
-+ti/k3-am625-beaglemod-can0.dtbo \
-+ti/k3-am625-beaglemod-can1.dtbo \
-+ti/k3-am625-beaglemod-csi0-ov5640.dtbo \
-+ti/k3-am625-beaglemod-eeprom.dtbo \
-+ti/k3-am625-beaglemod-eth.dtbo \
-+ti/k3-am625-beaglemod-hdmi.dtbo \
-+ti/k3-am625-beaglemod-io-expand.dtbo \
-+ti/k3-am625-beaglemod-lt-lcd185.dtbo \
-+ti/k3-am625-beaglemod-ospi-flash.dtbo \
-+ti/k3-am625-beaglemod-rs485-1.dtbo \
-+ti/k3-am625-beaglemod-rs485-2.dtbo \
-+ti/k3-am625-beaglemod-rtc.dtbo \
-+ti/k3-am625-beaglemod-wl1835.dtbo \
- ti/k3-am625-sk.dtb \
- ti/k3-am625-sk-dmtimer-pwm.dtbo \
- ti/k3-am625-sk-ecap-capture.dtbo \
-@@ -49,6 +64,7 @@ ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
- ti/k3-am62x-sk-csi2-v3link-fusion.dtbo \
- ti/k3-am62x-sk-eqep.dtbo \
- ti/k3-am62x-sk-hdmi-audio.dtbo \
-+ti/k3-am62x-sk-hdmi-disable-fastboot.dtbo \
- ti/k3-am62x-sk-lpm-wkup-sources.dtbo \
- ti/k3-am62x-sk-mcan.dtbo \
- "
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb b/meta-=
-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-index d6c4b993..81a26783 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-@@ -10,24 +10,21 @@ inherit kernel
- require recipes-kernel/linux/setup-defconfig.inc
- require recipes-kernel/linux/ti-kernel.inc
-=20
--# BB.org hasn't switched to "vendored" DTB layout by default yet
--KERNEL_DTBVENDORED =3D "0"
--
- DEPENDS +=3D "gmp-native libmpc-native"
-=20
- KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT} ${EXTRA_DTC_ARGS}=
-"
-=20
- S =3D "${WORKDIR}/git"
-=20
--# 6.1.69 version for 32-bit
--SRCREV:armv7a =3D "a1f26a19581970f76220c68c438981796ce5b767"
--PV:armv7a =3D "6.1.69+git${SRCPV}"
--BRANCH:armv7a =3D "v6.1.69-ti-r22"
-+# 6.1.80 version for 32-bit
-+SRCREV:armv7a =3D "4ca9ea30768d58c8d4d56d03dd1eaf8c8feb7ef9"
-+PV:armv7a =3D "6.1.80+git${SRCPV}"
-+BRANCH:armv7a =3D "v6.1.80-ti-r34"
-=20
--# 6.1.69 version for 64-bit
--SRCREV:aarch64 =3D "bc76b5d278271f66a6faeb2d09cb09fc6c57dd3c"
--PV:aarch64 =3D "6.1.69+git${SRCPV}"
--BRANCH:aarch64 =3D "v6.1.69-ti-arm64-r24"
-+# 6.1.80 version for 64-bit
-+SRCREV:aarch64 =3D "977c75e082620f15c06c72bcced30f787c14b390"
-+PV:aarch64 =3D "6.1.80+git${SRCPV}"
-+BRANCH:aarch64 =3D "v6.1.80-ti-arm64-r49"
-=20
- SRC_URI =3D " \
-     git://github.com/beagleboard/linux.git;protocol=3Dhttps;branch=3D${B=
-RANCH} \
---=20
-2.25.1
+diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb
+index d43d1635..c731fabb 100644
+--- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb
++++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.1.6554834.bb
+@@ -16,7 +16,7 @@ PR = "r3"
+ 
+ BRANCH = "linuxws/scarthgap/k6.6/${PV}"
+ SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-umlibs.git;protocol=https;branch=${BRANCH}"
+-SRCREV = "e473234158c736248cf71a60080b7faf76fca561"
++SRCREV = "aeaf6d007abdc0f782d5f5c4b374efdad2d87943"
+ S = "${WORKDIR}/git/targetfs/${TARGET_PRODUCT}/${PVR_WS}/${PVR_BUILD}"
+ 
+ TARGET_PRODUCT:j721e = "j721e_linux"
+-- 
+2.45.1
 
 
