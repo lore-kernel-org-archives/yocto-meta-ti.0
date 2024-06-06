@@ -1,151 +1,174 @@
-Return-Path: <d-gole@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A98C2C25B75
-	for <webhook@archiver.kernel.org>; Thu,  6 Jun 2024 07:44:19 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.8845.1717659853256547161
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 671A3C25B75
+	for <webhook@archiver.kernel.org>; Thu,  6 Jun 2024 11:37:22 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.12092.1717673834680246089
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 06 Jun 2024 00:44:13 -0700
+ Thu, 06 Jun 2024 04:37:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=EazE2eMf;
- spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: d-gole@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4567i9ak049744;
-	Thu, 6 Jun 2024 02:44:09 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=DL/OzllX;
+ spf=pass (domain: list.ti.com, ip: 198.47.23.249, mailfrom: lcpdbld@list.ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 456BbDX6016387;
+	Thu, 6 Jun 2024 06:37:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1717659849;
-	bh=0GVrNMpnpG1wOQWyxcPYELh+oIgPC4YcyYJ3hgkeujQ=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=EazE2eMfJy6TB+Yy95/8m8QWeAFn6ld8EKlHcDE9nI5HFZ4VeXIp16+4KUkbrEvSt
-	 J84UzxeBjL9Qy5WAPAyQeudAm2G2dDRXEdzRHmfxUi8bbnaK8QujaYQYBHI9pp+SKN
-	 7IWLvkvxGOaV9mZCPy0nfjONGZcrw+sWXY5x6Uvs=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4567i9sv016208
+	s=ti-com-17Q1; t=1717673833; i=@ti.com;
+	bh=s278kThy1J45+VzUswa2FfQg0iKHltHSQhkOTmcer54=;
+	h=From:To:Subject:Date;
+	b=DL/OzllXtyXqV6cVP9FYyXpHN7W3YSlN+77sH8LfPquQS7/XJW+YFoecAq1TRMJIf
+	 bIT08kW+eDK4ztWuBa5Cz07KrK+syXsMdP8VfWDUDsvwAXrIiN704L7PD6xEMvd0Sc
+	 jFw6bWI9l7dGUexHxNdXsfOAeWstraCC3E+sTV7k=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 456BbDP3078521
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 6 Jun 2024 02:44:09 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 6 Jun 2024 06:37:13 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 6
- Jun 2024 02:44:09 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2024 06:37:13 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 6 Jun 2024 02:44:09 -0500
-Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4567i8nY028780;
-	Thu, 6 Jun 2024 02:44:09 -0500
-Date: Thu, 6 Jun 2024 13:14:08 +0530
-From: Dhruva Gole <d-gole@ti.com>
-To: Chirag Shilwant <c-shilwant@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, Denys <denis@denix.org>,
-        Ryan Eatmon
-	<reatmon@ti.com>, Gyan Gupta <g-gupta@ti.com>,
-        Khasim <khasim@ti.com>, Praneeth <praneeth@ti.com>,
-        Nishant <nm@ti.com>, Robert Nelson
-	<robertcnelson@gmail.com>
-Subject: Re: [meta-ti][master/scarthgap][PATCH] conf: machine: Switch
- beagleplay to TI baseline by default
-Message-ID: <20240606074408.ohvvzu7tpro4lqvp@dhruva>
-References: <20240606060555.1544271-1-c-shilwant@ti.com>
+ Frontend Transport; Thu, 6 Jun 2024 06:37:13 -0500
+Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.248.130.8])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 456BbD0O007608;
+	Thu, 6 Jun 2024 06:37:13 -0500
+Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
+	id 113D810AC0C8; Thu,  6 Jun 2024 06:37:13 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202406060400
+Date: Thu, 6 Jun 2024 06:37:13 -0500
+Message-ID: <1717673833-22482-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240606060555.1544271-1-c-shilwant@ti.com>
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 06 Jun 2024 07:44:19 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17700
+ <meta-ti@lists.yoctoproject.org>; Thu, 06 Jun 2024 11:37:22 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17701
 
-Hi,
+Updated the value(s) for:
+  ti-linux-fw: TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
+  u-boot-ti-staging_2023.04: SRCREV
+  u-boot-ti-staging_2024.04: SRCREV
+  linux-ti-staging-rt_6.1: PV,SRCREV
+  linux-ti-staging-rt_6.6: SRCREV
+  linux-ti-staging_6.1: PV,SRCREV
+  linux-ti-staging_6.6: SRCREV
 
-On Jun 06, 2024 at 11:35:55 +0530, Chirag Shilwant wrote:
-> - From LTS scarthgap, the beagleplay yocto machine will by
-> default build with TI baseline (i.e kernel 6.6 & U-Boot 2024.04 as of today).
-> Hence, remove all the references of bb.org from machine configuration file.
-> 
-> - Users can still build with Beagle's baseline (i.e. linux-bb.org & u-boot-bb.org)
-> by adding the following in their local.conf,
-> 
-> ```
->    PREFERRED_PROVIDER_virtual/bootloader = "u-boot-bb.org"
->    PREFERRED_PROVIDER_u-boot = "u-boot-bb.org"
->    PREFERRED_PROVIDER_virtual/kernel = "linux-bb.org"
-> ```
-> 
-> Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
-> ---
->  meta-ti-bsp/conf/machine/beagleplay-k3r5.conf | 10 +---------
->  meta-ti-bsp/conf/machine/beagleplay.conf      | 12 +++---------
->  2 files changed, 4 insertions(+), 18 deletions(-)
-> 
-> diff --git a/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf b/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
-> index 601cbbf7..b597c702 100644
-> --- a/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
-> +++ b/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
-> @@ -4,16 +4,8 @@
->  
->  require conf/machine/include/k3r5.inc
->  
-> -PREFERRED_PROVIDER_virtual/bootloader = "u-boot-bb.org"
-> -PREFERRED_PROVIDER_u-boot = "u-boot-bb.org"
-> -
->  SYSFW_SOC = "am62x"
->  SYSFW_CONFIG = "evm"
->  SYSFW_SUFFIX = "gp"
->  
-> -UBOOT_MACHINE = "am62x_evm_r5_defconfig"
-> -
-> -# UBOOT_CONFIG_FRAGMENTS holds the list of u-boot config fragments which has to be build
-> -# along with the base defconfig mentioned in UBOOT_MACHINE. Refer u-boot-mergeconfig.inc
-> -# under meta-ti-bsp/recipes-bsp/u-boot/ for more details.
-> -UBOOT_CONFIG_FRAGMENTS = "am625_beagleplay_r5.config"
-> +UBOOT_MACHINE = "am62x_beagleplay_r5_defconfig"
-> diff --git a/meta-ti-bsp/conf/machine/beagleplay.conf b/meta-ti-bsp/conf/machine/beagleplay.conf
-> index 65c14333..1420d439 100644
-> --- a/meta-ti-bsp/conf/machine/beagleplay.conf
-> +++ b/meta-ti-bsp/conf/machine/beagleplay.conf
-> @@ -2,7 +2,6 @@
->  #@NAME: BeaglePlay (A53)
->  #@DESCRIPTION: Machine configuration for the BeaglePlay board (A53 core)
->  
-> -require conf/machine//include/beagle.inc
->  require conf/machine/include/k3.inc
->  SOC_FAMILY:append = ":am62xx"
->  
-> @@ -18,15 +17,10 @@ TFA_K3_SYSTEM_SUSPEND = "1"
->  
->  OPTEEMACHINE = "k3-am62x"
->  
-> -UBOOT_MACHINE = "am62x_evm_a53_defconfig"
-> +SPL_BINARY = "tispl.bin_unsigned"
-> +SPL_BINARYNAME = "tispl.bin"
->  
-> -# UBOOT_CONFIG_FRAGMENTS holds the list of u-boot config fragments which has to be build
-> -# along with the base defconfig mentioned in UBOOT_MACHINE. Refer u-boot-mergeconfig.inc
-> -# under meta-ti-bsp/recipes-bsp/u-boot/ for more details.
-> -UBOOT_CONFIG_FRAGMENTS = "am625_beagleplay_a53.config"
-> -
-> -PREFERRED_PROVIDER_virtual/bootloader = "u-boot-bb.org"
-> -PREFERRED_PROVIDER_u-boot = "u-boot-bb.org"
-> +UBOOT_MACHINE = "am62x_beagleplay_a53_defconfig"
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 4 ++--
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb | 2 +-
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb | 4 ++--
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb    | 4 ++--
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb    | 2 +-
+ 7 files changed, 10 insertions(+), 10 deletions(-)
 
-I agree with the idea here that we'd rather move to using the ti linux
-and uboots for the yocto beagleplay images that we're going to be coming
-out with. The debian offering that Beagleboard does is going to be based
-off of the beagle trees and is independent of these changes anyway.
-
-So the users that do use yocto still have the flexibility to use bb
-trees as mentioned in the commit message, and I do hope it is also well
-documented somewhere. But by default it makes sense to roll out ti
-baseline yocto images for beagleplay.
-
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
-
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 6f7e881..adf8e69 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -15,9 +15,9 @@ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+ CNM_WAVE521_FW_VERSION = "1.0.3"
+ TI_DM_FW_VERSION = "09.02.04"
+-TI_SYSFW_VERSION = "09.02.07"
++TI_SYSFW_VERSION = "09.02.08"
+ 
+-TI_LINUX_FW_SRCREV ?= "58e3c376102aa8f42a0b1208afc91d75200b2d7b"
++TI_LINUX_FW_SRCREV ?= "3987d170fc522565c5e4a9293aba1db75951b8c0"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+index f2da156..199b44f 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+@@ -6,4 +6,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2023.04"
+ 
+-SRCREV = "f9b966c674731a1a29a20a8e143c61d4e046f13c"
++SRCREV = "83660642085462346fbeb410f83bc99448ec7042"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
+index fa8a790..0b58aee 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
+@@ -6,4 +6,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2024.04"
+ 
+-SRCREV = "919b5bb5e9eea5324b6d8b469ae69ff1dae45b75"
++SRCREV = "b8bb247cbc834da0ee91722c25c0d9cb3a572267"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+index 4546141..80277aa 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+@@ -8,8 +8,8 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
+ 
+ BRANCH = "ti-rt-linux-6.1.y"
+ 
+-SRCREV = "01dbe4e64bacaa4c891c1997f2724c320698d61f"
++SRCREV = "96b0ebd82722d16e9ab646cd3a73080e6f790747"
+ 
+ include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+ 
+-PV = "6.1.82+git"
++PV = "6.1.83+git"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
+index 3870f9b..a7809d7 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
+@@ -8,7 +8,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:"
+ 
+ BRANCH = "ti-rt-linux-6.6.y"
+ 
+-SRCREV = "7cceac93947da35755935827cd675925400d0102"
++SRCREV = "2e6e9faa3018fdddf384d145ce2bae10712fc132"
+ 
+ include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+index a58494d..51d0a6a 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+@@ -23,8 +23,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.1.y"
+ 
+-SRCREV ?= "e44f83d2aa4366b3097307c5915d03696cf3e1b8"
+-PV = "6.1.82+git"
++SRCREV ?= "c1c2f1971fbf6ddad93a8c94314fe8221e7aa6be"
++PV = "6.1.83+git"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR:append = "b"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
+index 3adf9b7..cd26a9c 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.6.y"
+ 
+-SRCREV ?= "f7f73d9d344c89081db499a2968d9033d7cac45c"
++SRCREV ?= "76313798e7121bf56820e7aa7aed82a0f3ffc566"
+ PV = "6.6.25+git"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -- 
-Best regards,
-Dhruva
+1.8.3.1
+
 
