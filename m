@@ -2,89 +2,153 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BDC08C27C77
-	for <webhook@archiver.kernel.org>; Fri, 14 Jun 2024 16:34:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D248EC27C77
+	for <webhook@archiver.kernel.org>; Fri, 14 Jun 2024 16:38:40 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.16295.1718382866524610689
+ by mx.groups.io with SMTP id smtpd.web11.16376.1718383117671672489
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 14 Jun 2024 09:34:26 -0700
+ Fri, 14 Jun 2024 09:38:37 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id BB86A40CC7;
-	Fri, 14 Jun 2024 16:34:25 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 0629640CC7;
+	Fri, 14 Jun 2024 16:38:37 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id bems1Hdswtgh; Fri, 14 Jun 2024 16:34:25 +0000 (UTC)
+	with ESMTP id HlzYXgVCYJdM; Fri, 14 Jun 2024 16:38:36 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 771A440C8C;
-	Fri, 14 Jun 2024 16:34:23 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C88DD40C8C;
+	Fri, 14 Jun 2024 16:38:33 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 0FF2E163FA6; Fri, 14 Jun 2024 12:34:23 -0400 (EDT)
-Date: Fri, 14 Jun 2024 12:34:23 -0400
+	id 8B571163FA6; Fri, 14 Jun 2024 12:38:33 -0400 (EDT)
+Date: Fri, 14 Jun 2024 12:38:33 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-To: Ryan Eatmon <reatmon@ti.com>
-Cc: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denys@konsulko.com>
-Subject: Re: [meta-ti] [master/scarthgap][PATCH 1/4] conf/machine, ti-bsp:
- add support for multiple BSP providers
-Message-ID: <20240614163423.GX21287@denix.org>
+To: a-limaye@ti.com
+Cc: meta-ti@lists.yoctoproject.org, "Francis, Neha" <n-francis@ti.com>,
+	Denys Dmytriyenko <denys@konsulko.com>
+Subject: Re: [meta-ti] [master/scarthgap][PATCH 2/4] conf/machine/j721e:
+ some BSPs don't support all SR and HS variants
+Message-ID: <20240614163833.GY21287@denix.org>
 References: <20240613172254.770920-1-denis@denix.org>
- <f74e3a99-3dbc-4a68-b4b8-a5f77f6e149a@ti.com>
+ <20240613172254.770920-2-denis@denix.org>
+ <f67f2fee-fa34-47b7-bad3-e7b9fa2a0a43@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <f74e3a99-3dbc-4a68-b4b8-a5f77f6e149a@ti.com>
+In-Reply-To: <f67f2fee-fa34-47b7-bad3-e7b9fa2a0a43@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 14 Jun 2024 16:34:30 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17737
+ <meta-ti@lists.yoctoproject.org>; Fri, 14 Jun 2024 16:38:40 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17738
 
-On Thu, Jun 13, 2024 at 04:18:16PM -0500, Ryan Eatmon wrote:
-> 
-> 
-> On 6/13/2024 12:22 PM, Denys Dmytriyenko wrote:
+On Fri, Jun 14, 2024 at 03:50:14PM +0530, Aniket Limaye via lists.yoctopr=
+oject.org wrote:
+> Hi Denys,
+>=20
+> On 6/13/2024 10:52 PM, Denys Dmytriyenko wrote:
+> >From: Denys Dmytriyenko <denys@=E2=80=8Akonsulko.=E2=80=8Acom> Adjust
+> >IMAGE_BOOT_FILES list as some BSPs do not support all combinations
+> >of SR1.=E2=80=8A1, SR2.=E2=80=8A0, HS-FS and HS-SE variants. Signed-of=
+f-by: Denys
+> >Dmytriyenko <denys@=E2=80=8Akonsulko.=E2=80=8Acom> ---
+> >meta-ti-bsp/conf/machine/include/j721e.=E2=80=8Ainc
+> >ZjQcmQRYFpfptBannerStart
 > >From: Denys Dmytriyenko <denys@konsulko.com>
+> >Adjust IMAGE_BOOT_FILES list as some BSPs do not support all combinati=
+ons
+> >of SR1.1, SR2.0, HS-FS and HS-SE variants.
 > >
-> >This adds a facility to define multiple supported BSPs with their own
-> >preferences for individual components, as well as lets machine configs
-> >specify conditional configurations for different BSPs.
+> >Signed-off-by: Denys Dmytriyenko<denys@konsulko.com>
+> >---
+>=20
+> Same change is needed for J7200 as well. At the current commit
+> pointed by u-boot-ti-mainline=C2=A0[1], j7200 only has support for belo=
+w:
+> GP , SR2.0 HS-FS , SR2.0 HS-SE
+>=20
+> Hence also suggest below for j7200.inc:
+>=20
+> diff --git a/meta-ti-bsp/conf/machine/include/j7200.inc
+> b/meta-ti-bsp/conf/machine/include/j7200.inc
+> index caa79876..2a11e3dd 100644
+> --- a/meta-ti-bsp/conf/machine/include/j7200.inc
+> +++ b/meta-ti-bsp/conf/machine/include/j7200.inc
+> @@ -5,10 +5,14 @@ SOC_FAMILY:append =3D ":j7200"
+> =C2=A0IMAGE_BOOT_FILES +=3D "tiboot3-j7200-gp-evm.bin"
+>=20
+> =C2=A0# Since default tiboot3.bin on J7200 is for GP, add a version for
+> SR1.0 HS-FS
+> -IMAGE_BOOT_FILES +=3D "tiboot3-j7200-hs-fs-evm.bin"
+> +IMAGE_SR1_HS_FS_FILES =3D "tiboot3-j7200-hs-fs-evm.bin"
+> +IMAGE_SR1_HS_FS_FILES:bsp-mainline =3D ""
+> +IMAGE_BOOT_FILES +=3D "${IMAGE_SR1_HS_FS_FILES}"
+>=20
+> =C2=A0# Since default tiboot3.bin on J7200 is for GP, add a version for
+> SR1.0 HS-SE
+> -IMAGE_BOOT_FILES +=3D "tiboot3-j7200-hs-evm.bin"
+> +IMAGE_SR1_HS_SE_FILES =3D "tiboot3-j7200-hs-evm.bin"
+> +IMAGE_SR1_HS_SE_FILES:bsp-mainline =3D ""
+> +IMAGE_BOOT_FILES +=3D "${IMAGE_SR1_HS_SE_FILES}"
+>=20
+> =C2=A0# Since default tiboot3.bin on J7200 is for GP, add a version for
+> SR2.0 HS-FS
+> =C2=A0IMAGE_BOOT_FILES +=3D "tiboot3-j7200_sr2-hs-fs-evm.bin"
+>=20
+>=20
+> [1]: https://source.denx.de/u-boot/u-boot/-/blob/866ca972d6c3cabeaf6dba=
+c431e8e08bb30b3c8e/arch/arm/dts/k3-j7200-binman.dtsi
+
+Thanks! Patches are welcome.
+
+It wasn't possible for me to test all platforms for all 4 supported "BSPs=
+" - I=20
+only focused on all Beagles and few EVMs, so some could have been missed,=
+=20
+especially for the "mainline" BSP.
+
+
+> >  meta-ti-bsp/conf/machine/include/j721e.inc | 18 ++++++++++--------
+> >  1 file changed, 10 insertions(+), 8 deletions(-)
 > >
-> >Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> 
-> 
-> 
-> >diff --git a/meta-ti-bsp/conf/machine/include/ti-bsp.inc b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-> >new file mode 100644
-> >index 00000000..3bb94a7f
-> >--- /dev/null
-> >+++ b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-> >@@ -0,0 +1,109 @@
-> >+# Support multiple BSP providers
-> >+# The main input is TI_DEFAULT_BSP, which translates into default
-> >+# preferences for kernel, bootloader and graphics components, as
-> >+# well as a dedicated machine override.
-> >+
-> >+# Supported options are: mainline, ti-6_6, ti-6_1, bb_org
-> >+TI_DEFAULT_BSP ??= "ti-6_6"
-> 
-> Should this variable be named TI_DEFAULT_BSP?  That implies that
-> this is the value of the default for this feature.  But in reality
-> this variable is what chooses the TI BSP version.  Should it be
-> something like TI_BSP_VERSION instead?
-
-It's not just the version, it's entire BSP stack. E.g. "mainline" vs. "bb_org"
-Initially I started with only 2 options - "ti" vs. "bb_org", but eventually 
-expanded it to support "mainline" and in case of "ti" also different LTS 
-versions - "ti-6_1" and "ti-6_6"... Hence the original name stayed. And not 
-sure how long both LTS versions will be supported in meta-ti...
-
-Anyway, I'm fine changing it to something else, but I thing calling it 
-"version" will be more confusing.
-
--- 
-Denys
+> >diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/=
+conf/machine/include/j721e.inc
+> >index a54c3f2f..62487aa9 100644
+> >--- a/meta-ti-bsp/conf/machine/include/j721e.inc
+> >+++ b/meta-ti-bsp/conf/machine/include/j721e.inc
+> >@@ -13,20 +13,22 @@ IMAGE_BOOT_FILES +=3D "tiboot3-j721e-gp-evm.bin"
+> >  IMAGE_BOOT_FILES +=3D "sysfw-j721e-gp-evm.itb"
+> >  # Since default on J721e is for GP, add a version for SR1.1 HS-FS
+> >-IMAGE_BOOT_FILES +=3D "tiboot3-j721e_sr1_1-hs-fs-evm.bin"
+> >-IMAGE_BOOT_FILES +=3D "sysfw-j721e_sr1_1-hs-fs-evm.itb"
+> >+IMAGE_SR1_1_HS_FS_FILES =3D "tiboot3-j721e_sr1_1-hs-fs-evm.bin sysfw-=
+j721e_sr1_1-hs-fs-evm.itb"
+> >+IMAGE_SR1_1_HS_FS_FILES:bsp-mainline =3D ""
+> >+IMAGE_BOOT_FILES +=3D "${IMAGE_SR1_1_HS_FS_FILES}"
+> >  # Since default on J721e is for GP, add a version for SR1.1 HS-SE
+> >-IMAGE_BOOT_FILES +=3D "tiboot3-j721e_sr1_1-hs-evm.bin"
+> >-IMAGE_BOOT_FILES +=3D "sysfw-j721e_sr1_1-hs-evm.itb"
+> >+IMAGE_SR1_1_HS_SE_FILES =3D "tiboot3-j721e_sr1_1-hs-evm.bin sysfw-j72=
+1e_sr1_1-hs-evm.itb"
+> >+IMAGE_BOOT_FILES +=3D "${IMAGE_SR1_1_HS_SE_FILES}"
+> >  # Since default on J721e is for GP, add a version for SR2.0 HS-FS
+> >-IMAGE_BOOT_FILES +=3D "tiboot3-j721e_sr2-hs-fs-evm.bin"
+> >-IMAGE_BOOT_FILES +=3D "sysfw-j721e_sr2-hs-fs-evm.itb"
+> >+IMAGE_SR2_HS_FS_FILES =3D "tiboot3-j721e_sr2-hs-fs-evm.bin sysfw-j721=
+e_sr2-hs-fs-evm.itb"
+> >+IMAGE_BOOT_FILES +=3D "${IMAGE_SR2_HS_FS_FILES}"
+> >  # Since default on J721e is for GP, add a version for SR2.0 HS-SE
+> >-IMAGE_BOOT_FILES +=3D "tiboot3-j721e_sr2-hs-evm.bin"
+> >-IMAGE_BOOT_FILES +=3D "sysfw-j721e_sr2-hs-evm.itb"
+> >+IMAGE_SR2_HS_SE_FILES =3D "tiboot3-j721e_sr2-hs-evm.bin sysfw-j721e_s=
+r2-hs-evm.itb"
+> >+IMAGE_SR2_HS_SE_FILES:bsp-mainline =3D ""
+> >+IMAGE_BOOT_FILES +=3D "${IMAGE_SR2_HS_SE_FILES}"
+> >  TFA_BOARD =3D "generic"
+> >--=20
+> >2.25.1
 
