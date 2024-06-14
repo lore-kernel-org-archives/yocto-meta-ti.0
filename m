@@ -1,110 +1,92 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <alexandre.belloni@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBA9DC27C6E
-	for <webhook@archiver.kernel.org>; Fri, 14 Jun 2024 13:11:19 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.11180.1718370677953836843
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 652D7C27C6E
+	for <webhook@archiver.kernel.org>; Fri, 14 Jun 2024 15:13:40 +0000 (UTC)
+Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
+ by mx.groups.io with SMTP id smtpd.web11.14295.1718378011532611795
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 14 Jun 2024 06:11:18 -0700
+ Fri, 14 Jun 2024 08:13:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Mlcyyhqj;
- spf=pass (domain: list.ti.com, ip: 198.47.19.141, mailfrom: lcpdbld@list.ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45EDBGHZ076261;
-	Fri, 14 Jun 2024 08:11:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1718370676; i=@ti.com;
-	bh=rHWaCXtxZ6WGtQrqSHZoMYK9arUAC0xowZeJifi1gIQ=;
-	h=From:To:Subject:Date;
-	b=MlcyyhqjAo2DYEbNIRZeyYWUj/ayoVXj1PNR+el74xEiQnM1odGwyhVjMqyOFcoaN
-	 CPzC8xgDptI/MYcHF7oZdrpALAFVNv6AVB6Zh3b3OxMVMQ1q4Qnukqg5TyJOSjHLvs
-	 3IVgx4Rbcw8pn6CAjRpCPzBTYwrVrzUZiUoDAi1c=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45EDBGEH075751
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 14 Jun 2024 08:11:16 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
- Jun 2024 08:11:16 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 14 Jun 2024 08:11:16 -0500
-Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.248.130.8])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45EDBGW3058851;
-	Fri, 14 Jun 2024 08:11:16 -0500
-Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
-	id 164F510AC0C6; Fri, 14 Jun 2024 08:11:16 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202406140408
-Date: Fri, 14 Jun 2024 08:11:16 -0500
-Message-ID: <1718370676-106388-1-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@bootlin.com header.s=gm1 header.b=o1bMqMuT;
+ spf=pass (domain: bootlin.com, ip: 217.70.183.194, mailfrom: alexandre.belloni@bootlin.com)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 551424000A;
+	Fri, 14 Jun 2024 15:13:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1718378009;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=TOWzea25zeFaFuXXUvm6eyziLDN8egQsAPygVbM84G8=;
+	b=o1bMqMuTD153vJurqLgdNjRlhftDE1ID2y3Fwo5IhCLM295e6R9bSGUZFhz2jo/aKy5ux4
+	aWx9m8xjFineEo9+AMumYrwi6h4tnmZ1XR6CE6VkZueQbCwo6IsBBUuWi4J/79Cwl5GVK1
+	BKauIy8mEMiNBkjXs4j99+bnNCkbdfkjfK5CftaVlVuQZnKl0JiHYbO6eSOL3Pn2RvObok
+	l8YngjOixDhA0havuHkjyDUN74R9IuD4rBzuSlCPoLky1ehM+3qLqvh/vs//rJUrfJQQga
+	gG1bdonoALSd1Uvfg+86ZjyCbd919sgI4sL2qDgxEFDkZspcyzhFt1bTKGue+g==
+Date: Fri, 14 Jun 2024 17:13:29 +0200
+From: Alexandre Belloni <alexandre.belloni@bootlin.com>
+To: Denys Dmytriyenko <denys@konsulko.com>, meta-ti@lists.yoctoproject.org
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: Re: check-layer failures for meta-ti
+Message-ID: <20240614151329915a52aa@mail.local>
+References: <20240508215222b967f0db@mail.local>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240508215222b967f0db@mail.local>
+X-GND-Sasl: alexandre.belloni@bootlin.com
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 14 Jun 2024 13:11:19 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17732
+ <meta-ti@lists.yoctoproject.org>; Fri, 14 Jun 2024 15:13:40 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17733
 
-Updated the value(s) for:
-  u-boot-ti-staging_2024.04: SRCREV
-  linux-ti-staging-rt_6.6: SRCREV
-  linux-ti-staging_6.6: SRCREV
+Hello,
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
----
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb    | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+This was reported more than a month ago and this is still failing:
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-index 53c54e3..13f6179 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-@@ -6,4 +6,4 @@ PR = "r0"
- 
- BRANCH = "ti-u-boot-2024.04"
- 
--SRCREV = "6c2704e46073349030956d3cea04e63e90aeafb6"
-+SRCREV = "7bdcacf9f50caac83f121e65fffeb7a0f9b452fd"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-index 17e5e6b..6122cba 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-@@ -8,7 +8,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:"
- 
- BRANCH = "ti-rt-linux-6.6.y"
- 
--SRCREV = "d415ce41c543cacbe5d1a4897f35b9247d801c29"
-+SRCREV = "eeca5715c9a5b742423bd83ed587fac26268771c"
- 
- include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
- 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-index 8af87d9..2bc7235 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH ?= "ti-linux-6.6.y"
- 
--SRCREV ?= "51479baa13b77d89091fef60bac4a5707870b15a"
-+SRCREV ?= "8086474caf5dc2570a947669acf226d319cd0651"
- PV = "6.6.32+git"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+https://autobuilder.yoctoproject.org/typhoon/#/builders/121/builds/2123/steps/19/logs/stdio
+
+I guess the solution is to stop testing meta-ti master. I'll send a
+patch to do that. Of course, once this is fixed, you can send a patch to
+enable testing again.
+
+On 08/05/2024 23:52:23+0200, Alexandre Belloni wrote:
+> Hello,
+> 
+> meta-ti is currently failing check-layer-nightly:
+> 
+> https://autobuilder.yoctoproject.org/typhoon/#/builders/121/builds/2063/steps/20/logs/stdio
+> 
+> INFO: ======================================================================
+> INFO: FAIL: test_signatures (common.CommonCheckLayer.test_signatures)
+> INFO: ----------------------------------------------------------------------
+> INFO: Traceback (most recent call last):
+>   File "/home/pokybuild/yocto-worker/check-layer-nightly/build/scripts/lib/checklayer/cases/common.py", line 99, in test_signatures
+>     self.fail('Adding layer %s changed signatures.\n%s' % (self.tc.layer['name'], msg))
+> AssertionError: Adding layer meta-ti-extras changed signatures.
+> 19 signatures changed, initial differences (first hash before, second after):
+>    python3-yamllint:do_recipe_qa: 8ee2e91624905aa91d611870e9d8cf0d1fb6bc248f181cb9f9f9c35198cd2ec6 -> 7d43e16b2e61b0e319270b32ff19a39960e99a77af1fdabbd2f3610066344a3f
+>       bitbake-diffsigs --task python3-yamllint do_recipe_qa --signature 8ee2e91624905aa91d611870e9d8cf0d1fb6bc248f181cb9f9f9c35198cd2ec6 7d43e16b2e61b0e319270b32ff19a39960e99a77af1fdabbd2f3610066344a3f
+>       NOTE: Starting bitbake server...
+>       basehash changed from 8a578aebd04ba58b12e29b5eef3f92aaafba21aed33f40ab80f6d93689da0241 to 842db39ba0f9c7db1959bf577c83fb1455216b8c38f8e9822b3be7275048d240
+>       Variable ERROR_QA value changed:
+>       @@ -1,2 +1,2 @@
+>       -dev-so debug-deps dev-deps debug-files arch pkgconfig la             perms dep-cmp pkgvarcheck perm-config perm-line perm-link             split-strip packages-list pkgv-undefined var-undefined             version-going-backwards expanded-d invalid-chars             license-checksum dev-elf file-rdeps configure-unsafe             configure-gettext perllocalpod shebang-size             already-stripped installed-vs-shipped ldflags compile-host-path             install-host-path pn-overrides unknown-configure-option             useless-rpaths rpaths staticdev empty-dirs             patch-fuzz             ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', ' usrmerge', '', d)} patch-status
+>       +dev-so debug-deps dev-deps debug-files arch pkgconfig la             perms dep-cmp pkgvarcheck perm-config perm-line perm-link             split-strip packages-list pkgv-undefined var-undefined             version-going-backwards expanded-d invalid-chars             license-checksum dev-elf file-rdeps configure-unsafe             configure-gettext perllocalpod shebang-size             already-stripped installed-vs-shipped ldflags compile-host-path             install-host-path pn-overrides unknown-configure-option             useless-rpaths rpaths staticdev empty-dirs             patch-fuzz             ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', ' usrmerge', '', d)}
+>        DISTRO_FEATURES{usrmerge} = Unset
+>       Variable PV value changed from '1.35.1' to '1.33.0'
+>       Variable SRC_URI[sha256sum] value changed from '7a003809f88324fd2c877734f2d575ee7881dd9043360657cc8049c809eba6cd' to '2dceab9ef2d99518a2fcf4ffc964d44250ac4459be1ba3ca315118e4a1a81f7d'
+> 
+> 
+> -- 
+> Alexandre Belloni, co-owner and COO, Bootlin
+> Embedded Linux and Kernel engineering
+> https://bootlin.com
+
 -- 
-1.8.3.1
-
+Alexandre Belloni, co-owner and COO, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
 
