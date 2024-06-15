@@ -1,413 +1,100 @@
-Return-Path: <denis@denix.org>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6D20C2BA12
-	for <webhook@archiver.kernel.org>; Fri, 14 Jun 2024 21:57:35 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.1434.1718402246816459319
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96923C27C4F
+	for <webhook@archiver.kernel.org>; Sat, 15 Jun 2024 13:01:31 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.12076.1718456490997453563
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 14 Jun 2024 14:57:27 -0700
+ Sat, 15 Jun 2024 06:01:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id E2C5240CC8;
-	Fri, 14 Jun 2024 21:57:25 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MNzE1gRoJJSj; Fri, 14 Jun 2024 21:57:25 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id BE08F40CCA;
-	Fri, 14 Jun 2024 21:57:24 +0000 (UTC)
-Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 4DAB0163FAB;
-	Fri, 14 Jun 2024 17:57:22 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master/scarthgap][PATCH 3/4] conf/machine/beagle*, linux-bb.org: update for multi-BSP support
-Date: Fri, 14 Jun 2024 17:57:20 -0400
-Message-Id: <20240614215721.796496-3-denis@denix.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240614215721.796496-1-denis@denix.org>
-References: <20240614215721.796496-1-denis@denix.org>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Hmo4ChET;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45FD1N9T016277;
+	Sat, 15 Jun 2024 08:01:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1718456483;
+	bh=2CnfpeJiZQ7Ki01TlEV5p+2qdTCao5TVhiMwA6Z3jRk=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=Hmo4ChETWtViVI3qgAxF2cFlu2whc5z7VF3m08fbQgWYEtL64/l8VvyoCHyJx46wC
+	 krhKm8mgPTcftLP5BVLTAATTEDJ2ijlToj/X43gM3yA9o99BDAaT67Bc0Le+ouex2W
+	 2l5iWMiiG69YEKf8B44Coizh345P8DTx58QOnPm0=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45FD1Nre089927
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Sat, 15 Jun 2024 08:01:23 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 15
+ Jun 2024 08:01:23 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sat, 15 Jun 2024 08:01:23 -0500
+Received: from [10.249.34.39] ([10.249.34.39])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45FD1NI0094567;
+	Sat, 15 Jun 2024 08:01:23 -0500
+Message-ID: <d5054cda-4085-49d6-be0a-55956c9c70f9@ti.com>
+Date: Sat, 15 Jun 2024 08:01:23 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti] check-layer failures for meta-ti
+To: Denys Dmytriyenko <denis@denix.org>, <alexandre.belloni@bootlin.com>
+CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>,
+        Richard Purdie <richard.purdie@linuxfoundation.org>
+References: <20240508215222b967f0db@mail.local>
+ <20240614151329915a52aa@mail.local> <20240614161756.GW21287@denix.org>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20240614161756.GW21287@denix.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 14 Jun 2024 21:57:35 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17746
+ <meta-ti@lists.yoctoproject.org>; Sat, 15 Jun 2024 13:01:31 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17748
 
-From: Denys Dmytriyenko <denys@konsulko.com>
 
-Update all Beagle platform configurations to support multiple BSPs.
+The offending patch has been reverted and pushed to master.  You should 
+be able re-enable the nightly testing from the perspective of this issue.
 
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
----
- meta-ti-bsp/conf/machine/beagle-x15.conf      | 18 ++--
- .../conf/machine/beaglebone-ai64-k3r5.conf    |  8 +-
- meta-ti-bsp/conf/machine/beaglebone-ai64.conf | 23 ++++-
- meta-ti-bsp/conf/machine/beaglebone.conf      | 30 ++++---
- meta-ti-bsp/conf/machine/beagleplay-k3r5.conf |  9 +-
- meta-ti-bsp/conf/machine/beagleplay.conf      | 48 ++++++++++-
- .../recipes-kernel/linux/linux-bb.org_git.bb  | 84 -------------------
- 7 files changed, 100 insertions(+), 120 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/machine/beagle-x15.conf b/meta-ti-bsp/conf/=
-machine/beagle-x15.conf
-index 706f999a..15815119 100644
---- a/meta-ti-bsp/conf/machine/beagle-x15.conf
-+++ b/meta-ti-bsp/conf/machine/beagle-x15.conf
-@@ -5,17 +5,21 @@
- require conf/machine/include/beagle.inc
- require conf/machine/include/am57xx.inc
-=20
-+DT_VENDOR_PREFIX =3D "ti/omap/"
-+DT_VENDOR_PREFIX:bsp-ti-6_1 =3D ""
-+DT_VENDOR_PREFIX:bsp-bb_org =3D ""
-+
- KERNEL_DEVICETREE_PREFIX =3D " \
--ti/omap/am57xx-beagle-x15 \
--ti/omap/am57xx-idk-lcd \
-+${DT_VENDOR_PREFIX}am57xx-beagle-x15 \
-+${DT_VENDOR_PREFIX}am57xx-idk-lcd \
- "
-=20
- KERNEL_DEVICETREE =3D " \
--ti/omap/am57xx-beagle-x15.dtb \
--ti/omap/am57xx-beagle-x15-revb1.dtb \
--ti/omap/am57xx-beagle-x15-revc.dtb \
--ti/omap/am57xx-idk-lcd-osd101t2045.dtbo \
--ti/omap/am57xx-idk-lcd-osd101t2587.dtbo \
-+${DT_VENDOR_PREFIX}am57xx-beagle-x15.dtb \
-+${DT_VENDOR_PREFIX}am57xx-beagle-x15-revb1.dtb \
-+${DT_VENDOR_PREFIX}am57xx-beagle-x15-revc.dtb \
-+${DT_VENDOR_PREFIX}am57xx-idk-lcd-osd101t2045.dtbo \
-+${DT_VENDOR_PREFIX}am57xx-idk-lcd-osd101t2587.dtbo \
- "
-=20
- MACHINE_GUI_CLASS =3D "bigscreen"
-diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf b/meta-ti=
--bsp/conf/machine/beaglebone-ai64-k3r5.conf
-index 2bf58bce..85669cca 100644
---- a/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/beaglebone-ai64-k3r5.conf
-@@ -2,6 +2,7 @@
- #@NAME: BeagleBone AI-64 (R5F)
- #@DESCRIPTION: Machine configuration for the BeagleBone AI-64 (R5F core)
-=20
-+require conf/machine/include/beagle.inc
- require conf/machine/include/k3r5.inc
-=20
- SYSFW_SOC =3D "j721e"
-@@ -15,8 +16,7 @@ UBOOT_IMAGE =3D "tiboot3-${MAINMACHINE}-${PV}-${PR}.${U=
-BOOT_SUFFIX}"
- UBOOT_SYMLINK =3D "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
-=20
- UBOOT_MACHINE =3D "j721e_evm_r5_defconfig"
-+UBOOT_MACHINE:bsp-ti-6_6 =3D "j721e_beagleboneai64_r5_defconfig"
-=20
--# UBOOT_CONFIG_FRAGMENTS holds the list of u-boot config fragments which=
- has to be build
--# along with the base defconfig mentioned in UBOOT_MACHINE. Refer u-boot=
--mergeconfig.inc
--# under meta-ti-bsp/recipes-bsp/u-boot/ for more details.
--UBOOT_CONFIG_FRAGMENTS =3D "j721e_beagleboneai64_r5.config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "j721e_beagleboneai64_r5.config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 =3D "j721e_beagleboneai64_r5.config"
-diff --git a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf b/meta-ti-bsp/=
-conf/machine/beaglebone-ai64.conf
-index aaf94fa5..618e27d7 100644
---- a/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
-+++ b/meta-ti-bsp/conf/machine/beaglebone-ai64.conf
-@@ -6,11 +6,13 @@ require conf/machine/include/beagle.inc
- require conf/machine/include/j721e.inc
-=20
- UBOOT_MACHINE =3D "j721e_evm_a72_config"
-+UBOOT_MACHINE:bsp-ti-6_6 =3D "j721e_beagleboneai64_a72_defconfig"
-=20
--# UBOOT_CONFIG_FRAGMENTS holds the list of u-boot config fragments which=
- has to be build
--# along with the base defconfig mentioned in UBOOT_MACHINE. Refer u-boot=
--mergeconfig.inc
--# under meta-ti-bsp/recipes-bsp/u-boot/ for more details.
--UBOOT_CONFIG_FRAGMENTS =3D "j721e_beagleboneai64_a72.config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 =3D "j721e_beagleboneai64_a72.config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "j721e_beagleboneai64_a72.config"
-+
-+SPL_BINARY:bsp-ti-6_6 =3D "tispl.bin_unsigned"
-+SPL_BINARYNAME:bsp-ti-6_6 =3D "tispl.bin"
-=20
- KERNEL_DEVICETREE_PREFIX =3D " \
-     ti/k3-j721e \
-@@ -24,4 +26,17 @@ ti/k3-j721e-evm-quad-port-eth-exp.dtbo \
- ti/k3-j721e-sk.dtb \
- "
-=20
-+KERNEL_DEVICETREE:append:bsp-bb_org =3D " \
-+ti/k3-j721e-beagleboneai64-dsi-rpi-7inch-panel.dtbo \
-+ti/k3-j721e-common-proc-board-infotainment.dtbo \
-+ti/k3-j721e-evm-csi2-ov5640.dtbo \
-+ti/k3-j721e-evm-fusion.dtbo \
-+ti/k3-j721e-evm-pcie0-ep.dtbo \
-+ti/k3-j721e-evm-virt-mac-client.dtbo \
-+ti/k3-j721e-sk-csi2-ov5640.dtbo \
-+ti/k3-j721e-sk-csi2-rpi-imx219.dtbo \
-+ti/k3-j721e-sk-fusion.dtbo \
-+ti/k3-j721e-sk-rpi-hdr-ehrpwm.dtbo \
-+"
-+
- MACHINE_GUI_CLASS =3D "bigscreen"
-diff --git a/meta-ti-bsp/conf/machine/beaglebone.conf b/meta-ti-bsp/conf/=
-machine/beaglebone.conf
-index 9d001599..9f5f41e0 100644
---- a/meta-ti-bsp/conf/machine/beaglebone.conf
-+++ b/meta-ti-bsp/conf/machine/beaglebone.conf
-@@ -5,23 +5,27 @@
- require conf/machine/include/beagle.inc
- require conf/machine/include/ti33x.inc
-=20
-+DT_VENDOR_PREFIX =3D "ti/omap/"
-+DT_VENDOR_PREFIX:bsp-ti-6_1 =3D ""
-+DT_VENDOR_PREFIX:bsp-bb_org =3D ""
-+
- KERNEL_DEVICETREE_PREFIX =3D " \
--ti/omap/am335x-bone \
--ti/omap/am335x-pocketbeagle \
--ti/omap/am335x-sancloud-bbe \
-+${DT_VENDOR_PREFIX}am335x-bone \
-+${DT_VENDOR_PREFIX}am335x-pocketbeagle \
-+${DT_VENDOR_PREFIX}am335x-sancloud-bbe \
- "
-=20
- KERNEL_DEVICETREE =3D " \
--ti/omap/am335x-bone.dtb \
--ti/omap/am335x-boneblack.dtb \
--ti/omap/am335x-boneblack-wireless.dtb \
--ti/omap/am335x-boneblue.dtb \
--ti/omap/am335x-bonegreen.dtb \
--ti/omap/am335x-bonegreen-wireless.dtb \
--ti/omap/am335x-pocketbeagle.dtb \
--ti/omap/am335x-sancloud-bbe.dtb \
--ti/omap/am335x-sancloud-bbe-extended-wifi.dtb \
--ti/omap/am335x-sancloud-bbe-lite.dtb \
-+${DT_VENDOR_PREFIX}am335x-bone.dtb \
-+${DT_VENDOR_PREFIX}am335x-boneblack.dtb \
-+${DT_VENDOR_PREFIX}am335x-boneblack-wireless.dtb \
-+${DT_VENDOR_PREFIX}am335x-boneblue.dtb \
-+${DT_VENDOR_PREFIX}am335x-bonegreen.dtb \
-+${DT_VENDOR_PREFIX}am335x-bonegreen-wireless.dtb \
-+${DT_VENDOR_PREFIX}am335x-pocketbeagle.dtb \
-+${DT_VENDOR_PREFIX}am335x-sancloud-bbe.dtb \
-+${DT_VENDOR_PREFIX}am335x-sancloud-bbe-extended-wifi.dtb \
-+${DT_VENDOR_PREFIX}am335x-sancloud-bbe-lite.dtb \
- "
-=20
- MACHINE_GUI_CLASS =3D "bigscreen"
-diff --git a/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf b/meta-ti-bsp/=
-conf/machine/beagleplay-k3r5.conf
-index e38029ff..16503f09 100644
---- a/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
-@@ -2,6 +2,7 @@
- #@NAME: BeaglePlay (R5F)
- #@DESCRIPTION: Machine configuration for the BeaglePlay (R5F core)
-=20
-+require conf/machine/include/beagle.inc
- require conf/machine/include/k3r5.inc
-=20
- SYSFW_SOC =3D "am62x"
-@@ -9,8 +10,8 @@ SYSFW_CONFIG =3D "evm"
- SYSFW_SUFFIX =3D "gp"
-=20
- UBOOT_MACHINE =3D "am62x_evm_r5_defconfig"
-+UBOOT_MACHINE:bsp-ti-6_6 =3D "am62x_beagleplay_r5_defconfig"
-=20
--# UBOOT_CONFIG_FRAGMENTS holds the list of u-boot config fragments which=
- has to be build
--# along with the base defconfig mentioned in UBOOT_MACHINE. Refer u-boot=
--mergeconfig.inc
--# under meta-ti-bsp/recipes-bsp/u-boot/ for more details.
--UBOOT_CONFIG_FRAGMENTS =3D "am625_beagleplay_r5.config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am625_beagleplay_r5.config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 =3D "am625_beagleplay_r5.config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-mainline =3D "beagleplay_r5.config"
-diff --git a/meta-ti-bsp/conf/machine/beagleplay.conf b/meta-ti-bsp/conf/=
-machine/beagleplay.conf
-index a09c0d13..6f042d03 100644
---- a/meta-ti-bsp/conf/machine/beagleplay.conf
-+++ b/meta-ti-bsp/conf/machine/beagleplay.conf
-@@ -19,11 +19,14 @@ TFA_K3_SYSTEM_SUSPEND =3D "1"
- OPTEEMACHINE =3D "k3-am62x"
-=20
- UBOOT_MACHINE =3D "am62x_evm_a53_defconfig"
-+UBOOT_MACHINE:bsp-ti-6_6 =3D "am62x_beagleplay_a53_defconfig"
-=20
--# UBOOT_CONFIG_FRAGMENTS holds the list of u-boot config fragments which=
- has to be build
--# along with the base defconfig mentioned in UBOOT_MACHINE. Refer u-boot=
--mergeconfig.inc
--# under meta-ti-bsp/recipes-bsp/u-boot/ for more details.
--UBOOT_CONFIG_FRAGMENTS =3D "am625_beagleplay_a53.config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 =3D "am625_beagleplay_a53.config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am625_beagleplay_a53.config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-mainline =3D "beagleplay_a53.config"
-+
-+SPL_BINARY:bsp-ti-6_6 =3D "tispl.bin_unsigned"
-+SPL_BINARYNAME:bsp-ti-6_6 =3D "tispl.bin"
-=20
- KERNEL_DEVICETREE_PREFIX =3D " \
-     ti/k3-am625 \
-@@ -36,4 +39,41 @@ ti/k3-am625-sk.dtb \
- ti/k3-am62x-sk-hdmi-audio.dtbo \
- "
-=20
-+KERNEL_DEVICETREE:append:bsp-bb_org =3D " \
-+ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
-+ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
-+ti/k3-am625-beagleplay-lincolntech-lcd185-panel.dtbo \
-+ti/k3-am625-beaglemod.dtb \
-+ti/k3-am625-beaglemod-audio.dtbo \
-+ti/k3-am625-beaglemod-can0.dtbo \
-+ti/k3-am625-beaglemod-can1.dtbo \
-+ti/k3-am625-beaglemod-csi0-ov5640.dtbo \
-+ti/k3-am625-beaglemod-eeprom.dtbo \
-+ti/k3-am625-beaglemod-eth.dtbo \
-+ti/k3-am625-beaglemod-hdmi.dtbo \
-+ti/k3-am625-beaglemod-io-expand.dtbo \
-+ti/k3-am625-beaglemod-lt-lcd185.dtbo \
-+ti/k3-am625-beaglemod-ospi-flash.dtbo \
-+ti/k3-am625-beaglemod-rs485-1.dtbo \
-+ti/k3-am625-beaglemod-rs485-2.dtbo \
-+ti/k3-am625-beaglemod-rtc.dtbo \
-+ti/k3-am625-beaglemod-wl1835.dtbo \
-+ti/k3-am625-sk-dmtimer-pwm.dtbo \
-+ti/k3-am625-sk-ecap-capture.dtbo \
-+ti/k3-am625-sk-lincolntech-lcd185-panel.dtbo \
-+ti/k3-am625-sk-mcspi-loopback.dtbo \
-+ti/k3-am625-sk-microtips-mf101hie-panel.dtbo \
-+ti/k3-am625-sk-microtips-mf103hie-lcd2.dtbo \
-+ti/k3-am625-sk-pwm.dtbo \
-+ti/k3-am625-sk-rpi-hdr-ehrpwm.dtbo \
-+ti/k3-am62x-sk-csi2-imx219.dtbo \
-+ti/k3-am62x-sk-csi2-ov5640.dtbo \
-+ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
-+ti/k3-am62x-sk-csi2-v3link-fusion.dtbo \
-+ti/k3-am62x-sk-eqep.dtbo \
-+ti/k3-am62x-sk-hdmi-disable-fastboot.dtbo \
-+ti/k3-am62x-sk-lpm-wkup-sources.dtbo \
-+ti/k3-am62x-sk-mcan.dtbo \
-+"
-+
- MACHINE_GUI_CLASS =3D "bigscreen"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb b/meta-=
-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-index 534fc047..cee9c7cb 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
-@@ -14,32 +14,6 @@ DEPENDS +=3D "gmp-native libmpc-native"
-=20
- KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT} ${EXTRA_DTC_ARGS}=
-"
-=20
--KERNEL_DEVICETREE:beaglebone =3D " \
--am335x-bone.dtb \
--am335x-boneblack.dtb \
--am335x-boneblack-pps.dtb \
--am335x-boneblack-uboot.dtb \
--am335x-boneblack-uboot-univ.dtb \
--am335x-boneblack-wireless.dtb \
--am335x-boneblue.dtb \
--am335x-bonegreen.dtb \
--am335x-bonegreen-gateway.dtb \
--am335x-bonegreen-wireless.dtb \
--am335x-bonegreen-wireless-uboot-univ.dtb \
--am335x-pocketbeagle.dtb \
--am335x-sancloud-bbe.dtb \
--am335x-sancloud-bbe-extended-wifi.dtb \
--am335x-sancloud-bbe-lite.dtb \
--"
--
--KERNEL_DEVICETREE:beagle-x15 =3D " \
--am57xx-beagle-x15.dtb \
--am57xx-beagle-x15-revb1.dtb \
--am57xx-beagle-x15-revc.dtb \
--am57xx-idk-lcd-osd101t2045.dtbo \
--am57xx-idk-lcd-osd101t2587.dtbo \
--"
--
- # Extra DT overlays/capes
- KERNEL_DEVICETREE:append:armv7a =3D " \
- AM335X-PRU-UIO-00A0.dtbo \
-@@ -76,64 +50,6 @@ PB-MIKROBUS-0.dtbo \
- PB-MIKROBUS-1.dtbo \
- "
-=20
--KERNEL_DEVICETREE:beaglebone-ai64 =3D " \
--ti/k3-j721e-beagleboneai64.dtb \
--ti/k3-j721e-common-proc-board.dtb \
--ti/k3-j721e-beagleboneai64-dsi-rpi-7inch-panel.dtbo \
--ti/k3-j721e-common-proc-board-infotainment.dtbo \
--ti/k3-j721e-evm-csi2-ov5640.dtbo \
--ti/k3-j721e-evm-fusion.dtbo \
--ti/k3-j721e-evm-gesi-exp-board.dtbo \
--ti/k3-j721e-evm-pcie0-ep.dtbo \
--ti/k3-j721e-evm-quad-port-eth-exp.dtbo \
--ti/k3-j721e-evm-virt-mac-client.dtbo \
--ti/k3-j721e-sk.dtb \
--ti/k3-j721e-sk-csi2-ov5640.dtbo \
--ti/k3-j721e-sk-csi2-rpi-imx219.dtbo \
--ti/k3-j721e-sk-fusion.dtbo \
--ti/k3-j721e-sk-rpi-hdr-ehrpwm.dtbo \
--"
--
--KERNEL_DEVICETREE:beagleplay =3D " \
--ti/k3-am625-beagleplay.dtb \
--ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
--ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
--ti/k3-am625-beagleplay-lincolntech-lcd185-panel.dtbo \
--ti/k3-am625-beaglemod.dtb \
--ti/k3-am625-beaglemod-audio.dtbo \
--ti/k3-am625-beaglemod-can0.dtbo \
--ti/k3-am625-beaglemod-can1.dtbo \
--ti/k3-am625-beaglemod-csi0-ov5640.dtbo \
--ti/k3-am625-beaglemod-eeprom.dtbo \
--ti/k3-am625-beaglemod-eth.dtbo \
--ti/k3-am625-beaglemod-hdmi.dtbo \
--ti/k3-am625-beaglemod-io-expand.dtbo \
--ti/k3-am625-beaglemod-lt-lcd185.dtbo \
--ti/k3-am625-beaglemod-ospi-flash.dtbo \
--ti/k3-am625-beaglemod-rs485-1.dtbo \
--ti/k3-am625-beaglemod-rs485-2.dtbo \
--ti/k3-am625-beaglemod-rtc.dtbo \
--ti/k3-am625-beaglemod-wl1835.dtbo \
--ti/k3-am625-sk.dtb \
--ti/k3-am625-sk-dmtimer-pwm.dtbo \
--ti/k3-am625-sk-ecap-capture.dtbo \
--ti/k3-am625-sk-lincolntech-lcd185-panel.dtbo \
--ti/k3-am625-sk-mcspi-loopback.dtbo \
--ti/k3-am625-sk-microtips-mf101hie-panel.dtbo \
--ti/k3-am625-sk-microtips-mf103hie-lcd2.dtbo \
--ti/k3-am625-sk-pwm.dtbo \
--ti/k3-am625-sk-rpi-hdr-ehrpwm.dtbo \
--ti/k3-am62x-sk-csi2-imx219.dtbo \
--ti/k3-am62x-sk-csi2-ov5640.dtbo \
--ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
--ti/k3-am62x-sk-csi2-v3link-fusion.dtbo \
--ti/k3-am62x-sk-eqep.dtbo \
--ti/k3-am62x-sk-hdmi-audio.dtbo \
--ti/k3-am62x-sk-hdmi-disable-fastboot.dtbo \
--ti/k3-am62x-sk-lpm-wkup-sources.dtbo \
--ti/k3-am62x-sk-mcan.dtbo \
--"
--
- S =3D "${WORKDIR}/git"
-=20
- # 6.1.80 version for 32-bit
---=20
-2.25.1
+On 6/14/2024 11:17 AM, Denys Dmytriyenko wrote:
+> Thanks Alexandre
+> 
+> And sorry this has taken longer than expected to get it fixed.
+> 
+> As I explained last time, we were holding until nanbield got EOL-ed in May,
+> since the component in question python3-yamllint was added to OE-Core since
+> scarthgap and meta-ti doesn't have a separate nanbield branch. Anyway, I just
+> sent patches to remove the recipe and nanbield compatibility:
+> https://patchwork.yoctoproject.org/project/ti/patch/20240614155606.792020-1-denis@denix.org/
+> https://patchwork.yoctoproject.org/project/ti/patch/20240614155606.792020-2-denis@denix.org/
+> 
+> But honestly, there's been a lot of breakage in master caused by the UNPACKDIR
+> fallout and other changes slowly propagating to other layers - Ryan hasn't
+> been able to get green CI builds for many weeks now and meta-ti patches have
+> been piling up in next and wip branches w/o being tested. E.g. meta-arm is
+> only now unlocking master:
+> https://patchwork.yoctoproject.org/project/arm/list/?series=25549
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#17736): https://lists.yoctoproject.org/g/meta-ti/message/17736
+> Mute This Topic: https://lists.yoctoproject.org/mt/105990588/6551054
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [reatmon@ti.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
