@@ -1,122 +1,131 @@
-Return-Path: <sabeeh-khan@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0867EC2BA18
-	for <webhook@archiver.kernel.org>; Fri, 21 Jun 2024 01:24:35 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.63318.1718933073250380385
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51A81C2BBCA
+	for <webhook@archiver.kernel.org>; Fri, 21 Jun 2024 09:14:28 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.68906.1718961267383859296
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 20 Jun 2024 18:24:33 -0700
+ Fri, 21 Jun 2024 02:14:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=qU6J5CHk;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: sabeeh-khan@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=MUuaH/v4;
+ spf=pass (domain: list.ti.com, ip: 198.47.19.142, mailfrom: lcpdbld@list.ti.com)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45L1OUUe063392;
-	Thu, 20 Jun 2024 20:24:30 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45L9ENGN123955;
+	Fri, 21 Jun 2024 04:14:23 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1718933070;
-	bh=wfxCYrzMfJOiN5T/xDrxuEjQl4S8tkbch8zgSsLrXU4=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=qU6J5CHkesI7BH+RW15ihB/lw5lnuTWOu1PijRdvWuoFZh1FGxhjFr/6lej9tjYt/
-	 5aBA/YIWHfWO14qSG8gRRQqZErD7MThM7H33BTK8qbsfvxLana2tddgbGI0cj9WlT6
-	 gNQ/6tPmUNAr1UX1jlgBITsSCndOr16F7xvVKNIo=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45L1OU8G007812
+	s=ti-com-17Q1; t=1718961263; i=@ti.com;
+	bh=pzXAnj7zmhFCAJrrzIqd8Gadp0PqejPBBr00X0s4MTw=;
+	h=From:To:Subject:Date;
+	b=MUuaH/v4GOpFuLNAaMEw1qna5GPyu3KyDnNj+jZgh88ymIKQpj8ytwJhFC4f3vUX0
+	 2PVe9wM2k82M+8vBEPQlh5/P/lJO2bXqe9J6e1OFiDbamLMZJXX6UThEFkR87DuNme
+	 o428x0wIjvGSlruedQwGNacKVI5jqJSM77YT/VL4=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45L9ENca016422
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 20 Jun 2024 20:24:30 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 20
- Jun 2024 20:24:29 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 21 Jun 2024 04:14:23 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 21
+ Jun 2024 04:14:23 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 20 Jun 2024 20:24:29 -0500
-Received: from [10.249.33.211] ([10.249.33.211])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45L1OTqk009947;
-	Thu, 20 Jun 2024 20:24:29 -0500
-Message-ID: <479b1a23-4b73-4fb8-a712-adf712705de6@ti.com>
-Date: Thu, 20 Jun 2024 20:24:29 -0500
+ Frontend Transport; Fri, 21 Jun 2024 04:14:23 -0500
+Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.248.130.8])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45L9ENuY076735;
+	Fri, 21 Jun 2024 04:14:23 -0500
+Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
+	id 2373910AC0C6; Fri, 21 Jun 2024 04:14:23 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202406202156
+Date: Fri, 21 Jun 2024 04:14:23 -0500
+Message-ID: <1718961263-77767-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti] [RFC][master/scarthgap][PATCH 4/4]
- cc33xx-target-scripts: add cc33xx scripts to control TI cc33xx WLAN device
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <meta-ti@lists.yoctoproject.org>
-References: <20240620032202.169122-1-sabeeh-khan@ti.com>
- <20240620032202.169122-5-sabeeh-khan@ti.com>
- <20240620202733.GF18231@denix.org>
- <224a7234-e455-44a1-971d-326761968609@ti.com>
- <20240621011752.GG18231@denix.org>
-Content-Language: en-US
-From: "Khan, Sabeeh" <sabeeh-khan@ti.com>
-In-Reply-To: <20240621011752.GG18231@denix.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 21 Jun 2024 01:24:35 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17790
+ <meta-ti@lists.yoctoproject.org>; Fri, 21 Jun 2024 09:14:28 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17791
 
+Updated the value(s) for:
+  ti-linux-fw: CNM_WAVE521_FW_VERSION,TI_DM_FW_VERSION,TI_LINUX_FW_SRCREV
+  u-boot-ti-staging_2024.04: SRCREV
+  linux-ti-staging-rt_6.6: SRCREV
+  linux-ti-staging_6.6: SRCREV
 
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 6 +++---
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb    | 2 +-
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
-On 6/20/2024 8:17 PM, Denys Dmytriyenko wrote:
-> On Thu, Jun 20, 2024 at 03:37:12PM -0500, Khan, Sabeeh wrote:
->> On 6/20/2024 3:27 PM, Denys Dmytriyenko wrote:
->>> On Wed, Jun 19, 2024 at 10:22:02PM -0500, Sabeeh Khan via lists.yoctoproject.org wrote:
->>>> [...]
->>>>
->>>> diff --git a/meta-ti-extras/recipes-connectivity/cc33xx-target-scripts/cc33xx-target-scripts.bb b/meta-ti-extras/recipes-connectivity/cc33xx-target-scripts/cc33xx-target-scripts.bb
->>>> new file mode 100644
->>>> index 00000000..2f13f911
->>>> --- /dev/null
->>>> +++ b/meta-ti-extras/recipes-connectivity/cc33xx-target-scripts/cc33xx-target-scripts.bb
->>>> @@ -0,0 +1,22 @@
->>>> +DESCRIPTION = "Scripts and configuration files for TI cc33xx wireless drivers"
->>> SUMMARY
->> Apologies for not being familiar, but are you suggesting here
->>
->> to have "SUMMARY" variable instead of "DESCRIPTION", or in addition to?
->>
->> Can I please have some more context over the ask here?
->>
->> I don't see "SUMMARY" variable in other meta-ti recipes, so I'm
->> looking for a reference.
-> https://urldefense.com/v3/__https://docs.yoctoproject.org/ref-manual/variables.html*term-SUMMARY__;Iw!!G3vK!T0lI-6cdoXVmU9UPzr9erSCvNsNdMvKJfZFYYP7HcUra2w5WfkbtKxo7hDbZ8P2Uk5WwWYI2c9n5$ 
-> https://urldefense.com/v3/__https://docs.yoctoproject.org/ref-manual/variables.html*term-DESCRIPTION__;Iw!!G3vK!T0lI-6cdoXVmU9UPzr9erSCvNsNdMvKJfZFYYP7HcUra2w5WfkbtKxo7hDbZ8P2Uk5WwWRlLSudn$ 
->
-> SUMMARY is a shorter version of the package description (one-line under 72 
-> characters), while DESCRIPTION can be a longer multi-line description.
->
-> DESCRIPTION can be omitted and will be derived from SUMMARY, but not the other 
-> way around.
->
-> In the very old days only the DESCRIPTION was used, hence old recipes still 
-> don't set SUMMARY, but newly added recipes should not do that.
->
-> Here's one of the many recipes in meta-ti that properly uses/sets both:
-> https://urldefense.com/v3/__https://git.yoctoproject.org/meta-ti/tree/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc__;!!G3vK!T0lI-6cdoXVmU9UPzr9erSCvNsNdMvKJfZFYYP7HcUra2w5WfkbtKxo7hDbZ8P2Uk5WwWUukMkI9$ 
-This makes it very clear, thank you!
-I'll make the changes throughout the series.
->
->>>> [...]
->>>> +
->>>> +do_install() {
->>>> +	install -d ${D}${datadir}/cc33xx/
->>>> +
->>>> +	scripts=`find ./* -type f -name "*.*"`
->>> Is this find command necessary?
->> The recipe should install .sh and .conf files from the git repo only.
->>
->> This was done to ignore any README or license files and not have
->> them installed.
-> I believe you can use globs directly with install, unless there's a 
-> directory hierarchy:
->
-> install -m 0755 *.* ${D}${datadir}/cc33xx/
-Yes, there is also a directory hierarchy.
-So for now I will leave this as is.
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index adf8e69..6ccb93c 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -13,11 +13,11 @@ PRUETH_FW_AM65X_SR2_VERSION = "02.02.13.00"
+ GOODIX_FW_VERSION = "1.0.0.0"
+ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+-CNM_WAVE521_FW_VERSION = "1.0.3"
+-TI_DM_FW_VERSION = "09.02.04"
++CNM_WAVE521_FW_VERSION = "1.0.4"
++TI_DM_FW_VERSION = "10.00.01"
+ TI_SYSFW_VERSION = "09.02.08"
+ 
+-TI_LINUX_FW_SRCREV ?= "3987d170fc522565c5e4a9293aba1db75951b8c0"
++TI_LINUX_FW_SRCREV ?= "83d5c6a2349436185fb49922da40d4201fb8d2c3"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
+index 9ed4a74..d01e9d6 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
+@@ -6,4 +6,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2024.04"
+ 
+-SRCREV = "70e054f85f98a0f255ba308c54b16e0557bc8af1"
++SRCREV = "c377e32f1e563280093aa28361a07751a75da792"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
+index ed22fbb..fa53395 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
+@@ -8,7 +8,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:"
+ 
+ BRANCH = "ti-rt-linux-6.6.y"
+ 
+-SRCREV = "8410a9e2cda1f2da2b24de65d8651984c507ab01"
++SRCREV = "10e40a5ae075f5d07636fd78ec5bffe9d3faa668"
+ 
+ include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
+index 585bdba..178f4f9 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.6.y"
+ 
+-SRCREV ?= "28ca41014f923e6e0e314492899b7cda49439c39"
++SRCREV ?= "4bd0d44f69cbda913ca7fcb809ae0fa682416b14"
+ PV = "6.6.32+git"
+ 
+ KERNEL_GIT_URI ?= "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
+-- 
+1.8.3.1
+
 
