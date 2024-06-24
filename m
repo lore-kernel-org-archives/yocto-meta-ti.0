@@ -1,85 +1,90 @@
-Return-Path: <rs@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D298CC30653
-	for <webhook@archiver.kernel.org>; Mon, 24 Jun 2024 18:17:33 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.148740.1719253049353310829
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A1FF3C2D0D1
+	for <webhook@archiver.kernel.org>; Mon, 24 Jun 2024 20:06:50 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.152147.1719259606926686371
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 24 Jun 2024 11:17:29 -0700
+ Mon, 24 Jun 2024 13:06:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=wgs67WXW;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: rs@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45OIHNK3130639;
-	Mon, 24 Jun 2024 13:17:23 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1719253044;
-	bh=CCvUiOKYFtcPgy9dcZ+sMEkPhejmTQkzI8rAvVGEX8o=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=wgs67WXWvnslxs9+Yw0cstqyf68tLbBrCMxV4kwg/TJeu3DSMwJdLorNPge1OupaD
-	 dlkk+t2eMPDHipEt20q423xHdLXEf/D6gSeFgZkefSc8ZbE4l2nr131wUi5etYjSdh
-	 y6EKV7eUcrJeddNtPZnt2LKL7Bzqzus5hAZgKz08=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45OIHNlD024710
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 24 Jun 2024 13:17:23 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 24
- Jun 2024 13:17:23 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 24 Jun 2024 13:17:23 -0500
-Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45OIHLrH025548;
-	Mon, 24 Jun 2024 13:17:23 -0500
-From: <rs@ti.com>
-To: <denis@denix.org>, <reatmon@ti.com>
-CC: <max.oss.09@gmail.com>, <meta-ti@lists.yoctoproject.org>,
-        <detheridge@ti.com>
-Subject: [meta-ti][master/scarthgap][PATCHv2 2/2] ti-img-rogue-driver_24.1: gcc 14 compat
-Date: Mon, 24 Jun 2024 13:17:14 -0500
-Message-ID: <20240624181714.1293865-3-rs@ti.com>
-X-Mailer: git-send-email 2.45.1
-In-Reply-To: <20240624181714.1293865-1-rs@ti.com>
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A2F4040CAF;
+	Mon, 24 Jun 2024 20:06:45 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id enm8cz61oUeU; Mon, 24 Jun 2024 20:06:45 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 809AF40BA8;
+	Mon, 24 Jun 2024 20:06:40 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 7E24B163FC6; Mon, 24 Jun 2024 16:06:39 -0400 (EDT)
+Date: Mon, 24 Jun 2024 16:06:39 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: rs@ti.com
+Cc: reatmon@ti.com, max.oss.09@gmail.com, meta-ti@lists.yoctoproject.org,
+	detheridge@ti.com
+Subject: Re: [meta-ti][master/scarthgap][PATCHv2 0/2] gcc 14 and bsp
+ provider fixup
+Message-ID: <20240624200639.GH18231@denix.org>
 References: <20240624181714.1293865-1-rs@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240624181714.1293865-1-rs@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 24 Jun 2024 18:17:33 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17803
+ <meta-ti@lists.yoctoproject.org>; Mon, 24 Jun 2024 20:06:50 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17804
 
-From: Randolph Sapp <rs@ti.com>
+On Mon, Jun 24, 2024 at 01:17:12PM -0500, rs@ti.com wrote:
+> From: Randolph Sapp <rs@ti.com>
+> 
+> Resolve some issues afer the new bsp-provider selection logic was added and add
+> some patches to help with compilation flag checks in the KM.
 
-Bump this recipe to add a change to help with GCC 14 compatibility in
-the check-cc script used to check compiler flags before use.
+FWIW, the new bsp-provider selection logic was not causing any new issues.
 
-Signed-off-by: Randolph Sapp <rs@ti.com>
----
- .../powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Anyone using meta-ti master and scarthgap from early February until late May 
+were already exposed to this.
 
-diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb
-index 6f374f69..fc303c4f 100644
---- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb
-+++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb
-@@ -19,7 +19,7 @@ SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-driver.git;protocol=https;
- 
- S = "${WORKDIR}/git"
- 
--SRCREV = "e2dfdfee991dadc18175f27fe9e8676e910a2f8d"
-+SRCREV = "81e189096ef2f2479ccfb50d8b2fb24097188de3"
- 
- TARGET_PRODUCT:j721e = "j721e_linux"
- TARGET_PRODUCT:j721s2 = "j721s2_linux"
--- 
-2.45.1
+While 6.1 LTS was still the default, this change to 23.3 got merged on Feb 9:
+https://git.yoctoproject.org/meta-ti/commit/?id=737807fc4360b7fe3cbe493a6104558c4658a046
 
+Separate new 24.1 DDK for the 6.6 LTS was added on May 2, still disabled:
+https://git.yoctoproject.org/meta-ti/commit/?id=d89907ec2322f23271917d75f052217dd8a2c27a
+
+And then 6.6 LTS got flipped to become the default on May 23:
+https://git.yoctoproject.org/meta-ti/commit/?id=d41d49cfdc6deee33a40ab44d453167c36462c89
+
+When adding the BSP provider code and setting preferred versions, I did see 
+the first commit that switched branches from 6.1 to 6.6, and I was considering 
+reverting it (like you are proposing here with patch #1). But I didn't want to 
+upset anyone and figured since this was already the default config for almost 
+4 months (!) of using the updated 23.3 DDK with 6.1 LTS, I just left it alone.
+
+So, the BSP provider logic just formalized all the existing defaults.
+
+
+> This includes equivalent patches from the following post for GCC 14 compat:
+> https://lists.yoctoproject.org/g/meta-ti/topic/106806264
+> 
+> Randolph Sapp (2):
+>   ti-img-rogue-*_23.3: gcc 14 compat and branch sel
+>   ti-img-rogue-driver_24.1: gcc 14 compat
+> 
+>  .../powervr-drivers/ti-img-rogue-driver_23.3.6512818.bb       | 4 ++--
+>  .../powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb       | 2 +-
+>  .../powervr-umlibs/ti-img-rogue-umlibs_23.3.6512818.bb        | 2 +-
+>  3 files changed, 4 insertions(+), 4 deletions(-)
+> 
+> -- 
+> 2.45.1
+> 
 
