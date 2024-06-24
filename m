@@ -2,89 +2,121 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1FF3C2D0D1
-	for <webhook@archiver.kernel.org>; Mon, 24 Jun 2024 20:06:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B45ACC2BD09
+	for <webhook@archiver.kernel.org>; Mon, 24 Jun 2024 20:21:10 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.152147.1719259606926686371
+ by mx.groups.io with SMTP id smtpd.web10.152534.1719260468800934091
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 24 Jun 2024 13:06:47 -0700
+ Mon, 24 Jun 2024 13:21:09 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id A2F4040CAF;
-	Mon, 24 Jun 2024 20:06:45 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id E25D040CAF;
+	Mon, 24 Jun 2024 20:21:07 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id enm8cz61oUeU; Mon, 24 Jun 2024 20:06:45 +0000 (UTC)
+	with ESMTP id r7WriuhG6_f1; Mon, 24 Jun 2024 20:21:07 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 809AF40BA8;
-	Mon, 24 Jun 2024 20:06:40 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C39FA40BA8;
+	Mon, 24 Jun 2024 20:21:06 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 7E24B163FC6; Mon, 24 Jun 2024 16:06:39 -0400 (EDT)
-Date: Mon, 24 Jun 2024 16:06:39 -0400
+	id E17BF163FC6; Mon, 24 Jun 2024 16:21:05 -0400 (EDT)
+Date: Mon, 24 Jun 2024 16:21:05 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-To: rs@ti.com
-Cc: reatmon@ti.com, max.oss.09@gmail.com, meta-ti@lists.yoctoproject.org,
-	detheridge@ti.com
-Subject: Re: [meta-ti][master/scarthgap][PATCHv2 0/2] gcc 14 and bsp
- provider fixup
-Message-ID: <20240624200639.GH18231@denix.org>
-References: <20240624181714.1293865-1-rs@ti.com>
+To: sabeeh-khan@ti.com
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti] [RFC][master/scarthgap][PATCH 1/4] cc33conf: add new
+ cc33conf tool for cc33xx devices
+Message-ID: <20240624202105.GI18231@denix.org>
+References: <20240620032202.169122-1-sabeeh-khan@ti.com>
+ <20240620032202.169122-2-sabeeh-khan@ti.com>
+ <20240620202002.GD18231@denix.org>
+ <3311702c-1cc8-4542-8661-72af6262443a@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240624181714.1293865-1-rs@ti.com>
+In-Reply-To: <3311702c-1cc8-4542-8661-72af6262443a@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 24 Jun 2024 20:06:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17804
+ <meta-ti@lists.yoctoproject.org>; Mon, 24 Jun 2024 20:21:10 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17805
 
-On Mon, Jun 24, 2024 at 01:17:12PM -0500, rs@ti.com wrote:
-> From: Randolph Sapp <rs@ti.com>
+On Thu, Jun 20, 2024 at 03:40:22PM -0500, Sabeeh Khan via lists.yoctoproject.org wrote:
 > 
-> Resolve some issues afer the new bsp-provider selection logic was added and add
-> some patches to help with compilation flag checks in the KM.
-
-FWIW, the new bsp-provider selection logic was not causing any new issues.
-
-Anyone using meta-ti master and scarthgap from early February until late May 
-were already exposed to this.
-
-While 6.1 LTS was still the default, this change to 23.3 got merged on Feb 9:
-https://git.yoctoproject.org/meta-ti/commit/?id=737807fc4360b7fe3cbe493a6104558c4658a046
-
-Separate new 24.1 DDK for the 6.6 LTS was added on May 2, still disabled:
-https://git.yoctoproject.org/meta-ti/commit/?id=d89907ec2322f23271917d75f052217dd8a2c27a
-
-And then 6.6 LTS got flipped to become the default on May 23:
-https://git.yoctoproject.org/meta-ti/commit/?id=d41d49cfdc6deee33a40ab44d453167c36462c89
-
-When adding the BSP provider code and setting preferred versions, I did see 
-the first commit that switched branches from 6.1 to 6.6, and I was considering 
-reverting it (like you are proposing here with patch #1). But I didn't want to 
-upset anyone and figured since this was already the default config for almost 
-4 months (!) of using the updated 23.3 DDK with 6.1 LTS, I just left it alone.
-
-So, the BSP provider logic just formalized all the existing defaults.
-
-
-> This includes equivalent patches from the following post for GCC 14 compat:
-> https://lists.yoctoproject.org/g/meta-ti/topic/106806264
+> On 6/20/2024 3:20 PM, Denys Dmytriyenko wrote:
+> >On Wed, Jun 19, 2024 at 10:21:59PM -0500, Sabeeh Khan via lists.yoctoproject.org wrote:
+> >>cc33conf is a tool provided by TI to configure
+> >>cc33xx WLAN devices. It can be used to change
+> >>the RF parameters and other features of the target.
+> >>Documentation for this tool is provided within the following link:
+> >>https://www.ti.com/tool/CC33XX-SOFTWARE
+> >>
+> >>Signed-off-by: Sabeeh Khan<sabeeh-khan@ti.com>
+> >>---
+> >>  .../cc33conf/cc33conf_git.bb                  | 29 +++++++++++++++++++
+> >>  1 file changed, 29 insertions(+)
+> >>  create mode 100644 meta-ti-extras/recipes-connectivity/cc33conf/cc33conf_git.bb
+> >>
+> >>diff --git a/meta-ti-extras/recipes-connectivity/cc33conf/cc33conf_git.bb b/meta-ti-extras/recipes-connectivity/cc33conf/cc33conf_git.bb
+> >>new file mode 100644
+> >>index 00000000..1e4faa77
+> >>--- /dev/null
+> >>+++ b/meta-ti-extras/recipes-connectivity/cc33conf/cc33conf_git.bb
+> >>@@ -0,0 +1,29 @@
+> >>+DESCRIPTION = "Configuration utility for TI CC33xx wireless devices"
+> >>+LICENSE = "BSD-3-Clause"
+> >>+LIC_FILES_CHKSUM ="file://COPYING;md5=d5fc448a36efe573623542dcb989afc4"
+> >>+
+> >>+SRCREV = "a2f84140b8d67cfc94472cf92676a409d1e47d86"
+> >>+SRC_URI = "git://git.ti.com/git/cc33xx-wlan/cc33xx-utils.git;branch=master;protocol=https"
+> >>+
+> >>+PV = "1.7.0.120"
+> >>+
+> >>+S = "${WORKDIR}/git/cc33conf"
+> >>+
+> >>+EXTRA_OEMAKE = "CC="${CC}""
+> >>+
+> >>+do_install() {
+> >>+	install -d ${D}${sbindir}
+> >>+	install -d ${D}${sbindir}/cc33conf/
+> >>+
+> >>+	install -m 0755 cc33xxconf ${D}${sbindir}/cc33conf/
+> >>+	install -m 0755 dictionary.txt ${D}${sbindir}/cc33conf/
+> >>+	install -m 0755 default.conf ${D}${sbindir}/cc33conf/
+> >>+	install -m 0755 README ${D}${sbindir}/cc33conf/
+> >>+	install -m 0755 cc33xx-conf.conf ${D}${sbindir}/cc33conf/
+> >>+	install -m 0755 cc33xx-conf.ini ${D}${sbindir}/cc33conf/
+> >>+	install -m 0755 conf.h ${D}${sbindir}/cc33conf/
+> >Should all these files really go into sbindir?
 > 
-> Randolph Sapp (2):
->   ti-img-rogue-*_23.3: gcc 14 compat and branch sel
->   ti-img-rogue-driver_24.1: gcc 14 compat
+> This recipe and tool is based off of wlconf. Since wlconf was
+> already accepted,
 > 
->  .../powervr-drivers/ti-img-rogue-driver_23.3.6512818.bb       | 4 ++--
->  .../powervr-drivers/ti-img-rogue-driver_24.1.6554834.bb       | 2 +-
->  .../powervr-umlibs/ti-img-rogue-umlibs_23.3.6512818.bb        | 2 +-
->  3 files changed, 4 insertions(+), 4 deletions(-)
+> I figured installing to a similar location would be practical.
 > 
-> -- 
-> 2.45.1
+> However, I am open to other locations if you have suggestions.
 > 
+> The tool does use all of these files.
+
+Well, wlconf does indeed set a bad precedent...
+
+Are those files being used relative to the binary and hence should reside 
+there?
+
+The standard is to have conf files in /etc, binaries in /usr/bin or /bin, 
+docs/READMEs in /usr/share/doc and .h headers in /usr/include.
+
+And bitbake.conf sets all the corresponding variables accordingly, such as 
+sysconfdir, bindir, datadir, docdir, includedir, etc:
+https://git.openembedded.org/openembedded-core/tree/meta/conf/bitbake.conf
+
+So, if the tool is capable of locating its files in the proper system-wide 
+locations, the recipe should definitely install them in the right location.
+
+-- 
+Denys
 
