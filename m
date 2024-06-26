@@ -1,146 +1,128 @@
-Return-Path: <sabeeh-khan@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 103B7C2BD09
-	for <webhook@archiver.kernel.org>; Mon, 24 Jun 2024 21:20:11 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.154339.1719264002942958315
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C458FC27C4F
+	for <webhook@archiver.kernel.org>; Wed, 26 Jun 2024 20:28:18 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.663.1719433690552315472
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 24 Jun 2024 14:20:03 -0700
+ Wed, 26 Jun 2024 13:28:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=hEeUvfQi;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: sabeeh-khan@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45OLJx4A056679;
-	Mon, 24 Jun 2024 16:19:59 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=glsQe1Io;
+ spf=pass (domain: list.ti.com, ip: 198.47.19.141, mailfrom: lcpdbld@list.ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45QKS63L101561;
+	Wed, 26 Jun 2024 15:28:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1719264000;
-	bh=6UAqaQv3wDJDuWzoTPtbBEeDJNaXCZBnAhOyV9EsHWA=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=hEeUvfQiuhlEA7X3UNA21uUWb8OQT2TNREn/wvQOUHeXv7iNtyO8qUiyYlPFr0Ldc
-	 dNHon9yOo+iyzNaSL0LYVxFzPNSwc51hNhB+ls0Dv5ieXzwov/4pYIYSTuElHcr00B
-	 ARzM20zBlP3j4Tx0ezyDBhuR+OavS3lTn9kxManM=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45OLJxB9077282
+	s=ti-com-17Q1; t=1719433686; i=@ti.com;
+	bh=ead1nO3Kn/3ku7RMZJGFH7ywf2KWa+LckL0RI4dJRcg=;
+	h=From:To:Subject:Date;
+	b=glsQe1IotRrmWDb4vg9EcrT9UAMCFsvq3CHrxYmW5DHzuDBdywzbDDJq2tezDYzBg
+	 hNvHYWzW256Yt/jZ9rjNBu2jNhrKS83leO07WHOi+tZWsavBfdVvU8TLQbksQq9ZsB
+	 PuBrni5L7cOpgfUJp3TxQNkE0D7diRZRntoCmJrs=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45QKS6jP080917
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 24 Jun 2024 16:19:59 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 24
- Jun 2024 16:19:59 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 26 Jun 2024 15:28:06 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 26
+ Jun 2024 15:28:05 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 24 Jun 2024 16:19:59 -0500
-Received: from [128.247.83.254] (lt5cd302htfz.dhcp.ti.com [128.247.83.254])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45OLJx0s084968;
-	Mon, 24 Jun 2024 16:19:59 -0500
-Message-ID: <1b3f786d-d4d1-4f8c-b285-d3cf8f25c151@ti.com>
-Date: Mon, 24 Jun 2024 16:19:59 -0500
+ Frontend Transport; Wed, 26 Jun 2024 15:28:06 -0500
+Received: from fllvdckhpci021.itg.ti.com (fllvdckhpci021.itg.ti.com [10.248.130.114])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45QKS6fY073582;
+	Wed, 26 Jun 2024 15:28:06 -0500
+Received: by fllvdckhpci021.itg.ti.com (Postfix, from userid 60899)
+	id 17F1510F57BB; Wed, 26 Jun 2024 15:28:06 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202406260816
+Date: Wed, 26 Jun 2024 15:28:06 -0500
+Message-ID: <1719433686-118964-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti] [RFC][master/scarthgap][PATCH 1/4] cc33conf: add new
- cc33conf tool for cc33xx devices
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <meta-ti@lists.yoctoproject.org>
-References: <20240620032202.169122-1-sabeeh-khan@ti.com>
- <20240620032202.169122-2-sabeeh-khan@ti.com>
- <20240620202002.GD18231@denix.org>
- <3311702c-1cc8-4542-8661-72af6262443a@ti.com>
- <20240624202105.GI18231@denix.org>
-Content-Language: en-US
-From: "Khan, Sabeeh" <sabeeh-khan@ti.com>
-In-Reply-To: <20240624202105.GI18231@denix.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 24 Jun 2024 21:20:11 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17807
+ <meta-ti@lists.yoctoproject.org>; Wed, 26 Jun 2024 20:28:18 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17808
 
+Updated the value(s) for:
+  ti-linux-fw: TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
+  u-boot-ti-staging_2024.04: SRCREV
+  linux-ti-staging-rt_6.6: SRCREV
+  linux-ti-staging_6.6: SRCREV
 
-On 6/24/2024 3:21 PM, Denys Dmytriyenko wrote:
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 4 ++--
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb    | 2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
-> On Thu, Jun 20, 2024 at 03:40:22PM -0500, Sabeeh Khan via lists.yoctoproject.org wrote:
->> On 6/20/2024 3:20 PM, Denys Dmytriyenko wrote:
->>> On Wed, Jun 19, 2024 at 10:21:59PM -0500, Sabeeh Khan via lists.yoctoproject.org wrote:
->>>> cc33conf is a tool provided by TI to configure
->>>> cc33xx WLAN devices. It can be used to change
->>>> the RF parameters and other features of the target.
->>>> Documentation for this tool is provided within the following link:
->>>> https://www.ti.com/tool/CC33XX-SOFTWARE
->>>>
->>>> Signed-off-by: Sabeeh Khan<sabeeh-khan@ti.com>
->>>> ---
->>>>  .../cc33conf/cc33conf_git.bb                  | 29 +++++++++++++++++++
->>>>  1 file changed, 29 insertions(+)
->>>>  create mode 100644 meta-ti-extras/recipes-connectivity/cc33conf/cc33conf_git.bb
->>>>
->>>> diff --git a/meta-ti-extras/recipes-connectivity/cc33conf/cc33conf_git.bb b/meta-ti-extras/recipes-connectivity/cc33conf/cc33conf_git.bb
->>>> new file mode 100644
->>>> index 00000000..1e4faa77
->>>> --- /dev/null
->>>> +++ b/meta-ti-extras/recipes-connectivity/cc33conf/cc33conf_git.bb
->>>> @@ -0,0 +1,29 @@
->>>> +DESCRIPTION = "Configuration utility for TI CC33xx wireless devices"
->>>> +LICENSE = "BSD-3-Clause"
->>>> +LIC_FILES_CHKSUM ="file://COPYING;md5=d5fc448a36efe573623542dcb989afc4"
->>>> +
->>>> +SRCREV = "a2f84140b8d67cfc94472cf92676a409d1e47d86"
->>>> +SRC_URI = "git://git.ti.com/git/cc33xx-wlan/cc33xx-utils.git;branch=master;protocol=https"
->>>> +
->>>> +PV = "1.7.0.120"
->>>> +
->>>> +S = "${WORKDIR}/git/cc33conf"
->>>> +
->>>> +EXTRA_OEMAKE = "CC="${CC}""
->>>> +
->>>> +do_install() {
->>>> +	install -d ${D}${sbindir}
->>>> +	install -d ${D}${sbindir}/cc33conf/
->>>> +
->>>> +	install -m 0755 cc33xxconf ${D}${sbindir}/cc33conf/
->>>> +	install -m 0755 dictionary.txt ${D}${sbindir}/cc33conf/
->>>> +	install -m 0755 default.conf ${D}${sbindir}/cc33conf/
->>>> +	install -m 0755 README ${D}${sbindir}/cc33conf/
->>>> +	install -m 0755 cc33xx-conf.conf ${D}${sbindir}/cc33conf/
->>>> +	install -m 0755 cc33xx-conf.ini ${D}${sbindir}/cc33conf/
->>>> +	install -m 0755 conf.h ${D}${sbindir}/cc33conf/
->>> Should all these files really go into sbindir?
->> This recipe and tool is based off of wlconf. Since wlconf was
->> already accepted,
->>
->> I figured installing to a similar location would be practical.
->>
->> However, I am open to other locations if you have suggestions.
->>
->> The tool does use all of these files.
-> Well, wlconf does indeed set a bad precedent...
->
-> Are those files being used relative to the binary and hence should reside 
-> there?
-
-Yes, these files are used by the cc33conf binary, and are expected to be 
-in the same directory. 
-
->
-> The standard is to have conf files in /etc, binaries in /usr/bin or /bin, 
-> docs/READMEs in /usr/share/doc and .h headers in /usr/include.
->
-> And bitbake.conf sets all the corresponding variables accordingly, such as 
-> sysconfdir, bindir, datadir, docdir, includedir, etc:
-> https://urldefense.com/v3/__https://git.openembedded.org/openembedded-core/tree/meta/conf/bitbake.conf__;!!G3vK!VPNKNNfyhJIOrtUFG8JhfU9TtuBcgUmgLggT-57NAKqxdaDVVGRDA89I5c9JmFrVB1_4chMVtjDH$ 
->
-> So, if the tool is capable of locating its files in the proper system-wide 
-> locations, the recipe should definitely install them in the right location.
->
-The tool currently isn't capable of searching system-wide, but per your feedback, 
-I am certainly open to improving the tool to do this. 
-However, I'm not sure of the feasibility of doing so. Feels like a major re-work unfortunately. 
-
-Thanks for your guidance!
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 6ccb93c..dbde9eb 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -15,9 +15,9 @@ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+ CNM_WAVE521_FW_VERSION = "1.0.4"
+ TI_DM_FW_VERSION = "10.00.01"
+-TI_SYSFW_VERSION = "09.02.08"
++TI_SYSFW_VERSION = "10.00.02"
+ 
+-TI_LINUX_FW_SRCREV ?= "83d5c6a2349436185fb49922da40d4201fb8d2c3"
++TI_LINUX_FW_SRCREV ?= "4a334045552fa5edf9097a0e968a172e7a2ddc38"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
+index d01e9d6..211056e 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
+@@ -6,4 +6,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2024.04"
+ 
+-SRCREV = "c377e32f1e563280093aa28361a07751a75da792"
++SRCREV = "a966db94265729780911e4e5cc8f70ed21b65029"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
+index fa53395..eecdb7b 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
+@@ -8,7 +8,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:"
+ 
+ BRANCH = "ti-rt-linux-6.6.y"
+ 
+-SRCREV = "10e40a5ae075f5d07636fd78ec5bffe9d3faa668"
++SRCREV = "1b49ba34b397c3ad7680efdf653e16a135ebd6da"
+ 
+ include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
+index 178f4f9..9a146b4 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.6.y"
+ 
+-SRCREV ?= "4bd0d44f69cbda913ca7fcb809ae0fa682416b14"
++SRCREV ?= "617ff9770276964869d70593a0eab2145b087d12"
+ PV = "6.6.32+git"
+ 
+ KERNEL_GIT_URI ?= "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
+-- 
+1.8.3.1
 
 
