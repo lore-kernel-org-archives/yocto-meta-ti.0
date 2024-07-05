@@ -1,157 +1,130 @@
-Return-Path: <c-shilwant@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C15A7C30658
-	for <webhook@archiver.kernel.org>; Fri,  5 Jul 2024 04:52:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E19AAC41513
+	for <webhook@archiver.kernel.org>; Fri,  5 Jul 2024 12:59:27 +0000 (UTC)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.10698.1720155115278985017
+ by mx.groups.io with SMTP id smtpd.web10.16239.1720184362475879450
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 04 Jul 2024 21:51:55 -0700
+ Fri, 05 Jul 2024 05:59:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=DV+a+RsP;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: c-shilwant@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4654psXY035535
-	for <meta-ti@lists.yoctoproject.org>; Thu, 4 Jul 2024 23:51:54 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=PnqUgR39;
+ spf=pass (domain: list.ti.com, ip: 198.47.19.142, mailfrom: lcpdbld@list.ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 465CxItS010528;
+	Fri, 5 Jul 2024 07:59:18 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1720155114;
-	bh=RTKF/7xVTWxBnhPpn7n17f22xOpxnmEBSHUEkMZKcI4=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=DV+a+RsPLMuSlseIX82EJ4TboDvyPbKmmeUz/rhefUTYqaLbq/I69S1CcegtT7lZZ
-	 ZZ2NO+Vzz7uzLLX/tJwR63RSlFd7pRGvdRd/6Y3OioTz5Iz6/DAeaL7csASgcwv2KS
-	 /namNZxRgzmeLLMDg4i6pfT2Hsi3079w+7Lp2R28=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4654ps6J024751
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 4 Jul 2024 23:51:54 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Jul 2024 23:51:54 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1720184358; i=@ti.com;
+	bh=s5tRmr579HSOEZy/mBMhjPuYF93JwDf0f/RR4JCUV5s=;
+	h=From:To:Subject:Date;
+	b=PnqUgR39Srri5dJzqIHTNlxQwICuxjHSG/xIP7TihHYFBlK6+2jj+A8w0vqZwqfMz
+	 UXpmZuM0yKKOH2rkUfL+se1MbdC806Jler+mVJgME1OrzseSEOLbmnxLR+GKLC6H1v
+	 3qvAvsnxM8CuqlIFWytisckTwIM0IFmyFBFtLql4=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 465CxIxj118718
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 5 Jul 2024 07:59:18 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 5
+ Jul 2024 07:59:18 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Jul 2024 23:51:54 -0500
-Received: from [172.24.227.238] (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.238])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4654ppdn113777;
-	Thu, 4 Jul 2024 23:51:52 -0500
-Message-ID: <51ff6257-56c4-415e-b330-bd8e597c7c2c@ti.com>
-Date: Fri, 5 Jul 2024 10:21:50 +0530
+ Frontend Transport; Fri, 5 Jul 2024 07:59:18 -0500
+Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.248.130.8])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 465CxIfs040014;
+	Fri, 5 Jul 2024 07:59:18 -0500
+Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
+	id 4D699110BE03; Fri,  5 Jul 2024 07:59:18 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202407050400
+Date: Fri, 5 Jul 2024 07:59:18 -0500
+Message-ID: <1720184358-51488-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][master/scarthgap][PATCH] conf: machine: Update
- am62pxx-evm for multi-BSP support
-To: <meta-ti@lists.yoctoproject.org>
-CC: Ryan Eatmon <reatmon@ti.com>, Gyan Gupta <g-gupta@ti.com>,
-        "Raghavendra,
- Vignesh" <vigneshr@ti.com>,
-        "Bajjuri, Praneeth" <praneeth@ti.com>,
-        "Khasim,
- Syed Mohammed" <khasim@ti.com>,
-        Devarsh Thakkar <devarsht@ti.com>
-References: <20240704071935.840815-1-c-shilwant@ti.com>
- <ad6c5c84-e01e-4a5d-4847-4832b4d30e93@ti.com>
-Content-Language: en-US
-From: Chirag Shilwant <c-shilwant@ti.com>
-In-Reply-To: <ad6c5c84-e01e-4a5d-4847-4832b4d30e93@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 05 Jul 2024 04:52:05 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17822
+ <meta-ti@lists.yoctoproject.org>; Fri, 05 Jul 2024 12:59:27 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17823
 
-Hi,
-On 04/07/24 16:35, Devarsh Thakkar wrote:
-> Hi Chirag,
->
-> Thanks for the patch.
-> On 04/07/24 12:49, Chirag Shilwant wrote:
->> - In ti-u-boot-2024.04, the config fragment to disable splashscreen
->> is now renamed to am62x_evm_prune_splashscreen.config [1]
->> Hence, update UBOOT_CONFIG_FRAGMENTS for the same.
->>> - Add UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 which ensures that
->> am62pxx-evm machine configuration still supports Display Cluster usecase [2]
->> with ti-u-boot-2023.04
->>
->> [1]: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2024.04&id=981eddc83dfdbbf176a4984977f9779dc1d56f87
->>
->> [2]: https://software-dl.ti.com/mcu-plus-sdk/esd/AM62PX/09_01_00_39/exports/docs/api_guide_am62px/EXAMPLES_DRIVERS_DSS_DISPLAY_SHARE.html
->>
->> Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
-> Reviewed-by: Devarsh Thakkar <devarsht@ti.com>
->
->
-> On a side-note,
-> The uEnv.txt also needs to be updated as need to prefix ti in name_overlays as
-> otherwise we get below error :
->
-> [2024-07-04 15:57:12.135] Failed to load
-> '/boot/dtb/k3-am62p5-sk-microtips-mf101hie-panel.dtbo'
-> [2024-07-04 15:57:12.151] Failed to load
-> '/boot/dtb/k3-am62p5-sk-dss-shared-mode.dtbo'
-> [2024-07-04 15:57:12.151] ## Flattened Device Tree blob at 88000000
->
-> After setting as below, it works fine :
->
-> setenv name_overlays ti/k3-am62p5-sk-microtips-mf101hie-panel.dtbo
-> ti/k3-am62p5-sk-dss-shared-mode.dtbo $name_overlay
->
-> Above can go as a separate patch and there could be multiple platforms
-> affected, please verify.
+Updated the value(s) for:
+  ti-linux-fw: TI_DM_FW_VERSION,TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
+  u-boot-ti-staging_2024.04: SRCREV
+  linux-ti-staging-rt_6.6: SRCREV
+  linux-ti-staging_6.6: SRCREV
 
-
-
-Just a clarification for folks in mailing list,
-
-The uEnv.txt only for Display Cluster usecase of AM62P is updated in 
-meta-tisdk [1]
-& is independent of meta-arago. Will take an action to update the 
-uEnv.txt in meta-tisdk
-post we have this patch integrated to master/scarthgap.
-
-For other platforms, by default the uEnv.txt is empty & it comes from 
-meta-arago [2].
-So, rest all platforms aren't affected!
-
-
-[1]: 
-https://git.ti.com/cgit/ti-sdk-linux/meta-tisdk/tree/recipes-tisdk/tisdk-uenv/tisdk-uenv/am62pxx-evm/uEnv-am62p-display-cluster.txt?h=scarthgap
-
-[2]: 
-https://git.ti.com/cgit/arago-project/meta-arago/tree/meta-arago-distro/recipes-tisdk/tisdk-uenv/tisdk-uenv/uEnv.txt?h=scarthgap
-
-
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
 ---
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 6 +++---
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb    | 2 +-
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
-Regards,
-Chirag
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 1942be8..ef6be86 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -14,10 +14,10 @@ GOODIX_FW_VERSION = "1.0.0.0"
+ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+ CNM_WAVE521_FW_VERSION = "1.0.4"
+-TI_DM_FW_VERSION = "10.00.01"
+-TI_SYSFW_VERSION = "10.00.02"
++TI_DM_FW_VERSION = "10.00.05"
++TI_SYSFW_VERSION = "10.00.04"
+ 
+-TI_LINUX_FW_SRCREV ?= "bce9bafb6efeb8ac539bd9858d474a55fe88cd46"
++TI_LINUX_FW_SRCREV ?= "af745923679b12f9872ed43e510e74335149de1c"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
+index ce97d54..df274ae 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
+@@ -6,4 +6,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2024.04"
+ 
+-SRCREV = "b3c10f333acccef49ebaf4abc575616ea7326d50"
++SRCREV = "c2e4dd919f1ab482496f1ca3afce3624979036c9"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
+index b8acebc..b3466e1 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
+@@ -8,7 +8,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:"
+ 
+ BRANCH = "ti-rt-linux-6.6.y"
+ 
+-SRCREV = "0e1cf9a5dc2aedc23644276953f7a89a5a9e6749"
++SRCREV = "55cfa6cfef88accd529863b53f89bebdb3bba024"
+ 
+ include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
+index 5d0bb12..dd87788 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.6.y"
+ 
+-SRCREV ?= "b39a7a4a83900c5e9376663293af2aa3e0f5931a"
++SRCREV ?= "dd0c137e219ab179c10ecb067bdf67a268004e14"
+ PV = "6.6.32+git"
+ 
+ KERNEL_GIT_URI ?= "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
+-- 
+1.8.3.1
 
-
-
-
-> Regards
-> Devarsh
->
->> ---
->>   meta-ti-bsp/conf/machine/am62pxx-evm.conf | 6 ++++--
->>   1 file changed, 4 insertions(+), 2 deletions(-)
->>
->> diff --git a/meta-ti-bsp/conf/machine/am62pxx-evm.conf b/meta-ti-bsp/conf/machine/am62pxx-evm.conf
->> index fab96bd8..8d94c2b4 100644
->> --- a/meta-ti-bsp/conf/machine/am62pxx-evm.conf
->> +++ b/meta-ti-bsp/conf/machine/am62pxx-evm.conf
->> @@ -22,5 +22,7 @@ UBOOT_MACHINE = "am62px_evm_a53_defconfig"
->>   # along with the base defconfig mentioned in UBOOT_MACHINE. Refer u-boot-mergeconfig.inc
->>   # under meta-ti-bsp/recipes-bsp/u-boot/ for more details.
->>   # For AM62P tisdk-display-cluster image, splash screen is handled by SBL.
->> -# Hence, disable the A53 based splash screen using the am62px_evm_prune_splashscreen.config fragment present in ti-u-boot tree
->> -UBOOT_CONFIG_FRAGMENTS = "${@oe.utils.conditional('DISPLAY_CLUSTER_ENABLE', '1', 'am62px_evm_prune_splashscreen.config', '', d)}"
->> +# Hence, disable the A53 based splash screen using the am62x_evm_prune_splashscreen.config fragment present in ti-u-boot tree
->> +UBOOT_CONFIG_FRAGMENTS = "${@oe.utils.conditional('DISPLAY_CLUSTER_ENABLE', '1', 'am62x_evm_prune_splashscreen.config', '', d)}"
->> +
->> +UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "${@oe.utils.conditional('DISPLAY_CLUSTER_ENABLE', '1', 'am62px_evm_prune_splashscreen.config', '', d)}"
 
