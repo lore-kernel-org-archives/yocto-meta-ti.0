@@ -2,46 +2,46 @@ Return-Path: <p-bhagat@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4089C2BD09
-	for <webhook@archiver.kernel.org>; Tue,  9 Jul 2024 12:34:39 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.11924.1720528472046785948
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C84CEC2BD09
+	for <webhook@archiver.kernel.org>; Tue,  9 Jul 2024 12:41:19 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web11.11929.1720528871282631307
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 09 Jul 2024 05:34:32 -0700
+ Tue, 09 Jul 2024 05:41:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=pmuIZioZ;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: p-bhagat@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 469CYVa8063256
-	for <meta-ti@lists.yoctoproject.org>; Tue, 9 Jul 2024 07:34:31 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=zKHCN8fL;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: p-bhagat@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 469CfACN127098
+	for <meta-ti@lists.yoctoproject.org>; Tue, 9 Jul 2024 07:41:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1720528471;
-	bh=5hZgto9WGeVGBg1l3jcZJXfkrbUr69endM96vqLkJKI=;
+	s=ti-com-17Q1; t=1720528870;
+	bh=Eo9HnjV5M6oY+BJwu6n3v68QUVZrXbz8B0fKIaALQhg=;
 	h=From:To:CC:Subject:Date;
-	b=pmuIZioZN2EvTcfyuEw85y8kty6YLLl2bgaaTM2fQwsDc4G9zIXPUZBJqu9aaw6nd
-	 coueHjC5/Cn8RcitNtdjdUH5/1+kjnfwNYPuWhhf8A4acNP//VWVz4C/EpqGCHsyF3
-	 GFAHY+50V8A76O4O1VbO0rmhpTfG+mI7RDV/tXgA=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 469CYV1f087548
+	b=zKHCN8fLNNwUsxuQk68Yplb6SUX65zpc7EG5hk58cHqxHYLMDygEZjyXRGJvyfcRD
+	 KSmMzPhS2oAtHkRA7ONVAuip/VF/erDcjX/dflOX5v0lKyijnzV+mhEtwi4pMFFcfa
+	 Q8buocVEc5Tn3s7xvrTcqpohsN2RqpXhNDkdLmmE=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 469CfAoO001390
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Tue, 9 Jul 2024 07:34:31 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Tue, 9 Jul 2024 07:41:10 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
- Jul 2024 07:34:31 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 07:41:10 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 9 Jul 2024 07:34:31 -0500
+ Frontend Transport; Tue, 9 Jul 2024 07:41:10 -0500
 Received: from localhost (ula0502350.dhcp.ti.com [172.24.227.38])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 469CYUNm118940;
-	Tue, 9 Jul 2024 07:34:30 -0500
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 469Cf9Bj048020;
+	Tue, 9 Jul 2024 07:41:10 -0500
 From: Paresh Bhagat <p-bhagat@ti.com>
 To: <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>, <reatmon@ti.com>
 CC: <c-shilwant@ti.com>, <s-adivi@ti.com>, <khasim@ti.com>, <g-gupta@ti.com>
-Subject: [master/scarthgap][PATCH] recipes-ti: jailhouse: Update jailhouse for scarthgap
-Date: Tue, 9 Jul 2024 18:03:59 +0530
-Message-ID: <20240709123359.3086351-1-p-bhagat@ti.com>
+Subject: [master/scarthgap][PATCH v2] ti-extras: Update SRCREV and BRANCH for ti-extras sources
+Date: Tue, 9 Jul 2024 18:11:06 +0530
+Message-ID: <20240709124106.3105971-1-p-bhagat@ti.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -50,88 +50,76 @@ X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 09 Jul 2024 12:34:39 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17844
+ <meta-ti@lists.yoctoproject.org>; Tue, 09 Jul 2024 12:41:19 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17845
 
-Update SRCREV for jailhouse which incorporates makefile changes for
-scarthgap.
-Add ${ARAGO_IMAGE_SUFFIX} so that jailhouse can pick correct inmate
-image for RT build.
-Skip QA checks for usrmerge and buildpath. This is required to package
-jailhouse in image.
-Update FILES:${PN}.
+Update u-boot/ti-extras.inc to 2024.04 version.
+Update linux/ti-extras-rt.inc to 6.6 version.
+Update linux/ti-extras.inc to version 6.6.
 
 Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
 ---
- .../recipes-ti/jailhouse/jailhouse_git.bb     | 20 +++++++++----------
- .../recipes-ti/jailhouse/ti-jailhouse.inc     |  2 +-
- 2 files changed, 10 insertions(+), 12 deletions(-)
+ meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc      | 8 ++++----
+ meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc | 8 ++++----
+ meta-ti-bsp/recipes-kernel/linux/ti-extras.inc    | 8 ++++----
+ 3 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb b/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-index 98ec0e9e..32e94dd0 100644
---- a/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-+++ b/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-@@ -51,11 +51,11 @@ do_install() {
- 	install -d ${D}/boot
- 	if [ -n "${JH_RAMFS_IMAGE}" ]
- 	then
--		if [ -f ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}-${MACHINE}.cpio ]
-+		if [ -f ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}${ARAGO_IMAGE_SUFFIX}-${MACHINE}.rootfs.cpio ]
- 		then
--			install -m 0644 ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}-${MACHINE}.cpio ${D}/boot
-+			install -m 0644 ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}${ARAGO_IMAGE_SUFFIX}-${MACHINE}.rootfs.cpio ${D}/boot
- 		else
--			bberror "Could not find JH_RAMFS_IMAGE (${JH_RAMFS_IMAGE}-${MACHINE}.cpio)!"
-+			bberror "Could not find JH_RAMFS_IMAGE (${JH_RAMFS_IMAGE}${ARAGO_IMAGE_SUFFIX}-${MACHINE}.rootfs.cpio)!"
- 			bberror "Please make sure that \"cpio\" is in IMAGE_FSTYPES."
- 		fi
- 	fi
-@@ -68,7 +68,7 @@ do_install() {
- 		./jailhouse-cell-linux -w ${D}${JH_DATADIR}/${JH_INMATE_DTB} \
- 			-a ${JH_ARCH} -c "${JH_CMDLINE}" \
- 			-d ../configs/${JH_ARCH}/dts/${JH_INMATE_DTB} \
--			-i ${D}/boot/${JH_RAMFS_IMAGE}-${MACHINE}.cpio \
-+			-i ${D}/boot/${JH_RAMFS_IMAGE}${ARAGO_IMAGE_SUFFIX}-${MACHINE}.rootfs.cpio \
- 			${D}${CELL_DIR}/${JH_LINUX_DEMO_CELL} \
- 			${DEPLOY_DIR_IMAGE}/Image \
- 			| tr -cd '\11\12\15\40-\176' \
-@@ -96,7 +96,8 @@ RDEPENDS:pyjailhouse = "python3-core python3-ctypes python3-fcntl python3-shell"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc b/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
+index d32c6529..0252e2c3 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
++++ b/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
+@@ -3,10 +3,10 @@
  
- RRECOMMENDS:${PN} = "${PN}-tools"
- 
--INSANE_SKIP:${PN} = "ldflags"
-+INSANE_SKIP:${PN} = "ldflags usrmerge"
-+INSANE_SKIP:${PN}-dbg = "usrmerge buildpaths"
- 
- KERNEL_MODULE_AUTOLOAD += "jailhouse"
- 
-@@ -117,10 +118,7 @@ python __anonymous () {
- }
- 
- FILES:${PN} = " \
--    /boot/* \
--    /usr/libexec \
--    /usr/sbin/* \
--    /usr/libexec/* \
--    /usr/share/* \
--    /lib/firmware/* \
-+    /boot \
-+    /usr \
-+    /lib \
- "
-diff --git a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-index 6faf16b8..2831e560 100644
---- a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-+++ b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = " \
  COMPATIBLE_MACHINE = "am62xx|am62pxx"
- TARGET_CC_ARCH += "${LDFLAGS}"
- PV = "0.12+git"
--SRCREV = "603819ef9a771a3c253a141220daab8e61751a43"
-+SRCREV = "9b494ddf4bd8845a2c1063352d08a274ef61777b"
- BRANCH = "master"
- SRC_URI = " \
-     git://git.ti.com/git/jailhouse/ti-jailhouse.git;protocol=https;branch=${BRANCH} \
+ 
+-BRANCH = "ti-u-boot-2023.04"
+-BRANCH:tie-jailhouse = "ti-u-boot-2023.04-jailhouse"
++BRANCH = "ti-u-boot-2024.04"
++BRANCH:tie-jailhouse = "ti-u-boot-2024.04-jailhouse"
+ 
+-SRCREV = "b0d868ee086eb5c96a3d32f72a7cb9670abf5b90"
+-SRCREV:tie-jailhouse = "765cab112d16fcf68a3266738073663dae67a55d"
++SRCREV = "b3c10f333acccef49ebaf4abc575616ea7326d50"
++SRCREV:tie-jailhouse = "b3c10f333acccef49ebaf4abc575616ea7326d50"
+ 
+ UBOOT_GIT_URI = "git://git.ti.com/git/processor-sdk/u-boot.git"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc b/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc
+index 530a1783..df10d594 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc
++++ b/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc
+@@ -4,8 +4,8 @@
+ 
+ COMPATIBLE_MACHINE = "am62xx|am62pxx"
+ 
+-BRANCH = "ti-rt-linux-6.1.y"
+-BRANCH:tie-jailhouse = "ti-rt-linux-6.1.y-jailhouse"
++BRANCH = "ti-rt-linux-6.6.y"
++BRANCH:tie-jailhouse = "ti-rt-linux-6.6.y-jailhouse"
+ 
+-SRCREV = "685e77152461bd6b791500f717bec62d17c1b36d"
+-SRCREV:tie-jailhouse = "a74088b40b4d27478a2af5c20cdc0b4ec8ed9470"
++SRCREV = "fb89cd4d622ce6cc1b7b254ae21298570d437a08"
++SRCREV:tie-jailhouse = "ea592a872ebdb974f26f6f839596e0a79e9d408b"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc b/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
+index 0b22aca9..880d5d87 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
++++ b/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
+@@ -4,11 +4,11 @@
+ 
+ COMPATIBLE_MACHINE = "am62xx|am62pxx"
+ 
+-BRANCH = "ti-linux-6.1.y"
+-BRANCH:tie-jailhouse = "ti-linux-6.1.y-jailhouse"
++BRANCH = "ti-linux-6.6.y"
++BRANCH:tie-jailhouse = "ti-linux-6.6.y-jailhouse"
+ 
+-SRCREV = "ec058c3ddc5377c629e988a95ef84826b14a3307"
+-SRCREV:tie-jailhouse = "d035e0cc72399f1c087a63c4210d29e79a7a66e4"
++SRCREV = "e298dab666632b6f62ed61eac35813331341c3aa"
++SRCREV:tie-jailhouse = "b45ba5ae4b724d4a09c0c7125ffb49e9d58c04f7"
+ 
+ KERNEL_GIT_URI = "git://git.ti.com/git/processor-sdk/linux.git"
+ 
 -- 
 2.34.1
 
