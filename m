@@ -1,138 +1,110 @@
-Return-Path: <p-bhagat@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67A57C3DA41
-	for <webhook@archiver.kernel.org>; Thu, 11 Jul 2024 10:01:30 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web11.8245.1720692084456924908
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4337CC3DA41
+	for <webhook@archiver.kernel.org>; Thu, 11 Jul 2024 13:33:11 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.12031.1720704784376168852
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 11 Jul 2024 03:01:24 -0700
+ Thu, 11 Jul 2024 06:33:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=TSAyQB0V;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: p-bhagat@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46BA1NS6121759
-	for <meta-ti@lists.yoctoproject.org>; Thu, 11 Jul 2024 05:01:23 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=bGm6uCAT;
+ spf=pass (domain: list.ti.com, ip: 198.47.23.248, mailfrom: lcpdbld@list.ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46BDX2w8113214;
+	Thu, 11 Jul 2024 08:33:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1720692083;
-	bh=WxUGotRlnHsbC8ML0NvoSxixouIye+s/mLS5vPHSoOo=;
-	h=From:To:CC:Subject:Date;
-	b=TSAyQB0VyrGXBxxbmjv1cr6Zo79ioJTgwldmv+wddcoXVQMsFcwykcJpx2usKj+v8
-	 IPaDCgXDoPma42Yuo7WLpao7PYrsh/GAE6V2lpdT/xESHUa1Vo+8W0mDD6r8FjHn36
-	 mHlzaM5noYAk4apiRqajA9OHDXgwVZcIkIsgY88o=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46BA1NWo035816
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 11 Jul 2024 05:01:23 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1720704782; i=@ti.com;
+	bh=0rjTOgJn5T0SLc1zEtEoZBf+Kif+fHJYWwlcKhilQKU=;
+	h=From:To:Subject:Date;
+	b=bGm6uCATeECH+lhRNLEcPyjiNqKVd5SQuwn9DUjyBFZ8zcen2Flr1mxWxbn7RaHtK
+	 J7q9P3GL3M1YBLAiInbWbmK9YSic+UOBsI/aXhTOJ0Ueupw8P2IcnzQe/ws8t3K0dd
+	 kH/n+9JPP1BkdhhGrXycAS+KqAbx4adI2VKT9DhI=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46BDX2db118697
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 11 Jul 2024 08:33:02 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 11
- Jul 2024 05:01:23 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 08:33:02 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 11 Jul 2024 05:01:23 -0500
-Received: from localhost (ula0502350.dhcp.ti.com [172.24.227.38])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46BA1Mpr104540;
-	Thu, 11 Jul 2024 05:01:22 -0500
-From: Paresh Bhagat <p-bhagat@ti.com>
-To: <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>, <reatmon@ti.com>
-CC: <c-shilwant@ti.com>, <s-adivi@ti.com>, <khasim@ti.com>, <g-gupta@ti.com>
-Subject: [master/scarthgap][PATCH v2] recipes-ti: jailhouse: Update jailhouse for scarthgap
-Date: Thu, 11 Jul 2024 15:31:14 +0530
-Message-ID: <20240711100114.131223-1-p-bhagat@ti.com>
-X-Mailer: git-send-email 2.34.1
+ Frontend Transport; Thu, 11 Jul 2024 08:33:02 -0500
+Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.248.130.8])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46BDX2Y9021355;
+	Thu, 11 Jul 2024 08:33:02 -0500
+Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
+	id 9096310F58D2; Thu, 11 Jul 2024 08:33:02 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202407110400
+Date: Thu, 11 Jul 2024 08:33:02 -0500
+Message-ID: <1720704782-150662-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 11 Jul 2024 10:01:30 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17855
+ <meta-ti@lists.yoctoproject.org>; Thu, 11 Jul 2024 13:33:11 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17856
 
-- Update SRCREV for jailhouse which incorporates makefile changes for
-scarthgap.
-- To handle ${ARAGO_IMAGE_SUFFIX}, add * wherever JH_RAMFS_IMAGE is used in
-do_install (install or copy) so to pick correct inmate image for RT build.
-- Skip QA checks for usrmerge and buildpath. This is required to package
-jailhouse in image.
-- Update FILES:${PN}.
+Updated the value(s) for:
+  u-boot-ti-staging_2024.04: SRCREV
+  linux-ti-staging-rt_6.6: SRCREV
+  linux-ti-staging_6.6: SRCREV
 
-Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
 ---
- .../recipes-ti/jailhouse/jailhouse_git.bb     | 20 +++++++++----------
- .../recipes-ti/jailhouse/ti-jailhouse.inc     |  2 +-
- 2 files changed, 10 insertions(+), 12 deletions(-)
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb    | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb b/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-index 98ec0e9e..38281615 100644
---- a/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-+++ b/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-@@ -51,11 +51,11 @@ do_install() {
- 	install -d ${D}/boot
- 	if [ -n "${JH_RAMFS_IMAGE}" ]
- 	then
--		if [ -f ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}-${MACHINE}.cpio ]
-+		if [ -f ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}*-${MACHINE}.rootfs.cpio ]
- 		then
--			install -m 0644 ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}-${MACHINE}.cpio ${D}/boot
-+			install -m 0644 ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}*-${MACHINE}.rootfs.cpio ${D}/boot
- 		else
--			bberror "Could not find JH_RAMFS_IMAGE (${JH_RAMFS_IMAGE}-${MACHINE}.cpio)!"
-+			bberror "Could not find JH_RAMFS_IMAGE (${JH_RAMFS_IMAGE}*-${MACHINE}.rootfs.cpio)!"
- 			bberror "Please make sure that \"cpio\" is in IMAGE_FSTYPES."
- 		fi
- 	fi
-@@ -68,7 +68,7 @@ do_install() {
- 		./jailhouse-cell-linux -w ${D}${JH_DATADIR}/${JH_INMATE_DTB} \
- 			-a ${JH_ARCH} -c "${JH_CMDLINE}" \
- 			-d ../configs/${JH_ARCH}/dts/${JH_INMATE_DTB} \
--			-i ${D}/boot/${JH_RAMFS_IMAGE}-${MACHINE}.cpio \
-+			-i ${D}/boot/${JH_RAMFS_IMAGE}*-${MACHINE}.rootfs.cpio \
- 			${D}${CELL_DIR}/${JH_LINUX_DEMO_CELL} \
- 			${DEPLOY_DIR_IMAGE}/Image \
- 			| tr -cd '\11\12\15\40-\176' \
-@@ -96,7 +96,8 @@ RDEPENDS:pyjailhouse = "python3-core python3-ctypes python3-fcntl python3-shell"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
+index 7d49d1b..a837863 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
+@@ -6,4 +6,4 @@ PR = "r0"
  
- RRECOMMENDS:${PN} = "${PN}-tools"
+ BRANCH = "ti-u-boot-2024.04"
  
--INSANE_SKIP:${PN} = "ldflags"
-+INSANE_SKIP:${PN} = "ldflags usrmerge"
-+INSANE_SKIP:${PN}-dbg = "usrmerge buildpaths"
+-SRCREV = "c404d79db7c55787ed0feb6f97c1baa4e5a69877"
++SRCREV = "79b13d5cb02d619cfb1842ee28ea2e7b77be54cc"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
+index 21be793..5f681a8 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
+@@ -8,7 +8,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:"
  
- KERNEL_MODULE_AUTOLOAD += "jailhouse"
+ BRANCH = "ti-rt-linux-6.6.y"
  
-@@ -117,10 +118,7 @@ python __anonymous () {
- }
+-SRCREV = "fb89cd4d622ce6cc1b7b254ae21298570d437a08"
++SRCREV = "30b405326c30368375e58551f85c9e531ec4aef2"
  
- FILES:${PN} = " \
--    /boot/* \
--    /usr/libexec \
--    /usr/sbin/* \
--    /usr/libexec/* \
--    /usr/share/* \
--    /lib/firmware/* \
-+    /boot \
-+    /usr \
-+    /lib \
- "
-diff --git a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-index 6faf16b8..2831e560 100644
---- a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-+++ b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = " \
- COMPATIBLE_MACHINE = "am62xx|am62pxx"
- TARGET_CC_ARCH += "${LDFLAGS}"
- PV = "0.12+git"
--SRCREV = "603819ef9a771a3c253a141220daab8e61751a43"
-+SRCREV = "9b494ddf4bd8845a2c1063352d08a274ef61777b"
- BRANCH = "master"
- SRC_URI = " \
-     git://git.ti.com/git/jailhouse/ti-jailhouse.git;protocol=https;branch=${BRANCH} \
+ include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
+index efc9fbe..2288cef 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.6.y"
+ 
+-SRCREV ?= "e298dab666632b6f62ed61eac35813331341c3aa"
++SRCREV ?= "15f828fd0fc706919f64551afbe431eb66ba927f"
+ PV = "6.6.32+git"
+ 
+ KERNEL_GIT_URI ?= "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
 -- 
-2.34.1
+1.8.3.1
 
 
