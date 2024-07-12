@@ -1,135 +1,127 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 04BDEC41513
-	for <webhook@archiver.kernel.org>; Fri, 12 Jul 2024 08:36:41 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.3408.1720773392212828860
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04D1BC2BD09
+	for <webhook@archiver.kernel.org>; Fri, 12 Jul 2024 12:16:12 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.6270.1720786570100333046
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 12 Jul 2024 01:36:32 -0700
+ Fri, 12 Jul 2024 05:16:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=OOulKdeA;
- spf=pass (domain: list.ti.com, ip: 198.47.23.248, mailfrom: lcpdbld@list.ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46C8aVXU023899;
-	Fri, 12 Jul 2024 03:36:31 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=DcJcFa+U;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46CCG5CL006531;
+	Fri, 12 Jul 2024 07:16:05 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1720773391; i=@ti.com;
-	bh=A8Tr4GRN4PovdaaYMaGVCeVVXyJqQEHJlVsbOw2b7h0=;
+	s=ti-com-17Q1; t=1720786565;
+	bh=bgy8gJeNjgqWi9CZAL1ohwE9OxOE23R66meCUnEs+wY=;
 	h=From:To:Subject:Date;
-	b=OOulKdeA5ifF/8rSEgEg48UV82FqKXBLsLzVMtbbRK/IuVG7gh5vtz4MyLSNdDtOX
-	 OfRzQNii4fXDRGW+qB40tjZ2JIC1d94YRpPU7r6YgfMGbogIxMTJCbQX1RybOC3mMy
-	 ZjEwFRFjJ7ZMudZDUXA6IuNh5/UCCN0zreSFs5gw=
+	b=DcJcFa+UfCsfJdT5OM13IS8BZNLxa+kDMG9y2tvYR2Ghs3d822fhIlPMDpHilOgRM
+	 qtvixomGTdmgVoMienTCdWa9vGg3NY8RCvxGIP8NCD/XW6qSotZTCulp5LCgP/04Qg
+	 0NQVuJSxeYNlw0u1U6YpYgMwbRYTn/xIXCvOGOlM=
 Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46C8aVVt000512
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46CCG5xA088244
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 12 Jul 2024 03:36:31 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE112.ent.ti.com
+	Fri, 12 Jul 2024 07:16:05 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE112.ent.ti.com
  (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 12
- Jul 2024 03:36:30 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 07:16:05 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 12 Jul 2024 03:36:30 -0500
-Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.248.130.8])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46C8aUdo043217;
-	Fri, 12 Jul 2024 03:36:30 -0500
-Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
-	id C2B55110BE06; Fri, 12 Jul 2024 03:36:30 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
+ Frontend Transport; Fri, 12 Jul 2024 07:16:05 -0500
+Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46CCG5b1099140;
+	Fri, 12 Jul 2024 07:16:05 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1sSFC1-0003VJ-Ar; Fri, 12 Jul 2024 07:16:05 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202407112101
-Date: Fri, 12 Jul 2024 03:36:30 -0500
-Message-ID: <1720773390-90178-1-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
+Subject: [meta-ti][master/scarthgap][PATCH] Revert "conf: machine: am62*-evm-k3r5.conf: apply fragment for enabling USB DFU"
+Date: Fri, 12 Jul 2024 07:16:05 -0500
+Message-ID: <20240712121605.13430-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 12 Jul 2024 08:36:41 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17859
+ <meta-ti@lists.yoctoproject.org>; Fri, 12 Jul 2024 12:16:12 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17860
 
-Updated the value(s) for:
-  ti-linux-fw: PRUETH_FW_AM65X_SR2_VERSION,TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
-  u-boot-ti-staging_2024.04: SRCREV
-  linux-ti-staging-rt_6.6: SRCREV
-  linux-ti-staging_6.6: SRCREV
+This reverts commit fa94effc26a8678a5400291a3ca0ef1000eea7b1.
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+There are boot issues with SD card booting with this change.
+
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 6 +++---
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb    | 2 +-
- 4 files changed, 6 insertions(+), 6 deletions(-)
+ meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf   | 2 --
+ meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf   | 2 --
+ meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf    | 2 --
+ meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf | 2 --
+ meta-ti-bsp/conf/machine/am62xxsip-evm-k3r5.conf | 2 +-
+ 5 files changed, 1 insertion(+), 9 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index ef6be86..eb10b9a 100644
---- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -9,15 +9,15 @@ INC_PR = "r4"
- # Firmware versions
- CORESDK_RTOS_VERSION = "08.02.00.04"
- PRUETH_FW_AM65X_VERSION = "08.00.00.20"
--PRUETH_FW_AM65X_SR2_VERSION = "02.02.14.00"
-+PRUETH_FW_AM65X_SR2_VERSION = "02.02.14.01"
- GOODIX_FW_VERSION = "1.0.0.0"
- CADENCE_MHDP_FW_VERSION = "2.1.0"
- IMG_DEC_FW_VERSION = "1.0"
- CNM_WAVE521_FW_VERSION = "1.0.4"
- TI_DM_FW_VERSION = "10.00.05"
--TI_SYSFW_VERSION = "10.00.04"
-+TI_SYSFW_VERSION = "10.00.06"
+diff --git a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf
+index 370ae2f9..2af3317e 100644
+--- a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf
+@@ -9,5 +9,3 @@ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "hs-fs"
  
--TI_LINUX_FW_SRCREV ?= "af745923679b12f9872ed43e510e74335149de1c"
-+TI_LINUX_FW_SRCREV ?= "3fb564f38fd2e2fb3ad3a54ac8fd079248f6e8f5"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
+ UBOOT_MACHINE = "am62ax_evm_r5_defconfig"
+-UBOOT_CONFIG_FRAGMENTS = "am62x_r5_usbdfu.config"
+-UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = ""
+diff --git a/meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf
+index 2da09f5c..36915381 100644
+--- a/meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf
+@@ -10,5 +10,3 @@ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "hs-fs"
  
- BRANCH ?= "ti-linux-firmware"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-index a837863..6502248 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-@@ -6,4 +6,4 @@ PR = "r0"
+ UBOOT_MACHINE = "am62px_evm_r5_defconfig"
+-UBOOT_CONFIG_FRAGMENTS = "am62x_r5_usbdfu.config"
+-UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = ""
+diff --git a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
+index 483de2e4..548369ca 100644
+--- a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
+@@ -10,5 +10,3 @@ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "hs-fs"
  
- BRANCH = "ti-u-boot-2024.04"
+ UBOOT_MACHINE = "am62x_evm_r5_defconfig"
+-UBOOT_CONFIG_FRAGMENTS = "am62x_r5_usbdfu.config"
+-UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = ""
+diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
+index 1c3c5213..52b69a72 100644
+--- a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
+@@ -10,5 +10,3 @@ SYSFW_CONFIG = "evm"
+ SYSFW_SUFFIX = "hs-fs"
  
--SRCREV = "79b13d5cb02d619cfb1842ee28ea2e7b77be54cc"
-+SRCREV = "67e6428fc439d3456634fac9660e3c1108b7fce0"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-index 5f681a8..26562c9 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-@@ -8,7 +8,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:"
+ UBOOT_MACHINE = "am62x_lpsk_r5_defconfig"
+-UBOOT_CONFIG_FRAGMENTS = "am62x_r5_usbdfu.config"
+-UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = ""
+diff --git a/meta-ti-bsp/conf/machine/am62xxsip-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62xxsip-evm-k3r5.conf
+index 57ccbc15..55bc530b 100644
+--- a/meta-ti-bsp/conf/machine/am62xxsip-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/am62xxsip-evm-k3r5.conf
+@@ -11,5 +11,5 @@ SYSFW_SUFFIX = "hs-fs"
+ UBOOT_MACHINE = "am62xsip_evm_r5_defconfig"
  
- BRANCH = "ti-rt-linux-6.6.y"
- 
--SRCREV = "30b405326c30368375e58551f85c9e531ec4aef2"
-+SRCREV = "e7925886029c9eadf1182fa31af4f70ad45b4b35"
- 
- include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
- 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-index 2288cef..4f942b4 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH ?= "ti-linux-6.6.y"
- 
--SRCREV ?= "15f828fd0fc706919f64551afbe431eb66ba927f"
-+SRCREV ?= "8636139a4976bc9076db79c08dfbf82230fdcfe0"
- PV = "6.6.32+git"
- 
- KERNEL_GIT_URI ?= "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
+ UBOOT_MACHINE:bsp-ti-6_1 = "am62x_evm_r5_defconfig"
+-UBOOT_CONFIG_FRAGMENTS = "am62x_r5_usbdfu.config"
++
+ UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "am62xsip_sk_r5.config"
 -- 
-1.8.3.1
+2.17.1
 
 
