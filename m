@@ -1,270 +1,93 @@
-Return-Path: <denis@denix.org>
+Return-Path: <praneeth@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DA15C3DA4B
-	for <webhook@archiver.kernel.org>; Mon, 15 Jul 2024 23:45:53 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.796.1721087144207194341
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53A77C3DA59
+	for <webhook@archiver.kernel.org>; Mon, 15 Jul 2024 23:57:33 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.1037.1721087845253659846
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 15 Jul 2024 16:45:44 -0700
+ Mon, 15 Jul 2024 16:57:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 8FA4340A2F;
-	Mon, 15 Jul 2024 23:45:43 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id nsftXQ3--dBm; Mon, 15 Jul 2024 23:45:43 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0F28240C76;
-	Mon, 15 Jul 2024 23:45:42 +0000 (UTC)
-Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id B3E43163FF4;
-	Mon, 15 Jul 2024 19:45:40 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master][PATCH 2/2] linux: add linux-yocto reproducibility patches
-Date: Mon, 15 Jul 2024 19:45:39 -0400
-Message-Id: <20240715234539.2284580-2-denis@denix.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240715234539.2284580-1-denis@denix.org>
-References: <20240715234539.2284580-1-denis@denix.org>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=F8WiSYiB;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: praneeth@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46FNvOqW075987
+	for <meta-ti@lists.yoctoproject.org>; Mon, 15 Jul 2024 18:57:24 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1721087844;
+	bh=zgpzr32M2us6Av4emYA3yobF6rKkIEQ8GSLe8NkZcEA=;
+	h=From:To:CC:Subject:Date;
+	b=F8WiSYiBv2NmIn4GHANsb9aRxZPNdUqBlZDm1mLjcCEmzkYub7GcBXIh4N1iGctQ+
+	 CAHt8+gzjPC9lDmq85aBI6MpChQpYvLahiecslKTm+J2BYMq2Vhh81NAOV5Osro2H/
+	 SN8mwfopjMQZPfTcwZcnSYjSlIuFHT9tSgTKMy/k=
+Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46FNvOD4102594
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Mon, 15 Jul 2024 18:57:24 -0500
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 15
+ Jul 2024 18:57:24 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 15 Jul 2024 18:57:24 -0500
+Received: from localhost (praneethhome.dhcp.ti.com [128.247.81.61])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46FNvOFq113296;
+	Mon, 15 Jul 2024 18:57:24 -0500
+From: <praneeth@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Ryan Eatmon <reatmon@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, Hari Nagalla <hnagalla@ti.com>,
+        Nick
+ Saulnier <nsaulnier@ti.com>
+Subject: [scarthgap PATCH] ipc: ti-rpmsg-char: Update library to 0.6.7
+Date: Mon, 15 Jul 2024 18:57:24 -0500
+Message-ID: <20240715235724.28197-1-praneeth@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 15 Jul 2024 23:45:53 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17862
+ <meta-ti@lists.yoctoproject.org>; Mon, 15 Jul 2024 23:57:33 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17864
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+From: Praneeth Bajjuri <praneeth@ti.com>
 
-Add reproducibility patches from linux-yocto to resolve "buildpaths"
-QA errors.
+update from 0.6.6 to 0.6.7.
+This update brings the following fixes from ti-rpmsg-char repo.
 
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+5100a2e lib: Fix truncation warnings
+15011fe example: Add roundtrip delay metering
+aac39ae lib: fix truncation warnings with spritnf
+4b9fd76 include: rproc_id: Add numbered enum
+
+Signed-off-by: Praneeth Bajjuri <praneeth@ti.com>
 ---
- ..._registry-fix-reproducibility-issues.patch | 46 +++++++++++++++
- ...-pnmtologo-use-relocatable-file-name.patch | 55 ++++++++++++++++++
- ...-conmakehash-improve-reproducibility.patch | 56 +++++++++++++++++++
- .../recipes-kernel/linux/ti-kernel.inc        |  6 ++
- 4 files changed, 163 insertions(+)
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-lib-build=
-_OID_registry-fix-reproducibility-issues.patch
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-pnmtologo=
--use-relocatable-file-name.patch
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmak=
-ehash-improve-reproducibility.patch
+ meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-lib-build_OID_re=
-gistry-fix-reproducibility-issues.patch b/meta-ti-bsp/recipes-kernel/linu=
-x/files/0001-lib-build_OID_registry-fix-reproducibility-issues.patch
-new file mode 100644
-index 00000000..98af632f
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-lib-build_OID_registry-=
-fix-reproducibility-issues.patch
-@@ -0,0 +1,46 @@
-+From 2fca0fd719812ea2ff67630b01355aa80481623e Mon Sep 17 00:00:00 2001
-+From: Bruce Ashfield <bruce.ashfield@gmail.com>
-+Date: Sun, 10 Jul 2022 22:56:53 -0400
-+Subject: [PATCH] lib/build_OID_registry: fix reproducibility issues
-+
-+The script build_OID_registry captures the full path of itself
-+in the generated data. This causes reproduciblity issues as the
-+path is captured and packaged.
-+
-+We use the basename of the script instead, and that allows us
-+to be reprodicible, with slightly less information captured in
-+the output data (but the generating script can still easily
-+be found).
-+
-+Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-+---
-+ lib/build_OID_registry | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/lib/build_OID_registry b/lib/build_OID_registry
-+index d7fc32ea8ac2..f6de0a7f7457 100755
-+--- a/lib/build_OID_registry
-++++ b/lib/build_OID_registry
-+@@ -8,6 +8,7 @@
-+ #
-+=20
-+ use strict;
-++use File::Basename;
-+=20
-+ my @names =3D ();
-+ my @oids =3D ();
-+@@ -35,7 +36,7 @@ close IN_FILE || die;
-+ #
-+ open C_FILE, ">$ARGV[1]" or die;
-+ print C_FILE "/*\n";
-+-print C_FILE " * Automatically generated by ", $0, ".  Do not edit\n";
-++print C_FILE " * Automatically generated by ", basename $0, ".  Do not =
-edit\n";
-+ print C_FILE " */\n";
-+=20
-+ #
-+--=20
-+2.25.1
-diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-pnmtologo-use-re=
-locatable-file-name.patch b/meta-ti-bsp/recipes-kernel/linux/files/0001-p=
-nmtologo-use-relocatable-file-name.patch
-new file mode 100644
-index 00000000..7427b168
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-pnmtologo-use-relocatab=
-le-file-name.patch
-@@ -0,0 +1,55 @@
-+From a40d2daf2795d89e3ef8af0413b25190558831ec Mon Sep 17 00:00:00 2001
-+From: Bruce Ashfield <bruce.ashfield@gmail.com>
-+Date: Thu, 14 Jul 2022 14:43:46 -0400
-+Subject: [PATCH] pnmtologo: use relocatable file name
-+
-+The logo generation utility is capturing the source of the logo
-+in the generated .c file. The source file is absolute (as passed
-+by make), so the full path is captured.
-+
-+This makes the source fail reproducibility tests.
-+
-+We use basename() to just get the source file name, and use
-+that in the generated .c file.
-+
-+Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-+---
-+ drivers/video/logo/pnmtologo.c | 5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
-+
-+diff --git a/drivers/video/logo/pnmtologo.c b/drivers/video/logo/pnmtolo=
-go.c
-+index ada5ef6e51b7..7527be845443 100644
-+--- a/drivers/video/logo/pnmtologo.c
-++++ b/drivers/video/logo/pnmtologo.c
-+@@ -13,7 +13,7 @@
-+ #include <stdlib.h>
-+ #include <string.h>
-+ #include <unistd.h>
-+-
-++#include <libgen.h>
-+=20
-+ static const char *programname;
-+ static const char *filename;
-+@@ -223,6 +223,7 @@ static inline int is_equal(struct color c1, struct c=
-olor c2)
-+=20
-+ static void write_header(void)
-+ {
-++	char *filename_basename =3D basename(filename);
-+ 	/* open logo file */
-+ 	if (outputname) {
-+ 		out =3D fopen(outputname, "w");
-+@@ -235,7 +236,7 @@ static void write_header(void)
-+ 	fputs("/*\n", out);
-+ 	fputs(" *  DO NOT EDIT THIS FILE!\n", out);
-+ 	fputs(" *\n", out);
-+-	fprintf(out, " *  It was automatically generated from %s\n", filename)=
-;
-++	fprintf(out, " *  It was automatically generated from %s\n", filename_=
-basename);
-+ 	fputs(" *\n", out);
-+ 	fprintf(out, " *  Linux logo %s\n", logoname);
-+ 	fputs(" */\n\n", out);
-+--=20
-+2.25.1
-diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-i=
-mprove-reproducibility.patch b/meta-ti-bsp/recipes-kernel/linux/files/000=
-1-vt-conmakehash-improve-reproducibility.patch
-new file mode 100644
-index 00000000..59ac4b62
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-=
-reproducibility.patch
-@@ -0,0 +1,56 @@
-+From 0f586f4ee8adacac79b64d1f3d47799a5eb7fbea Mon Sep 17 00:00:00 2001
-+From: Bruce Ashfield <bruce.ashfield@gmail.com>
-+Date: Sun, 10 Jul 2022 21:37:07 -0400
-+Subject: [PATCH] vt/conmakehash: improve reproducibility
-+
-+The file generated by conmakehash capture the application
-+path used to generate the file. While that can be informative,
-+it varies based on where the kernel was built, as the full
-+path is captured.
-+
-+We tweak the application to use a second input as the "capture
-+name", and then modify the Makefile to pass the basename of
-+the source, making it reproducible.
-+
-+This could be improved by using some sort of path mapping,
-+or the application manipualing argv[1] itself, but for now
-+this solves the reprodicibility issue.
-+
-+Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-+---
-+ drivers/tty/vt/Makefile      | 2 +-
-+ drivers/tty/vt/conmakehash.c | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/drivers/tty/vt/Makefile b/drivers/tty/vt/Makefile
-+index fe30ce512819..cb51c21b58f9 100644
-+--- a/drivers/tty/vt/Makefile
-++++ b/drivers/tty/vt/Makefile
-+@@ -15,7 +15,7 @@ clean-files :=3D consolemap_deftbl.c defkeymap.c
-+ hostprogs +=3D conmakehash
-+=20
-+ quiet_cmd_conmk =3D CONMK   $@
-+-      cmd_conmk =3D $(obj)/conmakehash $< > $@
-++      cmd_conmk =3D $(obj)/conmakehash $< $(shell basename $<) > $@
-+=20
-+ $(obj)/consolemap_deftbl.c: $(src)/$(FONTMAPFILE) $(obj)/conmakehash
-+ 	$(call cmd,conmk)
-+diff --git a/drivers/tty/vt/conmakehash.c b/drivers/tty/vt/conmakehash.c
-+index cddd789fe46e..d62510b280e9 100644
-+--- a/drivers/tty/vt/conmakehash.c
-++++ b/drivers/tty/vt/conmakehash.c
-+@@ -253,7 +253,7 @@ int main(int argc, char *argv[])
-+ #include <linux/types.h>\n\
-+ \n\
-+ u8 dfont_unicount[%d] =3D \n\
-+-{\n\t", argv[1], fontlen);
-++{\n\t", argv[2], fontlen);
-+=20
-+   for ( i =3D 0 ; i < fontlen ; i++ )
-+     {
-+--=20
-+2.25.1
-diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc b/meta-ti-bsp=
-/recipes-kernel/linux/ti-kernel.inc
-index dd5578f5..43d2341a 100644
---- a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
-+++ b/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
-@@ -12,3 +12,9 @@ EXTRA_DTC_ARGS +=3D "${@get_extra_dtc_args(d)}"
- # the kernel.
- KERNEL_DTBDEST =3D "${KERNEL_IMAGEDEST}/dtb"
- KERNEL_DTBVENDORED =3D "1"
-+
-+SRC_URI +=3D " \
-+file://0001-lib-build_OID_registry-fix-reproducibility-issues.patch \
-+file://0001-vt-conmakehash-improve-reproducibility.patch \
-+file://0001-pnmtologo-use-relocatable-file-name.patch \
-+"
---=20
-2.25.1
+diff --git a/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc b/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc
+index 4710be09..22d03d97 100644
+--- a/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc
++++ b/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc
+@@ -7,10 +7,10 @@ PROTOCOL = "https"
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/git/rpmsg/ti-rpmsg-char.git;protocol=${PROTOCOL};branch=${BRANCH};"
+ 
+-# 0.6.6 release
+-SRCREV = "55a6f4032246631a309f8608af5e822024664b59"
++# 0.6.7 release
++SRCREV = "5100a2e4a4a951e40ea0708fa78960770ec0ac33"
+ 
+-PV = "0.6.6+git"
++PV = "0.6.7+git"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.17.1
 
 
