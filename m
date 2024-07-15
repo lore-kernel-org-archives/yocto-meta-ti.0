@@ -2,250 +2,268 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C6D7C3DA59
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DA15C3DA4B
 	for <webhook@archiver.kernel.org>; Mon, 15 Jul 2024 23:45:53 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.795.1721087144130967367
+ by mx.groups.io with SMTP id smtpd.web11.796.1721087144207194341
  for <meta-ti@lists.yoctoproject.org>;
  Mon, 15 Jul 2024 16:45:44 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 337F740C82;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 8FA4340A2F;
 	Mon, 15 Jul 2024 23:45:43 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0uWQSdua_rAr; Mon, 15 Jul 2024 23:45:43 +0000 (UTC)
+	with ESMTP id nsftXQ3--dBm; Mon, 15 Jul 2024 23:45:43 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id F1CA240A2F;
-	Mon, 15 Jul 2024 23:45:41 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0F28240C76;
+	Mon, 15 Jul 2024 23:45:42 +0000 (UTC)
 Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id A4FD7163FF0;
+	by mail.denix.org (Postfix) with ESMTP id B3E43163FF4;
 	Mon, 15 Jul 2024 19:45:40 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master][PATCH 1/2] linux: remove old unused patches
-Date: Mon, 15 Jul 2024 19:45:38 -0400
-Message-Id: <20240715234539.2284580-1-denis@denix.org>
+Subject: [master][PATCH 2/2] linux: add linux-yocto reproducibility patches
+Date: Mon, 15 Jul 2024 19:45:39 -0400
+Message-Id: <20240715234539.2284580-2-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240715234539.2284580-1-denis@denix.org>
+References: <20240715234539.2284580-1-denis@denix.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Mon, 15 Jul 2024 23:45:53 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17863
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17862
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-These patches are not used anywhere now.
+Add reproducibility patches from linux-yocto to resolve "buildpaths"
+QA errors.
 
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- ...s-Fix-build-for-upcoming-GCC-release.patch |  46 --------
- ...ture-changes-causes-compile-failures.patch | 111 ------------------
- 2 files changed, 157 deletions(-)
- delete mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-gcc-plugi=
-ns-Fix-build-for-upcoming-GCC-release.patch
- delete mode 100644 meta-ti-bsp/recipes-kernel/linux/files/init_disassemb=
-le_info-signature-changes-causes-compile-failures.patch
+ ..._registry-fix-reproducibility-issues.patch | 46 +++++++++++++++
+ ...-pnmtologo-use-relocatable-file-name.patch | 55 ++++++++++++++++++
+ ...-conmakehash-improve-reproducibility.patch | 56 +++++++++++++++++++
+ .../recipes-kernel/linux/ti-kernel.inc        |  6 ++
+ 4 files changed, 163 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-lib-build=
+_OID_registry-fix-reproducibility-issues.patch
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-pnmtologo=
+-use-relocatable-file-name.patch
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmak=
+ehash-improve-reproducibility.patch
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-gcc-plugins-Fix-=
-build-for-upcoming-GCC-release.patch b/meta-ti-bsp/recipes-kernel/linux/f=
-iles/0001-gcc-plugins-Fix-build-for-upcoming-GCC-release.patch
-deleted file mode 100644
-index 3dfa31a1..00000000
---- a/meta-ti-bsp/recipes-kernel/linux/files/0001-gcc-plugins-Fix-build-f=
-or-upcoming-GCC-release.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--From 3cd29a3d7c25cca9989e7d8966141f725fa99c68 Mon Sep 17 00:00:00 2001
--From: Palmer Dabbelt <palmer@rivosinc.com>
--Date: Fri, 13 Jan 2023 09:30:33 -0800
--Subject: [PATCH] gcc-plugins: Fix build for upcoming GCC release
--
--The upcoming GCC release has refactored the gimple plugin interface a
--bit and unless gimple-iterator.h is included before gimple-fold.h I end
--up with a bunch of missing declarations when building the stack
--protector plugin.
--
--Upstream-Status: Backport [https://lore.kernel.org/all/20230113173033.43=
-80-1-palmer@rivosinc.com/]
--Reported-by: Palmer Dabbelt <palmer@rivosinc.com>
--Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
--Link: https://lore.kernel.org/all/20230113173033.4380-1-palmer@rivosinc.=
-com/
--Cc: linux-hardening@vger.kernel.org
--Signed-off-by: Kees Cook <keescook@chromium.org>
-----
-- scripts/gcc-plugins/gcc-common.h | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
----- a/scripts/gcc-plugins/gcc-common.h
--+++ b/scripts/gcc-plugins/gcc-common.h
--@@ -108,7 +108,9 @@
-- #include "varasm.h"
-- #include "stor-layout.h"
-- #include "internal-fn.h"
--+#include "gimple.h"
-- #include "gimple-expr.h"
--+#include "gimple-iterator.h"
-- #include "gimple-fold.h"
-- #include "context.h"
-- #include "tree-ssa-alias.h"
--@@ -124,13 +126,10 @@
-- #include "gimplify.h"
-- #endif
--
---#include "gimple.h"
---
-- #if BUILDING_GCC_VERSION >=3D 4009
-- #include "tree-ssa-operands.h"
-- #include "tree-phinodes.h"
-- #include "tree-cfg.h"
---#include "gimple-iterator.h"
-- #include "gimple-ssa.h"
-- #include "ssa-iterators.h"
-- #endif
-diff --git a/meta-ti-bsp/recipes-kernel/linux/files/init_disassemble_info=
--signature-changes-causes-compile-failures.patch b/meta-ti-bsp/recipes-ke=
-rnel/linux/files/init_disassemble_info-signature-changes-causes-compile-f=
-ailures.patch
-deleted file mode 100644
-index e1e04c34..00000000
---- a/meta-ti-bsp/recipes-kernel/linux/files/init_disassemble_info-signat=
-ure-changes-causes-compile-failures.patch
-+++ /dev/null
-@@ -1,111 +0,0 @@
--
--Adaption of a patch [A] applied to meta-arm for the kernel.  But since T=
-I has it's own
--kernel we have to "adjust" the patch to match our files.
--
--[A] https://patchwork.yoctoproject.org/project/arm/patch/20220824025819.=
-4888-1-jon.mason@arm.com/#5104
--
--Upstream-Status: Pending
--
--Signed-off-by: Ryan Eatmon <reatmon@ti.com>
--
--
--
--From 1b2013986271de39360cf79e62ed9b7d2cc59f9b Mon Sep 17 00:00:00 2001
--From: Andres Freund <andres@anarazel.de>
--Date: Wed, 22 Jun 2022 11:19:18 -0700
--Subject: [PATCH] init_disassemble_info() signature changes causes compil=
-e
-- failures
--MIME-Version: 1.0
--Content-Type: text/plain; charset=3DUTF-8
--Content-Transfer-Encoding: 8bit
--
--Hi,
--
--binutils changed the signature of init_disassemble_info(), which now cau=
-ses
--perf and bpftool to fail to compile (e.g. on debian unstable).
--
--Relevant binutils commit: https://sourceware.org/git/?p=3Dbinutils-gdb.g=
-it;a=3Dcommitdiff;h=3D60a3da00bd5407f07d64dff82a4dae98230dfaac
--
--util/annotate.c: In function ?symbol__disassemble_bpf?:
--util/annotate.c:1765:9: error: too few arguments to function ?init_disas=
-semble_info?
-- 1765 |         init_disassemble_info(&info, s,
--      |         ^~~~~~~~~~~~~~~~~~~~~
--In file included from util/annotate.c:1718:
--/usr/include/dis-asm.h:472:13: note: declared here
--  472 | extern void init_disassemble_info (struct disassemble_info *dinf=
-o, void *stream,
--      |             ^~~~~~~~~~~~~~~~~~~~~
--
--with equivalent failures in
--
--tools/bpf/bpf_jit_disasm.c
--tools/bpf/bpftool/jit_disasm.c
--
--The fix is easy enough, add a wrapper around fprintf() that conforms to =
-the
--new signature.
--
--However I assume the necessary feature test and wrapper should only be a=
-dded
--once? I don't know the kernel stuff well enough to choose the right stru=
-cture
--here.
--
--Attached is my local fix for perf. Obviously would need work to be a rea=
-l
--solution.
--
--Greetings,
--
--Andres Freund
-----
--
--binutils 2.39 changed the signature of init_disassemble_info(),
--which now causes perf and bpftool to fail to compile.
--
--Relevant binutils commit: [1]
--
--There is a proper fix in development upstream[2].
--This is a work-around for older kernels.
--
--[1] https://sourceware.org/git/?p=3Dbinutils-gdb.git;a=3Dcommitdiff;h=3D=
-60a3da00bd5407f07d64dff82a4dae98230dfaac
--[2] https://patchwork.kernel.org/project/netdevbpf/cover/20220801013834.=
-156015-1-andres@anarazel.de/
--
--Upstream-Status: Pending
--Signed-off-by: Anton Antonov <Anton.Antonov@arm.com>
--
--
-- tools/perf/util/annotate.c | 15 ++++++++++++++-
-- 1 file changed, 14 insertions(+), 1 deletion(-)
--
--diff --git a/tools/perf/util/annotate.c b/tools/perf/util/annotate.c
--index 308189454788..6573d2b07548 100644
----- a/tools/perf/util/annotate.c
--+++ b/tools/perf/util/annotate.c
--@@ -1685,6 +1685,18 @@
-- #include <bfd.h>
-- #include <dis-asm.h>
--=20
--+static int fprintf_styled(void *, enum disassembler_style, const char* =
-fmt, ...)
--+{
--+  va_list args;
--+  int r;
--+
--+  va_start(args, fmt);
--+  r =3D vprintf(fmt, args);
--+  va_end(args);
--+
--+  return r;
--+}
--+
-- static int symbol__disassemble_bpf(struct symbol *sym,
--				   struct annotate_args *args)
-- {
--@@ -1727,7 +1739,8 @@ static int symbol__disassemble_bpf(struct symbol *=
-sym,
--		goto out;
--	}
--	init_disassemble_info(&info, s,
---			      (fprintf_ftype) fprintf);
--+			      (fprintf_ftype) fprintf,
--+                  fprintf_styled);
--=20
--	info.arch =3D bfd_get_arch(bfdf);
--	info.mach =3D bfd_get_mach(bfdf);
----=20
--2.17.1
--
+diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-lib-build_OID_re=
+gistry-fix-reproducibility-issues.patch b/meta-ti-bsp/recipes-kernel/linu=
+x/files/0001-lib-build_OID_registry-fix-reproducibility-issues.patch
+new file mode 100644
+index 00000000..98af632f
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-lib-build_OID_registry-=
+fix-reproducibility-issues.patch
+@@ -0,0 +1,46 @@
++From 2fca0fd719812ea2ff67630b01355aa80481623e Mon Sep 17 00:00:00 2001
++From: Bruce Ashfield <bruce.ashfield@gmail.com>
++Date: Sun, 10 Jul 2022 22:56:53 -0400
++Subject: [PATCH] lib/build_OID_registry: fix reproducibility issues
++
++The script build_OID_registry captures the full path of itself
++in the generated data. This causes reproduciblity issues as the
++path is captured and packaged.
++
++We use the basename of the script instead, and that allows us
++to be reprodicible, with slightly less information captured in
++the output data (but the generating script can still easily
++be found).
++
++Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
++
++Upstream-Status: Inappropriate
++
++Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
++---
++ lib/build_OID_registry | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/lib/build_OID_registry b/lib/build_OID_registry
++index d7fc32ea8ac2..f6de0a7f7457 100755
++--- a/lib/build_OID_registry
+++++ b/lib/build_OID_registry
++@@ -8,6 +8,7 @@
++ #
++=20
++ use strict;
+++use File::Basename;
++=20
++ my @names =3D ();
++ my @oids =3D ();
++@@ -35,7 +36,7 @@ close IN_FILE || die;
++ #
++ open C_FILE, ">$ARGV[1]" or die;
++ print C_FILE "/*\n";
++-print C_FILE " * Automatically generated by ", $0, ".  Do not edit\n";
+++print C_FILE " * Automatically generated by ", basename $0, ".  Do not =
+edit\n";
++ print C_FILE " */\n";
++=20
++ #
++--=20
++2.25.1
+diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-pnmtologo-use-re=
+locatable-file-name.patch b/meta-ti-bsp/recipes-kernel/linux/files/0001-p=
+nmtologo-use-relocatable-file-name.patch
+new file mode 100644
+index 00000000..7427b168
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-pnmtologo-use-relocatab=
+le-file-name.patch
+@@ -0,0 +1,55 @@
++From a40d2daf2795d89e3ef8af0413b25190558831ec Mon Sep 17 00:00:00 2001
++From: Bruce Ashfield <bruce.ashfield@gmail.com>
++Date: Thu, 14 Jul 2022 14:43:46 -0400
++Subject: [PATCH] pnmtologo: use relocatable file name
++
++The logo generation utility is capturing the source of the logo
++in the generated .c file. The source file is absolute (as passed
++by make), so the full path is captured.
++
++This makes the source fail reproducibility tests.
++
++We use basename() to just get the source file name, and use
++that in the generated .c file.
++
++Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
++
++Upstream-Status: Inappropriate
++
++Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
++---
++ drivers/video/logo/pnmtologo.c | 5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)
++
++diff --git a/drivers/video/logo/pnmtologo.c b/drivers/video/logo/pnmtolo=
+go.c
++index ada5ef6e51b7..7527be845443 100644
++--- a/drivers/video/logo/pnmtologo.c
+++++ b/drivers/video/logo/pnmtologo.c
++@@ -13,7 +13,7 @@
++ #include <stdlib.h>
++ #include <string.h>
++ #include <unistd.h>
++-
+++#include <libgen.h>
++=20
++ static const char *programname;
++ static const char *filename;
++@@ -223,6 +223,7 @@ static inline int is_equal(struct color c1, struct c=
+olor c2)
++=20
++ static void write_header(void)
++ {
+++	char *filename_basename =3D basename(filename);
++ 	/* open logo file */
++ 	if (outputname) {
++ 		out =3D fopen(outputname, "w");
++@@ -235,7 +236,7 @@ static void write_header(void)
++ 	fputs("/*\n", out);
++ 	fputs(" *  DO NOT EDIT THIS FILE!\n", out);
++ 	fputs(" *\n", out);
++-	fprintf(out, " *  It was automatically generated from %s\n", filename)=
+;
+++	fprintf(out, " *  It was automatically generated from %s\n", filename_=
+basename);
++ 	fputs(" *\n", out);
++ 	fprintf(out, " *  Linux logo %s\n", logoname);
++ 	fputs(" */\n\n", out);
++--=20
++2.25.1
+diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-i=
+mprove-reproducibility.patch b/meta-ti-bsp/recipes-kernel/linux/files/000=
+1-vt-conmakehash-improve-reproducibility.patch
+new file mode 100644
+index 00000000..59ac4b62
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-=
+reproducibility.patch
+@@ -0,0 +1,56 @@
++From 0f586f4ee8adacac79b64d1f3d47799a5eb7fbea Mon Sep 17 00:00:00 2001
++From: Bruce Ashfield <bruce.ashfield@gmail.com>
++Date: Sun, 10 Jul 2022 21:37:07 -0400
++Subject: [PATCH] vt/conmakehash: improve reproducibility
++
++The file generated by conmakehash capture the application
++path used to generate the file. While that can be informative,
++it varies based on where the kernel was built, as the full
++path is captured.
++
++We tweak the application to use a second input as the "capture
++name", and then modify the Makefile to pass the basename of
++the source, making it reproducible.
++
++This could be improved by using some sort of path mapping,
++or the application manipualing argv[1] itself, but for now
++this solves the reprodicibility issue.
++
++Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
++
++Upstream-Status: Inappropriate
++
++Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
++---
++ drivers/tty/vt/Makefile      | 2 +-
++ drivers/tty/vt/conmakehash.c | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/drivers/tty/vt/Makefile b/drivers/tty/vt/Makefile
++index fe30ce512819..cb51c21b58f9 100644
++--- a/drivers/tty/vt/Makefile
+++++ b/drivers/tty/vt/Makefile
++@@ -15,7 +15,7 @@ clean-files :=3D consolemap_deftbl.c defkeymap.c
++ hostprogs +=3D conmakehash
++=20
++ quiet_cmd_conmk =3D CONMK   $@
++-      cmd_conmk =3D $(obj)/conmakehash $< > $@
+++      cmd_conmk =3D $(obj)/conmakehash $< $(shell basename $<) > $@
++=20
++ $(obj)/consolemap_deftbl.c: $(src)/$(FONTMAPFILE) $(obj)/conmakehash
++ 	$(call cmd,conmk)
++diff --git a/drivers/tty/vt/conmakehash.c b/drivers/tty/vt/conmakehash.c
++index cddd789fe46e..d62510b280e9 100644
++--- a/drivers/tty/vt/conmakehash.c
+++++ b/drivers/tty/vt/conmakehash.c
++@@ -253,7 +253,7 @@ int main(int argc, char *argv[])
++ #include <linux/types.h>\n\
++ \n\
++ u8 dfont_unicount[%d] =3D \n\
++-{\n\t", argv[1], fontlen);
+++{\n\t", argv[2], fontlen);
++=20
++   for ( i =3D 0 ; i < fontlen ; i++ )
++     {
++--=20
++2.25.1
+diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc b/meta-ti-bsp=
+/recipes-kernel/linux/ti-kernel.inc
+index dd5578f5..43d2341a 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
++++ b/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
+@@ -12,3 +12,9 @@ EXTRA_DTC_ARGS +=3D "${@get_extra_dtc_args(d)}"
+ # the kernel.
+ KERNEL_DTBDEST =3D "${KERNEL_IMAGEDEST}/dtb"
+ KERNEL_DTBVENDORED =3D "1"
++
++SRC_URI +=3D " \
++file://0001-lib-build_OID_registry-fix-reproducibility-issues.patch \
++file://0001-vt-conmakehash-improve-reproducibility.patch \
++file://0001-pnmtologo-use-relocatable-file-name.patch \
++"
 --=20
 2.25.1
 
