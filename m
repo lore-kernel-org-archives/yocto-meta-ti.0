@@ -1,198 +1,459 @@
-Return-Path: <a-limaye@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88342C3DA60
-	for <webhook@archiver.kernel.org>; Thu, 18 Jul 2024 08:13:09 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.10334.1721290379795494983
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D7BFC3DA49
+	for <webhook@archiver.kernel.org>; Thu, 18 Jul 2024 14:21:02 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.16219.1721312455230459027
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 18 Jul 2024 01:12:59 -0700
+ Thu, 18 Jul 2024 07:20:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=p8426XED;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: a-limaye@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46I8Cw8c051592
-	for <meta-ti@lists.yoctoproject.org>; Thu, 18 Jul 2024 03:12:58 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=fv46HtN5;
+ spf=pass (domain: list.ti.com, ip: 198.47.23.248, mailfrom: lcpdbld@list.ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46IEKrVw010651;
+	Thu, 18 Jul 2024 09:20:53 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1721290378;
-	bh=hOoGispJJsoWvFn7aEFL+C6CPR0R1wB2xoJ/h00BiEM=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=p8426XEDzRbauFOAx7oyaVFSeQgufKqRMrhi44Zp/LlK83DCBv7F1WRj2E09uXzsf
-	 Gc0dmFby4Magd5UiHv2ctTuHwRDsQHjxqgy/LpaNh0r2bOAkKE26HPAup1poRxc/KU
-	 26dffg3Kmugd9bnSq6drZcHRtkYngt01DF+YPW9o=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46I8CwmO122483
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 18 Jul 2024 03:12:58 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1721312453; i=@ti.com;
+	bh=DBoXJbLBR8vOFr8IloOaGLZn4rG+9bFKIe6uJ1F4XWU=;
+	h=From:To:Subject:Date;
+	b=fv46HtN5zmD/XjEv8iTaN7+idBYKPC75v3IC/8v5WdwuVO5rz7xFDnJFWWymBkAKN
+	 lmSZAseL4HUIlURD0lK7givhLTST6fJVyaSmRGp/VKJ+ZChp+nzvknvC9THyPDaK4E
+	 J79fRiDFG1tj+YRlVkCGHsa1VxLokMGlHrjZBql8=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46IEKrjY111990
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 18 Jul 2024 09:20:53 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 18
- Jul 2024 03:12:57 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 09:20:53 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 18 Jul 2024 03:12:58 -0500
-Received: from [172.24.19.89] (lt5cd112gt3k.dhcp.ti.com [172.24.19.89])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46I8CtQT121490;
-	Thu, 18 Jul 2024 03:12:56 -0500
-Content-Type: multipart/alternative;
-	boundary="------------bBtXeYW1uMZwD6zX0QG67rGq"
-Message-ID: <0c76a7e1-840a-4564-ae42-38225dd351e8@ti.com>
-Date: Thu, 18 Jul 2024 13:42:54 +0530
+ Frontend Transport; Thu, 18 Jul 2024 09:20:53 -0500
+Received: from fllvdckhpci035.itg.ti.com (fllvdckhpci035.itg.ti.com [10.248.132.247])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46IEKr8g042955;
+	Thu, 18 Jul 2024 09:20:53 -0500
+Received: by fllvdckhpci035.itg.ti.com (Postfix, from userid 60899)
+	id 9AC7210F3324; Thu, 18 Jul 2024 09:20:53 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH] linux-ti-mainline: Update to version: v6.10
+Date: Thu, 18 Jul 2024 09:20:53 -0500
+Message-ID: <1721312453-131291-1-git-send-email-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][master/scarthgap][PATCH 3/3] meta-ti-bsp: j742s2: add
- Rogue GPU driver to machine definition
-To: Ryan Eatmon <reatmon@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: <m-chawdhry@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
-        <detheridge@ti.com>
-References: <20240717133614.787998-1-a-limaye@ti.com>
- <20240717133614.787998-4-a-limaye@ti.com>
- <def67aa5-9757-486c-b474-4d7372f8efd3@ti.com>
-Content-Language: en-US
-From: "Limaye, Aniket" <a-limaye@ti.com>
-In-Reply-To: <def67aa5-9757-486c-b474-4d7372f8efd3@ti.com>
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 18 Jul 2024 08:13:09 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17886
+ <meta-ti@lists.yoctoproject.org>; Thu, 18 Jul 2024 14:21:02 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17887
 
---------------bBtXeYW1uMZwD6zX0QG67rGq
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id 46I8Cw8c051592
+Updated the value(s) for:
+  am57xx-evm: KERNEL_DEVICETREE
+  am62axx-evm: KERNEL_DEVICETREE
+  am62pxx-evm: KERNEL_DEVICETREE
+  am62xx-evm: KERNEL_DEVICETREE
+  am62xx-lp-evm: KERNEL_DEVICETREE
+  am68-sk: KERNEL_DEVICETREE
+  am69-sk: KERNEL_DEVICETREE
+  beagleplay: KERNEL_DEVICETREE
+  am64xx-evm: KERNEL_DEVICETREE
+  am65xx-evm: KERNEL_DEVICETREE
+  am335x-evm: KERNEL_DEVICETREE
+  am437x-evm: KERNEL_DEVICETREE
+  j7200-evm: KERNEL_DEVICETREE
+  j721e-evm: KERNEL_DEVICETREE
+  j721e-sk: KERNEL_DEVICETREE
+  j721s2-evm: KERNEL_DEVICETREE
+  j722s-evm: KERNEL_DEVICETREE
+  j784s4-evm: KERNEL_DEVICETREE
+  linux-ti-mainline: PV,SRCREV
 
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/conf/machine/am57xx-evm.conf           | 17 +++++++---
+ meta-ti-bsp/conf/machine/am62axx-evm.conf          |  4 +++
+ meta-ti-bsp/conf/machine/am62pxx-evm.conf          |  4 +++
+ meta-ti-bsp/conf/machine/am62xx-evm.conf           | 16 +++++++++
+ meta-ti-bsp/conf/machine/am62xx-lp-evm.conf        |  2 ++
+ meta-ti-bsp/conf/machine/am68-sk.conf              |  1 +
+ meta-ti-bsp/conf/machine/am69-sk.conf              |  1 +
+ meta-ti-bsp/conf/machine/beagleplay.conf           | 20 ++++++++++--
+ meta-ti-bsp/conf/machine/include/am64xx.inc        |  7 ++++
+ meta-ti-bsp/conf/machine/include/am65xx.inc        |  9 +++++
+ meta-ti-bsp/conf/machine/include/ti33x.inc         | 38 ++++++++++++++++++----
+ meta-ti-bsp/conf/machine/include/ti43x.inc         |  4 ++-
+ meta-ti-bsp/conf/machine/j7200-evm.conf            |  1 +
+ meta-ti-bsp/conf/machine/j721e-evm.conf            |  5 +++
+ meta-ti-bsp/conf/machine/j721e-sk.conf             |  1 +
+ meta-ti-bsp/conf/machine/j721s2-evm.conf           |  3 ++
+ meta-ti-bsp/conf/machine/j784s4-evm.conf           |  1 +
+ .../recipes-kernel/linux/linux-ti-mainline_git.bb  |  6 ++--
+ 18 files changed, 123 insertions(+), 17 deletions(-)
 
-On 7/17/2024 7:11 PM, Ryan Eatmon wrote:
->
->
-> On 7/17/2024 8:36 AM, Aniket Limaye wrote:
->> Add ti-img-rogue-driver as the preferred provider and enable the gpu
->> driver in the image.
->>
->> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
->> ---
->> =C2=A0 meta-ti-bsp/conf/machine/include/j742s2.inc | 2 +-
->> =C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-ti-bsp/conf/machine/include/j742s2.inc=20
->> b/meta-ti-bsp/conf/machine/include/j742s2.inc
->> index 41f3a73d..60d91f16 100644
->> --- a/meta-ti-bsp/conf/machine/include/j742s2.inc
->> +++ b/meta-ti-bsp/conf/machine/include/j742s2.inc
->> @@ -4,7 +4,7 @@ SOC_FAMILY:append =3D ":j742s2"
->> =C2=A0 MACHINE_FEATURES +=3D "screen gpu"
->> =C2=A0 =C2=A0 require conf/machine/include/mesa-pvr.inc
->> -PREFERRED_PROVIDER_virtual/gpudriver ?=3D ""
->> +PREFERRED_PROVIDER_virtual/gpudriver ?=3D "ti-img-rogue-driver"
->
-> NAK.=C2=A0 With the new BSP support this should be:
->
-> PREFERRED_PROVIDER_virtual/gpudriver ?=3D "${BSP_ROGUE_DRIVER_PROVIDER}=
-"
->
-Right.. sent a v2 with the fix!
-https://lists.yoctoproject.org/g/meta-ti/message/17882
+diff --git a/meta-ti-bsp/conf/machine/am57xx-evm.conf b/meta-ti-bsp/conf/machine/am57xx-evm.conf
+index 09eb470..f9ff90c 100644
+--- a/meta-ti-bsp/conf/machine/am57xx-evm.conf
++++ b/meta-ti-bsp/conf/machine/am57xx-evm.conf
+@@ -25,13 +25,22 @@ KERNEL_DEVICETREE_DTBMERGE = " \
+ "
+ 
+ KERNEL_DEVICETREE = " \
+-    ti/omap/am57xx-beagle-x15.dtb \
+-    ti/omap/am57xx-beagle-x15-revb1.dtb \
+-    ti/omap/am57xx-beagle-x15-revc.dtb \
+-    ti/omap/am5729-beagleboneai.dtb \
++    ti/omap/am571x-idk-touchscreen.dtbo \
+     ti/omap/am571x-idk.dtb \
++    ti/omap/am5729-beagleboneai.dtb \
++    ti/omap/am572x-idk-touchscreen.dtbo \
+     ti/omap/am572x-idk.dtb \
+     ti/omap/am574x-idk.dtb \
++    ti/omap/am57xx-beagle-x15-revb1.dtb \
++    ti/omap/am57xx-beagle-x15-revc.dtb \
++    ti/omap/am57xx-beagle-x15.dtb \
++    ti/omap/am57xx-cl-som-am57x.dtb \
++    ti/omap/am57xx-evm-reva3.dtb \
++    ti/omap/am57xx-evm.dtb \
++    ti/omap/am57xx-evm.dtbo \
++    ti/omap/am57xx-idk-lcd-osd101t2045.dtbo \
++    ti/omap/am57xx-idk-lcd-osd101t2587.dtbo \
++    ti/omap/am57xx-sbc-am57x.dtb \
+ "
+ 
+ UBOOT_MACHINE = "am57xx_evm_config"
+diff --git a/meta-ti-bsp/conf/machine/am62axx-evm.conf b/meta-ti-bsp/conf/machine/am62axx-evm.conf
+index 238718d..4828c9d 100644
+--- a/meta-ti-bsp/conf/machine/am62axx-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62axx-evm.conf
+@@ -13,6 +13,10 @@ KERNEL_DEVICETREE_PREFIX = " \
+ 
+ KERNEL_DEVICETREE = " \
+     ti/k3-am62a7-sk.dtb \
++    ti/k3-am62x-sk-csi2-imx219.dtbo \
++    ti/k3-am62x-sk-csi2-ov5640.dtbo \
++    ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
++    ti/k3-am62x-sk-hdmi-audio.dtbo \
+ "
+ 
+ UBOOT_MACHINE = "am62ax_evm_a53_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am62pxx-evm.conf b/meta-ti-bsp/conf/machine/am62pxx-evm.conf
+index 8d94c2b..676e64a 100644
+--- a/meta-ti-bsp/conf/machine/am62pxx-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62pxx-evm.conf
+@@ -14,6 +14,10 @@ KERNEL_DEVICETREE_PREFIX = " \
+ 
+ KERNEL_DEVICETREE = " \
+     ti/k3-am62p5-sk.dtb \
++    ti/k3-am62x-sk-csi2-imx219.dtbo \
++    ti/k3-am62x-sk-csi2-ov5640.dtbo \
++    ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
++    ti/k3-am62x-sk-hdmi-audio.dtbo \
+ "
+ 
+ UBOOT_MACHINE = "am62px_evm_a53_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am62xx-evm.conf b/meta-ti-bsp/conf/machine/am62xx-evm.conf
+index fadbc6f..31de4a1 100644
+--- a/meta-ti-bsp/conf/machine/am62xx-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62xx-evm.conf
+@@ -11,7 +11,23 @@ KERNEL_DEVICETREE_PREFIX = " \
+ "
+ 
+ KERNEL_DEVICETREE = " \
++    ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
++    ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
++    ti/k3-am625-beagleplay.dtb \
++    ti/k3-am625-phyboard-lyra-rdk.dtb \
+     ti/k3-am625-sk.dtb \
++    ti/k3-am625-verdin-nonwifi-dahlia.dtb \
++    ti/k3-am625-verdin-nonwifi-dev.dtb \
++    ti/k3-am625-verdin-nonwifi-mallow.dtb \
++    ti/k3-am625-verdin-nonwifi-yavia.dtb \
++    ti/k3-am625-verdin-wifi-dahlia.dtb \
++    ti/k3-am625-verdin-wifi-dev.dtb \
++    ti/k3-am625-verdin-wifi-mallow.dtb \
++    ti/k3-am625-verdin-wifi-yavia.dtb \
++    ti/k3-am62x-sk-csi2-imx219.dtbo \
++    ti/k3-am62x-sk-csi2-ov5640.dtbo \
++    ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
++    ti/k3-am62x-sk-hdmi-audio.dtbo \
+ "
+ 
+ UBOOT_MACHINE = "am62x_evm_a53_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+index 51e9972..e9271f5 100644
+--- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+@@ -15,6 +15,8 @@ KERNEL_DEVICETREE_PREFIX = " \
+ 
+ KERNEL_DEVICETREE = " \
+     ti/k3-am62-lp-sk.dtb \
++    ti/k3-am625-sk.dtb \
++    ti/k3-am62x-sk-hdmi-audio.dtbo \
+ "
+ 
+ UBOOT_MACHINE = "am62x_lpsk_a53_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am68-sk.conf b/meta-ti-bsp/conf/machine/am68-sk.conf
+index 894c4e8..feabbfd 100644
+--- a/meta-ti-bsp/conf/machine/am68-sk.conf
++++ b/meta-ti-bsp/conf/machine/am68-sk.conf
+@@ -17,6 +17,7 @@ KERNEL_DEVICETREE_PREFIX = " \
+ 
+ KERNEL_DEVICETREE = " \
+     ti/k3-am68-sk-base-board.dtb \
++    ti/k3-j721e-sk-csi2-dual-imx219.dtbo \
+ "
+ 
+ UBOOT_MACHINE = "am68_sk_a72_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/am69-sk.conf b/meta-ti-bsp/conf/machine/am69-sk.conf
+index aff06a0..9531cc2 100644
+--- a/meta-ti-bsp/conf/machine/am69-sk.conf
++++ b/meta-ti-bsp/conf/machine/am69-sk.conf
+@@ -18,6 +18,7 @@ KERNEL_DEVICETREE_PREFIX = " \
+ 
+ KERNEL_DEVICETREE = " \
+     ti/k3-am69-sk.dtb \
++    ti/k3-j721e-sk-csi2-dual-imx219.dtbo \
+ "
+ 
+ UBOOT_MACHINE = "am69_sk_a72_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/beagleplay.conf b/meta-ti-bsp/conf/machine/beagleplay.conf
+index 8c83198..d420c6c 100644
+--- a/meta-ti-bsp/conf/machine/beagleplay.conf
++++ b/meta-ti-bsp/conf/machine/beagleplay.conf
+@@ -33,9 +33,23 @@ KERNEL_DEVICETREE_PREFIX = " \
+ "
+ 
+ KERNEL_DEVICETREE = " \
+-ti/k3-am625-beagleplay.dtb \
+-ti/k3-am625-sk.dtb \
+-ti/k3-am62x-sk-hdmi-audio.dtbo \
++    ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
++    ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
++    ti/k3-am625-beagleplay.dtb \
++    ti/k3-am625-phyboard-lyra-rdk.dtb \
++    ti/k3-am625-sk.dtb \
++    ti/k3-am625-verdin-nonwifi-dahlia.dtb \
++    ti/k3-am625-verdin-nonwifi-dev.dtb \
++    ti/k3-am625-verdin-nonwifi-mallow.dtb \
++    ti/k3-am625-verdin-nonwifi-yavia.dtb \
++    ti/k3-am625-verdin-wifi-dahlia.dtb \
++    ti/k3-am625-verdin-wifi-dev.dtb \
++    ti/k3-am625-verdin-wifi-mallow.dtb \
++    ti/k3-am625-verdin-wifi-yavia.dtb \
++    ti/k3-am62x-sk-csi2-imx219.dtbo \
++    ti/k3-am62x-sk-csi2-ov5640.dtbo \
++    ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
++    ti/k3-am62x-sk-hdmi-audio.dtbo \
+ "
+ 
+ KERNEL_DEVICETREE:append:bsp-bb_org = " \
+diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/conf/machine/include/am64xx.inc
+index cfade2f..56b6df7 100644
+--- a/meta-ti-bsp/conf/machine/include/am64xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
+@@ -4,8 +4,15 @@ SOC_FAMILY:append = ":am64xx"
+ KERNEL_DEVICETREE_PREFIX = "ti/k3-am642"
+ 
+ KERNEL_DEVICETREE = " \
++    ti/k3-am642-evm-icssg1-dualemac.dtbo \
+     ti/k3-am642-evm.dtb \
++    ti/k3-am642-hummingboard-t-pcie.dtbo \
++    ti/k3-am642-hummingboard-t-usb3.dtbo \
++    ti/k3-am642-hummingboard-t.dtb \
++    ti/k3-am642-phyboard-electra-gpio-fan.dtbo \
++    ti/k3-am642-phyboard-electra-rdk.dtb \
+     ti/k3-am642-sk.dtb \
++    ti/k3-am642-tqma64xxl-mbax4xxl.dtb \
+ "
+ 
+ # Default tiboot3.bin on AM64x is for SR2.0 HS-FS
+diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
+index e033c09..4651314 100644
+--- a/meta-ti-bsp/conf/machine/include/am65xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
+@@ -9,7 +9,16 @@ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_SGX_DRIVER_PROVIDER}"
+ KERNEL_DEVICETREE_PREFIX = "ti/k3-am654"
+ 
+ KERNEL_DEVICETREE = " \
++    ti/k3-am654-base-board-rocktech-rk101-panel.dtbo \
+     ti/k3-am654-base-board.dtb \
++    ti/k3-am654-icssg2.dtbo \
++    ti/k3-am654-idk.dtbo \
++    ti/k3-am654-pcie-usb2.dtbo \
++    ti/k3-am654-pcie-usb3.dtbo \
++    ti/k3-am6548-iot2050-advanced-m2.dtb \
++    ti/k3-am6548-iot2050-advanced-pg2.dtb \
++    ti/k3-am6548-iot2050-advanced-sm.dtb \
++    ti/k3-am6548-iot2050-advanced.dtb \
+ "
+ 
+ IMAGE_BOOT_FILES += "sysfw.itb"
+diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/conf/machine/include/ti33x.inc
+index a8dc217..7e9eb48 100644
+--- a/meta-ti-bsp/conf/machine/include/ti33x.inc
++++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
+@@ -19,17 +19,43 @@ KERNEL_DEVICETREE_PREFIX = " \
+ "
+ 
+ KERNEL_DEVICETREE = " \
++    ti/omap/am335x-baltos-ir2110.dtb \
++    ti/omap/am335x-baltos-ir3220.dtb \
++    ti/omap/am335x-baltos-ir5221.dtb \
++    ti/omap/am335x-base0033.dtb \
++    ti/omap/am335x-bone.dtb \
++    ti/omap/am335x-boneblack-wireless.dtb \
++    ti/omap/am335x-boneblack.dtb \
++    ti/omap/am335x-boneblue.dtb \
++    ti/omap/am335x-bonegreen-wireless.dtb \
++    ti/omap/am335x-bonegreen.dtb \
++    ti/omap/am335x-chiliboard.dtb \
++    ti/omap/am335x-cm-t335.dtb \
+     ti/omap/am335x-evm.dtb \
+     ti/omap/am335x-evmsk.dtb \
++    ti/omap/am335x-guardian.dtb \
+     ti/omap/am335x-icev2.dtb \
++    ti/omap/am335x-lxm.dtb \
++    ti/omap/am335x-moxa-uc-2101.dtb \
++    ti/omap/am335x-moxa-uc-8100-me-t.dtb \
++    ti/omap/am335x-myirtech-myd.dtb \
++    ti/omap/am335x-nano.dtb \
++    ti/omap/am335x-netcan-plus-1xx.dtb \
++    ti/omap/am335x-netcom-plus-2xx.dtb \
++    ti/omap/am335x-netcom-plus-8xx.dtb \
++    ti/omap/am335x-osd3358-sm-red.dtb \
++    ti/omap/am335x-pdu001.dtb \
++    ti/omap/am335x-pepper.dtb \
++    ti/omap/am335x-phycore-rdk.dtb \
+     ti/omap/am335x-pocketbeagle.dtb \
+-    ti/omap/am335x-bone.dtb \
+-    ti/omap/am335x-boneblue.dtb \
+-    ti/omap/am335x-bonegreen.dtb \
+-    ti/omap/am335x-bonegreen-wireless.dtb \
+-    ti/omap/am335x-boneblack.dtb \
+-    ti/omap/am335x-boneblack-wireless.dtb \
++    ti/omap/am335x-regor-rdk.dtb \
++    ti/omap/am335x-sancloud-bbe-extended-wifi.dtb \
++    ti/omap/am335x-sancloud-bbe-lite.dtb \
+     ti/omap/am335x-sancloud-bbe.dtb \
++    ti/omap/am335x-sbc-t335.dtb \
++    ti/omap/am335x-shc.dtb \
++    ti/omap/am335x-sl50.dtb \
++    ti/omap/am335x-wega-rdk.dtb \
+ "
+ 
+ UBOOT_ARCH = "arm"
+diff --git a/meta-ti-bsp/conf/machine/include/ti43x.inc b/meta-ti-bsp/conf/machine/include/ti43x.inc
+index 6fb87f1..2621d19 100644
+--- a/meta-ti-bsp/conf/machine/include/ti43x.inc
++++ b/meta-ti-bsp/conf/machine/include/ti43x.inc
+@@ -21,9 +21,11 @@ KERNEL_DEVICETREE_PREFIX = " \
+ "
+ 
+ KERNEL_DEVICETREE = " \
++    ti/omap/am437x-cm-t43.dtb \
+     ti/omap/am437x-gp-evm.dtb \
+-    ti/omap/am437x-sk-evm.dtb \
+     ti/omap/am437x-idk-evm.dtb \
++    ti/omap/am437x-sbc-t43.dtb \
++    ti/omap/am437x-sk-evm.dtb \
+     ti/omap/am43x-epos-evm.dtb \
+ "
+ 
+diff --git a/meta-ti-bsp/conf/machine/j7200-evm.conf b/meta-ti-bsp/conf/machine/j7200-evm.conf
+index dff1da6..adfc637 100644
+--- a/meta-ti-bsp/conf/machine/j7200-evm.conf
++++ b/meta-ti-bsp/conf/machine/j7200-evm.conf
+@@ -8,6 +8,7 @@ KERNEL_DEVICETREE_PREFIX = "ti/k3-j7200"
+ 
+ KERNEL_DEVICETREE = " \
+     ti/k3-j7200-common-proc-board.dtb \
++    ti/k3-j7200-evm-quad-port-eth-exp.dtbo \
+ "
+ 
+ UBOOT_MACHINE = "j7200_evm_a72_config"
+diff --git a/meta-ti-bsp/conf/machine/j721e-evm.conf b/meta-ti-bsp/conf/machine/j721e-evm.conf
+index 5e1f6dc..92144d3 100644
+--- a/meta-ti-bsp/conf/machine/j721e-evm.conf
++++ b/meta-ti-bsp/conf/machine/j721e-evm.conf
+@@ -11,7 +11,12 @@ KERNEL_DEVICETREE_PREFIX = " \
+ "
+ 
+ KERNEL_DEVICETREE = " \
++    ti/k3-j721e-beagleboneai64.dtb \
+     ti/k3-j721e-common-proc-board.dtb \
++    ti/k3-j721e-evm-gesi-exp-board.dtbo \
++    ti/k3-j721e-evm-pcie0-ep.dtbo \
++    ti/k3-j721e-evm-quad-port-eth-exp.dtbo \
++    ti/k3-j721e-sk-csi2-dual-imx219.dtbo \
+     ti/k3-j721e-sk.dtb \
+ "
+ 
+diff --git a/meta-ti-bsp/conf/machine/j721e-sk.conf b/meta-ti-bsp/conf/machine/j721e-sk.conf
+index a7a9578..604f893 100644
+--- a/meta-ti-bsp/conf/machine/j721e-sk.conf
++++ b/meta-ti-bsp/conf/machine/j721e-sk.conf
+@@ -10,6 +10,7 @@ KERNEL_DEVICETREE_PREFIX = " \
+ "
+ 
+ KERNEL_DEVICETREE = " \
++    ti/k3-j721e-sk-csi2-dual-imx219.dtbo \
+     ti/k3-j721e-sk.dtb \
+ "
+ 
+diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+index c4e8af9..5cb2830 100644
+--- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
++++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+@@ -16,7 +16,10 @@ KERNEL_DEVICETREE_PREFIX = " \
+ "
+ 
+ KERNEL_DEVICETREE = " \
++    ti/k3-am68-sk-base-board.dtb \
+     ti/k3-j721s2-common-proc-board.dtb \
++    ti/k3-j721s2-evm-gesi-exp-board.dtbo \
++    ti/k3-j721s2-evm-pcie1-ep.dtbo \
+ "
+ 
+ UBOOT_MACHINE = "j721s2_evm_a72_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/j784s4-evm.conf b/meta-ti-bsp/conf/machine/j784s4-evm.conf
+index 770701f..8858a91 100644
+--- a/meta-ti-bsp/conf/machine/j784s4-evm.conf
++++ b/meta-ti-bsp/conf/machine/j784s4-evm.conf
+@@ -18,6 +18,7 @@ KERNEL_DEVICETREE_PREFIX = " \
+ "
+ 
+ KERNEL_DEVICETREE = " \
++    ti/k3-am69-sk.dtb \
+     ti/k3-j784s4-evm.dtb \
+ "
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
+index 77ebb11..ffeaa2e 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
+@@ -13,9 +13,9 @@ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT} ${EXTRA_DTC_ARGS}"
+ 
+ S = "${WORKDIR}/git"
+ 
+-# 6.6 Mainline version
+-SRCREV = "ffc253263a1375a65fa6c9f62a893e9767fbebfa"
+-PV = "6.6"
++# 6.10 Mainline version
++SRCREV = "d04e483db22823c13c0313b7c43a52529a2e2672"
++PV = "6.10"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git;protocol=https;branch=master"
+ 
+-- 
+1.8.3.1
 
-Thanks,
-Aniket
-
->
->> =C2=A0 # Default tiboot3.bin on J742S2 is for HS-FS
->> =C2=A0 IMAGE_BOOT_FILES +=3D "tiboot3-j742s2-hs-fs-evm.bin"
->
---------------bBtXeYW1uMZwD6zX0QG67rGq
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id 46I8Cw8c051592
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF=
--8">
-  </head>
-  <body text=3D"#000000" bgcolor=3D"#FFFFFF">
-    <p><br>
-    </p>
-    <div class=3D"moz-cite-prefix">On 7/17/2024 7:11 PM, Ryan Eatmon
-      wrote:<br>
-    </div>
-    <blockquote type=3D"cite"
-      cite=3D"mid:def67aa5-9757-486c-b474-4d7372f8efd3@ti.com">
-      <br>
-      <br>
-      On 7/17/2024 8:36 AM, Aniket Limaye wrote:
-      <br>
-      <blockquote type=3D"cite">Add ti-img-rogue-driver as the preferred
-        provider and enable the gpu
-        <br>
-        driver in the image.
-        <br>
-        <br>
-        Signed-off-by: Aniket Limaye <a class=3D"moz-txt-link-rfc2396E" h=
-ref=3D"mailto:a-limaye@ti.com">&lt;a-limaye@ti.com&gt;</a>
-        <br>
-        ---
-        <br>
-        =C2=A0 meta-ti-bsp/conf/machine/include/j742s2.inc | 2 +-
-        <br>
-        =C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
-        <br>
-        <br>
-        diff --git a/meta-ti-bsp/conf/machine/include/j742s2.inc
-        b/meta-ti-bsp/conf/machine/include/j742s2.inc
-        <br>
-        index 41f3a73d..60d91f16 100644
-        <br>
-        --- a/meta-ti-bsp/conf/machine/include/j742s2.inc
-        <br>
-        +++ b/meta-ti-bsp/conf/machine/include/j742s2.inc
-        <br>
-        @@ -4,7 +4,7 @@ SOC_FAMILY:append =3D ":j742s2"
-        <br>
-        =C2=A0 MACHINE_FEATURES +=3D "screen gpu"
-        <br>
-        =C2=A0 =C2=A0 require conf/machine/include/mesa-pvr.inc
-        <br>
-        -PREFERRED_PROVIDER_virtual/gpudriver ?=3D ""
-        <br>
-        +PREFERRED_PROVIDER_virtual/gpudriver ?=3D "ti-img-rogue-driver"
-        <br>
-      </blockquote>
-      <br>
-      NAK.=C2=A0 With the new BSP support this should be:
-      <br>
-      <br>
-      PREFERRED_PROVIDER_virtual/gpudriver ?=3D
-      "${BSP_ROGUE_DRIVER_PROVIDER}"
-      <br>
-      <br>
-    </blockquote>
-    Right.. sent a v2 with the fix!<br>
-    <a class=3D"moz-txt-link-freetext" href=3D"https://lists.yoctoproject=
-.org/g/meta-ti/message/17882">https://lists.yoctoproject.org/g/meta-ti/me=
-ssage/17882</a>
-    <p>Thanks,<br>
-      Aniket<br>
-    </p>
-    <blockquote type=3D"cite"
-      cite=3D"mid:def67aa5-9757-486c-b474-4d7372f8efd3@ti.com">
-      <br>
-      <blockquote type=3D"cite">=C2=A0 # Default tiboot3.bin on J742S2 is=
- for
-        HS-FS
-        <br>
-        =C2=A0 IMAGE_BOOT_FILES +=3D "tiboot3-j742s2-hs-fs-evm.bin"
-        <br>
-      </blockquote>
-      <br>
-    </blockquote>
-  </body>
-</html>
-
---------------bBtXeYW1uMZwD6zX0QG67rGq--
 
