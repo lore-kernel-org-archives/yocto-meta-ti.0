@@ -1,225 +1,78 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <hnagalla@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5500AC3DA59
-	for <webhook@archiver.kernel.org>; Fri, 19 Jul 2024 16:08:36 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.22123.1721405310895641503
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D4E9C3DA59
+	for <webhook@archiver.kernel.org>; Fri, 19 Jul 2024 18:58:27 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.25872.1721415498227252113
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 19 Jul 2024 09:08:31 -0700
+ Fri, 19 Jul 2024 11:58:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=iJpnupWk;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46JG8TXQ035374;
-	Fri, 19 Jul 2024 11:08:29 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=WvFj/hbJ;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: hnagalla@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46JIwGUs036158
+	for <meta-ti@lists.yoctoproject.org>; Fri, 19 Jul 2024 13:58:16 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1721405309;
-	bh=Nc2woMETTcWstQ38uFD//jjfBEWL1VR9hma2li+0YrA=;
-	h=From:To:Subject:Date;
-	b=iJpnupWkpPW9DydJPKra2wVRiPZT+H1cXh2nBZ5fYolo2SLQrmKeaz2CVdinfj/ms
-	 mYOMk/i+oweyCRQcKD3IBs2q1wMEk07ZlbeVpveSvrdhYt3zHX4n5M7rsQTip2CkYU
-	 7NXN7+mmpUEdexbXPQPNhBeB79zwYs0HmzAtV/64=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46JG8TLD097064
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 19 Jul 2024 11:08:29 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1721415496;
+	bh=Qyb6M8slZOTgQZmWYWkDF9tzkZkPv8ei+PnA2ic1ic0=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=WvFj/hbJes0Fg56x0XcNbbdRsGhwo+BQPuGXdYrJWHTjEuizzaMHbi6z8KTYmnMac
+	 jWy+XL1KST1S1n0ykWjfuVWogCVIvqrwMkTyicL/FhYrrgc2i9DSI63HrqmKZBkNKI
+	 HVfaLHu2zz2croK/W5WAK43enHRt7HyER1/skFho=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46JIwG37006270
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Fri, 19 Jul 2024 13:58:16 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
- Jul 2024 11:08:28 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2024 13:58:16 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 19 Jul 2024 11:08:28 -0500
-Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46JG8Sl7033531;
-	Fri, 19 Jul 2024 11:08:28 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1sUq9k-0007Pb-MA; Fri, 19 Jul 2024 11:08:28 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/scarthgap][PATCH] linux: Reproducibility patches from meta-ti-upstream for 6.10
-Date: Fri, 19 Jul 2024 11:08:28 -0500
-Message-ID: <20240719160828.28447-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ Frontend Transport; Fri, 19 Jul 2024 13:58:16 -0500
+Received: from [10.250.38.65] ([10.250.38.65])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46JIwGA3049924;
+	Fri, 19 Jul 2024 13:58:16 -0500
+Message-ID: <1443e154-2515-7211-39e6-3642244a4a22@ti.com>
+Date: Fri, 19 Jul 2024 13:58:15 -0500
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [scarthgap PATCH] ipc: ti-rpmsg-char: Update library to 0.6.7
+To: <praneeth@ti.com>, Ryan Eatmon <reatmon@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, Nick Saulnier <nsaulnier@ti.com>
+References: <20240715235724.28197-1-praneeth@ti.com>
+Content-Language: en-US
+From: Hari Nagalla <hnagalla@ti.com>
+In-Reply-To: <20240715235724.28197-1-praneeth@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 19 Jul 2024 16:08:36 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17893
+ <meta-ti@lists.yoctoproject.org>; Fri, 19 Jul 2024 18:58:27 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17894
 
-Backport the reproducibility patches from meta-ti-upstream for the v6.10
-mainline and next kernels.
-
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- ...msm-registers-improve-reproducibilit.patch | 56 +++++++++++++++++
- ...sh-improve-reproducibility-for-v6.10.patch | 61 +++++++++++++++++++
- .../recipes-kernel/linux/ti-kernel.inc        | 10 +++
- 3 files changed, 127 insertions(+)
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch
-
-diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch b/meta-ti-bsp/recipes-kernel/linux/files/0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch
-new file mode 100644
-index 00000000..f83746ee
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch
-@@ -0,0 +1,56 @@
-+From 2c78d22a78584f2a17eb33b5b5fd6fa602c2af8d Mon Sep 17 00:00:00 2001
-+From: Ryan Eatmon <reatmon@ti.com>
-+Date: Wed, 17 Jul 2024 16:19:20 -0500
-+Subject: [PATCH] drivers: gpu: drm: msm: registers: improve reproducibility
-+
-+The files generated by gen_header.py capture the source path to the
-+input files and the date.  While that can be informative, it varies
-+based on where and when the kernel was built as the full path is
-+captured.
-+
-+Since all of the files that this tool is run on is under the drivers
-+directory, this modifies the application to strip all of the path before
-+drivers.  Additionally it prints <stripped> instead of the date.
-+
-+Both changes solve the reproducibility issue.
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-+---
-+ drivers/gpu/drm/msm/registers/gen_header.py | 8 +++++---
-+ 1 file changed, 5 insertions(+), 3 deletions(-)
-+
-+diff --git a/drivers/gpu/drm/msm/registers/gen_header.py b/drivers/gpu/drm/msm/registers/gen_header.py
-+index 3926485bb197..a409404627c7 100644
-+--- a/drivers/gpu/drm/msm/registers/gen_header.py
-++++ b/drivers/gpu/drm/msm/registers/gen_header.py
-+@@ -11,6 +11,7 @@ import collections
-+ import argparse
-+ import time
-+ import datetime
-++import re
-+ 
-+ class Error(Exception):
-+ 	def __init__(self, message):
-+@@ -877,13 +878,14 @@ The rules-ng-ng source files this header was generated from are:
-+ """)
-+ 	maxlen = 0
-+ 	for filepath in p.xml_files:
-+-		maxlen = max(maxlen, len(filepath))
-++		new_filepath = re.sub("^.+drivers","drivers",filepath)
-++		maxlen = max(maxlen, len(new_filepath))
-+ 	for filepath in p.xml_files:
-+-		pad = " " * (maxlen - len(filepath))
-++		pad = " " * (maxlen - len(new_filepath))
-+ 		filesize = str(os.path.getsize(filepath))
-+ 		filesize = " " * (7 - len(filesize)) + filesize
-+ 		filetime = time.ctime(os.path.getmtime(filepath))
-+-		print("- " + filepath + pad + " (" + filesize + " bytes, from " + filetime + ")")
-++		print("- " + new_filepath + pad + " (" + filesize + " bytes, from <stripped>)")
-+ 	if p.copyright_year:
-+ 		current_year = str(datetime.date.today().year)
-+ 		print()
-+-- 
-+2.17.1
-+
-diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch b/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch
-new file mode 100644
-index 00000000..056220a5
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch
-@@ -0,0 +1,61 @@
-+From 4907fa9ff1dbdd72ce9fa7855091fb604a35a62d Mon Sep 17 00:00:00 2001
-+From: Ryan Eatmon <reatmon@ti.com>
-+Date: Wed, 17 Jul 2024 14:55:10 -0500
-+Subject: [PATCH] vt/conmakehash: improve reproducibility for v6.10
-+
-+The file generated by conmakehash capture the application
-+path used to generate the file. While that can be informative,
-+it varies based on where the kernel was built, as the full
-+path is captured.
-+
-+We tweak the application to use a second input as the "capture
-+name", and then modify the Makefile to pass the basename of
-+the source, making it reproducible.
-+
-+This could be improved by using some sort of path mapping,
-+or the application manipualing argv[1] itself, but for now
-+this solves the reprodicibility issue.
-+
-+Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-+
-+This is a minior rework of Bruce's original patch for the v6.10 kernel.
-+
-+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-+---
-+ drivers/tty/vt/Makefile      | 2 +-
-+ drivers/tty/vt/conmakehash.c | 2 ++
-+ 2 files changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/drivers/tty/vt/Makefile b/drivers/tty/vt/Makefile
-+index 2c8ce8b592ed..8532077ed3bb 100644
-+--- a/drivers/tty/vt/Makefile
-++++ b/drivers/tty/vt/Makefile
-+@@ -15,7 +15,7 @@ clean-files := consolemap_deftbl.c defkeymap.c
-+ hostprogs += conmakehash
-+ 
-+ quiet_cmd_conmk = CONMK   $@
-+-      cmd_conmk = $(obj)/conmakehash $< > $@
-++      cmd_conmk = $(obj)/conmakehash $< $(shell basename $<) > $@
-+ 
-+ $(obj)/consolemap_deftbl.c: $(src)/$(FONTMAPFILE) $(obj)/conmakehash
-+ 	$(call cmd,conmk)
-+diff --git a/drivers/tty/vt/conmakehash.c b/drivers/tty/vt/conmakehash.c
-+index dc2177fec715..9cd4096a8ffa 100644
-+--- a/drivers/tty/vt/conmakehash.c
-++++ b/drivers/tty/vt/conmakehash.c
-+@@ -112,6 +112,8 @@ int main(int argc, char *argv[])
-+   else
-+     rel_tblname = tblname;
-+ 
-++  rel_tblname = argv[2];
-++
-+   /* For now we assume the default font is always 256 characters. */
-+   fontlen = 256;
-+ 
-+-- 
-+2.17.1
-+
-diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc b/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
-index 1831ba66..5e27bcff 100644
---- a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
-+++ b/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
-@@ -15,6 +15,16 @@ KERNEL_DTBVENDORED = "1"
- 
- KERNEL_PATCHES = ""
- 
-+KERNEL_PATCHES:bsp-mainline = " \
-+    file://0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch \
-+    file://0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch \
-+"
-+
-+KERNEL_PATCHES:bsp-next = " \
-+    file://0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch \
-+    file://0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch \
-+"
-+
- KERNEL_PATCHES:bsp-ti-6_6 = " \
-     file://0001-lib-build_OID_registry-fix-reproducibility-issues.patch \
-     file://0001-vt-conmakehash-improve-reproducibility.patch \
--- 
-2.17.1
-
+On 7/15/24 18:57, praneeth@ti.com wrote:
+> --- a/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc
+> +++ b/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc
+> @@ -7,10 +7,10 @@ PROTOCOL = "https"
+>   BRANCH = "master"
+>   SRC_URI = "git://git.ti.com/git/rpmsg/ti-rpmsg-char.git;protocol=${PROTOCOL};branch=${BRANCH};"
+>   
+> -# 0.6.6 release
+> -SRCREV = "55a6f4032246631a309f8608af5e822024664b59"
+> +# 0.6.7 release
+> +SRCREV = "5100a2e4a4a951e40ea0708fa78960770ec0ac33"
+>   
+> -PV = "0.6.6+git"
+> +PV = "0.6.7+git"
+>   
+>   S = "${WORKDIR}/git"
+>   
+Acked-by : Hari Nagalla <hnagalla@ti.com>
 
