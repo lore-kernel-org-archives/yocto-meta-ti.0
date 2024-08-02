@@ -2,51 +2,51 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 627ACC3DA4A
-	for <webhook@archiver.kernel.org>; Fri,  2 Aug 2024 22:24:57 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.8.1722637493769555973
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 555F8C3DA4A
+	for <webhook@archiver.kernel.org>; Fri,  2 Aug 2024 22:28:47 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.65.1722637719437925127
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 02 Aug 2024 15:24:53 -0700
+ Fri, 02 Aug 2024 15:28:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=RhDvHUOs;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 472MOqOT117182;
-	Fri, 2 Aug 2024 17:24:52 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Mu8ndmg6;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 472MScr0013261;
+	Fri, 2 Aug 2024 17:28:38 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1722637492;
-	bh=W9zzirsxZJkoBqyphbtb+BfMi8fs9N7thocWoIun5sc=;
+	s=ti-com-17Q1; t=1722637718;
+	bh=fikSDzYRtO+w5EAmuZhBVWIw/U33zdKW3v7vwS1D+ac=;
 	h=From:To:Subject:Date;
-	b=RhDvHUOsoaAzQb9BE1o+sEJR0i4TPTcL8oCU3pLsduwO6kbWiB8C+zJ1S1jl+pskS
-	 gJIRnpWedCegoCLEiBPr29jNcJVAqysbe64us8WI5akZvag8DbvyEGTelDJ0ZXg+tE
-	 Rwl6JkbY0pahPu21bwqYnM6eR3IXlwWCbZcz//70=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 472MOqqp072982
+	b=Mu8ndmg6teEvmY7hJijDBKxRYjplsYq5LJUCtPyJ9pcxmyNtxzuQ0q3+Mj1BNNC91
+	 bWZyuhKjjTGePApcnaIKRwy0h3hF74KydHzVwE68pEyAkiX/YjnrTDgVF5EXGwYDV4
+	 MXruCLD5sROZcyYaSBCGL2+BeUda8jV2I1jzzxJM=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 472MScJk015122
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 2 Aug 2024 17:24:52 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 2 Aug 2024 17:28:38 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 2
- Aug 2024 17:24:51 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2024 17:28:38 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 2 Aug 2024 17:24:51 -0500
+ Frontend Transport; Fri, 2 Aug 2024 17:28:38 -0500
 Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 472MOpas116836;
-	Fri, 2 Aug 2024 17:24:51 -0500
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 472MScSe121432;
+	Fri, 2 Aug 2024 17:28:38 -0500
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1sa0hf-0003kP-Iz; Fri, 02 Aug 2024 17:24:51 -0500
+	id 1sa0lK-0003oy-1y; Fri, 02 Aug 2024 17:28:38 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/scarthgap][PATCH v2] linux: Reproducibility patches from meta-ti-upstream for 6.10
-Date: Fri, 2 Aug 2024 17:24:51 -0500
-Message-ID: <20240802222451.14364-1-reatmon@ti.com>
+Subject: [meta-ti][master/scarthgap][PATCH v3] linux: Reproducibility patches from meta-ti-upstream for 6.10
+Date: Fri, 2 Aug 2024 17:28:38 -0500
+Message-ID: <20240802222838.14649-1-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -54,14 +54,15 @@ X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 02 Aug 2024 22:24:57 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17917
+ <meta-ti@lists.yoctoproject.org>; Fri, 02 Aug 2024 22:28:47 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17918
 
 Backport the reproducibility patches from meta-ti-upstream for the v6.10
-mainline and next kernels.
+mainline kernel.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
+v3: Remove the references to next in the commit message.
 v2: Remove the patches for next.  The current version in the linux-next
 recipe will take these patches, so don't include them here.
 
