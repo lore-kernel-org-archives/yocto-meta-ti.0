@@ -1,115 +1,221 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C10AC3DA49
-	for <webhook@archiver.kernel.org>; Fri,  2 Aug 2024 04:09:40 +0000 (UTC)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- by mx.groups.io with SMTP id smtpd.web11.85553.1722571776230382774
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 627ACC3DA4A
+	for <webhook@archiver.kernel.org>; Fri,  2 Aug 2024 22:24:57 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ by mx.groups.io with SMTP id smtpd.web10.8.1722637493769555973
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 01 Aug 2024 21:09:36 -0700
+ Fri, 02 Aug 2024 15:24:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=mtcwi5h4;
- spf=pass (domain: list.ti.com, ip: 198.47.23.248, mailfrom: lcpdbld@list.ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47249ZMB078916;
-	Thu, 1 Aug 2024 23:09:35 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=RhDvHUOs;
+ spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 472MOqOT117182;
+	Fri, 2 Aug 2024 17:24:52 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1722571775; i=@ti.com;
-	bh=BCq3sXI4M325ecOF7r8VxGdDZGDd3ux0kGhlosukmaM=;
+	s=ti-com-17Q1; t=1722637492;
+	bh=W9zzirsxZJkoBqyphbtb+BfMi8fs9N7thocWoIun5sc=;
 	h=From:To:Subject:Date;
-	b=mtcwi5h4//cr6MJ8xJKgFLAinJ5gAArGVJN0k1zRIJSPRDNXoYgsKj3ln8ImgpPtE
-	 AiuaZ+esSsTpHzeJwsoD0yXNKSyiuNp/JzDICr6ehIKgM0lLSXu7Tij8/+6vn3jto/
-	 7K7F55MTQ9Mj+AFydzB7xmUUBDWRh9cHuaSx/Lc8=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47249ZsW022084
+	b=RhDvHUOsoaAzQb9BE1o+sEJR0i4TPTcL8oCU3pLsduwO6kbWiB8C+zJ1S1jl+pskS
+	 gJIRnpWedCegoCLEiBPr29jNcJVAqysbe64us8WI5akZvag8DbvyEGTelDJ0ZXg+tE
+	 Rwl6JkbY0pahPu21bwqYnM6eR3IXlwWCbZcz//70=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 472MOqqp072982
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 1 Aug 2024 23:09:35 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 1
- Aug 2024 23:09:34 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 2 Aug 2024 17:24:52 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 2
+ Aug 2024 17:24:51 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 1 Aug 2024 23:09:34 -0500
-Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.248.130.8])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47249Yfc011029;
-	Thu, 1 Aug 2024 23:09:34 -0500
-Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
-	id A892A11124C9; Thu,  1 Aug 2024 23:09:34 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
+ Frontend Transport; Fri, 2 Aug 2024 17:24:51 -0500
+Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 472MOpas116836;
+	Fri, 2 Aug 2024 17:24:51 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1sa0hf-0003kP-Iz; Fri, 02 Aug 2024 17:24:51 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202408011846
-Date: Thu, 1 Aug 2024 23:09:34 -0500
-Message-ID: <1722571774-59189-1-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
+Subject: [meta-ti][master/scarthgap][PATCH v2] linux: Reproducibility patches from meta-ti-upstream for 6.10
+Date: Fri, 2 Aug 2024 17:24:51 -0500
+Message-ID: <20240802222451.14364-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 02 Aug 2024 04:09:40 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17916
+ <meta-ti@lists.yoctoproject.org>; Fri, 02 Aug 2024 22:24:57 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17917
 
-Updated the value(s) for:
-  u-boot-ti-staging_2024.04: SRCREV
-  linux-ti-staging-rt_6.6: SRCREV
-  linux-ti-staging_6.6: SRCREV
+Backport the reproducibility patches from meta-ti-upstream for the v6.10
+mainline and next kernels.
 
-Changelogs:
-  u-boot-ti-staging_2024.04: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=1a74648ab378f8c14ae6fc3a4f11ed3ad1ad7126..818c76aed67f94059b9ebb94d237418802620b81
-  linux-ti-staging-rt_6.6: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=e1ea7912c2045eaea586cb12cc63b6280e2a6c35..f9bceb7343387ac6fab003518f1cd31987d6eb05
-  linux-ti-staging_6.6: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=a816c5abf3307f42e308a1fe13bd72244f37ec86..db88712931433e92a5f73cec57c82c5c7ebee593
-
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb    | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+v2: Remove the patches for next.  The current version in the linux-next
+recipe will take these patches, so don't include them here.
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-index 7949ddf..a873488 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-@@ -6,4 +6,4 @@ PR = "r0"
+ ...msm-registers-improve-reproducibilit.patch | 55 +++++++++++++++++
+ ...sh-improve-reproducibility-for-v6.10.patch | 60 +++++++++++++++++++
+ .../recipes-kernel/linux/ti-kernel.inc        |  5 ++
+ 3 files changed, 120 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch
+
+diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch b/meta-ti-bsp/recipes-kernel/linux/files/0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch
+new file mode 100644
+index 00000000..56a06e01
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch
+@@ -0,0 +1,55 @@
++From 2c78d22a78584f2a17eb33b5b5fd6fa602c2af8d Mon Sep 17 00:00:00 2001
++From: Ryan Eatmon <reatmon@ti.com>
++Date: Wed, 17 Jul 2024 16:19:20 -0500
++Subject: [PATCH] drivers: gpu: drm: msm: registers: improve reproducibility
++
++The files generated by gen_header.py capture the source path to the
++input files and the date.  While that can be informative, it varies
++based on where and when the kernel was built as the full path is
++captured.
++
++Since all of the files that this tool is run on is under the drivers
++directory, this modifies the application to strip all of the path before
++drivers.  Additionally it prints <stripped> instead of the date.
++
++Both changes solve the reproducibility issue.
++
++Upstream-Status: Inappropriate
++
++Signed-off-by: Ryan Eatmon <reatmon@ti.com>
++---
++ drivers/gpu/drm/msm/registers/gen_header.py | 8 +++++---
++ 1 file changed, 5 insertions(+), 3 deletions(-)
++
++diff --git a/drivers/gpu/drm/msm/registers/gen_header.py b/drivers/gpu/drm/msm/registers/gen_header.py
++index 3926485bb197..a409404627c7 100644
++--- a/drivers/gpu/drm/msm/registers/gen_header.py
+++++ b/drivers/gpu/drm/msm/registers/gen_header.py
++@@ -11,6 +11,7 @@ import collections
++ import argparse
++ import time
++ import datetime
+++import re
++
++ class Error(Exception):
++	def __init__(self, message):
++@@ -877,13 +878,14 @@ The rules-ng-ng source files this header was generated from are:
++ """)
++	maxlen = 0
++	for filepath in p.xml_files:
++-		maxlen = max(maxlen, len(filepath))
+++		new_filepath = re.sub("^.+drivers","drivers",filepath)
+++		maxlen = max(maxlen, len(new_filepath))
++	for filepath in p.xml_files:
++-		pad = " " * (maxlen - len(filepath))
+++		pad = " " * (maxlen - len(new_filepath))
++		filesize = str(os.path.getsize(filepath))
++		filesize = " " * (7 - len(filesize)) + filesize
++		filetime = time.ctime(os.path.getmtime(filepath))
++-		print("- " + filepath + pad + " (" + filesize + " bytes, from " + filetime + ")")
+++		print("- " + new_filepath + pad + " (" + filesize + " bytes, from <stripped>)")
++	if p.copyright_year:
++		current_year = str(datetime.date.today().year)
++		print()
++--
++2.17.1
+diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch b/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch
+new file mode 100644
+index 00000000..f9fdece8
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch
+@@ -0,0 +1,60 @@
++From 4907fa9ff1dbdd72ce9fa7855091fb604a35a62d Mon Sep 17 00:00:00 2001
++From: Ryan Eatmon <reatmon@ti.com>
++Date: Wed, 17 Jul 2024 14:55:10 -0500
++Subject: [PATCH] vt/conmakehash: improve reproducibility for v6.10
++
++The file generated by conmakehash capture the application
++path used to generate the file. While that can be informative,
++it varies based on where the kernel was built, as the full
++path is captured.
++
++We tweak the application to use a second input as the "capture
++name", and then modify the Makefile to pass the basename of
++the source, making it reproducible.
++
++This could be improved by using some sort of path mapping,
++or the application manipualing argv[1] itself, but for now
++this solves the reprodicibility issue.
++
++Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
++
++Upstream-Status: Inappropriate
++
++Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
++
++This is a minior rework of Bruce's original patch for the v6.10 kernel.
++
++Signed-off-by: Ryan Eatmon <reatmon@ti.com>
++---
++ drivers/tty/vt/Makefile      | 2 +-
++ drivers/tty/vt/conmakehash.c | 2 ++
++ 2 files changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/drivers/tty/vt/Makefile b/drivers/tty/vt/Makefile
++index 2c8ce8b592ed..8532077ed3bb 100644
++--- a/drivers/tty/vt/Makefile
+++++ b/drivers/tty/vt/Makefile
++@@ -15,7 +15,7 @@ clean-files := consolemap_deftbl.c defkeymap.c
++ hostprogs += conmakehash
++
++ quiet_cmd_conmk = CONMK   $@
++-      cmd_conmk = $(obj)/conmakehash $< > $@
+++      cmd_conmk = $(obj)/conmakehash $< $(shell basename $<) > $@
++
++ $(obj)/consolemap_deftbl.c: $(src)/$(FONTMAPFILE) $(obj)/conmakehash
++	$(call cmd,conmk)
++diff --git a/drivers/tty/vt/conmakehash.c b/drivers/tty/vt/conmakehash.c
++index dc2177fec715..9cd4096a8ffa 100644
++--- a/drivers/tty/vt/conmakehash.c
+++++ b/drivers/tty/vt/conmakehash.c
++@@ -112,6 +112,8 @@ int main(int argc, char *argv[])
++   else
++     rel_tblname = tblname;
++
+++  rel_tblname = argv[2];
+++
++   /* For now we assume the default font is always 256 characters. */
++   fontlen = 256;
++
++--
++2.17.1
+diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc b/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
+index 1831ba66..4cd5886a 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
++++ b/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
+@@ -15,6 +15,11 @@ KERNEL_DTBVENDORED = "1"
  
- BRANCH = "ti-u-boot-2024.04"
+ KERNEL_PATCHES = ""
  
--SRCREV = "1a74648ab378f8c14ae6fc3a4f11ed3ad1ad7126"
-+SRCREV = "818c76aed67f94059b9ebb94d237418802620b81"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-index 500e28b..29607b2 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-@@ -8,7 +8,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:"
- 
- BRANCH = "ti-rt-linux-6.6.y"
- 
--SRCREV = "e1ea7912c2045eaea586cb12cc63b6280e2a6c35"
-+SRCREV = "f9bceb7343387ac6fab003518f1cd31987d6eb05"
- 
- include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
- 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-index ba70f9e..341a4cc 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH ?= "ti-linux-6.6.y"
- 
--SRCREV ?= "a816c5abf3307f42e308a1fe13bd72244f37ec86"
-+SRCREV ?= "db88712931433e92a5f73cec57c82c5c7ebee593"
- PV = "6.6.32+git"
- 
- KERNEL_GIT_URI ?= "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
++KERNEL_PATCHES:bsp-mainline = " \
++    file://0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch \
++    file://0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch \
++"
++
+ KERNEL_PATCHES:bsp-ti-6_6 = " \
+     file://0001-lib-build_OID_registry-fix-reproducibility-issues.patch \
+     file://0001-vt-conmakehash-improve-reproducibility.patch \
 -- 
-1.8.3.1
+2.17.1
 
 
