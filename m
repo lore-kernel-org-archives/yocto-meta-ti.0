@@ -2,51 +2,51 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 555F8C3DA4A
-	for <webhook@archiver.kernel.org>; Fri,  2 Aug 2024 22:28:47 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.65.1722637719437925127
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 796BCC3DA64
+	for <webhook@archiver.kernel.org>; Sun,  4 Aug 2024 16:49:31 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.29739.1722790168028540884
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 02 Aug 2024 15:28:39 -0700
+ Sun, 04 Aug 2024 09:49:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Mu8ndmg6;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 472MScr0013261;
-	Fri, 2 Aug 2024 17:28:38 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=No6SRXKG;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 474GnRVh019575;
+	Sun, 4 Aug 2024 11:49:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1722637718;
-	bh=fikSDzYRtO+w5EAmuZhBVWIw/U33zdKW3v7vwS1D+ac=;
+	s=ti-com-17Q1; t=1722790167;
+	bh=MHbg+fIxg//KUs04FeXGiou2WglwyHH92AqTDPUoIDQ=;
 	h=From:To:Subject:Date;
-	b=Mu8ndmg6teEvmY7hJijDBKxRYjplsYq5LJUCtPyJ9pcxmyNtxzuQ0q3+Mj1BNNC91
-	 bWZyuhKjjTGePApcnaIKRwy0h3hF74KydHzVwE68pEyAkiX/YjnrTDgVF5EXGwYDV4
-	 MXruCLD5sROZcyYaSBCGL2+BeUda8jV2I1jzzxJM=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 472MScJk015122
+	b=No6SRXKGJOjgFsBa6b9G3d4axtvlcWz2GAC8DVRUBBmjlsVEyvelOW+31uC3NndTn
+	 cKfukd+4+afCW9EtmNlsokF0m/xg5jyELmn7OO3YsNdjztc7GvBzK54pZRvyaiWqXN
+	 WeOebJcgJDfmZFPID9q1qUK8zSt+tkR6fQNSEEM4=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 474GnRfK030978
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 2 Aug 2024 17:28:38 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 2
- Aug 2024 17:28:38 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	Sun, 4 Aug 2024 11:49:27 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 4
+ Aug 2024 11:49:26 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 2 Aug 2024 17:28:38 -0500
+ Frontend Transport; Sun, 4 Aug 2024 11:49:26 -0500
 Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 472MScSe121432;
-	Fri, 2 Aug 2024 17:28:38 -0500
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 474GnQ04069742;
+	Sun, 4 Aug 2024 11:49:26 -0500
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1sa0lK-0003oy-1y; Fri, 02 Aug 2024 17:28:38 -0500
+	id 1saeQA-000458-Jv; Sun, 04 Aug 2024 11:49:26 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/scarthgap][PATCH v3] linux: Reproducibility patches from meta-ti-upstream for 6.10
-Date: Fri, 2 Aug 2024 17:28:38 -0500
-Message-ID: <20240802222838.14649-1-reatmon@ti.com>
+Subject: [meta-ti][master/scarthgap][PATCH] debugss-module-drv: Fix compile failure under kernel v6.10
+Date: Sun, 4 Aug 2024 11:49:26 -0500
+Message-ID: <20240804164926.15650-1-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -54,168 +54,74 @@ X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 02 Aug 2024 22:28:47 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17918
+ <meta-ti@lists.yoctoproject.org>; Sun, 04 Aug 2024 16:49:31 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17919
 
-Backport the reproducibility patches from meta-ti-upstream for the v6.10
-mainline kernel.
+A compile error has apperaed when building againt the v6.10 kernel.
+
+git/debugss_module/debugss-mod/debugss_kmodule.c:1149:34: error: array type has incomplete element type 'struct of_device_id'
+ 1149 | static const struct of_device_id dra7xx_debugss_of_match[] = {
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~
+
+The easy fix is just to add an include for the header that defines the
+missing struct.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
-v3: Remove the references to next in the commit message.
-v2: Remove the patches for next.  The current version in the linux-next
-recipe will take these patches, so don't include them here.
+ .../dsptop/debugss-module-drv_git.bb          |  2 ++
+ ...le-Add-include-for-mod_devicetable.h.patch | 33 +++++++++++++++++++
+ 2 files changed, 35 insertions(+)
+ create mode 100644 meta-ti-extras/recipes-bsp/dsptop/files/0001-debugss_kmodule-Add-include-for-mod_devicetable.h.patch
 
- ...msm-registers-improve-reproducibilit.patch | 55 +++++++++++++++++
- ...sh-improve-reproducibility-for-v6.10.patch | 60 +++++++++++++++++++
- .../recipes-kernel/linux/ti-kernel.inc        |  5 ++
- 3 files changed, 120 insertions(+)
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch
-
-diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch b/meta-ti-bsp/recipes-kernel/linux/files/0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch
+diff --git a/meta-ti-extras/recipes-bsp/dsptop/debugss-module-drv_git.bb b/meta-ti-extras/recipes-bsp/dsptop/debugss-module-drv_git.bb
+index 62b4645c..81e544f7 100644
+--- a/meta-ti-extras/recipes-bsp/dsptop/debugss-module-drv_git.bb
++++ b/meta-ti-extras/recipes-bsp/dsptop/debugss-module-drv_git.bb
+@@ -17,3 +17,5 @@ COMPATIBLE_MACHINE = "dra7xx"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ include dsptop.inc
++
++SRC_URI += "file://0001-debugss_kmodule-Add-include-for-mod_devicetable.h.patch"
+diff --git a/meta-ti-extras/recipes-bsp/dsptop/files/0001-debugss_kmodule-Add-include-for-mod_devicetable.h.patch b/meta-ti-extras/recipes-bsp/dsptop/files/0001-debugss_kmodule-Add-include-for-mod_devicetable.h.patch
 new file mode 100644
-index 00000000..56a06e01
+index 00000000..89cfe1cd
 --- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch
-@@ -0,0 +1,55 @@
-+From 2c78d22a78584f2a17eb33b5b5fd6fa602c2af8d Mon Sep 17 00:00:00 2001
++++ b/meta-ti-extras/recipes-bsp/dsptop/files/0001-debugss_kmodule-Add-include-for-mod_devicetable.h.patch
+@@ -0,0 +1,33 @@
++From 5a514f6a6bb1c49bdbaf8eabc1776f54851227af Mon Sep 17 00:00:00 2001
 +From: Ryan Eatmon <reatmon@ti.com>
-+Date: Wed, 17 Jul 2024 16:19:20 -0500
-+Subject: [PATCH] drivers: gpu: drm: msm: registers: improve reproducibility
++Date: Sun, 4 Aug 2024 11:17:28 -0500
++Subject: [PATCH] debugss_kmodule: Add include for mod_devicetable.h
 +
-+The files generated by gen_header.py capture the source path to the
-+input files and the date.  While that can be informative, it varies
-+based on where and when the kernel was built as the full path is
-+captured.
++Add include for <linux/mod_devicetable.h> to fix compile error:
 +
-+Since all of the files that this tool is run on is under the drivers
-+directory, this modifies the application to strip all of the path before
-+drivers.  Additionally it prints <stripped> instead of the date.
++git/debugss_module/debugss-mod/debugss_kmodule.c:1149:34: error:
++array type has incomplete element type 'struct of_device_id'
 +
-+Both changes solve the reproducibility issue.
-+
-+Upstream-Status: Inappropriate
++Upstream-Status: Inactive-Upstream
 +
 +Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 +---
-+ drivers/gpu/drm/msm/registers/gen_header.py | 8 +++++---
-+ 1 file changed, 5 insertions(+), 3 deletions(-)
++ debugss_kmodule.c | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+diff --git a/drivers/gpu/drm/msm/registers/gen_header.py b/drivers/gpu/drm/msm/registers/gen_header.py
-+index 3926485bb197..a409404627c7 100644
-+--- a/drivers/gpu/drm/msm/registers/gen_header.py
-++++ b/drivers/gpu/drm/msm/registers/gen_header.py
-+@@ -11,6 +11,7 @@ import collections
-+ import argparse
-+ import time
-+ import datetime
-++import re
-+
-+ class Error(Exception):
-+	def __init__(self, message):
-+@@ -877,13 +878,14 @@ The rules-ng-ng source files this header was generated from are:
-+ """)
-+	maxlen = 0
-+	for filepath in p.xml_files:
-+-		maxlen = max(maxlen, len(filepath))
-++		new_filepath = re.sub("^.+drivers","drivers",filepath)
-++		maxlen = max(maxlen, len(new_filepath))
-+	for filepath in p.xml_files:
-+-		pad = " " * (maxlen - len(filepath))
-++		pad = " " * (maxlen - len(new_filepath))
-+		filesize = str(os.path.getsize(filepath))
-+		filesize = " " * (7 - len(filesize)) + filesize
-+		filetime = time.ctime(os.path.getmtime(filepath))
-+-		print("- " + filepath + pad + " (" + filesize + " bytes, from " + filetime + ")")
-++		print("- " + new_filepath + pad + " (" + filesize + " bytes, from <stripped>)")
-+	if p.copyright_year:
-+		current_year = str(datetime.date.today().year)
-+		print()
-+--
-+2.17.1
-diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch b/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch
-new file mode 100644
-index 00000000..f9fdece8
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/files/0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch
-@@ -0,0 +1,60 @@
-+From 4907fa9ff1dbdd72ce9fa7855091fb604a35a62d Mon Sep 17 00:00:00 2001
-+From: Ryan Eatmon <reatmon@ti.com>
-+Date: Wed, 17 Jul 2024 14:55:10 -0500
-+Subject: [PATCH] vt/conmakehash: improve reproducibility for v6.10
-+
-+The file generated by conmakehash capture the application
-+path used to generate the file. While that can be informative,
-+it varies based on where the kernel was built, as the full
-+path is captured.
-+
-+We tweak the application to use a second input as the "capture
-+name", and then modify the Makefile to pass the basename of
-+the source, making it reproducible.
-+
-+This could be improved by using some sort of path mapping,
-+or the application manipualing argv[1] itself, but for now
-+this solves the reprodicibility issue.
-+
-+Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-+
-+This is a minior rework of Bruce's original patch for the v6.10 kernel.
-+
-+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-+---
-+ drivers/tty/vt/Makefile      | 2 +-
-+ drivers/tty/vt/conmakehash.c | 2 ++
-+ 2 files changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/drivers/tty/vt/Makefile b/drivers/tty/vt/Makefile
-+index 2c8ce8b592ed..8532077ed3bb 100644
-+--- a/drivers/tty/vt/Makefile
-++++ b/drivers/tty/vt/Makefile
-+@@ -15,7 +15,7 @@ clean-files := consolemap_deftbl.c defkeymap.c
-+ hostprogs += conmakehash
-+
-+ quiet_cmd_conmk = CONMK   $@
-+-      cmd_conmk = $(obj)/conmakehash $< > $@
-++      cmd_conmk = $(obj)/conmakehash $< $(shell basename $<) > $@
-+
-+ $(obj)/consolemap_deftbl.c: $(src)/$(FONTMAPFILE) $(obj)/conmakehash
-+	$(call cmd,conmk)
-+diff --git a/drivers/tty/vt/conmakehash.c b/drivers/tty/vt/conmakehash.c
-+index dc2177fec715..9cd4096a8ffa 100644
-+--- a/drivers/tty/vt/conmakehash.c
-++++ b/drivers/tty/vt/conmakehash.c
-+@@ -112,6 +112,8 @@ int main(int argc, char *argv[])
-+   else
-+     rel_tblname = tblname;
-+
-++  rel_tblname = argv[2];
++diff --git a/debugss_kmodule.c b/debugss_kmodule.c
++index 6fac61d..9e084eb 100644
++--- a/debugss_kmodule.c
+++++ b/debugss_kmodule.c
++@@ -26,6 +26,8 @@
++ #include <linux/of_device.h>
++ #include "debugss_kmodule.h"
++ 
+++#include <linux/mod_devicetable.h>
 ++
-+   /* For now we assume the default font is always 256 characters. */
-+   fontlen = 256;
-+
-+--
++ /* un-comment the line below to enable printing for kernel debug messages */
++ //#define DEBUGSS_DRV_DEBUG
++ 
++-- 
 +2.17.1
-diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc b/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
-index 1831ba66..4cd5886a 100644
---- a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
-+++ b/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
-@@ -15,6 +15,11 @@ KERNEL_DTBVENDORED = "1"
- 
- KERNEL_PATCHES = ""
- 
-+KERNEL_PATCHES:bsp-mainline = " \
-+    file://0001-vt-conmakehash-improve-reproducibility-for-v6.10.patch \
-+    file://0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch \
-+"
 +
- KERNEL_PATCHES:bsp-ti-6_6 = " \
-     file://0001-lib-build_OID_registry-fix-reproducibility-issues.patch \
-     file://0001-vt-conmakehash-improve-reproducibility.patch \
 -- 
 2.17.1
 
