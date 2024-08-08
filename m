@@ -1,102 +1,159 @@
-Return-Path: <d.schultz@phytec.de>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A165C52D6F
-	for <webhook@archiver.kernel.org>; Wed,  7 Aug 2024 07:59:57 +0000 (UTC)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- by mx.groups.io with SMTP id smtpd.web11.28464.1723017590462217482
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C15FC3DA4A
+	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 17:17:59 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.65589.1723137470895730441
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 07 Aug 2024 00:59:51 -0700
+ Thu, 08 Aug 2024 10:17:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@phytec.de header.s=a4 header.b=d+DgSNHq;
- spf=pass (domain: phytec.de, ip: 91.26.50.163, mailfrom: d.schultz@phytec.de)
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
-	q=dns/txt; i=@phytec.de; t=1723017583; x=1725609583;
-	h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=yoqoNHhACjd55aDw3G6OSxufvuspy4U1tpe9jnUeLzw=;
-	b=d+DgSNHq998TTweH8bzrDevMp6uOaSDh8QBtG/xR4LgkGWAlldnPwOkJHb4wnZ2U
-	erOWLldDNwEkFXOfxj62LZR5DcMtbOdNxmYAVPNOBtmAjIc1bo/QaFsv/kqR/MKx
-	pJ78ZISscms/b4u9Wve6IhwPAyL/EAXcGj6qPlffJqs=;
-X-AuditID: ac14000a-03251700000021bc-7d-66b3296f675f
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
-	(using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(Client did not present a certificate)
-	by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 1F.83.08636.F6923B66; Wed,  7 Aug 2024 09:59:43 +0200 (CEST)
-Received: from [10.0.0.19] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 7 Aug 2024
- 09:59:41 +0200
-Message-ID: <b981ea8f-2d09-4446-8ce3-fbf37ee23dc2@phytec.de>
-Date: Wed, 7 Aug 2024 09:59:37 +0200
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=gdEjL0G2;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 478HHkmJ091912;
+	Thu, 8 Aug 2024 12:17:46 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1723137466;
+	bh=tPxbmAfVWh5iyfDPjXJ2m+lcEWwvpttRiiHKyHU4FU0=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=gdEjL0G2ItXtJV26k5I949upmlRU/MBhzS2MqMdBowJm3lMR4Z+yk4ZDyt/zvs0Aj
+	 9LEcHjEMKUxrPwILx+UhDbliDdUU8qAv75Xiw0uz3ySGzjymtpj05KkldnTZLBq782
+	 mukQu9gB1N/fybGt7hj0gx5SehQthsmFDrYQYdV8=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 478HHkh5028478
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 8 Aug 2024 12:17:46 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 8
+ Aug 2024 12:17:45 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 8 Aug 2024 12:17:45 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 478HHjPA006716;
+	Thu, 8 Aug 2024 12:17:45 -0500
+Message-ID: <56b01c2b-80f2-46b0-b3bd-794591c69177@ti.com>
+Date: Thu, 8 Aug 2024 12:17:45 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][master/scarthgap/kirkstone] [PATCH] meta-ti-extras:
- recipes-multimedia: libdce: Fix libdce SRC_URI
-To: Nishanth Menon <nm@ti.com>, Denys Dmytriyenko <denis@denix.org>, Ryan
- Eatmon <reatmon@ti.com>
-CC: Praneeth Bajjuri <praneeth@ti.com>, meta-ti
-	<meta-ti@lists.yoctoproject.org>
-References: <20240725113703.877552-1-nm@ti.com>
+Subject: Re: [meta-ti] [master][RFC PATCH] openmp-rtos: deprecate
+To: Denys Dmytriyenko <denis@denix.org>, <meta-ti@lists.yoctoproject.org>
+CC: Denys Dmytriyenko <denys@konsulko.com>
+References: <20240805043654.172479-1-denis@denix.org>
 Content-Language: en-US
-From: Daniel Schultz <d.schultz@phytec.de>
-In-Reply-To: <20240725113703.877552-1-nm@ti.com>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20240805043654.172479-1-denis@denix.org>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrBLMWRmVeSWpSXmKPExsWyRpKBRzdfc3OawbW/yhZ/F79ms5j75Rab
-	xZsfZ5ks/jx6yWbRcqKNzYHVY87FLlaPmaceMXscv7GdKYA5issmJTUnsyy1SN8ugStjc/9u
-	1oIpXBWvT21ibmC8w9HFyMkhIWAicXfJc/YuRi4OIYElTBLdD3YyQTg3GSV650xgAqniFbCR
-	eLnhLTOIzSKgInHj6C8WiLigxMmZT8BsUQF5ifu3ZrCD2MIC1RKzmz6D2SICyRL7729kA7GZ
-	BYIklvx5ClYvJKAv8WnaHSaIuLjErSfzwWw2AS2JO1vmgu3iFDCQOLr4ICtEjYXE4jcH2SFs
-	eYntb+cwQ8xRkJi9bTIjxDfyEtPOvWaGsEMltn7ZzjSBUXgWklNnIVk3C8nYWUjGLmBkWcUo
-	lJuZnJ1alJmtV5BRWZKarJeSuokRFBsiDFw7GPvmeBxiZOJgPMQowcGsJMLbHL4pTYg3JbGy
-	KrUoP76oNCe1+BCjNAeLkjjv6o7gVCGB9MSS1OzU1ILUIpgsEwenVANj1iXu0EM30mOe3L8x
-	4+fh5ey3NT0mLXJLOyC1JMH5seOBif18W8ItdxW5v/2s27N2vnvDpsMxi6+4vRPtEVON/y//
-	IDTsfliorbPK153bF8dtXZIVfNLwxP8qzrUXLM7Ot+/6vrkq2jH/T9Lb53MllUxmtWbOfa4R
-	+z2J7+vxRV8/nlqzYXanixJLcUaioRZzUXEiAF6dNpZ7AgAA
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 07 Aug 2024 07:59:57 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17928
+ <meta-ti@lists.yoctoproject.org>; Thu, 08 Aug 2024 17:17:59 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17929
 
-Thanks for fixing this recipe!
+On 8/4/24 11:36 PM, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@konsulko.com>
+> 
+> Remove openmp-rtos component as deprecated and not maintained.
+> 
+> This used to provide OpenMP DSP runtime components for legacy devices.
+> 
 
-On 25.07.24 13:37, Nishanth Menon wrote:
-> omapzoom has been down since a long time. Point the repository to the
-> mirror in git.ti.com
->
-> Reported-by: Daniel Schultz <d.schultz@phytec.de>
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-Tested-by: Daniel Schultz <d.schultz@phytec.de>
+With all the OpenCL stuff gone from meta-arago, dsplib/mathlib/imglib/swtools
+can also be dropped. On the side, dspdce-fw and ipumm-fw should be updated
+to be shipped as binaries, same as we do with all other sysbios/ti-rtos firmware.
+Then we could also drop out all the remaining sysbios/xdc bits.
+
+Andrew
+
+> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 > ---
->
-> Daniel: please test and report if this resolves the downstream distro
-> build errors seen.
->
->   meta-ti-extras/recipes-multimedia/libdce/libdce_3.00.15.00.bb | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-ti-extras/recipes-multimedia/libdce/libdce_3.00.15.00.bb b/meta-ti-extras/recipes-multimedia/libdce/libdce_3.00.15.00.bb
-> index 54f6ff8a6630..f46d9c77fc6a 100644
-> --- a/meta-ti-extras/recipes-multimedia/libdce/libdce_3.00.15.00.bb
-> +++ b/meta-ti-extras/recipes-multimedia/libdce/libdce_3.00.15.00.bb
-> @@ -6,7 +6,8 @@ inherit autotools pkgconfig
->   
->   DEPENDS = "libdrm ti-ipc"
->   
-> -SRC_URI = "git://git.omapzoom.org/repo/libdce.git;protocol=git;branch=master"
-> +SRC_URI = "git://git.ti.com/git/omapzoom/libdce.git;protocol=https;branch=master"
-> +
->   SRCREV = "ec14e1d5cea1ed3c3ea0e2b9cf1fd581acff93e3"
->   
->   S = "${WORKDIR}/git"
->
-> base-commit: c57b63147d2ac0dde16e43f7407d0ff50e62efdb
+>   .../recipes-ti/openmp-rtos/openmp-rtos_git.bb | 62 -------------------
+>   1 file changed, 62 deletions(-)
+>   delete mode 100644 meta-ti-extras/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+> 
+> diff --git a/meta-ti-extras/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/meta-ti-extras/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+> deleted file mode 100644
+> index aa4bc6cd..00000000
+> --- a/meta-ti-extras/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+> +++ /dev/null
+> @@ -1,62 +0,0 @@
+> -DESCRIPTION = "TI OpenMP RTOS"
+> -HOMEPAGE = "git://git.ti.com/git/openmp/ti-openmp-dsp-runtime.git"
+> -LICENSE = "BSD-3-Clause"
+> -
+> -require recipes-ti/includes/ti-paths.inc
+> -
+> -inherit features_check
+> -
+> -REQUIRED_MACHINE_FEATURES = "dsp"
+> -REQUIRED_DISTRO_FEATURES = "openmp"
+> -
+> -PV = "2_06_03_00"
+> -PR = "r0"
+> -
+> -OPENMP_RTOS_GIT_URI = "git://git.ti.com/git/openmp/ti-openmp-dsp-runtime.git"
+> -OPENMP_RTOS_GIT_PROTOCOL = "https"
+> -OPENMP_RTOS_GIT_BRANCH = "master"
+> -
+> -BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
+> -SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH}"
+> -
+> -SRCREV = "c090eb664d9815a36ead0e14f31e102590680fb8"
+> -
+> -LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
+> -
+> -DEPENDS = "common-csl-ip-rtos doxygen-native libulm ti-xdctools-native ti-ipc-rtos ti-sysbios ti-cgt6x-native zip-native"
+> -
+> -COMPATIBLE_MACHINE = "omap-a15"
+> -PACKAGE_ARCH = "${MACHINE_ARCH}"
+> -
+> -S = "${WORKDIR}/git"
+> -export IPC_DIR = "${IPC_INSTALL_DIR}"
+> -export XDC_DIR = "${XDC_INSTALL_DIR}"
+> -export BIOS_DIR = "${SYSBIOS_INSTALL_DIR}"
+> -export ULM_DIR ="${STAGING_DIR_TARGET}/usr/share/ti/ulm"
+> -export C6636_PDK_DIR ="${PDK_INSTALL_DIR}"
+> -export AM572_PDK_DIR ="${PDK_INSTALL_DIR}"
+> -export XDCCGROOT = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
+> -
+> -export BUILD_AM572 = "0"
+> -
+> -BUILD_AM572:omap-a15 = "1"
+> -
+> -RELEASE_TARGET = ""
+> -RELEASE_TARGET:omap-a15 = "am57xx"
+> -
+> -do_compile() {
+> -    make -f utils/product/Makefile .zipfile
+> -}
+> -
+> -do_install() {
+> -    install -d ${D}${OMP_INSTALL_DIR_RECIPE}
+> -    cp -r ${S}/exports/openmp_dsp_${RELEASE_TARGET}_*/. -d  ${D}${OMP_INSTALL_DIR_RECIPE}
+> -}
+> -
+> -ALLOW_EMPTY:${PN} = "1"
+> -
+> -FILES:${PN}-dev += " \
+> -    ${OMP_INSTALL_DIR_RECIPE}/ \
+> -"
+> -
+> -INSANE_SKIP:${PN}-dev = "arch"
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#17923): https://lists.yoctoproject.org/g/meta-ti/message/17923
+> Mute This Topic: https://lists.yoctoproject.org/mt/107727040/3619733
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [afd@ti.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
