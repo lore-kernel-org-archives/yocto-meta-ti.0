@@ -2,54 +2,52 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11B0CC52D7B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1538BC52D7D
 	for <webhook@archiver.kernel.org>; Wed, 14 Aug 2024 15:27:52 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.100986.1723649266538051535
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web11.100985.1723649266412642036
  for <meta-ti@lists.yoctoproject.org>;
  Wed, 14 Aug 2024 08:27:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=sGv6nb7U;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47EFRj7h087623;
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=llobrrbe;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47EFRjFw048165;
 	Wed, 14 Aug 2024 10:27:45 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1723649265;
-	bh=F7/9nILm5KUBldQxxNDz1sAIY8Evkp97Id5cesxy29M=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=sGv6nb7UxVolL8aoAeCT1JgO2xSe8op9B7XL5UyXjNrzGofFcwUg8i74poIzNm4YN
-	 I/CaRoB6XcZJt3W3DMVWPoRDJbBPOjP1JojmxNmr5dliipFa803LZYoRmCfFQTFLJl
-	 ZRe5bDxm8nEmZyrNapGeW8gCLR9TvXQ+TE/f5S0Q=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47EFRjtX031071
+	bh=mYhOqzxyGE4T1fjNnu8oUzT67Jd3C9e0kvZo0UKAhKQ=;
+	h=From:To:Subject:Date;
+	b=llobrrbehl8LWh5YMRpoEvpjr/4yiP0v51nwiJFrT57o6IJvWywvVnVmpQl4envYk
+	 WBDo2pJwiWlh1xPOXcAPAIFgdt4gAUA25LZcyzmL5wtFyTgM3GPj6SVWVixQLpNMJB
+	 fDMV+D5WYaTwDQ3YMLfxGgQbJSwzXa9j72NpYjuc=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47EFRjXx085594
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Wed, 14 Aug 2024 10:27:45 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 14
- Aug 2024 10:27:45 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2024 10:27:44 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 14 Aug 2024 10:27:45 -0500
+ Frontend Transport; Wed, 14 Aug 2024 10:27:44 -0500
 Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47EFRjca119172;
-	Wed, 14 Aug 2024 10:27:45 -0500
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47EFRiBd091559;
+	Wed, 14 Aug 2024 10:27:44 -0500
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1seFua-000599-Ss; Wed, 14 Aug 2024 10:27:44 -0500
+	id 1seFua-000596-NQ; Wed, 14 Aug 2024 10:27:44 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/scarthgap][RFC v2 2/3] ti-unified-wic: Tool to create new wics from deployed collateral
-Date: Wed, 14 Aug 2024 10:27:43 -0500
-Message-ID: <20240814152744.19738-2-reatmon@ti.com>
+Subject: [meta-ti][master/scarthgap][RFC v2 1/3] conf: machine: Breakout IMAGE_BOOT_FILES into new variables
+Date: Wed, 14 Aug 2024 10:27:42 -0500
+Message-ID: <20240814152744.19738-1-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240814152744.19738-1-reatmon@ti.com>
-References: <20240814152744.19738-1-reatmon@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -57,455 +55,418 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Wed, 14 Aug 2024 15:27:52 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17935
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17934
 
-Deploy a shell script that can take the deployed images/bootloaders from
-a build and swap out the bootloader files with alternate versions
-produced from the UBOOT_CONFIG flow and from what the u-boot binman tool
-creates.
+The IMAGE_BOOT_FILES variable has been overloaded to include additional
+files that should be included in the boot partition but are not boot
+loaders themselves (images, etc...).
+
+There is also a need to generate a report in the deploy directory for
+the list of actual bootloader files that were constructed as part of the
+build.
+
+Solution, break the IMAGE_BOOT_FILES into two new variables
+TI_BOOTLAODERS and TI_MULTICONFIGS and default IMAGE_BOOT_FILES to
+TI_BOOTLOADERS.  This way we can stick additional boot loaders into a
+new variable and they will will end up in the IMAGE_BOOT_FILES list.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- .../recipes-ti/ti-unified-wic/files/LICENSE   |   7 +
- .../ti-unified-wic/files/ti_unified_wic.sh    | 370 ++++++++++++++++++
- .../ti-unified-wic/ti-unified-wic.bb          |  37 ++
- 3 files changed, 414 insertions(+)
- create mode 100644 meta-ti-bsp/recipes-ti/ti-unified-wic/files/LICENSE
- create mode 100755 meta-ti-bsp/recipes-ti/ti-unified-wic/files/ti_unified_wic.sh
- create mode 100644 meta-ti-bsp/recipes-ti/ti-unified-wic/ti-unified-wic.bb
+ meta-ti-bsp/conf/machine/include/am62axx.inc  |  9 +++++---
+ meta-ti-bsp/conf/machine/include/am62pxx.inc  |  3 ++-
+ meta-ti-bsp/conf/machine/include/am62xx.inc   |  9 +++++---
+ meta-ti-bsp/conf/machine/include/am64xx.inc   |  9 +++++---
+ meta-ti-bsp/conf/machine/include/am65xx.inc   | 10 ++++----
+ meta-ti-bsp/conf/machine/include/am68.inc     |  6 +++--
+ meta-ti-bsp/conf/machine/include/am69.inc     |  6 +++--
+ meta-ti-bsp/conf/machine/include/j7200.inc    | 16 +++++++++----
+ meta-ti-bsp/conf/machine/include/j721e.inc    | 23 +++++++++++++------
+ meta-ti-bsp/conf/machine/include/j721s2.inc   |  9 +++++---
+ meta-ti-bsp/conf/machine/include/j722s.inc    |  9 ++++++--
+ meta-ti-bsp/conf/machine/include/j742s2.inc   |  6 +++--
+ meta-ti-bsp/conf/machine/include/j784s4.inc   |  9 +++++---
+ meta-ti-bsp/conf/machine/include/k3.inc       |  5 +++-
+ meta-ti-bsp/conf/machine/include/omap-a15.inc |  3 ++-
+ meta-ti-bsp/conf/machine/include/ti33x.inc    |  3 ++-
+ meta-ti-bsp/conf/machine/include/ti43x.inc    |  3 ++-
+ 17 files changed, 95 insertions(+), 43 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-ti/ti-unified-wic/files/LICENSE b/meta-ti-bsp/recipes-ti/ti-unified-wic/files/LICENSE
-new file mode 100644
-index 00000000..abbd6489
---- /dev/null
-+++ b/meta-ti-bsp/recipes-ti/ti-unified-wic/files/LICENSE
-@@ -0,0 +1,7 @@
-+Copyright 2024 Texas Instruments, Inc.
-+
-+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ?Software?), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-+
-+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-+
-+THE SOFTWARE IS PROVIDED ?AS IS?, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-diff --git a/meta-ti-bsp/recipes-ti/ti-unified-wic/files/ti_unified_wic.sh b/meta-ti-bsp/recipes-ti/ti-unified-wic/files/ti_unified_wic.sh
-new file mode 100755
-index 00000000..ce12a985
---- /dev/null
-+++ b/meta-ti-bsp/recipes-ti/ti-unified-wic/files/ti_unified_wic.sh
-@@ -0,0 +1,370 @@
-+#!/usr/bin/env bash
-+
-+glRealBin=$(cd "$(dirname "$0")"; pwd)
-+glScript=$(basename "$0")
-+
-+glDeployDir=""
-+glImage=""
-+glVariant=""
-+glMultiConfig=""
-+glOutput=""
-+
-+glListOptions="false"
-+glListImages="false"
-+glListVariants="false"
-+glListMultiConfigs="false"
-+glCleanWorkDir="false"
-+
-+glConfigFN="ti_unified_wic.cfg"
-+
-+glRunDir=$(pwd)
-+glWorkDir="${glRunDir}/.ti_unified_wic.workdir"
-+
-+glOeCoreRepoDN="oe-core-repo"
-+glOeCoreRepoFPDN="${glWorkDir}/${glOeCoreRepoDN}"
-+
-+glBmaptoolRepoDN="bmaptool-repo"
-+glBmaptoolRepoFPDN="${glWorkDir}/${glBmaptoolRepoDN}"
-+
-+
-+read_config()
-+{
-+    local loConfigFPFN="${glDeployDir}/${glConfigFN}"
-+
-+    glConfigMachine=""
-+    glConfigVariants=""
-+    glConfigMultiConfigs=""
-+    glConfigBootloaders=""
-+
-+    local loSection=""
-+
-+    while CFG_IN= read -r lpLine
-+    do
-+        case "$lpLine" in
-+            \[machine\])      loSection="machine" ;;
-+            \[variants\])     loSection="variants" ;;
-+            \[multiconfigs\]) loSection="multiconfigs" ;;
-+            \[bootloaders\])  loSection="bootloaders" ;;
-+            \#*)  ;;
-+            "")  ;;
-+            *) [ "$loSection" == "machine" ]      && glConfigMachine="${lpLine}";
-+               [ "$loSection" == "variants" ]     && glConfigVariants="${glConfigVariants} ${lpLine}";
-+               [ "$loSection" == "multiconfigs" ] && glConfigMultiConfigs="${glConfigMultiConfigs} ${lpLine}";
-+               [ "$loSection" == "bootloaders" ]  && glConfigBootloaders="${glConfigBootloaders} ${lpLine}";
-+                ;;
-+        esac
-+    done <$loConfigFPFN
-+
-+    glConfigImages=""
-+    glConfigWics=""
-+
-+    for lpWic in `ls ${glDeployDir}/*.wic.xz`; do
-+        if [ ! -L "${lpWic}" ]; then
-+            local loWic=$(basename $lpWic);
-+            local loImage=`echo ${loWic} | awk -F "-${glConfigMachine}" '{printf($1)}'`
-+            glConfigImages="${glConfigImages} ${loImage}"
-+            glConfigWics="${glConfigWics} ${loImage}:${loWic}"
-+        fi
-+    done
-+}
-+
-+list_options()
-+{
-+    echo "Images:"
-+    for lpImage in $glConfigImages; do
-+        echo "  ${lpImage}"
-+    done
-+
-+    echo ""
-+
-+    echo "U-Boot Variants:"
-+    for lpVariant in $glConfigVariants; do
-+        echo "  ${lpVariant}"
-+    done
-+
-+    echo ""
-+
-+    echo "U-Boot Multi-Configs:"
-+    for lpMultiConfig in $glConfigMultiConfigs; do
-+        echo "  ${lpMultiConfig}"
-+    done
-+}
-+
-+list_images()
-+{
-+    echo $glConfigImages
-+}
-+
-+list_variants()
-+{
-+    echo $glConfigVariants
-+}
-+
-+list_multiconfigs()
-+{
-+    echo $glConfigMultiConfigs
-+}
-+
-+clean_work_dir() {
-+    rm -rf ${glWorkDir}
-+}
-+
-+copy_and_update_wic()
-+{
-+    local loWicImageFN=""
-+    for lpWic in $glConfigWics; do
-+        local loImage=`echo ${lpWic} | awk -F : '{printf($1)}'`
-+        if [ "${loImage}" == "${glImage}" ]; then
-+            loWicImageFN=`echo ${lpWic} | awk -F : '{printf($2)}'`
-+            break
-+        fi
-+    done
-+
-+    if [ "${loWicImageFN}" == "" ]; then
-+        echo "ERROR: Invalid image \"$glImage\"."
-+        exit 1
-+    fi
-+
-+    local loSourceWic="${glDeployDir}/${loWicImageFN}"
-+
-+    local loTempWic="${glWorkDir}/temp.wic"
-+    local loTempWicXz="${loTempWic}.xz"
-+
-+    echo -n "Copying and uncompressing source wic file..."
-+    cp ${loSourceWic} ${loTempWicXz}
-+    xz --decompress -f -k --memlimit=50% --threads=$(nproc) ${loTempWicXz}
-+    echo "done"
-+
-+    #${glOeCoreRepoFPDN}/scripts/wic ls ${loTempWic}:1
-+
-+    echo "Installing new bootloader files..."
-+    for lpFile in $glConfigBootloaders; do
-+        if [ "${glVariant}" != "" ]; then
-+            echo "    ${lpFile}-${glVariant} -> ${lpFile}"
-+            ${glOeCoreRepoFPDN}/scripts/wic rm ${loTempWic}:1/${lpFile}
-+            ${glOeCoreRepoFPDN}/scripts/wic cp ${glDeployDir}/${lpFile}-${glVariant} ${loTempWic}:1/${lpFile}
-+        fi
-+
-+        if [ "${glMultiConfig}" != "" ]; then
-+            if [[ "${lpFile}" =~ ^(.+)-${glMultiConfig}(.+) ]]; then
-+                local loFront=${BASH_REMATCH[1]}
-+                local loBack=${BASH_REMATCH[2]}
-+
-+                local loBootloader="${loFront}${loBack}"
-+
-+                if [ "${glVariant}" != "" ]; then
-+                    echo "    ${lpFile}-${glVariant} -> ${loBootloader}"
-+                    ${glOeCoreRepoFPDN}/scripts/wic rm ${loTempWic}:1/${loBootloader}
-+                    ${glOeCoreRepoFPDN}/scripts/wic cp ${glDeployDir}/${lpFile}-${glVariant} ${loTempWic}:1/${loBootloader}
-+                else
-+                    echo "    ${lpFile} -> ${loBootloader}"
-+                    ${glOeCoreRepoFPDN}/scripts/wic rm ${loTempWic}:1/${loBootloader}
-+                    ${glOeCoreRepoFPDN}/scripts/wic cp ${glDeployDir}/${lpFile} ${loTempWic}:1/${loBootloader}
-+                fi
-+            fi
-+        fi
-+    done
-+    echo "done"
-+
-+    #${glOeCoreRepoFPDN}/scripts/wic ls ${loTempWic}:1
-+
-+    echo -n "Generating bmap file..."
-+    cd ${glBmaptoolRepoFPDN}/src
-+    python3 -m bmaptool create ${loTempWic} -o ${glOutput}.bmap
-+    echo "done"
-+
-+    cd ${glRunDir}
-+
-+    echo -n "Compressing target wic file..."
-+    xz -f -k -c -6 --memlimit=50% --threads=$(nproc) --check=crc32 ${loTempWic} > ${glOutput}
-+    echo "done"
-+    
-+    rm -f ${loTempWic} ${loTempWicXz}
-+}
-+
-+function git_clone()
-+{
-+    local arRepoUrl=$1
-+    local arRepoDir=$2
-+
-+    cd ${glWorkDir}
-+
-+    if [ ! -d $arRepoDir ]; then
-+        echo ""
-+        echo "Cloning $arRepoDir..."
-+        echo ""
-+
-+        git clone ${arRepoUrl} ${arRepoDir}
-+    fi
-+
-+    cd ${glRunDir}
-+}
-+
-+usage()
-+{
-+    echo "Usage:" >&2
-+    echo "" >&2
-+    echo "$glScript" >&2
-+    echo "" >&2
-+    echo "  --image <image>         Image to use as the base for the new wic image." >&2
-+    echo "  --output <path>         Path to where the new wic should be placed." >&2
-+    echo "" >&2
-+    echo "  [--deploy-dir <path>]   Path to the directory that contains the wic images," >&2
-+    echo "                          bootloaders, config, etc...  If you do not specify" >&2
-+    echo "                          this option, it will be set to the location where" >&2
-+    echo "                          the \"${glConfigFN}\" config file is found." >&2
-+    echo "  [--variant <variant>]   U-Boot variant to install." >&2
-+    echo "  [--multiconfig <cfg>]   U-Boot multiconfig to install." >&2
-+    echo "" >&2
-+    echo "  [--list-options]        Print a report of all available options for image" >&2
-+    echo "                          variant, and multiconfig from the config file." >&2
-+    echo "  [--list-images]         Print the available images in the deploy-dir." >&2
-+    echo "  [--list-variants]       Print the available U-Boot variants from the config" >&2
-+    echo "                          file." >&2
-+    echo "  [--list-multiconfigs]   Print the available U-Boot multiconfigs from the" >&2
-+    echo "                          config file." >&2
-+    echo "  [--clean-workdir]       Remove the workdir and clean up any left over files" >&2
-+    echo "                          from running the command.  This option should only" >&2
-+    echo "                          be called once all of the calls to the script are" >&2
-+    echo "                          complete as this removes the git repos for the wic." >&2
-+    echo "                          and bmaptool programs." >&2
-+    echo "  [--help]                Show this screen]" >&2
-+}
-+
-+
-+###############################################################################
-+# Process the command line arguments and set global variables for each one.
-+###############################################################################
-+glOptSpec="h-:"
-+while getopts "$glOptSpec" lpArg; do
-+    case "${lpArg}" in
-+        -)
-+            case "${OPTARG}" in
-+                deploy-dir)     loVal="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ));  glDeployDir=$loVal;;
-+                deploy-dir=*)   loVal=${OPTARG#*=}; loOpt=${OPTARG%=$loVal};    glDeployDir=$loVal;;
-+                image)          loVal="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ));  glImage=$loVal;;
-+                image=*)        loVal=${OPTARG#*=}; loOpt=${OPTARG%=$loVal};    glImage=$loVal;;
-+                variant)        loVal="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ));  glVariant=$loVal;;
-+                variant=*)      loVal=${OPTARG#*=}; loOpt=${OPTARG%=$loVal};    glVariant=$loVal;;
-+                multiconfig)    loVal="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ));  glMultiConfig=$loVal;;
-+                multiconfig=*)  loVal=${OPTARG#*=}; loOpt=${OPTARG%=$loVal};    glMultiConfig=$loVal;;
-+                output)         loVal="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ));  glOutput=$loVal;;
-+                ouptut=*)       loVal=${OPTARG#*=}; loOpt=${OPTARG%=$loVal};    glOutput=$loVal;;
-+
-+                list-options)                                                   glListOptions="true";;
-+                list-images)                                                    glListImages="true";;
-+                list-variants)                                                  glListVariants="true";;
-+                list-multiconfigs)                                              glListMultiConfigs="true";;
-+                clean-workdir)                                                  glCleanWorkDir="true";;
-+
-+                help)                                                           usage; exit 0;;
-+                *)
-+                    if [ "$OPTERR" = 1 ] && [ "${glOptSpec:0:1}" != ":" ]; then
-+                        usage
-+                        echo "" >&2
-+                        echo "Unknown option --${OPTARG}" >&2
-+                        echo "" >&2
-+                        exit 0
-+                    fi
-+                    exit 1;
-+                    ;;
-+            esac;;
-+        h)  usage; exit 0;;
-+    esac
-+done
-+
-+glFailedArgCheck=0
-+
-+echo "$glConfigFN"
-+if [ "${glDeployDir}" == "" ]; then
-+    if [ -f $glConfigFN ]; then
-+        glDeployDir="${glRunDir}"
-+    fi
-+fi
-+
-+if [ "${glDeployDir}" == "" ]; then
-+    if [ -f "${glRealBin}/${glConfigFN}" ]; then
-+        glDeployDir="${glRealBin}"
-+    fi
-+fi
-+
-+if [ "${glDeployDir}" == "" ]; then
-+    echo "ERROR: You must specify --deploy-dir <dir> where all of the deployed files reside."
-+    glFailedArgCheck=1
-+fi
-+
-+read_config
-+
-+if [ "${glListImages}" == "true" ]; then
-+    list_images
-+    exit
-+fi
-+
-+if [ "${glListVariants}" == "true" ]; then
-+    list_variants
-+    exit
-+fi
-+
-+if [ "${glListMultiConfigs}" == "true" ]; then
-+    list_multiconfigs
-+    exit
-+fi
-+
-+if [ "${glCleanWorkDir}" == "true" ]; then
-+    clean_work_dir
-+    exit
-+fi
-+
-+echo ""
-+echo "${glScript}"
-+echo "-----------------"
-+echo ""
-+
-+if [ "${glListOptions}" == "true" ]; then
-+    list_options
-+    exit
-+fi
-+
-+if [ "${glImage}" == "" ]; then
-+    echo "ERROR: You must specify --image <image> to choose which image wic file to pull from."
-+    glFailedArgCheck=1
-+fi
-+
-+if [[ "${glVariant}" == "" && "${glMultiConfig}" == "" ]]; then
-+    echo "ERROR: You must specify --variation <variation> and/or --multiconfig <multiconfig> to choose which set of bootloaders to configure on the target wic image."
-+    glFailedArgCheck=1
-+fi
-+
-+if [ "${glOutput}" == "" ]; then
-+    echo "ERROR: You must specify --output <file> to point to the new wic file you want to create with the applied variation."
-+    glFailedArgCheck=1
-+fi
-+
-+glOutput=$(realpath ${glOutput})
-+
-+if [ "${glFailedArgCheck}" == "1" ]; then
-+    echo ""
-+    echo "Aborting"
-+    exit 1
-+fi
-+
-+echo "WORK-DIR:     ${glWorkDir}"
-+echo "DPELOY-DIR:   ${glDeployDir}"
-+echo "IMAGE:        ${glImage}"
-+if [ "${glVariant}" != "" ]; then
-+    echo "VARIANT:      ${glVariant}"
-+fi
-+if [ "${glMultiConfig}" != "" ]; then
-+    echo "MULTI-CONFIG: ${glMultiConfig}"
-+fi
-+echo "OUTPUT:       ${glOutput}"
-+
-+mkdir -p ${glWorkDir}
-+
-+git_clone https://git.openembedded.org/openembedded-core ${glOeCoreRepoDN}
-+git_clone https://github.com/yoctoproject/bmaptool.git ${glBmaptoolRepoDN}
-+
-+echo ""
-+
-+copy_and_update_wic
-+
-diff --git a/meta-ti-bsp/recipes-ti/ti-unified-wic/ti-unified-wic.bb b/meta-ti-bsp/recipes-ti/ti-unified-wic/ti-unified-wic.bb
-new file mode 100644
-index 00000000..5f5d9982
---- /dev/null
-+++ b/meta-ti-bsp/recipes-ti/ti-unified-wic/ti-unified-wic.bb
-@@ -0,0 +1,37 @@
-+SUMMARY = "TI Unified WIC builder"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=92b3423643fe55420ad98ab5bef7c799"
-+
-+inherit deploy
-+
-+SRC_URI = " \
-+    file://ti_unified_wic.sh;name=ti_unified_wic \
-+    file://LICENSE;name=license \
-+"
-+
-+SRC_URI[ti_unified_wic.sha256sum] = "aecf38ebca7f25263d4656d12b210db1197aca92d311d44f924906bb86982b7a"
-+SRC_URI[license.sha256sum] = "2a0aebb221c0b2b97b907baf8eb103fb3474cfcadb78667859e028a5e52e984c"
-+
-+S = "${WORKDIR}"
-+
-+do_deploy() {
-+
-+    install -m 0755 ${S}/ti_unified_wic.sh ${DEPLOYDIR}
-+
-+    loCfg="${DEPLOYDIR}/ti_unified_wic.cfg"
-+
-+    echo "[machine]" > $loCfg
-+    echo "${MACHINE}" >> $loCfg
-+    echo "" >> $loCfg
-+    echo "[variants]" >> $loCfg
-+    echo "${UBOOT_CONFIG}" >> $loCfg
-+    echo "" >> $loCfg
-+    echo "[multiconfigs]" >> $loCfg
-+    echo "${TI_MULTICONFIGS}" >> $loCfg
-+    echo "" >> $loCfg
-+    echo "[bootloaders]" >> $loCfg
-+    echo "${TI_BOOTLOADERS}" >> $loCfg
-+}
-+
-+addtask deploy after do_install before do_build
-+
+diff --git a/meta-ti-bsp/conf/machine/include/am62axx.inc b/meta-ti-bsp/conf/machine/include/am62axx.inc
+index 93a41d8d..8268a956 100644
+--- a/meta-ti-bsp/conf/machine/include/am62axx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62axx.inc
+@@ -6,13 +6,16 @@ MACHINE_FEATURES += "screen touchscreen"
+ TFA_K3_SYSTEM_SUSPEND = "1"
+ 
+ # Default tiboot3.bin on AM62A is for HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-am62ax-hs-fs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-am62ax-hs-fs-evm.bin"
++TI_MULTICONFIGS += "am62ax-hs-fs-evm"
+ 
+ # Since default tiboot3.bin on AM62A is for HS-FS, add a version for GP
+-IMAGE_BOOT_FILES += "tiboot3-am62ax-gp-evm.bin"
++TI_BOOTLOADERS += "tiboot3-am62ax-gp-evm.bin"
++TI_MULTICONFIGS += "am62ax-gp-evm"
+ 
+ # Since default tiboot3.bin on AM62A is for HS-FS, add a version for HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-am62ax-hs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-am62ax-hs-evm.bin"
++TI_MULTICONFIGS += "am62ax-hs-evm"
+ 
+ TFA_BOARD = "lite"
+ OPTEEMACHINE = "k3-am62x"
+diff --git a/meta-ti-bsp/conf/machine/include/am62pxx.inc b/meta-ti-bsp/conf/machine/include/am62pxx.inc
+index a2825905..cc9a2c01 100644
+--- a/meta-ti-bsp/conf/machine/include/am62pxx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62pxx.inc
+@@ -7,7 +7,8 @@ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+ # Default tiboot3.bin on AM62Px is for HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-am62px-hs-fs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-am62px-hs-fs-evm.bin"
++TI_MULTICONFIGS += "am62px-hs-fs-evm"
+ 
+ TFA_BOARD = "lite"
+ TFA_K3_SYSTEM_SUSPEND = "1"
+diff --git a/meta-ti-bsp/conf/machine/include/am62xx.inc b/meta-ti-bsp/conf/machine/include/am62xx.inc
+index 070a691b..21b6d1ec 100644
+--- a/meta-ti-bsp/conf/machine/include/am62xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62xx.inc
+@@ -7,13 +7,16 @@ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+ # Default tiboot3.bin on AM62x is for HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-am62x-hs-fs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-am62x-hs-fs-evm.bin"
++TI_MULTICONFIGS += "am62x-hs-fs-evm"
+ 
+ # Since default tiboot3.bin on AM62x is for HS-FS, add a version for GP
+-IMAGE_BOOT_FILES += "tiboot3-am62x-gp-evm.bin"
++TI_BOOTLOADERS += "tiboot3-am62x-gp-evm.bin"
++TI_MULTICONFIGS += "am62x-gp-evm"
+ 
+ # Since default tiboot3.bin on AM62x is for HS-FS, add a version for HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-am62x-hs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-am62x-hs-evm.bin"
++TI_MULTICONFIGS += "am62x-hs-evm"
+ 
+ # Bitmap image tarball for early splashscreen
+ IMAGE_BOOT_FILES += "ti_logo_414x97_32bpp.bmp.gz"
+diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/conf/machine/include/am64xx.inc
+index 56b6df78..95529a83 100644
+--- a/meta-ti-bsp/conf/machine/include/am64xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
+@@ -16,13 +16,16 @@ KERNEL_DEVICETREE = " \
+ "
+ 
+ # Default tiboot3.bin on AM64x is for SR2.0 HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-am64x_sr2-hs-fs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-am64x_sr2-hs-fs-evm.bin"
++TI_MULTICONFIGS += "am64x_sr2-hs-fs-evm"
+ 
+ # Since default tiboot3.bin on AM64x is for SR2.0 HS-FS, add a version for GP
+-IMAGE_BOOT_FILES += "tiboot3-am64x-gp-evm.bin"
++TI_BOOTLOADERS += "tiboot3-am64x-gp-evm.bin"
++TI_MULTICONFIGS += "am64x-gp-evm"
+ 
+ # Since default tiboot3.bin on AM64x is for SR2.0 HS-FS, add a version for SR2.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-am64x_sr2-hs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-am64x_sr2-hs-evm.bin"
++TI_MULTICONFIGS += "am64x_sr2-hs-evm"
+ 
+ TFA_BOARD = "lite"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
+index 46513141..485dcc54 100644
+--- a/meta-ti-bsp/conf/machine/include/am65xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
+@@ -24,12 +24,14 @@ KERNEL_DEVICETREE = " \
+ IMAGE_BOOT_FILES += "sysfw.itb"
+ 
+ # Default on AM65x is for GP
+-IMAGE_BOOT_FILES += "tiboot3-am65x_sr2-gp-evm.bin"
+-IMAGE_BOOT_FILES += "sysfw-am65x_sr2-gp-evm.itb"
++TI_BOOTLOADERS += "tiboot3-am65x_sr2-gp-evm.bin"
++TI_BOOTLOADERS += "sysfw-am65x_sr2-gp-evm.itb"
++TI_MULTICONFIGS += "am65x_sr2-gp-evm"
+ 
+ # Since default on AM65x is for GP, add a version for HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-am65x_sr2-hs-evm.bin"
+-IMAGE_BOOT_FILES += "sysfw-am65x_sr2-hs-evm.itb"
++TI_BOOTLOADERS += "tiboot3-am65x_sr2-hs-evm.bin"
++TI_BOOTLOADERS += "sysfw-am65x_sr2-hs-evm.itb"
++TI_MULTICONFIGS += "am65x_sr2-hs-evm"
+ 
+ TFA_BOARD = "generic"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/am68.inc b/meta-ti-bsp/conf/machine/include/am68.inc
+index 327366be..a7ccea79 100644
+--- a/meta-ti-bsp/conf/machine/include/am68.inc
++++ b/meta-ti-bsp/conf/machine/include/am68.inc
+@@ -7,10 +7,12 @@ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+ # Default tiboot3.bin on AM68 is for SR1.0 HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j721s2-hs-fs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j721s2-hs-fs-evm.bin"
++TI_MULTICONFIGS += "j721s2-hs-fs-evm"
+ 
+ # Since default tiboot3.bin on AM68 is for HS-FS, add a version for SR1.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-j721s2-hs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j721s2-hs-evm.bin"
++TI_MULTICONFIGS += "j721s2-hs-evm"
+ 
+ TFA_BOARD = "generic"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/am69.inc b/meta-ti-bsp/conf/machine/include/am69.inc
+index 488f9c33..d18cf740 100644
+--- a/meta-ti-bsp/conf/machine/include/am69.inc
++++ b/meta-ti-bsp/conf/machine/include/am69.inc
+@@ -7,10 +7,12 @@ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+ # Default tiboot3.bin on AM69 is for SR1.0 HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j784s4-hs-fs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j784s4-hs-fs-evm.bin"
++TI_MULTICONFIGS += "j784s4-hs-fs-evm"
+ 
+ # Since default tiboot3.bin on AM69 is for HS-FS, add a version for SR1.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-j784s4-hs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j784s4-hs-evm.bin"
++TI_MULTICONFIGS += "j784s4-hs-evm"
+ 
+ TFA_BOARD = "j784s4"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/j7200.inc b/meta-ti-bsp/conf/machine/include/j7200.inc
+index 2a11e3dd..bee2345f 100644
+--- a/meta-ti-bsp/conf/machine/include/j7200.inc
++++ b/meta-ti-bsp/conf/machine/include/j7200.inc
+@@ -7,18 +7,26 @@ IMAGE_BOOT_FILES += "tiboot3-j7200-gp-evm.bin"
+ # Since default tiboot3.bin on J7200 is for GP, add a version for SR1.0 HS-FS
+ IMAGE_SR1_HS_FS_FILES = "tiboot3-j7200-hs-fs-evm.bin"
+ IMAGE_SR1_HS_FS_FILES:bsp-mainline = ""
+-IMAGE_BOOT_FILES += "${IMAGE_SR1_HS_FS_FILES}"
++MULTICONFIG_SR1_HS_FS = "j7200-hs-fs-evm"
++MULTICONFIG_SR1_HS_FS:bsp-mainline = ""
++TI_BOOTLOADERS += "${IMAGE_SR1_HS_FS_FILES}"
++TI_MULTICONFIGS += "${MULTICONFIG_SR1_HS_FS}"
+ 
+ # Since default tiboot3.bin on J7200 is for GP, add a version for SR1.0 HS-SE
+ IMAGE_SR1_HS_SE_FILES = "tiboot3-j7200-hs-evm.bin"
+ IMAGE_SR1_HS_SE_FILES:bsp-mainline = ""
+-IMAGE_BOOT_FILES += "${IMAGE_SR1_HS_SE_FILES}"
++MULTICONFIG_SR1_HS_SE = "j7200-hs-evm"
++MULTICONFIG_SR1_HS_SE:bsp-mainline = ""
++TI_BOOTLOADERS += "${IMAGE_SR1_HS_SE_FILES}"
++TI_MULTICONFIGS += "${MULTICONFIG_SR1_HS_SE}"
+ 
+ # Since default tiboot3.bin on J7200 is for GP, add a version for SR2.0 HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j7200_sr2-hs-fs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j7200_sr2-hs-fs-evm.bin"
++TI_MULTICONFIGS += "j7200_sr2-hs-fs-evm"
+ 
+ # Since default tiboot3.bin on J721e is for GP, add a version for SR2.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-j7200_sr2-hs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j7200_sr2-hs-evm.bin"
++TI_MULTICONFIGS += "j7200_sr2-hs-evm"
+ 
+ TFA_BOARD = "generic"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/conf/machine/include/j721e.inc
+index 62487aa9..29e50023 100644
+--- a/meta-ti-bsp/conf/machine/include/j721e.inc
++++ b/meta-ti-bsp/conf/machine/include/j721e.inc
+@@ -6,29 +6,38 @@ MACHINE_FEATURES += "screen gpu"
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+-IMAGE_BOOT_FILES += "sysfw.itb"
++TI_BOOTLOADERS += "sysfw.itb"
+ 
+ # Default on J721e is for GP
+-IMAGE_BOOT_FILES += "tiboot3-j721e-gp-evm.bin"
+-IMAGE_BOOT_FILES += "sysfw-j721e-gp-evm.itb"
++TI_BOOTLOADERS += "tiboot3-j721e-gp-evm.bin"
++TI_BOOTLOADERS += "sysfw-j721e-gp-evm.itb"
++TI_MULTICONFIGS += "j721e-gp-evm"
+ 
+ # Since default on J721e is for GP, add a version for SR1.1 HS-FS
+ IMAGE_SR1_1_HS_FS_FILES = "tiboot3-j721e_sr1_1-hs-fs-evm.bin sysfw-j721e_sr1_1-hs-fs-evm.itb"
+ IMAGE_SR1_1_HS_FS_FILES:bsp-mainline = ""
+-IMAGE_BOOT_FILES += "${IMAGE_SR1_1_HS_FS_FILES}"
++MULTICONFIG_SR1_1_HS_FS = "j721e_sr1_1-hs-fs-evm"
++MULTICONFIG_SR1_1_HS_FS:bsp-mainline = ""
++TI_BOOTLOADERS += "${IMAGE_SR1_1_HS_FS_FILES}"
++TI_MULTICONFIGS += "${MULTICONFIG_SR1_1_HS_FS}"
+ 
+ # Since default on J721e is for GP, add a version for SR1.1 HS-SE
+ IMAGE_SR1_1_HS_SE_FILES = "tiboot3-j721e_sr1_1-hs-evm.bin sysfw-j721e_sr1_1-hs-evm.itb"
+-IMAGE_BOOT_FILES += "${IMAGE_SR1_1_HS_SE_FILES}"
++TI_BOOTLOADERS += "${IMAGE_SR1_1_HS_SE_FILES}"
++TI_MULTICONFIGS += "j721e_sr1_1-hs-evm"
+ 
+ # Since default on J721e is for GP, add a version for SR2.0 HS-FS
+ IMAGE_SR2_HS_FS_FILES = "tiboot3-j721e_sr2-hs-fs-evm.bin sysfw-j721e_sr2-hs-fs-evm.itb"
+-IMAGE_BOOT_FILES += "${IMAGE_SR2_HS_FS_FILES}"
++TI_BOOTLOADERS += "${IMAGE_SR2_HS_FS_FILES}"
++TI_MULTICONFIGS += "j721e_sr2-hs-fs-evm"
+ 
+ # Since default on J721e is for GP, add a version for SR2.0 HS-SE
+ IMAGE_SR2_HS_SE_FILES = "tiboot3-j721e_sr2-hs-evm.bin sysfw-j721e_sr2-hs-evm.itb"
+ IMAGE_SR2_HS_SE_FILES:bsp-mainline = ""
+-IMAGE_BOOT_FILES += "${IMAGE_SR2_HS_SE_FILES}"
++MULTICONFIG_SR2_HS_SE = "j721e_sr2-hs-evm"
++MULTICONFIG_SR2_HS_SE:bsp-mainline = ""
++TI_BOOTLOADERS += "${IMAGE_SR2_HS_SE_FILES}"
++TI_MULTICONFIGS += "${MULTICONFIG_SR2_HS_SE}"
+ 
+ TFA_BOARD = "generic"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/j721s2.inc b/meta-ti-bsp/conf/machine/include/j721s2.inc
+index 9cd88d9b..5ebb4a16 100644
+--- a/meta-ti-bsp/conf/machine/include/j721s2.inc
++++ b/meta-ti-bsp/conf/machine/include/j721s2.inc
+@@ -7,13 +7,16 @@ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+ # Default tiboot3.bin on J721S2 is for GP
+-IMAGE_BOOT_FILES += "tiboot3-j721s2-gp-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j721s2-gp-evm.bin"
++TI_MULTICONFIGS += "j721s2-gp-evm"
+ 
+ # Since default tiboot3.bin on J721S2 is for GP, add a version for SR1.0 HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j721s2-hs-fs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j721s2-hs-fs-evm.bin"
++TI_MULTICONFIGS += "j721s2-hs-fs-evm"
+ 
+ # Since default tiboot3.bin on J721S2 is for GP, add a version for SR1.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-j721s2-hs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j721s2-hs-evm.bin"
++TI_MULTICONFIGS += "j721s2-hs-evm"
+ 
+ TFA_BOARD = "generic"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/j722s.inc b/meta-ti-bsp/conf/machine/include/j722s.inc
+index ef35d83a..42f50feb 100644
+--- a/meta-ti-bsp/conf/machine/include/j722s.inc
++++ b/meta-ti-bsp/conf/machine/include/j722s.inc
+@@ -7,13 +7,18 @@ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+ # Default tiboot3.bin on J722S is for HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j722s-hs-fs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j722s-hs-fs-evm.bin"
++TI_MULTICONFIGS += "j722s-hs-fs-evm"
+ 
+ # Since default tiboot3.bin on J722S is for HS-FS, add a version for HS-SE
+ IMAGE_SR1_HS_SE_FILES = "tiboot3-j722s-hs-evm.bin"
+ IMAGE_SR1_HS_SE_FILES:bsp-mainline = ""
+ IMAGE_SR1_HS_SE_FILES:bsp-next = ""
+-IMAGE_BOOT_FILES += "${IMAGE_SR1_HS_SE_FILES}"
++MULTICONFIG_SR1_HS_SE = "j722s-hs-evm"
++MULTICONFIG_SR1_HS_SE:bsp-mainline = ""
++MULTICONFIG_SR1_HS_SE:bsp-next = ""
++TI_BOOTLOADERS += "${IMAGE_SR1_HS_SE_FILES}"
++TI_MULTICONFIGS += "${MULTICONFIG_SR1_HS_SE}"
+ 
+ TFA_BOARD = "lite"
+ TFA_K3_SYSTEM_SUSPEND = "1"
+diff --git a/meta-ti-bsp/conf/machine/include/j742s2.inc b/meta-ti-bsp/conf/machine/include/j742s2.inc
+index aad7a768..7c248310 100644
+--- a/meta-ti-bsp/conf/machine/include/j742s2.inc
++++ b/meta-ti-bsp/conf/machine/include/j742s2.inc
+@@ -7,10 +7,12 @@ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+ # Default tiboot3.bin on J742S2 is for HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j742s2-hs-fs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j742s2-hs-fs-evm.bin"
++TI_MULTICONFIGS += "j742s2-hs-fs-evm"
+ 
+ # Since default tiboot3.bin on J742S2 is for HS-FS, add a version for SR1.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-j742s2-hs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j742s2-hs-evm.bin"
++TI_MULTICONFIGS += "j742s2-hs-evm"
+ 
+ TFA_BOARD = "j784s4"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/j784s4.inc b/meta-ti-bsp/conf/machine/include/j784s4.inc
+index 883c4a6e..6fb26bbc 100644
+--- a/meta-ti-bsp/conf/machine/include/j784s4.inc
++++ b/meta-ti-bsp/conf/machine/include/j784s4.inc
+@@ -7,13 +7,16 @@ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+ # Default tiboot3.bin on J784S4 is for GP
+-IMAGE_BOOT_FILES += "tiboot3-j784s4-gp-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j784s4-gp-evm.bin"
++TI_MULTICONFIGS += "j784s4-gp-evm"
+ 
+ # Since default tiboot3.bin on J784S4 is for GP, add a version for SR1.0 HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j784s4-hs-fs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j784s4-hs-fs-evm.bin"
++TI_MULTICONFIGS += "j784s4-hs-fs-evm"
+ 
+ # Since default tiboot3.bin on J784S4 is for GP, add a version for SR1.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-j784s4-hs-evm.bin"
++TI_BOOTLOADERS += "tiboot3-j784s4-hs-evm.bin"
++TI_MULTICONFIGS += "j784s4-hs-evm"
+ 
+ TFA_BOARD = "j784s4"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/machine/include/k3.inc
+index 34991ec9..2e5ffe09 100644
+--- a/meta-ti-bsp/conf/machine/include/k3.inc
++++ b/meta-ti-bsp/conf/machine/include/k3.inc
+@@ -48,7 +48,10 @@ MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 alsa pci"
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
+ 
+-IMAGE_BOOT_FILES ?= "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3.bin"
++TI_BOOTLOADERS ?= "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3.bin"
++TI_MULTICONFIGS = ""
++
++IMAGE_BOOT_FILES ?= "${TI_BOOTLOADERS}"
+ IMAGE_EFI_BOOT_FILES ?= "${IMAGE_BOOT_FILES}"
+ 
+ EFI_PROVIDER ?= "grub-efi"
+diff --git a/meta-ti-bsp/conf/machine/include/omap-a15.inc b/meta-ti-bsp/conf/machine/include/omap-a15.inc
+index be086936..6092040a 100644
+--- a/meta-ti-bsp/conf/machine/include/omap-a15.inc
++++ b/meta-ti-bsp/conf/machine/include/omap-a15.inc
+@@ -48,5 +48,6 @@ MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 screen alsa gpu mmip dsp gc3
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
+ WKS_FILE ?= "sdimage-2part.wks"
+-IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES}"
++TI_BOOTLOADERS ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES}"
++TI_MULTICONFIGS = ""
+ do_image_wic[depends] += "virtual/bootloader:do_deploy"
+diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/conf/machine/include/ti33x.inc
+index 7e9eb48c..2287f24c 100644
+--- a/meta-ti-bsp/conf/machine/include/ti33x.inc
++++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
+@@ -94,5 +94,6 @@ MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 alsa gpu"
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
+ WKS_FILE ?= "sdimage-2part.wks"
+-IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES}"
++TI_BOOTLOADERS ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES}"
++TI_MULTICONFIGS = ""
+ do_image_wic[depends] += "virtual/bootloader:do_deploy"
+diff --git a/meta-ti-bsp/conf/machine/include/ti43x.inc b/meta-ti-bsp/conf/machine/include/ti43x.inc
+index 2621d19a..74c1defa 100644
+--- a/meta-ti-bsp/conf/machine/include/ti43x.inc
++++ b/meta-ti-bsp/conf/machine/include/ti43x.inc
+@@ -66,5 +66,6 @@ MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 screen alsa gpu"
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
+ WKS_FILE ?= "sdimage-2part.wks"
+-IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES}"
++TI_BOOTLOADERS ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES}"
++TI_MULTICONFIGS = ""
+ do_image_wic[depends] += "virtual/bootloader:do_deploy"
 -- 
 2.17.1
 
