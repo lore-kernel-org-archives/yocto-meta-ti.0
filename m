@@ -2,516 +2,511 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26484C3DA4A
-	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 19:28:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11B0CC52D7B
+	for <webhook@archiver.kernel.org>; Wed, 14 Aug 2024 15:27:52 +0000 (UTC)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web10.68398.1723145291739379548
+ by mx.groups.io with SMTP id smtpd.web11.100986.1723649266538051535
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 08 Aug 2024 12:28:11 -0700
+ Wed, 14 Aug 2024 08:27:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=gzM0Hc9X;
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=sGv6nb7U;
  spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 478JSAuJ127471;
-	Thu, 8 Aug 2024 14:28:10 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47EFRj7h087623;
+	Wed, 14 Aug 2024 10:27:45 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1723145290;
-	bh=i1FVT31A2W3BA6USbjcfNT5V6uR6SweVTLVLtYZhkt8=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=gzM0Hc9Xe0zHtmTlSdN+U1IEZmqOZIkSskMcjxSQbgYkYg2eVg+1k7kLD36CXOIOb
-	 FqyUjDR+Xo2pkhmX0SL67zSTM0dpAYsxCM6vCq8djX1iUD5RleIzO3/qZrpX8q50Dc
-	 vK1OBoaym+Civ+FBYvzjvs1hK+0O//encwjlQzss=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 478JSA9F093128
+	s=ti-com-17Q1; t=1723649265;
+	bh=F7/9nILm5KUBldQxxNDz1sAIY8Evkp97Id5cesxy29M=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=sGv6nb7UxVolL8aoAeCT1JgO2xSe8op9B7XL5UyXjNrzGofFcwUg8i74poIzNm4YN
+	 I/CaRoB6XcZJt3W3DMVWPoRDJbBPOjP1JojmxNmr5dliipFa803LZYoRmCfFQTFLJl
+	 ZRe5bDxm8nEmZyrNapGeW8gCLR9TvXQ+TE/f5S0Q=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47EFRjtX031071
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 8 Aug 2024 14:28:10 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 8
- Aug 2024 14:28:10 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 14 Aug 2024 10:27:45 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 14
+ Aug 2024 10:27:45 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 8 Aug 2024 14:28:10 -0500
-Received: from [10.249.36.103] ([10.249.36.103])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 478JSA9O074861;
-	Thu, 8 Aug 2024 14:28:10 -0500
-Message-ID: <1aba4217-a90b-449e-9269-ca6656da5e7f@ti.com>
-Date: Thu, 8 Aug 2024 14:28:10 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][master/scarthgap][PATCH] u-boot-ti.inc: Refactor
- overrides to match changes in oe-core
+ Frontend Transport; Wed, 14 Aug 2024 10:27:45 -0500
+Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47EFRjca119172;
+	Wed, 14 Aug 2024 10:27:45 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1seFua-000599-Ss; Wed, 14 Aug 2024 10:27:44 -0500
+From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-References: <17E9D76C9018E00B.19172@lists.yoctoproject.org>
-Content-Language: en-US
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <17E9D76C9018E00B.19172@lists.yoctoproject.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: [meta-ti][master/scarthgap][RFC v2 2/3] ti-unified-wic: Tool to create new wics from deployed collateral
+Date: Wed, 14 Aug 2024 10:27:43 -0500
+Message-ID: <20240814152744.19738-2-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20240814152744.19738-1-reatmon@ti.com>
+References: <20240814152744.19738-1-reatmon@ti.com>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 08 Aug 2024 19:28:20 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17932
+ <meta-ti@lists.yoctoproject.org>; Wed, 14 Aug 2024 15:27:52 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17935
 
+Deploy a shell script that can take the deployed images/bootloaders from
+a build and swap out the bootloader files with alternate versions
+produced from the UBOOT_CONFIG flow and from what the u-boot binman tool
+creates.
 
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ .../recipes-ti/ti-unified-wic/files/LICENSE   |   7 +
+ .../ti-unified-wic/files/ti_unified_wic.sh    | 370 ++++++++++++++++++
+ .../ti-unified-wic/ti-unified-wic.bb          |  37 ++
+ 3 files changed, 414 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-ti/ti-unified-wic/files/LICENSE
+ create mode 100755 meta-ti-bsp/recipes-ti/ti-unified-wic/files/ti_unified_wic.sh
+ create mode 100644 meta-ti-bsp/recipes-ti/ti-unified-wic/ti-unified-wic.bb
 
-On 8/8/2024 2:26 PM, Ryan Eatmon via lists.yoctoproject.org wrote:
-> A recent change in oe-core [1] to refactor the uboot flow allows for a more
-> targeted refactoring of our override code as well.
-> 
-> Additionally, fix the UBOOT_CONFIG code to work correctly for k3r5
-> builds.
-> 
-> [1] https://git.openembedded.org/openembedded-core/commit/?id=e29d006a118643b276c6977cb70b0fb56635fc33
-
-Just so everyone is aware, this change is not quite on master/scarthgap 
-branches yet, but it is required for this patch to work.
-
-
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-> ---
->   meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc | 392 +++++++++----------
->   1 file changed, 192 insertions(+), 200 deletions(-)
-> 
-> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-> index 4e6825a8..bb50e1e9 100644
-> --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-> @@ -115,104 +115,115 @@ UBOOT_HS_2ND_BINARY = "u-boot-spl_HS_2ND"
->   UBOOT_HS_2ND_IMAGE = "u-boot-spl_HS_2ND-${MACHINE}-${PV}-${PR}"
->   UBOOT_HS_2ND_SYMLINK = "u-boot-spl_HS_2ND-${MACHINE}"
->   
-> -do_compile:append:k3r5 () {
-> -	if [ -n "${UBOOT_CONFIG}" ];
-> -	then
-> -		for config in ${UBOOT_MACHINE}; do
-> -			i=$(expr $i + 1);
-> -			for type in ${UBOOT_CONFIG}; do
-> -				j=$(expr $j + 1);
-> -				if [ $j -eq $i ];
-> -				then
-> -					if ! [ -L ${B}/${config}/${UBOOT_BINARY} ] && ! [ -f ${B}/${config}/${UBOOT_BINARY} ]; then
-> -						ln -s ${B}/${config}/spl/u-boot-spl.${UBOOT_SUFFIX} ${B}/${config}/${UBOOT_BINARY}
-> -					fi
-> -				fi
-> -			done
-> -			unset  j
-> -		done
-> -		unset  i
-> -	else
-> -		if ! [ -f ${B}/${UBOOT_BINARY} ]; then
-> -			ln -s spl/u-boot-spl.${UBOOT_SUFFIX} ${B}/${UBOOT_BINARY}
-> -		fi
-> -	fi
-> +uboot_compile:append () {
-> +    if ! [ -f ${B}/${UBOOT_BINARY} ]; then
-> +        ln -s spl/u-boot-spl.${UBOOT_SUFFIX} ${B}/${UBOOT_BINARY}
-> +    fi
->   }
->   
-> -do_install:append () {
-> -	if [ -n "${UBOOT_CONFIG}" ]
-> -	then
-> -		for config in ${UBOOT_MACHINE}; do
-> -			i=$(expr $i + 1);
-> -			for type in ${UBOOT_CONFIG}; do
-> -				j=$(expr $j + 1);
-> -				if [ $j -eq $i ]
-> -				then
-> -					if [ "x${SPL_UART_BINARY}" != "x" ]; then
-> -						install ${B}/${config}/spl/${SPL_UART_BINARY} ${D}/boot/${SPL_UART_IMAGE}-${type}
-> -						ln -sf ${SPL_UART_IMAGE}-${type} ${D}/boot/${SPL_UART_BINARY}-${type}
-> -						ln -sf ${SPL_UART_IMAGE}-${type} ${D}/boot/${SPL_UART_BINARY}
-> -					fi
-> -					if [ -f ${B}/${config}/${SPL_HS_MLO_BINARY} ]; then
-> -						install ${B}/${config}/${SPL_HS_MLO_BINARY} ${D}/boot/${SPL_HS_MLO_IMAGE}-${type}
-> -						ln -sf ${SPL_HS_MLO_IMAGE}-${type} ${D}/boot/${SPL_HS_MLO_BINARY}-${type}
-> -						ln -sf ${SPL_HS_MLO_IMAGE}-${type} ${D}/boot/${SPL_HS_MLO_BINARY}
-> -					fi
-> -					if [ -f ${B}/${config}/${UBOOT_HS_XLD_BINARY} ]; then
-> -						install ${B}/${config}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}-${type}
-> -						ln -sf ${UBOOT_HS_XLD_IMAGE}-${type} ${D}/boot/${UBOOT_HS_XLD_BINARY}-${type}
-> -						ln -sf ${UBOOT_HS_XLD_IMAGE}-${type} ${D}/boot/${UBOOT_HS_XLD_BINARY}
-> -					fi
-> -					if [ -f ${B}/${config}/${UBOOT_HS_MLO_BINARY} ]; then
-> -						install ${B}/${config}/${UBOOT_HS_MLO_BINARY} ${D}/boot/${UBOOT_HS_MLO_IMAGE}-${type}
-> -						ln -sf ${UBOOT_HS_MLO_IMAGE}-${type} ${D}/boot/${UBOOT_HS_MLO_BINARY}-${type}
-> -						ln -sf ${UBOOT_HS_MLO_IMAGE}-${type} ${D}/boot/${UBOOT_HS_MLO_BINARY}
-> -					fi
-> -					if [ -f ${B}/${config}/${UBOOT_HS_ISSW_BINARY} ]; then
-> -						install ${B}/${config}/${UBOOT_HS_ISSW_BINARY} ${D}/boot/${UBOOT_HS_ISSW_IMAGE}-${type}
-> -						ln -sf ${UBOOT_HS_ISSW_IMAGE}-${type} ${D}/boot/${UBOOT_HS_ISSW_BINARY}-${type}
-> -						ln -sf ${UBOOT_HS_ISSW_IMAGE}-${type} ${D}/boot/${UBOOT_HS_ISSW_BINARY}
-> -					fi
-> -					if [ -f ${B}/${config}/${UBOOT_HS_2ND_BINARY} ]; then
-> -						install ${B}/${config}/${UBOOT_HS_2ND_BINARY} ${D}/boot/${UBOOT_HS_2ND_IMAGE}-${type}
-> -						ln -sf ${UBOOT_HS_2ND_IMAGE}-${type} ${D}/boot/${UBOOT_HS_2ND_BINARY}-${type}
-> -						ln -sf ${UBOOT_HS_2ND_IMAGE}-${type} ${D}/boot/${UBOOT_HS_2ND_BINARY}
-> -					fi
-> -				fi
-> -			done
-> -			unset  j
-> -		done
-> -		unset  i
-> -	else
-> -		if [ "x${SPL_UART_BINARY}" != "x" ]; then
-> -			install ${B}/spl/${SPL_UART_BINARY} ${D}/boot/${SPL_UART_IMAGE}
-> -			ln -sf ${SPL_UART_IMAGE} ${D}/boot/${SPL_UART_BINARY}
-> -		fi
-> -		if [ -f ${B}/${SPL_HS_MLO_BINARY} ]; then
-> -			install ${B}/${SPL_HS_MLO_BINARY} ${D}/boot/${SPL_HS_MLO_IMAGE}
-> -			ln -sf ${SPL_HS_MLO_IMAGE} ${D}/boot/${SPL_HS_MLO_BINARY}
-> -		fi
-> -		if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
-> -			install ${B}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
-> -			ln -sf ${UBOOT_HS_XLD_IMAGE} ${D}/boot/${UBOOT_HS_XLD_BINARY}
-> -		fi
-> -		if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
-> -			install ${B}/${UBOOT_HS_MLO_BINARY} ${D}/boot/${UBOOT_HS_MLO_IMAGE}
-> -			ln -sf ${UBOOT_HS_MLO_IMAGE} ${D}/boot/${UBOOT_HS_MLO_BINARY}
-> -		fi
-> -		if [ -f ${B}/${UBOOT_HS_ISSW_BINARY} ]; then
-> -			install ${B}/${UBOOT_HS_ISSW_BINARY} ${D}/boot/${UBOOT_HS_ISSW_IMAGE}
-> -			ln -sf ${UBOOT_HS_ISSW_IMAGE} ${D}/boot/${UBOOT_HS_ISSW_BINARY}
-> +uboot_compile_config_copy_binary:k3r5 () {
-> +    config=$1
-> +    type=$2
-> +    binary=$3
-> +
-> +    if ! [ -L ${B}/${config}/${UBOOT_BINARYNAME}-${type}.${UBOOT_SUFFIX} ] && ! [ -f ${B}/${config}/${UBOOT_BINARYNAME}-${type}.${UBOOT_SUFFIX} ]; then
-> +        ln -s ${B}/${config}/spl/u-boot-spl.${UBOOT_SUFFIX} ${B}/${config}/${UBOOT_BINARYNAME}-${type}.${UBOOT_SUFFIX}
-> +    fi
-> +
-> +    if ! [ -L ${B}/${config}/${binary} ] && ! [ -f ${B}/${config}/${binary} ]; then
-> +        ln -s ${B}/${config}/spl/u-boot-spl.${UBOOT_SUFFIX} ${B}/${config}/${binary}
-> +    fi
-> +}
-> +
-> +uboot_install_config:append () {
-> +    if [ "x${SPL_UART_BINARY}" != "x" ]; then
-> +        install ${B}/${config}/spl/${SPL_UART_BINARY} ${D}/boot/${SPL_UART_IMAGE}-${type}
-> +        ln -sf ${SPL_UART_IMAGE}-${type} ${D}/boot/${SPL_UART_BINARY}-${type}
-> +        ln -sf ${SPL_UART_IMAGE}-${type} ${D}/boot/${SPL_UART_BINARY}
-> +    fi
-> +    if [ -f ${B}/${config}/${SPL_HS_MLO_BINARY} ]; then
-> +        install ${B}/${config}/${SPL_HS_MLO_BINARY} ${D}/boot/${SPL_HS_MLO_IMAGE}-${type}
-> +        ln -sf ${SPL_HS_MLO_IMAGE}-${type} ${D}/boot/${SPL_HS_MLO_BINARY}-${type}
-> +        ln -sf ${SPL_HS_MLO_IMAGE}-${type} ${D}/boot/${SPL_HS_MLO_BINARY}
-> +    fi
-> +    if [ -f ${B}/${config}/${UBOOT_HS_XLD_BINARY} ]; then
-> +        install ${B}/${config}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}-${type}
-> +        ln -sf ${UBOOT_HS_XLD_IMAGE}-${type} ${D}/boot/${UBOOT_HS_XLD_BINARY}-${type}
-> +        ln -sf ${UBOOT_HS_XLD_IMAGE}-${type} ${D}/boot/${UBOOT_HS_XLD_BINARY}
-> +    fi
-> +    if [ -f ${B}/${config}/${UBOOT_HS_MLO_BINARY} ]; then
-> +        install ${B}/${config}/${UBOOT_HS_MLO_BINARY} ${D}/boot/${UBOOT_HS_MLO_IMAGE}-${type}
-> +        ln -sf ${UBOOT_HS_MLO_IMAGE}-${type} ${D}/boot/${UBOOT_HS_MLO_BINARY}-${type}
-> +        ln -sf ${UBOOT_HS_MLO_IMAGE}-${type} ${D}/boot/${UBOOT_HS_MLO_BINARY}
-> +    fi
-> +    if [ -f ${B}/${config}/${UBOOT_HS_ISSW_BINARY} ]; then
-> +        install ${B}/${config}/${UBOOT_HS_ISSW_BINARY} ${D}/boot/${UBOOT_HS_ISSW_IMAGE}-${type}
-> +        ln -sf ${UBOOT_HS_ISSW_IMAGE}-${type} ${D}/boot/${UBOOT_HS_ISSW_BINARY}-${type}
-> +        ln -sf ${UBOOT_HS_ISSW_IMAGE}-${type} ${D}/boot/${UBOOT_HS_ISSW_BINARY}
-> +    fi
-> +    if [ -f ${B}/${config}/${UBOOT_HS_2ND_BINARY} ]; then
-> +        install ${B}/${config}/${UBOOT_HS_2ND_BINARY} ${D}/boot/${UBOOT_HS_2ND_IMAGE}-${type}
-> +        ln -sf ${UBOOT_HS_2ND_IMAGE}-${type} ${D}/boot/${UBOOT_HS_2ND_BINARY}-${type}
-> +        ln -sf ${UBOOT_HS_2ND_IMAGE}-${type} ${D}/boot/${UBOOT_HS_2ND_BINARY}
-> +    fi
-> +}
-> +
-> +uboot_install:append () {
-> +    if [ "x${SPL_UART_BINARY}" != "x" ]; then
-> +        install ${B}/spl/${SPL_UART_BINARY} ${D}/boot/${SPL_UART_IMAGE}
-> +        ln -sf ${SPL_UART_IMAGE} ${D}/boot/${SPL_UART_BINARY}
-> +    fi
-> +    if [ -f ${B}/${SPL_HS_MLO_BINARY} ]; then
-> +        install ${B}/${SPL_HS_MLO_BINARY} ${D}/boot/${SPL_HS_MLO_IMAGE}
-> +        ln -sf ${SPL_HS_MLO_IMAGE} ${D}/boot/${SPL_HS_MLO_BINARY}
-> +    fi
-> +    if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
-> +        install ${B}/${UBOOT_HS_XLD_BINARY} ${D}/boot/${UBOOT_HS_XLD_IMAGE}
-> +        ln -sf ${UBOOT_HS_XLD_IMAGE} ${D}/boot/${UBOOT_HS_XLD_BINARY}
-> +    fi
-> +    if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
-> +        install ${B}/${UBOOT_HS_MLO_BINARY} ${D}/boot/${UBOOT_HS_MLO_IMAGE}
-> +        ln -sf ${UBOOT_HS_MLO_IMAGE} ${D}/boot/${UBOOT_HS_MLO_BINARY}
-> +    fi
-> +    if [ -f ${B}/${UBOOT_HS_ISSW_BINARY} ]; then
-> +        install ${B}/${UBOOT_HS_ISSW_BINARY} ${D}/boot/${UBOOT_HS_ISSW_IMAGE}
-> +        ln -sf ${UBOOT_HS_ISSW_IMAGE} ${D}/boot/${UBOOT_HS_ISSW_BINARY}
-> +    fi
-> +    if [ -f ${B}/${UBOOT_HS_2ND_BINARY} ]; then
-> +        install ${B}/${UBOOT_HS_2ND_BINARY} ${D}/boot/${UBOOT_HS_2ND_IMAGE}
-> +        ln -sf ${UBOOT_HS_2ND_IMAGE} ${D}/boot/${UBOOT_HS_2ND_BINARY}
-> +    fi
-> +}
-> +
-> +do_deploy:append:k3r5 () {
-> +	rm ${DEPLOYDIR}/u-boot-initial-env* || true
-> +	rm ${DEPLOYDIR}/${PN}-initial-env* || true
-> +	rm ${DEPLOYDIR}/u-boot-initial-env-${MACHINE}* || true
-> +	rm ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}* || true
-> +	rm ${DEPLOYDIR}/u-boot-initial-env-${MACHINE}-${PV}-${PR}* || true
-> +	rm ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}-${PV}-${PR}* || true
-> +}
-> +
-> +uboot_deploy_config:append:k3r5 () {
-> +    for f in ${B}/${config}/tiboot3-*.bin; do
-> +		if [ -f "$f" ]; then
-> +            f_base=$(basename $f)
-> +			install -m 644 $f ${DEPLOYDIR}/${f_base}-${type}
-> +            ln -sf ${f_base}-${type} ${DEPLOYDIR}/${f_base}
->   		fi
-> -		if [ -f ${B}/${UBOOT_HS_2ND_BINARY} ]; then
-> -			install ${B}/${UBOOT_HS_2ND_BINARY} ${D}/boot/${UBOOT_HS_2ND_IMAGE}
-> -			ln -sf ${UBOOT_HS_2ND_IMAGE} ${D}/boot/${UBOOT_HS_2ND_BINARY}
-> +	done
-> +
-> +	for f in ${B}/${config}/sysfw*.itb; do
-> +		if [ -f "$f" ]; then
-> +            f_base=$(basename $f)
-> +			install -m 644 $f ${DEPLOYDIR}/${f_base}-${type}
-> +            ln -sf ${f_base}-${type} ${DEPLOYDIR}/${f_base}
->   		fi
-> -	fi
-> +	done
->   }
->   
-> -do_deploy:append:k3r5 () {
-> -	for f in ${B}/tiboot3-*.bin; do
-> +uboot_deploy:append:k3r5 () {
-> +    for f in ${B}/tiboot3-*.bin; do
->   		if [ -f "$f" ]; then
->   			install -m 644 $f ${DEPLOYDIR}/
->   		fi
-> @@ -223,117 +234,98 @@ do_deploy:append:k3r5 () {
->   			install -m 644 $f ${DEPLOYDIR}/
->   		fi
->   	done
-> +}
->   
-> -	rm ${DEPLOYDIR}/u-boot-initial-env || true
-> -	rm ${DEPLOYDIR}/${PN}-initial-env || true
-> -	rm ${DEPLOYDIR}/u-boot-initial-env-${MACHINE} || true
-> -	rm ${DEPLOYDIR}/${PN}-initial-env-${MACHINE} || true
-> -	rm ${DEPLOYDIR}/u-boot-initial-env-${MACHINE}-${PV}-${PR} || true
-> -	rm ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}-${PV}-${PR} || true
-> +uboot_deploy_config:append () {
-> +    cd ${DEPLOYDIR}
-> +    if [ "x${SPL_UART_BINARY}" != "x" ]; then
-> +        install ${B}/${config}/spl/${SPL_UART_BINARY} ${SPL_UART_IMAGE}-${type}
-> +        rm -f ${SPL_UART_BINARY} ${SPL_UART_SYMLINK}
-> +        ln -sf ${SPL_UART_IMAGE}-${type} ${SPL_UART_BINARY}-${type}
-> +        ln -sf ${SPL_UART_IMAGE}-${type} ${SPL_UART_BINARY}
-> +        ln -sf ${SPL_UART_IMAGE}-${type} ${SPL_UART_SYMLINK}-${type}
-> +        ln -sf ${SPL_UART_IMAGE}-${type} ${SPL_UART_SYMLINK}
-> +    fi
-> +    if [ -f ${B}/${config}/${SPL_HS_MLO_BINARY} ]; then
-> +        install ${B}/${config}/${SPL_HS_MLO_BINARY} ${SPL_HS_MLO_IMAGE}-${type}
-> +        rm -f ${SPL_HS_MLO_BINARY} ${SPL_HS_MLO_SYMLINK}
-> +        ln -sf ${SPL_HS_MLO_IMAGE}-${type} ${SPL_HS_MLO_SYMLINK}-${type}
-> +        ln -sf ${SPL_HS_MLO_IMAGE}-${type} ${SPL_HS_MLO_SYMLINK}
-> +        ln -sf ${SPL_HS_MLO_IMAGE}-${type} ${SPL_HS_MLO_BINARY}-${type}
-> +        ln -sf ${SPL_HS_MLO_IMAGE}-${type} ${SPL_HS_MLO_BINARY}
-> +    fi
-> +    if [ -f ${B}/${config}/${UBOOT_HS_XLD_BINARY} ]; then
-> +        install ${B}/${config}/${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_IMAGE}-${type}
-> +        rm -f ${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_SYMLINK}
-> +        ln -sf ${UBOOT_HS_XLD_IMAGE}-${type} ${UBOOT_HS_XLD_SYMLINK}-${type}
-> +        ln -sf ${UBOOT_HS_XLD_IMAGE}-${type} ${UBOOT_HS_XLD_SYMLINK}
-> +        ln -sf ${UBOOT_HS_XLD_IMAGE}-${type} ${UBOOT_HS_XLD_BINARY}-${type}
-> +        ln -sf ${UBOOT_HS_XLD_IMAGE}-${type} ${UBOOT_HS_XLD_BINARY}
-> +    fi
-> +    if [ -f ${B}/${config}/${UBOOT_HS_MLO_BINARY} ]; then
-> +        install ${B}/${config}/${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_IMAGE}-${type}
-> +        rm -f ${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_SYMLINK}
-> +        ln -sf ${UBOOT_HS_MLO_IMAGE}-${type} ${UBOOT_HS_MLO_SYMLINK}-${type}
-> +        ln -sf ${UBOOT_HS_MLO_IMAGE}-${type} ${UBOOT_HS_MLO_SYMLINK}
-> +        ln -sf ${UBOOT_HS_MLO_IMAGE}-${type} ${UBOOT_HS_MLO_BINARY}-${type}
-> +        ln -sf ${UBOOT_HS_MLO_IMAGE}-${type} ${UBOOT_HS_MLO_BINARY}
-> +    fi
-> +    if [ -f ${B}/${config}/${UBOOT_HS_ISSW_BINARY} ]; then
-> +        install ${B}/${config}/${UBOOT_HS_ISSW_BINARY} ${UBOOT_HS_ISSW_IMAGE}-${type}
-> +        rm -f ${UBOOT_HS_ISSW_BINARY} ${UBOOT_HS_ISSW_SYMLINK}
-> +        ln -sf ${UBOOT_HS_ISSW_IMAGE}-${type} ${UBOOT_HS_ISSW_SYMLINK}-${type}
-> +        ln -sf ${UBOOT_HS_ISSW_IMAGE}-${type} ${UBOOT_HS_ISSW_SYMLINK}
-> +        ln -sf ${UBOOT_HS_ISSW_IMAGE}-${type} ${UBOOT_HS_ISSW_BINARY}-${type}
-> +        ln -sf ${UBOOT_HS_ISSW_IMAGE}-${type} ${UBOOT_HS_ISSW_BINARY}
-> +    fi
-> +    if [ -f ${B}/${config}/${UBOOT_HS_2ND_BINARY} ]; then
-> +        install ${B}/${config}/${UBOOT_HS_2ND_BINARY} ${UBOOT_HS_2ND_IMAGE}-${type}
-> +        rm -f ${UBOOT_HS_2ND_BINARY} ${UBOOT_HS_2ND_SYMLINK}
-> +        ln -sf ${UBOOT_HS_2ND_IMAGE}-${type} ${UBOOT_HS_2ND_SYMLINK}-${type}
-> +        ln -sf ${UBOOT_HS_2ND_IMAGE}-${type} ${UBOOT_HS_2ND_SYMLINK}
-> +        ln -sf ${UBOOT_HS_2ND_IMAGE}-${type} ${UBOOT_HS_2ND_BINARY}-${type}
-> +        ln -sf ${UBOOT_HS_2ND_IMAGE}-${type} ${UBOOT_HS_2ND_BINARY}
-> +    fi
->   }
->   
-> -do_deploy:append () {
-> -	if [ -n "${UBOOT_CONFIG}" ]
-> -	then
-> -		for config in ${UBOOT_MACHINE}; do
-> -			i=$(expr $i + 1);
-> -			for type in ${UBOOT_CONFIG}; do
-> -				j=$(expr $j + 1);
-> -				if [ $j -eq $i ]
-> -				then
-> -					cd ${DEPLOYDIR}
-> -					if [ "x${SPL_UART_BINARY}" != "x" ]; then
-> -						install ${B}/${config}/spl/${SPL_UART_BINARY} ${SPL_UART_IMAGE}-${type}
-> -						rm -f ${SPL_UART_BINARY} ${SPL_UART_SYMLINK}
-> -						ln -sf ${SPL_UART_IMAGE}-${type} ${SPL_UART_BINARY}-${type}
-> -						ln -sf ${SPL_UART_IMAGE}-${type} ${SPL_UART_BINARY}
-> -						ln -sf ${SPL_UART_IMAGE}-${type} ${SPL_UART_SYMLINK}-${type}
-> -						ln -sf ${SPL_UART_IMAGE}-${type} ${SPL_UART_SYMLINK}
-> -					fi
-> -					if [ -f ${B}/${config}/${SPL_HS_MLO_BINARY} ]; then
-> -						install ${B}/${config}/${SPL_HS_MLO_BINARY} ${SPL_HS_MLO_IMAGE}-${type}
-> -						rm -f ${SPL_HS_MLO_BINARY} ${SPL_HS_MLO_SYMLINK}
-> -						ln -sf ${SPL_HS_MLO_IMAGE}-${type} ${SPL_HS_MLO_SYMLINK}-${type}
-> -						ln -sf ${SPL_HS_MLO_IMAGE}-${type} ${SPL_HS_MLO_SYMLINK}
-> -						ln -sf ${SPL_HS_MLO_IMAGE}-${type} ${SPL_HS_MLO_BINARY}-${type}
-> -						ln -sf ${SPL_HS_MLO_IMAGE}-${type} ${SPL_HS_MLO_BINARY}
-> -					fi
-> -					if [ -f ${B}/${config}/${UBOOT_HS_XLD_BINARY} ]; then
-> -						install ${B}/${config}/${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_IMAGE}-${type}
-> -						rm -f ${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_SYMLINK}
-> -						ln -sf ${UBOOT_HS_XLD_IMAGE}-${type} ${UBOOT_HS_XLD_SYMLINK}-${type}
-> -						ln -sf ${UBOOT_HS_XLD_IMAGE}-${type} ${UBOOT_HS_XLD_SYMLINK}
-> -						ln -sf ${UBOOT_HS_XLD_IMAGE}-${type} ${UBOOT_HS_XLD_BINARY}-${type}
-> -						ln -sf ${UBOOT_HS_XLD_IMAGE}-${type} ${UBOOT_HS_XLD_BINARY}
-> -					fi
-> -					if [ -f ${B}/${config}/${UBOOT_HS_MLO_BINARY} ]; then
-> -						install ${B}/${config}/${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_IMAGE}-${type}
-> -						rm -f ${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_SYMLINK}
-> -						ln -sf ${UBOOT_HS_MLO_IMAGE}-${type} ${UBOOT_HS_MLO_SYMLINK}-${type}
-> -						ln -sf ${UBOOT_HS_MLO_IMAGE}-${type} ${UBOOT_HS_MLO_SYMLINK}
-> -						ln -sf ${UBOOT_HS_MLO_IMAGE}-${type} ${UBOOT_HS_MLO_BINARY}-${type}
-> -						ln -sf ${UBOOT_HS_MLO_IMAGE}-${type} ${UBOOT_HS_MLO_BINARY}
-> -					fi
-> -					if [ -f ${B}/${config}/${UBOOT_HS_ISSW_BINARY} ]; then
-> -						install ${B}/${config}/${UBOOT_HS_ISSW_BINARY} ${UBOOT_HS_ISSW_IMAGE}-${type}
-> -						rm -f ${UBOOT_HS_ISSW_BINARY} ${UBOOT_HS_ISSW_SYMLINK}
-> -						ln -sf ${UBOOT_HS_ISSW_IMAGE}-${type} ${UBOOT_HS_ISSW_SYMLINK}-${type}
-> -						ln -sf ${UBOOT_HS_ISSW_IMAGE}-${type} ${UBOOT_HS_ISSW_SYMLINK}
-> -						ln -sf ${UBOOT_HS_ISSW_IMAGE}-${type} ${UBOOT_HS_ISSW_BINARY}-${type}
-> -						ln -sf ${UBOOT_HS_ISSW_IMAGE}-${type} ${UBOOT_HS_ISSW_BINARY}
-> -					fi
-> -					if [ -f ${B}/${config}/${UBOOT_HS_2ND_BINARY} ]; then
-> -						install ${B}/${config}/${UBOOT_HS_2ND_BINARY} ${UBOOT_HS_2ND_IMAGE}-${type}
-> -						rm -f ${UBOOT_HS_2ND_BINARY} ${UBOOT_HS_2ND_SYMLINK}
-> -						ln -sf ${UBOOT_HS_2ND_IMAGE}-${type} ${UBOOT_HS_2ND_SYMLINK}-${type}
-> -						ln -sf ${UBOOT_HS_2ND_IMAGE}-${type} ${UBOOT_HS_2ND_SYMLINK}
-> -						ln -sf ${UBOOT_HS_2ND_IMAGE}-${type} ${UBOOT_HS_2ND_BINARY}-${type}
-> -						ln -sf ${UBOOT_HS_2ND_IMAGE}-${type} ${UBOOT_HS_2ND_BINARY}
-> -					fi
-> -				fi
-> -			done
-> -			unset  j
-> -		done
-> -		unset  i
-> -	else
-> -		cd ${DEPLOYDIR}
-> -		if [ "x${SPL_UART_BINARY}" != "x" ]; then
-> -			install ${B}/spl/${SPL_UART_BINARY} ${SPL_UART_IMAGE}
-> -			rm -f ${SPL_UART_BINARY} ${SPL_UART_SYMLINK}
-> -			ln -sf ${SPL_UART_IMAGE} ${SPL_UART_BINARY}
-> -			ln -sf ${SPL_UART_IMAGE} ${SPL_UART_SYMLINK}
-> -		fi
-> -		if [ -f ${B}/${SPL_HS_MLO_BINARY} ]; then
-> -			install ${B}/${SPL_HS_MLO_BINARY} ${SPL_HS_MLO_IMAGE}
-> -			rm -f ${SPL_HS_MLO_BINARY} ${SPL_HS_MLO_SYMLINK}
-> -			ln -sf ${SPL_HS_MLO_IMAGE} ${SPL_HS_MLO_SYMLINK}
-> -			ln -sf ${SPL_HS_MLO_IMAGE} ${SPL_HS_MLO_BINARY}
-> -		fi
-> -		if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
-> -			install ${B}/${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_IMAGE}
-> -			rm -f ${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_SYMLINK}
-> -			ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_SYMLINK}
-> -			ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_BINARY}
-> -		fi
-> -		if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
-> -			install ${B}/${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_IMAGE}
-> -			rm -f ${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_SYMLINK}
-> -			ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_SYMLINK}
-> -			ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_BINARY}
-> -		fi
-> -		if [ -f ${B}/${UBOOT_HS_ISSW_BINARY} ]; then
-> -			install ${B}/${UBOOT_HS_ISSW_BINARY} ${UBOOT_HS_ISSW_IMAGE}
-> -			rm -f ${UBOOT_HS_ISSW_BINARY} ${UBOOT_HS_ISSW_SYMLINK}
-> -			ln -sf ${UBOOT_HS_ISSW_IMAGE} ${UBOOT_HS_ISSW_SYMLINK}
-> -			ln -sf ${UBOOT_HS_ISSW_IMAGE} ${UBOOT_HS_ISSW_BINARY}
-> -		fi
-> -		if [ -f ${B}/${UBOOT_HS_2ND_BINARY} ]; then
-> -			install ${B}/${UBOOT_HS_2ND_BINARY} ${UBOOT_HS_2ND_IMAGE}
-> -			rm -f ${UBOOT_HS_2ND_BINARY} ${UBOOT_HS_2ND_SYMLINK}
-> -			ln -sf ${UBOOT_HS_2ND_IMAGE} ${UBOOT_HS_2ND_SYMLINK}
-> -			ln -sf ${UBOOT_HS_2ND_IMAGE} ${UBOOT_HS_2ND_BINARY}
-> -		fi
-> -	fi
-> +uboot_deploy:append () {
-> +    cd ${DEPLOYDIR}
-> +    if [ "x${SPL_UART_BINARY}" != "x" ]; then
-> +        install ${B}/spl/${SPL_UART_BINARY} ${SPL_UART_IMAGE}
-> +        rm -f ${SPL_UART_BINARY} ${SPL_UART_SYMLINK}
-> +        ln -sf ${SPL_UART_IMAGE} ${SPL_UART_BINARY}
-> +        ln -sf ${SPL_UART_IMAGE} ${SPL_UART_SYMLINK}
-> +    fi
-> +    if [ -f ${B}/${SPL_HS_MLO_BINARY} ]; then
-> +        install ${B}/${SPL_HS_MLO_BINARY} ${SPL_HS_MLO_IMAGE}
-> +        rm -f ${SPL_HS_MLO_BINARY} ${SPL_HS_MLO_SYMLINK}
-> +        ln -sf ${SPL_HS_MLO_IMAGE} ${SPL_HS_MLO_SYMLINK}
-> +        ln -sf ${SPL_HS_MLO_IMAGE} ${SPL_HS_MLO_BINARY}
-> +    fi
-> +    if [ -f ${B}/${UBOOT_HS_XLD_BINARY} ]; then
-> +        install ${B}/${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_IMAGE}
-> +        rm -f ${UBOOT_HS_XLD_BINARY} ${UBOOT_HS_XLD_SYMLINK}
-> +        ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_SYMLINK}
-> +        ln -sf ${UBOOT_HS_XLD_IMAGE} ${UBOOT_HS_XLD_BINARY}
-> +    fi
-> +    if [ -f ${B}/${UBOOT_HS_MLO_BINARY} ]; then
-> +        install ${B}/${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_IMAGE}
-> +        rm -f ${UBOOT_HS_MLO_BINARY} ${UBOOT_HS_MLO_SYMLINK}
-> +        ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_SYMLINK}
-> +        ln -sf ${UBOOT_HS_MLO_IMAGE} ${UBOOT_HS_MLO_BINARY}
-> +    fi
-> +    if [ -f ${B}/${UBOOT_HS_ISSW_BINARY} ]; then
-> +        install ${B}/${UBOOT_HS_ISSW_BINARY} ${UBOOT_HS_ISSW_IMAGE}
-> +        rm -f ${UBOOT_HS_ISSW_BINARY} ${UBOOT_HS_ISSW_SYMLINK}
-> +        ln -sf ${UBOOT_HS_ISSW_IMAGE} ${UBOOT_HS_ISSW_SYMLINK}
-> +        ln -sf ${UBOOT_HS_ISSW_IMAGE} ${UBOOT_HS_ISSW_BINARY}
-> +    fi
-> +    if [ -f ${B}/${UBOOT_HS_2ND_BINARY} ]; then
-> +        install ${B}/${UBOOT_HS_2ND_BINARY} ${UBOOT_HS_2ND_IMAGE}
-> +        rm -f ${UBOOT_HS_2ND_BINARY} ${UBOOT_HS_2ND_SYMLINK}
-> +        ln -sf ${UBOOT_HS_2ND_IMAGE} ${UBOOT_HS_2ND_SYMLINK}
-> +        ln -sf ${UBOOT_HS_2ND_IMAGE} ${UBOOT_HS_2ND_BINARY}
-> +    fi
->   }
->   
->   do_install:append:am62xx() {
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#17930): https://lists.yoctoproject.org/g/meta-ti/message/17930
-> Mute This Topic: https://lists.yoctoproject.org/mt/107796186/6551054
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [reatmon@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
+diff --git a/meta-ti-bsp/recipes-ti/ti-unified-wic/files/LICENSE b/meta-ti-bsp/recipes-ti/ti-unified-wic/files/LICENSE
+new file mode 100644
+index 00000000..abbd6489
+--- /dev/null
++++ b/meta-ti-bsp/recipes-ti/ti-unified-wic/files/LICENSE
+@@ -0,0 +1,7 @@
++Copyright 2024 Texas Instruments, Inc.
++
++Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ?Software?), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED ?AS IS?, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+diff --git a/meta-ti-bsp/recipes-ti/ti-unified-wic/files/ti_unified_wic.sh b/meta-ti-bsp/recipes-ti/ti-unified-wic/files/ti_unified_wic.sh
+new file mode 100755
+index 00000000..ce12a985
+--- /dev/null
++++ b/meta-ti-bsp/recipes-ti/ti-unified-wic/files/ti_unified_wic.sh
+@@ -0,0 +1,370 @@
++#!/usr/bin/env bash
++
++glRealBin=$(cd "$(dirname "$0")"; pwd)
++glScript=$(basename "$0")
++
++glDeployDir=""
++glImage=""
++glVariant=""
++glMultiConfig=""
++glOutput=""
++
++glListOptions="false"
++glListImages="false"
++glListVariants="false"
++glListMultiConfigs="false"
++glCleanWorkDir="false"
++
++glConfigFN="ti_unified_wic.cfg"
++
++glRunDir=$(pwd)
++glWorkDir="${glRunDir}/.ti_unified_wic.workdir"
++
++glOeCoreRepoDN="oe-core-repo"
++glOeCoreRepoFPDN="${glWorkDir}/${glOeCoreRepoDN}"
++
++glBmaptoolRepoDN="bmaptool-repo"
++glBmaptoolRepoFPDN="${glWorkDir}/${glBmaptoolRepoDN}"
++
++
++read_config()
++{
++    local loConfigFPFN="${glDeployDir}/${glConfigFN}"
++
++    glConfigMachine=""
++    glConfigVariants=""
++    glConfigMultiConfigs=""
++    glConfigBootloaders=""
++
++    local loSection=""
++
++    while CFG_IN= read -r lpLine
++    do
++        case "$lpLine" in
++            \[machine\])      loSection="machine" ;;
++            \[variants\])     loSection="variants" ;;
++            \[multiconfigs\]) loSection="multiconfigs" ;;
++            \[bootloaders\])  loSection="bootloaders" ;;
++            \#*)  ;;
++            "")  ;;
++            *) [ "$loSection" == "machine" ]      && glConfigMachine="${lpLine}";
++               [ "$loSection" == "variants" ]     && glConfigVariants="${glConfigVariants} ${lpLine}";
++               [ "$loSection" == "multiconfigs" ] && glConfigMultiConfigs="${glConfigMultiConfigs} ${lpLine}";
++               [ "$loSection" == "bootloaders" ]  && glConfigBootloaders="${glConfigBootloaders} ${lpLine}";
++                ;;
++        esac
++    done <$loConfigFPFN
++
++    glConfigImages=""
++    glConfigWics=""
++
++    for lpWic in `ls ${glDeployDir}/*.wic.xz`; do
++        if [ ! -L "${lpWic}" ]; then
++            local loWic=$(basename $lpWic);
++            local loImage=`echo ${loWic} | awk -F "-${glConfigMachine}" '{printf($1)}'`
++            glConfigImages="${glConfigImages} ${loImage}"
++            glConfigWics="${glConfigWics} ${loImage}:${loWic}"
++        fi
++    done
++}
++
++list_options()
++{
++    echo "Images:"
++    for lpImage in $glConfigImages; do
++        echo "  ${lpImage}"
++    done
++
++    echo ""
++
++    echo "U-Boot Variants:"
++    for lpVariant in $glConfigVariants; do
++        echo "  ${lpVariant}"
++    done
++
++    echo ""
++
++    echo "U-Boot Multi-Configs:"
++    for lpMultiConfig in $glConfigMultiConfigs; do
++        echo "  ${lpMultiConfig}"
++    done
++}
++
++list_images()
++{
++    echo $glConfigImages
++}
++
++list_variants()
++{
++    echo $glConfigVariants
++}
++
++list_multiconfigs()
++{
++    echo $glConfigMultiConfigs
++}
++
++clean_work_dir() {
++    rm -rf ${glWorkDir}
++}
++
++copy_and_update_wic()
++{
++    local loWicImageFN=""
++    for lpWic in $glConfigWics; do
++        local loImage=`echo ${lpWic} | awk -F : '{printf($1)}'`
++        if [ "${loImage}" == "${glImage}" ]; then
++            loWicImageFN=`echo ${lpWic} | awk -F : '{printf($2)}'`
++            break
++        fi
++    done
++
++    if [ "${loWicImageFN}" == "" ]; then
++        echo "ERROR: Invalid image \"$glImage\"."
++        exit 1
++    fi
++
++    local loSourceWic="${glDeployDir}/${loWicImageFN}"
++
++    local loTempWic="${glWorkDir}/temp.wic"
++    local loTempWicXz="${loTempWic}.xz"
++
++    echo -n "Copying and uncompressing source wic file..."
++    cp ${loSourceWic} ${loTempWicXz}
++    xz --decompress -f -k --memlimit=50% --threads=$(nproc) ${loTempWicXz}
++    echo "done"
++
++    #${glOeCoreRepoFPDN}/scripts/wic ls ${loTempWic}:1
++
++    echo "Installing new bootloader files..."
++    for lpFile in $glConfigBootloaders; do
++        if [ "${glVariant}" != "" ]; then
++            echo "    ${lpFile}-${glVariant} -> ${lpFile}"
++            ${glOeCoreRepoFPDN}/scripts/wic rm ${loTempWic}:1/${lpFile}
++            ${glOeCoreRepoFPDN}/scripts/wic cp ${glDeployDir}/${lpFile}-${glVariant} ${loTempWic}:1/${lpFile}
++        fi
++
++        if [ "${glMultiConfig}" != "" ]; then
++            if [[ "${lpFile}" =~ ^(.+)-${glMultiConfig}(.+) ]]; then
++                local loFront=${BASH_REMATCH[1]}
++                local loBack=${BASH_REMATCH[2]}
++
++                local loBootloader="${loFront}${loBack}"
++
++                if [ "${glVariant}" != "" ]; then
++                    echo "    ${lpFile}-${glVariant} -> ${loBootloader}"
++                    ${glOeCoreRepoFPDN}/scripts/wic rm ${loTempWic}:1/${loBootloader}
++                    ${glOeCoreRepoFPDN}/scripts/wic cp ${glDeployDir}/${lpFile}-${glVariant} ${loTempWic}:1/${loBootloader}
++                else
++                    echo "    ${lpFile} -> ${loBootloader}"
++                    ${glOeCoreRepoFPDN}/scripts/wic rm ${loTempWic}:1/${loBootloader}
++                    ${glOeCoreRepoFPDN}/scripts/wic cp ${glDeployDir}/${lpFile} ${loTempWic}:1/${loBootloader}
++                fi
++            fi
++        fi
++    done
++    echo "done"
++
++    #${glOeCoreRepoFPDN}/scripts/wic ls ${loTempWic}:1
++
++    echo -n "Generating bmap file..."
++    cd ${glBmaptoolRepoFPDN}/src
++    python3 -m bmaptool create ${loTempWic} -o ${glOutput}.bmap
++    echo "done"
++
++    cd ${glRunDir}
++
++    echo -n "Compressing target wic file..."
++    xz -f -k -c -6 --memlimit=50% --threads=$(nproc) --check=crc32 ${loTempWic} > ${glOutput}
++    echo "done"
++    
++    rm -f ${loTempWic} ${loTempWicXz}
++}
++
++function git_clone()
++{
++    local arRepoUrl=$1
++    local arRepoDir=$2
++
++    cd ${glWorkDir}
++
++    if [ ! -d $arRepoDir ]; then
++        echo ""
++        echo "Cloning $arRepoDir..."
++        echo ""
++
++        git clone ${arRepoUrl} ${arRepoDir}
++    fi
++
++    cd ${glRunDir}
++}
++
++usage()
++{
++    echo "Usage:" >&2
++    echo "" >&2
++    echo "$glScript" >&2
++    echo "" >&2
++    echo "  --image <image>         Image to use as the base for the new wic image." >&2
++    echo "  --output <path>         Path to where the new wic should be placed." >&2
++    echo "" >&2
++    echo "  [--deploy-dir <path>]   Path to the directory that contains the wic images," >&2
++    echo "                          bootloaders, config, etc...  If you do not specify" >&2
++    echo "                          this option, it will be set to the location where" >&2
++    echo "                          the \"${glConfigFN}\" config file is found." >&2
++    echo "  [--variant <variant>]   U-Boot variant to install." >&2
++    echo "  [--multiconfig <cfg>]   U-Boot multiconfig to install." >&2
++    echo "" >&2
++    echo "  [--list-options]        Print a report of all available options for image" >&2
++    echo "                          variant, and multiconfig from the config file." >&2
++    echo "  [--list-images]         Print the available images in the deploy-dir." >&2
++    echo "  [--list-variants]       Print the available U-Boot variants from the config" >&2
++    echo "                          file." >&2
++    echo "  [--list-multiconfigs]   Print the available U-Boot multiconfigs from the" >&2
++    echo "                          config file." >&2
++    echo "  [--clean-workdir]       Remove the workdir and clean up any left over files" >&2
++    echo "                          from running the command.  This option should only" >&2
++    echo "                          be called once all of the calls to the script are" >&2
++    echo "                          complete as this removes the git repos for the wic." >&2
++    echo "                          and bmaptool programs." >&2
++    echo "  [--help]                Show this screen]" >&2
++}
++
++
++###############################################################################
++# Process the command line arguments and set global variables for each one.
++###############################################################################
++glOptSpec="h-:"
++while getopts "$glOptSpec" lpArg; do
++    case "${lpArg}" in
++        -)
++            case "${OPTARG}" in
++                deploy-dir)     loVal="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ));  glDeployDir=$loVal;;
++                deploy-dir=*)   loVal=${OPTARG#*=}; loOpt=${OPTARG%=$loVal};    glDeployDir=$loVal;;
++                image)          loVal="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ));  glImage=$loVal;;
++                image=*)        loVal=${OPTARG#*=}; loOpt=${OPTARG%=$loVal};    glImage=$loVal;;
++                variant)        loVal="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ));  glVariant=$loVal;;
++                variant=*)      loVal=${OPTARG#*=}; loOpt=${OPTARG%=$loVal};    glVariant=$loVal;;
++                multiconfig)    loVal="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ));  glMultiConfig=$loVal;;
++                multiconfig=*)  loVal=${OPTARG#*=}; loOpt=${OPTARG%=$loVal};    glMultiConfig=$loVal;;
++                output)         loVal="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ));  glOutput=$loVal;;
++                ouptut=*)       loVal=${OPTARG#*=}; loOpt=${OPTARG%=$loVal};    glOutput=$loVal;;
++
++                list-options)                                                   glListOptions="true";;
++                list-images)                                                    glListImages="true";;
++                list-variants)                                                  glListVariants="true";;
++                list-multiconfigs)                                              glListMultiConfigs="true";;
++                clean-workdir)                                                  glCleanWorkDir="true";;
++
++                help)                                                           usage; exit 0;;
++                *)
++                    if [ "$OPTERR" = 1 ] && [ "${glOptSpec:0:1}" != ":" ]; then
++                        usage
++                        echo "" >&2
++                        echo "Unknown option --${OPTARG}" >&2
++                        echo "" >&2
++                        exit 0
++                    fi
++                    exit 1;
++                    ;;
++            esac;;
++        h)  usage; exit 0;;
++    esac
++done
++
++glFailedArgCheck=0
++
++echo "$glConfigFN"
++if [ "${glDeployDir}" == "" ]; then
++    if [ -f $glConfigFN ]; then
++        glDeployDir="${glRunDir}"
++    fi
++fi
++
++if [ "${glDeployDir}" == "" ]; then
++    if [ -f "${glRealBin}/${glConfigFN}" ]; then
++        glDeployDir="${glRealBin}"
++    fi
++fi
++
++if [ "${glDeployDir}" == "" ]; then
++    echo "ERROR: You must specify --deploy-dir <dir> where all of the deployed files reside."
++    glFailedArgCheck=1
++fi
++
++read_config
++
++if [ "${glListImages}" == "true" ]; then
++    list_images
++    exit
++fi
++
++if [ "${glListVariants}" == "true" ]; then
++    list_variants
++    exit
++fi
++
++if [ "${glListMultiConfigs}" == "true" ]; then
++    list_multiconfigs
++    exit
++fi
++
++if [ "${glCleanWorkDir}" == "true" ]; then
++    clean_work_dir
++    exit
++fi
++
++echo ""
++echo "${glScript}"
++echo "-----------------"
++echo ""
++
++if [ "${glListOptions}" == "true" ]; then
++    list_options
++    exit
++fi
++
++if [ "${glImage}" == "" ]; then
++    echo "ERROR: You must specify --image <image> to choose which image wic file to pull from."
++    glFailedArgCheck=1
++fi
++
++if [[ "${glVariant}" == "" && "${glMultiConfig}" == "" ]]; then
++    echo "ERROR: You must specify --variation <variation> and/or --multiconfig <multiconfig> to choose which set of bootloaders to configure on the target wic image."
++    glFailedArgCheck=1
++fi
++
++if [ "${glOutput}" == "" ]; then
++    echo "ERROR: You must specify --output <file> to point to the new wic file you want to create with the applied variation."
++    glFailedArgCheck=1
++fi
++
++glOutput=$(realpath ${glOutput})
++
++if [ "${glFailedArgCheck}" == "1" ]; then
++    echo ""
++    echo "Aborting"
++    exit 1
++fi
++
++echo "WORK-DIR:     ${glWorkDir}"
++echo "DPELOY-DIR:   ${glDeployDir}"
++echo "IMAGE:        ${glImage}"
++if [ "${glVariant}" != "" ]; then
++    echo "VARIANT:      ${glVariant}"
++fi
++if [ "${glMultiConfig}" != "" ]; then
++    echo "MULTI-CONFIG: ${glMultiConfig}"
++fi
++echo "OUTPUT:       ${glOutput}"
++
++mkdir -p ${glWorkDir}
++
++git_clone https://git.openembedded.org/openembedded-core ${glOeCoreRepoDN}
++git_clone https://github.com/yoctoproject/bmaptool.git ${glBmaptoolRepoDN}
++
++echo ""
++
++copy_and_update_wic
++
+diff --git a/meta-ti-bsp/recipes-ti/ti-unified-wic/ti-unified-wic.bb b/meta-ti-bsp/recipes-ti/ti-unified-wic/ti-unified-wic.bb
+new file mode 100644
+index 00000000..5f5d9982
+--- /dev/null
++++ b/meta-ti-bsp/recipes-ti/ti-unified-wic/ti-unified-wic.bb
+@@ -0,0 +1,37 @@
++SUMMARY = "TI Unified WIC builder"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=92b3423643fe55420ad98ab5bef7c799"
++
++inherit deploy
++
++SRC_URI = " \
++    file://ti_unified_wic.sh;name=ti_unified_wic \
++    file://LICENSE;name=license \
++"
++
++SRC_URI[ti_unified_wic.sha256sum] = "aecf38ebca7f25263d4656d12b210db1197aca92d311d44f924906bb86982b7a"
++SRC_URI[license.sha256sum] = "2a0aebb221c0b2b97b907baf8eb103fb3474cfcadb78667859e028a5e52e984c"
++
++S = "${WORKDIR}"
++
++do_deploy() {
++
++    install -m 0755 ${S}/ti_unified_wic.sh ${DEPLOYDIR}
++
++    loCfg="${DEPLOYDIR}/ti_unified_wic.cfg"
++
++    echo "[machine]" > $loCfg
++    echo "${MACHINE}" >> $loCfg
++    echo "" >> $loCfg
++    echo "[variants]" >> $loCfg
++    echo "${UBOOT_CONFIG}" >> $loCfg
++    echo "" >> $loCfg
++    echo "[multiconfigs]" >> $loCfg
++    echo "${TI_MULTICONFIGS}" >> $loCfg
++    echo "" >> $loCfg
++    echo "[bootloaders]" >> $loCfg
++    echo "${TI_BOOTLOADERS}" >> $loCfg
++}
++
++addtask deploy after do_install before do_build
++
 -- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+2.17.1
+
 
