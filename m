@@ -1,96 +1,58 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <arcady.ruvidic@clearsy.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDA62C531DC
-	for <webhook@archiver.kernel.org>; Fri, 16 Aug 2024 18:53:16 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.155429.1723834389698090282
- for <meta-ti@lists.yoctoproject.org>;
- Fri, 16 Aug 2024 11:53:09 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Saybdgag;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47GIr89e090969;
-	Fri, 16 Aug 2024 13:53:08 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1723834388;
-	bh=475P3GA5P3l4zNrLkBa2XP9tzUIiZ4mfNA0gVsGMREI=;
-	h=From:To:Subject:Date;
-	b=SaybdgagC0U+//64z1RyH5fXS5gFcYzEDBB4Z5kdLTi3Hdu09x7qJIk6gtzTfA4Kl
-	 c0R/F0MFvuka7KJQfQF+oKwMEHh0mPlZx2HYlsC3MTNQwqXI6wRv+e6K1oLDtTPqmw
-	 j+ToNM6WzZvWXH4zfIVUcU37hPLbRZS2vRLye1BY=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47GIr8rL023156
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 16 Aug 2024 13:53:08 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 16
- Aug 2024 13:53:08 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 16 Aug 2024 13:53:08 -0500
-Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47GIr8PH117510;
-	Fri, 16 Aug 2024 13:53:08 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1sf24R-00047h-T8; Fri, 16 Aug 2024 13:53:07 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/scarthgap][PATCH v2] trusted-firmware-a: Update to v2.11 release tag
-Date: Fri, 16 Aug 2024 13:53:07 -0500
-Message-ID: <20240816185307.15808-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BFBFC3DA4A
+	for <webhook@archiver.kernel.org>; Tue, 20 Aug 2024 09:07:20 +0000 (UTC)
+Subject: Yocto Development for custom AM335x/OSD335x board and more
+To: meta-ti@lists.yoctoproject.org
+From: "Arcadius" <arcady.ruvidic@clearsy.com>
+X-Originating-Location: La Murette, Auvergne-Rhone-Alpes, FR (5.226.5.184)
+X-Originating-Platform: Windows Firefox 129
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Date: Tue, 20 Aug 2024 02:07:13 -0700
+Message-ID: <xdSV.1724144833468760472.3FMY@lists.yoctoproject.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 16 Aug 2024 18:53:16 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17942
+ <meta-ti@lists.yoctoproject.org>; Tue, 20 Aug 2024 09:07:20 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17943
 
-From: Kamlesh Gurudasani <kamlesh@ti.com>
+Hello everyone,
 
-Update to latest release tag, i.e. v2.11.
+This is my first attempt at working with Linux on a custom board, which see=
+ms quite differently from RTOS development I am used to.
+I have been looking into the Yocto Project to create a custom distribution,=
+ but before modifying Linux itself I would like to understand how to start =
+working from the default Poky distro to get it running on a custom board.
+I currently have the OSD3358-SM-RED dev kit board from Octavo Systems and w=
+ill soon have my custom board based on the OSD3358 C-SiP (SiP with AM3358 i=
+nside).
+As a first step I would like to get Poky running on the dev kit.
 
-Also update the LIC_FILES_CHKSUM since the license file changed since
-the last SRCREV change.
+I have checked that Yocto succeeds building the minimal image for Qemu on b=
+ranch Scarthgap and Ubuntu 22.04 host.
+I got the device tree sources for the board from Octavo Systems' GitHub.
+I guess that adding the meta-ti layer along with its dependencies should ad=
+d support for the AM3358 processor (although I am unsure as to what exactly=
+ Arago is and if I can ignore it for a minimal Poky build).
+Then I would probably need a custom layer to add custom recipes including t=
+he device tree sources.
+But with my current knowledge, I can't get much further than this.
 
-Commit:
-https://git.trustedfirmware.org/TF-A/trusted-firmware-a/+/f2735ebccf5173f74c0458736ec526276106097e
+I have seen the processor SDK for AM335x but I was wondering if there would=
+ be a more direct way of doing things starting from Poky.
+Additionally, I would like to be able to use my Linux distro on other custo=
+m boards which won't necessarily use TI processors (e.g. Microchip's SAMA7G=
+54), so I was unsure if the SDK was a good development environment for this=
+ case.
+I would basically like to learn a process that would work for any board wit=
+h any processor as long as BSPs are provided.
+I have checked the documents from Octavo Systems but their approach of "hac=
+king" a Beaglebone image doesn't really fit into my objective.
 
-Tag:
-https://git.trustedfirmware.org/TF-A/trusted-firmware-a/+/refs/tags/v2.11
-
-Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
-Tested-by: Manorit Chawdhry <m-chawdhry@ti.com>
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- .../recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-index 291259c0..157bdbc5 100644
---- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-@@ -1,5 +1,6 @@
--PV:k3 = "2.10+git"
--SRCREV_tfa:k3 = "00f1ec6b8740ccd403e641131e294aabacf2a48b"
-+PV:k3 = "2.11+git"
-+SRCREV_tfa:k3 = "f2735ebccf5173f74c0458736ec526276106097e"
-+LIC_FILES_CHKSUM:k3 = "file://docs/license.rst;md5=b5fbfdeb6855162dded31fadcd5d4dc5"
- SRC_URI:k3 = "git://git.trustedfirmware.org/TF-A/trusted-firmware-a.git;protocol=https;name=tfa;branch=master"
- COMPATIBLE_MACHINE:k3 = "k3"
- TFA_BUILD_TARGET:k3 = "all"
--- 
-2.17.1
-
+So, any help would be appreciated!
 
