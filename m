@@ -1,115 +1,151 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE988C531DF
-	for <webhook@archiver.kernel.org>; Thu, 22 Aug 2024 15:14:23 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.15645.1724339661554313881
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73519C5472E
+	for <webhook@archiver.kernel.org>; Mon, 26 Aug 2024 18:46:34 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.60568.1724697989278319794
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 22 Aug 2024 08:14:21 -0700
+ Mon, 26 Aug 2024 11:46:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ORPdpc58;
- spf=pass (domain: list.ti.com, ip: 198.47.23.249, mailfrom: lcpdbld@list.ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47MFEK9e045341;
-	Thu, 22 Aug 2024 10:14:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1724339660; i=@ti.com;
-	bh=XXZ/W1djFAg8gh0oOk/mn9qhdBREMUUYFj0fOJQGEog=;
-	h=From:To:Subject:Date;
-	b=ORPdpc58Fymaafq4nt6Slp8rl0y5oxot32JqWqEexQkqmc8+8/fLOLATKY5X/MYB2
-	 SSPhj2XJHVmkUr1NKUkOBZJ2wLnbQHV9NZb50BUKUUWBBoGNlLmpvccLMeiH1r4NcN
-	 q0kG0DiSVyFo8iiQBBggXl9sTkli/IPlaARHEOmY=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47MFEKk3018196
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 22 Aug 2024 10:14:20 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 22
- Aug 2024 10:14:20 -0500
-Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 22 Aug 2024 10:14:20 -0500
-Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.248.130.8])
-	by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47MFEJMD018014;
-	Thu, 22 Aug 2024 10:14:19 -0500
-Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
-	id EA08711125AA; Thu, 22 Aug 2024 10:14:19 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202408220400
-Date: Thu, 22 Aug 2024 10:14:19 -0500
-Message-ID: <1724339659-52312-1-git-send-email-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7411840C67;
+	Mon, 26 Aug 2024 18:46:28 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id MlPvubWOvDhG; Mon, 26 Aug 2024 18:46:28 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 44C8940A03;
+	Mon, 26 Aug 2024 18:46:26 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 66F1C164061; Mon, 26 Aug 2024 14:46:25 -0400 (EDT)
+Date: Mon, 26 Aug 2024 14:46:25 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Andrew Davis <afd@ti.com>
+Cc: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denys@konsulko.com>
+Subject: Re: [meta-ti] [master][RFC PATCH] openmp-rtos: deprecate
+Message-ID: <20240826184625.GA17572@denix.org>
+References: <20240805043654.172479-1-denis@denix.org>
+ <56b01c2b-80f2-46b0-b3bd-794591c69177@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <56b01c2b-80f2-46b0-b3bd-794591c69177@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 22 Aug 2024 15:14:23 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17947
+ <meta-ti@lists.yoctoproject.org>; Mon, 26 Aug 2024 18:46:34 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17948
 
-Updated the value(s) for:
-  u-boot-ti-staging_2024.04: SRCREV
-  linux-ti-staging-rt_6.6: SRCREV
-  linux-ti-staging_6.6: SRCREV
+On Thu, Aug 08, 2024 at 12:17:45PM -0500, Andrew Davis wrote:
+> On 8/4/24 11:36 PM, Denys Dmytriyenko wrote:
+> >From: Denys Dmytriyenko <denys@konsulko.com>
+> >
+> >Remove openmp-rtos component as deprecated and not maintained.
+> >
+> >This used to provide OpenMP DSP runtime components for legacy devices.
+> >
+> 
+> With all the OpenCL stuff gone from meta-arago, dsplib/mathlib/imglib/swtools
+> can also be dropped.
 
-Changelogs:
-  u-boot-ti-staging_2024.04: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=818c76aed67f94059b9ebb94d237418802620b81..7986fd679935818d0ef11e6a334377df178774f6
-  linux-ti-staging-rt_6.6: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=f9bceb7343387ac6fab003518f1cd31987d6eb05..2cc066b2c5d12544415bd84564e633bf852bef74
-  linux-ti-staging_6.6: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=db88712931433e92a5f73cec57c82c5c7ebee593..d80245c38ed4432878e5fe309f6ba958fd2c2e8f
+None of those use OpenCL and are rather self-contained (either prebuilt 
+binaries, or use existing components from meta-ti, like CGT).
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
----
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb    | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+But they are in the same bucket of deprecated DSP-programming enablement in 
+TI-SDK. Moreover, we are seeing deeper issues with old CGT versions generating 
+non-reproducible code, so this class of components was pending a second round 
+of clean ups...
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-index a873488..69add27 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-@@ -6,4 +6,4 @@ PR = "r0"
- 
- BRANCH = "ti-u-boot-2024.04"
- 
--SRCREV = "818c76aed67f94059b9ebb94d237418802620b81"
-+SRCREV = "7986fd679935818d0ef11e6a334377df178774f6"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-index 29607b2..da0bcc7 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-@@ -8,7 +8,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:"
- 
- BRANCH = "ti-rt-linux-6.6.y"
- 
--SRCREV = "f9bceb7343387ac6fab003518f1cd31987d6eb05"
-+SRCREV = "2cc066b2c5d12544415bd84564e633bf852bef74"
- 
- include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
- 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-index 341a4cc..7407088 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH ?= "ti-linux-6.6.y"
- 
--SRCREV ?= "db88712931433e92a5f73cec57c82c5c7ebee593"
-+SRCREV ?= "d80245c38ed4432878e5fe309f6ba958fd2c2e8f"
- PV = "6.6.32+git"
- 
- KERNEL_GIT_URI ?= "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
--- 
-1.8.3.1
 
+> On the side, dspdce-fw and ipumm-fw should be updated
+> to be shipped as binaries, same as we do with all other sysbios/ti-rtos firmware.
+> Then we could also drop out all the remaining sysbios/xdc bits.
+
+Yes, that was the thinking. Someone needs to add prebuilt FW binaries to 
+ti-linux-firmware repo before the rest of dependencies can finally be dropped 
+from meta-ti.
+
+
+> Andrew
+> 
+> >Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> >---
+> >  .../recipes-ti/openmp-rtos/openmp-rtos_git.bb | 62 -------------------
+> >  1 file changed, 62 deletions(-)
+> >  delete mode 100644 meta-ti-extras/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+> >
+> >diff --git a/meta-ti-extras/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/meta-ti-extras/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+> >deleted file mode 100644
+> >index aa4bc6cd..00000000
+> >--- a/meta-ti-extras/recipes-ti/openmp-rtos/openmp-rtos_git.bb
+> >+++ /dev/null
+> >@@ -1,62 +0,0 @@
+> >-DESCRIPTION = "TI OpenMP RTOS"
+> >-HOMEPAGE = "git://git.ti.com/git/openmp/ti-openmp-dsp-runtime.git"
+> >-LICENSE = "BSD-3-Clause"
+> >-
+> >-require recipes-ti/includes/ti-paths.inc
+> >-
+> >-inherit features_check
+> >-
+> >-REQUIRED_MACHINE_FEATURES = "dsp"
+> >-REQUIRED_DISTRO_FEATURES = "openmp"
+> >-
+> >-PV = "2_06_03_00"
+> >-PR = "r0"
+> >-
+> >-OPENMP_RTOS_GIT_URI = "git://git.ti.com/git/openmp/ti-openmp-dsp-runtime.git"
+> >-OPENMP_RTOS_GIT_PROTOCOL = "https"
+> >-OPENMP_RTOS_GIT_BRANCH = "master"
+> >-
+> >-BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
+> >-SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH}"
+> >-
+> >-SRCREV = "c090eb664d9815a36ead0e14f31e102590680fb8"
+> >-
+> >-LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
+> >-
+> >-DEPENDS = "common-csl-ip-rtos doxygen-native libulm ti-xdctools-native ti-ipc-rtos ti-sysbios ti-cgt6x-native zip-native"
+> >-
+> >-COMPATIBLE_MACHINE = "omap-a15"
+> >-PACKAGE_ARCH = "${MACHINE_ARCH}"
+> >-
+> >-S = "${WORKDIR}/git"
+> >-export IPC_DIR = "${IPC_INSTALL_DIR}"
+> >-export XDC_DIR = "${XDC_INSTALL_DIR}"
+> >-export BIOS_DIR = "${SYSBIOS_INSTALL_DIR}"
+> >-export ULM_DIR ="${STAGING_DIR_TARGET}/usr/share/ti/ulm"
+> >-export C6636_PDK_DIR ="${PDK_INSTALL_DIR}"
+> >-export AM572_PDK_DIR ="${PDK_INSTALL_DIR}"
+> >-export XDCCGROOT = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
+> >-
+> >-export BUILD_AM572 = "0"
+> >-
+> >-BUILD_AM572:omap-a15 = "1"
+> >-
+> >-RELEASE_TARGET = ""
+> >-RELEASE_TARGET:omap-a15 = "am57xx"
+> >-
+> >-do_compile() {
+> >-    make -f utils/product/Makefile .zipfile
+> >-}
+> >-
+> >-do_install() {
+> >-    install -d ${D}${OMP_INSTALL_DIR_RECIPE}
+> >-    cp -r ${S}/exports/openmp_dsp_${RELEASE_TARGET}_*/. -d  ${D}${OMP_INSTALL_DIR_RECIPE}
+> >-}
+> >-
+> >-ALLOW_EMPTY:${PN} = "1"
+> >-
+> >-FILES:${PN}-dev += " \
+> >-    ${OMP_INSTALL_DIR_RECIPE}/ \
+> >-"
+> >-
+> >-INSANE_SKIP:${PN}-dev = "arch"
 
