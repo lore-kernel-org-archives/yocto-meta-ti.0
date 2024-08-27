@@ -1,180 +1,111 @@
-Return-Path: <afd@ti.com>
+Return-Path: <max.oss.09@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 08836C5321D
-	for <webhook@archiver.kernel.org>; Mon, 26 Aug 2024 19:53:46 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.61218.1724702022759388745
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02385C52D6F
+	for <webhook@archiver.kernel.org>; Tue, 27 Aug 2024 06:58:51 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web10.72704.1724741922432478375
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 26 Aug 2024 12:53:42 -0700
+ Mon, 26 Aug 2024 23:58:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=gNUYKWD3;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47QJrbml103590;
-	Mon, 26 Aug 2024 14:53:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1724702017;
-	bh=khrQGbJsvFYIQwxSfTbvCgmKGocbGiT744d2lHWhrjA=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=gNUYKWD3y1lkIZV3z1fPns615+n+B+TBa+wDXyv/2/r0OvUkbW9khOBlyC7G/2BxU
-	 fUBgb6uCBv41bEd+Q02PVmhkVc6c1DAlEu/Y+cvJexaPUym4x6m7RXx2d2bdUNIhZb
-	 cvjRIjLYfl4wCeQpNcSB59StlQfWoqL7t+jyi6m0=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47QJrbm5024261
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 26 Aug 2024 14:53:37 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 26
- Aug 2024 14:53:36 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 26 Aug 2024 14:53:36 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47QJraOI021384;
-	Mon, 26 Aug 2024 14:53:36 -0500
-Message-ID: <03c012be-9684-4a7d-8c9e-98d081fb5b9d@ti.com>
-Date: Mon, 26 Aug 2024 14:53:36 -0500
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jp3hxETV;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: max.oss.09@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-42819654737so43608965e9.1
+        for <meta-ti@lists.yoctoproject.org>; Mon, 26 Aug 2024 23:58:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1724741920; x=1725346720; darn=lists.yoctoproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=NvlYk+s0EOeF0VhDr9os8QEaWDNsFRnPO7eZgOMdKx4=;
+        b=jp3hxETVZPH6ETjE0S5U9Da6kFbzvrc2WiyKcjrLDU5W7v39zbxOm7swMijEca0o4u
+         xX7GTEOBsouGAkQtu4xcMTMEq42RUs+YlqMc6b2IWifGllq6iYjnOiJoXRiMFcj4ewYz
+         gFUM0sRzGcQyEXubT200fZsCKPz3PQ+5ypQaOo6IYYAFASM2xmCBEYMgC3IP/5KWlnKQ
+         Rggioj/4YdmYkhO+RG5tYTvfhovDzQLQvftIphWUK0rWKAs0J6jIU8tYaJG7QCub2Hoy
+         COkVZnoG4ly1wBHz712pJx9Pj4o+5DU6Cvo7IrUb0tDF7sgI+Jp0fAsXksbTgaVCsJfw
+         Mp2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1724741920; x=1725346720;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=NvlYk+s0EOeF0VhDr9os8QEaWDNsFRnPO7eZgOMdKx4=;
+        b=wx0lyRPFSC5aEIlVGVprWjWklARtuUvDTabCI67EKi3GXHQLZVP4xra6OAlh55OKXu
+         wKNBfQwX4Li9b5Nl8jLx8H51IVTkzKXqW6cTezSg2QbNe3MVT7nyhfsR1RWHuyeMn4wI
+         hHRrFvca5IrKUe8lAVtogWWQyla/M9Dk5kRhTzE0i4CRdSt/Ylk6BZY93Go2Jm+GULoN
+         AGd2PmL1wNgTaBkNKUBcSUJPYzoy9Yz+0ZSZ7clnqNEHhp4ejXRd+Pp9EquZlePHk0Id
+         YguKCZanzV/8tmMihCQzAz4ANcKoBBA3EMwCKPA1EU/odKTtxS+DuQjUUATGcoVvb6Rp
+         Wjyw==
+X-Gm-Message-State: AOJu0YzjMJqnSOFzqsczkIswqA6CkviYt2v33l0ZWiJiYVSYo5Lx7TsP
+	1t+8/38qczXdJ/jLaRJ3r79cgQ+gFnCbsJSqu1BLsyVLpOa+5IkG+pC8bg==
+X-Google-Smtp-Source: AGHT+IHzk/0BuLJc5K1jMUWrXuwRn0CBeKjMTWc+3xWiwPWEF1kNq31zt+ANQpvcoNpyKyAILH8sLA==
+X-Received: by 2002:a5d:47a7:0:b0:371:8cf9:27e6 with SMTP id ffacd0b85a97d-373118e404cmr10218927f8f.56.1724741919760;
+        Mon, 26 Aug 2024 23:58:39 -0700 (PDT)
+Received: from toolbox.int.toradex.com (31-10-206-125.static.upc.ch. [31.10.206.125])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-373081ff633sm12348601f8f.77.2024.08.26.23.58.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 26 Aug 2024 23:58:39 -0700 (PDT)
+From: max.oss.09@gmail.com
+To: meta-ti@lists.yoctoproject.org
+Cc: Max Krummenacher <max.krummenacher@toradex.com>,
+	Randolph Sapp <rs@ti.com>
+Subject: [meta-ti][PATCH] mesa-pvr: set pv explicitely
+Date: Tue, 27 Aug 2024 08:57:23 +0200
+Message-ID: <20240827065723.1108167-1-max.oss.09@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti] [master][RFC PATCH] openmp-rtos: deprecate
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <meta-ti@lists.yoctoproject.org>, Denys Dmytriyenko <denys@konsulko.com>
-References: <20240805043654.172479-1-denis@denix.org>
- <56b01c2b-80f2-46b0-b3bd-794591c69177@ti.com>
- <20240826184625.GA17572@denix.org>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20240826184625.GA17572@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 26 Aug 2024 19:53:46 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17950
+ <meta-ti@lists.yoctoproject.org>; Tue, 27 Aug 2024 06:58:51 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17951
 
-On 8/26/24 1:46 PM, Denys Dmytriyenko wrote:
-> On Thu, Aug 08, 2024 at 12:17:45PM -0500, Andrew Davis wrote:
->> On 8/4/24 11:36 PM, Denys Dmytriyenko wrote:
->>> From: Denys Dmytriyenko <denys@konsulko.com>
->>>
->>> Remove openmp-rtos component as deprecated and not maintained.
->>>
->>> This used to provide OpenMP DSP runtime components for legacy devices.
->>>
->>
->> With all the OpenCL stuff gone from meta-arago, dsplib/mathlib/imglib/swtools
->> can also be dropped.
-> 
-> None of those use OpenCL and are rather self-contained (either prebuilt
-> binaries, or use existing components from meta-ti, like CGT).
-> 
+From: Max Krummenacher <max.krummenacher@toradex.com>
 
-Other way around, they were only used by OpenCL. While there could be some other
-users out of tree users we don't know about, I highly doubt it at this point.
+openembedded-core commit f5cfb3e23603 ("mesa: set PV from the .inc
+file and not via filenames") now sets PV in the mesa.inc file
+explicitely to whatever version oe-core is using.
+Override that setting to the actual version here to prevent the
+following parse error and whatever else would go wrong afterwards.
 
-> But they are in the same bucket of deprecated DSP-programming enablement in
-> TI-SDK. Moreover, we are seeing deeper issues with old CGT versions generating
-> non-reproducible code, so this class of components was pending a second round
-> of clean ups...
-> 
-> 
->> On the side, dspdce-fw and ipumm-fw should be updated
->> to be shipped as binaries, same as we do with all other sysbios/ti-rtos firmware.
->> Then we could also drop out all the remaining sysbios/xdc bits.
-> 
-> Yes, that was the thinking. Someone needs to add prebuilt FW binaries to
-> ti-linux-firmware repo before the rest of dependencies can finally be dropped
-> from meta-ti.
-> 
+| ERROR: .../mesa-pvr_23.2.1.bb: Unable to get checksum for mesa-pvr SRC_URI entry 0001-meson-Disable-cmake-dependency-detector-for-llvm.patch: file could not be found
+| The following paths were searched:
+| .../meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.7/bsp-ti-6_1/0001-meson-Disable-cmake-dependency-detector-for-llvm.patch
+| ...
 
-If we want to put a timeline in place for dropping the sysbios/xdc parts,
-I could add those firmware to right now. If we think this will be many
-years out, then we can take our time on that. Doesn't matter much either
-way to me.
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
+CC: Randolph Sapp <rs@ti.com>
+ meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb | 1 +
+ meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb | 1 +
+ 2 files changed, 2 insertions(+)
 
-Andrew
+diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb
+index 5abd07934d94..09ae0510ce53 100644
+--- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb
++++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb
+@@ -29,6 +29,7 @@ PACKAGECONFIG:append = " \
+ "
+ 
+ SRCREV = "1be98ba80452ebe38546a7fca26b5a70f2629083"
++PV = "22.3.5"
+ 
+ PVR_DISPLAY_CONTROLLER_ALIAS ??= "tidss"
+ PACKAGECONFIG[pvr] = "-Dgallium-pvr-alias=${PVR_DISPLAY_CONTROLLER_ALIAS},"
+diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
+index a137f4521e08..21134bc774cf 100644
+--- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
++++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
+@@ -26,6 +26,7 @@ PACKAGECONFIG:append = " \
+ "
+ 
+ SRCREV = "b12290126ba6a154f0e8b0a8c8b2b0d64f98e427"
++PV = "23.2.1"
+ 
+ PVR_DISPLAY_CONTROLLER_ALIAS ??= "tidss"
+ PACKAGECONFIG[pvr] = "-Dgallium-pvr-alias=${PVR_DISPLAY_CONTROLLER_ALIAS},"
+-- 
+2.42.0
 
-> 
->> Andrew
->>
->>> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
->>> ---
->>>   .../recipes-ti/openmp-rtos/openmp-rtos_git.bb | 62 -------------------
->>>   1 file changed, 62 deletions(-)
->>>   delete mode 100644 meta-ti-extras/recipes-ti/openmp-rtos/openmp-rtos_git.bb
->>>
->>> diff --git a/meta-ti-extras/recipes-ti/openmp-rtos/openmp-rtos_git.bb b/meta-ti-extras/recipes-ti/openmp-rtos/openmp-rtos_git.bb
->>> deleted file mode 100644
->>> index aa4bc6cd..00000000
->>> --- a/meta-ti-extras/recipes-ti/openmp-rtos/openmp-rtos_git.bb
->>> +++ /dev/null
->>> @@ -1,62 +0,0 @@
->>> -DESCRIPTION = "TI OpenMP RTOS"
->>> -HOMEPAGE = "git://git.ti.com/git/openmp/ti-openmp-dsp-runtime.git"
->>> -LICENSE = "BSD-3-Clause"
->>> -
->>> -require recipes-ti/includes/ti-paths.inc
->>> -
->>> -inherit features_check
->>> -
->>> -REQUIRED_MACHINE_FEATURES = "dsp"
->>> -REQUIRED_DISTRO_FEATURES = "openmp"
->>> -
->>> -PV = "2_06_03_00"
->>> -PR = "r0"
->>> -
->>> -OPENMP_RTOS_GIT_URI = "git://git.ti.com/git/openmp/ti-openmp-dsp-runtime.git"
->>> -OPENMP_RTOS_GIT_PROTOCOL = "https"
->>> -OPENMP_RTOS_GIT_BRANCH = "master"
->>> -
->>> -BRANCH = "${OPENMP_RTOS_GIT_BRANCH}"
->>> -SRC_URI = "${OPENMP_RTOS_GIT_URI};protocol=${OPENMP_RTOS_GIT_PROTOCOL};branch=${BRANCH}"
->>> -
->>> -SRCREV = "c090eb664d9815a36ead0e14f31e102590680fb8"
->>> -
->>> -LIC_FILES_CHKSUM = "file://docs/license/omp_manifest_template.html;md5=61a6972303c0447b7c056195d7ebafee"
->>> -
->>> -DEPENDS = "common-csl-ip-rtos doxygen-native libulm ti-xdctools-native ti-ipc-rtos ti-sysbios ti-cgt6x-native zip-native"
->>> -
->>> -COMPATIBLE_MACHINE = "omap-a15"
->>> -PACKAGE_ARCH = "${MACHINE_ARCH}"
->>> -
->>> -S = "${WORKDIR}/git"
->>> -export IPC_DIR = "${IPC_INSTALL_DIR}"
->>> -export XDC_DIR = "${XDC_INSTALL_DIR}"
->>> -export BIOS_DIR = "${SYSBIOS_INSTALL_DIR}"
->>> -export ULM_DIR ="${STAGING_DIR_TARGET}/usr/share/ti/ulm"
->>> -export C6636_PDK_DIR ="${PDK_INSTALL_DIR}"
->>> -export AM572_PDK_DIR ="${PDK_INSTALL_DIR}"
->>> -export XDCCGROOT = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
->>> -
->>> -export BUILD_AM572 = "0"
->>> -
->>> -BUILD_AM572:omap-a15 = "1"
->>> -
->>> -RELEASE_TARGET = ""
->>> -RELEASE_TARGET:omap-a15 = "am57xx"
->>> -
->>> -do_compile() {
->>> -    make -f utils/product/Makefile .zipfile
->>> -}
->>> -
->>> -do_install() {
->>> -    install -d ${D}${OMP_INSTALL_DIR_RECIPE}
->>> -    cp -r ${S}/exports/openmp_dsp_${RELEASE_TARGET}_*/. -d  ${D}${OMP_INSTALL_DIR_RECIPE}
->>> -}
->>> -
->>> -ALLOW_EMPTY:${PN} = "1"
->>> -
->>> -FILES:${PN}-dev += " \
->>> -    ${OMP_INSTALL_DIR_RECIPE}/ \
->>> -"
->>> -
->>> -INSANE_SKIP:${PN}-dev = "arch"
 
