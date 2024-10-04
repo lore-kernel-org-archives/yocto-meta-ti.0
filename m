@@ -2,54 +2,52 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BF64CF8849
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3AA68CF8847
 	for <webhook@archiver.kernel.org>; Fri,  4 Oct 2024 15:19:05 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- by mx.groups.io with SMTP id smtpd.web10.24479.1728055138917435241
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.24478.1728055138814761662
  for <meta-ti@lists.yoctoproject.org>;
  Fri, 04 Oct 2024 08:18:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=FTjGx3dp;
- spf=pass (domain: ti.com, ip: 198.47.19.141, mailfrom: reatmon@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=HO+2uDdN;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 494FIvgn079698;
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 494FIv6e063614;
 	Fri, 4 Oct 2024 10:18:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1728055137;
-	bh=vC2U887+UrPIETHYWAWRmW6C8ipdF+hwLKZd5kEPY/E=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=FTjGx3dpg619YdTOms7w1je8JJbEFEJFzYk1fsNl5mjofq7SmjHdYhax78aVS6m8m
-	 NsMw0vF64+71iidKokkqGvUN+1oYL8rs72NItuTitATe4OS8cu2TrUwc1/4kfT4GO5
-	 sJuB4MKCubzJjuOS8XgNxCFIzJfv/JESuD3qsBPQ=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 494FIvd0045403
+	bh=n8KEdqA5IAR95rt8Ona2Qpiv19Aa5inaSo3CkT0pLU0=;
+	h=From:To:Subject:Date;
+	b=HO+2uDdN3sV0KwXJS4vXnPSsQHC9jzA4UamMEsowKk4AiGtXKs3Be0Kcj/5EzN2du
+	 YQDpLy8dyjcs2klD5eFrgofzK7fVwf56nufMLEC6T/BJNy/Qj7WO/kJ3KTwZBBdOZz
+	 sTUpyjaLnoB5xbPosp74jthGouY9a9S/dpHYRRFc=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 494FIvOf045400
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Fri, 4 Oct 2024 10:18:57 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 4
  Oct 2024 10:18:57 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 4 Oct 2024 10:18:57 -0500
 Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 494FIvgr127597;
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 494FIv9p127591;
 	Fri, 4 Oct 2024 10:18:57 -0500
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1swk53-0006PF-8O; Fri, 04 Oct 2024 10:18:57 -0500
+	id 1swk53-0006PD-4W; Fri, 04 Oct 2024 10:18:57 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/scarthgap][PATCH 2/4] u-boot-ti-staging: Add v2024.10 recipe
-Date: Fri, 4 Oct 2024 10:18:55 -0500
-Message-ID: <20241004151857.24578-2-reatmon@ti.com>
+Subject: [meta-ti][master/scarthgap][PATCH 1/4] linux-ti-staging: Add v6.12 recipe
+Date: Fri, 4 Oct 2024 10:18:54 -0500
+Message-ID: <20241004151857.24578-1-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20241004151857.24578-1-reatmon@ti.com>
-References: <20241004151857.24578-1-reatmon@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -57,49 +55,239 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Fri, 04 Oct 2024 15:19:05 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17979
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/17978
 
-Adding needed recipe for initial testing and development of the 2024.10
-version of u-boot for the next LTS.
+Adding needed recipes for initial testing and development of the 6.12
+kernel for the next LTS.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- .../recipes-bsp/u-boot/u-boot-ti-staging_2024.10.bb   | 11 +++++++++++
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc          |  3 +++
- 2 files changed, 14 insertions(+)
- create mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.10.bb
+ .../linux/linux-ti-staging-6.12/defconfig     |  2 +
+ .../linux/linux-ti-staging-6.12/k3/defconfig  |  2 +
+ .../linux-ti-staging-6.12/omapl138/defconfig  |  1 +
+ .../linux-ti-staging-6.12/ti33x/defconfig     |  2 +
+ .../linux-ti-staging-6.12/ti43x/defconfig     |  2 +
+ .../linux/linux-ti-staging-rt-6.12/defconfig  |  2 +
+ .../linux-ti-staging-rt-6.12/k3/defconfig     |  2 +
+ .../omapl138/defconfig                        |  2 +
+ .../linux-ti-staging-rt-6.12/ti33x/defconfig  |  2 +
+ .../linux-ti-staging-rt-6.12/ti43x/defconfig  |  2 +
+ .../linux/linux-ti-staging-rt_6.12.bb         |  9 +++++
+ .../linux-ti-staging-systest-6.12/defconfig   |  2 +
+ .../k3/defconfig                              |  2 +
+ .../omapl138/defconfig                        |  1 +
+ .../linux/linux-ti-staging-systest_6.12.bb    |  7 ++++
+ .../linux/linux-ti-staging_6.12.bb            | 40 +++++++++++++++++++
+ .../recipes-kernel/linux/ti-kernel.inc        |  4 ++
+ 17 files changed, 84 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/omapl138/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/omapl138/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.12/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.12/k3/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.12/omapl138/defconfig
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.12.bb
+ create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.10.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.10.bb
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
 new file mode 100644
-index 00000000..1ab94fcc
+index 00000000..9d579e41
 --- /dev/null
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.10.bb
-@@ -0,0 +1,11 @@
-+require u-boot-ti.inc
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
+@@ -0,0 +1,2 @@
++use-kernel-config=multi_v7_defconfig
++config-fragment=
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig
+new file mode 100644
+index 00000000..fd07b34e
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig
+@@ -0,0 +1,2 @@
++use-kernel-config=defconfig
++config-fragment=
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/omapl138/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/omapl138/defconfig
+new file mode 100644
+index 00000000..099493af
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/omapl138/defconfig
+@@ -0,0 +1 @@
++use-kernel-config=davinci_all_defconfig
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig
+new file mode 100644
+index 00000000..9d579e41
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig
+@@ -0,0 +1,2 @@
++use-kernel-config=multi_v7_defconfig
++config-fragment=
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig
+new file mode 100644
+index 00000000..9d579e41
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig
+@@ -0,0 +1,2 @@
++use-kernel-config=multi_v7_defconfig
++config-fragment=
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig
+new file mode 100644
+index 00000000..9d579e41
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig
+@@ -0,0 +1,2 @@
++use-kernel-config=multi_v7_defconfig
++config-fragment=
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig
+new file mode 100644
+index 00000000..fd07b34e
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig
+@@ -0,0 +1,2 @@
++use-kernel-config=defconfig
++config-fragment=
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/omapl138/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/omapl138/defconfig
+new file mode 100644
+index 00000000..3d890b6e
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/omapl138/defconfig
+@@ -0,0 +1,2 @@
++use-kernel-config=davinci_all_defconfig
++config-fragment=
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defconfig
+new file mode 100644
+index 00000000..9d579e41
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defconfig
+@@ -0,0 +1,2 @@
++use-kernel-config=multi_v7_defconfig
++config-fragment=
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defconfig
+new file mode 100644
+index 00000000..9d579e41
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defconfig
+@@ -0,0 +1,2 @@
++use-kernel-config=multi_v7_defconfig
++config-fragment=
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+new file mode 100644
+index 00000000..9e5c4ee4
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+@@ -0,0 +1,9 @@
++require linux-ti-staging_6.12.bb
++
++KERNEL_LOCALVERSION:append = "-rt"
++
++# Look in the generic major.minor directory for files
++# This will have priority over generic non-rt path
++FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.12:"
++
++include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.12/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.12/defconfig
+new file mode 100644
+index 00000000..9d579e41
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.12/defconfig
+@@ -0,0 +1,2 @@
++use-kernel-config=multi_v7_defconfig
++config-fragment=
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.12/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.12/k3/defconfig
+new file mode 100644
+index 00000000..fd07b34e
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.12/k3/defconfig
+@@ -0,0 +1,2 @@
++use-kernel-config=defconfig
++config-fragment=
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.12/omapl138/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.12/omapl138/defconfig
+new file mode 100644
+index 00000000..099493af
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest-6.12/omapl138/defconfig
+@@ -0,0 +1 @@
++use-kernel-config=davinci_all_defconfig
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.12.bb
+new file mode 100644
+index 00000000..8ce23368
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-systest_6.12.bb
+@@ -0,0 +1,7 @@
++require linux-ti-staging_6.12.bb
 +
 +DEFAULT_PREFERENCE = "-1"
 +
-+include ${@ 'recipes-bsp/u-boot/ti-extras.inc' if d.getVar('TI_EXTRAS') else ''}
++# Look in the generic major.minor directory for files
++# This will have priority over generic non-rt path
++FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.12:"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+new file mode 100644
+index 00000000..f6f8732b
+--- /dev/null
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+@@ -0,0 +1,40 @@
++SECTION = "kernel"
++SUMMARY = "Linux kernel for TI devices"
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 +
-+PR = "r0"
++inherit ti-secdev
++inherit kernel
 +
-+BRANCH = "ti-u-boot-2024.10"
++DEFAULT_PREFERENCE = "-1"
 +
-+SRCREV = "c97ada2dc66934ee00a7a03d9ed078bdfb7b4039"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-index e1f1972e..97237d66 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -26,6 +26,9 @@ SRC_URI = "${UBOOT_GIT_URI};protocol=${UBOOT_GIT_PROTOCOL};branch=${BRANCH}"
++require recipes-kernel/linux/setup-defconfig.inc
++require recipes-kernel/linux/ti-kernel.inc
++include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}
++include ${@ 'recipes-kernel/linux/ti-extras.inc' if d.getVar('TI_EXTRAS') else ''}
++
++DEPENDS += "gmp-native libmpc-native"
++
++# Look in the generic major.minor directory for files
++FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.12:"
++
++KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT} \
++		      ${EXTRA_DTC_ARGS}"
++
++S = "${WORKDIR}/git"
++
++BRANCH ?= "ti-linux-6.12.y"
++
++SRCREV ?= "9852d85ec9d492ebef56dc5f229416c925758edc"
++PV = "6.12-rc1+git"
++
++KERNEL_GIT_URI ?= "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
++KERNEL_GIT_PROTOCOL = "https"
++SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
++            file://defconfig"
++
++# Special configuration for remoteproc/rpmsg IPC modules
++module_conf_rpmsg_client_sample = "blacklist rpmsg_client_sample"
++module_conf_ti_k3_r5_remoteproc = "softdep ti_k3_r5_remoteproc pre: virtio_rpmsg_bus"
++module_conf_ti_k3_dsp_remoteproc = "softdep ti_k3_dsp_remoteproc pre: virtio_rpmsg_bus"
++KERNEL_MODULE_PROBECONF += "rpmsg_client_sample ti_k3_r5_remoteproc ti_k3_dsp_remoteproc"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc b/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
+index 4bcbc27e..09cfdb12 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
++++ b/meta-ti-bsp/recipes-kernel/linux/ti-kernel.inc
+@@ -20,6 +20,10 @@ KERNEL_PATCHES:bsp-mainline = " \
+     file://0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch \
+ "
  
- PV:append = "+git"
- 
-+# u-boot builds a tool mkeficapsule and it needs this
-+DEPENDS += "gnutls-native"
++KERNEL_PATCHES:bsp-ti-6_12 = " \
++    file://0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch \
++"
 +
- # u-boot needs devtree compiler to parse dts files
- DEPENDS += "dtc-native bc-native flex-native bison-native python3-setuptools-native"
- 
+ KERNEL_PATCHES:bsp-ti-6_6 = " \
+     file://0001-vt-conmakehash-improve-reproducibility.patch \
+ "
 -- 
 2.17.1
 
