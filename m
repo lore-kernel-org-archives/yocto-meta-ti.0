@@ -1,84 +1,104 @@
-Return-Path: <denis@denix.org>
+Return-Path: <sergio.prado@e-labworks.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F2A9CF2583
-	for <webhook@archiver.kernel.org>; Sat, 12 Oct 2024 21:19:22 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.19682.1728767953249955644
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02F22D18145
+	for <webhook@archiver.kernel.org>; Mon, 14 Oct 2024 20:28:03 +0000 (UTC)
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web10.1949.1728937676368359856
  for <meta-ti@lists.yoctoproject.org>;
- Sat, 12 Oct 2024 14:19:13 -0700
+ Mon, 14 Oct 2024 13:27:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9EF5C4126C;
-	Sat, 12 Oct 2024 21:19:12 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NMMsFnhGCxOP; Sat, 12 Oct 2024 21:19:12 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 83C0741266;
-	Sat, 12 Oct 2024 21:19:11 +0000 (UTC)
-Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 3AB2816408C;
-	Sat, 12 Oct 2024 17:19:11 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+ dkim=pass header.i=@e-labworks-com.20230601.gappssmtp.com header.s=20230601 header.b=fob3hLAY;
+ spf=none, err=permanent DNS error (domain: e-labworks.com, ip: 209.85.216.41, mailfrom: sergio.prado@e-labworks.com)
+Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-2e0d9b70455so3620442a91.3
+        for <meta-ti@lists.yoctoproject.org>; Mon, 14 Oct 2024 13:27:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=e-labworks-com.20230601.gappssmtp.com; s=20230601; t=1728937675; x=1729542475; darn=lists.yoctoproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=++c9P27Br9dyMUPX/gv2JnjYSvuvfz8MOyqbo/DxN78=;
+        b=fob3hLAY+Q32Nsu0EXgKh6cr/COD2ZEkLFR+YJvTAM1dMsksp1XhfwOmH0ZKx0+DyQ
+         uMeIDFOLE/y5glW+UCfhHEE08UKMiXXsVQyUCVp+nN8/XL5T7YX82g1KjFlvcAJza6sa
+         g6LD7FDA5lD443UsrW9MTw3aogXiqqnpNYOPYu7Wsq6Ab7Ivgp8s5V+HMILLbIFPYanf
+         fFGwceHjXjFOH7dhTA8cbLHzhXmpPuEyQTcK1pPCp5iJPu3jrpBGkzHJnWXTZlxjxOEJ
+         qptkEook03YU981S2YxwXEFi2VeciLAtHqvwLEPQ1I7iTs2nRFM6KjR4O2ZgJekZ3D8+
+         GPPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1728937675; x=1729542475;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=++c9P27Br9dyMUPX/gv2JnjYSvuvfz8MOyqbo/DxN78=;
+        b=Qx64LjPwDIAJdcOUdf4dmHEqB7PVbRQTd3L+X/LU1GD9iMA/y64IMqgCxLNQVGG4bS
+         MO+ekMfGwXq+lUVDazC+RV+TpYaUgTXqobY3qXeOR8FveRa24jY7Un8ymop58Nnj7csL
+         LrxiuRrYcexunZCueP48kEZHk+8dRpsUfsyCXMnNi+2+99dtG1bViliLnv1iKx1W5f1Z
+         F/oVZdQW8S7r/1zQE9vqHnFTFR8nD0EbAf8xL4bM5iEvKe6VSUppW4vHYHS/9nj0r5VG
+         xgXY9jWbAD52K4YxRzu8CWoP2kASJIdXaVSTOA1JBJYX/xS9wDRtjuUG0MbN4fsCLXoM
+         /28w==
+X-Gm-Message-State: AOJu0Yxx7U15+JQy6G2aqJutKVCNNWuojXV/jvpUV3FbcJbj8Ld9ThzF
+	VZADDXGhmR4T4SMmXzi3A5ETQjOZhqZaTEOZ+skeYQ+UV2nREG8DU2hMA2h1pPmWd5KanpRE+ny
+	F0gk=
+X-Google-Smtp-Source: AGHT+IFNziM1opRatnbqpJnTkc2rOJ9GrR8gSDUwzQoNqWc3puZSktIe/iZJeilIUOcNg1pWb4+m3w==
+X-Received: by 2002:a17:90b:193:b0:2e2:b2ce:e41e with SMTP id 98e67ed59e1d1-2e2f0add938mr16094484a91.13.1728937675436;
+        Mon, 14 Oct 2024 13:27:55 -0700 (PDT)
+Received: from desktop.. ([2804:7f0:6400:b74:20a1:8702:50bb:4d87])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7ea784b00d7sm3483834a12.22.2024.10.14.13.27.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Oct 2024 13:27:54 -0700 (PDT)
+From: Sergio Prado <sergio.prado@e-labworks.com>
 To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master][PATCH] layer.conf: add compatibility with walnascar
-Date: Sat, 12 Oct 2024 17:19:10 -0400
-Message-Id: <20241012211910.54727-1-denis@denix.org>
-X-Mailer: git-send-email 2.25.1
+Cc: rogerio.borin@toradex.com,
+	Sergio Prado <sergio.prado@e-labworks.com>
+Subject: [master/scarthgap][PATCH] conf: machine: k3: use weak assignment for FIT image variables
+Date: Mon, 14 Oct 2024 17:27:46 -0300
+Message-Id: <20241014202746.1818435-1-sergio.prado@e-labworks.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sat, 12 Oct 2024 21:19:22 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18005
+ <meta-ti@lists.yoctoproject.org>; Mon, 14 Oct 2024 20:28:03 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18006
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+Use weak assignment to make it possible to override the default
+value via classes parsed after the machine configuration file.
 
-The next Yocto Project release is called walnascar and OE-Core master bra=
-nch
-is now marked accordingly. Add layer compatibility with walnascar.
+This is the case when using the tdxref-signed class from
+meta-toradex-security to generated signed images for AM6X.
 
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+Additionally, explicitly set FIT_SIGN_NUMBITS to 4096 to align with the
+default rsa4096 algorithm, preventing potential mismatches between the
+signing algorithm and key length.
+
+Signed-off-by: Sergio Prado <sergio.prado@e-labworks.com>
+Signed-off-by: Rogerio Borin <rogerio.borin@toradex.com>
 ---
- meta-ti-bsp/conf/layer.conf    | 2 +-
- meta-ti-extras/conf/layer.conf | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meta-ti-bsp/conf/machine/include/k3.inc | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
-index e87221f3..1fffb971 100644
---- a/meta-ti-bsp/conf/layer.conf
-+++ b/meta-ti-bsp/conf/layer.conf
-@@ -9,7 +9,7 @@ BBFILE_COLLECTIONS +=3D "meta-ti-bsp"
- BBFILE_PATTERN_meta-ti-bsp :=3D "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-ti-bsp =3D "6"
-=20
--LAYERSERIES_COMPAT_meta-ti-bsp =3D "scarthgap styhead"
-+LAYERSERIES_COMPAT_meta-ti-bsp =3D "scarthgap styhead walnascar"
-=20
- LICENSE_PATH +=3D "${LAYERDIR}/licenses"
-=20
-diff --git a/meta-ti-extras/conf/layer.conf b/meta-ti-extras/conf/layer.c=
-onf
-index a8c68343..5c493daa 100644
---- a/meta-ti-extras/conf/layer.conf
-+++ b/meta-ti-extras/conf/layer.conf
-@@ -9,7 +9,7 @@ BBFILE_COLLECTIONS +=3D "meta-ti-extras"
- BBFILE_PATTERN_meta-ti-extras :=3D "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-ti-extras =3D "6"
-=20
--LAYERSERIES_COMPAT_meta-ti-extras =3D "scarthgap styhead"
-+LAYERSERIES_COMPAT_meta-ti-extras =3D "scarthgap styhead walnascar"
-=20
- LICENSE_PATH +=3D "${LAYERDIR}/licenses"
-=20
---=20
-2.25.1
+diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/machine/include/k3.inc
+index a296f64fa141..07f0bcb48bfc 100644
+--- a/meta-ti-bsp/conf/machine/include/k3.inc
++++ b/meta-ti-bsp/conf/machine/include/k3.inc
+@@ -26,10 +26,11 @@ UBOOT_SUFFIX = "img"
+ 
+ UBOOT_SIGN_ENABLE = "1"
+ UBOOT_MKIMAGE_DTCOPTS = "-I dts -O dtb"
+-UBOOT_SIGN_KEYNAME ?= "custMpk"
+-UBOOT_SIGN_KEYDIR ?= "${TI_SECURE_DEV_PKG}/keys"
+-FIT_HASH_ALG ?= "sha512"
+-FIT_SIGN_ALG ?= "rsa4096"
++UBOOT_SIGN_KEYNAME ??= "custMpk"
++UBOOT_SIGN_KEYDIR ??= "${TI_SECURE_DEV_PKG}/keys"
++FIT_HASH_ALG ??= "sha512"
++FIT_SIGN_ALG ??= "rsa4096"
++FIT_SIGN_NUMBITS ??= "4096"
+ 
+ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+ 
+-- 
+2.34.1
 
 
