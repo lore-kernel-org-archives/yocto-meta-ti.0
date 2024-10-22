@@ -2,51 +2,51 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09851D2CE08
-	for <webhook@archiver.kernel.org>; Tue, 22 Oct 2024 17:01:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 618D7CDD0E1
+	for <webhook@archiver.kernel.org>; Tue, 22 Oct 2024 20:25:52 +0000 (UTC)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.23663.1729616462630241156
+ by mx.groups.io with SMTP id smtpd.web10.4063.1729628747463898599
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 22 Oct 2024 10:01:02 -0700
+ Tue, 22 Oct 2024 13:25:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=HXIzO3QE;
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=aNlQvDQ+;
  spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49MH10We086337;
-	Tue, 22 Oct 2024 12:01:00 -0500
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49MKPjMQ007953;
+	Tue, 22 Oct 2024 15:25:45 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1729616460;
-	bh=NazstFe1MrL2S7xrFh7mctX1ctbFTGLBQF2wS/vtgOw=;
+	s=ti-com-17Q1; t=1729628745;
+	bh=rc/uH0fBwllhY6NeFSCc8TdgtJrBCm2Rk7Z9gPxqeWE=;
 	h=From:To:Subject:Date;
-	b=HXIzO3QEZGDXyVBzxrra12PnnNNL0rz2zWmaOFcgjsi/6R0SZ49OKJ4v8OUVYDcy2
-	 lETi2Bv2ViOklsuDIz3KrrMCoh/osHTPaP/yI90mRmuT6Z0WQ6izhbL18/m5Li71N/
-	 hOGDEBBjEHQPzgrn+clBLndAobp3M+HNcvwfHtK0=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49MH103Z000993
+	b=aNlQvDQ+dbrVyQUURvsZviJOuSAOSmNNmO86aSj7PtHg9UvsC7glRvdnimHGCYTIf
+	 Xn7c3OBI7I9EVWWfL14iVQggdDvxqludwyCusnOrnyB4oYfpxDmniLLPGf0RNIE7Fs
+	 NYenuxBKa86iZheMS1GbNw/lzhEesfFgkUaKHbKA=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49MKPjSU028331
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 22 Oct 2024 12:01:00 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 22 Oct 2024 15:25:45 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
- Oct 2024 12:01:00 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2024 15:25:45 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 22 Oct 2024 12:01:00 -0500
+ Frontend Transport; Tue, 22 Oct 2024 15:25:45 -0500
 Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49MH10An120890;
-	Tue, 22 Oct 2024 12:01:00 -0500
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49MKPjep082238;
+	Tue, 22 Oct 2024 15:25:45 -0500
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1t3IFg-0001c1-1Z; Tue, 22 Oct 2024 12:01:00 -0500
+	id 1t3LRp-0004Wz-7n; Tue, 22 Oct 2024 15:25:45 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/scarthgap][PATCH v2] uboot-ti-next: Add new recipe to track master-next
-Date: Tue, 22 Oct 2024 12:01:00 -0500
-Message-ID: <20241022170100.6145-1-reatmon@ti.com>
+Subject: [meta-ti][master/scarthgap][PATCH v2] optee: Update to v4.4.0
+Date: Tue, 22 Oct 2024 15:25:45 -0500
+Message-ID: <20241022202545.17378-1-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -54,47 +54,64 @@ X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 22 Oct 2024 17:01:07 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18025
+ <meta-ti@lists.yoctoproject.org>; Tue, 22 Oct 2024 20:25:52 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18026
 
-Our upstream testing needs to point to both master and master-next and
-we need two different recipes to track that.  This recipe mirrors the
-linux-ti-next recipe and points to the master-next branch for the latest
-bleeding edge changes.
+Update all of the components to the upstream 4.4.0 version.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
-v2: Fix require of the mainline recipe.
+v2: Remove some patches from the upstram recipe that are no longer
+    needed for 4.4.0.
 
- meta-ti-bsp/conf/machine/include/ti-bsp.inc          | 2 +-
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-next_git.bb | 5 +++++
- 2 files changed, 6 insertions(+), 1 deletion(-)
- create mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-next_git.bb
+ .../optee/optee-client-ti-version.inc                 |  4 ++--
+ .../optee/optee-examples-ti-version.inc               |  2 +-
+ .../recipes-security/optee/optee-os-ti-version.inc    | 11 +++++++++--
+ .../recipes-security/optee/optee-test-ti-version.inc  |  4 ++--
+ 4 files changed, 14 insertions(+), 7 deletions(-)
 
-diff --git a/meta-ti-bsp/conf/machine/include/ti-bsp.inc b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-index 0c8f657d..2eb3bd19 100644
---- a/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-+++ b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-@@ -28,7 +28,7 @@ MACHINE_FEATURES:remove:bsp-mainline = "gpu"
- # ==========
- BSP_KERNEL_PROVIDER:bsp-next = "linux-ti-next"
- BSP_KERNEL_VERSION:bsp-next = "%"
--BSP_BOOTLOADER_PROVIDER:bsp-next = "u-boot-ti-mainline"
-+BSP_BOOTLOADER_PROVIDER:bsp-next = "u-boot-ti-next"
- BSP_BOOTLOADER_VERSION:bsp-next = "%"
- 
- # GPU support requires out-of-tree SGX and Rogue drivers not available
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-next_git.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-next_git.bb
-new file mode 100644
-index 00000000..9bdedfa3
---- /dev/null
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-next_git.bb
-@@ -0,0 +1,5 @@
-+require u-boot-ti-mainline_git.bb
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc b/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc
+index 5f06fa03..2c8977dd 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc
++++ b/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc
+@@ -1,2 +1,2 @@
+-PV = "4.3.0+git"
+-SRCREV = "a5b1ffcd26e328af0bbf18ab448a38ecd558e05c"
++PV = "4.4.0+git"
++SRCREV = "d221676a58b305bddbf97db00395205b3038de8e"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-examples-ti-version.inc b/meta-ti-bsp/recipes-security/optee/optee-examples-ti-version.inc
+index 4d9897a7..8c21bc75 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-examples-ti-version.inc
++++ b/meta-ti-bsp/recipes-security/optee/optee-examples-ti-version.inc
+@@ -1,2 +1,2 @@
+-PV = "4.3.0+git"
++PV = "4.4.0+git"
+ SRCREV = "378dc0db2d5dd279f58a3b6cb3f78ffd6b165035"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-ti-version.inc b/meta-ti-bsp/recipes-security/optee/optee-os-ti-version.inc
+index a79e5702..375c1a7e 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-os-ti-version.inc
++++ b/meta-ti-bsp/recipes-security/optee/optee-os-ti-version.inc
+@@ -1,2 +1,9 @@
+-PV = "4.3.0+git"
+-SRCREV = "1c0d52ace3c237ca6276cafb5c73f699a75c1d40"
++PV = "4.4.0+git"
++SRCREV = "8f645256efc0dc66bd5c118778b0b50c44469ae1"
 +
-+SUMMARY = "U-Boot master-next for TI devices"
-+
-+BRANCH = "master-next"
++SRC_URI:remove = " \
++    file://0001-mk-compile.mk-remove-absolute-build-time-paths.patch \
++    file://0001-compile.mk-use-CFLAGS-from-environment.patch \
++    file://0002-link.mk-use-CFLAGS-with-version.o.patch \
++    file://0003-link.mk-generate-version.o-in-link-out-dir.patch \
++"
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-test-ti-version.inc b/meta-ti-bsp/recipes-security/optee/optee-test-ti-version.inc
+index 0b902d69..3c1fedc9 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-test-ti-version.inc
++++ b/meta-ti-bsp/recipes-security/optee/optee-test-ti-version.inc
+@@ -1,2 +1,2 @@
+-PV = "4.3.0+git"
+-SRCREV = "9d4c4fb9638fb533211037016b6da12fbbcc4bb6"
++PV = "4.4.0+git"
++SRCREV = "695231ef8987866663a9ed5afd8f77d1bae3dc08"
 -- 
 2.17.1
 
