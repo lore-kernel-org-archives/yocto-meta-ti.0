@@ -1,93 +1,144 @@
-Return-Path: <denis@denix.org>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61031E6F082
-	for <webhook@archiver.kernel.org>; Fri,  1 Nov 2024 18:46:04 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.1757.1730486756391532908
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D596D1BDE9
+	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 19:46:46 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web11.633.1730749599874282593
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 01 Nov 2024 11:45:57 -0700
+ Mon, 04 Nov 2024 11:46:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 70FDC41255;
-	Fri,  1 Nov 2024 18:45:55 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xBK6rBHVS4Ud; Fri,  1 Nov 2024 18:45:55 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3F76641243;
-	Fri,  1 Nov 2024 18:45:52 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 9FB7A1640C3; Fri,  1 Nov 2024 14:45:51 -0400 (EDT)
-Date: Fri, 1 Nov 2024 14:45:51 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: reatmon@ti.com
-Cc: Praneeth Bajjuri <praneeth@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][master/scarthgap][PATCH] ti-bsp: Tighten up versions
- for PREFERRED_VERSION
-Message-ID: <20241101184551.GI20070@denix.org>
-References: <20241031204955.23594-1-reatmon@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=rRCaASmV;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4A4JkcuV088109;
+	Mon, 4 Nov 2024 13:46:38 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1730749598;
+	bh=RtH3UP4F1pbby1uB90SeR6BD/GSEA8l52SkNhqaSneE=;
+	h=From:To:Subject:Date;
+	b=rRCaASmVioy8cvMDFZr+KeU9klPsQau9hJGadzXZWRvtj4guypiqqv7+fMwz7ra6j
+	 TmHSX2eeQ+smklk8PWEG28yEUftGOvMBM11x8eqjgMvwiFaRQ5nfWZhIeuo8so9pbK
+	 kK8L2V1JETvlW4e8luEcnDSCFHm6Hh05QYdJeVhg=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4A4JkcHc034632
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 4 Nov 2024 13:46:38 -0600
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 4
+ Nov 2024 13:46:38 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 4 Nov 2024 13:46:38 -0600
+Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4A4JkcGS118094;
+	Mon, 4 Nov 2024 13:46:38 -0600
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1t8326-0003sY-7m; Mon, 04 Nov 2024 13:46:38 -0600
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master/scarthgap][PATCH] mesa-pvr: Fix build issues with llvm 18+
+Date: Mon, 4 Nov 2024 13:46:38 -0600
+Message-ID: <20241104194638.14864-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241031204955.23594-1-reatmon@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 01 Nov 2024 18:46:04 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18033
+ <meta-ti@lists.yoctoproject.org>; Mon, 04 Nov 2024 19:46:46 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18034
 
-On Thu, Oct 31, 2024 at 03:49:55PM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
-> PREFERRED_VERSION matches against the PV in the recipe, not against the
-> file name.  With the upcoming 6.12, the 6.1 kernel version string was a
-> little too loose. The "6.1%" could glob onto the 6.12 recipe.  Take
-> this time to also clean up a couple of the other versions and narrow
-> them down.
+Backport two fixes from the latest mesa project to fix two builds issues
+related to newer llvm versions.
 
-While this is Ok for stable versions in general, which have 6.1.y versioning, 
-the first release in the series has implied ".0" and when Linus released it, 
-it was versioned as 6.1 (not 6.1.0) until Greg made the first stable release 
-as 6.1.1. Just something to keep in mind... I see you haven't changed 6.12% 
-matching, so it should be fine even for the first release, when it's out.
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ ...allium-Fix-build-with-llvm-18-and-19.patch | 53 +++++++++++++++++++
+ .../recipes-graphics/mesa/mesa-pvr_23.2.1.bb  |  1 +
+ 2 files changed, 54 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-18-and-19.patch
 
+diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-18-and-19.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-18-and-19.patch
+new file mode 100644
+index 00000000..ad5059f1
+--- /dev/null
++++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-18-and-19.patch
+@@ -0,0 +1,53 @@
++From 6c5033bb01a3a1341d4db5007586a5f2e2727b0a Mon Sep 17 00:00:00 2001
++From: Ryan Eatmon <reatmon@ti.com>
++Date: Mon, 4 Nov 2024 13:37:29 -0600
++Subject: [PATCH] gallium: Fix build with llvm 18 and 19
++
++- CodeGenOpt::Level changed to CodeGenOoptLevel. [1]
++- llvm::sys::getHostCPUFeatures() now returns the features instead of
++modifying the passed in argument. [2]
++
++Upstream-Status: Backport [1][https://gitlab.freedesktop.org/mesa/mesa/-/commit/f79617fe804ea6524651ff1bc3a91098d3199179]
++Upstream-Status: Backport [2][https://gitlab.freedesktop.org/mesa/mesa/-/commit/fa9cd89a85b904615ebc11da609445b5b751e68d]
++
++Signed-off-by: Ryan Eatmon <reatmon@ti.com>
++---
++ src/gallium/auxiliary/gallivm/lp_bld_misc.cpp | 14 ++++++++++++--
++ 1 file changed, 12 insertions(+), 2 deletions(-)
++
++diff --git a/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp b/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
++index 5e7a30a6cc2..dbc777e3096 100644
++--- a/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
+++++ b/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
++@@ -366,7 +366,11 @@ lp_build_create_jit_compiler_for_module(LLVMExecutionEngineRef *OutJIT,
++    builder.setEngineKind(EngineKind::JIT)
++           .setErrorStr(&Error)
++           .setTargetOptions(options)
+++#if LLVM_VERSION_MAJOR >= 18
+++          .setOptLevel((CodeGenOptLevel)OptLevel);
+++#else
++           .setOptLevel((CodeGenOpt::Level)OptLevel);
+++#endif
++ 
++ #if DETECT_OS_WINDOWS
++     /*
++@@ -394,8 +398,14 @@ lp_build_create_jit_compiler_for_module(LLVMExecutionEngineRef *OutJIT,
++     * which allows us to enable/disable code generation based
++     * on the results of cpuid on these architectures.
++     */
++-   llvm::StringMap<bool> features;
++-   llvm::sys::getHostCPUFeatures(features);
+++   #if LLVM_VERSION_MAJOR >= 19
+++      /* llvm-19+ returns StringMap from getHostCPUFeatures.
+++      */
+++      auto features = llvm::sys::getHostCPUFeatures();
+++   #else
+++      llvm::StringMap<bool> features;
+++      llvm::sys::getHostCPUFeatures(features);
+++   #endif
++ 
++    for (StringMapIterator<bool> f = features.begin();
++         f != features.end();
++-- 
++2.17.1
++
+diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
+index 21134bc7..33af456d 100644
+--- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
++++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
+@@ -16,6 +16,7 @@ SRC_URI = " \
+     file://0001-meson-misdetects-64bit-atomics-on-mips-clang.patch \
+     file://0001-gallium-Fix-build-with-llvm-17.patch \
+     file://0001-meson-Disable-cmake-dependency-detector-for-llvm.patch \
++    file://0001-gallium-Fix-build-with-llvm-18-and-19.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.17.1
 
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-> ---
->  meta-ti-bsp/conf/machine/include/ti-bsp.inc | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/meta-ti-bsp/conf/machine/include/ti-bsp.inc b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-> index 2eb3bd19..d27bbe3c 100644
-> --- a/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-> +++ b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-> @@ -53,7 +53,7 @@ MACHINE_FEATURES:remove:bsp-ti-6_12 = "gpu"
->  # TI staging kernel 6.6, u-boot 2024.04
->  # ==========
->  BSP_KERNEL_PROVIDER:bsp-ti-6_6 = "linux-ti-staging"
-> -BSP_KERNEL_VERSION:bsp-ti-6_6 = "6.6%"
-> +BSP_KERNEL_VERSION:bsp-ti-6_6 = "6.6.%"
->  BSP_BOOTLOADER_PROVIDER:bsp-ti-6_6 = "u-boot-ti-staging"
->  BSP_BOOTLOADER_VERSION:bsp-ti-6_6 = "2024.04%"
->  
-> @@ -68,9 +68,9 @@ BSP_MESA_PVR_VERSION:bsp-ti-6_6 = "23%"
->  # TI staging kernel 6.1, u-boot 2023.04
->  # ==========
->  BSP_KERNEL_PROVIDER:bsp-ti-6_1 = "linux-ti-staging"
-> -BSP_KERNEL_VERSION:bsp-ti-6_1 = "6.1%"
-> +BSP_KERNEL_VERSION:bsp-ti-6_1 = "6.1.%"
->  BSP_BOOTLOADER_PROVIDER:bsp-ti-6_1 = "u-boot-ti-staging"
-> -BSP_BOOTLOADER_VERSION:bsp-ti-6_1 = "2023%"
-> +BSP_BOOTLOADER_VERSION:bsp-ti-6_1 = "2023.04%"
->  
->  BSP_SGX_DRIVER_PROVIDER:bsp-ti-6_1 = "ti-sgx-ddk-km"
->  BSP_SGX_DRIVER_VERSION:bsp-ti-6_1 = "1.17%"
-> -- 
-> 2.17.1
 
