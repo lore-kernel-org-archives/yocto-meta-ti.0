@@ -1,144 +1,108 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D596D1BDE9
-	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 19:46:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FB12D1BDF1
+	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 20:39:44 +0000 (UTC)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.633.1730749599874282593
+ by mx.groups.io with SMTP id smtpd.web10.954.1730752779752553252
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 04 Nov 2024 11:46:40 -0800
+ Mon, 04 Nov 2024 12:39:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=rRCaASmV;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=urj99JZt;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: rs@ti.com)
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4A4JkcuV088109;
-	Mon, 4 Nov 2024 13:46:38 -0600
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4A4KdZrJ098982;
+	Mon, 4 Nov 2024 14:39:35 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1730749598;
-	bh=RtH3UP4F1pbby1uB90SeR6BD/GSEA8l52SkNhqaSneE=;
-	h=From:To:Subject:Date;
-	b=rRCaASmVioy8cvMDFZr+KeU9klPsQau9hJGadzXZWRvtj4guypiqqv7+fMwz7ra6j
-	 TmHSX2eeQ+smklk8PWEG28yEUftGOvMBM11x8eqjgMvwiFaRQ5nfWZhIeuo8so9pbK
-	 kK8L2V1JETvlW4e8luEcnDSCFHm6Hh05QYdJeVhg=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4A4JkcHc034632
+	s=ti-com-17Q1; t=1730752775;
+	bh=eUfu4c5T29WOjpFZjxyRQsyKsPjd/WeB5E4V92DJMYc=;
+	h=From:To:CC:Subject:Date;
+	b=urj99JZty7SkSqbzMsaNTPy4oy7voC2sB17ZMSu48D1XoRne9dgFlJtLc0L8/5ohN
+	 mVAgQKM5cUrvf9hkjnly5AfrdoPfdwkCH1MB6B7LxYW+awck35UwlvXiNretTpYo2e
+	 hnQ57PpNGMbG+LArP0w2J0V64edVmx64HmfxZuZQ=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4A4KdZwp063046
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 4 Nov 2024 13:46:38 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+	Mon, 4 Nov 2024 14:39:35 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 4
- Nov 2024 13:46:38 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2024 14:39:34 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 4 Nov 2024 13:46:38 -0600
-Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4A4JkcGS118094;
-	Mon, 4 Nov 2024 13:46:38 -0600
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1t8326-0003sY-7m; Mon, 04 Nov 2024 13:46:38 -0600
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/scarthgap][PATCH] mesa-pvr: Fix build issues with llvm 18+
-Date: Mon, 4 Nov 2024 13:46:38 -0600
-Message-ID: <20241104194638.14864-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ Frontend Transport; Mon, 4 Nov 2024 14:39:34 -0600
+Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4A4KdYQa043235;
+	Mon, 4 Nov 2024 14:39:35 -0600
+From: <rs@ti.com>
+To: <denis@denix.org>, <reatmon@ti.com>
+CC: <detheridge@ti.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master/scarthgap][PATCH] mesa-pvr: remove dynamic-layer append for llvmpipe
+Date: Mon, 4 Nov 2024 14:39:08 -0600
+Message-ID: <20241104203907.3365806-2-rs@ti.com>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 04 Nov 2024 19:46:46 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18034
+ <meta-ti@lists.yoctoproject.org>; Mon, 04 Nov 2024 20:39:44 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18035
 
-Backport two fixes from the latest mesa project to fix two builds issues
-related to newer llvm versions.
+From: Randolph Sapp <rs@ti.com>
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+The mesa.inc that we inherit from oe-core now has the required
+parameters. This conditional append is no longer required.
+
+This reverts commit dbc6afc46e55b247606dfad5238137c8fa807843.
+
+Signed-off-by: Randolph Sapp <rs@ti.com>
 ---
- ...allium-Fix-build-with-llvm-18-and-19.patch | 53 +++++++++++++++++++
- .../recipes-graphics/mesa/mesa-pvr_23.2.1.bb  |  1 +
- 2 files changed, 54 insertions(+)
- create mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-18-and-19.patch
+ meta-ti-bsp/conf/layer.conf                        |  4 ----
+ .../recipes-graphics/mesa/mesa-pvr_%.bbappend      | 14 --------------
+ 2 files changed, 18 deletions(-)
+ delete mode 100644 meta-ti-bsp/dynamic-layers/clang-layer/recipes-graphics/mesa/mesa-pvr_%.bbappend
 
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-18-and-19.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-18-and-19.patch
-new file mode 100644
-index 00000000..ad5059f1
---- /dev/null
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-18-and-19.patch
-@@ -0,0 +1,53 @@
-+From 6c5033bb01a3a1341d4db5007586a5f2e2727b0a Mon Sep 17 00:00:00 2001
-+From: Ryan Eatmon <reatmon@ti.com>
-+Date: Mon, 4 Nov 2024 13:37:29 -0600
-+Subject: [PATCH] gallium: Fix build with llvm 18 and 19
-+
-+- CodeGenOpt::Level changed to CodeGenOoptLevel. [1]
-+- llvm::sys::getHostCPUFeatures() now returns the features instead of
-+modifying the passed in argument. [2]
-+
-+Upstream-Status: Backport [1][https://gitlab.freedesktop.org/mesa/mesa/-/commit/f79617fe804ea6524651ff1bc3a91098d3199179]
-+Upstream-Status: Backport [2][https://gitlab.freedesktop.org/mesa/mesa/-/commit/fa9cd89a85b904615ebc11da609445b5b751e68d]
-+
-+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-+---
-+ src/gallium/auxiliary/gallivm/lp_bld_misc.cpp | 14 ++++++++++++--
-+ 1 file changed, 12 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp b/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
-+index 5e7a30a6cc2..dbc777e3096 100644
-+--- a/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
-++++ b/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
-+@@ -366,7 +366,11 @@ lp_build_create_jit_compiler_for_module(LLVMExecutionEngineRef *OutJIT,
-+    builder.setEngineKind(EngineKind::JIT)
-+           .setErrorStr(&Error)
-+           .setTargetOptions(options)
-++#if LLVM_VERSION_MAJOR >= 18
-++          .setOptLevel((CodeGenOptLevel)OptLevel);
-++#else
-+           .setOptLevel((CodeGenOpt::Level)OptLevel);
-++#endif
-+ 
-+ #if DETECT_OS_WINDOWS
-+     /*
-+@@ -394,8 +398,14 @@ lp_build_create_jit_compiler_for_module(LLVMExecutionEngineRef *OutJIT,
-+     * which allows us to enable/disable code generation based
-+     * on the results of cpuid on these architectures.
-+     */
-+-   llvm::StringMap<bool> features;
-+-   llvm::sys::getHostCPUFeatures(features);
-++   #if LLVM_VERSION_MAJOR >= 19
-++      /* llvm-19+ returns StringMap from getHostCPUFeatures.
-++      */
-++      auto features = llvm::sys::getHostCPUFeatures();
-++   #else
-++      llvm::StringMap<bool> features;
-++      llvm::sys::getHostCPUFeatures(features);
-++   #endif
-+ 
-+    for (StringMapIterator<bool> f = features.begin();
-+         f != features.end();
-+-- 
-+2.17.1
-+
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-index 21134bc7..33af456d 100644
---- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-@@ -16,6 +16,7 @@ SRC_URI = " \
-     file://0001-meson-misdetects-64bit-atomics-on-mips-clang.patch \
-     file://0001-gallium-Fix-build-with-llvm-17.patch \
-     file://0001-meson-Disable-cmake-dependency-detector-for-llvm.patch \
-+    file://0001-gallium-Fix-build-with-llvm-18-and-19.patch \
+diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
+index 462bf763..251f1fa4 100644
+--- a/meta-ti-bsp/conf/layer.conf
++++ b/meta-ti-bsp/conf/layer.conf
+@@ -18,10 +18,6 @@ LAYERDEPENDS_meta-ti-bsp = " \
+     meta-arm \
  "
  
- S = "${WORKDIR}/git"
+-BBFILES_DYNAMIC += " \
+-    clang-layer:${LAYERDIR}/dynamic-layers/clang-layer/recipes*/*/*.bbappend \
+-"
+-
+ SIGGEN_EXCLUDERECIPES_ABISAFE += " \
+     mesa-pvr \
+ "
+diff --git a/meta-ti-bsp/dynamic-layers/clang-layer/recipes-graphics/mesa/mesa-pvr_%.bbappend b/meta-ti-bsp/dynamic-layers/clang-layer/recipes-graphics/mesa/mesa-pvr_%.bbappend
+deleted file mode 100644
+index 7e5c36fd..00000000
+--- a/meta-ti-bsp/dynamic-layers/clang-layer/recipes-graphics/mesa/mesa-pvr_%.bbappend
++++ /dev/null
+@@ -1,14 +0,0 @@
+-# This is a copy of meta-clang/recipes-graphics/mesa/mesa_%.bbappend required
+-# for llvmpipe when using pvr-mesa since we aren't caught by that glob.
+-
+-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+-
+-LDFLAGS:append:toolchain-clang = " -latomic -lm"
+-DEPENDS:append:toolchain-clang = " libatomic-ops"
+-
+-EXTRA_OEMASON:append:toolchain-clang:x86 = " -Dasm=false"
+-EXTRA_OEMASON:append:toolchain-clang:x86-64 = " -Dasm=false"
+-
+-export YOCTO_ALTERNATE_EXE_PATH = "${STAGING_LIBDIR}/llvm-config"
+-
+-PACKAGECONFIG[gallium-llvm] = "-Dllvm=true -Dshared-llvm=true -Ddraw-use-llvm=true,-Dllvm=false,clang clang-native elfutils"
 -- 
-2.17.1
+2.47.0
 
 
