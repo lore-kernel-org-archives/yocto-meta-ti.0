@@ -2,125 +2,74 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF587D5C0F6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE833D5C0F5
 	for <webhook@archiver.kernel.org>; Fri,  8 Nov 2024 15:51:05 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.15832.1731081064928100228
+ by mx.groups.io with SMTP id smtpd.web11.16061.1731081063312061519
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 08 Nov 2024 07:51:05 -0800
+ Fri, 08 Nov 2024 07:51:03 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4F01840BA7;
-	Fri,  8 Nov 2024 15:51:04 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 2904340CA8;
+	Fri,  8 Nov 2024 15:51:02 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id G_OeqYKRiOhN; Fri,  8 Nov 2024 15:51:04 +0000 (UTC)
+	with ESMTP id ioj7ubF41p-C; Fri,  8 Nov 2024 15:51:02 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 504E840C50;
-	Fri,  8 Nov 2024 15:51:02 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0D6A940C3E;
+	Fri,  8 Nov 2024 15:51:01 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 572FF1640E2;
+	by mail.denix.org (Postfix) with ESMTP id 19BEF1640CE;
 	Fri,  8 Nov 2024 10:50:59 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master][RFC PATCH v2 08/10] conf/machine: add BeagleY-AI platform
-Date: Fri,  8 Nov 2024 10:50:56 -0500
-Message-Id: <20241108155058.2729634-8-denis@denix.org>
+Subject: [master][RFC PATCH v2 01/10] conf/machine: rename beagleplay machine to beagleplay-ti
+Date: Fri,  8 Nov 2024 10:50:49 -0500
+Message-Id: <20241108155058.2729634-1-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241108155058.2729634-1-denis@denix.org>
-References: <20241108155058.2729634-1-denis@denix.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Fri, 08 Nov 2024 15:51:05 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18062
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18053
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-Add machine configuration for BeagleY-AI platform.
+BeaglePlay is officially supported by TI "ti-6_6" BSP and is part
+of the TI-SDK releases. Switching BSP to BeagleBoard.org "bb_org"
+settings for the same machine is possible within the same layer.
+
+But having different machine configs for the same machine name in
+multiple layers can be confusing and prone to errors. Hence rename
+the config to indicate BeaglePlay with official TI support in order
+to re-use the canonical name in a separate layer.
 
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-beagle/conf/machine/beagley-ai-k3r5.conf | 14 +++++++++++
- meta-beagle/conf/machine/beagley-ai.conf      | 23 +++++++++++++++++++
- .../recipes-bsp/u-boot/u-boot-bb.org_git.bb   |  5 ++++
- 3 files changed, 42 insertions(+)
- create mode 100644 meta-beagle/conf/machine/beagley-ai-k3r5.conf
- create mode 100644 meta-beagle/conf/machine/beagley-ai.conf
+ .../machine/{beagleplay-k3r5.conf =3D> beagleplay-ti-k3r5.conf}     | 0
+ meta-ti-bsp/conf/machine/{beagleplay.conf =3D> beagleplay-ti.conf}  | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-ti-bsp/conf/machine/{beagleplay-k3r5.conf =3D> beagleplay-ti=
+-k3r5.conf} (100%)
+ rename meta-ti-bsp/conf/machine/{beagleplay.conf =3D> beagleplay-ti.conf=
+} (100%)
 
-diff --git a/meta-beagle/conf/machine/beagley-ai-k3r5.conf b/meta-beagle/=
-conf/machine/beagley-ai-k3r5.conf
-new file mode 100644
-index 00000000..87462e72
---- /dev/null
-+++ b/meta-beagle/conf/machine/beagley-ai-k3r5.conf
-@@ -0,0 +1,14 @@
-+#@TYPE: Machine
-+#@NAME: BeagleY AI (R5F)
-+#@DESCRIPTION: Machine configuration for the BeagleY AI (R5F core)
-+
-+require conf/machine/include/k3r5.inc
-+require conf/machine/include/beagle-bsp.inc
-+
-+SYSFW_SOC =3D "j722s"
-+SYSFW_CONFIG =3D "evm"
-+SYSFW_SUFFIX =3D "hs-fs"
-+
-+UBOOT_MACHINE =3D "j722s_evm_r5_defconfig"
-+
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am67a_beagley_ai_r5.config"
-diff --git a/meta-beagle/conf/machine/beagley-ai.conf b/meta-beagle/conf/=
-machine/beagley-ai.conf
-new file mode 100644
-index 00000000..8dcc9b14
---- /dev/null
-+++ b/meta-beagle/conf/machine/beagley-ai.conf
-@@ -0,0 +1,23 @@
-+#@TYPE: Machine
-+#@NAME: BeagleY AI (A53)
-+#@DESCRIPTION: Machine configuration for the BeagleY AI board (A53 core)
-+
-+require conf/machine/include/j722s.inc
-+require conf/machine/include/beagle-bsp.inc
-+
-+UBOOT_MACHINE =3D "j722s_evm_a53_config"
-+
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am67a_beagley_ai_a53.config"
-+
-+KERNEL_DEVICETREE_PREFIX =3D " \
-+    ti/k3-j722s \
-+"
-+
-+KERNEL_DEVICETREE =3D ""
-+
-+KERNEL_DEVICETREE:append:bsp-bb_org =3D " \
-+ti/k3-j722s-evm.dtb \
-+ti/k3-am67a-beagley-ai.dtb \
-+"
-+
-+MACHINE_GUI_CLASS =3D "bigscreen"
-diff --git a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_git.bb b/meta-b=
-eagle/recipes-bsp/u-boot/u-boot-bb.org_git.bb
-index 0b23effc..8e14c495 100644
---- a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_git.bb
-+++ b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_git.bb
-@@ -15,3 +15,8 @@ BRANCH:beagleplay =3D "v2023.04-ti-09.01.00.008-BeagleP=
-lay"
- BRANCH:beagleplay-k3r5 =3D "v2023.04-ti-09.01.00.008-BeaglePlay"
- SRCREV:beagleplay =3D "43791d945f4e5c25bcc19b9c778e8f9d194dc16e"
- SRCREV:beagleplay-k3r5 =3D "43791d945f4e5c25bcc19b9c778e8f9d194dc16e"
-+
-+BRANCH:beagley-ai =3D "v2023.04-ti-09.02.00.009-BeagleY-AI-Production"
-+BRANCH:beagley-ai-k3r5 =3D "v2023.04-ti-09.02.00.009-BeagleY-AI-Producti=
-on"
-+SRCREV:beagley-ai =3D "93735daa6fe024304934d5a5e93ab05a06abf1a8"
-+SRCREV:beagley-ai-k3r5 =3D "93735daa6fe024304934d5a5e93ab05a06abf1a8"
+diff --git a/meta-ti-bsp/conf/machine/beagleplay-k3r5.conf b/meta-ti-bsp/=
+conf/machine/beagleplay-ti-k3r5.conf
+similarity index 100%
+rename from meta-ti-bsp/conf/machine/beagleplay-k3r5.conf
+rename to meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf
+diff --git a/meta-ti-bsp/conf/machine/beagleplay.conf b/meta-ti-bsp/conf/=
+machine/beagleplay-ti.conf
+similarity index 100%
+rename from meta-ti-bsp/conf/machine/beagleplay.conf
+rename to meta-ti-bsp/conf/machine/beagleplay-ti.conf
 --=20
 2.25.1
 
