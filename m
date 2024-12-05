@@ -1,96 +1,89 @@
-Return-Path: <denis@denix.org>
+Return-Path: <jm@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A461E77170
-	for <webhook@archiver.kernel.org>; Wed,  4 Dec 2024 17:31:25 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.20544.1733333480167175528
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 491EAE7716D
+	for <webhook@archiver.kernel.org>; Thu,  5 Dec 2024 00:22:18 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web11.30236.1733358131986046633
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 04 Dec 2024 09:31:20 -0800
+ Wed, 04 Dec 2024 16:22:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 3871C40A2F;
-	Wed,  4 Dec 2024 17:31:19 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5lzrZQBIeA5x; Wed,  4 Dec 2024 17:31:19 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0F8F440023;
-	Wed,  4 Dec 2024 17:31:17 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 421E01640F2; Wed,  4 Dec 2024 12:31:16 -0500 (EST)
-Date: Wed, 4 Dec 2024 12:31:16 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Chirag Shilwant <c-shilwant@ti.com>
-Cc: meta-ti@lists.yoctoproject.org, Ryan Eatmon <reatmon@ti.com>
-Subject: Re: [meta-ti][master][PATCH] conf: layer.conf: Drop scarthgap from
- LAYERSERIES_COMPAT
-Message-ID: <20241204173116.GA23825@denix.org>
-References: <20241204150506.3419041-1-c-shilwant@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=fH+v9lw0;
+ spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: jm@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B50MAjN1842919
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 4 Dec 2024 18:22:10 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1733358130;
+	bh=2+useigBczsnal65zAUdNARU3z2YE+ERAwrvrDlLqr4=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=fH+v9lw0SmUYyunLC9VG1vHMVMTQr0eVZgpPA4B3mVJIbnG2GfpEUFpTeaYK+t6ba
+	 shoi57CpSPxVG6q1/bClJCTbGpkskEZca9hXNftQO/lvCQgkw1ZszbVfv1LS+NxOnt
+	 8LoDM8dKnxzj67mhpuCCYNySIzZacJhFfvoKRrqM=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4B50MAjW088472
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 4 Dec 2024 18:22:10 -0600
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
+ Dec 2024 18:22:09 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 4 Dec 2024 18:22:10 -0600
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B50MAjn053848;
+	Wed, 4 Dec 2024 18:22:10 -0600
+Message-ID: <68466ae0-1e4f-4a40-8839-6e430a8f9031@ti.com>
+Date: Wed, 4 Dec 2024 18:22:10 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241204150506.3419041-1-c-shilwant@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti][master/scarthgap][PATCH] conf: machine: am62xx-lp-evm:
+ Add PWM overlay
+To: Ryan Eatmon <reatmon@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>, Denys Dmytriyenko <denys@konsulko.com>,
+        Randolph Sapp <rs@ti.com>, Praneeth Bajjuri <praneeth@ti.com>
+References: <20241202194929.67533-1-jm@ti.com>
+Content-Language: en-US
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <20241202194929.67533-1-jm@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 04 Dec 2024 17:31:25 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18078
+ <meta-ti@lists.yoctoproject.org>; Thu, 05 Dec 2024 00:22:18 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18079
 
-On Wed, Dec 04, 2024 at 08:35:06PM +0530, Chirag Shilwant wrote:
-> After scarthgap release, oe-core switched to use UNPACKDIR instead
-> of WORKDIR [1]. Post this change, meta-ti updated all references of
-> WORKDIR to UNPACKDIR in master branch.
+Hi all,
+
+Please do not merge, I will be adding a second overlay to this patch.
+
+~ Judith
+
+On 12/2/24 1:49 PM, Judith Mendez wrote:
+> Add the k3-am62x-sk-pwm.dtbo overlay for AM62 LP SK.
 > 
-> Since, UNPACKDIR changes aren't backported to oe-core:scarthgap, we need to
-> drop it from LAYERSERIES_COMPAT in meta-ti.
-> 
-> [1]: https://git.openembedded.org/openembedded-core/commit/?id=e022d62ba917790af2121da57646271ef17c03fa
-
-Yeah, this makes sense
-
-
-> Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
-
-Acked-by: Denys Dmytriyenko <denys@konsulko.com>
-
-
+> Signed-off-by: Judith Mendez <jm@ti.com>
 > ---
->  meta-ti-bsp/conf/layer.conf    | 2 +-
->  meta-ti-extras/conf/layer.conf | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
+>   meta-ti-bsp/conf/machine/am62xx-lp-evm.conf | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
-> index 0d67c729..6d2b0a9a 100644
-> --- a/meta-ti-bsp/conf/layer.conf
-> +++ b/meta-ti-bsp/conf/layer.conf
-> @@ -9,7 +9,7 @@ BBFILE_COLLECTIONS += "meta-ti-bsp"
->  BBFILE_PATTERN_meta-ti-bsp := "^${LAYERDIR}/"
->  BBFILE_PRIORITY_meta-ti-bsp = "6"
->  
-> -LAYERSERIES_COMPAT_meta-ti-bsp = "scarthgap styhead walnascar"
-> +LAYERSERIES_COMPAT_meta-ti-bsp = "styhead walnascar"
->  
->  LICENSE_PATH += "${LAYERDIR}/licenses"
->  
-> diff --git a/meta-ti-extras/conf/layer.conf b/meta-ti-extras/conf/layer.conf
-> index 5c493daa..bd139673 100644
-> --- a/meta-ti-extras/conf/layer.conf
-> +++ b/meta-ti-extras/conf/layer.conf
-> @@ -9,7 +9,7 @@ BBFILE_COLLECTIONS += "meta-ti-extras"
->  BBFILE_PATTERN_meta-ti-extras := "^${LAYERDIR}/"
->  BBFILE_PRIORITY_meta-ti-extras = "6"
->  
-> -LAYERSERIES_COMPAT_meta-ti-extras = "scarthgap styhead walnascar"
-> +LAYERSERIES_COMPAT_meta-ti-extras = "styhead walnascar"
->  
->  LICENSE_PATH += "${LAYERDIR}/licenses"
->  
-> -- 
-> 2.34.1
+> diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+> index 51e99728..cd413afe 100644
+> --- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+> @@ -11,6 +11,7 @@ KERNEL_DEVICETREE_PREFIX = " \
+>       ti/k3-am62x-sk-hdmi \
+>       ti/k3-am62x-sk-lpm \
+>       ti/k3-am62x-sk-mcan \
+> +    ti/k3-am62x-sk-pwm \
+>   "
+>   
+>   KERNEL_DEVICETREE = " \
+
 
