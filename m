@@ -2,47 +2,47 @@ Return-Path: <a-shenai@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AD4FE7716F
-	for <webhook@archiver.kernel.org>; Fri,  6 Dec 2024 04:22:48 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web11.30094.1733458961095313035
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F27FE77173
+	for <webhook@archiver.kernel.org>; Fri,  6 Dec 2024 05:36:08 +0000 (UTC)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ by mx.groups.io with SMTP id smtpd.web11.30853.1733463364068765265
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 05 Dec 2024 20:22:41 -0800
+ Thu, 05 Dec 2024 21:36:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=d0lryMmC;
- spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: a-shenai@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B64MeVB2304527
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=rxmaxBTX;
+ spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: a-shenai@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B65a3HQ1864177
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 5 Dec 2024 22:22:40 -0600
+	for <meta-ti@lists.yoctoproject.org>; Thu, 5 Dec 2024 23:36:03 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1733458960;
-	bh=Jbi2LuLCHzNws2p8gmYpd9FkJxYrjYk7JdAxMN6bLJQ=;
+	s=ti-com-17Q1; t=1733463363;
+	bh=COnt0vtQQHwQDAyyFb9okyMhLYgOictri9AKUiFt5X8=;
 	h=From:To:CC:Subject:Date;
-	b=d0lryMmCozxEM9y6ZDkVsVX5U0Ax28Caqxgth27i/xJYayhTp1xYLSYbpwT166qyw
-	 7YSZtqbT0JV2cIRVnQmuvfilHp87cIGZo0r++b2aK8kEfE2FMUg2seiq053HrTlbeN
-	 /UoR6yy25FJ2wgmc2oBM4GUnQ+SxUF1kiQyoFc/s=
+	b=rxmaxBTXQVZbTPUb6It6NKwsWJg9Y5e1/aywFQTf32yN8AxWHdo+jOttW4Et5T6Ny
+	 Fu0hBDVeEsyGkAE5f0HToBRiySGcLpaXhdt4+3dU3Be66x3KLJ0ZRWP6Fu6RmBSOYB
+	 8hRMdxtNfBKQALDXQnCiQnTcL0PbKzRk26BlDU+Y=
 Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4B64MeVS099245
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4B65a3ZH064204
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 5 Dec 2024 22:22:40 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE105.ent.ti.com
+	for <meta-ti@lists.yoctoproject.org>; Thu, 5 Dec 2024 23:36:03 -0600
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE105.ent.ti.com
  (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 5
- Dec 2024 22:22:40 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2024 23:36:02 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 5 Dec 2024 22:22:40 -0600
+ Frontend Transport; Thu, 5 Dec 2024 23:36:02 -0600
 Received: from aashvij.dhcp.ti.com (aashvij.dhcp.ti.com [172.24.227.252])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B64MbxG104404;
-	Thu, 5 Dec 2024 22:22:38 -0600
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B65a0P7087683;
+	Thu, 5 Dec 2024 23:36:01 -0600
 From: Aashvij Shenai <a-shenai@ti.com>
 To: <meta-ti@lists.yoctoproject.org>, <c-shilwant@ti.com>, <reatmon@ti.com>
 CC: <praneeth@ti.com>, <kamlesh@ti.com>
-Subject: [meta-ti][master/scarthgap][PATCH v1] am62p: PRNG: Remove software PRNG
-Date: Fri, 6 Dec 2024 09:52:20 +0530
-Message-ID: <20241206042220.1063902-1-a-shenai@ti.com>
+Subject: [meta-ti][master/scarthgap][PATCH v2] am62p: PRNG: Remove software PRNG
+Date: Fri, 6 Dec 2024 11:05:21 +0530
+Message-ID: <20241206053521.1126544-1-a-shenai@ti.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -51,19 +51,29 @@ X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 06 Dec 2024 04:22:48 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18084
+ <meta-ti@lists.yoctoproject.org>; Fri, 06 Dec 2024 05:36:08 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18085
 
-With the latest TIFS fix that is integrated into SDK, AM62P is able to
-leverage the hardware-TRNG instead of having to fallback into
-the software-PRNG.
+With the latest TIFS fix [1], AM62P is able to leverage the hardware-TRNG
+instead of having to fallback into the software-PRNG.
 
-Testlogs:
-http://serenity.dal.design.ti.com:7777/wikadipamu.yaml
-https://gist.github.com/AashvijShenai/9ea3e128ab29f703c2b6d988cfd0b82a
+[1] - commit: 98de0a4290ec200cc224d4a5a6f42d2126230e2f ("ti-sysfw:
+am65x/am64x/am62x/am62ax/am62px: update to version v10.01.08")
+
+Repo: https://git.ti.com/git/processor-firmware/ti-linux-firmware.git
+Branch: ti-linux-firmware
 
 Signed-off-by: Aashvij Shenai <a-shenai@ti.com>
 ---
+
+Changelog:
+v1 -> v2:
+  - Updated commit message to include fix and moved test logs
+
+Testlogs: https://gist.github.com/AashvijShenai/9ea3e128ab29f703c2b6d988cfd0b82a
+
+---
+
  meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
