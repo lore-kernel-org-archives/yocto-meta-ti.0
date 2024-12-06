@@ -1,53 +1,49 @@
-Return-Path: <a-limaye@ti.com>
+Return-Path: <a-shenai@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0464E77175
-	for <webhook@archiver.kernel.org>; Thu,  5 Dec 2024 18:31:14 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web11.18959.1733423471837458688
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AD4FE7716F
+	for <webhook@archiver.kernel.org>; Fri,  6 Dec 2024 04:22:48 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web11.30094.1733458961095313035
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 05 Dec 2024 10:31:12 -0800
+ Thu, 05 Dec 2024 20:22:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=LTPi4D+5;
- spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: a-limaye@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B5IVA5r1795406
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=d0lryMmC;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: a-shenai@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B64MeVB2304527
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 5 Dec 2024 12:31:11 -0600
+	for <meta-ti@lists.yoctoproject.org>; Thu, 5 Dec 2024 22:22:40 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1733423471;
-	bh=usDMAmTpzhfpx+KjB7NXUDi9j5eMBR/SqYsdsxbKKP8=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=LTPi4D+51usazOL0mC7fFzc2UxA8XbqEkUpndAXQirvap5Zr/SzKpTGk2CidKcdcm
-	 +3ZmHBauCjpB4TLIvz1FDDbnUf06KGCH2TcfYm5xhwj+4AXATx0XoTMtoOSERPyk9F
-	 +uHHsdgvhBbRkACjyW9ngslaETLezFLqO00+JKLM=
+	s=ti-com-17Q1; t=1733458960;
+	bh=Jbi2LuLCHzNws2p8gmYpd9FkJxYrjYk7JdAxMN6bLJQ=;
+	h=From:To:CC:Subject:Date;
+	b=d0lryMmCozxEM9y6ZDkVsVX5U0Ax28Caqxgth27i/xJYayhTp1xYLSYbpwT166qyw
+	 7YSZtqbT0JV2cIRVnQmuvfilHp87cIGZo0r++b2aK8kEfE2FMUg2seiq053HrTlbeN
+	 /UoR6yy25FJ2wgmc2oBM4GUnQ+SxUF1kiQyoFc/s=
 Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4B5IVAqe003920
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4B64MeVS099245
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Thu, 5 Dec 2024 12:31:10 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE105.ent.ti.com
+	for <meta-ti@lists.yoctoproject.org>; Thu, 5 Dec 2024 22:22:40 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE105.ent.ti.com
  (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 5
- Dec 2024 12:31:10 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2024 22:22:40 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 5 Dec 2024 12:31:10 -0600
-Received: from PSDKL-Workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com [172.24.227.91])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B5IV6nj101183;
-	Thu, 5 Dec 2024 12:31:08 -0600
-From: Aniket Limaye <a-limaye@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-CC: <reatmon@ti.com>, <b-padhi@ti.com>, <u-kumar1@ti.com>,
-        Aniket Limaye
-	<a-limaye@ti.com>
-Subject: [meta-ti][kirkstone][PATCH 1/2] meta-ti-extras: ti-ipc-rtos: Deploy ipc firmware
-Date: Thu, 5 Dec 2024 23:35:47 +0530
-Message-ID: <20241205183103.3411587-2-a-limaye@ti.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241205183103.3411587-1-a-limaye@ti.com>
-References: <20241205183103.3411587-1-a-limaye@ti.com>
+ Frontend Transport; Thu, 5 Dec 2024 22:22:40 -0600
+Received: from aashvij.dhcp.ti.com (aashvij.dhcp.ti.com [172.24.227.252])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B64MbxG104404;
+	Thu, 5 Dec 2024 22:22:38 -0600
+From: Aashvij Shenai <a-shenai@ti.com>
+To: <meta-ti@lists.yoctoproject.org>, <c-shilwant@ti.com>, <reatmon@ti.com>
+CC: <praneeth@ti.com>, <kamlesh@ti.com>
+Subject: [meta-ti][master/scarthgap][PATCH v1] am62p: PRNG: Remove software PRNG
+Date: Fri, 6 Dec 2024 09:52:20 +0530
+Message-ID: <20241206042220.1063902-1-a-shenai@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -55,49 +51,36 @@ X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 05 Dec 2024 18:31:14 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18082
+ <meta-ti@lists.yoctoproject.org>; Fri, 06 Dec 2024 04:22:48 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18084
 
-Early boot of remote processors from SPL stage of bootloader requires
-the remoteproc firmware to be present in the boot partition. Deploy this
-rproc IPC firmware so that it can be copied to the boot partitions of
-the wic images.
+With the latest TIFS fix that is integrated into SDK, AM62P is able to
+leverage the hardware-TRNG instead of having to fallback into
+the software-PRNG.
 
-Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+Testlogs:
+http://serenity.dal.design.ti.com:7777/wikadipamu.yaml
+https://gist.github.com/AashvijShenai/9ea3e128ab29f703c2b6d988cfd0b82a
+
+Signed-off-by: Aashvij Shenai <a-shenai@ti.com>
 ---
- meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb b/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb
-index 999993ea..be769abb 100644
---- a/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb
-+++ b/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb
-@@ -2,6 +2,8 @@ require recipes-ti/ipc/ti-ipc.inc
- require recipes-ti/ipc/ti-ipc-common.inc
- require ti-ipc-rtos.inc
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+index 43b8ce1c..f131f1ff 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
++++ b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+@@ -6,7 +6,7 @@ EXTRA_OEMAKE:remove = "CFG_MAP_EXT_DT_SECURE=y"
+ EXTRA_OEMAKE:append:k3 = "${@ ' CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
  
-+inherit deploy
-+
- DEPENDS = "ti-xdctools-native ti-sysbios doxygen-native zip-native"
+ EXTRA_OEMAKE:append:am62xx = " CFG_TEE_CORE_LOG_LEVEL=1"
+-EXTRA_OEMAKE:append:am62pxx = " CFG_WITH_SOFTWARE_PRNG=y CFG_TEE_CORE_LOG_LEVEL=1"
++EXTRA_OEMAKE:append:am62pxx = " CFG_TEE_CORE_LOG_LEVEL=1"
+ EXTRA_OEMAKE:append:am62axx = " CFG_TEE_CORE_LOG_LEVEL=1"
+ EXTRA_OEMAKE:append:j722s = " CFG_TEE_CORE_LOG_LEVEL=1"
  
- PACKAGES =+ "${PN}-fw"
-@@ -99,3 +101,15 @@ pkg_postinst:${PN}-fw:omapl138 () {
- pkg_postrm:${PN}-fw:omapl138 () {
-   update-alternatives --remove rproc-dsp-fw ipc/ti_platforms_evmOMAPL138_DSP/messageq_single.xe674
- }
-+
-+do_deploy() {
-+  install -d ${DEPLOYDIR}
-+}
-+
-+do_deploy:append:omap-a15() {
-+  install -d ${DEPLOYDIR}/ipc
-+  install -m 0644 ${S}/packages/ti/ipc/tests/bin/ti_platforms_evmDRA7XX_ipu1/test_omx_ipu1_vayu.xem4 ${DEPLOYDIR}/ipc/dra7-ipu1-fw.xem4
-+}
-+
-+addtask deploy after do_install
-+
 -- 
-2.47.0
+2.34.1
 
 
