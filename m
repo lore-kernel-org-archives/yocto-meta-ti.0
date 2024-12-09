@@ -1,116 +1,158 @@
-Return-Path: <u-kumar1@ti.com>
+Return-Path: <a-shenai@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BFBCE7716E
-	for <webhook@archiver.kernel.org>; Sat,  7 Dec 2024 06:11:56 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web10.55896.1733551912821875148
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7ABA9E77173
+	for <webhook@archiver.kernel.org>; Mon,  9 Dec 2024 03:29:19 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web10.92970.1733714956478919035
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 06 Dec 2024 22:11:53 -0800
+ Sun, 08 Dec 2024 19:29:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=YVomjdjG;
- spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: u-kumar1@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=y5BctMOd;
+ spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: a-shenai@ti.com)
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B76BqKM2463871
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B93TF6e2406827
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO)
-	for <meta-ti@lists.yoctoproject.org>; Sat, 7 Dec 2024 00:11:52 -0600
+	for <meta-ti@lists.yoctoproject.org>; Sun, 8 Dec 2024 21:29:15 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1733551912;
-	bh=3s+IMFlDHikmo0Jr6eZEyh+I0QhCh7zHcTGdTgyRU7c=;
+	s=ti-com-17Q1; t=1733714955;
+	bh=XUzzr1V+Ryu/ec9Q7o0pWv5akRGUWxdJlfT1WWy83+U=;
 	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=YVomjdjGfFKgWygIKJ/X/ysOYrSo+3jMLO8oRPUFpbJkKVIxv5y7HMYaQOuGqNOhj
-	 Kv0Qc+4utZgeOqvXLcedNCTRU62MDx7QZ1kut+cpKy1SObWOdfoPgotUpZa9RYR22q
-	 18ne1o/QbOH9n5WdhRHDrnxmxu9stjutpxSZS3I8=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B76BpV6033047
-	for <meta-ti@lists.yoctoproject.org>; Sat, 7 Dec 2024 00:11:51 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 7
- Dec 2024 00:11:51 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+	b=y5BctMOdyaUpw9DNRqwJd2ZLfirwTJDPCc/ZebmZN27ONZM36ppStuZk+K0Rh6eBS
+	 FW0FPxEjrimz8QimZAcTsPFpXhO9d2Bv1uTZw+xT5Q+wPK3BrkZJs7ni5EaboDGFn7
+	 lyAh/vOKQ+6UfUgIjLPdrZosTGhMiBvSiPyHzGAA=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B93TFmE115216
+	for <meta-ti@lists.yoctoproject.org>; Sun, 8 Dec 2024 21:29:15 -0600
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 8
+ Dec 2024 21:29:15 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sat, 7 Dec 2024 00:11:51 -0600
-Received: from [10.249.141.75] ([10.249.141.75])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B76BnWd097031;
-	Sat, 7 Dec 2024 00:11:50 -0600
-Message-ID: <e09d5840-917a-4bfb-bbf4-6c1dcc68d0e9@ti.com>
-Date: Sat, 7 Dec 2024 11:41:48 +0530
+ Frontend Transport; Sun, 8 Dec 2024 21:29:15 -0600
+Received: from [172.24.227.252] (aashvij.dhcp.ti.com [172.24.227.252])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B93TDAE069975;
+	Sun, 8 Dec 2024 21:29:13 -0600
+Message-ID: <c5657ade-5872-43db-bdc9-15549c0fdbfc@ti.com>
+Date: Mon, 9 Dec 2024 08:59:12 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][kirkstone][PATCH 0/2] omap-a15: Add dra7-ipu1-fw to
- boot
-To: "Limaye, Aniket" <a-limaye@ti.com>, Ryan Eatmon <reatmon@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-CC: <b-padhi@ti.com>, <u-kumar1@ti.com>
-References: <20241205183103.3411587-1-a-limaye@ti.com>
- <25709f42-f9bd-4033-b416-a2639ae1a5b6@ti.com>
- <71fa0573-a129-4b3b-888f-fc154f343e6c@ti.com>
+Subject: Re: [meta-ti][master/scarthgap][PATCH v2] am62p: PRNG: Remove
+ software PRNG
+To: "Eatmon, Ryan" <reatmon@ti.com>, "Shilwant, Chirag" <c-shilwant@ti.com>
+CC: "Bajjuri, Praneeth" <praneeth@ti.com>,
+        "Gurudasani, Kamlesh"
+	<kamlesh@ti.com>,
+        "meta-ti@lists.yoctoproject.org"
+	<meta-ti@lists.yoctoproject.org>
+References: <20241206053521.1126544-1-a-shenai@ti.com>
+ <379643c3-612f-4da3-8f0b-2d8f68934079@ti.com>
+ <7f9f806c-0616-4bf2-a9f7-b972945a0bb9@ti.com>
 Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <71fa0573-a129-4b3b-888f-fc154f343e6c@ti.com>
+From: Aashvij Shenai <a-shenai@ti.com>
+In-Reply-To: <7f9f806c-0616-4bf2-a9f7-b972945a0bb9@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by lelvem-ot01.ext.ti.com id 4B76BqKM2463871
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllvem-ot04.ext.ti.com id 4B93TF6e2406827
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sat, 07 Dec 2024 06:11:56 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18091
+ <meta-ti@lists.yoctoproject.org>; Mon, 09 Dec 2024 03:29:19 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18092
 
+Thanks for the reviews,
 
-On 12/7/2024 10:48 AM, Limaye, Aniket wrote:
+I will update and send a v3
+
+Regards,
+
+Aashvij
+
+On 06/12/24 20:35, Eatmon, Ryan wrote:
 >
->
-> On 12/6/2024 8:50 PM, Ryan Eatmon wrote:
+> On 12/6/2024 8:56 AM, Chirag Shilwant wrote:
+>> Hi,
 >>
->> As this platform still exists in scarthgap and master, should this=20
->> patch also be applied to those branches as well?
+>> Based on the convention, commit message title should be
+>> recipes-security: optee: Remove software PRNG in am62pxx
+> We don't usually require the "recipes-security" part.  As that makes th=
+e
+> message get really long.  But the recipe name base should be part of it.
+>
+> For non-recipes we tend to like a portion of the directory that the fil=
+e
+> being updated is in.  For example for a machine conf file:
+>
+> conf: am62xx-evm: do something
+> classes: Update foo.class
+>
+> etc...
+>
+> But we do like to see something a bit more descriptive so that if we
+> search through the logs it is more apparent about what area your change
+> is being made.
+>
+> If you are ever unclear on what to put there, just to git.ti.com,
+> navigate to the file you are changing, then look at the log changes for
+> that file and see the history of changes to that file and try to be
+> consistent.
+>
+>
+>> On 06/12/24 11:05, Aashvij Shenai wrote:
+>>> With the latest TIFS fix [1], AM62P is able to leverage the hardware-=
+TRNG
+>>> instead of having to fallback into the software-PRNG.
+>>>
+>>> [1] - commit: 98de0a4290ec200cc224d4a5a6f42d2126230e2f ("ti-sysfw:
+>>> am65x/am64x/am62x/am62ax/am62px: update to version v10.01.08")
+>>>
+>>> Repo: https://git.ti.com/git/processor-firmware/ti-linux-firmware.git
+>>> Branch: ti-linux-firmware
 >>
->
-> Udit? Beleswar? Are we targeting the early boot feature in latest=20
-> kernel, u-boot? (TI tree and upstream?)
->
-Upstream kernel and u-boot will be part of plan. But at present kernel=20
-patches are not in shape to be up streamed.
-
-
-> Should I send this series for scarthgap/master wic images as well?
-
-
-yes please send this patch for=C2=A0scarthgap/master as well
-
->
-> Thanks,
-> Aniket
->
 >>
->> On 12/5/2024 12:05 PM, Aniket Limaye wrote:
->>> The firmware is required for early boot of the remoteproc from SPL=20
->>> stage
->>> of the bootloader. Copy the ipc firmware into the boot partition of t=
-he
->>> wic images, where the bootloader expects it to be.
->>>
->>> For this, add a deploy task for the firmware binary and also include=20
->>> the
->>> file in IMAGE_BOOT_FILES for omap-a15.
->>>
->>> Aniket Limaye (2):
->>> =C2=A0=C2=A0 meta-ti-extras: ti-ipc-rtos: Deploy ipc firmware
->>> =C2=A0=C2=A0 conf: machine: omap-a15.inc: include ipu1 firmware in th=
-e boot
->>> =C2=A0=C2=A0=C2=A0=C2=A0 partition
->>>
->>> =C2=A0 meta-ti-bsp/conf/machine/include/omap-a15.inc=C2=A0=C2=A0=C2=A0=
- |=C2=A0 3 ++-
->>> =C2=A0 meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb | 14 ++++++++=
-++++++
->>> =C2=A0 2 files changed, 16 insertions(+), 1 deletion(-)
->>>
+>> This entire story could just have been,
 >>
->
+>> [1]:
+>> https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/commit/?h=
+=3Dti-linux-firmware&id=3D98de0a4290ec200cc224d4a5a6f42d2126230e2f
+>>
+>>
+>>
+>>> Signed-off-by: Aashvij Shenai <a-shenai@ti.com>
+>>> ---
+>>>
+>>> Changelog:
+>>> v1 -> v2:
+>>>  =C2=A0=C2=A0 - Updated commit message to include fix and moved test =
+logs
+>>>
+>>> Testlogs:
+>>> https://gist.github.com/AashvijShenai/9ea3e128ab29f703c2b6d988cfd0b82=
+a
+>>>
+>>> ---
+>>>
+>>>  =C2=A0 meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc =
+| 2 +-
+>>>  =C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git
+>>> a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+>>> b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+>>> index 43b8ce1c..f131f1ff 100644
+>>> --- a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+>>> +++ b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+>>> @@ -6,7 +6,7 @@ EXTRA_OEMAKE:remove =3D "CFG_MAP_EXT_DT_SECURE=3Dy"
+>>>  =C2=A0 EXTRA_OEMAKE:append:k3 =3D "${@ ' CFG_CONSOLE_UART=3D'+
+>>> d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
+>>>  =C2=A0 EXTRA_OEMAKE:append:am62xx =3D " CFG_TEE_CORE_LOG_LEVEL=3D1"
+>>> -EXTRA_OEMAKE:append:am62pxx =3D " CFG_WITH_SOFTWARE_PRNG=3Dy
+>>> CFG_TEE_CORE_LOG_LEVEL=3D1"
+>>> +EXTRA_OEMAKE:append:am62pxx =3D " CFG_TEE_CORE_LOG_LEVEL=3D1"
+>>>  =C2=A0 EXTRA_OEMAKE:append:am62axx =3D " CFG_TEE_CORE_LOG_LEVEL=3D1"
+>>>  =C2=A0 EXTRA_OEMAKE:append:j722s =3D " CFG_TEE_CORE_LOG_LEVEL=3D1"
 
