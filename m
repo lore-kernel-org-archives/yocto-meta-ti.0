@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55BC9E7718A
-	for <webhook@archiver.kernel.org>; Fri, 13 Dec 2024 23:32:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5EAEDE7717F
+	for <webhook@archiver.kernel.org>; Fri, 13 Dec 2024 23:32:20 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.8565.1734132728360118974
+ by mx.groups.io with SMTP id smtpd.web10.8520.1734132730185064703
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 13 Dec 2024 15:32:08 -0800
+ Fri, 13 Dec 2024 15:32:10 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id C8B8140CC6;
-	Fri, 13 Dec 2024 23:32:07 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A31C740C21;
+	Fri, 13 Dec 2024 23:32:09 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id k-YRohwd1leV; Fri, 13 Dec 2024 23:32:07 +0000 (UTC)
+	with ESMTP id 0YGdkKJ9T2p2; Fri, 13 Dec 2024 23:32:09 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B3F1140CC5;
-	Fri, 13 Dec 2024 23:32:04 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CF12540CCD;
+	Fri, 13 Dec 2024 23:32:05 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 6DD43164129;
+	by mail.denix.org (Postfix) with ESMTP id 7B46816412C;
 	Fri, 13 Dec 2024 18:32:04 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master][PATCH 05/12] conf/machine: split beagleplay config between meta-ti-bsp and meta-beagle
-Date: Fri, 13 Dec 2024 18:31:56 -0500
-Message-Id: <20241213233203.2688541-5-denis@denix.org>
+Subject: [master][PATCH 07/12] u-boot-bb_org, linux-bb_org: move "bb_org" providers to meta-beagle
+Date: Fri, 13 Dec 2024 18:31:58 -0500
+Message-Id: <20241213233203.2688541-7-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241213233203.2688541-1-denis@denix.org>
 References: <20241213233203.2688541-1-denis@denix.org>
@@ -38,193 +38,88 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 13 Dec 2024 23:32:10 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18112
+ <meta-ti@lists.yoctoproject.org>; Fri, 13 Dec 2024 23:32:20 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18118
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-Extract "bb_org" BSP specific settings from beagleplay-ti in meta-ti-bsp =
-and
-move them to own beagleplay machine config in meta-beagle.
-
-The differences between 2 configs are minimal, hence beagleplay in meta-b=
-eagle
-inherits beagleplay-ti from meta-ti-bsp as a base and only adjusts what's
-needed.
+Move "bb_org" kernel and U-boot providers that use corresponding official
+BeagleBoard.org trees into own meta-beagle layer.
 
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
-No changes since RFC v2
+Changes since RFC v2:
+* apply required SWIG patch from meta-ti-bsp to u-boot recipe
 
- meta-beagle/conf/machine/beagleplay-k3r5.conf |  8 +++
- meta-beagle/conf/machine/beagleplay.conf      | 45 ++++++++++++++++
- .../conf/machine/beagleplay-ti-k3r5.conf      |  1 -
- meta-ti-bsp/conf/machine/beagleplay-ti.conf   | 51 +------------------
- 4 files changed, 55 insertions(+), 50 deletions(-)
- create mode 100644 meta-beagle/conf/machine/beagleplay-k3r5.conf
- create mode 100644 meta-beagle/conf/machine/beagleplay.conf
+ .../recipes-bsp/u-boot/u-boot-bb.org_git.bb                   | 4 +++-
+ ...001-blk-iocost-avoid-64-bit-division-in-ioc_timer_fn.patch | 0
+ ...block-blk-iocost-gcc13-keep-large-values-in-a-new-en.patch | 0
+ .../recipes-kernel/linux/linux-bb.org/defconfig               | 0
+ .../recipes-kernel/linux/linux-bb.org_git.bb                  | 0
+ 5 files changed, 3 insertions(+), 1 deletion(-)
+ rename {meta-ti-bsp =3D> meta-beagle}/recipes-bsp/u-boot/u-boot-bb.org_g=
+it.bb (80%)
+ rename {meta-ti-bsp =3D> meta-beagle}/recipes-kernel/linux/linux-bb.org/=
+0001-blk-iocost-avoid-64-bit-division-in-ioc_timer_fn.patch (100%)
+ rename {meta-ti-bsp =3D> meta-beagle}/recipes-kernel/linux/linux-bb.org/=
+0001-block-blk-iocost-gcc13-keep-large-values-in-a-new-en.patch (100%)
+ rename {meta-ti-bsp =3D> meta-beagle}/recipes-kernel/linux/linux-bb.org/=
+defconfig (100%)
+ rename {meta-ti-bsp =3D> meta-beagle}/recipes-kernel/linux/linux-bb.org_=
+git.bb (100%)
 
-diff --git a/meta-beagle/conf/machine/beagleplay-k3r5.conf b/meta-beagle/=
-conf/machine/beagleplay-k3r5.conf
-new file mode 100644
-index 00000000..1423aa10
---- /dev/null
-+++ b/meta-beagle/conf/machine/beagleplay-k3r5.conf
-@@ -0,0 +1,8 @@
-+#@TYPE: Machine
-+#@NAME: BeaglePlay (R5F)
-+#@DESCRIPTION: Machine configuration for the BeaglePlay (R5F core)
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb b/meta-b=
+eagle/recipes-bsp/u-boot/u-boot-bb.org_git.bb
+similarity index 80%
+rename from meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb
+rename to meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_git.bb
+index 13286564..1d895f9c 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-bb.org_git.bb
++++ b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_git.bb
+@@ -1,4 +1,4 @@
+-require u-boot-ti.inc
++require recipes-bsp/u-boot/u-boot-ti.inc
+=20
+ SUMMARY =3D "BeagleBoard.org U-Boot"
+=20
+@@ -6,6 +6,8 @@ COMPATIBLE_MACHINE =3D "beagle.*"
+=20
+ PV =3D "2023.04"
+=20
++SRC_URI +=3D "file://0001-scripts-dtc-pylibfdt-libfdt.i_shipped-Use-SWIG=
+_Appen.patch"
 +
-+require conf/machine/beagleplay-ti-k3r5.conf
-+require conf/machine/include/beagle-bsp.inc
-+
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am625_beagleplay_r5.config"
-diff --git a/meta-beagle/conf/machine/beagleplay.conf b/meta-beagle/conf/=
-machine/beagleplay.conf
-new file mode 100644
-index 00000000..1977b4c1
---- /dev/null
-+++ b/meta-beagle/conf/machine/beagleplay.conf
-@@ -0,0 +1,45 @@
-+#@TYPE: Machine
-+#@NAME: BeaglePlay (A53)
-+#@DESCRIPTION: Machine configuration for the BeaglePlay board (A53 core)
-+
-+require conf/machine/beagleplay-ti.conf
-+require conf/machine/include/beagle-bsp.inc
-+
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am625_beagleplay_a53.config"
-+
-+KERNEL_DEVICETREE:append:bsp-bb_org =3D " \
-+ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
-+ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
-+ti/k3-am625-beagleplay-lincolntech-lcd185-panel.dtbo \
-+ti/k3-am625-beaglemod.dtb \
-+ti/k3-am625-beaglemod-audio.dtbo \
-+ti/k3-am625-beaglemod-can0.dtbo \
-+ti/k3-am625-beaglemod-can1.dtbo \
-+ti/k3-am625-beaglemod-csi0-ov5640.dtbo \
-+ti/k3-am625-beaglemod-eeprom.dtbo \
-+ti/k3-am625-beaglemod-eth.dtbo \
-+ti/k3-am625-beaglemod-hdmi.dtbo \
-+ti/k3-am625-beaglemod-io-expand.dtbo \
-+ti/k3-am625-beaglemod-lt-lcd185.dtbo \
-+ti/k3-am625-beaglemod-ospi-flash.dtbo \
-+ti/k3-am625-beaglemod-rs485-1.dtbo \
-+ti/k3-am625-beaglemod-rs485-2.dtbo \
-+ti/k3-am625-beaglemod-rtc.dtbo \
-+ti/k3-am625-beaglemod-wl1835.dtbo \
-+ti/k3-am625-sk-dmtimer-pwm.dtbo \
-+ti/k3-am625-sk-ecap-capture.dtbo \
-+ti/k3-am625-sk-lincolntech-lcd185-panel.dtbo \
-+ti/k3-am625-sk-mcspi-loopback.dtbo \
-+ti/k3-am625-sk-microtips-mf101hie-panel.dtbo \
-+ti/k3-am625-sk-microtips-mf103hie-lcd2.dtbo \
-+ti/k3-am625-sk-pwm.dtbo \
-+ti/k3-am625-sk-rpi-hdr-ehrpwm.dtbo \
-+ti/k3-am62x-sk-csi2-imx219.dtbo \
-+ti/k3-am62x-sk-csi2-ov5640.dtbo \
-+ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
-+ti/k3-am62x-sk-csi2-v3link-fusion.dtbo \
-+ti/k3-am62x-sk-eqep.dtbo \
-+ti/k3-am62x-sk-hdmi-disable-fastboot.dtbo \
-+ti/k3-am62x-sk-lpm-wkup-sources.dtbo \
-+ti/k3-am62x-sk-mcan.dtbo \
-+"
-diff --git a/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf b/meta-ti-b=
-sp/conf/machine/beagleplay-ti-k3r5.conf
-index 3844ccfa..c27e0abc 100644
---- a/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf
-@@ -12,6 +12,5 @@ UBOOT_MACHINE =3D "am62x_evm_r5_defconfig"
- UBOOT_MACHINE:bsp-ti-6_6 =3D "am62x_beagleplay_r5_defconfig"
- UBOOT_MACHINE:bsp-ti-6_12 =3D "am62x_beagleplay_r5_defconfig"
-=20
--UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am625_beagleplay_r5.config"
- UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 =3D "am625_beagleplay_r5.config"
- UBOOT_CONFIG_FRAGMENTS:bsp-mainline =3D "beagleplay_r5.config"
-diff --git a/meta-ti-bsp/conf/machine/beagleplay-ti.conf b/meta-ti-bsp/co=
-nf/machine/beagleplay-ti.conf
-index 3ae10171..68d6dced 100644
---- a/meta-ti-bsp/conf/machine/beagleplay-ti.conf
-+++ b/meta-ti-bsp/conf/machine/beagleplay-ti.conf
-@@ -24,14 +24,14 @@ UBOOT_MACHINE:bsp-ti-6_6 =3D "am62x_beagleplay_a53_de=
-fconfig"
- UBOOT_MACHINE:bsp-ti-6_12 =3D "am62x_beagleplay_a53_defconfig"
-=20
- UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 =3D "am625_beagleplay_a53.config"
--UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am625_beagleplay_a53.config"
- UBOOT_CONFIG_FRAGMENTS:bsp-mainline =3D "beagleplay_a53.config"
-=20
- SPL_BINARY:bsp-ti-6_6 =3D "tispl.bin_unsigned"
- SPL_BINARYNAME:bsp-ti-6_6 =3D "tispl.bin"
-=20
- KERNEL_DEVICETREE_PREFIX =3D " \
--    ti/k3-am625 \
-+    ti/k3-am625-beagle \
-+    ti/k3-am625-sk \
-     ti/k3-am62x-sk \
- "
-=20
-@@ -39,58 +39,11 @@ KERNEL_DEVICETREE =3D " \
-     ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
-     ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
-     ti/k3-am625-beagleplay.dtb \
--    ti/k3-am625-phyboard-lyra-1-4-ghz-opp.dtbo \
--    ti/k3-am625-phyboard-lyra-rdk.dtb \
-     ti/k3-am625-sk.dtb \
--    ti/k3-am625-verdin-nonwifi-dahlia.dtb \
--    ti/k3-am625-verdin-nonwifi-dev.dtb \
--    ti/k3-am625-verdin-nonwifi-mallow.dtb \
--    ti/k3-am625-verdin-nonwifi-yavia.dtb \
--    ti/k3-am625-verdin-wifi-dahlia.dtb \
--    ti/k3-am625-verdin-wifi-dev.dtb \
--    ti/k3-am625-verdin-wifi-mallow.dtb \
--    ti/k3-am625-verdin-wifi-yavia.dtb \
-     ti/k3-am62x-sk-csi2-imx219.dtbo \
-     ti/k3-am62x-sk-csi2-ov5640.dtbo \
-     ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
-     ti/k3-am62x-sk-hdmi-audio.dtbo \
- "
-=20
--KERNEL_DEVICETREE:append:bsp-bb_org =3D " \
--ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
--ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
--ti/k3-am625-beagleplay-lincolntech-lcd185-panel.dtbo \
--ti/k3-am625-beaglemod.dtb \
--ti/k3-am625-beaglemod-audio.dtbo \
--ti/k3-am625-beaglemod-can0.dtbo \
--ti/k3-am625-beaglemod-can1.dtbo \
--ti/k3-am625-beaglemod-csi0-ov5640.dtbo \
--ti/k3-am625-beaglemod-eeprom.dtbo \
--ti/k3-am625-beaglemod-eth.dtbo \
--ti/k3-am625-beaglemod-hdmi.dtbo \
--ti/k3-am625-beaglemod-io-expand.dtbo \
--ti/k3-am625-beaglemod-lt-lcd185.dtbo \
--ti/k3-am625-beaglemod-ospi-flash.dtbo \
--ti/k3-am625-beaglemod-rs485-1.dtbo \
--ti/k3-am625-beaglemod-rs485-2.dtbo \
--ti/k3-am625-beaglemod-rtc.dtbo \
--ti/k3-am625-beaglemod-wl1835.dtbo \
--ti/k3-am625-sk-dmtimer-pwm.dtbo \
--ti/k3-am625-sk-ecap-capture.dtbo \
--ti/k3-am625-sk-lincolntech-lcd185-panel.dtbo \
--ti/k3-am625-sk-mcspi-loopback.dtbo \
--ti/k3-am625-sk-microtips-mf101hie-panel.dtbo \
--ti/k3-am625-sk-microtips-mf103hie-lcd2.dtbo \
--ti/k3-am625-sk-pwm.dtbo \
--ti/k3-am625-sk-rpi-hdr-ehrpwm.dtbo \
--ti/k3-am62x-sk-csi2-imx219.dtbo \
--ti/k3-am62x-sk-csi2-ov5640.dtbo \
--ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
--ti/k3-am62x-sk-csi2-v3link-fusion.dtbo \
--ti/k3-am62x-sk-eqep.dtbo \
--ti/k3-am62x-sk-hdmi-disable-fastboot.dtbo \
--ti/k3-am62x-sk-lpm-wkup-sources.dtbo \
--ti/k3-am62x-sk-mcan.dtbo \
--"
--
- MACHINE_GUI_CLASS =3D "bigscreen"
+ UBOOT_GIT_URI =3D "git://github.com/beagleboard/u-boot.git"
+ UBOOT_GIT_PROTOCOL =3D "https"
+ BRANCH =3D "v2023.04-ti-09.01.00.008"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org/0001-blk-iocos=
+t-avoid-64-bit-division-in-ioc_timer_fn.patch b/meta-beagle/recipes-kerne=
+l/linux/linux-bb.org/0001-blk-iocost-avoid-64-bit-division-in-ioc_timer_f=
+n.patch
+similarity index 100%
+rename from meta-ti-bsp/recipes-kernel/linux/linux-bb.org/0001-blk-iocost=
+-avoid-64-bit-division-in-ioc_timer_fn.patch
+rename to meta-beagle/recipes-kernel/linux/linux-bb.org/0001-blk-iocost-a=
+void-64-bit-division-in-ioc_timer_fn.patch
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org/0001-block-blk=
+-iocost-gcc13-keep-large-values-in-a-new-en.patch b/meta-beagle/recipes-k=
+ernel/linux/linux-bb.org/0001-block-blk-iocost-gcc13-keep-large-values-in=
+-a-new-en.patch
+similarity index 100%
+rename from meta-ti-bsp/recipes-kernel/linux/linux-bb.org/0001-block-blk-=
+iocost-gcc13-keep-large-values-in-a-new-en.patch
+rename to meta-beagle/recipes-kernel/linux/linux-bb.org/0001-block-blk-io=
+cost-gcc13-keep-large-values-in-a-new-en.patch
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org/defconfig b/me=
+ta-beagle/recipes-kernel/linux/linux-bb.org/defconfig
+similarity index 100%
+rename from meta-ti-bsp/recipes-kernel/linux/linux-bb.org/defconfig
+rename to meta-beagle/recipes-kernel/linux/linux-bb.org/defconfig
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb b/meta-=
+beagle/recipes-kernel/linux/linux-bb.org_git.bb
+similarity index 100%
+rename from meta-ti-bsp/recipes-kernel/linux/linux-bb.org_git.bb
+rename to meta-beagle/recipes-kernel/linux/linux-bb.org_git.bb
 --=20
 2.25.1
 
