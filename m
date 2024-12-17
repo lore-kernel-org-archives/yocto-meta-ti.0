@@ -1,76 +1,137 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BFCC4E7717F
-	for <webhook@archiver.kernel.org>; Tue, 17 Dec 2024 17:24:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA90CE7717F
+	for <webhook@archiver.kernel.org>; Tue, 17 Dec 2024 20:59:50 +0000 (UTC)
 Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web10.87049.1734456259624901743
+ by mx.groups.io with SMTP id smtpd.web10.91572.1734469188852469035
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 17 Dec 2024 09:24:19 -0800
+ Tue, 17 Dec 2024 12:59:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=W21VDntM;
- spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: reatmon@ti.com)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BHHOGfa035746
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 17 Dec 2024 11:24:16 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=no69esn6;
+ spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: afd@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BHKxla3057922
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Tue, 17 Dec 2024 14:59:47 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1734456256;
-	bh=qU4ta0m7AA+ldNXWYlnmeJ6MNS2fkgHu6q1DuzVKpGU=;
-	h=From:To:Subject:Date;
-	b=W21VDntMguPjszFmX+YRMafBx688Aim4NKp/XsEL1rd4eWc+0JrwxsShmx70IgTE3
-	 gCm6paoSWX7X3XycnAu6rF23Wqiobnd/czuvMDqOh1GHvNVe1+h6BVElEIeRwTMlId
-	 0lMNAhZBpmQfSyjSMwtQ9dFoj99rMc87a8+txseI=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BHHOG5J082773
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 17 Dec 2024 11:24:16 -0600
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1734469187;
+	bh=xUHakbf7iBkyzM701AeaFONDW3h7mcGPZfj8+QEGz10=;
+	h=From:To:CC:Subject:Date;
+	b=no69esn6FKbfIXdRSR8Xjvp9Q87BDQoZvs98Vt14I79VZ7HRfudUOyQIry9kukBK7
+	 cOxj4SSSLclacJh9u64AYxPnD5DPyctpNfEmQ4OXKlqAdjrzBn5OnjX+CUiYjoetf0
+	 n2MkOOrDZ2W0jlQjd2r0wjtWa5YcOMcHmdX6jFZ4=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BHKxl5j018038;
+	Tue, 17 Dec 2024 14:59:47 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
- Dec 2024 11:24:16 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2024 14:59:46 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 17 Dec 2024 11:24:16 -0600
-Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BHHOGI0126837;
-	Tue, 17 Dec 2024 11:24:16 -0600
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1tNbIu-000890-1V; Tue, 17 Dec 2024 11:24:16 -0600
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
+ Frontend Transport; Tue, 17 Dec 2024 14:59:46 -0600
+Received: from lelvsmtp5.itg.ti.com ([10.249.42.149])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BHKxkaR037110;
+	Tue, 17 Dec 2024 14:59:46 -0600
+From: Andrew Davis <afd@ti.com>
+To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] meta-beagle: Add SECURITY file
-Date: Tue, 17 Dec 2024 11:24:16 -0600
-Message-ID: <20241217172416.31267-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+CC: Andrew Davis <afd@ti.com>
+Subject: [meta-ti][scarthgap/master][PATCH] ti-bsp: Disable GC320 support conditionally on BSP version
+Date: Tue, 17 Dec 2024 14:59:45 -0600
+Message-ID: <20241217205945.46805-1-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 17 Dec 2024 17:24:29 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18125
+ <meta-ti@lists.yoctoproject.org>; Tue, 17 Dec 2024 20:59:50 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18126
 
-Add missing SECURITY file required by yocto-check-layer.
+Like we do with GPU support, GC320 support is conditional on the
+kernel we are building and so should be disabled here for kernels
+on which it is not functional yet.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+We can then remove these disabling lines as the driver is updated
+for each supported kernel, instead of blanket disabling in the
+distro layer as done currently.
+
+Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- {meta-ti-bsp => meta-beagle}/SECURITY | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- copy {meta-ti-bsp => meta-beagle}/SECURITY (100%)
+ meta-ti-bsp/conf/machine/include/ti-bsp.inc | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/meta-ti-bsp/SECURITY b/meta-beagle/SECURITY
-similarity index 100%
-copy from meta-ti-bsp/SECURITY
-copy to meta-beagle/SECURITY
+diff --git a/meta-ti-bsp/conf/machine/include/ti-bsp.inc b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
+index 814c6ca8..bdc8bef7 100644
+--- a/meta-ti-bsp/conf/machine/include/ti-bsp.inc
++++ b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
+@@ -22,6 +22,9 @@ BSP_BOOTLOADER_VERSION:bsp-mainline = "%"
+ # in mainline, usually present in TI staging or derivative like BB.org
+ MACHINE_FEATURES:remove:bsp-mainline = "gpu"
+ 
++# GC320 support requires out-of-tree drivers not available in mainline
++MACHINE_FEATURES:remove:bsp-mainline = "gc320"
++
+ # ==========
+ # next
+ # upcoming upstream/mainline kernel, u-boot
+@@ -35,6 +38,9 @@ BSP_BOOTLOADER_VERSION:bsp-next = "%"
+ # in next, usually present in TI staging or derivative like BB.org
+ MACHINE_FEATURES:remove:bsp-next = "gpu"
+ 
++# GC320 support requires out-of-tree drivers not available in next
++MACHINE_FEATURES:remove:bsp-next = "gc320"
++
+ # ==========
+ # ti-6_12
+ # TI staging kernel 6.12, u-boot 2024.10
+@@ -48,6 +54,9 @@ BSP_BOOTLOADER_VERSION:bsp-ti-6_12 = "2024.10%"
+ # in 6.12 yet
+ MACHINE_FEATURES:remove:bsp-ti-6_12 = "gpu"
+ 
++# GC320 support requires out-of-tree drivers not yet available in 6.12
++MACHINE_FEATURES:remove:bsp-ti-6_12 = "gc320"
++
+ # ==========
+ # ti-6_6
+ # TI staging kernel 6.6, u-boot 2024.04
+@@ -65,6 +74,9 @@ BSP_ROGUE_DRIVER_VERSION:bsp-ti-6_6 = "24%"
+ BSP_ROGUE_UMLIBS_VERSION:bsp-ti-6_6 = "24%"
+ BSP_MESA_PVR_VERSION:bsp-ti-6_6 = "23%"
+ 
++# GC320 support requires out-of-tree drivers not yet available in 6.6
++MACHINE_FEATURES:remove:bsp-ti-6_6 = "gc320"
++
+ # ==========
+ # ti-6_1
+ # TI staging kernel 6.1, u-boot 2023.04
+@@ -82,6 +94,9 @@ BSP_ROGUE_DRIVER_VERSION:bsp-ti-6_1 = "23%"
+ BSP_ROGUE_UMLIBS_VERSION:bsp-ti-6_1 = "23%"
+ BSP_MESA_PVR_VERSION:bsp-ti-6_1 = "22%"
+ 
++# GC320 support requires out-of-tree drivers not yet available in 6.1
++MACHINE_FEATURES:remove:bsp-ti-6_1 = "gc320"
++
+ # ==========
+ # bb_org
+ # BeagleBoard.org kernel 6.1, u-boot 2023.04
+@@ -101,6 +116,9 @@ BSP_ROGUE_DRIVER_VERSION:bsp-bb_org = "23%"
+ BSP_ROGUE_UMLIBS_VERSION:bsp-bb_org = "23%"
+ BSP_MESA_PVR_VERSION:bsp-bb_org = "22%"
+ 
++# GC320 support requires out-of-tree drivers not yet available in bb.org
++MACHINE_FEATURES:remove:bsp-bb_org = "gc320"
++
+ # ==========
+ # sane fallback defaults
+ # if specific values are not defined or bsp is set incorrectly
 -- 
-2.17.1
+2.39.2
 
 
