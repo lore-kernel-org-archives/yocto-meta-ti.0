@@ -2,35 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E48C7E77187
-	for <webhook@archiver.kernel.org>; Wed, 18 Dec 2024 20:49:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17AA6E7718E
+	for <webhook@archiver.kernel.org>; Wed, 18 Dec 2024 20:49:38 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.115336.1734554968749693797
+ by mx.groups.io with SMTP id smtpd.web10.115335.1734554967731704766
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 18 Dec 2024 12:49:28 -0800
+ Wed, 18 Dec 2024 12:49:27 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 3780240CBB;
-	Wed, 18 Dec 2024 20:49:28 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 0CEC640CCE;
+	Wed, 18 Dec 2024 20:49:27 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6rZzJI3QdEwv; Wed, 18 Dec 2024 20:49:28 +0000 (UTC)
+	with ESMTP id kVnaeEqcvAEP; Wed, 18 Dec 2024 20:49:27 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 18FDA40CC7;
-	Wed, 18 Dec 2024 20:49:26 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id EF38640CBF;
+	Wed, 18 Dec 2024 20:49:25 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id D5F00164140;
+	by mail.denix.org (Postfix) with ESMTP id A80F116413C;
 	Wed, 18 Dec 2024 15:49:24 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
-Cc: Ryan Eatmon <reatmon@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>
-Subject: [scarthgap][PATCH 13/13] meta-beagle: Add SECURITY file
-Date: Wed, 18 Dec 2024 15:49:23 -0500
-Message-Id: <20241218204923.2601088-13-denis@denix.org>
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [scarthgap][PATCH 09/13] conf/machine: add BeagleY-AI platform
+Date: Wed, 18 Dec 2024 15:49:19 -0500
+Message-Id: <20241218204923.2601088-9-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241218204923.2601088-1-denis@denix.org>
 References: <20241218204923.2601088-1-denis@denix.org>
@@ -39,50 +38,89 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 18 Dec 2024 20:49:37 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18140
+ <meta-ti@lists.yoctoproject.org>; Wed, 18 Dec 2024 20:49:38 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18136
 
-From: Ryan Eatmon <reatmon@ti.com>
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-Add missing SECURITY file required by yocto-check-layer.
+Add machine configuration for BeagleY-AI platform.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-beagle/SECURITY | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 meta-beagle/SECURITY
+ meta-beagle/conf/machine/beagley-ai-k3r5.conf | 14 +++++++++++
+ meta-beagle/conf/machine/beagley-ai.conf      | 23 +++++++++++++++++++
+ .../recipes-bsp/u-boot/u-boot-bb.org_git.bb   |  5 ++++
+ 3 files changed, 42 insertions(+)
+ create mode 100644 meta-beagle/conf/machine/beagley-ai-k3r5.conf
+ create mode 100644 meta-beagle/conf/machine/beagley-ai.conf
 
-diff --git a/meta-beagle/SECURITY b/meta-beagle/SECURITY
+diff --git a/meta-beagle/conf/machine/beagley-ai-k3r5.conf b/meta-beagle/=
+conf/machine/beagley-ai-k3r5.conf
 new file mode 100644
-index 00000000..367adc34
+index 00000000..87462e72
 --- /dev/null
-+++ b/meta-beagle/SECURITY
-@@ -0,0 +1,20 @@
-+How to Report a Potential Vulnerability?
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++++ b/meta-beagle/conf/machine/beagley-ai-k3r5.conf
+@@ -0,0 +1,14 @@
++#@TYPE: Machine
++#@NAME: BeagleY AI (R5F)
++#@DESCRIPTION: Machine configuration for the BeagleY AI (R5F core)
 +
-+If you would like to report a public issue (for example, one with a rele=
-ased
-+CVE number), please report it to the mailing list:
++require conf/machine/include/k3r5.inc
++require conf/machine/include/beagle-bsp.inc
 +
-+  https://lists.yoctoproject.org/g/meta-ti
++SYSFW_SOC =3D "j722s"
++SYSFW_CONFIG =3D "evm"
++SYSFW_SUFFIX =3D "hs-fs"
 +
-+If you are dealing with a not-yet released or urgent issue, please send =
-a
-+message to one of the maintainers listed in the README.  Include as many
-+details as possible:
-+  - the layer or software module affected
-+  - the recipe and its version
-+  - any example code, if available
++UBOOT_MACHINE =3D "j722s_evm_r5_defconfig"
 +
-+Branches maintained with security fixes
-+---------------------------------------
++UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am67a_beagley_ai_r5.config"
+diff --git a/meta-beagle/conf/machine/beagley-ai.conf b/meta-beagle/conf/=
+machine/beagley-ai.conf
+new file mode 100644
+index 00000000..8dcc9b14
+--- /dev/null
++++ b/meta-beagle/conf/machine/beagley-ai.conf
+@@ -0,0 +1,23 @@
++#@TYPE: Machine
++#@NAME: BeagleY AI (A53)
++#@DESCRIPTION: Machine configuration for the BeagleY AI board (A53 core)
 +
-+See https://wiki.yoctoproject.org/wiki/Releases for the list of current
-+releases.  We only accept patches for the LTS releases and the master br=
-anch.
++require conf/machine/include/j722s.inc
++require conf/machine/include/beagle-bsp.inc
++
++UBOOT_MACHINE =3D "j722s_evm_a53_config"
++
++UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am67a_beagley_ai_a53.config"
++
++KERNEL_DEVICETREE_PREFIX =3D " \
++    ti/k3-j722s \
++"
++
++KERNEL_DEVICETREE =3D ""
++
++KERNEL_DEVICETREE:append:bsp-bb_org =3D " \
++ti/k3-j722s-evm.dtb \
++ti/k3-am67a-beagley-ai.dtb \
++"
++
++MACHINE_GUI_CLASS =3D "bigscreen"
+diff --git a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_git.bb b/meta-b=
+eagle/recipes-bsp/u-boot/u-boot-bb.org_git.bb
+index 0b23effc..8e14c495 100644
+--- a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_git.bb
++++ b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_git.bb
+@@ -15,3 +15,8 @@ BRANCH:beagleplay =3D "v2023.04-ti-09.01.00.008-BeagleP=
+lay"
+ BRANCH:beagleplay-k3r5 =3D "v2023.04-ti-09.01.00.008-BeaglePlay"
+ SRCREV:beagleplay =3D "43791d945f4e5c25bcc19b9c778e8f9d194dc16e"
+ SRCREV:beagleplay-k3r5 =3D "43791d945f4e5c25bcc19b9c778e8f9d194dc16e"
++
++BRANCH:beagley-ai =3D "v2023.04-ti-09.02.00.009-BeagleY-AI-Production"
++BRANCH:beagley-ai-k3r5 =3D "v2023.04-ti-09.02.00.009-BeagleY-AI-Producti=
+on"
++SRCREV:beagley-ai =3D "93735daa6fe024304934d5a5e93ab05a06abf1a8"
++SRCREV:beagley-ai-k3r5 =3D "93735daa6fe024304934d5a5e93ab05a06abf1a8"
 --=20
 2.25.1
 
