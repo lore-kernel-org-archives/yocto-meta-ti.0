@@ -2,459 +2,143 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 185DEE77190
-	for <webhook@archiver.kernel.org>; Wed, 18 Dec 2024 20:49:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CA22E77187
+	for <webhook@archiver.kernel.org>; Wed, 18 Dec 2024 21:19:38 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.115502.1734554967767372226
+ by mx.groups.io with SMTP id smtpd.web10.115986.1734556771147611521
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 18 Dec 2024 12:49:27 -0800
+ Wed, 18 Dec 2024 13:19:31 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 2B7A840CBF;
-	Wed, 18 Dec 2024 20:49:27 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 78C5E40CB0;
+	Wed, 18 Dec 2024 21:19:30 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xgden4DsF3ND; Wed, 18 Dec 2024 20:49:27 +0000 (UTC)
+	with ESMTP id 36-xFmotgj9m; Wed, 18 Dec 2024 21:19:30 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0854140CC3;
-	Wed, 18 Dec 2024 20:49:25 +0000 (UTC)
-Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id BEE9316413E;
-	Wed, 18 Dec 2024 15:49:24 -0500 (EST)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 456F940BD4;
+	Wed, 18 Dec 2024 21:19:28 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id AB395164135; Wed, 18 Dec 2024 16:19:27 -0500 (EST)
+Date: Wed, 18 Dec 2024 16:19:27 -0500
 From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [scarthgap][PATCH 11/13] beagle-bsp, linux-bb.org, u-boot-bb.org: add support for 6.6 BSP
-Date: Wed, 18 Dec 2024 15:49:21 -0500
-Message-Id: <20241218204923.2601088-11-denis@denix.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241218204923.2601088-1-denis@denix.org>
-References: <20241218204923.2601088-1-denis@denix.org>
+To: afd@ti.com
+Cc: Ryan Eatmon <reatmon@ti.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][scarthgap/master][PATCH] ti-bsp: Disable GC320
+ support conditionally on BSP version
+Message-ID: <20241218211927.GI23825@denix.org>
+References: <20241217205945.46805-1-afd@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241217205945.46805-1-afd@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 18 Dec 2024 20:49:38 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18137
+ <meta-ti@lists.yoctoproject.org>; Wed, 18 Dec 2024 21:19:38 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18142
 
-From: Denys Dmytriyenko <denys@konsulko.com>
+Andrew,
 
-Most Beagle platforms are switching to 6.6 based Linux kernel and U-boot
-2024.10. Add corresponding recipes and extend beagle-bsp with required
-settings.
+Thanks for the patches. Ryan and I were discussing them yesterday.
 
-BeagleY-AI for now remains on 6.1 BSP with U-boot 2023.04.
+Couple points/questions:
 
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
----
- meta-beagle/conf/machine/beagle-x15.conf      |  2 +-
- .../conf/machine/beaglebone-ai64-k3r5.conf    |  8 ++-
- meta-beagle/conf/machine/beaglebone-ai64.conf | 19 ++++--
- meta-beagle/conf/machine/beaglebone.conf      |  2 +-
- meta-beagle/conf/machine/beagleplay-k3r5.conf |  5 +-
- meta-beagle/conf/machine/beagleplay.conf      | 37 +++++++++-
- meta-beagle/conf/machine/beagley-ai-k3r5.conf |  4 +-
- meta-beagle/conf/machine/beagley-ai.conf      |  6 +-
- .../conf/machine/include/beagle-bsp.inc       | 47 +++++++++----
- .../u-boot/u-boot-bb.org_2024.10.bb           | 12 ++++
- .../linux/linux-bb.org-6.6/defconfig          |  1 +
- .../recipes-kernel/linux/linux-bb.org_6.6.bb  | 68 +++++++++++++++++++
- 12 files changed, 180 insertions(+), 31 deletions(-)
- create mode 100644 meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.=
-bb
- create mode 100644 meta-beagle/recipes-kernel/linux/linux-bb.org-6.6/def=
-config
- create mode 100644 meta-beagle/recipes-kernel/linux/linux-bb.org_6.6.bb
+1. There's meta-beagle restructuring going on in master right now - the 
+changes are in master-next and should be merged to master shortly. I also 
+just posted a series to backport these changes to scarthgap. That will 
+affect your change below to ti-bsp.inc and will need to be re-spinned.
 
-diff --git a/meta-beagle/conf/machine/beagle-x15.conf b/meta-beagle/conf/=
-machine/beagle-x15.conf
-index e9ab5d40..8ad028f4 100644
---- a/meta-beagle/conf/machine/beagle-x15.conf
-+++ b/meta-beagle/conf/machine/beagle-x15.conf
-@@ -7,7 +7,7 @@ require conf/machine/include/beagle-bsp.inc
-=20
- DT_VENDOR_PREFIX =3D "ti/omap/"
- DT_VENDOR_PREFIX:bsp-ti-6_1 =3D ""
--DT_VENDOR_PREFIX:bsp-bb_org =3D ""
-+DT_VENDOR_PREFIX:bsp-bb_org-6_1 =3D ""
-=20
- KERNEL_DEVICETREE_PREFIX =3D " \
- ${DT_VENDOR_PREFIX}am57xx-beagle-x15 \
-diff --git a/meta-beagle/conf/machine/beaglebone-ai64-k3r5.conf b/meta-be=
-agle/conf/machine/beaglebone-ai64-k3r5.conf
-index 95d3abc0..4574f82b 100644
---- a/meta-beagle/conf/machine/beaglebone-ai64-k3r5.conf
-+++ b/meta-beagle/conf/machine/beaglebone-ai64-k3r5.conf
-@@ -15,8 +15,10 @@ UBOOT_BINARY =3D "tiboot3.${UBOOT_SUFFIX}"
- UBOOT_IMAGE =3D "tiboot3-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
- UBOOT_SYMLINK =3D "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
-=20
--UBOOT_MACHINE =3D "j721e_evm_r5_defconfig"
--UBOOT_MACHINE:bsp-ti-6_6 =3D "j721e_beagleboneai64_r5_defconfig"
-+UBOOT_MACHINE =3D "j721e_beagleboneai64_r5_defconfig"
-=20
--UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "j721e_beagleboneai64_r5.config"
-+UBOOT_MACHINE:bsp-ti-6_1 =3D "j721e_evm_r5_defconfig"
- UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 =3D "j721e_beagleboneai64_r5.config"
-+
-+UBOOT_MACHINE:bsp-bb_org-6_1 =3D "j721e_evm_r5_defconfig"
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 =3D "j721e_beagleboneai64_r5.confi=
-g"
-diff --git a/meta-beagle/conf/machine/beaglebone-ai64.conf b/meta-beagle/=
-conf/machine/beaglebone-ai64.conf
-index faffd0bb..a521c8cf 100644
---- a/meta-beagle/conf/machine/beaglebone-ai64.conf
-+++ b/meta-beagle/conf/machine/beaglebone-ai64.conf
-@@ -5,18 +5,25 @@
- require conf/machine/include/j721e.inc
- require conf/machine/include/beagle-bsp.inc
-=20
--IMAGE_SR1_1_HS_FS_FILES:bsp-bb_org =3D ""
--IMAGE_SR2_HS_SE_FILES:bsp-bb_org =3D ""
-+IMAGE_SR1_1_HS_FS_FILES =3D ""
-+IMAGE_SR1_1_HS_SE_FILES =3D ""
-+IMAGE_SR2_HS_FS_FILES =3D ""
-+IMAGE_SR2_HS_SE_FILES =3D ""
-=20
--UBOOT_MACHINE =3D "j721e_evm_a72_config"
--UBOOT_MACHINE:bsp-ti-6_6 =3D "j721e_beagleboneai64_a72_defconfig"
-+UBOOT_MACHINE =3D "j721e_beagleboneai64_a72_defconfig"
-=20
-+UBOOT_MACHINE:bsp-ti-6_1 =3D "j721e_evm_a72_config"
- UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 =3D "j721e_beagleboneai64_a72.config"
--UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "j721e_beagleboneai64_a72.config"
-+
-+UBOOT_MACHINE:bsp-bb_org-6_1 =3D "j721e_evm_a72_config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 =3D "j721e_beagleboneai64_a72.conf=
-ig"
-=20
- SPL_BINARY:bsp-ti-6_6 =3D "tispl.bin_unsigned"
- SPL_BINARYNAME:bsp-ti-6_6 =3D "tispl.bin"
-=20
-+SPL_BINARY:bsp-bb_org-6_6 =3D "tispl.bin_unsigned"
-+SPL_BINARYNAME:bsp-bb_org-6_6 =3D "tispl.bin"
-+
- KERNEL_DEVICETREE_PREFIX =3D " \
-     ti/k3-j721e \
- "
-@@ -29,7 +36,7 @@ ti/k3-j721e-evm-quad-port-eth-exp.dtbo \
- ti/k3-j721e-sk.dtb \
- "
-=20
--KERNEL_DEVICETREE:append:bsp-bb_org =3D " \
-+KERNEL_DEVICETREE:append:bsp-bb_org-6_1 =3D " \
- ti/k3-j721e-beagleboneai64-dsi-rpi-7inch-panel.dtbo \
- ti/k3-j721e-common-proc-board-infotainment.dtbo \
- ti/k3-j721e-evm-csi2-ov5640.dtbo \
-diff --git a/meta-beagle/conf/machine/beaglebone.conf b/meta-beagle/conf/=
-machine/beaglebone.conf
-index 6048383b..456da618 100644
---- a/meta-beagle/conf/machine/beaglebone.conf
-+++ b/meta-beagle/conf/machine/beaglebone.conf
-@@ -7,7 +7,7 @@ require conf/machine/include/beagle-bsp.inc
-=20
- DT_VENDOR_PREFIX =3D "ti/omap/"
- DT_VENDOR_PREFIX:bsp-ti-6_1 =3D ""
--DT_VENDOR_PREFIX:bsp-bb_org =3D ""
-+DT_VENDOR_PREFIX:bsp-bb_org-6_1 =3D ""
-=20
- KERNEL_DEVICETREE_PREFIX =3D " \
- ${DT_VENDOR_PREFIX}am335x-bone \
-diff --git a/meta-beagle/conf/machine/beagleplay-k3r5.conf b/meta-beagle/=
-conf/machine/beagleplay-k3r5.conf
-index 1423aa10..3e7f0c1b 100644
---- a/meta-beagle/conf/machine/beagleplay-k3r5.conf
-+++ b/meta-beagle/conf/machine/beagleplay-k3r5.conf
-@@ -3,6 +3,9 @@
- #@DESCRIPTION: Machine configuration for the BeaglePlay (R5F core)
-=20
- require conf/machine/beagleplay-ti-k3r5.conf
-+
- require conf/machine/include/beagle-bsp.inc
-=20
--UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am625_beagleplay_r5.config"
-+UBOOT_MACHINE:bsp-bb_org-6_6 =3D "am62x_beagleplay_r5_defconfig"
-+
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 =3D "am625_beagleplay_r5.config"
-diff --git a/meta-beagle/conf/machine/beagleplay.conf b/meta-beagle/conf/=
-machine/beagleplay.conf
-index 1977b4c1..b1a463e1 100644
---- a/meta-beagle/conf/machine/beagleplay.conf
-+++ b/meta-beagle/conf/machine/beagleplay.conf
-@@ -3,11 +3,17 @@
- #@DESCRIPTION: Machine configuration for the BeaglePlay board (A53 core)
-=20
- require conf/machine/beagleplay-ti.conf
-+
- require conf/machine/include/beagle-bsp.inc
-=20
--UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am625_beagleplay_a53.config"
-+UBOOT_MACHINE:bsp-bb_org-6_6 =3D "am62x_beagleplay_a53_defconfig"
-+
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 =3D "am625_beagleplay_a53.config"
-+
-+SPL_BINARY:bsp-bb_org-6_6 =3D "tispl.bin_unsigned"
-+SPL_BINARYNAME:bsp-bb_org-6_6 =3D "tispl.bin"
-=20
--KERNEL_DEVICETREE:append:bsp-bb_org =3D " \
-+KERNEL_DEVICETREE:append:bsp-bb_org-6_1 =3D " \
- ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
- ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
- ti/k3-am625-beagleplay-lincolntech-lcd185-panel.dtbo \
-@@ -43,3 +49,30 @@ ti/k3-am62x-sk-hdmi-disable-fastboot.dtbo \
- ti/k3-am62x-sk-lpm-wkup-sources.dtbo \
- ti/k3-am62x-sk-mcan.dtbo \
- "
-+
-+KERNEL_DEVICETREE:append:bsp-bb_org-6_6 =3D " \
-+ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
-+ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
-+ti/k3-am625-beagleplay.dtb \
-+ti/k3-am625-beagleplay-lincolntech-lcd185-panel.dtbo \
-+ti/k3-am625-minimal.dtb \
-+ti/k3-am625-sk.dtb \
-+ti/k3-am625-sk-ecap-capture.dtbo \
-+ti/k3-am625-sk-lincolntech-lcd185-panel.dtbo \
-+ti/k3-am625-sk-m2-cc3301.dtbo \
-+ti/k3-am625-sk-mcspi-loopback.dtbo \
-+ti/k3-am625-sk-microtips-mf101hie-panel.dtbo \
-+ti/k3-am625-sk-rpi-hdr-ehrpwm.dtbo \
-+ti/k3-am62x-sk-csi2-imx219.dtbo \
-+ti/k3-am62x-sk-csi2-ov5640.dtbo \
-+ti/k3-am62x-sk-csi2-tevi-ov5640.dtbo \
-+ti/k3-am62x-sk-csi2-v3link-fusion.dtbo \
-+ti/k3-am62x-sk-dmtimer-pwm.dtbo \
-+ti/k3-am62x-sk-eqep.dtbo \
-+ti/k3-am62x-sk-fastboot-disable-hdmi.dtbo \
-+ti/k3-am62x-sk-hdmi-audio.dtbo \
-+ti/k3-am62x-sk-lpm-wkup-sources.dtbo \
-+ti/k3-am62x-sk-mcan.dtbo \
-+ti/k3-am62x-sk-microtips-mf103hie-lcd2.dtbo \
-+ti/k3-am62x-sk-pwm.dtbo \
-+"
-diff --git a/meta-beagle/conf/machine/beagley-ai-k3r5.conf b/meta-beagle/=
-conf/machine/beagley-ai-k3r5.conf
-index 87462e72..6cc370d1 100644
---- a/meta-beagle/conf/machine/beagley-ai-k3r5.conf
-+++ b/meta-beagle/conf/machine/beagley-ai-k3r5.conf
-@@ -3,6 +3,8 @@
- #@DESCRIPTION: Machine configuration for the BeagleY AI (R5F core)
-=20
- require conf/machine/include/k3r5.inc
-+
-+TI_PREFERRED_BSP ?=3D "bb_org-6_1"
- require conf/machine/include/beagle-bsp.inc
-=20
- SYSFW_SOC =3D "j722s"
-@@ -11,4 +13,4 @@ SYSFW_SUFFIX =3D "hs-fs"
-=20
- UBOOT_MACHINE =3D "j722s_evm_r5_defconfig"
-=20
--UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am67a_beagley_ai_r5.config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 =3D "am67a_beagley_ai_r5.config"
-diff --git a/meta-beagle/conf/machine/beagley-ai.conf b/meta-beagle/conf/=
-machine/beagley-ai.conf
-index 8dcc9b14..9b1832d2 100644
---- a/meta-beagle/conf/machine/beagley-ai.conf
-+++ b/meta-beagle/conf/machine/beagley-ai.conf
-@@ -3,11 +3,13 @@
- #@DESCRIPTION: Machine configuration for the BeagleY AI board (A53 core)
-=20
- require conf/machine/include/j722s.inc
-+
-+TI_PREFERRED_BSP ?=3D "bb_org-6_1"
- require conf/machine/include/beagle-bsp.inc
-=20
- UBOOT_MACHINE =3D "j722s_evm_a53_config"
-=20
--UBOOT_CONFIG_FRAGMENTS:bsp-bb_org =3D "am67a_beagley_ai_a53.config"
-+UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 =3D "am67a_beagley_ai_a53.config"
-=20
- KERNEL_DEVICETREE_PREFIX =3D " \
-     ti/k3-j722s \
-@@ -15,7 +17,7 @@ KERNEL_DEVICETREE_PREFIX =3D " \
-=20
- KERNEL_DEVICETREE =3D ""
-=20
--KERNEL_DEVICETREE:append:bsp-bb_org =3D " \
-+KERNEL_DEVICETREE:append:bsp-bb_org-6_1 =3D " \
- ti/k3-j722s-evm.dtb \
- ti/k3-am67a-beagley-ai.dtb \
- "
-diff --git a/meta-beagle/conf/machine/include/beagle-bsp.inc b/meta-beagl=
-e/conf/machine/include/beagle-bsp.inc
-index 77d0b483..34889b41 100644
---- a/meta-beagle/conf/machine/include/beagle-bsp.inc
-+++ b/meta-beagle/conf/machine/include/beagle-bsp.inc
-@@ -1,24 +1,43 @@
- # Use meta-ti-bsp "multi-BSP" facility to create a custom "bb_org" BSP p=
-rofile
- # with default preferences for Beagle platforms
-=20
--# Default is bb_org, but can override with any of the existing options
--TI_PREFERRED_BSP ?=3D "bb_org"
-+# Default is bb_org-6_6, but can override with any of the existing optio=
-ns
-+TI_PREFERRED_BSP ?=3D "bb_org-6_6"
-=20
- # =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
--# bb_org
-+# bb_org-6_1
- # BeagleBoard.org kernel 6.1, u-boot 2023.04
- # based on TI staging trees with extra Beagle-specific features
- # but may not be up-to-date with TI version
- # =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
--BSP_KERNEL_PROVIDER:bsp-bb_org =3D "linux-bb.org"
--BSP_KERNEL_VERSION:bsp-bb_org =3D "%"
--BSP_BOOTLOADER_PROVIDER:bsp-bb_org =3D "u-boot-bb.org"
--BSP_BOOTLOADER_VERSION:bsp-bb_org =3D "%"
-+BSP_KERNEL_PROVIDER:bsp-bb_org-6_1 =3D "linux-bb.org"
-+BSP_KERNEL_VERSION:bsp-bb_org-6_1 =3D "6.1.%"
-+BSP_BOOTLOADER_PROVIDER:bsp-bb_org-6_1 =3D "u-boot-bb.org"
-+BSP_BOOTLOADER_VERSION:bsp-bb_org-6_1 =3D "2023.%"
-=20
--BSP_SGX_DRIVER_PROVIDER:bsp-bb_org =3D "ti-sgx-ddk-km"
--BSP_SGX_DRIVER_VERSION:bsp-bb_org =3D "1.17%"
--BSP_SGX_UMLIBS_VERSION:bsp-bb_org =3D "1.17%"
--BSP_ROGUE_DRIVER_PROVIDER:bsp-bb_org =3D "ti-img-rogue-driver"
--BSP_ROGUE_DRIVER_VERSION:bsp-bb_org =3D "23%"
--BSP_ROGUE_UMLIBS_VERSION:bsp-bb_org =3D "23%"
--BSP_MESA_PVR_VERSION:bsp-bb_org =3D "22%"
-+BSP_SGX_DRIVER_PROVIDER:bsp-bb_org-6_1 =3D "ti-sgx-ddk-km"
-+BSP_SGX_DRIVER_VERSION:bsp-bb_org-6_1 =3D "1.17%"
-+BSP_SGX_UMLIBS_VERSION:bsp-bb_org-6_1 =3D "1.17%"
-+BSP_ROGUE_DRIVER_PROVIDER:bsp-bb_org-6_1 =3D "ti-img-rogue-driver"
-+BSP_ROGUE_DRIVER_VERSION:bsp-bb_org-6_1 =3D "23%"
-+BSP_ROGUE_UMLIBS_VERSION:bsp-bb_org-6_1 =3D "23%"
-+BSP_MESA_PVR_VERSION:bsp-bb_org-6_1 =3D "22%"
-+
-+# =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+# bb_org-6_6
-+# BeagleBoard.org kernel 6.6, Upstream u-boot 2024.07
-+# based on TI staging trees with extra Beagle-specific features
-+# but may not be up-to-date with TI version
-+# =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+BSP_KERNEL_PROVIDER:bsp-bb_org-6_6 =3D "linux-bb.org"
-+BSP_KERNEL_VERSION:bsp-bb_org-6_6 =3D "6.6.%"
-+BSP_BOOTLOADER_PROVIDER:bsp-bb_org-6_6 =3D "u-boot-bb.org"
-+BSP_BOOTLOADER_VERSION:bsp-bb_org-6_6 =3D "2024.%"
-+
-+BSP_SGX_DRIVER_PROVIDER:bsp-bb_org-6_6 =3D "ti-sgx-ddk-km"
-+BSP_SGX_DRIVER_VERSION:bsp-bb_org-6_6 =3D "1.17%"
-+BSP_SGX_UMLIBS_VERSION:bsp-bb_org-6_6 =3D "1.17%"
-+BSP_ROGUE_DRIVER_PROVIDER:bsp-bb_org-6_6 =3D "ti-img-rogue-driver"
-+BSP_ROGUE_DRIVER_VERSION:bsp-bb_org-6_6 =3D "24%"
-+BSP_ROGUE_UMLIBS_VERSION:bsp-bb_org-6_6 =3D "24%"
-+BSP_MESA_PVR_VERSION:bsp-bb_org-6_6 =3D "23%"
-diff --git a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.bb b/me=
-ta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.bb
-new file mode 100644
-index 00000000..10b20873
---- /dev/null
-+++ b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.bb
-@@ -0,0 +1,12 @@
-+require recipes-bsp/u-boot/u-boot-ti.inc
-+
-+SUMMARY =3D "BeagleBoard.org U-Boot"
-+
-+COMPATIBLE_MACHINE =3D "beagle.*"
-+
-+PV =3D "2024.10"
-+
-+UBOOT_GIT_URI =3D "git://github.com/beagleboard/u-boot.git"
-+UBOOT_GIT_PROTOCOL =3D "https"
-+BRANCH =3D "v2024.10-Beagle"
-+SRCREV =3D "bf0e9d0b7274d2b561bd24c858affec2038250f9"
-diff --git a/meta-beagle/recipes-kernel/linux/linux-bb.org-6.6/defconfig =
-b/meta-beagle/recipes-kernel/linux/linux-bb.org-6.6/defconfig
-new file mode 100644
-index 00000000..a5de2e24
---- /dev/null
-+++ b/meta-beagle/recipes-kernel/linux/linux-bb.org-6.6/defconfig
-@@ -0,0 +1 @@
-+use-kernel-config=3Dbb.org_defconfig
-diff --git a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.6.bb b/meta-=
-beagle/recipes-kernel/linux/linux-bb.org_6.6.bb
-new file mode 100644
-index 00000000..bf8f8a24
---- /dev/null
-+++ b/meta-beagle/recipes-kernel/linux/linux-bb.org_6.6.bb
-@@ -0,0 +1,68 @@
-+# Look in the generic major.minor directory for files
-+FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-6.6:"
-+
-+SECTION =3D "kernel"
-+SUMMARY =3D "BeagleBoard.org Linux kernel"
-+LICENSE =3D "GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6bc538ed5bd9a7fc9398086aedcd7=
-e46"
-+
-+COMPATIBLE_MACHINE =3D "beagle.*"
-+
-+inherit kernel
-+
-+require recipes-kernel/linux/setup-defconfig.inc
-+require recipes-kernel/linux/ti-kernel.inc
-+
-+DEPENDS +=3D "gmp-native libmpc-native"
-+
-+KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT} ${EXTRA_DTC_ARGS}=
-"
-+
-+# Extra DT overlays/capes
-+KERNEL_DEVICETREE:append:armv7a =3D " \
-+${DT_VENDOR_PREFIX}AM335X-PRU-UIO-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-ADC-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-BBBW-WL1835-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-BBGG-WL1835-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-BBGW-WL1835-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-BONE-4D5R-01-00A1.dtbo \
-+${DT_VENDOR_PREFIX}BB-BONE-eMMC1-01-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-BONE-LCD4-01-00A1.dtbo \
-+${DT_VENDOR_PREFIX}BB-BONE-NH7C-01-A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-CAPE-DISP-CT4-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-HDMI-TDA998x-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-I2C1-MCP7940X-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-I2C1-RTC-DS3231.dtbo \
-+${DT_VENDOR_PREFIX}BB-I2C1-RTC-PCF8563.dtbo \
-+${DT_VENDOR_PREFIX}BB-I2C2-BME680.dtbo \
-+${DT_VENDOR_PREFIX}BB-I2C2-MPU6050.dtbo \
-+${DT_VENDOR_PREFIX}BB-LCD-ADAFRUIT-24-SPI1-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-NHDMI-TDA998x-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BBORG_COMMS-00A2.dtbo \
-+${DT_VENDOR_PREFIX}BBORG_FAN-A000.dtbo \
-+${DT_VENDOR_PREFIX}BBORG_RELAY-00A2.dtbo \
-+${DT_VENDOR_PREFIX}BB-SPIDEV0-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-SPIDEV1-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-UART1-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-UART2-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-UART4-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BB-W1-P9.12-00A0.dtbo \
-+${DT_VENDOR_PREFIX}BONE-ADC.dtbo \
-+${DT_VENDOR_PREFIX}M-BB-BBG-00A0.dtbo \
-+${DT_VENDOR_PREFIX}M-BB-BBGG-00A0.dtbo \
-+${DT_VENDOR_PREFIX}PB-MIKROBUS-0.dtbo \
-+${DT_VENDOR_PREFIX}PB-MIKROBUS-1.dtbo \
-+"
-+
-+S =3D "${WORKDIR}/git"
-+
-+# 6.6.32 version for 32-bit
-+SRCREV:armv7a =3D "525684d28fadc2bdae5424f28b219377bd5d4639"
-+PV:armv7a =3D "6.6.32+git"
-+BRANCH:armv7a =3D "v6.6.32-ti-arm32-r7"
-+
-+# 6.6.58 version for 64-bit
-+SRCREV:aarch64 =3D "9beffa9162f6a0f5de7e25bbb66026a579376428"
-+PV:aarch64 =3D "6.6.58+git"
-+BRANCH:aarch64 =3D "v6.6.58-ti-arm64-r16"
-+
-+KERNEL_GIT_URI =3D "git://github.com/beagleboard/linux.git"
---=20
-2.25.1
+2. A more generic question... GC320 is a unique peripheral of legacy AM57/J6 
+platforms and the driver for it hasn't been updated since 5.10 times. It 
+has been disabled globally in the Distro layer for a couple years now. While 
+I do understand your change to move this disablenent from the Distro to 
+BSP, are there any plans to revive GC320 support and not simply remove it 
+altogether?
 
+
+On Tue, Dec 17, 2024 at 02:59:45PM -0600, Andrew Davis via lists.yoctoproject.org wrote:
+> Like we do with GPU support, GC320 support is conditional on the
+> kernel we are building and so should be disabled here for kernels
+> on which it is not functional yet.
+> 
+> We can then remove these disabling lines as the driver is updated
+> for each supported kernel, instead of blanket disabling in the
+> distro layer as done currently.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>  meta-ti-bsp/conf/machine/include/ti-bsp.inc | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+> 
+> diff --git a/meta-ti-bsp/conf/machine/include/ti-bsp.inc b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
+> index 814c6ca8..bdc8bef7 100644
+> --- a/meta-ti-bsp/conf/machine/include/ti-bsp.inc
+> +++ b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
+> @@ -22,6 +22,9 @@ BSP_BOOTLOADER_VERSION:bsp-mainline = "%"
+>  # in mainline, usually present in TI staging or derivative like BB.org
+>  MACHINE_FEATURES:remove:bsp-mainline = "gpu"
+>  
+> +# GC320 support requires out-of-tree drivers not available in mainline
+> +MACHINE_FEATURES:remove:bsp-mainline = "gc320"
+> +
+>  # ==========
+>  # next
+>  # upcoming upstream/mainline kernel, u-boot
+> @@ -35,6 +38,9 @@ BSP_BOOTLOADER_VERSION:bsp-next = "%"
+>  # in next, usually present in TI staging or derivative like BB.org
+>  MACHINE_FEATURES:remove:bsp-next = "gpu"
+>  
+> +# GC320 support requires out-of-tree drivers not available in next
+> +MACHINE_FEATURES:remove:bsp-next = "gc320"
+> +
+>  # ==========
+>  # ti-6_12
+>  # TI staging kernel 6.12, u-boot 2024.10
+> @@ -48,6 +54,9 @@ BSP_BOOTLOADER_VERSION:bsp-ti-6_12 = "2024.10%"
+>  # in 6.12 yet
+>  MACHINE_FEATURES:remove:bsp-ti-6_12 = "gpu"
+>  
+> +# GC320 support requires out-of-tree drivers not yet available in 6.12
+> +MACHINE_FEATURES:remove:bsp-ti-6_12 = "gc320"
+> +
+>  # ==========
+>  # ti-6_6
+>  # TI staging kernel 6.6, u-boot 2024.04
+> @@ -65,6 +74,9 @@ BSP_ROGUE_DRIVER_VERSION:bsp-ti-6_6 = "24%"
+>  BSP_ROGUE_UMLIBS_VERSION:bsp-ti-6_6 = "24%"
+>  BSP_MESA_PVR_VERSION:bsp-ti-6_6 = "23%"
+>  
+> +# GC320 support requires out-of-tree drivers not yet available in 6.6
+> +MACHINE_FEATURES:remove:bsp-ti-6_6 = "gc320"
+> +
+>  # ==========
+>  # ti-6_1
+>  # TI staging kernel 6.1, u-boot 2023.04
+> @@ -82,6 +94,9 @@ BSP_ROGUE_DRIVER_VERSION:bsp-ti-6_1 = "23%"
+>  BSP_ROGUE_UMLIBS_VERSION:bsp-ti-6_1 = "23%"
+>  BSP_MESA_PVR_VERSION:bsp-ti-6_1 = "22%"
+>  
+> +# GC320 support requires out-of-tree drivers not yet available in 6.1
+> +MACHINE_FEATURES:remove:bsp-ti-6_1 = "gc320"
+> +
+>  # ==========
+>  # bb_org
+>  # BeagleBoard.org kernel 6.1, u-boot 2023.04
+> @@ -101,6 +116,9 @@ BSP_ROGUE_DRIVER_VERSION:bsp-bb_org = "23%"
+>  BSP_ROGUE_UMLIBS_VERSION:bsp-bb_org = "23%"
+>  BSP_MESA_PVR_VERSION:bsp-bb_org = "22%"
+>  
+> +# GC320 support requires out-of-tree drivers not yet available in bb.org
+> +MACHINE_FEATURES:remove:bsp-bb_org = "gc320"
+> +
+>  # ==========
+>  # sane fallback defaults
+>  # if specific values are not defined or bsp is set incorrectly
+> -- 
+> 2.39.2
 
