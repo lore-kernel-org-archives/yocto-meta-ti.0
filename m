@@ -1,152 +1,90 @@
-Return-Path: <afd@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E81DEE77188
-	for <webhook@archiver.kernel.org>; Wed,  8 Jan 2025 20:51:53 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.31798.1736369508673122677
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB852E77199
+	for <webhook@archiver.kernel.org>; Wed,  8 Jan 2025 22:05:14 +0000 (UTC)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ by mx.groups.io with SMTP id smtpd.web11.33683.1736373909787281907
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 08 Jan 2025 12:51:48 -0800
+ Wed, 08 Jan 2025 14:05:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=aFSZ8A6e;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: afd@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 508Kpl4A100963;
-	Wed, 8 Jan 2025 14:51:47 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=SgPNzkTv;
+ spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: reatmon@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 508M58733167909
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 8 Jan 2025 16:05:08 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1736369507;
-	bh=jZVxvaoqxT6iE1w+8miPXVFp4FtPaJDro8t7WVF3Zz8=;
-	h=From:To:CC:Subject:Date;
-	b=aFSZ8A6eHZPqQRcHY1F/pX71gS3UE9OZHLPaGn5fQkbqwRd3P/IiRqb0PkwfkU1R2
-	 ixOftIhWtu6mTAN+JDpbVXxm6YSdFu3Nd13/HgTl4EBu1JjkCv9nORIk3Llwx5S+r0
-	 5DP+EauPBXI1Rw1uSL8Tux1LdwBioKYf9VJj73xc=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 508Kpltn016120;
-	Wed, 8 Jan 2025 14:51:47 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1736373908;
+	bh=FMjBt64wZfK/bSyF+MEBG/wmAFMuVIk+4PbdDk5CecI=;
+	h=From:To:Subject:Date;
+	b=SgPNzkTvUVbu7qbKU1vHWX1W4dAVMppHQB1yhQVk9skr7cpqTr/lAOsKL5++fTt8m
+	 sSDJHzs3CMd2NRoyYjg73VwsML2Dcc7j1WoGBB5joAWJesZCvyJWqwcyIwUGy0GAf3
+	 s8pXBfMQG3MMznicsOPLjH4fvQr6KEqjXCsNwrhY=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 508M58vS012247
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 8 Jan 2025 16:05:08 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 8
- Jan 2025 14:51:47 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2025 16:05:08 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 8 Jan 2025 14:51:47 -0600
-Received: from lelvsmtp5.itg.ti.com ([10.249.42.149])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 508Kpk7C130459;
-	Wed, 8 Jan 2025 14:51:46 -0600
-From: Andrew Davis <afd@ti.com>
-To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
+ Frontend Transport; Wed, 8 Jan 2025 16:05:08 -0600
+Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 508M58aq103634;
+	Wed, 8 Jan 2025 16:05:08 -0600
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1tVeAm-0002QW-5m; Wed, 08 Jan 2025 16:05:08 -0600
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][scarthgap/master][PATCH v2] ti-bsp: Disable GC320 support conditionally on BSP version
-Date: Wed, 8 Jan 2025 14:51:45 -0600
-Message-ID: <20250108205145.542754-1-afd@ti.com>
-X-Mailer: git-send-email 2.39.2
+Subject: [meta-ti][master][PATCH] u-boot-ti-mainline: Add patch to use SWIG_AppendOutput
+Date: Wed, 8 Jan 2025 16:05:08 -0600
+Message-ID: <20250108220508.9197-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 08 Jan 2025 20:51:53 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18171
+ <meta-ti@lists.yoctoproject.org>; Wed, 08 Jan 2025 22:05:14 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18172
 
-Like we do with GPU support, GC320 support is conditional on the
-kernel we are building and so should be disabled here for kernels
-on which it is not functional yet.
+Missed this recipe with the previous recipe.
 
-We can then remove these disabling lines as the driver is updated
-for each supported kernel, instead of blanket disabling in the
-distro layer as done currently.
+Swig has changed language specific AppendOutput functions. The helper
+macro SWIG_AppendOutput remains unchanged. Use that instead
+of SWIG_Python_AppendOutput, which would require an extra parameter
+since swig 4.3.0.
 
-Signed-off-by: Andrew Davis <afd@ti.com>
+This is a port from oe-core:
+https://git.openembedded.org/openembedded-core/commit/?id=4eae7888e91c7c864bf490dee38716267be6202e
+
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Changes for v2:
- - Rebased on latest with new meta-beagle layer
-
- meta-beagle/conf/machine/include/beagle-bsp.inc |  6 ++++++
- meta-ti-bsp/conf/machine/include/ti-bsp.inc     | 15 +++++++++++++++
- 2 files changed, 21 insertions(+)
-
-diff --git a/meta-beagle/conf/machine/include/beagle-bsp.inc b/meta-beagle/conf/machine/include/beagle-bsp.inc
-index 34889b41..06483ba9 100644
---- a/meta-beagle/conf/machine/include/beagle-bsp.inc
-+++ b/meta-beagle/conf/machine/include/beagle-bsp.inc
-@@ -23,6 +23,9 @@ BSP_ROGUE_DRIVER_VERSION:bsp-bb_org-6_1 = "23%"
- BSP_ROGUE_UMLIBS_VERSION:bsp-bb_org-6_1 = "23%"
- BSP_MESA_PVR_VERSION:bsp-bb_org-6_1 = "22%"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
+index e1b51ce7..db89fd08 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
+@@ -6,4 +6,6 @@ PV = "2024.10"
  
-+# GC320 support requires out-of-tree drivers not yet available in bb.org 6.1
-+MACHINE_FEATURES:remove:bsp-bb_org-6_1 = "gc320"
-+
- # ==========
- # bb_org-6_6
- # BeagleBoard.org kernel 6.6, Upstream u-boot 2024.07
-@@ -41,3 +44,6 @@ BSP_ROGUE_DRIVER_PROVIDER:bsp-bb_org-6_6 = "ti-img-rogue-driver"
- BSP_ROGUE_DRIVER_VERSION:bsp-bb_org-6_6 = "24%"
- BSP_ROGUE_UMLIBS_VERSION:bsp-bb_org-6_6 = "24%"
- BSP_MESA_PVR_VERSION:bsp-bb_org-6_6 = "23%"
-+
-+# GC320 support requires out-of-tree drivers not yet available in bb.org 6.6
-+MACHINE_FEATURES:remove:bsp-bb_org-6_6 = "gc320"
-diff --git a/meta-ti-bsp/conf/machine/include/ti-bsp.inc b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-index 4bbe7668..6773bb7a 100644
---- a/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-+++ b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-@@ -22,6 +22,9 @@ BSP_BOOTLOADER_VERSION:bsp-mainline = "%"
- # in mainline, usually present in TI staging or derivative like BB.org
- MACHINE_FEATURES:remove:bsp-mainline = "gpu"
+ UBOOT_GIT_URI = "git://source.denx.de/u-boot/u-boot.git"
  
-+# GC320 support requires out-of-tree drivers not available in mainline
-+MACHINE_FEATURES:remove:bsp-mainline = "gc320"
++SRC_URI += "file://0001-scripts-dtc-pylibfdt-libfdt.i_shipped-Use-SWIG_Appen.patch"
 +
- # ==========
- # next
- # upcoming upstream/mainline kernel, u-boot
-@@ -35,6 +38,9 @@ BSP_BOOTLOADER_VERSION:bsp-next = "%"
- # in next, usually present in TI staging or derivative like BB.org
- MACHINE_FEATURES:remove:bsp-next = "gpu"
- 
-+# GC320 support requires out-of-tree drivers not available in next
-+MACHINE_FEATURES:remove:bsp-next = "gc320"
-+
- # ==========
- # ti-6_12
- # TI staging kernel 6.12, u-boot 2024.10
-@@ -48,6 +54,9 @@ BSP_BOOTLOADER_VERSION:bsp-ti-6_12 = "2024.10%"
- # in 6.12 yet
- MACHINE_FEATURES:remove:bsp-ti-6_12 = "gpu"
- 
-+# GC320 support requires out-of-tree drivers not yet available in 6.12
-+MACHINE_FEATURES:remove:bsp-ti-6_12 = "gc320"
-+
- # ==========
- # ti-6_6
- # TI staging kernel 6.6, u-boot 2024.04
-@@ -65,6 +74,9 @@ BSP_ROGUE_DRIVER_VERSION:bsp-ti-6_6 = "24%"
- BSP_ROGUE_UMLIBS_VERSION:bsp-ti-6_6 = "24%"
- BSP_MESA_PVR_VERSION:bsp-ti-6_6 = "23%"
- 
-+# GC320 support requires out-of-tree drivers not yet available in 6.6
-+MACHINE_FEATURES:remove:bsp-ti-6_6 = "gc320"
-+
- # ==========
- # ti-6_1
- # TI staging kernel 6.1, u-boot 2023.04
-@@ -82,6 +94,9 @@ BSP_ROGUE_DRIVER_VERSION:bsp-ti-6_1 = "23%"
- BSP_ROGUE_UMLIBS_VERSION:bsp-ti-6_1 = "23%"
- BSP_MESA_PVR_VERSION:bsp-ti-6_1 = "22%"
- 
-+# GC320 support requires out-of-tree drivers not yet available in 6.1
-+MACHINE_FEATURES:remove:bsp-ti-6_1 = "gc320"
-+
- # ==========
- # sane fallback defaults
- # if specific values are not defined or bsp is set incorrectly
+ SRCREV = "f919c3a889f0ec7d63a48b5d0ed064386b0980bd"
 -- 
-2.39.2
+2.17.1
 
 
