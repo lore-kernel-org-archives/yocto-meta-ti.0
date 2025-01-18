@@ -1,81 +1,99 @@
-Return-Path: <denis@denix.org>
+Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01323C02183
-	for <webhook@archiver.kernel.org>; Thu, 16 Jan 2025 21:01:15 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.3720.1737061271875251593
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5B2AC0218A
+	for <webhook@archiver.kernel.org>; Sat, 18 Jan 2025 01:00:49 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web11.2939.1737162048402504134
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 16 Jan 2025 13:01:12 -0800
+ Fri, 17 Jan 2025 17:00:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 47EDE40C6B;
-	Thu, 16 Jan 2025 21:01:11 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9dgBb3OYtfQO; Thu, 16 Jan 2025 21:01:11 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1B6B740A3D;
-	Thu, 16 Jan 2025 21:01:09 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id CF0BB16415B; Thu, 16 Jan 2025 16:01:08 -0500 (EST)
-Date: Thu, 16 Jan 2025 16:01:08 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-Cc: meta-ti@lists.yoctoproject.org, oss@ew.tq-group.com
-Subject: Re: [meta-ti] [master][PATCH] conf: machine: k3: use ARMv8-A as
- base arch
-Message-ID: <20250116210108.GH21836@denix.org>
-References: <20241114140801.1964528-1-matthias.schiffer@ew.tq-group.com>
- <806ad6edd0e2359aeabb6d4e41795b91b0b2023c.camel@ew.tq-group.com>
- <20241209155956.GE23825@denix.org>
- <6ba39e5a31a0d58810967646b7b3c3bb6d576232.camel@ew.tq-group.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=j+243oCD;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: rs@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50I10gYq279889
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Fri, 17 Jan 2025 19:00:42 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1737162042;
+	bh=8nM2kfXnBb5de+DevDWD9/dT2oKRGygVouArfZprurs=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=j+243oCDUW1XZs42tZKRub4SlnRFDVMsfd1h9XGBuvn+1VsNclJjBguJ6jMQCO9AU
+	 v87PZcyhXR3EwSR7Z/QKFlCAq77NRW/gVBsepOab680fiuHDhwERn30SjByzJVQcBZ
+	 IGbahcUrF0YpfUhpEWcEYg0OhE+x+akj4al/P63Q=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50I10grb113541
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 17 Jan 2025 19:00:42 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 17
+ Jan 2025 19:00:42 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 17 Jan 2025 19:00:42 -0600
+Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50I10gEW117516;
+	Fri, 17 Jan 2025 19:00:42 -0600
+From: <rs@ti.com>
+To: <matthias.schiffer@ew.tq-group.com>, <reatmon@ti.com>,
+        <denys@konsulko.com>
+CC: <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCHv2 3/4] ti-bsp: select the graphics 24.2 packages
+Date: Fri, 17 Jan 2025 19:00:31 -0600
+Message-ID: <20250118010032.4092491-4-rs@ti.com>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250118010032.4092491-1-rs@ti.com>
+References: <20250118010032.4092491-1-rs@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <6ba39e5a31a0d58810967646b7b3c3bb6d576232.camel@ew.tq-group.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 16 Jan 2025 21:01:15 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18202
+ <meta-ti@lists.yoctoproject.org>; Sat, 18 Jan 2025 01:00:49 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18204
 
-On Thu, Jan 16, 2025 at 03:19:29PM +0100, Matthias Schiffer wrote:
-> On Mon, 2024-12-09 at 10:59 -0500, Denys Dmytriyenko wrote:
-> > 
-> > On Mon, Dec 09, 2024 at 10:38:56AM +0100, Matthias Schiffer via lists.yoctoproject.org wrote:
-> > > On Thu, 2024-11-14 at 15:08 +0100, Matthias Schiffer wrote:
-> > > > All K3 SoCs are Cortex-A53/A72, so arch-armv8a.inc is a more appropriate
-> > > > common base than the very generic arch-arm64.inc. arch-armv8a.inc defaults
-> > > > to enable the CRC extension (DEFAULTTUNE = "armv8a-crc") and allows for
-> > > > easy addition of the ARMv8 crypto extensions by setting the tune to
-> > > > "armv8a-crc-crypto".
-> > > 
-> > > Hi, any comments regarding this patch?
-> > 
-> > Matthias,
-> > 
-> > We've discussed this couple of weeks ago and decided to make a slightly 
-> > different change that will also enable your use case as well.
-> > 
-> > Ryan got busy lately with master breakage, so I should probably send the 
-> > change in for discussion.
-> 
-> Hi Denys,
-> 
-> I haven't seen the mentioned change yet, did you not send it or did I overlook
-> it?
+From: Randolph Sapp <rs@ti.com>
 
-Matthias,
+Since this is new logic is in place, switch the k6.6 and k6.12 configs
+to use these new libraries. Do not enable GFX on 6.12 just yet. Still
+need some kernel patches on the SGX side.
 
-Thank you for the reminder - unfortunately it fell through the cracks due to 
-the holidays and other engagements and distractions. I'll get to it shortly.
+Signed-off-by: Randolph Sapp <rs@ti.com>
+---
+ meta-ti-bsp/conf/machine/include/ti-bsp.inc | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
+diff --git a/meta-ti-bsp/conf/machine/include/ti-bsp.inc b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
+index 4bbe7668..1afc98dd 100644
+--- a/meta-ti-bsp/conf/machine/include/ti-bsp.inc
++++ b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
+@@ -44,6 +44,11 @@ BSP_KERNEL_VERSION:bsp-ti-6_12 = "6.12%"
+ BSP_BOOTLOADER_PROVIDER:bsp-ti-6_12 = "u-boot-ti-staging"
+ BSP_BOOTLOADER_VERSION:bsp-ti-6_12 = "2024.10%"
+ 
++BSP_ROGUE_DRIVER_PROVIDER:bsp-ti-6_12 = "ti-img-rogue-driver"
++BSP_ROGUE_DRIVER_VERSION:bsp-ti-6_12 = "24%"
++BSP_ROGUE_UMLIBS_VERSION:bsp-ti-6_12 = "24%"
++BSP_MESA_PVR_VERSION:bsp-ti-6_12 = "24%"
++
+ # GPU support requires out-of-tree SGX and Rogue drivers not available
+ # in 6.12 yet
+ MACHINE_FEATURES:remove:bsp-ti-6_12 = "gpu"
+@@ -63,7 +68,7 @@ BSP_SGX_UMLIBS_VERSION:bsp-ti-6_6 = "1.17%"
+ BSP_ROGUE_DRIVER_PROVIDER:bsp-ti-6_6 = "ti-img-rogue-driver"
+ BSP_ROGUE_DRIVER_VERSION:bsp-ti-6_6 = "24%"
+ BSP_ROGUE_UMLIBS_VERSION:bsp-ti-6_6 = "24%"
+-BSP_MESA_PVR_VERSION:bsp-ti-6_6 = "23%"
++BSP_MESA_PVR_VERSION:bsp-ti-6_6 = "24%"
+ 
+ # ==========
+ # ti-6_1
 -- 
-Denys
+2.47.1
+
 
