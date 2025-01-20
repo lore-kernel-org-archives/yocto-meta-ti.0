@@ -1,430 +1,135 @@
-Return-Path: <rs@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6D78C02188
-	for <webhook@archiver.kernel.org>; Sat, 18 Jan 2025 01:00:59 +0000 (UTC)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web11.2945.1737162052545033062
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EB11C02181
+	for <webhook@archiver.kernel.org>; Mon, 20 Jan 2025 20:14:08 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.162.1737404047080460809
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 17 Jan 2025 17:00:52 -0800
+ Mon, 20 Jan 2025 12:14:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=GENfuTQV;
- spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: rs@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50I10gBa422193
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 17 Jan 2025 19:00:42 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1737162042;
-	bh=TlLYk5mjl6bFd6L+H457BLKupXvNqAlGNa7/l47ieTk=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=GENfuTQVBiO3gscnh9EymrJbDAk43CoZ5SoMVM1Y7dVDk7YvVSCuyYZph9lFSv8fA
-	 UVRhDd4NuMnwQK2m4JZDswbNR08fOr1qujAB0n4t6el2c8dXJ0/lcYowC+wLFdEGQG
-	 iIDYAQiACX7gXqCgsEH6kRtfJvGCaSOPQthadvAw=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50I10gCF113544
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 17 Jan 2025 19:00:42 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 17
- Jan 2025 19:00:42 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 17 Jan 2025 19:00:42 -0600
-Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50I10gEV117516;
-	Fri, 17 Jan 2025 19:00:42 -0600
-From: <rs@ti.com>
-To: <matthias.schiffer@ew.tq-group.com>, <reatmon@ti.com>,
-        <denys@konsulko.com>
-CC: <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCHv2 2/4] mesa-pvr: version 23.2.1 -> 24.0.1
-Date: Fri, 17 Jan 2025 19:00:30 -0600
-Message-ID: <20250118010032.4092491-3-rs@ti.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250118010032.4092491-1-rs@ti.com>
-References: <20250118010032.4092491-1-rs@ti.com>
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 34CD740C2B;
+	Mon, 20 Jan 2025 20:14:06 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4DH2RFiyp41e; Mon, 20 Jan 2025 20:14:06 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0EBCB40B13;
+	Mon, 20 Jan 2025 20:14:04 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 427DA16415A; Mon, 20 Jan 2025 15:14:03 -0500 (EST)
+Date: Mon, 20 Jan 2025 15:14:03 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: reatmon@ti.com
+Cc: Praneeth Bajjuri <praneeth@ti.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][master/scarthgap][PATCH 1/2] conf: machine:
+ beagleplay*: Update defaults to mainline
+Message-ID: <20250120201403.GI21836@denix.org>
+References: <20250113225222.13622-1-reatmon@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250113225222.13622-1-reatmon@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sat, 18 Jan 2025 01:00:59 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18206
+ <meta-ti@lists.yoctoproject.org>; Mon, 20 Jan 2025 20:14:08 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18208
 
-From: Randolph Sapp <rs@ti.com>
+On Mon, Jan 13, 2025 at 04:52:21PM -0600, Ryan Eatmon via lists.yoctoproject.org wrote:
+> The defaults for UBOOT_MACHINE and SPL_BINARY are now aligned with the
+> mainline values and new ti-6_1 values for the previous defaults were
+> created to capture those.  Also updated the meta-beagle beagleplay since
+> it inherits the beagleplay-ti settings.
+> 
+> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 
-The gfx library provided by rogue can support this never version of mesa
-out of the box. Pull it in now that we have ported the SGX side of
-things.
+Tested-by: Denys Dmytriyenko <denys@konsulko.com>
 
-Signed-off-by: Randolph Sapp <rs@ti.com>
----
- ...allium-Fix-build-with-llvm-18-and-19.patch | 53 -----------------
- ...e-cmake-dependency-detector-for-llvm.patch | 42 --------------
- .../0001-drisw-fix-build-without-dri3.patch   | 58 +++++++++++++++++++
- .../0001-gallium-Fix-build-with-llvm-17.patch |  3 +-
- ...sdetects-64bit-atomics-on-mips-clang.patch |  4 +-
- ...k-for-all-linux-host_os-combinations.patch | 22 +++----
- ...on-t-try-zink-if-not-enabled-in-mesa.patch | 42 ++++++++++++++
- ...{mesa-pvr_23.2.1.bb => mesa-pvr_24.0.1.bb} | 14 ++---
- 8 files changed, 119 insertions(+), 119 deletions(-)
- delete mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-18-and-19.patch
- delete mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-meson-Disable-cmake-dependency-detector-for-llvm.patch
- create mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-drisw-fix-build-without-dri3.patch
- rename meta-ti-bsp/recipes-graphics/mesa/{mesa-pvr-23.2.1 => mesa-pvr-24.0.1}/0001-gallium-Fix-build-with-llvm-17.patch (99%)
- rename meta-ti-bsp/recipes-graphics/mesa/{mesa-pvr-23.2.1 => mesa-pvr-24.0.1}/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch (99%)
- rename meta-ti-bsp/recipes-graphics/mesa/{mesa-pvr-23.2.1 => mesa-pvr-24.0.1}/0001-meson.build-check-for-all-linux-host_os-combinations.patch (70%)
- create mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0002-glxext-don-t-try-zink-if-not-enabled-in-mesa.patch
- rename meta-ti-bsp/recipes-graphics/mesa/{mesa-pvr_23.2.1.bb => mesa-pvr_24.0.1.bb} (81%)
 
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-18-and-19.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-18-and-19.patch
-deleted file mode 100644
-index ad5059f1..00000000
---- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-18-and-19.patch
-+++ /dev/null
-@@ -1,53 +0,0 @@
--From 6c5033bb01a3a1341d4db5007586a5f2e2727b0a Mon Sep 17 00:00:00 2001
--From: Ryan Eatmon <reatmon@ti.com>
--Date: Mon, 4 Nov 2024 13:37:29 -0600
--Subject: [PATCH] gallium: Fix build with llvm 18 and 19
--
--- CodeGenOpt::Level changed to CodeGenOoptLevel. [1]
--- llvm::sys::getHostCPUFeatures() now returns the features instead of
--modifying the passed in argument. [2]
--
--Upstream-Status: Backport [1][https://gitlab.freedesktop.org/mesa/mesa/-/commit/f79617fe804ea6524651ff1bc3a91098d3199179]
--Upstream-Status: Backport [2][https://gitlab.freedesktop.org/mesa/mesa/-/commit/fa9cd89a85b904615ebc11da609445b5b751e68d]
--
--Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-----
-- src/gallium/auxiliary/gallivm/lp_bld_misc.cpp | 14 ++++++++++++--
-- 1 file changed, 12 insertions(+), 2 deletions(-)
--
--diff --git a/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp b/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
--index 5e7a30a6cc2..dbc777e3096 100644
----- a/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
--+++ b/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
--@@ -366,7 +366,11 @@ lp_build_create_jit_compiler_for_module(LLVMExecutionEngineRef *OutJIT,
--    builder.setEngineKind(EngineKind::JIT)
--           .setErrorStr(&Error)
--           .setTargetOptions(options)
--+#if LLVM_VERSION_MAJOR >= 18
--+          .setOptLevel((CodeGenOptLevel)OptLevel);
--+#else
--           .setOptLevel((CodeGenOpt::Level)OptLevel);
--+#endif
-- 
-- #if DETECT_OS_WINDOWS
--     /*
--@@ -394,8 +398,14 @@ lp_build_create_jit_compiler_for_module(LLVMExecutionEngineRef *OutJIT,
--     * which allows us to enable/disable code generation based
--     * on the results of cpuid on these architectures.
--     */
---   llvm::StringMap<bool> features;
---   llvm::sys::getHostCPUFeatures(features);
--+   #if LLVM_VERSION_MAJOR >= 19
--+      /* llvm-19+ returns StringMap from getHostCPUFeatures.
--+      */
--+      auto features = llvm::sys::getHostCPUFeatures();
--+   #else
--+      llvm::StringMap<bool> features;
--+      llvm::sys::getHostCPUFeatures(features);
--+   #endif
-- 
--    for (StringMapIterator<bool> f = features.begin();
--         f != features.end();
---- 
--2.17.1
--
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-meson-Disable-cmake-dependency-detector-for-llvm.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-meson-Disable-cmake-dependency-detector-for-llvm.patch
-deleted file mode 100644
-index 4cded054..00000000
---- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-meson-Disable-cmake-dependency-detector-for-llvm.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--From 00d41cd5aa3f4b494dc276c9b4ccdc096310c91f Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 28 Sep 2023 15:34:22 -0700
--Subject: [PATCH] meson: use llvm-config instead of cmake to fix linking errors with meson 1.2.1
--
--meson dependency auto dependency detection uses cmake and then
--config-tool to process dependencies, in mesa the logic to detect llvm is
--using auto detection which means if it finds cmake then it will try to
--use cmake method. Cmake method works ok except a case when llvm-dev
--package is installed on the build host then it generates its own
--native.meson file and ignores OE supplied meson.native file which has
--correct llvm-config tool specified which is pointing to llvm-config from
--native sysroot. The generated meson.native file points to one found in
--/usr/bin and there onwards detector finds native install of llvm and
--configures that into building native mesa package.
--
--Since cmake detector does not always work, disable it by default and use
--config-tool which works in all cases. This is suggested in below issues
--too
--
--A similar issue is open in meson upstream [1] and mesa [2]
--
--[1] https://github.com/mesonbuild/meson/issues/10483
--[2] https://gitlab.freedesktop.org/mesa/mesa/-/issues/6738
--
--Upstream-Status: Submitted [https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/25438]
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- meson.build | 1 +
-- 1 file changed, 1 insertion(+)
--
----- a/meson.build
--+++ b/meson.build
--@@ -1659,6 +1659,7 @@ with_llvm = false
-- if _llvm.allowed()
--   dep_llvm = dependency(
--     'llvm',
--+    method : host_machine.system() == 'windows' ? 'auto' : 'config-tool',
--     version : _llvm_version,
--     modules : llvm_modules,
--     optional_modules : llvm_optional_modules,
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-drisw-fix-build-without-dri3.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-drisw-fix-build-without-dri3.patch
-new file mode 100644
-index 00000000..ab161520
---- /dev/null
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-drisw-fix-build-without-dri3.patch
-@@ -0,0 +1,58 @@
-+From 4bd15a419e892da843489c374c58c5b29c40b5d6 Mon Sep 17 00:00:00 2001
-+From: Romain Naour <romain.naour@smile.fr>
-+Date: Tue, 6 Feb 2024 09:47:09 +0100
-+Subject: [PATCH 1/2] drisw: fix build without dri3
-+
-+commit 1887368df41 ("glx/sw: check for modifier support in the kopper path")
-+added dri3_priv.h header and dri3_check_multibuffer() function in drisw that
-+can be build without dri3.
-+
-+  i686-buildroot-linux-gnu/bin/ld: src/glx/libglx.a.p/drisw_glx.c.o: in function `driswCreateScreenDriver':
-+  drisw_glx.c:(.text.driswCreateScreenDriver+0x3a0): undefined reference to `dri3_check_multibuffer'
-+  collect2: error: ld returned 1 exit status
-+
-+Add HAVE_DRI3 guard around dri3_priv.h header and the zink code using
-+dri3_check_multibuffer().
-+
-+Fixes: 1887368df41 ("glx/sw: check for modifier support in the kopper path")
-+
-+Upstream-Status: Submitted [https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/27478]
-+Signed-off-by: Romain Naour <romain.naour@smile.fr>
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/glx/drisw_glx.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/src/glx/drisw_glx.c b/src/glx/drisw_glx.c
-+index 3d3f752..4b19e2d 100644
-+--- a/src/glx/drisw_glx.c
-++++ b/src/glx/drisw_glx.c
-+@@ -32,7 +32,9 @@
-+ #include <dlfcn.h>
-+ #include "dri_common.h"
-+ #include "drisw_priv.h"
-++#ifdef HAVE_DRI3
-+ #include "dri3_priv.h"
-++#endif
-+ #include <X11/extensions/shmproto.h>
-+ #include <assert.h>
-+ #include <vulkan/vulkan_core.h>
-+@@ -995,6 +997,7 @@ driswCreateScreenDriver(int screen, struct glx_display *priv,
-+        goto handle_error;
-+    }
-+ 
-++#ifdef HAVE_DRI3
-+    if (pdpyp->zink) {
-+       bool err;
-+       psc->has_multibuffer = dri3_check_multibuffer(priv->dpy, &err);
-+@@ -1005,6 +1008,7 @@ driswCreateScreenDriver(int screen, struct glx_display *priv,
-+          goto handle_error;
-+       }
-+    }
-++#endif
-+ 
-+    glx_config_destroy_list(psc->base.configs);
-+    psc->base.configs = configs;
-+-- 
-+2.44.0
-+
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-17.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-gallium-Fix-build-with-llvm-17.patch
-similarity index 99%
-rename from meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-17.patch
-rename to meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-gallium-Fix-build-with-llvm-17.patch
-index 738ff267..237f940f 100644
---- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-gallium-Fix-build-with-llvm-17.patch
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-gallium-Fix-build-with-llvm-17.patch
-@@ -36,5 +36,6 @@ index cd2108f..b1a4d03 100644
-  #include <llvm-c/Transforms/Coroutines.h>
-  #endif
- +#endif
--
-+ 
-  unsigned gallivm_perf = 0;
-+ 
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch
-similarity index 99%
-rename from meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch
-rename to meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch
-index 35bd0ea1..9cd9bee2 100644
---- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch
-@@ -17,9 +17,9 @@ index 5a5eab4..e499516 100644
- @@ -21,7 +21,7 @@
-   * IN THE SOFTWARE.
-   */
--
-+ 
- -#if defined(MISSING_64BIT_ATOMICS) && defined(HAVE_PTHREAD)
- +#if !defined(__clang__) && defined(MISSING_64BIT_ATOMICS) && defined(HAVE_PTHREAD)
--
-+ 
-  #include <stdint.h>
-  #include <pthread.h>
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-meson.build-check-for-all-linux-host_os-combinations.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-meson.build-check-for-all-linux-host_os-combinations.patch
-similarity index 70%
-rename from meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-meson.build-check-for-all-linux-host_os-combinations.patch
-rename to meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-meson.build-check-for-all-linux-host_os-combinations.patch
-index e9a6fd3f..b0be8d0f 100644
---- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-23.2.1/0001-meson.build-check-for-all-linux-host_os-combinations.patch
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0001-meson.build-check-for-all-linux-host_os-combinations.patch
-@@ -1,4 +1,4 @@
--From b251af67df5a6840d2e9cc06edae2c387f8778f1 Mon Sep 17 00:00:00 2001
-+From f2fe76d506f356de055b8eca83a7c9d0744a40af Mon Sep 17 00:00:00 2001
- From: Alistair Francis <alistair@alistair23.me>
- Date: Thu, 14 Nov 2019 13:04:49 -0800
- Subject: [PATCH] meson.build: check for all linux host_os combinations
-@@ -20,24 +20,24 @@ Signed-off-by: Alistair Francis <alistair@alistair23.me>
-  1 file changed, 2 insertions(+), 2 deletions(-)
- 
- diff --git a/meson.build b/meson.build
--index 22385d8..15f48a6 100644
-+index 35cc5f1..9a49c0d 100644
- --- a/meson.build
- +++ b/meson.build
--@@ -121,7 +121,7 @@ with_any_opengl = with_opengl or with_gles1 or with_gles2
-+@@ -128,7 +128,7 @@
-  # Only build shared_glapi if at least one OpenGL API is enabled
-  with_shared_glapi = with_shared_glapi and with_any_opengl
--
---system_has_kms_drm = ['openbsd', 'netbsd', 'freebsd', 'gnu/kfreebsd', 'dragonfly', 'linux', 'sunos', 'android'].contains(host_machine.system())
--+system_has_kms_drm = ['openbsd', 'netbsd', 'freebsd', 'gnu/kfreebsd', 'dragonfly', 'linux', 'sunos', 'android'].contains(host_machine.system()) or host_machine.system().startswith('linux')
--
-+ 
-+-system_has_kms_drm = ['openbsd', 'netbsd', 'freebsd', 'gnu/kfreebsd', 'dragonfly', 'linux', 'sunos', 'android', 'managarm'].contains(host_machine.system())
-++system_has_kms_drm = ['openbsd', 'netbsd', 'freebsd', 'gnu/kfreebsd', 'dragonfly', 'linux', 'sunos', 'android', 'managarm'].contains(host_machine.system()) or host_machine.system().startswith('linux')
-+ 
-  gallium_drivers = get_option('gallium-drivers')
-  if gallium_drivers.contains('auto')
--@@ -909,7 +909,7 @@ if cc.has_function('fmemopen')
-+@@ -998,7 +998,7 @@
-  endif
--
-+ 
-  # TODO: this is very incomplete
---if ['linux', 'cygwin', 'gnu', 'freebsd', 'gnu/kfreebsd', 'haiku', 'android'].contains(host_machine.system())
--+if ['linux', 'cygwin', 'gnu', 'freebsd', 'gnu/kfreebsd', 'haiku'].contains(host_machine.system()) or host_machine.system().startswith('linux')
-+-if ['linux', 'cygwin', 'gnu', 'freebsd', 'gnu/kfreebsd', 'haiku', 'android', 'managarm'].contains(host_machine.system())
-++if ['linux', 'cygwin', 'gnu', 'freebsd', 'gnu/kfreebsd', 'haiku', 'android', 'managarm'].contains(host_machine.system()) or host_machine.system().startswith('linux')
-    pre_args += '-D_GNU_SOURCE'
-  elif host_machine.system() == 'sunos'
-    pre_args += '-D__EXTENSIONS__'
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0002-glxext-don-t-try-zink-if-not-enabled-in-mesa.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0002-glxext-don-t-try-zink-if-not-enabled-in-mesa.patch
-new file mode 100644
-index 00000000..036a0b49
---- /dev/null
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.0.1/0002-glxext-don-t-try-zink-if-not-enabled-in-mesa.patch
-@@ -0,0 +1,42 @@
-+From 62495ebb977866c52d5bed8499a547c49f0d9bc1 Mon Sep 17 00:00:00 2001
-+From: Romain Naour <romain.naour@smile.fr>
-+Date: Tue, 6 Feb 2024 09:47:10 +0100
-+Subject: [PATCH 2/2] glxext: don't try zink if not enabled in mesa
-+
-+Commit 7d9ea77b459 ("glx: add automatic zink fallback loading between hw and sw drivers")
-+added an automatic zink fallback even when the zink gallium is not
-+enabled at build time.
-+
-+It leads to unexpected error log while loading drisw driver and
-+zink is not installed on the rootfs:
-+
-+  MESA-LOADER: failed to open zink: /usr/lib/dri/zink_dri.so
-+
-+Fixes: 7d9ea77b459 ("glx: add automatic zink fallback loading between hw and sw drivers")
-+
-+Upstream-Status: Submitted [https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/27478]
-+Signed-off-by: Romain Naour <romain.naour@smile.fr>
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/glx/glxext.c | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/glx/glxext.c b/src/glx/glxext.c
-+index 05c825a..7a06aa9 100644
-+--- a/src/glx/glxext.c
-++++ b/src/glx/glxext.c
-+@@ -908,9 +908,11 @@ __glXInitialize(Display * dpy)
-+ #endif /* HAVE_DRI3 */
-+       if (!debug_get_bool_option("LIBGL_DRI2_DISABLE", false))
-+          dpyPriv->dri2Display = dri2CreateDisplay(dpy);
-++#if defined(HAVE_ZINK)
-+       if (!dpyPriv->dri3Display && !dpyPriv->dri2Display)
-+          try_zink = !debug_get_bool_option("LIBGL_KOPPER_DISABLE", false) &&
-+                     !getenv("GALLIUM_DRIVER");
-++#endif /* HAVE_ZINK */
-+    }
-+ #endif /* GLX_USE_DRM */
-+    if (glx_direct)
-+-- 
-+2.44.0
-+
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_24.0.1.bb
-similarity index 81%
-rename from meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-rename to meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_24.0.1.bb
-index cdff372a..b21b805c 100644
---- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_23.2.1.bb
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_24.0.1.bb
-@@ -15,8 +15,8 @@ SRC_URI = " \
-     file://0001-meson.build-check-for-all-linux-host_os-combinations.patch \
-     file://0001-meson-misdetects-64bit-atomics-on-mips-clang.patch \
-     file://0001-gallium-Fix-build-with-llvm-17.patch \
--    file://0001-meson-Disable-cmake-dependency-detector-for-llvm.patch \
--    file://0001-gallium-Fix-build-with-llvm-18-and-19.patch \
-+    file://0001-drisw-fix-build-without-dri3.patch \
-+    file://0002-glxext-don-t-try-zink-if-not-enabled-in-mesa.patch \
- "
- 
- S = "${WORKDIR}/git"
-@@ -26,19 +26,13 @@ PACKAGECONFIG:append = " \
-     ${@bb.utils.contains('PREFERRED_PROVIDER_virtual/gpudriver', 'ti-sgx-ddk-km', 'sgx', '', d)} \
- "
- 
--SRCREV = "0e75e7ded360ea6aee4140393b30960e152f3994"
--PV = "23.2.1"
-+SRCREV = "82e6a9293c476267417c5b6b906b01fb73a34e38"
-+PV = "24.0.1"
- 
- PVR_DISPLAY_CONTROLLER_ALIAS ??= "tidss"
- PACKAGECONFIG[pvr] = "-Dgallium-pvr-alias=${PVR_DISPLAY_CONTROLLER_ALIAS},"
- PACKAGECONFIG[sgx] = "-Dgallium-sgx-alias=${PVR_DISPLAY_CONTROLLER_ALIAS},"
- 
--PACKAGECONFIG:remove = "video-codecs"
--PACKAGECONFIG[video-codecs] = ""
--PACKAGECONFIG:remove = "elf-tls"
--PACKAGECONFIG[elf-tls] = ""
--PACKAGECONFIG:remove = "xvmc"
--PACKAGECONFIG[xvmc] = ""
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--- 
-2.47.1
-
+> ---
+>  meta-beagle/conf/machine/beagleplay-k3r5.conf    | 2 +-
+>  meta-beagle/conf/machine/beagleplay.conf         | 5 +----
+>  meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf | 6 ++----
+>  meta-ti-bsp/conf/machine/beagleplay-ti.conf      | 9 +++------
+>  4 files changed, 7 insertions(+), 15 deletions(-)
+> 
+> diff --git a/meta-beagle/conf/machine/beagleplay-k3r5.conf b/meta-beagle/conf/machine/beagleplay-k3r5.conf
+> index 3e7f0c1b..f053c11e 100644
+> --- a/meta-beagle/conf/machine/beagleplay-k3r5.conf
+> +++ b/meta-beagle/conf/machine/beagleplay-k3r5.conf
+> @@ -6,6 +6,6 @@ require conf/machine/beagleplay-ti-k3r5.conf
+>  
+>  require conf/machine/include/beagle-bsp.inc
+>  
+> -UBOOT_MACHINE:bsp-bb_org-6_6 = "am62x_beagleplay_r5_defconfig"
+> +UBOOT_MACHINE:bsp-bb_org-6_1 = "am62x_evm_r5_defconfig"
+>  
+>  UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 = "am625_beagleplay_r5.config"
+> diff --git a/meta-beagle/conf/machine/beagleplay.conf b/meta-beagle/conf/machine/beagleplay.conf
+> index b1a463e1..bc0de3f0 100644
+> --- a/meta-beagle/conf/machine/beagleplay.conf
+> +++ b/meta-beagle/conf/machine/beagleplay.conf
+> @@ -6,13 +6,10 @@ require conf/machine/beagleplay-ti.conf
+>  
+>  require conf/machine/include/beagle-bsp.inc
+>  
+> -UBOOT_MACHINE:bsp-bb_org-6_6 = "am62x_beagleplay_a53_defconfig"
+> +UBOOT_MACHINE:bsp-bb_org-6_1 = "am62x_evm_a53_defconfig"
+>  
+>  UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 = "am625_beagleplay_a53.config"
+>  
+> -SPL_BINARY:bsp-bb_org-6_6 = "tispl.bin_unsigned"
+> -SPL_BINARYNAME:bsp-bb_org-6_6 = "tispl.bin"
+> -
+>  KERNEL_DEVICETREE:append:bsp-bb_org-6_1 = " \
+>  ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
+>  ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
+> diff --git a/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf b/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf
+> index c27e0abc..72dc145b 100644
+> --- a/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf
+> +++ b/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf
+> @@ -8,9 +8,7 @@ SYSFW_SOC = "am62x"
+>  SYSFW_CONFIG = "evm"
+>  SYSFW_SUFFIX = "gp"
+>  
+> -UBOOT_MACHINE = "am62x_evm_r5_defconfig"
+> -UBOOT_MACHINE:bsp-ti-6_6 = "am62x_beagleplay_r5_defconfig"
+> -UBOOT_MACHINE:bsp-ti-6_12 = "am62x_beagleplay_r5_defconfig"
+> +UBOOT_MACHINE = "am62x_beagleplay_r5_defconfig"
+> +UBOOT_MACHINE:bsp-ti-6_1 = "am62x_evm_r5_defconfig"
+>  
+>  UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "am625_beagleplay_r5.config"
+> -UBOOT_CONFIG_FRAGMENTS:bsp-mainline = "beagleplay_r5.config"
+> diff --git a/meta-ti-bsp/conf/machine/beagleplay-ti.conf b/meta-ti-bsp/conf/machine/beagleplay-ti.conf
+> index 68d6dced..3824d867 100644
+> --- a/meta-ti-bsp/conf/machine/beagleplay-ti.conf
+> +++ b/meta-ti-bsp/conf/machine/beagleplay-ti.conf
+> @@ -19,15 +19,12 @@ TFA_K3_SYSTEM_SUSPEND = "1"
+>  
+>  OPTEEMACHINE = "k3-am62x"
+>  
+> -UBOOT_MACHINE = "am62x_evm_a53_defconfig"
+> -UBOOT_MACHINE:bsp-ti-6_6 = "am62x_beagleplay_a53_defconfig"
+> -UBOOT_MACHINE:bsp-ti-6_12 = "am62x_beagleplay_a53_defconfig"
+> +UBOOT_MACHINE = "am62x_beagleplay_a53_defconfig"
+> +UBOOT_MACHINE:bsp-ti-6_1 = "am62x_evm_a53_defconfig"
+>  
+>  UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "am625_beagleplay_a53.config"
+> -UBOOT_CONFIG_FRAGMENTS:bsp-mainline = "beagleplay_a53.config"
+>  
+> -SPL_BINARY:bsp-ti-6_6 = "tispl.bin_unsigned"
+> -SPL_BINARYNAME:bsp-ti-6_6 = "tispl.bin"
+> +SPL_BINARY = "tispl.bin_unsigned"
+>  
+>  KERNEL_DEVICETREE_PREFIX = " \
+>      ti/k3-am625-beagle \
+> -- 
+> 2.17.1
 
