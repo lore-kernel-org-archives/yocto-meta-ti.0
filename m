@@ -1,79 +1,140 @@
-Return-Path: <denis@denix.org>
+Return-Path: <b-padhi@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02D6EC02182
-	for <webhook@archiver.kernel.org>; Mon, 20 Jan 2025 20:14:38 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.183.1737404076441077358
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A111BC0218B
+	for <webhook@archiver.kernel.org>; Tue, 21 Jan 2025 17:56:34 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web11.22078.1737482189424286300
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 20 Jan 2025 12:14:36 -0800
+ Tue, 21 Jan 2025 09:56:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id DB0D040C2B;
-	Mon, 20 Jan 2025 20:14:35 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ixtqYLQPJuOa; Mon, 20 Jan 2025 20:14:35 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B917940B13;
-	Mon, 20 Jan 2025 20:14:33 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 84B6216415A; Mon, 20 Jan 2025 15:14:33 -0500 (EST)
-Date: Mon, 20 Jan 2025 15:14:33 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: reatmon@ti.com
-Cc: Praneeth Bajjuri <praneeth@ti.com>, meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][master/scarthgap][PATCH 2/2] conf: machine:
- beaglebone-ai64: Update SPLY_BINARY
-Message-ID: <20250120201433.GJ21836@denix.org>
-References: <20250113225222.13622-1-reatmon@ti.com>
- <20250113225222.13622-2-reatmon@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=fGp8e51P;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: b-padhi@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50LHuSwH866080
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 21 Jan 2025 11:56:28 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1737482188;
+	bh=rQO77c8vQTl0Yc6MkhVBpDH3a+4mXErHDbmNzZA5W2g=;
+	h=From:To:CC:Subject:Date;
+	b=fGp8e51PxPU7seTEwSFA2X/9I+Uf8BCsRA9BxfTb3BmyV8VkWwDO7e13hHLebJHqh
+	 U47ChNbIRfx9DQPP/nBJl8NV8KUq0Ka1joAcCmiv6UD8wK7Pkv665ELMiJADrLzLOr
+	 fFoxQSSpRK0zVHQSuR14wo2++7BkpL6R1kOfXDdA=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50LHuSCW001111
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 21 Jan 2025 11:56:28 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 21
+ Jan 2025 11:56:28 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 21 Jan 2025 11:56:28 -0600
+Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.227.151])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50LHuPbU087671;
+	Tue, 21 Jan 2025 11:56:26 -0600
+From: Beleswar Padhi <b-padhi@ti.com>
+To: <reatmon@ti.com>, <denys@konsulko.com>
+CC: <u-kumar1@ti.com>, <afd@ti.com>, <meta-ti@lists.yoctoproject.org>,
+        <b-padhi@ti.com>
+Subject: [scarthgap][PATCH] linux-ti-staging: Add config-fragments for v6.12 Kernel
+Date: Tue, 21 Jan 2025 23:26:25 +0530
+Message-ID: <20250121175625.4114041-1-b-padhi@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250113225222.13622-2-reatmon@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 20 Jan 2025 20:14:38 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18209
+ <meta-ti@lists.yoctoproject.org>; Tue, 21 Jan 2025 17:56:34 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18210
 
-On Mon, Jan 13, 2025 at 04:52:22PM -0600, Ryan Eatmon via lists.yoctoproject.org wrote:
-> Rather than override the value for SPL_BINARY for all bsps, simply just
-> set the value to the correct value.  This should be ok since all
-> beaglebone-ai64 variations should use tispl.bin_unsigned.
-> 
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+ti-linux-kernel tree has several prune config fragments for ARM/ARM64/RT
+configurations. Enable the prune config fragments here.
 
-Tested-by: Denys Dmytriyenko <denys@konsulko.com>
+Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+---
+ .../recipes-kernel/linux/linux-ti-staging-6.12/defconfig        | 2 +-
+ .../recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig     | 2 +-
+ .../recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig  | 2 +-
+ .../recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig  | 2 +-
+ .../recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig     | 2 +-
+ .../recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig  | 2 +-
+ .../linux/linux-ti-staging-rt-6.12/ti33x/defconfig              | 2 +-
+ .../linux/linux-ti-staging-rt-6.12/ti43x/defconfig              | 2 +-
+ 8 files changed, 8 insertions(+), 8 deletions(-)
 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
+index 9d579e41..24b53cf7 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
+@@ -1,2 +1,2 @@
+ use-kernel-config=multi_v7_defconfig
+-config-fragment=
++config-fragment=kernel/configs/ti_multi_v7_prune.config
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig
+index fd07b34e..ef1d3efd 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig
+@@ -1,2 +1,2 @@
+ use-kernel-config=defconfig
+-config-fragment=
++config-fragment=kernel/configs/ti_arm64_prune.config
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig
+index 9d579e41..e6a967e1 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig
+@@ -1,2 +1,2 @@
+ use-kernel-config=multi_v7_defconfig
+-config-fragment=
++config-fragment=kernel/configs/ti_multi_v7_prune.config kernel/configs/no_smp.config
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig
+index 9d579e41..e6a967e1 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig
+@@ -1,2 +1,2 @@
+ use-kernel-config=multi_v7_defconfig
+-config-fragment=
++config-fragment=kernel/configs/ti_multi_v7_prune.config kernel/configs/no_smp.config
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig
+index 9d579e41..43089dc8 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig
+@@ -1,2 +1,2 @@
+ use-kernel-config=multi_v7_defconfig
+-config-fragment=
++config-fragment=kernel/configs/ti_multi_v7_prune.config kernel/configs/ti_rt.config
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig
+index fd07b34e..47d78664 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig
+@@ -1,2 +1,2 @@
+ use-kernel-config=defconfig
+-config-fragment=
++config-fragment=kernel/configs/ti_arm64_prune.config kernel/configs/ti_rt.config
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defconfig
+index 9d579e41..5de2b229 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defconfig
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defconfig
+@@ -1,2 +1,2 @@
+ use-kernel-config=multi_v7_defconfig
+-config-fragment=
++config-fragment=kernel/configs/ti_multi_v7_prune.config kernel/configs/ti_rt.config kernel/configs/no_smp.config
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defconfig
+index 9d579e41..5de2b229 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defconfig
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defconfig
+@@ -1,2 +1,2 @@
+ use-kernel-config=multi_v7_defconfig
+-config-fragment=
++config-fragment=kernel/configs/ti_multi_v7_prune.config kernel/configs/ti_rt.config kernel/configs/no_smp.config
+-- 
+2.34.1
 
-> ---
->  meta-beagle/conf/machine/beaglebone-ai64.conf | 6 +-----
->  1 file changed, 1 insertion(+), 5 deletions(-)
-> 
-> diff --git a/meta-beagle/conf/machine/beaglebone-ai64.conf b/meta-beagle/conf/machine/beaglebone-ai64.conf
-> index a521c8cf..ecd3a6e7 100644
-> --- a/meta-beagle/conf/machine/beaglebone-ai64.conf
-> +++ b/meta-beagle/conf/machine/beaglebone-ai64.conf
-> @@ -18,11 +18,7 @@ UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "j721e_beagleboneai64_a72.config"
->  UBOOT_MACHINE:bsp-bb_org-6_1 = "j721e_evm_a72_config"
->  UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 = "j721e_beagleboneai64_a72.config"
->  
-> -SPL_BINARY:bsp-ti-6_6 = "tispl.bin_unsigned"
-> -SPL_BINARYNAME:bsp-ti-6_6 = "tispl.bin"
-> -
-> -SPL_BINARY:bsp-bb_org-6_6 = "tispl.bin_unsigned"
-> -SPL_BINARYNAME:bsp-bb_org-6_6 = "tispl.bin"
-> +SPL_BINARY = "tispl.bin_unsigned"
->  
->  KERNEL_DEVICETREE_PREFIX = " \
->      ti/k3-j721e \
-> -- 
-> 2.17.1
 
