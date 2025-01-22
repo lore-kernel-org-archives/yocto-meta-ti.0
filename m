@@ -1,98 +1,157 @@
-Return-Path: <denis@denix.org>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FDABC02182
-	for <webhook@archiver.kernel.org>; Tue, 21 Jan 2025 19:09:45 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.24252.1737486579149913221
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18F92C0218C
+	for <webhook@archiver.kernel.org>; Wed, 22 Jan 2025 16:50:42 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web10.48660.1737564634561613960
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 21 Jan 2025 11:09:39 -0800
+ Wed, 22 Jan 2025 08:50:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 6657340BA7;
-	Tue, 21 Jan 2025 19:09:38 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Ra0xFZPu8-8K; Tue, 21 Jan 2025 19:09:38 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3AA8A40B13;
-	Tue, 21 Jan 2025 19:09:36 +0000 (UTC)
-Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 993D616415A;
-	Tue, 21 Jan 2025 14:09:35 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@lists.yoctoproject.org
-Cc: Andrew Davis <afd@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master/scarthgap][PATCH v2] conf: machine: k3: Use Cortex-A53/A72 CPU tune
-Date: Tue, 21 Jan 2025 14:08:25 -0500
-Message-Id: <20250121190825.817065-1-denis@denix.org>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=yAelo4TZ;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: afd@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50MGoWOB1047039
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 22 Jan 2025 10:50:32 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1737564632;
+	bh=MzpzdrQ+LmbAhk2Tp8PSxvf+kVjiQDcq4UQJZamrt8E=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=yAelo4TZVgbl3fxIxLOoijWjBFrbektWgsb+nj9iLipmciBy92Uw69SjfOhD75Br1
+	 oiHBuzjuESE4wuIfhJixw0OJuy9kNin+LHMRGNlGyyfMHvTVwEcM4pxVhAih/JISbd
+	 S1Pp/kcjjeFGGFIrpA+ZPKeIRqt5HoBJfeyER7tg=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50MGoW7e037830
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 22 Jan 2025 10:50:32 -0600
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
+ Jan 2025 10:50:32 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 22 Jan 2025 10:50:31 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50MGoVGw036905;
+	Wed, 22 Jan 2025 10:50:31 -0600
+Message-ID: <7ea61ec8-e499-48d7-9fb5-f5159c6bc82d@ti.com>
+Date: Wed, 22 Jan 2025 10:50:31 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [scarthgap][PATCH] linux-ti-staging: Add config-fragments for
+ v6.12 Kernel
+To: Beleswar Padhi <b-padhi@ti.com>, <reatmon@ti.com>, <denys@konsulko.com>
+CC: <u-kumar1@ti.com>, <meta-ti@lists.yoctoproject.org>
+References: <20250121175625.4114041-1-b-padhi@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20250121175625.4114041-1-b-padhi@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 21 Jan 2025 19:09:45 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18211
+ <meta-ti@lists.yoctoproject.org>; Wed, 22 Jan 2025 16:50:42 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18212
 
-From: Andrew Davis <afd@ti.com>
+On 1/21/25 11:56 AM, Beleswar Padhi wrote:
+> ti-linux-kernel tree has several prune config fragments for ARM/ARM64/RT
+> configurations. Enable the prune config fragments here.
+> 
+> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> ---
+>   .../recipes-kernel/linux/linux-ti-staging-6.12/defconfig        | 2 +-
+>   .../recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig     | 2 +-
+>   .../recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig  | 2 +-
+>   .../recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig  | 2 +-
+>   .../recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig     | 2 +-
+>   .../recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig  | 2 +-
+>   .../linux/linux-ti-staging-rt-6.12/ti33x/defconfig              | 2 +-
+>   .../linux/linux-ti-staging-rt-6.12/ti43x/defconfig              | 2 +-
+>   8 files changed, 8 insertions(+), 8 deletions(-)
+> 
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
+> index 9d579e41..24b53cf7 100644
+> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
+> @@ -1,2 +1,2 @@
+>   use-kernel-config=multi_v7_defconfig
+> -config-fragment=
+> +config-fragment=kernel/configs/ti_multi_v7_prune.config
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig
+> index fd07b34e..ef1d3efd 100644
+> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig
+> @@ -1,2 +1,2 @@
+>   use-kernel-config=defconfig
+> -config-fragment=
+> +config-fragment=kernel/configs/ti_arm64_prune.config
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig
+> index 9d579e41..e6a967e1 100644
+> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig
+> @@ -1,2 +1,2 @@
+>   use-kernel-config=multi_v7_defconfig
+> -config-fragment=
+> +config-fragment=kernel/configs/ti_multi_v7_prune.config kernel/configs/no_smp.config
 
-All current K3 devices use either A53 or A72. Use the compile tune
-configuration specific for these to allow the compiler to make
-better optimizations.
+We are running into some issues with the no_smp.config, seems some kernel
+sysfs items relating to CPU counts are misbehaving (Chirag has more details
+if anyone is interested). Disabling SMP is not well tested in general anymore
+as it is often enabled by default even for single-core systems. The very small
+performance change is not worth the lack of testing and instability caused
+by going with non-standard configurations IMHO.
 
-Default tune here is weakly set to a lowest common denominator of
-aarch64, as before, which is a recommended behavior for a BSP layer.
+Everything else here looks good, but could we drop no_smp.config for now
+and take up a debate on adding it in at a later time?
 
-This allows for greater binary reuse (packages, sstate, etc.) across
-different platforms of the same architecture in multi-BSP environments.
+This also has the side benefit of reducing our kernel builds from 6 variations
+to just 4 (arm32/64 x rt/non-rt).
 
-At the same time, since all the correct tunes are now configured for
-K3 devices, one can elevate compiler optimization levels either from
-local.conf or own Distro configuration on a per-SoC or per-device
-basis, like so:
+Andrew
 
-DEFAULTTUNE:k3 =3D "armv8a-crc"
-DEFAULTTUNE:j721e =3D "cortexa72-cortexa53"
-DEFAULTTUNE:beagleplay =3D "cortexa72-cortexa53"
-
-Signed-off-by: Andrew Davis <afd@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
----
-There were several discussions on this topic, e.g. a v1 of this
-patch and also a similar separate patch:
-https://patchwork.yoctoproject.org/project/ti/patch/20240215212613.57012-=
-1-afd@ti.com/
-https://patchwork.yoctoproject.org/project/ti/patch/20241114140801.196452=
-8-1-matthias.schiffer@ew.tq-group.com/
-
-v2 sets back the lowest DEFAULTTUNE, explains why, and details
-how to benefit from extra optimizations and where to set those.
-
- meta-ti-bsp/conf/machine/include/k3.inc | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/m=
-achine/include/k3.inc
-index a296f64f..dd3cbeca 100644
---- a/meta-ti-bsp/conf/machine/include/k3.inc
-+++ b/meta-ti-bsp/conf/machine/include/k3.inc
-@@ -3,7 +3,8 @@
- require conf/machine/include/ti-soc.inc
- SOC_FAMILY:append =3D ":k3"
-=20
--require conf/machine/include/arm/arch-arm64.inc
-+DEFAULTTUNE ?=3D "aarch64"
-+require conf/machine/include/arm/armv8a/tune-cortexa72-cortexa53.inc
-=20
- require conf/machine/include/ti-bsp.inc
-=20
---=20
-2.25.1
-
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig
+> index 9d579e41..e6a967e1 100644
+> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig
+> @@ -1,2 +1,2 @@
+>   use-kernel-config=multi_v7_defconfig
+> -config-fragment=
+> +config-fragment=kernel/configs/ti_multi_v7_prune.config kernel/configs/no_smp.config
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig
+> index 9d579e41..43089dc8 100644
+> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig
+> @@ -1,2 +1,2 @@
+>   use-kernel-config=multi_v7_defconfig
+> -config-fragment=
+> +config-fragment=kernel/configs/ti_multi_v7_prune.config kernel/configs/ti_rt.config
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig
+> index fd07b34e..47d78664 100644
+> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig
+> @@ -1,2 +1,2 @@
+>   use-kernel-config=defconfig
+> -config-fragment=
+> +config-fragment=kernel/configs/ti_arm64_prune.config kernel/configs/ti_rt.config
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defconfig
+> index 9d579e41..5de2b229 100644
+> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defconfig
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defconfig
+> @@ -1,2 +1,2 @@
+>   use-kernel-config=multi_v7_defconfig
+> -config-fragment=
+> +config-fragment=kernel/configs/ti_multi_v7_prune.config kernel/configs/ti_rt.config kernel/configs/no_smp.config
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defconfig
+> index 9d579e41..5de2b229 100644
+> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defconfig
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defconfig
+> @@ -1,2 +1,2 @@
+>   use-kernel-config=multi_v7_defconfig
+> -config-fragment=
+> +config-fragment=kernel/configs/ti_multi_v7_prune.config kernel/configs/ti_rt.config kernel/configs/no_smp.config
 
