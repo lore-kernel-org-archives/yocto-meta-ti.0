@@ -2,145 +2,242 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B946C02182
-	for <webhook@archiver.kernel.org>; Wed, 22 Jan 2025 17:07:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 365DBC02182
+	for <webhook@archiver.kernel.org>; Wed, 22 Jan 2025 17:10:42 +0000 (UTC)
 Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web10.49136.1737565654341955471
+ by mx.groups.io with SMTP id smtpd.web10.49240.1737565833172093400
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 22 Jan 2025 09:07:34 -0800
+ Wed, 22 Jan 2025 09:10:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=TKetg0mJ;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=Koei7y17;
  spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: reatmon@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50MH7X1b230013
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Wed, 22 Jan 2025 11:07:33 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50MHAWsG230642
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 22 Jan 2025 11:10:32 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1737565653;
-	bh=SMWSmmpZ6ypOTVNOwjt5MPmEqKNyJXbMEqVchaoHWCg=;
-	h=From:To:Subject:Date;
-	b=TKetg0mJljHAQE0za+11oLEOgaQWiHj6z8zs9Dtzd/+ubaIJjQTmW6ZW0A7S8JQuk
-	 sY8kPrDq21oHczYKi9aYtv7sry9RcJFX1phyjU5SOXWddPsLW5pCKP+ZTZOEa0ADcr
-	 j67WxIsimtd+8IbYa0U97Ogh4svWeS/VXIS85ioI=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50MH7XIQ081110;
-	Wed, 22 Jan 2025 11:07:33 -0600
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1737565832;
+	bh=YpQFAdRX7Tg+7LgMJ5W+n/jqZAAwDkD8t30tMlYdwwI=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=Koei7y17Y95HBbQkWEhQTb0WiFCdGHpfEgW/3hEyxsPZbB/HIboaSAwQ8OZdd59dA
+	 4mjuqLwxBpdkMTyDgMXKssn6cHYBfgppUF+OdjTkwV0XVVdgj3Tswr+3eUhHjKa849
+	 ulehBFzQgYKCar9Livx7x2lZDhBAvof6sJH1ANUY=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50MHAWoI011632
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 22 Jan 2025 11:10:32 -0600
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- Jan 2025 11:07:32 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2025 11:10:32 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 Jan 2025 11:07:32 -0600
-Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50MH7WMR070508;
-	Wed, 22 Jan 2025 11:07:32 -0600
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1taeCS-0005Sw-OI; Wed, 22 Jan 2025 11:07:32 -0600
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master/scarthgap][PATCH v2 1/2] conf: machine: beagleplay*: Update defaults to mainline
-Date: Wed, 22 Jan 2025 11:07:31 -0600
-Message-ID: <20250122170732.20970-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ Frontend Transport; Wed, 22 Jan 2025 11:10:32 -0600
+Received: from [10.249.32.65] ([10.249.32.65])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50MHAVuf075033;
+	Wed, 22 Jan 2025 11:10:31 -0600
+Message-ID: <f829641b-ae91-4b31-9077-9547f05a670b@ti.com>
+Date: Wed, 22 Jan 2025 11:10:31 -0600
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [scarthgap][PATCH] linux-ti-staging: Add config-fragments for
+ v6.12 Kernel
+To: Andrew Davis <afd@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
+        <denys@konsulko.com>
+CC: <u-kumar1@ti.com>, <meta-ti@lists.yoctoproject.org>
+References: <20250121175625.4114041-1-b-padhi@ti.com>
+ <7ea61ec8-e499-48d7-9fb5-f5159c6bc82d@ti.com>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <7ea61ec8-e499-48d7-9fb5-f5159c6bc82d@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by lelvem-ot02.ext.ti.com id 50MHAWsG230642
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 22 Jan 2025 17:07:42 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18214
+ <meta-ti@lists.yoctoproject.org>; Wed, 22 Jan 2025 17:10:42 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18215
 
-The defaults for UBOOT_MACHINE and SPL_BINARY are now aligned with the
-mainline values and new ti-6_1 values for the previous defaults were
-created to capture those.  Also updated the meta-beagle beagleplay since
-it inherits the beagleplay-ti settings.
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- meta-beagle/conf/machine/beagleplay-k3r5.conf    | 2 +-
- meta-beagle/conf/machine/beagleplay.conf         | 5 +----
- meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf | 6 ++----
- meta-ti-bsp/conf/machine/beagleplay-ti.conf      | 9 +++------
- 4 files changed, 7 insertions(+), 15 deletions(-)
 
-diff --git a/meta-beagle/conf/machine/beagleplay-k3r5.conf b/meta-beagle/conf/machine/beagleplay-k3r5.conf
-index 3e7f0c1b..f053c11e 100644
---- a/meta-beagle/conf/machine/beagleplay-k3r5.conf
-+++ b/meta-beagle/conf/machine/beagleplay-k3r5.conf
-@@ -6,6 +6,6 @@ require conf/machine/beagleplay-ti-k3r5.conf
- 
- require conf/machine/include/beagle-bsp.inc
- 
--UBOOT_MACHINE:bsp-bb_org-6_6 = "am62x_beagleplay_r5_defconfig"
-+UBOOT_MACHINE:bsp-bb_org-6_1 = "am62x_evm_r5_defconfig"
- 
- UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 = "am625_beagleplay_r5.config"
-diff --git a/meta-beagle/conf/machine/beagleplay.conf b/meta-beagle/conf/machine/beagleplay.conf
-index b1a463e1..bc0de3f0 100644
---- a/meta-beagle/conf/machine/beagleplay.conf
-+++ b/meta-beagle/conf/machine/beagleplay.conf
-@@ -6,13 +6,10 @@ require conf/machine/beagleplay-ti.conf
- 
- require conf/machine/include/beagle-bsp.inc
- 
--UBOOT_MACHINE:bsp-bb_org-6_6 = "am62x_beagleplay_a53_defconfig"
-+UBOOT_MACHINE:bsp-bb_org-6_1 = "am62x_evm_a53_defconfig"
- 
- UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 = "am625_beagleplay_a53.config"
- 
--SPL_BINARY:bsp-bb_org-6_6 = "tispl.bin_unsigned"
--SPL_BINARYNAME:bsp-bb_org-6_6 = "tispl.bin"
--
- KERNEL_DEVICETREE:append:bsp-bb_org-6_1 = " \
- ti/k3-am625-beagleplay-csi2-ov5640.dtbo \
- ti/k3-am625-beagleplay-csi2-tevi-ov5640.dtbo \
-diff --git a/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf b/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf
-index c27e0abc..72dc145b 100644
---- a/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf
-@@ -8,9 +8,7 @@ SYSFW_SOC = "am62x"
- SYSFW_CONFIG = "evm"
- SYSFW_SUFFIX = "gp"
- 
--UBOOT_MACHINE = "am62x_evm_r5_defconfig"
--UBOOT_MACHINE:bsp-ti-6_6 = "am62x_beagleplay_r5_defconfig"
--UBOOT_MACHINE:bsp-ti-6_12 = "am62x_beagleplay_r5_defconfig"
-+UBOOT_MACHINE = "am62x_beagleplay_r5_defconfig"
-+UBOOT_MACHINE:bsp-ti-6_1 = "am62x_evm_r5_defconfig"
- 
- UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "am625_beagleplay_r5.config"
--UBOOT_CONFIG_FRAGMENTS:bsp-mainline = "beagleplay_r5.config"
-diff --git a/meta-ti-bsp/conf/machine/beagleplay-ti.conf b/meta-ti-bsp/conf/machine/beagleplay-ti.conf
-index 68d6dced..3824d867 100644
---- a/meta-ti-bsp/conf/machine/beagleplay-ti.conf
-+++ b/meta-ti-bsp/conf/machine/beagleplay-ti.conf
-@@ -19,15 +19,12 @@ TFA_K3_SYSTEM_SUSPEND = "1"
- 
- OPTEEMACHINE = "k3-am62x"
- 
--UBOOT_MACHINE = "am62x_evm_a53_defconfig"
--UBOOT_MACHINE:bsp-ti-6_6 = "am62x_beagleplay_a53_defconfig"
--UBOOT_MACHINE:bsp-ti-6_12 = "am62x_beagleplay_a53_defconfig"
-+UBOOT_MACHINE = "am62x_beagleplay_a53_defconfig"
-+UBOOT_MACHINE:bsp-ti-6_1 = "am62x_evm_a53_defconfig"
- 
- UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "am625_beagleplay_a53.config"
--UBOOT_CONFIG_FRAGMENTS:bsp-mainline = "beagleplay_a53.config"
- 
--SPL_BINARY:bsp-ti-6_6 = "tispl.bin_unsigned"
--SPL_BINARYNAME:bsp-ti-6_6 = "tispl.bin"
-+SPL_BINARY = "tispl.bin_unsigned"
- 
- KERNEL_DEVICETREE_PREFIX = " \
-     ti/k3-am625-beagle \
--- 
-2.17.1
+On 1/22/2025 10:50 AM, Andrew Davis wrote:
+> On 1/21/25 11:56 AM, Beleswar Padhi wrote:
+>> ti-linux-kernel tree has several prune config fragments for ARM/ARM64/=
+RT
+>> configurations. Enable the prune config fragments here.
+>>
+>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+>> ---
+>> =C2=A0 .../recipes-kernel/linux/linux-ti-staging-6.12/defconfig=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 2 +-
+>> =C2=A0 .../recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig=C2=A0=
+=C2=A0=C2=A0=C2=A0 | 2 +-
+>> =C2=A0 .../recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconfig=C2=
+=A0 | 2 +-
+>> =C2=A0 .../recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconfig=C2=
+=A0 | 2 +-
+>> =C2=A0 .../recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig=C2=A0=
+=C2=A0=C2=A0=C2=A0 | 2 +-
+>> =C2=A0 .../recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconfig=C2=
+=A0 | 2 +-
+>> =C2=A0 .../linux/linux-ti-staging-rt-6.12/ti33x/defconfig=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 2 +-
+>> =C2=A0 .../linux/linux-ti-staging-rt-6.12/ti43x/defconfig=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 2 +-
+>> =C2=A0 8 files changed, 8 insertions(+), 8 deletions(-)
+>>
+>> diff --git=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig=20
+>> b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
+>> index 9d579e41..24b53cf7 100644
+>> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
+>> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
+>> @@ -1,2 +1,2 @@
+>> =C2=A0 use-kernel-config=3Dmulti_v7_defconfig
+>> -config-fragment=3D
+>> +config-fragment=3Dkernel/configs/ti_multi_v7_prune.config
+>> diff --git=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig=20
+>> b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconfig
+>> index fd07b34e..ef1d3efd 100644
+>> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defcon=
+fig
+>> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defcon=
+fig
+>> @@ -1,2 +1,2 @@
+>> =C2=A0 use-kernel-config=3Ddefconfig
+>> -config-fragment=3D
+>> +config-fragment=3Dkernel/configs/ti_arm64_prune.config
+>> diff --git=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconf=
+ig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconf=
+ig
+>> index 9d579e41..e6a967e1 100644
+>> ---=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconf=
+ig
+>> +++=20
+>> b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti33x/defconf=
+ig
+>> @@ -1,2 +1,2 @@
+>> =C2=A0 use-kernel-config=3Dmulti_v7_defconfig
+>> -config-fragment=3D
+>> +config-fragment=3Dkernel/configs/ti_multi_v7_prune.config=20
+>> kernel/configs/no_smp.config
+>=20
+> We are running into some issues with the no_smp.config, seems some kern=
+el
+> sysfs items relating to CPU counts are misbehaving (Chirag has more det=
+ails
+> if anyone is interested). Disabling SMP is not well tested in general=20
+> anymore
+> as it is often enabled by default even for single-core systems. The ver=
+y=20
+> small
+> performance change is not worth the lack of testing and instability cau=
+sed
+> by going with non-standard configurations IMHO.
+>=20
+> Everything else here looks good, but could we drop no_smp.config for no=
+w
+> and take up a debate on adding it in at a later time?
+>=20
+> This also has the side benefit of reducing our kernel builds from 6=20
+> variations
+> to just 4 (arm32/64 x rt/non-rt).
 
+We only have 4 now... the no_smp was just added to ti33 and ti43 for=20
+backwards compat to fix some issues.   But we never did additional=20
+kernel builds because of it...
+
+What were the 6 variations you were referring to?
+
+
+> Andrew
+>=20
+>> diff --git=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconf=
+ig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconf=
+ig
+>> index 9d579e41..e6a967e1 100644
+>> ---=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconf=
+ig
+>> +++=20
+>> b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/ti43x/defconf=
+ig
+>> @@ -1,2 +1,2 @@
+>> =C2=A0 use-kernel-config=3Dmulti_v7_defconfig
+>> -config-fragment=3D
+>> +config-fragment=3Dkernel/configs/ti_multi_v7_prune.config=20
+>> kernel/configs/no_smp.config
+>> diff --git=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig=20
+>> b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconfig
+>> index 9d579e41..43089dc8 100644
+>> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defcon=
+fig
+>> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defcon=
+fig
+>> @@ -1,2 +1,2 @@
+>> =C2=A0 use-kernel-config=3Dmulti_v7_defconfig
+>> -config-fragment=3D
+>> +config-fragment=3Dkernel/configs/ti_multi_v7_prune.config=20
+>> kernel/configs/ti_rt.config
+>> diff --git=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconf=
+ig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconf=
+ig
+>> index fd07b34e..47d78664 100644
+>> ---=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconf=
+ig
+>> +++=20
+>> b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defconf=
+ig
+>> @@ -1,2 +1,2 @@
+>> =C2=A0 use-kernel-config=3Ddefconfig
+>> -config-fragment=3D
+>> +config-fragment=3Dkernel/configs/ti_arm64_prune.config=20
+>> kernel/configs/ti_rt.config
+>> diff --git=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defc=
+onfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/d=
+efconfig
+>> index 9d579e41..5de2b229 100644
+>> ---=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defc=
+onfig
+>> +++=20
+>> b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti33x/defc=
+onfig
+>> @@ -1,2 +1,2 @@
+>> =C2=A0 use-kernel-config=3Dmulti_v7_defconfig
+>> -config-fragment=3D
+>> +config-fragment=3Dkernel/configs/ti_multi_v7_prune.config=20
+>> kernel/configs/ti_rt.config kernel/configs/no_smp.config
+>> diff --git=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defc=
+onfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/d=
+efconfig
+>> index 9d579e41..5de2b229 100644
+>> ---=20
+>> a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defc=
+onfig
+>> +++=20
+>> b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/ti43x/defc=
+onfig
+>> @@ -1,2 +1,2 @@
+>> =C2=A0 use-kernel-config=3Dmulti_v7_defconfig
+>> -config-fragment=3D
+>> +config-fragment=3Dkernel/configs/ti_multi_v7_prune.config=20
+>> kernel/configs/ti_rt.config kernel/configs/no_smp.config
+
+--=20
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
