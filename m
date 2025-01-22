@@ -2,51 +2,52 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 393D6C02181
-	for <webhook@archiver.kernel.org>; Wed, 22 Jan 2025 21:42:47 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web10.5903.1737582160186747459
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20295C0218C
+	for <webhook@archiver.kernel.org>; Wed, 22 Jan 2025 21:42:57 +0000 (UTC)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ by mx.groups.io with SMTP id smtpd.web10.5906.1737582175375995787
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 22 Jan 2025 13:42:40 -0800
+ Wed, 22 Jan 2025 13:42:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=eZHe9eA+;
- spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: reatmon@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50MLgcFm1062043
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Wed, 22 Jan 2025 15:42:39 -0600
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=aHgoSZTP;
+ spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: reatmon@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50MLgsb3265432
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 22 Jan 2025 15:42:54 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1737582159;
-	bh=ezjQ+F4UsFZFFGQvhFQ6Dnee5ee4JHJ60v0gQP3V6+o=;
+	s=ti-com-17Q1; t=1737582174;
+	bh=J1F+iOu5H5OULnRKvyxWlspf0RpfRSiESYAU2kCVYjk=;
 	h=From:To:Subject:Date;
-	b=eZHe9eA+6JbAgKyV/7GKmAK/3rOy4tsFp9/uad3UsB6CS3WkV7YQjIajdtLYmjIct
-	 bvUuFEmzyQfjPG1slsBjNp8LNsXy17koe7CRhZv2Z7eLTxvYbeJJH/EyUk9+OarAR/
-	 qXc0HEGWigCEY8cwvhjgUQfFR0qINNPMsAMVQVB0=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50MLgcHO105556;
-	Wed, 22 Jan 2025 15:42:38 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- Jan 2025 15:42:38 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
+	b=aHgoSZTPX54Z3JnhWjlUcWua7bozHKWMKcOTUp2ebP4BRo3AYULh+gGTfrpzme++V
+	 m0R/KXQcaETizzd77hF32+eSZU0ZKX+Gx+CEqGjUtMGr1meN634mrLfDs7cDiEi1gF
+	 7S7BL2naYZXF5/Goiao95lgRSY7zTOq06Ds97xeI=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50MLgsd4076384
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 22 Jan 2025 15:42:54 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE108.ent.ti.com
  (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
+ Jan 2025 15:42:53 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 Jan 2025 15:42:38 -0600
+ Frontend Transport; Wed, 22 Jan 2025 15:42:53 -0600
 Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50MLgcFR112557;
-	Wed, 22 Jan 2025 15:42:38 -0600
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50MLgrL2112781;
+	Wed, 22 Jan 2025 15:42:53 -0600
 Received: from reatmon by uda0214219 with local (Exim 4.90_1)
 	(envelope-from <reatmon@ti.com>)
-	id 1taiUg-0005JX-E0; Wed, 22 Jan 2025 15:42:38 -0600
+	id 1taiUv-0005Kn-NY; Wed, 22 Jan 2025 15:42:53 -0600
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] ti-bsp: Remove ti-6_1 and all related recipes
-Date: Wed, 22 Jan 2025 15:42:38 -0600
-Message-ID: <20250122214238.20386-1-reatmon@ti.com>
+Subject: [meta-ti][scarthgap][PATCH] ti-bsp: Remove ti-6_1 and all related recipes
+Date: Wed, 22 Jan 2025 15:42:53 -0600
+Message-ID: <20250122214253.20466-1-reatmon@ti.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -54,8 +55,8 @@ X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 22 Jan 2025 21:42:47 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18221
+ <meta-ti@lists.yoctoproject.org>; Wed, 22 Jan 2025 21:42:57 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18222
 
 With the upcoming LTS move to 6.12 we no longer need to continue
 supporting the ti-6_1 BSP.  Also remove the related recipes and their
@@ -81,9 +82,9 @@ Signed-off-by: Ryan Eatmon <reatmon@ti.com>
  meta-ti-bsp/conf/machine/beagleplay-ti.conf   |   3 -
  meta-ti-bsp/conf/machine/include/ti-bsp.inc   |  22 +--
  .../ti-img-rogue-driver_23.3.6512818.bb       |  39 -----
- .../u-boot/u-boot-ti-staging_2023.04.bb       |  11 --
- ...lude-of-Host-h-moved-to-TargetParser.patch |  65 --------
- ...allium-Fix-build-with-llvm-18-and-19.patch |  53 -------
+ .../u-boot/u-boot-ti-staging_2023.04.bb       |   9 --
+ ...lude-of-Host-h-moved-to-TargetParser.patch |  64 --------
+ ...allium-Fix-build-with-llvm-18-and-19.patch |  52 -------
  .../recipes-graphics/mesa/mesa-pvr_22.3.5.bb  |  62 --------
  .../ti-img-rogue-umlibs_23.3.6512818.bb       | 147 ------------------
  .../linux/linux-ti-staging-6.1/defconfig      |   2 -
@@ -96,8 +97,9 @@ Signed-off-by: Ryan Eatmon <reatmon@ti.com>
  .../omapl138/defconfig                        |   2 -
  .../linux-ti-staging-rt-6.1/ti33x/defconfig   |   2 -
  .../linux-ti-staging-rt-6.1/ti43x/defconfig   |   2 -
+ .../linux/linux-ti-staging-rt_6.1.bb          |  15 --
  .../linux/linux-ti-staging_6.1.bb             |  33 ----
- 27 files changed, 1 insertion(+), 472 deletions(-)
+ 28 files changed, 1 insertion(+), 483 deletions(-)
  delete mode 100644 meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.3.6512818.bb
  delete mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
  delete mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-fix-gallivm-fix-LLVM-include-of-Host-h-moved-to-TargetParser.patch
@@ -114,6 +116,7 @@ Signed-off-by: Ryan Eatmon <reatmon@ti.com>
  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/omapl138/defconfig
  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/ti33x/defconfig
  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/ti43x/defconfig
+ delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
 
 diff --git a/meta-beagle/conf/machine/beagle-x15.conf b/meta-beagle/conf/machine/beagle-x15.conf
@@ -225,7 +228,7 @@ index 3824d867..792c91b2 100644
  SPL_BINARY = "tispl.bin_unsigned"
  
 diff --git a/meta-ti-bsp/conf/machine/include/ti-bsp.inc b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-index 0d519671..0dbd89fd 100644
+index 7c8466c4..0f62702f 100644
 --- a/meta-ti-bsp/conf/machine/include/ti-bsp.inc
 +++ b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
 @@ -3,7 +3,7 @@
@@ -311,10 +314,10 @@ index f7c871e1..00000000
 -RRECOMMENDS:${PN} += "ti-img-rogue-umlibs"
 diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
 deleted file mode 100644
-index b26c59d4..00000000
+index 1ceebede..00000000
 --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
 +++ /dev/null
-@@ -1,11 +0,0 @@
+@@ -1,9 +0,0 @@
 -require u-boot-ti.inc
 -
 -include ${@ 'recipes-bsp/u-boot/ti-extras.inc' if d.getVar('TI_EXTRAS') else ''}
@@ -323,15 +326,13 @@ index b26c59d4..00000000
 -
 -BRANCH = "ti-u-boot-2023.04"
 -
--SRC_URI += "file://0001-scripts-dtc-pylibfdt-libfdt.i_shipped-Use-SWIG_Appen.patch"
--
--SRCREV = "2bedcd265ca6de803c90505df5962cbd70cda611"
+-SRCREV = "0893e693e08f9fc864a6191051dccc818accf933"
 diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-fix-gallivm-fix-LLVM-include-of-Host-h-moved-to-TargetParser.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-fix-gallivm-fix-LLVM-include-of-Host-h-moved-to-TargetParser.patch
 deleted file mode 100644
-index 7d4fe078..00000000
+index aa1ab0d9..00000000
 --- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-fix-gallivm-fix-LLVM-include-of-Host-h-moved-to-TargetParser.patch
 +++ /dev/null
-@@ -1,65 +0,0 @@
+@@ -1,64 +0,0 @@
 -From bb2db56ffec6e527d88751f75117ae690227cd6c Mon Sep 17 00:00:00 2001
 -From: =?UTF-8?q?Kai=20Wasserb=C3=A4ch?= <kai@dev.carbon-project.org>
 -Date: Sat, 11 Feb 2023 18:38:01 +0100
@@ -367,7 +368,7 @@ index 7d4fe078..00000000
 - #include <llvm/Support/Format.h>
 --#include <llvm/Support/Host.h>
 - #include <llvm/IR/Module.h>
-- 
+-
 -+#if LLVM_VERSION_MAJOR >= 17
 -+#include <llvm/TargetParser/Host.h>
 -+#else
@@ -376,7 +377,7 @@ index 7d4fe078..00000000
 -+
 - #include "util/u_math.h"
 - #include "util/u_debug.h"
-- 
+-
 -diff --git a/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp b/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
 -index 334c13530394b..5e7a30a6cc2e3 100644
 ---- a/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
@@ -393,16 +394,15 @@ index 7d4fe078..00000000
 - #include <llvm/Support/PrettyStackTrace.h>
 - #include <llvm/ExecutionEngine/ObjectCache.h>
 - #include <llvm/Support/TargetSelect.h>
-- 
---- 
--GitLab
 -
+---
+-GitLab
 diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-gallium-Fix-build-with-llvm-18-and-19.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-gallium-Fix-build-with-llvm-18-and-19.patch
 deleted file mode 100644
-index 37888c34..00000000
+index 4566c515..00000000
 --- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-gallium-Fix-build-with-llvm-18-and-19.patch
 +++ /dev/null
-@@ -1,53 +0,0 @@
+@@ -1,52 +0,0 @@
 -From 6c5033bb01a3a1341d4db5007586a5f2e2727b0a Mon Sep 17 00:00:00 2001
 -From: Ryan Eatmon <reatmon@ti.com>
 -Date: Mon, 4 Nov 2024 13:37:29 -0600
@@ -433,7 +433,7 @@ index 37888c34..00000000
 -+#else
 -           .setOptLevel((CodeGenOpt::Level)OptLevel);
 -+#endif
-- 
+-
 - #ifdef _WIN32
 -     /*
 -@@ -392,8 +396,14 @@ lp_build_create_jit_compiler_for_module(LLVMExecutionEngineRef *OutJIT,
@@ -450,12 +450,11 @@ index 37888c34..00000000
 -+      llvm::StringMap<bool> features;
 -+      llvm::sys::getHostCPUFeatures(features);
 -+   #endif
-- 
+-
 -    for (StringMapIterator<bool> f = features.begin();
 -         f != features.end();
---- 
+---
 -2.17.1
--
 diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb
 deleted file mode 100644
 index bdc9ce16..00000000
@@ -756,9 +755,30 @@ index 5de2b229..00000000
 @@ -1,2 +0,0 @@
 -use-kernel-config=multi_v7_defconfig
 -config-fragment=kernel/configs/ti_multi_v7_prune.config kernel/configs/ti_rt.config kernel/configs/no_smp.config
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
+deleted file mode 100644
+index 2d136698..00000000
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-require linux-ti-staging_6.1.bb
+-
+-KERNEL_LOCALVERSION:append = "-rt"
+-
+-# Look in the generic major.minor directory for files
+-# This will have priority over generic non-rt path
+-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.1:"
+-
+-BRANCH = "ti-rt-linux-6.1.y"
+-
+-SRCREV = "194ebd939bee3ffff36de9cf8dff28a77c671f5b"
+-
+-include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
+-
+-PV = "6.1.112+git"
 diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
 deleted file mode 100644
-index 8208e930..00000000
+index 47ed4f72..00000000
 --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
 +++ /dev/null
 @@ -1,33 +0,0 @@
@@ -787,8 +807,8 @@ index 8208e930..00000000
 -
 -BRANCH ?= "ti-linux-6.1.y"
 -
--SRCREV ?= "e4e8b16e66f592749984b2d287e0479e93ef35b3"
--PV = "6.1.119+git"
+-SRCREV ?= "4ef41ca7ad952c7b13b7e40808ab1025796f9a6c"
+-PV = "6.1.112+git"
 -
 -# Special configuration for remoteproc/rpmsg IPC modules
 -module_conf_rpmsg_client_sample = "blacklist rpmsg_client_sample"
