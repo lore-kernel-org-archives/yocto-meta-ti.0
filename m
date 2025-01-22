@@ -1,66 +1,50 @@
-Return-Path: <afd@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 570FAC02181
-	for <webhook@archiver.kernel.org>; Wed, 22 Jan 2025 22:06:37 +0000 (UTC)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web10.6511.1737583590304846680
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3ACE5C02182
+	for <webhook@archiver.kernel.org>; Wed, 22 Jan 2025 22:06:47 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.6519.1737583602640050692
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 22 Jan 2025 14:06:30 -0800
+ Wed, 22 Jan 2025 14:06:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=xGaUm8h8;
- spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: afd@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50MM6TDP268420
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 22 Jan 2025 16:06:29 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1737583589;
-	bh=ybbocHVp/OY++VxfMLThOpJxsiuNxjv25lZHWut9SuA=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=xGaUm8h847MyCFJ0b0W1Ows75U6aLchqnKxXweBViL0i8hJhi2aQ9HHewmmdbMvZt
-	 4edHYs2UObL05tQcbzw9kn2DsjW/gjpbazrpMAvlGbh/FZenz2T5NL8pvopWklUhTZ
-	 +BnCteZTObO1X0mQ0m+lTVPwSO9VC1/eBB5r4Rbg=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50MM6TR6029799
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 22 Jan 2025 16:06:29 -0600
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- Jan 2025 16:06:28 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 Jan 2025 16:06:28 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50MM6Sbe020075;
-	Wed, 22 Jan 2025 16:06:28 -0600
-Message-ID: <483b17d8-29cf-402b-98b3-0fb64edf6b1a@ti.com>
-Date: Wed, 22 Jan 2025 16:06:27 -0600
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id DCF9B40C83;
+	Wed, 22 Jan 2025 22:06:41 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id e4Kf2OnINYXt; Wed, 22 Jan 2025 22:06:41 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 99A4740800;
+	Wed, 22 Jan 2025 22:06:38 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id CC87F16415C; Wed, 22 Jan 2025 17:06:37 -0500 (EST)
+Date: Wed, 22 Jan 2025 17:06:37 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: reatmon@ti.com
+Cc: Praneeth Bajjuri <praneeth@ti.com>,
+	Denys Dmytriyenko <denys@konsulko.com>,
+	meta-ti@lists.yoctoproject.org
 Subject: Re: [meta-ti][master][PATCH] ti-bsp: Remove ti-6_1 and all related
  recipes
-To: <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
+Message-ID: <20250122220637.GR21836@denix.org>
 References: <20250122214238.20386-1-reatmon@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 In-Reply-To: <20250122214238.20386-1-reatmon@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 22 Jan 2025 22:06:37 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18223
+ <meta-ti@lists.yoctoproject.org>; Wed, 22 Jan 2025 22:06:47 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18224
 
-On 1/22/25 3:42 PM, Ryan Eatmon via lists.yoctoproject.org wrote:
+On Wed, Jan 22, 2025 at 03:42:38PM -0600, Ryan Eatmon via lists.yoctoproject.org wrote:
 > With the upcoming LTS move to 6.12 we no longer need to continue
 > supporting the ti-6_1 BSP.  Also remove the related recipes and their
 > related file:
@@ -68,123 +52,126 @@ On 1/22/25 3:42 PM, Ryan Eatmon via lists.yoctoproject.org wrote:
 > linux-ti-staging_6.1.bb
 > linux-ti-staging-rt_6.1.bb
 > u-boot-ti-staging_2023.04.bb
+
+
 > ti-img-rogue-driver_23.3.6512818.bb
 > ti-img-rogue-umlibs_23.3.6512818.bb
 > mesa-pvr_22.3.5.bb
-> 
+
+meta-beagle defines 6.6 and 6.1 BSPs, while 6.12 isn't going to be ready soon.
+And while meta-beagle uses own providers for the kernel and u-boot recipes, 
+it's not the case for the graphics, such as SGX, Rogue and Mesa.
+Moreover, BeagleY-AI haven't yet migrated to 6.6 and is stuck on 6.1 for now.
+That means we cannot remove old graphics pieces yet.
+
+
 > Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 > ---
-
-Any plans on dropping bb_org-6_1? Couple cleanups around DT handling
-could be made when that is gone. Anyway,
-
-Acked-by: Andrew Davis <afd@ti.com>
-
->   meta-beagle/conf/machine/beagle-x15.conf      |   1 -
->   .../conf/machine/beaglebone-ai64-k3r5.conf    |   3 -
->   meta-beagle/conf/machine/beaglebone-ai64.conf |   3 -
->   meta-beagle/conf/machine/beaglebone.conf      |   1 -
->   meta-ti-bsp/conf/machine/am62pxx-evm.conf     |   2 -
->   .../conf/machine/am62xxsip-evm-k3r5.conf      |   4 -
->   meta-ti-bsp/conf/machine/am62xxsip-evm.conf   |   2 -
->   .../conf/machine/beagleplay-ti-k3r5.conf      |   3 -
->   meta-ti-bsp/conf/machine/beagleplay-ti.conf   |   3 -
->   meta-ti-bsp/conf/machine/include/ti-bsp.inc   |  22 +--
->   .../ti-img-rogue-driver_23.3.6512818.bb       |  39 -----
->   .../u-boot/u-boot-ti-staging_2023.04.bb       |  11 --
->   ...lude-of-Host-h-moved-to-TargetParser.patch |  65 --------
->   ...allium-Fix-build-with-llvm-18-and-19.patch |  53 -------
->   .../recipes-graphics/mesa/mesa-pvr_22.3.5.bb  |  62 --------
->   .../ti-img-rogue-umlibs_23.3.6512818.bb       | 147 ------------------
->   .../linux/linux-ti-staging-6.1/defconfig      |   2 -
->   .../linux/linux-ti-staging-6.1/k3/defconfig   |   2 -
->   .../linux-ti-staging-6.1/omapl138/defconfig   |   1 -
->   .../linux-ti-staging-6.1/ti33x/defconfig      |   2 -
->   .../linux-ti-staging-6.1/ti43x/defconfig      |   2 -
->   .../linux/linux-ti-staging-rt-6.1/defconfig   |   2 -
->   .../linux-ti-staging-rt-6.1/k3/defconfig      |   2 -
->   .../omapl138/defconfig                        |   2 -
->   .../linux-ti-staging-rt-6.1/ti33x/defconfig   |   2 -
->   .../linux-ti-staging-rt-6.1/ti43x/defconfig   |   2 -
->   .../linux/linux-ti-staging_6.1.bb             |  33 ----
->   27 files changed, 1 insertion(+), 472 deletions(-)
->   delete mode 100644 meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.3.6512818.bb
->   delete mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
->   delete mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-fix-gallivm-fix-LLVM-include-of-Host-h-moved-to-TargetParser.patch
->   delete mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-gallium-Fix-build-with-llvm-18-and-19.patch
->   delete mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb
->   delete mode 100644 meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.3.6512818.bb
->   delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig
->   delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig
->   delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig
->   delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/ti33x/defconfig
->   delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/ti43x/defconfig
->   delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/defconfig
->   delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/k3/defconfig
->   delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/omapl138/defconfig
->   delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/ti33x/defconfig
->   delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/ti43x/defconfig
->   delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
+>  meta-beagle/conf/machine/beagle-x15.conf      |   1 -
+>  .../conf/machine/beaglebone-ai64-k3r5.conf    |   3 -
+>  meta-beagle/conf/machine/beaglebone-ai64.conf |   3 -
+>  meta-beagle/conf/machine/beaglebone.conf      |   1 -
+>  meta-ti-bsp/conf/machine/am62pxx-evm.conf     |   2 -
+>  .../conf/machine/am62xxsip-evm-k3r5.conf      |   4 -
+>  meta-ti-bsp/conf/machine/am62xxsip-evm.conf   |   2 -
+>  .../conf/machine/beagleplay-ti-k3r5.conf      |   3 -
+>  meta-ti-bsp/conf/machine/beagleplay-ti.conf   |   3 -
+>  meta-ti-bsp/conf/machine/include/ti-bsp.inc   |  22 +--
+>  .../ti-img-rogue-driver_23.3.6512818.bb       |  39 -----
+>  .../u-boot/u-boot-ti-staging_2023.04.bb       |  11 --
+>  ...lude-of-Host-h-moved-to-TargetParser.patch |  65 --------
+>  ...allium-Fix-build-with-llvm-18-and-19.patch |  53 -------
+>  .../recipes-graphics/mesa/mesa-pvr_22.3.5.bb  |  62 --------
+>  .../ti-img-rogue-umlibs_23.3.6512818.bb       | 147 ------------------
+>  .../linux/linux-ti-staging-6.1/defconfig      |   2 -
+>  .../linux/linux-ti-staging-6.1/k3/defconfig   |   2 -
+>  .../linux-ti-staging-6.1/omapl138/defconfig   |   1 -
+>  .../linux-ti-staging-6.1/ti33x/defconfig      |   2 -
+>  .../linux-ti-staging-6.1/ti43x/defconfig      |   2 -
+>  .../linux/linux-ti-staging-rt-6.1/defconfig   |   2 -
+>  .../linux-ti-staging-rt-6.1/k3/defconfig      |   2 -
+>  .../omapl138/defconfig                        |   2 -
+>  .../linux-ti-staging-rt-6.1/ti33x/defconfig   |   2 -
+>  .../linux-ti-staging-rt-6.1/ti43x/defconfig   |   2 -
+>  .../linux/linux-ti-staging_6.1.bb             |  33 ----
+>  27 files changed, 1 insertion(+), 472 deletions(-)
+>  delete mode 100644 meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.3.6512818.bb
+>  delete mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2023.04.bb
+>  delete mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-fix-gallivm-fix-LLVM-include-of-Host-h-moved-to-TargetParser.patch
+>  delete mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-gallium-Fix-build-with-llvm-18-and-19.patch
+>  delete mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb
+>  delete mode 100644 meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.3.6512818.bb
+>  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/defconfig
+>  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/k3/defconfig
+>  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/omapl138/defconfig
+>  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/ti33x/defconfig
+>  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.1/ti43x/defconfig
+>  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/defconfig
+>  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/k3/defconfig
+>  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/omapl138/defconfig
+>  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/ti33x/defconfig
+>  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.1/ti43x/defconfig
+>  delete mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.1.bb
 > 
 > diff --git a/meta-beagle/conf/machine/beagle-x15.conf b/meta-beagle/conf/machine/beagle-x15.conf
 > index 8ad028f4..d7fde889 100644
 > --- a/meta-beagle/conf/machine/beagle-x15.conf
 > +++ b/meta-beagle/conf/machine/beagle-x15.conf
 > @@ -6,7 +6,6 @@ require conf/machine/include/am57xx.inc
->   require conf/machine/include/beagle-bsp.inc
->   
->   DT_VENDOR_PREFIX = "ti/omap/"
+>  require conf/machine/include/beagle-bsp.inc
+>  
+>  DT_VENDOR_PREFIX = "ti/omap/"
 > -DT_VENDOR_PREFIX:bsp-ti-6_1 = ""
->   DT_VENDOR_PREFIX:bsp-bb_org-6_1 = ""
->   
->   KERNEL_DEVICETREE_PREFIX = " \
+>  DT_VENDOR_PREFIX:bsp-bb_org-6_1 = ""
+>  
+>  KERNEL_DEVICETREE_PREFIX = " \
 > diff --git a/meta-beagle/conf/machine/beaglebone-ai64-k3r5.conf b/meta-beagle/conf/machine/beaglebone-ai64-k3r5.conf
 > index 4574f82b..5de809c9 100644
 > --- a/meta-beagle/conf/machine/beaglebone-ai64-k3r5.conf
 > +++ b/meta-beagle/conf/machine/beaglebone-ai64-k3r5.conf
 > @@ -17,8 +17,5 @@ UBOOT_SYMLINK = "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
->   
->   UBOOT_MACHINE = "j721e_beagleboneai64_r5_defconfig"
->   
+>  
+>  UBOOT_MACHINE = "j721e_beagleboneai64_r5_defconfig"
+>  
 > -UBOOT_MACHINE:bsp-ti-6_1 = "j721e_evm_r5_defconfig"
 > -UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "j721e_beagleboneai64_r5.config"
 > -
->   UBOOT_MACHINE:bsp-bb_org-6_1 = "j721e_evm_r5_defconfig"
->   UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 = "j721e_beagleboneai64_r5.config"
+>  UBOOT_MACHINE:bsp-bb_org-6_1 = "j721e_evm_r5_defconfig"
+>  UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 = "j721e_beagleboneai64_r5.config"
 > diff --git a/meta-beagle/conf/machine/beaglebone-ai64.conf b/meta-beagle/conf/machine/beaglebone-ai64.conf
 > index ecd3a6e7..fffdca81 100644
 > --- a/meta-beagle/conf/machine/beaglebone-ai64.conf
 > +++ b/meta-beagle/conf/machine/beaglebone-ai64.conf
 > @@ -12,9 +12,6 @@ IMAGE_SR2_HS_SE_FILES = ""
->   
->   UBOOT_MACHINE = "j721e_beagleboneai64_a72_defconfig"
->   
+>  
+>  UBOOT_MACHINE = "j721e_beagleboneai64_a72_defconfig"
+>  
 > -UBOOT_MACHINE:bsp-ti-6_1 = "j721e_evm_a72_config"
 > -UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "j721e_beagleboneai64_a72.config"
 > -
->   UBOOT_MACHINE:bsp-bb_org-6_1 = "j721e_evm_a72_config"
->   UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 = "j721e_beagleboneai64_a72.config"
->   
+>  UBOOT_MACHINE:bsp-bb_org-6_1 = "j721e_evm_a72_config"
+>  UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 = "j721e_beagleboneai64_a72.config"
+>  
 > diff --git a/meta-beagle/conf/machine/beaglebone.conf b/meta-beagle/conf/machine/beaglebone.conf
 > index 456da618..27c084fc 100644
 > --- a/meta-beagle/conf/machine/beaglebone.conf
 > +++ b/meta-beagle/conf/machine/beaglebone.conf
 > @@ -6,7 +6,6 @@ require conf/machine/include/ti33x.inc
->   require conf/machine/include/beagle-bsp.inc
->   
->   DT_VENDOR_PREFIX = "ti/omap/"
+>  require conf/machine/include/beagle-bsp.inc
+>  
+>  DT_VENDOR_PREFIX = "ti/omap/"
 > -DT_VENDOR_PREFIX:bsp-ti-6_1 = ""
->   DT_VENDOR_PREFIX:bsp-bb_org-6_1 = ""
->   
->   KERNEL_DEVICETREE_PREFIX = " \
+>  DT_VENDOR_PREFIX:bsp-bb_org-6_1 = ""
+>  
+>  KERNEL_DEVICETREE_PREFIX = " \
 > diff --git a/meta-ti-bsp/conf/machine/am62pxx-evm.conf b/meta-ti-bsp/conf/machine/am62pxx-evm.conf
 > index bb3c34a3..d7d1fa83 100644
 > --- a/meta-ti-bsp/conf/machine/am62pxx-evm.conf
 > +++ b/meta-ti-bsp/conf/machine/am62pxx-evm.conf
 > @@ -29,5 +29,3 @@ UBOOT_MACHINE = "am62px_evm_a53_defconfig"
->   # For AM62P tisdk-display-cluster image, splash screen is handled by SBL.
->   # Hence, disable the A53 based splash screen using the am62x_evm_prune_splashscreen.config fragment present in ti-u-boot tree
->   UBOOT_CONFIG_FRAGMENTS = "${@oe.utils.conditional('DISPLAY_CLUSTER_ENABLE', '1', 'am62x_evm_prune_splashscreen.config', '', d)}"
+>  # For AM62P tisdk-display-cluster image, splash screen is handled by SBL.
+>  # Hence, disable the A53 based splash screen using the am62x_evm_prune_splashscreen.config fragment present in ti-u-boot tree
+>  UBOOT_CONFIG_FRAGMENTS = "${@oe.utils.conditional('DISPLAY_CLUSTER_ENABLE', '1', 'am62x_evm_prune_splashscreen.config', '', d)}"
 > -
 > -UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "${@oe.utils.conditional('DISPLAY_CLUSTER_ENABLE', '1', 'am62px_evm_prune_splashscreen.config', '', d)}"
 > diff --git a/meta-ti-bsp/conf/machine/am62xxsip-evm-k3r5.conf b/meta-ti-bsp/conf/machine/am62xxsip-evm-k3r5.conf
@@ -192,9 +179,9 @@ Acked-by: Andrew Davis <afd@ti.com>
 > --- a/meta-ti-bsp/conf/machine/am62xxsip-evm-k3r5.conf
 > +++ b/meta-ti-bsp/conf/machine/am62xxsip-evm-k3r5.conf
 > @@ -9,7 +9,3 @@ SYSFW_CONFIG = "evm"
->   SYSFW_SUFFIX = "hs-fs"
->   
->   UBOOT_MACHINE = "am62xsip_evm_r5_defconfig"
+>  SYSFW_SUFFIX = "hs-fs"
+>  
+>  UBOOT_MACHINE = "am62xsip_evm_r5_defconfig"
 > -
 > -UBOOT_MACHINE:bsp-ti-6_1 = "am62x_evm_r5_defconfig"
 > -
@@ -204,9 +191,9 @@ Acked-by: Andrew Davis <afd@ti.com>
 > --- a/meta-ti-bsp/conf/machine/am62xxsip-evm.conf
 > +++ b/meta-ti-bsp/conf/machine/am62xxsip-evm.conf
 > @@ -14,5 +14,3 @@ KERNEL_DEVICETREE = " \
->   "
->   
->   UBOOT_MACHINE = "am62xsip_evm_a53_defconfig"
+>  "
+>  
+>  UBOOT_MACHINE = "am62xsip_evm_a53_defconfig"
 > -
 > -UBOOT_MACHINE:bsp-ti-6_1 = "am62x_evm_a53_defconfig"
 > diff --git a/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf b/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf
@@ -214,9 +201,9 @@ Acked-by: Andrew Davis <afd@ti.com>
 > --- a/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf
 > +++ b/meta-ti-bsp/conf/machine/beagleplay-ti-k3r5.conf
 > @@ -9,6 +9,3 @@ SYSFW_CONFIG = "evm"
->   SYSFW_SUFFIX = "gp"
->   
->   UBOOT_MACHINE = "am62x_beagleplay_r5_defconfig"
+>  SYSFW_SUFFIX = "gp"
+>  
+>  UBOOT_MACHINE = "am62x_beagleplay_r5_defconfig"
 > -UBOOT_MACHINE:bsp-ti-6_1 = "am62x_evm_r5_defconfig"
 > -
 > -UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "am625_beagleplay_r5.config"
@@ -225,32 +212,32 @@ Acked-by: Andrew Davis <afd@ti.com>
 > --- a/meta-ti-bsp/conf/machine/beagleplay-ti.conf
 > +++ b/meta-ti-bsp/conf/machine/beagleplay-ti.conf
 > @@ -20,9 +20,6 @@ TFA_K3_SYSTEM_SUSPEND = "1"
->   OPTEEMACHINE = "k3-am62x"
->   
->   UBOOT_MACHINE = "am62x_beagleplay_a53_defconfig"
+>  OPTEEMACHINE = "k3-am62x"
+>  
+>  UBOOT_MACHINE = "am62x_beagleplay_a53_defconfig"
 > -UBOOT_MACHINE:bsp-ti-6_1 = "am62x_evm_a53_defconfig"
 > -
 > -UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "am625_beagleplay_a53.config"
->   
->   SPL_BINARY = "tispl.bin_unsigned"
->   
+>  
+>  SPL_BINARY = "tispl.bin_unsigned"
+>  
 > diff --git a/meta-ti-bsp/conf/machine/include/ti-bsp.inc b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
 > index 0d519671..0dbd89fd 100644
 > --- a/meta-ti-bsp/conf/machine/include/ti-bsp.inc
 > +++ b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
 > @@ -3,7 +3,7 @@
->   # preferences for kernel, bootloader and graphics components, as
->   # well as a dedicated machine override.
->   
+>  # preferences for kernel, bootloader and graphics components, as
+>  # well as a dedicated machine override.
+>  
 > -# Supported options are: mainline, next, ti-6_12, ti-6_6, ti-6_1
 > +# Supported options are: mainline, next, ti-6_12, ti-6_6
->   TI_PREFERRED_BSP ??= "ti-6_12"
->   
->   # Use bsp-* namespace for overrides
+>  TI_PREFERRED_BSP ??= "ti-6_12"
+>  
+>  # Use bsp-* namespace for overrides
 > @@ -77,26 +77,6 @@ BSP_MESA_PVR_VERSION:bsp-ti-6_6 = "23%"
->   # GC320 support requires out-of-tree drivers not yet available in 6.6
->   MACHINE_FEATURES:remove:bsp-ti-6_6 = "gc320"
->   
+>  # GC320 support requires out-of-tree drivers not yet available in 6.6
+>  MACHINE_FEATURES:remove:bsp-ti-6_6 = "gc320"
+>  
 > -# ==========
 > -# ti-6_1
 > -# TI staging kernel 6.1, u-boot 2023.04
@@ -271,9 +258,9 @@ Acked-by: Andrew Davis <afd@ti.com>
 > -# GC320 support requires out-of-tree drivers not yet available in 6.1
 > -MACHINE_FEATURES:remove:bsp-ti-6_1 = "gc320"
 > -
->   # ==========
->   # sane fallback defaults
->   # if specific values are not defined or bsp is set incorrectly
+>  # ==========
+>  # sane fallback defaults
+>  # if specific values are not defined or bsp is set incorrectly
 > diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.3.6512818.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_23.3.6512818.bb
 > deleted file mode 100644
 > index f7c871e1..00000000
@@ -377,7 +364,7 @@ Acked-by: Andrew Davis <afd@ti.com>
 > - #include <llvm/Support/Format.h>
 > --#include <llvm/Support/Host.h>
 > - #include <llvm/IR/Module.h>
-> -
+> - 
 > -+#if LLVM_VERSION_MAJOR >= 17
 > -+#include <llvm/TargetParser/Host.h>
 > -+#else
@@ -386,7 +373,7 @@ Acked-by: Andrew Davis <afd@ti.com>
 > -+
 > - #include "util/u_math.h"
 > - #include "util/u_debug.h"
-> -
+> - 
 > -diff --git a/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp b/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
 > -index 334c13530394b..5e7a30a6cc2e3 100644
 > ---- a/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
@@ -403,8 +390,8 @@ Acked-by: Andrew Davis <afd@ti.com>
 > - #include <llvm/Support/PrettyStackTrace.h>
 > - #include <llvm/ExecutionEngine/ObjectCache.h>
 > - #include <llvm/Support/TargetSelect.h>
-> -
-> ---
+> - 
+> --- 
 > -GitLab
 > -
 > diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-gallium-Fix-build-with-llvm-18-and-19.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-gallium-Fix-build-with-llvm-18-and-19.patch
@@ -443,7 +430,7 @@ Acked-by: Andrew Davis <afd@ti.com>
 > -+#else
 > -           .setOptLevel((CodeGenOpt::Level)OptLevel);
 > -+#endif
-> -
+> - 
 > - #ifdef _WIN32
 > -     /*
 > -@@ -392,8 +396,14 @@ lp_build_create_jit_compiler_for_module(LLVMExecutionEngineRef *OutJIT,
@@ -460,10 +447,10 @@ Acked-by: Andrew Davis <afd@ti.com>
 > -+      llvm::StringMap<bool> features;
 > -+      llvm::sys::getHostCPUFeatures(features);
 > -+   #endif
-> -
+> - 
 > -    for (StringMapIterator<bool> f = features.begin();
 > -         f != features.end();
-> ---
+> --- 
 > -2.17.1
 > -
 > diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_22.3.5.bb
@@ -805,15 +792,6 @@ Acked-by: Andrew Davis <afd@ti.com>
 > -module_conf_ti_k3_r5_remoteproc = "softdep ti_k3_r5_remoteproc pre: virtio_rpmsg_bus"
 > -module_conf_ti_k3_dsp_remoteproc = "softdep ti_k3_dsp_remoteproc pre: virtio_rpmsg_bus"
 > -KERNEL_MODULE_PROBECONF += "rpmsg_client_sample ti_k3_r5_remoteproc ti_k3_dsp_remoteproc"
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#18221): https://lists.yoctoproject.org/g/meta-ti/message/18221
-> Mute This Topic: https://lists.yoctoproject.org/mt/110761580/3619733
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [afd@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+> -- 
+> 2.17.1
 
