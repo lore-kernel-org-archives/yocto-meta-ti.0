@@ -1,194 +1,123 @@
-Return-Path: <denis@denix.org>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0DD0C0218A
-	for <webhook@archiver.kernel.org>; Tue, 28 Jan 2025 20:31:39 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web10.6249.1738093430610204256
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D53A0C0218A
+	for <webhook@archiver.kernel.org>; Thu, 30 Jan 2025 19:34:45 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web11.3106.1738265679814903783
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 28 Jan 2025 11:43:50 -0800
+ Thu, 30 Jan 2025 11:34:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=U7vUa4sV;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: willhowe235@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-2f441791e40so8121549a91.3
-        for <meta-ti@lists.yoctoproject.org>; Tue, 28 Jan 2025 11:43:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738093430; x=1738698230; darn=lists.yoctoproject.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=ntYUhR5wDoqokZMSr5nBzMb5EaMj64fkqoWw1uCZT3s=;
-        b=U7vUa4sVfuQdSrZ/8XUqQfenkpRXYsuu3a5PQU97fEcOTnquVfjhX2N7D4wonaFRIS
-         M0IE+Cz5E9s7DV65y/SfldYv5ixK7M5OLMIZ4YtaJN0W2OA6QQN87Sl0pKACsir1a5+v
-         VTOaPVa/mj0X/JvdabCa+FztdEL+6zRVLMBAfKJdMMQEhQaJ14hthd06AygpY2qXeBCu
-         9ep4WatBionwEnTp2XCdErh8KzVIoFNwhV6aieTblWQcTEy2QO25w8r4pI0oVsqRZ/fw
-         OxK35aifgQcbQECCVqv8/xXETE422mz+PWikANsW5EPTwW/h5qgnM+k4COOENuOJBCst
-         Q07g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738093430; x=1738698230;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ntYUhR5wDoqokZMSr5nBzMb5EaMj64fkqoWw1uCZT3s=;
-        b=M/lt4ltgHpQTNTAq5l2LVVhaRP5Q7138kVGdkiR4vvzZkHca3q6n/P8Hmq1B9YuXOa
-         7QBQYYvFOiXUKAxTpwBT3iNZepxPSOpiamFynpjUTt8tDk4MBpONKzocqD/pPNPTyPFU
-         eo6/MjFrVKEBZBBXT9i+rpi4q+k8VumKqrmftKOSK+EVJ8PqlW82WTCx7R3fSt64y1wW
-         lSzUnHpMhnfEQVzMx8Nxw8eqLR/3+bHl7mAkIzH+dbI4y00MHuPrC7L3VZ+wdYUB++dn
-         xnAGWs5oO0aPmy/mdA4HAbY9D47CErGRi7YlcbyP5MKQ0ZrXX1P91hXSyecA10O6HmxY
-         GThg==
-X-Gm-Message-State: AOJu0YzCo1g/eVxjtKUxqHpNn2co4h3PTMOpkdJl5hO/dyOT+pW3/yBk
-	I7qXavPJwpQBbpTo1SWXnqCw8cmYtPmCvWOLEVtWkA+CuXlkO+aujGzEfaxN+fCfhQKfdoroWOy
-	vCn8+S+qMlAH6fK9iOVdjYlm5dn2WVA==
-X-Gm-Gg: ASbGncs1mbm0Lpld7r0TWRDANuB1Kai+X6mBQvy/YeZrARxto1BWylXSVO/bI1PEJca
-	q9pIuzffk+V2PvYoyO+PrZgRCRxETyVCGnPAngsdODDG5xb+5Mg083DhCbZXH6eHTvH3KznuI6h
-	c=
-X-Google-Smtp-Source: AGHT+IFiN4JBNYQcAEJ+VN3e5Rmo5u4mET+dSVkq/PU3Ud2ufnhT4oIgGruNiOagioNcdBXjkdyvmz1doXEARqztD8Y=
-X-Received: by 2002:a17:90b:2742:b0:2f2:a796:26b with SMTP id
- 98e67ed59e1d1-2f83abb3480mr350252a91.1.1738093429783; Tue, 28 Jan 2025
- 11:43:49 -0800 (PST)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=qNqhVIa0;
+ spf=pass (domain: list.ti.com, ip: 198.47.23.234, mailfrom: lcpdbld@list.ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50UJYcEf2398120
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Thu, 30 Jan 2025 13:34:38 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1738265678; i=@ti.com;
+	bh=bF+0nPcMTUZNlz2pjsH7jwzKjBOQxvNiTQcUSG8XDDQ=;
+	h=From:To:Subject:Date;
+	b=qNqhVIa0J5Wre8KSw4InnWtScpN6AEkR8dS34p2bC7L+whQ0j2cxRWzZYC92syEPh
+	 1k7Lw17uHP46uCWea28pjmEy0lN0PtBHLfhb6iPgAba7S8UoOdtSGBn1/rKMGXgzdN
+	 tKeJ9ecXnkBbGNQbKMb2aZ0+48/RF411EiHKYxF4=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50UJYcca013250;
+	Thu, 30 Jan 2025 13:34:38 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
+ Jan 2025 13:34:38 -0600
+Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 30 Jan 2025 13:34:37 -0600
+Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.64.72.21])
+	by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50UJYbrL060173;
+	Thu, 30 Jan 2025 13:34:37 -0600
+Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
+	id BE190E80D1; Thu, 30 Jan 2025 13:34:37 -0600 (CST)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202501300931
+Date: Thu, 30 Jan 2025 13:34:37 -0600
+Message-ID: <20250130193437.1462689-1-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
-References: <lrnS.1737746847989365062.hDBY@lists.yoctoproject.org>
- <20250124215239.GB21836@denix.org> <CAMWH2H31xA76ciYOz6x_mqzW=ZSpmOBQAC_Q16khfECipqCszg@mail.gmail.com>
- <20250128194054.GG21836@denix.org>
-In-Reply-To: <20250128194054.GG21836@denix.org>
-From: willhowe235@gmail.com
-Date: Tue, 28 Jan 2025 14:44:27 -0500
-X-Gm-Features: AWEUYZn6dz5DGCmnW5uiEm0Xo9CTzfiZbC9VxnaLnOkTK5JUjBXIpcOcWnCdgMw
-Message-ID: <CAMWH2H3GE2o32+Dx6=d2M0EFd7uQ+R74kqNCiJd34u1Zpzji1w@mail.gmail.com>
-Subject: Re: [meta-arm] Failing to fetch beaglebone kernel from github
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: meta-ti@lists.yoctoproject.org
-Content-Type: multipart/alternative; boundary="00000000000078048e062cc96924"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 28 Jan 2025 20:31:39 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18239
+ <meta-ti@lists.yoctoproject.org>; Thu, 30 Jan 2025 19:34:45 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18240
 
---00000000000078048e062cc96924
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Updated the value(s) for:
+  ti-linux-fw: CNM_WAVE521_FW_VERSION,TI_LINUX_FW_SRCREV
+  u-boot-ti-staging_2025.01: SRCREV
+  linux-ti-staging_6.12: PV,SRCREV
 
-Thanks Denys,
+Changelogs:
+  ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/log/?qt=range&q=1eaf07dc4ec5cdeb98078f17a9d4635e88f43f75..7fbc75f80161a400a4b9c618b6191d72ab408def
+  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=b841e559cd26ffcb20f22e8ee75debed9616c002..4e9c90ad8b12cc5b4fdd1308bc3ac3e4fc869aab
+  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=ade72d105eb7c9a2a4addfd0204eb4551b8efa7a..8906665ace32eb0dc12810667ee8646bd660c374
 
-I'm on a better connection today and I was able to get it to build,
-indicating it was a connectivity issue.
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 4 ++--
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb   | 4 ++--
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-Thanks for the help and sorry for the churn.
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index e79da6dd..1347fd99 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -13,11 +13,11 @@ PRUETH_FW_AM65X_SR2_VERSION = "02.02.15.00"
+ GOODIX_FW_VERSION = "1.0.0.0"
+ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+-CNM_WAVE521_FW_VERSION = "1.0.5"
++CNM_WAVE521_FW_VERSION = "1.0.7"
+ TI_DM_FW_VERSION = "10.01.03"
+ TI_SYSFW_VERSION = "10.01.08"
+ 
+-TI_LINUX_FW_SRCREV ?= "1eaf07dc4ec5cdeb98078f17a9d4635e88f43f75"
++TI_LINUX_FW_SRCREV ?= "7fbc75f80161a400a4b9c618b6191d72ab408def"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+index 4a3b347d..5e56d2db 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+@@ -6,4 +6,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2025.01"
+ 
+-SRCREV = "b841e559cd26ffcb20f22e8ee75debed9616c002"
++SRCREV = "4e9c90ad8b12cc5b4fdd1308bc3ac3e4fc869aab"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+index 0967cd88..d928e7fa 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+@@ -23,8 +23,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.12.y"
+ 
+-SRCREV ?= "ade72d105eb7c9a2a4addfd0204eb4551b8efa7a"
+-PV = "6.12.0+git"
++SRCREV ?= "8906665ace32eb0dc12810667ee8646bd660c374"
++PV = "6.12.9+git"
+ 
+ # Special configuration for remoteproc/rpmsg IPC modules
+ module_conf_rpmsg_client_sample = "blacklist rpmsg_client_sample"
+-- 
+2.43.5
 
-On Tue, Jan 28, 2025 at 2:40=E2=80=AFPM Denys Dmytriyenko <denis@denix.org>=
- wrote:
-
-> On Fri, Jan 24, 2025 at 05:05:27PM -0500, Will Howe wrote:
-> > Thanks Denys,
->
-> It is always recommended to copy the mailing list in order to get faster
-> response from others, as one person can get busy or unavailable...
->
->
-> > I attached the logs of the first error. It definitely seemed to me like
-> it
-> > was a connectivity issue.
->
-> Relevant messages from the logs, indicating connectivity issues:
->
-> error: RPC failed;
-> +curl 92 HTTP/2 stream 5 was not closed cleanly: CANCEL (err 8)
-> error: 22969 bytes of body are still expected
-> fetch-pack: unexpected disconnect while reading sideband packet
-> fatal: early EOF
-> fatal: fetch-pack: invalid index-pack output
->
->
-> > But I'm not so sure since I'm wondering if it is
-> > a delta with the URI.
-> >
-> > It seems like the delta is caused between "https://..." vs "git://...".
-> > Currently the recipe is using:
-> >
-> > KERNEL_GIT_URI =3D "git://github.com/beagleboard/linux.git"
-> >
-> > Changing it to:
-> >
-> > KERNEL_GIT_URI =3D "https://github.com/beagleboard/linux.git"
-> >
-> > gives me the following new errors related to the license file:
->
-> Please don't do that, your change is incorrect - it tells Bitbake to use
-> the
-> wrong fetcher and instead of cloning git repository, it tries to download
-> a
-> Web file, which obviously fails. The recipe already sets the protocol to
-> "https" to be used when cloning the git repository.
->
-> --
-> Denys
->
-
---00000000000078048e062cc96924
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Thanks Denys,<div><br></div><div>I&#39;m on a better conne=
-ction today and I was able to get it to build, indicating it was a connecti=
-vity issue.</div><div><br></div><div>Thanks for the help and sorry for the =
-churn.</div></div><br><div class=3D"gmail_quote gmail_quote_container"><div=
- dir=3D"ltr" class=3D"gmail_attr">On Tue, Jan 28, 2025 at 2:40=E2=80=AFPM D=
-enys Dmytriyenko &lt;<a href=3D"mailto:denis@denix.org">denis@denix.org</a>=
-&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
-0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On F=
-ri, Jan 24, 2025 at 05:05:27PM -0500, Will Howe wrote:<br>
-&gt; Thanks Denys,<br>
-<br>
-It is always recommended to copy the mailing list in order to get faster <b=
-r>
-response from others, as one person can get busy or unavailable...<br>
-<br>
-<br>
-&gt; I attached the logs of the first error. It definitely seemed to me lik=
-e it<br>
-&gt; was a connectivity issue.<br>
-<br>
-Relevant messages from the logs, indicating connectivity issues:<br>
-<br>
-error: RPC failed;<br>
-+curl 92 HTTP/2 stream 5 was not closed cleanly: CANCEL (err 8)<br>
-error: 22969 bytes of body are still expected<br>
-fetch-pack: unexpected disconnect while reading sideband packet<br>
-fatal: early EOF<br>
-fatal: fetch-pack: invalid index-pack output<br>
-<br>
-<br>
-&gt; But I&#39;m not so sure since I&#39;m wondering if it is<br>
-&gt; a delta with the URI.<br>
-&gt; <br>
-&gt; It seems like the delta is caused between &quot;https://...&quot; vs &=
-quot;git://...&quot;.<br>
-&gt; Currently the recipe is using:<br>
-&gt; <br>
-&gt; KERNEL_GIT_URI =3D &quot;git://<a href=3D"http://github.com/beagleboar=
-d/linux.git" rel=3D"noreferrer" target=3D"_blank">github.com/beagleboard/li=
-nux.git</a>&quot;<br>
-&gt; <br>
-&gt; Changing it to:<br>
-&gt; <br>
-&gt; KERNEL_GIT_URI =3D &quot;<a href=3D"https://github.com/beagleboard/lin=
-ux.git" rel=3D"noreferrer" target=3D"_blank">https://github.com/beagleboard=
-/linux.git</a>&quot;<br>
-&gt; <br>
-&gt; gives me the following new errors related to the license file:<br>
-<br>
-Please don&#39;t do that, your change is incorrect - it tells Bitbake to us=
-e the <br>
-wrong fetcher and instead of cloning git repository, it tries to download a=
- <br>
-Web file, which obviously fails. The recipe already sets the protocol to <b=
-r>
-&quot;https&quot; to be used when cloning the git repository.<br>
-<br>
--- <br>
-Denys<br>
-</blockquote></div>
-
---00000000000078048e062cc96924--
 
