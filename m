@@ -1,54 +1,54 @@
-Return-Path: <afd@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 006DDC02193
-	for <webhook@archiver.kernel.org>; Tue,  4 Feb 2025 16:42:59 +0000 (UTC)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web11.120824.1738687369579280833
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D92B9C02193
+	for <webhook@archiver.kernel.org>; Tue,  4 Feb 2025 16:45:28 +0000 (UTC)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ by mx.groups.io with SMTP id smtpd.web11.120886.1738687523849787202
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 04 Feb 2025 08:42:49 -0800
+ Tue, 04 Feb 2025 08:45:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ugGWSb4Q;
- spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: afd@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=bv82oBVi;
+ spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: reatmon@ti.com)
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 514GglQl2430032
+	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 514GjLIo3187480
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 4 Feb 2025 10:42:47 -0600
+	Tue, 4 Feb 2025 10:45:21 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1738687367;
-	bh=vDCgH9E+3AU6kbXR1R/mOfhUH/4zN6SbZr2vISC301U=;
+	s=ti-com-17Q1; t=1738687521;
+	bh=R6fMk7spk5CGzeNHrWb8+YEjKU+KGpy/oB5q3mprvpI=;
 	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=ugGWSb4Q9K2RFtU+ZNkq3h2xlLT+NJ3Lxmp85xSLOfUI5NIPsJSiH1apxmjXXaX0W
-	 T9Sxd0wbJB6pjjqgPavFqPGnJOSj5BpnAyykuhMb/12Q24UWPvQxChputP+HSRBYwP
-	 MdY72i+7EemYuKLLppmLWlHS7GThWvOvcKMQpoak=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 514GglCv051060
+	b=bv82oBVigVuzrwHWRKJdAOxIk0zg2a4760CGo0xEXuJ4FfgPUAlAuqaQXVj0oejE/
+	 iZkbTHxP2ASzTMbZhJwLh7EQCCzpkD2hA6eaVgqnN+9NAd0KPZiM8mJzBG0brGldU7
+	 JVj+p+eNNsxqMU6BeuflnDIwDxmDky9mSIN6D1nw=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 514GjLC9052808
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 4 Feb 2025 10:42:47 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 4 Feb 2025 10:45:21 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 4
- Feb 2025 10:42:47 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2025 10:45:21 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 4 Feb 2025 10:42:47 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 514GgkrA114461;
-	Tue, 4 Feb 2025 10:42:47 -0600
-Message-ID: <eb673423-a7e7-4d32-bf61-e1efad5e3f5a@ti.com>
-Date: Tue, 4 Feb 2025 10:42:46 -0600
+ Frontend Transport; Tue, 4 Feb 2025 10:45:20 -0600
+Received: from [128.247.81.69] (dtmxl9433pnr.dhcp.ti.com [128.247.81.69])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 514GjKs9117386;
+	Tue, 4 Feb 2025 10:45:21 -0600
+Message-ID: <2571109c-6880-4234-b2c3-52340524b0e9@ti.com>
+Date: Tue, 4 Feb 2025 10:45:20 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [meta-ti][master/scarthgap][PATCH 2/3] meta-ti-bsp: Add Support
  for AM62L
-To: <c-shilwant@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: Denys <denis@denix.org>, Ryan Eatmon <reatmon@ti.com>
+To: Chirag Shilwant <c-shilwant@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: Denys <denis@denix.org>
 References: <20250204134925.968150-1-c-shilwant@ti.com>
  <20250204134925.968150-3-c-shilwant@ti.com>
 Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
+From: Ryan Eatmon <reatmon@ti.com>
 In-Reply-To: <20250204134925.968150-3-c-shilwant@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
@@ -56,10 +56,12 @@ X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 04 Feb 2025 16:42:58 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18262
+ <meta-ti@lists.yoctoproject.org>; Tue, 04 Feb 2025 16:45:28 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18263
 
-On 2/4/25 7:49 AM, Chirag Shilwant via lists.yoctoproject.org wrote:
+
+
+On 2/4/2025 7:49 AM, Chirag Shilwant wrote:
 > - Add machine configuration for am62lxx-evm
 > - Add TFA, OPTEE, firmware & u-boot overrides
 > 
@@ -99,7 +101,19 @@ On 2/4/25 7:49 AM, Chirag Shilwant via lists.yoctoproject.org wrote:
 > +    ti/k3-am62l.dtb \
 > +    ti/k3-am62l3-evm.dtb \
 > +"
-> +
+
+Technically, we use KERNEL_DEVICETREE to only point to files that are 
+available in the current mainline version of the kernel.  Since this is 
+not upstreamed or released yet, this should be set to "".  None of those 
+files are going to exist and be valid for anything other than our kernel 
+repo as this time.
+
+The KERNEL_DEVICETREE_PREFIX will pick up all of the needed files during 
+the build.  And then a part of our upstream stable testing, we update 
+the value of KERNEL_DEVICETREE to whatever files match the PREFIX at the 
+time we test a final version of the upstream kernel.
+
+
 > +UBOOT_MACHINE = "am62lx_evm_defconfig"
 > diff --git a/meta-ti-bsp/conf/machine/include/am62lxx.inc b/meta-ti-bsp/conf/machine/include/am62lxx.inc
 > new file mode 100644
@@ -121,9 +135,6 @@ On 2/4/25 7:49 AM, Chirag Shilwant via lists.yoctoproject.org wrote:
 > +OPTEEMACHINE = "k3-am62lx"
 > +
 > +SERIAL_CONSOLES = "115200;ttyS2"
-
-Do the default SERIAL_CONSOLES in k3.inc not work?
-
 > diff --git a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
 > index 0b6792b6..638138f4 100644
 > --- a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
@@ -202,11 +213,6 @@ Do the default SERIAL_CONSOLES in k3.inc not work?
 > +uboot_deploy_config:append:am62lxx () {
 > +    for f in ${B}/${config}/tiboot3-*.bin; do
 > +                if [ -f "$f" ]; then
-
-Seems to be some mixed tabs and spaces. That is already an issue in this
-file I see, but no reason to keep doing it. I would prefer tabs everywhere
-but not sure if there is a standard is in Yocto.
-
 > +            f_base=$(basename $f)
 > +                        install -m 644 $f ${DEPLOYDIR}/${f_base}-${type}
 > +            ln -sf ${f_base}-${type} ${DEPLOYDIR}/${f_base}
@@ -254,13 +260,6 @@ but not sure if there is a standard is in Yocto.
 > +This patch is posted upstream [1] & will be dropped once it's merged
 > +
 > +[1]: https://github.com/OP-TEE/optee_os/pull/7258
-
-Looks like this just got taken upstream, might be easier now to
-update our OP-TEE to the latest master. I know it is off release,
-but I don't think there will be any harm in staying up to date.
-
-Andrew
-
 > +
 > +Upstream-Status: Submitted
 > +
@@ -346,15 +345,13 @@ Andrew
 > +SRC_URI:append:am62lxx = " \
 > +    file://Add-initial-support-for-AM62Lx-SoC.patch \
 > +"
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#18257): https://lists.yoctoproject.org/g/meta-ti/message/18257
-> Mute This Topic: https://lists.yoctoproject.org/mt/110991530/3619733
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [afd@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+
+These changes should not be in the .bbappend.  We are storing them in 
+the optee-os-ti-version.inc file.  Please move them there.
+
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
