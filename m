@@ -2,140 +2,91 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93C96C02193
-	for <webhook@archiver.kernel.org>; Tue,  4 Feb 2025 19:08:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB9CDC02193
+	for <webhook@archiver.kernel.org>; Tue,  4 Feb 2025 19:16:59 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.124784.1738696133735640718
+ by mx.groups.io with SMTP id smtpd.web10.125345.1738696611301765984
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 04 Feb 2025 11:08:54 -0800
+ Tue, 04 Feb 2025 11:16:51 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id D057640C88;
-	Tue,  4 Feb 2025 19:08:52 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id BB6DF40C88;
+	Tue,  4 Feb 2025 19:16:50 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qt9hWdaVcz_Y; Tue,  4 Feb 2025 19:08:52 +0000 (UTC)
+	with ESMTP id BUD3hEr-pDZe; Tue,  4 Feb 2025 19:16:50 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 980EE407E5;
-	Tue,  4 Feb 2025 19:08:49 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8EC66407E5;
+	Tue,  4 Feb 2025 19:16:47 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 4F8891641FB; Tue,  4 Feb 2025 14:08:49 -0500 (EST)
-Date: Tue, 4 Feb 2025 14:08:49 -0500
+	id 470F0164201; Tue,  4 Feb 2025 14:16:47 -0500 (EST)
+Date: Tue, 4 Feb 2025 14:16:47 -0500
 From: Denys Dmytriyenko <denis@denix.org>
-To: Andrew Davis <afd@ti.com>
+To: afd@ti.com
 Cc: c-shilwant@ti.com, meta-ti@lists.yoctoproject.org,
 	Ryan Eatmon <reatmon@ti.com>
-Subject: Re: [meta-ti][master/scarthgap][PATCH 2/3] meta-ti-bsp: Add
- Support for AM62L
-Message-ID: <20250204190849.GI21608@denix.org>
+Subject: Re: [meta-ti][master/scarthgap][PATCH 1/3] trusted-firmware-a:
+ Switch TFA to TI fork
+Message-ID: <20250204191647.GJ21608@denix.org>
 References: <20250204134925.968150-1-c-shilwant@ti.com>
- <20250204134925.968150-3-c-shilwant@ti.com>
- <eb673423-a7e7-4d32-bf61-e1efad5e3f5a@ti.com>
+ <20250204134925.968150-2-c-shilwant@ti.com>
+ <11d39f7d-7b08-42e0-87a5-0b4380859706@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <eb673423-a7e7-4d32-bf61-e1efad5e3f5a@ti.com>
+In-Reply-To: <11d39f7d-7b08-42e0-87a5-0b4380859706@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 04 Feb 2025 19:08:59 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18266
+ <meta-ti@lists.yoctoproject.org>; Tue, 04 Feb 2025 19:16:59 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18267
 
-On Tue, Feb 04, 2025 at 10:42:46AM -0600, Andrew Davis wrote:
+On Tue, Feb 04, 2025 at 10:25:14AM -0600, Andrew Davis via lists.yoctoproject.org wrote:
 > On 2/4/25 7:49 AM, Chirag Shilwant via lists.yoctoproject.org wrote:
-> >- Add machine configuration for am62lxx-evm
-> >- Add TFA, OPTEE, firmware & u-boot overrides
+> >- While TFA patches for K3-based AM62L platform are under
+> >review upstream, temporarily switch to TI's GitHub fork
+> >for all K3 platforms to prevent disruptions and ensure timely bringup
 > >
+> >- Also update the PV & LIC_FILES_CHKSUM as well
+> 
+> The license change isn't something we did as part of our fork ti-atf.
+> Maybe you could split this into two to make that clear,
+> 
+>  * Update to upstream 2.12 + license fix
+>  * Patch that only deals with switching to ti-atf.
+
+Andrew,
+
+Any downside to switching from upstream tfa to ti-tfa?
+
+Is the only change to support non-R5 platform and won't affect other K3 
+devices?
+
+
 > >Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
 > >---
-> >  meta-ti-bsp/conf/machine/am62lxx-evm.conf     | 16 ++++
-> >  meta-ti-bsp/conf/machine/include/am62lxx.inc  | 14 ++++
-> >  meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb  |  2 +
-> >  .../recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb    |  6 ++
-> >  .../trusted-firmware-a-ti.inc                 |  3 +
-> >  meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc  | 21 ++++++
-> >  .../Add-initial-support-for-AM62Lx-SoC.patch  | 75 +++++++++++++++++++
-> >  .../optee/optee-os-ti-overrides.inc           |  1 +
-> >  .../optee/optee-os_%.bbappend                 |  6 ++
-> >  9 files changed, 144 insertions(+)
-> >  create mode 100644 meta-ti-bsp/conf/machine/am62lxx-evm.conf
-> >  create mode 100644 meta-ti-bsp/conf/machine/include/am62lxx.inc
-> >  create mode 100644 meta-ti-bsp/recipes-security/optee/files/Add-initial-support-for-AM62Lx-SoC.patch
-
-...
-
-> >diff --git a/meta-ti-bsp/conf/machine/include/am62lxx.inc b/meta-ti-bsp/conf/machine/include/am62lxx.inc
-> >new file mode 100644
-> >index 00000000..94eadd4b
-> >--- /dev/null
-> >+++ b/meta-ti-bsp/conf/machine/include/am62lxx.inc
-> >@@ -0,0 +1,14 @@
-> >+require conf/machine/include/k3.inc
-> >+SOC_FAMILY:append = ":am62lxx"
+> >  .../trusted-firmware-a/trusted-firmware-a-ti.inc         | 9 +++++----
+> >  1 file changed, 5 insertions(+), 4 deletions(-)
+> >
+> >diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
+> >index ebb13bbd..e4a9c49b 100644
+> >--- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
+> >+++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
+> >@@ -1,7 +1,8 @@
+> >-PV:k3 = "2.11+git"
+> >-SRCREV_tfa:k3 = "58b25570c9ef91753b14c2103f45f4be9dddb696"
+> >-LIC_FILES_CHKSUM:k3 = "file://docs/license.rst;md5=83b7626b8c7a37263c6a58af8d19bee1"
+> >-SRC_URI:k3 = "git://git.trustedfirmware.org/TF-A/trusted-firmware-a.git;protocol=https;name=tfa;branch=master"
+> >+PV:k3 = "2.12+git"
+> >+SRCREV_tfa:k3 = "5227171c079d0c7d22a6d37b5cec079c8c5bb4b1"
+> >+LIC_FILES_CHKSUM:k3 = "file://docs/license.rst;md5=1118e32884721c0be33267bd7ae11130"
+> >+SRC_URI:k3 = "git://github.com/TexasInstruments/arm-trusted-firmware.git;protocol=https;name=tfa;branch=ti-master"
 > >+
-> >+MACHINE_FEATURES += "screen"
-> >+
-> >+# Default tiboot3.bin on AM62L is for HS-FS
-> >+IMAGE_BOOT_FILES += "tiboot3-am62lx-hs-fs-evm.bin"
-> >+
-> >+TFA_BOARD = "am62l"
-> >+TFA_K3_SYSTEM_SUSPEND = "1"
-> >+
-> >+OPTEEMACHINE = "k3-am62lx"
-> >+
-> >+SERIAL_CONSOLES = "115200;ttyS2"
-> 
-> Do the default SERIAL_CONSOLES in k3.inc not work?
-
-Standard k3.inc defines ttyS0 and ttyS2 - I'm guessing this was overwritten 
-here due to no R5 or to avoid re-spawning the gettty?
-
-
-> >--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-> >+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-> >@@ -53,8 +53,10 @@ PLAT_SFX:am65xx = "am65xx"
-> >  PLAT_SFX:am64xx = "am64xx"
-> >  PLAT_SFX:am62xx = "am62xx"
-> >  PLAT_SFX:am62axx = "am62axx"
-> >+PLAT_SFX:am62lxx = "am62lxx"
-> >  PLAT_SFX:am62pxx = "am62pxx"
-> >+PACKAGECONFIG[ap-trusted-rom] = "BL1=${STAGING_DIR_HOST}/firmware/bl1.bin,,trusted-firmware-a"
-> >  PACKAGECONFIG[atf] = "BL31=${STAGING_DIR_HOST}/firmware/bl31.bin,,trusted-firmware-a"
-> >  PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/bl32.bin,,optee-os"
-> >  PACKAGECONFIG[dm] = "DM=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/ti-dm/${PLAT_SFX}/${DM_FIRMWARE},,ti-dm-fw"
-> >@@ -68,6 +70,7 @@ PACKAGECONFIG:append:j722s = " dm"
-> >  PACKAGECONFIG:append:j742s2 = " dm"
-> >  PACKAGECONFIG:append:am62xx = " dm"
-> >  PACKAGECONFIG:append:am62axx = " dm"
-> >+PACKAGECONFIG:append:am62lxx = " ap-trusted-rom"
-> >  PACKAGECONFIG:append:am62pxx = " dm"
-> >  COMPATIBLE_MACHINE = "(ti-soc)"
-> >@@ -226,6 +229,16 @@ uboot_deploy_config:append:k3r5 () {
-> >  	done
-> >  }
-> >+uboot_deploy_config:append:am62lxx () {
-> >+    for f in ${B}/${config}/tiboot3-*.bin; do
-> >+                if [ -f "$f" ]; then
-> 
-> Seems to be some mixed tabs and spaces. That is already an issue in this
-> file I see, but no reason to keep doing it. I would prefer tabs everywhere
-> but not sure if there is a standard is in Yocto.
-
-u-boot-ti.inc is an old file and received modifications over many years before 
-there was any policy.
-
-FTR, OE-Core official policy is to use tabs for shell code and 2-spcaes for 
-Python code. But layer maintainers can adopt a slightly different policy that 
-hopefully gets documented.
-
-I'd suggest sticking to the OE-Core policy and I personally try to update 
-indentation when I modify large chunks of code. But we haven't done any global 
-cleanup for the same...
-
--- 
-Denys
+> >  COMPATIBLE_MACHINE:k3 = "k3"
+> >  TFA_BUILD_TARGET:k3 = "all"
+> >  TFA_INSTALL_TARGET:k3 = "bl31"
 
