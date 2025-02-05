@@ -2,133 +2,174 @@ Return-Path: <c-shilwant@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E7F7C02192
-	for <webhook@archiver.kernel.org>; Wed,  5 Feb 2025 07:52:56 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web10.6995.1738741966185153692
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1059C02194
+	for <webhook@archiver.kernel.org>; Wed,  5 Feb 2025 09:46:16 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web10.8272.1738748773116417893
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 04 Feb 2025 23:52:46 -0800
+ Wed, 05 Feb 2025 01:46:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=zTE0kzjE;
- spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: c-shilwant@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=gwM/HHyI;
+ spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: c-shilwant@ti.com)
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5157qjC93313640
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5159kAUI2511255
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 5 Feb 2025 01:52:45 -0600
+	Wed, 5 Feb 2025 03:46:10 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1738741965;
-	bh=F3SiKR8n5s//fToCuixNxOIBnadAQFogTBxSsfq95ek=;
+	s=ti-com-17Q1; t=1738748770;
+	bh=vJjn3Qybe4CS+63OjRY27dyxB+Jggtc6gbWTDfRMRUI=;
 	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=zTE0kzjE1tiEa/LaXicyDbkJm335rk5cdgrIPGqe90lxHD14m/OS6Xc8jIEXhn0D3
-	 JcH43HGKVaOt6nKAzf5plFx7isrqD/1uBCdvJSHewOXK4oNuJ+PJhCefKx2W5PC6KP
-	 nj0YyT+bY1AmYbLaKPv/vySP4wQz9YuEIg6rfyqk=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5157qjKi082287
+	b=gwM/HHyIae59O86gp9rr8ktxm2/rHtdzf6exPu5ZWtrBMCid+Kaph4lGJW3Mp5seT
+	 m0BHUvpstxDTDMICbopMopB9b0VisGhjUNi8QjMEIMbnuJk8Zxj16pfxGIF7sazqsY
+	 kzfRCvhP9xqT3ikeyO5cic8tLM8p3AkyD2gYhjII=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5159kASi027801
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 5 Feb 2025 01:52:45 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	Wed, 5 Feb 2025 03:46:10 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 5
- Feb 2025 01:52:44 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2025 03:46:09 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 5 Feb 2025 01:52:45 -0600
+ Frontend Transport; Wed, 5 Feb 2025 03:46:09 -0600
 Received: from [172.24.227.238] (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.238])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5157qg7i047614;
-	Wed, 5 Feb 2025 01:52:43 -0600
-Message-ID: <a1293c13-9f64-475c-bd49-0e5d94a09e8f@ti.com>
-Date: Wed, 5 Feb 2025 13:22:41 +0530
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5159k7Pq053470;
+	Wed, 5 Feb 2025 03:46:08 -0600
+Message-ID: <257ac030-2e69-40e9-9f5c-446fd04b8b5a@ti.com>
+Date: Wed, 5 Feb 2025 15:16:06 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [EXTERNAL] [meta-ti] [PATCH] conf: machine: j722s: Add overlay to
- KERNEL_DEVICETREE_PREFIX
-To: <a-dutta@ti.com>, <reatmon@ti.com>, <denys@konsulko.com>
-CC: <u-kumar1@ti.com>, <meta-ti@lists.yoctoproject.org>
-References: <20250205073251.42414-1-a-dutta@ti.com>
+Subject: Re: [meta-ti][master/scarthgap][PATCH 1/3] trusted-firmware-a: Switch
+ TFA to TI fork
+To: Andrew Davis <afd@ti.com>, Denys Dmytriyenko <denis@denix.org>
+CC: <meta-ti@lists.yoctoproject.org>, Ryan Eatmon <reatmon@ti.com>,
+        Praneeth
+ Bajjuri <praneeth@ti.com>
+References: <20250204134925.968150-1-c-shilwant@ti.com>
+ <20250204134925.968150-2-c-shilwant@ti.com>
+ <11d39f7d-7b08-42e0-87a5-0b4380859706@ti.com>
+ <20250204191647.GJ21608@denix.org>
+ <cfafd00a-5d37-473f-81e3-33a4705bda51@ti.com>
 Content-Language: en-US
 From: Chirag Shilwant <c-shilwant@ti.com>
-In-Reply-To: <20250205073251.42414-1-a-dutta@ti.com>
+In-Reply-To: <cfafd00a-5d37-473f-81e3-33a4705bda51@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllvem-ot03.ext.ti.com id 5157qjC93313640
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllvem-ot04.ext.ti.com id 5159kAUI2511255
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 05 Feb 2025 07:52:56 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18270
+ <meta-ti@lists.yoctoproject.org>; Wed, 05 Feb 2025 09:46:16 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18271
 
-Hi,
+Hi Andrew & Ryan,
 
-Is this intended for master, scarthgap or both?
-as subject prefix doesn't mention the target branch.
+On 05/02/25 01:35, Andrew Davis wrote:
+> On 2/4/25 1:16 PM, Denys Dmytriyenko wrote:
+>> On Tue, Feb 04, 2025 at 10:25:14AM -0600, Andrew Davis via=20
+>> lists.yoctoproject.org wrote:
+>>> On 2/4/25 7:49 AM, Chirag Shilwant via lists.yoctoproject.org wrote:
+>>>> - While TFA patches for K3-based AM62L platform are under
+>>>> review upstream, temporarily switch to TI's GitHub fork
+>>>> for all K3 platforms to prevent disruptions and ensure timely bringu=
+p
+>>>>
+>>>> - Also update the PV & LIC_FILES_CHKSUM as well
+>>>
+>>> The license change isn't something we did as part of our fork ti-atf.
+>>> Maybe you could split this into two to make that clear,
+>>>
+>>> =C2=A0 * Update to upstream 2.12 + license fix
+>>> =C2=A0 * Patch that only deals with switching to ti-atf.
 
-meta-ti convention is - [meta-ti][branch-name/s][PATCH]
-
-checkout [1] for more details
 
 
-[1]: https://lists.yoctoproject.org/g/meta-ti/messages?dir=3Ddesc
+I understand the intention of splitting the TFA changes into two commits
+to avoid highlighting the fact that switching to GitHub fork isn't
+updating the LICENSE file.
+
+But this isn't possible because TFA 2.12 had a different LICENSE version
+& the current TFA upstream master (eventually which was used to create
+the TI fork) has a different LICENSE version. So, even if I go ahead & ma=
+ke
+it granular it would be something like,
+
+* Update to upstream 2.12 + license SHA update
+* Patch that switches to ti-atf + license SHA update
+
+
+I had an offline syncup with Praneeth on the above split I mentioned & wi=
+ll
+eventually go ahead with the same in v2
+
 
 --
 Chirag
 
-On 05/02/25 13:02, Anurag Dutta via lists.yoctoproject.org wrote:
-> Add the overlay "k3-j7200-evm-mcspi-loopback.=E2=80=8Adtso" to the j722=
-s=20
-> configuration so that SPI loopback tests can be carried out=20
-> successfully. Signed-off-by: Anurag Dutta <a-dutta@=E2=80=8Ati.=E2=80=8A=
-com> ---=20
-> meta-ti-bsp/conf/machine/j722s-evm.=E2=80=8Aconf | 1 + 1
-> ZjQcmQRYFpfptBannerStart
-> This message was sent from outside of Texas Instruments.
-> Do not click links or open attachments unless you recognize the source=20
-> of this email and know the content is safe.
-> Report=C2=A0Suspicious
-> <https://us-phishalarm-ewt.proofpoint.com/EWT/v1/G3vK!uFdqXRfP1m1bKqZk3=
-LPDfOi2poL4OClMb3IQWBMLR7Hs_8vJrAjdbzKut0Ums3yL50vq-atYRdntACEuvn8$>=20
+
+
+>>
+>> Andrew,
+>>
+>> Any downside to switching from upstream tfa to ti-tfa?
+>>
+>> Is the only change to support non-R5 platform and won't affect other K=
+3
+>> devices?
+>>
 >
-> ZjQcmQRYFpfptBannerEnd
-> Add the overlay "k3-j7200-evm-mcspi-loopback.dtso" to the j722s
-> configuration so that SPI loopback tests can be carried out
-> successfully.
+> Right, this fork should only be needed for AM62L, and there was
+> some talk around only using the fork for that platform. But the
+> thinking here is that if something in that fork accidentally does
+> break the other K3 devices, it is best we find out about it early
+> here by our SDK testing vs later when the patches end up in
+> upstream.
 >
-> Signed-off-by: Anurag Dutta <a-dutta@ti.com>
-> ---
->   meta-ti-bsp/conf/machine/j722s-evm.conf | 1 +
->   1 file changed, 1 insertion(+)
+> Hopefully this will not be a long running fork and we can switch
+> back to upstream when the AM62L support patches are taken upstream.
 >
-> diff --git a/meta-ti-bsp/conf/machine/j722s-evm.conf b/meta-ti-bsp/conf=
-/machine/j722s-evm.conf
-> index 2af0981e..8f42866c 100644
-> --- a/meta-ti-bsp/conf/machine/j722s-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/j722s-evm.conf
-> @@ -7,6 +7,7 @@ require conf/machine/include/j722s.inc
->   KERNEL_DEVICETREE_PREFIX =3D " \
->       ti/k3-j722s \
->       ti/k3-fpdlink \
-> +    ti/k3-j7200-evm-mcspi-loopback \
->       ti/k3-v3link \
->   "
->  =20
-> --=20
-> 2.34.1
+> Andrew
 >
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#18269): https://urldefense.com/v3/__https://lists.y=
-octoproject.org/g/meta-ti/message/18269__;!!G3vK!XtFGvKLXQl7jW5WRVs4amySH=
-OYw6_sWc6SMhtGivEXzjmIK_B73jrA36bkb9L3XfO2uMadFW88EobYYZAxz6mGJbpkp7WEEJ4=
-A$
-> Mute This Topic: https://urldefense.com/v3/__https://lists.yoctoproject=
-.org/mt/111008641/7030289__;!!G3vK!XtFGvKLXQl7jW5WRVs4amySHOYw6_sWc6SMhtG=
-ivEXzjmIK_B73jrA36bkb9L3XfO2uMadFW88EobYYZAxz6mGJbpkqdnUHh5Q$
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://urldefense.com/v3/__https://lists.yoctoproject.org=
-/g/meta-ti/unsub__;!!G3vK!XtFGvKLXQl7jW5WRVs4amySHOYw6_sWc6SMhtGivEXzjmIK=
-_B73jrA36bkb9L3XfO2uMadFW88EobYYZAxz6mGJbpkqq16zQHQ$  [c-shilwant@ti.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+>>
+>>>> Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
+>>>> ---
+>>>> =C2=A0 .../trusted-firmware-a/trusted-firmware-a-ti.inc=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 9=20
+>>>> +++++----
+>>>> =C2=A0 1 file changed, 5 insertions(+), 4 deletions(-)
+>>>>
+>>>> diff --git=20
+>>>> a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.i=
+nc=20
+>>>> b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.i=
+nc
+>>>> index ebb13bbd..e4a9c49b 100644
+>>>> ---=20
+>>>> a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.i=
+nc
+>>>> +++=20
+>>>> b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.i=
+nc
+>>>> @@ -1,7 +1,8 @@
+>>>> -PV:k3 =3D "2.11+git"
+>>>> -SRCREV_tfa:k3 =3D "58b25570c9ef91753b14c2103f45f4be9dddb696"
+>>>> -LIC_FILES_CHKSUM:k3 =3D=20
+>>>> "file://docs/license.rst;md5=3D83b7626b8c7a37263c6a58af8d19bee1"
+>>>> -SRC_URI:k3 =3D=20
+>>>> "git://git.trustedfirmware.org/TF-A/trusted-firmware-a.git;protocol=3D=
+https;name=3Dtfa;branch=3Dmaster"
+>>>> +PV:k3 =3D "2.12+git"
+>>>> +SRCREV_tfa:k3 =3D "5227171c079d0c7d22a6d37b5cec079c8c5bb4b1"
+>>>> +LIC_FILES_CHKSUM:k3 =3D=20
+>>>> "file://docs/license.rst;md5=3D1118e32884721c0be33267bd7ae11130"
+>>>> +SRC_URI:k3 =3D=20
+>>>> "git://github.com/TexasInstruments/arm-trusted-firmware.git;protocol=
+=3Dhttps;name=3Dtfa;branch=3Dti-master"
+>>>> +
+>>>> =C2=A0 COMPATIBLE_MACHINE:k3 =3D "k3"
+>>>> =C2=A0 TFA_BUILD_TARGET:k3 =3D "all"
+>>>> =C2=A0 TFA_INSTALL_TARGET:k3 =3D "bl31"
 
