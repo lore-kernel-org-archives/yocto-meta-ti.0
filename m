@@ -1,88 +1,97 @@
-Return-Path: <denis@denix.org>
+Return-Path: <c-shilwant@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F105C02198
-	for <webhook@archiver.kernel.org>; Wed,  5 Feb 2025 17:17:09 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.17962.1738775824412017124
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9734C02196
+	for <webhook@archiver.kernel.org>; Thu,  6 Feb 2025 14:40:45 +0000 (UTC)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ by mx.groups.io with SMTP id smtpd.web10.42559.1738852835546249377
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 05 Feb 2025 09:17:04 -0800
+ Thu, 06 Feb 2025 06:40:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id C0F6A40B66;
-	Wed,  5 Feb 2025 17:17:03 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tFc5jfdWMW66; Wed,  5 Feb 2025 17:17:03 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 99211407E5;
-	Wed,  5 Feb 2025 17:17:01 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 575E4164210; Wed,  5 Feb 2025 12:17:01 -0500 (EST)
-Date: Wed, 5 Feb 2025 12:17:01 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Chirag Shilwant <c-shilwant@ti.com>
-Cc: meta-ti@lists.yoctoproject.org, Ryan Eatmon <reatmon@ti.com>
-Subject: Re: [meta-ti][master/scarthgap][PATCH v2 3/5] trusted-firmware-a:
- Switch TFA to TI fork
-Message-ID: <20250205171701.GL21608@denix.org>
-References: <20250205111211.1847450-1-c-shilwant@ti.com>
- <20250205111211.1847450-4-c-shilwant@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=wTWxzlzS;
+ spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: c-shilwant@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 516EeWYf2818271
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Thu, 6 Feb 2025 08:40:32 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1738852832;
+	bh=r8gsjDmV3ydNdgIKlN6TWvW7YdhRfEYRMOjkXQ4/GcA=;
+	h=From:To:CC:Subject:Date;
+	b=wTWxzlzSTflYsNH1EKFP9EKS/mKHQSmnQRYUxtBb3Wz1td/vs16UXYIzejmn8wNgl
+	 GtGFrABcLwUpjLy+5XdMKYjuwpgpwa2UKZQ27LyvXLF2bQ8Sc+6/nzT3/HzQn0110u
+	 PItQCb+77HQNGAq7jrwcx7ollKDrrBmbBiek04Vk=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 516EeWav041299;
+	Thu, 6 Feb 2025 08:40:32 -0600
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 6
+ Feb 2025 08:40:32 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 6 Feb 2025 08:40:31 -0600
+Received: from localhost (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.238])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 516EeVOJ070580;
+	Thu, 6 Feb 2025 08:40:31 -0600
+From: Chirag Shilwant <c-shilwant@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: Denys <denis@denix.org>, Ryan Eatmon <reatmon@ti.com>
+Subject: [meta-ti][master][PATCH v3 0/5] Upgrade TFA, OPTEE-OS & enable AM62L support
+Date: Thu, 6 Feb 2025 20:10:16 +0530
+Message-ID: <20250206144021.3007831-1-c-shilwant@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250205111211.1847450-4-c-shilwant@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 05 Feb 2025 17:17:09 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18279
+ <meta-ti@lists.yoctoproject.org>; Thu, 06 Feb 2025 14:40:45 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18280
 
-On Wed, Feb 05, 2025 at 04:42:09PM +0530, Chirag Shilwant wrote:
-> - While TFA patches for K3-based AM62L platform are under
-> review upstream, temporarily switch to TI's GitHub fork
-> for all K3 platforms to prevent disruptions and ensure timely bringup
-> 
-> - Also update the LIC_FILES_CHKSUM since the license file changed between
-> upstream TFA v2.12 [1] & the SRCREV in this commit [2][3]
-> 
-> [1]: https://github.com/ARM-software/arm-trusted-firmware/blob/v2.12/docs/license.rst
-> 
-> [2]: https://github.com/ARM-software/arm-trusted-firmware/blob/master/docs/license.rst
-> 
-> [3]: https://github.com/TexasInstruments/arm-trusted-firmware/blob/ti-master/docs/license.rst
+This series is intended only for master.
+It bumps up TFA to v2.12+ & OPTEE-OS to v4.5.0+
+It also aims to enable platform support for AM62L in meta-ti-bsp
 
-Sorry for the late reply, but master (styhead+) now requires License-Update: 
-tag for such cases:
+Link to AM62L TRM: https://www.ti.com/lit/pdf/sprujb4
 
-https://docs.yoctoproject.org/dev/contributor-guide/recipe-style-guide.html#license-updates
+Changes in v3:
 
+* Add License-Update tag for "trusted-firmware-a: Switch TFA to TI fork"
 
-> Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
-> ---
->  .../trusted-firmware-a/trusted-firmware-a-ti.inc            | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-> index df3cea23..c628eb15 100644
-> --- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-> +++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-> @@ -1,7 +1,7 @@
->  PV:k3 = "2.12+git"
-> -SRCREV_tfa:k3 = "4ec2948fe3f65dba2f19e691e702f7de2949179c"
-> -LIC_FILES_CHKSUM:k3 = "file://docs/license.rst;md5=83b7626b8c7a37263c6a58af8d19bee1"
-> -SRC_URI:k3 = "git://git.trustedfirmware.org/TF-A/trusted-firmware-a.git;protocol=https;name=tfa;branch=master"
-> +SRCREV_tfa:k3 = "5227171c079d0c7d22a6d37b5cec079c8c5bb4b1"
-> +LIC_FILES_CHKSUM:k3 = "file://docs/license.rst;md5=1118e32884721c0be33267bd7ae11130"
-> +SRC_URI:k3 = "git://github.com/TexasInstruments/arm-trusted-firmware.git;protocol=https;name=tfa;branch=ti-master"
->  COMPATIBLE_MACHINE:k3 = "k3"
->  TFA_BUILD_TARGET:k3 = "all"
->  TFA_INSTALL_TARGET:k3 = "bl31"
-> -- 
-> 2.34.1
+Changes in v2:
+
+* Upgrade optee-os to v4.5.0+ & drop Add-initial-support-for-AM62Lx-SoC.patch
+* Split TFA upgrade to v2.12 & switch to Github TI fork into 2 commits
+* Fix indentation for AM62L specific newly added changes in u-boot-ti.inc by using OE-Core policy
+* Set KERNEL_DEVICETREE to empty
+* Drop SERIAL_CONSOLES from am62lxx.inc as k3.inc already has it defined
+
+Chirag Shilwant (5):
+  recipes-security: optee: Update to v4.5.0+
+  trusted-firmware-a: Update to v2.12 release tag
+  trusted-firmware-a: Switch TFA to TI fork
+  meta-ti-bsp: Add Support for AM62L
+  conf: machine: am62lxx-evm: Add logic to generate UBI filesystem
+    images
+
+ meta-ti-bsp/conf/machine/am62lxx-evm.conf     | 19 +++++++++++++++++
+ meta-ti-bsp/conf/machine/include/am62lxx.inc  | 12 +++++++++++
+ meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb  |  2 ++
+ .../recipes-bsp/ti-sci-fw/ti-sci-fw_git.bb    |  6 ++++++
+ .../trusted-firmware-a-ti.inc                 | 11 ++++++----
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc  | 21 +++++++++++++++++++
+ .../optee/optee-os-ti-overrides.inc           |  1 +
+ .../optee/optee-os-ti-version.inc             |  4 ++--
+ 8 files changed, 70 insertions(+), 6 deletions(-)
+ create mode 100644 meta-ti-bsp/conf/machine/am62lxx-evm.conf
+ create mode 100644 meta-ti-bsp/conf/machine/include/am62lxx.inc
+
+-- 
+2.34.1
+
 
