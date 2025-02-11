@@ -1,81 +1,100 @@
-Return-Path: <denis@denix.org>
+Return-Path: <jm@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B365C0219B
-	for <webhook@archiver.kernel.org>; Tue, 11 Feb 2025 20:27:58 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.3946.1739305672236580501
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17C07C021A0
+	for <webhook@archiver.kernel.org>; Tue, 11 Feb 2025 23:11:22 +0000 (UTC)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ by mx.groups.io with SMTP id smtpd.web10.2359.1739315478433586781
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 11 Feb 2025 12:27:52 -0800
+ Tue, 11 Feb 2025 15:11:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 8885240CC3;
-	Tue, 11 Feb 2025 20:27:51 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ewtMZIWrAcmB; Tue, 11 Feb 2025 20:27:51 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3DB9940C6C;
-	Tue, 11 Feb 2025 20:27:45 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 7AD5E16423C; Tue, 11 Feb 2025 15:27:44 -0500 (EST)
-Date: Tue, 11 Feb 2025 15:27:44 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: a-dutta@ti.com
-Cc: reatmon@ti.com, denys@konsulko.com, u-kumar1@ti.com,
-	meta-ti@lists.yoctoproject.org, c-shilwant@ti.com, a-limaye@ti.com
-Subject: Re: [meta-ti][scarthgap][PATCH] conf: machine: j722s: Change
- overlay in KERNEL_DEVICETREE_PREFIX
-Message-ID: <20250211202744.GT21608@denix.org>
-References: <20250211055530.16704-1-a-dutta@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=zFQGYs3s;
+ spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: jm@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51BNBG053783659
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 11 Feb 2025 17:11:16 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1739315476;
+	bh=BLsZ+26nSYCiBfsHxDTpqReukXs164my83fCGYvRCTk=;
+	h=From:To:CC:Subject:Date;
+	b=zFQGYs3s4JzmwYFKfA8GlvrTj//eBm2hu2PKSu9eEecJY9trkx9PbIq6pWeFf5ZwX
+	 pYPkkazOgzintaPaISW5hoRXiGddfy9peBVsR4Xl+3EJPRTtpKt/M6WHBbcer2LyXS
+	 SCHBiPXJcD+pVhMlTJeasqlOX9Ly7uTJPQaFCMB4=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51BNBG24129580
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 11 Feb 2025 17:11:16 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 11
+ Feb 2025 17:11:15 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 11 Feb 2025 17:11:15 -0600
+Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51BNBFC2045040;
+	Tue, 11 Feb 2025 17:11:15 -0600
+From: Judith Mendez <jm@ti.com>
+To: <denys@konsulko.com>, <reatmon@ti.com>
+CC: Judith Mendez <jm@ti.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] HACK: conf: machine: am64x: Use new sdimage efti wks template
+Date: Tue, 11 Feb 2025 17:11:15 -0600
+Message-ID: <20250211231115.139972-1-jm@ti.com>
+X-Mailer: git-send-email 2.48.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250211055530.16704-1-a-dutta@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 11 Feb 2025 20:27:58 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18299
+ <meta-ti@lists.yoctoproject.org>; Tue, 11 Feb 2025 23:11:22 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18300
 
-Is it really scarthgap-specific?
+Currently am64x boards are failing SD card boot since standard
+boot is the current boot method for the boards. With standard
+boot, the grub shell is invoked and the grub.cfg used to pass
+kernel parameters to Linux. Normally we would like to use grub
+class to modify the kernel parameters passed to Linux but
+since this is not currently working with SERIAL_CONSOLES nor
+GRUB_OPTS, lets make a template that includes our own custom
+console= and let am64x conf use this.
 
+Signed-off-by: Judith Mendez <jm@ti.com>
+---
+ meta-ti-bsp/conf/machine/include/am64xx.inc  | 2 ++
+ meta-ti-bsp/wic/sdimage-2part-efi-csl.wks.in | 8 ++++++++
+ 2 files changed, 10 insertions(+)
+ create mode 100644 meta-ti-bsp/wic/sdimage-2part-efi-csl.wks.in
 
-On Tue, Feb 11, 2025 at 11:25:30AM +0530, Anurag Dutta via lists.yoctoproject.org wrote:
-> Currently, the overlay mentioned in KERNEL_DEVICETREE_PREFIX in case
-> of j722s is "k3-j7200-evm-mcspi-loopback" which is incorrect. Change
-> the overlay to "k3-am625-sk-mcspi-loopback.dtso" in order to carry
-> out SPI loopback tests successfully.
-> 
-> Fixes: 13b691a9bc2d ("conf: machine: j722s: Add overlay to
-> KERNEL_DEVICETREE_PREFIX")
-> 
-> Signed-off-by: Anurag Dutta <a-dutta@ti.com>
-> ---
-> 
-> Test link: https://gist.github.com/anuragdutta731/f93908b31d524ff0c52c3fd314449948
-> 
->  meta-ti-bsp/conf/machine/j722s-evm.conf | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-ti-bsp/conf/machine/j722s-evm.conf b/meta-ti-bsp/conf/machine/j722s-evm.conf
-> index 8f42866c..52a6cfbd 100644
-> --- a/meta-ti-bsp/conf/machine/j722s-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/j722s-evm.conf
-> @@ -7,7 +7,7 @@ require conf/machine/include/j722s.inc
->  KERNEL_DEVICETREE_PREFIX = " \
->      ti/k3-j722s \
->      ti/k3-fpdlink \
-> -    ti/k3-j7200-evm-mcspi-loopback \
-> +    ti/k3-am625-sk-mcspi-loopback \
->      ti/k3-v3link \
->  "
->  
-> -- 
-> 2.34.1
+diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/conf/machine/include/am64xx.inc
+index 49e996c8..be65aa6e 100644
+--- a/meta-ti-bsp/conf/machine/include/am64xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
+@@ -34,3 +34,5 @@ TFA_BOARD = "lite"
+ OPTEEMACHINE = "k3-am64x"
+ 
+ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "prueth-fw pruhsr-fw prusw-fw"
++
++WKS_FILE = "${@bb.utils.contains("MACHINE_FEATURES", "efi", "sdimage-2part-efi-csl.wks.in", "sdimage-2part.wks", d)}"
+diff --git a/meta-ti-bsp/wic/sdimage-2part-efi-csl.wks.in b/meta-ti-bsp/wic/sdimage-2part-efi-csl.wks.in
+new file mode 100644
+index 00000000..6dc69a17
+--- /dev/null
++++ b/meta-ti-bsp/wic/sdimage-2part-efi-csl.wks.in
+@@ -0,0 +1,8 @@
++# short-description: Create SD card image with 2 partitions and EFI support
++# long-description: Creates a partitioned SD card image for TI platforms that
++# supports EFI.  Boot files are located in the first vfat partition with extra
++# reserved space.  We cannot use a GPT here.
++
++bootloader --timeout=5 --append="rootfstype=ext4 console=ttyS2,115200n8"
++part --source bootimg-efi --sourceparams="loader=${EFI_PROVIDER}" --fstype=vfat --label boot --active --align 1024 --use-uuid --fixed-size 128M
++part / --source rootfs --fstype=ext4 --label root --align 1024 --use-uuid
+-- 
+2.48.0
+
 
