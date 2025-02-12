@@ -1,110 +1,185 @@
-Return-Path: <a-christidis@ti.com>
+Return-Path: <jm@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F683C021A0
-	for <webhook@archiver.kernel.org>; Wed, 12 Feb 2025 20:18:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BD0AC02198
+	for <webhook@archiver.kernel.org>; Wed, 12 Feb 2025 22:42:39 +0000 (UTC)
 Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web10.26466.1739391511738571147
+ by mx.groups.io with SMTP id smtpd.web10.1624.1739400149945781058
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 12 Feb 2025 12:18:31 -0800
+ Wed, 12 Feb 2025 14:42:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ZKuiyzhZ;
- spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: a-christidis@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51CKIVuR3971621
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <meta-ti@lists.yoctoproject.org>; Wed, 12 Feb 2025 14:18:31 -0600
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=x6B2J0aj;
+ spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: jm@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51CMgS1r3990316
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Wed, 12 Feb 2025 16:42:29 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1739391511;
-	bh=2YbUeub2XUjEXeJkygmZDrSFnqwWRgOLwmgNs8+tUlo=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=ZKuiyzhZymOitkMiF3rubHDCGxPyNDSjzzEZAjI+HDiRNl/P7P6AqF/QE3dl8A58d
-	 4i41Hl+QcknSjH02Xel0JFWxnYUEavvOeJ7XeSufCmQhYwKsrO/21eQKMRSq6GVgVS
-	 +2nX0uXjh7RwnGiNnCUO+ISRzCZfwtQzyZ/ECqEQ=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51CKIUc9103430
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Wed, 12 Feb 2025 14:18:30 -0600
-Received: from lewvowa01.ent.ti.com (10.180.75.79) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1739400149;
+	bh=h3elNP/HZaTYGe+uGnBs1LL4AL2rNnYW7mJABDRB3o4=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=x6B2J0aj6CAdfDv19bYf6+r48egZ0mFql+/dXy9cMUjhW4bnjhH2UtjBybkSZBteC
+	 e6P3k9Ih1Y9L7oUvVAFM+eJ70NTqREDAXYIjx3YvsOBheZPhnD0RS2qKoApDywzIep
+	 wHm38QjdOXVMeMpKKGXvUQbiHEWoJk5hS6TZvOKs=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51CMgSOi046307;
+	Wed, 12 Feb 2025 16:42:28 -0600
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 12
- Feb 2025 14:18:30 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by lewvowa01.ent.ti.com
- (10.180.75.79) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2507.34; Wed, 12 Feb
- 2025 14:18:30 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2025 16:42:28 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 12 Feb 2025 14:18:30 -0600
-Received: from antonios-ThinkStation-P3-Tower.dhcp.ti.com (antonios-thinkstation-p3-tower.dhcp.ti.com [128.247.81.112])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51CKIUdF049546
-	for <meta-ti@lists.yoctoproject.org>; Wed, 12 Feb 2025 14:18:30 -0600
-From: <a-christidis@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][scarthgap/master][PATCH 2/3] recipes-graphics : port gc320 libs to work on kernel 6.12
-Date: Wed, 12 Feb 2025 14:18:29 -0600
-Message-ID: <20250212201830.2090247-3-a-christidis@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250212201830.2090247-1-a-christidis@ti.com>
-References: <20250212201830.2090247-1-a-christidis@ti.com>
+ Frontend Transport; Wed, 12 Feb 2025 16:42:28 -0600
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51CMgS5C045263;
+	Wed, 12 Feb 2025 16:42:28 -0600
+Message-ID: <9c0b57a7-99a7-4944-8eef-49f0ad3f602e@ti.com>
+Date: Wed, 12 Feb 2025 16:42:28 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti][scarthgap][PATCH] HACK: conf: machine: am64x: Use new
+ sdimage efti wks template
+To: Andrew Davis <afd@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: <denys@konsulko.com>, <reatmon@ti.com>
+References: <20250211231115.139972-1-jm@ti.com>
+ <1240a4e9-215c-406e-baca-020c7faeaa5e@ti.com>
+Content-Language: en-US
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <1240a4e9-215c-406e-baca-020c7faeaa5e@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by lelvem-ot02.ext.ti.com id 51CMgS1r3990316
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 12 Feb 2025 20:18:39 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18305
+ <meta-ti@lists.yoctoproject.org>; Wed, 12 Feb 2025 22:42:39 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18306
 
-From: Antonios Christidis <a0507488@uda0867391-2.dhcp.ti.com>
+Hi Andrew,
 
-The user mode libraries needed recompiling with the scarthgap revision of gcc to
-remove all the warning about 32bit API usage during the linking stage, New SRCREV
-and branch includes this changes. Versions of the libraries remain the same.
+On 2/12/25 1:42 PM, Andrew Davis wrote:
+> On 2/11/25 5:11 PM, Mendez, Judith via lists.yoctoproject.org wrote:
+>> Currently am64x boards are failing SD card boot since standard
+>> boot is the current boot method for the boards. With standard
+>> boot, the grub shell is invoked and the grub.cfg used to pass
+>> kernel parameters to Linux. Normally we would like to use grub
+>> class to modify the kernel parameters passed to Linux but
+>> since this is not currently working with SERIAL_CONSOLES nor
+>> GRUB_OPTS, lets make a template that includes our own custom
+>=20
+> Why do SERIAL_CONSOLES nor GRUB_OPTS work here? Should explain
+> that in this message.
 
-Also, create custom package split logic. Old logic would place the symbolic link
-to the new recompiled packages, in a package that would not be included in the
-SDK. So, new logic makes sure the symbolic link is included in a package that
-get included in the rootfs.
+According to the grub class, I believe we are supposed to be able
+to modify GRUB_OPTS to append variables, for grub config. It was not
+working for me.
 
-Signed-Off-By: Antonios Christidis <a-christidis@ti.com>
----
- .../recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+SERIAL_CONSOLES is a bit of a misery to me. Although I did not spend
+to much time on this, I tested both variables to see if the default
+console would change but it did not work. So I am just pointing that
+out as well.
 
-diff --git a/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-index 807f421c..02b44355 100644
---- a/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-+++ b/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-@@ -11,10 +11,10 @@ COMPATIBLE_MACHINE = "omap-a15"
- 
- CLEANBROKEN = "1"
- 
--BRANCH = "ti-${PV}"
-+BRANCH = "ti-${PV}-scarthgap"
- 
- SRC_URI = "git://git.ti.com/git/graphics/ti-gc320-libs.git;protocol=https;branch=${BRANCH}"
--SRCREV = "c0afab259de59909cfe74c01f3f7fbaa147f94b5"
-+SRCREV = "85c175e8425c33dda6e272aeb45afe0f69a79096"
- 
- RRECOMMENDS:${PN} = "ti-gc320-driver"
- 
-@@ -41,6 +41,10 @@ EXTRA_OEMAKE += "DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT} LIBDIR=${libdir}"
- do_install() {
-     oe_runmake install
-     chown -R root:root ${D}
-+    mkdir lib
- }
- 
--INSANE_SKIP:${PN} += "ldflags"
-+PACKAGES = "${PN}"
-+FILES:${PN} = "${libdir} /usr/include"
-+
-+INSANE_SKIP:${PN} += "ldflags already-stripped dev-so"
--- 
-2.34.1
+>=20
+> Looks like there is a comment that this needs fixed[0]. Since it
+> affects you now, might be good to go fix this upstream.
+
+Yes, that is a good idea. Ill keep it in mind, thanks.
+
+>=20
+> For now, this seems like a GRUB issue. Why do we use GRUB again,
+> isn't one bootloader enough?.. uboot-extlinux-config.bbclass
+> doesn't seem to have this issue, and the resulting extlinux.conf
+> can be used directly by U-Boot (or used by GRUB if we really want
+> to have a middle layer bootloader that only ends up breaking FIT,
+> DT overlays, rproc loading, security, etc..)
+>=20
+> <rant>
+> GRUB makes no sense on embedded, and it never did as we don't
+> have an x86 legacy BIOS, the only reason anyone still uses GRUB.
+> systemd-boot and efistub are the future for EFI capable systems
+> like ours. Simple, better security, and already available in
+> Yocto, let's switch already..
+> </rant>
+
+I do not have a strong opinion on what bootloader to use. imo, I think
+we should just select one unanimously and be done with it.
+
+Probably this will never happen.
+
+Sign.. in any case, we have a grub config issue in our hands, so was
+fixing it as quick as possible to unblock CICD.
+
+~ Judith
+
+
+>=20
+> Andrew
+>=20
+> [0]=20
+> https://git.openembedded.org/openembedded-core/tree/meta/classes-recipe=
+/grub-efi-cfg.bbclass#n22
+>=20
+>> console=3D and let am64x conf use this.
+>>
+>> Signed-off-by: Judith Mendez <jm@ti.com>
+>> ---
+>> =C2=A0 meta-ti-bsp/conf/machine/include/am64xx.inc=C2=A0 | 2 ++
+>> =C2=A0 meta-ti-bsp/wic/sdimage-2part-efi-csl.wks.in | 8 ++++++++
+>> =C2=A0 2 files changed, 10 insertions(+)
+>> =C2=A0 create mode 100644 meta-ti-bsp/wic/sdimage-2part-efi-csl.wks.in
+>>
+>> diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc=20
+>> b/meta-ti-bsp/conf/machine/include/am64xx.inc
+>> index 49e996c8..be65aa6e 100644
+>> --- a/meta-ti-bsp/conf/machine/include/am64xx.inc
+>> +++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
+>> @@ -34,3 +34,5 @@ TFA_BOARD =3D "lite"
+>> =C2=A0 OPTEEMACHINE =3D "k3-am64x"
+>> =C2=A0 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "prueth-fw pruhsr-fw p=
+rusw-fw"
+>> +
+>> +WKS_FILE =3D "${@bb.utils.contains("MACHINE_FEATURES", "efi",=20
+>> "sdimage-2part-efi-csl.wks.in", "sdimage-2part.wks", d)}"
+>> diff --git a/meta-ti-bsp/wic/sdimage-2part-efi-csl.wks.in=20
+>> b/meta-ti-bsp/wic/sdimage-2part-efi-csl.wks.in
+>> new file mode 100644
+>> index 00000000..6dc69a17
+>> --- /dev/null
+>> +++ b/meta-ti-bsp/wic/sdimage-2part-efi-csl.wks.in
+>> @@ -0,0 +1,8 @@
+>> +# short-description: Create SD card image with 2 partitions and EFI=20
+>> support
+>> +# long-description: Creates a partitioned SD card image for TI=20
+>> platforms that
+>> +# supports EFI.=C2=A0 Boot files are located in the first vfat partit=
+ion=20
+>> with extra
+>> +# reserved space.=C2=A0 We cannot use a GPT here.
+>> +
+>> +bootloader --timeout=3D5 --append=3D"rootfstype=3Dext4 console=3DttyS=
+2,115200n8"
+>> +part --source bootimg-efi --sourceparams=3D"loader=3D${EFI_PROVIDER}"=
+=20
+>> --fstype=3Dvfat --label boot --active --align 1024 --use-uuid=20
+>> --fixed-size 128M
+>> +part / --source rootfs --fstype=3Dext4 --label root --align 1024=20
+>> --use-uuid
+>>
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#18300):=20
+>> https://lists.yoctoproject.org/g/meta-ti/message/18300
+>> Mute This Topic: https://lists.yoctoproject.org/mt/111133257/3619733
+>> Group Owner: meta-ti+owner@lists.yoctoproject.org
+>> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [afd@ti.co=
+m]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
 
 
