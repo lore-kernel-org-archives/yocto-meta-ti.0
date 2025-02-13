@@ -2,46 +2,47 @@ Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FD0BC021A9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F62CC021AA
 	for <webhook@archiver.kernel.org>; Thu, 13 Feb 2025 23:48:35 +0000 (UTC)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- by mx.groups.io with SMTP id smtpd.web10.8738.1739490506518534345
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web10.8734.1739490505281564634
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 13 Feb 2025 15:48:26 -0800
+ Thu, 13 Feb 2025 15:48:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=C+xo2guR;
- spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: rs@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51DNmO8B4102450
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=RgCqs0+S;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: rs@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51DNmOpV838148
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
 	Thu, 13 Feb 2025 17:48:24 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1739490504;
-	bh=QkJFb4l96XBFh1pfKGZdLlMi08NxSfUitKf+ztmDYyY=;
+	bh=6NmxJrxLSCmatH/gubmVyNDX2DP1TVNwk/Y1rQfKVWw=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=C+xo2guRAtoPTTByWQoIkFxXIMdt9C5lvZ94Wqmoc1S4I9QFZb/OsynZal0n4Nbo6
-	 +Uk9itN5HNOA+4axfjBkc2se+Rtps1fmYW8gxu5bJZt3XgQ9B/gR+KdxUfokzeKiTs
-	 ENw+F6DCgOh67khIPjfxc9NcyVbi5ojyy2dGMQYg=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51DNmOSF050156;
+	b=RgCqs0+SbFELs7gNJjCLu4jgk36SSMJjEhnudrOaWFZK6vvNQ3YujK0BeWEbFf42k
+	 FRgBtRU8DhTxbf/mhWwazsN7T4Shf471To5w6H0O/r2KJ8zzKbxqbJ16hAVz8SCb6c
+	 xoZfETccEcwgZ19iKiAFFld/rxYynWcWx6F4IXEo=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51DNmO5u087688
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
 	Thu, 13 Feb 2025 17:48:24 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
  Feb 2025 17:48:23 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Thu, 13 Feb 2025 17:48:23 -0600
 Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51DNmNcQ056749;
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51DNmNcP056749;
 	Thu, 13 Feb 2025 17:48:23 -0600
 From: <rs@ti.com>
 To: <reatmon@ti.com>, <denys@konsulko.com>
 CC: <meta-ti@lists.yoctoproject.org>, <detheridge@ti.com>
-Subject: [meta-ti][scarthgap][PATCH 5/7] mesa-pvr: relocate 22.3.5 patches
-Date: Thu, 13 Feb 2025 17:48:11 -0600
-Message-ID: <20250213234813.3618729-6-rs@ti.com>
+Subject: [meta-ti][scarthgap][PATCH 4/7] ti-img-rogue-umlibs: filter binaries post install
+Date: Thu, 13 Feb 2025 17:48:10 -0600
+Message-ID: <20250213234813.3618729-5-rs@ti.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250213234813.3618729-1-rs@ti.com>
 References: <20250213234813.3618729-1-rs@ti.com>
@@ -53,60 +54,99 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Thu, 13 Feb 2025 23:48:35 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18313
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18311
 
 From: Randolph Sapp <rs@ti.com>
 
-Relocate the patches for 22.3.5 to the mesa-pvr-22.3.5 subdirectory so
-it's more clear what version of mesa they apply to.
+No reason to do this pre install now that my python function can
+evaluate file paths. Also, this may have been causing issues with state
+when attempting to switch between opencl enabled/disabled builds.
 
 Signed-off-by: Randolph Sapp <rs@ti.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- ...001-fix-gallivm-limit-usage-of-LLVMContextSetOpaquePoint.patch | 0
- ...001-freedreno-pm4-Use-unsigned-instead-of-uint-to-fix-mu.patch | 0
- .../0001-gallium-Fix-build-with-llvm-17.patch                     | 0
- .../0001-gbm-backend-fix-gbm-compile-without-dri.patch            | 0
- .../0001-meson-misdetects-64bit-atomics-on-mips-clang.patch       | 0
- ...001-meson.build-check-for-all-linux-host_os-combinations.patch | 0
- .../0001-util-format-Check-for-NEON-before-using-it.patch         | 0
- 7 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-ti-bsp/recipes-graphics/mesa/{files => mesa-pvr-22.3.5}/0001-fix-gallivm-limit-usage-of-LLVMContextSetOpaquePoint.patch (100%)
- rename meta-ti-bsp/recipes-graphics/mesa/{files => mesa-pvr-22.3.5}/0001-freedreno-pm4-Use-unsigned-instead-of-uint-to-fix-mu.patch (100%)
- rename meta-ti-bsp/recipes-graphics/mesa/{files => mesa-pvr-22.3.5}/0001-gallium-Fix-build-with-llvm-17.patch (100%)
- rename meta-ti-bsp/recipes-graphics/mesa/{files => mesa-pvr-22.3.5}/0001-gbm-backend-fix-gbm-compile-without-dri.patch (100%)
- rename meta-ti-bsp/recipes-graphics/mesa/{files => mesa-pvr-22.3.5}/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch (100%)
- rename meta-ti-bsp/recipes-graphics/mesa/{files => mesa-pvr-22.3.5}/0001-meson.build-check-for-all-linux-host_os-combinations.patch (100%)
- rename meta-ti-bsp/recipes-graphics/mesa/{files => mesa-pvr-22.3.5}/0001-util-format-Check-for-NEON-before-using-it.patch (100%)
+ .../powervr-umlibs/ti-img-rogue-umlibs_23.3.6512818.bb | 10 +++++-----
+ .../powervr-umlibs/ti-img-rogue-umlibs_24.2.6643903.bb | 10 +++++-----
+ 2 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/files/0001-fix-gallivm-limit-usage-of-LLVMContextSetOpaquePoint.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-fix-gallivm-limit-usage-of-LLVMContextSetOpaquePoint.patch
-similarity index 100%
-rename from meta-ti-bsp/recipes-graphics/mesa/files/0001-fix-gallivm-limit-usage-of-LLVMContextSetOpaquePoint.patch
-rename to meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-fix-gallivm-limit-usage-of-LLVMContextSetOpaquePoint.patch
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/files/0001-freedreno-pm4-Use-unsigned-instead-of-uint-to-fix-mu.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-freedreno-pm4-Use-unsigned-instead-of-uint-to-fix-mu.patch
-similarity index 100%
-rename from meta-ti-bsp/recipes-graphics/mesa/files/0001-freedreno-pm4-Use-unsigned-instead-of-uint-to-fix-mu.patch
-rename to meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-freedreno-pm4-Use-unsigned-instead-of-uint-to-fix-mu.patch
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/files/0001-gallium-Fix-build-with-llvm-17.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-gallium-Fix-build-with-llvm-17.patch
-similarity index 100%
-rename from meta-ti-bsp/recipes-graphics/mesa/files/0001-gallium-Fix-build-with-llvm-17.patch
-rename to meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-gallium-Fix-build-with-llvm-17.patch
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/files/0001-gbm-backend-fix-gbm-compile-without-dri.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-gbm-backend-fix-gbm-compile-without-dri.patch
-similarity index 100%
-rename from meta-ti-bsp/recipes-graphics/mesa/files/0001-gbm-backend-fix-gbm-compile-without-dri.patch
-rename to meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-gbm-backend-fix-gbm-compile-without-dri.patch
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/files/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch
-similarity index 100%
-rename from meta-ti-bsp/recipes-graphics/mesa/files/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch
-rename to meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-meson-misdetects-64bit-atomics-on-mips-clang.patch
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/files/0001-meson.build-check-for-all-linux-host_os-combinations.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-meson.build-check-for-all-linux-host_os-combinations.patch
-similarity index 100%
-rename from meta-ti-bsp/recipes-graphics/mesa/files/0001-meson.build-check-for-all-linux-host_os-combinations.patch
-rename to meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-meson.build-check-for-all-linux-host_os-combinations.patch
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/files/0001-util-format-Check-for-NEON-before-using-it.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-util-format-Check-for-NEON-before-using-it.patch
-similarity index 100%
-rename from meta-ti-bsp/recipes-graphics/mesa/files/0001-util-format-Check-for-NEON-before-using-it.patch
-rename to meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-22.3.5/0001-util-format-Check-for-NEON-before-using-it.patch
+diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.3.6512818.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.3.6512818.bb
+index 40835439..675edc14 100644
+--- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.3.6512818.bb
++++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_23.3.6512818.bb
+@@ -44,7 +44,7 @@ PACKAGECONFIG[opencl] = ",,,,${OPENCL_PACKAGES}"
+ def get_file_list(package_list_var, d):
+     file_list = []
+     package_list = d.getVar(package_list_var)
+-    prefix = f"{d.getVar('S')}/"
++    prefix = f"{d.getVar('D')}/"
+     if package_list:
+         for package in package_list.split():
+             package_file_string = d.getVar(f"FILES:{package}")
+@@ -53,7 +53,7 @@ def get_file_list(package_list_var, d):
+                     file_list.append(f"{prefix}{package_file}")
+     return " ".join(file_list)
+ 
+-do_install:prepend() {
++do_install:append() {
+     if ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'false', 'true', d)}; then
+         for file in ${@get_file_list('GLES_PACKAGES',  d)}; do
+             rm -rf ${file}
+@@ -70,13 +70,13 @@ do_install:prepend() {
+         done
+     fi
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'false', d)}; then
+-        if [ -e ${S}/lib/firmware ]; then
+-            mv ${S}/lib/firmware ${S}${nonarch_base_libdir}
++        if [ -e ${D}/lib/firmware ]; then
++            mv ${D}/lib/firmware ${D}${nonarch_base_libdir}
+         fi
+     fi
+ 
+     # clean up any empty directories
+-    find "${S}" -empty -type d -delete
++    find "${D}" -empty -type d -delete
+ }
+ 
+ GLES_PACKAGES = "libgles1-rogue libgles2-rogue libgles3-rogue"
+diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.2.6643903.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.2.6643903.bb
+index 0de66b72..b8153711 100644
+--- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.2.6643903.bb
++++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.2.6643903.bb
+@@ -45,7 +45,7 @@ PACKAGECONFIG[opencl] = ",,,,${OPENCL_PACKAGES}"
+ def get_file_list(package_list_var, d):
+     file_list = []
+     package_list = d.getVar(package_list_var)
+-    prefix = f"{d.getVar('S')}/"
++    prefix = f"{d.getVar('D')}/"
+     if package_list:
+         for package in package_list.split():
+             package_file_string = d.getVar(f"FILES:{package}")
+@@ -54,7 +54,7 @@ def get_file_list(package_list_var, d):
+                     file_list.append(f"{prefix}{package_file}")
+     return " ".join(file_list)
+ 
+-do_install:prepend() {
++do_install:append() {
+     if ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'false', 'true', d)}; then
+         for file in ${@get_file_list('GLES_PACKAGES',  d)}; do
+             rm -rf ${file}
+@@ -71,13 +71,13 @@ do_install:prepend() {
+         done
+     fi
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'false', d)}; then
+-        if [ -e ${S}/lib/firmware ]; then
+-            mv ${S}/lib/firmware ${S}${nonarch_base_libdir}
++        if [ -e ${D}/lib/firmware ]; then
++            mv ${D}/lib/firmware ${D}${nonarch_base_libdir}
+         fi
+     fi
+ 
+     # clean up any empty directories
+-    find "${S}" -empty -type d -delete
++    find "${D}" -empty -type d -delete
+ }
+ 
+ GLES_PACKAGES = "libgles1-rogue libgles2-rogue libgles3-rogue"
 -- 
 2.48.1
 
