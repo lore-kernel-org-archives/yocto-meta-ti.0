@@ -1,116 +1,122 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6B80C021AA
-	for <webhook@archiver.kernel.org>; Tue, 18 Feb 2025 22:02:48 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web10.8807.1739916166430459790
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2E38C021AA
+	for <webhook@archiver.kernel.org>; Wed, 19 Feb 2025 21:48:07 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.35206.1740001685588466869
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 18 Feb 2025 14:02:46 -0800
+ Wed, 19 Feb 2025 13:48:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=yHS2Z7yT;
- spf=pass (domain: list.ti.com, ip: 198.47.19.245, mailfrom: lcpdbld@list.ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51IM2iDP1637843
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Tue, 18 Feb 2025 16:02:44 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1739916164; i=@ti.com;
-	bh=weAGfxZ8WDbEAjMtpDvZQn/GUKFAqHrFmImkzn8a8bk=;
-	h=From:To:Subject:Date;
-	b=yHS2Z7yTWiycy7Oc6EnirJJTnPUS1R3t2ERPcY+SafyDfUOgEh9gWq6NPTg+1Xlea
-	 hll2hawMTCSIaWlVy4ILg8JL8hOoUWSHCDwfTffJPrLLqSiTkrz+I+0Xqo5q6/S4H+
-	 HzI717WjeUDIk93tJXtebD0enwo9HzeiwFP6xvOs=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51IM2iSs053317;
-	Tue, 18 Feb 2025 16:02:44 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 18
- Feb 2025 16:02:44 -0600
-Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 18 Feb 2025 16:02:44 -0600
-Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.64.72.21])
-	by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51IM2iwQ063291;
-	Tue, 18 Feb 2025 16:02:44 -0600
-Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
-	id EB8EF138215; Tue, 18 Feb 2025 16:02:43 -0600 (CST)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202502181346
-Date: Tue, 18 Feb 2025 16:02:43 -0600
-Message-ID: <20250218220243.3277622-1-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 2.43.5
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id D7F61411EB;
+	Wed, 19 Feb 2025 21:48:04 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id c7Ohchm96imH; Wed, 19 Feb 2025 21:48:04 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id BD3E940DCA;
+	Wed, 19 Feb 2025 21:48:03 +0000 (UTC)
+Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id E3031164265;
+	Wed, 19 Feb 2025 16:48:02 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [master/scarthgap][PATCH] trusted-firmware-a: simplify TI customizations
+Date: Wed, 19 Feb 2025 16:48:01 -0500
+Message-Id: <20250219214801.2239589-1-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 18 Feb 2025 22:02:48 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18326
+ <meta-ti@lists.yoctoproject.org>; Wed, 19 Feb 2025 21:48:07 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18327
 
-Updated the value(s) for:
-  ti-linux-fw: TI_LINUX_FW_SRCREV
-  u-boot-ti-staging_2025.01: SRCREV
-  linux-ti-staging_6.12: SRCREV
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-Changelogs:
-  ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/log/?qt=range&q=7fbc75f80161a400a4b9c618b6191d72ab408def..e38a05e2ef5f6a6f2387742864042beba01972bb
-  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=4e9c90ad8b12cc5b4fdd1308bc3ac3e4fc869aab..9c89e8b0a82fabe55c6366aa65eb987f05bb4472
-  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=8906665ace32eb0dc12810667ee8646bd660c374..6423e6bb6191982da1c09a21a46c68b494f5b1b5
+The original .bbappend started with just a few customizations behind
+a :k3 SoC override, but eventually grew in size. It got converted into
+a .inc file, which is behind the same SoC override and hence it gets
+included by .bbappend only for K3 platforms:
+https://git.yoctoproject.org/meta-ti/commit/?id=3D389f9a8b726868768a8bed6=
+cbe0b2a1f18c05410
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+It doesn't make sense to use the same :k3 override inside this .inc
+file for every variable. Moreover, it makes it harder to change
+those variables downstream for any derivative platform or even for
+upstream testing.
+
+This change drops redundant :k3 SoC overrides, w/o changing existing
+behavior. It allows easier modifications of such customizations from
+downstream layers or a local.conf, e.g. SRC_URI_TRUSTED_FIRMWARE_A
+
+Note that SRC_URI is set exactly the same as in upstream base .inc
+file, but version-specific recipes in meta-arm tend to add extra
+patches directly to SRC_URI, which is undesirable here. Thus, reset
+SRC_URI back to its default.
+
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 2 +-
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb   | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ .../trusted-firmware-a-ti.inc                 | 26 ++++++++++++-------
+ 1 file changed, 16 insertions(+), 10 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 1347fd99..f3db9bd7 100644
---- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -17,7 +17,7 @@ CNM_WAVE521_FW_VERSION = "1.0.7"
- TI_DM_FW_VERSION = "10.01.03"
- TI_SYSFW_VERSION = "10.01.08"
- 
--TI_LINUX_FW_SRCREV ?= "7fbc75f80161a400a4b9c618b6191d72ab408def"
-+TI_LINUX_FW_SRCREV ?= "e38a05e2ef5f6a6f2387742864042beba01972bb"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
- 
- BRANCH ?= "ti-linux-firmware"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-index 5e56d2db..183b33db 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-@@ -6,4 +6,4 @@ PR = "r0"
- 
- BRANCH = "ti-u-boot-2025.01"
- 
--SRCREV = "4e9c90ad8b12cc5b4fdd1308bc3ac3e4fc869aab"
-+SRCREV = "9c89e8b0a82fabe55c6366aa65eb987f05bb4472"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-index 88c41ac5..170b0f0b 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH ?= "ti-linux-6.12.y"
- 
--SRCREV ?= "8906665ace32eb0dc12810667ee8646bd660c374"
-+SRCREV ?= "6423e6bb6191982da1c09a21a46c68b494f5b1b5"
- PV = "6.12.9+git"
- 
- KERNEL_REPRODUCIBILITY_PATCHES = " \
--- 
-2.43.5
+diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-=
+a-ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-=
+ti.inc
+index 9971e960..21aef489 100644
+--- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.in=
+c
++++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.in=
+c
+@@ -1,14 +1,20 @@
+-PV:k3 =3D "2.12+git"
+-SRCREV_tfa:k3 =3D "5227171c079d0c7d22a6d37b5cec079c8c5bb4b1"
+-LIC_FILES_CHKSUM:k3 =3D "file://docs/license.rst;md5=3D1118e32884721c0be=
+33267bd7ae11130"
+-SRC_URI:k3 =3D "git://github.com/TexasInstruments/arm-trusted-firmware.g=
+it;protocol=3Dhttps;name=3Dtfa;branch=3Dti-master"
+-COMPATIBLE_MACHINE:k3 =3D "k3"
+-TFA_BUILD_TARGET:k3 =3D "all"
+-TFA_INSTALL_TARGET:k3 =3D "bl31"
+-TFA_SPD:k3 =3D "opteed"
++# NOTE: This .inc file with customizations only gets included for K3 pla=
+tforms
++
++PV =3D "2.12+git"
++SRCREV_tfa =3D "5227171c079d0c7d22a6d37b5cec079c8c5bb4b1"
++SRC_URI_TRUSTED_FIRMWARE_A =3D "git://github.com/TexasInstruments/arm-tr=
+usted-firmware.git;protocol=3Dhttps"
++SRCBRANCH =3D "ti-master"
++SRC_URI =3D "${SRC_URI_TRUSTED_FIRMWARE_A};name=3Dtfa;branch=3D${SRCBRAN=
+CH}"
++
++LIC_FILES_CHKSUM =3D "file://docs/license.rst;md5=3D1118e32884721c0be332=
+67bd7ae11130"
++COMPATIBLE_MACHINE =3D "k3"
++
++TFA_BUILD_TARGET =3D "all"
++TFA_INSTALL_TARGET =3D "bl31"
++TFA_SPD =3D "opteed"
+=20
+ # For am62lxx, install bl1 & bl31 using TFA_INSTALL_TARGET
+ TFA_INSTALL_TARGET:am62lxx =3D "bl31 bl1"
+=20
+-EXTRA_OEMAKE:append:k3 =3D "${@ ' K3_USART=3D' + d.getVar('TFA_K3_USART'=
+) if d.getVar('TFA_K3_USART') else ''}"
+-EXTRA_OEMAKE:append:k3 =3D "${@ ' K3_PM_SYSTEM_SUSPEND=3D' + d.getVar('T=
+FA_K3_SYSTEM_SUSPEND') if d.getVar('TFA_K3_SYSTEM_SUSPEND') else ''}"
++EXTRA_OEMAKE +=3D "${@ 'K3_USART=3D' + d.getVar('TFA_K3_USART') if d.get=
+Var('TFA_K3_USART') else ''}"
++EXTRA_OEMAKE +=3D "${@ 'K3_PM_SYSTEM_SUSPEND=3D' + d.getVar('TFA_K3_SYST=
+EM_SUSPEND') if d.getVar('TFA_K3_SYSTEM_SUSPEND') else ''}"
+--=20
+2.25.1
 
 
