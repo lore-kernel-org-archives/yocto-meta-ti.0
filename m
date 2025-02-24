@@ -2,52 +2,73 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A944C021B3
-	for <webhook@archiver.kernel.org>; Sat, 22 Feb 2025 00:43:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FE49C021B2
+	for <webhook@archiver.kernel.org>; Mon, 24 Feb 2025 01:13:23 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.38127.1740185011875154847
+ by mx.groups.io with SMTP id smtpd.web10.79227.1740359601651121560
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 21 Feb 2025 16:43:32 -0800
+ Sun, 23 Feb 2025 17:13:22 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 04DD140D60;
-	Sat, 22 Feb 2025 00:43:31 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id CCB6040C88;
+	Mon, 24 Feb 2025 01:13:20 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id pludCpB9faiC; Sat, 22 Feb 2025 00:43:30 +0000 (UTC)
+	with ESMTP id GWkMYoa6FOPU; Mon, 24 Feb 2025 01:13:20 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CE99340CFC;
-	Sat, 22 Feb 2025 00:43:28 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 3733D16428D; Fri, 21 Feb 2025 19:43:28 -0500 (EST)
-Date: Fri, 21 Feb 2025 19:43:28 -0500
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id AFA6E40C85;
+	Mon, 24 Feb 2025 01:13:19 +0000 (UTC)
+Received: from thorin.denix (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id E164916428D;
+	Sun, 23 Feb 2025 20:13:18 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
-To: jweyer@aecontrols.com, Paresh Bhagat <p-bhagat@ti.com>
-Cc: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] Jailhouse invalid SRC_REV
-Message-ID: <20250222004328.GC1879@denix.org>
-References: <04a9fd4d741d4ca99d52a75677ab8114@AEC-Exchange.AEC.local>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [master/scarthgap][PATCH] conf: machine: j742s2: skip HS-SE SPL for 6.12
+Date: Sun, 23 Feb 2025 20:13:18 -0500
+Message-Id: <20250224011318.2801708-1-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <04a9fd4d741d4ca99d52a75677ab8114@AEC-Exchange.AEC.local>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sat, 22 Feb 2025 00:43:39 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18334
+ <meta-ti@lists.yoctoproject.org>; Mon, 24 Feb 2025 01:13:23 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18335
 
-+Paresh Bhagat
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-jailhouse recipe now points to SRCREV="dc77c05460bc3df8f2ddc9cc3a9990ca31cb9f9d"
+It appears there's no HS-SE SPL being produced with TI BSP 6.12, as there=
+'s
+no tiboot3-j742s2-hs-evm.bin being deployed. Disable it for now.
 
-https://git.yoctoproject.org/meta-ti/commit/?id=31b423275aa2bc685a1348218bda16894a35ad8b
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+---
+ meta-ti-bsp/conf/machine/include/j742s2.inc | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-which does not exist:
+diff --git a/meta-ti-bsp/conf/machine/include/j742s2.inc b/meta-ti-bsp/co=
+nf/machine/include/j742s2.inc
+index 9a54e11e..67e30fe9 100644
+--- a/meta-ti-bsp/conf/machine/include/j742s2.inc
++++ b/meta-ti-bsp/conf/machine/include/j742s2.inc
+@@ -12,7 +12,9 @@ PREFERRED_PROVIDER_virtual/gpudriver ?=3D "${BSP_ROGUE_=
+DRIVER_PROVIDER}"
+ IMAGE_BOOT_FILES +=3D "tiboot3-j742s2-hs-fs-evm.bin"
+=20
+ # Since default tiboot3.bin on J742S2 is for HS-FS, add a version for SR=
+1.0 HS-SE
+-IMAGE_BOOT_FILES +=3D "tiboot3-j742s2-hs-evm.bin"
++IMAGE_SR1_HS_SE_FILES =3D "tiboot3-j742s2-hs-evm.bin"
++IMAGE_SR1_HS_SE_FILES:bsp-ti-6_12 =3D ""
++IMAGE_BOOT_FILES +=3D "${IMAGE_SR1_HS_SE_FILES}"
+=20
+ TFA_BOARD =3D "j784s4"
+=20
+--=20
+2.25.1
 
-https://git.ti.com/cgit/jailhouse/ti-jailhouse/commit/?id=dc77c05460bc3df8f2ddc9cc3a9990ca31cb9f9d
 
