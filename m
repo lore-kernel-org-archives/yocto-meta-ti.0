@@ -1,91 +1,123 @@
-Return-Path: <a-christidis@ti.com>
+Return-Path: <matthias.schiffer@ew.tq-group.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2D71C282E5
-	for <webhook@archiver.kernel.org>; Wed,  5 Mar 2025 17:21:55 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web11.19154.1741195309103885360
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31771C28B23
+	for <webhook@archiver.kernel.org>; Thu,  6 Mar 2025 14:13:03 +0000 (UTC)
+Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
+ by mx.groups.io with SMTP id smtpd.web10.14326.1741270378887491676
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 05 Mar 2025 09:21:49 -0800
+ Thu, 06 Mar 2025 06:12:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ZreFsiku;
- spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: a-christidis@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 525HLm6x3468476
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO)
-	for <meta-ti@lists.yoctoproject.org>; Wed, 5 Mar 2025 11:21:48 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1741195308;
-	bh=wxlyOOtCWzfI1/M1uZkpKhy2ERQezBYZgxFu0ZDdZOk=;
-	h=From:To:Subject:Date;
-	b=ZreFsikuigW9kbIbRDyzNj7DBxAmN0JqaE2WOZTJ2X2M9hORdIwUKXfHx/ASkuJuu
-	 SmZJfMovzBG4iKDDZGqWqhsFU01i71TjWphHeIhdeS21jV8/LzXsILUM5h7yw3JvCK
-	 QTYQNni4iX+BaQekeSlORUnlkJbRx3YIW4Ln8naI=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 525HLmTc116243
-	for <meta-ti@lists.yoctoproject.org>; Wed, 5 Mar 2025 11:21:48 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 5
- Mar 2025 11:21:48 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 5 Mar 2025 11:21:48 -0600
-Received: from antonios-ThinkStation-P3-Tower.dhcp.ti.com (antonios-thinkstation-p3-tower.dhcp.ti.com [128.247.81.112])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 525HLmVN064406
-	for <meta-ti@lists.yoctoproject.org>; Wed, 5 Mar 2025 11:21:48 -0600
-From: <a-christidis@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][scarthgap/master][PATCH v4 0/3] Enabling the gc320 driver for am57xx-evm
-Date: Wed, 5 Mar 2025 11:21:45 -0600
-Message-ID: <20250305172148.358549-1-a-christidis@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@tq-group.com header.s=key1 header.b=cdapbbFz;
+ dkim=fail reason="dkim: no key for signature: lookup dkim._domainkey.ew.tq-group.com on 100.100.100.100:53: no such host" header.i=@ew.tq-group.com header.s=dkim header.b=oXz0n8nG;
+ spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81, mailfrom: matthias.schiffer@ew.tq-group.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1741270379; x=1772806379;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=5IyOAkVCerhobSSX2kFiFTJM9KZdQqsywRllYdfg2Yw=;
+  b=cdapbbFziTUlwmu0MWLrf9TcQZAHCOWVVjmr2JOophqchfqyTTlA6Gzc
+   BUe6FyoH/m6tlWQ+zXVHfiIBMqwl7bf+MXNH6ki7Ra/uhTKXA5DTavMqY
+   OrwfV3gfpbsIudFTcL7WTsdGA5+Mv5yuJTANMDateR+h+ONzMpEu6T3yS
+   BjHPiM+1C8a9QKV/65ttQWOhrj56DmLU31dFkRvoG5WAfH0fALUlC5crh
+   cNOibso+Q8rKPRZ7mxnkxcpA3Ss9mIdicnF1j4WouCvYIDNmlzAcVH8bY
+   ktpXPPqCVTZ2VL/ax8ilQTsoTEkAYn+tRnyiRKxt8rSBgZ+aDn99OdnUs
+   g==;
+X-CSE-ConnectionGUID: hWTI18I8Q92SlXLL7kTw6g==
+X-CSE-MsgGUID: f//ZAHXGRL+53C+vsr2lJg==
+X-IronPort-AV: E=Sophos;i="6.14,226,1736809200"; 
+   d="scan'208";a="42369756"
+Received: from vmailcow01.tq-net.de ([10.150.86.48])
+  by mx1.tq-group.com with ESMTP; 06 Mar 2025 15:12:56 +0100
+X-CheckPoint: {67C9AD68-A-903EAEAC-E04C76C8}
+X-MAIL-CPID: 78F4C2720DB335309D605B059752115A_5
+X-Control-Analysis: str=0001.0A006369.67C9AD6C.00A3,ss=1,re=0.000,recu=0.000,reip=0.000,cl=1,cld=1,fgs=0
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id D0450166244;
+	Thu,  6 Mar 2025 15:12:51 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ew.tq-group.com;
+	s=dkim; t=1741270372;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=5IyOAkVCerhobSSX2kFiFTJM9KZdQqsywRllYdfg2Yw=;
+	b=oXz0n8nGOpXhyolxo9vllHut8LRCmofJ7xqOulJ5ZPQAeEkqXGtAsJsG5ZMVqAGYPmOiNy
+	NZwqjDuoaKeQA9IJY3xuh30wwjMQoJrgPt8yp3ltBHNWygHGMnRZyQjJo60kObN8OZzgF8
+	4NhO+aFLXesQJZbyGMVFUpOudmCx4n/fe/zsVKnY5RlNBZ/lBb3YWEi23g3npy+7p5NKEd
+	0eNVjDJz9QPYf0UErKwr3YS6CGqZvcmUzI8ug1svOEA7bsdd92PnjQ8A+BA1tX9SZSAsbc
+	GgkF4VkldUrC8oQfQFUMCqMVHPl7fljxj013C61rWCwJ2owvpdT8+C2YcPE+2w==
+From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+To: meta-ti@lists.yoctoproject.org
+Cc: oss@ew.tq-group.com,
+	Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+Subject: [scarthgap/master][PATCH] ti-sgx-ddk-km: work around incorrect target name selection
+Date: Thu,  6 Mar 2025 15:12:17 +0100
+Message-ID: <20250306141217.346689-1-matthias.schiffer@ew.tq-group.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Last-TLS-Session-Version: TLSv1.3
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 05 Mar 2025 17:21:55 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18355
+ <meta-ti@lists.yoctoproject.org>; Thu, 06 Mar 2025 14:13:03 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18359
 
-From: Antonios Christidis <a-christidis@ti.com>
+The omap5-sgx-ddk-linux Makefiles contain a list of target triple
+patterns that are detected as "Yocto" to deal with arm vs. armhf target
+selection. This breaks for Yocto distros that override TARGET_VENDOR,
+requiring patches like [1]; similar patches can also be found in other
+vendors' machine layers.
 
-The gc320 driver has been ported from kernel 6.1 to work on kernel 6.12.
-This patch series updates and sets up everything required to start building gc320 again for kernel 6.12.
+Work around the incorrect target selection by passing TARGET_PRIMARY_ARCH
+via EXTRA_OEMAKE.
 
-This patch series goes hand in hand with a patch sent to meta-arago
-adding ti-gc320-libs-dev to packagegroup-arago-tisdk-graphics.
+[1] https://github.com/tq-systems/meta-tq/blob/scarthgap.TQ.ARM.BSP.0003/meta-tq/dynamic-layers/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/linux-5.10/0001-ti-sgx-ddk-km-properly-handle-more-OE-YP-compiler-pr.patch
 
-Regards,
-Antonios 
+Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+---
 
-v4:
-- Instead of commenting out, remove the MACHINE_FEATURES line
+Tested with meta-tq + meta-ti scarthgap for am335x.
 
-v3: ti-gc320-libs
-- Removed commented lines and extra lib directory that was being created
-  in do_install()
+ .../powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb     | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
 
-v2: ti-gc320-libs
-- No longer include within the ${PN} package /usr/include files and symb link
-  to library file. This is done by not changing the FILES/PACKAGES variables, thus creating a -dev
-  package including the above.
-
-Antonios Christidis (3):
-  recipes-graphics : port gc320 driver to work on kernel 6.12
-  recipes-graphics : port gc320 libs to work on kernel 6.12
-  conf: machine: am57xx-evm : Enable gc320 machine feature for am57xx
-
- meta-ti-bsp/conf/machine/include/ti-bsp.inc                 | 2 --
- .../recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb  | 4 ++--
- .../recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb      | 6 +++---
- 3 files changed, 5 insertions(+), 7 deletions(-)
-
+diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+index 49376221..aaeee1d2 100644
+--- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
++++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+@@ -28,8 +28,11 @@ TARGET_PRODUCT:am65xx = "ti654x_linux"
+ PVR_BUILD = "release"
+ PVR_WS = "lws-generic"
+ 
++TARGET_PRIMARY_ARCH = "target_armhf"
++TARGET_PRIMARY_ARCH:aarch64 = "target_aarch64"
++
+ EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" BUILD=${PVR_BUILD} \
+-WINDOW_SYSTEM=${PVR_WS} PVR_BUILD_DIR=${TARGET_PRODUCT}'
++WINDOW_SYSTEM=${PVR_WS} PVR_BUILD_DIR=${TARGET_PRODUCT} TARGET_PRIMARY_ARCH=${TARGET_PRIMARY_ARCH}'
+ 
+ # There are useful flags here that are interpreted by the final kbuild pass
+ # These variables are not necessary when compiling outside of Yocto
+@@ -40,11 +43,7 @@ export KERNEL_OBJCOPY
+ export KERNEL_STRIP
+ 
+ do_install() {
+-    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasiacon/binary_${TARGET_PRODUCT}_${PVR_WS}_${PVR_BUILD}/target_armhf/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
+-}
+-
+-do_install:am65xx() {
+-    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasiacon/binary_${TARGET_PRODUCT}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
++    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasiacon/binary_${TARGET_PRODUCT}_${PVR_WS}_${PVR_BUILD}/${TARGET_PRIMARY_ARCH}/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
+ }
+ 
+ RRECOMMENDS:${PN} += "ti-sgx-ddk-um"
 -- 
-2.34.1
+TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
+Amtsgericht München, HRB 105018
+Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
+https://www.tq-group.com/
 
 
