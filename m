@@ -1,201 +1,145 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75A84C282EC
-	for <webhook@archiver.kernel.org>; Tue, 11 Mar 2025 16:43:32 +0000 (UTC)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web10.14481.1741711405760497640
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F3EFC2BA1B
+	for <webhook@archiver.kernel.org>; Tue, 11 Mar 2025 19:55:33 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web10.19825.1741722931694976794
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 11 Mar 2025 09:43:25 -0700
+ Tue, 11 Mar 2025 12:55:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=neeBhokQ;
- spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: reatmon@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52BGhMTq1347528
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=kQ3ANfFP;
+ spf=pass (domain: list.ti.com, ip: 198.47.19.246, mailfrom: lcpdbld@list.ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52BJtURw1282885
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 11 Mar 2025 11:43:22 -0500
+	Tue, 11 Mar 2025 14:55:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1741711402;
-	bh=5LJCf3P/xf+TeRiOyBtj1dxJfVUNxOBN4JLFqUESk0Y=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=neeBhokQbSSxemP9L9EmYC6lzy94kmyVxTFwld9LLEVl7RiW8nCFX9T8mmrAYKZKz
-	 y7Egab2XZxTu0NMjLK3heRGomGdZ/P2nbto6S47PPG4WqcF7G55bAvm6Xxgs2UXvuV
-	 WUmaaipQPJnScJf9VlbMcgtaR0CSK5LgceeEBA2g=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52BGhMqv023142
+	s=ti-com-17Q1; t=1741722930; i=@ti.com;
+	bh=KIcGt78jv7eYYRpXFh7vobhguL1xt4JBs8amb0E792I=;
+	h=From:To:Subject:Date;
+	b=kQ3ANfFPHho7onJBZ3/CGpwxZSEzzjxORboNFjP6QBzs1CeA3s5aO/sFjenPK/jML
+	 CNeSY7E2tNeqOrqF8s5LpKFPFseWoKUKWi3R9PAIQWVoRDJBjURMeIo99eqgu1SDdf
+	 Z1sArkhVRMM5+zGH3itaTdEhDhAnhP1aZgo9oK/U=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52BJtUrB102360
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 11 Mar 2025 11:43:22 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 11 Mar 2025 14:55:30 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 11
- Mar 2025 11:43:21 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2025 14:55:29 -0500
+Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 11 Mar 2025 11:43:21 -0500
-Received: from [10.249.33.140] ([10.249.33.140])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52BGhLAj032696;
-	Tue, 11 Mar 2025 11:43:21 -0500
-Message-ID: <52517f1f-c7a7-490a-993f-e3e1c24ef0ea@ti.com>
-Date: Tue, 11 Mar 2025 11:43:21 -0500
+ Frontend Transport; Tue, 11 Mar 2025 14:55:29 -0500
+Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.64.72.21])
+	by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52BJtTip083437;
+	Tue, 11 Mar 2025 14:55:29 -0500
+Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
+	id 8908F18D46F; Tue, 11 Mar 2025 14:55:29 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202503111223
+Date: Tue, 11 Mar 2025 14:55:29 -0500
+Message-ID: <20250311195529.2199081-1-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti] [scarthgap][PATCH 1/2] ti-bsp: ti-img-encode-decode:
- Add Recipe for Building VXE-VXD Out-of-Tree Module
-To: Denys Dmytriyenko <denis@denix.org>, <b-brnich@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, Darren Etheridge <detheridge@ti.com>
-References: <20250306203749.794759-1-b-brnich@ti.com>
- <182A59C7642211D5.31492@lists.yoctoproject.org>
- <182B88F400236EE2.13955@lists.yoctoproject.org>
- <20250310202926.GS1879@denix.org>
- <20250310203953.odjau32sbqbulruq@udba0500997>
- <20250310211407.GT1879@denix.org>
-Content-Language: en-US
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20250310211407.GT1879@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 11 Mar 2025 16:43:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18371
+ <meta-ti@lists.yoctoproject.org>; Tue, 11 Mar 2025 19:55:33 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18372
 
+Updated the value(s) for:
+  ti-linux-fw: PRUETH_FW_AM65X_SR2_VERSION,TI_DM_FW_VERSION,TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
+  atf: SRCREV_tfa
+  u-boot-ti-staging_2025.01: SRCREV
+  linux-ti-staging_6.12: PV,SRCREV
 
+Changelogs:
+  ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/log/?qt=range&q=e38a05e2ef5f6a6f2387742864042beba01972bb..e089c2f8db0577aa4acd3b3ef3ab229be2e804e1
+  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=9c89e8b0a82fabe55c6366aa65eb987f05bb4472..baf3aaa8ecfa20b9d9f497621b6c11915223f502
+  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=6423e6bb6191982da1c09a21a46c68b494f5b1b5..1a22c2fb64485a5dea9a9247eb007ddd4ea8a81d
 
-On 3/10/2025 4:14 PM, Denys Dmytriyenko wrote:
-> On Mon, Mar 10, 2025 at 03:39:53PM -0500, Brandon Brnich via lists.yoctoproject.org wrote:
->> Hi Denys,
->>
->> On 16:29-20250310, Denys Dmytriyenko wrote:
->>> On Mon, Mar 10, 2025 at 03:50:56PM -0400, Denys Dmytriyenko wrote:
->>>> On Thu, Mar 06, 2025 at 06:15:13PM -0500, Denys Dmytriyenko wrote:
->>>>> On Thu, Mar 06, 2025 at 02:37:48PM -0600, Brandon Brnich via lists.yoctoproject.org wrote:
->>>>>> During 10.0 LTS bringup, the decision was made that it would be the last LTS
->>>>>> that carried the IMG VXE and VXD driver in tree. Driver is now hosted on
->>>>>> git.ti.com. This recipe is responsible for pulling in the driver,
->>>>>> building it, and packaging it within the J721e SDK.
->>>>>>
->>>>>> Signed-off-by: Brandon Brnich <b-brnich@ti.com>
->>>>>> ---
->>>>>>
->>>>>> This build was tested by changing the kernel to point towards latest
->>>>>> head that has relevant device tree changes and config options. Build is
->>>>>> successful with those changes and no warnings are present.
->>>>>>
->>>>>>   .../ti-vxe-vxd-driver_6.12.bb                 | 23 +++++++++++++++++++
->>>>>>   1 file changed, 23 insertions(+)
->>>>>>   create mode 100644 meta-ti-bsp/recipes-bsp/ti-img-encode-decode/ti-vxe-vxd-driver_6.12.bb
->>>>>>
->>>>>> diff --git a/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/ti-vxe-vxd-driver_6.12.bb b/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/ti-vxe-vxd-driver_6.12.bb
->>>>>> new file mode 100644
->>>>>> index 00000000..fa2d3792
->>>>>> --- /dev/null
->>>>>> +++ b/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/ti-vxe-vxd-driver_6.12.bb
->>>>>> @@ -0,0 +1,23 @@
->>>>>> +DESCRIPTION =  "Kernel drivers for the VXE384 and D5500 Video Accelerators found in the J721E TI SoC"
->>>>>
->>>>> Shorter SUMMARY is missing?
->>
->> Should I just change DESCRIPTION to SUMMARY? Why need both?
-> 
-> Sigh, I'm becoming a "broken record"...
-> 
-> https://docs.yoctoproject.org/bitbake/bitbake-user-manual/bitbake-user-manual-ref-variables.html#term-SUMMARY
-> SUMMARY - A short summary for the recipe, which is 72 characters or less.
-> 
-> This is mandatory.
-> 
-> https://docs.yoctoproject.org/bitbake/bitbake-user-manual/bitbake-user-manual-ref-variables.html#term-DESCRIPTION
-> DESCRIPTION - A long description for the recipe.
-> 
-> This is optional - SUMMARY is used if omitted.
-> 
-> 
->>>>>> +LICENSE = "GPL-2.0-only"
->>>>>> +LIC_FILES_CHKSUM = "file://README;beginline=11;endline=12;md5=ad10b552e357ac443ec5dd2e02912b1b"
->>>>>> +
->>>>>> +inherit module
->>>>>> +
->>>>>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
->>>>>> +
->>>>>> +COMPATIBLE_MACHINE = "j721e"
->>>>>> +
->>>>>> +DEPENDS += "virtual/kernel"
->>>>>> +
->>>>>> +BRANCH = "scarthgap/k${PV}"
->>>>>> +
->>>>>> +SRC_URI = "git://git.ti.com/multimedia/img-vxe-vxd.git;protocol=https;branch=${BRANCH}"
->>>>
->>>> Also, SRC_URI is incorrect - should be git://git.ti.com/git/multimedia/... for
->>>> https access (i.e. one level of /git/ is missing):
->>>>
->>>> WARNING: ti-vxe-vxd-driver-6.12-r0 do_fetch: Failed to fetch URL git://git.ti.com/multimedia/img-vxe-vxd.git;protocol=https;branch=scarthgap/k6.12, attempting MIRRORS if available
->>>>
->>>> Just do this to see other examples in meta-ti:
->>>>
->>>> $ grep 'git://git.ti.com' * -r
->>
->> Okay will also fix.
->>
->>>
->>> And it fails to build:
->>>
->>> | /OE/arago-master/build/arago-tmp-default/work/j721e_evm-oe-linux/ti-vxe-vxd-driver/6.12/git/encoder/vxe_enc.c:24:9: warning: "MAX" redefined
->>> |    24 | #define MAX(a, b, type) ({ \
->>> |       |         ^~~
->>> | In file included from /OE/arago-master/build/arago-tmp-default/work-shared/j721e-evm/kernel-source/include/linux/kernel.h:28,
->>> |                  from /OE/arago-master/build/arago-tmp-default/work-shared/j721e-evm/kernel-source/arch/arm64/include/asm/cpufeature.h:26,
->>> |                  from /OE/arago-master/build/arago-tmp-default/work-shared/j721e-evm/kernel-source/arch/arm64/include/asm/processor.h:38,
->>> |                  from /OE/arago-master/build/arago-tmp-default/work-shared/j721e-evm/kernel-source/include/linux/sched.h:13,
->>> |                  from /OE/arago-master/build/arago-tmp-default/work-shared/j721e-evm/kernel-source/include/linux/ratelimit.h:6,
->>> |                  from /OE/arago-master/build/arago-tmp-default/work-shared/j721e-evm/kernel-source/include/linux/dev_printk.h:16,
->>> |                  from /OE/arago-master/build/arago-tmp-default/work-shared/j721e-evm/kernel-source/include/linux/device.h:15,
->>> |                  from /OE/arago-master/build/arago-tmp-default/work-shared/j721e-evm/kernel-source/include/linux/dma-mapping.h:8,
->>> |                  from /OE/arago-master/build/arago-tmp-default/work/j721e_evm-oe-linux/ti-vxe-vxd-driver/6.12/git/encoder/vxe_enc.c:16:
->>> | /OE/arago-master/build/arago-tmp-default/work-shared/j721e-evm/kernel-source/include/linux/minmax.h:330:9: note: this is the location of the previous definition
->>> |   330 | #define MAX(a,b) __cmp(max,a,b)
->>> |       |         ^~~
->>> |   LD [M]  /OE/arago-master/build/arago-tmp-default/work/j721e_evm-oe-linux/ti-vxe-vxd-driver/6.12/git/vxe-enc.o
->>> |   LD [M]  /OE/arago-master/build/arago-tmp-default/work/j721e_evm-oe-linux/ti-vxe-vxd-driver/6.12/git/vxd-dec.o
->>> |   MODPOST /OE/arago-master/build/arago-tmp-default/work/j721e_evm-oe-linux/ti-vxe-vxd-driver/6.12/git/Module.symvers
->>> | ERROR: modpost: "vb2_dma_sg_memops" [/OE/arago-master/build/arago-tmp-default/work/j721e_evm-oe-linux/ti-vxe-vxd-driver/6.12/git/vxe-enc.ko] undefined!
->>> | ERROR: modpost: "vb2_dma_sg_memops" [/OE/arago-master/build/arago-tmp-default/work/j721e_evm-oe-linux/ti-vxe-vxd-driver/6.12/git/vxd-dec.ko] undefined!
->>> | make[4]: *** [/OE/arago-master/build/arago-tmp-default/work-shared/j721e-evm/kernel-source/scripts/Makefile.modpost:145: /OE/arago-master/build/arago-tmp-default/work/j721e_evm-oe-linux/ti-vxe-vxd-driver/6.12/git/Module.symvers] Error 1
->>>
->>
->> I added this in the notes section that the kernel commit needed to point
->> at the HEAD of TI's 6.12.y-cicd branch in order to build due to a config
->> issue. The driver built and was validated against Scarthgap.
-> 
-> This has been merged to master-wip, which is what I'm testing now. It seems
-> required dependencies are not met.
-> 
-> 
->> This patch can already be found in scarthgap tree[0]. I will submit new
->> patch to fix up the other comments you have made.
->>
->> [0]: https://git.ti.com/cgit/arago-project/meta-ti/commit/?h=scarthgap&id=296344c8ea44b958269352cd5a417adfd9df9857
-> 
-> This is unacceptable!!
-> 
-> The first comment was made the same day within couple of hours of the patch
-> being posted to the list:
-> https://patchwork.yoctoproject.org/project/ti/patch/20250306203749.794759-1-b-brnich@ti.com/
-> 
-> There should be AT LEAST 24-48 hours allowed for patch reviews and comments.
-> There should NOT be any pressure applied on the maintainer to merge the
-> patches immediately.
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc       | 8 ++++----
+ .../trusted-firmware-a/trusted-firmware-a-ti.inc          | 2 +-
+ .../recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb       | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb | 4 ++--
+ 4 files changed, 8 insertions(+), 8 deletions(-)
 
-That's my fault.  I was the one rushing this.
-
-Brandon, send in a second patch fixing all of the reported comments.
-
-
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index f3db9bd7..f9773dad 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -9,15 +9,15 @@ INC_PR = "r4"
+ # Firmware versions
+ CORESDK_RTOS_VERSION = "08.02.00.04"
+ PRUETH_FW_AM65X_VERSION = "08.00.00.20"
+-PRUETH_FW_AM65X_SR2_VERSION = "02.02.15.00"
++PRUETH_FW_AM65X_SR2_VERSION = "02.02.15.02"
+ GOODIX_FW_VERSION = "1.0.0.0"
+ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+ CNM_WAVE521_FW_VERSION = "1.0.7"
+-TI_DM_FW_VERSION = "10.01.03"
+-TI_SYSFW_VERSION = "10.01.08"
++TI_DM_FW_VERSION = "11.00.06"
++TI_SYSFW_VERSION = "11.00.06"
+ 
+-TI_LINUX_FW_SRCREV ?= "e38a05e2ef5f6a6f2387742864042beba01972bb"
++TI_LINUX_FW_SRCREV ?= "e089c2f8db0577aa4acd3b3ef3ab229be2e804e1"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
+index 6dc30b5a..bc21a5cb 100644
+--- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
++++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
+@@ -1,7 +1,7 @@
+ # NOTE: This .inc file with customizations only gets included for K3 platforms
+ 
+ PV = "2.12+git"
+-SRCREV_tfa = "5227171c079d0c7d22a6d37b5cec079c8c5bb4b1"
++SRCREV_tfa = "a29bdfd4c91330e3f2ccd3c591d0b3b5da019c8e"
+ SRC_URI_TRUSTED_FIRMWARE_A = "git://github.com/TexasInstruments/arm-trusted-firmware.git;protocol=https"
+ SRCBRANCH = "ti-master"
+ SRC_URI = "${SRC_URI_TRUSTED_FIRMWARE_A};name=tfa;branch=${SRCBRANCH}"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+index 183b33db..8fea6396 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+@@ -6,4 +6,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2025.01"
+ 
+-SRCREV = "9c89e8b0a82fabe55c6366aa65eb987f05bb4472"
++SRCREV = "baf3aaa8ecfa20b9d9f497621b6c11915223f502"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+index 170b0f0b..fb71a2f0 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+@@ -23,8 +23,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.12.y"
+ 
+-SRCREV ?= "6423e6bb6191982da1c09a21a46c68b494f5b1b5"
+-PV = "6.12.9+git"
++SRCREV ?= "1a22c2fb64485a5dea9a9247eb007ddd4ea8a81d"
++PV = "6.12.17+git"
+ 
+ KERNEL_REPRODUCIBILITY_PATCHES = " \
+     file://0001-drivers-gpu-drm-msm-registers-improve-reproducibilit.patch \
 -- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+2.43.5
+
 
