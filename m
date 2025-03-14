@@ -1,127 +1,98 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9947BC282EC
-	for <webhook@archiver.kernel.org>; Fri, 14 Mar 2025 08:22:23 +0000 (UTC)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web10.8987.1741940541568125035
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D86F4C282EC
+	for <webhook@archiver.kernel.org>; Fri, 14 Mar 2025 21:41:54 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.5306.1741988509896205124
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 14 Mar 2025 01:22:21 -0700
+ Fri, 14 Mar 2025 14:41:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ipGYtgBY;
- spf=pass (domain: list.ti.com, ip: 198.47.23.235, mailfrom: lcpdbld@list.ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52E8MKfP2113520
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 14 Mar 2025 03:22:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1741940540; i=@ti.com;
-	bh=Up1CPjs077RqoS7vMFuIGgHiAfV8sHoIjn7SBiRZfTg=;
-	h=From:To:Subject:Date;
-	b=ipGYtgBYwmVhAgvcE0bTy+MWs7W+5jZatyrIfhsxM4BMvsinsHVBj65AuSldOP5cw
-	 ROkaRR4YOJUkVqPd8qvECsCSBzB0jzsW/bQgur61Icc6/q2g3DI1gVn7+s34rHZ9XE
-	 E6EIr/PCPFENCFL+Q+GFqpli7FTcYcrTT9KGiyWI=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52E8MKUf029942
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 14 Mar 2025 03:22:20 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
- Mar 2025 03:22:19 -0500
-Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 14 Mar 2025 03:22:19 -0500
-Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.64.72.21])
-	by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52E8MJFi037632;
-	Fri, 14 Mar 2025 03:22:19 -0500
-Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
-	id A2C7E24E9; Fri, 14 Mar 2025 03:22:19 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202503140100
-Date: Fri, 14 Mar 2025 03:22:19 -0500
-Message-ID: <20250314082219.2139376-1-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 2.43.5
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id C92E940CA8;
+	Fri, 14 Mar 2025 21:41:48 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 7pS2_RF6nokB; Fri, 14 Mar 2025 21:41:48 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9ABFD406B5;
+	Fri, 14 Mar 2025 21:41:45 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 07677164372; Fri, 14 Mar 2025 17:41:45 -0400 (EDT)
+Date: Fri, 14 Mar 2025 17:41:44 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: matthias.schiffer@ew.tq-group.com, Randolph Sapp <rs@ti.com>
+Cc: meta-ti@lists.yoctoproject.org, oss@ew.tq-group.com
+Subject: Re: [meta-ti] [scarthgap/master][PATCH] ti-sgx-ddk-km: work around
+ incorrect target name selection
+Message-ID: <20250314214144.GG23729@denix.org>
+References: <20250306141217.346689-1-matthias.schiffer@ew.tq-group.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250306141217.346689-1-matthias.schiffer@ew.tq-group.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 14 Mar 2025 08:22:23 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18383
+ <meta-ti@lists.yoctoproject.org>; Fri, 14 Mar 2025 21:41:54 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18384
 
-Updated the value(s) for:
-  ti-linux-fw: PRUETH_FW_AM65X_SR2_VERSION,TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
-  u-boot-ti-staging_2025.01: SRCREV
-  linux-ti-staging_6.12: SRCREV
++ Randolph Sapp as a domain expert here
 
-Changelogs:
-  ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/log/?qt=range&q=e089c2f8db0577aa4acd3b3ef3ab229be2e804e1..1faf5974a93eb35ac31ed27e5693739edb08824c
-  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=baf3aaa8ecfa20b9d9f497621b6c11915223f502..c8badfb165815c648052309418987f302e48aeef
-  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=1a22c2fb64485a5dea9a9247eb007ddd4ea8a81d..8c8cc002ab65149491f9b75cadfaeb2342150800
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
----
- meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 6 +++---
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb   | 2 +-
- 3 files changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index f9773dad..2aad1c03 100644
---- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -9,15 +9,15 @@ INC_PR = "r4"
- # Firmware versions
- CORESDK_RTOS_VERSION = "08.02.00.04"
- PRUETH_FW_AM65X_VERSION = "08.00.00.20"
--PRUETH_FW_AM65X_SR2_VERSION = "02.02.15.02"
-+PRUETH_FW_AM65X_SR2_VERSION = "02.02.15.04"
- GOODIX_FW_VERSION = "1.0.0.0"
- CADENCE_MHDP_FW_VERSION = "2.1.0"
- IMG_DEC_FW_VERSION = "1.0"
- CNM_WAVE521_FW_VERSION = "1.0.7"
- TI_DM_FW_VERSION = "11.00.06"
--TI_SYSFW_VERSION = "11.00.06"
-+TI_SYSFW_VERSION = "11.00.07"
- 
--TI_LINUX_FW_SRCREV ?= "e089c2f8db0577aa4acd3b3ef3ab229be2e804e1"
-+TI_LINUX_FW_SRCREV ?= "1faf5974a93eb35ac31ed27e5693739edb08824c"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
- 
- BRANCH ?= "ti-linux-firmware"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-index 8fea6396..f23a9f1d 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-@@ -6,4 +6,4 @@ PR = "r0"
- 
- BRANCH = "ti-u-boot-2025.01"
- 
--SRCREV = "baf3aaa8ecfa20b9d9f497621b6c11915223f502"
-+SRCREV = "c8badfb165815c648052309418987f302e48aeef"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-index fb71a2f0..7bc025fa 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH ?= "ti-linux-6.12.y"
- 
--SRCREV ?= "1a22c2fb64485a5dea9a9247eb007ddd4ea8a81d"
-+SRCREV ?= "8c8cc002ab65149491f9b75cadfaeb2342150800"
- PV = "6.12.17+git"
- 
- KERNEL_REPRODUCIBILITY_PATCHES = " \
--- 
-2.43.5
-
+On Thu, Mar 06, 2025 at 03:12:17PM +0100, Matthias Schiffer via lists.yoctoproject.org wrote:
+> The omap5-sgx-ddk-linux Makefiles contain a list of target triple
+> patterns that are detected as "Yocto" to deal with arm vs. armhf target
+> selection. This breaks for Yocto distros that override TARGET_VENDOR,
+> requiring patches like [1]; similar patches can also be found in other
+> vendors' machine layers.
+> 
+> Work around the incorrect target selection by passing TARGET_PRIMARY_ARCH
+> via EXTRA_OEMAKE.
+> 
+> [1] https://github.com/tq-systems/meta-tq/blob/scarthgap.TQ.ARM.BSP.0003/meta-tq/dynamic-layers/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km/linux-5.10/0001-ti-sgx-ddk-km-properly-handle-more-OE-YP-compiler-pr.patch
+> 
+> Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+> ---
+> 
+> Tested with meta-tq + meta-ti scarthgap for am335x.
+> 
+>  .../powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb     | 11 +++++------
+>  1 file changed, 5 insertions(+), 6 deletions(-)
+> 
+> diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+> index 49376221..aaeee1d2 100644
+> --- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+> +++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+> @@ -28,8 +28,11 @@ TARGET_PRODUCT:am65xx = "ti654x_linux"
+>  PVR_BUILD = "release"
+>  PVR_WS = "lws-generic"
+>  
+> +TARGET_PRIMARY_ARCH = "target_armhf"
+> +TARGET_PRIMARY_ARCH:aarch64 = "target_aarch64"
+> +
+>  EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}" BUILD=${PVR_BUILD} \
+> -WINDOW_SYSTEM=${PVR_WS} PVR_BUILD_DIR=${TARGET_PRODUCT}'
+> +WINDOW_SYSTEM=${PVR_WS} PVR_BUILD_DIR=${TARGET_PRODUCT} TARGET_PRIMARY_ARCH=${TARGET_PRIMARY_ARCH}'
+>  
+>  # There are useful flags here that are interpreted by the final kbuild pass
+>  # These variables are not necessary when compiling outside of Yocto
+> @@ -40,11 +43,7 @@ export KERNEL_OBJCOPY
+>  export KERNEL_STRIP
+>  
+>  do_install() {
+> -    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasiacon/binary_${TARGET_PRODUCT}_${PVR_WS}_${PVR_BUILD}/target_armhf/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
+> -}
+> -
+> -do_install:am65xx() {
+> -    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasiacon/binary_${TARGET_PRODUCT}_${PVR_WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
+> +    make -C ${STAGING_KERNEL_DIR} M=${B}/eurasiacon/binary_${TARGET_PRODUCT}_${PVR_WS}_${PVR_BUILD}/${TARGET_PRIMARY_ARCH}/kbuild INSTALL_MOD_PATH=${D}${root_prefix} PREFIX=${STAGING_DIR_HOST} modules_install
+>  }
+>  
+>  RRECOMMENDS:${PN} += "ti-sgx-ddk-um"
 
