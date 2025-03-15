@@ -2,43 +2,43 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DB0FC282EC
-	for <webhook@archiver.kernel.org>; Sat, 15 Mar 2025 01:47:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E0C1C282EC
+	for <webhook@archiver.kernel.org>; Sat, 15 Mar 2025 01:47:35 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.2585.1742003241116851101
+ by mx.groups.io with SMTP id smtpd.web11.2521.1742003250188348839
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 14 Mar 2025 18:47:21 -0700
+ Fri, 14 Mar 2025 18:47:30 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 40D1640023;
-	Sat, 15 Mar 2025 01:47:20 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A165F40023;
+	Sat, 15 Mar 2025 01:47:29 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id i83cVVtp7ArI; Sat, 15 Mar 2025 01:47:20 +0000 (UTC)
+	with ESMTP id bnvFm1DUb7WY; Sat, 15 Mar 2025 01:47:29 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 18A2B40021;
-	Sat, 15 Mar 2025 01:47:18 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7BA7040021;
+	Sat, 15 Mar 2025 01:47:27 +0000 (UTC)
 Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 6E8E1164371;
-	Fri, 14 Mar 2025 21:47:17 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 479AE164371;
+	Fri, 14 Mar 2025 21:47:27 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@konsulko.com>,
 	Paresh Bhagat <p-bhagat@ti.com>
 Subject: [master/scarthgap][PATCH] jailhouse: revert changes for am62lxx
-Date: Fri, 14 Mar 2025 21:47:16 -0400
-Message-Id: <20250315014716.2806394-1-denis@denix.org>
+Date: Fri, 14 Mar 2025 21:47:26 -0400
+Message-Id: <20250315014726.2806459-1-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sat, 15 Mar 2025 01:47:25 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18386
+ <meta-ti@lists.yoctoproject.org>; Sat, 15 Mar 2025 01:47:35 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18387
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
