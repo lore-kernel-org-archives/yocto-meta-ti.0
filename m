@@ -2,47 +2,49 @@ Return-Path: <a-christidis@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91DFDC35FFA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9300FC36000
 	for <webhook@archiver.kernel.org>; Wed, 19 Mar 2025 21:34:50 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web11.7207.1742420084586239395
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ by mx.groups.io with SMTP id smtpd.web11.7210.1742420084734862208
  for <meta-ti@lists.yoctoproject.org>;
  Wed, 19 Mar 2025 14:34:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ujwX5/am;
- spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: a-christidis@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52JLYiNT3031098
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=FYwV0BNN;
+ spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: a-christidis@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52JLYi0M432881
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <meta-ti@lists.yoctoproject.org>; Wed, 19 Mar 2025 16:34:44 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1742420084;
-	bh=lLRZI6yDf6Z2wbt9Od3vTTptzlEgmCCYoMKoMcUThaQ=;
-	h=From:To:Subject:Date;
-	b=ujwX5/amD83kYv59+BRzp0kntfZsq6YhLeMva+aRzdpPgrNi00yUen9dSFjKon+h0
-	 a7k6Nq+OEq/9LhbF/dlh7ToLeUybs08/mHbrdIvKRpJoHQJ6qpAA3/AfCVR93WM4XO
-	 e2GZykKh2EpyoSojGUXLxyRxLqTAVMH1s8qX3enQ=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52JLYiBK078173
+	bh=XKVRi00yutY5i2oYY+QQGMJmYLC5gXEKBfyTm87orH8=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=FYwV0BNNP21ut7G07o3SlXtpWFKtYh8dsNwUVOtr7VAAoIBYjkLYOXV0M5GeyXjet
+	 jA+cjWFKo5khrz3n99+LKVdSnS74NnRv4yiIbAUJzKgwmchgvYKo6WnCWkt1Oesx6t
+	 mFuH5Qgql6xBWUbxEPQV/QFJPuJgQ4oW0QP7LzdM=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52JLYia0097851
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <meta-ti@lists.yoctoproject.org>; Wed, 19 Mar 2025 16:34:44 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 19
- Mar 2025 16:34:43 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2025 16:34:44 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Wed, 19 Mar 2025 16:34:43 -0500
 Received: from antonios-ThinkStation-P3-Tower.dhcp.ti.com (antonios-thinkstation-p3-tower.dhcp.ti.com [128.247.81.112])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52JLYhaN035721;
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52JLYhaQ035721;
 	Wed, 19 Mar 2025 16:34:43 -0500
 From: <a-christidis@ti.com>
 To: <meta-ti@lists.yoctoproject.org>, <reatmon@ti.com>
-Subject: [meta-ti][scarthgap/master][PATCH v6 0/3] Enabiling gc320 5 driver for am57 in k6.12
-Date: Wed, 19 Mar 2025 16:34:40 -0500
-Message-ID: <20250319213443.470976-1-a-christidis@ti.com>
+Subject: [meta-ti][scarthgap/master][PATCH v6 3/3] recipes-graphics: port gc320 libs to work on kernel 6.12
+Date: Wed, 19 Mar 2025 16:34:43 -0500
+Message-ID: <20250319213443.470976-4-a-christidis@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250319213443.470976-1-a-christidis@ti.com>
+References: <20250319213443.470976-1-a-christidis@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -51,30 +53,62 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Wed, 19 Mar 2025 21:34:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18407
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18410
 
 From: Antonios Christidis <a-christidis@ti.com>
 
-The gc320 driver has been ported from kernel 6.1 to 6.12.
-This patch series updates and sets up everything required to start
-buidling gc320 again for kernel 6.12.
- 
-This patch series goes hand in hand with a patch sent to meta-arago
-updating the SRCREV of ti-gc320-tests.
- 
-Regards,
-Antonios
+The user mode libraries needed recompiling with the scarthgap revision of gcc to
+remove all the warnings about 32bit API usage during the linking stage, new
+SRCREV includes this changes. Versions of the libraries remain the same.
 
-Antonios Christidis (3):
-  recipe-graphics: port gc320 driver to work on kernel 6.12
-  conf: machine: am57xx-evm: Enable gc320 machine feature for am57xx
-  recipes-graphics: port gc320 libs to work on kernel 6.12
+Signed-off-by: Antonios Christidis <a-christidis@ti>
+---
+v6:
+ - Instead of"append" on the FILES variable, use "+=", also
+   specifically state which file in the ${libdir} we want to include
+   in the ${PN} package. Makes it easier to read and understand why
+   appending to the default FILES rules for a ${PN} is necessary, the reason
+   being it's a symb link which would not typically be included.
 
- meta-ti-bsp/conf/machine/include/ti-bsp.inc               | 3 ---
- .../gc320-drivers/ti-gc320-driver_5.0.11.p7.bb            | 4 ++--
+v5:
+ - Move the symb link of libGAL.so within the ${PN} package. While making
+   sure the header files are part of the ${PN}-dev package.
+  
+ v3:
+ - Removed commented lines and extra lib directory that was being created
+   in do_install()
+ 
+ v2:
+ - No longer include withing the PN package /usr/include file and symb
+   link to library file. This is done by not chaning the FILES/PACKAGES
+   variables, thus creating a -dev package.
+
  .../recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb    | 8 ++++++--
- 3 files changed, 8 insertions(+), 7 deletions(-)
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
+diff --git a/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+index 807f421c..fc70e1ed 100644
+--- a/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
++++ b/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+@@ -14,7 +14,7 @@ CLEANBROKEN = "1"
+ BRANCH = "ti-${PV}"
+ 
+ SRC_URI = "git://git.ti.com/git/graphics/ti-gc320-libs.git;protocol=https;branch=${BRANCH}"
+-SRCREV = "c0afab259de59909cfe74c01f3f7fbaa147f94b5"
++SRCREV = "85c175e8425c33dda6e272aeb45afe0f69a79096"
+ 
+ RRECOMMENDS:${PN} = "ti-gc320-driver"
+ 
+@@ -43,4 +43,8 @@ do_install() {
+     chown -R root:root ${D}
+ }
+ 
+-INSANE_SKIP:${PN} += "ldflags"
++PACKAGES = "${PN} ${PN}-dev"
++FILES:${PN} += "${libdir}/libGAL.so"
++FILES:${PN}-dev = "/usr/include"
++
++INSANE_SKIP:${PN} += "ldflags already-stripped dev-so"
 -- 
 2.34.1
 
