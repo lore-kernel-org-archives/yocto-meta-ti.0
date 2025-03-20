@@ -1,130 +1,115 @@
-Return-Path: <b-padhi@ti.com>
+Return-Path: <matthias.schiffer@ew.tq-group.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A101C28B30
-	for <webhook@archiver.kernel.org>; Thu, 20 Mar 2025 08:59:27 +0000 (UTC)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web10.2958.1742461160733817096
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 657D9C36000
+	for <webhook@archiver.kernel.org>; Thu, 20 Mar 2025 09:12:47 +0000 (UTC)
+Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
+ by mx.groups.io with SMTP id smtpd.web10.3084.1742461964237142131
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 20 Mar 2025 01:59:20 -0700
+ Thu, 20 Mar 2025 02:12:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=klTgYG+0;
- spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: b-padhi@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52K8xI3L556345
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Thu, 20 Mar 2025 03:59:18 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1742461158;
-	bh=fY3uHMZMeJlEaoO6w/vm42ZWkuoF8IW4XM2Pqgdfjns=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=klTgYG+0Q0k25KVZZ11+2YWH1NHzTgnEWQfQUuSUrZeUkakftlHsLw/RmBDyRTneu
-	 saK/qTsYOUWNq7O9px1CPduhAubfvYqLQ7Oz535kDnFIYXJwkaiBk5IT/VNJ1DKNXL
-	 9WmCb+MKQbYH3Araelzj3IUC5FtDAG1ft/91euQw=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52K8xIvi099759;
-	Thu, 20 Mar 2025 03:59:18 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 20
- Mar 2025 03:59:18 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 20 Mar 2025 03:59:18 -0500
-Received: from [172.24.227.151] (uda0510294.dhcp.ti.com [172.24.227.151])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52K8xFp2105119;
-	Thu, 20 Mar 2025 03:59:15 -0500
-Message-ID: <00bc7e5d-070d-4883-855a-6359219296db@ti.com>
-Date: Thu, 20 Mar 2025 14:29:14 +0530
+ dkim=pass header.i=@tq-group.com header.s=key1 header.b=pLYGkJO+;
+ dkim=fail reason="dkim: no key for signature: lookup dkim._domainkey.ew.tq-group.com on 100.100.100.100:53: no such host" header.i=@ew.tq-group.com header.s=dkim header.b=EnzWh+dd;
+ spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81, mailfrom: matthias.schiffer@ew.tq-group.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1742461964; x=1773997964;
+  h=message-id:subject:from:to:cc:date:in-reply-to:
+   references:content-transfer-encoding:mime-version;
+  bh=eTIN7oz6Qsq5zPPCvOVaVsnnKknz50rnOSAZ874WLJM=;
+  b=pLYGkJO+S8k7di6FbGtNuXhTeyKmOX6oijUMnhWvs6T4QOc3TEol1al2
+   0C0CLxQSv61VzJGmHNmAKWQVXtC8MGN4HqcEFQJ89IZ1cTZSt0PemN2BN
+   eG2VB9Ge+6TgIyTJXboVGLR0nJbURj8GHoN6EB+nF8CT656Yxb35tL3NS
+   vmWmE0gmn1i2jeQ03h0XuC1SuZYsysGOofrA073zn8A0dRzNCJJG/ke+n
+   Gct4ViFhi900Nb7LzJT3WfRUGnyOgUtjofQQAV/wN5jetcHCVH4gXwc9H
+   WGH69xKer4d/gFuE0fvIcjx7f8ldwOQlzDBLs1woakRWqY1QfdLGlGijO
+   A==;
+X-CSE-ConnectionGUID: 2zDTkMhcQDGe1clVkeuC2w==
+X-CSE-MsgGUID: tykTTBSdSbGjjWshtaMGqA==
+X-IronPort-AV: E=Sophos;i="6.14,261,1736809200"; 
+   d="scan'208";a="43064643"
+Received: from vmailcow01.tq-net.de ([10.150.86.48])
+  by mx1.tq-group.com with ESMTP; 20 Mar 2025 10:12:41 +0100
+X-CheckPoint: {67DBDC09-37-903EAEAC-E04C76C8}
+X-MAIL-CPID: 3D1166091D226B85E27AB34AD9D6AADF_5
+X-Control-Analysis: str=0001.0A006371.67DBDC01.0046,ss=1,re=0.000,recu=0.000,reip=0.000,cl=1,cld=1,fgs=0
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 2BBBA16902F;
+	Thu, 20 Mar 2025 10:12:36 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ew.tq-group.com;
+	s=dkim; t=1742461957;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=eTIN7oz6Qsq5zPPCvOVaVsnnKknz50rnOSAZ874WLJM=;
+	b=EnzWh+ddoPEZYQGHZdzfqVc2yP/fRzWDLkBpuHffqFSjl6ccp6HrQEqwY+w/fAeb3ZQs80
+	zlevGbJUdfClyRi1QevQcOIWH1b/3isOL49/qLUoe1qtajhYlavq8gHBXJPbl2zmDzNMNc
+	xzVvbR4ZavxMo5MkkZ8HmCXU/gvdLujvvVnLmrSp9G9CITFLQ5xsld8PzA0ikyVqIdn26T
+	RtAsBAucXoMu2gm/EexMDKu4fEQi/sWKpKiu02FI/uJT7YTC9LP/QNNcyk7At1MYpZQjVP
+	o/TiM+xKSHG8ShcKJBqLgSTrgvRw+j784y312YVWVZSuludHkE060YTSqdCIfg==
+Message-ID: <94455bb5a7ab81a4f31aa8797cc5d9bfddafcb63.camel@ew.tq-group.com>
+Subject: Re: [meta-ti][scarthgap/master][PATCH] ti-sgx-ddk-km: rework
+ preferred_target selection
+From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+To: rs@ti.com
+Cc: meta-ti@lists.yoctoproject.org, denis@denix.org, reatmon@ti.com
+Date: Thu, 20 Mar 2025 10:12:36 +0100
+In-Reply-To: <20250319213819.955726-1-rs@ti.com>
+References: <20250319213819.955726-1-rs@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.3-0ubuntu1 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti] [master/scarthgap][PATCH] omap-a15.inc: don't include
- ipu1 firmware in the boot partition
-To: Denys Dmytriyenko <denis@denix.org>, <a-limaye@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, Denys Dmytriyenko <denys@konsulko.com>,
-        "Kumar, Udit" <u-kumar1@ti.com>, "CHAVDA, ANKIT" <a-chavda@ti.com>,
-        Praneeth
- Bajjuri <praneeth@ti.com>
-References: <20250315020224.3100249-1-denis@denix.org>
- <b7de1d68-1947-4ec3-b690-3cbafb84a8e8@ti.com>
- <20250318161810.GJ23729@denix.org>
-Content-Language: en-US
-From: Beleswar Prasad Padhi <b-padhi@ti.com>
-In-Reply-To: <20250318161810.GJ23729@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Last-TLS-Session-Version: TLSv1.3
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 20 Mar 2025 08:59:27 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18414
+ <meta-ti@lists.yoctoproject.org>; Thu, 20 Mar 2025 09:12:47 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18415
+
+On Wed, 2025-03-19 at 16:38 -0500, rs@ti.com wrote:
+> From: Randolph Sapp <rs@ti.com>
+>=20
+> Bump SRCREV to include a patch that changes the way
+> compiler_preferred_target is selected for a given toolchain. This now
+> checks specified SYS_CFLAGS to see if hardfloat is set explicitly and
+> will override the default target selection if necessary.
+>=20
+> Signed-off-by: Randolph Sapp <rs@ti.com>
+
+Tested-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
 
 
-On 18/03/25 21:48, Denys Dmytriyenko wrote:
-> On Sat, Mar 15, 2025 at 10:29:18AM +0530, Aniket Limaye via lists.yoctoproject.org wrote:
->> On 3/15/2025 7:32 AM, Denys Dmytriyenko wrote:
->>> From: Denys Dmytriyenko <denys@konsulko.com>
->>>
->>> This reverts commit c58af0b172660ef1248a3454af06251d872770b1.
->>>
->>> This adds an undesired dependency on meta-ti-extras - more details:
->>> https://lists.yoctoproject.org/g/meta-ti/topic/110003435
->>>
->>> Cc: Aniket Limaye <a-limaye@ti.com>
->>> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com
->>> ---
->> The fw binary is actually a requirement for AM57x boards to boot
->> now. U-Boot expects
->> the firmware to be present in the boot partition, and fails if not found.
->> (Beleswar can correct me if I'm mistaken).
-> Huh, interesting - do you know the version where this started?
->
-> If it is indeed a hard requirement to boot the platform now, another option
-> is to get a prebuilt binary into ti-linux-firmware and pull it from there,
-> instead of building it from sources using legacy tools...
 
+> ---
+>  .../recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb   | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4=
+948957.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948=
+957.bb
+> index 49376221..18b81d2f 100644
+> --- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.=
+bb
+> +++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.=
+bb
+> @@ -19,7 +19,7 @@ SRC_URI =3D "git://git.ti.com/git/graphics/omap5-sgx-dd=
+k-linux.git;protocol=3Dhttps;
+> =20
+>  S =3D "${WORKDIR}/git"
+> =20
+> -SRCREV =3D "f555b9e1ae4b2baf68ac778ca41dc0c17e96f89a"
+> +SRCREV =3D "9ae0fa4998b1c624408945e062bf8fb0ea7efb9d"
+> =20
+>  TARGET_PRODUCT:omap-a15 =3D "ti572x_linux"
+>  TARGET_PRODUCT:ti33x =3D "ti335x_linux"
 
-This is great too. However, meta-ti should still have the deploy rule to 
-pick the pre-built firmware and put it into the boot partition.
-
-Thanks,
-Beleswar
-
->
->
->> If we don't want to break this board, we need to maybe migrate the
->> ti-ipc-rtos recipe from
->> meta-ti-extras to meta-ti-bsp, since it is anyway a requirement for
->> AM57X u-boot recipe.
->> Denys, I also see that you mentioned that the ti-ipc-rtos recipe
->> currently resides in extras
->> due to the legacy recipes built from sources using old tools like
->> XDC, SYS/BIOS and CGT...
->> which cannot be easily moved to meta-ti-bsp.
->>
->> A temporary fix might be to somehow add these inside of
->> meta-ti-extras/conf/layer.conf?
->>
->> However, I Ack the revert in case it is needed for now:
->>
->> Acked-by: Aniket Limaye <a-limaye@ti.com>
->>
->>
->>>   meta-ti-bsp/conf/machine/include/omap-a15.inc | 3 +--
->>>   1 file changed, 1 insertion(+), 2 deletions(-)
->>>
->>> diff --git a/meta-ti-bsp/conf/machine/include/omap-a15.inc b/meta-ti-bsp/conf/machine/include/omap-a15.inc
->>> index a258decd..be086936 100644
->>> --- a/meta-ti-bsp/conf/machine/include/omap-a15.inc
->>> +++ b/meta-ti-bsp/conf/machine/include/omap-a15.inc
->>> @@ -48,6 +48,5 @@ MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 screen alsa gpu mmip dsp gc3
->>>   IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
->>>   WKS_FILE ?= "sdimage-2part.wks"
->>> -IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES} ipc/dra7-ipu1-fw.xem4;dra7-ipu1-fw.xem4"
->>> +IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES}"
->>>   do_image_wic[depends] += "virtual/bootloader:do_deploy"
->>> -do_image_wic[depends] += "ti-ipc-rtos:do_deploy"
+--=20
+TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Germ=
+any
+Amtsgericht M=C3=BCnchen, HRB 105018
+Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan Sch=
+neider
+https://www.tq-group.com/
 
