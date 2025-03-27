@@ -1,157 +1,160 @@
-Return-Path: <afd@ti.com>
+Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6AF79C3600B
-	for <webhook@archiver.kernel.org>; Thu, 27 Mar 2025 18:50:08 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web10.4099.1743101400480850083
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02165C3600B
+	for <webhook@archiver.kernel.org>; Thu, 27 Mar 2025 20:43:29 +0000 (UTC)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ by mx.groups.io with SMTP id smtpd.web10.6549.1743108204231428690
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 27 Mar 2025 11:50:00 -0700
+ Thu, 27 Mar 2025 13:43:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=NIe50opD;
- spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: afd@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52RInxV51946362
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=C2EAxmA0;
+ spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: rs@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52RKhJ1R2511609
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Thu, 27 Mar 2025 13:49:59 -0500
+	Thu, 27 Mar 2025 15:43:19 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1743101399;
-	bh=HKQElEdcgCnisICQZe7YcvHaY6S84qHBnLMqU95txE0=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=NIe50opDl60/UFmWbc4z5Fb0dH1luFMxKPdl68qEFcaGIppkTSJmNb9TQN5EksvX2
-	 loGalM6UvC4IYpstn74urMVApTY+SzlwsQZlQFRgDYrCErSyi83jyv7v78R2WD28Bc
-	 aCngI2z4z9yC0o+F2Y0viv9q1GaaZJrFYpgzUEcU=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52RInxgq022247
+	s=ti-com-17Q1; t=1743108199;
+	bh=LmCGuye7LCSmRgR/tpFp+svw6m1nP7RQZhyUxmDe5eY=;
+	h=Date:CC:Subject:From:To:References:In-Reply-To;
+	b=C2EAxmA0WG/dbgi+M4k0f/2InJhtX6irIWys5AcXVpcIPGPWBF7ePpP3OybaWbQp9
+	 B7/xn2DX3ZjpT1djKUX5GsNwui+H4Leea/0ZLScep+wjT2+Uf3/uDfo85N337iapX+
+	 Ckz1z/1P2O8skeuqF6hl/sbvgj3FwG8E2cb4xG6Q=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52RKhJ0C076589
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 27 Mar 2025 13:49:59 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 27 Mar 2025 15:43:19 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 27
- Mar 2025 13:49:58 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2025 15:43:18 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 27 Mar 2025 13:49:58 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52RInwJO058087;
-	Thu, 27 Mar 2025 13:49:58 -0500
-Message-ID: <1d0eeedc-8574-487b-aada-871668ad3679@ti.com>
-Date: Thu, 27 Mar 2025 13:49:58 -0500
+ Frontend Transport; Thu, 27 Mar 2025 15:43:18 -0500
+Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.144])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52RKhIau053959;
+	Thu, 27 Mar 2025 15:43:18 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [master/scarthgap][PATCH] ti-hsm-fw: Add a recipe to export
- prebuilt HSM firmware
-To: Beleswar Padhi <b-padhi@ti.com>, <reatmon@ti.com>, <denys@konsulko.com>
-CC: <a-limaye@ti.com>, <u-kumar1@ti.com>, <meta-ti@lists.yoctoproject.org>
-References: <20250327092323.1726839-1-b-padhi@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250327092323.1726839-1-b-padhi@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Thu, 27 Mar 2025 15:43:18 -0500
+Message-ID: <D8RCABOSAGVD.2LWQZFHF2TJCR@ti.com>
+CC: <meta-ti@lists.yoctoproject.org>
+Subject: Re: [meta-ti] Postinstall scriptlets of ['ti-sgx-ddk-um'] have
+ failed.
+From: Randolph Sapp <rs@ti.com>
+To: <alex.kiernan@gmail.com>, <sebastian.krahl@lacon.de>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a
+References: <vr9P.1743087135909863464.R6f8@lists.yoctoproject.org>
+ <CAO5Uq5QZhqoxA4H0D+b=mTzo_tYOTYU-un1fD2XbCSyLimN3CA@mail.gmail.com>
+In-Reply-To: <CAO5Uq5QZhqoxA4H0D+b=mTzo_tYOTYU-un1fD2XbCSyLimN3CA@mail.gmail.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 27 Mar 2025 18:50:08 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18429
+ <meta-ti@lists.yoctoproject.org>; Thu, 27 Mar 2025 20:43:29 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18430
 
-On 3/27/25 4:23 AM, Beleswar Padhi wrote:
-> Add a recipe to deploy the HSM firmware to the DEPLOYDIR, to be picked
-> up by the tisdk-core-bundle for the prebuilt binaries directory.
-> 
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> ---
->   .../recipes-bsp/ti-hsm-fw/ti-hsm-fw_git.bb    | 28 +++++++++++++++++++
->   .../recipes-bsp/ti-linux-fw/ti-linux-fw.inc   |  1 +
->   meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc  |  4 +++
->   3 files changed, 33 insertions(+)
->   create mode 100644 meta-ti-bsp/recipes-bsp/ti-hsm-fw/ti-hsm-fw_git.bb
-> 
-> diff --git a/meta-ti-bsp/recipes-bsp/ti-hsm-fw/ti-hsm-fw_git.bb b/meta-ti-bsp/recipes-bsp/ti-hsm-fw/ti-hsm-fw_git.bb
-> new file mode 100644
-> index 00000000..8b225421
-> --- /dev/null
-> +++ b/meta-ti-bsp/recipes-bsp/ti-hsm-fw/ti-hsm-fw_git.bb
-> @@ -0,0 +1,28 @@
-> +SUMMARY = "TI HSM Firmware"
-> +
-> +inherit deploy
-> +
-> +require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> +
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +PV = "${TI_HSM_FW_VERSION}"
-> +PR = "${INC_PR}.0"
-> +
-> +SYSFW_SOC ?= "*"
+That recipe postinst script should consist of only the following under a sy=
+stemd
+machine:
 
-Was this supposed to be ""?
+#!/bin/sh
+set -e
+if [ x"$D" =3D "x" ]; then
+	if [ -x /sbin/ldconfig ]; then /sbin/ldconfig ; fi
+fi
 
-Also, thinking on this, since these binaries have different names
-when deployed, do we really need this package to be different
-per machine? Why not have this recipe generate two packages,
+Under sysvinit it should be:
 
-ti-hsm-fw-j721s2
-ti-hsm-fw-j784s4
+#!/bin/sh
+set -e
+if true && type update-rc.d >/dev/null 2>/dev/null; then
+	if [ -n "$D" ]; then
+		OPT=3D"-r $D"
+	else
+		OPT=3D"-s"
+	fi
+	update-rc.d $OPT rc.pvr defaults 8
+fi
+if [ x"$D" =3D "x" ]; then
+	if [ -x /sbin/ldconfig ]; then /sbin/ldconfig ; fi
+fi
 
-each containing the firmware for that SoC. Then in u-boot-ti.inc
-have:
+"Deferring to first boot via 'exit 1'" should not be what's occuring here. =
+I'm
+setting up a little test to verify with MACHINE=3Dam335x-evm, but I don't r=
+eally
+know how you got to this error, aside from missing ldconfig or some issue w=
+ith
+update-rc.d.
 
-DEPENDS:append:j721s2 = " ti-hsm-fw-j721s2"
-DEPENDS:append:j784s4 = " ti-hsm-fw-j784s4"
+On Thu Mar 27, 2025 at 10:22 AM CDT, Alex Kiernan via lists.yoctoproject.or=
+g wrote:
+> The postinstall script in ti-sgx-ddk-um failed - look at the
+> referenced log file, hopefully you'll get a clue as to what/why.
+>
+> Assuming its this recipe:
+>
+> https://git.yoctoproject.org/meta-ti/tree/meta-ti-bsp/recipes-graphics/po=
+wervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb?h=3Dkirkstone
+>
+> I'd guess its something about the init script setup (update-rc.d adds
+> a postinstall scriptlet).
+>
+> On Thu, Mar 27, 2025 at 2:52=E2=80=AFPM Sebastian via lists.yoctoproject.=
+org
+> <sebastian.krahl=3Dlacon.de@lists.yoctoproject.org> wrote:
+>>
+>> Hey there,
+>>
+>> actually I'm frustrated, I don't know where I'm going wrong.
+>>
+>> My setup:
+>> Build Configuration:
+>> BB_VERSION           =3D "2.0.0"
+>> BUILD_SYS            =3D "x86_64-linux"
+>> NATIVELSBSTRING      =3D "universal"
+>> TARGET_SYS           =3D "arm-poky-linux-gnueabi"
+>> MACHINE              =3D "beaglebone"
+>> DISTRO               =3D "poky"
+>> DISTRO_VERSION       =3D "4.0.25"
+>> TUNE_FEATURES        =3D "arm armv7a vfp thumb neon callconvention-hard"
+>> TARGET_FPU           =3D "hard"
+>> meta
+>> meta-poky            =3D "kirkstone:b210ed67de098a78a577baf464fae569d020=
+de62"
+>> meta-arm-toolchain
+>> meta-arm             =3D "kirkstone:936c02ec13661bd86a05f7f90e1b920d5092=
+d670"
+>> meta-ti-bsp
+>> meta-ti-extras       =3D "kirkstone:98c5c3d732334a26d57cb3534230e858d96d=
+b0c6"
+>> meta-oe              =3D "kirkstone:7e18b3fc774b7efabf9a20ae3cd6abd0e071=
+5b59"
+>>
+>> I want to build the core-image-sato but it fails with:
+>> ERROR: core-image-sato-1.0-r0 do_rootfs: Postinstall scriptlets of ['ti-=
+sgx-ddk-um'] have failed. If the intention is to defer them to first boot,
+>> then please place them into pkg_postinst_ontarget:${PN} ().
+>> Deferring to first boot via 'exit 1' is no longer supported.
+>> Details of the failure are in /home/lacon/yocto/build/tmp/work/beaglebon=
+e-poky-linux-gnueabi/core-image-sato/1.0-r0/temp/log.do_rootfs.
+>> ERROR: Logfile of failure stored in: /home/lacon/yocto/build/tmp/work/be=
+aglebone-poky-linux-gnueabi/core-image-sato/1.0-r0/temp/log.do_rootfs.23534
+>> ERROR: Task (/home/lacon/yocto/poky/meta/recipes-sato/images/core-image-=
+sato.bb:do_rootfs) failed with exit code '1'
+>>
+>> Can anyone help to progress further?
+>>
+>> Regards,
+>>
+>> Sebastian
+>>
+>>=20
+>>
 
-Then you can drop the PACKAGE_ARCH line above. I'm thinking about
-doing this for the other firmware. I'd like to keep removing
-machine dependent packages to push us closer to common rootfs
-images that work across machines.
-
-Andrew
-
-> +SYSFW_SOC:j721s2 = "j721s2"
-> +SYSFW_SOC:j784s4 = "j784s4"
-> +
-> +HSM_BINARY = "hsm-demo-firmware-${SYSFW_SOC}*.bin"
-> +
-> +do_install() {
-> +	install -d ${D}${nonarch_base_libdir}/firmware/ti-hsm
-> +	install -m 644 ${S}/ti-hsm/${HSM_BINARY} ${D}${nonarch_base_libdir}/firmware/ti-hsm
-> +}
-> +
-> +do_deploy() {
-> +	install -d ${DEPLOYDIR}/ti-hsm
-> +	install -m 644 ${S}/ti-hsm/${HSM_BINARY} ${DEPLOYDIR}/ti-hsm
-> +}
-> +
-> +addtask deploy before do_build after do_compile
-> diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> index 0d912625..4e9c385c 100644
-> --- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> +++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> @@ -16,6 +16,7 @@ IMG_DEC_FW_VERSION = "1.0"
->   CNM_WAVE521_FW_VERSION = "1.0.7"
->   TI_DM_FW_VERSION = "11.00.09"
->   TI_SYSFW_VERSION = "11.00.07"
-> +TI_HSM_FW_VERSION = "11.00.09"
->   
->   TI_LINUX_FW_SRCREV ?= "27003b6bff61a55dd1fff2cc777e5e07b092b1f7"
->   SRCREV = "${TI_LINUX_FW_SRCREV}"
-> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-> index 41d4abdd..8a800193 100644
-> --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-> @@ -40,6 +40,10 @@ DEPENDS += "python3-pyelftools-native python3-pyyaml-native python3-jsonschema-n
->   DEPENDS:append:k3 = " ti-sci-fw"
->   DEPENDS:append:k3r5 = " ti-sci-fw"
->   
-> +# HSM Firmware is only applicable for J721S2 & J784S4 devices
-> +DEPENDS:append:j721s2 = " ti-hsm-fw"
-> +DEPENDS:append:j784s4 = " ti-hsm-fw"
-> +
->   DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
->   
->   PLAT_SFX = ""
 
