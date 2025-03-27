@@ -1,142 +1,163 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <s-anna@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1AA8C36010
-	for <webhook@archiver.kernel.org>; Thu, 27 Mar 2025 15:22:50 +0000 (UTC)
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
- by mx.groups.io with SMTP id smtpd.web11.52533.1743088967775104362
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C23AEC3600B
+	for <webhook@archiver.kernel.org>; Thu, 27 Mar 2025 16:45:37 +0000 (UTC)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ by mx.groups.io with SMTP id smtpd.web11.1166.1743093933129928179
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 27 Mar 2025 08:22:48 -0700
+ Thu, 27 Mar 2025 09:45:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=K26z2plm;
- spf=pass (domain: gmail.com, ip: 209.85.167.48, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-54acc0cd458so1247471e87.0
-        for <meta-ti@lists.yoctoproject.org>; Thu, 27 Mar 2025 08:22:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743088966; x=1743693766; darn=lists.yoctoproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4vaWNpjxIALW0rP7Wb6X6AqoH5R4jl5b+oHap77/cWE=;
-        b=K26z2plmkT9DbAmbGzpuGm5byZJ0IgLQWj0Weo7MzkDIGhWaYKvHulowduNZd3kkNx
-         0qS8b6V93wW6LvGMJKzSdNhk3H0M3LMw/8apgN9Z27MsukB2r6hxEurJNOn+7w4pAaso
-         Ksc4R9fXtNdAh3LALWB9yBBEHdV9ZT9TvzudJum63PpmmGHFre0f183s+QscPzhwQiF+
-         aF8Pc1JzPY2DAVMONidPrMbnhVOpFvqIamrU9xRmXJD6JXOClFEy9NpT9hifIN/XqWnH
-         GaInt4uomvebZhVID13zoXFUMygGiSXIzpaMklTjFQPWoPODAXnTJ6F7Qx7Uz2PZmmC9
-         d/Tw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743088966; x=1743693766;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=4vaWNpjxIALW0rP7Wb6X6AqoH5R4jl5b+oHap77/cWE=;
-        b=oIOdt8D4BtLZ6xrwwTtgd1xUv/dDhPzf115W7icMkRtR0sU2KoQX0gNf9eVrhPZXEw
-         /QPgmE0i5XvWAg0SnpQUaJA8TmfVsqkdvrjnDGdqtl3pMKoX7z2T1hoy9miNv7jrQDvF
-         LsK6Oaa4nQR8JDjC6XBX7CjBF10doE/slZwkapmQIt6k1xjP2W1nVLbObweHCYDQdItD
-         t132em12citx2WkXez/pbsVhL9zqIpQmOX/KSQiemLrJB7tKomSi6mk/s1kLkXMtVrYC
-         I3IE0H0oVvujZK6GCCKybbdBe/dFc/5cuXng9ePCKKOwhSKk4XPwX1sb0X9eAAKZk4+p
-         BHpA==
-X-Gm-Message-State: AOJu0YwLr0joEPbdfpX0rUKh3v0U41y78ILdFQImOa8UCNzvrCxuO4zL
-	MJ4/faeLocxOIsnFGJvs2i1wryqkdFrr5pmqU1Jjah33oQay29ETHv4WPYFbBXed5mF/50LheNn
-	u+xpjb9HcULDROtXJoz1aCtjpIs4=
-X-Gm-Gg: ASbGncsjYTc0YZHpO+zxfAyaFJSuiRqcBMQHF2LSyh7opOauOMDS4WKwpR9mVoGw6MR
-	AhxVOIy+D8DO862OH2pSzQ0WT0ofEK0Bqr6ZTzD8P/WizZLQsxpcOf4e7nC8k0+Q0kap8cktbKc
-	k8RDOvRj4M8lAEYEfQ3lkMAEx2e1vGsffCDsg=
-X-Google-Smtp-Source: AGHT+IFv+gUd/s+1iF+s30a95txbr2ydyVCsVr9GOko+WrP9jjw9RIdlA01/S2TXbGmvQ4r+CACi1W6keNLvmMzAFaI=
-X-Received: by 2002:a05:6512:3f05:b0:545:a1a:5576 with SMTP id
- 2adb3069b0e04-54b011d5bbdmr1824393e87.22.1743088965457; Thu, 27 Mar 2025
- 08:22:45 -0700 (PDT)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ylHrV0In;
+ spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: s-anna@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52RGjUus1890252
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Thu, 27 Mar 2025 11:45:30 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1743093930;
+	bh=fX5fkg/uvzK1ok4MAahGXMGj4EDEJKlGeKKdZbgvKjg=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=ylHrV0InIxvpSt0nP7NqOuFg6GsdGBJ7LwTRCFzKAAydEeYs/ij0wU6eHx8tUttO6
+	 Je+Y1HIEcWRb47YNttqJmKqQvdzpW3ZX5J9OOAUHSC1Qj3cbTv9AQiGBzftNfbwOji
+	 uMT7vK3tKpE5Q2TkAia0b7cYsYqyt0Sa8+ZOzhko=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52RGjUIo010289
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 27 Mar 2025 11:45:30 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 27
+ Mar 2025 11:45:30 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 27 Mar 2025 11:45:30 -0500
+Received: from [128.247.81.162] (irmo.dhcp.ti.com [128.247.81.162])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52RGjROG080049;
+	Thu, 27 Mar 2025 11:45:28 -0500
+Message-ID: <850d2bdc-6bfb-a27d-b9d9-d609f401df93@ti.com>
+Date: Thu, 27 Mar 2025 11:45:27 -0500
 MIME-Version: 1.0
-References: <vr9P.1743087135909863464.R6f8@lists.yoctoproject.org>
-In-Reply-To: <vr9P.1743087135909863464.R6f8@lists.yoctoproject.org>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Thu, 27 Mar 2025 15:22:33 +0000
-X-Gm-Features: AQ5f1JqMXpQjm8IVNBqNlRl6v1JXcllBvYj16x6rDEOAzOtLTaGt0td0p1ljU_0
-Message-ID: <CAO5Uq5QZhqoxA4H0D+b=mTzo_tYOTYU-un1fD2XbCSyLimN3CA@mail.gmail.com>
-Subject: Re: [meta-ti] Postinstall scriptlets of ['ti-sgx-ddk-um'] have failed.
-To: sebastian.krahl@lacon.de
-Cc: meta-ti@lists.yoctoproject.org
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [meta-ti] [master/scarthgap][PATCH] ti-hsm-fw: Add a recipe to
+ export prebuilt HSM firmware
+To: <b-padhi@ti.com>, <reatmon@ti.com>, <denys@konsulko.com>
+CC: <a-limaye@ti.com>, <afd@ti.com>, <u-kumar1@ti.com>,
+        <meta-ti@lists.yoctoproject.org>
+References: <20250327092323.1726839-1-b-padhi@ti.com>
+Content-Language: en-US
+From: Suman Anna <s-anna@ti.com>
+In-Reply-To: <20250327092323.1726839-1-b-padhi@ti.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 27 Mar 2025 15:22:50 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18424
+ <meta-ti@lists.yoctoproject.org>; Thu, 27 Mar 2025 16:45:37 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18425
 
-The postinstall script in ti-sgx-ddk-um failed - look at the
-referenced log file, hopefully you'll get a clue as to what/why.
+Hi Beleswar,
 
-Assuming its this recipe:
+On 3/27/25 04:23, Beleswar Padhi via lists.yoctoproject.org wrote:
+> Add a recipe to deploy the HSM firmware to the DEPLOYDIR, to be picked
+> up by the tisdk-core-bundle for the prebuilt binaries directory.
 
-https://git.yoctoproject.org/meta-ti/tree/meta-ti-bsp/recipes-graphics/powe=
-rvr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb?h=3Dkirkstone
+The HSM firmware is only an example/demo firmware, and not a production HSM
+firmware.
 
-I'd guess its something about the init script setup (update-rc.d adds
-a postinstall scriptlet).
+This is not clear when looking at this commit. Please revise your patch
+description and the SUMMARY to better reflect this.
 
-On Thu, Mar 27, 2025 at 2:52=E2=80=AFPM Sebastian via lists.yoctoproject.or=
-g
-<sebastian.krahl=3Dlacon.de@lists.yoctoproject.org> wrote:
->
-> Hey there,
->
-> actually I'm frustrated, I don't know where I'm going wrong.
->
-> My setup:
-> Build Configuration:
-> BB_VERSION           =3D "2.0.0"
-> BUILD_SYS            =3D "x86_64-linux"
-> NATIVELSBSTRING      =3D "universal"
-> TARGET_SYS           =3D "arm-poky-linux-gnueabi"
-> MACHINE              =3D "beaglebone"
-> DISTRO               =3D "poky"
-> DISTRO_VERSION       =3D "4.0.25"
-> TUNE_FEATURES        =3D "arm armv7a vfp thumb neon callconvention-hard"
-> TARGET_FPU           =3D "hard"
-> meta
-> meta-poky            =3D "kirkstone:b210ed67de098a78a577baf464fae569d020d=
-e62"
-> meta-arm-toolchain
-> meta-arm             =3D "kirkstone:936c02ec13661bd86a05f7f90e1b920d5092d=
-670"
-> meta-ti-bsp
-> meta-ti-extras       =3D "kirkstone:98c5c3d732334a26d57cb3534230e858d96db=
-0c6"
-> meta-oe              =3D "kirkstone:7e18b3fc774b7efabf9a20ae3cd6abd0e0715=
-b59"
->
-> I want to build the core-image-sato but it fails with:
-> ERROR: core-image-sato-1.0-r0 do_rootfs: Postinstall scriptlets of ['ti-s=
-gx-ddk-um'] have failed. If the intention is to defer them to first boot,
-> then please place them into pkg_postinst_ontarget:${PN} ().
-> Deferring to first boot via 'exit 1' is no longer supported.
-> Details of the failure are in /home/lacon/yocto/build/tmp/work/beaglebone=
--poky-linux-gnueabi/core-image-sato/1.0-r0/temp/log.do_rootfs.
-> ERROR: Logfile of failure stored in: /home/lacon/yocto/build/tmp/work/bea=
-glebone-poky-linux-gnueabi/core-image-sato/1.0-r0/temp/log.do_rootfs.23534
-> ERROR: Task (/home/lacon/yocto/poky/meta/recipes-sato/images/core-image-s=
-ato.bb:do_rootfs) failed with exit code '1'
->
-> Can anyone help to progress further?
->
-> Regards,
->
-> Sebastian
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+Hopefully, the same is captured as well in the commit that added this to the
+ti-linux-firmware repo.
+
+regards
+Suman
+
+> 
+> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> ---
+>  .../recipes-bsp/ti-hsm-fw/ti-hsm-fw_git.bb    | 28 +++++++++++++++++++
+>  .../recipes-bsp/ti-linux-fw/ti-linux-fw.inc   |  1 +
+>  meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc  |  4 +++
+>  3 files changed, 33 insertions(+)
+>  create mode 100644 meta-ti-bsp/recipes-bsp/ti-hsm-fw/ti-hsm-fw_git.bb
+> 
+> diff --git a/meta-ti-bsp/recipes-bsp/ti-hsm-fw/ti-hsm-fw_git.bb b/meta-ti-bsp/recipes-bsp/ti-hsm-fw/ti-hsm-fw_git.bb
+> new file mode 100644
+> index 00000000..8b225421
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-bsp/ti-hsm-fw/ti-hsm-fw_git.bb
+> @@ -0,0 +1,28 @@
+> +SUMMARY = "TI HSM Firmware"
+> +
+> +inherit deploy
+> +
+> +require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+> +
+> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> +
+> +PV = "${TI_HSM_FW_VERSION}"
+> +PR = "${INC_PR}.0"
+> +
+> +SYSFW_SOC ?= "*"
+> +SYSFW_SOC:j721s2 = "j721s2"
+> +SYSFW_SOC:j784s4 = "j784s4"
+> +
+> +HSM_BINARY = "hsm-demo-firmware-${SYSFW_SOC}*.bin"
+> +
+> +do_install() {
+> +	install -d ${D}${nonarch_base_libdir}/firmware/ti-hsm
+> +	install -m 644 ${S}/ti-hsm/${HSM_BINARY} ${D}${nonarch_base_libdir}/firmware/ti-hsm
+> +}
+> +
+> +do_deploy() {
+> +	install -d ${DEPLOYDIR}/ti-hsm
+> +	install -m 644 ${S}/ti-hsm/${HSM_BINARY} ${DEPLOYDIR}/ti-hsm
+> +}
+> +
+> +addtask deploy before do_build after do_compile
+> diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+> index 0d912625..4e9c385c 100644
+> --- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+> +++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+> @@ -16,6 +16,7 @@ IMG_DEC_FW_VERSION = "1.0"
+>  CNM_WAVE521_FW_VERSION = "1.0.7"
+>  TI_DM_FW_VERSION = "11.00.09"
+>  TI_SYSFW_VERSION = "11.00.07"
+> +TI_HSM_FW_VERSION = "11.00.09"
+>  
+>  TI_LINUX_FW_SRCREV ?= "27003b6bff61a55dd1fff2cc777e5e07b092b1f7"
+>  SRCREV = "${TI_LINUX_FW_SRCREV}"
+> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+> index 41d4abdd..8a800193 100644
+> --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+> @@ -40,6 +40,10 @@ DEPENDS += "python3-pyelftools-native python3-pyyaml-native python3-jsonschema-n
+>  DEPENDS:append:k3 = " ti-sci-fw"
+>  DEPENDS:append:k3r5 = " ti-sci-fw"
+>  
+> +# HSM Firmware is only applicable for J721S2 & J784S4 devices
+> +DEPENDS:append:j721s2 = " ti-hsm-fw"
+> +DEPENDS:append:j784s4 = " ti-hsm-fw"
+> +
+>  DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
+>  
+>  PLAT_SFX = ""
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#18423): https://lists.yoctoproject.org/g/meta-ti/mess=
-age/18423
-> Mute This Topic: https://lists.yoctoproject.org/mt/111937570/3618097
+> View/Reply Online (#18422): https://lists.yoctoproject.org/g/meta-ti/message/18422
+> Mute This Topic: https://lists.yoctoproject.org/mt/111933183/4594561
 > Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [alex.kiernan=
-@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [s-anna@ti.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
-
---=20
-Alex Kiernan
 
