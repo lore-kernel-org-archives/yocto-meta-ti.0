@@ -1,103 +1,80 @@
-Return-Path: <denis@denix.org>
+Return-Path: <jm@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE1D6C369A2
-	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 15:01:00 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.78009.1744124449797598410
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94C04C36010
+	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 20:15:06 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web10.5941.1744143303444940310
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 08 Apr 2025 08:00:50 -0700
+ Tue, 08 Apr 2025 13:15:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id B79C440C86;
-	Tue,  8 Apr 2025 15:00:48 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cAMJkRzVnc5v; Tue,  8 Apr 2025 15:00:48 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 992E340C1E;
-	Tue,  8 Apr 2025 15:00:46 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 09A2E165911; Tue,  8 Apr 2025 11:00:46 -0400 (EDT)
-Date: Tue, 8 Apr 2025 11:00:46 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Ryan Eatmon <reatmon@ti.com>
-Cc: meta-ti@lists.yoctoproject.org, Denys Dmytriyenko <denys@konsulko.com>
-Subject: Re: [meta-ti] [master][PATCH] optee-client: remove patch that got
- accepted upstream
-Message-ID: <20250408150045.GF13634@denix.org>
-References: <20250408030807.1978102-1-denis@denix.org>
- <a07bcf18-88a2-4eb4-b1f6-d0bad9fcf96f@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=gQOMgnMe;
+ spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: jm@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 538KExuB1302134
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 8 Apr 2025 15:14:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1744143299;
+	bh=1nX4CQIVHg/1XMtWB513oqgcZ3Dg/7Ju1fQ+51sAAk4=;
+	h=From:To:CC:Subject:Date;
+	b=gQOMgnMekpya1RY2VvRi/gCY7L1nYGhK9QDTxbTKwsHekCjAHVDZbsnHTYuat4l+J
+	 TfFAmrsg0rrgYxR7o+u64CqCbW25JrBIJdqbR3CybCUmeEbFAABEKegTb/P20zdHmV
+	 heejCk8zZRHeZile4rAuEijXpckQn7KiqMgoq2UY=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 538KEx0G007938
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 8 Apr 2025 15:14:59 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 8
+ Apr 2025 15:14:59 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 8 Apr 2025 15:14:59 -0500
+Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 538KExsZ074317;
+	Tue, 8 Apr 2025 15:14:59 -0500
+From: Judith Mendez <jm@ti.com>
+To: <reatmon@ti.com>
+CC: <denis@denix.org>, <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] conf: machine: am62xx-lp-evm: Add eqep overlay
+Date: Tue, 8 Apr 2025 15:14:59 -0500
+Message-ID: <20250408201459.2863836-1-jm@ti.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <a07bcf18-88a2-4eb4-b1f6-d0bad9fcf96f@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 08 Apr 2025 15:01:00 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18451
+ <meta-ti@lists.yoctoproject.org>; Tue, 08 Apr 2025 20:15:06 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18452
 
-On Tue, Apr 08, 2025 at 08:41:20AM -0500, Ryan Eatmon wrote:
-> 
-> I was unsure about doing this...
-> 
-> meta-arm added a second optee recipe version.  So both exist:
-> optee-client_4.3.0.bb
-> optee-client_4.4.0.bb
-> 
-> So "theoretically" the build should prefer the newer version, right?
+This patch adds prefix string for eqep overlay to
+KERNEL_DEVICETREE_PREFIX.
 
-No, that's not how it works. Our bbappend in version-agnostic and hence gets 
-applied to both base recipes. And then bbappend bumps the PV and they are now 
-matching and neither is newer than the other.
+Signed-off-by: Judith Mendez <jm@ti.com>
+---
+ meta-ti-bsp/conf/machine/am62xx-lp-evm.conf | 1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+index 32d9eb31..37f4a644 100644
+--- a/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm.conf
+@@ -9,6 +9,7 @@ KERNEL_DEVICETREE_PREFIX = " \
+     ti/k3-am62-lp \
+     ti/k3-am625-sk \
+     ti/k3-am62x-sk-dmtimer-pwm \
++    ti/k3-am62x-sk-eqep \
+     ti/k3-am62x-sk-hdmi \
+     ti/k3-am62x-sk-lpm \
+     ti/k3-am62x-sk-mcan \
+-- 
+2.49.0
 
-> But for some reason, our builds keep loading the 4.3.0 recipe and
-> then our bbappend bumps the version to 4.4.0.  The 4.3.0 recipe has
-> this offending patch, but the 4.4.0 version does not.
-> 
-> I've been trying to figure out why our builds keep locking into
-> 4.3.0 when the 4.4.0 is sitting right there...
-
-It is a downside of version-agnostic bbappends with PV changes - we've been 
-in this situation before. And we used some version-specific tricks to make it 
-work. Another solution is to make bbappend match a specific version, e.g. 
-rename it to optee-client_4.4%.bbappend for a while, until 4.5 is out...
-
-
-> I agree that this patch is a good work around, but I'm not 100% sure
-> it's the final best fix.
-
-This way is more generic - below :remove would be no-op if such patch is not 
-in the SRC_URI.
-
-
-> On 4/7/2025 10:08 PM, Denys Dmytriyenko wrote:
-> >From: Denys Dmytriyenko <denys@konsulko.com>
-> >
-> >meta-arm adds a patch that was sent and accepted upstream, remove
-> >it since mta-ti pulls a more recent verstion.
-> >
-> >Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> >---
-> >  .../recipes-security/optee/optee-client-ti-version.inc        | 4 ++++
-> >  1 file changed, 4 insertions(+)
-> >
-> >diff --git a/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc b/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc
-> >index 2c8977dd..a628e446 100644
-> >--- a/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc
-> >+++ b/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc
-> >@@ -1,2 +1,6 @@
-> >  PV = "4.4.0+git"
-> >  SRCREV = "d221676a58b305bddbf97db00395205b3038de8e"
-> >+
-> >+SRC_URI:remove = " \
-> >+    file://0001-tee-supplicant-add-udev-rule-and-systemd-service-fil.patch \
-> >+"
 
