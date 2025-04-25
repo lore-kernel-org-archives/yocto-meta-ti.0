@@ -1,50 +1,51 @@
-Return-Path: <anshuld@ti.com>
+Return-Path: <c-shilwant@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6A5CC369D9
-	for <webhook@archiver.kernel.org>; Fri, 25 Apr 2025 15:26:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1803C369C2
+	for <webhook@archiver.kernel.org>; Fri, 25 Apr 2025 20:49:21 +0000 (UTC)
 Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- by mx.groups.io with SMTP id smtpd.web11.9184.1745594797711097269
+ by mx.groups.io with SMTP id smtpd.web10.1287.1745614154502899858
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 25 Apr 2025 08:26:37 -0700
+ Fri, 25 Apr 2025 13:49:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=r+REKQww;
- spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: anshuld@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53PFQWr62822632
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=aNEbvMen;
+ spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: c-shilwant@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53PKnA6e2883164
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 25 Apr 2025 10:26:32 -0500
+	Fri, 25 Apr 2025 15:49:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1745594792;
-	bh=+B/I7VYLwPbmhqwRqvPYeKi3MlT20/SBJ1leu5f/Hn0=;
+	s=ti-com-17Q1; t=1745614150;
+	bh=KuVmUnmOIi2EIVoToaBT4KKdRg6M6dIAHgWyrvqNfvA=;
 	h=From:To:CC:Subject:Date;
-	b=r+REKQwwGpFHOdRK3teSgVaIImFaVKwZ5QdInMPacfz32IzyXeHAKDWta2ZM9YQIY
-	 Vu9aHstArz8GNWAOeQkHKX0Mmc9/05BVzOTNaxtXTm41eX4tsq5WyNrDUagIekzTt/
-	 81JNGFDisjax/C0BelL1PM94nkDpwNAUs4b3+KOM=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53PFQW9v017946
+	b=aNEbvMen1Y8qjlnI0hCVQT5HiRAsnFvE5+sz++eSzRd0wlIFHYpjaCq6BlY0iXX6e
+	 lcF3Aia8yfBoFw0Gubqv2Z74IA4Ibq1dnCkBLD/J1tkzw/wGDsrRWDteOCvMRZewKo
+	 2XC/fkAf/aUMhatdBcOXDNr3lrKMaTb3sGnfJojs=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53PKnAYx061428
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 25 Apr 2025 10:26:32 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 25 Apr 2025 15:49:10 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Apr 2025 10:26:31 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 15:49:10 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Apr 2025 10:26:31 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53PFQV8N105693;
-	Fri, 25 Apr 2025 10:26:31 -0500
-From: Anshul Dalal <anshuld@ti.com>
+ Frontend Transport; Fri, 25 Apr 2025 15:49:10 -0500
+Received: from localhost (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.238])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53PKn9YT070099;
+	Fri, 25 Apr 2025 15:49:10 -0500
+From: Chirag Shilwant <c-shilwant@ti.com>
 To: <meta-ti@lists.yoctoproject.org>
-CC: Anshul Dalal <anshuld@ti.com>, <denis@denix.org>, <reatmon@ti.com>,
-        <vigneshr@ti.com>
-Subject: [PATCH v3 0/4] add support for falcon mode builds
-Date: Fri, 25 Apr 2025 20:56:06 +0530
-Message-ID: <20250425152613.2470204-1-anshuld@ti.com>
-X-Mailer: git-send-email 2.49.0
+CC: Denys <denis@denix.org>, Ryan Eatmon <reatmon@ti.com>,
+        Andrew
+	<afd@ti.com>, Neha <n-francis@ti.com>
+Subject: [meta-ti][master/scarthgap][PATCH] recipes-bsp: u-boot: Fix PACKAGECONFIG[dm] arguments
+Date: Sat, 26 Apr 2025 02:18:57 +0530
+Message-ID: <20250425204857.3271868-1-c-shilwant@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -52,62 +53,41 @@ X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 25 Apr 2025 15:26:40 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18507
+ <meta-ti@lists.yoctoproject.org>; Fri, 25 Apr 2025 20:49:21 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18511
 
-Falcon mode[1] in u-boot enables us to bypass proper u-boot when booting hence
-reducing boot time.
+* As observed in the u-boot makefile [0][1], the argument
+anticipated by u-boot binman is "TI_DM" instead of "DM".
+Hence, fix the same in meta-ti-bsp.
 
-This patch set adds support for falcon mode on am62 evms depending on the
-`ti-falcon` distro override which can be added by appending to local.conf with
-the follows:
+* The behavior went unnoticed until now because "ti-dm"
+was still being sourced from BINMAN_INDIRS, which referred
+to "ti-linux-firmware" and the PACKAGECONFIG[dm] feature
+was redundant.
 
-  DISTROOVERRIDES:append = ":ti-falcon"
+[0]: https://github.com/u-boot/u-boot/blob/v2025.01/Makefile#L1408
 
-Build process remains un-changed if the override is not present.
+[1]: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/Makefile?h=ti-u-boot-2025.01#n1409
 
-The override enables the usage of the falcon config fragment during r5 build
-process as well as deploying the associated tispl_falcon.bin to rootfs's boot
-directory.
-
-For secure boot since the R5 core is slower compared to A53 cores,
-authenticating as well as decompressing the signed fitImage from oe-core takes
-multiple seconds, therefore we opt for using legacyhs-fitimage instead which
-allows the authentication to be deferred to tifs.
-
-[1]:
-https://docs.u-boot.org/en/latest/develop/falcon.html
-
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
+Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
 ---
-Changes in v3:
- * Better handling of u-boot-ti-staging-falcon package for non ti-falcon builds
- * Add TFA build commands since upstream changes were rejected:
-   https://lore.kernel.org/u-boot/20250417113013.mrlhl65farooaiq2@extradite/
-v2:
-https://lore.kernel.org/yocto-meta-ti/20250417113614.1780603-1-anshuld@ti.com/
-Changes in v2:
- * Add cover letter describing the patch set
- * Add default empty string for 'FALCON_INCLUDE' preventing recipie parsing
-   error when ti-falcon is not set
-v1:
-https://lore.kernel.org/yocto-meta-ti/20250415093645.435281-1-anshuld@ti.com/
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Anshul Dalal (4):
-  am62: apply u-boot config fragment on ti-falcon
-  bsp: conf: machine: add ti-falcon.inc
-  bsp: u-boot: deploy tispl_falcon.bin to rootfs
-  bsp: tfa: add build flags for ti-falcon
-
- meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf     |  2 ++
- meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf     |  2 ++
- meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf      |  2 ++
- meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf   |  2 ++
- meta-ti-bsp/conf/machine/include/k3.inc            |  5 +++++
- meta-ti-bsp/conf/machine/include/ti-falcon.inc     |  6 ++++++
- .../trusted-firmware-a/trusted-firmware-a-ti.inc   |  1 +
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc       | 14 ++++++++++++++
- 8 files changed, 34 insertions(+)
- create mode 100644 meta-ti-bsp/conf/machine/include/ti-falcon.inc
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+index 9a74b840..e337f84f 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -63,7 +63,7 @@ PLAT_SFX:am62pxx = "am62pxx"
+ PACKAGECONFIG[ap-trusted-rom] = "BL1=${STAGING_DIR_HOST}/firmware/bl1.bin,,trusted-firmware-a"
+ PACKAGECONFIG[atf] = "BL31=${STAGING_DIR_HOST}/firmware/bl31.bin,,trusted-firmware-a"
+ PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/bl32.bin,,optee-os"
+-PACKAGECONFIG[dm] = "DM=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/ti-dm/${PLAT_SFX}/${DM_FIRMWARE},,ti-dm-fw"
++PACKAGECONFIG[dm] = "TI_DM=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/ti-dm/${PLAT_SFX}/${DM_FIRMWARE},,ti-dm-fw"
+ 
+ PACKAGECONFIG:append:aarch64 = " atf optee"
+ PACKAGECONFIG:append:j721e = " dm"
+-- 
+2.34.1
 
 
