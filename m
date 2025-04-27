@@ -1,314 +1,214 @@
-Return-Path: <max.oss.09@gmail.com>
+Return-Path: <a-limaye@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E8CEC369D3
-	for <webhook@archiver.kernel.org>; Sun, 27 Apr 2025 10:00:18 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.web10.23659.1745747999527647134
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7EE6C369D1
+	for <webhook@archiver.kernel.org>; Sun, 27 Apr 2025 20:07:01 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web11.33021.1745784415373622607
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 27 Apr 2025 02:59:59 -0700
+ Sun, 27 Apr 2025 13:06:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=epai86VQ;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: max.oss.09@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-43cf05f0c3eso23964265e9.0
-        for <meta-ti@lists.yoctoproject.org>; Sun, 27 Apr 2025 02:59:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745747997; x=1746352797; darn=lists.yoctoproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=XpWP4e+obUKNpU3eh/NO6zTiAQSOh6hdWpcVV7J6Bm0=;
-        b=epai86VQvjH/9m/K48JlBjZG2mAOmnK+6mtN2piOhr+JWgGsO5vENldQk9s2837aAR
-         njfv+EVHa7KEn1yxgoy615jun0q5dRCxSagFsn0vveDWHFQQO7nBR46MHpXuXWYm/m8k
-         A4js1sCZYmOUgFzReEFQI+9dEUJE2PD/l9E2/+uprytBeg0Ska2u8hqnRFlvjooT1qws
-         ihQ4NpOOaxEF9vHMSmoxUTCJCNyX+A7OBGMTPybnx6OxUf+9tpg/KHBxT7Cg15XerIjz
-         8rQtCvXzMqRbMyPwv21XjF6BoaQUck/gWAQVaS9msa3InmDIro508ZcB9Q35vV5XUz5U
-         nZIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745747997; x=1746352797;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=XpWP4e+obUKNpU3eh/NO6zTiAQSOh6hdWpcVV7J6Bm0=;
-        b=JZ9W4UKqX4gbAbBt53J5isXJdedE9wMW28v90EBipxcpzpVwV7AzzhslELgVaOujgu
-         pgpLfZ/r0y4YeI1HKDmQ6QQviUi6f+66/Ow2mOoIDAw4QeAC3WwGI0CJyoOzX660pwmh
-         q81WbbZIEIuqmaxv6YRK+XzK8enpZYjqrVHT5aEyM2CSTvSmsLQyjeYD4rFemgTbnI4R
-         iJtZsslzyTqRykc/T5iYn3f6WxbpM/dmAj5pFa2SzGmPmZa8RqGtPrAFgNSwmimNVRE/
-         6GaBjI4aqxUJbg134MGarrPkHtZVEfOzQJw6nAbXoJkfUjZsep7slDHyR8PRpw/HouwT
-         Rk+w==
-X-Gm-Message-State: AOJu0Yzufu2AOUaZivGXyfd+83WEqe0klHr7mGIAdmoXokHPe5LLmixY
-	p3azNr1xAAhZ2wepxR6fGFEIcXzGsMfA2nde+smGytRpGglR9ZMboSdUhQ==
-X-Gm-Gg: ASbGncsBhFFtiJLS3irKRmPvO0qnmbq98Je9ea6t+byTU6HfdZUs6ggITAjmGnP09n0
-	PSFX9GdjcyP+bdggy8VXAEsFJOaEpvoes3JMiJf1iBFAjtTcCgrxTrHSV4+9tmXV4Igcn1trl8T
-	eb9gJZlFrNbAxuz95B4oIPR9ysaPa4LBbMxJY2DNBUNtn9t19AMkXK8Cl7IMtwWFm532fNi+bLp
-	7wKqOs/j7ghhpuRsjHtc52IauEegUXul4UkwkCYF12tqSP+9iiq+Wo5GmFiiKHV6gNI+sBuLBCj
-	wkigdN+5vBVlOHAJ3MrYqecyeXk2zEfztxNOTvTemf1lkAagDRczTMHoVsWNapXnWYXeE7MB0K/
-	wIK+vdxBO
-X-Google-Smtp-Source: AGHT+IFvfCxpiObJcUZdb8+oSoWfEqIygpBVg0T9PaHm61g9fDr8tP5+XcDbtdXfN7EgNs3ytCSspw==
-X-Received: by 2002:a05:600c:3d87:b0:440:61eb:2ce5 with SMTP id 5b1f17b1804b1-440a9390560mr68502705e9.17.1745747997082;
-        Sun, 27 Apr 2025 02:59:57 -0700 (PDT)
-Received: from toolbox.int.toradex.com (31-10-206-125.static.upc.ch. [31.10.206.125])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-440a538f9c6sm88020525e9.39.2025.04.27.02.59.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Apr 2025 02:59:56 -0700 (PDT)
-From: max.oss.09@gmail.com
-To: meta-ti@lists.yoctoproject.org
-Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-ti][PATCH 2/2] meta-ti-extras recipes: fix whitespace warnings
-Date: Sun, 27 Apr 2025 11:59:18 +0200
-Message-ID: <20250427095918.3941375-2-max.oss.09@gmail.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20250427095918.3941375-1-max.oss.09@gmail.com>
-References: <20250427095918.3941375-1-max.oss.09@gmail.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=k4oedzu9;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: a-limaye@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53RK6pvq2595789
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Sun, 27 Apr 2025 15:06:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1745784411;
+	bh=ZHunNE2IGr1s/aAzKvqUoNJnP9qG40uXhlLLgoH97a0=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=k4oedzu9xH9vwG7AUCNkJUvBW/7ckXc60PlRMUQXcDlDvjpi62eWZGQJ+bpMURTpU
+	 ZsICyRZ2MXeq4KSDdCR/0NfaoQkuazjf700g36bIvDX3Enx9iKCiUWQR68wMOIhj97
+	 Ce2TxaJ1Tvex2GTrgATnZ2aFp0CSeYD9SnJ5ngDg=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53RK6p1m071593
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Sun, 27 Apr 2025 15:06:51 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 27
+ Apr 2025 15:06:51 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sun, 27 Apr 2025 15:06:51 -0500
+Received: from [10.249.133.122] ([10.249.133.122])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53RK6mUL116695;
+	Sun, 27 Apr 2025 15:06:49 -0500
+Message-ID: <c2f94aeb-5833-4f77-a64c-82decae1a050@ti.com>
+Date: Mon, 28 Apr 2025 01:36:48 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti] [master/scarthgap][PATCH] omap-a15.inc: don't include
+ ipu1 firmware in the boot partition
+To: Denys Dmytriyenko <denis@denix.org>
+CC: "Kumar, Udit" <u-kumar1@ti.com>, <b-padhi@ti.com>,
+        <meta-ti@lists.yoctoproject.org>,
+        Denys Dmytriyenko <denys@konsulko.com>,
+        "CHAVDA, ANKIT" <a-chavda@ti.com>, Praneeth Bajjuri <praneeth@ti.com>
+References: <20250315020224.3100249-1-denis@denix.org>
+ <b7de1d68-1947-4ec3-b690-3cbafb84a8e8@ti.com>
+ <20250318161810.GJ23729@denix.org>
+ <00bc7e5d-070d-4883-855a-6359219296db@ti.com>
+ <18355F7853CF1E08.27206@lists.yoctoproject.org>
+ <20250423015332.GD13634@denix.org>
+ <56d4e2ac-8912-4ac7-be9d-d2bb71d62619@ti.com>
+ <20250423163415.GF13634@denix.org>
+ <d0ae8f78-e751-46a0-9565-b75fc8445bde@ti.com>
+ <20250425005743.GM13634@denix.org>
+Content-Language: en-US
+From: "Limaye, Aniket" <a-limaye@ti.com>
+In-Reply-To: <20250425005743.GM13634@denix.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sun, 27 Apr 2025 10:00:18 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18515
+ <meta-ti@lists.yoctoproject.org>; Sun, 27 Apr 2025 20:07:01 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18516
 
-From: Max Krummenacher <max.krummenacher@toradex.com>
 
-Since OE bitbake commit 24772dd2ae6c ("parse/ConfHandler: Add warning for
-deprecated whitespace usage"), the current build generates the following
-warning (as example):
 
-| WARNING: ...meta-ti/meta-ti-bsp/recipes-ti/ipc/ti-ipc_git.bb:
-|   meta-ti/meta-ti-bsp/recipes-ti/ipc/ti-ipc_git.bb:2
-|   has a lack of whitespace around the assignment:
-|   'HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"'
+On 4/25/2025 6:27 AM, Denys Dmytriyenko wrote:
+> On Fri, Apr 25, 2025 at 02:29:31AM +0530, Limaye, Aniket wrote:
+>>
+>>
+>> On 4/23/2025 10:04 PM, Denys Dmytriyenko wrote:
+>>> On Wed, Apr 23, 2025 at 06:50:14PM +0530, Kumar, Udit wrote:
+>>>>
+>>>> On 4/23/2025 7:23 AM, Denys Dmytriyenko wrote:
+>>>>> On Fri, Apr 11, 2025 at 05:03:12PM -0400, Denys Dmytriyenko wrote:
+>>>>>> Circling back to this...
+>>>>>>
+>>>>>> On Thu, Mar 20, 2025 at 02:29:14PM +0530, Beleswar Padhi via lists.yoctoproject.org wrote:
+>>>>>>> On 18/03/25 21:48, Denys Dmytriyenko wrote:
+>>>>>>>> On Sat, Mar 15, 2025 at 10:29:18AM +0530, Aniket Limaye via lists.yoctoproject.org wrote:
+>>>>>>>>> On 3/15/2025 7:32 AM, Denys Dmytriyenko wrote:
+>>>>>>>>>> From: Denys Dmytriyenko <denys@konsulko.com>
+>>>>>>>>>>
+>>>>>>>>>> This reverts commit c58af0b172660ef1248a3454af06251d872770b1.
+>>>>>>>>>>
+>>>>>>>>>> This adds an undesired dependency on meta-ti-extras - more details:
+>>>>>>>>>> https://lists.yoctoproject.org/g/meta-ti/topic/110003435
+>>>>>>>>>>
+>>>>>>>>>> Cc: Aniket Limaye <a-limaye@ti.com>
+>>>>>>>>>> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com
+>>>>>>>>>> ---
+>>>>>>>>> The fw binary is actually a requirement for AM57x boards to boot
+>>>>>>>>> now. U-Boot expects
+>>>>>>>>> the firmware to be present in the boot partition, and fails if not found.
+>>>>>>>>> (Beleswar can correct me if I'm mistaken).
+>>>>>>>> Huh, interesting - do you know the version where this started?
+>>>>>>> The firmware is required for Early boot of remote processors (IPU in
+>>>>>>> this case) by U-Boot. Without the firmware, there won't be a system
+>>>>>>> boot failure, only rproc boot will fail.
+>>>>>>>
+>>>>>>>
+>>>>>>>> If it is indeed a hard requirement to boot the platform now, another option
+>>>>>>>> is to get a prebuilt binary into ti-linux-firmware and pull it from there,
+>>>>>>>> instead of building it from sources using legacy tools...
+>>>>>>> This is great too. However, meta-ti should still have the deploy
+>>>>>>> rule to pick the pre-built firmware and put it into the boot
+>>>>>>> partition.
+>>>>>>>
+>>>>>>> Thanks,
+>>>>>>> Beleswar
+>>>>>> Thanks, Beleswar.
+>>>>>>
+>>>>>> Ryan, All,
+>>>>>>
+>>>>>> How should this be fixed?
+>>>>> Ping.
+>>>>>
+>>>>> Since nobody's working on adding a prebuilt binary to ti-linux-firmware,
+>>>>> then this should be reverted as is for now, IMHO.
+>>>>>
+>>>> Until, we don't have this fw in ti-linux-firmware,
+>>>>
+>>>> need to get it through build :(
+>>>
+>>> As discussed - reverting this won't affect the build, it won't even affect the
+>>> platform boot. It only affects rproc boot, which can be resolved by moving
+>>> this code to a curresponding SDK layer.
+>>>
+>>
+>> Yeah I can work on making these updates in SDK layer for the time being.
+>>
+>> While long term fix being to push prebuilt firmware to
+>> ti-linux-firmware... such that ti-ipc-rtos recipe can be moved to
+>> meta-ti-bsp & we can re-implement this in meta-ti-bsp too.
+>>
+>> Denys,
+>>
+>> One question:
+>> The IMAGE_BOOT_FILES can be easily conditionally appended for
+>> omap-a15 but is there a simple way to add the do_image_wic task
+>> dependency conditionally in the SDK layer?
+>>
+>> Since override syntax does not work with Variable flags, I imagine
+>> we will need to copy-paste the entire am57xx-evm.conf in the SDK
+>> layer with this addition?
+>>
+>> do_image_wic[depends] += "ti-ipc-rtos:do_deploy"
+> 
+> I was thinking something along the lines (not tested):
+> 
+> WIC_EXTRA_RTOS_DEPENDS = ""
+> WIC_EXTRA_RTOS_DEPENDS:omap-a15 = "ti-ipc-rtos:do_deploy"
+> do_image_wic[depends] += "${WIC_EXTRA_RTOS_DEPENDS}"
 
-Fix all the warnings.
+Ahhh of course... Yeah this should work
 
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
----
- .../recipes-bsp/dsptop/libulm_git.bb          |  4 ++--
- .../recipes-bsp/ipumm-fw/ipumm-fw_git.bb      | 24 +++++++++----------
- meta-ti-extras/recipes-ti/bios/ti-sysbios.inc |  4 ++--
- .../recipes-ti/ctoolslib/libaet_git.bb        |  2 +-
- .../recipes-ti/devtools/ti-cg-xml_2.61.00.bb  |  6 ++---
- .../recipes-ti/devtools/ti-cgt470.inc         |  6 ++---
- .../recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb  |  2 +-
- meta-ti-extras/recipes-ti/dsplib/dsplib.inc   | 18 +++++++-------
- meta-ti-extras/recipes-ti/mathlib/mathlib.inc | 16 ++++++-------
- meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc  |  4 ++--
- 10 files changed, 43 insertions(+), 43 deletions(-)
+I can add these to the SDK layer once this is removed from here. 
+Shouldn't be a problem
 
-diff --git a/meta-ti-extras/recipes-bsp/dsptop/libulm_git.bb b/meta-ti-extras/recipes-bsp/dsptop/libulm_git.bb
-index 998d9d830913..a4670b6e795a 100644
---- a/meta-ti-extras/recipes-bsp/dsptop/libulm_git.bb
-+++ b/meta-ti-extras/recipes-bsp/dsptop/libulm_git.bb
-@@ -11,7 +11,7 @@ PR = "${INC_PR}.0"
- 
- S = "${WORKDIR}/git/dsptop/ulm"
- 
--DEVICE=""
-+DEVICE = ""
- DEVICE:dra7xx = "DRA7xx"
- 
- EXTRA_OEMAKE = "release DEVICE=${DEVICE} CROSS_COMPILE=${TARGET_PREFIX}"
-@@ -42,7 +42,7 @@ include dsptop.inc
- 
- ALLOW_EMPTY:${PN} = "1"
- 
--PARALLEL_MAKE= ""
-+PARALLEL_MAKE = ""
- 
- # Disable the "buildpaths" check while we figure out how we are
- # going to address this issue.
-diff --git a/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index 87f63750ea14..09926109fb68 100644
---- a/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -26,18 +26,18 @@ inherit update-alternatives
- 
- DEPENDS = "ti-xdctools-native ti-sysbios ti-codec-engine ti-framework-components ti-xdais ti-cgt-arm-native ti-ipc-rtos"
- 
--export HWVERSION="ES10"
--export BIOSTOOLSROOT="${STAGING_DIR_TARGET}/usr/share/ti"
--
--export XDCVERSION="ti-xdctools-tree"
--export BIOSVERSION="ti-sysbios-tree"
--export IPCVERSION="ti-ipc-tree"
--export CEVERSION="ti-codec-engine-tree"
--export FCVERSION="ti-framework-components-tree"
--export XDAISVERSION="ti-xdais-tree"
--
--export TMS470CGTOOLPATH="${M4_TOOLCHAIN_INSTALL_DIR}"
--export IPCSRC="${STAGING_DIR_TARGET}/usr/share/ti/ti-ipc-tree"
-+export HWVERSION = "ES10"
-+export BIOSTOOLSROOT = "${STAGING_DIR_TARGET}/usr/share/ti"
-+
-+export XDCVERSION = "ti-xdctools-tree"
-+export BIOSVERSION = "ti-sysbios-tree"
-+export IPCVERSION = "ti-ipc-tree"
-+export CEVERSION = "ti-codec-engine-tree"
-+export FCVERSION = "ti-framework-components-tree"
-+export XDAISVERSION = "ti-xdais-tree"
-+
-+export TMS470CGTOOLPATH = "${M4_TOOLCHAIN_INSTALL_DIR}"
-+export IPCSRC = "${STAGING_DIR_TARGET}/usr/share/ti/ti-ipc-tree"
- 
- EXTRA_OEMAKE += "XDCDIST_TREE=${STAGING_DIR_NATIVE}/usr/share/ti/${XDCVERSION}"
- 
-diff --git a/meta-ti-extras/recipes-ti/bios/ti-sysbios.inc b/meta-ti-extras/recipes-ti/bios/ti-sysbios.inc
-index 8cc9e3095d41..3c1861ac2392 100644
---- a/meta-ti-extras/recipes-ti/bios/ti-sysbios.inc
-+++ b/meta-ti-extras/recipes-ti/bios/ti-sysbios.inc
-@@ -10,8 +10,8 @@ require ../includes/ti-eula-unpack.inc
- S = "${WORKDIR}/bios_${PV}"
- 
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/bios/sysbios/${PV}/exports/bios_setuplinux_${PV}.bin;name=sysbiosbin"
--BINFILE="bios_${PV}.bin"
--TI_BIN_UNPK_CMDS="Y: q:workdir:Y"
-+BINFILE = "bios_${PV}.bin"
-+TI_BIN_UNPK_CMDS = "Y: q:workdir:Y"
- 
- do_install() {
-     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
-diff --git a/meta-ti-extras/recipes-ti/ctoolslib/libaet_git.bb b/meta-ti-extras/recipes-ti/ctoolslib/libaet_git.bb
-index 400221f97d2d..f3b03bd66f1a 100644
---- a/meta-ti-extras/recipes-ti/ctoolslib/libaet_git.bb
-+++ b/meta-ti-extras/recipes-ti/ctoolslib/libaet_git.bb
-@@ -15,7 +15,7 @@ PR = "r0"
- 
- S = "${WORKDIR}/git/aet"
- 
--DEVICE=""
-+DEVICE = ""
- DEVICE:dra7xx = "DRA7xx"
- 
- EXTRA_OEMAKE = "C6X_C_DIR=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x/include"
-diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cg-xml_2.61.00.bb b/meta-ti-extras/recipes-ti/devtools/ti-cg-xml_2.61.00.bb
-index c7608a768c21..a0972602e7a0 100644
---- a/meta-ti-extras/recipes-ti/devtools/ti-cg-xml_2.61.00.bb
-+++ b/meta-ti-extras/recipes-ti/devtools/ti-cg-xml_2.61.00.bb
-@@ -19,9 +19,9 @@ LIC_FILES_CHKSUM = "file://cg_xml_${PV}_Manifest.pdf;md5=fc02a39748ba50373f32b2f
- SRC_URI[cgxmlbin_linux.md5sum] = "6ce60caa97bbf15158d806fb062fadff"
- SRC_URI[cgxmlbin_linux.sha256sum] = "da77cb10bd3d5de89e27e4ce8f4408a2e50775c8980225f9a828ddc242bb81f9"
- 
--BINFILE="cgxml-${PV}-linux-installer.run"
--TI_BIN_UNPK_CMDS=""
--TI_BIN_UNPK_ARGS="--prefix ${S} --mode unattended"
-+BINFILE = "cgxml-${PV}-linux-installer.run"
-+TI_BIN_UNPK_CMDS = ""
-+TI_BIN_UNPK_ARGS = "--prefix ${S} --mode unattended"
- 
- do_install() {
-     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
-diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc b/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
-index f0992aa7db8e..d905755c0130 100644
---- a/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
-+++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
-@@ -13,9 +13,9 @@ S = "${WORKDIR}/cgt470_${PV}"
- 
- SRC_URI = "http://install.source.dir.local/ti_cgt_tms470_${PVwithdots}_setup_linux_x86.bin;name=cgt470bin"
- 
--BINFILE="ti_cgt_tms470_${PVwithdots}_setup_linux_x86.bin"
--TI_BIN_UNPK_CMDS="Y:qY:workdir: : "
--TI_BIN_UNPK_WDEXT="/cgt470_${PV}"
-+BINFILE = "ti_cgt_tms470_${PVwithdots}_setup_linux_x86.bin"
-+TI_BIN_UNPK_CMDS = "Y:qY:workdir: : "
-+TI_BIN_UNPK_WDEXT = "/cgt470_${PV}"
- 
- do_install() {
-     install -d ${D}${CODEGEN_ARM_INSTALL_DIR_RECIPE}
-diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb b/meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb
-index a7de8e38441b..0cc068e46a61 100644
---- a/meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb
-+++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb
-@@ -19,7 +19,7 @@ require recipes-ti/includes/ti-unpack.inc
- BINFILE = "ti_cgt_c6000_7.4.16_linux_installer_x86.bin"
- BINFILE_NAME = "cgt6x_7.4.16_x86_installer"
- TI_BIN_UNPK_ARGS = "--prefix ${WORKDIR} --mode unattended"
--TI_BIN_UNPK_CMDS=""
-+TI_BIN_UNPK_CMDS = ""
- 
- SRC_URI = "http://install.source.dir.local/${BINFILE};name=${BINFILE_NAME}"
- 
-diff --git a/meta-ti-extras/recipes-ti/dsplib/dsplib.inc b/meta-ti-extras/recipes-ti/dsplib/dsplib.inc
-index 3c24f1966c4f..cabd2a9d116f 100644
---- a/meta-ti-extras/recipes-ti/dsplib/dsplib.inc
-+++ b/meta-ti-extras/recipes-ti/dsplib/dsplib.inc
-@@ -25,19 +25,19 @@ SRCREV = "${DSPLIB_SRCREV}"
- 
- LIC_FILES_CHKSUM = "file://ti/dsplib/src/common/c66/lnk.cmd;beginline=1;endline=37;md5=0f0c9c4d51d8af75419781591ace190b"
- 
--export DSPLIB_WORK_DIR="${S}"
--export CGTOOLS_INSTALL_DIR  = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
--export C64PCODEGENTOOL="${CGTOOLS_INSTALL_DIR}"
--export C674CODEGENTOOL="${CGTOOLS_INSTALL_DIR}"
--export C66CODEGENTOOL ="${CGTOOLS_INSTALL_DIR}"
-+export DSPLIB_WORK_DIR = "${S}"
-+export CGTOOLS_INSTALL_DIR = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-+export C64PCODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
-+export C674CODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
-+export C66CODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
- export SWTOOLS_PATH = "${SWTOOLS_INSTALL_DIR}/ti/mas/swtools"
--export XDCBUILDCFG="${SWTOOLS_PATH}/config.bld"
--export INCDIR="${MATHLIB_INSTALL_DIR}/"
-+export XDCBUILDCFG = "${SWTOOLS_PATH}/config.bld"
-+export INCDIR = "${MATHLIB_INSTALL_DIR}/"
- 
- PATH:append = ":${XDC_INSTALL_DIR}"
- 
--XDCPATH.="${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;"
--XDCPATH.="${SWTOOLS_INSTALL_DIR};${MATHLIB_INSTALL_DIR};${DSPLIB_WORK_DIR};"
-+XDCPATH .= "${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;"
-+XDCPATH .= "${SWTOOLS_INSTALL_DIR};${MATHLIB_INSTALL_DIR};${DSPLIB_WORK_DIR};"
- 
- export XDCPATH
- 
-diff --git a/meta-ti-extras/recipes-ti/mathlib/mathlib.inc b/meta-ti-extras/recipes-ti/mathlib/mathlib.inc
-index 34902ba1ae64..fb9de41df10b 100644
---- a/meta-ti-extras/recipes-ti/mathlib/mathlib.inc
-+++ b/meta-ti-extras/recipes-ti/mathlib/mathlib.inc
-@@ -25,18 +25,18 @@ SRCREV = "${MATHLIB_SRCREV}"
- 
- LIC_FILES_CHKSUM = "file://ti/mathlib/src/acosdp/acosdp.h;beginline=1;endline=35;md5=c133f7e139b46385906c861dd9552250"
- 
--export MATHLIB_WORK_DIR="${S}"
--export CGTOOLS_INSTALL_DIR  = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
--export C64PCODEGENTOOL="${CGTOOLS_INSTALL_DIR}"
--export C674CODEGENTOOL="${CGTOOLS_INSTALL_DIR}"
--export C66CODEGENTOOL ="${CGTOOLS_INSTALL_DIR}"
-+export MATHLIB_WORK_DIR = "${S}"
-+export CGTOOLS_INSTALL_DIR = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-+export C64PCODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
-+export C674CODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
-+export C66CODEGENTOOL = "${CGTOOLS_INSTALL_DIR}"
- export SWTOOLS_PATH = "${SWTOOLS_INSTALL_DIR}/ti/mas/swtools"
--export XDCBUILDCFG="${SWTOOLS_PATH}/config.bld"
-+export XDCBUILDCFG = "${SWTOOLS_PATH}/config.bld"
- 
- PATH:append = ":${XDC_INSTALL_DIR}"
- 
--XDCPATH.="${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;"
--XDCPATH.="${SWTOOLS_INSTALL_DIR};${MATHLIB_WORK_DIR};"
-+XDCPATH .= "${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages;"
-+XDCPATH .= "${SWTOOLS_INSTALL_DIR};${MATHLIB_WORK_DIR};"
- 
- export XDCPATH
- 
-diff --git a/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc b/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc
-index 6b5e186cf889..518468369b32 100644
---- a/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc
-+++ b/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc
-@@ -13,9 +13,9 @@ SRC_URI = "http://software-dl.ti.com/libs/vlib/${PV}//exports/vlib_c66x_obj_${PV
- 
- S = "${WORKDIR}/vlib_c66x_${PV}"
- 
--BINFILE="vlib_c66x_obj_${PV}_Linux.bin"
-+BINFILE = "vlib_c66x_obj_${PV}_Linux.bin"
- TI_BIN_UNPK_ARGS = "--mode silent --prefix ${S}"
--TI_BIN_UNPK_CMDS=""
-+TI_BIN_UNPK_CMDS = ""
- 
- do_install() {
-     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
--- 
-2.42.0
+Once prebuilt firmware is available at ti-linux-firmware, we can add 
+this back to meta-ti-bsp, along with moving the ti-ipc-rtos recipe to 
+meta-ti-bsp.
+
+Thanks,
+Aniket
+
+> 
+> IMAGE_BOOT_FILES:append:omap-a15 = " ipc/dra7-ipu1-fw.xem4;dra7-ipu1-fw.xem4"
+> 
+> This has to be done in a global namespace, i.e. in one of the .conf files, not
+> in a recipe.>
+> 
+>>>>>>>>> If we don't want to break this board, we need to maybe migrate the
+>>>>>>>>> ti-ipc-rtos recipe from
+>>>>>>>>> meta-ti-extras to meta-ti-bsp, since it is anyway a requirement for
+>>>>>>>>> AM57X u-boot recipe.
+>>>>>>>>> Denys, I also see that you mentioned that the ti-ipc-rtos recipe
+>>>>>>>>> currently resides in extras
+>>>>>>>>> due to the legacy recipes built from sources using old tools like
+>>>>>>>>> XDC, SYS/BIOS and CGT...
+>>>>>>>>> which cannot be easily moved to meta-ti-bsp.
+>>>>>>>>>
+>>>>>>>>> A temporary fix might be to somehow add these inside of
+>>>>>>>>> meta-ti-extras/conf/layer.conf?
+>>>>>>>>>
+>>>>>>>>> However, I Ack the revert in case it is needed for now:
+>>>>>>>>>
+>>>>>>>>> Acked-by: Aniket Limaye <a-limaye@ti.com>
+>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>>>   meta-ti-bsp/conf/machine/include/omap-a15.inc | 3 +--
+>>>>>>>>>>   1 file changed, 1 insertion(+), 2 deletions(-)
+>>>>>>>>>>
+>>>>>>>>>> diff --git a/meta-ti-bsp/conf/machine/include/omap-a15.inc b/meta-ti-bsp/conf/machine/include/omap-a15.inc
+>>>>>>>>>> index a258decd..be086936 100644
+>>>>>>>>>> --- a/meta-ti-bsp/conf/machine/include/omap-a15.inc
+>>>>>>>>>> +++ b/meta-ti-bsp/conf/machine/include/omap-a15.inc
+>>>>>>>>>> @@ -48,6 +48,5 @@ MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 screen alsa gpu mmip dsp gc3
+>>>>>>>>>>   IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
+>>>>>>>>>>   WKS_FILE ?= "sdimage-2part.wks"
+>>>>>>>>>> -IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES} ipc/dra7-ipu1-fw.xem4;dra7-ipu1-fw.xem4"
+>>>>>>>>>> +IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLINUX_BOOT_FILES}"
+>>>>>>>>>>   do_image_wic[depends] += "virtual/bootloader:do_deploy"
+>>>>>>>>>> -do_image_wic[depends] += "ti-ipc-rtos:do_deploy"
 
 
