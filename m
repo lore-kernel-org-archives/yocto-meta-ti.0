@@ -1,107 +1,147 @@
-Return-Path: <c-shilwant@ti.com>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D160C369D5
-	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 13:42:19 +0000 (UTC)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web11.48586.1745847730229094086
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CFD9EC369DC
+	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 14:12:59 +0000 (UTC)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ by mx.groups.io with SMTP id smtpd.web11.49386.1745849570233443070
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 28 Apr 2025 06:42:10 -0700
+ Mon, 28 Apr 2025 07:12:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=YNr2KNCc;
- spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: c-shilwant@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53SDg7WW3558448
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=ffoS2K/j;
+ spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: afd@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53SEClYA2813004
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Mon, 28 Apr 2025 08:42:07 -0500
+	Mon, 28 Apr 2025 09:12:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1745847727;
-	bh=ejMTV87MvLoO2D4d8xlJV9FkGY+iQOR4wv8/w57ZKnQ=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=YNr2KNCckAx+vljveB/VvFZ4JwRGT5n4o0FxUpMD1dCziRPoGvIMop8LjyDKOP1C1
-	 6XO4K34FQOnNZwNlBtf/duLrblFWQlSlTA87aI2wX8NwP8VAb8m6zy0ZdYda08MGaD
-	 75F76qpzdCnZXCon2jrEU2UgldhO9r+khMVMrahA=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53SDg7d4098405
+	s=ti-com-17Q1; t=1745849567;
+	bh=QnxcC6nEI34Vh2TCbtDVu55JEzusNMiHY7Et8J/pOLo=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=ffoS2K/jvWBlXeCExVxUZHQA6nV8JvgvuQo9QQVWf57xI5F6RCzSOAd/28wbINmr8
+	 PKviObQ5RvR5ZmX5lk2/sfrVnYGq7M0yjbiNUfd9eUAPNmWkER85bc6GxC7d8n7Mjh
+	 rB/UunrrzYiJbvkE8tqrTIdaoxZcL4P/TASHaaPw=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53SEClWK009830
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 28 Apr 2025 08:42:07 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	Mon, 28 Apr 2025 09:12:47 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 28
- Apr 2025 08:42:07 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 09:12:47 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 28 Apr 2025 08:42:07 -0500
-Received: from localhost (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.238])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53SDg6Df018776;
-	Mon, 28 Apr 2025 08:42:07 -0500
-From: Chirag Shilwant <c-shilwant@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-CC: Denys <denis@denix.org>, Ryan Eatmon <reatmon@ti.com>
-Subject: [meta-ti][master/scarthgap][PATCH 2/2] recipes-bsp: Add DM_FIRMWARE override for am62axx
-Date: Mon, 28 Apr 2025 19:11:52 +0530
-Message-ID: <20250428134152.1921752-3-c-shilwant@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250428134152.1921752-1-c-shilwant@ti.com>
-References: <20250428134152.1921752-1-c-shilwant@ti.com>
+ Frontend Transport; Mon, 28 Apr 2025 09:12:47 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53SECk2V044328;
+	Mon, 28 Apr 2025 09:12:46 -0500
+Message-ID: <bc65b9cf-eb4c-40a7-824c-1bf05efecdd0@ti.com>
+Date: Mon, 28 Apr 2025 09:12:46 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti][master/scarthgap][PATCH] recipes-bsp: u-boot: Fix
+ PACKAGECONFIG[dm] arguments
+To: Chirag Shilwant <c-shilwant@ti.com>, Denys Dmytriyenko <denis@denix.org>
+CC: <meta-ti@lists.yoctoproject.org>, Ryan Eatmon <reatmon@ti.com>,
+        Neha
+	<n-francis@ti.com>
+References: <20250425204857.3271868-1-c-shilwant@ti.com>
+ <20250426160457.GN13634@denix.org>
+ <cfa1de82-add1-4791-bcdb-573159af20b8@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <cfa1de82-add1-4791-bcdb-573159af20b8@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllvem-ot03.ext.ti.com id 53SEClYA2813004
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 28 Apr 2025 13:42:19 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18520
+ <meta-ti@lists.yoctoproject.org>; Mon, 28 Apr 2025 14:12:59 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18521
 
-* With [0], the EdgeAI DM R5 firmware for am62axx will now be
-maintained at ti-linux-firmware. Until now, the same firmware was
-maintained on psdk_fw [1] with a different name & fetched in TI SDK
-via meta-edgeai [2]
+On 4/28/25 3:48 AM, Chirag Shilwant wrote:
+>=20
+> On 26/04/25 21:34, Denys Dmytriyenko wrote:
+>> On Sat, Apr 26, 2025 at 02:18:57AM +0530, Chirag Shilwant wrote:
+>>> * As observed in the u-boot makefile [0][1], the argument
+>>> anticipated by u-boot binman is "TI_DM" instead of "DM".
+>>> Hence, fix the same in meta-ti-bsp.
+>> Was it always "TI_DM", or was it "DM" initially in TI U-boot and later=
+ got
+>> changed tp "TI_DM" in upstream?
+>=20
+>=20
+> As per [0] which added the TI_DM support in U-Boot, I see it was always=
+ TI_DM.
+> So, it was [1] where we added it as DM under meta-ti-bsp improperly
+>=20
+> [0]: https://github.com/u-boot/u-boot/commit/23d2ef91efa40d525a4a555770=
+4184bcfd64ca16
+>=20
+> [1]: https://git.yoctoproject.org/meta-ti/commit/meta-ti-bsp/recipes-bs=
+p/u-boot/u-boot-ti.inc?id=3Db21d29d94694ac49b97a1f4ba428c7d8cd6fb64a
+>=20
 
-* Hence, add a am62axx specific override for DM_FIRMWARE inorder to
-match the firmware name as maintained in "ti-dm/am62axx" of
-ti-linux-firmware.
+The original commit adding the line was here in 2020:
 
-[0]: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/commit/?h=ti-linux-firmware&id=eee26bfeb6469af30e5309ba8859e9b65670fcc3
+https://git.yoctoproject.org/meta-ti/commit/?id=3D4df0f89bb237c26118bdb23=
+9e2aef974333cca58
 
-[1]: https://git.ti.com/cgit/processor-sdk/psdk_fw/
+I almost remember some early version of U-Boot taking "DM" and it was cha=
+nged to "TI_DM"
+for upstream.
 
-[2]: https://git.ti.com/cgit/edgeai/meta-edgeai/tree/recipes-tisdk/ti-psdk-rtos/ti-edgeai-firmware.bb?h=EDGEAI_CICD_20250417
+Either way it has been wrong for a long time and we have only been saved =
+by BINMAN_INDIRS
+just happening to have the default file inside. This will change soon, he=
+nce needing this
+fix now.
 
-Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
----
- meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb | 1 +
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc | 1 +
- 2 files changed, 2 insertions(+)
+Andrew
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
-index 638138f4..a7d15e30 100644
---- a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
-+++ b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
-@@ -39,6 +39,7 @@ DM_FW_DIR = "ti-dm/${PLAT_SFX}"
- INSTALL_DM_FW_DIR  = "${nonarch_base_libdir}/firmware/${DM_FW_DIR}"
- 
- DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
-+DM_FIRMWARE:am62axx = "dm_edgeai_mcu1_0_release_strip.out"
- 
- DM_FW_LIST = ""
- DM_FW_LIST:j721e =   "${DM_FIRMWARE}"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-index e337f84f..57bf7a4e 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -45,6 +45,7 @@ DEPENDS:append:j721s2 = " ti-hsm-demo-fw"
- DEPENDS:append:j784s4 = " ti-hsm-demo-fw"
- 
- DM_FIRMWARE = "ipc_echo_testb_mcu1_0_release_strip.xer5f"
-+DM_FIRMWARE:am62axx = "dm_edgeai_mcu1_0_release_strip.out"
- 
- PLAT_SFX = ""
- PLAT_SFX:j721e = "j721e"
--- 
-2.34.1
-
+> --=20
+> Chirag
+>=20
+>=20
+>>
+>>
+>>> * The behavior went unnoticed until now because "ti-dm"
+>>> was still being sourced from BINMAN_INDIRS, which referred
+>>> to "ti-linux-firmware" and the PACKAGECONFIG[dm] feature
+>>> was redundant.
+>>>
+>>> [0]: https://github.com/u-boot/u-boot/blob/v2025.01/Makefile#L1408
+>>>
+>>> [1]: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/Makefile?h=3Dti=
+-u-boot-2025.01#n1409
+>>>
+>>> Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
+>>> ---
+>>> =C2=A0 meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc | 2 +-
+>>> =C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-b=
+sp/recipes-bsp/u-boot/u-boot-ti.inc
+>>> index 9a74b840..e337f84f 100644
+>>> --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+>>> +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
+>>> @@ -63,7 +63,7 @@ PLAT_SFX:am62pxx =3D "am62pxx"
+>>> =C2=A0 PACKAGECONFIG[ap-trusted-rom] =3D "BL1=3D${STAGING_DIR_HOST}/f=
+irmware/bl1.bin,,trusted-firmware-a"
+>>> =C2=A0 PACKAGECONFIG[atf] =3D "BL31=3D${STAGING_DIR_HOST}/firmware/bl=
+31.bin,,trusted-firmware-a"
+>>> =C2=A0 PACKAGECONFIG[optee] =3D "TEE=3D${STAGING_DIR_HOST}${nonarch_b=
+ase_libdir}/firmware/bl32.bin,,optee-os"
+>>> -PACKAGECONFIG[dm] =3D "DM=3D${STAGING_DIR_HOST}${nonarch_base_libdir=
+}/firmware/ti-dm/${PLAT_SFX}/${DM_FIRMWARE},,ti-dm-fw"
+>>> +PACKAGECONFIG[dm] =3D "TI_DM=3D${STAGING_DIR_HOST}${nonarch_base_lib=
+dir}/firmware/ti-dm/${PLAT_SFX}/${DM_FIRMWARE},,ti-dm-fw"
+>>> =C2=A0 PACKAGECONFIG:append:aarch64 =3D " atf optee"
+>>> =C2=A0 PACKAGECONFIG:append:j721e =3D " dm"
+>>> --=20
+>>> 2.34.1
 
