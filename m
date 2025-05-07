@@ -1,85 +1,70 @@
-Return-Path: <afd@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 08B07C3ABC0
-	for <webhook@archiver.kernel.org>; Wed,  7 May 2025 17:35:45 +0000 (UTC)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- by mx.groups.io with SMTP id smtpd.web10.1893.1746639344283929846
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 002A0C3ABC0
+	for <webhook@archiver.kernel.org>; Wed,  7 May 2025 23:20:58 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.3137.1746660056112145974
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 07 May 2025 10:35:44 -0700
+ Wed, 07 May 2025 16:20:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Et213U9w;
- spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: afd@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 547HZgu31438615
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 7 May 2025 12:35:42 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1746639342;
-	bh=FBv3LJO6UcvkV/rnBuKTvuNNG+vi52clpAuQHGyhTXc=;
-	h=From:To:CC:Subject:Date;
-	b=Et213U9wZ+NIqnEyPKzGsT5W0ywahuHoNX+bJcD/rAtefinyivRu1jME67UDoIsIv
-	 3wnBtZpcgcjyDCAN7A/91GoriLywULT0i6C0YmemCgiezM064iUwlGvF/Z0SMXtZ4l
-	 EhmVdwrlvTkXQdt3JMxcKYLPsF+xSqFAXKfYZjMI=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 547HZgEr097039
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 7 May 2025 12:35:42 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 7
- May 2025 12:35:42 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 7 May 2025 12:35:42 -0500
-Received: from lelvsmtp6.itg.ti.com ([10.249.42.149])
-	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 547HZgqc049901;
-	Wed, 7 May 2025 12:35:42 -0500
-From: Andrew Davis <afd@ti.com>
-To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][scarthgap/master][PATCH] conf: machine: k3: Add OP-TEE firmware TPM example TA
-Date: Wed, 7 May 2025 12:35:41 -0500
-Message-ID: <20250507173541.401243-1-afd@ti.com>
-X-Mailer: git-send-email 2.39.2
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7B31240C21;
+	Wed,  7 May 2025 23:20:55 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id YxsPbIS1Kagb; Wed,  7 May 2025 23:20:55 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5EAA040A22;
+	Wed,  7 May 2025 23:20:54 +0000 (UTC)
+Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id 183F1167A59;
+	Wed,  7 May 2025 19:20:54 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [master/scarthgap][PATCH] gdbc6x: force older GNU/C standard
+Date: Wed,  7 May 2025 19:20:53 -0400
+Message-Id: <20250507232053.2027601-1-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 07 May 2025 17:35:45 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18542
+ <meta-ti@lists.yoctoproject.org>; Wed, 07 May 2025 23:20:58 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18543
 
-This OP-TEE fTPM is a TA from Microsoft containing the reference
-implementation of the TPM 2.0 Specification. As K3 OP-TEE now has the
-necessary features supported to run this fTPM, enable it here. This will
-serve as an example of using OP-TEE on K3 as a TPM without needing an
-external harware TPM.
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-Signed-off-by: Andrew Davis <afd@ti.com>
+This is an old code base and hasn't been updated in a very long
+time. It now fails to compile with gcc-15 (C23 standard). Force
+compilation with GNU/C11 standard instead.
+
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- meta-ti-bsp/conf/machine/include/k3.inc | 2 +-
+ meta-ti-extras/recipes-devtools/gdbc6x/gdbc6x_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/machine/include/k3.inc
-index ea6a5028..ff66c5a5 100644
---- a/meta-ti-bsp/conf/machine/include/k3.inc
-+++ b/meta-ti-bsp/conf/machine/include/k3.inc
-@@ -39,7 +39,7 @@ TFA_PLATFORM = "k3"
- UBI_VOLNAME = "rootfs"
- 
- # List common SoC features, may need to add touchscreen for specific machines
--MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 alsa pci"
-+MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 alsa pci optee-ftpm"
- 
- IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
- 
--- 
-2.39.2
+diff --git a/meta-ti-extras/recipes-devtools/gdbc6x/gdbc6x_git.bb b/meta-=
+ti-extras/recipes-devtools/gdbc6x/gdbc6x_git.bb
+index 855de762..777a217f 100644
+--- a/meta-ti-extras/recipes-devtools/gdbc6x/gdbc6x_git.bb
++++ b/meta-ti-extras/recipes-devtools/gdbc6x/gdbc6x_git.bb
+@@ -19,7 +19,7 @@ S =3D "${WORKDIR}/git/gdbc6x"
+ inherit update-rc.d
+ inherit gettext
+=20
+-CFLAGS +=3D "-fcommon -fpermissive"
++CFLAGS +=3D "-fcommon -fpermissive -std=3Dgnu11"
+=20
+ do_configure () {
+     cd ${S}
+--=20
+2.25.1
 
 
