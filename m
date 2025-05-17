@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E800C5475C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60BBFC3DA6D
 	for <webhook@archiver.kernel.org>; Sat, 17 May 2025 00:55:04 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.4219.1747443296848445922
+ by mx.groups.io with SMTP id smtpd.web11.4220.1747443298092301078
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 16 May 2025 17:54:56 -0700
+ Fri, 16 May 2025 17:54:58 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 3CC0E40BD4;
-	Sat, 17 May 2025 00:54:56 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7D47A40BD4;
+	Sat, 17 May 2025 00:54:57 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 2oOUAuWwNC9U; Sat, 17 May 2025 00:54:56 +0000 (UTC)
+	with ESMTP id yQqgBNrDnF7p; Sat, 17 May 2025 00:54:57 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 25A9140C2B;
-	Sat, 17 May 2025 00:54:55 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 58D8F40CC4;
+	Sat, 17 May 2025 00:54:56 +0000 (UTC)
 Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id DA3D8168550;
-	Fri, 16 May 2025 20:54:54 -0400 (EDT)
+	by mail.denix.org (Postfix) with ESMTP id 0998316855A;
+	Fri, 16 May 2025 20:54:55 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [scarthgap][PATCH 3/6] linux-bb.org: add 6.12 version
-Date: Fri, 16 May 2025 20:54:47 -0400
-Message-Id: <20250517005450.3648292-3-denis@denix.org>
+Subject: [scarthgap][PATCH 6/6] pocketbeagle2: add configs for new PocketBeagle2 platform
+Date: Fri, 16 May 2025 20:54:50 -0400
+Message-Id: <20250517005450.3648292-6-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250517005450.3648292-1-denis@denix.org>
 References: <20250517005450.3648292-1-denis@denix.org>
@@ -39,68 +39,122 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Sat, 17 May 2025 00:55:04 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18572
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18575
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-Add BeagleBoard.org Linux kernel version 6.12.22
+Add configuration files for the new PocketBeagle2 platform.
+
+U-boot support for this platform is still in its own branch.
+
+Adjust U-boot bootcmd, since EFI boot doesn't seem to work.
 
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- .../defconfig                                 |  0
- ...nux-bb.org_6.6.bb =3D> linux-bb.org_6.12.bb} | 21 ++++++++-----------
- 2 files changed, 9 insertions(+), 12 deletions(-)
- copy meta-beagle/recipes-kernel/linux/{linux-bb.org-6.1 =3D> linux-bb.or=
-g-6.12}/defconfig (100%)
- copy meta-beagle/recipes-kernel/linux/{linux-bb.org_6.6.bb =3D> linux-bb=
-.org_6.12.bb} (81%)
+ .../conf/machine/pocketbeagle2-k3r5.conf      | 12 ++++++++
+ meta-beagle/conf/machine/pocketbeagle2.conf   | 28 +++++++++++++++++++
+ .../u-boot/u-boot-bb.org_2025.04.bb           |  9 +++++-
+ .../recipes-kernel/linux/linux-bb.org_6.12.bb |  2 +-
+ 4 files changed, 49 insertions(+), 2 deletions(-)
+ create mode 100644 meta-beagle/conf/machine/pocketbeagle2-k3r5.conf
+ create mode 100644 meta-beagle/conf/machine/pocketbeagle2.conf
 
-diff --git a/meta-beagle/recipes-kernel/linux/linux-bb.org-6.1/defconfig =
-b/meta-beagle/recipes-kernel/linux/linux-bb.org-6.12/defconfig
-similarity index 100%
-copy from meta-beagle/recipes-kernel/linux/linux-bb.org-6.1/defconfig
-copy to meta-beagle/recipes-kernel/linux/linux-bb.org-6.12/defconfig
-diff --git a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.6.bb b/meta-=
-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
-similarity index 81%
-copy from meta-beagle/recipes-kernel/linux/linux-bb.org_6.6.bb
-copy to meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
-index e1a58b8c..2ef82e0c 100644
---- a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.6.bb
+diff --git a/meta-beagle/conf/machine/pocketbeagle2-k3r5.conf b/meta-beag=
+le/conf/machine/pocketbeagle2-k3r5.conf
+new file mode 100644
+index 00000000..32e40312
+--- /dev/null
++++ b/meta-beagle/conf/machine/pocketbeagle2-k3r5.conf
+@@ -0,0 +1,12 @@
++#@TYPE: Machine
++#@NAME: PocketBeagle2 (R5F)
++#@DESCRIPTION: Machine configuration for the PocketBeagle2 (R5F core)
++
++require conf/machine/include/k3r5.inc
++require conf/machine/include/beagle-bsp.inc
++
++SYSFW_SOC =3D "am62x"
++SYSFW_CONFIG =3D "evm"
++SYSFW_SUFFIX =3D "hs-fs"
++
++UBOOT_MACHINE =3D "am6232_pocketbeagle2_r5_defconfig"
+diff --git a/meta-beagle/conf/machine/pocketbeagle2.conf b/meta-beagle/co=
+nf/machine/pocketbeagle2.conf
+new file mode 100644
+index 00000000..3d9651bd
+--- /dev/null
++++ b/meta-beagle/conf/machine/pocketbeagle2.conf
+@@ -0,0 +1,28 @@
++#@TYPE: Machine
++#@NAME: PocketBeagle2 (A53)
++#@DESCRIPTION: Machine configuration for the PocketBeagle2 board (A53 co=
+re)
++
++require conf/machine/include/k3.inc
++require conf/machine/include/mc_k3r5.inc
++
++require conf/machine/include/beagle-bsp.inc
++
++SOC_FAMILY:append =3D ":am62xx"
++
++SERIAL_CONSOLES =3D "115200;ttyS2"
++
++TFA_BOARD =3D "lite"
++TFA_K3_SYSTEM_SUSPEND =3D "1"
++
++OPTEEMACHINE =3D "k3-am62x"
++
++UBOOT_MACHINE =3D "am6232_pocketbeagle2_a53_defconfig"
++
++KERNEL_DEVICETREE_PREFIX =3D " \
++    ti/k3-am6232 \
++"
++
++KERNEL_DEVICETREE =3D " \
++    ti/k3-am6232-pocketbeagle2.dtb \
++    ti/k3-am6232-pocketbeagle2-techlab-cape.dtbo \
++"
+diff --git a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.04.bb b/me=
+ta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.04.bb
+index 9fc4015e..aa825d99 100644
+--- a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.04.bb
++++ b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.04.bb
+@@ -2,7 +2,7 @@ require recipes-bsp/u-boot/u-boot-ti.inc
+=20
+ SUMMARY =3D "BeagleBoard.org U-Boot"
+=20
+-COMPATIBLE_MACHINE =3D "beagle.*"
++COMPATIBLE_MACHINE =3D "pocketbeagle2|beagle.*"
+=20
+ PV =3D "2025.04"
+=20
+@@ -17,3 +17,10 @@ SRCREV:beagley-ai =3D "cc376f9faef201670c7bb1734f42f54=
+75c73f85d"
+ SRCREV:beagley-ai-k3r5 =3D "cc376f9faef201670c7bb1734f42f5475c73f85d"
+=20
+ SRC_URI:append:beagley-ai =3D " file://bootcmd-ti-mmc.cfg"
++
++BRANCH:pocketbeagle2 =3D "v2025.04-pocketbeagle2"
++BRANCH:pocketbeagle2-k3r5 =3D "v2025.04-pocketbeagle2"
++SRCREV:pocketbeagle2 =3D "f7439516453b7728bda496ff6496ef6f1411aae3"
++SRCREV:pocketbeagle2-k3r5 =3D "f7439516453b7728bda496ff6496ef6f1411aae3"
++
++SRC_URI:append:pocketbeagle2 =3D " file://bootcmd-ti-mmc.cfg"
+diff --git a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb b/meta=
+-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
+index 2ef82e0c..bdfd4646 100644
+--- a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
 +++ b/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
-@@ -1,5 +1,5 @@
- # Look in the generic major.minor directory for files
--FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-6.6:"
-+FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-6.12:"
+@@ -6,7 +6,7 @@ SUMMARY =3D "BeagleBoard.org Linux kernel"
+ LICENSE =3D "GPL-2.0-only"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6bc538ed5bd9a7fc9398086aedcd7=
+e46"
 =20
- SECTION =3D "kernel"
- SUMMARY =3D "BeagleBoard.org Linux kernel"
-@@ -55,17 +55,14 @@ ${DT_VENDOR_PREFIX}PB-MIKROBUS-1.dtbo \
+-COMPATIBLE_MACHINE =3D "beagle.*"
++COMPATIBLE_MACHINE =3D "pocketbeagle2|beagle.*"
 =20
- S =3D "${WORKDIR}/git"
+ inherit kernel
 =20
--# 6.6.58 version for 32-bit
--SRCREV:armv7a =3D "0d043a88f69f48789e43526d7a807ab744708071"
--PV:armv7a =3D "6.6.58+git"
--BRANCH:armv7a =3D "v6.6.58-ti-arm32-r10"
-+# 6.12.22 version for 32-bit
-+SRCREV:armv7a =3D "d7f560ef48a867b94959f040b4c3c57053f4e32d"
-+PV:armv7a =3D "6.12.22+git"
-+BRANCH:armv7a =3D "v6.12.22-ti-arm32-r10"
-=20
--# 6.6.58 version for 64-bit
--SRCREV:aarch64 =3D "0987ef737c9812374607475972f0868b8fecbbf7"
--PV:aarch64 =3D "6.6.58+git"
--BRANCH:aarch64 =3D "v6.6.58-ti-arm64-r23"
-+# 6.12.22 version for 64-bit
-+SRCREV:aarch64 =3D "9e43fd19ece3affb9406e87ec3df733b91b77a4f"
-+PV:aarch64 =3D "6.12.22+git"
-+BRANCH:aarch64 =3D "v6.12.22-ti-arm64-r35"
-=20
- KERNEL_GIT_URI =3D "git://github.com/beagleboard/linux.git"
--
--SRC_URI +=3D "file://no-fortify.cfg"
--KERNEL_CONFIG_FRAGMENTS +=3D "${WORKDIR}/no-fortify.cfg"
 --=20
 2.25.1
 
