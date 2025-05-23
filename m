@@ -2,109 +2,110 @@ Return-Path: <robertcnelson@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0A8EC54ED0
-	for <webhook@archiver.kernel.org>; Fri, 23 May 2025 19:19:23 +0000 (UTC)
-Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
- by mx.groups.io with SMTP id smtpd.web10.2012.1748027960945515547
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A26B9C54ED1
+	for <webhook@archiver.kernel.org>; Fri, 23 May 2025 22:31:10 +0000 (UTC)
+Received: from mail-yb1-f181.google.com (mail-yb1-f181.google.com [209.85.219.181])
+ by mx.groups.io with SMTP id smtpd.web10.1160.1748039462206150788
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 23 May 2025 12:19:21 -0700
+ Fri, 23 May 2025 15:31:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VqNxhHOi;
- spf=pass (domain: gmail.com, ip: 209.85.219.170, mailfrom: robertcnelson@gmail.com)
-Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-e7d6cbd3a82so233495276.3
-        for <meta-ti@lists.yoctoproject.org>; Fri, 23 May 2025 12:19:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nlt7zCzo;
+ spf=pass (domain: gmail.com, ip: 209.85.219.181, mailfrom: robertcnelson@gmail.com)
+Received: by mail-yb1-f181.google.com with SMTP id 3f1490d57ef6-e7b93d61ee1so289717276.3
+        for <meta-ti@lists.yoctoproject.org>; Fri, 23 May 2025 15:31:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748027960; x=1748632760; darn=lists.yoctoproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=51goM3uvrdIMBHPIm7zCHlmcO6J97q+iOIiUTCDH/To=;
-        b=VqNxhHOinOT8akO1gqGSXwJytOL90uYmSVNacCEH/+BkBe5HqhzHhP70Iz97sZccmA
-         P3Lrp4A+HrOAUbEPa3PkwSexW5zlC1AiIfNkYgpa3P4gTzTIStyuqiMxrSBgxJUXKv7n
-         dS2VG3DteXl2rIRtzUfutgHpCzK377x0c3gjy0mT7ljHabG5n5+cBMQnQ0LMO1MamsWf
-         uLsidvq3Zcwfk7GhuTBjibS0UbB39DOHPBrHbpfPVzZubiRoPbc9u0A+p9UySZ3xr75/
-         xdU1McnETtcYNXNN5vixWU5bxsrwYedEfrHFm35+JC55kCJqCaQmqIYyBWo2rHOpZKV/
-         WbVg==
+        d=gmail.com; s=20230601; t=1748039461; x=1748644261; darn=lists.yoctoproject.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=0m5C31tc2yCtT7pRM17KKIGevX9NiTP9+VsTeWqC7wI=;
+        b=nlt7zCzoI4GVZXdjbioH2J/2g4LFDlKLTeNZ+YDpZEEQLNINi4I6jeFfSk6MUBAa7G
+         Edl0ULoSCppe8Zn9vTMLB3N0wVwbl75M1GbmVCHpbqR1HXnIbL5od9OPH39Y2axc/Z+E
+         rBlxMlvBf0F5/km14vX+VrgYdp1z+IEt3b2PlOH6uQBksqOdKZcu6OFPYMkXcZki7K0G
+         zd682F/4QiDU7HL341o+m8wsn53VuVYCp12l4LHzzWv4SjrL8s2yKgf9Wq53segavjEn
+         CSmLhWQ0WZF6P2nI4TfJ9EXivhN/12HcVV5L6ff97bYMxKMz4vzlfWV7vAA6CmFtzy2h
+         oVfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748027960; x=1748632760;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=51goM3uvrdIMBHPIm7zCHlmcO6J97q+iOIiUTCDH/To=;
-        b=WMoAs6OHzy/Cgf5Sf/0RQkt1RPYT9I1avzsXHxp5BqxDz8YHPDtGR0ZBGvVvLYcop2
-         J64OyS0SgH9H2eaoNwyERp6LCyciKVKdVS+KdgSrKRoU+CbkX2sdZ5cPP+tVtmqnZBlp
-         DerEi7qzuCaMqD2DXvspJZ1Sd53W0Lk8QmVp3RzN67tE5gcA1ApnJ8veGAP2cDRRc7tN
-         d9dCk9eQy0Um8bsuwykwnOGuhVnd8LXJswe/klE0I/l/wAmJFdhvyf/twGhwDGNqAhcS
-         VpLhc7El8XCRYDSNqU9mbiw+Y0q7s6GFNBu6EwMCpsokT9PmotxKRYM0orXh512/D7+A
-         oPwA==
-X-Forwarded-Encrypted: i=1; AJvYcCWdYsKn/DFzoOSSdqVmB//MwkQhrgS21KhHJTuBGCDQWZDYA7Stswj+z7SpDLfiNt13vDV4EQXa@lists.yoctoproject.org
-X-Gm-Message-State: AOJu0YzZO1snzLCqCHvAHpW3J+TNvsa4ArefCqSXeftgpddp1DVpkzg0
-	1nPwXdUQG8bbQSDIA4sHW4usIdZQcReDLa810Ul9pJwyPp46wjEI4NY1nzRffpF0E9387jPxCr0
-	lQ6FMisyqRdCWNY4PxhWXsW79O4GM/MA=
-X-Gm-Gg: ASbGncsE+poIPsPFqkNJ92PrLtFJcFWCZTWTaUyh8a3HdpdqMY854VmrdxNudo6afRB
-	FCC688fv2kav5sZ+9Dk6o+9yGj01OeZEAELbVjm671axl4gbLcoGb7J+U8GB0NGkyYDQ5mZIiy9
-	zox7DPa1FpCFWLmtA/vsPX0Iba4TOgSAxZAw==
-X-Google-Smtp-Source: AGHT+IHON40bp+S0QADRQT/twJXA2V4uR7q6kqoFXma6OyyuSpNrT/bpmtmdIc2PmDg/6dnsQhfQ0zDdjuoEC8VlTHQ=
-X-Received: by 2002:a05:6902:120a:b0:e7d:744d:e7e8 with SMTP id
- 3f1490d57ef6-e7d919ef6dcmr856566276.30.1748027960020; Fri, 23 May 2025
- 12:19:20 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1748039461; x=1748644261;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0m5C31tc2yCtT7pRM17KKIGevX9NiTP9+VsTeWqC7wI=;
+        b=bS7Veo+7P93LV1JzB7YnXJsURFx0YnoBKNVtI2BknWaAghOhDQNLDYrwbWF3sCkqDD
+         6B8IMz4toQDNsy2trxzDby6/K4NnhHDrvTyyCa272HTTQWu8ypeow/RIy2pJn3mAUrFV
+         fFVJsVqUaOchz53zDzyW1NtHCGVs6QB+Xc9zDXjTZfHHFp4CQrhZRLZDqtd0s2wL4NH5
+         gZNBwauKNuBqR1RoRRioVPehNca91flLqVuGD6vTHlAirY5nw/sKYHXizl3j/MeV38P2
+         a46b4j2eZKonJDYw1vWDGnXTkHFC5HF59dfyjHA2FaK5bhm1p1xfCxYqIolY61wqrQJC
+         UngQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUxuKQGFHG154Y5vwsZ6mu3EdNbwG9omOyGTLn8+ZFO1XXgmKfSmG6t7Cb7GMGv5JK8UvXhmXKO@lists.yoctoproject.org
+X-Gm-Message-State: AOJu0YwC+cxFFXXKvGsazOKycXwg0UeXfGJ5GLNJGZ4PyniXcWCDOxz0
+	uFqSAbhVBpLfBRKuGNij/eO/NJ3VfzSN7iT/Xx8zrGoRLDiaOk2geMBvF5Wm+F1HjGYypxE5Yb9
+	9oegO1z928DMVmX9EXkwtXgdKl8dMt30=
+X-Gm-Gg: ASbGncve/8aIAA0R0HoXWO2E1n7lu8vzlUwJ+P+mCJgAZf51zYIbNCuwpFXJBb6KK4q
+	583ukjEYBmAykWi0Xcs0TuTSXRVjXOCiCRmylYTPZFOuT/7yR/UMymuiVjcNp9ZGNQ7LUgIqsxF
+	Pq7Ayc8DjK8GG3uzrn3osCEAmt9pqab7Gdlg==
+X-Google-Smtp-Source: AGHT+IHOsnN3tp1sRQLEDmtXmmifZmaznriQHjT0Q+ycDXDHsHRSWhBiXnBqewiulWyRfb7BQdC2z5uwErF4twEH72U=
+X-Received: by 2002:a05:6902:4584:b0:e7d:7496:76ce with SMTP id
+ 3f1490d57ef6-e7d919d9bd8mr1055908276.27.1748039461309; Fri, 23 May 2025
+ 15:31:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250517005430.3648211-1-denis@denix.org> <20250517005430.3648211-6-denis@denix.org>
- <ad550e5e-3f13-45ff-8b42-08ff4e7117eb@ti.com> <20250523185239.ysx3b2du37qa2vmk@lcpd911>
-In-Reply-To: <20250523185239.ysx3b2du37qa2vmk@lcpd911>
+References: <20250517005430.3648211-1-denis@denix.org> <20250517005430.3648211-5-denis@denix.org>
+ <23d2cb8c-3603-4389-8737-caf2fc9b3d0f@ti.com> <20250519175202.GZ18383@denix.org>
+In-Reply-To: <20250519175202.GZ18383@denix.org>
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Fri, 23 May 2025 14:18:53 -0500
-X-Gm-Features: AX0GCFuhM8-cncS4m7-6L9_8IsGC7pbj2UhRu6rGtVo0Z1ieSc7qY0EAXuGmuvY
-Message-ID: <CAOCHtYhbNLkwcGKmmVeRdQUKXcVtUj8fzJ9_u_JVhndCsGo=Jw@mail.gmail.com>
-Subject: Re: [meta-ti] [master][PATCH 6/6] pocketbeagle2: add configs for new
- PocketBeagle2 platform
-To: Dhruva Gole <d-gole@ti.com>
-Cc: Chirag Shilwant <c-shilwant@ti.com>, Denys Dmytriyenko <denis@denix.org>, meta-ti@lists.yoctoproject.org, 
-	Denys Dmytriyenko <denys@konsulko.com>, jkridner@beagleboard.org
+Date: Fri, 23 May 2025 17:30:34 -0500
+X-Gm-Features: AX0GCFtjRaUlsRzojOB3kBp61MJzey_H91qnYyslykaYTP4Y94TwSY-yicJ4tYo
+Message-ID: <CAOCHtYhAwQ=NXkgYzgTcCZnPjOzXcWPn3LBA6u4f1WAfGvbExg@mail.gmail.com>
+Subject: Re: [meta-ti] [master][PATCH 5/6] beagley-ai: upgrade BeagleY-AI to 6.12
+To: denis@denix.org
+Cc: Andrew Davis <afd@ti.com>, meta-ti@lists.yoctoproject.org, 
+	Denys Dmytriyenko <denys@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 23 May 2025 19:19:23 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18595
+ <meta-ti@lists.yoctoproject.org>; Fri, 23 May 2025 22:31:10 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18596
 
-On Fri, May 23, 2025 at 1:52=E2=80=AFPM Dhruva Gole <d-gole@ti.com> wrote:
->
-> Hi Chirag,
->
-> On May 23, 2025 at 17:23:01 +0530, Chirag Shilwant wrote:
-> > + Dhruva from beagleboard.org
+> > >@@ -10,3 +10,10 @@ UBOOT_GIT_URI = "git://github.com/beagleboard/u-boot.git"
+> > >  UBOOT_GIT_PROTOCOL = "https"
+> > >  BRANCH = "v2025.04-Beagle"
+> > >  SRCREV = "ea2aeefcb2de36f8ca1b51d0580826d13c01f143"
+> > >+
+> > >+BRANCH:beagley-ai = "v2025.04-rc3-BeagleY-AI"
+
+Ugh... this was a build test of Andrew's patchset!
+
 > >
-> > Looks like Beagle-board.org just released Rev A1 which
-> > makes it quad-core A53 plus GPU [0]
->
-> Yes that's right.
->
+> > BeagleY-AI support is now in the latest upstream master. This branch here
+> > is missing some updates for BeagleY-AI that can be found in master.
 > >
-> > Dhruva,
-> >
-> > Any idea if beagleboard/u-boot will do s/am6232/am6254 in [1]
+> > Would it be better here to take the v2025.07-rc1-Beagle here which
+> > includes both these additional BeagleY-AI patches and also PB2 support?
+> > Maybe it should be the default then.
 >
-> I checked with Robert on discord, looks like he'll be the one making
-> these decisions.
-> Adding him to this thread.
+> I'd be fine switching to 2025.07 eventually, once it matures a bit - I'm not
+> comfortable taking rc1 at this point.
+>
+> We can do this in stages - now update 6.1 -> 6.12 with 2025.04 in a seaprate
+> branch, then update 2025.04 -> 2025.07 when it's ready (either final or at
+> least rc3/rc4).
 
-Oh it's worse.. I'm going to do... s/am6232-/am62- ...
+https://github.com/beagleboard/u-boot/tree/v2025.07-rc2-Beagle
 
-I blame TI. ;) for giving Jason the quad core..
+Tested on 5 BeagleY-AI's, 3 running pcie nvme root's, 2 normal
+microSD, v6.1.x-ti, v6.6.x-ti kernels.. (dropped in over the shipping
+2023.xx u-boot)
 
-So I'm going to do it in my `v2025.07` branch..
+TI_FIRMWARE="11.00.14"
+TRUSTED_FIRMWARE="lts-v2.12.3"
+OPTEE="4.6.0"
+UBOOT="v2025.07-rc2-Beagle"
 
-I still need to make all prior u-boot installs work for all our end
-users, so I'm going to have a mess of Device Tree files:
-am6232-pocket... am62-pocket...
-
-The good news, am62-pocket* device tree is in mainline kernel, so
-that's one piece in stone today..
+https://openbeagle.org/beagley-ai/u-boot-beagley-ai/-/blob/main/build_u-boot.sh?ref_type=heads
 
 Regards,
---=20
+
+-- 
 Robert Nelson
 https://rcn-ee.com/
 
