@@ -1,128 +1,186 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 618BFC5AD49
-	for <webhook@archiver.kernel.org>; Fri, 30 May 2025 13:31:56 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web11.6269.1748611906649212162
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2327EC5B543
+	for <webhook@archiver.kernel.org>; Fri, 30 May 2025 18:09:00 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.1949.1748628530760065204
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 30 May 2025 06:31:46 -0700
+ Fri, 30 May 2025 11:08:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ogyxmVN2;
- spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: reatmon@ti.com)
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54UDVjQf3795701;
-	Fri, 30 May 2025 08:31:45 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1748611905;
-	bh=YImS22UoE4Al7fTmKvH6ale1fTXvhl78bQ6TgOrFVU4=;
-	h=From:To:Subject:Date;
-	b=ogyxmVN2MlY7onzbMvhoCzz67+BRSuk5bG/ka3FJcfCCmPCeIZundnL5HNxKBJYnk
-	 P5uZaB79nebQjWB2Dt2/6/ZkfXEuuDKAM58JtW/zakcamP8mPh8Nvlh9ISNiA/JdwZ
-	 9cxSr9TnPKh8Zt9kjySIZoQAfbQiMGkFpSI7vqIA=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
-	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54UDVjnA847828
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Fri, 30 May 2025 08:31:45 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 30
- May 2025 08:31:45 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 30 May 2025 08:31:45 -0500
-Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 54UDVjT43118415;
-	Fri, 30 May 2025 08:31:45 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1uKzpp-0005HS-7Y; Fri, 30 May 2025 08:31:45 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] mesa-pvr: fold GL ES 3 packages into GL ES 2 ones
-Date: Fri, 30 May 2025 08:31:45 -0500
-Message-ID: <20250530133145.20258-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id ADCC940C79;
+	Fri, 30 May 2025 18:08:49 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id lmK_HUahTfrf; Fri, 30 May 2025 18:08:49 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 69F1F40C21;
+	Fri, 30 May 2025 18:08:45 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id C87411695C6; Fri, 30 May 2025 14:08:44 -0400 (EDT)
+Date: Fri, 30 May 2025 14:08:44 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: "Bajjuri, Praneeth" <praneeth@ti.com>
+Cc: "Brnich, Brandon" <b-brnich@ti.com>, Ryan Eatmon <reatmon@ti.com>,
+	Denys Dmytriyenko <denys@konsulko.com>,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger:
+ cicd.scarthgap.202505230901
+Message-ID: <20250530180844.GZ18383@denix.org>
+References: <20250523190054.691771-1-lcpdbld@list.ti.com>
+ <20250529194538.GV18383@denix.org>
+ <cbe4f229-549a-4749-9192-c318c9fd6308@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cbe4f229-549a-4749-9192-c318c9fd6308@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 30 May 2025 13:31:56 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18615
+ <meta-ti@lists.yoctoproject.org>; Fri, 30 May 2025 18:09:00 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18616
 
-This is a sideport of a patch against mesa in oe-core [1].
+On Thu, May 29, 2025 at 03:23:27PM -0500, Bajjuri, Praneeth wrote:
+> 
+> 
+> On 5/29/2025 2:45 PM, Denys Dmytriyenko wrote:
+> >Apparently, this went unnoticed, as nobody usually reviews CI/CD updates...
+> >
+> >
+> >On Fri, May 23, 2025 at 02:00:54PM -0500, LCPD Automation Script via lists.yoctoproject.org wrote:
+> >>Updated the value(s) for:
+> >>   cnm-wave-fw: LIC_FILES_CHKSUM
+> >>   ti-linux-fw: CNM_WAVE521_FW_VERSION,TI_LINUX_FW_SRCREV
+> >>   u-boot-ti-staging_2025.01: SRCREV
+> >>   k3conf: SRCREV
+> >>   linux-ti-staging_6.12: PV,SRCREV
+> >>
+> >>Changelogs:
+> >>   ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/log/?qt=range&q=bffa52a1b8d3318ec86814047025e7c5edf7b7b0..d5a6aed56d76f7a8a7729f0d0b4655b7e623e1c7
+> >>   u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=98b6b3f5a259be864e8db92f4925c3c19c3482a4..3d024809613c2a8f1d69258554ab8954d26537f5
+> >>   k3conf: https://git.ti.com/cgit/k3conf/k3conf/log/?qt=range&q=e4a814ff42ef357ee453b6f2f809ecdfa624aa8c..ea9938bf9cafd9c0cb05ef060a713ab4ac72270f
+> >>   linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=013211ccdf5ec33e19652be631b820bc5f6b86a4..d95b7f80f66d104525e6beb002d82a9505b28131
+> >>
+> >>Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+> >>---
+> >>  meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb      | 2 +-
+> >>  meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 4 ++--
+> >>  meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb | 2 +-
+> >>  meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb           | 2 +-
+> >>  meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb   | 4 ++--
+> >>  5 files changed, 7 insertions(+), 7 deletions(-)
+> >>
+> >>diff --git a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+> >>index 43624183..6a65992f 100644
+> >>--- a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+> >>+++ b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+> >>@@ -5,7 +5,7 @@ require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+> >>  inherit update-alternatives
+> >>  LICENSE = "BSD-3-Clause"
+> >>-LIC_FILES_CHKSUM = "file://LICENCE.cnm;md5=93b67e6bac7f8fec22b96b8ad0a1a9d0"
+> >>+LIC_FILES_CHKSUM = "file://LICENCE.cnm;md5=df3992006621b797e36de43f36336e36"
+> >
+> >What are the actual changes in the license that caused the checksum update?
+> >
+> >Did the license change from BSD-3-Clause to something else? Was the package
+> >re-licensed under something else, say more restrictive, or even commercial?
+> 
+> There was a update in License file adding more restrictive language
+> primarily on wave633c codec fw ( not present on TI parts)
+> 
+> Ref: https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/commit/LICENCE.cnm?id=c97a2ef501be047a901764735147a278999c8ff0
 
-OpenGL ES 3 is closely tied to the OpenGL ES 2: there is no separate
-library, one can use GL ES 2 headers for GL ES 3 app, etc. Instead of
-having separate packages, merge GL ES 3 packages into GL ES 2 ones.
+Thanks, Praneeth!
 
-[1] https://git.openembedded.org/openembedded-core/commit/?id=7c0e9c170db93d9af7cc505dcd71c4f3d6c4e9c5
+This is actually a perfect example why this kind of updates cannot be 
+automated!
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- meta-ti-bsp/recipes-graphics/mesa/mesa-pvr.inc | 18 ++++--------------
- 1 file changed, 4 insertions(+), 14 deletions(-)
+The license has been updated to restrict the usage to NXP parts only!
 
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr.inc b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr.inc
-index 471475ff..45d5ada3 100644
---- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr.inc
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr.inc
-@@ -228,17 +228,10 @@ CFLAGS:append:armv6 = " -DMISSING_64BIT_ATOMICS"
- # Remove the mesa dependency on mesa-dev, as mesa is empty
- DEV_PKG_DEPENDENCY = ""
- 
--# Khronos documentation says that include/GLES2/gl2ext.h can be used for
--# OpenGL ES 3 specification as well as for OpenGL ES 2.
--# There can be applications including GLES2/gl2ext.h instead of GLES3/gl3ext.h
--# meaning we should probably bring in GLES2/gl2ext.h if someone asks for
--# development package of libgles3.
--RDEPENDS:libgles3-mesa-dev += "libgles2-mesa-dev"
--
- # GLES2 and GLES3 implementations are packaged in a single library in libgles2-mesa.
- # Add a dependency so the GLES3 dev package is associated with its implementation.
--RDEPENDS:libgles2-mesa += "libgles3-mesa"
--ALLOW_EMPTY:libgles3-mesa = "1"
-+RPROVIDES:libgles2-mesa += "libgles3-mesa"
-+RPROVIDES:libgles2-mesa-dev += "libgles3-mesa-dev"
- 
- RDEPENDS:libopencl-mesa += "${@bb.utils.contains('PACKAGECONFIG', 'opencl', 'libclc spirv-tools', '', d)}"
- 
-@@ -250,7 +243,6 @@ PACKAGES =+ "libegl-mesa libegl-mesa-dev \
-              libgbm libgbm-dev \
-              libgles1-mesa libgles1-mesa-dev \
-              libgles2-mesa libgles2-mesa-dev \
--             libgles3-mesa libgles3-mesa-dev \
-              libopencl-mesa libopencl-mesa-dev \
-              libxatracker libxatracker-dev \
-              mesa-megadriver mesa-vulkan-drivers \
-@@ -288,8 +280,7 @@ python __anonymous() {
-               ("opengl", "libgl", "libgl1"),
-               ("glvnd", "libglx",),
-               ("gles", "libgles1", "libglesv1-cm1"),
--              ("gles", "libgles2", "libglesv2-2"),
--              ("gles", "libgles3",),
-+              ("gles", "libgles2", "libglesv2-2", "libgles3"),
-               ("opencl", "libopencl",)):
-         if not p[0] in pkgconfig:
-             continue
-@@ -363,8 +354,7 @@ FILES:libgl-mesa-dev = "${libdir}/libGL.* ${includedir}/GL ${libdir}/pkgconfig/g
- FILES:libglx-mesa-dev = "${libdir}/libGLX*.*"
- FILES:libglapi-dev = "${libdir}/libglapi.*"
- FILES:libgles1-mesa-dev = "${libdir}/libGLESv1*.* ${includedir}/GLES ${libdir}/pkgconfig/glesv1*.pc"
--FILES:libgles2-mesa-dev = "${libdir}/libGLESv2.* ${includedir}/GLES2 ${libdir}/pkgconfig/glesv2.pc"
--FILES:libgles3-mesa-dev = "${includedir}/GLES3"
-+FILES:libgles2-mesa-dev = "${libdir}/libGLESv2.* ${includedir}/GLES2 ${includedir}/GLES3 ${libdir}/pkgconfig/glesv2.pc"
- FILES:libopencl-mesa-dev = "${libdir}/libMesaOpenCL.so"
- FILES:libosmesa-dev = "${libdir}/libOSMesa.* ${includedir}/GL/osmesa.h ${libdir}/pkgconfig/osmesa.pc"
- FILES:libxatracker-dev = "${libdir}/libxatracker.so ${libdir}/libxatracker.la \
--- 
-2.17.1
+| The LICENCE.cnm file has been updated to restrict use
+| of this firmware to NXP silicon products only.
 
+Yes, this is specific to wave633c codec only, which doesn't apply to TI parts 
+using wave521c, but unless you carefully read the change, you cannot assume 
+anything.
+
+This must be blocked until human intervention - Ryan, can you please update 
+CI/CD scripting accordingly to not upodate LIC_FILES_CHKSUM? Thanks.
+
+
+> >Sure, I'm imagining a worst-case scenario, but the whole purpose of this
+> >LIC_FILES_CHKSUM variable is to catch such cases. So, whenever it changes,
+> >there should be an explanation in the commit message detailing the reason
+> >for the license checksum change.
+> >
+> >Moreover, in master there's now a mandatory tag required to explain such a
+> >change:
+> >https://docs.yoctoproject.org/next/contributor-guide/recipe-style-guide.html#license-updates
+> >
+> >In OE-Core this gets checked by test_lic_files_chksum_modified_not_mentioned
+> >Patchtest case and the patch gets automatically rejected w/o this tag:
+> >https://wiki.yoctoproject.org/wiki/Patchtest
+> >
+> >I would argue that CI/CD should not even try to modify LIC_FILES_CHKSUM
+> >variable in automated fashion - this was designed to be consciously updated
+> >by a human...
+> >
+> >
+> >>  PV = "${CNM_WAVE521_FW_VERSION}"
+> >>  PR = "${INC_PR}.1"
+> >>diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+> >>index 925f81fe..adc7afa1 100644
+> >>--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+> >>+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+> >>@@ -13,12 +13,12 @@ PRUETH_FW_AM65X_SR2_VERSION = "02.02.15.04"
+> >>  GOODIX_FW_VERSION = "1.0.0.0"
+> >>  CADENCE_MHDP_FW_VERSION = "2.1.0"
+> >>  IMG_DEC_FW_VERSION = "1.0"
+> >>-CNM_WAVE521_FW_VERSION = "1.0.7"
+> >>+CNM_WAVE521_FW_VERSION = "1.0.8"
+> >>  TI_DM_FW_VERSION = "11.00.09"
+> >>  TI_SYSFW_VERSION = "11.00.07"
+> >>  TI_HSM_DEMO_FW_VERSION = "11.00.09"
+> >>-TI_LINUX_FW_SRCREV ?= "bffa52a1b8d3318ec86814047025e7c5edf7b7b0"
+> >>+TI_LINUX_FW_SRCREV ?= "d5a6aed56d76f7a8a7729f0d0b4655b7e623e1c7"
+> >>  SRCREV = "${TI_LINUX_FW_SRCREV}"
+> >>  BRANCH ?= "ti-linux-firmware"
+> >>diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+> >>index fb5dfa73..99a2c8fc 100644
+> >>--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+> >>+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+> >>@@ -6,4 +6,4 @@ PR = "r0"
+> >>  BRANCH = "ti-u-boot-2025.01"
+> >>-SRCREV = "98b6b3f5a259be864e8db92f4925c3c19c3482a4"
+> >>+SRCREV = "3d024809613c2a8f1d69258554ab8954d26537f5"
+> >>diff --git a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
+> >>index 8e83a1aa..8691e523 100644
+> >>--- a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
+> >>+++ b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
+> >>@@ -10,7 +10,7 @@ PV = "0.3+git"
+> >>  COMPATIBLE_MACHINE = "k3"
+> >>  BRANCH ?= "master"
+> >>-SRCREV = "e4a814ff42ef357ee453b6f2f809ecdfa624aa8c"
+> >>+SRCREV = "ea9938bf9cafd9c0cb05ef060a713ab4ac72270f"
+> >>  SRC_URI = "git://git.ti.com/git/k3conf/k3conf.git;protocol=https;branch=${BRANCH}"
+> >>diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+> >>index 535a96f8..f399c207 100644
+> >>--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+> >>+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+> >>@@ -23,8 +23,8 @@ S = "${WORKDIR}/git"
+> >>  BRANCH ?= "ti-linux-6.12.y"
+> >>-SRCREV ?= "013211ccdf5ec33e19652be631b820bc5f6b86a4"
+> >>-PV = "6.12.23+git"
+> >>+SRCREV ?= "d95b7f80f66d104525e6beb002d82a9505b28131"
+> >>+PV = "6.12.24+git"
+> >>  # Special configuration for remoteproc/rpmsg IPC modules
+> >>  module_conf_rpmsg_client_sample = "blacklist rpmsg_client_sample"
+> >>-- 
+> >>2.43.5
 
