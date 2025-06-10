@@ -2,259 +2,136 @@ Return-Path: <p-bhagat@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C40E5C5B552
-	for <webhook@archiver.kernel.org>; Tue, 10 Jun 2025 16:43:18 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web11.91553.1749573794410131261
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C2E7C5B552
+	for <webhook@archiver.kernel.org>; Tue, 10 Jun 2025 18:17:39 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web10.94463.1749579453337936312
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 10 Jun 2025 09:43:14 -0700
+ Tue, 10 Jun 2025 11:17:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=fnrl4Et3;
- spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: p-bhagat@ti.com)
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55AGhA6A2354630;
-	Tue, 10 Jun 2025 11:43:10 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Tcm8Rgms;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: p-bhagat@ti.com)
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55AIHUge2363930;
+	Tue, 10 Jun 2025 13:17:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1749573790;
-	bh=uCVAurWSVEXhz1qcuVuGN085HkufArt1zABGd+gFPJU=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=fnrl4Et3+kY/0WAoPCSQs04Uc9UpAURzcbBewZQHR0ki1JqvluJioG+jkdUb3I2wl
-	 d0wyMJ7aE11EwFHOlEw5cAN02fWNQG2YbYIr8aKtb09ufKOyGN3vbaJQhIDHZDJHzp
-	 dfgDiyGN+y54LEh6V02T43512GZc69OnssYoBT2k=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55AGhAbg505676
+	s=ti-com-17Q1; t=1749579450;
+	bh=QkvPvXxgY+GsVzu1+ivczVEkns0RfnrOqYM37kg73aQ=;
+	h=From:To:CC:Subject:Date;
+	b=Tcm8Rgmshrt7T/spNv6MxvctJU9jWJ0G2k+FBv2vrxrVar/4KhD138+KR0IwdacaV
+	 pNSt1Ewin43W4Pm0Nh8HY7IZljebjM5KTr3Q67W+NmX1e1K/wAXpWZO10xh7bQQewU
+	 1wgazrNVNWLyNf6Liu1i03Ls9t3tIe05oDicZh9Y=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55AIHUGs2296140
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Tue, 10 Jun 2025 11:43:10 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 10 Jun 2025 13:17:30 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 10
- Jun 2025 11:43:09 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 10 Jun 2025 11:43:09 -0500
-Received: from [172.24.227.38] (ula0502350.dhcp.ti.com [172.24.227.38])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55AGh6KC3349394;
-	Tue, 10 Jun 2025 11:43:07 -0500
-Message-ID: <0ff484f4-5956-48bf-bbd6-2ef72191a40b@ti.com>
-Date: Tue, 10 Jun 2025 22:13:06 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [scarthgap][PATCH] meta-ti-bsp: ti-rtos-fw: Update IPC firmwares
- for am62dxx
-To: Andrew Davis <afd@ti.com>, Ryan Eatmon <reatmon@ti.com>,
-        <meta-ti@lists.yoctoproject.org>, <denis@denix.org>, <praneeth@ti.com>
-CC: <v-singh1@ti.com>, <c-shilwant@ti.com>, <khasim@ti.com>
-References: <20250609092640.1751993-1-p-bhagat@ti.com>
- <241aed51-1993-42d4-8aba-49d7864ac2d3@ti.com>
- <509621e3-5d19-467c-abf7-94b090dab5e8@ti.com>
- <16b9d526-4109-4ef6-8e22-9e57a43ab0c0@ti.com>
-Content-Language: en-US
+ Jun 2025 13:17:29 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 10 Jun 2025 13:17:29 -0500
+Received: from localhost (ula0502350.dhcp.ti.com [172.24.227.38])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55AIHTjS3454296;
+	Tue, 10 Jun 2025 13:17:29 -0500
 From: Paresh Bhagat <p-bhagat@ti.com>
-In-Reply-To: <16b9d526-4109-4ef6-8e22-9e57a43ab0c0@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+To: <meta-ti@lists.yoctoproject.org>, <denis@denix.org>, <praneeth@ti.com>,
+        <reatmon@ti.com>
+CC: <v-singh1@ti.com>, <c-shilwant@ti.com>, <khasim@ti.com>, <anoop.rk@ti.com>,
+        <afd@ti.com>
+Subject: [scarthgap][PATCH v2] meta-ti-bsp: ti-rtos-fw: Update IPC firmwares for am62dxx
+Date: Tue, 10 Jun 2025 23:47:23 +0530
+Message-ID: <20250610181723.820388-1-p-bhagat@ti.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllvem-ot03.ext.ti.com id 55AGhA6A2354630
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 10 Jun 2025 16:43:18 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18637
+ <meta-ti@lists.yoctoproject.org>; Tue, 10 Jun 2025 18:17:39 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18638
 
-Hi Andrew,
+Previously, AM62d build reused AM62a's IPC firmwares. Now that
+dedicated AM62d IPC firmwares are being pushed to ti-linux-firmware
+repo, package the new IPC firmwares for echo test.
 
+Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+---
 
-On 10/06/25 20:38, Andrew Davis wrote:
-> On 6/9/25 11:53 PM, Paresh Bhagat wrote:
->> Hi Ryan,
->>
->>
->> On 09/06/25 20:07, Ryan Eatmon wrote:
->>>
->>>
->>> On 6/9/2025 4:26 AM, Paresh Bhagat wrote:
->>>> Previously, AM62d build reused AM62a's IPC firmwares. Now that
->>>> dedicated AM62d IPC firmwares are being pushed to ti-linux-firmware
->>>> repo, package the new IPC firmwares.
->>>
->>> So... question for Andrew (and anyone else)...
->>>
->>> This recipe is for the ipc-rtos-echo-test-fw, so that implies that=20
->>> this recipes installs only that.=C2=A0 Should this commit add in a=20
->>> different firmware, or should commit make it so that this recipe=20
->>> adds nothing for am62d and then a new recipe for the new file?
->>>
->>> Thoughts?
->>>
->>> I know we previously accepted a commit that did this same kind of=20
->>> thing, but now I'm rethinking that.
->>
->>
->> Just trying to clarify, since the new firmware is also for ipc or=20
->> echo test, shouldn't we add it here?
->
-> Is that all this firmware does? Or does it extend the functionality int=
-o
-> some audio processing tasks? If it is only the echo test firmware, why =
-is
-> the name different from all the others?
->
-> Andrew
+Boot logs
+https://gist.github.com/paresh-bhagat12/6fef215c80fa03c8ea55952f46328b83
 
+Change log:
+V1 -> V2:
+	- Use do_install:prepend to update firmware name instead of
+	  overriding the variables.
 
-Yep it is only for echo test. Agree it should go with the same name.=20
-Will send a v2 to avoid overriding the variable and instead rename=20
-firmware in do_install.
-Thanks for the clarification.
+ .../ti-rtos-fw/ti-rtos-echo-test-fw.bb        | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
 
+diff --git a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
+index 1fe67be8..7961413c 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
++++ b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
+@@ -20,7 +20,7 @@ PLAT_SFX:am65xx = "am65xx"
+ PLAT_SFX:am64xx = "am64xx"
+ PLAT_SFX:am62xx = "am62xx"
+ PLAT_SFX:am62axx = "am62axx"
+-PLAT_SFX:am62dxx = "am62axx"
++PLAT_SFX:am62dxx = "am62dxx"
+ PLAT_SFX:am62pxx = "am62pxx"
+ 
+ FILESEXTRAPATHS:prepend := "${METATIBASE}/recipes-bsp/ti-sci-fw/files/:"
+@@ -101,7 +101,8 @@ do_install:prepend:am62axx() {
+ # Update the am62dxx ipc binaries to be consistent with other platforms
+ do_install:prepend:am62dxx() {
+         ( cd ${S}/${IPC_FW_DIR}; \
+-                ln -sf am62a-mcu-r5f0_0-fw ${MCU_2_0_FW}; \
++                ln -sf ipc_rpmsg_echo_linux.mcu-r5f0_0.release.strip.out ${MCU_2_0_FW}; \
++                ln -sf ipc_rpmsg_echo_linux.c75ss0-0.release.strip.out ${C7X_1_FW}; \
+         )
+ }
+ 
+@@ -149,8 +150,8 @@ ALTERNATIVE:${PN}:am62axx = "\
+                     "
+ 
+ ALTERNATIVE:${PN}:am62dxx = "\
+-                    am62a-mcu-r5f0_0-fw   am62a-mcu-r5f0_0-fw-sec \
+-                    am62a-c71_0-fw        am62a-c71_0-fw-sec \
++                    am62d-mcu-r5f0_0-fw   am62d-mcu-r5f0_0-fw-sec \
++                    am62d-c71_0-fw        am62d-c71_0-fw-sec \
+                     "
+ 
+ ALTERNATIVE:${PN}:j721e = "\
+@@ -243,6 +244,11 @@ ALTERNATIVE_LINK_NAME[am62a-mcu-r5f0_0-fw-sec] = "${nonarch_base_libdir}/firmwar
+ ALTERNATIVE_LINK_NAME[am62a-c71_0-fw]     = "${nonarch_base_libdir}/firmware/am62a-c71_0-fw"
+ ALTERNATIVE_LINK_NAME[am62a-c71_0-fw-sec] = "${nonarch_base_libdir}/firmware/am62a-c71_0-fw-sec"
+ 
++ALTERNATIVE_LINK_NAME[am62d-mcu-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/am62d-mcu-r5f0_0-fw"
++ALTERNATIVE_LINK_NAME[am62d-mcu-r5f0_0-fw-sec] = "${nonarch_base_libdir}/firmware/am62d-mcu-r5f0_0-fw-sec"
++ALTERNATIVE_LINK_NAME[am62d-c71_0-fw]     = "${nonarch_base_libdir}/firmware/am62d-c71_0-fw"
++ALTERNATIVE_LINK_NAME[am62d-c71_0-fw-sec] = "${nonarch_base_libdir}/firmware/am62d-c71_0-fw-sec"
++
+ ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw]     = "${nonarch_base_libdir}/firmware/j7-mcu-r5f0_1-fw"
+ ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw-sec] = "${nonarch_base_libdir}/firmware/j7-mcu-r5f0_1-fw-sec"
+ ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw]     = "${nonarch_base_libdir}/firmware/j7-main-r5f0_0-fw"
+@@ -364,6 +370,11 @@ ALTERNATIVE_TARGET[am62a-mcu-r5f0_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_F
+ ALTERNATIVE_TARGET[am62a-c71_0-fw]     = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}"
+ ALTERNATIVE_TARGET[am62a-c71_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}.signed"
+ 
++ALTERNATIVE_TARGET[am62d-mcu-r5f0_0-fw]     = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
++ALTERNATIVE_TARGET[am62d-mcu-r5f0_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}.signed"
++ALTERNATIVE_TARGET[am62d-c71_0-fw]     = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}"
++ALTERNATIVE_TARGET[am62d-c71_0-fw-sec] = "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}.signed"
++
+ ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw]     = "${INSTALL_IPC_FW_DIR}/${MCU_1_1_FW}"
+ ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw-sec] = "${INSTALL_IPC_FW_DIR}/${MCU_1_1_FW}.signed"
+ ALTERNATIVE_TARGET[j7-main-r5f0_0-fw]     = "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
+-- 
+2.34.1
 
->
->>>
->>>
->>>
->>>> Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
->>>> ---
->>>> Boot logs
->>>> https://gist.github.com/paresh-bhagat12/6fef215c80fa03c8ea55952f4632=
-8b83=20
->>>>
->>>>
->>>> =C2=A0 .../ti-rtos-fw/ti-rtos-echo-test-fw.bb=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 | 25=20
->>>> +++++++++++--------
->>>> =C2=A0 1 file changed, 15 insertions(+), 10 deletions(-)
->>>>
->>>> diff --git=20
->>>> a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb=20
->>>> b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
->>>> index 1fe67be8..d43e8a8c 100644
->>>> --- a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
->>>> +++ b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
->>>> @@ -20,7 +20,7 @@ PLAT_SFX:am65xx =3D "am65xx"
->>>> =C2=A0 PLAT_SFX:am64xx =3D "am64xx"
->>>> =C2=A0 PLAT_SFX:am62xx =3D "am62xx"
->>>> =C2=A0 PLAT_SFX:am62axx =3D "am62axx"
->>>> -PLAT_SFX:am62dxx =3D "am62axx"
->>>> +PLAT_SFX:am62dxx =3D "am62dxx"
->>>> =C2=A0 PLAT_SFX:am62pxx =3D "am62pxx"
->>>> =C2=A0 =C2=A0 FILESEXTRAPATHS:prepend :=3D=20
->>>> "${METATIBASE}/recipes-bsp/ti-sci-fw/files/:"
->>>> @@ -39,6 +39,7 @@ INSTALL_IPC_FW_DIR =3D=20
->>>> "${nonarch_base_libdir}/firmware/${IPC_FW_DIR}"
->>>> =C2=A0 MCU_1_0_FW =3D "ipc_echo_test_mcu1_0_release_strip.xer5f"
->>>> =C2=A0 MCU_1_1_FW =3D "ipc_echo_test_mcu1_1_release_strip.xer5f"
->>>> =C2=A0 MCU_2_0_FW =3D "ipc_echo_test_mcu2_0_release_strip.xer5f"
->>>> +MCU_2_0_FW:am62dxx =3D=20
->>>> "ipc_rpmsg_echo_linux.mcu-r5f0_0.release.strip.out"
->>>
->>> Any reason not to add more spaces to all of the other lines so that=20
->>> everything continues to line up?
->>
->>
->> Will update this, I was confused earlier whether to line them up but=20
->> will do.
->>>
->>>
->>>> =C2=A0 MCU_2_1_FW =3D "ipc_echo_test_mcu2_1_release_strip.xer5f"
->>>> =C2=A0 MCU_3_0_FW =3D "ipc_echo_test_mcu3_0_release_strip.xer5f"
->>>> =C2=A0 MCU_3_1_FW =3D "ipc_echo_test_mcu3_1_release_strip.xer5f"
->>>> @@ -48,6 +49,7 @@ C66_1_FW =3D=20
->>>> "ipc_echo_test_c66xdsp_1_release_strip.xe66"
->>>> =C2=A0 C66_2_FW =3D "ipc_echo_test_c66xdsp_2_release_strip.xe66"
->>>> =C2=A0 C7X_1_FW =3D "ipc_echo_test_c7x_1_release_strip.xe71"
->>>> =C2=A0 C7X_1_FW:am62axx =3D "dsp_edgeai_c7x_1_release_strip.out"
->>>> +C7X_1_FW:am62dxx =3D "ipc_rpmsg_echo_linux.c75ss0-0.release.strip.o=
-ut"
->>>> =C2=A0 C7X_2_FW =3D "ipc_echo_test_c7x_2_release_strip.xe71"
->>>> =C2=A0 C7X_3_FW =3D "ipc_echo_test_c7x_3_release_strip.xe71"
->>>> =C2=A0 C7X_4_FW =3D "ipc_echo_test_c7x_4_release_strip.xe71"
->>>> @@ -98,13 +100,6 @@ do_install:prepend:am62axx() {
->>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 )
->>>> =C2=A0 }
->>>> =C2=A0 -# Update the am62dxx ipc binaries to be consistent with othe=
-r=20
->>>> platforms
->>>> -do_install:prepend:am62dxx() {
->>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ( cd ${S}/${IPC_FW_DIR};=
- \
->>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 ln -sf am62a-mcu-r5f0_0-fw ${MCU_2_0_FW}; \
->>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 )
->>>> -}
->>>> -
->>>> =C2=A0 do_install() {
->>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 # IPC Firmware
->>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 for FW_NAME in ${IPC_FW_LIST}
->>>> @@ -149,8 +144,8 @@ ALTERNATIVE:${PN}:am62axx =3D "\
->>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "
->>>> =C2=A0 =C2=A0 ALTERNATIVE:${PN}:am62dxx =3D "\
->>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 am62a-mcu-r5f0_0-fw am62a-m=
-cu-r5f0_0-fw-sec \
->>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 am62a-c71_0-fw am62a-c71_0-=
-fw-sec \
->>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 am62d-mcu-r5f0_0-fw am62d-m=
-cu-r5f0_0-fw-sec \
->>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 am62d-c75_x-fw am62d-c75_x-=
-fw-sec \
->>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "
->>>> =C2=A0 =C2=A0 ALTERNATIVE:${PN}:j721e =3D "\
->>>> @@ -243,6 +238,11 @@ ALTERNATIVE_LINK_NAME[am62a-mcu-r5f0_0-fw-sec]=20
->>>> =3D "${nonarch_base_libdir}/firmwar
->>>> =C2=A0 ALTERNATIVE_LINK_NAME[am62a-c71_0-fw]=C2=A0=C2=A0=C2=A0=C2=A0=
- =3D=20
->>>> "${nonarch_base_libdir}/firmware/am62a-c71_0-fw"
->>>> =C2=A0 ALTERNATIVE_LINK_NAME[am62a-c71_0-fw-sec] =3D=20
->>>> "${nonarch_base_libdir}/firmware/am62a-c71_0-fw-sec"
->>>> =C2=A0 +ALTERNATIVE_LINK_NAME[am62d-mcu-r5f0_0-fw]=C2=A0=C2=A0=C2=A0=
-=C2=A0 =3D=20
->>>> "${nonarch_base_libdir}/firmware/am62d-mcu-r5f0_0-fw"
->>>> +ALTERNATIVE_LINK_NAME[am62d-mcu-r5f0_0-fw-sec] =3D=20
->>>> "${nonarch_base_libdir}/firmware/am62d-mcu-r5f0_0-fw-sec"
->>>> +ALTERNATIVE_LINK_NAME[am62d-c75_x-fw]=C2=A0=C2=A0=C2=A0=C2=A0 =3D=20
->>>> "${nonarch_base_libdir}/firmware/am62d-c75_x-fw"
->>>> +ALTERNATIVE_LINK_NAME[am62d-c75_x-fw-sec] =3D=20
->>>> "${nonarch_base_libdir}/firmware/am62d-c75_x-fw-sec"
->>>> +
->>>> =C2=A0 ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw]=C2=A0=C2=A0=C2=A0=C2=A0=
- =3D=20
->>>> "${nonarch_base_libdir}/firmware/j7-mcu-r5f0_1-fw"
->>>> =C2=A0 ALTERNATIVE_LINK_NAME[j7-mcu-r5f0_1-fw-sec] =3D=20
->>>> "${nonarch_base_libdir}/firmware/j7-mcu-r5f0_1-fw-sec"
->>>> =C2=A0 ALTERNATIVE_LINK_NAME[j7-main-r5f0_0-fw]=C2=A0=C2=A0=C2=A0=C2=
-=A0 =3D=20
->>>> "${nonarch_base_libdir}/firmware/j7-main-r5f0_0-fw"
->>>> @@ -364,6 +364,11 @@ ALTERNATIVE_TARGET[am62a-mcu-r5f0_0-fw-sec] =3D=
-=20
->>>> "${INSTALL_IPC_FW_DIR}/${MCU_2_0_F
->>>> =C2=A0 ALTERNATIVE_TARGET[am62a-c71_0-fw]=C2=A0=C2=A0=C2=A0=C2=A0 =3D=
-=20
->>>> "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}"
->>>> =C2=A0 ALTERNATIVE_TARGET[am62a-c71_0-fw-sec] =3D=20
->>>> "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}.signed"
->>>> =C2=A0 +ALTERNATIVE_TARGET[am62d-mcu-r5f0_0-fw]=C2=A0=C2=A0=C2=A0=C2=
-=A0 =3D=20
->>>> "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
->>>> +ALTERNATIVE_TARGET[am62d-mcu-r5f0_0-fw-sec] =3D=20
->>>> "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}.signed"
->>>> +ALTERNATIVE_TARGET[am62d-c75_x-fw]=C2=A0=C2=A0=C2=A0=C2=A0 =3D=20
->>>> "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}"
->>>> +ALTERNATIVE_TARGET[am62d-c75_x-fw-sec] =3D=20
->>>> "${INSTALL_IPC_FW_DIR}/${C7X_1_FW}.signed"
->>>> +
->>>> =C2=A0 ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw]=C2=A0=C2=A0=C2=A0=C2=A0 =
-=3D=20
->>>> "${INSTALL_IPC_FW_DIR}/${MCU_1_1_FW}"
->>>> =C2=A0 ALTERNATIVE_TARGET[j7-mcu-r5f0_1-fw-sec] =3D=20
->>>> "${INSTALL_IPC_FW_DIR}/${MCU_1_1_FW}.signed"
->>>> =C2=A0 ALTERNATIVE_TARGET[j7-main-r5f0_0-fw]=C2=A0=C2=A0=C2=A0=C2=A0=
- =3D=20
->>>> "${INSTALL_IPC_FW_DIR}/${MCU_2_0_FW}"
->>>
 
