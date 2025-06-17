@@ -1,52 +1,49 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <p-bhagat@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BDAAEC71148
-	for <webhook@archiver.kernel.org>; Thu, 12 Jun 2025 23:58:38 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web11.9077.1749772711784896683
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4123C71136
+	for <webhook@archiver.kernel.org>; Tue, 17 Jun 2025 10:19:20 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web10.15275.1750155557781209643
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 12 Jun 2025 16:58:32 -0700
+ Tue, 17 Jun 2025 03:19:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=MqTAeaB4;
- spf=pass (domain: list.ti.com, ip: 198.47.19.245, mailfrom: lcpdbld@list.ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Kd5zuIvQ;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: p-bhagat@ti.com)
 Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55CNwUTt2988751;
-	Thu, 12 Jun 2025 18:58:30 -0500
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55HAJDMW4090399;
+	Tue, 17 Jun 2025 05:19:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1749772710; i=@ti.com;
-	bh=tEOXSTwAPE6ACygsym66Y+YFTzg6qyHBfT51dGFlouM=;
-	h=From:To:Subject:Date;
-	b=MqTAeaB4zQYIZLrH9lw5V55Lc2Dl36XBzq537pThlOQCmmQNqwU7CX1v8UmP9wYvM
-	 xQujXCbLHqE1FbiUneVBHozH9WXSBefWVWQ9/JrtyedBMEjf2+AF4qNteBKX1xI78N
-	 U8/e6hWzwU0Gl7x0jHx4qOm5MXewKzk3bWfYM3Rc=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55CNwUjC2184921
+	s=ti-com-17Q1; t=1750155553;
+	bh=ilU3SWrSwhUxYONsLnE/KL4nu+YE16LkE7+qevVp5Cs=;
+	h=From:To:CC:Subject:Date;
+	b=Kd5zuIvQZCLanmbYACLvxLGu+KVqcZQHUHu6N1/qUbKBMpvnugSnUs+gWF2ox5UCF
+	 YF93w70d3XL+gx5M6D3UjOP/FNA8mv12YH/eZSA5GrB9nBAsxQECQwr/jW1KDGTqHd
+	 4UsABsncvVJcyyrgaxJgSkhQ/I7ATI7kfBBod1HU=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55HAJDWS1680634
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Thu, 12 Jun 2025 18:58:30 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 12
- Jun 2025 18:58:29 -0500
-Received: from fllvem-mr07.itg.ti.com (10.64.41.89) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 17 Jun 2025 05:19:13 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 17
+ Jun 2025 05:19:13 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 12 Jun 2025 18:58:29 -0500
-Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.64.72.21])
-	by fllvem-mr07.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55CNwTch965152;
-	Thu, 12 Jun 2025 18:58:29 -0500
-Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
-	id 9307D2356; Thu, 12 Jun 2025 18:58:29 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202506121146
-Date: Thu, 12 Jun 2025 18:58:29 -0500
-Message-ID: <20250612235829.1342698-1-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 2.43.5
+ Frontend Transport; Tue, 17 Jun 2025 05:19:13 -0500
+Received: from localhost (ula0502350.dhcp.ti.com [172.24.227.38])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55HAJCeS1512614;
+	Tue, 17 Jun 2025 05:19:13 -0500
+From: Paresh Bhagat <p-bhagat@ti.com>
+To: <meta-ti@lists.yoctoproject.org>, <denis@denix.org>, <praneeth@ti.com>,
+        <reatmon@ti.com>
+CC: <v-singh1@ti.com>, <c-shilwant@ti.com>, <khasim@ti.com>, <afd@ti.com>
+Subject: [scarthgap][PATCH] recipes-bsp: Add TI TAD5212 DAC firmware recipe
+Date: Tue, 17 Jun 2025 15:49:04 +0530
+Message-ID: <20250617101904.3686160-1-p-bhagat@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -54,69 +51,82 @@ X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 12 Jun 2025 23:58:38 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18644
+ <meta-ti@lists.yoctoproject.org>; Tue, 17 Jun 2025 10:19:20 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18645
 
-Updated the value(s) for:
-  ti-linux-fw: TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
-  u-boot-ti-staging_2025.01: SRCREV
-  linux-ti-staging_6.12: PV,SRCREV
+From: Vishnu Singh <v-singh1@ti.com>
 
-Changelogs:
-  ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/log/?qt=range&q=1ea29f4b3ec17bdc1a3431a014ea5224962dc779..a37c82f0e25e0e3c99fdf03f1d57f7b08314a2bc
-  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=c9c21ce31fc557c2f43c4991fcc0a11b1fd90a12..da601a5231bf1b053a35c94c5d57a5658ce2e4e7
-  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=20778f6c125dc24e62767dc4837d793a0f18c319..251ed68a96e3f85a5db174c9c39dc334c0f0ba5f
+Add TAD5212 DAC firmware images for am62dxx-evm to support two DAC
+configurations:
+- TAD5212_01.bin: Configures 1 DAC with stereo channel in i2s mode.
+- TAD5212_04.bin: Configures 4 DAC with each having stereo channel
+		  support in i2s mode.
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+Signed-off-by: Vishnu Singh <v-singh1@ti.com>
+Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
 ---
- meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 4 ++--
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb   | 4 ++--
- 3 files changed, 5 insertions(+), 5 deletions(-)
 
+This patch depends on new DAC firmware patch on ti-linux-firmware.
+
+Boot logs
+https://gist.github.com/paresh-bhagat12/e4e2a7a1291d0f2d7acd0971bf2ed539
+
+
+ meta-ti-bsp/conf/machine/include/am62dxx.inc  |  2 ++
+ .../recipes-bsp/ti-dac-fw/ti-dac-fw.bb        | 20 +++++++++++++++++++
+ .../recipes-bsp/ti-linux-fw/ti-linux-fw.inc   |  1 +
+ 3 files changed, 23 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb
+
+diff --git a/meta-ti-bsp/conf/machine/include/am62dxx.inc b/meta-ti-bsp/conf/machine/include/am62dxx.inc
+index ac4e8e17..3c60acb1 100644
+--- a/meta-ti-bsp/conf/machine/include/am62dxx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62dxx.inc
+@@ -13,3 +13,5 @@ IMAGE_BOOT_FILES += "tiboot3-am62dx-hs-evm.bin"
+ 
+ TFA_BOARD = "lite"
+ OPTEEMACHINE = "k3-am62x"
++
++MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "ti-dac-fw"
+diff --git a/meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb b/meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb
+new file mode 100644
+index 00000000..7d333b9e
+--- /dev/null
++++ b/meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "TI DAC TAD5212 config prebuild binary firmware"
++
++require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++
++LICENSE = "TI-TFL"
++LIC_FILES_CHKSUM = "file://${THISDIR}/../../licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
++
++PV = "${TAD5212_FW_VERSION}"
++PR = "${INC_PR}.0"
++
++COMPATIBLE_MACHINE = "am62dxx"
++
++TAD5212_1DEV = "TAD5212_01.bin"
++TAD5212_4DEV = "TAD5212_04.bin"
++
++do_install() {
++	install -d ${D}${nonarch_base_libdir}/firmware
++	install -m 0644 ${S}/ti/tad5212/${TAD5212_1DEV} ${D}${nonarch_base_libdir}/firmware/
++	install -m 0644 ${S}/ti/tad5212/${TAD5212_4DEV} ${D}${nonarch_base_libdir}/firmware/
++}
 diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 3c9836a0..d1dd9df3 100644
+index d1dd9df3..08cd0b30 100644
 --- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
 +++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -15,10 +15,10 @@ CADENCE_MHDP_FW_VERSION = "2.1.0"
- IMG_DEC_FW_VERSION = "1.0"
- CNM_WAVE521_FW_VERSION = "1.0.8"
+@@ -17,6 +17,7 @@ CNM_WAVE521_FW_VERSION = "1.0.8"
  TI_DM_FW_VERSION = "11.00.09"
--TI_SYSFW_VERSION = "11.00.07"
-+TI_SYSFW_VERSION = "11.01.00"
+ TI_SYSFW_VERSION = "11.01.00"
  TI_HSM_DEMO_FW_VERSION = "11.00.09"
++TAD5212_FW_VERSION = "1.0.0.0"
  
--TI_LINUX_FW_SRCREV ?= "1ea29f4b3ec17bdc1a3431a014ea5224962dc779"
-+TI_LINUX_FW_SRCREV ?= "a37c82f0e25e0e3c99fdf03f1d57f7b08314a2bc"
+ TI_LINUX_FW_SRCREV ?= "a37c82f0e25e0e3c99fdf03f1d57f7b08314a2bc"
  SRCREV = "${TI_LINUX_FW_SRCREV}"
- 
- BRANCH ?= "ti-linux-firmware"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-index 3ffbcd01..c1a1ad53 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-@@ -6,4 +6,4 @@ PR = "r0"
- 
- BRANCH = "ti-u-boot-2025.01"
- 
--SRCREV = "c9c21ce31fc557c2f43c4991fcc0a11b1fd90a12"
-+SRCREV = "da601a5231bf1b053a35c94c5d57a5658ce2e4e7"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-index 277c6769..be3274dd 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-@@ -23,8 +23,8 @@ S = "${WORKDIR}/git"
- 
- BRANCH ?= "ti-linux-6.12.y"
- 
--SRCREV ?= "20778f6c125dc24e62767dc4837d793a0f18c319"
--PV = "6.12.24+git"
-+SRCREV ?= "251ed68a96e3f85a5db174c9c39dc334c0f0ba5f"
-+PV = "6.12.33+git"
- 
- # Special configuration for remoteproc/rpmsg IPC modules
- module_conf_rpmsg_client_sample = "blacklist rpmsg_client_sample"
 -- 
-2.43.5
+2.34.1
 
 
