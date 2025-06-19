@@ -1,98 +1,115 @@
-Return-Path: <rpjday@crashcourse.ca>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5278AC7115C
-	for <webhook@archiver.kernel.org>; Thu, 19 Jun 2025 11:50:54 +0000 (UTC)
-Received: from cpanel10.indieserve.net (cpanel10.indieserve.net [199.212.143.9])
- by mx.groups.io with SMTP id smtpd.web10.12963.1750333846134767769
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E726DC7115B
+	for <webhook@archiver.kernel.org>; Thu, 19 Jun 2025 21:54:06 +0000 (UTC)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ by mx.groups.io with SMTP id smtpd.web10.814.1750370037796543403
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 19 Jun 2025 04:50:46 -0700
+ Thu, 19 Jun 2025 14:53:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@crashcourse.ca header.s=default header.b=OFNkTi4H;
- spf=pass (domain: crashcourse.ca, ip: 199.212.143.9, mailfrom: rpjday@crashcourse.ca)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=crashcourse.ca; s=default; h=Content-Type:MIME-Version:Message-ID:Subject:
-	To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=QR/bfbUOcd6CqMIxr7Aaq3PC75QEVTUo1oAqju0hVXA=; b=OFNkTi4Hf5o3iRBGQwZae+aZ0O
-	BIMXNBppTFw7eE30FrW/QwPVRYnvwvAYoFqV32iYVvviMKmm4tvVVppqCQVTjE1YRZKGCPn2hDFZG
-	ihPMiPCuyvu41ABGw52T1bJTvZSE/fwksji0zR7eh9ifZgtXLgGybc91E3bYJCLKOfnNYNygBIPSj
-	Xxiu50bgSTwjh/PuXDRPsPTsCJtTUksqpauG1iavBzORRdoD6l5LL0ESi45Bnm0X+nybemz44ahz3
-	p+T3YoL8UkBL1eFe8cXvVGDBEPkc7VTskJHaDUPb04BGktfyu9RkMMgt3ICTVdJqr6NyGSr8Su3yg
-	tyJiF+Vg==;
-Received: from pool-174-114-102-5.cpe.net.cable.rogers.com ([174.114.102.5]:49702 helo=asus)
-	by cpanel10.indieserve.net with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
-	(Exim 4.98.2)
-	(envelope-from <rpjday@crashcourse.ca>)
-	id 1uSDmx-0000000CUoJ-0xmm
-	for meta-ti@lists.yoctoproject.org;
-	Thu, 19 Jun 2025 07:50:41 -0400
-Date: Thu, 19 Jun 2025 07:50:33 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-To: meta-ti@lists.yoctoproject.org
-Subject: is this the right place to ask about building for PocketBeagle 2?
-Message-ID: <23a7970c-aeb0-9441-7740-d0324aecce55@crashcourse.ca>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=FxSsUUuC;
+ spf=pass (domain: list.ti.com, ip: 198.47.23.235, mailfrom: lcpdbld@list.ti.com)
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55JLruVK697564;
+	Thu, 19 Jun 2025 16:53:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1750370036; i=@ti.com;
+	bh=T0Et7vZuOb2PfDIrF7w+IlHxWpFFk2T3NBaIPMZL6U0=;
+	h=From:To:Subject:Date;
+	b=FxSsUUuCV5PsWFYcyoOl9ti31+y4ssIunWkmtREK5yPbkJNxixbB/j09Sahqpq/Pq
+	 I4WeSTcZ1WK2v84TkExxyhuuY3va9G84zUGQJvMD5iuCym5WUe1JGcuppXAqoOmPTa
+	 lrRAylCKswwrsI4/7kyguflr9N36souVSWlhnSrc=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55JLruSf1672410
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+	Thu, 19 Jun 2025 16:53:56 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 19
+ Jun 2025 16:53:26 -0500
+Received: from fllvem-mr07.itg.ti.com (10.64.41.89) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 19 Jun 2025 16:53:26 -0500
+Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.64.72.21])
+	by fllvem-mr07.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55JLrQQd3587882;
+	Thu, 19 Jun 2025 16:53:26 -0500
+Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
+	id 4E3242359; Thu, 19 Jun 2025 16:53:26 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202506191239
+Date: Thu, 19 Jun 2025 16:53:26 -0500
+Message-ID: <20250619215326.1589995-1-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel10.indieserve.net
-X-AntiAbuse: Original Domain - lists.yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Get-Message-Sender-Via: cpanel10.indieserve.net: authenticated_id: rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
-X-Authenticated-Sender: cpanel10.indieserve.net: rpjday@crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 19 Jun 2025 11:50:54 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18657
+ <meta-ti@lists.yoctoproject.org>; Thu, 19 Jun 2025 21:54:06 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18658
 
+Updated the value(s) for:
+  ti-linux-fw: TI_LINUX_FW_SRCREV
+  u-boot-ti-staging_2025.01: SRCREV
+  linux-ti-staging_6.12: SRCREV
 
-  I'm trying to build a simple core-image-minimal for the
-PocketBeagle 2; I've checked out the walnascar branch for Poky, and
-the master branches for all of meta-ti and meta-arm. (I'm using
-MACHINE "pocketbeagle2").
+Changelogs:
+  ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/log/?qt=range&q=a37c82f0e25e0e3c99fdf03f1d57f7b08314a2bc..e594deb508a322d5681888d48fbb153953b06ca9
+  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=da601a5231bf1b053a35c94c5d57a5658ce2e4e7..c99a1f082ba4970678c9cb5100d13a986e77817c
+  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=251ed68a96e3f85a5db174c9c39dc334c0f0ba5f..34d0b070130a8cd2cddd9260389ad974e8cb8468
 
-  I started a fresh build by building the kernel first, and that
-worked. So I then fired off a build of core-image-minimal, but I can't
-get past this point:
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 2 +-
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb   | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-$ bitbake core-image-minimal
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 08cd0b30..61364c66 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -19,7 +19,7 @@ TI_SYSFW_VERSION = "11.01.00"
+ TI_HSM_DEMO_FW_VERSION = "11.00.09"
+ TAD5212_FW_VERSION = "1.0.0.0"
+ 
+-TI_LINUX_FW_SRCREV ?= "a37c82f0e25e0e3c99fdf03f1d57f7b08314a2bc"
++TI_LINUX_FW_SRCREV ?= "e594deb508a322d5681888d48fbb153953b06ca9"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+index c1a1ad53..329c2af0 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+@@ -6,4 +6,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2025.01"
+ 
+-SRCREV = "da601a5231bf1b053a35c94c5d57a5658ce2e4e7"
++SRCREV = "c99a1f082ba4970678c9cb5100d13a986e77817c"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+index be3274dd..f7cb439f 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.12.y"
+ 
+-SRCREV ?= "251ed68a96e3f85a5db174c9c39dc334c0f0ba5f"
++SRCREV ?= "34d0b070130a8cd2cddd9260389ad974e8cb8468"
+ PV = "6.12.33+git"
+ 
+ # Special configuration for remoteproc/rpmsg IPC modules
+-- 
+2.43.5
 
-...snip ...
-
-| /home/rpjday/oe/builds/pocket2/tmp-k3r5/hosttools/ld:
-src/options/re2d-symtab.o: in function
-`re2c::add_named_def(std::map<char const*, re2c::AstNode const*,
-re2c::symtab_cmp_t, std::allocator<std::pair<char const* const,
-re2c::AstNode const*> > >&, char const*, re2c::AstNode const*,
-re2c::Input&)':
-| symtab.cc:(.text+0x1f2): undefined reference to
-`re2c::Input::error_at_tok(char const*, ...) const'
-| /home/rpjday/oe/builds/pocket2/tmp-k3r5/hosttools/ld: warning:
-creating DT_TEXTREL in a PIE
-| collect2: error: ld returned 1 exit status
-| make[2]: Leaving directory
-'/home/rpjday/oe/builds/pocket2/tmp-k3r5/work/x86_64-linux/re2c-native/4.1/build'
-| make[2]: *** [Makefile:4410: re2d] Error 1
-| make[1]: Leaving directory
-'/home/rpjday/oe/builds/pocket2/tmp-k3r5/work/x86_64-linux/re2c-native/4.1/build'
-| make[1]: *** [Makefile:16347: all-recursive] Error 1
-| make: *** [Makefile:3670: all] Error 2
-| ERROR: oe_runmake failed
-| WARNING: exit code 1 from a shell command.
-ERROR: Task
-(mc:k3r5:virtual:native:/home/rpjday/oe/layers/walnascar/poky/meta/recipes-support/re2c/re2c_4.1.bb:do_compile)
-failed with exit code '1'
-
-I can clean everything and start from scratch, but does this any of
-this look familiar?  Am I using the correct branches?
-
-rday
 
