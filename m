@@ -1,144 +1,98 @@
-Return-Path: <afd@ti.com>
+Return-Path: <rpjday@crashcourse.ca>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29A8CC7115A
-	for <webhook@archiver.kernel.org>; Wed, 18 Jun 2025 17:08:17 +0000 (UTC)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- by mx.groups.io with SMTP id smtpd.web11.1182.1750266493423005151
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5278AC7115C
+	for <webhook@archiver.kernel.org>; Thu, 19 Jun 2025 11:50:54 +0000 (UTC)
+Received: from cpanel10.indieserve.net (cpanel10.indieserve.net [199.212.143.9])
+ by mx.groups.io with SMTP id smtpd.web10.12963.1750333846134767769
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 18 Jun 2025 10:08:13 -0700
+ Thu, 19 Jun 2025 04:50:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ShuXwQy7;
- spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: afd@ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55IH8BI0369448;
-	Wed, 18 Jun 2025 12:08:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1750266491;
-	bh=WL0UZR6PtzFPvh4pdat6hh9lroOIcUKJLLu8Deqr/Rg=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=ShuXwQy7EAVWVHMSJ2Vtb/piI7aww2STBiVFS0ZJLw3K3hH9eoZbPgtPJWDbhYrgY
-	 W8tLxPmwaxNqjniI4uBxhLrJaN7jXSH9YNemABdJEJYCM2P/mprUgqI32b0c+khwH6
-	 2SQ+7G9z3X383BSz+E33V8VchvflWcFyhDyAyFRk=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55IH8BZP562104
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Wed, 18 Jun 2025 12:08:11 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 18
- Jun 2025 12:08:11 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 18 Jun 2025 12:08:11 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55IH8AE43854752;
-	Wed, 18 Jun 2025 12:08:10 -0500
-Message-ID: <5bd386d1-f911-4b14-ab1b-368f847adafc@ti.com>
-Date: Wed, 18 Jun 2025 12:08:10 -0500
+ dkim=pass header.i=@crashcourse.ca header.s=default header.b=OFNkTi4H;
+ spf=pass (domain: crashcourse.ca, ip: 199.212.143.9, mailfrom: rpjday@crashcourse.ca)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=crashcourse.ca; s=default; h=Content-Type:MIME-Version:Message-ID:Subject:
+	To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=QR/bfbUOcd6CqMIxr7Aaq3PC75QEVTUo1oAqju0hVXA=; b=OFNkTi4Hf5o3iRBGQwZae+aZ0O
+	BIMXNBppTFw7eE30FrW/QwPVRYnvwvAYoFqV32iYVvviMKmm4tvVVppqCQVTjE1YRZKGCPn2hDFZG
+	ihPMiPCuyvu41ABGw52T1bJTvZSE/fwksji0zR7eh9ifZgtXLgGybc91E3bYJCLKOfnNYNygBIPSj
+	Xxiu50bgSTwjh/PuXDRPsPTsCJtTUksqpauG1iavBzORRdoD6l5LL0ESi45Bnm0X+nybemz44ahz3
+	p+T3YoL8UkBL1eFe8cXvVGDBEPkc7VTskJHaDUPb04BGktfyu9RkMMgt3ICTVdJqr6NyGSr8Su3yg
+	tyJiF+Vg==;
+Received: from pool-174-114-102-5.cpe.net.cable.rogers.com ([174.114.102.5]:49702 helo=asus)
+	by cpanel10.indieserve.net with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <rpjday@crashcourse.ca>)
+	id 1uSDmx-0000000CUoJ-0xmm
+	for meta-ti@lists.yoctoproject.org;
+	Thu, 19 Jun 2025 07:50:41 -0400
+Date: Thu, 19 Jun 2025 07:50:33 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+To: meta-ti@lists.yoctoproject.org
+Subject: is this the right place to ask about building for PocketBeagle 2?
+Message-ID: <23a7970c-aeb0-9441-7740-d0324aecce55@crashcourse.ca>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [scarthgap][PATCH v3] recipes-bsp: Add TI TAD5212 DAC firmware
- recipe
-To: Paresh Bhagat <p-bhagat@ti.com>, <meta-ti@lists.yoctoproject.org>,
-        <denis@denix.org>, <praneeth@ti.com>, <reatmon@ti.com>
-CC: <v-singh1@ti.com>, <c-shilwant@ti.com>, <khasim@ti.com>
-References: <20250618170217.2577275-1-p-bhagat@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250618170217.2577275-1-p-bhagat@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=US-ASCII
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel10.indieserve.net
+X-AntiAbuse: Original Domain - lists.yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Get-Message-Sender-Via: cpanel10.indieserve.net: authenticated_id: rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
+X-Authenticated-Sender: cpanel10.indieserve.net: rpjday@crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 18 Jun 2025 17:08:17 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18656
+ <meta-ti@lists.yoctoproject.org>; Thu, 19 Jun 2025 11:50:54 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18657
 
-On 6/18/25 12:02 PM, Paresh Bhagat wrote:
-> From: Vishnu Singh <v-singh1@ti.com>
-> 
-> Add TAD5212 DAC firmware images for am62dxx-evm to support two DAC
-> configurations:
-> - tad5212_01.bin: Configures 1 DAC with stereo channel in i2s mode.
-> - tad5212_04.bin: Configures 4 DAC with each having stereo channel
-> 		  support in i2s mode.
-> 
-> Signed-off-by: Vishnu Singh <v-singh1@ti.com>
-> Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
-> ---
-> Boot logs
-> https://gist.github.com/paresh-bhagat12/38ad3188e2da2546627341cd9416ccad
-> 
-> Change log:
-> V2 -> V3:
-> 	- Removed redundant info in recipe(licesne and checksum)
-> 	- Package firmware only for am62dxx-evm
-> 
-> V1 -> V2:
-> 	- Updated names of firmware in recipe
-> 
->   meta-ti-bsp/conf/machine/am62dxx-evm.conf       |  2 ++
->   meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb  | 17 +++++++++++++++++
->   .../recipes-bsp/ti-linux-fw/ti-linux-fw.inc     |  1 +
->   3 files changed, 20 insertions(+)
->   create mode 100644 meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb
-> 
-> diff --git a/meta-ti-bsp/conf/machine/am62dxx-evm.conf b/meta-ti-bsp/conf/machine/am62dxx-evm.conf
-> index 9fbbb90a..1e41c53c 100644
-> --- a/meta-ti-bsp/conf/machine/am62dxx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62dxx-evm.conf
-> @@ -14,3 +14,5 @@ KERNEL_DEVICETREE = ""
->   FIT_CONF_DEFAULT_DTB = "ti/k3-am62d2-evm.dtb"
->   
->   UBOOT_MACHINE = "am62dx_evm_a53_defconfig"
-> +
-> +MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "ti-dac-fw"
-> diff --git a/meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb b/meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb
-> new file mode 100644
-> index 00000000..8f68009d
-> --- /dev/null
-> +++ b/meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb
-> @@ -0,0 +1,17 @@
-> +DESCRIPTION = "TI DAC TAD5212 config prebuild binary firmware"
-> +
-> +require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> +
-> +PV = "${TAD5212_FW_VERSION}"
-> +PR = "${INC_PR}.0"
-> +
-> +COMPATIBLE_MACHINE = "am62dxx"
-> +
-> +TAD5212_1DEV = "tad5212_01.bin"
-> +TAD5212_4DEV = "tad5212_04.bin"
 
-You usually don't need to make variable definitions like this if you
-don't plan to vary the value and are only going to use the definition
-once, easier to just use the name directly.
+  I'm trying to build a simple core-image-minimal for the
+PocketBeagle 2; I've checked out the walnascar branch for Poky, and
+the master branches for all of meta-ti and meta-arm. (I'm using
+MACHINE "pocketbeagle2").
 
-But that is just nitpicking, everything else LGTM,
+  I started a fresh build by building the kernel first, and that
+worked. So I then fired off a build of core-image-minimal, but I can't
+get past this point:
 
-Reviewed-by: Andrew Davis <afd@ti.com>
+$ bitbake core-image-minimal
 
-> +
-> +do_install() {
-> +	install -d ${D}${nonarch_base_libdir}/firmware
-> +	install -m 0644 ${S}/ti/tad5212/${TAD5212_1DEV} ${D}${nonarch_base_libdir}/firmware/
-> +	install -m 0644 ${S}/ti/tad5212/${TAD5212_4DEV} ${D}${nonarch_base_libdir}/firmware/
-> +}
-> diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> index d1dd9df3..08cd0b30 100644
-> --- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> +++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> @@ -17,6 +17,7 @@ CNM_WAVE521_FW_VERSION = "1.0.8"
->   TI_DM_FW_VERSION = "11.00.09"
->   TI_SYSFW_VERSION = "11.01.00"
->   TI_HSM_DEMO_FW_VERSION = "11.00.09"
-> +TAD5212_FW_VERSION = "1.0.0.0"
->   
->   TI_LINUX_FW_SRCREV ?= "a37c82f0e25e0e3c99fdf03f1d57f7b08314a2bc"
->   SRCREV = "${TI_LINUX_FW_SRCREV}"
+...snip ...
+
+| /home/rpjday/oe/builds/pocket2/tmp-k3r5/hosttools/ld:
+src/options/re2d-symtab.o: in function
+`re2c::add_named_def(std::map<char const*, re2c::AstNode const*,
+re2c::symtab_cmp_t, std::allocator<std::pair<char const* const,
+re2c::AstNode const*> > >&, char const*, re2c::AstNode const*,
+re2c::Input&)':
+| symtab.cc:(.text+0x1f2): undefined reference to
+`re2c::Input::error_at_tok(char const*, ...) const'
+| /home/rpjday/oe/builds/pocket2/tmp-k3r5/hosttools/ld: warning:
+creating DT_TEXTREL in a PIE
+| collect2: error: ld returned 1 exit status
+| make[2]: Leaving directory
+'/home/rpjday/oe/builds/pocket2/tmp-k3r5/work/x86_64-linux/re2c-native/4.1/build'
+| make[2]: *** [Makefile:4410: re2d] Error 1
+| make[1]: Leaving directory
+'/home/rpjday/oe/builds/pocket2/tmp-k3r5/work/x86_64-linux/re2c-native/4.1/build'
+| make[1]: *** [Makefile:16347: all-recursive] Error 1
+| make: *** [Makefile:3670: all] Error 2
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
+ERROR: Task
+(mc:k3r5:virtual:native:/home/rpjday/oe/layers/walnascar/poky/meta/recipes-support/re2c/re2c_4.1.bb:do_compile)
+failed with exit code '1'
+
+I can clean everything and start from scratch, but does this any of
+this look familiar?  Am I using the correct branches?
+
+rday
 
