@@ -1,149 +1,145 @@
-Return-Path: <jcormier@criticallink.com>
+Return-Path: <rpjday@crashcourse.ca>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC1ACC7115C
-	for <webhook@archiver.kernel.org>; Fri, 20 Jun 2025 21:08:12 +0000 (UTC)
-Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com [209.85.219.173])
- by mx.groups.io with SMTP id smtpd.web10.6884.1750453687699938987
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05E3CC7115B
+	for <webhook@archiver.kernel.org>; Fri, 20 Jun 2025 21:20:13 +0000 (UTC)
+Received: from cpanel10.indieserve.net (cpanel10.indieserve.net [199.212.143.9])
+ by mx.groups.io with SMTP id smtpd.web10.7112.1750454410837129999
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 20 Jun 2025 14:08:07 -0700
+ Fri, 20 Jun 2025 14:20:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@criticallink.com header.s=google header.b=DEi0stwg;
- spf=pass (domain: criticallink.com, ip: 209.85.219.173, mailfrom: jcormier@criticallink.com)
-Received: by mail-yb1-f173.google.com with SMTP id 3f1490d57ef6-e81ec95d944so1995849276.1
-        for <meta-ti@lists.yoctoproject.org>; Fri, 20 Jun 2025 14:08:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=criticallink.com; s=google; t=1750453687; x=1751058487; darn=lists.yoctoproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0y+DPw/jutlA+RBljLQA9YlzfCIcn/NwMWMwTLS2bss=;
-        b=DEi0stwgFhD388bG9zBbabGXbxCbfTrmKMB/VlFlXPMkviZz07JM3vCMSH82D/vD8M
-         HAQftgGxzbsutLdsM+/5z+uvk09d3vBhMf5s4NU4Ye56Hekrmt+Vry2MyKMWo7bdpWVw
-         1ZUBBF0OOlM1wU8KjFMV1SpSbHFNPYowKeEhXuglq4Fb0wplG5Cv6Bt8RBrdl41cQq4F
-         cEaP76CBr19MDssTST49WaPMsDY6c6AdqsppUBZJzHormv9m5dQNcHrRDiktz8Ai+DbV
-         03RiyTS8i022lxHwtO0OVNY7sZCHtxn88bmFNryma5EhpPNBZ6x9hq0VqNoXw+y29oGG
-         2OAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750453687; x=1751058487;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=0y+DPw/jutlA+RBljLQA9YlzfCIcn/NwMWMwTLS2bss=;
-        b=sC7OiWHi0LpjUsU2vrEU52UjHqlStsD+/P9TV6neoDUFN1oPEXObMdCAI6HrRnIbqY
-         vvm0v+WM3/QkEVmwm1UKST6UUJd1MWcoW1phU1kT5FBYI+HpOI7O7fdCYUMQJ32oqEN4
-         0wVjf5v5ME/kuZX3PZH7rVt4+sdWkD/Ektv8jMq7Elbk06KuNnl3cTjtHRRnd7Ggzi4r
-         mk2AU10ga6sPgqu2nU2T/bmWHccy9thg12S0m1+JKZJQa8Fttfd2jMNpesVD97GWY5dJ
-         yOJTYgngv34eflkAMEAJbeEKKKrYUSUBm1kO8VFMpkEDnZFdsPTQ0c6Q+m4x8BlfY4LO
-         AyKw==
-X-Forwarded-Encrypted: i=1; AJvYcCU9bEctYqQwJK7nzWqcyPKoXQDSCRFU/aFv5s74JhfT7z6q14nkcCzYxH9TkBMKPY7XnkH1QSWJ@lists.yoctoproject.org
-X-Gm-Message-State: AOJu0Yz+hEsxUowcBV3oBxTVa33V9wlcMdF8bh5darisUFeXSq3o8uWF
-	mAmJ04RQCdztNnlPFq97n8X6SFWQPjEQZAU/QaOFs/NqI733IL9gL7vxuAGgILDd0vGJXC3ACdF
-	f4u8lJkV7etXTLvQR4PpAlckXH6FNLGmG97GWKsTI
-X-Gm-Gg: ASbGnctIJ3bb5TcsOL2dcF8ib7NyeOdfHL5N+qkqHk5v9P48IP19k9qtj6XkfnN4anS
-	fjy1Q/nqZ93Zr+JZ1yH8rrsADt6iI8AAp2e4snCrYY/5MXBcquL++sU5+Tj6CzPbHGxcYIL/nMm
-	YHIHYxlgHtln7xom00dOWHeNDtutjFm0JYlUWH8Sy8jQ==
-X-Google-Smtp-Source: AGHT+IHT24F3gWup+z2utBO3zb58pBt+4zHyTnavCZJ+tZY3eL/iagNDnofsbgqQmdFt79ze6M/zCP4KRmMqtOpSoqY=
-X-Received: by 2002:a05:690c:9418:10b0:712:c295:d01f with SMTP id
- 00721157ae682-712ca2f7576mr34512877b3.3.1750453686732; Fri, 20 Jun 2025
- 14:08:06 -0700 (PDT)
-MIME-Version: 1.0
-References: <23a7970c-aeb0-9441-7740-d0324aecce55@crashcourse.ca>
- <ee9fb18b-d0b4-40cd-bb1d-b1e883ed86c8@ti.com> <535c39ee-0174-b4ef-e3ef-5500cb493762@crashcourse.ca>
- <20250620184347.GI18383@denix.org>
-In-Reply-To: <20250620184347.GI18383@denix.org>
-From: Jon Cormier <jcormier@criticallink.com>
-Date: Fri, 20 Jun 2025 17:07:55 -0400
-X-Gm-Features: AX0GCFucsTqXCA7WvpEMYQE2lwljCMkumHG8Y7Otm9BbpsFasv90mTB2uxMjQ4E
-Message-ID: <CADL8D3bd2uX_QzwOHZKDnwhRN9dsTZ3zOVv8MyBDJaDDGBSrcg@mail.gmail.com>
+ dkim=pass header.i=@crashcourse.ca header.s=default header.b=bSZCJLXo;
+ spf=pass (domain: crashcourse.ca, ip: 199.212.143.9, mailfrom: rpjday@crashcourse.ca)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=crashcourse.ca; s=default; h=Content-Type:MIME-Version:References:
+	Message-ID:In-Reply-To:Subject:cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=fmniKFWrvDhMDHjBkEauwHFeBMmJEdEMs2Xc0sYgv60=; b=bSZCJLXoSDz3yGdYU1inp2Kwzj
+	53PeSGoY04qqD+4w7kLzw9pSOabEbcyimhF8G5ahIpoVIPo+fvjBN7AXJq5YR3LOCRTPKsDT0lKvd
+	1e61lmtEG1AGcqmlii21P2HyyaM5rmuqzxk+Fp/iIfH9C6lyMttJQKBefrKw8WiR7UMEDBvPSJELA
+	rGuPvHPeeyrT0Om0ViybCS0gOteXqY64tV7wt5XgCrqzoUggcNX3O3x8HH1FvL+U6qdfmvWs7WU1j
+	9YYUIYHad97Z3yRUMMjTvzmlBQOg1roujJXRLcNKXeb3rGnHcD+N26/I+bmx5MvjfBnN0Fs/asdGm
+	T2wA8GDQ==;
+Received: from pool-174-115-41-146.cpe.net.cable.rogers.com ([174.115.41.146]:57652 helo=asus)
+	by cpanel10.indieserve.net with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <rpjday@crashcourse.ca>)
+	id 1uSj9W-00000000boJ-3urH;
+	Fri, 20 Jun 2025 17:20:07 -0400
+Date: Fri, 20 Jun 2025 17:19:50 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+To: Jon Cormier <jcormier@criticallink.com>
+cc: denis@denix.org, Andrew Davis <afd@ti.com>, meta-ti@lists.yoctoproject.org
 Subject: Re: [meta-ti] is this the right place to ask about building for
  PocketBeagle 2?
-To: denis@denix.org
-Cc: "Robert P. J. Day" <rpjday@crashcourse.ca>, Andrew Davis <afd@ti.com>, meta-ti@lists.yoctoproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <CADL8D3bd2uX_QzwOHZKDnwhRN9dsTZ3zOVv8MyBDJaDDGBSrcg@mail.gmail.com>
+Message-ID: <2d0d7d2f-69fe-43f3-ddc4-dc77907c01b1@crashcourse.ca>
+References: <23a7970c-aeb0-9441-7740-d0324aecce55@crashcourse.ca> <ee9fb18b-d0b4-40cd-bb1d-b1e883ed86c8@ti.com> <535c39ee-0174-b4ef-e3ef-5500cb493762@crashcourse.ca> <20250620184347.GI18383@denix.org>
+ <CADL8D3bd2uX_QzwOHZKDnwhRN9dsTZ3zOVv8MyBDJaDDGBSrcg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="8323329-1680700882-1750454404=:2518381"
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel10.indieserve.net
+X-AntiAbuse: Original Domain - lists.yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Get-Message-Sender-Via: cpanel10.indieserve.net: authenticated_id: rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
+X-Authenticated-Sender: cpanel10.indieserve.net: rpjday@crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 20 Jun 2025 21:08:12 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18662
+ <meta-ti@lists.yoctoproject.org>; Fri, 20 Jun 2025 21:20:13 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18663
 
-Likely you need to add wic to IMAGE_FSTYPES.
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-IMAGE_FSTYPES +=3D "wic wic.xz wic.bmap"
+--8323329-1680700882-1750454404=:2518381
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
 
+On Fri, 20 Jun 2025, Jon Cormier wrote:
 
-On Fri, Jun 20, 2025 at 2:43=E2=80=AFPM Denys Dmytriyenko via
-lists.yoctoproject.org <denis=3Ddenix.org@lists.yoctoproject.org> wrote:
+> Likely you need to add wic to IMAGE_FSTYPES.
 >
-> On Fri, Jun 20, 2025 at 12:27:47PM -0400, Robert P. J. Day wrote:
-> > On Thu, 19 Jun 2025, Andrew Davis wrote:
+> IMAGE_FSTYPES += "wic wic.xz wic.bmap"
+
+  "bitbake -e ..." shows that part of that is already set:
+
+IMAGE_FSTYPES=" tar.xz wic.xz wic.bmap"
+
+but i'll add "wic" to the list.
+
+> On Fri, Jun 20, 2025 at 2:43 PM Denys Dmytriyenko via
+> lists.yoctoproject.org <denis=denix.org@lists.yoctoproject.org> wrote:
 > >
-> > > On 6/19/25 6:50 AM, Robert P. J. Day wrote:
-> > > > is this the right place to ask about building for PocketBeagle 2?
+> > On Fri, Jun 20, 2025 at 12:27:47PM -0400, Robert P. J. Day wrote:
+> > > On Thu, 19 Jun 2025, Andrew Davis wrote:
 > > >
-> > > The Beagle forums and Discord channel are probably the best place,
-> > > but we are friendly here so let's see if we can help you out :)
-> > >
-> > > >    I'm trying to build a simple core-image-minimal for the
-> > > > PocketBeagle 2; I've checked out the walnascar branch for Poky, and
-> > > > the master branches for all of meta-ti and meta-arm. (I'm using
-> > > > MACHINE "pocketbeagle2").
+> > > > On 6/19/25 6:50 AM, Robert P. J. Day wrote:
+> > > > > is this the right place to ask about building for PocketBeagle 2?
 > > > >
-> > > Why use walnascar for Poky but master for the other branches? You sho=
-uldn't
-> > > mix like that, if you want master then all branches should be master.=
- Note
-> > > though that master is a moving target and there is no guarantee to bu=
-ild.
+> > > > The Beagle forums and Discord channel are probably the best place,
+> > > > but we are friendly here so let's see if we can help you out :)
+> > > >
+> > > > >    I'm trying to build a simple core-image-minimal for the
+> > > > > PocketBeagle 2; I've checked out the walnascar branch for Poky, and
+> > > > > the master branches for all of meta-ti and meta-arm. (I'm using
+> > > > > MACHINE "pocketbeagle2").
+> > > > >
+> > > > Why use walnascar for Poky but master for the other branches? You shouldn't
+> > > > mix like that, if you want master then all branches should be master. Note
+> > > > though that master is a moving target and there is no guarantee to build.
+> > > >
+> > > > We don't provide a walnascar branch for meta-ti, but if you want to set
+> > > > all your layers back to scarthgap then you should have no issue building
+> > > > for pocketbeagle2.
+> > > >
+> > > > Looking at the actual issue, seems to be some failure building re2c
+> > > > which is provided by the oe-core layer, nothing specific to TI or
+> > > > the PocketBeagle2. Also looks like re2c was updated to 4.2 back in
+> > > > May so I'd also guess you haven't updated your branches in a while,
+> > > > start with that.
+> > > >
+> > > > Andrew
 > > >
-> > > We don't provide a walnascar branch for meta-ti, but if you want to s=
-et
-> > > all your layers back to scarthgap then you should have no issue build=
-ing
-> > > for pocketbeagle2.
-> > >
-> > > Looking at the actual issue, seems to be some failure building re2c
-> > > which is provided by the oe-core layer, nothing specific to TI or
-> > > the PocketBeagle2. Also looks like re2c was updated to 4.2 back in
-> > > May so I'd also guess you haven't updated your branches in a while,
-> > > start with that.
-> > >
-> > > Andrew
+> > >   Thanks for your guidance ... I eventually got a build, despite
+> > > weird, non-reproducible build errors. In the end, I built a
+> > > core-image-minimal for the PocketBeagle2, but did not get a final SD
+> > > card image, so I guess there's no .wks file that's associated with
+> > > this particular build. I will keep poking around.
 > >
-> >   Thanks for your guidance ... I eventually got a build, despite
-> > weird, non-reproducible build errors. In the end, I built a
-> > core-image-minimal for the PocketBeagle2, but did not get a final SD
-> > card image, so I guess there's no .wks file that's associated with
-> > this particular build. I will keep poking around.
+> > # pre-expansion value:
+> > #   "${@bb.utils.contains("MACHINE_FEATURES", "efi", "sdimage-2part-efi.wks.in", "sdimage-2part.wks", d)}"
+> > WKS_FILE="sdimage-2part.wks"
+> >
+> > --
+> > Denys
+> >
+> > -=-=-=-=-=-=-=-=-=-=-=-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#18661): https://lists.yoctoproject.org/g/meta-ti/message/18661
+> > Mute This Topic: https://lists.yoctoproject.org/mt/113723766/7902621
+> > Group Owner: meta-ti+owner@lists.yoctoproject.org
+> > Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [jcormier@criticallink.com]
+> > -=-=-=-=-=-=-=-=-=-=-=-
+> >
 >
-> # pre-expansion value:
-> #   "${@bb.utils.contains("MACHINE_FEATURES", "efi", "sdimage-2part-efi.w=
-ks.in", "sdimage-2part.wks", d)}"
-> WKS_FILE=3D"sdimage-2part.wks"
 >
 > --
-> Denys
+> Jonathan Cormier
+> Senior Software Engineer
 >
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#18661): https://lists.yoctoproject.org/g/meta-ti/mess=
-age/18661
-> Mute This Topic: https://lists.yoctoproject.org/mt/113723766/7902621
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [jcormier@cri=
-ticallink.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Voice:  315.425.4045 x222
 >
-
-
---=20
-Jonathan Cormier
-Senior Software Engineer
-
-Voice:  315.425.4045 x222
-
-http://www.CriticalLink.com
-6712 Brooklawn Parkway, Syracuse, NY 13211
+> http://www.CriticalLink.com
+> 6712 Brooklawn Parkway, Syracuse, NY 13211
+>
+--8323329-1680700882-1750454404=:2518381--
 
