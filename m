@@ -1,137 +1,182 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F526C77B7F
-	for <webhook@archiver.kernel.org>; Fri, 27 Jun 2025 13:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31EDCC77B7F
+	for <webhook@archiver.kernel.org>; Fri, 27 Jun 2025 14:32:28 +0000 (UTC)
 Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- by mx.groups.io with SMTP id smtpd.web10.13451.1751030126978909117
+ by mx.groups.io with SMTP id smtpd.web10.15226.1751034742838134068
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 27 Jun 2025 06:15:27 -0700
+ Fri, 27 Jun 2025 07:32:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=w4Gp8xXt;
- spf=pass (domain: list.ti.com, ip: 198.47.19.246, mailfrom: lcpdbld@list.ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55RDFPRF2758851;
-	Fri, 27 Jun 2025 08:15:25 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Pbb80gpc;
+ spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: reatmon@ti.com)
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55REWMAK2777520
+	for <meta-ti@lists.yoctoproject.org>; Fri, 27 Jun 2025 09:32:22 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1751030125; i=@ti.com;
-	bh=/ph8jkIomZGnpdnjpFZIYMeMCq4Bqo517DnTjUWlZHM=;
-	h=From:To:Subject:Date;
-	b=w4Gp8xXtt+5u/tuYZMNE00G3CVsbPZRbtfB3EpGIm7jn01H7bJnee5ZZFUoI6Oq1w
-	 HPj3h1sTN076vqf2K8dbRTpPPynALBfUUXPkbSHzLY1lQjWlp45edlvZbiD/YDVX/N
-	 v3PRDbuI6HOgtHrLxIZs7o4LdxhlR4PB0zv6mwko=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55RDFPeI413093
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Fri, 27 Jun 2025 08:15:25 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1751034742;
+	bh=whtCtSNNOV2lUIr5m8YRY35EH4hXsXLwG4ZIdF7Zbs8=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=Pbb80gpc4K+/obWGPDFt34zYBE+PD2cu9nGVbRfWlbG2mdBwX/5InNhloWBtBN23Q
+	 qGwQ/yXpvA1nPKa4nwIVTCt9o5b2JX4U5UfSyTYHogjkrdQg3mozE1+ceMX7Ch4eKb
+	 Rn8lp17KgtO5Ok5+RWnnX/w9KkXm2ECpp5Orvt1M=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55REWMH83042830
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Fri, 27 Jun 2025 09:32:22 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 27
- Jun 2025 08:14:54 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2025 09:32:22 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 27 Jun 2025 08:14:55 -0500
-Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.64.72.21])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55RDEsJQ2851528;
-	Fri, 27 Jun 2025 08:14:54 -0500
-Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
-	id D0BA3E8048; Fri, 27 Jun 2025 08:14:54 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202506261626
-Date: Fri, 27 Jun 2025 08:14:54 -0500
-Message-ID: <20250627131454.2142712-1-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 2.43.5
+ Frontend Transport; Fri, 27 Jun 2025 09:32:21 -0500
+Received: from [10.249.37.202] ([10.249.37.202])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55REWL992953408;
+	Fri, 27 Jun 2025 09:32:21 -0500
+Message-ID: <5b7c7d3c-22d6-4810-9951-84844b6d0e87@ti.com>
+Date: Fri, 27 Jun 2025 09:32:21 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 2/2] conf: machine: move UBOOR_*ADDRESS to top level
+ ti-soc
+To: Anshul Dalal <anshuld@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: <c-shilwant@ti.com>, <vigneshr@ti.com>, <praneeth@ti.com>
+References: <20250627060416.639661-1-anshuld@ti.com>
+ <20250627060416.639661-2-anshuld@ti.com>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20250627060416.639661-2-anshuld@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 27 Jun 2025 13:15:27 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18702
+ <meta-ti@lists.yoctoproject.org>; Fri, 27 Jun 2025 14:32:28 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18703
 
-Updated the value(s) for:
-  ti-linux-fw: TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
-  atf: SRCREV_tfa
-  u-boot-ti-staging_2025.01: SRCREV
-  linux-ti-staging_6.12: PV,SRCREV
 
-Changelogs:
-  ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/log/?qt=range&q=e594deb508a322d5681888d48fbb153953b06ca9..1190654141a9604e21307555882d77eaaf8c5fac
-  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=c99a1f082ba4970678c9cb5100d13a986e77817c..5350f13b66393212475a15c4e107add1d38267d3
-  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=34d0b070130a8cd2cddd9260389ad974e8cb8468..9167ea3511ca6ac1536b3114d92791b3de7422a3
+UBOOR ?  Typo in the subject.
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
----
- meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc           | 4 ++--
- .../recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc  | 2 +-
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb   | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb     | 4 ++--
- 4 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 61364c66..b1db1dfd 100644
---- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -15,11 +15,11 @@ CADENCE_MHDP_FW_VERSION = "2.1.0"
- IMG_DEC_FW_VERSION = "1.0"
- CNM_WAVE521_FW_VERSION = "1.0.8"
- TI_DM_FW_VERSION = "11.00.09"
--TI_SYSFW_VERSION = "11.01.00"
-+TI_SYSFW_VERSION = "11.01.02"
- TI_HSM_DEMO_FW_VERSION = "11.00.09"
- TAD5212_FW_VERSION = "1.0.0.0"
- 
--TI_LINUX_FW_SRCREV ?= "e594deb508a322d5681888d48fbb153953b06ca9"
-+TI_LINUX_FW_SRCREV ?= "1190654141a9604e21307555882d77eaaf8c5fac"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
- 
- BRANCH ?= "ti-linux-firmware"
-diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-index d3824b92..c17ac9de 100644
---- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-@@ -1,7 +1,7 @@
- # NOTE: This .inc file with customizations only gets included for K3 platforms
- 
- PV = "2.12+git"
--SRCREV_tfa = "39fe4a856d3576646642c2516b7a99de63eca74e"
-+SRCREV_tfa = "2ab59f45ad0a5d95b5cb339c0f64686954377050"
- SRC_URI_TRUSTED_FIRMWARE_A = "git://github.com/TexasInstruments/arm-trusted-firmware.git;protocol=https"
- SRCBRANCH = "ti-master"
- SRC_URI = "${SRC_URI_TRUSTED_FIRMWARE_A};name=tfa;branch=${SRCBRANCH}"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-index 329c2af0..0d61a732 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-@@ -6,4 +6,4 @@ PR = "r0"
- 
- BRANCH = "ti-u-boot-2025.01"
- 
--SRCREV = "c99a1f082ba4970678c9cb5100d13a986e77817c"
-+SRCREV = "5350f13b66393212475a15c4e107add1d38267d3"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-index f7cb439f..23675b35 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-@@ -23,8 +23,8 @@ S = "${WORKDIR}/git"
- 
- BRANCH ?= "ti-linux-6.12.y"
- 
--SRCREV ?= "34d0b070130a8cd2cddd9260389ad974e8cb8468"
--PV = "6.12.33+git"
-+SRCREV ?= "9167ea3511ca6ac1536b3114d92791b3de7422a3"
-+PV = "6.12.34+git"
- 
- # Special configuration for remoteproc/rpmsg IPC modules
- module_conf_rpmsg_client_sample = "blacklist rpmsg_client_sample"
+On 6/27/2025 1:04 AM, Anshul Dalal wrote:
+> Since all k3 and legacy platforms share common load addresses for kernel
+> and initrd in the fitImage, move them to top level ti-soc.inc.
+> 
+> No functional change is intended from this patch.
+> 
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
+>   meta-ti-bsp/conf/machine/am335x-hs-evm.conf | 5 -----
+>   meta-ti-bsp/conf/machine/am437x-hs-evm.conf | 5 -----
+>   meta-ti-bsp/conf/machine/am57xx-hs-evm.conf | 5 -----
+>   meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf | 5 -----
+>   meta-ti-bsp/conf/machine/include/k3.inc     | 4 ----
+>   meta-ti-bsp/conf/machine/include/ti-soc.inc | 6 ++++++
+>   6 files changed, 6 insertions(+), 24 deletions(-)
+> 
+> diff --git a/meta-ti-bsp/conf/machine/am335x-hs-evm.conf b/meta-ti-bsp/conf/machine/am335x-hs-evm.conf
+> index ca102961..652496c2 100644
+> --- a/meta-ti-bsp/conf/machine/am335x-hs-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/am335x-hs-evm.conf
+> @@ -10,11 +10,6 @@ UBOOT_CONFIG ??= "uart mmc"
+>   UBOOT_CONFIG[uart] = "am335x_hs_evm_uart_config"
+>   UBOOT_CONFIG[mmc] = "am335x_hs_evm_config"
+>   
+> -UBOOT_ENTRYPOINT = "0x82000000"
+> -UBOOT_LOADADDRESS = "0x82000000"
+> -UBOOT_RD_LOADADDRESS = "0x84000000"
+> -UBOOT_RD_ENTRYPOINT = "0x84000000"
+> -
+>   # FIT image for legacy secure devices
+>   KERNEL_CLASSES += " kernel-fitimage-legacyhs"
+>   KERNEL_IMAGETYPES += " fitImage"
+> diff --git a/meta-ti-bsp/conf/machine/am437x-hs-evm.conf b/meta-ti-bsp/conf/machine/am437x-hs-evm.conf
+> index 632b4995..fde38d39 100644
+> --- a/meta-ti-bsp/conf/machine/am437x-hs-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/am437x-hs-evm.conf
+> @@ -6,11 +6,6 @@ require conf/machine/am437x-evm.conf
+>   
+>   UBOOT_MACHINE = "am43xx_hs_evm_config"
+>   
+> -UBOOT_ENTRYPOINT = "0x82000000"
+> -UBOOT_LOADADDRESS = "0x82000000"
+> -UBOOT_RD_LOADADDRESS = "0x84000000"
+> -UBOOT_RD_ENTRYPOINT = "0x84000000"
+> -
+>   OPTEEMACHINE = "ti-am43xx"
+>   OPTEEFLAVOR = "am43xx"
+>   
+> diff --git a/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf b/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf
+> index 4f36a847..fcdc5c0b 100644
+> --- a/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/am57xx-hs-evm.conf
+> @@ -6,11 +6,6 @@ require conf/machine/am57xx-evm.conf
+>   
+>   UBOOT_MACHINE = "am57xx_hs_evm_config"
+>   
+> -UBOOT_ENTRYPOINT = "0x82000000"
+> -UBOOT_LOADADDRESS = "0x82000000"
+> -UBOOT_RD_LOADADDRESS = "0x84000000"
+> -UBOOT_RD_ENTRYPOINT = "0x84000000"
+> -
+>   OPTEEMACHINE = "ti-am57xx"
+>   OPTEEFLAVOR = "am57xx"
+>   OPTEEPAGER = "y"
+> diff --git a/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf b/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf
+> index 8e57a154..37ffef31 100644
+> --- a/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/dra7xx-hs-evm.conf
+> @@ -6,11 +6,6 @@ require conf/machine/dra7xx-evm.conf
+>   
+>   UBOOT_MACHINE = "dra7xx_hs_evm_config"
+>   
+> -UBOOT_ENTRYPOINT = "0x82000000"
+> -UBOOT_LOADADDRESS = "0x82000000"
+> -UBOOT_RD_LOADADDRESS = "0x84000000"
+> -UBOOT_RD_ENTRYPOINT = "0x84000000"
+> -
+>   OPTEEMACHINE = "ti-dra7xx"
+>   OPTEEFLAVOR = "dra7xx"
+>   OPTEEPAGER = "y"
+> diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/machine/include/k3.inc
+> index 28785173..feb5a543 100644
+> --- a/meta-ti-bsp/conf/machine/include/k3.inc
+> +++ b/meta-ti-bsp/conf/machine/include/k3.inc
+> @@ -13,10 +13,6 @@ KERNEL_IMAGETYPES = "Image fitImage"
+>   KERNEL_CLASSES += "kernel-fitimage"
+>   
+>   UBOOT_ARCH = "arm"
+> -UBOOT_ENTRYPOINT = "0x82000000"
+> -UBOOT_LOADADDRESS = "0x82000000"
+> -UBOOT_RD_LOADADDRESS = "0x84000000"
+> -UBOOT_RD_ENTRYPOINT = "0x84000000"
+>   UBOOT_DTB_LOADADDRESS = "0x88000000"
+>   UBOOT_DTBO_LOADADDRESS = "0x88080000"
+>   UBOOT_DTBO_OFFSET = "0x00010000"
+> diff --git a/meta-ti-bsp/conf/machine/include/ti-soc.inc b/meta-ti-bsp/conf/machine/include/ti-soc.inc
+> index 5d77e719..5125856f 100644
+> --- a/meta-ti-bsp/conf/machine/include/ti-soc.inc
+> +++ b/meta-ti-bsp/conf/machine/include/ti-soc.inc
+> @@ -3,6 +3,12 @@
+>   SOC_FAMILY = "ti-soc"
+>   require conf/machine/include/soc-family.inc
+>   
+> +# kernel, initrd load addresses for the fitImage in all TI platforms
+> +UBOOT_ENTRYPOINT = "0x82000000"
+> +UBOOT_LOADADDRESS = "0x82000000"
+> +UBOOT_RD_LOADADDRESS = "0x84000000"
+> +UBOOT_RD_ENTRYPOINT = "0x84000000"
+> +
+>   # TI platforms all use devicetrees with overlays
+>   MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "kernel-devicetree"
+>   KERNEL_DTB_OVERLAY_SUPPORT ?= "1"
+
 -- 
-2.43.5
-
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
