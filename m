@@ -2,130 +2,95 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20503C77B7F
-	for <webhook@archiver.kernel.org>; Fri, 27 Jun 2025 21:37:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 350B4C77B7F
+	for <webhook@archiver.kernel.org>; Fri, 27 Jun 2025 21:54:52 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.2040.1751060214564391983
+ by mx.groups.io with SMTP id smtpd.web10.2375.1751061284003835003
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 27 Jun 2025 14:36:55 -0700
+ Fri, 27 Jun 2025 14:54:44 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id DED2940CBF;
-	Fri, 27 Jun 2025 21:36:53 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 4A7A640CBF;
+	Fri, 27 Jun 2025 21:54:43 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id t6FIXRM1YkP1; Fri, 27 Jun 2025 21:36:53 +0000 (UTC)
+	with ESMTP id D4vDKkdRcIAz; Fri, 27 Jun 2025 21:54:43 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B324A40C37;
-	Fri, 27 Jun 2025 21:36:51 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 1011316ADDA; Fri, 27 Jun 2025 17:36:51 -0400 (EDT)
-Date: Fri, 27 Jun 2025 17:36:51 -0400
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2962740C37;
+	Fri, 27 Jun 2025 21:54:42 +0000 (UTC)
+Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id C724E16ADCC;
+	Fri, 27 Jun 2025 17:54:41 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
-To: afd@ti.com
-Cc: Ryan Eatmon <reatmon@ti.com>, meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][scarthgap/master][PATCH 1/3] meta-ti: Remove
- bsp-ti-6_1 and bsp-bb_org-6_1 support
-Message-ID: <20250627213651.GP18383@denix.org>
-References: <20250627192454.575458-1-afd@ti.com>
- <184D00FC97255535.20968@lists.yoctoproject.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [master][PATCH] Revert "meta-beagle: linux: Add INSANE_SKIP debug-deps"
+Date: Fri, 27 Jun 2025 17:54:41 -0400
+Message-Id: <20250627215441.2408098-1-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <184D00FC97255535.20968@lists.yoctoproject.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 27 Jun 2025 21:37:02 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18727
+ <meta-ti@lists.yoctoproject.org>; Fri, 27 Jun 2025 21:54:52 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18728
 
-BTW, I was going to test these changes, but looks like it is very 
-Scarthgap-specific, due to all the UNPACKDIR/WORKDIR/S, new FIT
-image framework and new QA tests, and related fixes, so it won't
-apply at all.
+From: Denys Dmytriyenko <denys@konsulko.com>
 
+This reverts commit 3e0b29d2e6780d31b1100cc11329601d6c3a8139.
 
-On Fri, Jun 27, 2025 at 04:41:49PM -0400, Denys Dmytriyenko wrote:
-> On Fri, Jun 27, 2025 at 02:24:52PM -0500, Andrew Davis via lists.yoctoproject.org wrote:
-> > Remove support for the v6.1 TI and Beagle BSPs. This was originally
-> > split into meta-ti-bsp and meta-beagle changes, but there are some
-> > hidden interdependencies that made that more painful than needed.
-> > Remove v6.1 support from both BSP layers here.
-> > 
-> > This includes packages specific to those BSPs:
-> >  - TI and BB.org v6.1 Linux kernel
-> >  - TI and BB.org 2023.04 U-Boot
-> >  - Rogue GPU driver 23.3 and Mesa 22.3.5
-> > 
-> > Signed-off-by: Andrew Davis <afd@ti.com>
-> > ---
-> 
-> [snip]
-> 
-> > diff --git a/meta-beagle/conf/machine/beaglebone-ai64.conf b/meta-beagle/conf/machine/beaglebone-ai64.conf
-> > index c7d72590..3da6e878 100644
-> > --- a/meta-beagle/conf/machine/beaglebone-ai64.conf
-> > +++ b/meta-beagle/conf/machine/beaglebone-ai64.conf
-> > @@ -12,12 +12,6 @@ IMAGE_SR2_HS_SE_FILES = ""
-> >  
-> >  UBOOT_MACHINE = "j721e_beagleboneai64_a72_defconfig"
-> >  
-> > -UBOOT_MACHINE:bsp-ti-6_1 = "j721e_evm_a72_config"
-> > -UBOOT_CONFIG_FRAGMENTS:bsp-ti-6_1 = "j721e_beagleboneai64_a72.config"
-> > -
-> > -UBOOT_MACHINE:bsp-bb_org-6_1 = "j721e_evm_a72_config"
-> > -UBOOT_CONFIG_FRAGMENTS:bsp-bb_org-6_1 = "j721e_beagleboneai64_a72.config"
-> > -
-> >  SPL_BINARY = "tispl.bin_unsigned"
-> >  
-> >  KERNEL_DEVICETREE_PREFIX = " \
-> > @@ -32,23 +26,4 @@ ti/k3-j721e-evm-quad-port-eth-exp.dtbo \
-> >  ti/k3-j721e-sk.dtb \
-> >  "
-> >  
-> > -KERNEL_DEVICETREE:append:bsp-bb_org-6_1 = " \
-> > -ti/k3-j721e-beagleboneai64-dsi-rpi-7inch-panel.dtbo \
-> > -ti/k3-j721e-common-proc-board-infotainment.dtbo \
-> > -ti/k3-j721e-evm-csi2-ov5640.dtbo \
-> > -ti/k3-j721e-evm-fusion.dtbo \
-> > -ti/k3-j721e-evm-pcie0-ep.dtbo \
-> > -ti/k3-j721e-evm-virt-mac-client.dtbo \
-> > -ti/k3-j721e-sk-csi2-ov5640.dtbo \
-> > -ti/k3-j721e-sk-csi2-rpi-imx219.dtbo \
-> > -ti/k3-j721e-sk-fusion.dtbo \
-> > -ti/k3-j721e-sk-rpi-hdr-ehrpwm.dtbo \
-> > -"
-> > -
-> >  MACHINE_GUI_CLASS = "bigscreen"
-> > -
-> > -# TI has moved a driver out of its kernel tree and into an out of tree module.
-> > -# We need to not include that for older kernels since the module is still in
-> > -# the kernel.
-> > -TI_VXE_VXD_DRIVER:bsp-bb_org-6_6 = ""
-> > -TI_VXE_VXD_DRIVER:bsp-bb_org-6_1 = ""
-> 
-> Looks like 6.6 override here got removed by accident along with 6.1
-> 
-> 
-> [snip]
-> 
-> 
-> > diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/conf/machine/include/j721e.inc
-> > index 30aa2a69..5833c322 100644
-> > --- a/meta-ti-bsp/conf/machine/include/j721e.inc
-> > +++ b/meta-ti-bsp/conf/machine/include/j721e.inc
-> > @@ -38,6 +38,5 @@ OPTEEMACHINE = "k3-j721e"
-> >  
-> >  TI_VXE_VXD_DRIVER = "ti-vxe-vxd-driver"
-> >  TI_VXE_VXD_DRIVER:bsp-ti-6_6 = ""
-> > -TI_VXE_VXD_DRIVER:bsp-ti-6_1 = ""
-> 
-> Here, the change is limited to 6.1 only, keeping 6.6
-> 
-> -- 
-> Denys
+As debug-deps QA false-positives were recently fixed in OE-Core/master,
+we no longer need these INSANE_SKIP.
+
+https://git.openembedded.org/openembedded-core/commit/?id=3D1b85d84c736a0=
+fa5cb27b8716ca37f181464c85a
+
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+---
+ meta-beagle/recipes-kernel/linux/linux-bb.org_6.1.bb  | 2 --
+ meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb | 2 --
+ meta-beagle/recipes-kernel/linux/linux-bb.org_6.6.bb  | 2 --
+ 3 files changed, 6 deletions(-)
+
+diff --git a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.1.bb b/meta-=
+beagle/recipes-kernel/linux/linux-bb.org_6.1.bb
+index 067c9ddf..16b4012c 100644
+--- a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.1.bb
++++ b/meta-beagle/recipes-kernel/linux/linux-bb.org_6.1.bb
+@@ -66,5 +66,3 @@ PV:aarch64 =3D "6.1.83+git"
+ BRANCH:aarch64 =3D "v6.1.83-ti-arm64-r64"
+=20
+ KERNEL_GIT_URI =3D "git://github.com/beagleboard/linux.git"
+-
+-INSANE_SKIP:kernel-modules +=3D "debug-deps"
+diff --git a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb b/meta=
+-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
+index 6e221d1b..4146bfb4 100644
+--- a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
++++ b/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
+@@ -66,5 +66,3 @@ PV:aarch64 =3D "6.12.22+git"
+ BRANCH:aarch64 =3D "v6.12.22-ti-arm64-r35"
+=20
+ KERNEL_GIT_URI =3D "git://github.com/beagleboard/linux.git"
+-
+-INSANE_SKIP:kernel-modules +=3D "debug-deps"
+diff --git a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.6.bb b/meta-=
+beagle/recipes-kernel/linux/linux-bb.org_6.6.bb
+index cc7a56ac..3fcd5454 100644
+--- a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.6.bb
++++ b/meta-beagle/recipes-kernel/linux/linux-bb.org_6.6.bb
+@@ -69,5 +69,3 @@ KERNEL_GIT_URI =3D "git://github.com/beagleboard/linux.=
+git"
+=20
+ SRC_URI +=3D "file://no-fortify.cfg"
+ KERNEL_CONFIG_FRAGMENTS +=3D "${UNPACKDIR}/no-fortify.cfg"
+-
+-INSANE_SKIP:kernel-modules +=3D "debug-deps"
+--=20
+2.25.1
+
 
