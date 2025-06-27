@@ -1,116 +1,137 @@
-Return-Path: <m-chawdhry@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 390B6C7EE31
-	for <webhook@archiver.kernel.org>; Fri, 27 Jun 2025 10:28:56 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web11.10328.1751020128852920639
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F526C77B7F
+	for <webhook@archiver.kernel.org>; Fri, 27 Jun 2025 13:15:27 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web10.13451.1751030126978909117
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 27 Jun 2025 03:28:49 -0700
+ Fri, 27 Jun 2025 06:15:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ieWjk8RG;
- spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: m-chawdhry@ti.com)
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55RASmQb2389049
-	for <meta-ti@lists.yoctoproject.org>; Fri, 27 Jun 2025 05:28:48 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=w4Gp8xXt;
+ spf=pass (domain: list.ti.com, ip: 198.47.19.246, mailfrom: lcpdbld@list.ti.com)
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55RDFPRF2758851;
+	Fri, 27 Jun 2025 08:15:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1751020128;
-	bh=EQlwl7h6croW9YIeYjmSV94qk0/CjRmSr1/VbXD5vmo=;
-	h=From:To:CC:Subject:Date;
-	b=ieWjk8RG5KC/v+7c5ndXm3i78TXhFpW4cJ3Cp732DMe5aaScb+/Hihnj4Oc7h6L/f
-	 rxIdwXZOvd4ChuU0OtM8oviVQGlJiOJxHlV9HCX7BOJNFbUANComCk7ty57OcWg/WR
-	 62pPuAFfbCVvJw/B9TY49U+39IiUgr3PkZnM+3kE=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
-	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55RASmWS3150671
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Fri, 27 Jun 2025 05:28:48 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1751030125; i=@ti.com;
+	bh=/ph8jkIomZGnpdnjpFZIYMeMCq4Bqo517DnTjUWlZHM=;
+	h=From:To:Subject:Date;
+	b=w4Gp8xXtt+5u/tuYZMNE00G3CVsbPZRbtfB3EpGIm7jn01H7bJnee5ZZFUoI6Oq1w
+	 HPj3h1sTN076vqf2K8dbRTpPPynALBfUUXPkbSHzLY1lQjWlp45edlvZbiD/YDVX/N
+	 v3PRDbuI6HOgtHrLxIZs7o4LdxhlR4PB0zv6mwko=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55RDFPeI413093
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+	Fri, 27 Jun 2025 08:15:25 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 27
- Jun 2025 05:28:47 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2025 08:14:54 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 27 Jun 2025 05:28:47 -0500
-Received: from uda0497581-HP.dhcp.ti.com (uda0497581-hp.dhcp.ti.com [172.24.227.253])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55RASiWF2916639;
-	Fri, 27 Jun 2025 05:28:45 -0500
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: <meta-ti@lists.yoctoproject.org>, Ryan Eatmon <reatmon@ti.com>
-CC: Aniket Limaye <a-limaye@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Kamlesh Gurudasani <kamlesh@ti.com>,
-        Vignesh Raghavendra <vigneshr@ti.com>, Udit Kumar <u-kumar1@ti.com>,
-        Manorit Chawdhry <m-chawdhry@ti.com>
-Subject: [meta-ti][scarthgap/master][PATCH] meta-ti-bsp: recipes-security: optee: Update OP-TEE components to 4.6.0
-Date: Fri, 27 Jun 2025 15:58:39 +0530
-Message-ID: <20250627102839.966496-1-m-chawdhry@ti.com>
-X-Mailer: git-send-email 2.34.1
+ Frontend Transport; Fri, 27 Jun 2025 08:14:55 -0500
+Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.64.72.21])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55RDEsJQ2851528;
+	Fri, 27 Jun 2025 08:14:54 -0500
+Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
+	id D0BA3E8048; Fri, 27 Jun 2025 08:14:54 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202506261626
+Date: Fri, 27 Jun 2025 08:14:54 -0500
+Message-ID: <20250627131454.2142712-1-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 27 Jun 2025 10:28:56 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18701
+ <meta-ti@lists.yoctoproject.org>; Fri, 27 Jun 2025 13:15:27 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18702
 
-Updates optee_os, optee_test, optee_client, optee_examples to 4.6.0
+Updated the value(s) for:
+  ti-linux-fw: TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
+  atf: SRCREV_tfa
+  u-boot-ti-staging_2025.01: SRCREV
+  linux-ti-staging_6.12: PV,SRCREV
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+Changelogs:
+  ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/log/?qt=range&q=e594deb508a322d5681888d48fbb153953b06ca9..1190654141a9604e21307555882d77eaaf8c5fac
+  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=c99a1f082ba4970678c9cb5100d13a986e77817c..5350f13b66393212475a15c4e107add1d38267d3
+  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=34d0b070130a8cd2cddd9260389ad974e8cb8468..9167ea3511ca6ac1536b3114d92791b3de7422a3
+
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
 ---
- .../recipes-security/optee/optee-client-ti-version.inc        | 4 ++--
- .../recipes-security/optee/optee-examples-ti-version.inc      | 4 ++--
- meta-ti-bsp/recipes-security/optee/optee-os-ti-version.inc    | 4 ++--
- meta-ti-bsp/recipes-security/optee/optee-test-ti-version.inc  | 4 ++--
- 4 files changed, 8 insertions(+), 8 deletions(-)
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc           | 4 ++--
+ .../recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc  | 2 +-
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb   | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb     | 4 ++--
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc b/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc
-index 2c8977dd17ec..86c928632142 100644
---- a/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc
-+++ b/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc
-@@ -1,2 +1,2 @@
--PV = "4.4.0+git"
--SRCREV = "d221676a58b305bddbf97db00395205b3038de8e"
-+PV = "4.6.0+git"
-+SRCREV = "02e7f9213b0d7db9c35ebf1e41e733fc9c5a3f75"
-diff --git a/meta-ti-bsp/recipes-security/optee/optee-examples-ti-version.inc b/meta-ti-bsp/recipes-security/optee/optee-examples-ti-version.inc
-index 8c21bc75d496..6c120be2a26b 100644
---- a/meta-ti-bsp/recipes-security/optee/optee-examples-ti-version.inc
-+++ b/meta-ti-bsp/recipes-security/optee/optee-examples-ti-version.inc
-@@ -1,2 +1,2 @@
--PV = "4.4.0+git"
--SRCREV = "378dc0db2d5dd279f58a3b6cb3f78ffd6b165035"
-+PV = "4.6.0+git"
-+SRCREV = "5306d2c7c618bb4a91df17a2d5d79ae4701af4a3"
-diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-ti-version.inc b/meta-ti-bsp/recipes-security/optee/optee-os-ti-version.inc
-index 89f7f818932f..d9705a0b2e80 100644
---- a/meta-ti-bsp/recipes-security/optee/optee-os-ti-version.inc
-+++ b/meta-ti-bsp/recipes-security/optee/optee-os-ti-version.inc
-@@ -1,5 +1,5 @@
--PV = "4.5.0+git"
--SRCREV = "ef1ebdc23034a804a72da2207f1a825ce96a1464"
-+PV = "4.6.0+git"
-+SRCREV = "71785645fa6ce42db40dbf5a54e0eaedc4f61591"
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 61364c66..b1db1dfd 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -15,11 +15,11 @@ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+ CNM_WAVE521_FW_VERSION = "1.0.8"
+ TI_DM_FW_VERSION = "11.00.09"
+-TI_SYSFW_VERSION = "11.01.00"
++TI_SYSFW_VERSION = "11.01.02"
+ TI_HSM_DEMO_FW_VERSION = "11.00.09"
+ TAD5212_FW_VERSION = "1.0.0.0"
  
- SRC_URI:remove = " \
-     file://0001-checkconf.mk-do-not-use-full-path-to-generate-guard-.patch \
-diff --git a/meta-ti-bsp/recipes-security/optee/optee-test-ti-version.inc b/meta-ti-bsp/recipes-security/optee/optee-test-ti-version.inc
-index f815cb8de786..35e780b373fe 100644
---- a/meta-ti-bsp/recipes-security/optee/optee-test-ti-version.inc
-+++ b/meta-ti-bsp/recipes-security/optee/optee-test-ti-version.inc
+-TI_LINUX_FW_SRCREV ?= "e594deb508a322d5681888d48fbb153953b06ca9"
++TI_LINUX_FW_SRCREV ?= "1190654141a9604e21307555882d77eaaf8c5fac"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
+index d3824b92..c17ac9de 100644
+--- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
++++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
 @@ -1,7 +1,7 @@
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=a8fa504109e4cd7ea575bc49ea4be560"
+ # NOTE: This .inc file with customizations only gets included for K3 platforms
  
--PV = "4.4.0+git"
--SRCREV = "695231ef8987866663a9ed5afd8f77d1bae3dc08"
-+PV = "4.6.0+git"
-+SRCREV = "a9e9495f4d57b97022008ad11198195e7e044c5d"
+ PV = "2.12+git"
+-SRCREV_tfa = "39fe4a856d3576646642c2516b7a99de63eca74e"
++SRCREV_tfa = "2ab59f45ad0a5d95b5cb339c0f64686954377050"
+ SRC_URI_TRUSTED_FIRMWARE_A = "git://github.com/TexasInstruments/arm-trusted-firmware.git;protocol=https"
+ SRCBRANCH = "ti-master"
+ SRC_URI = "${SRC_URI_TRUSTED_FIRMWARE_A};name=tfa;branch=${SRCBRANCH}"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+index 329c2af0..0d61a732 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+@@ -6,4 +6,4 @@ PR = "r0"
  
- SRC_URI:remove = " \
-     file://0001-xtest-stats-remove-unneeded-stat.h-include.patch \
+ BRANCH = "ti-u-boot-2025.01"
+ 
+-SRCREV = "c99a1f082ba4970678c9cb5100d13a986e77817c"
++SRCREV = "5350f13b66393212475a15c4e107add1d38267d3"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+index f7cb439f..23675b35 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+@@ -23,8 +23,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.12.y"
+ 
+-SRCREV ?= "34d0b070130a8cd2cddd9260389ad974e8cb8468"
+-PV = "6.12.33+git"
++SRCREV ?= "9167ea3511ca6ac1536b3114d92791b3de7422a3"
++PV = "6.12.34+git"
+ 
+ # Special configuration for remoteproc/rpmsg IPC modules
+ module_conf_rpmsg_client_sample = "blacklist rpmsg_client_sample"
 -- 
-2.34.1
+2.43.5
 
 
