@@ -2,179 +2,180 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2111EC7EE30
-	for <webhook@archiver.kernel.org>; Tue,  1 Jul 2025 15:36:01 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web10.196.1751384159478054859
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22832C7EE30
+	for <webhook@archiver.kernel.org>; Tue,  1 Jul 2025 15:37:01 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web11.210.1751384212911489807
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 01 Jul 2025 08:35:59 -0700
+ Tue, 01 Jul 2025 08:36:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=LAZAO35R;
- spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: reatmon@ti.com)
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 561FZwKp3353872
-	for <meta-ti@lists.yoctoproject.org>; Tue, 1 Jul 2025 10:35:58 -0500
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=LTqL5cTH;
+ spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: reatmon@ti.com)
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 561FapaR3672069;
+	Tue, 1 Jul 2025 10:36:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1751384158;
-	bh=YYQKZyuq/KlOzJDxZ6IQaXDhxAJwiVqxJRv24d92v68=;
+	s=ti-com-17Q1; t=1751384211;
+	bh=QcupmYeBWcO05O6Y5G3tCWAA2MDEW5l7AOCQnkC7tg0=;
 	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=LAZAO35RMeElq0adrRtAJUisVxDMKTO6DQmRo4VueqQ6ZRivHL7Z2uPADMY4AnXXf
-	 3qexRrjVUUuqsBBd7uKo7mA9WUWAD5GvJw/gwEoJ/m8vx1HbJlQ1dCevChTvJQaWjj
-	 wegIVrOqRs26LltSpt+EuhPvNwEvAGVlTXDHCcvM=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
-	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 561FZwVA2682261
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Tue, 1 Jul 2025 10:35:58 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+	b=LTqL5cTH6yZdaJOQ1q3QKftzqLLDaUjTO8ZpUDQfv27yfijXm29pLyryOlRSrIaCH
+	 1kVGpDjbSSz1xykMJQY3TYfHFAfx7/W15az4yGhFVn9yOteCWSqCAscO5c1N/mNUCl
+	 fbmcitr1KDyn6Ho2kL9Zt31qD7PVbrrzAKpx0qRQ=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 561Fapdu3036604
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+	Tue, 1 Jul 2025 10:36:51 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 1
- Jul 2025 10:35:58 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2025 10:36:51 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 1 Jul 2025 10:35:58 -0500
+ Frontend Transport; Tue, 1 Jul 2025 10:36:50 -0500
 Received: from [10.249.37.202] ([10.249.37.202])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 561FZwBi1803715;
-	Tue, 1 Jul 2025 10:35:58 -0500
-Message-ID: <ff98b73d-a428-479b-bae0-66473c034168@ti.com>
-Date: Tue, 1 Jul 2025 10:35:58 -0500
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 561FaoAH1529296;
+	Tue, 1 Jul 2025 10:36:50 -0500
+Message-ID: <f9ca9342-db29-4e23-ba74-3df526ed8f13@ti.com>
+Date: Tue, 1 Jul 2025 10:36:50 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][scarthgap][PATCH] trusted-firmware-a: add power state
- validation patch for K3 SoCs
-To: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>,
+Subject: Re: [meta-ti][scarthgap/master][PATCH 2/2] meta-ti-bsp: Add all
+ tiboot3.bin variants by wildcard
+To: Andrew Davis <afd@ti.com>, Chirag Shilwant <c-shilwant@ti.com>,
         <meta-ti@lists.yoctoproject.org>
-CC: Chirag <c-shilwant@ti.com>, Sebin Francis <sebin.francis@ti.com>
-References: <20250701133654.2985866-1-j-sahu@ti.com>
+CC: Denys Dmytriyenko <denys@konsulko.com>,
+        "Raghavendra, Vignesh"
+	<vigneshr@ti.com>,
+        Praneeth Bajjuri <praneeth@ti.com>
+References: <20250627193003.575911-1-afd@ti.com>
+ <20250627193003.575911-2-afd@ti.com>
+ <112eaca7-e4ba-411a-847c-cb352eae23da@ti.com>
+ <ee5285d3-965a-4fb2-9877-5fff5045f8eb@ti.com>
 Content-Language: en-US
 From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20250701133654.2985866-1-j-sahu@ti.com>
+In-Reply-To: <ee5285d3-965a-4fb2-9877-5fff5045f8eb@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllvem-ot04.ext.ti.com id 561FapaR3672069
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 01 Jul 2025 15:36:01 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18743
+ <meta-ti@lists.yoctoproject.org>; Tue, 01 Jul 2025 15:37:01 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18744
 
 
-We do not want to take feature patches into meta-ti.  It needs to live 
-in a repository on a branch.  The only patches we take are Yocto build 
-related fixes.
+
+On 7/1/2025 8:25 AM, Andrew Davis wrote:
+> On 7/1/25 7:06 AM, Chirag Shilwant wrote:
+>> Hi Andrew,
+>> On 28/06/25 01:00, Andrew Davis via lists.yoctoproject.org wrote:
+>>> U-Boot generates all the valid versions of tiboot3.bin and picks the
+>>> default based on the board's binman files. No need to duplicate this
+>>> logic here, simply deploy what U-Boot gives us.
+>>>
+>>> Signed-off-by: Andrew Davis <afd@ti.com>
+>>> ---
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/am62axx.inc |=C2=A0 6 ------
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/am62dxx.inc |=C2=A0 6 ------
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/am62pxx.inc |=C2=A0 6 ------
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/am62xx.inc=C2=A0 |=C2=A0 9 --=
+-------
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/am64xx.inc=C2=A0 |=C2=A0 9 --=
+-------
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/am65xx.inc=C2=A0 |=C2=A0 2 --
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/am68.inc=C2=A0=C2=A0=C2=A0 |=C2=
+=A0 6 ------
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/am69.inc=C2=A0=C2=A0=C2=A0 |=C2=
+=A0 6 ------
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/j7200.inc=C2=A0=C2=A0 | 15 --=
+-------------
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/j721e.inc=C2=A0=C2=A0 |=C2=A0=
+ 6 ------
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/j721s2.inc=C2=A0 |=C2=A0 9 --=
+-------
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/j722s.inc=C2=A0=C2=A0 |=C2=A0=
+ 6 ------
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/j742s2.inc=C2=A0 |=C2=A0 6 --=
+----
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/j784s4.inc=C2=A0 |=C2=A0 9 --=
+-------
+>>> =C2=A0 meta-ti-bsp/conf/machine/include/k3.inc=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 |=C2=A0 1 +
+>>> =C2=A0 15 files changed, 1 insertion(+), 101 deletions(-)
+>>>
+>>
+>> <snip>
+>>
+>>> diff --git a/meta-ti-bsp/conf/machine/include/k3.inc=20
+>>> b/meta-ti-bsp/conf/machine/include/k3.inc
+>>> index 9b85f867..d0f0bd62 100644
+>>> --- a/meta-ti-bsp/conf/machine/include/k3.inc
+>>> +++ b/meta-ti-bsp/conf/machine/include/k3.inc
+>>> @@ -44,6 +44,7 @@ MACHINE_FEATURES =3D "apm usbgadget usbhost vfat ex=
+t2=20
+>>> alsa pci optee-ftpm"
+>>> =C2=A0 IMAGE_FSTYPES +=3D "tar.xz wic.xz wic.bmap"
+>>> =C2=A0 IMAGE_BOOT_FILES ?=3D "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX=
+}=20
+>>> tiboot3.bin"
+>>> +IMAGE_BOOT_FILES +=3D "tiboot3-*-evm.bin"
+>>
+>>
+>> This commit seems to undo the effect of [0] which resolved SITSW-7159
+>> There was a request to not package tiboot3-am62ax-gp-evm.bin inside=20
+>> vfat boot partition of wic image
+>> but k3-am62a-sk-binman.dtsi [1] would still have it for Astc/vlab=20
+>> folks who know how to use the u-boot sources.
+>>
+>>
+>> Hence, even if this approach to ship all tiboot3.bin generated by=20
+>> u-boot build seems logically correct
+>> but it ends up deploying tiboot3 for GP samples which were only used=20
+>> internally for initial device bring-up
+>> & not available publicly.
+>>
+>=20
+> Then that version of tiboot3.bin should not be generated by U-Boot,=20
+> keeping the logic of
+> which tiboot3.bin variants are valid or not shouldn't be put in each=20
+> distro, let's drop
+> that version from U-Boot binman if it has no reason to be.
+
+Agreed.
 
 
-On 7/1/2025 8:36 AM, Telukula Jeevan Kumar Sahu wrote:
-> This commit adds the TI power state validation patch for K3 SoCs to
-> ensure correct PSCI power state transitions when using the upstream
-> Trusted Firmware-A (TFA).
-> This patch is excluded from the am62lxx platform, which uses the
-> TI-maintained fork.
-> 
-> Signed-off-by: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>
-> ---
->   .../trusted-firmware-a-ti.inc                 |  7 +-
->   ...e-power-state-validation-for-K3-SoCs.patch | 64 +++++++++++++++++++
->   2 files changed, 70 insertions(+), 1 deletion(-)
->   create mode 100644 meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a/0001-feat-ti-enable-power-state-validation-for-K3-SoCs.patch
-> 
-> diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-> index ec52d09c..588ee9d4 100644
-> --- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-> +++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-> @@ -5,14 +5,19 @@ PV = "2.13+git"
->   LIC_FILES_CHKSUM = "file://docs/license.rst;md5=6ed7bace7b0bc63021c6eba7b524039e"
->   SRCREV_tfa = "d90bb650fe4cb3784f62214ab5829f4051c38d0a"
->   SRC_URI_TRUSTED_FIRMWARE_A = "git://git.trustedfirmware.org/TF-A/trusted-firmware-a.git;protocol=https"
-> +TFA_TI_PATCH = "file://0001-feat-ti-enable-power-state-validation-for-K3-SoCs.patch"
->   SRCBRANCH = "master"
->   
->   LIC_FILES_CHKSUM:am62lxx = "file://docs/license.rst;md5=1118e32884721c0be33267bd7ae11130"
->   SRCREV_tfa:am62lxx = "2ab59f45ad0a5d95b5cb339c0f64686954377050"
->   SRC_URI_TRUSTED_FIRMWARE_A:am62lxx = "git://github.com/TexasInstruments/arm-trusted-firmware.git;protocol=https"
-> +TFA_TI_PATCH:am62lxx = ""
->   SRCBRANCH:am62lxx = "ti-master"
->   
-> -SRC_URI = "${SRC_URI_TRUSTED_FIRMWARE_A};name=tfa;branch=${SRCBRANCH}"
-> +SRC_URI = " \
-> +    ${SRC_URI_TRUSTED_FIRMWARE_A};name=tfa;branch=${SRCBRANCH} \
-> +    ${TFA_TI_PATCH} \
-> +"
->   
->   COMPATIBLE_MACHINE = "k3"
->   
-> diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a/0001-feat-ti-enable-power-state-validation-for-K3-SoCs.patch b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a/0001-feat-ti-enable-power-state-validation-for-K3-SoCs.patch
-> new file mode 100644
-> index 00000000..0ed2a933
-> --- /dev/null
-> +++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a/0001-feat-ti-enable-power-state-validation-for-K3-SoCs.patch
-> @@ -0,0 +1,64 @@
-> +From 8f676fc677752ca432b424b9738aac12357a35e7 Mon Sep 17 00:00:00 2001
-> +From: Kendall Willis <k-willis@ti.com>
-> +Date: Tue, 17 Jun 2025 10:43:30 -0500
-> +Subject: [PATCH] feat(ti): enable power state validation for K3 SoCs
-> +
-> +Add power state validation for K3 SoCs to ensure proper PSCI power state
-> +transitions. Defining validate_power_state enables the
-> +PSCI_CPU_SUSPEND_AARCH64 capability and, in turn, CPU_SUSPEND.
-> +
-> +validate_power_state checks if the requested power level and power state
-> +are in a valid configuration. If the power state requested is standby,
-> +set the core power state to the maximum retention state.
-> +
-> +Upstream-Status: Submitted [https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/39502]
-> +Change-Id: Ied3ebdc583b2e5b7c86923705954d763997b324e
-> +Signed-off-by: Kendall Willis <k-willis@ti.com>
-> +---
-> + plat/ti/k3/common/k3_psci.c | 23 +++++++++++++++++++++++
-> + 1 file changed, 23 insertions(+)
-> +
-> +diff --git a/plat/ti/k3/common/k3_psci.c b/plat/ti/k3/common/k3_psci.c
-> +index c679344c8..ec37d9f4c 100644
-> +--- a/plat/ti/k3/common/k3_psci.c
-> ++++ b/plat/ti/k3/common/k3_psci.c
-> +@@ -226,6 +226,28 @@ static void __dead2 k3_system_reset(void)
-> +         wfi();
-> + }
-> +
-> ++static int k3_validate_power_state(unsigned int power_state, psci_power_state_t *req_state)
-> ++{
-> ++    unsigned int pwr_lvl = psci_get_pstate_pwrlvl(power_state);
-> ++    unsigned int pstate = psci_get_pstate_type(power_state);
-> ++
-> ++    if (pwr_lvl > PLAT_MAX_PWR_LVL)
-> ++        return PSCI_E_INVALID_PARAMS;
-> ++
-> ++    if (pstate == PSTATE_TYPE_STANDBY) {
-> ++        /*
-> ++         * It's possible to enter standby only on power level 0
-> ++         * Ignore any other power level.
-> ++         */
-> ++        if (pwr_lvl != MPIDR_AFFLVL0)
-> ++            return PSCI_E_INVALID_PARAMS;
-> ++
-> ++        CORE_PWR_STATE(req_state) = PLAT_MAX_RET_STATE;
-> ++    }
-> ++
-> ++    return PSCI_E_SUCCESS;
-> ++}
-> ++
-> + static void k3_pwr_domain_suspend_to_mode(const psci_power_state_t *target_state, uint8_t mode)
-> + {
-> +     unsigned int core, proc_id;
-> +@@ -286,6 +308,7 @@ static plat_psci_ops_t k3_plat_psci_ops = {
-> +     .get_sys_suspend_power_state = k3_get_sys_suspend_power_state,
-> +     .system_off = k3_system_off,
-> +     .system_reset = k3_system_reset,
-> ++    .validate_power_state = k3_validate_power_state,
-> + };
-> +
-> + int plat_setup_psci_ops(uintptr_t sec_entrypoint,
-> +--
-> +2.34.1
-> +
+> Andrew
+>=20
+>>
+>> [0]=20
+>> https://git.yoctoproject.org/meta-ti/commit/?h=3Dscarthgap-next&id=3D4=
+92a9aa4a92787185b41023e1026369d4028c1eb
+>>
+>> [1]=20
+>> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/arch/arm/dts/k3-am62a=
+-sk-binman.dtsi?h=3D11.01.04#n104
+>>
+>>
+>> Chirag
+>>
+>>
+>>> =C2=A0 IMAGE_EFI_BOOT_FILES ?=3D "${IMAGE_BOOT_FILES}"
+>>> =C2=A0 EFI_PROVIDER ?=3D "grub-efi"
+>>>
+>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>> Links: You receive all messages sent to this group.
+>>> View/Reply Online (#18710):=20
+>>> https://lists.yoctoproject.org/g/meta-ti/message/18710
+>>> Mute This Topic: https://lists.yoctoproject.org/mt/113867726/7030289
+>>> Group Owner: meta-ti+owner@lists.yoctoproject.org
+>>> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub=20
+>>> [c-shilwant@ti.com]
+>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>>
 
--- 
+--=20
 Ryan Eatmon                reatmon@ti.com
 -----------------------------------------
 Texas Instruments, Inc.  -  LCPD  -  MGTS
