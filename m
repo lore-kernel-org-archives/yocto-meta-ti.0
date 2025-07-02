@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B4F9C83F03
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BB52C83F05
 	for <webhook@archiver.kernel.org>; Wed,  2 Jul 2025 01:46:30 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.13539.1751420780952114308
+ by mx.groups.io with SMTP id smtpd.web10.13489.1751420781007066608
  for <meta-ti@lists.yoctoproject.org>;
  Tue, 01 Jul 2025 18:46:21 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 5E30440C85;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 69E0540C8C;
 	Wed,  2 Jul 2025 01:46:20 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6qXSulaJCImu; Wed,  2 Jul 2025 01:46:20 +0000 (UTC)
+	with ESMTP id h3B7T8G60efR; Wed,  2 Jul 2025 01:46:20 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 44E8E40C8C;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5239440CC0;
 	Wed,  2 Jul 2025 01:46:19 +0000 (UTC)
 Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 9815816B1FC;
+	by mail.denix.org (Postfix) with ESMTP id A7B5E16B1FE;
 	Tue,  1 Jul 2025 21:46:17 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master][PATCH v2 3/6] ti-kernel-fitimage: extend default FIT image wrapper
-Date: Tue,  1 Jul 2025 21:46:13 -0400
-Message-Id: <20250702014616.100136-3-denis@denix.org>
+Subject: [master][PATCH v2 5/6] kernel-fitimage-legacyhs: rename kernel-uboot class
+Date: Tue,  1 Jul 2025 21:46:15 -0400
+Message-Id: <20250702014616.100136-5-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250702014616.100136-1-denis@denix.org>
 References: <20250702014616.100136-1-denis@denix.org>
@@ -39,45 +39,39 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Wed, 02 Jul 2025 01:46:30 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18755
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18757
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-OE-Core provides default FIT image wrapper, but we need to extend it
-with support for the dynamic devicetree prefix matching. While at it,
-also use the correct kernel version from PKGV. Both of these use the
-shared kernel sources tree, hence ensure it's available before any
-processing.
-
-Since old behavior was putting vendor subdir as a sanitized prefix
-for each DTB entry as "ti_", U-boot expects corresponding config
-entries to also contain the same - update conf prefix accordingly.
+Rename old snapshot of the kernel-uboot.bbclass to indicate it is
+still being used by the FIT processing for the legacy HS devices.
 
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
-v2 - set conf prefix to contain sanitized vendor subdir
+v2 - no changes
 
- meta-ti-bsp/recipes-kernel/linux/ti-kernel-fitimage.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
- create mode 100644 meta-ti-bsp/recipes-kernel/linux/ti-kernel-fitimage.b=
-b
+ meta-ti-bsp/classes/kernel-fitimage-legacyhs.bbclass            | 2 +-
+ ...l-uboot-deprecated.bbclass =3D> kernel-uboot-legacyhs.bbclass} | 0
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-ti-bsp/classes/{kernel-uboot-deprecated.bbclass =3D> kernel-=
+uboot-legacyhs.bbclass} (100%)
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-kernel-fitimage.bb b/met=
-a-ti-bsp/recipes-kernel/linux/ti-kernel-fitimage.bb
-new file mode 100644
-index 00000000..dae76387
---- /dev/null
-+++ b/meta-ti-bsp/recipes-kernel/linux/ti-kernel-fitimage.bb
-@@ -0,0 +1,8 @@
-+FIT_DESC ?=3D "Kernel fitImage for ${DISTRO_NAME}/${PKGV}/${MACHINE}"
-+FIT_CONF_PREFIX ?=3D "conf-ti_"
-+
-+require recipes-kernel/linux/linux-yocto-fitimage.bb
-+
-+include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.=
-getVar('KERNEL_DEVICETREE_PREFIX') else ''}
-+
-+do_compile[depends] +=3D "virtual/kernel:do_shared_workdir"
+diff --git a/meta-ti-bsp/classes/kernel-fitimage-legacyhs.bbclass b/meta-=
+ti-bsp/classes/kernel-fitimage-legacyhs.bbclass
+index ca133457..558e8954 100644
+--- a/meta-ti-bsp/classes/kernel-fitimage-legacyhs.bbclass
++++ b/meta-ti-bsp/classes/kernel-fitimage-legacyhs.bbclass
+@@ -1,4 +1,4 @@
+-inherit ti-secdev kernel-uboot-deprecated uboot-sign-legacyhs
++inherit ti-secdev kernel-uboot-legacyhs uboot-sign-legacyhs
+=20
+ FITIMAGE_HASH_ALGO ?=3D "sha1"
+ FITIMAGE_PACK_TEE ?=3D "0"
+diff --git a/meta-ti-bsp/classes/kernel-uboot-deprecated.bbclass b/meta-t=
+i-bsp/classes/kernel-uboot-legacyhs.bbclass
+similarity index 100%
+rename from meta-ti-bsp/classes/kernel-uboot-deprecated.bbclass
+rename to meta-ti-bsp/classes/kernel-uboot-legacyhs.bbclass
 --=20
 2.25.1
 
