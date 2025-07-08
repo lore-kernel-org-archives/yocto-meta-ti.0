@@ -1,136 +1,86 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 863F4C83F0A
-	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 14:42:34 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web10.20583.1751985749128436691
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 444A5C8303C
+	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 20:00:49 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web11.5671.1752004847508641818
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 08 Jul 2025 07:42:29 -0700
+ Tue, 08 Jul 2025 13:00:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=JO4hkfRl;
- spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: reatmon@ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 568EgR5e914400;
-	Tue, 8 Jul 2025 09:42:27 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=gRq/d1k6;
+ spf=pass (domain: list.ti.com, ip: 198.47.23.234, mailfrom: lcpdbld@list.ti.com)
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 568K0klb606675;
+	Tue, 8 Jul 2025 15:00:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1751985747;
-	bh=2pkA5tdb78OpT8/qbyoyavzy72ASf7GHoWs7GAd3hwg=;
+	s=ti-com-17Q1; t=1752004846; i=@ti.com;
+	bh=yZoUEKYZHAxjQROp9iZ30DIXHyjKjPYyzyt8L73GcPU=;
 	h=From:To:Subject:Date;
-	b=JO4hkfRl4Cp8UJ4GF8ddGhQ+5+YlB79n5JtdDYDq4dSJ1tbTYgLtk82SZke4IOVlL
-	 +KqYPzIDdsnBtHskfyna0/H0Sfsmw2kacNg2V1qacevgv33Q3Z0ve6IF3MrPFiOK/Z
-	 ZUJDy+lQdAoH0Xph04dFW+9JXJVk4ER24q3PFv6I=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 568EgRTv2461558
+	b=gRq/d1k6nWE4mRfkk9gAHfLJs+eXihSBSGwIzj3NBPPSts2oJYFY0tvQiu1g6qSTe
+	 rtcJeV1j2psQkZtZWp2sI6Pusuu+NVe7XN1w6wWb3nlXc6nmZw+6CbNPkjVxln85TU
+	 4jm6SSLn5DO4k0WROvSr0dQf85/owFuOFnBofKjo=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 568K0kaL1313251
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Tue, 8 Jul 2025 09:42:27 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 8 Jul 2025 15:00:46 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 8
- Jul 2025 09:42:26 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Jul 2025 15:00:45 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 8 Jul 2025 09:42:26 -0500
-Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 568EgQR42240567;
-	Tue, 8 Jul 2025 09:42:26 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1uZ9Wc-0005I7-7s; Tue, 08 Jul 2025 09:42:26 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
+ Frontend Transport; Tue, 8 Jul 2025 15:00:45 -0500
+Received: from fllvdckhpci035.itg.ti.com (fllvdckhpci035.itg.ti.com [10.64.72.49])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 568K0jvJ2656330;
+	Tue, 8 Jul 2025 15:00:45 -0500
+Received: by fllvdckhpci035.itg.ti.com (Postfix, from userid 60899)
+	id 6CE9912B242; Tue,  8 Jul 2025 15:00:45 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][scarthgap][PATCH] u-boot-ti: Move filenames to use PKGV instead of PV
-Date: Tue, 8 Jul 2025 09:42:26 -0500
-Message-ID: <20250708144226.20299-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+Subject: [meta-ti][master][PATCH] u-boot-ti-mainline: Update to version: v2025.07
+Date: Tue, 8 Jul 2025 15:00:45 -0500
+Message-ID: <20250708200045.1943775-1-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 08 Jul 2025 14:42:34 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18765
+ <meta-ti@lists.yoctoproject.org>; Tue, 08 Jul 2025 20:00:49 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18766
 
-We would like to know the git commit for the build by looking at the
-filenames of u-boot files.  Include the value for PKGV in the names of
-the files instead of PV.
+Updated the value(s) for:
+  u-boot-ti-mainline: PV,SRCREV
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
 ---
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc | 20 ++++++++++++--------
- 1 file changed, 12 insertions(+), 8 deletions(-)
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-index ffe50f65..743eb61b 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -5,6 +5,10 @@ do_compile:prepend () {
-     echo ${scm_version} > ${S}/.scmversion
- }
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
+index ba7a6e8d..d27ca9e5 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-mainline_git.bb
+@@ -2,8 +2,8 @@ require u-boot-ti.inc
  
-+inherit gitpkgv
-+PKGV = "${PV}${GITPKGV}"
-+UBOOT_VERSION = "${PKGV}-${PKGR}"
-+
- UBOOT_SUFFIX ?= "img"
- SPL_BINARY ?= "MLO"
+ SUMMARY = "Mainline U-Boot for TI devices"
  
-@@ -105,31 +109,31 @@ SYSROOT_DIRS += "/boot"
- SPL_UART_BINARY = "u-boot-spl.bin"
- SPL_UART_BINARY:k3r5 = ""
+-PV = "2025.04"
++PV = "2025.07"
  
--SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
-+SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${UBOOT_VERSION}"
- SPL_UART_SYMLINK ?= "${SPL_UART_BINARY}-${MACHINE}"
+ UBOOT_GIT_URI = "git://source.denx.de/u-boot/u-boot.git"
  
- SPL_HS_MLO_BINARY = "u-boot-spl_HS_MLO"
--SPL_HS_MLO_IMAGE = "u-boot-spl_HS_MLO-${MACHINE}-${PV}-${PR}"
-+SPL_HS_MLO_IMAGE = "u-boot-spl_HS_MLO-${MACHINE}-${UBOOT_VERSION}"
- SPL_HS_MLO_SYMLINK = "u-boot-spl_HS_MLO-${MACHINE}"
- 
- # HS XLD
- UBOOT_HS_XLD_BINARY = "u-boot-spl_HS_X-LOADER"
--UBOOT_HS_XLD_IMAGE = "u-boot-spl_HS_X-LOADER-${MACHINE}-${PV}-${PR}"
-+UBOOT_HS_XLD_IMAGE = "u-boot-spl_HS_X-LOADER-${MACHINE}-${UBOOT_VERSION}"
- UBOOT_HS_XLD_SYMLINK = "u-boot-spl_HS_X-LOADER-${MACHINE}"
- 
- # HS MLO
- UBOOT_HS_MLO_BINARY = "u-boot_HS_MLO"
--UBOOT_HS_MLO_IMAGE = "u-boot_HS_MLO-${MACHINE}-${PV}-${PR}"
-+UBOOT_HS_MLO_IMAGE = "u-boot_HS_MLO-${MACHINE}-${UBOOT_VERSION}"
- UBOOT_HS_MLO_SYMLINK = "u-boot_HS_MLO-${MACHINE}"
- 
- # HS ISSW
- UBOOT_HS_ISSW_BINARY = "u-boot-spl_HS_ISSW"
--UBOOT_HS_ISSW_IMAGE = "u-boot-spl_HS_ISSW-${MACHINE}-${PV}-${PR}"
-+UBOOT_HS_ISSW_IMAGE = "u-boot-spl_HS_ISSW-${MACHINE}-${UBOOT_VERSION}"
- UBOOT_HS_ISSW_SYMLINK = "u-boot-spl_HS_ISSW-${MACHINE}"
- 
- # HS 2ND
- UBOOT_HS_2ND_BINARY = "u-boot-spl_HS_2ND"
--UBOOT_HS_2ND_IMAGE = "u-boot-spl_HS_2ND-${MACHINE}-${PV}-${PR}"
-+UBOOT_HS_2ND_IMAGE = "u-boot-spl_HS_2ND-${MACHINE}-${UBOOT_VERSION}"
- UBOOT_HS_2ND_SYMLINK = "u-boot-spl_HS_2ND-${MACHINE}"
- 
- uboot_compile:append () {
-@@ -217,8 +221,8 @@ do_deploy:append:k3r5 () {
- 	rm -f ${DEPLOYDIR}/${PN}-initial-env*
- 	rm -f ${DEPLOYDIR}/u-boot-initial-env-${MACHINE}*
- 	rm -f ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}*
--	rm -f ${DEPLOYDIR}/u-boot-initial-env-${MACHINE}-${PV}-${PR}*
--	rm -f ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}-${PV}-${PR}*
-+	rm -f ${DEPLOYDIR}/u-boot-initial-env-${MACHINE}-${UBOOT_VERSION}*
-+	rm -f ${DEPLOYDIR}/${PN}-initial-env-${MACHINE}-${UBOOT_VERSION}*
- }
- 
- uboot_deploy_config:append:k3r5 () {
+-SRCREV = "34820924edbc4ec7803eb89d9852f4b870fa760a"
++SRCREV = "e37de002fac3895e8d0b60ae2015e17bb33e2b5b"
 -- 
-2.17.1
+2.43.5
 
 
