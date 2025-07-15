@@ -2,85 +2,111 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC35CC83F21
-	for <webhook@archiver.kernel.org>; Tue, 15 Jul 2025 13:38:47 +0000 (UTC)
-Received: from mslow3.mail.gandi.net (mslow3.mail.gandi.net [217.70.178.249])
- by mx.groups.io with SMTP id smtpd.web11.6615.1752581187679473712
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 040D0C83F2D
+	for <webhook@archiver.kernel.org>; Tue, 15 Jul 2025 13:52:18 +0000 (UTC)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ by mx.groups.io with SMTP id smtpd.web10.9200.1752587529738357252
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 15 Jul 2025 05:06:28 -0700
+ Tue, 15 Jul 2025 06:52:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=gm1 header.b=Rf0MruiN;
- spf=pass (domain: bootlin.com, ip: 217.70.178.249, mailfrom: miguel.gazquez@bootlin.com)
-Received: from relay15.mail.gandi.net (relay15.mail.gandi.net [IPv6:2001:4b98:dc4:8::235])
-	by mslow3.mail.gandi.net (Postfix) with ESMTP id BA96358767A
-	for <meta-ti@lists.yoctoproject.org>; Tue, 15 Jul 2025 11:35:47 +0000 (UTC)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 0922543186;
-	Tue, 15 Jul 2025 11:35:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1752579344;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=S7lM0sjOwt5pONJhQ8UlHabOvxyAhDIg3myK8BvR/TI=;
-	b=Rf0MruiNKquyZ4cIXd8PXtuLX00P/g2bXPREi616c4ML49/pO8Vq60dDYsBZV6BbzksIyJ
-	PudAj962Wlc1Qodz+gkslbnuiSCjY0G6mvI/85q89oMbhpzqywTmAZhdkD8PgCNSv0Iyht
-	dP6Nvb9cWOfmju51WGVE6WgBjE74MROjOzwQnHw0E8rHKY1sMCO54Ug3GgpK+XA7+HNCde
-	7XPpUUKEsWHZVHU4FqT/O9lbS7sin5SZ/JbGiM4hQgQQB+xwCA/Q88QutHZeScrSTyj23z
-	yiCk+sRqMCEMfe8WUtEcSQ5mzdWPymNCSexI9YNLP8MNtByCjsOrYm0EhP+SHg==
-From: Miguel Gazquez <miguel.gazquez@bootlin.com>
-Date: Tue, 15 Jul 2025 13:34:54 +0200
-Subject: [PATCH 1/2] conf: machine: add BeagleBone Green Eco to KERNEL_DEVICETREE
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ssywPogY;
+ spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: reatmon@ti.com)
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56FDq4kj2624168;
+	Tue, 15 Jul 2025 08:52:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1752587524;
+	bh=Spms3UaKrf8NhJlUxhGomnt9WCSY52Uqk/TShRgJ7aY=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=ssywPogYOYEJjUNuxaLQ783BhaK+194a2naC0TwvKG/f1diw+PgUlynDZ4uMNxT+q
+	 OVWKY0vm19kLZ+Ll+jC3+QtOktkNVDMleez4B4su0jsqjY3ZsDIUGLd+or+6v+e9tE
+	 mjDib9ZdTnfXjB7kQ5kar3Xi5Y3GK0lu0/uMmJ6w=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56FDq3cn2770864
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+	Tue, 15 Jul 2025 08:52:04 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 15
+ Jul 2025 08:52:03 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 15 Jul 2025 08:52:03 -0500
+Received: from [128.247.81.69] (dtmxl9433pnr.dhcp.ti.com [128.247.81.69])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56FDq3of2995417;
+	Tue, 15 Jul 2025 08:52:03 -0500
+Message-ID: <40c291ff-c3ee-4d9f-a45a-3affb088cf7e@ti.com>
+Date: Tue, 15 Jul 2025 08:52:03 -0500
 MIME-Version: 1.0
-Message-Id: <20250715-bbg_eco_machine-v1-1-6d1581129203@bootlin.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] conf: machine: add BeagleBone Green Eco to
+ KERNEL_DEVICETREE
+To: Miguel Gazquez <miguel.gazquez@bootlin.com>,
+        <meta-ti@lists.yoctoproject.org>
+CC: <thomas.petazzoni@bootlin.com>, <praneeth@ti.com>,
+        <romain.gantois@bootlin.com>, <kory.maincent@bootlin.com>,
+        <thomas.bonnefille@bootlin.com>, <denys@konsulko.com>,
+        <robertcnelson@gmail.com>
 References: <20250715-bbg_eco_machine-v1-0-6d1581129203@bootlin.com>
-In-Reply-To: <20250715-bbg_eco_machine-v1-0-6d1581129203@bootlin.com>
-To: meta-ti@lists.yoctoproject.org
-Cc: thomas.petazzoni@bootlin.com, praneeth@ti.com, 
- romain.gantois@bootlin.com, kory.maincent@bootlin.com, 
- thomas.bonnefille@bootlin.com, denys@konsulko.com, reatmon@ti.com, 
- robertcnelson@gmail.com, Miguel Gazquez <miguel.gazquez@bootlin.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1752579298; l=851;
- i=miguel.gazquez@bootlin.com; s=20250708; h=from:subject:message-id;
- bh=3iWe4tdDkM9vgTZhF5LB3OQ7+gzOM+lOgBmBXZvAUmE=;
- b=rk3fsfZfJg2ssmFr/YRYawft1C70zkNua2UXNwHV0UqvFTvQXrJgX5ZdhYa2obgQiScOoq019
- W0M8d/ul/k7CoXR+hC5GxdHuGACwJTaVk1gVmQJzIM+JUZwutbo/J1y
-X-Developer-Key: i=miguel.gazquez@bootlin.com; a=ed25519;
- pk=k/2KI9jkmayaF0ghZ8QYUH9Wm/kFHDhl8QoZ0RHbr4w=
-X-GND-State: clean
-X-GND-Score: 0
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdehgeejvdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucenucfjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomhepofhighhuvghlucfirgiiqhhuvgiiuceomhhighhuvghlrdhgrgiiqhhuvgiisegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeejlefgveeguefgvdelgfekiedvhffhkeegteegieejheeuvdelgffhheeihefgudenucfkphepledtrdekledrudeifedruddvjeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeeltddrkeelrdduieefrdduvdejpdhhvghloheplgduledvrdduieekrddtrddvvdgnpdhmrghilhhfrhhomhepmhhighhuvghlrdhgrgiiqhhuvgiisegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopedutddprhgtphhtthhopehmvghtrgdqthhisehlihhsthhsrdihohgtthhophhrohhjvggtthdrohhrghdprhgtphhtthhopehkohhrhidrmhgrihhntggvnhhtsegsohhothhlihhnrdgtohhmpdhrtghpthhtohepuggvnhihsheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtoheprhhomhgrihhnrdhgrghnthhoihhssegsohhothhlihhnrdgtohhmpdhrtghpthhtoheprhgvrghtmhhonhesthhirdgtohhmpdhrtghpthhtohept
- hhhohhmrghsrdgsohhnnhgvfhhilhhlvgessghoohhtlhhinhdrtghomhdprhgtphhtthhopehrohgsvghrthgtnhgvlhhsohhnsehgmhgrihhlrdgtohhmpdhrtghpthhtohepphhrrghnvggvthhhsehtihdrtghomh
-Content-Type: text/plain; charset="utf-8"
+ <20250715-bbg_eco_machine-v1-1-6d1581129203@bootlin.com>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20250715-bbg_eco_machine-v1-1-6d1581129203@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 15 Jul 2025 13:38:47 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18784
+ <meta-ti@lists.yoctoproject.org>; Tue, 15 Jul 2025 13:52:18 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18787
 
-Add am335x-bonegreen-eco devicetree to KERNEL_DEVICETREE in ti33x.inc
 
-Signed-off-by: Miguel Gazquez <miguel.gazquez@bootlin.com>
----
- meta-ti-bsp/conf/machine/include/ti33x.inc | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/conf/machine/include/ti33x.inc
-index 7e9eb48c52737e74750565e639956334162432e2..0a0730eae104371d65548588b3333839857a3a50 100644
---- a/meta-ti-bsp/conf/machine/include/ti33x.inc
-+++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
-@@ -28,6 +28,7 @@ KERNEL_DEVICETREE = " \
-     ti/omap/am335x-boneblack.dtb \
-     ti/omap/am335x-boneblue.dtb \
-     ti/omap/am335x-bonegreen-wireless.dtb \
-+    ti/omap/am335x-bonegreen-eco.dtb \
-     ti/omap/am335x-bonegreen.dtb \
-     ti/omap/am335x-chiliboard.dtb \
-     ti/omap/am335x-cm-t335.dtb \
+On 7/15/2025 6:34 AM, Miguel Gazquez wrote:
+> Add am335x-bonegreen-eco devicetree to KERNEL_DEVICETREE in ti33x.inc
+> 
+> Signed-off-by: Miguel Gazquez <miguel.gazquez@bootlin.com>
+> ---
+>   meta-ti-bsp/conf/machine/include/ti33x.inc | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/conf/machine/include/ti33x.inc
+> index 7e9eb48c52737e74750565e639956334162432e2..0a0730eae104371d65548588b3333839857a3a50 100644
+> --- a/meta-ti-bsp/conf/machine/include/ti33x.inc
+> +++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
+> @@ -28,6 +28,7 @@ KERNEL_DEVICETREE = " \
+>       ti/omap/am335x-boneblack.dtb \
+>       ti/omap/am335x-boneblue.dtb \
+>       ti/omap/am335x-bonegreen-wireless.dtb \
+> +    ti/omap/am335x-bonegreen-eco.dtb \
+>       ti/omap/am335x-bonegreen.dtb \
+>       ti/omap/am335x-chiliboard.dtb \
+>       ti/omap/am335x-cm-t335.dtb \
+
+NAK.  As has been mentioned several times on this list, we do not update 
+KERNEL_DEVICETREE directly.  As we support multiple kernel versions with 
+each branch, we cannot have a single KERNEL_DEVICETREE that works for 
+all kernel versions.
+
+To that end we setup the KERNEL_DEVICETREE_PREFIX variable that will 
+pattern match and change the value for KERNEL_DEVICETREE based on the 
+available matching DTBs in the given kernel.  The only kernel version 
+that uses KERNEL_DEVICETREE is the mainline (aka latest stable) kernel. 
+And the value for this variable is automatically updated to include all 
+of the available DTBs in the mainline kernel at the time we update the 
+recipe to that version.
+
+As the KERNEL_DEVICETREE_PREFIX already has an entry that will pick up 
+this new DTB when it is available, this change is not needed.
+
+Right now this new DTB is only available on linux-next and has not made 
+it into any released kernels.
+
 
 -- 
-2.50.0
-
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
