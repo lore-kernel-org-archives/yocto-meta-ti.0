@@ -1,78 +1,131 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <miguel.gazquez@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4380DC83F22
-	for <webhook@archiver.kernel.org>; Thu, 17 Jul 2025 14:12:35 +0000 (UTC)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- by mx.groups.io with SMTP id smtpd.web11.50467.1752761552286358042
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18CA9C83F34
+	for <webhook@archiver.kernel.org>; Thu, 17 Jul 2025 17:56:16 +0000 (UTC)
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net [217.70.183.196])
+ by mx.groups.io with SMTP id smtpd.web10.2084.1752774970137433167
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 17 Jul 2025 07:12:32 -0700
+ Thu, 17 Jul 2025 10:56:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=nAi1JKeN;
- spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: reatmon@ti.com)
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
-	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56HECUXn489186;
-	Thu, 17 Jul 2025 09:12:30 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1752761550;
-	bh=O1d8gpwmAaA8ttVKh64Di2cQuu5NrIf0B3ZYFOT13cc=;
-	h=From:To:Subject:Date;
-	b=nAi1JKeN8Zh1meuvDp5Caok2X2bd8ohuDuUJ6N/r5qI5818A0K6VsOqeoqeRqkE7b
-	 sOi8LdePNDpeoDiWBy5xI/nXh44/xk1Ax7cZ/YL/qnO2AoEtGecP4waFvF4HFMqXqJ
-	 haIl4WIzfMsSYp+sHTtv/x7sS9G1vTCSTf5yIYAE=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
-	by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56HECUjF277499
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Thu, 17 Jul 2025 09:12:30 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 17
- Jul 2025 09:12:30 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 17 Jul 2025 09:12:30 -0500
-Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56HECUFI2292035;
-	Thu, 17 Jul 2025 09:12:30 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1ucPLa-0007kQ-3A; Thu, 17 Jul 2025 09:12:30 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] ti-kernel-fitimage: Add missing SUMMARY
-Date: Thu, 17 Jul 2025 09:12:30 -0500
-Message-ID: <20250717141230.29742-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@bootlin.com header.s=gm1 header.b=jRmsdbfs;
+ spf=pass (domain: bootlin.com, ip: 217.70.183.196, mailfrom: miguel.gazquez@bootlin.com)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 30104443BE;
+	Thu, 17 Jul 2025 17:56:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1752774967;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=WGu0QDMevoMLZa2d0g+nQKvOO5Xu9fD+q9DyF9Q2+3Y=;
+	b=jRmsdbfs+4poPELsgmxnubJQ5tKp9QzZqWMeaJd0cECZw0dgTeD+vWKxOz0XGx4t1EdV0U
+	OXMNkXssVbIfmL0zDoGBarD6bSP4MxhUbDgJEtpXCyLRDMQk7t+V8I6z0VKnFkjOx+PxPk
+	QwmqSDxUcR0NhJMzI7Ps2vzyLA114jD+ntrSk9bC2Iehu2Pc2GJROGgznCmmbsQmNbqGSk
+	gDP09B+5+kmFLVf9KxXb9kwYK+2Dsg3O/hU0+OyeW9x3690Bbbwjhx2ZXk5erzBPq1Eisc
+	wPvOcEN2r9icQG8pNm3xZJnmbPtbw0nZLBjxZDjFfLCrTE/lrraBhqPRMkQHSQ==
+Message-ID: <53308664-c3e5-4442-9eca-3c4bce84395e@bootlin.com>
+Date: Thu, 17 Jul 2025 19:55:19 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] conf: machine: add BeagleBone Green Eco to
+ KERNEL_DEVICETREE
+To: Ryan Eatmon <reatmon@ti.com>, meta-ti@lists.yoctoproject.org
+Cc: thomas.petazzoni@bootlin.com, praneeth@ti.com,
+ romain.gantois@bootlin.com, kory.maincent@bootlin.com,
+ thomas.bonnefille@bootlin.com, denys@konsulko.com, robertcnelson@gmail.com
+References: <20250715-bbg_eco_machine-v1-0-6d1581129203@bootlin.com>
+ <20250715-bbg_eco_machine-v1-1-6d1581129203@bootlin.com>
+ <40c291ff-c3ee-4d9f-a45a-3affb088cf7e@ti.com>
+Content-Language: en-US
+From: Miguel Gazquez <miguel.gazquez@bootlin.com>
+In-Reply-To: <40c291ff-c3ee-4d9f-a45a-3affb088cf7e@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdeiuddvfecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepkfffgggfuffvvehfhffpjggtgfesthekredttddvjeenucfhrhhomhepofhighhuvghlucfirgiiqhhuvgiiuceomhhighhuvghlrdhgrgiiqhhuvgiisegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeduiefflefggfelvedvgedtieejteekgfehvdfhgffhieetjeetvedufeduhfffheenucffohhmrghinhepsghoohhtlhhinhdrtghomhenucfkphepledtrdekledrudeifedruddvjeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeeltddrkeelrdduieefrdduvdejpdhhvghloheplgduledvrdduieekrddtrddvvdgnpdhmrghilhhfrhhomhepmhhighhuvghlrdhgrgiiqhhuvgiisegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeelpdhrtghpthhtoheprhgvrghtmhhonhesthhirdgtohhmpdhrtghpthhtohepmhgvthgrqdhtiheslhhishhtshdrhihotghtohhprhhojhgvtghtrdhorhhgpdhrtghpthhtohepthhhohhmrghsrdhpvghtrgiiiihonhhisegsohhothhlihhnrdgtohhmpdhrtghpthhtohepphhrrghnvggvthhhsehtihdrtghomhdprhgtp
+ hhtthhopehrohhmrghinhdrghgrnhhtohhishessghoohhtlhhinhdrtghomhdprhgtphhtthhopehkohhrhidrmhgrihhntggvnhhtsegsohhothhlihhnrdgtohhmpdhrtghpthhtohepthhhohhmrghsrdgsohhnnhgvfhhilhhlvgessghoohhtlhhinhdrtghomhdprhgtphhtthhopeguvghnhihssehkohhnshhulhhkohdrtghomh
+X-GND-Sasl: miguel.gazquez@bootlin.com
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 17 Jul 2025 14:12:35 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18794
+ <meta-ti@lists.yoctoproject.org>; Thu, 17 Jul 2025 17:56:16 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18795
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- meta-ti-bsp/recipes-kernel/linux/ti-kernel-fitimage.bb | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-kernel-fitimage.bb b/meta-ti-bsp/recipes-kernel/linux/ti-kernel-fitimage.bb
-index a5e6a280..fc20b713 100644
---- a/meta-ti-bsp/recipes-kernel/linux/ti-kernel-fitimage.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/ti-kernel-fitimage.bb
-@@ -1,3 +1,5 @@
-+SUMMARY = "Generate and sign the fitImage file for TI Machines"
-+
- FIT_DESC ?= "Kernel fitImage for ${DISTRO_NAME}/${PKGV}/${MACHINE}"
- FIT_CONF_PREFIX ?= "conf-ti_"
- 
+
+Le 15/07/2025 à 15:52, Ryan Eatmon a écrit :
+> 
+> 
+> On 7/15/2025 6:34 AM, Miguel Gazquez wrote:
+>> Add am335x-bonegreen-eco devicetree to KERNEL_DEVICETREE in ti33x.inc
+>>
+>> Signed-off-by: Miguel Gazquez <miguel.gazquez@bootlin.com>
+>> ---
+>>   meta-ti-bsp/conf/machine/include/ti33x.inc | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/ 
+>> conf/machine/include/ti33x.inc
+>> index 
+>> 7e9eb48c52737e74750565e639956334162432e2..0a0730eae104371d65548588b3333839857a3a50 100644
+>> --- a/meta-ti-bsp/conf/machine/include/ti33x.inc
+>> +++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
+>> @@ -28,6 +28,7 @@ KERNEL_DEVICETREE = " \
+>>       ti/omap/am335x-boneblack.dtb \
+>>       ti/omap/am335x-boneblue.dtb \
+>>       ti/omap/am335x-bonegreen-wireless.dtb \
+>> +    ti/omap/am335x-bonegreen-eco.dtb \
+>>       ti/omap/am335x-bonegreen.dtb \
+>>       ti/omap/am335x-chiliboard.dtb \
+>>       ti/omap/am335x-cm-t335.dtb \
+> 
+> NAK.  As has been mentioned several times on this list, we do not update 
+> KERNEL_DEVICETREE directly.  As we support multiple kernel versions with 
+> each branch, we cannot have a single KERNEL_DEVICETREE that works for 
+> all kernel versions.
+> 
+> To that end we setup the KERNEL_DEVICETREE_PREFIX variable that will 
+> pattern match and change the value for KERNEL_DEVICETREE based on the 
+> available matching DTBs in the given kernel.  The only kernel version 
+> that uses KERNEL_DEVICETREE is the mainline (aka latest stable) kernel. 
+> And the value for this variable is automatically updated to include all 
+> of the available DTBs in the mainline kernel at the time we update the 
+> recipe to that version.
+> 
+> As the KERNEL_DEVICETREE_PREFIX already has an entry that will pick up 
+> this new DTB when it is available, this change is not needed.
+
+When building for the am335x_evm without this patch, the devicetree for 
+the beaglebone green eco is not included in the wic image, so the kernel 
+can't boot.
+
+As you said, in the linux-ti-staging recipe, KERNEL_DEVICETREE does 
+contains the dtb for the bbg eco.
+
+But core-image-minimal (which create the wic image) uses the value of 
+KERNEL_DEVICETREE from ti33x.inc, and not the one generated from 
+KERNEL_DEVICETREE_PREFIX, so it doesn't contains the devicetree for the 
+bbge. This can be checked with `bitbake-getvar -r core-image-minimal 
+KERNEL_DEVICETREE`.
+
+It probably works for others boards because, apart from the bbge, there 
+isn't any board supported in ti-linux-6.12.y but not in mainline.
+
+If we can't modify KERNEL_DEVICETREE here, what should I do to include 
+the devicetree into the final image ?
+
+> 
+> Right now this new DTB is only available on linux-next and has not made 
+> it into any released kernels.
+> 
+> 
+
 -- 
-2.17.1
+Miguel Gazquez, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
 
 
