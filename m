@@ -1,168 +1,157 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <miguel.gazquez@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C3CE7C83F34
-	for <webhook@archiver.kernel.org>; Thu, 17 Jul 2025 22:57:07 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web10.8272.1752793023157330367
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08D44C83F1A
+	for <webhook@archiver.kernel.org>; Fri, 18 Jul 2025 09:55:42 +0000 (UTC)
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
+ by mx.groups.io with SMTP id smtpd.web10.17255.1752832539898530883
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 17 Jul 2025 15:57:03 -0700
+ Fri, 18 Jul 2025 02:55:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=gf2DxmuR;
- spf=pass (domain: list.ti.com, ip: 198.47.23.234, mailfrom: lcpdbld@list.ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56HMv2cb110130;
-	Thu, 17 Jul 2025 17:57:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1752793022; i=@ti.com;
-	bh=aA+qJ76Wylhf3kSmIas6YG53kfojFS3u8iwHVo9GEII=;
-	h=From:To:Subject:Date;
-	b=gf2DxmuR4uGUFLBzk5EvjNVrvE3VipFIEwX5KbkLnpr45wR77KhFgSY18CGqCjkk8
-	 lONcAr0jKjl1pgQHK6DYhWNnQ/XK9tyFxXOaO/cmgOoznVT1rmGx48bLssBcsh2eSL
-	 9XbCxxZxkws0RFzxngdl3rfS4bdKE99hP96HQupk=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56HMv2KK3085622
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Thu, 17 Jul 2025 17:57:02 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 17
- Jul 2025 17:57:01 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 17 Jul 2025 17:57:01 -0500
-Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.64.72.21])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56HMv13p2572651;
-	Thu, 17 Jul 2025 17:57:01 -0500
-Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
-	id 85147138210; Thu, 17 Jul 2025 17:57:01 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202507171300
-Date: Thu, 17 Jul 2025 17:57:01 -0500
-Message-ID: <20250717225701.589136-1-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 2.43.5
+ dkim=pass header.i=@bootlin.com header.s=gm1 header.b=g5apnMnT;
+ spf=pass (domain: bootlin.com, ip: 217.70.183.201, mailfrom: miguel.gazquez@bootlin.com)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 781D643379;
+	Fri, 18 Jul 2025 09:55:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1752832538;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=VDqZ/VEQcHFLzKPfl7sLmsuLWGDNmVajW8BGBEjNmjo=;
+	b=g5apnMnTeSWDNwCImtVs4DWlctejaS0bTKOV3UX0RzhejzrXZMlBSYSkBLsXPUAjmcr3sK
+	6GZxZ+4QgZc15YXyCSXpDbnj0RjtBxPG4RiQbBEv8fDJRejgOj7140G3hh3v3BzI1Y+vTP
+	j6EzdgfXB34A4UCkPOUYZqO09YZamBR0KYCINASq+wOJ/mgGxYzLHWtpZgGhxN5DYwVx2w
+	zTr3oXdNcQbL8OSYD+plHaEIgH1PzP4+iiINai9a3EkRNc/cJmdtS7Pb3O6FFOYPFXobdA
+	lcvX9rtCV5YrOE03lJmYDhQJuk20dwuFIPRQxErl1O2WkxmccxjrcQAyuK5heA==
+Message-ID: <e7e1e822-5f2e-42d2-ac40-4d210c9f769d@bootlin.com>
+Date: Fri, 18 Jul 2025 11:54:49 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] conf: machine: add BeagleBone Green Eco to
+ KERNEL_DEVICETREE
+To: Ryan Eatmon <reatmon@ti.com>, meta-ti@lists.yoctoproject.org
+Cc: thomas.petazzoni@bootlin.com, praneeth@ti.com,
+ romain.gantois@bootlin.com, kory.maincent@bootlin.com,
+ thomas.bonnefille@bootlin.com, denys@konsulko.com, robertcnelson@gmail.com
+References: <20250715-bbg_eco_machine-v1-0-6d1581129203@bootlin.com>
+ <20250715-bbg_eco_machine-v1-1-6d1581129203@bootlin.com>
+ <40c291ff-c3ee-4d9f-a45a-3affb088cf7e@ti.com>
+ <53308664-c3e5-4442-9eca-3c4bce84395e@bootlin.com>
+ <51b4f094-3a20-4b4b-8b37-2eba3e2e3fc2@ti.com>
+Content-Language: en-US
+From: Miguel Gazquez <miguel.gazquez@bootlin.com>
+In-Reply-To: <51b4f094-3a20-4b4b-8b37-2eba3e2e3fc2@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdeifeduhecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepkfffgggfuffvvehfhfgjtgfgsehtkeertddtvdejnecuhfhrohhmpefoihhguhgvlhcuifgriihquhgviicuoehmihhguhgvlhdrghgriihquhgviiessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepjedviedtgfffueefveegjedtkeeujefggfefgfethefhjedvudejheelheehheejnecuffhomhgrihhnpegsohhothhlihhnrdgtohhmnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopegludelvddrudeikedrtddrvddvngdpmhgrihhlfhhrohhmpehmihhguhgvlhdrghgriihquhgviiessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepledprhgtphhtthhopehrvggrthhmohhnsehtihdrtghomhdprhgtphhtthhopehmvghtrgdqthhisehlihhsthhsrdihohgtthhophhrohhjvggtthdrohhrghdprhgtphhtthhopehthhhomhgrshdrphgvthgriiiiohhnihessghoohhtlhhinhdrtghomhdprhgtphhtthhopehprhgrnhgvvghthhesthhirdgtohhmpdhrtghpt
+ hhtoheprhhomhgrihhnrdhgrghnthhoihhssegsohhothhlihhnrdgtohhmpdhrtghpthhtohepkhhorhihrdhmrghinhgtvghnthessghoohhtlhhinhdrtghomhdprhgtphhtthhopehthhhomhgrshdrsghonhhnvghfihhllhgvsegsohhothhlihhnrdgtohhmpdhrtghpthhtohepuggvnhihsheskhhonhhsuhhlkhhordgtohhm
+X-GND-Sasl: miguel.gazquez@bootlin.com
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 17 Jul 2025 22:57:07 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18797
+ <meta-ti@lists.yoctoproject.org>; Fri, 18 Jul 2025 09:55:42 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18798
 
-Updated the value(s) for:
-  ti-linux-fw: TI_LINUX_FW_SRCREV,TI_SYSFW_VERSION
-  atf: SRCREV_tfa:am62lxx
-  u-boot-ti-staging_2025.01: SRCREV
-  k3conf: SRCREV
-  linux-ti-staging-rt_6.12: SRCREV_ARM32
-  linux-ti-staging_6.12: SRCREV
 
-Changelogs:
-  ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/log/?qt=range&q=373c2f5646e3947b3b4a340da729288ee3f07833..604d03d4f20727f5f9173d7db1e427cfbdd17022
-  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=827c35b4d141865e25d234e3d298614e6c47150c..c199d231a1477137f1b04e794e309af1eeb4c3dd
-  k3conf: https://git.ti.com/cgit/k3conf/k3conf/log/?qt=range&q=e6abc1b87f1d5bc4c2ab5f1ebfbf5a70e437dcb4..b537524cde12bf24a799f6b087b1bc6263bad87d
-  linux-ti-staging-rt_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=f0e4f5ca0905956c70779b31663f594c08c6a3bc..36c7ff7f60e71677601505976d915286923be488
-  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=78e6abff322081d53c5a685d927476086c9b2846..e6ed2862fe19bd0c8901ecfaa15a3805209d40bd
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
----
- meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc           | 4 ++--
- .../recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc  | 2 +-
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb   | 2 +-
- meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb             | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb  | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb     | 2 +-
- 6 files changed, 7 insertions(+), 7 deletions(-)
+Le 17/07/2025 à 20:01, Ryan Eatmon a écrit :
+> 
+> 
+> On 7/17/2025 12:55 PM, Miguel Gazquez wrote:
+>>
+>>
+>> Le 15/07/2025 à 15:52, Ryan Eatmon a écrit :
+>>>
+>>>
+>>> On 7/15/2025 6:34 AM, Miguel Gazquez wrote:
+>>>> Add am335x-bonegreen-eco devicetree to KERNEL_DEVICETREE in ti33x.inc
+>>>>
+>>>> Signed-off-by: Miguel Gazquez <miguel.gazquez@bootlin.com>
+>>>> ---
+>>>>   meta-ti-bsp/conf/machine/include/ti33x.inc | 1 +
+>>>>   1 file changed, 1 insertion(+)
+>>>>
+>>>> diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti- 
+>>>> bsp/ conf/machine/include/ti33x.inc
+>>>> index 
+>>>> 7e9eb48c52737e74750565e639956334162432e2..0a0730eae104371d65548588b3333839857a3a50 100644
+>>>> --- a/meta-ti-bsp/conf/machine/include/ti33x.inc
+>>>> +++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
+>>>> @@ -28,6 +28,7 @@ KERNEL_DEVICETREE = " \
+>>>>       ti/omap/am335x-boneblack.dtb \
+>>>>       ti/omap/am335x-boneblue.dtb \
+>>>>       ti/omap/am335x-bonegreen-wireless.dtb \
+>>>> +    ti/omap/am335x-bonegreen-eco.dtb \
+>>>>       ti/omap/am335x-bonegreen.dtb \
+>>>>       ti/omap/am335x-chiliboard.dtb \
+>>>>       ti/omap/am335x-cm-t335.dtb \
+>>>
+>>> NAK.  As has been mentioned several times on this list, we do not 
+>>> update KERNEL_DEVICETREE directly.  As we support multiple kernel 
+>>> versions with each branch, we cannot have a single KERNEL_DEVICETREE 
+>>> that works for all kernel versions.
+>>>
+>>> To that end we setup the KERNEL_DEVICETREE_PREFIX variable that will 
+>>> pattern match and change the value for KERNEL_DEVICETREE based on the 
+>>> available matching DTBs in the given kernel.  The only kernel version 
+>>> that uses KERNEL_DEVICETREE is the mainline (aka latest stable) 
+>>> kernel. And the value for this variable is automatically updated to 
+>>> include all of the available DTBs in the mainline kernel at the time 
+>>> we update the recipe to that version.
+>>>
+>>> As the KERNEL_DEVICETREE_PREFIX already has an entry that will pick 
+>>> up this new DTB when it is available, this change is not needed.
+>>
+>> When building for the am335x_evm without this patch, the devicetree 
+>> for the beaglebone green eco is not included in the wic image, so the 
+>> kernel can't boot.
+>>
+>> As you said, in the linux-ti-staging recipe, KERNEL_DEVICETREE does 
+>> contains the dtb for the bbg eco.
+>>
+>> But core-image-minimal (which create the wic image) uses the value of 
+>> KERNEL_DEVICETREE from ti33x.inc, and not the one generated from 
+>> KERNEL_DEVICETREE_PREFIX, so it doesn't contains the devicetree for 
+>> the bbge. This can be checked with `bitbake-getvar -r core-image- 
+>> minimal KERNEL_DEVICETREE`.
+>>
+>> It probably works for others boards because, apart from the bbge, 
+>> there isn't any board supported in ti-linux-6.12.y but not in mainline.
+>>
+>> If we can't modify KERNEL_DEVICETREE here, what should I do to include 
+>> the devicetree into the final image ?
+> 
+> Are you talking about a poky build with a poky kernel?  Or a poky build 
+> with the TI kernel?
+> 
+> If you are talking about the TI kernel, then the mainline recipe does 
+> not point to a kernel that has this DTB.  So are you trying to use the 
+> mainline recipe but change the SRCREV to point a commit that does 
+> contain this new DTB file?
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 30d5a1f3..2b3ccc97 100644
---- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -15,11 +15,11 @@ CADENCE_MHDP_FW_VERSION = "2.1.0"
- IMG_DEC_FW_VERSION = "1.0"
- CNM_WAVE521_FW_VERSION = "1.0.8"
- TI_DM_FW_VERSION = "11.00.09"
--TI_SYSFW_VERSION = "11.01.02"
-+TI_SYSFW_VERSION = "11.01.05"
- TI_HSM_DEMO_FW_VERSION = "11.00.09"
- TAD5212_FW_VERSION = "1.0.0.0"
- 
--TI_LINUX_FW_SRCREV ?= "373c2f5646e3947b3b4a340da729288ee3f07833"
-+TI_LINUX_FW_SRCREV ?= "604d03d4f20727f5f9173d7db1e427cfbdd17022"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
- 
- BRANCH ?= "ti-linux-firmware"
-diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-index 07ace3c4..cc443c3f 100644
---- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
-@@ -8,7 +8,7 @@ SRC_URI_TRUSTED_FIRMWARE_A = "git://git.trustedfirmware.org/TF-A/trusted-firmwar
- SRCBRANCH = "master"
- 
- LIC_FILES_CHKSUM:am62lxx = "file://docs/license.rst;md5=1118e32884721c0be33267bd7ae11130"
--SRCREV_tfa:am62lxx = "2ab59f45ad0a5d95b5cb339c0f64686954377050"
-+SRCREV_tfa:am62lxx = "c7583e555f0c7152a54e9ccac492dffddc4e3db0"
- SRC_URI_TRUSTED_FIRMWARE_A:am62lxx = "git://github.com/TexasInstruments/arm-trusted-firmware.git;protocol=https"
- SRCBRANCH:am62lxx = "ti-master"
- 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-index 6c88489d..2fba3f27 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-@@ -6,4 +6,4 @@ PR = "r0"
- 
- BRANCH = "ti-u-boot-2025.01"
- 
--SRCREV = "827c35b4d141865e25d234e3d298614e6c47150c"
-+SRCREV = "c199d231a1477137f1b04e794e309af1eeb4c3dd"
-diff --git a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
-index 1549e50f..35987b37 100644
---- a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
-+++ b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
-@@ -10,7 +10,7 @@ PV = "0.3+git"
- COMPATIBLE_MACHINE = "k3"
- 
- BRANCH ?= "master"
--SRCREV = "e6abc1b87f1d5bc4c2ab5f1ebfbf5a70e437dcb4"
-+SRCREV = "b537524cde12bf24a799f6b087b1bc6263bad87d"
- 
- SRC_URI = "git://git.ti.com/git/k3conf/k3conf.git;protocol=https;branch=${BRANCH}"
- 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
-index 974bf1d7..34eb56b8 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
-@@ -10,7 +10,7 @@ BRANCH_ARM64 = "ti-linux-6.12.y"
- BRANCH = "${BRANCH_ARM64}"
- 
- BRANCH_ARM32 = "ti-rt-linux-6.12.y-arm32"
--SRCREV_ARM32 = "f0e4f5ca0905956c70779b31663f594c08c6a3bc"
-+SRCREV_ARM32 = "36c7ff7f60e71677601505976d915286923be488"
- PV_ARM32 = "6.12.35+git"
- 
- BRANCH:ti33x = "${BRANCH_ARM32}"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-index f2f85bd1..d779cebd 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH ?= "ti-linux-6.12.y"
- 
--SRCREV ?= "78e6abff322081d53c5a685d927476086c9b2846"
-+SRCREV ?= "e6ed2862fe19bd0c8901ecfaa15a3805209d40bd"
- PV = "6.12.35+git"
- 
- # Special configuration for remoteproc/rpmsg IPC modules
+I'm using a poky build with the TI kernel, which by default uses the 
+branch "ti-linux-6.12.y", with the SRCREV equal to 
+"78e6abff322081d53c5a685d927476086c9b2846" (on the scarthgap branch, I 
+forgot to mention it). And on this branch there is the commit 
+"ab7f0d695e9a3268deb760dcd0fa58812a614cd8" adding the devicetree for the 
+beaglebone green eco.
+
+
+>>>
+>>> Right now this new DTB is only available on linux-next and has not 
+>>> made it into any released kernels.
+>>>
+>>>
+>>
+> 
+
 -- 
-2.43.5
+Miguel Gazquez, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
 
 
