@@ -1,64 +1,85 @@
-Return-Path: <denis@denix.org>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75171C83F17
-	for <webhook@archiver.kernel.org>; Mon, 28 Jul 2025 19:32:19 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.90102.1753731128892989201
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71880C83F17
+	for <webhook@archiver.kernel.org>; Mon, 28 Jul 2025 19:35:49 +0000 (UTC)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ by mx.groups.io with SMTP id smtpd.web10.90194.1753731343848491340
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 28 Jul 2025 12:32:09 -0700
+ Mon, 28 Jul 2025 12:35:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 2CE4640C37;
-	Mon, 28 Jul 2025 19:32:08 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id dNPIS6vZIohv; Mon, 28 Jul 2025 19:32:08 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id ED19B40C2C;
-	Mon, 28 Jul 2025 19:32:05 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 4D23C16D17C; Mon, 28 Jul 2025 15:32:05 -0400 (EDT)
-Date: Mon, 28 Jul 2025 15:32:05 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: afd@ti.com
-Cc: Ryan Eatmon <reatmon@ti.com>, meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][scarthgap/master][PATCH] recipes-graphics: Add
- weston fix for SGX from meta-arago
-Message-ID: <20250728193205.GK24899@denix.org>
-References: <20250728173316.575613-1-afd@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=JJi1TYXw;
+ spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: reatmon@ti.com)
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SJZgZY2830130;
+	Mon, 28 Jul 2025 14:35:42 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1753731342;
+	bh=EmA+6R/icyrHWgSsKihNRSm4SKFjzkgz4gbXYAupSvQ=;
+	h=Date:Subject:To:References:From:In-Reply-To;
+	b=JJi1TYXwrFgQqMk+fcsVFutb4UO8G5fJLzdeF203J8VctfrvY/dXaow4bSGhHuJcY
+	 aUPsGr2o/ahAu0MCBy3oVq1UER04TUzqs/ghHlSyF3IcaAWV7unSVVmpcqKKm6BTof
+	 v7kf1JT2g8DS54WOwK/5IafHB4K4+gXLWdAxrLhY=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SJZg5Z2235935
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+	Mon, 28 Jul 2025 14:35:42 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 28
+ Jul 2025 14:35:42 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Mon, 28 Jul 2025 14:35:42 -0500
+Received: from [10.249.37.202] ([10.249.37.202])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56SJZgJS2265346;
+	Mon, 28 Jul 2025 14:35:42 -0500
+Message-ID: <a21f580a-20c1-4353-aa0f-d9dd85458ff9@ti.com>
+Date: Mon, 28 Jul 2025 14:35:42 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti][scarthgap/master][PATCH] recipes-graphics: Add weston
+ fix for SGX from meta-arago
+To: Andrew Davis <afd@ti.com>, Denys Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+References: <20250728173316.575613-1-afd@ti.com>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
 In-Reply-To: <20250728173316.575613-1-afd@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 28 Jul 2025 19:32:19 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18842
+ <meta-ti@lists.yoctoproject.org>; Mon, 28 Jul 2025 19:35:49 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18843
 
-On Mon, Jul 28, 2025 at 12:33:16PM -0500, Andrew Davis via lists.yoctoproject.org wrote:
+
+As with the patch from meta-arago... NAK.
+
+weston has moved to 14.0 in master.
+
+Please submit the proper patch for master on both meta-arago and meta-ti.
+
+
+
+
+On 7/28/2025 12:33 PM, Andrew Davis wrote:
 > This change is needed due to the SGX driver, any distro, not just Arago,
 > using a TI SoC with SGX will need this fix, so it should go in meta-ti.
 > 
 > Signed-off-by: Andrew Davis <afd@ti.com>
-
-Acked-by: Denys Dmytriyenko <denys@konsulko.com>
-
-
 > ---
->  .../wayland/weston-ti-version.inc             |  7 ++
->  ...equire-GL_EXT_unpack_subimage-commit.patch | 95 +++++++++++++++++++
->  .../wayland/weston_13.0.%.bbappend            |  4 +
->  3 files changed, 106 insertions(+)
->  create mode 100644 meta-ti-bsp/recipes-graphics/wayland/weston-ti-version.inc
->  create mode 100644 meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch
->  create mode 100644 meta-ti-bsp/recipes-graphics/wayland/weston_13.0.%.bbappend
+>   .../wayland/weston-ti-version.inc             |  7 ++
+>   ...equire-GL_EXT_unpack_subimage-commit.patch | 95 +++++++++++++++++++
+>   .../wayland/weston_13.0.%.bbappend            |  4 +
+>   3 files changed, 106 insertions(+)
+>   create mode 100644 meta-ti-bsp/recipes-graphics/wayland/weston-ti-version.inc
+>   create mode 100644 meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch
+>   create mode 100644 meta-ti-bsp/recipes-graphics/wayland/weston_13.0.%.bbappend
 > 
 > diff --git a/meta-ti-bsp/recipes-graphics/wayland/weston-ti-version.inc b/meta-ti-bsp/recipes-graphics/wayland/weston-ti-version.inc
 > new file mode 100644
@@ -184,6 +205,9 @@ Acked-by: Denys Dmytriyenko <denys@konsulko.com>
 > +WESTON_TI_VERSION:ti-soc = "${BPN}-ti-version.inc"
 > +
 > +require ${WESTON_TI_VERSION}
-> -- 
-> 2.39.2
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
