@@ -1,169 +1,183 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD978C87FCB
-	for <webhook@archiver.kernel.org>; Mon, 28 Jul 2025 20:33:29 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web10.91583.1753734807677266686
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90733C83F26
+	for <webhook@archiver.kernel.org>; Mon, 28 Jul 2025 22:57:40 +0000 (UTC)
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.web10.94665.1753743450716269977
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 28 Jul 2025 13:33:27 -0700
+ Mon, 28 Jul 2025 15:57:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=huy2bL+x;
- spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: reatmon@ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56SKXOmV2384382;
-	Mon, 28 Jul 2025 15:33:24 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1753734804;
-	bh=Ks2ZLx1T4/iuQco+eCf66gClB0rNgX3j9HVCoK52KsE=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=huy2bL+xoLZe2HDD/wTzCXBmOMdEGhMlTxaxyms6nc67hbY/CXEt4FFjsJAmjPNgJ
-	 0MN8ghQIYOqVw1WxsVaI1Nmjfzuf6D/f1y6ehfFsknlQE8DleS3ya/AZKGHvIbKboH
-	 scGMf0c12OX5gLPRBX0muUAJS1enUF8OyacJKKZ4=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56SKXOBH2262263
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Mon, 28 Jul 2025 15:33:24 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 28
- Jul 2025 15:33:23 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 28 Jul 2025 15:33:23 -0500
-Received: from [10.249.37.202] ([10.249.37.202])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56SKXNM62624966;
-	Mon, 28 Jul 2025 15:33:23 -0500
-Message-ID: <f96c731a-8d8e-4838-be9e-2e4a81851e43@ti.com>
-Date: Mon, 28 Jul 2025 15:33:23 -0500
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Sre49k6M;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-70e5e6ab7b8so42817897b3.1
+        for <meta-ti@lists.yoctoproject.org>; Mon, 28 Jul 2025 15:57:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1753743450; x=1754348250; darn=lists.yoctoproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=aYEoabNVw234EradD11PqnisVMNoRzOwf+DmwoCOuU0=;
+        b=Sre49k6Mhpjgx/kBEXcwqhkQHjoVlmOU7uco3Jr2c+/dH8g2mEkMl9HZMcQ0R+aDVe
+         wg4Fk37gK2wEJc5eomLeWRlc8FX7VI9NzSvixsqork/OVj5OW+mZ/KuEVgAo+EG/3j2m
+         atLE7PcrIznHfSuFAvblhQ8HkxKWRBR+nN9Qj6vam0oFgKwIDJ96wOo5B64wOPsVrssz
+         6rNfE1QpNvhMFS+pFQ0J597nF9T19D5iQ+NTpa0yWOGhiVbCLbQrRJEmD649GXEKJBlx
+         Z6dTcmbga5AUx9UXf5vo8+93oWtSdyYYbwGymkubuI6OsdIOMEck9hlqBHyEKfM22t59
+         U1Yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1753743450; x=1754348250;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=aYEoabNVw234EradD11PqnisVMNoRzOwf+DmwoCOuU0=;
+        b=s1l5bofDU0mFrffsA6vGfw0/7Aw/2gAXnGH40wj5gfQe6s8vCyp3yjrKVPW5/iypot
+         JHqiadG0SynIijZD/JNqD5ynLXpE+rhoUr4Cz8C3GEQeJXv5cxvc6BkkS/HBn2R/22j2
+         Asv+4vSRSox7TWmAAI5dBz6LgC6ubCC8wOtfgaq/LEhAWQEEwZwQtjL5jqCJpn6fMfpV
+         YYsoLsRKz+brvjGo27azJsZInoGq7bzwf6l+Gnl0c3wBpGOC55+848Bc3E1zJN2W93S2
+         r4Okg9AR+UL3p5d7olkUMDe1YVv8WUii3hyHfgyb/CMEUQSKeLelpB3GX1zLYHteheun
+         QRhw==
+X-Forwarded-Encrypted: i=1; AJvYcCVXisQNOx2rWMwJZpQidFpceVGqJzk8aNDbE9QUojpmNk/VvrSc/5TzTPBNpk6Sgau+L6a0VCmi@lists.yoctoproject.org
+X-Gm-Message-State: AOJu0Yw9BG9yPxB8B0CY/eCc/2BHCaovcESfqfnLLgyR7iDyDfTbz8Gs
+	x6wrUKLlbvm1wRKqdVqJXuiEDy6zclzFXyskI2hG/fEKfdVXcqzAT72GhYbkqUeVDhXdAXjj+Df
+	uED79HHMNfWOtzfCj4CnmczncGmguD+s=
+X-Gm-Gg: ASbGncvUpWPAK25aacK1ZMo7rY2+FyXESV0hth/61xmyNeDkOKh0h1FwuSQl/D/PyUa
+	Yu4/v0wGKMp3xS8QQwNeq4eIFQa52E9hfgsykzNMmrjKPyDG9ku57C12PgH9VUa/BrasSfLGw6U
+	JWs6JLTQ9S2lttd/wb2Ps6EOY63d8FHkGTvuZDt1Cp65aZcyGk7AlYl0apOP4QRCihrGjeDkXO6
+	Vdla9rvYRba+epal+cGah8neKDOGtS8NeXj2NXk
+X-Google-Smtp-Source: AGHT+IHb+N3Qk3/MQVgB4wuSUZg683QWSe1kDtxVWFZeS3AXje0+TtHR/CyCpfvi3mRHmxmZg93IqntSwIcn+HSvCwo=
+X-Received: by 2002:a0d:d085:0:b0:719:fd6b:7cdd with SMTP id
+ 00721157ae682-719fd6b7eafmr68657437b3.5.1753743449664; Mon, 28 Jul 2025
+ 15:57:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+References: <20250728165437.571427-1-afd@ti.com> <20250728165437.571427-3-afd@ti.com>
+ <20250728182531.GJ24899@denix.org> <CAMKF1sod1hFZ6HbcZr6yJztNfos=iQt2_O4SBBFHSTEJPpU0Cw@mail.gmail.com>
+ <20250728194528.GM24899@denix.org> <CAMKF1sotFpGJeKJG8v13fELk6r-iUvZu+dA+D2ttGsoghG12vw@mail.gmail.com>
+ <f96c731a-8d8e-4838-be9e-2e4a81851e43@ti.com>
+In-Reply-To: <f96c731a-8d8e-4838-be9e-2e4a81851e43@ti.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 28 Jul 2025 15:57:03 -0700
+X-Gm-Features: Ac12FXydkub7M6ZEJyK_B2tqoD4G1BbmOst4giIWls3IT7n-q8qmMhrza93jgd0
+Message-ID: <CAMKF1sobyMqQW-c+dnLJ9X7s3oNVCokCJhNWNdKBietiS=BxJg@mail.gmail.com>
 Subject: Re: [meta-ti][scarthgap/master][PATCH 3/3] wic: sdimage-2part-efi:
  Remove 3 second menu delay
-To: <raj.khem@gmail.com>, Denys Dmytriyenko <denis@denix.org>
-CC: <afd@ti.com>, Denys Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20250728165437.571427-1-afd@ti.com>
- <20250728165437.571427-3-afd@ti.com> <20250728182531.GJ24899@denix.org>
- <CAMKF1sod1hFZ6HbcZr6yJztNfos=iQt2_O4SBBFHSTEJPpU0Cw@mail.gmail.com>
- <20250728194528.GM24899@denix.org>
- <CAMKF1sotFpGJeKJG8v13fELk6r-iUvZu+dA+D2ttGsoghG12vw@mail.gmail.com>
-Content-Language: en-US
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <CAMKF1sotFpGJeKJG8v13fELk6r-iUvZu+dA+D2ttGsoghG12vw@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+To: Ryan Eatmon <reatmon@ti.com>
+Cc: Denys Dmytriyenko <denis@denix.org>, afd@ti.com, Denys Dmytriyenko <denys@konsulko.com>, 
+	meta-ti@lists.yoctoproject.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by lelvem-ot01.ext.ti.com id 56SKXOmV2384382
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 28 Jul 2025 20:33:29 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18849
+ <meta-ti@lists.yoctoproject.org>; Mon, 28 Jul 2025 22:57:40 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18850
 
-
-
-On 7/28/2025 3:20 PM, Khem Raj via lists.yoctoproject.org wrote:
-> On Mon, Jul 28, 2025 at 12:45=E2=80=AFPM Denys Dmytriyenko <denis@denix=
+On Mon, Jul 28, 2025 at 1:33=E2=80=AFPM Ryan Eatmon <reatmon@ti.com> wrote:
+>
+>
+>
+> On 7/28/2025 3:20 PM, Khem Raj via lists.yoctoproject.org wrote:
+> > On Mon, Jul 28, 2025 at 12:45=E2=80=AFPM Denys Dmytriyenko <denis@denix=
 .org> wrote:
->>
->> On Mon, Jul 28, 2025 at 11:28:36AM -0700, Khem Raj wrote:
->>> On Mon, Jul 28, 2025 at 11:25=E2=80=AFAM Denys Dmytriyenko via
->>> lists.yoctoproject.org <denis=3Ddenix.org@lists.yoctoproject.org> wro=
+> >>
+> >> On Mon, Jul 28, 2025 at 11:28:36AM -0700, Khem Raj wrote:
+> >>> On Mon, Jul 28, 2025 at 11:25=E2=80=AFAM Denys Dmytriyenko via
+> >>> lists.yoctoproject.org <denis=3Ddenix.org@lists.yoctoproject.org> wro=
 te:
->>>>
->>>> On Mon, Jul 28, 2025 at 11:54:37AM -0500, Andrew Davis via lists.yoc=
+> >>>>
+> >>>> On Mon, Jul 28, 2025 at 11:54:37AM -0500, Andrew Davis via lists.yoc=
 toproject.org wrote:
->>>>> For all our platforms booting with EFI there is only one option tod=
+> >>>>> For all our platforms booting with EFI there is only one option tod=
 ay.
->>>>> The timeout gives the user 3 seconds to choose a different option, =
+> >>>>> The timeout gives the user 3 seconds to choose a different option, =
 but
->>>>> as there is only one, this just causes a needless 3 second delay in
->>>>> boot time. Remove this delay and boot the only option immediately.
->>>>> If we ever have more than one option we can always add this back.
->>>>
->>>> Well, menu delay in grub is not only used for selecting among availa=
+> >>>>> as there is only one, this just causes a needless 3 second delay in
+> >>>>> boot time. Remove this delay and boot the only option immediately.
+> >>>>> If we ever have more than one option we can always add this back.
+> >>>>
+> >>>> Well, menu delay in grub is not only used for selecting among availa=
 ble
->>>> predefined options, but also for interactively editing the command l=
+> >>>> predefined options, but also for interactively editing the command l=
 ine
->>>> on the fly before booting.
->>>>
->>>
->>> for development, this sounds good, for production not so much.
->>
->> Sure. And we also disable e.g. U-boot boot prompt delay all the time f=
+> >>>> on the fly before booting.
+> >>>>
+> >>>
+> >>> for development, this sounds good, for production not so much.
+> >>
+> >> Sure. And we also disable e.g. U-boot boot prompt delay all the time f=
 or our
->> customers during production hardening stage, among many other similar =
+> >> customers during production hardening stage, among many other similar =
 items.
->> But it is done for the final product - I don't think it should be done=
+> >> But it is done for the final product - I don't think it should be done=
  in a
->> generic BSP layer that many use for development.
->=20
-> Right, it could be documented somewhere in README or some such would he=
+> >> generic BSP layer that many use for development.
+> >
+> > Right, it could be documented somewhere in README or some such would he=
 lp
-> the consumers of the layer.
+> > the consumers of the layer.
+>
+> Is there already something in the system that we could use to drive a
+> variable that we can stick into the file?  Like EXTRA_IMAGE_FEATURES?  I
+> know there used to be a debug-tweaks that got broken out into multiple
+> features.  Maybe create a new one?
+>
+> TI_WKS_TIMEOUT =3D '${@bb.utils.contains("IMAGE_FEATURES",
+> "wks-debug-timeout", "3", "0 ",d)}'
+>
+> bootloader --timeout=3D${TI_WKS_TIMEOUT} --append=3D"rootfstype=3Dext4
+> rootwait ${TI_WKS_BOOTLOADER_APPEND}"
+>
+>
+> Would that work?
 
-Is there already something in the system that we could use to drive a=20
-variable that we can stick into the file?  Like EXTRA_IMAGE_FEATURES?  I=20
-know there used to be a debug-tweaks that got broken out into multiple=20
-features.  Maybe create a new one?
+probably, it can make it easier for sure.
 
-TI_WKS_TIMEOUT =3D '${@bb.utils.contains("IMAGE_FEATURES",=20
-"wks-debug-timeout", "3", "0 ",d)}'
-
-bootloader --timeout=3D${TI_WKS_TIMEOUT} --append=3D"rootfstype=3Dext4=20
-rootwait ${TI_WKS_BOOTLOADER_APPEND}"
-
-
-Would that work?
-
-
->>
->>
->>>>> Signed-off-by: Andrew Davis <afd@ti.com>
->>>>> ---
->>>>>   meta-ti-bsp/wic/sdimage-2part-efi.wks.in | 2 +-
->>>>>   1 file changed, 1 insertion(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/meta-ti-bsp/wic/sdimage-2part-efi.wks.in b/meta-ti-bsp=
+>
+>
+> >>
+> >>
+> >>>>> Signed-off-by: Andrew Davis <afd@ti.com>
+> >>>>> ---
+> >>>>>   meta-ti-bsp/wic/sdimage-2part-efi.wks.in | 2 +-
+> >>>>>   1 file changed, 1 insertion(+), 1 deletion(-)
+> >>>>>
+> >>>>> diff --git a/meta-ti-bsp/wic/sdimage-2part-efi.wks.in b/meta-ti-bsp=
 /wic/sdimage-2part-efi.wks.in
->>>>> index 7252411c..c1089762 100644
->>>>> --- a/meta-ti-bsp/wic/sdimage-2part-efi.wks.in
->>>>> +++ b/meta-ti-bsp/wic/sdimage-2part-efi.wks.in
->>>>> @@ -3,6 +3,6 @@
->>>>>   # supports EFI.  Boot files are located in the first vfat partiti=
+> >>>>> index 7252411c..c1089762 100644
+> >>>>> --- a/meta-ti-bsp/wic/sdimage-2part-efi.wks.in
+> >>>>> +++ b/meta-ti-bsp/wic/sdimage-2part-efi.wks.in
+> >>>>> @@ -3,6 +3,6 @@
+> >>>>>   # supports EFI.  Boot files are located in the first vfat partiti=
 on with extra
->>>>>   # reserved space.  We cannot use a GPT here.
->>>>>
->>>>> -bootloader --timeout=3D3 --append=3D"rootfstype=3Dext4 rootwait ${=
+> >>>>>   # reserved space.  We cannot use a GPT here.
+> >>>>>
+> >>>>> -bootloader --timeout=3D3 --append=3D"rootfstype=3Dext4 rootwait ${=
 TI_WKS_BOOTLOADER_APPEND}"
->>>>> +bootloader --timeout=3D0 --append=3D"rootfstype=3Dext4 rootwait ${=
+> >>>>> +bootloader --timeout=3D0 --append=3D"rootfstype=3Dext4 rootwait ${=
 TI_WKS_BOOTLOADER_APPEND}"
->>>>>   part --source bootimg-efi --sourceparams=3D"loader=3D${EFI_PROVID=
-ER}" --fstype=3Dvfat --label boot --active --align 1024 --use-uuid --fixe=
-d-size 128M
->>>>>   part / --source rootfs --fstype=3Dext4 --label root --align 1024 =
+> >>>>>   part --source bootimg-efi --sourceparams=3D"loader=3D${EFI_PROVID=
+ER}" --fstype=3Dvfat --label boot --active --align 1024 --use-uuid --fixed-=
+size 128M
+> >>>>>   part / --source rootfs --fstype=3Dext4 --label root --align 1024 =
 --use-uuid
->>>>> --
->>>>> 2.39.2
->>>>>
->>>>>
->>>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>>>> Links: You receive all messages sent to this group.
->>>>> View/Reply Online (#18848): https://lists.yoctoproject.org/g/meta-t=
+> >>>>> --
+> >>>>> 2.39.2
+> >>>>>
+> >>>>>
+> >>>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >>>>> Links: You receive all messages sent to this group.
+> >>>>> View/Reply Online (#18848): https://lists.yoctoproject.org/g/meta-t=
 i/message/18848
->>>>> Mute This Topic: https://lists.yoctoproject.org/mt/114416911/655105=
+> >>>>> Mute This Topic: https://lists.yoctoproject.org/mt/114416911/655105=
 4
->>>>> Group Owner: meta-ti+owner@lists.yoctoproject.org
->>>>> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [reatmo=
+> >>>>> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> >>>>> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [reatmo=
 n@ti.com]
->>>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>>>>
-
---=20
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+> >>>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >>>>>
+>
+> --
+> Ryan Eatmon                reatmon@ti.com
+> -----------------------------------------
+> Texas Instruments, Inc.  -  LCPD  -  MGTS
 
