@@ -1,129 +1,189 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30846C83F17
-	for <webhook@archiver.kernel.org>; Mon, 28 Jul 2025 18:29:09 +0000 (UTC)
-Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
- by mx.groups.io with SMTP id smtpd.web10.88613.1753727343427732919
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75171C83F17
+	for <webhook@archiver.kernel.org>; Mon, 28 Jul 2025 19:32:19 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.90102.1753731128892989201
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 28 Jul 2025 11:29:03 -0700
+ Mon, 28 Jul 2025 12:32:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lgdwCulS;
- spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-7196cb401d4so45307047b3.3
-        for <meta-ti@lists.yoctoproject.org>; Mon, 28 Jul 2025 11:29:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753727342; x=1754332142; darn=lists.yoctoproject.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=sI9DnxD53afh1bGVJtkHUSGUSl+2DhjWZmpd46BC7PI=;
-        b=lgdwCulSBVZzYIC6o65md2ERLqRytUjCmSR+k2wNjGzD/bmWAUEIlrdu75yzf0Ps+Z
-         AjIpK3ErxUzeXav254wStXhxfWTUD4AM/t8QLrX8xz1834GQcf9a8wwQM6aY9P/KE2yZ
-         B5dlI3NJCtL12s2pwfLSqQN6sbXoGNNCoYrr9hOPBqD67UH0lWLlTkZ7KbOBsWO7C6pp
-         XaOjqzvF52Gw8XobGUHBAQGsr31HpxiAGtIkrpWlAWn2+xgsXZOKZxQrtLOHoy/yoRWT
-         Vvm4L8hQ1aThfwaBz33IeE0/Ssw4GsTV1E3VEPiBfvj1xpymIDszmwJwy0lk7p1Z8ZrL
-         YbwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753727342; x=1754332142;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=sI9DnxD53afh1bGVJtkHUSGUSl+2DhjWZmpd46BC7PI=;
-        b=oU5jymLuPXg1Yzifm1ATZQwrWgvMw+ikm3PGwPV6u0IGzWdTDF0wvB83g0RvYWAjG0
-         MIZAGjrQWPifzqB43T9t/BuAQ5Q/+7FEtMHtyJ26ekFvc2CeJ0mVjs9uxyaec6eKO7I1
-         Tli7SV21ajBa4qEKJhBd1f2B7bSnShX4aHvRVAWcecg3aA8IAWH0+pmIh9wclHKQvSnj
-         b9oze2bW0kN1IhWkRZ1nIdH5To4t3pTfSX5N8jg34gHKszKHxXftz/c/dfdZfb2bvAKN
-         c3MzCc7eXMdi7GIwEUo204YRKH28pZFW4m+Mj+5C7afP8qDb+HBkrPWCHIXO721OkUiA
-         2X1g==
-X-Forwarded-Encrypted: i=1; AJvYcCWeUS9k/RomQ3V6SXxelE1VsfNNI5vMyPD1H/DQLQdeqBGMLv+RxcY36xclq1RQn80a4knJ8zdo@lists.yoctoproject.org
-X-Gm-Message-State: AOJu0Ywp2++lA7G8Z58BiwFT/ufZ10H/v1bwLPWneovEbQtFfl9q86BZ
-	UeqBmMGy9mne5nqtdv94NlEMYY/BnRERImedfwFyTEJx4peyUktvUzf/vxpt+E3teIfKSsRDjJv
-	CeOGSAbkrCSMpvoKk7N8vdRuU/4PqPf0=
-X-Gm-Gg: ASbGncubutrLb7gZmrSXQxd+S2ppLnaVdqSGHlfOO5oqT3u/sF5vC0s7in4JMTPZfPC
-	HyEFumrmuHIe2InTdT8ueEc1bLy61pcrty4te+fumBRnCXJz6CSX0woLBgf202mxY6r9m82laWm
-	W1BuxXSPSjlOoim0mSQ74TuBuQv05Uus8JGtTMipCj3MSBkWt+brRT0tkwcUEXJj3GiGtW3+nBE
-	yi4UG5BOclNKlBuA7OI8hJ4yAOTfPO4V7fzDGo2TRUKwA==
-X-Google-Smtp-Source: AGHT+IGqzBjKLdTA+LKuYM0EPNqI2tXAp8cilep9C9Z0VslCYWI6+0nTN/+ED7/Z2Yt5Pcz51PgLOdoN23/xZ5uB+vU=
-X-Received: by 2002:a05:690c:650f:b0:707:48a7:ea74 with SMTP id
- 00721157ae682-719e39287e1mr142139347b3.22.1753727342340; Mon, 28 Jul 2025
- 11:29:02 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 2CE4640C37;
+	Mon, 28 Jul 2025 19:32:08 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id dNPIS6vZIohv; Mon, 28 Jul 2025 19:32:08 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id ED19B40C2C;
+	Mon, 28 Jul 2025 19:32:05 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 4D23C16D17C; Mon, 28 Jul 2025 15:32:05 -0400 (EDT)
+Date: Mon, 28 Jul 2025 15:32:05 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: afd@ti.com
+Cc: Ryan Eatmon <reatmon@ti.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][scarthgap/master][PATCH] recipes-graphics: Add
+ weston fix for SGX from meta-arago
+Message-ID: <20250728193205.GK24899@denix.org>
+References: <20250728173316.575613-1-afd@ti.com>
 MIME-Version: 1.0
-References: <20250728165437.571427-1-afd@ti.com> <20250728165437.571427-3-afd@ti.com>
- <20250728182531.GJ24899@denix.org>
-In-Reply-To: <20250728182531.GJ24899@denix.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Jul 2025 11:28:36 -0700
-X-Gm-Features: Ac12FXxAhHqDlLtf3HqNd-gatTbbcIVh7RXBGkCRtidZTdYHhv60MF2qzmlJjl8
-Message-ID: <CAMKF1sod1hFZ6HbcZr6yJztNfos=iQt2_O4SBBFHSTEJPpU0Cw@mail.gmail.com>
-Subject: Re: [meta-ti][scarthgap/master][PATCH 3/3] wic: sdimage-2part-efi:
- Remove 3 second menu delay
-To: denis@denix.org
-Cc: afd@ti.com, Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>, 
-	meta-ti@lists.yoctoproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250728173316.575613-1-afd@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 28 Jul 2025 18:29:09 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18841
+ <meta-ti@lists.yoctoproject.org>; Mon, 28 Jul 2025 19:32:19 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18842
 
-On Mon, Jul 28, 2025 at 11:25=E2=80=AFAM Denys Dmytriyenko via
-lists.yoctoproject.org <denis=3Ddenix.org@lists.yoctoproject.org> wrote:
->
-> On Mon, Jul 28, 2025 at 11:54:37AM -0500, Andrew Davis via lists.yoctopro=
-ject.org wrote:
-> > For all our platforms booting with EFI there is only one option today.
-> > The timeout gives the user 3 seconds to choose a different option, but
-> > as there is only one, this just causes a needless 3 second delay in
-> > boot time. Remove this delay and boot the only option immediately.
-> > If we ever have more than one option we can always add this back.
->
-> Well, menu delay in grub is not only used for selecting among available
-> predefined options, but also for interactively editing the command line
-> on the fly before booting.
->
+On Mon, Jul 28, 2025 at 12:33:16PM -0500, Andrew Davis via lists.yoctoproject.org wrote:
+> This change is needed due to the SGX driver, any distro, not just Arago,
+> using a TI SoC with SGX will need this fix, so it should go in meta-ti.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
 
-for development, this sounds good, for production not so much.
+Acked-by: Denys Dmytriyenko <denys@konsulko.com>
 
->
-> > Signed-off-by: Andrew Davis <afd@ti.com>
-> > ---
-> >  meta-ti-bsp/wic/sdimage-2part-efi.wks.in | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-ti-bsp/wic/sdimage-2part-efi.wks.in b/meta-ti-bsp/wic=
-/sdimage-2part-efi.wks.in
-> > index 7252411c..c1089762 100644
-> > --- a/meta-ti-bsp/wic/sdimage-2part-efi.wks.in
-> > +++ b/meta-ti-bsp/wic/sdimage-2part-efi.wks.in
-> > @@ -3,6 +3,6 @@
-> >  # supports EFI.  Boot files are located in the first vfat partition wi=
-th extra
-> >  # reserved space.  We cannot use a GPT here.
-> >
-> > -bootloader --timeout=3D3 --append=3D"rootfstype=3Dext4 rootwait ${TI_W=
-KS_BOOTLOADER_APPEND}"
-> > +bootloader --timeout=3D0 --append=3D"rootfstype=3Dext4 rootwait ${TI_W=
-KS_BOOTLOADER_APPEND}"
-> >  part --source bootimg-efi --sourceparams=3D"loader=3D${EFI_PROVIDER}" =
---fstype=3Dvfat --label boot --active --align 1024 --use-uuid --fixed-size =
-128M
-> >  part / --source rootfs --fstype=3Dext4 --label root --align 1024 --use=
--uuid
-> > --
-> > 2.39.2
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#18840): https://lists.yoctoproject.org/g/meta-ti/mess=
-age/18840
-> Mute This Topic: https://lists.yoctoproject.org/mt/114416911/1997914
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [raj.khem@gma=
-il.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+
+> ---
+>  .../wayland/weston-ti-version.inc             |  7 ++
+>  ...equire-GL_EXT_unpack_subimage-commit.patch | 95 +++++++++++++++++++
+>  .../wayland/weston_13.0.%.bbappend            |  4 +
+>  3 files changed, 106 insertions(+)
+>  create mode 100644 meta-ti-bsp/recipes-graphics/wayland/weston-ti-version.inc
+>  create mode 100644 meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch
+>  create mode 100644 meta-ti-bsp/recipes-graphics/wayland/weston_13.0.%.bbappend
+> 
+> diff --git a/meta-ti-bsp/recipes-graphics/wayland/weston-ti-version.inc b/meta-ti-bsp/recipes-graphics/wayland/weston-ti-version.inc
+> new file mode 100644
+> index 00000000..fafef724
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-graphics/wayland/weston-ti-version.inc
+> @@ -0,0 +1,7 @@
+> +FILESEXTRAPATHS:prepend := "${THISDIR}/weston:"
+> +
+> +PR:append = ".ti-soc1"
+> +
+> +SRC_URI += " \
+> +        file://0001-Revert-require-GL_EXT_unpack_subimage-commit.patch \
+> +"
+> diff --git a/meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch b/meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch
+> new file mode 100644
+> index 00000000..ad252030
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch
+> @@ -0,0 +1,95 @@
+> +From 5a05e5b66dd3831a9c9c2b3f64bd42419d9ade2d Mon Sep 17 00:00:00 2001
+> +From: Denys Dmytriyenko <denys@konsulko.com>
+> +Date: Thu, 6 Jul 2023 01:48:41 +0000
+> +Subject: [PATCH] Revert require GL_EXT_unpack_subimage commit
+> +
+> +This reverts commit 593d5af43a8e2c2a3371088fa7ae430d0517c82d.
+> +
+> +That commit removed support for GPU drivers without GL_EXT_unpack_subimage
+> +which SGX does not support. Add back support for GPUs without this
+> +extension.
+> +
+> +Upstream-Status: Inappropriate [specific to TI SGX]
+> +
+> +Signed-off-by: Andrew Davis <afd@ti.com>
+> +Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+> +
+> +---
+> + libweston/renderer-gl/gl-renderer-internal.h |  2 ++
+> + libweston/renderer-gl/gl-renderer.c          | 29 ++++++++++++++++----
+> + 2 files changed, 26 insertions(+), 5 deletions(-)
+> +
+> +diff --git a/libweston/renderer-gl/gl-renderer-internal.h b/libweston/renderer-gl/gl-renderer-internal.h
+> +index 5032035..85616c9 100644
+> +--- a/libweston/renderer-gl/gl-renderer-internal.h
+> ++++ b/libweston/renderer-gl/gl-renderer-internal.h
+> +@@ -160,6 +160,8 @@ struct gl_renderer {
+> +	PFNEGLCREATEPLATFORMWINDOWSURFACEEXTPROC create_platform_window;
+> +	bool has_platform_base;
+> +
+> ++	bool has_unpack_subimage;
+> ++
+> +	PFNEGLBINDWAYLANDDISPLAYWL bind_display;
+> +	PFNEGLUNBINDWAYLANDDISPLAYWL unbind_display;
+> +	PFNEGLQUERYWAYLANDBUFFERWL query_buffer;
+> +diff --git a/libweston/renderer-gl/gl-renderer.c b/libweston/renderer-gl/gl-renderer.c
+> +index ccb41e6..38a0e0c 100644
+> +--- a/libweston/renderer-gl/gl-renderer.c
+> ++++ b/libweston/renderer-gl/gl-renderer.c
+> +@@ -2106,6 +2106,7 @@ gl_renderer_flush_damage(struct weston_surface *surface,
+> + {
+> +	const struct weston_testsuite_quirks *quirks =
+> +		&surface->compositor->test_data.test_quirks;
+> ++	struct gl_renderer *gr = get_renderer(surface->compositor);
+> +	struct gl_surface_state *gs = get_surface_state(surface);
+> +	struct gl_buffer_state *gb = gs->buffer;
+> +	struct weston_paint_node *pnode;
+> +@@ -2152,6 +2153,24 @@ gl_renderer_flush_damage(struct weston_surface *surface,
+> +
+> +	glActiveTexture(GL_TEXTURE0);
+> +
+> ++	if (!gr->has_unpack_subimage) {
+> ++		wl_shm_buffer_begin_access(buffer->shm_buffer);
+> ++		for (j = 0; j < gs->buffer->num_textures; j++) {
+> ++			glBindTexture(GL_TEXTURE_2D, gs->buffer->textures[j]);
+> ++			glTexImage2D(GL_TEXTURE_2D, 0,
+> ++				     gs->buffer->gl_format[j],
+> ++				     gs->buffer->pitch / pixel_format_hsub(buffer->pixel_format, j),
+> ++				     buffer->height / pixel_format_vsub(buffer->pixel_format, j),
+> ++				     0,
+> ++				     gl_format_from_internal(gs->buffer->gl_format[j]),
+> ++				     gs->buffer->gl_pixel_type,
+> ++				     data + gs->buffer->offset[j]);
+> ++		}
+> ++		wl_shm_buffer_end_access(buffer->shm_buffer);
+> ++
+> ++		goto done;
+> ++	}
+> ++
+> +	if (gb->needs_full_upload || quirks->gl_force_full_upload) {
+> +		glPixelStorei(GL_UNPACK_SKIP_PIXELS_EXT, 0);
+> +		glPixelStorei(GL_UNPACK_SKIP_ROWS_EXT, 0);
+> +@@ -4169,11 +4188,9 @@ gl_renderer_setup(struct weston_compositor *ec)
+> +	else
+> +		ec->read_format = pixel_format_get_info(DRM_FORMAT_ABGR8888);
+> +
+> +-	if (gr->gl_version < gr_gl_version(3, 0) &&
+> +-	    !weston_check_egl_extension(extensions, "GL_EXT_unpack_subimage")) {
+> +-		weston_log("GL_EXT_unpack_subimage not available.\n");
+> +-		return -1;
+> +-	}
+> ++	if (gr->gl_version >= gr_gl_version(3, 0) ||
+> ++	    weston_check_egl_extension(extensions, "GL_EXT_unpack_subimage"))
+> ++		gr->has_unpack_subimage = true;
+> +
+> +	if (gr->gl_version >= gr_gl_version(3, 0) ||
+> +	    weston_check_egl_extension(extensions, "GL_EXT_texture_type_2_10_10_10_REV"))
+> +@@ -4268,6 +4285,8 @@ gl_renderer_setup(struct weston_compositor *ec)
+> +		   gr_gl_version_minor(gr->gl_version));
+> +	weston_log_continue(STAMP_SPACE "read-back format: %s\n",
+> +			    ec->read_format->drm_format_name);
+> ++	weston_log_continue(STAMP_SPACE "wl_shm sub-image to texture: %s\n",
+> ++			    gr->has_unpack_subimage ? "yes" : "no");
+> +	weston_log_continue(STAMP_SPACE "glReadPixels supports y-flip: %s\n",
+> +			    yesno(gr->has_pack_reverse));
+> +	weston_log_continue(STAMP_SPACE "wl_shm 10 bpc formats: %s\n",
+> diff --git a/meta-ti-bsp/recipes-graphics/wayland/weston_13.0.%.bbappend b/meta-ti-bsp/recipes-graphics/wayland/weston_13.0.%.bbappend
+> new file mode 100644
+> index 00000000..cf4f530a
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-graphics/wayland/weston_13.0.%.bbappend
+> @@ -0,0 +1,4 @@
+> +WESTON_TI_VERSION = ""
+> +WESTON_TI_VERSION:ti-soc = "${BPN}-ti-version.inc"
+> +
+> +require ${WESTON_TI_VERSION}
+> -- 
+> 2.39.2
 
