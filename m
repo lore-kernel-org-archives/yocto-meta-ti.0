@@ -1,132 +1,136 @@
-Return-Path: <lcpdbld@list.ti.com>
+Return-Path: <max.oss.09@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D153AC87FCA
-	for <webhook@archiver.kernel.org>; Fri,  1 Aug 2025 08:16:26 +0000 (UTC)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web10.82950.1754036181364793093
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21B97C87FCA
+	for <webhook@archiver.kernel.org>; Fri,  1 Aug 2025 09:16:57 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.web11.83542.1754039810644030213
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 01 Aug 2025 01:16:21 -0700
+ Fri, 01 Aug 2025 02:16:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=fRMQ1RKj;
- spf=pass (domain: list.ti.com, ip: 198.47.23.235, mailfrom: lcpdbld@list.ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5718GKDh3687271;
-	Fri, 1 Aug 2025 03:16:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1754036180; i=@ti.com;
-	bh=DPG7cQjG3nHiuiRBil4NtaUEgnUkFDORvzwgtHdgVnU=;
-	h=From:To:Subject:Date;
-	b=fRMQ1RKjOd5anelez03o3Zn8n9g5cZEqHLD0iBcKwh4bHYcQxSLQlY8CE9E9ytWIM
-	 V8Orlym7ky78QdqeNetTv8ie+m/HIgngkt6rSBM+e5csdqBViG7iVST8sKOgkUmxk8
-	 74fmONXyYHWU54stLIdQEdL6R1hbqc58dpW1uH0c=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5718GK63637486
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Fri, 1 Aug 2025 03:16:20 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 1
- Aug 2025 03:16:19 -0500
-Received: from fllvem-mr08.itg.ti.com (10.64.41.88) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 1 Aug 2025 03:16:19 -0500
-Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.64.72.21])
-	by fllvem-mr08.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5718GJdf017406;
-	Fri, 1 Aug 2025 03:16:19 -0500
-Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
-	id A150CE8044; Fri,  1 Aug 2025 03:16:19 -0500 (CDT)
-From: LCPD Automation Script <lcpdbld@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202508010100
-Date: Fri, 1 Aug 2025 03:16:19 -0500
-Message-ID: <20250801081619.3460458-1-lcpdbld@list.ti.com>
-X-Mailer: git-send-email 2.43.5
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Kf46vfpi;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: max.oss.09@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4563cfac19cso19257285e9.2
+        for <meta-ti@lists.yoctoproject.org>; Fri, 01 Aug 2025 02:16:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1754039809; x=1754644609; darn=lists.yoctoproject.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:to:from:subject:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=LjYj4BDXV8lffGi4xNPIF4yuVxQmBlWrJsTFPIQjooo=;
+        b=Kf46vfpitAgdBC1xgblpeo4bVTfcA38oe6p9/dIB+DrIZYUJx3SiRY3BKFkzkGVUOE
+         SFrmn2LDyBWuhCb+cVusNSWkZXWWRujKz7rCAcMWNJiiQnPg2AZOrefJwIjoSK1+Y8Im
+         0DN8cCRpm6HK//w2jZzqhEV0fFQ94TY6ARvTBG1R0P07iqS8g0B3Sbj8U+2KDulPmC/z
+         Uk9xEgcf7/5Bw6zJsWT9+HWFS9VvfHxDrbAt/B8sF7uj+NhwYunt+3Z6gdPBNRs9ZuO9
+         SOZCb6n/3e+Nl17rl2OZm+W+eGT83Oczb9OCHXGYmlzQPqFkUM/TISFISYXTzLitmjdf
+         sVCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1754039809; x=1754644609;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:to:from:subject:message-id:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=LjYj4BDXV8lffGi4xNPIF4yuVxQmBlWrJsTFPIQjooo=;
+        b=TM9Q6Xn88BzA54CnDOji/2jlmaAX3DhfeXJym34ksYs8HpBuhQj0L/zXnWjZBSXbX6
+         +yaKnprCKL4DxwDNInTboBDVZkykxVZkYvRU6trHAT3bsuF0YqIMYwL9ptSgLA+gwLim
+         qLu1MSFmRZyMaixS2ua2mOpLmVuP5fT1SqC0ManQNAeTuRCbBQQGIPToh4ne6e+MUIL7
+         NvfjK1SMW+hTU+1F2YI9wlVQbv1tHPYkIj7fy03hAYt1lQBeAQyEZ+clRrZAYWBA2hYS
+         WXlCrsxyscu4LlocCrwakJgppCR/C6ajagzaXzEPzLWBXMLKTS5J8+JAfna60lwFkCus
+         L7CA==
+X-Forwarded-Encrypted: i=1; AJvYcCW/ZEG4Tyi981GpaZggNJ2c53h+VONF8qufqVr7MkS/ARX0ZbLjXGZMxmIOxbXBbSD7nR1IKgM9@lists.yoctoproject.org
+X-Gm-Message-State: AOJu0YweBKgHhX+7yeWOMSd0YitDrCRBI2i9RX+Js2qfuabSr80KupSN
+	dZKLQFu4PSTV47WfDUThpj08G5hj5zXM/kyx6OgJHuptz7SufdTcVber
+X-Gm-Gg: ASbGncuAQpsO4sbfK1B7o5qlQv7O+FlArH0s++bQgdzfFPVu5vhPg7Zmsl29spmiq+H
+	/qkxQhheCPA2CbIV3aQ2tS2avrxcL8my0hnL7MW89FWSj7JfGKVUWzhGyhfWhGPoMX/2ESWcqaw
+	TZtHUFdctCR9P6eJYCOJIz1oP8CZwSAOyPxDSpeWhlqxJ1iekjGxjdpGhIJWQ7X+LJbA9BC6nYS
+	4SBrBg9P3K4IClM7XPEAZDegzPsSbHC8zkxfUpPhSqI2gomG5qqrlaVeRDmRFFhFDISYDVPbWCo
+	gaMcV0tM0sZbUyeZP5NB/QATmBDmtTXXAKi9DY0wvTb2ir651BIn72leRhSvv6L3ID8SblQHiEm
+	g6PYspDFHF0BKyX671hIY/kLDvLTYXEKPwqS87NaafklU9ERKxamEpMrJswOS
+X-Google-Smtp-Source: AGHT+IFkfWy9v31jMFAZ50W/i4LZsRinACDZs+H0Hdd5Sf9iBoawWk7i8fqiZ6R6bV2/cGz9Vfx6wg==
+X-Received: by 2002:a05:600c:1da2:b0:456:1ac8:cace with SMTP id 5b1f17b1804b1-45892b9e27emr120937825e9.12.1754039808622;
+        Fri, 01 Aug 2025 02:16:48 -0700 (PDT)
+Received: from [192.168.0.7] (159-226-191-194.pool.dsl-net.ch. [194.191.226.159])
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-3b79c3ac158sm5345839f8f.4.2025.08.01.02.16.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 01 Aug 2025 02:16:48 -0700 (PDT)
+Message-ID: <b9c8b913068cfa6f0815f81e49aea1f501f7f12f.camel@gmail.com>
+Subject: Re: [meta-ti][master][PATCH] linux-ti-*: Fix support for building
+ legacy HS platforms
+From: Max <max.oss.09@gmail.com>
+To: reatmon@ti.com, Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
+	 <denys@konsulko.com>, meta-ti@lists.yoctoproject.org
+Date: Fri, 01 Aug 2025 11:16:47 +0200
+In-Reply-To: <20250722214327.16345-1-reatmon@ti.com>
+References: <20250722214327.16345-1-reatmon@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.50.3 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 01 Aug 2025 08:16:26 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18867
+ <meta-ti@lists.yoctoproject.org>; Fri, 01 Aug 2025 09:16:57 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18868
 
-Updated the value(s) for:
-  ti-linux-fw: TI_LINUX_FW_SRCREV
-  u-boot-ti-staging_2025.01: SRCREV
-  linux-ti-staging-rt_6.12: SRCREV_ARM32
-  linux-ti-staging_6.12: SRCREV
+Hi
 
-Changelogs:
-  ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/log/?qt=range&q=f59a711599249ecac75fea38b7a15ef9137d650d..e89a348f4618a26812fb353a04ed9532ef890a2f
-  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=3bcfad6cee95403f7f62dd9d871cc3ea948c0761..743712b9ee4b33cc9739a3cbeb5a8f14ae2ccf35
-  linux-ti-staging-rt_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=b5ee9420d81f46861c4f0a172154e477feda1980..60431d6c0e260d0b9404bcf325368a88daeef9ca
-  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=72f48d59b8f087fa0dd1f1e8c2c0b5bc0baa537c..ce4785d01a0b962c7d9cb12f56dbae02514213eb
+Am Dienstag, dem 22.07.2025 um 16:43 -0500 schrieb Ryan Eatmon via lists.yo=
+ctoproject.org:
+> The legacy HS platforms (am335x-hs-evm, am437x-hs-evm, and
+> am57xx-hs-evm) are not using the new fitImage flow, but the kernels all
+> include the kernel.bbclass which disallows the old fitImage flow.
+>=20
+> Copy in the last version of the kernel.bbclass and name it
+> kernel_legacyhs.bbclass, and update the machine configs to defined a
+> variable to use as the KERNEL_BASE_CLASS to inherit.
+>=20
+> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+> ---
+...
+> diff --git a/meta-ti-bsp/conf/machine/include/ti-soc.inc b/meta-ti-bsp/co=
+nf/machine/include/ti-soc.inc
+> index e3a50fdd..56ea9e47 100644
+> --- a/meta-ti-bsp/conf/machine/include/ti-soc.inc
+> +++ b/meta-ti-bsp/conf/machine/include/ti-soc.inc
+> @@ -11,3 +11,6 @@ UBOOT_RD_ENTRYPOINT =3D "0x84000000"
+> =20
+>  # TI platforms all use devicetrees with overlays
+>  MACHINE_ESSENTIAL_EXTRA_RDEPENDS +=3D "kernel-devicetree"
+> +
+> +# All machines should start off pointing at the default base kernel clas=
+s
+> +KERNEL_BASE_CLASS =3D "kernel"
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb b/=
+meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
+> index 4c740678..51723fc0 100644
+> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-mainline_git.bb
+> @@ -3,7 +3,7 @@ SUMMARY =3D "Mainline Linux kernel for TI devices"
+>  LICENSE =3D "GPL-2.0-only"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6bc538ed5bd9a7fc9398086aedcd7=
+e46"
+> =20
+> -inherit kernel
+> +inherit ${KERNEL_BASE_CLASS}
+> =20
+...
+>=20
 
-Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
----
- meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc          | 2 +-
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb  | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb | 2 +-
- meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb    | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+This breaks building for any machine which does not define KERNEL_BASE_CLAS=
+S,
+i.e. any machine which does not include ti-soc.inc or its siblings.
 
-diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index 571259e0..b8fb5570 100644
---- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -19,7 +19,7 @@ TI_SYSFW_VERSION = "11.01.05"
- TI_HSM_DEMO_FW_VERSION = "11.00.09"
- TAD5212_FW_VERSION = "1.0.0.0"
- 
--TI_LINUX_FW_SRCREV ?= "f59a711599249ecac75fea38b7a15ef9137d650d"
-+TI_LINUX_FW_SRCREV ?= "e89a348f4618a26812fb353a04ed9532ef890a2f"
- SRCREV = "${TI_LINUX_FW_SRCREV}"
- 
- BRANCH ?= "ti-linux-firmware"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-index 83965d54..94e4c322 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-@@ -6,4 +6,4 @@ PR = "r0"
- 
- BRANCH = "ti-u-boot-2025.01"
- 
--SRCREV = "3bcfad6cee95403f7f62dd9d871cc3ea948c0761"
-+SRCREV = "743712b9ee4b33cc9739a3cbeb5a8f14ae2ccf35"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
-index 7240db0e..3dd3f922 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
-@@ -10,7 +10,7 @@ BRANCH_ARM64 = "ti-linux-6.12.y"
- BRANCH = "${BRANCH_ARM64}"
- 
- BRANCH_ARM32 = "ti-rt-linux-6.12.y-arm32"
--SRCREV_ARM32 = "b5ee9420d81f46861c4f0a172154e477feda1980"
-+SRCREV_ARM32 = "60431d6c0e260d0b9404bcf325368a88daeef9ca"
- PV_ARM32 = "6.12.35+git"
- 
- BRANCH:ti33x = "${BRANCH_ARM32}"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-index db180e11..51e4b604 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-@@ -21,7 +21,7 @@ S = "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}"
- 
- BRANCH ?= "ti-linux-6.12.y"
- 
--SRCREV ?= "72f48d59b8f087fa0dd1f1e8c2c0b5bc0baa537c"
-+SRCREV ?= "ce4785d01a0b962c7d9cb12f56dbae02514213eb"
- PV = "6.12.35+git"
- 
- KERNEL_REPRODUCIBILITY_PATCHES = " \
--- 
-2.43.5
+Building for qemuarm64 results in the following parse error:
 
+| $ MACHINE=3Dqemuarm64 bitbake --parse-only
+| Loading cache: 100% |#################################| Time: 0:00:12
+| Loaded 5400 entries from dependency cache.
+| ERROR: ParseError at .../meta-ti/meta-ti-bsp/recipes-kernel/linux/linux-t=
+i-staging_6.12.bb:6:
+Could not inherit file classes/${KERNEL_BASE_CLASS}.bbclass                =
+                       =20
+| ERROR: Parsing halted due to errors, see error messages above
+
+Regards,
+Max
 
