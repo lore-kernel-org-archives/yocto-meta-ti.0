@@ -1,156 +1,132 @@
-Return-Path: <afd@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E22DC87FCA
-	for <webhook@archiver.kernel.org>; Thu,  7 Aug 2025 13:55:00 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web11.52991.1754574892119178693
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FA75C87FCF
+	for <webhook@archiver.kernel.org>; Fri,  8 Aug 2025 02:25:05 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web10.12539.1754619900759658424
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 07 Aug 2025 06:54:52 -0700
+ Thu, 07 Aug 2025 19:25:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=AU79xM/5;
- spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: afd@ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 577DspJA369791;
-	Thu, 7 Aug 2025 08:54:51 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=wJQHGZeg;
+ spf=pass (domain: list.ti.com, ip: 198.47.19.246, mailfrom: lcpdbld@list.ti.com)
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5782OwvU880002;
+	Thu, 7 Aug 2025 21:24:58 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1754574891;
-	bh=cobNhNEQREe4T3SMc8ZcXxazLblWZnF1kTzPu+2x0sA=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=AU79xM/5D07KSwpe3DMVZBmRDQ4n+s4wc4eU9TsvCVIP0VKsKNNXJK+4mGQRgcmp4
-	 Vvcsg7Yk+UEHsPqJEA4CjODVAfjlCnudl7M1aojZF2wNRoTu4HOUe5s9rkN/vKDwlE
-	 WBof1g4N24vNpumwTOGvArnHVUfIW5WivPsao/0M=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 577Dspnn922378
+	s=ti-com-17Q1; t=1754619898; i=@ti.com;
+	bh=dVV6SXwlQiWcyPTxZ66YU1lTEsX1ivt9aYTm3t3tPxM=;
+	h=From:To:Subject:Date;
+	b=wJQHGZeg16hg4j3RcBrRoi3icdlG/3vnq9fE+sNEgurqROtu8T/RJ9waCfR5439ZE
+	 ZALPuGOL/UYD85Cpf7rAKl2Wnr3IqCTSlHQTkrr3b8omkNkLAeEyWaf5NB2BWjHtb0
+	 18Q1TrWsrv+Zta83hlUQxixIa0xS5q/hy38L1RzM=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5782OwHi592730
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Thu, 7 Aug 2025 08:54:51 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 7 Aug 2025 21:24:58 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 7
- Aug 2025 08:54:50 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2025 21:24:58 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 7 Aug 2025 08:54:50 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 577DsoQe1113786;
-	Thu, 7 Aug 2025 08:54:50 -0500
-Message-ID: <3171512f-af2b-47e4-b6a6-77c54a6842a7@ti.com>
-Date: Thu, 7 Aug 2025 08:54:50 -0500
+ Frontend Transport; Thu, 7 Aug 2025 21:24:58 -0500
+Received: from fllvdckhpci004.itg.ti.com (fllvdckhpci004.itg.ti.com [10.64.72.21])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5782OwSt2031364;
+	Thu, 7 Aug 2025 21:24:58 -0500
+Received: by fllvdckhpci004.itg.ti.com (Postfix, from userid 60899)
+	id 2DF3A136ABD; Thu,  7 Aug 2025 21:24:58 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        Denys
+ Dmytriyenko <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202508071800
+Date: Thu, 7 Aug 2025 21:24:58 -0500
+Message-ID: <20250808022458.4193569-1-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [master/scarthgap][PATCH v2 1/5] ti-ipc-examples-linux: Add a
- recipe to build messageq app_host
-To: Beleswar Padhi <b-padhi@ti.com>, <reatmon@ti.com>, <denys@konsulko.com>
-CC: <a-limaye@ti.com>, <u-kumar1@ti.com>, <meta-ti@lists.yoctoproject.org>
-References: <20250806170442.243461-1-b-padhi@ti.com>
- <20250806170442.243461-2-b-padhi@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250806170442.243461-2-b-padhi@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 07 Aug 2025 13:55:00 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18908
+ <meta-ti@lists.yoctoproject.org>; Fri, 08 Aug 2025 02:25:05 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18909
 
-On 8/6/25 12:04 PM, Beleswar Padhi wrote:
-> Add a recipe to build the Application Host (for A15 core) to demonstrate
-> IPC with remote processors through messageq firmware. Also package this
-> in the /usr/bin directory for testing IPC. This recipe only builds the
-> app_host, and the firmwares are available in ti-linux-firmware
-> repository.
-> 
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> ---
->   .../ipc/ti-ipc-examples-linux_git.bb          | 68 +++++++++++++++++++
->   1 file changed, 68 insertions(+)
->   create mode 100644 meta-ti-extras/recipes-ti/ipc/ti-ipc-examples-linux_git.bb
-> 
-> diff --git a/meta-ti-extras/recipes-ti/ipc/ti-ipc-examples-linux_git.bb b/meta-ti-extras/recipes-ti/ipc/ti-ipc-examples-linux_git.bb
-> new file mode 100644
-> index 00000000..3a64409e
-> --- /dev/null
-> +++ b/meta-ti-extras/recipes-ti/ipc/ti-ipc-examples-linux_git.bb
-> @@ -0,0 +1,68 @@
-> +DESCRIPTION = "TI Inter Processor Communication (IPC) MessageQ Application for
-> +Linux Host"
-> +
-> +require recipes-ti/ipc/ti-ipc-common.inc
-> +require ti-ipc-rtos.inc
-> +
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://${S_ipc-examples}/src/makefile;beginline=1;endline=30;md5=a52324bd5033bb49ea07bade1244ac9a"
-> +
-> +INSANE_SKIP:${PN} += "arch"
-> +
-> +IPC_INSTALL_DIR = "${STAGING_DIR_TARGET}/usr/share/ti/ti-ipc-tree"
-> +INHIBIT_PACKAGE_STRIP = "1"
-> +
-> +DEPENDS = "ti-ipc ti-ipc-rtos ti-xdctools-native zip-native"
+Updated the value(s) for:
+  u-boot-ti-staging_2025.01: SRCREV
+  k3conf: SRCREV
+  linux-ti-staging-rt_6.12: SRCREV_ARM32
+  linux-ti-staging_6.12: SRCREV
 
-Do we really depend on "ti-ipc-rtos"? Once we add pre-built IPUMM firmware
-to linux-firmware, we should be able to drop the "ti-sysbios" recipe and
-all the recipes that depend on it, including ti-ipc-rtos.
+Changelogs:
+  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=743712b9ee4b33cc9739a3cbeb5a8f14ae2ccf35..05d141ca0739756a0cdd7a19268e3ad07279a17e
+  k3conf: https://git.ti.com/cgit/k3conf/k3conf/log/?qt=range&q=6034420195cf763c9470fb2113810695e5e37a23..b35ec6f6c6e11471c5d06f8c24ac396077f893be
+  linux-ti-staging-rt_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=60431d6c0e260d0b9404bcf325368a88daeef9ca..2bcb6e9caabf65ef182dde7dc0332a7fe53622a2
+  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=ce4785d01a0b962c7d9cb12f56dbae02514213eb..c94f90807b390a224fd087549b4bd5d84d5fc971
 
-Andrew
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb  | 2 +-
+ meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb            | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb    | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-> +
-> +EX02_PATH = "examples/DRA7XX_linux_elf/ex02_messageq/host"
-> +
-> +do_compile() {
-> +  cd ${S_ipc-examples}/src
-> +  oe_runmake .examples \
-> +    IPCTOOLS="${S_ipc-metadata}/src/etc"
-> +
-> +  for alt_platform in ${ALT_PLATFORM}; do
-> +    oe_runmake .examples "PLATFORM=${alt_platform}" \
-> +      IPCTOOLS="${S_ipc-metadata}/src/etc"
-> +  done
-> +
-> +  if [  "${PLATFORM}" != "UNKNOWN" ]; then
-> +    oe_runmake extract HOSTOS="linux" IPC_INSTALL_DIR="${IPC_INSTALL_DIR}"
-> +
-> +    if [ ! -z ${ALT_PLATFORM} ]; then
-> +      oe_runmake extract PLATFORM="${ALT_PLATFORM}" HOSTOS="linux" \
-> +         IPC_INSTALL_DIR="${IPC_INSTALL_DIR}"
-> +    fi
-> +    oe_runmake -C ${EX02_PATH} all HOSTOS="linux" \
-> +      LINUX_SYSROOT_DIR="${STAGING_INCDIR}" \
-> +      IPC_INSTALL_DIR="${IPC_INSTALL_DIR}"
-> +
-> +    if [ ! -z ${ALT_PLATFORM} ]; then
-> +      oe_runmake -C ${EX02_PATH} all HOSTOS="linux" \
-> +        LINUX_SYSROOT_DIR="${STAGING_INCDIR}" \
-> +        IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
-> +        PLATFORM="${ALT_PLATFORM}"
-> +    fi
-> +  fi
-> +}
-> +
-> +do_install() {
-> +  cd ${S_ipc-examples}/src
-> +
-> +  if [  "${PLATFORM}" != "UNKNOWN" ]; then
-> +    # Install directory for linux examples
-> +    install -d ${D}${bindir}/ipc/examples/ex02_messageq
-> +    oe_runmake -C ${EX02_PATH} install IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
-> +      LINUX_SYSROOT_DIR="${STAGING_INCDIR}" \
-> +      HOSTOS="linux" EXEC_DIR="${D}/${bindir}/ipc/examples/ex02_messageq"
-> +
-> +    if [ ! -z ${ALT_PLATFORM} ]; then
-> +      oe_runmake -C ${EX02_PATH} install IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
-> +        LINUX_SYSROOT_DIR="${STAGING_INCDIR}" \
-> +        HOSTOS="linux" EXEC_DIR="${D}/${bindir}/ipc/examples/ex02_messageq" \
-> +        PLATFORM="${ALT_PLATFORM}"
-> +    fi
-> +  fi
-> +}
-> +
-> +FILES:${PN} += "${bindir}/*"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+index 94e4c322..8024c295 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+@@ -6,4 +6,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2025.01"
+ 
+-SRCREV = "743712b9ee4b33cc9739a3cbeb5a8f14ae2ccf35"
++SRCREV = "05d141ca0739756a0cdd7a19268e3ad07279a17e"
+diff --git a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
+index a3ea714e..bff88e30 100644
+--- a/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
++++ b/meta-ti-bsp/recipes-devtools/k3conf/k3conf_git.bb
+@@ -10,7 +10,7 @@ PV = "0.3+git"
+ COMPATIBLE_MACHINE = "k3"
+ 
+ BRANCH ?= "master"
+-SRCREV = "6034420195cf763c9470fb2113810695e5e37a23"
++SRCREV = "b35ec6f6c6e11471c5d06f8c24ac396077f893be"
+ 
+ SRC_URI = "git://git.ti.com/git/k3conf/k3conf.git;protocol=https;branch=${BRANCH}"
+ 
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+index 3dd3f922..9839c308 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+@@ -10,7 +10,7 @@ BRANCH_ARM64 = "ti-linux-6.12.y"
+ BRANCH = "${BRANCH_ARM64}"
+ 
+ BRANCH_ARM32 = "ti-rt-linux-6.12.y-arm32"
+-SRCREV_ARM32 = "60431d6c0e260d0b9404bcf325368a88daeef9ca"
++SRCREV_ARM32 = "2bcb6e9caabf65ef182dde7dc0332a7fe53622a2"
+ PV_ARM32 = "6.12.35+git"
+ 
+ BRANCH:ti33x = "${BRANCH_ARM32}"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+index 9a6a08aa..689a2893 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+@@ -22,7 +22,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH ?= "ti-linux-6.12.y"
+ 
+-SRCREV ?= "ce4785d01a0b962c7d9cb12f56dbae02514213eb"
++SRCREV ?= "c94f90807b390a224fd087549b4bd5d84d5fc971"
+ PV = "6.12.35+git"
+ 
+ # Special configuration for remoteproc/rpmsg IPC modules
+-- 
+2.43.5
 
 
