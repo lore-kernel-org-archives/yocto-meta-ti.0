@@ -2,34 +2,34 @@ Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93D43C87FD2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92E63C87FCB
 	for <webhook@archiver.kernel.org>; Sat,  9 Aug 2025 23:46:34 +0000 (UTC)
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.17071.1754783187195149174
+ by mx.groups.io with SMTP id smtpd.web11.17072.1754783187571032719
  for <meta-ti@lists.yoctoproject.org>;
  Sat, 09 Aug 2025 16:46:27 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 47F9A40CB5;
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 54F1E40CB7;
 	Sat,  9 Aug 2025 23:46:26 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eTw3d3vdnkWW; Sat,  9 Aug 2025 23:46:26 +0000 (UTC)
+	with ESMTP id 6GaYKH-949b7; Sat,  9 Aug 2025 23:46:26 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 29F5540CB1;
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2E57F40CB4;
 	Sat,  9 Aug 2025 23:46:25 +0000 (UTC)
 Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 876B616F92A;
+	by mail.denix.org (Postfix) with ESMTP id 7BB6716F91C;
 	Sat,  9 Aug 2025 19:46:23 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@lists.yoctoproject.org
 Cc: Denys Dmytriyenko <denys@konsulko.com>
-Subject: [master][PATCH 3/4] linux-bb.org_6.12: upgrade to the latest 6.12.34
-Date: Sat,  9 Aug 2025 19:46:15 -0400
-Message-Id: <20250809234616.3626274-3-denis@denix.org>
+Subject: [master][PATCH 2/4] u-boot-bb.org: upgrade 2025.04 -> 2025.07
+Date: Sat,  9 Aug 2025 19:46:14 -0400
+Message-Id: <20250809234616.3626274-2-denis@denix.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250809234616.3626274-1-denis@denix.org>
 References: <20250809234616.3626274-1-denis@denix.org>
@@ -39,62 +39,69 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Sat, 09 Aug 2025 23:46:34 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18916
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18915
 
 From: Denys Dmytriyenko <denys@konsulko.com>
 
-Upgrade BB.org 6.12 kernel to the latest 6.12.34 tags.
+Upgrade BB.org U-boot from 2025.04 to 2025.07
 
 Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
- .../recipes-kernel/linux/linux-bb.org_6.12.bb | 23 +++++++++++--------
- 1 file changed, 14 insertions(+), 9 deletions(-)
+ .../bootcmd-ti-mmc.cfg                        |  0
+ ...rg_2025.04.bb =3D> u-boot-bb.org_2025.07.bb} | 21 +++++++------------
+ 2 files changed, 7 insertions(+), 14 deletions(-)
+ rename meta-beagle/recipes-bsp/u-boot/{u-boot-bb.org-2025.04+git =3D> u-=
+boot-bb.org-2025.07+git}/bootcmd-ti-mmc.cfg (100%)
+ rename meta-beagle/recipes-bsp/u-boot/{u-boot-bb.org_2025.04.bb =3D> u-b=
+oot-bb.org_2025.07.bb} (30%)
 
-diff --git a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb b/meta=
--beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
-index 625a4a39..2e57de2b 100644
---- a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
-+++ b/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
-@@ -19,7 +19,6 @@ KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT} =
-${EXTRA_DTC_ARGS}"
+diff --git a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org-2025.04+git/boo=
+tcmd-ti-mmc.cfg b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org-2025.07+gi=
+t/bootcmd-ti-mmc.cfg
+similarity index 100%
+rename from meta-beagle/recipes-bsp/u-boot/u-boot-bb.org-2025.04+git/boot=
+cmd-ti-mmc.cfg
+rename to meta-beagle/recipes-bsp/u-boot/u-boot-bb.org-2025.07+git/bootcm=
+d-ti-mmc.cfg
+diff --git a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.04.bb b/me=
+ta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.07.bb
+similarity index 30%
+rename from meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.04.bb
+rename to meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.07.bb
+index aa825d99..716adaa9 100644
+--- a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.04.bb
++++ b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.07.bb
+@@ -4,23 +4,16 @@ SUMMARY =3D "BeagleBoard.org U-Boot"
 =20
- # Extra DT overlays/capes
- KERNEL_DEVICETREE:append:armv7a =3D " \
--    ti/omap/AM335X-PRU-UIO-00A0.dtbo \
-     ti/omap/BB-ADC-00A0.dtbo \
-     ti/omap/BB-BBBW-WL1835-00A0.dtbo \
-     ti/omap/BB-BBGG-WL1835-00A0.dtbo \
-@@ -53,16 +52,22 @@ KERNEL_DEVICETREE:append:armv7a =3D " \
-     ti/omap/PB-MIKROBUS-1.dtbo \
- "
+ COMPATIBLE_MACHINE =3D "pocketbeagle2|beagle.*"
 =20
-+KERNEL_DEVICETREE:append:aarch64 =3D " \
-+    ti/BONE-I2C1.dtbo \
-+    ti/BONE-I2C2.dtbo \
-+    ti/BONE-I2C3.dtbo \
-+"
-+
- S =3D "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}"
+-PV =3D "2025.04"
++PV =3D "2025.07"
 =20
--# 6.12.22 version for 32-bit
--SRCREV:armv7a =3D "d7f560ef48a867b94959f040b4c3c57053f4e32d"
--PV:armv7a =3D "6.12.22+git"
--BRANCH:armv7a =3D "v6.12.22-ti-arm32-r10"
-+# 6.12.34 version for 32-bit
-+SRCREV:armv7a =3D "9e419b26243bd7efcd103ae0f6456f828592b34b"
-+PV:armv7a =3D "6.12.34+git"
-+BRANCH:armv7a =3D "v6.12.34-ti-arm32-r12"
+ UBOOT_GIT_URI =3D "git://github.com/beagleboard/u-boot.git"
+ UBOOT_GIT_PROTOCOL =3D "https"
+-BRANCH =3D "v2025.04-Beagle"
+-SRCREV =3D "ea2aeefcb2de36f8ca1b51d0580826d13c01f143"
++BRANCH =3D "v2025.07-Beagle"
++SRCREV =3D "919ec3cd84f39e6960d1705d4ba7f810bc1067fc"
 =20
--# 6.12.22 version for 64-bit
--SRCREV:aarch64 =3D "9e43fd19ece3affb9406e87ec3df733b91b77a4f"
--PV:aarch64 =3D "6.12.22+git"
--BRANCH:aarch64 =3D "v6.12.22-ti-arm64-r35"
-+# 6.12.34 version for 64-bit
-+SRCREV:aarch64 =3D "9ca36b8c54806a037f357efcd40eaa8399798b05"
-+PV:aarch64 =3D "6.12.34+git"
-+BRANCH:aarch64 =3D "v6.12.34-ti-arm64-r46"
+-BRANCH:beagley-ai =3D "v2025.04-rc3-BeagleY-AI"
+-BRANCH:beagley-ai-k3r5 =3D "v2025.04-rc3-BeagleY-AI"
+-SRCREV:beagley-ai =3D "cc376f9faef201670c7bb1734f42f5475c73f85d"
+-SRCREV:beagley-ai-k3r5 =3D "cc376f9faef201670c7bb1734f42f5475c73f85d"
+-
+-SRC_URI:append:beagley-ai =3D " file://bootcmd-ti-mmc.cfg"
+-
+-BRANCH:pocketbeagle2 =3D "v2025.04-pocketbeagle2"
+-BRANCH:pocketbeagle2-k3r5 =3D "v2025.04-pocketbeagle2"
+-SRCREV:pocketbeagle2 =3D "f7439516453b7728bda496ff6496ef6f1411aae3"
+-SRCREV:pocketbeagle2-k3r5 =3D "f7439516453b7728bda496ff6496ef6f1411aae3"
++BRANCH:pocketbeagle2 =3D "v2025.07-am6232-pocketbeagle2"
++BRANCH:pocketbeagle2-k3r5 =3D "v2025.07-am6232-pocketbeagle2"
++SRCREV:pocketbeagle2 =3D "6d5b4abc28f036a4a83ccb234f04d72eceafdc4e"
++SRCREV:pocketbeagle2-k3r5 =3D "6d5b4abc28f036a4a83ccb234f04d72eceafdc4e"
 =20
- KERNEL_GIT_URI =3D "git://github.com/beagleboard/linux.git"
+ SRC_URI:append:pocketbeagle2 =3D " file://bootcmd-ti-mmc.cfg"
 --=20
 2.25.1
 
