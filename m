@@ -1,110 +1,101 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FA78C87FD2
-	for <webhook@archiver.kernel.org>; Fri,  8 Aug 2025 08:10:27 +0000 (UTC)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- by mx.groups.io with SMTP id smtpd.web10.17045.1754640623599460992
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93D43C87FD2
+	for <webhook@archiver.kernel.org>; Sat,  9 Aug 2025 23:46:34 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web11.17071.1754783187195149174
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 08 Aug 2025 01:10:23 -0700
+ Sat, 09 Aug 2025 16:46:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Vkl71EBe;
- spf=pass (domain: list.ti.com, ip: 198.47.19.246, mailfrom: prc@list.ti.com)
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
-	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5788ALC5938809;
-	Fri, 8 Aug 2025 03:10:21 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1754640622; i=@ti.com;
-	bh=06LQSTLe2sy0Am8/Hk+fLRPrmG54rSok6B9A9u4Yr74=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=Vkl71EBe5OrwC2jRfyyCNhhRt9SHMk+YyrStVxb71YIiUryXpc/NXe2HSxyhviEaB
-	 OG2tGOuaYFP32ZLv+Hkl+YrnXCGCeD5JlmfwRtm14/O4/YiveJY0PF6OL3vkrRGnl5
-	 AO4IdFpIIr7moE5PvC2a6D3H77y4LC5RbAMzfdU4=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5788AL8L337319
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Fri, 8 Aug 2025 03:10:21 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 8
- Aug 2025 03:10:21 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 8 Aug 2025 03:10:21 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5788ALLM2738539;
-	Fri, 8 Aug 2025 03:10:21 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id 2682513F532; Fri,  8 Aug 2025 03:10:21 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: LCPD Automation Script <lcpdbld@list.ti.com>
-CC: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202508080100
-Date: Fri, 8 Aug 2025 03:10:21 -0500
-Message-ID: <20250808081021.745460-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20250808080630.1774007-1-lcpdbld@list.ti.com>
-References: <20250808080630.1774007-1-lcpdbld@list.ti.com>
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 47F9A40CB5;
+	Sat,  9 Aug 2025 23:46:26 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id eTw3d3vdnkWW; Sat,  9 Aug 2025 23:46:26 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 29F5540CB1;
+	Sat,  9 Aug 2025 23:46:25 +0000 (UTC)
+Received: from thorin.han-sole.ts.net (thorin.denix [192.168.30.9])
+	by mail.denix.org (Postfix) with ESMTP id 876B616F92A;
+	Sat,  9 Aug 2025 19:46:23 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [master][PATCH 3/4] linux-bb.org_6.12: upgrade to the latest 6.12.34
+Date: Sat,  9 Aug 2025 19:46:15 -0400
+Message-Id: <20250809234616.3626274-3-denis@denix.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250809234616.3626274-1-denis@denix.org>
+References: <20250809234616.3626274-1-denis@denix.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 08 Aug 2025 08:10:27 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18912
+ <meta-ti@lists.yoctoproject.org>; Sat, 09 Aug 2025 23:46:34 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18916
 
-meta-ti / na / 20250808080630.1774007-1-lcpdbld
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-PRC Results: PASS
+Upgrade BB.org 6.12 kernel to the latest 6.12.34 tags.
 
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  check-yocto-patches: PASS
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-Patches
-----------------------------------------
-All patches passed
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+---
+ .../recipes-kernel/linux/linux-bb.org_6.12.bb | 23 +++++++++++--------
+ 1 file changed, 14 insertions(+), 9 deletions(-)
 
-
-
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  apply-yocto-patch: PASS
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-master
-=====================
-Summary:
-- Patch Series: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202508080100
-- Submitter: From: LCPD Automation Script <lcpdbld@list.ti.com>
-- Date: Date: Fri, 8 Aug 2025 03:06:30 -0500
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: d0ea7074f51a05062cf4413dd601d989fdc48604
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-wip
-- Commit Author: Beleswar Padhi <b-padhi@ti.com>
-- Commit Subject: licenses: Add INSIDE-Secure LICENSE
-- Commit SHA: 1544ef5ecb65080c008a833109f217bb9b4c6eb4
-
-Patches
-----------------------------------------
-All patches applied
-
-
-
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-  check-yocto-repo: PASS
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-master
-=====================
-PASS
-
-
+diff --git a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb b/meta=
+-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
+index 625a4a39..2e57de2b 100644
+--- a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
++++ b/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
+@@ -19,7 +19,6 @@ KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT} =
+${EXTRA_DTC_ARGS}"
+=20
+ # Extra DT overlays/capes
+ KERNEL_DEVICETREE:append:armv7a =3D " \
+-    ti/omap/AM335X-PRU-UIO-00A0.dtbo \
+     ti/omap/BB-ADC-00A0.dtbo \
+     ti/omap/BB-BBBW-WL1835-00A0.dtbo \
+     ti/omap/BB-BBGG-WL1835-00A0.dtbo \
+@@ -53,16 +52,22 @@ KERNEL_DEVICETREE:append:armv7a =3D " \
+     ti/omap/PB-MIKROBUS-1.dtbo \
+ "
+=20
++KERNEL_DEVICETREE:append:aarch64 =3D " \
++    ti/BONE-I2C1.dtbo \
++    ti/BONE-I2C2.dtbo \
++    ti/BONE-I2C3.dtbo \
++"
++
+ S =3D "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}"
+=20
+-# 6.12.22 version for 32-bit
+-SRCREV:armv7a =3D "d7f560ef48a867b94959f040b4c3c57053f4e32d"
+-PV:armv7a =3D "6.12.22+git"
+-BRANCH:armv7a =3D "v6.12.22-ti-arm32-r10"
++# 6.12.34 version for 32-bit
++SRCREV:armv7a =3D "9e419b26243bd7efcd103ae0f6456f828592b34b"
++PV:armv7a =3D "6.12.34+git"
++BRANCH:armv7a =3D "v6.12.34-ti-arm32-r12"
+=20
+-# 6.12.22 version for 64-bit
+-SRCREV:aarch64 =3D "9e43fd19ece3affb9406e87ec3df733b91b77a4f"
+-PV:aarch64 =3D "6.12.22+git"
+-BRANCH:aarch64 =3D "v6.12.22-ti-arm64-r35"
++# 6.12.34 version for 64-bit
++SRCREV:aarch64 =3D "9ca36b8c54806a037f357efcd40eaa8399798b05"
++PV:aarch64 =3D "6.12.34+git"
++BRANCH:aarch64 =3D "v6.12.34-ti-arm64-r46"
+=20
+ KERNEL_GIT_URI =3D "git://github.com/beagleboard/linux.git"
+--=20
+2.25.1
 
 
