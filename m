@@ -2,189 +2,422 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3275CA0EE4
-	for <webhook@archiver.kernel.org>; Mon, 18 Aug 2025 18:57:53 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web10.897.1755543468683450010
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDF27CA0EE4
+	for <webhook@archiver.kernel.org>; Mon, 18 Aug 2025 19:01:53 +0000 (UTC)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ by mx.groups.io with SMTP id smtpd.web10.1010.1755543709057425623
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 18 Aug 2025 11:57:48 -0700
+ Mon, 18 Aug 2025 12:01:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=b0ZxiTNj;
- spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: afd@ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57IIvhvW2779477;
-	Mon, 18 Aug 2025 13:57:43 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=CW7uG8rE;
+ spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: afd@ti.com)
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57IJ1mW43228673;
+	Mon, 18 Aug 2025 14:01:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1755543463;
-	bh=ksGk7WwrOV1IIsrCkNwWGT0c/PwJcYhej6rqA/YIsFs=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=b0ZxiTNjmWYpzNd90TmKzm2zIXy+rtSZuerRxAoGHlliWKXY5FDHvFBROxSgbqAZS
-	 6FLXuOBVH76pvhY1NGDv/O46dODe5FTK/krzAXu86WaX27AkpfjJFMm+NjKQOSFpcH
-	 yQ9v2ZW+SwfFycr6F0be0thVcgjwB8ZL6O1qD77c=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57IIvhNI493942
+	s=ti-com-17Q1; t=1755543708;
+	bh=oiOjF542uB3mVGzbq+e6YT24CraqSQr/1i89r44usb0=;
+	h=From:To:CC:Subject:Date;
+	b=CW7uG8rElx+e8a9WVJpVCPpCTLw3abGF2iobHPgQZ7b4fJx8/+VUDkgE2DK3iPO8M
+	 wkFwRKAZj4lbfHQqFArgP7H4a+T2WF9234BOPCe5Rf490LElNvy4ix5WTEkvDNq8Ya
+	 3+CehDwLkhxZdXknI3R+Sfa9tLj5qvwcvcXDjOOI=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57IJ1msS722453
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Mon, 18 Aug 2025 13:57:43 -0500
-Received: from DLEE206.ent.ti.com (157.170.170.90) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	Mon, 18 Aug 2025 14:01:48 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 18
- Aug 2025 13:57:42 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE206.ent.ti.com
- (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.2.1748.24; Mon, 18 Aug
- 2025 13:57:42 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2025 14:01:47 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 18 Aug 2025 13:57:42 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57IIvgri1493102;
-	Mon, 18 Aug 2025 13:57:42 -0500
-Message-ID: <bc88e2a0-99c6-4ba3-96a8-f192aedc9b31@ti.com>
-Date: Mon, 18 Aug 2025 13:57:42 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti] [scarthgap][PATCH 3/3] meta-ti-bsp: convert DTB prefix
- matching into class
-To: Denys Dmytriyenko <denis@denix.org>, <meta-ti@lists.yoctoproject.org>
-CC: Denys Dmytriyenko <denys@konsulko.com>
-References: <20250725204908.2549495-1-denis@denix.org>
- <20250725204908.2549495-3-denis@denix.org>
-Content-Language: en-US
+ Frontend Transport; Mon, 18 Aug 2025 14:01:47 -0500
+Received: from lelvem-mr06.itg.ti.com ([10.249.42.149])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57IJ1lUl1501283;
+	Mon, 18 Aug 2025 14:01:47 -0500
 From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250725204908.2549495-3-denis@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
+        <meta-ti@lists.yoctoproject.org>
+CC: Andrew Davis <afd@ti.com>
+Subject: [meta-ti][scarthgap/master][PATCH] meta-ti-bsp: Add all tiboot3.bin and sysfw.itb variants by wildcard
+Date: Mon, 18 Aug 2025 14:01:46 -0500
+Message-ID: <20250818190146.1371051-1-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 18 Aug 2025 18:57:53 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18932
+ <meta-ti@lists.yoctoproject.org>; Mon, 18 Aug 2025 19:01:53 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18933
 
-On 7/25/25 3:49 PM, Denys Dmytriyenko wrote:
-> From: Denys Dmytriyenko <denys@konsulko.com>
-> 
-> Convert devicetree prefix matching functionality into a generic
-> class that can be used by the kernel and wic images. That way
-> dynamically generated KERNEL_DEVICETREE list will be the same
-> when populating /boot dir of rootfs and/or FAT boot partition
-> of a wic image.
-> 
-> Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> ---
->   .../ti-devicetree-prefix.bbclass}                         | 7 +++++--
->   meta-ti-bsp/conf/machine/include/ti-soc.inc               | 8 ++++++++
->   meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb     | 2 --
->   meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb | 1 -
->   meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb  | 1 -
->   5 files changed, 13 insertions(+), 6 deletions(-)
->   rename meta-ti-bsp/{recipes-kernel/linux/ti-kernel-devicetree-prefix.inc => classes/ti-devicetree-prefix.bbclass} (87%)
-> 
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-kernel-devicetree-prefix.inc b/meta-ti-bsp/classes/ti-devicetree-prefix.bbclass
-> similarity index 87%
-> rename from meta-ti-bsp/recipes-kernel/linux/ti-kernel-devicetree-prefix.inc
-> rename to meta-ti-bsp/classes/ti-devicetree-prefix.bbclass
-> index 2d7be280..5858cc65 100644
-> --- a/meta-ti-bsp/recipes-kernel/linux/ti-kernel-devicetree-prefix.inc
-> +++ b/meta-ti-bsp/classes/ti-devicetree-prefix.bbclass
-> @@ -1,3 +1,4 @@
-> +# Generate list of DTBs from the kernel source
->   def get_dtbs_from_kernel(dts_dir, dts_prefix):
->       import os
->       import glob
-> @@ -17,6 +18,8 @@ def get_dtbs_from_kernel(dts_dir, dts_prefix):
->               matches.append(filename)
->       return ' '.join(matches)
->   
-> +# Generate list of "merged" DTBs from the kernel source
-> +# It is TI custom feature to merge DTB overlays into a single DTB
->   def get_merge_dtbs_from_kernel(dts_dir, dts_pattern):
->       import os
->       matches = []
-> @@ -32,9 +35,9 @@ def get_merge_dtbs_from_kernel(dts_dir, dts_pattern):
->                       matches.append(pattern)
->       return ' '.join(matches)
->   
-> -KERNEL_DEVICETREE_DTBMERGE ?= ""
-> -
->   KERNEL_DEVICETREE = " \
->       ${@get_dtbs_from_kernel('${STAGING_KERNEL_DIR}/arch/${ARCH}/boot/dts/', '${KERNEL_DEVICETREE_PREFIX}')} \
->       ${@get_merge_dtbs_from_kernel('${STAGING_KERNEL_DIR}/arch/${ARCH}/boot/dts/', '${KERNEL_DEVICETREE_DTBMERGE}')} \
->   "
-> +
-> +do_image_wic[depends] += "virtual/kernel:do_shared_workdir"
-> diff --git a/meta-ti-bsp/conf/machine/include/ti-soc.inc b/meta-ti-bsp/conf/machine/include/ti-soc.inc
-> index 85f6f338..018e9bfb 100644
-> --- a/meta-ti-bsp/conf/machine/include/ti-soc.inc
-> +++ b/meta-ti-bsp/conf/machine/include/ti-soc.inc
+U-Boot generates all the valid versions of tiboot3.bin and sysfw.itb
+based on the given defconfig. The defaults are also picked based on
+the board's binman files. No need to duplicate this logic here,
+simply deploy what U-Boot generates.
 
-With this now part of ti-soc.inc, it seems we should get this feature with any kernel when
-building for a TI based board, not just when building with TI kernels. Does that mean we
-can drop all the KERNEL_DEVICETREE lines from the Beagle .conf files? I just tried it and
-it seems to work correctly.
+Signed-off-by: Andrew Davis <afd@ti.com>
+---
 
-Andrew
+This was 2 patches that are now squashed into 1. Doing this in
+two steps as before was causing issues with the beaglebone-ai64
+which only deploys one version of the files, but folding in the
+wildcard matching patch solves that.
 
-> @@ -19,3 +19,11 @@ KERNEL_DTBVENDORED = "1"
->   
->   # Also build a non-vendored list w/o dir structure
->   DEVICETREE_FILES = "${@' '.join([os.path.basename(f) for f in d.getVar("KERNEL_DEVICETREE").split()])}"
-> +
-> +KERNEL_DEVICETREE_DTBMERGE ?= ""
-> +
-> +# Dynamically build DTBs list based on prefix matching
-> +CLASS_DEVICETREE_PREFIX = "${@ 'ti-devicetree-prefix' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}"
-> +
-> +KERNEL_CLASSES += "${CLASS_DEVICETREE_PREFIX}"
-> +IMAGE_CLASSES += "${CLASS_DEVICETREE_PREFIX}"
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb
-> index 1feb7564..60b647f1 100644
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb
-> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-next_git.bb
-> @@ -2,8 +2,6 @@ require linux-ti-mainline_git.bb
->   
->   SUMMARY = "Linux-next kernel for TI devices"
->   
-> -include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}
-> -
->   # 6.6.0-rc3+ version
->   SRCREV = "6465e260f48790807eef06b583b38ca9789b6072"
->   PV = "6.6.0-rc3+git"
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-> index 9235cbc5..aa677cb2 100644
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
-> @@ -8,7 +8,6 @@ inherit kernel
->   
->   require recipes-kernel/linux/setup-defconfig.inc
->   require recipes-kernel/linux/ti-kernel.inc
-> -include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}
->   include ${@ 'recipes-kernel/linux/ti-extras.inc' if d.getVar('TI_EXTRAS') else ''}
->   
->   DEPENDS += "gmp-native libmpc-native"
-> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-> index 17bcd300..d6985b27 100644
-> --- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-> @@ -8,7 +8,6 @@ inherit kernel
->   
->   require recipes-kernel/linux/setup-defconfig.inc
->   require recipes-kernel/linux/ti-kernel.inc
-> -include ${@ 'recipes-kernel/linux/ti-kernel-devicetree-prefix.inc' if d.getVar('KERNEL_DEVICETREE_PREFIX') else ''}
->   include ${@ 'recipes-kernel/linux/ti-extras.inc' if d.getVar('TI_EXTRAS') else ''}
->   
->   DEPENDS += "gmp-native libmpc-native"
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#18834): https://lists.yoctoproject.org/g/meta-ti/message/18834
-> Mute This Topic: https://lists.yoctoproject.org/mt/114344340/3619733
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [afd@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+ meta-beagle/conf/machine/beaglebone-ai64.conf |  5 ----
+ meta-beagle/conf/machine/beagley-ai.conf      |  2 --
+ meta-ti-bsp/conf/machine/include/am62axx.inc  |  6 -----
+ meta-ti-bsp/conf/machine/include/am62dxx.inc  |  6 -----
+ meta-ti-bsp/conf/machine/include/am62pxx.inc  |  6 -----
+ meta-ti-bsp/conf/machine/include/am62xx.inc   |  9 -------
+ meta-ti-bsp/conf/machine/include/am64xx.inc   |  9 -------
+ meta-ti-bsp/conf/machine/include/am65xx.inc   | 11 ++------
+ meta-ti-bsp/conf/machine/include/am68.inc     |  6 -----
+ meta-ti-bsp/conf/machine/include/am69.inc     |  6 -----
+ meta-ti-bsp/conf/machine/include/j7200.inc    | 19 --------------
+ meta-ti-bsp/conf/machine/include/j721e.inc    | 25 ++-----------------
+ meta-ti-bsp/conf/machine/include/j721s2.inc   |  9 -------
+ meta-ti-bsp/conf/machine/include/j722s.inc    |  9 -------
+ meta-ti-bsp/conf/machine/include/j742s2.inc   |  6 -----
+ meta-ti-bsp/conf/machine/include/j784s4.inc   |  9 -------
+ meta-ti-bsp/conf/machine/include/k3.inc       |  2 +-
+ 17 files changed, 5 insertions(+), 140 deletions(-)
+
+diff --git a/meta-beagle/conf/machine/beaglebone-ai64.conf b/meta-beagle/conf/machine/beaglebone-ai64.conf
+index e05c6aff..0504832c 100644
+--- a/meta-beagle/conf/machine/beaglebone-ai64.conf
++++ b/meta-beagle/conf/machine/beaglebone-ai64.conf
+@@ -5,11 +5,6 @@
+ require conf/machine/include/j721e.inc
+ require conf/machine/include/beagle-bsp.inc
+ 
+-IMAGE_SR1_1_HS_FS_FILES = ""
+-IMAGE_SR1_1_HS_SE_FILES = ""
+-IMAGE_SR2_HS_FS_FILES = ""
+-IMAGE_SR2_HS_SE_FILES = ""
+-
+ UBOOT_MACHINE = "j721e_beagleboneai64_a72_defconfig"
+ 
+ SPL_BINARY = "tispl.bin_unsigned"
+diff --git a/meta-beagle/conf/machine/beagley-ai.conf b/meta-beagle/conf/machine/beagley-ai.conf
+index f7e7ec44..8fbf3cea 100644
+--- a/meta-beagle/conf/machine/beagley-ai.conf
++++ b/meta-beagle/conf/machine/beagley-ai.conf
+@@ -5,8 +5,6 @@
+ require conf/machine/include/j722s.inc
+ require conf/machine/include/beagle-bsp.inc
+ 
+-IMAGE_SR1_HS_SE_FILES:bsp-bb_org-6_6 = ""
+-
+ UBOOT_MACHINE:bsp-bb_org-6_6 = "j722s_evm_a53_config"
+ 
+ UBOOT_MACHINE = "am67a_beagley_ai_a53_defconfig"
+diff --git a/meta-ti-bsp/conf/machine/include/am62axx.inc b/meta-ti-bsp/conf/machine/include/am62axx.inc
+index e5f827a9..964be0ad 100644
+--- a/meta-ti-bsp/conf/machine/include/am62axx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62axx.inc
+@@ -7,12 +7,6 @@ MACHINE_FEATURES += "screen touchscreen"
+ 
+ TFA_K3_SYSTEM_SUSPEND = "1"
+ 
+-# Default tiboot3.bin on AM62A is for HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-am62ax-hs-fs-evm.bin"
+-
+-# Since default tiboot3.bin on AM62A is for HS-FS, add a version for HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-am62ax-hs-evm.bin"
+-
+ TFA_BOARD = "lite"
+ OPTEEMACHINE = "k3-am62x"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/am62dxx.inc b/meta-ti-bsp/conf/machine/include/am62dxx.inc
+index ac4e8e17..fc2ce4a3 100644
+--- a/meta-ti-bsp/conf/machine/include/am62dxx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62dxx.inc
+@@ -5,11 +5,5 @@ SOC_FAMILY:append = ":am62dxx"
+ 
+ TFA_K3_SYSTEM_SUSPEND = "1"
+ 
+-# Default tiboot3.bin on AM62D is for HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-am62dx-hs-fs-evm.bin"
+-
+-# Since default tiboot3.bin on AM62D is for HS-FS, add a version for HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-am62dx-hs-evm.bin"
+-
+ TFA_BOARD = "lite"
+ OPTEEMACHINE = "k3-am62x"
+diff --git a/meta-ti-bsp/conf/machine/include/am62pxx.inc b/meta-ti-bsp/conf/machine/include/am62pxx.inc
+index 061d0e67..d59f607d 100644
+--- a/meta-ti-bsp/conf/machine/include/am62pxx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62pxx.inc
+@@ -8,12 +8,6 @@ MACHINE_FEATURES += "screen gpu"
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+-# Default tiboot3.bin on AM62Px is for HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-am62px-hs-fs-evm.bin"
+-
+-# Since default tiboot3.bin on AM62Px is for HS-FS, add a version for HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-am62px-hs-evm.bin"
+-
+ TFA_BOARD = "lite"
+ TFA_K3_SYSTEM_SUSPEND = "1"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/am62xx.inc b/meta-ti-bsp/conf/machine/include/am62xx.inc
+index 1eb77b4e..74054a78 100644
+--- a/meta-ti-bsp/conf/machine/include/am62xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62xx.inc
+@@ -8,15 +8,6 @@ MACHINE_FEATURES += "screen gpu"
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+-# Default tiboot3.bin on AM62x is for HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-am62x-hs-fs-evm.bin"
+-
+-# Since default tiboot3.bin on AM62x is for HS-FS, add a version for GP
+-IMAGE_BOOT_FILES += "tiboot3-am62x-gp-evm.bin"
+-
+-# Since default tiboot3.bin on AM62x is for HS-FS, add a version for HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-am62x-hs-evm.bin"
+-
+ # Bitmap image tarball for early splashscreen
+ IMAGE_BOOT_FILES += "ti_logo_414x97_32bpp.bmp.gz"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/conf/machine/include/am64xx.inc
+index 27165547..e79e6e61 100644
+--- a/meta-ti-bsp/conf/machine/include/am64xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
+@@ -20,15 +20,6 @@ KERNEL_DEVICETREE = " \
+     ti/k3-am642-tqma64xxl-mbax4xxl.dtb \
+ "
+ 
+-# Default tiboot3.bin on AM64x is for SR2.0 HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-am64x_sr2-hs-fs-evm.bin"
+-
+-# Since default tiboot3.bin on AM64x is for SR2.0 HS-FS, add a version for GP
+-IMAGE_BOOT_FILES += "tiboot3-am64x-gp-evm.bin"
+-
+-# Since default tiboot3.bin on AM64x is for SR2.0 HS-FS, add a version for SR2.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-am64x_sr2-hs-evm.bin"
+-
+ TFA_BOARD = "lite"
+ 
+ OPTEEMACHINE = "k3-am64x"
+diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
+index 99a3b12f..7255bb30 100644
+--- a/meta-ti-bsp/conf/machine/include/am65xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
+@@ -25,15 +25,8 @@ KERNEL_DEVICETREE = " \
+     ti/k3-am6548-iot2050-advanced.dtb \
+ "
+ 
+-IMAGE_BOOT_FILES += "sysfw.itb"
+-
+-# Default on AM65x is for GP
+-IMAGE_BOOT_FILES += "tiboot3-am65x_sr2-gp-evm.bin"
+-IMAGE_BOOT_FILES += "sysfw-am65x_sr2-gp-evm.itb"
+-
+-# Since default on AM65x is for GP, add a version for HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-am65x_sr2-hs-evm.bin"
+-IMAGE_BOOT_FILES += "sysfw-am65x_sr2-hs-evm.itb"
++# Deploy SYSFW and any variants
++IMAGE_BOOT_FILES += "sysfw.itb sysfw-*-evm.itb"
+ 
+ TFA_BOARD = "generic"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/am68.inc b/meta-ti-bsp/conf/machine/include/am68.inc
+index 330a2973..b6d18fe0 100644
+--- a/meta-ti-bsp/conf/machine/include/am68.inc
++++ b/meta-ti-bsp/conf/machine/include/am68.inc
+@@ -8,12 +8,6 @@ MACHINE_FEATURES += "screen gpu"
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+-# Default tiboot3.bin on AM68 is for SR1.0 HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j721s2-hs-fs-evm.bin"
+-
+-# Since default tiboot3.bin on AM68 is for HS-FS, add a version for SR1.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-j721s2-hs-evm.bin"
+-
+ TFA_BOARD = "generic"
+ 
+ OPTEEMACHINE = "k3-j784s4"
+diff --git a/meta-ti-bsp/conf/machine/include/am69.inc b/meta-ti-bsp/conf/machine/include/am69.inc
+index 1a19410a..759984ea 100644
+--- a/meta-ti-bsp/conf/machine/include/am69.inc
++++ b/meta-ti-bsp/conf/machine/include/am69.inc
+@@ -8,12 +8,6 @@ MACHINE_FEATURES += "screen gpu"
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+-# Default tiboot3.bin on AM69 is for SR1.0 HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j784s4-hs-fs-evm.bin"
+-
+-# Since default tiboot3.bin on AM69 is for HS-FS, add a version for SR1.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-j784s4-hs-evm.bin"
+-
+ TFA_BOARD = "j784s4"
+ 
+ OPTEEMACHINE = "k3-j784s4"
+diff --git a/meta-ti-bsp/conf/machine/include/j7200.inc b/meta-ti-bsp/conf/machine/include/j7200.inc
+index 3cba71b6..be5cb4cd 100644
+--- a/meta-ti-bsp/conf/machine/include/j7200.inc
++++ b/meta-ti-bsp/conf/machine/include/j7200.inc
+@@ -3,25 +3,6 @@ require conf/machine/include/mc_k3r5.inc
+ 
+ SOC_FAMILY:append = ":j7200"
+ 
+-# Default tiboot3.bin on J7200 is for GP
+-IMAGE_BOOT_FILES += "tiboot3-j7200-gp-evm.bin"
+-
+-# Since default tiboot3.bin on J7200 is for GP, add a version for SR1.0 HS-FS
+-IMAGE_SR1_HS_FS_FILES = "tiboot3-j7200-hs-fs-evm.bin"
+-IMAGE_SR1_HS_FS_FILES:bsp-mainline = ""
+-IMAGE_BOOT_FILES += "${IMAGE_SR1_HS_FS_FILES}"
+-
+-# Since default tiboot3.bin on J7200 is for GP, add a version for SR1.0 HS-SE
+-IMAGE_SR1_HS_SE_FILES = "tiboot3-j7200-hs-evm.bin"
+-IMAGE_SR1_HS_SE_FILES:bsp-mainline = ""
+-IMAGE_BOOT_FILES += "${IMAGE_SR1_HS_SE_FILES}"
+-
+-# Since default tiboot3.bin on J7200 is for GP, add a version for SR2.0 HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j7200_sr2-hs-fs-evm.bin"
+-
+-# Since default tiboot3.bin on J721e is for GP, add a version for SR2.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-j7200_sr2-hs-evm.bin"
+-
+ TFA_BOARD = "generic"
+ 
+ OPTEEMACHINE = "k3-j721e"
+diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/conf/machine/include/j721e.inc
+index 5833c322..f9fdac0c 100644
+--- a/meta-ti-bsp/conf/machine/include/j721e.inc
++++ b/meta-ti-bsp/conf/machine/include/j721e.inc
+@@ -8,29 +8,8 @@ MACHINE_FEATURES += "screen gpu"
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+-IMAGE_BOOT_FILES += "sysfw.itb"
+-
+-# Default on J721e is for GP
+-IMAGE_BOOT_FILES += "tiboot3-j721e-gp-evm.bin"
+-IMAGE_BOOT_FILES += "sysfw-j721e-gp-evm.itb"
+-
+-# Since default on J721e is for GP, add a version for SR1.1 HS-FS
+-IMAGE_SR1_1_HS_FS_FILES = "tiboot3-j721e_sr1_1-hs-fs-evm.bin sysfw-j721e_sr1_1-hs-fs-evm.itb"
+-IMAGE_SR1_1_HS_FS_FILES:bsp-mainline = ""
+-IMAGE_BOOT_FILES += "${IMAGE_SR1_1_HS_FS_FILES}"
+-
+-# Since default on J721e is for GP, add a version for SR1.1 HS-SE
+-IMAGE_SR1_1_HS_SE_FILES = "tiboot3-j721e_sr1_1-hs-evm.bin sysfw-j721e_sr1_1-hs-evm.itb"
+-IMAGE_BOOT_FILES += "${IMAGE_SR1_1_HS_SE_FILES}"
+-
+-# Since default on J721e is for GP, add a version for SR2.0 HS-FS
+-IMAGE_SR2_HS_FS_FILES = "tiboot3-j721e_sr2-hs-fs-evm.bin sysfw-j721e_sr2-hs-fs-evm.itb"
+-IMAGE_BOOT_FILES += "${IMAGE_SR2_HS_FS_FILES}"
+-
+-# Since default on J721e is for GP, add a version for SR2.0 HS-SE
+-IMAGE_SR2_HS_SE_FILES = "tiboot3-j721e_sr2-hs-evm.bin sysfw-j721e_sr2-hs-evm.itb"
+-IMAGE_SR2_HS_SE_FILES:bsp-mainline = ""
+-IMAGE_BOOT_FILES += "${IMAGE_SR2_HS_SE_FILES}"
++# Deploy SYSFW and any variants
++IMAGE_BOOT_FILES += "sysfw.itb sysfw-*-evm.itb"
+ 
+ TFA_BOARD = "generic"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/j721s2.inc b/meta-ti-bsp/conf/machine/include/j721s2.inc
+index e6e4f162..b6d18fe0 100644
+--- a/meta-ti-bsp/conf/machine/include/j721s2.inc
++++ b/meta-ti-bsp/conf/machine/include/j721s2.inc
+@@ -8,15 +8,6 @@ MACHINE_FEATURES += "screen gpu"
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+-# Default tiboot3.bin on J721S2 is for GP
+-IMAGE_BOOT_FILES += "tiboot3-j721s2-gp-evm.bin"
+-
+-# Since default tiboot3.bin on J721S2 is for GP, add a version for SR1.0 HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j721s2-hs-fs-evm.bin"
+-
+-# Since default tiboot3.bin on J721S2 is for GP, add a version for SR1.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-j721s2-hs-evm.bin"
+-
+ TFA_BOARD = "generic"
+ 
+ OPTEEMACHINE = "k3-j784s4"
+diff --git a/meta-ti-bsp/conf/machine/include/j722s.inc b/meta-ti-bsp/conf/machine/include/j722s.inc
+index e0b77d96..8a02441b 100644
+--- a/meta-ti-bsp/conf/machine/include/j722s.inc
++++ b/meta-ti-bsp/conf/machine/include/j722s.inc
+@@ -8,15 +8,6 @@ MACHINE_FEATURES += "screen gpu"
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+-# Default tiboot3.bin on J722S is for HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j722s-hs-fs-evm.bin"
+-
+-# Since default tiboot3.bin on J722S is for HS-FS, add a version for HS-SE
+-IMAGE_SR1_HS_SE_FILES = "tiboot3-j722s-hs-evm.bin"
+-IMAGE_SR1_HS_SE_FILES:bsp-mainline = ""
+-IMAGE_SR1_HS_SE_FILES:bsp-next = ""
+-IMAGE_BOOT_FILES += "${IMAGE_SR1_HS_SE_FILES}"
+-
+ TFA_BOARD = "lite"
+ TFA_K3_SYSTEM_SUSPEND = "1"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/j742s2.inc b/meta-ti-bsp/conf/machine/include/j742s2.inc
+index 9a54e11e..d2de1d0d 100644
+--- a/meta-ti-bsp/conf/machine/include/j742s2.inc
++++ b/meta-ti-bsp/conf/machine/include/j742s2.inc
+@@ -8,12 +8,6 @@ MACHINE_FEATURES += "screen gpu"
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+-# Default tiboot3.bin on J742S2 is for HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j742s2-hs-fs-evm.bin"
+-
+-# Since default tiboot3.bin on J742S2 is for HS-FS, add a version for SR1.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-j742s2-hs-evm.bin"
+-
+ TFA_BOARD = "j784s4"
+ 
+ OPTEEMACHINE = "k3-j784s4"
+diff --git a/meta-ti-bsp/conf/machine/include/j784s4.inc b/meta-ti-bsp/conf/machine/include/j784s4.inc
+index 33224ee3..759984ea 100644
+--- a/meta-ti-bsp/conf/machine/include/j784s4.inc
++++ b/meta-ti-bsp/conf/machine/include/j784s4.inc
+@@ -8,15 +8,6 @@ MACHINE_FEATURES += "screen gpu"
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+ 
+-# Default tiboot3.bin on J784S4 is for GP
+-IMAGE_BOOT_FILES += "tiboot3-j784s4-gp-evm.bin"
+-
+-# Since default tiboot3.bin on J784S4 is for GP, add a version for SR1.0 HS-FS
+-IMAGE_BOOT_FILES += "tiboot3-j784s4-hs-fs-evm.bin"
+-
+-# Since default tiboot3.bin on J784S4 is for GP, add a version for SR1.0 HS-SE
+-IMAGE_BOOT_FILES += "tiboot3-j784s4-hs-evm.bin"
+-
+ TFA_BOARD = "j784s4"
+ 
+ OPTEEMACHINE = "k3-j784s4"
+diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/machine/include/k3.inc
+index fdcf193d..d17ae71b 100644
+--- a/meta-ti-bsp/conf/machine/include/k3.inc
++++ b/meta-ti-bsp/conf/machine/include/k3.inc
+@@ -44,7 +44,7 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "ti-pka-fw"
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
+ 
+-IMAGE_BOOT_FILES ?= "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3.bin"
++IMAGE_BOOT_FILES ?= "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3.bin tiboot3-*-evm.bin"
+ IMAGE_EFI_BOOT_FILES ?= "${IMAGE_BOOT_FILES}"
+ 
+ EFI_PROVIDER ?= "grub-efi"
+-- 
+2.39.2
 
 
