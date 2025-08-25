@@ -1,110 +1,189 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 410D8CA0FE1
-	for <webhook@archiver.kernel.org>; Mon, 25 Aug 2025 08:05:27 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web11.34462.1756109117381578268
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD40DCA0FE7
+	for <webhook@archiver.kernel.org>; Mon, 25 Aug 2025 13:29:18 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web10.38879.1756128552901302629
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 25 Aug 2025 01:05:17 -0700
+ Mon, 25 Aug 2025 06:29:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=r1g0gFHg;
- spf=pass (domain: list.ti.com, ip: 198.47.23.234, mailfrom: prc@list.ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57P85G54769694;
-	Mon, 25 Aug 2025 03:05:16 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=sD+rp63d;
+ spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: reatmon@ti.com)
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57PDTCW41284813
+	for <meta-ti@lists.yoctoproject.org>; Mon, 25 Aug 2025 08:29:12 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1756109116; i=@ti.com;
-	bh=Jlhf4SCx45h9oLHKsvlAifZy8w7RjWTqdNUjYvJdd0o=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=r1g0gFHg5iCwKxnYorsYLIx+0bf7XVWiOyHd2u7AwNCk15Nv3RJXLwFafBmsR1MfA
-	 gEUUj8fjJ1MzrrJFTYs0zhKfY1KH1aO3uQM3iZLYNTZud1l7LOmLa9isE4oR/4rOK5
-	 IxFNvVmj0UmLQjIiRFYj0jSTEatoculhRywwIQt0=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57P85GE41030246
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Mon, 25 Aug 2025 03:05:16 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1756128552;
+	bh=d4JxxJipZfJkbxLkgq7pyzODLQ6xfAmqaoPEmMMUvMo=;
+	h=Date:Subject:To:References:From:In-Reply-To;
+	b=sD+rp63dTXYtmurMHPYyShqml18OhCIFdE3uUL98L6Zp8Y8fYj+piLfVYstgVLT+b
+	 c+bz1K3P/77MTnuSdLxS2Rs9hkxNBmUPtB4Ny4CppH85Zmp9C3Tdj61ijymU67/fpF
+	 x/lPKZ6DRdh90ytUa3sLjktOiXkoWeoAZID1fO4I=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57PDTCEk908797
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Mon, 25 Aug 2025 08:29:12 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 25
- Aug 2025 03:05:15 -0500
-Received: from fllvem-mr08.itg.ti.com (10.64.41.88) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2025 08:29:11 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 25 Aug 2025 03:05:15 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by fllvem-mr08.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57P85FBZ1787584;
-	Mon, 25 Aug 2025 03:05:15 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id C22BF181224; Mon, 25 Aug 2025 03:05:15 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: LCPD Automation Script <lcpdbld@list.ti.com>
-CC: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202508250100
-Date: Mon, 25 Aug 2025 03:05:15 -0500
-Message-ID: <20250825080515.2151273-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20250825075955.342678-1-lcpdbld@list.ti.com>
-References: <20250825075955.342678-1-lcpdbld@list.ti.com>
+ Frontend Transport; Mon, 25 Aug 2025 08:29:11 -0500
+Received: from [128.247.81.69] (dtmxl9433pnr.dhcp.ti.com [128.247.81.69])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57PDTBmF3674811;
+	Mon, 25 Aug 2025 08:29:11 -0500
+Message-ID: <f6385a8f-9029-4f65-b0cf-b7321149d35f@ti.com>
+Date: Mon, 25 Aug 2025 08:29:11 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti][scarthgap/master][PATCH] conf: machine: Include merged
+ device trees in the list of generated dtbs
+To: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>,
+        <meta-ti@lists.yoctoproject.org>
+References: <20250825063449.3639186-1-j-sahu@ti.com>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20250825063449.3639186-1-j-sahu@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 25 Aug 2025 08:05:27 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18967
-
-meta-ti / na / 20250825075955.342678-1-lcpdbld
-
-PRC Results: PASS
-
-=========================================================
-  check-yocto-patches: PASS
-=========================================================
-Patches
-----------------------------------------
-All patches passed
+ <meta-ti@lists.yoctoproject.org>; Mon, 25 Aug 2025 13:29:18 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18968
 
 
 
-=========================================================
-  apply-yocto-patch: PASS
-=========================================================
-master
-=====================
-Summary:
-- Patch Series: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202508250100
-- Submitter: From: LCPD Automation Script <lcpdbld@list.ti.com>
-- Date: Date: Mon, 25 Aug 2025 02:59:55 -0500
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 1c253c5b407ec395cba6adecad64f3cbac7be75d
+On 8/25/2025 1:34 AM, Telukula Jeevan Kumar Sahu wrote:
+> Add support for dtbs that are generated by merging multiple .dtb and .dtbo
+> files in the /boot directory of the root filesystem.These merged device trees
+> are defined in ti-linux-kernel Makefile[1]. Include them using the
+> KERNEL_DEVICETREE_DTBMERGE variable.
 
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-wip
-- Commit Author: Thorsten Lannynd <t-lannynd@ti.com>
-- Commit Subject: ti-bsp: recipes-multimedia: Add udev rules for VPU and JPEG encoder symlinks
-- Commit SHA: 6059a084f6c8ae0aa1d76abb922949c8bb6dbb09
 
-Patches
-----------------------------------------
-All patches applied
+I'm pretty sure that this patch is unnecessary.  The 
+KERNEL_DEVICETREE_DTBMERGE variable was to support some older legacy 
+platforms.  All of the entries you are adding are already picked up by 
+the prefix.
+
+What problem are you trying to solve with this patch?
 
 
 
-=========================================================
-  check-yocto-repo: PASS
-=========================================================
-master
-=====================
-PASS
+> [1]: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/tree/arch/arm64/boot/dts/ti/Makefile?h=ti-linux-6.12.y
+> 
+> Signed-off-by: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>
+> ---
+>   meta-ti-bsp/conf/machine/am62axx-evm.conf   | 4 ++++
+>   meta-ti-bsp/conf/machine/include/am64xx.inc | 4 ++++
+>   meta-ti-bsp/conf/machine/include/am65xx.inc | 8 ++++++++
+>   meta-ti-bsp/conf/machine/j7200-evm.conf     | 4 ++++
+>   meta-ti-bsp/conf/machine/j721e-evm.conf     | 4 ++++
+>   meta-ti-bsp/conf/machine/j721s2-evm.conf    | 4 ++++
+>   6 files changed, 28 insertions(+)
+> 
+> diff --git a/meta-ti-bsp/conf/machine/am62axx-evm.conf b/meta-ti-bsp/conf/machine/am62axx-evm.conf
+> index faeb34a9..a10d5751 100644
+> --- a/meta-ti-bsp/conf/machine/am62axx-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/am62axx-evm.conf
+> @@ -11,6 +11,10 @@ KERNEL_DEVICETREE_PREFIX = " \
+>       ti/k3-v3link \
+>   "
+>   
+> +KERNEL_DEVICETREE_DTBMERGE = " \
+> +    ti/k3-am62a7-sk-ub954-evm-ov2312.dtb \
+> +"
+> +
+>   KERNEL_DEVICETREE = " \
+>       ti/k3-am62a7-phyboard-lyra-rdk.dtb \
+>       ti/k3-am62a7-sk.dtb \
+> diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/conf/machine/include/am64xx.inc
+> index e79e6e61..33fc6240 100644
+> --- a/meta-ti-bsp/conf/machine/include/am64xx.inc
+> +++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
+> @@ -5,6 +5,10 @@ SOC_FAMILY:append = ":am64xx"
+>   
+>   KERNEL_DEVICETREE_PREFIX = "ti/k3-am642"
+>   
+> +KERNEL_DEVICETREE_DTBMERGE = " \
+> +    ti/k3-am642-evm-nand.dtb \
+> +"
+> +
+>   KERNEL_DEVICETREE = " \
+>       ti/k3-am642-evm-icssg1-dualemac-mii.dtbo \
+>       ti/k3-am642-evm-icssg1-dualemac.dtbo \
+> diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
+> index 7255bb30..d70bb22d 100644
+> --- a/meta-ti-bsp/conf/machine/include/am65xx.inc
+> +++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
+> @@ -10,6 +10,14 @@ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_SGX_DRIVER_PROVIDER}"
+>   
+>   KERNEL_DEVICETREE_PREFIX = "ti/k3-am654"
+>   
+> +KERNEL_DEVICETREE_DTBMERGE = " \
+> +    ti/k3-am654-gp-evm.dtb \
+> +    ti/k3-am654-evm.dtb \
+> +    ti/k3-am654-idk.dtb \
+> +    ti/k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie.dtb \
+> +    ti/k3-am6548-iot2050-advanced-m2-bkey-usb3.dtb \
+> +"
+> +
+>   KERNEL_DEVICETREE = " \
+>       ti/k3-am654-base-board-rocktech-rk101-panel.dtbo \
+>       ti/k3-am654-base-board.dtb \
+> diff --git a/meta-ti-bsp/conf/machine/j7200-evm.conf b/meta-ti-bsp/conf/machine/j7200-evm.conf
+> index adfc6376..f6d9ee39 100644
+> --- a/meta-ti-bsp/conf/machine/j7200-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/j7200-evm.conf
+> @@ -6,6 +6,10 @@ require conf/machine/include/j7200.inc
+>   
+>   KERNEL_DEVICETREE_PREFIX = "ti/k3-j7200"
+>   
+> +KERNEL_DEVICETREE_DTBMERGE = " \
+> +    ti/k3-j7200-evm.dtb \
+> +"
+> +
+>   KERNEL_DEVICETREE = " \
+>       ti/k3-j7200-common-proc-board.dtb \
+>       ti/k3-j7200-evm-quad-port-eth-exp.dtbo \
+> diff --git a/meta-ti-bsp/conf/machine/j721e-evm.conf b/meta-ti-bsp/conf/machine/j721e-evm.conf
+> index b0b2a5b6..e9327f56 100644
+> --- a/meta-ti-bsp/conf/machine/j721e-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/j721e-evm.conf
+> @@ -10,6 +10,10 @@ KERNEL_DEVICETREE_PREFIX = " \
+>       ti/k3-j7200-evm-mcspi-loopback \
+>   "
+>   
+> +KERNEL_DEVICETREE_DTBMERGE = " \
+> +    ti/k3-j721e-evm.dtb \
+> +"
+> +
+>   KERNEL_DEVICETREE = " \
+>       ti/k3-j721e-beagleboneai64.dtb \
+>       ti/k3-j721e-common-proc-board-infotainment.dtbo \
+> diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+> index 5cb28309..2d7e6ebe 100644
+> --- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
+> +++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
+> @@ -15,6 +15,10 @@ KERNEL_DEVICETREE_PREFIX = " \
+>       ti/k3-v3link \
+>   "
+>   
+> +KERNEL_DEVICETREE_DTBMERGE = " \
+> +    ti/k3-j721s2-evm.dtb \
+> +"
+> +
+>   KERNEL_DEVICETREE = " \
+>       ti/k3-am68-sk-base-board.dtb \
+>       ti/k3-j721s2-common-proc-board.dtb \
 
-
-
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
