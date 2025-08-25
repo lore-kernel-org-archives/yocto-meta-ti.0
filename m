@@ -2,185 +2,175 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD40DCA0FE7
-	for <webhook@archiver.kernel.org>; Mon, 25 Aug 2025 13:29:18 +0000 (UTC)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- by mx.groups.io with SMTP id smtpd.web10.38879.1756128552901302629
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB8CACA0FE8
+	for <webhook@archiver.kernel.org>; Mon, 25 Aug 2025 16:51:09 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web10.43734.1756140666013928689
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 25 Aug 2025 06:29:13 -0700
+ Mon, 25 Aug 2025 09:51:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=sD+rp63d;
- spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: reatmon@ti.com)
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
-	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57PDTCW41284813
-	for <meta-ti@lists.yoctoproject.org>; Mon, 25 Aug 2025 08:29:12 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=tRnheS3a;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: reatmon@ti.com)
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 57PGp5v7856102
+	for <meta-ti@lists.yoctoproject.org>; Mon, 25 Aug 2025 11:51:05 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1756128552;
-	bh=d4JxxJipZfJkbxLkgq7pyzODLQ6xfAmqaoPEmMMUvMo=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=sD+rp63dTXYtmurMHPYyShqml18OhCIFdE3uUL98L6Zp8Y8fYj+piLfVYstgVLT+b
-	 c+bz1K3P/77MTnuSdLxS2Rs9hkxNBmUPtB4Ny4CppH85Zmp9C3Tdj61ijymU67/fpF
-	 x/lPKZ6DRdh90ytUa3sLjktOiXkoWeoAZID1fO4I=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
-	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57PDTCEk908797
+	s=ti-com-17Q1; t=1756140665;
+	bh=ZevdMUgrt7malfu0zzBuczl+A9tUWSAaQXsXz9HR6bM=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=tRnheS3aTALtklwDpNow3HYnDfhBMXpS7aWYAxKwYR3K0KnI3Cg2XX/UxpDosq9OK
+	 KXpZHYAVwl/lqXxMf9cTSXcrhv1ObfKaNmy9BC+M4lWfzLkOKx0Qz5F6Gc/wpgIAL/
+	 zcaRM7sKThVrJQ5XLR/plf/JE/cld2TJbXMTExbU=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+	by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 57PGp517745211
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 25 Aug 2025 08:29:12 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Mon, 25 Aug 2025 11:51:05 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 25
- Aug 2025 08:29:11 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2025 11:51:05 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 25 Aug 2025 08:29:11 -0500
+ Frontend Transport; Mon, 25 Aug 2025 11:51:05 -0500
 Received: from [128.247.81.69] (dtmxl9433pnr.dhcp.ti.com [128.247.81.69])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57PDTBmF3674811;
-	Mon, 25 Aug 2025 08:29:11 -0500
-Message-ID: <f6385a8f-9029-4f65-b0cf-b7321149d35f@ti.com>
-Date: Mon, 25 Aug 2025 08:29:11 -0500
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 57PGp4Gu022295;
+	Mon, 25 Aug 2025 11:51:04 -0500
+Message-ID: <60eca568-fabf-41cf-90e2-dbd715d0db61@ti.com>
+Date: Mon, 25 Aug 2025 11:51:04 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][scarthgap/master][PATCH] conf: machine: Include merged
- device trees in the list of generated dtbs
-To: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20250825063449.3639186-1-j-sahu@ti.com>
+Subject: Re: [meta-ti][master][PATCH v2] ti-bsp: recipes-multimedia: Add udev
+ rules for VPU and JPEG encoder symlinks
+To: Thorsten Lannynd <t-lannynd@ti.com>, <meta-ti@lists.yoctoproject.org>,
+        <afd@ti.com>
+CC: <detheridge@ti.com>, <rs@ti.com>, <b-brnich@ti.com>
+References: <20250821160944.845890-1-t-lannynd@ti.com>
 Content-Language: en-US
 From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20250825063449.3639186-1-j-sahu@ti.com>
+In-Reply-To: <20250821160944.845890-1-t-lannynd@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 25 Aug 2025 13:29:18 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18968
+ <meta-ti@lists.yoctoproject.org>; Mon, 25 Aug 2025 16:51:09 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18969
 
 
 
-On 8/25/2025 1:34 AM, Telukula Jeevan Kumar Sahu wrote:
-> Add support for dtbs that are generated by merging multiple .dtb and .dtbo
-> files in the /boot directory of the root filesystem.These merged device trees
-> are defined in ti-linux-kernel Makefile[1]. Include them using the
-> KERNEL_DEVICETREE_DTBMERGE variable.
-
-
-I'm pretty sure that this patch is unnecessary.  The 
-KERNEL_DEVICETREE_DTBMERGE variable was to support some older legacy 
-platforms.  All of the entries you are adding are already picked up by 
-the prefix.
-
-What problem are you trying to solve with this patch?
-
-
-
-> [1]: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/tree/arch/arm64/boot/dts/ti/Makefile?h=ti-linux-6.12.y
+On 8/21/2025 11:09 AM, Thorsten Lannynd wrote:
+> This patch introduces udev rules to ensure consistent device naming for
+> VPU decoders, encoders, and the JPEG encoder. These rules are essential
+> for enabling hardware-accelerated video decoding in Chromium using the
+> V4L2 Stateful decoder.
 > 
-> Signed-off-by: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>
+> The following udev rules are added:
+> - Map vpu and vpu0 to /dev/video-dec0 and /dev/video-enc0.
+> - Map vpu1 to /dev/video-dec1 and /dev/video-enc1.
+> - Map the JPEG encoder to /dev/jpeg-enc0.
+> 
+> These changes ensure proper operation of the VPU and JPEG encoder,
+> especially when other video devices are connected, avoiding mismatches.
+> 
+> Signed-off-by: Thorsten Lannynd <t-lannynd@ti.com>
+> Reviewed-by: Andrew Davis <afd@ti.com>
 > ---
->   meta-ti-bsp/conf/machine/am62axx-evm.conf   | 4 ++++
->   meta-ti-bsp/conf/machine/include/am64xx.inc | 4 ++++
->   meta-ti-bsp/conf/machine/include/am65xx.inc | 8 ++++++++
->   meta-ti-bsp/conf/machine/j7200-evm.conf     | 4 ++++
->   meta-ti-bsp/conf/machine/j721e-evm.conf     | 4 ++++
->   meta-ti-bsp/conf/machine/j721s2-evm.conf    | 4 ++++
->   6 files changed, 28 insertions(+)
 > 
-> diff --git a/meta-ti-bsp/conf/machine/am62axx-evm.conf b/meta-ti-bsp/conf/machine/am62axx-evm.conf
-> index faeb34a9..a10d5751 100644
-> --- a/meta-ti-bsp/conf/machine/am62axx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62axx-evm.conf
-> @@ -11,6 +11,10 @@ KERNEL_DEVICETREE_PREFIX = " \
->       ti/k3-v3link \
->   "
->   
-> +KERNEL_DEVICETREE_DTBMERGE = " \
-> +    ti/k3-am62a7-sk-ub954-evm-ov2312.dtb \
-> +"
+> v2:
+> - Split patch into seperate master and scarthgap patches
+> - Added SUMMARY to bitbake recipe
+> 
+>   .../recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb        |  2 ++
+>   .../ti-img-encode-decode/ti-vxe-vxd-driver_6.12.bb    |  2 ++
+>   .../ti-multimedia-udev/files/67-multimedia.rules      |  5 +++++
+>   .../ti-multimedia-udev/ti-multimedia-udev.bb          | 11 +++++++++++
+>   4 files changed, 20 insertions(+)
+>   create mode 100644 meta-ti-bsp/recipes-multimedia/ti-multimedia-udev/files/67-multimedia.rules
+>   create mode 100644 meta-ti-bsp/recipes-multimedia/ti-multimedia-udev/ti-multimedia-udev.bb
+> 
+> diff --git a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+> index 6a65992f..95bfd01a 100644
+> --- a/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+> +++ b/meta-ti-bsp/recipes-bsp/cnm-wave-fw/cnm-wave-fw_git.bb
+> @@ -27,3 +27,5 @@ do_install() {
+>   	install -d ${D}${nonarch_base_libdir}/firmware/cnm
+>   	install -m 0644 ${S}/cnm/${SOURCE_WAVE521C} ${D}${nonarch_base_libdir}/firmware/cnm/${TARGET_WAVE521C}
+>   }
 > +
->   KERNEL_DEVICETREE = " \
->       ti/k3-am62a7-phyboard-lyra-rdk.dtb \
->       ti/k3-am62a7-sk.dtb \
-> diff --git a/meta-ti-bsp/conf/machine/include/am64xx.inc b/meta-ti-bsp/conf/machine/include/am64xx.inc
-> index e79e6e61..33fc6240 100644
-> --- a/meta-ti-bsp/conf/machine/include/am64xx.inc
-> +++ b/meta-ti-bsp/conf/machine/include/am64xx.inc
-> @@ -5,6 +5,10 @@ SOC_FAMILY:append = ":am64xx"
+> +RDEPENDS:${PN} += "ti-multimedia-udev"
+> diff --git a/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/ti-vxe-vxd-driver_6.12.bb b/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/ti-vxe-vxd-driver_6.12.bb
+> index f73f59fa..cdcf4af0 100644
+> --- a/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/ti-vxe-vxd-driver_6.12.bb
+> +++ b/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/ti-vxe-vxd-driver_6.12.bb
+> @@ -19,3 +19,5 @@ SRCREV = "0bcbb20af32ea13275b452f0e84f5a49966d0bf6"
+>   TARGET_PRODUCT:j721e = "j721e_linux"
 >   
->   KERNEL_DEVICETREE_PREFIX = "ti/k3-am642"
->   
-> +KERNEL_DEVICETREE_DTBMERGE = " \
-> +    ti/k3-am642-evm-nand.dtb \
-> +"
+>   EXTRA_OEMAKE += 'KERNEL_DIR="${STAGING_KERNEL_DIR}" PREFIX="${D}"'
 > +
->   KERNEL_DEVICETREE = " \
->       ti/k3-am642-evm-icssg1-dualemac-mii.dtbo \
->       ti/k3-am642-evm-icssg1-dualemac.dtbo \
-> diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
-> index 7255bb30..d70bb22d 100644
-> --- a/meta-ti-bsp/conf/machine/include/am65xx.inc
-> +++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
-> @@ -10,6 +10,14 @@ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_SGX_DRIVER_PROVIDER}"
->   
->   KERNEL_DEVICETREE_PREFIX = "ti/k3-am654"
->   
-> +KERNEL_DEVICETREE_DTBMERGE = " \
-> +    ti/k3-am654-gp-evm.dtb \
-> +    ti/k3-am654-evm.dtb \
-> +    ti/k3-am654-idk.dtb \
-> +    ti/k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie.dtb \
-> +    ti/k3-am6548-iot2050-advanced-m2-bkey-usb3.dtb \
-> +"
+> +RDEPENDS:${PN} += "ti-multimedia-udev"
+> diff --git a/meta-ti-bsp/recipes-multimedia/ti-multimedia-udev/files/67-multimedia.rules b/meta-ti-bsp/recipes-multimedia/ti-multimedia-udev/files/67-multimedia.rules
+> new file mode 100644
+> index 00000000..5239d1ef
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-multimedia/ti-multimedia-udev/files/67-multimedia.rules
+> @@ -0,0 +1,5 @@
+> +SUBSYSTEM=="video4linux", DEVPATH=="/devices/*/*210000.video-codec/video4linux/video*", ATTR{name}=="C&M Wave5 VPU decoder", SYMLINK+="video-dec0"
+> +SUBSYSTEM=="video4linux", DEVPATH=="/devices/*/*210000.video-codec/video4linux/video*", ATTR{name}=="C&M Wave5 VPU encoder", SYMLINK+="video-enc0"
+> +SUBSYSTEM=="video4linux", DEVPATH=="/devices/*/4220000.video-codec/video4linux/video*", ATTR{name}=="C&M Wave5 VPU decoder", SYMLINK+="video-dec1"
+> +SUBSYSTEM=="video4linux", DEVPATH=="/devices/*/4220000.video-codec/video4linux/video*", ATTR{name}=="C&M Wave5 VPU encoder", SYMLINK+="video-enc1"
+> +SUBSYSTEM=="video4linux", DEVPATH=="/devices/*/fd20000.jpeg-encoder/video4linux/video*", ATTR{name}=="e5010", SYMLINK+="jpeg-enc0"
+> diff --git a/meta-ti-bsp/recipes-multimedia/ti-multimedia-udev/ti-multimedia-udev.bb b/meta-ti-bsp/recipes-multimedia/ti-multimedia-udev/ti-multimedia-udev.bb
+> new file mode 100644
+> index 00000000..40b0db8e
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-multimedia/ti-multimedia-udev/ti-multimedia-udev.bb
+> @@ -0,0 +1,11 @@
+> +SUMMARY = "Udev rules for device naming of VPU devices and JPEG encoder"
 > +
->   KERNEL_DEVICETREE = " \
->       ti/k3-am654-base-board-rocktech-rk101-panel.dtbo \
->       ti/k3-am654-base-board.dtb \
-> diff --git a/meta-ti-bsp/conf/machine/j7200-evm.conf b/meta-ti-bsp/conf/machine/j7200-evm.conf
-> index adfc6376..f6d9ee39 100644
-> --- a/meta-ti-bsp/conf/machine/j7200-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/j7200-evm.conf
-> @@ -6,6 +6,10 @@ require conf/machine/include/j7200.inc
->   
->   KERNEL_DEVICETREE_PREFIX = "ti/k3-j7200"
->   
-> +KERNEL_DEVICETREE_DTBMERGE = " \
-> +    ti/k3-j7200-evm.dtb \
-> +"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 > +
->   KERNEL_DEVICETREE = " \
->       ti/k3-j7200-common-proc-board.dtb \
->       ti/k3-j7200-evm-quad-port-eth-exp.dtbo \
-> diff --git a/meta-ti-bsp/conf/machine/j721e-evm.conf b/meta-ti-bsp/conf/machine/j721e-evm.conf
-> index b0b2a5b6..e9327f56 100644
-> --- a/meta-ti-bsp/conf/machine/j721e-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/j721e-evm.conf
-> @@ -10,6 +10,10 @@ KERNEL_DEVICETREE_PREFIX = " \
->       ti/k3-j7200-evm-mcspi-loopback \
->   "
->   
-> +KERNEL_DEVICETREE_DTBMERGE = " \
-> +    ti/k3-j721e-evm.dtb \
-> +"
+> +SRC_URI += "file://67-multimedia.rules"
 > +
->   KERNEL_DEVICETREE = " \
->       ti/k3-j721e-beagleboneai64.dtb \
->       ti/k3-j721e-common-proc-board-infotainment.dtbo \
-> diff --git a/meta-ti-bsp/conf/machine/j721s2-evm.conf b/meta-ti-bsp/conf/machine/j721s2-evm.conf
-> index 5cb28309..2d7e6ebe 100644
-> --- a/meta-ti-bsp/conf/machine/j721s2-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/j721s2-evm.conf
-> @@ -15,6 +15,10 @@ KERNEL_DEVICETREE_PREFIX = " \
->       ti/k3-v3link \
->   "
->   
-> +KERNEL_DEVICETREE_DTBMERGE = " \
-> +    ti/k3-j721s2-evm.dtb \
-> +"
-> +
->   KERNEL_DEVICETREE = " \
->       ti/k3-am68-sk-base-board.dtb \
->       ti/k3-j721s2-common-proc-board.dtb \
+> +do_install() {
+> +    install -d ${D}${sysconfdir}/udev/rules.d
+> +    install -m 0644 ${WORKDIR}/67-multimedia.rules ${D}${sysconfdir}/udev/rules.d/
+> +}
+
+
+This recipe is throwing warnings and errors out on master.  Please test 
+your patches on both branches when sending them in.
+
+The warning is:
+
+WARNING: ti-multimedia-udev-1.0-r0 do_unpack: ti-multimedia-udev: the 
+directory ${UNPACKDIR}/${BP} 
+(/scratch/builds/arago-master-wip/build/build/arago-tmp-default/work/aarch64-oe-linux/ti-multimedia-udev/1.0/sources/ti-multimedia-udev-1.0) 
+pointed to by the S variable doesn't exist - please set S within the 
+recipe to point to where the source has been unpacked to
+
+This is because your recipe does not actually have anything to unpack 
+(tarball, or git repo).  In the case where a recipe only refers to files 
+located in the meta layer, you need to add this:
+
+S = "${UNPACKDIR}"
+
+The error is:
+| install: cannot stat 
+'/scratch/builds/arago-master-wip/build/build/arago-tmp-default/work/aarch64-oe-linux/ti-multimedia-udev/1.0/67-multimedia.rules': 
+No such file or directory
+
+This is because you refer to WORKDIR in the do_install.  That needs to 
+be pointing to UNAPCKDIR dir instead.  This is a change in master.
+
+     install -m 0644 ${UNPACKDIR}/67-multimedia.rules 
+${D}${sysconfdir}/udev/rules.d/
+
+
+Please fix the master patch and send a v3.
+
 
 -- 
 Ryan Eatmon                reatmon@ti.com
