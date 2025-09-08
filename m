@@ -1,55 +1,50 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <m-shah@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3E35CA1014
-	for <webhook@archiver.kernel.org>; Wed,  3 Sep 2025 19:40:24 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web11.22043.1756928415547795079
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBBF9CAC581
+	for <webhook@archiver.kernel.org>; Mon,  8 Sep 2025 10:53:23 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web11.10272.1757328801229341772
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 03 Sep 2025 12:40:15 -0700
+ Mon, 08 Sep 2025 03:53:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=nxkd7b1G;
- spf=pass (domain: list.ti.com, ip: 198.47.19.245, mailfrom: prc@list.ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 583JeEKR2845276;
-	Wed, 3 Sep 2025 14:40:14 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=hGtWrh6R;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: m-shah@ti.com)
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 588ArKUt3850184
+	for <meta-ti@lists.yoctoproject.org>; Mon, 8 Sep 2025 05:53:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1756928414; i=@ti.com;
-	bh=IZoqjCTY5kPxcPcWjW5nPtgopNx0eUhtek3Rf0ExZa4=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=nxkd7b1GHNJufboyTARe5Dfx2x/C39512Q03g/5s3oi4TWlk4gl064ZMob0f6JD43
-	 N1f9OKC7VjOgPlBI+9x3Fk2urrKIO4M79fNCwpsoA32xyzQnLHacfvHJSilSPhaaIb
-	 bfawQTjfRs3URGg3Gmu7YIvTfiYWKxIoXae9S/ec=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 583JeE8A3828477
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Wed, 3 Sep 2025 14:40:14 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 3
- Sep 2025 14:40:13 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1757328800;
+	bh=59LQQ8v9xR6SDvqsx+7GfurXBDWORxp7UprKdTrr0gI=;
+	h=From:To:CC:Subject:Date;
+	b=hGtWrh6RUX9IKdNBVM+7J8o+ij0Brc63d8T4OcO46lEC5XS08WOSgCf8XIUCuLhKy
+	 WdD6n9IqaJzIK52LG4L9Uy0/BWRZOYvm42a6ddICSerRMl8JLEra/KBfEewxDGuIpI
+	 9IFIDadHO6/CUGU8KdlIVE0VQs8k6wgOtoZy1d8c=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 588ArK3v2950454
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Mon, 8 Sep 2025 05:53:20 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 8
+ Sep 2025 05:53:20 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 3 Sep 2025 14:40:13 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 583JeDUD2089328;
-	Wed, 3 Sep 2025 14:40:13 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id BF7ED13F529; Wed,  3 Sep 2025 14:40:13 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>
-CC: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][master][PATCH] optee-ftpm: Add TI version override for ftpm
-Date: Wed, 3 Sep 2025 14:40:13 -0500
-Message-ID: <20250903194013.2280354-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20250903193624.15577-1-reatmon@ti.com>
-References: <20250903193624.15577-1-reatmon@ti.com>
+ Frontend Transport; Mon, 8 Sep 2025 05:53:19 -0500
+Received: from moteen-ubuntu-desk.dhcp.ti.com (moteen-ubuntu-desk.dhcp.ti.com [10.24.72.162])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 588ArGNd479541;
+	Mon, 8 Sep 2025 05:53:17 -0500
+From: Moteen Shah <m-shah@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <vigneshr@ti.com>, <u-kumar1@ti.com>, <reatmon@ti.com>, <a-limaye@ti.com>,
+        <n-francis@ti.com>, <m-shah@ti.com>, <praneeth@ti.com>, <jm@ti.com>,
+        <b-padhi@ti.com>
+Subject: [master][PATCH 0/1] Add recipes to build initramfs image
+Date: Mon, 8 Sep 2025 16:23:13 +0530
+Message-ID: <20250908105315.19583-1-m-shah@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -57,54 +52,35 @@ X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 03 Sep 2025 19:40:24 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18978
+ <meta-ti@lists.yoctoproject.org>; Mon, 08 Sep 2025 10:53:23 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/18979
 
-meta-ti / na / 20250903193624.15577-1-reatmon
+The series aims to add a new recipe which will package
+boot essential and some other modules in image which
+can later be used in the boot process of all K3 platforms. 
 
-PRC Results: PASS
+The motivation behind the work is to probe modules(in boot time)
+which could not be built in the upstream Linux kernel image, as
+using it as inbuilt drivers will increase the kernel image size, 
+which is undesirable by the upstream folks.
 
-=========================================================
-  check-yocto-patches: PASS
-=========================================================
-Patches
-----------------------------------------
-All patches passed
+Hence, build those drivers as modules and package it inside initramfs
+and later get it probed through initramfs-udev(device manager).
 
+Moteen Shah (2):
+  recipes-ti: initrd: Make minimal initrd image
+  meta-ti-bsp: wic: Add a new GRUB config for ti platforms
 
+ .../initrd/packagegroup-ti-initrd.bb          |  5 ++
+ .../recipes-ti/initrd/ti-initrd-image.bb      | 56 +++++++++++++++++++
+ meta-ti-bsp/wic/sdimage-2part-efi.wks.in      |  2 +-
+ meta-ti-bsp/wic/ti-grub.cfg                   | 14 +++++
+ 4 files changed, 76 insertions(+), 1 deletion(-)
+ create mode 100644 meta-ti-bsp/recipes-ti/initrd/packagegroup-ti-initrd.bb
+ create mode 100644 meta-ti-bsp/recipes-ti/initrd/ti-initrd-image.bb
+ create mode 100644 meta-ti-bsp/wic/ti-grub.cfg
 
-=========================================================
-  apply-yocto-patch: PASS
-=========================================================
-master
-=====================
-Summary:
-- Patch Series: [meta-ti][master][PATCH] optee-ftpm: Add TI version override for ftpm
-- Submitter: From: Ryan Eatmon <reatmon@ti.com>
-- Date: Date: Wed, 3 Sep 2025 14:36:24 -0500
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 23f016b4e64a7cf139983cc4c9399b05c8092760
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-next
-- Commit Author: LCPD Automation Script <lcpdbld@list.ti.com>
-- Commit Subject: CI/CD Auto-Merger: cicd.master.202509030100
-- Commit SHA: 643562a21cd30815d38443b40ac2c8a9dc08dc8d
-
-Patches
-----------------------------------------
-All patches applied
-
-
-
-=========================================================
-  check-yocto-repo: PASS
-=========================================================
-master
-=====================
-PASS
-
-
+-- 
+2.34.1
 
 
