@@ -1,48 +1,47 @@
-Return-Path: <m-shah@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 08F83CA0EE8
-	for <webhook@archiver.kernel.org>; Wed, 17 Sep 2025 10:12:12 +0000 (UTC)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- by mx.groups.io with SMTP id smtpd.web11.19263.1758103928057581164
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3E27CAC59D
+	for <webhook@archiver.kernel.org>; Wed, 17 Sep 2025 14:44:53 +0000 (UTC)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ by mx.groups.io with SMTP id smtpd.web11.25310.1758120292466253637
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 17 Sep 2025 03:12:08 -0700
+ Wed, 17 Sep 2025 07:44:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=Knw0cBfX;
- spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: m-shah@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=tqkuC+4r;
+ spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: reatmon@ti.com)
 Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
-	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58HAC7D5225658
-	for <meta-ti@lists.yoctoproject.org>; Wed, 17 Sep 2025 05:12:07 -0500
+	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58HEipfh1535792
+	for <meta-ti@lists.yoctoproject.org>; Wed, 17 Sep 2025 09:44:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1758103927;
-	bh=73DmYZ7RBiyIGFOpb+BSNn/pqDy29AbxHEtJBzHAU/A=;
+	s=ti-com-17Q1; t=1758120291;
+	bh=lM7jI21BkrkyEe3KHFe3Y9MceG2O/6ee2uv1eyiaLy4=;
 	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=Knw0cBfXVxWAcrbana4JsK1JF+dSgvFt5Fcwu54b3uy4A+yuf9ut1ixTHDj9hsO7y
-	 zLTS+Q74f8ITapIZcyTdsOLa/aPJsftkY4yQVkfgzSeDFaJMUaW0xTr4BP2TSr4jkT
-	 Q+U21mSpZ0MdL4JbwI1yB3ym/0wg8GjfTEbDtS5w=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
-	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58HAC7fT2264639
+	b=tqkuC+4rbp18Q0h9rVpsIdorRxyweaEWa8n+hDjx5DpKK7+0SAY5RLIW+AldWw4+A
+	 FLRt5nAk1iu0sI98E9Yj50d7hOgTP21q8maKDZv4DgqfwGUa4EbgHj7KPdsbxgExtN
+	 Ds4zoc+Slyd156MVOdxj3Pfeg8uoLdXqNwo580ow=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58HEipSY2420333
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Wed, 17 Sep 2025 05:12:07 -0500
-Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+	for <meta-ti@lists.yoctoproject.org>; Wed, 17 Sep 2025 09:44:51 -0500
+Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 17
- Sep 2025 05:12:06 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 09:44:51 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 17 Sep 2025 05:12:06 -0500
-Received: from [10.24.72.162] (moteen-ubuntu-desk.dhcp.ti.com [10.24.72.162])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58HAC3tn3134594;
-	Wed, 17 Sep 2025 05:12:04 -0500
-Message-ID: <38c38ef5-2dbb-49f4-ae5f-8e10b5dac098@ti.com>
-Date: Wed, 17 Sep 2025 15:42:02 +0530
+ Transport; Wed, 17 Sep 2025 09:44:51 -0500
+Received: from [10.249.37.202] ([10.249.37.202])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58HEipjw3513916;
+	Wed, 17 Sep 2025 09:44:51 -0500
+Message-ID: <11f9f37a-ee40-4b33-ab69-81bcaf2ab07c@ti.com>
+Date: Wed, 17 Sep 2025 09:44:53 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti] [master][PATCH 1/2] recipes-ti: initrd: Make minimal
- initrd image
-To: Ryan Eatmon <reatmon@ti.com>, <meta-ti@lists.yoctoproject.org>
+Subject: Re: [master][PATCH 1/2] recipes-ti: initrd: Make minimal initrd image
+To: Moteen Shah <m-shah@ti.com>, <meta-ti@lists.yoctoproject.org>
 CC: <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-limaye@ti.com>,
         <n-francis@ti.com>, <praneeth@ti.com>, <jm@ti.com>, <b-padhi@ti.com>
 References: <20250908105315.19583-1-m-shah@ti.com>
@@ -50,25 +49,25 @@ References: <20250908105315.19583-1-m-shah@ti.com>
  <d5b52951-ad23-4a2a-b541-ea20a1b54b81@ti.com>
  <ab3c6b64-cf3a-4274-96ff-a81c47ee727b@ti.com>
  <ccf0bea6-5130-439e-b752-1a6fd413d246@ti.com>
- <186602EC8486BF32.13540@lists.yoctoproject.org>
+ <653a9707-41a4-486e-a8f0-d02c398831d5@ti.com>
 Content-Language: en-US
-From: Moteen Shah <m-shah@ti.com>
-In-Reply-To: <186602EC8486BF32.13540@lists.yoctoproject.org>
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <653a9707-41a4-486e-a8f0-d02c398831d5@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllvem-ot04.ext.ti.com id 58HAC7D5225658
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllvem-ot03.ext.ti.com id 58HEipfh1535792
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 17 Sep 2025 10:12:12 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19016
+ <meta-ti@lists.yoctoproject.org>; Wed, 17 Sep 2025 14:44:53 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19017
 
-Hey Ryan,
 
-On 17/09/25 13:28, Moteen Shah via lists.yoctoproject.org wrote:
+
+On 9/17/2025 2:58 AM, Moteen Shah wrote:
 > Hey Ryan,
->
+>=20
 > On 15/09/25 17:14, Ryan Eatmon wrote:
 >>
 >>
@@ -108,36 +107,28 @@ pio=20
 >>> will be shifting to the initrd flow.
 >>
 >> There are more distributions than just poky and arago.=C2=A0 The solut=
-ion=20
->> I suggested will work for all of them and not require anything=20
->> specific like your solution.
+ion I=20
+>> suggested will work for all of them and not require anything specific=20
+>> like your solution.
 >>
->
-> Understood, I will use MACHINE_ESSENTIAL_EXTRA_RRECOMMEND inside=20
-> k3.inc, but how should I include the initrd image in the boot=20
-> directory of the root partition, since initrd itself is an image I=20
-> cannot use ${IMAGE_ROOTFS} inside ti-initrd-image.bb. I did found a=20
-> way around it https://lists.yoctoproject.org/g/yocto/message/47500,=20
-> not really sure if its the correct way.
->
+>=20
+> Understood, I will use MACHINE_ESSENTIAL_EXTRA_RRECOMMEND inside k3.inc=
+,=20
+> but how should I include the initrd image in the boot directory of the=20
+> root partition, since initrd itself is an image I cannot use=20
+> ${IMAGE_ROOTFS} inside ti-initrd-image.bb. I did found a way around it=20
+> https://lists.yoctoproject.org/g/yocto/message/47500, not really sure i=
+f=20
+> its the correct way.
+
+Why does the initrd need to be in the rootfs?  The whole point of this=20
+initrd is to get the kernel to boot to get to the point of loading the=20
+rootfs, at which point the initrd has served it's purpose.
+
+
 > Regards,
 > Moteen
->
-
-Adding on the thread, using MACHINE_ESSENTIAL_EXTRA_RRECOMMEND does not=20
-builds the initrd.cpio. I suspect that the tag is used to include=20
-packages and since ti-initrd-image is recipe for image itself and not a=20
-package it does not work. As a workaround to the issue, I am using:
-
-do_image_complete[depends] +=3D "ti-initrd-image:do_image_complete"
-
-
-in the platform specific .inc files.
-
-Regards,
-Moteen
-
-
+>=20
 >>
 >>>>
 >>>> 2) We need a better way to specify the list of MODULES rather than=20
@@ -150,22 +141,25 @@ s=20
 >>>>
 >>>> =C2=A0 TI_INITRAMFS_KERNEL_MODULES ?=3D ""
 >>>>
->>>> Then in each platform specific .inc file we can set that list to=20
->>>> the needed modules based on the ti-bsp need.=C2=A0 Our vendor kernel=
-s do=20
->>>> not need it, so it could remain blank, but the mainline/next bsps=20
->>>> could set it since those actually create the kernel module packages.
+>>>> Then in each platform specific .inc file we can set that list to the=
+=20
+>>>> needed modules based on the ti-bsp need.=C2=A0 Our vendor kernels do=
+ not=20
+>>>> need it, so it could remain blank, but the mainline/next bsps could=20
+>>>> set it since those actually create the kernel module packages.
 >>>>
 >>>> =C2=A0 TI_INITRAMFS_KERNEL_MODULES:append:bsp-mainline =3D " mod1 mo=
 d2"
 >>>> =C2=A0 TI_INITRAMFS_KERNEL_MODULES:append:bsp-next =3D " mod1 mod2"
 >>>>
->>>> Then in the ti-initrd-image.bb you would drop the MODULES=3D""=20
->>>> setting and just change to the variable TI_INITRAMFS_KERNEL_MODULES.
+>>>> Then in the ti-initrd-image.bb you would drop the MODULES=3D"" setti=
+ng=20
+>>>> and just change to the variable TI_INITRAMFS_KERNEL_MODULES.
 >>>>
 >>>> This way, if there are other layers that want to create their own=20
->>>> initramfs we have a variable in place for them to use to include=20
->>>> the required modules based on the kernel version that is being built.
+>>>> initramfs we have a variable in place for them to use to include the=
+=20
+>>>> required modules based on the kernel version that is being built.
 >>>
 >>> Seems like a better solution for including the modules, I'll fix it=20
 >>> in v2.
@@ -173,13 +167,14 @@ d2"
 >>>>
 >>>>
 >>>>
->>>> So, I would probably break all of this up into multiple patches.=20
->>>> The first patch would the work in #2 above to establish the needed=20
+>>>> So, I would probably break all of this up into multiple patches. The=
+=20
+>>>> first patch would the work in #2 above to establish the needed=20
 >>>> variable for all platforms.=C2=A0 The next patches are your patches =
 but=20
 >>>> moving to TI_INITRAMFS_KERNEL_MODULES.=C2=A0 And the final patch wou=
-ld=20
->>>> be adding your new ti-initrd-image into=20
+ld be=20
+>>>> adding your new ti-initrd-image into=20
 >>>> MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS list for all platforms.
 >>>
 >>> Noted.
@@ -282,8 +277,9 @@ mage.bb
 >>>>> directory from
 >>>>> +# the final image this is usually done by adding=20
 >>>>> RDEPENDS_kernel-base =3D ""
->>>>> +# in the configuration file. In our case we can't use this=20
->>>>> method. Instead we
+>>>>> +# in the configuration file. In our case we can't use this method.=
+=20
+>>>>> Instead we
 >>>>> +# just wipe out the content of "/boot" before creating the image.
 >>>>> +ROOTFS_POSTPROCESS_COMMAND +=3D "empty_boot_dir; "
 >>>>> +empty_boot_dir () {
@@ -291,15 +287,9 @@ mage.bb
 >>>>> +}
 >>>>
 >>
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#19015): https://lists.yoctoproject.org/g/meta-ti/me=
-ssage/19015
-> Mute This Topic: https://lists.yoctoproject.org/mt/115128108/9997635
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [m-shah@ti.=
-com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+
+--=20
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
