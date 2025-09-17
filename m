@@ -2,48 +2,50 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DDB97CAC5A0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDB61CAC59A
 	for <webhook@archiver.kernel.org>; Wed, 17 Sep 2025 22:09:35 +0000 (UTC)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- by mx.groups.io with SMTP id smtpd.web10.36482.1758146969624756731
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ by mx.groups.io with SMTP id smtpd.web10.36481.1758146969442694288
  for <meta-ti@lists.yoctoproject.org>;
  Wed, 17 Sep 2025 15:09:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=mY6hJVNg;
- spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: afd@ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58HM9ShK349031;
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Rxt286Ti;
+ spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: afd@ti.com)
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58HM9Son351347;
 	Wed, 17 Sep 2025 17:09:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
 	s=ti-com-17Q1; t=1758146968;
-	bh=8xwzhm6nn+nN75y/hhOJWrrBDSMgGi5lcd1TyBynuMI=;
-	h=From:To:CC:Subject:Date;
-	b=mY6hJVNgDjLY9NWrkHv17x5J5RhgjtZzw/C36fq0sZlcxQnwU1f1T7dA7aF0zeTW3
-	 5sKiB4+KjuHvW720SoPjx2kqTmP4UuBCiBcjcs3AL1b1mnE9Sz7aWUKMMlA0FEBi3H
-	 ZKpdJVYkq4oamrSN0LAMZAOT7DSfunF58XfZrzKQ=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58HM9S521638004
+	bh=BUGRwuo+X5XfXiTeu782fx8gEiCq7twXyw0gdWIdw5I=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=Rxt286TifH52SPpuh//giLqDjEfzLPzZGzvSCPU8pGi8R4FctkOvPIwke9BXgOQsZ
+	 7T/Kio7LtVlYlmJ+dt/ZhvgoCkGS5ZvPJipRwY0dTva3mxRdi09OtIlpKCpvXXjeMi
+	 PPYKfLsQkCp+3NKdGm0EkP5zO9OF4tECyHkWaTSw=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58HM9S772666822
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
 	Wed, 17 Sep 2025 17:09:28 -0500
-Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 17
- Sep 2025 17:09:27 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 17:09:28 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 17 Sep 2025 17:09:27 -0500
+ Transport; Wed, 17 Sep 2025 17:09:28 -0500
 Received: from lelvem-mr06.itg.ti.com ([10.249.42.149])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58HM9RZ94056077;
-	Wed, 17 Sep 2025 17:09:27 -0500
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58HM9RZA4056077;
+	Wed, 17 Sep 2025 17:09:28 -0500
 From: Andrew Davis <afd@ti.com>
 To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         Randolph Sapp <rs@ti.com>, <meta-ti@lists.yoctoproject.org>
 CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][scarthgap][PATCH 1/5] ti-sgx-ddk-um: UM side driver depends on KM side driver
-Date: Wed, 17 Sep 2025 17:09:22 -0500
-Message-ID: <20250917220926.1116988-1-afd@ti.com>
+Subject: [meta-ti][scarthgap][PATCH 2/5] ti-bsp: Do not remove gpu MACHINE_FEATURE conditionally on BSP version
+Date: Wed, 17 Sep 2025 17:09:23 -0500
+Message-ID: <20250917220926.1116988-2-afd@ti.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20250917220926.1116988-1-afd@ti.com>
+References: <20250917220926.1116988-1-afd@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -52,30 +54,245 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Wed, 17 Sep 2025 22:09:35 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19026
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19025
 
-This also matches what is done for ti-img-rogue-umlibs.
+Setting or removing the gpu MACHINE_FEATURE does not actually change
+if the GPU driver is built or not. That is done based on the setting
+of the BSP_{SGX,ROGUE}_{DRIVER,UMLIBS}_{PROVIDER,VERSION} vars. These
+are default empty for BSP versions without supported GPU drivers, which
+will correctly cause a fallback to SW rendering when the GPU driver is
+not available.
+
+As the "gpu" MACHINE_FEATURE now has no uses, remove it from all the
+machine config include files.
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- .../powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb              | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ meta-ti-bsp/conf/machine/beagleplay-ti.conf   | 2 +-
+ meta-ti-bsp/conf/machine/include/am62pxx.inc  | 2 +-
+ meta-ti-bsp/conf/machine/include/am62xx.inc   | 2 +-
+ meta-ti-bsp/conf/machine/include/am65xx.inc   | 2 +-
+ meta-ti-bsp/conf/machine/include/am68.inc     | 2 +-
+ meta-ti-bsp/conf/machine/include/am69.inc     | 2 +-
+ meta-ti-bsp/conf/machine/include/j721e.inc    | 2 +-
+ meta-ti-bsp/conf/machine/include/j721s2.inc   | 2 +-
+ meta-ti-bsp/conf/machine/include/j722s.inc    | 2 +-
+ meta-ti-bsp/conf/machine/include/j742s2.inc   | 2 +-
+ meta-ti-bsp/conf/machine/include/j784s4.inc   | 2 +-
+ meta-ti-bsp/conf/machine/include/omap-a15.inc | 2 +-
+ meta-ti-bsp/conf/machine/include/ti-bsp.inc   | 8 --------
+ meta-ti-bsp/conf/machine/include/ti33x.inc    | 2 +-
+ meta-ti-bsp/conf/machine/include/ti43x.inc    | 2 +-
+ 15 files changed, 14 insertions(+), 22 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb
-index b260abdf..b6f5534e 100644
---- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb
-+++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb
-@@ -40,9 +40,7 @@ TARGET_PRODUCT:ti43x = "ti437x_linux"
- TARGET_PRODUCT:omap-a15 = "ti572x_linux"
- TARGET_PRODUCT:am65xx = "ti654x_linux"
+diff --git a/meta-ti-bsp/conf/machine/beagleplay-ti.conf b/meta-ti-bsp/conf/machine/beagleplay-ti.conf
+index 792c91b2..ca88fdfb 100644
+--- a/meta-ti-bsp/conf/machine/beagleplay-ti.conf
++++ b/meta-ti-bsp/conf/machine/beagleplay-ti.conf
+@@ -7,7 +7,7 @@ require conf/machine/include/mc_k3r5.inc
  
--RDEPENDS:${PN} += "libdrm"
+ SOC_FAMILY:append = ":am62xx"
+ 
+-MACHINE_FEATURES += "screen gpu"
++MACHINE_FEATURES += "screen"
+ 
+ SERIAL_CONSOLES = "115200;ttyS2"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/am62pxx.inc b/meta-ti-bsp/conf/machine/include/am62pxx.inc
+index d59f607d..560334c1 100644
+--- a/meta-ti-bsp/conf/machine/include/am62pxx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62pxx.inc
+@@ -3,7 +3,7 @@ require conf/machine/include/mc_k3r5.inc
+ 
+ SOC_FAMILY:append = ":am62pxx"
+ 
+-MACHINE_FEATURES += "screen gpu"
++MACHINE_FEATURES += "screen"
+ 
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+diff --git a/meta-ti-bsp/conf/machine/include/am62xx.inc b/meta-ti-bsp/conf/machine/include/am62xx.inc
+index 74054a78..9e24898c 100644
+--- a/meta-ti-bsp/conf/machine/include/am62xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62xx.inc
+@@ -3,7 +3,7 @@ require conf/machine/include/mc_k3r5.inc
+ 
+ SOC_FAMILY:append = ":am62xx"
+ 
+-MACHINE_FEATURES += "screen gpu"
++MACHINE_FEATURES += "screen"
+ 
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+diff --git a/meta-ti-bsp/conf/machine/include/am65xx.inc b/meta-ti-bsp/conf/machine/include/am65xx.inc
+index d70bb22d..bfaa529b 100644
+--- a/meta-ti-bsp/conf/machine/include/am65xx.inc
++++ b/meta-ti-bsp/conf/machine/include/am65xx.inc
+@@ -3,7 +3,7 @@ require conf/machine/include/mc_k3r5.inc
+ 
+ SOC_FAMILY:append = ":am65xx"
+ 
+-MACHINE_FEATURES += "screen touchscreen gpu"
++MACHINE_FEATURES += "screen touchscreen"
+ 
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_SGX_DRIVER_PROVIDER}"
+diff --git a/meta-ti-bsp/conf/machine/include/am68.inc b/meta-ti-bsp/conf/machine/include/am68.inc
+index b6d18fe0..60ea679a 100644
+--- a/meta-ti-bsp/conf/machine/include/am68.inc
++++ b/meta-ti-bsp/conf/machine/include/am68.inc
+@@ -3,7 +3,7 @@ require conf/machine/include/mc_k3r5.inc
+ 
+ SOC_FAMILY:append = ":j721s2"
+ 
+-MACHINE_FEATURES += "screen gpu"
++MACHINE_FEATURES += "screen"
+ 
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+diff --git a/meta-ti-bsp/conf/machine/include/am69.inc b/meta-ti-bsp/conf/machine/include/am69.inc
+index 759984ea..7956e355 100644
+--- a/meta-ti-bsp/conf/machine/include/am69.inc
++++ b/meta-ti-bsp/conf/machine/include/am69.inc
+@@ -3,7 +3,7 @@ require conf/machine/include/mc_k3r5.inc
+ 
+ SOC_FAMILY:append = ":j784s4"
+ 
+-MACHINE_FEATURES += "screen gpu"
++MACHINE_FEATURES += "screen"
+ 
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/conf/machine/include/j721e.inc
+index f9fdac0c..a74fbfee 100644
+--- a/meta-ti-bsp/conf/machine/include/j721e.inc
++++ b/meta-ti-bsp/conf/machine/include/j721e.inc
+@@ -3,7 +3,7 @@ require conf/machine/include/mc_k3r5.inc
+ 
+ SOC_FAMILY:append = ":j721e"
+ 
+-MACHINE_FEATURES += "screen gpu"
++MACHINE_FEATURES += "screen"
+ 
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+diff --git a/meta-ti-bsp/conf/machine/include/j721s2.inc b/meta-ti-bsp/conf/machine/include/j721s2.inc
+index b6d18fe0..60ea679a 100644
+--- a/meta-ti-bsp/conf/machine/include/j721s2.inc
++++ b/meta-ti-bsp/conf/machine/include/j721s2.inc
+@@ -3,7 +3,7 @@ require conf/machine/include/mc_k3r5.inc
+ 
+ SOC_FAMILY:append = ":j721s2"
+ 
+-MACHINE_FEATURES += "screen gpu"
++MACHINE_FEATURES += "screen"
+ 
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+diff --git a/meta-ti-bsp/conf/machine/include/j722s.inc b/meta-ti-bsp/conf/machine/include/j722s.inc
+index 8a02441b..c2732b70 100644
+--- a/meta-ti-bsp/conf/machine/include/j722s.inc
++++ b/meta-ti-bsp/conf/machine/include/j722s.inc
+@@ -3,7 +3,7 @@ require conf/machine/include/mc_k3r5.inc
+ 
+ SOC_FAMILY:append = ":j722s"
+ 
+-MACHINE_FEATURES += "screen gpu"
++MACHINE_FEATURES += "screen"
+ 
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+diff --git a/meta-ti-bsp/conf/machine/include/j742s2.inc b/meta-ti-bsp/conf/machine/include/j742s2.inc
+index d2de1d0d..13037c09 100644
+--- a/meta-ti-bsp/conf/machine/include/j742s2.inc
++++ b/meta-ti-bsp/conf/machine/include/j742s2.inc
+@@ -3,7 +3,7 @@ require conf/machine/include/mc_k3r5.inc
+ 
+ SOC_FAMILY:append = ":j742s2"
+ 
+-MACHINE_FEATURES += "screen gpu"
++MACHINE_FEATURES += "screen"
+ 
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+diff --git a/meta-ti-bsp/conf/machine/include/j784s4.inc b/meta-ti-bsp/conf/machine/include/j784s4.inc
+index 759984ea..7956e355 100644
+--- a/meta-ti-bsp/conf/machine/include/j784s4.inc
++++ b/meta-ti-bsp/conf/machine/include/j784s4.inc
+@@ -3,7 +3,7 @@ require conf/machine/include/mc_k3r5.inc
+ 
+ SOC_FAMILY:append = ":j784s4"
+ 
+-MACHINE_FEATURES += "screen gpu"
++MACHINE_FEATURES += "screen"
+ 
+ require conf/machine/include/mesa-pvr.inc
+ PREFERRED_PROVIDER_virtual/gpudriver ?= "${BSP_ROGUE_DRIVER_PROVIDER}"
+diff --git a/meta-ti-bsp/conf/machine/include/omap-a15.inc b/meta-ti-bsp/conf/machine/include/omap-a15.inc
+index 2179476f..aed2c727 100644
+--- a/meta-ti-bsp/conf/machine/include/omap-a15.inc
++++ b/meta-ti-bsp/conf/machine/include/omap-a15.inc
+@@ -42,7 +42,7 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "vpdma-fw goodix-fw"
+ UBI_VOLNAME = "rootfs"
+ 
+ # List common SoC features, may need to add touchscreen for specific machines
+-MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 screen alsa gpu mmip dsp gc320"
++MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 screen alsa mmip dsp gc320"
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
+ WKS_FILE ?= "sdimage-2part.wks"
+diff --git a/meta-ti-bsp/conf/machine/include/ti-bsp.inc b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
+index 262aa884..a5d9a51f 100644
+--- a/meta-ti-bsp/conf/machine/include/ti-bsp.inc
++++ b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
+@@ -18,10 +18,6 @@ BSP_KERNEL_VERSION:bsp-mainline = "%"
+ BSP_BOOTLOADER_PROVIDER:bsp-mainline = "u-boot-ti-mainline"
+ BSP_BOOTLOADER_VERSION:bsp-mainline = "%"
+ 
+-# GPU support requires out-of-tree SGX and Rogue drivers not available
+-# in mainline, usually present in TI staging or derivative like BB.org
+-MACHINE_FEATURES:remove:bsp-mainline = "gpu"
 -
--RRECOMMENDS:${PN} += "ti-sgx-ddk-km"
-+RDEPENDS:${PN} += "libdrm ti-sgx-ddk-km"
+ # GC320 support requires out-of-tree drivers not available in mainline
+ MACHINE_FEATURES:remove:bsp-mainline = "gc320"
  
- S = "${WORKDIR}/git"
+@@ -34,10 +30,6 @@ BSP_KERNEL_VERSION:bsp-next = "%"
+ BSP_BOOTLOADER_PROVIDER:bsp-next = "u-boot-ti-next"
+ BSP_BOOTLOADER_VERSION:bsp-next = "%"
  
+-# GPU support requires out-of-tree SGX and Rogue drivers not available
+-# in next, usually present in TI staging or derivative like BB.org
+-MACHINE_FEATURES:remove:bsp-next = "gpu"
+-
+ # GC320 support requires out-of-tree drivers not available in next
+ MACHINE_FEATURES:remove:bsp-next = "gc320"
+ 
+diff --git a/meta-ti-bsp/conf/machine/include/ti33x.inc b/meta-ti-bsp/conf/machine/include/ti33x.inc
+index c47165e4..662fbd03 100644
+--- a/meta-ti-bsp/conf/machine/include/ti33x.inc
++++ b/meta-ti-bsp/conf/machine/include/ti33x.inc
+@@ -88,7 +88,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "kernel-image-zimage"
+ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "amx3-cm3 prueth-fw pruhsr-fw pruprp-fw"
+ 
+ # List common SoC features, may need to add touchscreen for specific machines
+-MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 alsa gpu"
++MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 alsa"
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
+ WKS_FILE ?= "sdimage-2part.wks"
+diff --git a/meta-ti-bsp/conf/machine/include/ti43x.inc b/meta-ti-bsp/conf/machine/include/ti43x.inc
+index a23b6518..6150d106 100644
+--- a/meta-ti-bsp/conf/machine/include/ti43x.inc
++++ b/meta-ti-bsp/conf/machine/include/ti43x.inc
+@@ -60,7 +60,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "kernel-image-zimage"
+ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "amx3-cm3 prueth-fw pruhsr-fw pruprp-fw"
+ 
+ # List common SoC features, may need to add touchscreen for specific machines
+-MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 screen alsa gpu"
++MACHINE_FEATURES = "apm usbgadget usbhost vfat ext2 screen alsa"
+ 
+ IMAGE_FSTYPES += "tar.xz wic.xz wic.bmap"
+ WKS_FILE ?= "sdimage-2part.wks"
 -- 
 2.39.2
 
