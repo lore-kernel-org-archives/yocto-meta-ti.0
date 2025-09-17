@@ -1,295 +1,112 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3E27CAC59D
-	for <webhook@archiver.kernel.org>; Wed, 17 Sep 2025 14:44:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C239DCAC59A
+	for <webhook@archiver.kernel.org>; Wed, 17 Sep 2025 18:23:04 +0000 (UTC)
 Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web11.25310.1758120292466253637
+ by mx.groups.io with SMTP id smtpd.web11.31207.1758133380698294588
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 17 Sep 2025 07:44:52 -0700
+ Wed, 17 Sep 2025 11:23:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=tqkuC+4r;
- spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: reatmon@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=RYulamxT;
+ spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: rs@ti.com)
 Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58HEipfh1535792
-	for <meta-ti@lists.yoctoproject.org>; Wed, 17 Sep 2025 09:44:51 -0500
+	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58HIMxWc1575374;
+	Wed, 17 Sep 2025 13:22:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1758120291;
-	bh=lM7jI21BkrkyEe3KHFe3Y9MceG2O/6ee2uv1eyiaLy4=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=tqkuC+4rbp18Q0h9rVpsIdorRxyweaEWa8n+hDjx5DpKK7+0SAY5RLIW+AldWw4+A
-	 FLRt5nAk1iu0sI98E9Yj50d7hOgTP21q8maKDZv4DgqfwGUa4EbgHj7KPdsbxgExtN
-	 Ds4zoc+Slyd156MVOdxj3Pfeg8uoLdXqNwo580ow=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
-	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58HEipSY2420333
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Wed, 17 Sep 2025 09:44:51 -0500
-Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1758133379;
+	bh=z/hkLzZ8zdkoO2jYmG5Z82fpXO35ZQ9sFrPwvUPKCIA=;
+	h=Date:To:Subject:From:References:In-Reply-To;
+	b=RYulamxT50RtNzFyWq+u9c9iC++zw3FlK32ysQoYh1bHTEHDaPwPZuec6UOkExzqO
+	 Vw+0qp8vCLhxaIACKk4Nn87PTQqG/Cp2bgURHDA/TNqTnZt37jQpccmCbQEBWBYy5f
+	 dC6Wtzk/0/1yekJSzPUk4xbpJvyIAFgCV94cWGXM=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58HIMx6l2544919
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+	Wed, 17 Sep 2025 13:22:59 -0500
+Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 17
- Sep 2025 09:44:51 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 13:22:58 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 17 Sep 2025 09:44:51 -0500
-Received: from [10.249.37.202] ([10.249.37.202])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58HEipjw3513916;
-	Wed, 17 Sep 2025 09:44:51 -0500
-Message-ID: <11f9f37a-ee40-4b33-ab69-81bcaf2ab07c@ti.com>
-Date: Wed, 17 Sep 2025 09:44:53 -0500
+ Transport; Wed, 17 Sep 2025 13:22:58 -0500
+Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.144])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58HIMwHO3788541;
+	Wed, 17 Sep 2025 13:22:58 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [master][PATCH 1/2] recipes-ti: initrd: Make minimal initrd image
-To: Moteen Shah <m-shah@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-limaye@ti.com>,
-        <n-francis@ti.com>, <praneeth@ti.com>, <jm@ti.com>, <b-padhi@ti.com>
-References: <20250908105315.19583-1-m-shah@ti.com>
- <20250908105315.19583-2-m-shah@ti.com>
- <d5b52951-ad23-4a2a-b541-ea20a1b54b81@ti.com>
- <ab3c6b64-cf3a-4274-96ff-a81c47ee727b@ti.com>
- <ccf0bea6-5130-439e-b752-1a6fd413d246@ti.com>
- <653a9707-41a4-486e-a8f0-d02c398831d5@ti.com>
-Content-Language: en-US
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <653a9707-41a4-486e-a8f0-d02c398831d5@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllvem-ot03.ext.ti.com id 58HEipfh1535792
+Content-Type: text/plain; charset="UTF-8"
+Date: Wed, 17 Sep 2025 13:22:58 -0500
+Message-ID: <DCVA9O56NNYP.3LRTIEDU4CVL2@ti.com>
+To: Andrew Davis <afd@ti.com>, Denys Dmytriyenko <denys@konsulko.com>,
+        Ryan
+ Eatmon <reatmon@ti.com>, <meta-ti@lists.yoctoproject.org>
+Subject: Re: [meta-ti][scarthgap][RFC 6/6] mesa-pvr: Use mesa-pvr for all TI
+ SoCs
+From: Randolph Sapp <rs@ti.com>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
+References: <20250909151028.272925-1-afd@ti.com>
+ <20250909151028.272925-6-afd@ti.com> <DCOKFZNU5ZM9.1PL3UQTDARDKL@ti.com>
+ <3bb49aca-f4b6-4205-baec-51f556e5bb0c@ti.com>
+In-Reply-To: <3bb49aca-f4b6-4205-baec-51f556e5bb0c@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 17 Sep 2025 14:44:53 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19017
+ <meta-ti@lists.yoctoproject.org>; Wed, 17 Sep 2025 18:23:04 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19018
 
+On Fri Sep 12, 2025 at 11:38 AM CDT, Andrew Davis wrote:
+> On 9/9/25 3:52 PM, Randolph Sapp wrote:
+>> On Tue Sep 9, 2025 at 10:10 AM CDT, Andrew Davis wrote:
+>>> TI SoCs without GPUs can still use mesa-pvr as it will simply fallback =
+to
+>>> SW rendering just like the normal mesa package. The benefit is using th=
+e
+>>> same version across all supported devices is more consistent and only
+>>> one version of Mesa is needed for all TI SoCs.
+>>>
+>>> Signed-off-by: Andrew Davis <afd@ti.com>
+>>> ---
+>>=20
+>> [snip]
+>>=20
+>> Originally this was done to mitigate damage in the event where there is =
+an
+>> issue with mesa. I'm not entirely sure we want to move everything over t=
+o
+>> pvr-mesa as they still hijack some of the common dri code for their own =
+goofy
+>> stuff.
+>>=20
+>
+> Fair point, would be nice if the PVR support didn't touch the core/common=
+ DRI
+> at all. Having this the common Mesa for all boards would help in identify=
+ing
+> if they broke anything in the common/sw rendering side though, right now =
+we
+> would only find those bugs if one was both using a device with GPU *and* =
+it
+> falls back to SW.
+>
+>> My opinion is we should use vanilla software where we can. Especially
+>> considering we'll need to be able to access vanilla mesa for AM62 later =
+if I get
+>> my way.
+>>=20
+>
+> Could you expand on that? Outside of the eventual switch to the upstream
+> PVR driver, what would we need vanilla mesa for on AM62?
+>
+> Andrew
 
+Ah, not much to expand on really. Upstream driver needs vanilla mesa, and I=
+'d
+like to avoid shipping hacked libraries on devices that don't need em.
 
-On 9/17/2025 2:58 AM, Moteen Shah wrote:
-> Hey Ryan,
->=20
-> On 15/09/25 17:14, Ryan Eatmon wrote:
->>
->>
->> On 9/15/2025 1:12 AM, Moteen Shah wrote:
->>> Hey Ryan,
->>> Thanks for the detailed review.
->>>
->>> On 12/09/25 21:42, Ryan Eatmon wrote:
->>>>
->>>> After some discussion in a call with Denys today, I think we have=20
->>>> some feedback on what is needed to better leverage this patch idea.
->>>>
->>>> 1) We need the way to get this image built as part of the build=20
->>>> process. =C2=A0The best way to accomplish that will likely be to fol=
-low=20
->>>> the firmware approach and include it in the=20
->>>> MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS variable for each platform that=20
->>>> requires it.
->>>
->>> I was planning to do something like:
->>>
->>> do_rootfs[depends] +=3D "ti-initrd-image:do_image_complete"
->>> ROOTFS_POSTPROCESS_COMMAND +=3D "install_initrd_to_boot; "
->>> install_initrd_to_boot() {
->>> =C2=A0=C2=A0=C2=A0=C2=A0 install -m 0644 ${DEPLOY_DIR_IMAGE}/initrd.c=
-pio=20
->>> ${IMAGE_ROOTFS}/boot/initrd.cpio
->>> }
->>>
->>> in core-image-%.bbappend file to make this image as a part of core=20
->>> image build.
->>>
->>> I will look out for how I can achieve the same with=20
->>> MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS.
->>>
->>> Is the above solution optimal though? Since all of the K3 platforms=20
->>> will be shifting to the initrd flow.
->>
->> There are more distributions than just poky and arago.=C2=A0 The solut=
-ion I=20
->> suggested will work for all of them and not require anything specific=20
->> like your solution.
->>
->=20
-> Understood, I will use MACHINE_ESSENTIAL_EXTRA_RRECOMMEND inside k3.inc=
-,=20
-> but how should I include the initrd image in the boot directory of the=20
-> root partition, since initrd itself is an image I cannot use=20
-> ${IMAGE_ROOTFS} inside ti-initrd-image.bb. I did found a way around it=20
-> https://lists.yoctoproject.org/g/yocto/message/47500, not really sure i=
-f=20
-> its the correct way.
-
-Why does the initrd need to be in the rootfs?  The whole point of this=20
-initrd is to get the kernel to boot to get to the point of loading the=20
-rootfs, at which point the initrd has served it's purpose.
-
-
-> Regards,
-> Moteen
->=20
->>
->>>>
->>>> 2) We need a better way to specify the list of MODULES rather than=20
->>>> hardcoding the list in the recipe.=C2=A0 The list of required module=
-s=20
->>>> will likely be different for different platforms.
->>>>
->>>> To that end we recommend creating a new variable that should be=20
->>>> defined in the ti-soc.inc:
->>>>
->>>> =C2=A0 TI_INITRAMFS_KERNEL_MODULES ?=3D ""
->>>>
->>>> Then in each platform specific .inc file we can set that list to the=
-=20
->>>> needed modules based on the ti-bsp need.=C2=A0 Our vendor kernels do=
- not=20
->>>> need it, so it could remain blank, but the mainline/next bsps could=20
->>>> set it since those actually create the kernel module packages.
->>>>
->>>> =C2=A0 TI_INITRAMFS_KERNEL_MODULES:append:bsp-mainline =3D " mod1 mo=
-d2"
->>>> =C2=A0 TI_INITRAMFS_KERNEL_MODULES:append:bsp-next =3D " mod1 mod2"
->>>>
->>>> Then in the ti-initrd-image.bb you would drop the MODULES=3D"" setti=
-ng=20
->>>> and just change to the variable TI_INITRAMFS_KERNEL_MODULES.
->>>>
->>>> This way, if there are other layers that want to create their own=20
->>>> initramfs we have a variable in place for them to use to include the=
-=20
->>>> required modules based on the kernel version that is being built.
->>>
->>> Seems like a better solution for including the modules, I'll fix it=20
->>> in v2.
->>>
->>>>
->>>>
->>>>
->>>> So, I would probably break all of this up into multiple patches. The=
-=20
->>>> first patch would the work in #2 above to establish the needed=20
->>>> variable for all platforms.=C2=A0 The next patches are your patches =
-but=20
->>>> moving to TI_INITRAMFS_KERNEL_MODULES.=C2=A0 And the final patch wou=
-ld be=20
->>>> adding your new ti-initrd-image into=20
->>>> MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS list for all platforms.
->>>
->>> Noted.
->>>
->>> Regards,
->>> Moteen
->>>
->>>>
->>>> Did I miss anything, Denys?
->>>>
->>>>
->>>> On 9/8/2025 5:53 AM, Moteen Shah wrote:
->>>>> Introduce a new minimal initramfs image which will be used
->>>>> for all K3 devices in the boot flow. The image will package
->>>>> boot essential and other modules which will be modprobed by
->>>>> initramfs-udev once the inbuilt drivers gets probed.
->>>>>
->>>>> Signed-off-by: Moteen Shah <m-shah@ti.com>
->>>>> ---
->>>>> =C2=A0 .../initrd/packagegroup-ti-initrd.bb=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 5 ++
->>>>> =C2=A0 .../recipes-ti/initrd/ti-initrd-image.bb=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 | 56=20
->>>>> +++++++++++++++++++
->>>>> =C2=A0 2 files changed, 61 insertions(+)
->>>>> =C2=A0 create mode 100644=20
->>>>> meta-ti-bsp/recipes-ti/initrd/packagegroup-ti-initrd.bb
->>>>> =C2=A0 create mode 100644 meta-ti-bsp/recipes-ti/initrd/ti-initrd-i=
-mage.bb
->>>>>
->>>>> diff --git=20
->>>>> a/meta-ti-bsp/recipes-ti/initrd/packagegroup-ti-initrd.bb=20
->>>>> b/meta-ti-bsp/recipes-ti/initrd/packagegroup-ti-initrd.bb
->>>>> new file mode 100644
->>>>> index 00000000..8847cb2e
->>>>> --- /dev/null
->>>>> +++ b/meta-ti-bsp/recipes-ti/initrd/packagegroup-ti-initrd.bb
->>>>> @@ -0,0 +1,5 @@
->>>>> +SUMMARY =3D "Minimal initrd for boot requirements"
->>>>> +
->>>>> +require recipes-core/packagegroups/packagegroup-core-boot.bb
->>>>> +
->>>>> +RDEPENDS:${PN}:remove =3D "grub-efi kernel"
->>>>> diff --git a/meta-ti-bsp/recipes-ti/initrd/ti-initrd-image.bb=20
->>>>> b/meta-ti-bsp/recipes-ti/initrd/ti-initrd-image.bb
->>>>> new file mode 100644
->>>>> index 00000000..f6b99073
->>>>> --- /dev/null
->>>>> +++ b/meta-ti-bsp/recipes-ti/initrd/ti-initrd-image.bb
->>>>> @@ -0,0 +1,56 @@
->>>>> +SUMMARY =3D "TI SDK minimal initrd image"
->>>>> +
->>>>> +DESCRIPTION =3D "Image meant to probe boot essential modules\
->>>>> + and other modules to reach the userspace, which cannot be\
->>>>> + built inside the upstream linux kernel image.\
->>>>> +"
->>>>> +
->>>>> +LICENSE =3D "MIT"
->>>>> +
->>>>> +inherit core-image
->>>>> +
->>>>> +IMAGE_NAME =3D "initrd"
->>>>> +
->>>>> +IMAGE_NAME_SUFFIX =3D ""
->>>>> +
->>>>> +IMAGE_FEATURES:remove =3D "package-management"
->>>>> +
->>>>> +INITRAMFS_FSTYPES =3D "cpio cpio.xz"
->>>>> +
->>>>> +IMAGE_FSTYPES =3D "${INITRAMFS_FSTYPES}"
->>>>> +
->>>>> +INITRAMFS_SCRIPTS ?=3D "\
->>>>> +=C2=A0=C2=A0=C2=A0 initramfs-framework-base \
->>>>> +=C2=A0=C2=A0=C2=A0 initramfs-module-udev \
->>>>> +=C2=A0=C2=A0=C2=A0 initramfs-module-nfsrootfs \
->>>>> +"
->>>>> +
->>>>> +MODULES =3D "\
->>>>> +=C2=A0=C2=A0=C2=A0 kernel-module-cdns-pltfrm \
->>>>> +=C2=A0=C2=A0=C2=A0 kernel-module-ti-j721e-ufs \
->>>>> +=C2=A0=C2=A0=C2=A0 kernel-module-tps6594-i2c \
->>>>> +"
->>>>> +
->>>>> +UTILS =3D "\
->>>>> +=C2=A0=C2=A0=C2=A0 cifs-utils \
->>>>> +=C2=A0=C2=A0=C2=A0 nfs-utils \
->>>>> +=C2=A0=C2=A0=C2=A0 nfs-utils-client \
->>>>> +"
->>>>> +
->>>>> +PACKAGE_INSTALL =3D "\
->>>>> +=C2=A0=C2=A0=C2=A0 ${INITRAMFS_SCRIPTS} \
->>>>> +=C2=A0=C2=A0=C2=A0 ${UTILS} \
->>>>> +=C2=A0=C2=A0=C2=A0 ${MODULES} \
->>>>> +=C2=A0=C2=A0=C2=A0 packagegroup-ti-initrd \
->>>>> +"
->>>>> +
->>>>> +export IMAGE_BASENAME =3D "ti-initrd-image"
->>>>> +
->>>>> +# To further reduce the size of the rootfs, remove the /boot=20
->>>>> directory from
->>>>> +# the final image this is usually done by adding=20
->>>>> RDEPENDS_kernel-base =3D ""
->>>>> +# in the configuration file. In our case we can't use this method.=
-=20
->>>>> Instead we
->>>>> +# just wipe out the content of "/boot" before creating the image.
->>>>> +ROOTFS_POSTPROCESS_COMMAND +=3D "empty_boot_dir; "
->>>>> +empty_boot_dir () {
->>>>> +=C2=A0=C2=A0=C2=A0 rm -rf ${IMAGE_ROOTFS}/boot/*
->>>>> +}
->>>>
->>
-
---=20
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+- Randolph
 
