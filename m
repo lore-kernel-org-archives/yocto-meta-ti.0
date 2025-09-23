@@ -2,119 +2,184 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AAFD3CA100F
-	for <webhook@archiver.kernel.org>; Mon, 22 Sep 2025 14:49:40 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web10.53965.1758552573114923780
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 769F8CAC5AC
+	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 21:15:03 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web10.206.1758662101530562816
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 22 Sep 2025 07:49:33 -0700
+ Tue, 23 Sep 2025 14:15:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=vGyhZ40G;
- spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: reatmon@ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58MEnWfN804886;
-	Mon, 22 Sep 2025 09:49:32 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=XPzkm6F5;
+ spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: reatmon@ti.com)
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58NLExfE1533899;
+	Tue, 23 Sep 2025 16:14:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1758552572;
-	bh=fBpKx5q1rcLCP7JvluTeLEDbx6rypg4XqbVK0RT6EPM=;
-	h=Date:Subject:CC:References:From:In-Reply-To;
-	b=vGyhZ40GkQYckf+Dcln07dRsVxyzKL7hOuFGgcGwhQ02LrOnMQ8X6gzQb6j5kINqH
-	 847B96CBLl95tfmDEpsNHF9E27JMWfUcOeFBUEXUF8f5YTOt8/4NMHhxNzX24chjRG
-	 pe73okUS5wA/ljVkBXveu+Hw4ln4hvhWI8bOkNuw=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58MEnWBJ958370
+	s=ti-com-17Q1; t=1758662099;
+	bh=+dhDzLlceZ4AjVQtH8h15bKW352h7Hmevq9KaV4DmOA=;
+	h=Date:From:Subject:To:CC:References:In-Reply-To;
+	b=XPzkm6F5KBOKugIuO1ZhdealM1yTL7mDRfDC5Eq1oZVJQG/2Lge1BfJXJ+DrK9STc
+	 8wLI6KqHBSJK7iX1ZOjrVX51sogoBn5SZQ/qnqO3bNG0vcxrY9Q8/DbjtJxC+99J8o
+	 xLvmJX3TE/yIPCuhuR55gQcQ6SgmJy/+80W5zNuQ=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+	by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58NLExkH1359521
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Mon, 22 Sep 2025 09:49:32 -0500
-Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 22
- Sep 2025 09:49:31 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+	Tue, 23 Sep 2025 16:14:59 -0500
+Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 23
+ Sep 2025 16:14:59 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 22 Sep 2025 09:49:31 -0500
-Received: from [128.247.81.40] (dtmz023nlv.dhcp.ti.com [128.247.81.40])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58MEnVE72688356;
-	Mon, 22 Sep 2025 09:49:31 -0500
-Message-ID: <7d47894a-43ca-4209-9e20-a7d918653a99@ti.com>
-Date: Mon, 22 Sep 2025 09:49:31 -0500
+ Transport; Tue, 23 Sep 2025 16:14:59 -0500
+Received: from [10.249.37.202] ([10.249.37.202])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58NLExpP909977;
+	Tue, 23 Sep 2025 16:14:59 -0500
+Message-ID: <1058b2e6-7196-4cb2-b851-3f2b6e015b99@ti.com>
+Date: Tue, 23 Sep 2025 16:14:59 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][master][PATCH] u-boot: Moved to named git repo
-CC: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-References: <20250922144016.4131-1-reatmon@ti.com>
- <20250922144514.727160-1-prc@list.ti.com>
-Content-Language: en-US
 From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20250922144514.727160-1-prc@list.ti.com>
+Subject: Re: [master][PATCH 2/4 v2] recipes-ti: initrd: Make minimal initrd
+ image
+To: Moteen Shah <m-shah@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-limaye@ti.com>,
+        <n-francis@ti.com>, <praneeth@ti.com>, <jm@ti.com>, <b-padhi@ti.com>,
+        <bb@ti.com>, <denys@konsulko.com>, <rs@ti.com>
+References: <20250919093831.20609-1-m-shah@ti.com>
+ <20250919093831.20609-3-m-shah@ti.com>
+Content-Language: en-US
+In-Reply-To: <20250919093831.20609-3-m-shah@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 22 Sep 2025 14:49:40 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19055
+ <meta-ti@lists.yoctoproject.org>; Tue, 23 Sep 2025 21:15:03 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19056
 
 
-On 9/22/2025 9:45 AM, PRC Automation wrote:
-> meta-ti / na / 20250922144016.4131-1-reatmon
-> 
-> PRC Results: FAIL
-> 
-> =========================================================
->    check-yocto-patches: PASS
-> =========================================================
-> Patches
-> ----------------------------------------
-> WARN - [meta-ti][master][PATCH] u-boot: Moved to named git repo
->      WARN: Commit message does not include file/recipe name: u-boot: Moved to named git repo. (COMMIT-MESSAGE-2)
->          patch
->      
->      WARN: Commit message should not include directory path to recipe: u-boot: Moved to named git repo.
->                u-boot: (COMMIT-MESSAGE-3)
->          patch
-> 
-> 
-> 
-> =========================================================
->    apply-yocto-patch: FAIL
-> =========================================================
-> master
-> =====================
-> Summary:
-> - Patch Series: [meta-ti][master][PATCH] u-boot: Moved to named git repo
-> - Submitter: From: Ryan Eatmon <reatmon@ti.com>
-> - Date: Date: Mon, 22 Sep 2025 09:40:16 -0500
-> - Num Patches: 1
-> - Mailing List (public inbox) Commit SHA: 5b9d50c689045d1561478d31b261927aa8e36132
-> 
-> Applied to:
-> - Repository: lcpd-prc-meta-ti
-> - Base Branch: master
-> - Commit Author: Ryan Eatmon <reatmon@ti.com>
-> - Commit Subject: mesa-pvr: add PROVIDES for Vulkan and OpenCL ICDs
-> - Commit SHA: 1d5ec7bb9e0da9c5715839192d73fedcbd706bf4
-> 
-> Patches
-> ----------------------------------------
-> FAIL - [meta-ti][master][PATCH] u-boot: Moved to named git repo
->      error: patch failed: meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc:5
->      error: meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc: patch does not apply
->      Applying: u-boot: Moved to named git repo
->      Patch failed at 0001 u-boot: Moved to named git repo
-> 
 
-This (and the scarthgap version) requires the previous patch.  I should 
-have sent this as a series.  My bad.
+On 9/19/2025 4:38 AM, Moteen Shah wrote:
+> Introduce a new minimal initramfs image which will be used
+> for all K3 devices in the boot flow. The image will package
+> boot essential and other modules which will be modprobed by
+> initramfs-udev once the inbuilt drivers gets probed.
+> 
+> Signed-off-by: Moteen Shah <m-shah@ti.com>
+> ---
+>   .../initrd/packagegroup-ti-initrd.bb          |  5 ++
+>   .../recipes-ti/initrd/ti-initrd-image.bb      | 50 +++++++++++++++++++
+>   2 files changed, 55 insertions(+)
+>   create mode 100644 meta-ti-bsp/recipes-ti/initrd/packagegroup-ti-initrd.bb
+>   create mode 100644 meta-ti-bsp/recipes-ti/initrd/ti-initrd-image.bb
+> 
+> diff --git a/meta-ti-bsp/recipes-ti/initrd/packagegroup-ti-initrd.bb b/meta-ti-bsp/recipes-ti/initrd/packagegroup-ti-initrd.bb
+> new file mode 100644
+> index 00000000..8847cb2e
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-ti/initrd/packagegroup-ti-initrd.bb
 
+We are using initrd and initramfs in different places.  Yocto seems to 
+use initramfs everywhere.  Let's unify to initramfs instead of initrd.
+
+Change the recipe name to packagegroup-ti-core-initramfs.bb
+
+> @@ -0,0 +1,5 @@
+> +SUMMARY = "Minimal initrd for boot requirements"
+> +
+> +require recipes-core/packagegroups/packagegroup-core-boot.bb
+> +
+> +RDEPENDS:${PN}:remove = "grub-efi kernel"
+> diff --git a/meta-ti-bsp/recipes-ti/initrd/ti-initrd-image.bb b/meta-ti-bsp/recipes-ti/initrd/ti-initrd-image.bb
+> new file mode 100644
+> index 00000000..f47307e5
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-ti/initrd/ti-initrd-image.bb
+
+Change the recipe name to ti-core-initramfs.bb
+
+
+> @@ -0,0 +1,50 @@
+> +SUMMARY = "TI SDK minimal initrd image"
+
+s/initrd/initramfs/
+
+> +
+> +DESCRIPTION = "Image meant to probe boot essential modules\
+> + and other modules to reach the userspace, which cannot be\
+> + built inside the upstream linux kernel image.\
+> +"
+> +
+> +LICENSE = "MIT"
+> +
+> +inherit core-image
+> +
+> +IMAGE_NAME = "initrd"
+
+Change the image name to ti-core-initramfs.  There is no good reason to 
+not use more characters and be more descriptive.
+
+> +IMAGE_NAME_SUFFIX = ""
+> +
+> +IMAGE_FEATURES:remove = "package-management"
+> +
+> +INITRAMFS_FSTYPES = "cpio cpio.xz"
+> +
+> +IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
+> +
+> +INITRAMFS_SCRIPTS ?= "\
+> +    initramfs-framework-base \
+> +    initramfs-module-udev \
+> +    initramfs-module-nfsrootfs \
+> +"
+> +
+> +UTILS = "\
+> +    cifs-utils \
+> +    nfs-utils \
+> +    nfs-utils-client \
+> +"
+
+I think the two variables above all need to move into the packagegroup 
+and not directly in the image recipe.  Otherwise what is the point of 
+the packagegroup at all?
+
+Use RDEPENDS to make the packagegroup depend on the variables, and then 
+remove them from the list below.  And move the 
+TI_INITRAMFS_KERNEL_MODULES entry as well.
+
+That way if someone else wants to create another initramfs to do 
+something like secure boot (or whatever) they have a single point to 
+include and pull in all of the files required for boot.
+
+> +PACKAGE_INSTALL = "\
+> +    ${INITRAMFS_SCRIPTS} \
+> +    ${UTILS} \
+> +    ${TI_INITRAMFS_KERNEL_MODULES} \
+> +    packagegroup-ti-initrd \
+
+s/packagegroup-ti-initrd/packagegroup-ti-core-initramfs/
+
+> +"
+> +
+> +export IMAGE_BASENAME = "ti-initrd-image"
+
+s/ti-initrd-image/ti-core-initramfs/
+
+> +
+> +# To further reduce the size of the rootfs, remove the /boot directory from
+> +# the final image this is usually done by adding RDEPENDS_kernel-base = ""
+> +# in the configuration file. In our case we can't use this method. Instead we
+> +# just wipe out the content of "/boot" before creating the image.
+> +ROOTFS_POSTPROCESS_COMMAND += "empty_boot_dir; "
+> +empty_boot_dir () {
+> +	rm -rf ${IMAGE_ROOTFS}/boot/*
+> +}
 
 -- 
 Ryan Eatmon                reatmon@ti.com
 -----------------------------------------
 Texas Instruments, Inc.  -  LCPD  -  MGTS
-
 
