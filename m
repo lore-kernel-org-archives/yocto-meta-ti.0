@@ -2,50 +2,48 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1720DCAC5B8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18090CCA471
 	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 13:52:18 +0000 (UTC)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web10.9191.1759413134805439475
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web10.9190.1759413134633852586
  for <meta-ti@lists.yoctoproject.org>;
  Thu, 02 Oct 2025 06:52:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=tCzE2RW9;
- spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: afd@ti.com)
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 592DqEcD3348127;
-	Thu, 2 Oct 2025 08:52:14 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=H1JJVhWP;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: afd@ti.com)
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 592DqDeN2892162;
+	Thu, 2 Oct 2025 08:52:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1759413134;
-	bh=nCCYZwPLzFdpGoLuJQRghqvcNhww/bBA7q/8iVHNW/A=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=tCzE2RW9p4wSMK4ltilOIK05MbLb8LiXt5xljMK+sNARvpqq5DT7YEJPWJV6866XN
-	 xHGcyHZ/sVPW4yJyX8vzYVU8VFyKqlOdOMhz5/J8qm2l2B1VU9XjDmU/0djukHrKMd
-	 1m1zlLdksPONNZE39CNZNYdipcaycP7/E5znNccM=
-Received: from DFLE214.ent.ti.com (dfle214.ent.ti.com [10.64.6.72])
-	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 592DqE5T1272280
+	s=ti-com-17Q1; t=1759413133;
+	bh=QLyWwcgAmNmD0vPuNSQvjg6ovgwdUJuKpAa4Xt6juOo=;
+	h=From:To:CC:Subject:Date;
+	b=H1JJVhWPoD6lApT2LMaXezKDSmJ2BK9IIR3BEOZAyCHe//lvtnhcecxVQb+hDJN32
+	 W0bR7nGdl21b1XgMuopgMkwANQ97ZLyDVYtBBlsJRjdC1sq1D0R0NasVb2tHK+lxrm
+	 /v0RSgUmuC9zMrw/C6s4P+pLGnD1q9flHMQ9YZww=
+Received: from DLEE210.ent.ti.com (dlee210.ent.ti.com [157.170.170.112])
+	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 592DqDI4470071
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 2 Oct 2025 08:52:14 -0500
-Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+	Thu, 2 Oct 2025 08:52:13 -0500
+Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 2 Oct
  2025 08:52:13 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Thu, 2 Oct 2025 08:52:13 -0500
 Received: from lelvem-mr06.itg.ti.com ([10.249.42.149])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 592DqDGu1918045;
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 592DqDGt1918045;
 	Thu, 2 Oct 2025 08:52:13 -0500
 From: Andrew Davis <afd@ti.com>
 To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
         <meta-ti@lists.yoctoproject.org>
 CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][scarthgap][PATCH 2/2] meta-ti-extras: libaet: Remove this recipe
-Date: Thu, 2 Oct 2025 08:52:12 -0500
-Message-ID: <20251002135212.1820365-2-afd@ti.com>
+Subject: [meta-ti][scarthgap][PATCH 1/2] meta-ti-bsp: vpe-tests: Remove this recipe
+Date: Thu, 2 Oct 2025 08:52:11 -0500
+Message-ID: <20251002135212.1820365-1-afd@ti.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20251002135212.1820365-1-afd@ti.com>
-References: <20251002135212.1820365-1-afd@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -54,61 +52,55 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Thu, 02 Oct 2025 13:52:18 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19093
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19092
 
-This was only ever used as part of the DSP firmware for OpenCL dispatch.
-That is all gone now, so remove this leftover dependency.
+vpe-tests is obsolete, it was replaced with "testvpe" as part of
+glsdk-example-apps about 10 years ago in meta-arago, so long ago even
+its replacement has been obsoleted and removed. Yet, this unbuildable
+recipe still lives on here in meta-ti. Send it out to sea.
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- .../recipes-ti/ctoolslib/libaet_git.bb        | 38 -------------------
- 1 file changed, 38 deletions(-)
- delete mode 100644 meta-ti-extras/recipes-ti/ctoolslib/libaet_git.bb
+ .../recipes-bsp/vpe-tests/vpe-tests_git.bb    | 30 -------------------
+ 1 file changed, 30 deletions(-)
+ delete mode 100644 meta-ti-bsp/recipes-bsp/vpe-tests/vpe-tests_git.bb
 
-diff --git a/meta-ti-extras/recipes-ti/ctoolslib/libaet_git.bb b/meta-ti-extras/recipes-ti/ctoolslib/libaet_git.bb
+diff --git a/meta-ti-bsp/recipes-bsp/vpe-tests/vpe-tests_git.bb b/meta-ti-bsp/recipes-bsp/vpe-tests/vpe-tests_git.bb
 deleted file mode 100644
-index f3b03bd6..00000000
---- a/meta-ti-extras/recipes-ti/ctoolslib/libaet_git.bb
+index 274cc735..00000000
+--- a/meta-ti-bsp/recipes-bsp/vpe-tests/vpe-tests_git.bb
 +++ /dev/null
-@@ -1,38 +0,0 @@
--SUMMARY = "TI Emulation CTools AET library"
--DESCRIPTION = "The AETLIB library provides programmatic access to the Advanced Event Triggering capability on C6x processor cores"
+@@ -1,30 +0,0 @@
+-SUMMARY = "VPE test program"
 -
 -LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
 -
--PV = "4.19.0.0"
+-DEPENDS = "virtual/kernel vpdma-fw"
 -
--LIC_FILES_CHKSUM = "file://../ctoolslib_manifest.html;md5=b7dd369a2e07ef9a71795ee5a9bd01bd"
--
--SRC_URI = "git://git.ti.com/git/sdo-emu/ctoolslib.git;protocol=https;branch=opencl_aetlib_build"
--SRCREV = "de7954abab0f0caa8a2c7b53095c30226d901a31"
--
--DEPENDS = "ti-cgt6x-native"
--PR = "r0"
--
--S = "${WORKDIR}/git/aet"
--
--DEVICE = ""
--DEVICE:dra7xx = "DRA7xx"
--
--EXTRA_OEMAKE = "C6X_C_DIR=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x/include"
--
--do_install() {
--    install -d ${D}${datadir}/ti/ctoolslib/aet
--    install -d ${D}${datadir}/ti/ctoolslib/aet/include
--    install -d ${D}${datadir}/ti/ctoolslib/aet/lib
--    cp -rP --preserve=mode,links,timestamps --no-preserve=ownership ${S}/include/* ${D}${datadir}/ti/ctoolslib/aet/include/
--    install -m 0644 ${S}/build/c66/libaet.ae66 ${D}${datadir}/ti/ctoolslib/aet/lib/
--}
+-PR = "r3"
 -
 -COMPATIBLE_MACHINE = "dra7xx"
+-
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
--FILES:${PN}-dev += "\
--    ${datadir}/ti/ctoolslib/aet \
--"
+-SRCREV = "e3d8db1aa935775f9d196ad7428e0cd9864a36ca"
+-BRANCH ?= "master"
 -
--ALLOW_EMPTY:${PN} = "1"
+-SRC_URI = "git://git.ti.com/git/vpe_tests/vpe_tests.git;protocol=https;branch=${BRANCH}"
+-
+-S = "${WORKDIR}/git"
+-
+-FLOATABI = "${@bb.utils.contains("TUNE_FEATURES", "vfp", bb.utils.contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
+-
+-# The test application needs additional include headers from the kernel
+-EXTRA_OEMAKE = 'CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${FLOATABI}" KDIR="${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include"'
+-
+-do_install() {
+-    oe_runmake DESTDIR="${D}" install
+-    rm -rf ${D}${nonarch_base_libdir}/firmware/vpdma-*.bin
+-    rmdir -p ${D}${nonarch_base_libdir}/firmware || true
+-}
 -- 
 2.39.2
 
