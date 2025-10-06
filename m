@@ -1,87 +1,112 @@
-Return-Path: <bb@ti.com>
+Return-Path: <m-shah@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B6C2CCA471
-	for <webhook@archiver.kernel.org>; Fri,  3 Oct 2025 14:05:41 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web11.8531.1759500333875188228
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C2C2CCA471
+	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 11:50:18 +0000 (UTC)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ by mx.groups.io with SMTP id smtpd.web11.32013.1759751416762642359
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 03 Oct 2025 07:05:34 -0700
+ Mon, 06 Oct 2025 04:50:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=IC2auUjl;
- spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: bb@ti.com)
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 593E5U4k3103447;
-	Fri, 3 Oct 2025 09:05:30 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=GHUDvWAl;
+ spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: m-shah@ti.com)
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 596BoFhI4051219;
+	Mon, 6 Oct 2025 06:50:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1759500330;
-	bh=yswxEIruTFWAbxAo0gOi/qX5l2Srdyw/c+kQgrxdFD8=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To;
-	b=IC2auUjl479oNKzUjyoKzXHOap7UAZe2fjD34B+KvdEdjqt6ZdAVtLM4S6mscaT5w
-	 6UWzz8h/uAycywAlsRnduvPtzwCiH3AkKujTbumOCr5mmvrQWn3WBpHFbHHCsx1VTd
-	 Qm1qKWvtvvy+IywP81K6hWQjPZHbOCZAhvXjkntI=
-Received: from DLEE209.ent.ti.com (dlee209.ent.ti.com [157.170.170.98])
-	by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 593E5UTb191903
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 3 Oct 2025 09:05:30 -0500
-Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 3 Oct
- 2025 09:05:30 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1759751415;
+	bh=Lyu8htIr+e7I3qSMc6vguoCG7aAyiBBrrq9Gk3HXh8Q=;
+	h=From:To:CC:Subject:Date;
+	b=GHUDvWAlSR2chqhF1wk4nqdipvkLWwtAGNnWCK+C6DLzYn3dj+cL+72rYoxH1GHRT
+	 Cgr7ueW72Xcz3nbFdNRcLZoi7TFLfD7tfBM9MMSGvTpDWB3cwaFlPa1ESuaRYtL8bG
+	 D6M6czDI3Cbm/+BJ92b2IVt/wXnT0IdjZENAX/so=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 596BoF6U2819203
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+	Mon, 6 Oct 2025 06:50:15 -0500
+Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 6
+ Oct 2025 06:50:15 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 3 Oct 2025 09:05:30 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 593E5U7j3735896;
-	Fri, 3 Oct 2025 09:05:30 -0500
-Date: Fri, 3 Oct 2025 09:05:30 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>
-CC: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
-        Meta-TI <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti] [PATCH RFC] optee: use software PRNG for real-time
- kernel builds
-Message-ID: <20251003140530.43ervhgyxuer4pfj@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20251002-rtl-optee-hack-v1-1-efe08f733059@ti.com>
- <20251002191853.GE3125@denix.org>
+ Transport; Mon, 6 Oct 2025 06:50:15 -0500
+Received: from moteen-ubuntu-desk.dhcp.ti.com (moteen-ubuntu-desk.dhcp.ti.com [10.24.72.162])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 596BoAwN3371433;
+	Mon, 6 Oct 2025 06:50:11 -0500
+From: Moteen Shah <m-shah@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <vigneshr@ti.com>, <u-kumar1@ti.com>, <reatmon@ti.com>, <a-limaye@ti.com>,
+        <n-francis@ti.com>, <m-shah@ti.com>, <praneeth@ti.com>, <jm@ti.com>,
+        <b-padhi@ti.com>, <bb@ti.com>, <denys@konsulko.com>, <rs@ti.com>
+Subject: [master][PATCH v4 0/4] Add recipes to build initramfs image
+Date: Mon, 6 Oct 2025 17:20:06 +0530
+Message-ID: <20251006115010.1530509-1-m-shah@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20251002191853.GE3125@denix.org>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 03 Oct 2025 14:05:41 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19104
+ <meta-ti@lists.yoctoproject.org>; Mon, 06 Oct 2025 11:50:18 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19105
 
-On October  2, 2025 thus sayeth Denys Dmytriyenko:
-> On Thu, Oct 02, 2025 at 07:28:27AM -0500, Bryan Brattlof via lists.yoctoproject.org wrote:
-> > The 4.7.0 release of OP-TEE is causing unacceptable latency issues with
-> > the real-time kernel. Migrate to software PRNG until they can be
-> > resolved in a later release.
-> > 
-> > Signed-off-by: Bryan Brattlof <bb@ti.com>
-> > ---
-> > Debugging a +30us latency regression has lead us to the hardware
-> > accelerated RNG drivers in OP-TEE. Falling back to software PRNG
-> > restores the context switch latency back to acceptable levels.
-> > 
-> > Because this only affects real-time kernels this is more an RFC
-> > until we can fix the firmware or find an alternative for the
-> > builds where latency is prioritized over random number generation
-> 
-> I don't see the change being specific to real-time kernel, which the commit 
-> message above imlies several times - is it intended?
+The series aims to add a new recipe which will package boot
+essential and some other modules in image which can later be
+used in the boot process of all K3 platforms. This will result
+in the addition of ~20MB initramfs image in the bootflow.
 
-I need to talk to the security people if disabling the true RNG drivers 
-is acceptable. But you're right, if it is deemed acceptable, I can add a 
-switch to append the pseudo RNG flag to the real-time kernel only. I'm 
-just not sure I fully understand the consequences moving to a PRNG 
-driver has for the security focused team
+The motivation behind the work is to probe modules(in boot time)
+which could not be built in the upstream Linux kernel
+image, as using it as inbuilt drivers will increase the
+kernel image size, which is undesirable by the upstream folks.
 
-~Bryan
+Hence, build those drivers as modules and package it inside
+initramfs and later get it probed through initramfs-udev(device manager).
+
+The series will introduce an additional 20MB initramfs image in the
+bootflow of all K3 platforms regardless of whether any platform chooses
+to add modules to it or not, so as to keep the bootflow for all devices
+uniform. Hence, the build/packaging of initrd image is being triggered
+in k3.inc.
+
+Boot tests for am64xx:
+[0] https://gist.github.com/Jamm02/0abbba19ff27272a9945dd7f3035b603
+
+Changes since V3:
+- Move initramfs build from k3.inc to ti-soc.inc so that legacy
+platforms like am57 also includes the initramfs image.
+- Change BUILD_CORE_INITRD_IMAGE -> BUILD_CORE_INITRAMFS_IMAGE
+
+Link to V2: https://lists.yoctoproject.org/g/meta-ti/message/19043
+
+Link to V1: https://lists.yoctoproject.org/g/meta-ti/topic/115128108
+
+
+Moteen Shah (4):
+  meta-ti-bsp: conf: machine: include: Add common module variable for TI
+    Initramfs image
+  recipes-ti: initramfs: Make minimal initramfs image
+  meta-ti-bsp: wic: Add initramfs path to to grub config
+  meta-ti-bsp: conf: machine: include: Build initramfs for all TI
+    SoC's
+
+ meta-ti-bsp/conf/machine/include/am62axx.inc  |  3 ++
+ meta-ti-bsp/conf/machine/include/j721e.inc    |  3 ++
+ meta-ti-bsp/conf/machine/include/j784s4.inc   |  3 ++
+ meta-ti-bsp/conf/machine/include/ti-soc.inc   | 10 ++++++
+ .../packagegroup-ti-core-initramfs.bb         | 15 +++++++++
+ .../recipes-ti/initramfs/ti-core-initramfs.bb | 33 +++++++++++++++++++
+ meta-ti-bsp/wic/sdimage-2part-efi.wks.in      |  2 +-
+ 7 files changed, 68 insertions(+), 1 deletion(-)
+ create mode 100644 meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
+ create mode 100644 meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb
+
+-- 
+2.34.1
+
 
