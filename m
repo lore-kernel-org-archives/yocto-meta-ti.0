@@ -1,54 +1,50 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <m-shah@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 559A5CCD18E
-	for <webhook@archiver.kernel.org>; Wed, 15 Oct 2025 05:30:20 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web11.8816.1760506218027897494
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC126CCD193
+	for <webhook@archiver.kernel.org>; Wed, 15 Oct 2025 12:00:42 +0000 (UTC)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ by mx.groups.io with SMTP id smtpd.web11.14454.1760529640104919591
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 14 Oct 2025 22:30:18 -0700
+ Wed, 15 Oct 2025 05:00:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=fUn8M2aZ;
- spf=pass (domain: list.ti.com, ip: 198.47.23.234, mailfrom: prc@list.ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59F5UHN21324277
-	for <meta-ti@lists.yoctoproject.org>; Wed, 15 Oct 2025 00:30:17 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=k+eDWeJc;
+ spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: m-shah@ti.com)
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59FC0b6i1310765;
+	Wed, 15 Oct 2025 07:00:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1760506217; i=@ti.com;
-	bh=cYBOJJhao4bCCmS5fcNs7606kvrKsxH6+WS+QrUl1iI=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=fUn8M2aZ27t2fYQfilE/Sg47U/KVY5sk+cAJRfPU3MXwc644f09GIoQMj1xB5mZJG
-	 qzWZDDIfGb9lX2NZqxefaXVjICzpixliwB1Qhyz40jdX9ZAhvZS6WF3k8WnldzEjxd
-	 QxbwJg33nVNkBH2hUnwpLoWf0O5NeD6a5kNrwaRE=
-Received: from DLEE213.ent.ti.com (dlee213.ent.ti.com [157.170.170.116])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59F5UHBE989508
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Wed, 15 Oct 2025 00:30:17 -0500
-Received: from DLEE206.ent.ti.com (157.170.170.90) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+	s=ti-com-17Q1; t=1760529637;
+	bh=GmknYVeGWJQ9MCMgkHfLWCF0aZ+xycShxk60Cc08FBY=;
+	h=From:To:CC:Subject:Date;
+	b=k+eDWeJcr4Xm/RtBcSh9YMVFYjcWP6uVL6enVIrSTT9Ay6fTXdIjXyuqjPA6dsGQ6
+	 aOsBnoAwPOOY2HkvikM8fx+j171x6L7CuvSdg8zaHO8UtyT8YqOQjcHFgF+aYCwrAf
+	 IiwOEXlxv8ey/5t8f6cx4BhjodIcK26c/QAJL3oo=
+Received: from DFLE210.ent.ti.com (dfle210.ent.ti.com [10.64.6.68])
+	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59FC0b4X385474
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 15 Oct 2025 07:00:37 -0500
+Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 15 Oct
- 2025 00:30:16 -0500
-Received: from fllvem-mr08.itg.ti.com (10.64.41.88) by DLEE206.ent.ti.com
- (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 07:00:36 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 15 Oct 2025 00:30:16 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by fllvem-mr08.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59F5UGYE723654;
-	Wed, 15 Oct 2025 00:30:16 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id C7CF313F538; Wed, 15 Oct 2025 00:30:16 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: Paresh Bhagat <p-bhagat@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>, <reatmon@ti.com>,
-        <v-singh1@ti.com>, <j-sahu@ti.com>, <c-shilwant@ti.com>,
-        <khasim@ti.com>, <jm@ti.com>
-Subject: Re: [master/scarthgap][PATCH] conf: machine: am62dxx-evm: Add overlay for EQEP
-Date: Wed, 15 Oct 2025 00:30:16 -0500
-Message-ID: <20251015053016.2377872-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20251015052836.1579479-1-p-bhagat@ti.com>
-References: <20251015052836.1579479-1-p-bhagat@ti.com>
+ Transport; Wed, 15 Oct 2025 07:00:36 -0500
+Received: from moteen-ubuntu-desk.dhcp.ti.com (moteen-ubuntu-desk.dhcp.ti.com [10.24.72.162])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59FC0W7J1859032;
+	Wed, 15 Oct 2025 07:00:33 -0500
+From: Moteen Shah <m-shah@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <vigneshr@ti.com>, <u-kumar1@ti.com>, <reatmon@ti.com>, <a-limaye@ti.com>,
+        <n-francis@ti.com>, <m-shah@ti.com>, <praneeth@ti.com>, <jm@ti.com>,
+        <b-padhi@ti.com>, <bb@ti.com>, <denys@konsulko.com>, <rs@ti.com>
+Subject: [master][PATCH v5 0/4] Add recipes to build initramfs image
+Date: Wed, 15 Oct 2025 17:30:28 +0530
+Message-ID: <20251015120032.288741-1-m-shah@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -56,100 +52,60 @@ X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 15 Oct 2025 05:30:20 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19125
+ <meta-ti@lists.yoctoproject.org>; Wed, 15 Oct 2025 12:00:42 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19126
 
-meta-ti / na / 20251015052836.1579479-1-p-bhagat
+The series aims to add a new recipe which will package boot
+essential and some other modules in image which can later be
+used in the boot process of all K3 platforms. This will result
+in the addition of ~20MB initramfs image in the bootflow.
 
-PRC Results: FAIL
+The motivation behind the work is to probe modules(in boot time)
+which could not be built in the upstream Linux kernel
+image, as using it as inbuilt drivers will increase the
+kernel image size, which is undesirable by the upstream folks.
 
-=========================================================
-  check-yocto-patches: PASS
-=========================================================
-Patches
-----------------------------------------
-WARN - [master/scarthgap][PATCH] conf: machine: am62dxx-evm: Add overlay for EQEP
-    WARN: Commit message should not include directory path to recipe: conf: machine: am62dxx-evm: Add overlay for EQEP.
-              conf:
-              machine: (COMMIT-MESSAGE-3)
-        patch
+Hence, build those drivers as modules and package it inside
+initramfs and later get it probed through initramfs-udev(device manager).
 
+The series will introduce an additional 20MB initramfs image in the
+bootflow of all K3 platforms regardless of whether any platform chooses
+to add modules to it or not, so as to keep the bootflow for all devices
+uniform. Hence, the build/packaging of initrd image is being triggered
+in k3.inc.
 
+Bootlogs for J784s4: 
+https://gist.github.com/Jamm02/8fc4c60b113a420ac0a0dee375228faf
 
-=========================================================
-  apply-yocto-patch: PASS
-=========================================================
-master
-=====================
-Summary:
-- Patch Series: [master/scarthgap][PATCH] conf: machine: am62dxx-evm: Add overlay for EQEP
-- Submitter: From: Paresh Bhagat <p-bhagat@ti.com>
-- Date: Date: Wed, 15 Oct 2025 10:58:36 +0530
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 994160d65e91e4b98732e532a1137ea65ccd5fb3
+Changes since V4:
+- Save the initramfs file name in a variable instead of hardcoding it.
+- Optionally include initrd inside .wks using a varible to avoid build
+failures for non mainline builds.
 
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-wip
-- Commit Author: Ryan Eatmon <reatmon@ti.com>
-- Commit Subject: TEMP: Cleanup initramfs
-- Commit SHA: 1c17231ad27cb522b44b5614f39caf9d0aa99330
+Link to V4: https://lists.yoctoproject.org/g/meta-ti/message/19110
+Link to V3: https://lists.yoctoproject.org/g/meta-ti/message/19083
+Link to V2: https://lists.yoctoproject.org/g/meta-ti/message/19043
+Link to V1: https://lists.yoctoproject.org/g/meta-ti/topic/115128108
 
-Patches
-----------------------------------------
-All patches applied
+Moteen Shah (4):
+  meta-ti-bsp: conf: machine: include: Add common module variable for TI
+    Initramfs image
+  recipes-ti: initramfs: Make minimal initramfs image
+  meta-ti-bsp: wic: Add initramfs path to to grub config
+  meta-ti-bsp: conf: machine: include: Build initramfs for all TI SoCs.
 
-scarthgap
-=====================
-Summary:
-- Patch Series: [master/scarthgap][PATCH] conf: machine: am62dxx-evm: Add overlay for EQEP
-- Submitter: From: Paresh Bhagat <p-bhagat@ti.com>
-- Date: Date: Wed, 15 Oct 2025 10:58:36 +0530
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 994160d65e91e4b98732e532a1137ea65ccd5fb3
+ meta-ti-bsp/conf/machine/include/am62axx.inc  |  3 ++
+ meta-ti-bsp/conf/machine/include/j721e.inc    |  3 ++
+ meta-ti-bsp/conf/machine/include/j784s4.inc   |  3 ++
+ meta-ti-bsp/conf/machine/include/ti-soc.inc   | 18 ++++++++++
+ .../packagegroup-ti-core-initramfs.bb         | 15 +++++++++
+ .../recipes-ti/initramfs/ti-core-initramfs.bb | 33 +++++++++++++++++++
+ meta-ti-bsp/wic/sdimage-2part-efi.wks.in      |  2 +-
+ 7 files changed, 76 insertions(+), 1 deletion(-)
+ create mode 100644 meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
+ create mode 100644 meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb
 
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: scarthgap-wip
-- Commit Author: Andrew Davis <afd@ti.com>
-- Commit Subject: meta-ti-extras: dsptop: Explicitly allow build for AM57x
-- Commit SHA: c8c3142da3517745c28232b4c910988235c721b0
-
-Patches
-----------------------------------------
-All patches applied
-
-
-
-=========================================================
-  check-yocto-repo: FAIL
-=========================================================
-master
-=====================
-FAIL
-    WARN: You might need a " " as the first character for the :append. (APPEND-2)
-        meta-ti-bsp/conf/machine/include/am62axx.inc:15
-            TI_INITRAMFS_KERNEL_MODULES:append:bsp-mainline  = "kernel-module-tps6594-i2c"
-    
-    WARN: You might need a " " as the first character for the :append. (APPEND-2)
-        meta-ti-bsp/conf/machine/include/am62axx.inc:16
-            TI_INITRAMFS_KERNEL_MODULES:append:bsp-next  = "kernel-module-tps6594-i2c"
-    
-    
-    Code Summary
-    ============
-    
-    APPEND-2
-    -------------------------------------------
-      :append simply takes the specified string and concatenates it
-      directly to the variable.  Most of the time we want there to spaces
-      between entries.  This check flags us to check if the missing space
-      is actually needed.
-
-scarthgap
-=====================
-PASS
-
-
+-- 
+2.34.1
 
 
