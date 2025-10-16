@@ -1,88 +1,88 @@
-Return-Path: <denis@denix.org>
+Return-Path: <p-bhagat@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2E4BCCD194
-	for <webhook@archiver.kernel.org>; Wed, 15 Oct 2025 16:50:34 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.23012.1760547030564881816
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 102A7CCD183
+	for <webhook@archiver.kernel.org>; Thu, 16 Oct 2025 04:39:09 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web11.938.1760589540610513358
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 15 Oct 2025 09:50:31 -0700
+ Wed, 15 Oct 2025 21:39:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 8888A40C8F;
-	Wed, 15 Oct 2025 16:50:29 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FyIiru15a8wk; Wed, 15 Oct 2025 16:50:29 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 607A240A0B;
-	Wed, 15 Oct 2025 16:50:27 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id BD0CC167E9D; Wed, 15 Oct 2025 12:50:26 -0400 (EDT)
-Date: Wed, 15 Oct 2025 12:50:26 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: j-sahu@ti.com
-Cc: meta-ti@lists.yoctoproject.org, Ryan Eatmon <reatmon@ti.com>
-Subject: Re: [meta-ti][scarthgap/master][PATCH] conf: am335x-evm and
- am437x-evm: Bump up max_leb_cnt
-Message-ID: <20251015165026.GT3125@denix.org>
-References: <20251015163336.3955455-1-j-sahu@ti.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=jRbqhnIB;
+ spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: p-bhagat@ti.com)
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59G4cxIW1927227
+	for <meta-ti@lists.yoctoproject.org>; Wed, 15 Oct 2025 23:38:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1760589539;
+	bh=Btyp7nOXJVFquECA/ioZgq6eIVANIC9DKZOtqfCDECo=;
+	h=From:To:CC:Subject:Date;
+	b=jRbqhnIBNyAYpjE0NAbzDnnBQLbtJu0mPoyxCQM6tgiRTeBI20Ywg6NC10xVupVzU
+	 HjCRHbMVWYHYmF7Cpi5LuLvh1U3WdZlutUy3anGYfKTroU61iLnJpGPgLe6hwHq+lG
+	 oPU6ux8T+qhEF0MVoJWnzF5NWMaEMDirHq7q0oys=
+Received: from DLEE206.ent.ti.com (dlee206.ent.ti.com [157.170.170.90])
+	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59G4cxtj1343412
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <meta-ti@lists.yoctoproject.org>; Wed, 15 Oct 2025 23:38:59 -0500
+Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE206.ent.ti.com
+ (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 15 Oct
+ 2025 23:38:59 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 15 Oct 2025 23:38:59 -0500
+Received: from localhost (ula0502350.dhcp.ti.com [172.24.233.249])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59G4cwRi3150183;
+	Wed, 15 Oct 2025 23:38:58 -0500
+From: Paresh Bhagat <p-bhagat@ti.com>
+To: <meta-ti@lists.yoctoproject.org>, <praneeth@ti.com>, <reatmon@ti.com>
+CC: <v-singh1@ti.com>, <j-sahu@ti.com>, <c-shilwant@ti.com>, <khasim@ti.com>,
+        <jm@ti.com>
+Subject: [master/scarthgap][PATCH v2] conf: machine: am62dxx-evm: Package overlays
+Date: Thu, 16 Oct 2025 10:08:36 +0530
+Message-ID: <20251016043836.1679278-1-p-bhagat@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251015163336.3955455-1-j-sahu@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 15 Oct 2025 16:50:34 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19136
+ <meta-ti@lists.yoctoproject.org>; Thu, 16 Oct 2025 04:39:09 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19137
 
-On Wed, Oct 15, 2025 at 10:03:36PM +0530, Jeevan via lists.yoctoproject.org wrote:
-> New features added require another increase to max_leb_cnt
+Package overlays which are common for AM62 family of devices for
+am62dxx-evm by adding prefix string in KERNEL_DEVICETREE_PREFIX.
 
-Quick question - is UBI still being used and/or tested on these platforms?
+Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+---
+Boot logs
+https://gist.github.com/paresh-bhagat12/f8513c05abeb0585abcc30cfefd6a40a
 
-If this is no longer part of regular testing, maybe it's time to disable UBI 
-by default?
+Change log
+v1->v2-Package common overlays, following am62a approach.
 
+v1-https://lists.yoctoproject.org/g/meta-ti/topic/master_scarthgap_patch/115766465
 
-> Signed-off-by: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>
-> ---
->  meta-ti-bsp/conf/machine/am335x-evm.conf | 2 +-
->  meta-ti-bsp/conf/machine/am437x-evm.conf | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/meta-ti-bsp/conf/machine/am335x-evm.conf b/meta-ti-bsp/conf/machine/am335x-evm.conf
-> index 029e761b..cc5d87d7 100644
-> --- a/meta-ti-bsp/conf/machine/am335x-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am335x-evm.conf
-> @@ -22,7 +22,7 @@ SERIAL_CONSOLES = "115200;ttyS0 115200;ttyS3"
->  # UBI: logical eraseblock size:    126976 bytes
->  # from ubiattach stdout:
->  # UBI device number 0, total 1988 LEBs
-> -MKUBIFS_ARGS ?= "-F -m 2048 -e 126976 -c 16000"
-> +MKUBIFS_ARGS ?= "-F -m 2048 -e 126976 -c 18000"
->  
->  # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
->  # from dmesg:
-> diff --git a/meta-ti-bsp/conf/machine/am437x-evm.conf b/meta-ti-bsp/conf/machine/am437x-evm.conf
-> index 248add70..bbe956f2 100644
-> --- a/meta-ti-bsp/conf/machine/am437x-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am437x-evm.conf
-> @@ -21,7 +21,7 @@ SERIAL_CONSOLES = "115200;ttyS0"
->  # UBI: logical eraseblock size:    253952 bytes
->  # from ubiattach stdout:
->  # UBI device number 0, total 994 LEBs
-> -MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 8000"
-> +MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 10000"
->  
->  # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
->  # from dmesg:
-> -- 
-> 2.34.1
+ meta-ti-bsp/conf/machine/am62dxx-evm.conf | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-ti-bsp/conf/machine/am62dxx-evm.conf b/meta-ti-bsp/conf/machine/am62dxx-evm.conf
+index 1e41c53c..9008a6dd 100644
+--- a/meta-ti-bsp/conf/machine/am62dxx-evm.conf
++++ b/meta-ti-bsp/conf/machine/am62dxx-evm.conf
+@@ -7,6 +7,7 @@ require conf/machine/include/am62dxx.inc
+ KERNEL_DEVICETREE_PREFIX = " \
+     ti/k3-am62d2 \
+     ti/k3-am62a7-sk-edgeai \
++    ti/k3-am62x-sk \
+ "
+ 
+ KERNEL_DEVICETREE = ""
+-- 
+2.34.1
+
 
