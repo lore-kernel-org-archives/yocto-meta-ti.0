@@ -1,115 +1,89 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 496B5CCD193
-	for <webhook@archiver.kernel.org>; Mon, 20 Oct 2025 13:05:37 +0000 (UTC)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web11.18157.1760965532132264885
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91F62CCD1A5
+	for <webhook@archiver.kernel.org>; Tue, 21 Oct 2025 20:02:57 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.22701.1761076971749714149
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 20 Oct 2025 06:05:32 -0700
+ Tue, 21 Oct 2025 13:02:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=dnnC9x5S;
- spf=pass (domain: list.ti.com, ip: 198.47.23.235, mailfrom: prc@list.ti.com)
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59KD5VUp2998073;
-	Mon, 20 Oct 2025 08:05:31 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1760965531; i=@ti.com;
-	bh=kZF0M+0VtDmE6IFWiBvVK5QhA/LGtIn463/u7DdC008=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=dnnC9x5ScHGQoRHpoyB9p3NwYJgfnzDg6C6CKYG1uULVSXfVZQfzTtzDHQ5VFl3JF
-	 nWUgYhQFfk/QAif4yip1syJI1GNmrYiSZNHbp87QE+KBS3CiEsTV6T0ELaTXXCuYgq
-	 Lonl30U9im2tFA2DdoIjW2dPBLR/3IVxLAV1Z81Q=
-Received: from DLEE208.ent.ti.com (dlee208.ent.ti.com [157.170.170.97])
-	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59KD5Usk026420
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 20 Oct 2025 08:05:30 -0500
-Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE208.ent.ti.com
- (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 20 Oct
- 2025 08:05:30 -0500
-Received: from fllvem-mr07.itg.ti.com (10.64.41.89) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 20 Oct 2025 08:05:30 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by fllvem-mr07.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59KD5U6J1650985;
-	Mon, 20 Oct 2025 08:05:30 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id 87C9413F538; Mon, 20 Oct 2025 08:05:30 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: LCPD Automation Script <lcpdbld@list.ti.com>
-CC: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202510200100
-Date: Mon, 20 Oct 2025 08:05:30 -0500
-Message-ID: <20251020130530.575460-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20251020130348.270516-1-lcpdbld@list.ti.com>
-References: <20251020130348.270516-1-lcpdbld@list.ti.com>
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 4837E40C86;
+	Tue, 21 Oct 2025 20:02:50 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id kwih_gRQGm8V; Tue, 21 Oct 2025 20:02:50 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2ADC540C6C;
+	Tue, 21 Oct 2025 20:02:49 +0000 (UTC)
+Received: from gimli.cabin (argonath.cabin [172.31.1.2])
+	by mail.denix.org (Postfix) with ESMTP id 19AAD16A438;
+	Tue, 21 Oct 2025 16:02:48 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: Denys Dmytriyenko <denys@konsulko.com>
+Subject: [master][PATCH 2/2] linux-bb.org: update to 6.12.43
+Date: Tue, 21 Oct 2025 16:02:47 -0400
+Message-Id: <20251021200247.52202-2-denis@denix.org>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20251021200247.52202-1-denis@denix.org>
+References: <20251021200247.52202-1-denis@denix.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 20 Oct 2025 13:05:37 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19147
+ <meta-ti@lists.yoctoproject.org>; Tue, 21 Oct 2025 20:02:57 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19148
 
-meta-ti / na / 20251020130348.270516-1-lcpdbld
+From: Denys Dmytriyenko <denys@konsulko.com>
 
-PRC Results: FAIL
+Update bb.org kernel to 6.12.43 for 64-bit platforms.
 
-=========================================================
-  check-yocto-patches: PASS
-=========================================================
-Patches
-----------------------------------------
-WARN - [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202510200100
-    WARN: Commit message does not include file/recipe name: CI/CD Auto-Merger: cicd.master.202510200100. (COMMIT-MESSAGE-2)
-        patch
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
+---
+ .../recipes-kernel/linux/linux-bb.org_6.12.bb      | 14 ++++----------
+ 1 file changed, 4 insertions(+), 10 deletions(-)
 
-
-
-=========================================================
-  apply-yocto-patch: FAIL
-=========================================================
-master
-=====================
-Summary:
-- Patch Series: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202510200100
-- Submitter: From: LCPD Automation Script <lcpdbld@list.ti.com>
-- Date: Date: Mon, 20 Oct 2025 08:03:48 -0500
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 50b832b0110b2374453e32204c0b32ab74cb6ddb
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master
-- Commit Author: LCPD Automation Script <lcpdbld@list.ti.com>
-- Commit Subject: CI/CD Auto-Merger: cicd.master.202510200100
-- Commit SHA: 79836f10b9b3a08905a13a8f09cd045191f03c8b
-
-Patches
-----------------------------------------
-FAIL - [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202510200100
-    error: patch failed: meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc:15
-    error: meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc: patch does not apply
-    error: patch failed: meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc:8
-    error: meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc: patch does not apply
-    error: patch failed: meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb:6
-    error: meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb: patch does not apply
-    error: patch failed: meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb:10
-    error: meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb: patch does not apply
-    error: patch failed: meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb:22
-    error: meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb: patch does not apply
-    Applying: CI/CD Auto-Merger: cicd.master.202510200100
-    Patch failed at 0001 CI/CD Auto-Merger: cicd.master.202510200100
-
-
+diff --git a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb b/meta=
+-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
+index 2e57de2b..8ab9fc67 100644
+--- a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
++++ b/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
+@@ -52,12 +52,6 @@ KERNEL_DEVICETREE:append:armv7a =3D " \
+     ti/omap/PB-MIKROBUS-1.dtbo \
+ "
+=20
+-KERNEL_DEVICETREE:append:aarch64 =3D " \
+-    ti/BONE-I2C1.dtbo \
+-    ti/BONE-I2C2.dtbo \
+-    ti/BONE-I2C3.dtbo \
+-"
+-
+ S =3D "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}"
+=20
+ # 6.12.34 version for 32-bit
+@@ -65,9 +59,9 @@ SRCREV:armv7a =3D "9e419b26243bd7efcd103ae0f6456f828592=
+b34b"
+ PV:armv7a =3D "6.12.34+git"
+ BRANCH:armv7a =3D "v6.12.34-ti-arm32-r12"
+=20
+-# 6.12.34 version for 64-bit
+-SRCREV:aarch64 =3D "9ca36b8c54806a037f357efcd40eaa8399798b05"
+-PV:aarch64 =3D "6.12.34+git"
+-BRANCH:aarch64 =3D "v6.12.34-ti-arm64-r46"
++# 6.12.43 version for 64-bit
++SRCREV:aarch64 =3D "84c4b4613a852db269620a3fdfed65de90569fa1"
++PV:aarch64 =3D "6.12.43+git"
++BRANCH:aarch64 =3D "v6.12.43-ti-arm64-r54"
+=20
+ KERNEL_GIT_URI =3D "git://github.com/beagleboard/linux.git"
+--=20
+2.35.3
 
 
