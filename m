@@ -1,130 +1,93 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <j-sahu@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6D4BCCD1AB
-	for <webhook@archiver.kernel.org>; Wed, 22 Oct 2025 07:50:23 +0000 (UTC)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web11.3688.1761119414443249010
- for <meta-ti@lists.yoctoproject.org>;
- Wed, 22 Oct 2025 00:50:14 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=iD4LWOyp;
- spf=pass (domain: list.ti.com, ip: 198.47.23.235, mailfrom: prc@list.ti.com)
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59M7oDBs216970;
-	Wed, 22 Oct 2025 02:50:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1761119413; i=@ti.com;
-	bh=tZo3/Hqqd/eAonpO0P+zFgbjL6a9FLo++w/4kosVcdo=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=iD4LWOypk0FRz41KMDPRDJd7jini+flk6f8uS5FWRO2SC+9UYbnqYS6ysg/lUjLP9
-	 jE44h80k5Oh/Eie7XD+h+fuuRl0uOoKwr1Vwh8zac3oS0O3VZdsMi0uhN+mKrTfyDV
-	 s1nKa5nP3/WLCWCtgrduxf7uX7h9Xi3xndgiYP1U=
-Received: from DLEE214.ent.ti.com (dlee214.ent.ti.com [157.170.170.117])
-	by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59M7oDAI1764385
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 22 Oct 2025 02:50:13 -0500
-Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 22 Oct
- 2025 02:50:13 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 22 Oct 2025 02:50:13 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59M7oDmu873530;
-	Wed, 22 Oct 2025 02:50:13 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id 08670180194; Wed, 22 Oct 2025 02:50:13 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: LCPD Automation Script <lcpdbld@list.ti.com>
-CC: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-        Denys
- Dmytriyenko <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202510220100
-Date: Wed, 22 Oct 2025 02:50:13 -0500
-Message-ID: <20251022075013.4079013-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20251022074851.1115311-1-lcpdbld@list.ti.com>
-References: <20251022074851.1115311-1-lcpdbld@list.ti.com>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B2A4CCD195
+	for <webhook@archiver.kernel.org>; Wed, 22 Oct 2025 10:55:14 +0000 (UTC)
+Subject: Re: [scarthgap/master][PATCH] conf: am335x-evm and am437x-evm: Bump up max_leb_cnt
+To: meta-ti@lists.yoctoproject.org
+From: "Jeevan" <j-sahu@ti.com>
+X-Originating-Location: IN (103.146.116.9)
+X-Originating-Platform: Linux Firefox 143
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Date: Wed, 22 Oct 2025 03:55:10 -0700
+References: <26313.1760592243413874082@lists.yoctoproject.org>
+In-Reply-To: <26313.1760592243413874082@lists.yoctoproject.org>
+Message-ID: <13211.1761130510356553328@lists.yoctoproject.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 22 Oct 2025 07:50:23 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19154
+ <meta-ti@lists.yoctoproject.org>; Wed, 22 Oct 2025 10:55:14 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19155
 
-meta-ti / na / 20251022074851.1115311-1-lcpdbld
+On Thu, Oct 16, 2025 at 10:54 AM, Jeevan wrote:
 
-PRC Results: FAIL
+>
+> On Wed, Oct 15, 2025 at 10:20 PM, Denys Dmytriyenko wrote:
+>=20
+> >
+> > On Wed, Oct 15, 2025 at 10:03:36PM +0530, Jeevan via lists.yoctoproject=
+.org
+> > wrote:
+> > > New features added require another increase to max_leb_cnt
+> >=20
 
-=========================================================
-  check-yocto-patches: PASS
-=========================================================
-Patches
-----------------------------------------
-WARN - [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202510220100
-    WARN: Commit message does not include file/recipe name: CI/CD Auto-Merger: cicd.master.202510220100. (COMMIT-MESSAGE-2)
-        patch
-
-
-
-=========================================================
-  apply-yocto-patch: PASS
-=========================================================
-master
-=====================
-Summary:
-- Patch Series: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202510220100
-- Submitter: From: LCPD Automation Script <lcpdbld@list.ti.com>
-- Date: Date: Wed, 22 Oct 2025 02:48:51 -0500
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 9d01b713dca630ff8db894b596d83b6c2d42a208
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-wip
-- Commit Author: Ryan Eatmon <reatmon@ti.com>
-- Commit Subject: conf: j784s4: Add k3_bist tie-test-builds config
-- Commit SHA: 20db2e351fa4fb615b39b69eae8658ee252b03ed
-
-Patches
-----------------------------------------
-All patches applied
+Ping on this patch. Processor SDK builds are failing due to insufficient ma=
+x_leb_cnt.=20
 
 
-
-=========================================================
-  check-yocto-repo: FAIL
-=========================================================
-master
-=====================
-FAIL
-    WARN: You might need a " " as the first character for the :append. (APPEND-2)
-        meta-ti-bsp/conf/machine/include/am62axx.inc:15
-            TI_INITRAMFS_KERNEL_MODULES:append:bsp-mainline  = "kernel-module-tps6594-i2c"
-    
-    WARN: You might need a " " as the first character for the :append. (APPEND-2)
-        meta-ti-bsp/conf/machine/include/am62axx.inc:16
-            TI_INITRAMFS_KERNEL_MODULES:append:bsp-next  = "kernel-module-tps6594-i2c"
-    
-    
-    Code Summary
-    ============
-    
-    APPEND-2
-    -------------------------------------------
-      :append simply takes the specified string and concatenates it
-      directly to the variable.  Most of the time we want there to spaces
-      between entries.  This check flags us to check if the missing space
-      is actually needed.
-
-
-
+> > Quick question - is UBI still being used and/or tested on these platfor=
+ms?
+> >=20
+> > If this is no longer part of regular testing, maybe it's time to disabl=
+e UBI
+>=20
+> > by default?
+> >=20
+>=20
+> We need to maintain this as UBIFS is being tested for NAND on am335x and
+> am437x.=20
+>=20
+> >=20
+> > > Signed-off-by: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>
+> > > ---
+> > >  meta-ti-bsp/conf/machine/am335x-evm.conf | 2 +-
+> > >  meta-ti-bsp/conf/machine/am437x-evm.conf | 2 +-
+> > >  2 files changed, 2 insertions(+), 2 deletions(-)
+> > >=20
+> > > diff --git a/meta-ti-bsp/conf/machine/am335x-evm.conf
+> > b/meta-ti-bsp/conf/machine/am335x-evm.conf
+> > > index 029e761b..cc5d87d7 100644
+> > > --- a/meta-ti-bsp/conf/machine/am335x-evm.conf
+> > > +++ b/meta-ti-bsp/conf/machine/am335x-evm.conf
+> > > @@ -22,7 +22,7 @@ SERIAL_CONSOLES =3D "115200;ttyS0 115200;ttyS3"
+> > >  # UBI: logical eraseblock size:    126976 bytes
+> > >  # from ubiattach stdout:
+> > >  # UBI device number 0, total 1988 LEBs
+> > > -MKUBIFS_ARGS ?=3D "-F -m 2048 -e 126976 -c 16000"
+> > > +MKUBIFS_ARGS ?=3D "-F -m 2048 -e 126976 -c 18000"
+> > > =20
+> > >  # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+> > >  # from dmesg:
+> > > diff --git a/meta-ti-bsp/conf/machine/am437x-evm.conf
+> > b/meta-ti-bsp/conf/machine/am437x-evm.conf
+> > > index 248add70..bbe956f2 100644
+> > > --- a/meta-ti-bsp/conf/machine/am437x-evm.conf
+> > > +++ b/meta-ti-bsp/conf/machine/am437x-evm.conf
+> > > @@ -21,7 +21,7 @@ SERIAL_CONSOLES =3D "115200;ttyS0"
+> > >  # UBI: logical eraseblock size:    253952 bytes
+> > >  # from ubiattach stdout:
+> > >  # UBI device number 0, total 994 LEBs
+> > > -MKUBIFS_ARGS =3D "-F -m 4096 -e 253952 -c 8000"
+> > > +MKUBIFS_ARGS =3D "-F -m 4096 -e 253952 -c 10000"
+> > > =20
+> > >  # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
+> > >  # from dmesg:
+> > > --=20
+> > > 2.34.1
+> >
+>
 
