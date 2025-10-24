@@ -1,83 +1,110 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <prc@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 32A4CCCF9E0
-	for <webhook@archiver.kernel.org>; Fri, 24 Oct 2025 16:19:32 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web10.15563.1761322762251494677
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A376CCF9E0
+	for <webhook@archiver.kernel.org>; Fri, 24 Oct 2025 16:20:22 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web10.15584.1761322814660443286
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 24 Oct 2025 09:19:22 -0700
+ Fri, 24 Oct 2025 09:20:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=waKxUpvL;
- spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: reatmon@ti.com)
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59OGJLO71922826;
-	Fri, 24 Oct 2025 11:19:21 -0500
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=gJEZ92ac;
+ spf=pass (domain: list.ti.com, ip: 198.47.19.246, mailfrom: prc@list.ti.com)
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59OGKDk0783289;
+	Fri, 24 Oct 2025 11:20:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1761322761;
-	bh=rxjmEcBQMn2lz6oRaBPLxFK72JszA6Xd3KwcbA2kwuk=;
-	h=From:To:Subject:Date;
-	b=waKxUpvLgLeLhUfaljS4VNLza0+Z+0hkNDZvK/LdckWKPg4a+Wpieu+NERi2JqSJN
-	 77BnWwQ90h8R6ZxisLiLj6gvGRhktAXwlyiSdwCmiuVpBQp/Y8327+ZouPEYytSDbi
-	 CAsd63gwK3HUtGHXjfNn9uzMJ48xF1HXfm6ihW1s=
-Received: from DFLE210.ent.ti.com (dfle210.ent.ti.com [10.64.6.68])
-	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59OGJKmc3692661
+	s=ti-com-17Q1; t=1761322813; i=@ti.com;
+	bh=ExzLE5KlgrS3Etsd6c3SJDa+JyODqpsyUrVl1Y2N/cY=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=gJEZ92acT071cR3mlwbbxYIOZy9ORZ2jWlt84gmKuUhcwn9wQNeq5H9pPJxKICZbP
+	 y736lYsjSK/SiutV/qH6YPllFEHlOaIyOIDSVpyCfSWZcOAmQoYGZr6Aq5AvK2eQL3
+	 sEdcpzUMiXGUW42lO9q56m96d4U6x8jyTFqUhG5c=
+Received: from DLEE214.ent.ti.com (dlee214.ent.ti.com [157.170.170.117])
+	by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59OGKDDW3577452
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 24 Oct 2025 11:19:21 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 24 Oct 2025 11:20:13 -0500
+Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE214.ent.ti.com
+ (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Oct
- 2025 11:19:20 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 11:20:13 -0500
+Received: from fllvem-mr07.itg.ti.com (10.64.41.89) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 24 Oct 2025 11:19:20 -0500
-Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59OGJKw8593432;
-	Fri, 24 Oct 2025 11:19:20 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1vCKVc-0005qi-HE; Fri, 24 Oct 2025 11:19:20 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
+ Transport; Fri, 24 Oct 2025 11:20:13 -0500
+Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
+	by fllvem-mr07.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59OGKDmf1366722;
+	Fri, 24 Oct 2025 11:20:13 -0500
+Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
+	id 03611181222; Fri, 24 Oct 2025 11:20:13 -0500 (CDT)
+From: PRC Automation <prc@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>
+CC: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] am62axx: Add whitespace to append assignment
-Date: Fri, 24 Oct 2025 11:19:20 -0500
-Message-ID: <20251024161920.22445-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
+Subject: Re: [meta-ti][master][PATCH] am62axx: Add whitespace to append assignment
+Date: Fri, 24 Oct 2025 11:20:12 -0500
+Message-ID: <20251024162012.3528143-1-prc@list.ti.com>
+X-Mailer: git-send-email 2.43.5
+In-Reply-To: <20251024161920.22445-1-reatmon@ti.com>
+References: <20251024161920.22445-1-reatmon@ti.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 24 Oct 2025 16:19:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19176
+ <meta-ti@lists.yoctoproject.org>; Fri, 24 Oct 2025 16:20:22 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19177
 
-Add missing whitespace on append assignment since the list is space
-separated.
+meta-ti / na / 20251024161920.22445-1-reatmon
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- meta-ti-bsp/conf/machine/include/am62axx.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+PRC Results: PASS
 
-diff --git a/meta-ti-bsp/conf/machine/include/am62axx.inc b/meta-ti-bsp/conf/machine/include/am62axx.inc
-index bacee3a6..b66a2227 100644
---- a/meta-ti-bsp/conf/machine/include/am62axx.inc
-+++ b/meta-ti-bsp/conf/machine/include/am62axx.inc
-@@ -12,5 +12,5 @@ OPTEEMACHINE = "k3-am62x"
- 
- MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "cnm-wave-fw"
- 
--TI_INITRAMFS_KERNEL_MODULES:append:bsp-mainline  = "kernel-module-tps6594-i2c"
--TI_INITRAMFS_KERNEL_MODULES:append:bsp-next  = "kernel-module-tps6594-i2c"
-+TI_INITRAMFS_KERNEL_MODULES:append:bsp-mainline  = " kernel-module-tps6594-i2c"
-+TI_INITRAMFS_KERNEL_MODULES:append:bsp-next  = " kernel-module-tps6594-i2c"
--- 
-2.17.1
+=========================================================
+  check-yocto-patches: PASS
+=========================================================
+Patches
+----------------------------------------
+All patches passed
+
+
+
+=========================================================
+  apply-yocto-patch: PASS
+=========================================================
+master
+=====================
+Summary:
+- Patch Series: [meta-ti][master][PATCH] am62axx: Add whitespace to append assignment
+- Submitter: From: Ryan Eatmon <reatmon@ti.com>
+- Date: Date: Fri, 24 Oct 2025 11:19:20 -0500
+- Num Patches: 1
+- Mailing List (public inbox) Commit SHA: 30e4b4586fa9001874efb92815031459c1b59e5a
+
+Applied to:
+- Repository: lcpd-prc-meta-ti
+- Base Branch: master-next
+- Commit Author: Ryan Eatmon <reatmon@ti.com>
+- Commit Subject: packagegroup-ti-core-initramfs: ensure TI_INITRAMFS_KERNEL_MODULES is set
+- Commit SHA: a58677ffedd5733ce7eba266bc1ed981d90af2a0
+
+Patches
+----------------------------------------
+All patches applied
+
+
+
+=========================================================
+  check-yocto-repo: PASS
+=========================================================
+master
+=====================
+PASS
+
+
 
 
