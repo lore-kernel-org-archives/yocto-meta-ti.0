@@ -2,167 +2,83 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A0B0CCF9E0
-	for <webhook@archiver.kernel.org>; Fri, 24 Oct 2025 16:23:02 +0000 (UTC)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- by mx.groups.io with SMTP id smtpd.web10.15669.1761322981352458024
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E15DCCF9E0
+	for <webhook@archiver.kernel.org>; Fri, 24 Oct 2025 21:25:07 +0000 (UTC)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ by mx.groups.io with SMTP id smtpd.web11.4448.1761341102596740000
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 24 Oct 2025 09:23:01 -0700
+ Fri, 24 Oct 2025 14:25:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=RtpvkmGf;
- spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: reatmon@ti.com)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=vb5YqplG;
+ spf=pass (domain: ti.com, ip: 198.47.19.246, mailfrom: reatmon@ti.com)
 Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59OGMwQs1923451;
-	Fri, 24 Oct 2025 11:22:58 -0500
+	by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59OLP0Dc827066;
+	Fri, 24 Oct 2025 16:25:00 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1761322978;
-	bh=KdSxG7Dp9ppr4Ms+KcY3EGrM0WNKI6/HTZo60rwRTP0=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=RtpvkmGfxte4nYDpPuytf+scxkUVBTGDmISGUd7nKtPKtKahXqj8/z6sZJZsP//zf
-	 w/y4PwdgmcE0obZdbHl7ICHy3XAJEmGrZEv5u/kJKuHUiW+YT4AYiU+zEFCppwkVTL
-	 RFKlySKwySSgoGssRlpCx7uoJAnogo1yetF+RxdQ=
-Received: from DLEE205.ent.ti.com (dlee205.ent.ti.com [157.170.170.85])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59OGMw0V3996302
+	s=ti-com-17Q1; t=1761341100;
+	bh=qC4F5Z34LLUbrwGG1TQU8yjU8rc+Oz0R2MqvveRKzOQ=;
+	h=From:To:Subject:Date;
+	b=vb5YqplGGyo3z5an9HxZ1isavBKDzbsUWRmzeBP94p8ttIAlhORpZVYTCReHTGtvC
+	 wJSN9F1Kdh808qKpgoYowt9L8IkNdknuBgzbN9cB5q4Igav0vtjRc2Sl9bycrAQlt4
+	 0tQcdJHdcQIcEiKWVBbPnzCDN0aSvIvZgyTggqP4=
+Received: from DFLE210.ent.ti.com (dfle210.ent.ti.com [10.64.6.68])
+	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59OLP0ts4153946
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 24 Oct 2025 11:22:58 -0500
-Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE205.ent.ti.com
- (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
+	Fri, 24 Oct 2025 16:25:00 -0500
+Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Oct
- 2025 11:22:58 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 16:25:00 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 24 Oct 2025 11:22:58 -0500
-Received: from [10.249.37.202] ([10.249.37.202])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59OGMwFf603397;
-	Fri, 24 Oct 2025 11:22:58 -0500
-Message-ID: <ca17b8ec-20e6-4b45-965a-f89c6f7d016d@ti.com>
-Date: Fri, 24 Oct 2025 11:22:58 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [EXTERNAL] Re: [meta-ti] [master][PATCH]
- packagegroup-ti-core-initramfs: ensure TI_INITRAMFS_KERNEL_MODULES is set
-To: Denys Dmytriyenko <denis@denix.org>
-CC: Denys Dmytriyenko <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-References: <20251023181013.25365-1-denis@denix.org>
- <20251023181525.3536647-1-prc@list.ti.com> <20251023201625.GA3125@denix.org>
-Content-Language: en-US
+ Transport; Fri, 24 Oct 2025 16:25:00 -0500
+Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59OLP04X925284;
+	Fri, 24 Oct 2025 16:25:00 -0500
+Received: from reatmon by uda0214219 with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1vCPHQ-0001jU-9x; Fri, 24 Oct 2025 16:25:00 -0500
 From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20251023201625.GA3125@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+To: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master/scarthgap][PATCH] check_yocto_rules: Add new rule exception
+Date: Fri, 24 Oct 2025 16:25:00 -0500
+Message-ID: <20251024212500.6621-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by fllvem-ot03.ext.ti.com id 59OGMwQs1923451
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 24 Oct 2025 16:23:02 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19178
+ <meta-ti@lists.yoctoproject.org>; Fri, 24 Oct 2025 21:25:07 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19179
 
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ check_yocto_rules.json | 5 +++++
+ 1 file changed, 5 insertions(+)
 
+diff --git a/check_yocto_rules.json b/check_yocto_rules.json
+index 237aa6a3..56e8c771 100644
+--- a/check_yocto_rules.json
++++ b/check_yocto_rules.json
+@@ -24,6 +24,11 @@
+     "GUARD-2" : {
+         "skip_vars" : [ "k3" , "ti-soc" ]
+     },
++    "GUARD-3" : {
++        "skip_files" : [
++            "meta-ti-bsp/recipes-security/optee/optee-os-tadevkit_%.bbappend"
++        ]
++    },
+     "SUMMARY-1" : {
+         "skip_files" : [
+             "meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb"
+-- 
+2.17.1
 
-On 10/23/2025 3:16 PM, Denys Dmytriyenko wrote:
-> Hey, Ryan, Something is wrong with PRC.=E2=80=8A.=E2=80=8A. On Thu, Oct=
- 23, 2025 at 01:=20
-> =E2=80=8A15:=E2=80=8A25PM -0500, PRC Automation via lists.=E2=80=8Ayoct=
-oproject.=E2=80=8Aorg wrote: >=20
-> meta-ti / na / 20251023181013.=E2=80=8A25365-1-denis > > PRC Results: F=
-AIL > >=20
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D
-> ZjQcmQRYFpfptBannerStart
-> This message was sent from outside of Texas Instruments.
-> Do not click links or open attachments unless you recognize the source=20
-> of this email and know the content is safe.
-> Report=C2=A0Suspicious
-> <https://us-phishalarm-ewt.proofpoint.com/EWT/v1/G3vK!uJdqXRfP1k0bamYkP=
-PNDnBRijNbc-tnZWIKmvuQwEU3-lCPVdNywd9Z3mgF2f24Zn2T7Or4b$>
-> ZjQcmQRYFpfptBannerEnd
->=20
-> Hey, Ryan,
->=20
-> Something is wrong with PRC...
->=20
->=20
-> On Thu, Oct 23, 2025 at 01:15:25PM -0500, PRC Automation via lists.yoct=
-oproject.org wrote:
->> meta-ti / na / 20251023181013.25365-1-denis
->>=20
->> PRC Results: FAIL
->>=20
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D
->>   check-yocto-patches: PASS
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D
->> Patches
->> ----------------------------------------
->> WARN - [master][PATCH] packagegroup-ti-core-initramfs: ensure TI_INITR=
-AMFS_KERNEL_MODULES is set
->>     WARN: Commit message does not include file/recipe name: packagegro=
-up-ti-core-initramfs: ensure TI_INITRAMFS_KERNEL_MODULES is set. (COMMIT-=
-MESSAGE-2)
->=20
-> Well, packagegroup-ti-core-initramfs is actually the name of the recipe.
-
-Yeah, it's on my list to fix.  Hoping today I can knock off the small=20
-things like this (and hooking up check-layers) into PRC.
-
->=20
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D
->>   check-yocto-repo: FAIL
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D
->> master
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> FAIL
->>     WARN: You might need a " " as the first character for the :append.=
- (APPEND-2)
->>         meta-ti-bsp/conf/machine/include/am62axx.inc:15
->>             TI_INITRAMFS_KERNEL_MODULES:append:bsp-mainline  =3D "kern=
-el-module-tps6594-i2c"
->>    =20
->>     WARN: You might need a " " as the first character for the :append.=
- (APPEND-2)
->>         meta-ti-bsp/conf/machine/include/am62axx.inc:16
->>             TI_INITRAMFS_KERNEL_MODULES:append:bsp-next  =3D "kernel-m=
-odule-tps6594-i2c"
->=20
-> This is not in my patch, but is a valid concern - need to correct it fo=
-r
-> am62axx.inc, while other machines appending to this variable already us=
-e a
-> leading space...
-
-Just sent the patch that fixes this.
-
-
->>    =20
->>    =20
->>     Code Summary
->>     =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->>    =20
->>     APPEND-2
->>     -------------------------------------------
->>       :append simply takes the specified string and concatenates it
->>       directly to the variable.  Most of the time we want there to spa=
-ces
->>       between entries.  This check flags us to check if the missing sp=
-ace
->>       is actually needed.
->>=20
->>=20
->>=20
->=20
-
---=20
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
 
