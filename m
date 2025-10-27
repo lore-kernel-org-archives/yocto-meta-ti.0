@@ -1,122 +1,110 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20BD1CCF9E5
-	for <webhook@archiver.kernel.org>; Mon, 27 Oct 2025 18:40:27 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web10.41018.1761590417388814608
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AF6E0CCF9EA
+	for <webhook@archiver.kernel.org>; Mon, 27 Oct 2025 21:20:24 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.2984.1761600015353339700
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 27 Oct 2025 11:40:17 -0700
+ Mon, 27 Oct 2025 14:20:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=SVa/3Ez2;
- spf=pass (domain: list.ti.com, ip: 198.47.23.234, mailfrom: prc@list.ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59RIeGSx2486409
-	for <meta-ti@lists.yoctoproject.org>; Mon, 27 Oct 2025 13:40:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1761590416; i=@ti.com;
-	bh=Ldfnnb8yx3TR3Z/IW9G5GMqj7U5yGHRcJxe4AxZ0Tiw=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=SVa/3Ez2QhJ6AoTZaazhger2AnVFMscG1Xivv/59ARknzNNfJnuPUI0wDwN2L+3eY
-	 d+5LvaUt40bF0DZc/SChzwr39yoxDgIE7PAcqMbAGIkyNiAHBz52bJPdkzpq7rzUfQ
-	 zBEcHhoIqvemPbbtGBVK6wVPKekgDK5IUcJLg974=
-Received: from DLEE202.ent.ti.com (dlee202.ent.ti.com [157.170.170.77])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59RIeG0g1838033
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <meta-ti@lists.yoctoproject.org>; Mon, 27 Oct 2025 13:40:16 -0500
-Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 27 Oct
- 2025 13:40:16 -0500
-Received: from fllvem-mr08.itg.ti.com (10.64.41.88) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 27 Oct 2025 13:40:16 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by fllvem-mr08.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59RIeGUC4148968;
-	Mon, 27 Oct 2025 13:40:16 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id 6E6341801A0; Mon, 27 Oct 2025 13:40:16 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: Sabeeh Khan <sabeeh-khan@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>
-Subject: Re: [scarthgap][PATCH] meta-ti-extras: cc33xx-fw: update cc33xx firmware to 1.7.0.323
-Date: Mon, 27 Oct 2025 13:40:16 -0500
-Message-ID: <20251027184016.3710106-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20251027183914.3955321-1-sabeeh-khan@ti.com>
-References: <20251027183914.3955321-1-sabeeh-khan@ti.com>
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 6BADD40C82;
+	Mon, 27 Oct 2025 21:20:14 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 2JqybYG-5JEY; Mon, 27 Oct 2025 21:20:14 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3F1F240021;
+	Mon, 27 Oct 2025 21:20:12 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 67B6016E27C; Mon, 27 Oct 2025 17:20:11 -0400 (EDT)
+Date: Mon, 27 Oct 2025 17:20:11 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Ryan Eatmon <reatmon@ti.com>
+Cc: vishnu singh <v-singh1@ti.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [PATCH v2] meta-ti-bsp : ipc: update ti-librpmsg-dma srcrev &
+ license
+Message-ID: <20251027212011.GC3125@denix.org>
+References: <20251027040535.3340080-1-v-singh1@ti.com>
+ <03baf840-71b6-4260-ad63-7f3f3d781c74@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <03baf840-71b6-4260-ad63-7f3f3d781c74@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 27 Oct 2025 18:40:27 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19185
+ <meta-ti@lists.yoctoproject.org>; Mon, 27 Oct 2025 21:20:24 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19186
 
-meta-ti / na / 20251027183914.3955321-1-sabeeh-khan
+On Mon, Oct 27, 2025 at 08:03:59AM -0500, Ryan Eatmon wrote:
+> 
+> The subject does not state which recipe is being updated.  Please
+> change it to:
+> 
+> ti-librpmsg-dma: update ti-librpmsg-dma SRCREV & LICENSE
+> 
+> Also you did not include the branches in the subject so PRC only
+> checked against master.  Likely you will need two patches, one for
+> scarthgap and one for master making the same changes in both.
+> 
+> Also, when sending v2 and higher you should always include the
+> version history in the patch after the --- to document what each
+> revision was changing.
 
-PRC Results: FAIL
+Can we also get a little bit more reasoning behind the license change?
 
-=========================================================
-  check-yocto-patches: PASS
-=========================================================
-Patches
-----------------------------------------
-WARN - [scarthgap][PATCH] meta-ti-extras: cc33xx-fw: update cc33xx firmware to 1.7.0.323
-    WARN: Commit message should not include directory path to recipe: meta-ti-extras: cc33xx-fw: update cc33xx firmware to 1.7.0.323.
-              meta-ti-extras: (COMMIT-MESSAGE-3)
-        patch
+Re-licensing is very rare and usually is something to stay away from, 
+especially when changing from a more permissive license to a less 
+permissive one.
 
+Also, the commit that changes the licensing updates the README file from 
+MIT to BSD-3-Clause, not TI-TFL - so which one is it?
 
+https://github.com/TexasInstruments/rpmsg-dma/commit/47beb4c0a98c1fbbac73ef46d69b48b2002c941b
 
-=========================================================
-  apply-yocto-patch: PASS
-=========================================================
-scarthgap
-=====================
-Summary:
-- Patch Series: [scarthgap][PATCH] meta-ti-extras: cc33xx-fw: update cc33xx firmware to 1.7.0.323
-- Submitter: From: Sabeeh Khan <sabeeh-khan@ti.com>
-- Date: Date: Mon, 27 Oct 2025 13:39:14 -0500
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 012593d3d163f049c74d338f2ad142a6cc39c078
+https://github.com/TexasInstruments/rpmsg-dma/blob/scarthgap/README.md#-license
 
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: scarthgap-wip
-- Commit Author: Judith Mendez <jm@ti.com>
-- Commit Subject: conf: machine: Include MCSPI overlay for am62p and am62 LP
-- Commit SHA: b5523559e61116526f4594ea44a7eef1a16a7b45
-
-Patches
-----------------------------------------
-All patches applied
+Please be very specifici when it comes to licensing. Thanks.
 
 
-
-=========================================================
-  check-yocto-repo: FAIL
-=========================================================
-scarthgap
-=====================
-FAIL
-    WARN: Include file should reference ${BPN}: optee-os-ti-version.inc (GUARD-3)
-        meta-ti-bsp/recipes-security/optee/optee-os-tadevkit_%.bbappend:2
-            OPTEE_TI_VERSION:ti-soc = "optee-os-ti-version.inc"
-    
-    
-    Code Summary
-    ============
-    
-    GUARD-3
-    -------------------------------------------
-      The guard file should be named the same as the bbappend.  Feel free
-      to use ${BPN} to make it easier.
-
-
-
+> On 10/26/2025 11:05 PM, vishnu singh wrote:
+> >From: Vishnu Singh <v-singh1@ti.com>
+> >
+> >Update recipe license to TI-TFL, use scarthgap branch
+> >Disable 2dfft and audio offload example build for rpmsg-dma library.
+> >
+> >License-Update: license change to TI-TFL
+> >
+> >Signed-off-by: Vishnu Singh <v-singh1@ti.com>
+> >---
+> >  meta-ti-bsp/recipes-ti/ipc/ti-librpmsg-dma_1.0.bb | 10 +++++-----
+> >  1 file changed, 5 insertions(+), 5 deletions(-)
+> >
+> >diff --git a/meta-ti-bsp/recipes-ti/ipc/ti-librpmsg-dma_1.0.bb b/meta-ti-bsp/recipes-ti/ipc/ti-librpmsg-dma_1.0.bb
+> >index b624871d..7600f867 100644
+> >--- a/meta-ti-bsp/recipes-ti/ipc/ti-librpmsg-dma_1.0.bb
+> >+++ b/meta-ti-bsp/recipes-ti/ipc/ti-librpmsg-dma_1.0.bb
+> >@@ -1,9 +1,9 @@
+> >  SUMMARY = "RPMsg DMA shared library"
+> >-LICENSE = "MIT"
+> >-LIC_FILES_CHKSUM = "file://LICENSE;md5=744e63d2bb8c6151dcdd97f49aa02c53"
+> >+LICENSE = "TI-TFL"
+> >+LIC_FILES_CHKSUM = "file://LICENSE;md5=91dc4ee6d125d0aaba4e5bd2fcc50ed3"
+> >-SRC_URI = "git://github.com/TexasInstruments/rpmsg-dma.git;protocol=https;branch=main"
+> >-SRCREV = "609fd72f458ba56f80d06810509ef88d010d2c03"
+> >+SRC_URI = "git://github.com/TexasInstruments/rpmsg-dma.git;protocol=https;branch=scarthgap"
+> >+SRCREV = "33d20a5a488844ace45ffb9dbbad9f043c5c897f"
+> >  S = "${WORKDIR}/git"
+> >@@ -11,6 +11,6 @@ inherit cmake
+> >  DEPENDS = "ti-rpmsg-char"
+> >-EXTRA_OECMAKE += "-DBUILD_LIB=ON -DBUILD_EXAMPLE=OFF"
+> >+EXTRA_OECMAKE += "-DBUILD_LIB=ON -DBUILD_AUDIO_OFFLOAD_EXAMPLE=OFF -DBUILD_2DFFT_OFFLOAD_EXAMPLE=OFF"
+> >  COMPATIBLE_MACHINE = "^(k3)$"
 
