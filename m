@@ -1,202 +1,175 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <v-singh1@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3F52CCD1BF
-	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 05:00:34 +0000 (UTC)
-Received: from CH1PR05CU001.outbound.protection.outlook.com (CH1PR05CU001.outbound.protection.outlook.com [52.101.193.19])
- by mx.groups.io with SMTP id smtpd.web11.1096.1761714026364160670
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ED84CCCD1BF
+	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 05:03:04 +0000 (UTC)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com (SN4PR0501CU005.outbound.protection.outlook.com [40.93.194.37])
+ by mx.groups.io with SMTP id smtpd.web10.1124.1761714183867309065
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 28 Oct 2025 22:00:26 -0700
+ Tue, 28 Oct 2025 22:03:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=agAoHRHO;
- spf=pass (domain: list.ti.com, ip: 52.101.193.19, mailfrom: prc@list.ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=iulYLTv/;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.194.37, mailfrom: v-singh1@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pbqF9StzYeqbFKyPV/upYZ0KL4+alOKChBdorDwErX+gfuKmcvz3TRf/H9GY/cCsfxdWLm6C2+VJ9pXVMbKz7AHSPZ2QQLC3pQ1j5Yy4GfBUnRawp0y6pnyEW+vSipiohc3Spk4GpJ+E3dBzs0J/GrRWjJDY1ntSKVcfJTAY4oRObr/Pe9yNPdIb66hloUcR9d5nAie4Pmzpj4wiPXYFC43G8gYKduIqXjxFVI4HALoA4C342BEQgzJNhsfMYC/FPq1r6lD7b8vQ9+hH3/qdi8l0lt1v3wSWIhA0UjZcZWrArrrLCFvjOAF9oyFwm4w0sCV9VxSruxvjJdVo2QPtEQ==
+ b=QBv5APWx6DMrhMPyYXk+3ySTqxnMYb8PV3a5qeFDP3yMqWD19CxFxA0qkZAvBrapGhhpOU8SN58BLZLx0RR3BmQhGHIdltaMXtypb+nELOvl8OMJMwBmsdA2Mrkg+JRkSzlekQdKhoEjh35P1XgAOZ4tZb9MLO5OCYh4INsx0OsVvsHLTqDllv42OmaEQRMvGMerE2Xpj/ZykBYR7JR04csn6+swxdjoDKP3GfLT977whbA8tiBRciAdRJVBe9P1e2Gaxybmk8+FUGMaG9SziT9QRofTWC5C0DtXh0KvkctqSWnvP38OsN82aWKvIxp2RkC5RnJZDjwezEQGY/G72Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4Yvowdtac2sc0NHlZVcJoc8z23bUAjE9AxKb2jZX6ug=;
- b=Jnscy52zGLKOCTDs0YbfYwF0Ng8VmeOT9kxoamA49ObxqUulhA3niY8APIN6JOFJ0SFLiCH71UKMbknqvbfLm5kYt9inqLbgjd2XoL8A2Cugd/fhqyvOCG+J6ea43DCfTyZEkeRftUyvLqM6rrKeaTQSLjIxhMbAVpRZ9Wew3xNgVRFSY61SkswJJTrpxY5MTI6BIct5VJey9aKCyRipSLf413dF69HhYn9sJBHUKTwDOEtkVrhLacIm8ijobMb83fO73hgV2WsrBaDQbYpEgiTLNhT6qKHu9GG/WHfNQfvczVRSmWZjOKuiDJXufF+5CV4HZpaxy1jYj8yPNH6LNQ==
+ bh=5uqroPpRp7JDL+ykRhr0ZdqvUJquqhykCiDPlBwH9Hs=;
+ b=qoL04srhUH2XRrDbrYAGoDNklg+Y2ISEBv/HE/Dx0PFBjSKW7oCS/x1Dd4j65+yGRJqm3UKIZgaANKGA1JLSauK/m17cXP7SNdKRegHJlrwSNiI4JsEfUCe1ucqCAiQ69oTMM4NzvYN1KC2u8zCiaU3CD3LmKE8OJ5YYPK6pSYyUSdQG5A4ldAKjS41S9TK8Qq7ksAmLN9r1TovL7AuEeOCkpbrtibfiSigS1vcSPyy5+aWCjWPpdRDIYa7SlDgS87YaxTFvWFSwGa9GYd5zzvv0x1a1cztWqE8ww1X0lgUKNcDV3d/z4pY4nZNW0KvvlC/GqxaVfsRz/Fq4DhTowg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org
- smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
- action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
- (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
- s=selector1;
+ 198.47.21.195) smtp.rcpttodomain=denix.org smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4Yvowdtac2sc0NHlZVcJoc8z23bUAjE9AxKb2jZX6ug=;
- b=agAoHRHOv/DSRlbPznDqpolfVFSBzo11b3DLZAUIZTJrWM6LVffKXJYo2UbIflgsIYLc6kz8cBWHIdW+Fs4pk5bkdjHKdmDE7hjPByf52wlzKwNTttHsBk2beXqW4Yv4sVDOB0UU9bW09SdVuXCJmb1e6+H/PrudjD8rwz2TyH5HqIUZYYyL8MrB8msYiXp8t1RO0cpmHJjejwpdJ6X8DpEOWMaOwDaHHexgcSW1jhkdAyNFb4drgUZjA/Y43ulxrD6KizFmBXflZQVxI6Phr2HXwAGMz35tD8yQCNM3ZclN8iwiNqnxIg9zUwXGF+Qjs4bnBRuSDfU5z5zNTW/qDw==
-Received: from PH8PR07CA0045.namprd07.prod.outlook.com (2603:10b6:510:2cf::14)
- by PH7PR10MB7086.namprd10.prod.outlook.com (2603:10b6:510:269::9) with
+ bh=5uqroPpRp7JDL+ykRhr0ZdqvUJquqhykCiDPlBwH9Hs=;
+ b=iulYLTv/CfmYOCYvV+VbUpYMogJjbpW6FEWM2rI0U9Z+bAGUAiSXVomJMYxbFhPJXhxt5N1OJZ2w344HMiGpVcclP/vCMCxcV59/gWulygG+1wfk9t0WLry7l2WrrFhl3H8BZPSIVvB+5hFigxTCqNNkMFqsn52JSztTSWK3tc0=
+Received: from BL0PR02CA0009.namprd02.prod.outlook.com (2603:10b6:207:3c::22)
+ by IA1PR10MB6242.namprd10.prod.outlook.com (2603:10b6:208:3a2::19) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.12; Wed, 29 Oct
- 2025 05:00:22 +0000
-Received: from CY4PEPF0000EE3D.namprd03.prod.outlook.com
- (2603:10b6:510:2cf:cafe::c7) by PH8PR07CA0045.outlook.office365.com
- (2603:10b6:510:2cf::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.13 via Frontend Transport; Wed,
- 29 Oct 2025 05:00:22 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=list.ti.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=list.ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- CY4PEPF0000EE3D.mail.protection.outlook.com (10.167.242.15) with Microsoft
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.13; Wed, 29 Oct
+ 2025 05:03:00 +0000
+Received: from BL02EPF00021F69.namprd02.prod.outlook.com
+ (2603:10b6:207:3c:cafe::71) by BL0PR02CA0009.outlook.office365.com
+ (2603:10b6:207:3c::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.12 via Frontend Transport; Wed,
+ 29 Oct 2025 05:02:59 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BL02EPF00021F69.mail.protection.outlook.com (10.167.249.5) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Wed, 29 Oct 2025 05:00:21 +0000
-Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9275.10 via Frontend Transport; Wed, 29 Oct 2025 05:03:00 +0000
+Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Oct
- 2025 00:00:18 -0500
-Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 00:02:33 -0500
+Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Oct
- 2025 00:00:18 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 00:02:32 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 29 Oct 2025 00:00:18 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59T50IgV3454267;
-	Wed, 29 Oct 2025 00:00:18 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id 6B56A13F52E; Wed, 29 Oct 2025 00:00:18 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: Vishnu Singh <v-singh1@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, <reatmon@ti.com>, <denis@denix.org>
-Subject: Re: [PATCH] ti-librpmsg-dma: update ti-librpmsg-dma SRCREV & LICENSE
-Date: Wed, 29 Oct 2025 00:00:18 -0500
-Message-ID: <20251029050018.1934443-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20251029045922.1528945-1-v-singh1@ti.com>
-References: <20251029045922.1528945-1-v-singh1@ti.com>
+ Transport; Wed, 29 Oct 2025 00:02:32 -0500
+Received: from uda0513920.dhcp.ti.com (uda0513920.dhcp.ti.com [10.24.69.90])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59T52UYj3458999;
+	Wed, 29 Oct 2025 00:02:31 -0500
+From: vishnu singh <v-singh1@ti.com>
+To: <meta-ti@lists.yoctoproject.org>, <reatmon@ti.com>, <denis@denix.org>
+Subject: [PATCH] ti-librpmsg-dma: update ti-librpmsg-dma SRCREV & LICENSE
+Date: Wed, 29 Oct 2025 10:32:30 +0530
+Message-ID: <20251029050230.1697118-1-v-singh1@ti.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3D:EE_|PH7PR10MB7086:EE_
-X-MS-Office365-Filtering-Correlation-Id: e324f17f-8084-40e2-453b-08de16a81069
+X-MS-TrafficTypeDiagnostic: BL02EPF00021F69:EE_|IA1PR10MB6242:EE_
+X-MS-Office365-Filtering-Correlation-Id: 293f3f10-bedd-4199-98d1-08de16a86ebb
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|61400799027|82310400026|376014|36860700013|34020700016;
+	BCL:0;ARA:13230040|82310400026|36860700013|34020700016|1800799024|376014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?pwxIRQ0hDQvH+CDrDHzztUnRRxXPuGi8fVJIXZuzU02VXv0/JEPUArl430DZ?=
- =?us-ascii?Q?xYhLOs8f36P1QmKu7wxV+XdeUsBe8MxdVlBCDaERsi+UlUOki4UR4IlAt1jy?=
- =?us-ascii?Q?ptl8lrlWRsA4GIDBrvuEWqIO/x6SksMXklbj9cuRz2bcze6HejIwIr6wD9AW?=
- =?us-ascii?Q?xAo3dBnnQpMh4YGXInLNINxiAwjPFCJwMq2wb6oyZc/eGalj5KD/NEvqBkyh?=
- =?us-ascii?Q?IzfpuZshARQEli2HuNppTwLNu7vNwwwGgXh39bMA1miLguF5EvKyClWZ2SPD?=
- =?us-ascii?Q?0W2BSz+qnYQtJ7ycqhq+Vt1yLHT4QLmSTFk5XI09NS307NmO8bYBlMHOkEzs?=
- =?us-ascii?Q?Lo5FAApQGSavG5X749cuWR7HCxW3vCJ5gFnLkeATHXJNTFSLaVzMwCHVnOyZ?=
- =?us-ascii?Q?jJs6RQE+yO3iq6iuNHV/1ABQCIaayDSwE70b5ljSdpqmXNpdKiMZjJOrw85r?=
- =?us-ascii?Q?Ft3vp9H/KKb0GPZtcx7SRd0TxipHvfMkkyR6azParVK3N8GmQjosgPMysHHU?=
- =?us-ascii?Q?jj0o2pHtoK+0AcH+WKeHyFurL7btdXqlmrZ3SFxGD1vjM0tF0IVMPL1/G1vk?=
- =?us-ascii?Q?Kz8XpaC3YNQ8A97pykmyLgI1B76UPdpapEa19MDdeYF3F/5AvE4+fpOSFLKt?=
- =?us-ascii?Q?wj9lJbdA0cVoDWVBTcSgx324ZmPs/CknH6BjwCDpebITLx3Mc+UBnKgjmREV?=
- =?us-ascii?Q?56g7TKXMzZJLZWq7Cc01nLyu+UTPdJHcLVDdzLIUJ6O4essFHXgjx6aDitC+?=
- =?us-ascii?Q?G8zO/ObGD6cBGuZsEdbbMPyyyJUvcC8Mi/t9ySdhoOC2bHQvxatbViLtblj4?=
- =?us-ascii?Q?r3sJlmXQBHnpns+9erVPt0/fZ8gGrvS5QTpK6BkZMr0C1wh+IA2ErXIhFcDz?=
- =?us-ascii?Q?WXsPl9k7EkKJnuSokvHuqdEcjiJ/l8CnwUDvSH3jx2hzv1z1SZ4utCs8ioR3?=
- =?us-ascii?Q?BzQV8o3jCXfmVdP8nMAJ3qW2Pm3B2sVvTVvjDqNgRbjqPZ6Ab+zwY0tw7AJ4?=
- =?us-ascii?Q?jB88vjb1tz/Xt11+v4roJQDWGRQ1WXjLvhGk/djTC2VqHGG3RAz+8xfiJLv2?=
- =?us-ascii?Q?LKCR+iIB2dtbmobvrkpu6JKPlTkyHr8XTy6WOAF6BMQuFhtePV/Y0mKsGQkL?=
- =?us-ascii?Q?G3/zeYD8WboYDLeBAdPsvmiLSvJl+FSJZ01RpesBiyhpssiCZacK3eXOwdZS?=
- =?us-ascii?Q?LwXBG+kz7H1owiMahHoJlWg73NNDQkD/w4GQX4XHvjORB3xCytZIDUXGEeqN?=
- =?us-ascii?Q?WtNHSJu2Kr1eRsdYOODMiML1Z5jGH/rpyOGCzSiK5ni2KllTAY9cdGgjopf5?=
- =?us-ascii?Q?WuOwjtRALWzyv3kNxQwaoAbp7LZyVq3L7Td9t63iSizB3HomNUDV7/AYf5PV?=
- =?us-ascii?Q?hpGNh3zJoBLyXb9PSB6Mzeysnz3RZxVVYx+B2KRiWQ//fWThLDuOx8ShSju/?=
- =?us-ascii?Q?XGqjY0nx1scSTUpi1VZYWpykRvI+EDoqFCRwNrw1hWp1zHSPn46pdfjn8gNw?=
- =?us-ascii?Q?ugYZ6El8LtlLed3TZeR3o//uXcHHquldpNYWfLSbFzh3cq+UL8XGYCkZ7QZ6?=
- =?us-ascii?Q?tDx1N65Aslexvok2V6Q=3D?=
+	=?us-ascii?Q?yidr2IyZfdQkE40ab6gOt2hW6nTnZp2m3zmnRCMPsnbT+3NeFkfe8yvM78U1?=
+ =?us-ascii?Q?JfhrdRp+mYIfTFqYcjWu/e+trwXg3pm/e7FYgYF6J9WrD9uqioMFebWOWkat?=
+ =?us-ascii?Q?CX3y+whijcKLRfXscKNSUh8sdMPiOH/iMR3DN7RvFTkek68wrBkSIMJ9afVq?=
+ =?us-ascii?Q?ecbMlmoN7tLDm738VvLYjhey1gyoMt64fE7/VAiuIfx/tdWZS2MZVuNr63Cs?=
+ =?us-ascii?Q?1I47YkrIu/BbUPsQm6heOpSHCjFlv8v3LwrQVmYcGtJ6+SmvnYfRNpUBwSG8?=
+ =?us-ascii?Q?vPfj8eOgcGzxWyZFfOQlGzVhW6LIx08pZfeVx0WbAaG3w0s3FM/9yT8z9qU4?=
+ =?us-ascii?Q?8Mr1ElDPsrzwLsC48MI/ebmxhrHN4XoxUDfQEK1qt4h16f5gNJredSDcEZQW?=
+ =?us-ascii?Q?wQhnHo2o4gVhcFcmydWi2x0RuDYTgCJsD+WWiU0E9UfHJYkZBgOxaQtIMLYE?=
+ =?us-ascii?Q?BrZ8L3uoFjqr5uoq1+4HAENI+vJ5iCaggYSjiVj4UyNgp3+BG9MlX6Qpq9vq?=
+ =?us-ascii?Q?IkatoIZ4bOV6+OKaX5xA+/2uhthxV8f9JDRO4SyiJcQPaqZcV76oehqnoeNV?=
+ =?us-ascii?Q?rBxg+B1ID39oGATY7H0ksKrsle+FAFveoFhrrYTd5XXTLDQfl12lcqtK6SGY?=
+ =?us-ascii?Q?VRajME637VoUpUxORJmnYNTZZgSKfm0q0WE6xNaP7+RCdI/eNwy+rEz+UVWo?=
+ =?us-ascii?Q?aZgBi+AEP8Ke3NhplgGJxgbrGHoaKFcVGy+FRneYO7oLmemGBXAyHUqB+XsL?=
+ =?us-ascii?Q?kJw5+f74wQkcrf79tljpxSwy061uYpUuzSsF4wMFvnEBbEwN3qZO7yRdGYkJ?=
+ =?us-ascii?Q?7cWHzUQM1fACfcTLGpuMOSWUMW63/f2xPh6JF1fKe+4q4HA5XD8fqfZp56NN?=
+ =?us-ascii?Q?9N2pgrAzQJ4LZtVPM7HwS+yVWadj76+tKDMAICcFfSm9tpzTqnueMx+j3wxf?=
+ =?us-ascii?Q?APsrPmkol82hQGXqhYHoI2VmOVTsZBd3yGdx4vQwvM+AN1jv2o5Icj92sk5H?=
+ =?us-ascii?Q?RtdNxe6qSe4owRzA/3myU8XC4I8w0uMGBT3/SVmbblrpCw3RY2ah+wPqGNEs?=
+ =?us-ascii?Q?68qOhdEIaMKRsNCfw35iR1N2DXVXxEdgJm5NAU2Y9iNjTYOTViZbx0fxKWu8?=
+ =?us-ascii?Q?/67ucSPyIVHiKKlffkkSce8S8c2MzEw4ftijY6GE3EZCydJdbGIb36n0K2+7?=
+ =?us-ascii?Q?Z9nmYDD6UlvmF7AmP8SQy8tsjBR/6kO2zdNBfgsr2es+i1ymHzfUrYJKI5iX?=
+ =?us-ascii?Q?628SD317FkP1onDpH4oJCbMCqiuWAU2HY4Lk1cMHR5NXNp6HOSyrOSEUOR6c?=
+ =?us-ascii?Q?KPC1VAut1mZEu/wiDmxPH/h1mWw4jBWC0mIc1Y9MBnj5NG0t73WGOkaQg7Ar?=
+ =?us-ascii?Q?rW0GoNfeAbbDSekgaeA6oF14ScamAmT1v2qlb/xljAUqoJroDfYTEsThCcxr?=
+ =?us-ascii?Q?MISVYH+FM2DIo2waY2069NuzLIPFQ0fprnOfkZs4csRk4+h6gwDbOD8RAC70?=
+ =?us-ascii?Q?UU05PBEvY2tsY3TqlCMM4qdpl1WKyAQ4zX6rjzZBRFCnUEzjH0qDA2awsnI+?=
+ =?us-ascii?Q?oJ4/FVgweXyxYBmXpu8=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(61400799027)(82310400026)(376014)(36860700013)(34020700016);DIR:OUT;SFP:1101;
-X-OriginatorOrg: list.ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Oct 2025 05:00:21.8599
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(34020700016)(1800799024)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Oct 2025 05:03:00.0127
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e324f17f-8084-40e2-453b-08de16a81069
+X-MS-Exchange-CrossTenant-Network-Message-Id: 293f3f10-bedd-4199-98d1-08de16a86ebb
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	CY4PEPF0000EE3D.namprd03.prod.outlook.com
+	BL02EPF00021F69.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB7086
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB6242
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 29 Oct 2025 05:00:34 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19194
+ <meta-ti@lists.yoctoproject.org>; Wed, 29 Oct 2025 05:03:04 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19195
 
-meta-ti / na / 20251029045922.1528945-1-v-singh1
-
-PRC Results: PASS
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-patches: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-Patches
-----------------------------------------
-WARN - [PATCH] ti-librpmsg-dma: update ti-librpmsg-dma SRCREV & LICENSE
-    WARN: Missing branches specifier [master/scarthgap/XXXXX]. (META-2)
-        patch:66
-            Subject: [PATCH] ti-librpmsg-dma: update ti-librpmsg-dma SRCREV=
- & LICENSE
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  apply-yocto-patch: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Summary:
-- Patch Series: [PATCH] ti-librpmsg-dma: update ti-librpmsg-dma SRCREV & LI=
-CENSE
-- Submitter: From: vishnu singh <v-singh1@ti.com>
 From: Vishnu Singh <v-singh1@ti.com>
-- Date: Date: Wed, 29 Oct 2025 10:29:22 +0530
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: a07034dc1bc202b2bb1a9984d71481523=
-1ad2776
 
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-wip
-- Commit Author: Ryan Eatmon <reatmon@ti.com>
-- Commit Subject: conf: j784s4: Add k3_bist tie-test-builds config
-- Commit SHA: 91a018116239c12c5d57da646fbcfd6f4af12c2b
+Replace MIT license with TI-TFL to align with TI release policy
+and product requirements. Legal approval: SRAS00013045
+Update scarthgap srcrev and disable 2dfft example from lib build.
 
-Patches
-----------------------------------------
-All patches applied
+Signed-off-by: Vishnu Singh <v-singh1@ti.com>
+---
+ meta-ti-bsp/recipes-ti/ipc/ti-librpmsg-dma_1.0.bb | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-repo: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-PASS
-
-
+diff --git a/meta-ti-bsp/recipes-ti/ipc/ti-librpmsg-dma_1.0.bb b/meta-ti-bs=
+p/recipes-ti/ipc/ti-librpmsg-dma_1.0.bb
+index b624871d..7600f867 100644
+--- a/meta-ti-bsp/recipes-ti/ipc/ti-librpmsg-dma_1.0.bb
++++ b/meta-ti-bsp/recipes-ti/ipc/ti-librpmsg-dma_1.0.bb
+@@ -1,9 +1,9 @@
+ SUMMARY =3D "RPMsg DMA shared library"
+-LICENSE =3D "MIT"
+-LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D744e63d2bb8c6151dcdd97f49aa02c5=
+3"
++LICENSE =3D "TI-TFL"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D91dc4ee6d125d0aaba4e5bd2fcc50ed=
+3"
+=20
+-SRC_URI =3D "git://github.com/TexasInstruments/rpmsg-dma.git;protocol=3Dht=
+tps;branch=3Dmain"
+-SRCREV =3D "609fd72f458ba56f80d06810509ef88d010d2c03"
++SRC_URI =3D "git://github.com/TexasInstruments/rpmsg-dma.git;protocol=3Dht=
+tps;branch=3Dscarthgap"
++SRCREV =3D "33d20a5a488844ace45ffb9dbbad9f043c5c897f"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+@@ -11,6 +11,6 @@ inherit cmake
+=20
+ DEPENDS =3D "ti-rpmsg-char"
+=20
+-EXTRA_OECMAKE +=3D "-DBUILD_LIB=3DON -DBUILD_EXAMPLE=3DOFF"
++EXTRA_OECMAKE +=3D "-DBUILD_LIB=3DON -DBUILD_AUDIO_OFFLOAD_EXAMPLE=3DOFF -=
+DBUILD_2DFFT_OFFLOAD_EXAMPLE=3DOFF"
+=20
+ COMPATIBLE_MACHINE =3D "^(k3)$"
+--=20
+2.50.1
 
 
