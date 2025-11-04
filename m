@@ -1,235 +1,292 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2200CCFA00
-	for <webhook@archiver.kernel.org>; Tue,  4 Nov 2025 09:26:21 +0000 (UTC)
-Received: from BN1PR04CU002.outbound.protection.outlook.com (BN1PR04CU002.outbound.protection.outlook.com [52.101.56.7])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13849.1762248378354433949
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B38E9CCF9E3
+	for <webhook@archiver.kernel.org>; Tue,  4 Nov 2025 15:25:33 +0000 (UTC)
+Received: from PH0PR06CU001.outbound.protection.outlook.com (PH0PR06CU001.outbound.protection.outlook.com [40.107.208.68])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.20512.1762269925366904910
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 04 Nov 2025 01:26:18 -0800
+ Tue, 04 Nov 2025 07:25:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=FNeEQsK7;
- spf=pass (domain: list.ti.com, ip: 52.101.56.7, mailfrom: prc@list.ti.com)
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=TQYbj9BE;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.107.208.68, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tds0ZuoB2ssRcw27efiNLbTtKqyBdGvCNvE6KJkyGnjAz3EPk+5MSv6sQ71fqKVzO1l2m+yMa1FixcOx90MV8XA2iYDyj7Ty+7sV2wXUIWT/1Je2y/JK5QUfZI0tQG2sM16OL9vB+0QpTnYEAaUVurFNKYCbJsfdl7CEZ2eRpytTNLem3mLwrTnXvCOlmsySdjX143NP3nchLYC2qXJfpbEE9VSKe752QFWxQEJXcdoB82HgOA8rR1OLsaAY8jjQg0NHWvJfsz2y+4WjMG4z27LZOMImaGNG+hGaPgNWv9K2Shg01zN8RQEvNTlG4/FheMJ338olcgzz45lp1iIcvA==
+ b=XmIed7x/2OCDVUwjnYIxblY2eEdJjm/ZI3O/YCIQ/UT0YxfR508HQ39bY3eL58MAuDXnErRwsHpxnSaBbmRhU4/EbJBq5PzgOQOirp8bwVm4fiopYaRlqJnHK/abZLHZ0Hk3TKCJ7EQ9G4dVCE4JlnDP1Z2b1BVAwSXfl5OqmhhoMqCeAffmpmiHjYdKzgkfkgjqW1nqwvFPkz9kbjIHGt6IYX0NyhXqhL8f/jfit/5Mhlljh52pMMFx3fd+tlGZt5tqmiVWdG6yzNBk7yC3vJJgHje12KAEgctXb7bygNvV85m0joflqzTv4vZi7htEjb0YO+EBiMi1FigqmBq5bQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9ef8U2W/DtG6mGj9GCQhjXXsL8kE/ulrwy0PiCRQsXE=;
- b=ojl7Elnlat5PzroUC81/M0eyurg66KZts2C2VKf6C8yUXdBdxum9A/ykVM2GjERq9OeIZJbQpEASEjMt900H1nxV6EEcyvTToGLjzTwtpfe5MtbQ7pyj2qlQCBiX9toU3wWxCv4I1ekS3f/CzABrqLdbKH8JGzbw4SMSJwW2Z1oSDqp3TEcE9MrxNPNLoPMLkPUPdugCkR6jUPtl5aDW4H2W7cW7sI7WzzeCrhjOjicd7EWQmqLjjPDcfabweNwUDQTLkKne0MMY4L6t1qW4C1n+GI5/ryIOLCNQRvyGrcg/fxJh84jcAz2mWihVq9HK850KF62Y1KoIrmuQVSJuDQ==
+ bh=XyAyOiER6pHML8WjaASDpfQesdJxvRIAKAVdfsVDenw=;
+ b=PHFBspBr2a2Y6WydNzAC68EK0MXuaK1td0A05Ln67d17L5iPpLkQyQhlKpW7bwfRr2DlVcjKDP++6s3duCQyKBIzc6aDPI/9cYSsxv6G8AaOyf5E3yiQxilxHaGEXLFG3MKFIME2CaM5i3KeUJYPrikgV8CkLR+Xa8J+RD6+oL7ZguTn20qAvdVmnAoUhtbSLT6r7WX3tG0PzcVlmDjsiWehPIBHwIBDPdpr14ZinGQj2JlteNBDayaw0n90ZqpzcceObg6u3sDluc6YnnGDyFqiMNrEivmJ3HfjThQTFKkYwcSFYS817ySse45yNCkKROjEa108eMfi8BV+PUIfgw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org
- smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
- action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
- (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
- s=selector1;
+ 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9ef8U2W/DtG6mGj9GCQhjXXsL8kE/ulrwy0PiCRQsXE=;
- b=FNeEQsK7aK/awYAu2Xd6IQcEfrDCBN6Vdr3UIzrbFAsAty0r041+U5vFJrUSajVHkEdUcX/RX0qcJxtdkrID5WrzV9Ke+1TcndrKVEw1pYsoyOTWz4ZUg6Cc6J9KS8/FiQVIrERmg2fZjvtXCECJRkZuSpqfL5j+USI+bWz3+LqxOuXok8JM7PMcUEH9PwwJ+y0NGXK32jADxMRVm0DXDb2LcHJXOoWPP/SBoIKnui5lyAaFEslNHRO0LtYPIhA0dfGuzkYSxZt3nmqYNV1cJrG1xZ/wBHl4zlJURVDRdU34rQKJFLPXmeCQKHqJMctY1qoUX2JFLERFx+g4IisXsQ==
-Received: from DS7PR03CA0092.namprd03.prod.outlook.com (2603:10b6:5:3b7::7) by
- DS7PR10MB7375.namprd10.prod.outlook.com (2603:10b6:8:d9::21) with Microsoft
+ bh=XyAyOiER6pHML8WjaASDpfQesdJxvRIAKAVdfsVDenw=;
+ b=TQYbj9BE6wWKUC2oHGXfZbXGXCvV+JEf7J2bg1G1pgQBFS1IvbCwv7qht0W4NNtWIGfo4eaUcDJYrzLMfYpdo4adfpg83pDE8HJR9g+J+CleUil6WKwUdEcXl7kPCEfivxT/JRNpocjc/XST8lfxod1kA7O2zz0CParpT3Gd23E=
+Received: from SA9P221CA0027.NAMP221.PROD.OUTLOOK.COM (2603:10b6:806:25::32)
+ by CY5PR10MB6047.namprd10.prod.outlook.com (2603:10b6:930:3c::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.7; Tue, 4 Nov
+ 2025 15:25:22 +0000
+Received: from SA2PEPF00001504.namprd04.prod.outlook.com
+ (2603:10b6:806:25:cafe::a6) by SA9P221CA0027.outlook.office365.com
+ (2603:10b6:806:25::32) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.8 via Frontend Transport; Tue, 4
+ Nov 2025 15:25:22 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SA2PEPF00001504.mail.protection.outlook.com (10.167.242.36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.16; Tue, 4 Nov 2025 09:26:14 +0000
-Received: from DS3PEPF000099D5.namprd04.prod.outlook.com
- (2603:10b6:5:3b7:cafe::e3) by DS7PR03CA0092.outlook.office365.com
- (2603:10b6:5:3b7::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.16 via Frontend Transport; Tue,
- 4 Nov 2025 09:26:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=list.ti.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=list.ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- DS3PEPF000099D5.mail.protection.outlook.com (10.167.17.6) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.6 via Frontend Transport; Tue, 4 Nov 2025 09:26:12 +0000
-Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9298.6 via Frontend Transport; Tue, 4 Nov 2025 15:25:22 +0000
+Received: from DLEE207.ent.ti.com (157.170.170.95) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 4 Nov
- 2025 03:25:12 -0600
-Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 09:25:20 -0600
+Received: from DLEE214.ent.ti.com (157.170.170.117) by DLEE207.ent.ti.com
+ (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 4 Nov
- 2025 03:25:12 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 09:25:19 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE214.ent.ti.com
+ (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 4 Nov 2025 03:25:12 -0600
-Received: from fllvdckhpci021.itg.ti.com (fllvdckhpci021.itg.ti.com [10.64.72.33])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A49PCUj1722858;
-	Tue, 4 Nov 2025 03:25:12 -0600
-Received: by fllvdckhpci021.itg.ti.com (Postfix, from userid 60899)
-	id 6C92F142E38; Tue,  4 Nov 2025 03:25:12 -0600 (CST)
-From: PRC Automation <prc@list.ti.com>
-To: Vishnu Singh <v-singh1@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, <denis@denix.org>, <praneeth@ti.com>,
-	<reatmon@ti.com>, <afd@ti.com>, <c-shilwant@ti.com>, <khasim@ti.com>,
-	<j-sahu@ti.com>
-Subject: Re: [master/scarthgap][PATCH] recipes-bsp: Add TI PCM6240 ADC firmware recipe
-Date: Tue, 4 Nov 2025 03:25:12 -0600
-Message-ID: <20251104092512.3341541-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20251104091846.1599044-1-p-bhagat@ti.com>
-References: <20251104091846.1599044-1-p-bhagat@ti.com>
+ Transport; Tue, 4 Nov 2025 09:25:19 -0600
+Received: from [128.247.81.40] (dtmz023nlvx.dhcp.ti.com [128.247.81.40])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A4FPJjk2163531;
+	Tue, 4 Nov 2025 09:25:19 -0600
+Message-ID: <ac556c03-abbf-4a50-a9e8-1fc91e9c0c6d@ti.com>
+Date: Tue, 4 Nov 2025 09:25:19 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti][scarthgap][PATCH v2] meta-ti-bsp: optee: Add flags to
+ enable RPMB and PKCS#11
+To: <s-joshi@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: <kamlesh@ti.com>
+References: <20251104082759.711246-1-s-joshi@ti.com>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20251104082759.711246-1-s-joshi@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099D5:EE_|DS7PR10MB7375:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8c0291c8-9d36-4718-d436-08de1b84326f
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001504:EE_|CY5PR10MB6047:EE_
+X-MS-Office365-Filtering-Correlation-Id: 573763ad-03f6-433b-a61f-08de1bb65ef7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|61400799027|36860700013|34020700016|82310400026;
+	BCL:0;ARA:13230040|1800799024|376014|34020700016|82310400026|4022899009|36860700013;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?5/8soZKX0xNpv69JKrfbxLBhuiM1CRVLVSaen0AkIsM4ZsNnFdWAVGPuYYwa?=
- =?us-ascii?Q?8EpaKa/t5K/2tao1+nnnoMU+GI6qUet7EFRs/LUbrusnjbm1+U8bQMMam+/i?=
- =?us-ascii?Q?WpqX1Pf305j1825Q8JU4T9AqF0yH9bAgqafjunmIlbIl/KCSrylE0tmb3Jeh?=
- =?us-ascii?Q?ar9KApO8/AiuK/QBPFQmyK2wqCYOzTZQU/Piswb5RyXxoLEy8hpwM4q/wV0w?=
- =?us-ascii?Q?7v1A/ZGEe4qjDuC4oTZv8ArIiFNs0SJP8MAA5w+dSldH8qVqqIGudxZEUMXS?=
- =?us-ascii?Q?CiAARsrfOB7KOSVPBl+U/0mUY9P/cY4hFmMudpR8hZgfVKu9R13Pyvpl71Zf?=
- =?us-ascii?Q?KlVV1NisCa4Fg9vkzAfi3nYfvZKF2qN8K+dNXrjo+psa2tkSdL4F9RrPYWJm?=
- =?us-ascii?Q?D2HEzqUG0HR9/Y7XdluZRWiwYCi8aS5SXip6a4/8WPW5ckh+oblippjogK9f?=
- =?us-ascii?Q?ak5kb+/APhS1LOOenEkuNCcf9h6X+tvFJj08OxGdxh8mXBJiFrws42rW7ybP?=
- =?us-ascii?Q?dtLIsFSNlDrBN3hNw4+q0+RfVrkff8XZLy/W9l8v/OoyoYNmwrO0RmxZkJ4f?=
- =?us-ascii?Q?7D2pA1dtCQlaS1JTvJia2blI6fji1Al+oWi608ZPqohMScO0AP18dwwsgy0V?=
- =?us-ascii?Q?1H3hzN+IFRaW2m3s51WZ/LIU73JgMiftqoS6nxO/ufFIftElXF6icZ8YfkWf?=
- =?us-ascii?Q?mlD260+uRLA+2GpKm7D83OnmyLnmUL4W6UK4zXc5lB/c3WD+nQl7+JzbLOD3?=
- =?us-ascii?Q?44BrGneEiA1oZINmQyJ7OrgsRsniRof+YATzjEM7Zh7DnNAls8Vsux7UPwVu?=
- =?us-ascii?Q?+mpmoPvrb4DpNYcQP8W4u69SZPMWtobMLPCHyqb4pCu1077K4LFvCHFcWLf0?=
- =?us-ascii?Q?y7QXTy4KNXG/ksD71VpFLBfgSmV5pvEUN80deXDPnuRSZfIhQXLDJzcKXg6i?=
- =?us-ascii?Q?g5kRC1A4cIhcQx6Ls4fbEbBr/rh8nEbXrfGfyng+CEv6YLWCvXj82C7O67Ru?=
- =?us-ascii?Q?DuE9CmqjKd7kTqGdowCAetLfZ9jFrkOMd6OQ1Rs4UaUWWuDyXGBYx+lokN/F?=
- =?us-ascii?Q?YUBKZH5WHT/19UK3QrdUekSrcp/qxhVg7iLnyUgjajROv7SKzhj0xiP/DpXW?=
- =?us-ascii?Q?kLjlOVC/pfbfh5CzpnFsqcSQQ6CNsbU76wiawxy7dgfLHW7956t+UPzpw3V2?=
- =?us-ascii?Q?bjvME0DDK1p0IS7HDTxOdW8LmzXy6lu+3aZAFP/zCihX7He3tRhgSoNwt4IQ?=
- =?us-ascii?Q?62DN3zErKmE2Jq6WHaOiDhR2kyvypFHY39CYoXH4bUgoYL5JlFZJ/Y948uvV?=
- =?us-ascii?Q?6pd+VYhoYgnueGQUSyu1CDQiIOPE0JQE785G3LimNrGINGErHpHIyhCJvTem?=
- =?us-ascii?Q?vQu8xMPW30fB6X1AtTDLQ7dJlfMqL4vkYMG/SInnGOJ6gfDIfuThRj19Dr9m?=
- =?us-ascii?Q?XR34iTusXC8TBAbIKxuZTHPSs+Ki3MN2YHqjSyCG7YSCkIj3EBcIUehzPhAI?=
- =?us-ascii?Q?CKPxBUIX3gyBh/vOqExioIle+tSw9dmEITmOJFSr9lqNdRdEvPy//5vW+CKz?=
- =?us-ascii?Q?x6Z9USMZYpiqduHpC04=3D?=
+	=?utf-8?B?RWI4Y2hRTnJaYnhKdkt2ZzNrRDNraTFCTnNVdENoRkpTcWhCcGRweU5ndFhY?=
+ =?utf-8?B?UkVxQ0dyQXRiZVZ0T1NLYUVtQVYvRjFhNlVBSkM5VE5VUWFhZXNlUm1tYTVQ?=
+ =?utf-8?B?b2R6djRuNi9pKzRTK0NvWHk4V0FQS1NkOUxaTGRzWkpyaUhpbEs0cnpMMk02?=
+ =?utf-8?B?eHAwODFzLzdDc3E3WTB6VlpYRWJCSWVYUG1pWmNRMXcrUEtiYldXU3NiYlFy?=
+ =?utf-8?B?OExWTVJZdVVNV2thVlpTREVsRi9YcUJQVUt5cU5WbVZtK0QzOW8yakg5U0FK?=
+ =?utf-8?B?TmxETzV0Z2xSaDFEUktLYlNnUXRJVHlsc1R0aHkwbktDajlBcmVSSjFSTjFW?=
+ =?utf-8?B?ZUo3YkJoblRzT2FmNTcrVDZmRG05ZjZrSnJGcTMvalJQTzJOYlNJend1RTgx?=
+ =?utf-8?B?cFRnOUhXb3JZcmRNcnJkMU9EeWpxTDlQOXYrcmVvc1JLVjlKS1d1SFhIbVF2?=
+ =?utf-8?B?MitXV01sdGhoYW5VOXNHN2x3UVRZek9DYzRXeEVpa3ludkMxc0RjbFdOa0k1?=
+ =?utf-8?B?SHBpWnQ2UmF4K3FtTSt1bElrOWlVbE0rZDZpN2JKNXY2U3BhL0lZZzlrakFT?=
+ =?utf-8?B?Nm9Wbno3Z1ozajdnMWNGTnYzbmt1VFhsVy9Ud3BBTDlSNnUwd0VKNFB5VkhQ?=
+ =?utf-8?B?QncrL01XWFJaNi9MSkNmTkxhNllZbjRuL3FmcUxiem1QZFJBaXBHaTFKaklp?=
+ =?utf-8?B?RXRCSVVId1ZEZi90QTJnSUs0VkRFb284aENKc2dhRkJMenB4eWtnR0h1YUpX?=
+ =?utf-8?B?Zjlab05ienNiTXM3R3VnSFBmMGVQSzhId0lRS1Mzc3h4OS93VzE5TmFxZm9N?=
+ =?utf-8?B?bUl2NTJNTGJDaGd3R1JjVVJwZGdha3NxckhDdG12M2xmQ1NLQkRtbVplUW5j?=
+ =?utf-8?B?ZllDZFJOczdodldjYjFlRlZmZkZBdFJGMDlmdE4xOGF1WHZPSjZrb0pZazRp?=
+ =?utf-8?B?L1h3ZkRydUNNTGJPcW1IRzhqZUpxMjJYandicDNqWVYwcE5tbHJ3cTZLcmx4?=
+ =?utf-8?B?WlJCU3UzVC9HaEtrUHZ1Mit4YlhPeUY2aThPVUtrWjdWUk4zd1d1QlZIeHBs?=
+ =?utf-8?B?OGs0b0pGTFRSVjlkSTZRaTFZZm5RSFdTTWpNN3JURmZKekFGMjM3dDUyNmwx?=
+ =?utf-8?B?SHFlMSt6eUdyTXhDazZSek9wRmRUU0Nsazg3UGhCM0hOS1o0WVNVeWdqU0JH?=
+ =?utf-8?B?dm5IaDRrbnZWcWZTelRxU0NHRzRjS0podkFnWFB5Uk4vclZRUnpOWTdRTmpB?=
+ =?utf-8?B?NytYTGMrVXBKNlJNU0FDRzBVMnc4MHZYTEtFTHVGdTJSa3Qvbk5uWHZQdG1k?=
+ =?utf-8?B?Nm1waWs1bVl0MERBUlM1enh1MUkvQk5qRVJsdjFsUk41aS90N2FuQWREb1pp?=
+ =?utf-8?B?cG9STmN5azQyZzcrWU1FOCtWY2t3dWNJWW5Dc2dQZTZqUlZ0K0hTUDBDZEJv?=
+ =?utf-8?B?bnZMcm56VFVnR1d5dFlEaWw5RTcrQnMyd282QUZZQjdxYVZFM0Y3RG9zVGNH?=
+ =?utf-8?B?bEo4VEFDZVM1anFhNnY5Wi9JRUVHY1FJZ2ExZmU0dTdSR0JhMnJBMHJ0QUF4?=
+ =?utf-8?B?T3dFRCtzSXNoSzFMRjg3Mk5sUzVrU3k0OGwzdHYyaWdVYXAvdTZxWnRLMWVG?=
+ =?utf-8?B?b1V1Uy9RbzUrQVBVSmxYUGJ0RmZCMjhwalVwR2VMeTBTOU41d0dhNUpncHg0?=
+ =?utf-8?B?alRwZzl0dmdndDRpNG4zQUpvT1Y2TUVWemg5TWVLUUF1Qng1OTdwaUFLY0RB?=
+ =?utf-8?B?d3ZvTm85akpFc0JZS1QrRGNPd3JxYTkrQzF4clozOXdZK3NLZzlLdjZxQXhQ?=
+ =?utf-8?B?RTQrN3ZiN3NCWlIydStWakdab0I4RGFZM0hzQjVHZFpJelVCdlRRSWdjOXpy?=
+ =?utf-8?B?OXJleS9aVkl0NVMwOE9vMUFRZ2xScGpDMVFpVDBXRUljMDIxVnlQcEJwYmlT?=
+ =?utf-8?B?OS9oRTIva3BSUjF5bWFaQkxoMytSMGg5VUVzK1E4ZXhwZ1VpRnp2TDdST0tH?=
+ =?utf-8?Q?iONJaY8nGjFKcggeaTHP8JYtcZpKjg=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(61400799027)(36860700013)(34020700016)(82310400026);DIR:OUT;SFP:1101;
-X-OriginatorOrg: list.ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2025 09:26:12.7953
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(34020700016)(82310400026)(4022899009)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2025 15:25:22.4032
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8c0291c8-9d36-4718-d436-08de1b84326f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 573763ad-03f6-433b-a61f-08de1bb65ef7
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	DS3PEPF000099D5.namprd04.prod.outlook.com
+	SA2PEPF00001504.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB7375
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR10MB6047
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 04 Nov 2025 09:26:21 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19226
-
-meta-ti / na / 20251104091846.1599044-1-p-bhagat
-
-PRC Results: PASS
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-patches: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-Patches
-----------------------------------------
-WARN - [master/scarthgap][PATCH] recipes-bsp: Add TI PCM6240 ADC firmware r=
-ecipe
-    WARN: Commit message does not include file/recipe name: recipes-bsp: Ad=
-d TI PCM6240 ADC firmware recipe. (COMMIT-MESSAGE-2)
-        patch
-   =20
-    WARN: Commit message should not include directory path to recipe: recip=
-es-bsp: Add TI PCM6240 ADC firmware recipe.
-              recipes-bsp: (COMMIT-MESSAGE-3)
-        patch
+ <meta-ti@lists.yoctoproject.org>; Tue, 04 Nov 2025 15:25:33 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19227
 
 
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  apply-yocto-patch: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Summary:
-- Patch Series: [master/scarthgap][PATCH] recipes-bsp: Add TI PCM6240 ADC f=
-irmware recipe
-- Submitter: From: Paresh Bhagat <p-bhagat@ti.com>
-From: Vishnu Singh <v-singh1@ti.com>
-- Date: Date: Tue, 4 Nov 2025 14:48:46 +0530
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 7f2bd9da684f733fe10ceadddcb802190=
-9741371
+On 11/4/2025 2:27 AM, Suhaas Joshi via lists.yoctoproject.org wrote:
+> RPMB is a secure storage mechanism used to store data in a separate
+> partition of compliant storage devices such as eMMC, NVME etc. It is
+> provided by TEE's, including OP-TEE.
+> 
+> Add the following build options to optee_os:
+>      * CFG_REE_FS=n -> disables the default REE_FS, this is so that
+>        RPMB can be be demonstrated
+>      * CFG_RPMB_FS=y -> enables the RPMB feature
+>      * CFG_RPMB_WRITE_KEY=y -> generates and automatically writes the RPMB
+>        key if not already written (see NOTE below).
+>      * CFG_PKCS11_TA=y -> enables PKCS#11 API support in form of a
+>        Trusted Application. This commit also copies this TA to the
+>        relevant location.
+> 
+> In optee_client, do the following:
+>      * Add RPMB_EMU=1 option. This is enabled by-default, but even so,
+>        enable it explicitly. This option makes tee-supplicant emulate
+>        RPMB instead of using the actual hardware. The actual hardware
+>        should be used consciously since the key, once written, cannot be
+>        re-programmed. But in the emulated flow, each reboot wipes the key
+>        off, since the "emulated RPMB" is just a portion of primary
+>        memory.
+>      * Copy libckteec library files to relevant locations.
+> 
+> NOTE:
+> 
+> CFG_RPMB_WRITE_KEY=y sends the key in *plain text* to the normal Linux
+> world. This might be OK in development environments, but it is a huge
+> security risk in production! Therefore, this option must always be
+> disabled in production images.
+> 
+> RPMB_EMU=1 emulates RPMB, instead of using the real one. With
+> CFG_RPMB_WRITE_KEY=y, it also prevents the key from being written to the
+> real device. This option, also, must be disabled (RPMB_EMU=0) in
+> production environment.
+> 
+> Both of these options are enabled for the purposes of demo'ing RPMB
+> examples only, but are unsuited for production.
+> 
+> Signed-off-by: Suhaas Joshi <s-joshi@ti.com>
+> ---
+> changes from v1:
+> - move "FILES-${PN}*" lines from .bbappend to .inc
+> - actually add RPMB_EMU=1 explicitly
+> - give a more elaborate explanation of CFG_RPMB_WRITE_KEY and RPMB_EMU
+> ---
+>   .../optee/optee-client-ti-version.inc              |  3 +++
+>   .../recipes-security/optee/optee-client_%.bbappend | 14 ++++++++++++++
+>   .../optee/optee-os-ti-overrides.inc                | 10 ++++++----
+>   3 files changed, 23 insertions(+), 4 deletions(-)
+> 
+> diff --git a/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc b/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc
+> index 289ca5b5..7e4505ff 100644
+> --- a/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc
+> +++ b/meta-ti-bsp/recipes-security/optee/optee-client-ti-version.inc
+> @@ -1,2 +1,5 @@
+>   PV = "4.7.0+git"
+>   SRCREV = "23c112a6f05cc5e39bd4aaf52ad515cad532237d"
+> +
 
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-wip
-- Commit Author: Ryan Eatmon <reatmon@ti.com>
-- Commit Subject: ti-core-initramfs: Set IMAGE_OVERHEAD_FACTOR
-- Commit SHA: dec3f236ac32ab2ea80e6d0640fc38ad26dbe5da
+> +FILES:${PN} += "${libdir}/libckteec.so.0 ${libdir}/libckteec.so.0.1 ${libdir}/libckteec.so.0.1.0"
+> +FILES:${PN}-dev += "${libdir}/libckteec.so"
 
-Patches
-----------------------------------------
-All patches applied
-
-scarthgap
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Summary:
-- Patch Series: [master/scarthgap][PATCH] recipes-bsp: Add TI PCM6240 ADC f=
-irmware recipe
-- Submitter: From: Paresh Bhagat <p-bhagat@ti.com>
-From: Vishnu Singh <v-singh1@ti.com>
-- Date: Date: Tue, 4 Nov 2025 14:48:46 +0530
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 7f2bd9da684f733fe10ceadddcb802190=
-9741371
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: scarthgap-wip
-- Commit Author: Vishnu Singh <v-singh1@ti.com>
-- Commit Subject: ti-librpmsg-dma: update ti-librpmsg-dma SRCREV & LICENSE
-- Commit SHA: 879abf6914437e3a4da45fd515f33ac583bbddc5
-
-Patches
-----------------------------------------
-All patches applied
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-repo: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-PASS
-
-scarthgap
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-PASS
+These changes should be in the new optee-client-ti-overrides.inc file
+(see next comment).  The optee-client-ti-version.inc should just contain 
+the needed information for changing the version.
 
 
+> diff --git a/meta-ti-bsp/recipes-security/optee/optee-client_%.bbappend b/meta-ti-bsp/recipes-security/optee/optee-client_%.bbappend
+> index f193e78b..1727caa5 100644
+> --- a/meta-ti-bsp/recipes-security/optee/optee-client_%.bbappend
+> +++ b/meta-ti-bsp/recipes-security/optee/optee-client_%.bbappend
+> @@ -2,3 +2,17 @@ OPTEE_TI_VERSION = ""
+>   OPTEE_TI_VERSION:ti-soc = "${BPN}-ti-version.inc"
+>   
+>   require ${OPTEE_TI_VERSION}
+> +
+> +EXTRA_OEMAKE:append:am62xx = " RPMB_EMU=1"
+> +EXTRA_OEMAKE:append:am62px = " RPMB_EMU=1"
+> +EXTRA_OEMAKE:append:am62ax = " RPMB_EMU=1"
+> +EXTRA_OEMAKE:append:am62dx = " RPMB_EMU=1"
+> +
+> +do_install:append() {
+> +   install -d ${D}${libdir}
+> +
+> +   install -m 0644 ${B}/libckteec/libckteec.so.0.1.0 ${D}${libdir}/
+> +   ln -v -sf libckteec.so.0.1.0 ${D}${libdir}/libckteec.so.0.1
+> +   ln -v -sf libckteec.so.0.1 ${D}${libdir}/libckteec.so.0
+> +   ln -v -sf libckteec.so.0 ${D}${libdir}/libckteec.so
+> +}
+
+I think you missed Denys' point.  There should be NOTHING in the 
+bbappend file except for including two .inc files.  So all of the 
+changes above need to move into a new optee-client-ti-overrides.inc 
+file, and the correct include lines in the bbappend.  You can see the 
+optee-os_%.bbappend for an example.
+
+Also, are these files needed for ALL platforms, just k3, or just the 
+four listed above?  Is this libckteec.so file related to the RPMB_EMU=1 
+option, or does it exist in all situations?
+
+
+> diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+> index 61a74a06..0b940e5c 100644
+> --- a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+> +++ b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
+> @@ -6,11 +6,11 @@ EXTRA_OEMAKE:remove = "CFG_MAP_EXT_DT_SECURE=y"
+>   EXTRA_OEMAKE:append:k3 = " ${@ 'CFG_CONSOLE_UART='+ d.getVar('OPTEE_K3_USART') if d.getVar('OPTEE_K3_USART') else ''}"
+>   EXTRA_OEMAKE:append:k3 = " ${@ 'CFG_TZDRAM_START='+ d.getVar('OPTEE_K3_TZDRAM_START') if d.getVar('OPTEE_K3_TZDRAM_START') else ''}"
+>   
+> -EXTRA_OEMAKE:append:am62xx = " CFG_TEE_CORE_LOG_LEVEL=1"
+> +EXTRA_OEMAKE:append:am62xx = " CFG_TEE_CORE_LOG_LEVEL=1 CFG_REE_FS=n CFG_RPMB_FS=y CFG_RPMB_WRITE_KEY=y CFG_PKCS11_TA=y"
+>   EXTRA_OEMAKE:append:am62lxx = " CFG_TEE_CORE_LOG_LEVEL=1"
+> -EXTRA_OEMAKE:append:am62pxx = " CFG_TEE_CORE_LOG_LEVEL=1"
+> -EXTRA_OEMAKE:append:am62axx = " CFG_TEE_CORE_LOG_LEVEL=1"
+> -EXTRA_OEMAKE:append:am62dxx = " CFG_TEE_CORE_LOG_LEVEL=1"
+> +EXTRA_OEMAKE:append:am62pxx = " CFG_TEE_CORE_LOG_LEVEL=1 CFG_REE_FS=n CFG_RPMB_FS=y CFG_RPMB_WRITE_KEY=y CFG_PKCS11_TA=y"
+> +EXTRA_OEMAKE:append:am62axx = " CFG_TEE_CORE_LOG_LEVEL=1 CFG_REE_FS=n CFG_RPMB_FS=y CFG_RPMB_WRITE_KEY=y CFG_PKCS11_TA=y"
+> +EXTRA_OEMAKE:append:am62dxx = " CFG_TEE_CORE_LOG_LEVEL=1 CFG_REE_FS=n CFG_RPMB_FS=y CFG_RPMB_WRITE_KEY=y CFG_PKCS11_TA=y"
+>   EXTRA_OEMAKE:append:j722s = " CFG_TEE_CORE_LOG_LEVEL=1"
+>   
+>   do_compile:append:k3() {
+> @@ -49,6 +49,8 @@ do_install:append() {
+>       install -m 644 ${B}/*.optee ${D}${nonarch_base_libdir}/firmware/ || true
+>       install -m 644 ${B}/bl32.bin ${D}${nonarch_base_libdir}/firmware/ || true
+>       install -m 644 ${B}/bl32.elf ${D}${nonarch_base_libdir}/firmware/ || true
+> +    install -d ${D}${nonarch_base_libdir}/optee_armtz
+> +    install -m 644 ${B}/ta/pkcs11/fd02c9da-306c-48c7-a49c-bbd827ae86ee.ta ${D}${nonarch_base_libdir}/optee_armtz
+>   }
+>   
+>   optee_deploy_legacyhs() {
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#19223): https://lists.yoctoproject.org/g/meta-ti/message/19223
+> Mute This Topic: https://lists.yoctoproject.org/mt/116113939/6551054
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [reatmon@ti.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
 
