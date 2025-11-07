@@ -1,146 +1,154 @@
-Return-Path: <res.sapp@gmail.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D68FCCF9E3
-	for <webhook@archiver.kernel.org>; Fri,  7 Nov 2025 04:00:07 +0000 (UTC)
-Received: from mail-oo1-f51.google.com (mail-oo1-f51.google.com [209.85.161.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4070.1762488004184364406
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49CC0CCFA05
+	for <webhook@archiver.kernel.org>; Fri,  7 Nov 2025 16:29:24 +0000 (UTC)
+Received: from PH7PR06CU001.outbound.protection.outlook.com (PH7PR06CU001.outbound.protection.outlook.com [52.101.201.35])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3146.1762532954811518288
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 06 Nov 2025 20:00:04 -0800
+ Fri, 07 Nov 2025 08:29:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NO85wdJU;
- spf=pass (domain: gmail.com, ip: 209.85.161.51, mailfrom: res.sapp@gmail.com)
-Received: by mail-oo1-f51.google.com with SMTP id 006d021491bc7-651cda151f0so150815eaf.3
-        for <meta-ti@lists.yoctoproject.org>; Thu, 06 Nov 2025 20:00:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762488003; x=1763092803; darn=lists.yoctoproject.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GweB1FVChkhCGRucyXi2vFwqYcC8nHEXqrjXWf4zn+g=;
-        b=NO85wdJUIq8VjW09M1WmklAgSs8dDQU/3iqWt5QZWn2ClEOp9l1R/NW/YjoN8Ojllb
-         ew88JgzDNLZU2qLKrqC5G+walBTpcXzwPOHn/shyIDwhNC/sKPeHt5RfYaOSejio0Be3
-         W5AvsKT91RITuOiD6JZ1hPRWRHoUQX9sPM8DIJMSutsSdNn9ai/YUqN+jGQ8Sg6M0WdC
-         SzEnfqggC5g4ALGYk5Q4h5ZO1wCs6DX/Rerg4pljCyMTQ0RHMvTQrXGB4txIAEpvynzj
-         oyMqMxeYZOVDkti1C+DpJrqhBQX3RSekn8X2tnO8dAaAk3bEjlgPXbDcgQ4EbzZ3NQ/c
-         JI7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762488003; x=1763092803;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=GweB1FVChkhCGRucyXi2vFwqYcC8nHEXqrjXWf4zn+g=;
-        b=Uze6Afkwfk1VxKCWBjbKK0CyAVumB5uinEyaw8Ehqg5w4D0RH/hlFGdCaiqUbU5Aay
-         /0rKkdCC1rPSQtT5pZISpVAgyX6JX/hYQJoFQDoT4tEdYv4b6rPH2zoWjU30LHq70zg9
-         LOlOcj34xWG/dfcmzDnDnFTt0cVcOKsiplqndZ78w9tV3OPKVvd0RBLP9MeXmgwPOCPk
-         snt7jjsue/4zHnF6l0Se5P7p1X9pO5cw5Z0/+hnRCZ/dPBAq7eJ4nLeC2jDBrpXFDiJf
-         /3hTWbbu49lsa2WCuPZgk1NfoU9fhKoOZuO31czLlWBRVUy2VU1gFxiDtb09fUsyWCfK
-         9EdA==
-X-Forwarded-Encrypted: i=1; AJvYcCVyCMmO+PW3gzeBy43kXG2D4Mv/pJ1N0+fpjgcEvH/rCn27UqRO+GBQXgPFbPajblWllbBVQLTQ@lists.yoctoproject.org
-X-Gm-Message-State: AOJu0YywVfOUMQr7AIoKpiRAc1hQ6DptUe8JPanB0BxLJR1k5Iq9W8NS
-	6jyjy1A0DTB5Sr+H1bMTr0iMROFd0oopm5s1buU134236atWZ+5rsqSU
-X-Gm-Gg: ASbGnctJXV+8crMflgqvk28rWVbAQp1GlhzJd0GHRaYfjUiu4aXfSIS3L1vvN9FgBia
-	7eitMcsmU3J9x8BG3O8bOzXS42/NyFYVKB8ZGvBSEU1IHOt/+d41t6XSBYbxJkYXk6VmJVb5/wq
-	gaQnuQqztmFHyyeWBrOp/mUB8XonlYB1JIkrQpoG5SN8vCfPzTO8uV/NBf9Ur0WflJkkSDr2ips
-	kwlRmCkrMDO2pUnb0dybSuu0ax1uCY9B5RiFhsHpHwpiU01DTYxgHK+pin0mWFCe1hr5n2IT3rC
-	qPnJn+FRnrITR260O46WvhiQ1Voq8H3k3S+QkjftqrWNZWeHUbCy64n/z3tZroMGz9qQ+X/PJju
-	95lclBkpOzHDuCiDEQRDJs3sdaCYKlp0V94kKJNq8i0OvRKhg6DtwbnwXD2YVLDLk7fiRtR8Q2j
-	fVOghcOg==
-X-Google-Smtp-Source: AGHT+IHYFQWNe9Yp/AUMH3eE68cdjOBpvve3x9VIir08N1b/VjUM2zoa1/MKQJ9Jid8kJjzdsS8mSg==
-X-Received: by 2002:a05:6808:2e46:b0:450:5f:7941 with SMTP id 5614622812f47-45015f5d4b0mr1014966b6e.61.1762488002868;
-        Thu, 06 Nov 2025 20:00:02 -0800 (PST)
-Received: from localhost ([99.150.150.17])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-656c57ec231sm1671252eaf.17.2025.11.06.20.00.02
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 06 Nov 2025 20:00:02 -0800 (PST)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Thu, 06 Nov 2025 22:00:02 -0600
-Message-Id: <DE25UQGWIZQL.1QAOVGFZ9KHIE@gmail.com>
-Cc: <rs@ti.com>, <praneeth@ti.com>, <reatmon@ti.com>,
- <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][scarthgap/master][PATCH] layer: add github MIRRORS
- definitions
-From: "Res Sapp" <res.sapp@gmail.com>
-To: "Denys Dmytriyenko" <denis@denix.org>, "Res Sapp" <res.sapp@gmail.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20251107010115.1974047-2-rs@ti.com>
- <20251107012234.GQ3125@denix.org> <DE24KCGE6W2I.2SEIT58IEUNC9@gmail.com>
- <20251107031749.GR3125@denix.org>
-In-Reply-To: <20251107031749.GR3125@denix.org>
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=HK+abZsw;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.201.35, mailfrom: reatmon@ti.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=iCXhm9AZdXnSxmwzu0RDAB86fIQUpODRPsOOZLQmGklFZBRbo0DvrccRgUTBKw57/QWI3Pi1b0Eev4kvpzrTY84GMrvdkqPV+5cJj1m7W884v9uUAyb559dk6OyG5lTSXJGSLfmW+c1pHca/6t5/e77UeWYWhjq45e7liykD7qXjCZafOEbyJRfwSTyMKhatAH3i833qDNe+YWxZosVKeCUNyDzJ7WgQVoSXVDxGGdAKgZZnh/Bc3l/DhyAG6I2KdvPpH0SVW7bQQzg3P/BcLZPQW22C3GWwhVxq6Xt+Ads7wU/LsTphDTd5rtaLo1OtYRPGP91bJiHUtcPAJ6naPQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YC1P8JyvZH0aqFMYoKScvWUJ/6/av75H2xOF+XzG50M=;
+ b=uQuS0BbJDoOsjdhhb7KhcUddNGZccrvIFUqeylS+5Ga3WhdUkA/irZiJYVmmhCW9DEk2BIjhuERt/PQtjRaMRhrSYpMnKYP81tKherXDiwWfTzbZ6KQnsFBj8AOL14Ib7vb0LAuH9SjJ0AMTv/jg8kKHwUgBirOKmEAYFWg6ekAt/wWY7D8lIaf62ZaRZXZnda6a97oMby3oXtYppVxuIDPgLK01wnRNjDNTxK+dIcOgWtUgexaVix0yb3XW4+VEVhU84LxevZkpcThos30pH/mCUk+pqgOqKJPF2yUsmSaoKmASdVGJbsbpjtJI9vA0W5qHj4V1wgw4YN/jUND+Rg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YC1P8JyvZH0aqFMYoKScvWUJ/6/av75H2xOF+XzG50M=;
+ b=HK+abZswGFNOBZz8VizL9JdSEfQP00iEYd22t/ceSsVyN3+nbI3zaLZe/ad6jexufsSk5L5X2Xj5s87YVU0P+XwSHzVxlzbtz/GYDd6MrgHVTUkRZih3BZSMM8+IkaNoXDm8DdL33ry6jkK5vdmsh6zWcybtai9OqMje8g6jPSs=
+Received: from SJ0PR05CA0019.namprd05.prod.outlook.com (2603:10b6:a03:33b::24)
+ by MN2PR10MB4255.namprd10.prod.outlook.com (2603:10b6:208:1d2::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.8; Fri, 7 Nov
+ 2025 16:29:11 +0000
+Received: from BY1PEPF0001AE1C.namprd04.prod.outlook.com
+ (2603:10b6:a03:33b:cafe::2c) by SJ0PR05CA0019.outlook.office365.com
+ (2603:10b6:a03:33b::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.8 via Frontend Transport; Fri, 7
+ Nov 2025 16:28:55 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BY1PEPF0001AE1C.mail.protection.outlook.com (10.167.242.105) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9298.6 via Frontend Transport; Fri, 7 Nov 2025 16:29:10 +0000
+Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 7 Nov
+ 2025 10:29:07 -0600
+Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 7 Nov
+ 2025 10:29:07 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 7 Nov 2025 10:29:07 -0600
+Received: from sneezy (sneezy.dhcp.ti.com [128.247.81.222])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A7GT7vw3321758;
+	Fri, 7 Nov 2025 10:29:07 -0600
+Received: from reatmon by sneezy with local (Exim 4.90_1)
+	(envelope-from <reatmon@ti.com>)
+	id 1vHPKl-0000L5-DU; Fri, 07 Nov 2025 10:29:07 -0600
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
+	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH] check_yocto_rules: Add new exception for packagegroup-ti-core-initramfs.bbappend
+Date: Fri, 7 Nov 2025 10:29:07 -0600
+Message-ID: <20251107162907.31733-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY1PEPF0001AE1C:EE_|MN2PR10MB4255:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9ce600c2-391b-4f66-7d31-08de1e1ac7d3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700013;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?vLjUPxYzuhY3yrs5iJH4stteVDzP5nUp0l3s4tswRev4Lm+re31qGvcfTUHz?=
+ =?us-ascii?Q?7cS/pdkcKOqXtGBu1IzM9Ud618KetItOHnQO6+lpQBi6nFKbIr/jdTnRvhng?=
+ =?us-ascii?Q?650Ja8ot6rvDQO6q/oQaSodfURvcg/Nl3dcitKwfls1m4A1Mw6JAkMotY90F?=
+ =?us-ascii?Q?KR4g5+wc9zkaquBvcnNbGNcWCK9m2XemZS4dSz9DbsqLe3YA0DXVT1Rwmmgo?=
+ =?us-ascii?Q?OQMd63aULe201EV/MajPyX8m+Dpi/6EMZeZAKYVDFqqc+pQNecGHx0JdKTg6?=
+ =?us-ascii?Q?Nf7GkmrmLmHVf/vzJ55vvf1SqJ+NwUk0DJ/bU0PhcdOClerrXykKfalY7S98?=
+ =?us-ascii?Q?FSgCMT9XWNxks3evmugfJ4z1xCwx1Dj84Tl0CTbO3ANqquJLr4cmYLN8pLlL?=
+ =?us-ascii?Q?GAQD9s+NoEXeq4CrQD/fk8PNNk6bkqAi3obL7TOKg7waV/S1K9+GyAfa8RUU?=
+ =?us-ascii?Q?+Qn8w57pakxjELagHbtehBhz1kG7j73eNKwRbyAty26+o6wHPvpOnFj7Udzj?=
+ =?us-ascii?Q?uJrKhcbaRakpmdiMRCRxrAEM0biXCm1lheS99QqZO9A8ak29OkWfAWFfQRIC?=
+ =?us-ascii?Q?QL/IMquxIXR/vFvvLo0JBITLlpQSNM23dT5MDwLaBbES7dEYGkD4fdhnwV0u?=
+ =?us-ascii?Q?eYhTV8I98jjhgiR3M5GA0e0HR6e+V6v0IHKCGBRFuE5JJMgN2OO8TIVP+DSM?=
+ =?us-ascii?Q?i7EL327qCoGzIY1Vu3W+0Xp3uNVkL8ma4If9uL/sFdXNNGNm+oxcG/I0o/K4?=
+ =?us-ascii?Q?eiG0oAGFbJkcbJAWjC2mR3SvhOKGb8Fq4yU2COwBQfuu0FZSC0XUiD6eh6r7?=
+ =?us-ascii?Q?iNeAiF6NajT7nz3cpwPn6yQt1A52hwjkuYIsTt6WEdDTqJkQNBivhFzLCQ6N?=
+ =?us-ascii?Q?I6RigBhBLanIDkJm4QpDI/OV94BCeQ3aA+M5Wtfui5G6PITIYJSCbAYSu2MV?=
+ =?us-ascii?Q?z9dv9jLdfj1eCgTZdubCVp9PPdSvVw0q3o43vVM5ZrmlkLQ9pxNHfKUlyg6e?=
+ =?us-ascii?Q?4J5+TzkwqCO+Pd/uhel9mIFEwe2dsz6VrGPnGb4G2vTjB+kqCn5tYaI1gVIU?=
+ =?us-ascii?Q?7T4sCbyD1w0x4x4XSZn5d/yr2lVB6ldodD4DLncq2dxIu5iUmWo1LYwoLcaw?=
+ =?us-ascii?Q?4ecE71GZKDBGf6tNcZbgP4IY8mVmGXhKdobYuE9zmB+YiQpV5PyodAAp7KCO?=
+ =?us-ascii?Q?PTBQcj8AS7srp8jds/xkFYmwczjAxtSA8QDSG3ireOXIVLXg1fNXmaO+PqVn?=
+ =?us-ascii?Q?dpv13f4Du80W5zCFBQoU2fPHeCjEQxU40N+mrZgOfFE58TuoaC/ezcw3sTxt?=
+ =?us-ascii?Q?3LL3gdr5HEAn1GxUeJQcO2OC6qsV4e0U++DrdorHcapFMCPo/IL0zz7u+fkr?=
+ =?us-ascii?Q?UQKiiNzpOdkz66xRxmKCyWGJs3QlCeV3LfMCRs/tsbZjmjViIIdFmInPIWTU?=
+ =?us-ascii?Q?PF1wGEOHIy2POr4PUzLigZky7/SGlYF3J7dMJZVU+g7u7BjkIFpOLhUTGDM3?=
+ =?us-ascii?Q?olJaTRH+73maJheB9P83uVl0M/z6gLbAFBsXNRgmgr5AiYI01eFrOtk76uPr?=
+ =?us-ascii?Q?rdNjJW1qgBQlsbgvirY=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013);DIR:OUT;SFP:1101;
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2025 16:29:10.2949
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9ce600c2-391b-4f66-7d31-08de1e1ac7d3
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	BY1PEPF0001AE1C.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR10MB4255
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 07 Nov 2025 04:00:07 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19238
+ <meta-ti@lists.yoctoproject.org>; Fri, 07 Nov 2025 16:29:24 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19239
 
-On Thu Nov 6, 2025 at 9:17 PM CST, Denys Dmytriyenko wrote:
-> On Thu, Nov 06, 2025 at 08:59:26PM -0600, Res Sapp wrote:
->> On Thu Nov 6, 2025 at 7:22 PM CST, Denys Dmytriyenko via lists.yoctoproj=
-ect.org wrote:
->> > I wonder how that will affect the signatures for the YP Compat... [Not=
- even=20
->> > talking about evil github reliance...]
->> >
->> >
->> > On Thu, Nov 06, 2025 at 07:01:16PM -0600, rs@ti.com wrote:
->> >> From: Randolph Sapp <rs@ti.com>
->> >>=20
->> >> We have some projects mirrored to GitHub currently. It makes sense to
->> >> add a MIRRORS entry for git.ti.com sources to fall back on in the eve=
-nt
->> >> git.ti.com is unreachable.
->> >>=20
->> >> Placing this in the main BSP layer configuration file should be all t=
-hat
->> >> is required for this and any other layers that depend this core layer=
- to
->> >> fall back to GitHub.
->> >>=20
->> >> Signed-off-by: Randolph Sapp <rs@ti.com>
->> >> ---
->> >>=20
->> >> Tested locally by making git.ti.com ns lookups return NXDOMAIN and th=
-en
->> >> requesting to fetch linux-ti-staging.
->> >>=20
->> >>  meta-ti-bsp/conf/layer.conf | 5 +++++
->> >>  1 file changed, 5 insertions(+)
->> >>=20
->> >> diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.con=
-f
->> >> index e3a28628..d87d040b 100644
->> >> --- a/meta-ti-bsp/conf/layer.conf
->> >> +++ b/meta-ti-bsp/conf/layer.conf
->> >> @@ -36,3 +36,8 @@ TI_COMMON_DEPLOY ?=3D "${TOPDIR}/deploy-ti"
->> >>  DEPLOY_DIR_IMAGE:ti-soc =3D "${TI_COMMON_DEPLOY}/images/${MACHINE}"
->> >>  SDK_DEPLOY:ti-soc =3D "${TI_COMMON_DEPLOY}/sdk"
->> >>  PSEUDO_IGNORE_PATHS:append:ti-soc =3D ",${TI_COMMON_DEPLOY}"
->> >> +
->> >> +MIRRORS +=3D " \
->> >> +    git://git.ti.com/.* git://github.com/TexasInstruments/BASENAME;p=
-rotocol=3Dhttps \
->> >> +    gitsm://git.ti.com/.* gitsm://github.com/TexasInstruments/BASENA=
-ME;protocol=3Dhttps \
->> >> +"
->> >> --=20
->> >> 2.51.1
->>=20
->> I hate M$ as much as anyone else, but reliable infrastructure as a *fall=
-back* is
->> still useful. As far as signatures go, you guys have been doing this in
->> meta-arago with the arago distro since 2019.
->
-> Yes, meta-arago is not yet fully YP Compat yet - we are still figuring it=
- out.
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ check_yocto_rules.json | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Fair enough. I think this should be allowed. Other layers adjust MIRRORS in
-specific recipes, but this variable still ends up being globally referenced=
-.
+diff --git a/check_yocto_rules.json b/check_yocto_rules.json
+index 56e8c771..fc516a51 100644
+--- a/check_yocto_rules.json
++++ b/check_yocto_rules.json
+@@ -18,7 +18,8 @@
+             "meta-ti-bsp/recipes-core/udev/eudev_%.bbappend",
+             "meta-ti-bsp/recipes-devtools/binutils/binutils-cross-canadian_%.bbappend",
+             "meta-ti-bsp/recipes-security/optee/optee-%.bbappend",
+-            "meta-ti-bsp/dynamic-layers/openembedded-layer/recipes-bsp/u-boot/u-boot-ti-%.bbappend"
++            "meta-ti-bsp/dynamic-layers/openembedded-layer/recipes-bsp/u-boot/u-boot-ti-%.bbappend",
++            "meta-ti-bsp/dynamic-layers/openembedded-layer/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bbappend"
+         ]
+     },
+     "GUARD-2" : {
+-- 
+2.17.1
 
-If necessary I can request oe-core append a DISTRO_MIRRORS/LAYER_MIRRORS se=
-ction
-to the mirrors.bbclass. Would be a little cleaner I suppose.
 
