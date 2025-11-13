@@ -1,260 +1,166 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <hnagalla@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5613BCD4853
-	for <webhook@archiver.kernel.org>; Wed, 12 Nov 2025 22:03:23 +0000 (UTC)
-Received: from MW6PR02CU001.outbound.protection.outlook.com (MW6PR02CU001.outbound.protection.outlook.com [52.101.48.64])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9775.1762984999661250117
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 390D1CD5BAF
+	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 09:50:07 +0000 (UTC)
+Received: from SA9PR02CU001.outbound.protection.outlook.com (SA9PR02CU001.outbound.protection.outlook.com [40.93.196.55])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.20166.1763027404139664559
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 12 Nov 2025 14:03:20 -0800
+ Thu, 13 Nov 2025 01:50:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=selector1 header.b=MyWte2tc;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.48.64, mailfrom: reatmon@ti.com)
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=NZXokUDA;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.196.55, mailfrom: hnagalla@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mxTZCsKdSt14Z7uPKFCszXKuXwSr9THsOgWbvQM7IGNvKZZP0/ymnjUS45Uoc4QHgLiYKpXOpt+F3SOsggiWPT/YqOfSwbHdnwd/DgYL9nlICIRzBLDn1zWyrwu1IvKaTfLsweNEOE+tfGgLNpXaC0hSFWB9viEwa+fIT0bb4rUyiF3ncHuKjn9e/MDVhX5QRwNjT2FTz83FemAuVD3ogAq8lAr2nIWwmq6NLOytcfEncN5fUzgMtICFWUd28nLPhpOhPLjNZCCZOUhesp/faXRNXqucYUvfwyoI4EOP1PlUGVUC/7OeliSVkuFzf5mqGK4Vq9OwphTpBLuN3cOlbQ==
+ b=A55Fx0J7F3utmQESlrGCR8nhIWnrkwrl1y/pIOHK5phiIyMOkS7Q0a4RvOzPfacLN/fajLjacZRCUYyritdEvoxLT/6eKa70lbhWlkes/JgRlifhLZFf0Nw51dhHawc9oJu86Npm6FrHwYN7xSiKSsEZhDbBpkoaAEWgMzHiIIniSEVgaY4uJ4AFBraR9+V5SvMhAk3WSAdExATnHko2tq24i5DwG+o+7pH6IRjXFe/mkZjR0xWwzzM1DWkiPT1aoYceSDgEzSX6hEnTdYSygnF1ig/BhW9LMLXHO5HQVU4c0Y3C6hf4GbZRzWp0p0zeSM8usPMDdw98QhgaU4rBKg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NQT2Op+w9oVLqb8iiOt+pLA0sG+kWiJHKMnczZJ8Qdo=;
- b=Vq4vUQOOkT31Ji1sHBCD2YuVHwWLJ6BMpEiehLYsOfnlF5RGFxlPP5lUiFCywhpC5G8KuSafbqh1+Re+N+W7yXk2JnlFYqgMHXZ9sf4lFLvIzAf/v4aY5NqLs93nGnyrl6m+pphawI+T+vy1mvEuxN43WWN/sSmWPJAOPCF0Gb3RbuOepzQLQnFq2DCK7O+yNdlKTMPOflpVrqog8WHFci85q6TdlufgAFrSJLTZW4npcu4PraxlAGTiE9tZKwEW2Jxsfx9MfjKlMy+xQ4kCF7/3o+nOzwCOhXGglFc5NEKCoZ6Xxw0uUNspWHem6W2395prfMFy1fOlFPSpwwr6hQ==
+ bh=Fz/ZodsPRInRfSUk6mAjmKjY+qsUZbJyv6tFK2q0gmM=;
+ b=AWlb2GoGGFA+ayElcYY67kQZBLuhyzbmiSd+GL6PDEX9lqaN2yNDHxrt0U95LCHa0N1ZLSYOncI7b0G4vs9bnK/DyTZwY5mPg4jt96AGxTcNwntfVHT3rwIfmjJjOq3n1b1tl68j2EY4gmyeXfTKUZAzQhp/LXqAAVPnRVrkxVlaG5TuaIPnUWeu+uTXmaJIIXn+9y8Qbv+sJPxuI7Ghncrh7i2WADbKWOKN0XhYsJtaIzHppSIoT0RODJ/u9d+pY5DLrr1wHNTSgvZblaaT2q7RtbA0sXsURPLqgc6Nn8VOfsHxEcgsgGv0gQJiPi3Onh5DZnLQ5hl+mAjXm6koSg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NQT2Op+w9oVLqb8iiOt+pLA0sG+kWiJHKMnczZJ8Qdo=;
- b=MyWte2tcb4sZAUvZ0dhlnb2ZJgabfIWr/BW6bga3DC8uu+fzbuoCWJLwuQYR5sv16OEI4AOyghPNx/8PCXowBKA4raz7M0Ndoy28dOxV7VxH+qf9X+6lAfxmB8Zk9HOdwV4M26a+Qlz1g2Jk+MdeATjPwMCxEn5AgA8pqdoqjNs=
-Received: from BN0PR04CA0158.namprd04.prod.outlook.com (2603:10b6:408:eb::13)
- by DS7PR10MB7190.namprd10.prod.outlook.com (2603:10b6:8:db::20) with
+ bh=Fz/ZodsPRInRfSUk6mAjmKjY+qsUZbJyv6tFK2q0gmM=;
+ b=NZXokUDA6tm0tbI0G1t8acGphTJ71SXXfyan2Xjp6kmuvLxGBP9S6Q65fEbBHtM+QoStK4jHJL54s+nPJkLeGGXOHpfmeybBuaulNOcP3S0XjiKBGRRrt/7Qb/UXFkfcwE/Ml/ZzI1ugxxGZuE4K46jZPuxJWrM+9mgwG3l/JsQ=
+Received: from BYAPR06CA0034.namprd06.prod.outlook.com (2603:10b6:a03:d4::47)
+ by CY8PR10MB7316.namprd10.prod.outlook.com (2603:10b6:930:7a::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.15; Wed, 12 Nov
- 2025 22:03:15 +0000
-Received: from BN1PEPF00004682.namprd03.prod.outlook.com
- (2603:10b6:408:eb:cafe::7c) by BN0PR04CA0158.outlook.office365.com
- (2603:10b6:408:eb::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.15 via Frontend Transport; Wed,
- 12 Nov 2025 22:03:05 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.15; Thu, 13 Nov
+ 2025 09:50:01 +0000
+Received: from SJ1PEPF00001CDD.namprd05.prod.outlook.com
+ (2603:10b6:a03:d4:cafe::60) by BYAPR06CA0034.outlook.office365.com
+ (2603:10b6:a03:d4::47) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.17 via Frontend Transport; Thu,
+ 13 Nov 2025 09:50:00 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- BN1PEPF00004682.mail.protection.outlook.com (10.167.243.88) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ SJ1PEPF00001CDD.mail.protection.outlook.com (10.167.242.5) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9320.13 via Frontend Transport; Wed, 12 Nov 2025 22:03:15 +0000
-Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 12 Nov
- 2025 16:03:12 -0600
-Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 12 Nov
- 2025 16:03:11 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE204.ent.ti.com
- (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9320.13 via Frontend Transport; Thu, 13 Nov 2025 09:49:59 +0000
+Received: from DFLE204.ent.ti.com (10.64.6.62) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 13 Nov
+ 2025 03:44:45 -0600
+Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 13 Nov
+ 2025 03:44:45 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 12 Nov 2025 16:03:11 -0600
-Received: from [10.249.34.12] ([10.249.34.12])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5ACM3BEo3411893;
-	Wed, 12 Nov 2025 16:03:11 -0600
-Message-ID: <c947ea12-c5a0-4c4a-a08e-0e6f169640ff@ti.com>
-Date: Wed, 12 Nov 2025 16:03:11 -0600
+ Transport; Thu, 13 Nov 2025 03:44:45 -0600
+Received: from localhost ([10.249.48.175])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AD9ijiU022078;
+	Thu, 13 Nov 2025 03:44:45 -0600
+From: Hari Nagalla <hnagalla@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <praneeth@ti.com>, <nsaulnier@ti.com>, <b-padhi@ti.com>, Hari Nagalla
+	<hnagalla@ti.com>
+Subject: [master/scarthgap] ipc: ti-rpmsg-char: Update library to 0.6.10
+Date: Thu, 13 Nov 2025 03:44:40 -0600
+Message-ID: <20251113094440.19249-1-hnagalla@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][scarthgap][PATCH v4] ti-img-rogue-*: Migrate GPU driver
- version 24.2 -> 25.2
-To: <a-christidis@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: <rs@ti.com>
-References: <20251112202652.3718660-1-a-christidis@ti.com>
-Content-Language: en-US
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20251112202652.3718660-1-a-christidis@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004682:EE_|DS7PR10MB7190:EE_
-X-MS-Office365-Filtering-Correlation-Id: 571e6e0e-3281-4ec1-da5e-08de22374789
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CDD:EE_|CY8PR10MB7316:EE_
+X-MS-Office365-Filtering-Correlation-Id: f8d4d95b-94ad-49b0-4b77-08de229a02d4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700013;
+	BCL:0;ARA:13230040|376014|36860700013|82310400026|1800799024;
 X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?QnJCYW5xRnRJY3J6ZmZTMWZMbzlxQUw2d1hLRFZ4RGt4TUNiYkd1YkErUzUr?=
- =?utf-8?B?Z3cyRDVWWmY3WlNpbTk5TlZ3eGc5QVloM0pIaS83VEhBbis1dk42Qm1kVWRn?=
- =?utf-8?B?UU5vZUZqbVhlbDJvcC8xNEVWVFhRRXZxNThzWkpwYkhxdmsxL1N2UmtFQnRN?=
- =?utf-8?B?QURLQm5KaDZpb2hzRkFtYktKZnN3WnVZSThOeTJpTERnOHRhcmk2TW1NK3cz?=
- =?utf-8?B?MHBGbXMzN0VwMFUyZWtrdzJnMHNLcnFkbHd4ZTBwakVNK0JoR2ZXUVdZMlgv?=
- =?utf-8?B?T1QzM09GUkE2d0VsSXFVQy9scndSajJQcTZZWGlhcGdzOWRiWWQweEw0bjI3?=
- =?utf-8?B?Zy9nOWs0djJVRExHeFFuY1RtQjFZRDhzaEhCQUMxNnA2WW5WNmQ1SGVCS2lq?=
- =?utf-8?B?Z09RSTlRMnM5NXVsWVJzV0h5VmR3OFhyaTRIT054U3dBS1lPWHRKSDROdTNa?=
- =?utf-8?B?VHdVbmRMWm5JanRaTXYrTU9aZzdMRGw2dkJBWlF0S0srYkVVekhsNFhaOUht?=
- =?utf-8?B?SlhmbHF4T2RCNEsrUW5rU2U0dUdtL282S0ZIVG91ZXJtZkFWQ1dINE45K0ZI?=
- =?utf-8?B?OERqQjlpZ2JkT2MzQ01QMzJoRGh4anY4ZjQzTTA5aE14bzRieElibTMzQjJ4?=
- =?utf-8?B?OGcvcmFoR1FGU1VsSUh0UVQzbzBKSStzeEd3TWkyV1RxVjU5RHhpaGtTNWhY?=
- =?utf-8?B?Z2J3UjBWVUtXcGpkdDJLZDJ5NVdpWFJnWDF0SDBlVk8vMDVjWkZqMFpEOFpu?=
- =?utf-8?B?SktXdUFOYTNoQjFDVE9oNmQwWEJvVHgwYVU3YjlEWlpBcWxnQy83NXZwNnBo?=
- =?utf-8?B?akFXc1hpV0preHFvYndManRpaXdwY3oxYzFDSXY4V1Rlb2RvU1JJWUlHVUl4?=
- =?utf-8?B?bVN5K01RNmJ4bmNSUEFMeVppZjVIV1ZidFN1d1hKUUJWY0gvSGFJdjZBMEFD?=
- =?utf-8?B?K3hJQ29jV3NKcitxZkFtUGhzYXFZS0tsSWNjTW5ScFpHVTZPUzd3WmpWeDFP?=
- =?utf-8?B?d0JmaDhHeEJxeTBnM3BXNE43WUJQVVhObDBtS0M3WHJLdEQ0cnhjY1I1SGgr?=
- =?utf-8?B?eVFVa2ZUM3hQby90YWE0WkxWSUNOMExkb0hwZllTV2FRYTFvdlNHQ05FSlBD?=
- =?utf-8?B?a2FzN0RZMkNCMXdkUm9jVFpPV1FkK2F2RnBHZUpwNkd6bE5yN0tyV2M3aGZD?=
- =?utf-8?B?SldwMHBnaWR6VnRPRFBLVTl6VGZadGM3OWpRWThFMWwvOXF1TnR5bk5YK1ZI?=
- =?utf-8?B?ZmM5MCtKUmp0UStuNnRrYXRTVzJZRnc5QkZHZzFWak40QUduYmkrdGVwMUNa?=
- =?utf-8?B?N2F5bmh3TW1kRXBDcytPaU8xTnBMYmxWTTlobTM1VUtJOXU0cDlXeFV2QUlJ?=
- =?utf-8?B?VmhVdS82T05BTE5OMXFWRGF6K0MzK2xLejhlbDF5Zm9oZ0YxNHRKNlJtdVB0?=
- =?utf-8?B?NFpUVXVhMWFnZGVKSFp2WWlJOFZuQnF5R3MxdFZZOGkrdlZla2g0KzJwQVhN?=
- =?utf-8?B?SnRkaUVrbzN2QXJIZEJiVTVhNmFVbnlITThjNllBaU9vV2g4Qy9qVjl1WVpl?=
- =?utf-8?B?WVBpT1RiTTNrQVl6anYxRWZqckZSeGJVWDRzYlE2Sk84Y1NUczl5UVFqWXRF?=
- =?utf-8?B?NXFHYU9XWWt3Y3dtamk5Q1VFdVQ4YmVGNDJpend6SGQxdXJiZm1DWXpsYVB6?=
- =?utf-8?B?TGZSaVNIZ01EcjltUnFPbit1UnpxemhSRWo4Y0lQdzR2eXU2UTVNOHlHZHlY?=
- =?utf-8?B?VDJ4MDcvSUhiT3VsY0pyZWNYdmRuS2tqSUR5ZXZub2pZQ2k0Y3NIR05uOXJE?=
- =?utf-8?B?dFUvWVQyZndhcm9tWC8yTFZiVWw3L21xVU91LytMOFpweHl1NWtKL25PVTA5?=
- =?utf-8?B?Qjl6WENMcWtkc21YTXFlbWxmMHV4UFF4c1hRaU45eFNQUmJKS2VpWEJKOFpr?=
- =?utf-8?B?WE5xa0lTSWphZHJoQWdEMEwxL0k1SnUycE1jQVFzZnp6akIyV0Ztam4rNlpC?=
- =?utf-8?B?T2pwYW1scWRjbWU5YWd4a2w0U3hoclRNeTZyM2kxU3lhczhoUkZrRFgyNnN1?=
- =?utf-8?B?c1dRaFlEcjNpdkU1Mml2T1g0NzFQWnFoK1JyaDF0UGF0czZQSVBzTkV4QlpB?=
- =?utf-8?Q?tVuk=3D?=
+	=?us-ascii?Q?pHWpP5CkrAz1X77XnwWPIBDoi2lxN/jggwf0pbc1fmcUmWo8QtWLDIh8edaV?=
+ =?us-ascii?Q?C2fnFMPmUV4Fof4eodzHQrVaXC9SQuEzjKcH4OQAWULj4tnbJc4FFb9eA+uA?=
+ =?us-ascii?Q?338lTAqFtMH74/Bv+NicLqeN57MwkdkGVAQfJDdGOGaQ5xd5+eHs/CTj4mf3?=
+ =?us-ascii?Q?qTIuccyWoGYDrSDdy/GPpNASXoAuXaI+PBpsJjiRUl2M10HqFCnp5jmph3+h?=
+ =?us-ascii?Q?HSb3B2M26Y1K5qnEC5IsORvRd46OOmwDrD2BpVS3HNgSI7LtYDf2cpxXpX4z?=
+ =?us-ascii?Q?HnYgaDyzWq3/35Jz0XXJYfoRyHRBww+riVWqcNwBWn7PAS8ojMtMYDzzJhVm?=
+ =?us-ascii?Q?OnYIiRegWndcYxMDIkgxM/OQROE+FDqf49mFJDayPrrJLPEK4abm20n5zZwA?=
+ =?us-ascii?Q?BLrC9dEOEdR2hcyRnw5VT11nOy5tV6Dg6ZIbXZHayhf9TH1jcKvUC7Evzzuz?=
+ =?us-ascii?Q?y7cDDUiXytekCpgppDFZkqqTRBB0SEV6sSjH4xhUJifexxuCuTYnbYis6SAe?=
+ =?us-ascii?Q?lotaH7NlPrhPrF3t/wpLnfBTAhO3ARmi0ERFueTKQd7ZyPvN/OeB1UazNgW1?=
+ =?us-ascii?Q?D8YTmOhy5lqLElXKqGQkktlWXSEPQbn2032IugZLJ+bdqRMwlwUe1Gew2xnf?=
+ =?us-ascii?Q?tOodmUgnnzao+zJD/jdYhFS7SzGHdAbl2ag/AAKmSKR7MEVpGl6DgKY0nOff?=
+ =?us-ascii?Q?AOIti6XKah1WglYKi47M2u0gKsICfuMQnhsdUzHQw/STGtWiTaTZ8aFmf8D4?=
+ =?us-ascii?Q?OgjGTLBI2HajjPHhqm+vZYBgZgp0HTJ96QTap187lC9MJY+LWzDkFtLwTDWQ?=
+ =?us-ascii?Q?Ci+LM8X+w2/F9GaPQ176dMEYeMbC0GE7pAIJ/soqiR3TAl1yashsuHhSjKP+?=
+ =?us-ascii?Q?AWxjj4FNHLAwimVPM95UTLCEck83dZSkKk1NMV+4VJyWbLtAO3WNHAPquSNg?=
+ =?us-ascii?Q?dv4MbhajPajJm3XX08rn00rdmHHJUU2IO0tBzR+XhnU7JfhZBeGpODBlui3A?=
+ =?us-ascii?Q?kd1XMoFSxCq0lOfk/NF9U/sRlIrAUx41VbnQtPrtL8udBvWTrBLq0kkR7Il2?=
+ =?us-ascii?Q?NDlSa1aHGVqm87gMRHPX8eH+nn/vdvznRH2vX6VHDVCrxuVEIbZM1GldzNP1?=
+ =?us-ascii?Q?4lqojRhP9YJGst1VIvQGR68N88FTruEJrp2Jv2QMA0kE37WQSm78bMzouRQg?=
+ =?us-ascii?Q?B3lY5K+7s2mBykbSfu8uZSMJSCMJdgTkkYDFkEh4SN1a3TvTV6QVMEdE5y1A?=
+ =?us-ascii?Q?S5lGXcwQfGXcAU7xmGMBbSGY+WQbapzPWk9M3EdgMo2KthQOU8LyT9H9bmIx?=
+ =?us-ascii?Q?ycYOtYU70Ovk6QgiDldHBA0UAdQ2W3FHQa9eLCy6sbnHuId2Fu9yC/6WCA/5?=
+ =?us-ascii?Q?JRkxK/OR5vKHFw10hWBpigqq5/tBuzQ8naB9qJ3L5Skts8cIVP0+nH7B+iTh?=
+ =?us-ascii?Q?93Y+4PyP4umRA82a6JkK0UStIBeZhDVo0CCrUSuKE6qqMPG8XXJG11FbIoI3?=
+ =?us-ascii?Q?kPYSADXtxiNQn6oIpQn7HPc4JnVXYBr0wf6REdXhMbepxrM3KA1lsxdQcRV+?=
+ =?us-ascii?Q?84ou4W5qoElDRLxqAYw=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013);DIR:OUT;SFP:1101;
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2025 22:03:15.1179
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 09:49:59.9660
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 571e6e0e-3281-4ec1-da5e-08de22374789
+X-MS-Exchange-CrossTenant-Network-Message-Id: f8d4d95b-94ad-49b0-4b77-08de229a02d4
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	BN1PEPF00004682.namprd03.prod.outlook.com
+	SJ1PEPF00001CDD.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB7190
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR10MB7316
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 12 Nov 2025 22:03:23 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19263
+ <meta-ti@lists.yoctoproject.org>; Thu, 13 Nov 2025 09:50:07 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19264
 
+update rpmsg library tp 0.6.10
+It brings the following fixes from ti-rpmsg-char repo:
 
-Where is the master series for this?
+d4cf638 (origin/master, origin/HEAD) src: fix bug in file_read_string()
+3e72722 src: add api to fetch kernel allocated remote proc id
+5061690 benchmark: update max runs = 1 trillion, max latency = 9sec
+4aa2a84 examples: clean up tabs, delay metering
+07660dd example: add rpmsg_char_benchmark
+b40845f Replace read bytes from 256 --> 496
+b2e9e2f Update max message size to 496
 
+Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+---
+ meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-On 11/12/2025 2:26 PM, a-christidis@ti.com wrote:
-> From: Antonios Christidis <a-christidis@ti.com>
-> 
-> New recipes for GPU DDK 25.2. Update BSP configuration files with new
-> preferred recipe versions.
-> 
-> Signed-off-by: Antonios Christidis <a-christidis@ti.com>
-> ---
-> v2:
-> - Removed recipes for 24.2
-> - Update ti/beagle bsp config files to build 25.2 for kenrel 6.6
->   
-> v3:
-> - Forgot to update commit message. DDK 24.2 recipes will no longer
->    be present. DDK 25.2 also supports Linux kernel 6.6
-> 
-> v4:
-> - Remove explicitly setting of PR variable, as it defaults to 0
-> - Fix spelling mistake (DSP & dsp -> BSP & bsp)
-> 
->   meta-beagle/conf/machine/include/beagle-bsp.inc               | 4 ++--
->   meta-ti-bsp/conf/machine/include/ti-bsp.inc                   | 4 ++--
->   ...er_24.2.6643903.bb => ti-img-rogue-driver_25.2.6850647.bb} | 2 +-
->   ...bs_24.2.6643903.bb => ti-img-rogue-umlibs_25.2.6850647.bb} | 4 +---
->   4 files changed, 6 insertions(+), 8 deletions(-)
->   rename meta-ti-bsp/recipes-bsp/powervr-drivers/{ti-img-rogue-driver_24.2.6643903.bb => ti-img-rogue-driver_25.2.6850647.bb} (96%)
->   rename meta-ti-bsp/recipes-graphics/powervr-umlibs/{ti-img-rogue-umlibs_24.2.6643903.bb => ti-img-rogue-umlibs_25.2.6850647.bb} (98%)
-> 
-> diff --git a/meta-beagle/conf/machine/include/beagle-bsp.inc b/meta-beagle/conf/machine/include/beagle-bsp.inc
-> index 448e2086..5060e286 100644
-> --- a/meta-beagle/conf/machine/include/beagle-bsp.inc
-> +++ b/meta-beagle/conf/machine/include/beagle-bsp.inc
-> @@ -19,7 +19,7 @@ KERNEL_DEVICETREE_PREFIX:bsp-bb_org-6_12 = ""
->   BSP_SGX_DRIVER_PROVIDER:bsp-bb_org-6_12 = "ti-sgx-ddk-km"
->   BSP_SGX_DRIVER_VERSION:bsp-bb_org-6_12 = "1.17%"
->   BSP_ROGUE_DRIVER_PROVIDER:bsp-bb_org-6_12 = "ti-img-rogue-driver"
-> -BSP_ROGUE_DRIVER_VERSION:bsp-bb_org-6_12 = "24%"
-> +BSP_ROGUE_DRIVER_VERSION:bsp-bb_org-6_12 = "25%"
->   BSP_MESA_PVR_VERSION:bsp-bb_org-6_12 = "24%"
->   
->   # GC320 support requires out-of-tree drivers not yet available in bb.org 6.12
-> @@ -40,7 +40,7 @@ KERNEL_DEVICETREE_PREFIX:bsp-bb_org-6_6 = ""
->   BSP_SGX_DRIVER_PROVIDER:bsp-bb_org-6_6 = "ti-sgx-ddk-km"
->   BSP_SGX_DRIVER_VERSION:bsp-bb_org-6_6 = "1.17%"
->   BSP_ROGUE_DRIVER_PROVIDER:bsp-bb_org-6_6 = "ti-img-rogue-driver"
-> -BSP_ROGUE_DRIVER_VERSION:bsp-bb_org-6_6 = "24%"
-> +BSP_ROGUE_DRIVER_VERSION:bsp-bb_org-6_6 = "25%"
->   BSP_MESA_PVR_VERSION:bsp-bb_org-6_6 = "24%"
->   
->   # GC320 support requires out-of-tree drivers not yet available in bb.org 6.6
-> diff --git a/meta-ti-bsp/conf/machine/include/ti-bsp.inc b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-> index dc0473de..5dc2e19e 100644
-> --- a/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-> +++ b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
-> @@ -45,7 +45,7 @@ BSP_BOOTLOADER_VERSION:bsp-ti-6_12 = "2025.01%"
->   BSP_SGX_DRIVER_PROVIDER:bsp-ti-6_12 = "ti-sgx-ddk-km"
->   BSP_SGX_DRIVER_VERSION:bsp-ti-6_12 = "1.17%"
->   BSP_ROGUE_DRIVER_PROVIDER:bsp-ti-6_12 = "ti-img-rogue-driver"
-> -BSP_ROGUE_DRIVER_VERSION:bsp-ti-6_12 = "24%"
-> +BSP_ROGUE_DRIVER_VERSION:bsp-ti-6_12 = "25%"
->   BSP_MESA_PVR_VERSION:bsp-ti-6_12 = "24%"
->   
->   # ==========
-> @@ -60,7 +60,7 @@ BSP_BOOTLOADER_VERSION:bsp-ti-6_6 = "2024.04%"
->   BSP_SGX_DRIVER_PROVIDER:bsp-ti-6_6 = "ti-sgx-ddk-km"
->   BSP_SGX_DRIVER_VERSION:bsp-ti-6_6 = "1.17%"
->   BSP_ROGUE_DRIVER_PROVIDER:bsp-ti-6_6 = "ti-img-rogue-driver"
-> -BSP_ROGUE_DRIVER_VERSION:bsp-ti-6_6 = "24%"
-> +BSP_ROGUE_DRIVER_VERSION:bsp-ti-6_6 = "25%"
->   BSP_MESA_PVR_VERSION:bsp-ti-6_6 = "24%"
->   
->   # GC320 support requires out-of-tree drivers not yet available in 6.6
-> diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.2.6643903.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.2.6850647.bb
-> similarity index 96%
-> rename from meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.2.6643903.bb
-> rename to meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.2.6850647.bb
-> index 513429bd..0f50026a 100644
-> --- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_24.2.6643903.bb
-> +++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.2.6850647.bb
-> @@ -19,7 +19,7 @@ SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-driver.git;protocol=https;
->   
->   S = "${WORKDIR}/git"
->   
-> -SRCREV = "8eaff654a8871118c08cfafe53795f57e3b6b396"
-> +SRCREV = "a838ac0074db640ebd1b64be6364417b1bbca3cd"
->   
->   TARGET_PRODUCT:j721e = "j721e_linux"
->   TARGET_PRODUCT:j721s2 = "j721s2_linux"
-> diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.2.6643903.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_25.2.6850647.bb
-> similarity index 98%
-> rename from meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.2.6643903.bb
-> rename to meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_25.2.6850647.bb
-> index 57f48fec..38a8e68a 100644
-> --- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_24.2.6643903.bb
-> +++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_25.2.6850647.bb
-> @@ -6,11 +6,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=7232b98c1c58f99e3baa03de52
->   PACKAGE_ARCH = "${MACHINE_ARCH}"
->   COMPATIBLE_MACHINE = "j721e|j721s2|j784s4|j742s2|am62xx|am62pxx|j722s"
->   
-> -PR = "r4"
-> -
->   BRANCH = "linuxws/scarthgap/k6.12/${PV}"
->   SRC_URI = "git://git.ti.com/git/graphics/ti-img-rogue-umlibs.git;protocol=https;branch=${BRANCH}"
-> -SRCREV = "1ed9ee185cd876200e6747192854015b8e94a7b0"
-> +SRCREV = "adcbb5c620ff172da4152c02a2fee8f42dc4c472"
->   S = "${WORKDIR}/git"
->   
->   TARGET_PRODUCT:j721e = "j721e_linux"
-
+diff --git a/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc b/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc
+index 0350152d..e8f0f8ba 100644
+--- a/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc
++++ b/meta-ti-bsp/recipes-ti/ipc/ti-rpmsg-char.inc
+@@ -7,9 +7,9 @@ PROTOCOL = "https"
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/git/rpmsg/ti-rpmsg-char.git;protocol=${PROTOCOL};branch=${BRANCH};"
+ 
+-# 0.6.9 release
+-SRCREV = "09b064c6663ed46e4a402291dd87c8fe96135bd7"
++# 0.6.10 release
++SRCREV = "057b1a249261e26d00c501b59646957160ec815b"
+ 
+-PV = "0.6.9+git"
++PV = "0.6.10+git"
+ 
+ COMPATIBLE_MACHINE = "^(k3)$"
 -- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+2.34.1
+
 
