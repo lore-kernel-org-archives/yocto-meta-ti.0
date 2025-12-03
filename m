@@ -2,330 +2,574 @@ Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE068D1BDDC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC913D1BDDB
 	for <webhook@archiver.kernel.org>; Wed,  3 Dec 2025 20:32:29 +0000 (UTC)
-Received: from SA9PR02CU001.outbound.protection.outlook.com (SA9PR02CU001.outbound.protection.outlook.com [40.93.196.28])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.25959.1764793944017032330
+Received: from BYAPR05CU005.outbound.protection.outlook.com (BYAPR05CU005.outbound.protection.outlook.com [52.101.85.31])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.25948.1764793940950702875
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 03 Dec 2025 12:32:24 -0800
+ Wed, 03 Dec 2025 12:32:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=kiJJhYD3;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.196.28, mailfrom: afd@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=HL/8qZTZ;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.85.31, mailfrom: afd@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Yeo5mYtUhX4Vdg4YMuVDAxH3mCUP0HnOlxt7L6FaEnDuJrU8S1Dhsuz00QG0ALqqigHojY7T7wlX3H2ezvdacBdUvioh9B8TypHbj9BAmWhW6kNLpv4WjT3srcJHFLaI5wTOvURKNkctvgayi9xyc44dTd21kUqivPIfWeEzcsSNlTMaHe0UmU6gXgM+GiavfNoh9zN05m4WzCidfFSqYDNFv9214zGhOSBxgsdWg71wlUulS77KBlCsxWEYXEdgUqk25o/siIwVEKaPLqczg53sQCR3wNFkptiLKonjCuVRHStVeXZnr+I0VZYTfOSkbyrqePGI+BjYILdj+l0t6A==
+ b=fcIQ4HeMos8JHEXDD94XDt8apUv93RKoi5pQe8sRikUen9/qfoyndyFkURML4DNkcoPPklvuISktCzY3OQC+uPeASFm+BDROqBRSZArzSoyQ1G1s3w+3O9XXXKebuM3oqQsb6ruqFABLY6UA+ePVdHjmnAVcBXXZp+Vya1jBPQNF391yVq0Ou5Rz/fz02ACGirEngGx48R4qRKa+Lh2N90SI43oxtnJMfpU+WTslA6+isIF8HTTz8suCklYbQwCNyZTKDaUT1Y6AbEPrpUN2/Q/L+LvoAui8BgoSEHc9FP+w7tL2q3TSX8w34M9LXxrjBHuzprSH74ooiIF7ZF1IaQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uRD4R7PhoIrhy0jq13n5NfGAqL8vd8LRWOwAUMNzY0A=;
- b=A2no1Mc4x0an+QGz5DBPfRLReDTToaIaPRd9egtW60apy4kOiLQ/4UYjZRBokbjuu4a0gXrLXhESEPWtrDXia4Lc0iRtoZrW5pRT21XQl/jBuGXtoc0xO1Vqk4WmcCFjsjXJEQYbzWXk3JCFw5aNnGxG4qyhAUOakItZ5U+QF2Azo6gAezjVENoF1rzlG4gClyTn11X4GEtH72DeK7v/4D5/KclP+j8aVb5SU8ekLu/yzvWRnkb1A5ehHN5+FuYbDbl0pVVvhwyrgxZB38JcDius1FF4hO4g4RnQuwJJp/UeImgRGio7qnMfAJfoJHQpNCwx7g3nvAGd12ALkeantw==
+ bh=AWN55g1GwQsv9Lhd2vj0XJRoralLBu0NOLMIurDpq7I=;
+ b=RfpbCvCHUfsYAYIeXANvXgDwYwRfekRsH49q5HxF069cyZhKj/SuxnXwJj4nrWnyVjqEtusHl+Svq+tZxL7hhtS8hIT8WKS/+yYzNwrMQEQnAX2pPM2vYppSlfDeU06/f2Oc0cuhLtmcPS7AZWRJq06oHcKgMHtAhOm73BZh/eLzBa/vlYZljVWUE96xr1bhfpq/CEIL10+zloD7Wc88VRRoiVYyqEM4HATYRMPJVmvEv6wNIWOlKhjeNdPCnCWKXbchu0dO9X8lK5GUlv1dHxEexrmIxyLwxYYsUjJDV+8kJTVzboSpBLFUDYrLxtIigQz0j+8QJqDIbo9S+hME3A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uRD4R7PhoIrhy0jq13n5NfGAqL8vd8LRWOwAUMNzY0A=;
- b=kiJJhYD3EnY/+3JHmB8sB0YJIcgK/V1K+HRap6b2ux2qPnabed8JniUycIbSK9gKfBAiaXnRZYevvYttT5p3qGp812CaFUnYLArbMdhqTsiEQ5dACBX9tO/Ddvzt+BBaiHf6TMdltSFnhKKJ7IjtDuMxcbaEFk5bplyaxfj0QHQ=
-Received: from CH0PR03CA0310.namprd03.prod.outlook.com (2603:10b6:610:118::33)
- by BY5PR10MB4276.namprd10.prod.outlook.com (2603:10b6:a03:201::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Wed, 3 Dec
- 2025 20:32:21 +0000
-Received: from CH2PEPF00000148.namprd02.prod.outlook.com
- (2603:10b6:610:118:cafe::6f) by CH0PR03CA0310.outlook.office365.com
- (2603:10b6:610:118::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Wed,
- 3 Dec 2025 20:32:17 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ bh=AWN55g1GwQsv9Lhd2vj0XJRoralLBu0NOLMIurDpq7I=;
+ b=HL/8qZTZZuoXinZjps6b0ahLccpQecvtS5vHCRXqN7l7fhCKE7ZVAhIBx82YaRDRCmu9kqZdLLzkb6LyH7ZAKGfgH70bqIjYJzwRQPaOnYwAhySD6WlbNcU3kPhGqiNPPlVsARZFEU5QdZY5pXJJneUbXnZFr1BdpO+gnK3v784=
+Received: from BYAPR01CA0061.prod.exchangelabs.com (2603:10b6:a03:94::38) by
+ SJ0PR10MB5614.namprd10.prod.outlook.com (2603:10b6:a03:3d7::7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9388.9; Wed, 3 Dec 2025 20:32:17 +0000
+Received: from SJ1PEPF0000231D.namprd03.prod.outlook.com
+ (2603:10b6:a03:94:cafe::7b) by BYAPR01CA0061.outlook.office365.com
+ (2603:10b6:a03:94::38) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.9 via Frontend Transport; Wed, 3
+ Dec 2025 20:32:14 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- CH2PEPF00000148.mail.protection.outlook.com (10.167.244.105) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ SJ1PEPF0000231D.mail.protection.outlook.com (10.167.242.234) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.8 via Frontend Transport; Wed, 3 Dec 2025 20:32:15 +0000
-Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9388.8 via Frontend Transport; Wed, 3 Dec 2025 20:32:16 +0000
+Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 3 Dec
- 2025 14:32:13 -0600
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE212.ent.ti.com
+ 2025 14:32:14 -0600
+Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE212.ent.ti.com
  (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 3 Dec
  2025 14:32:13 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Wed, 3 Dec 2025 14:32:13 -0600
 Received: from lelvem-mr06.itg.ti.com ([10.249.42.149])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B3KWDe6396911;
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B3KWDe7396911;
 	Wed, 3 Dec 2025 14:32:13 -0600
 From: Andrew Davis <afd@ti.com>
 To: Denys Dmytriyenko <denys@konsulko.com>, Ryan Eatmon <reatmon@ti.com>,
 	<meta-ti@lists.yoctoproject.org>
 CC: Andrew Davis <afd@ti.com>
-Subject: [meta-ti][master][PATCH 1/2] meta-ti/all: Make DRA7xx support a subset of AM57xx support
-Date: Wed, 3 Dec 2025 14:32:10 -0600
-Message-ID: <20251203203211.1113327-1-afd@ti.com>
+Subject: [meta-ti][master][PATCH 2/2] meta-ti/all: Merge omap-a15.inc into am57xx.inc
+Date: Wed, 3 Dec 2025 14:32:11 -0600
+Message-ID: <20251203203211.1113327-2-afd@ti.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20251203203211.1113327-1-afd@ti.com>
+References: <20251203203211.1113327-1-afd@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000148:EE_|BY5PR10MB4276:EE_
-X-MS-Office365-Filtering-Correlation-Id: dbf68ff8-ac61-44ed-d802-08de32ab0c04
+X-MS-TrafficTypeDiagnostic: SJ1PEPF0000231D:EE_|SJ0PR10MB5614:EE_
+X-MS-Office365-Filtering-Correlation-Id: 35aacbe0-e2ee-4e95-235c-08de32ab0c68
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024;
+	BCL:0;ARA:13230040|376014|82310400026|36860700013|1800799024;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?td3gTz1TCR+bCh7uzzUq7uvSDwCRlNUu6b74wZpgDEzQPUdDghY7josmRDro?=
- =?us-ascii?Q?AU/mNuuZOMrEH6HPYtuqzZh7z3rXtCI/ksYweuHDLr21sNjJsy4xZi1Kb8fn?=
- =?us-ascii?Q?h0xNEf2AXfMWymTZOuNqyIqGGKU6bE/rPuy4vOtzjRr/6p9wvyWsq2KNGMI4?=
- =?us-ascii?Q?yc5cXFo0om4MTOXcd38U25DKIfI2KhiWIcKFQytoHkcJ280DhyUl4CsTAhu0?=
- =?us-ascii?Q?5A41kaC/w9xLItQBBXCuqkA4bHHHvYahsjSEU75nyEZCgiBcQJFQHqZY9a/u?=
- =?us-ascii?Q?2NqjMfwuLQYQMz52PQxga4mDh+Al0QmjCN/lcvFTj4HnJyOJkFBfF8VsFuj1?=
- =?us-ascii?Q?q30efEZ3Bk9YZQYQWBUlh6hLSaGv5MrO0Fau2mWP624ISPKCcOkA1OJyzivd?=
- =?us-ascii?Q?BpooltK7jJOUcYcROK9cfaBoHV53hyleYL4QjHhKPdDQMLD+NYxw4JuKqli/?=
- =?us-ascii?Q?ehglV7T9wOx+Ab24JPol5vcUkpEL+ZFpBlJ4LI7dQLS6RQ4zHk8IMMnEsy1A?=
- =?us-ascii?Q?3Lo3VHsO1QU0yNhn4ZNYAbhKXCqozzTG2r+ujF22y3on/8h7n14wLbE1NeTV?=
- =?us-ascii?Q?aofk9RSCgQX/UhdNZv2fBeVp2Du4zLA8LooICN/nY3UHNQGLCIssJlHGi7Bq?=
- =?us-ascii?Q?j+IPc8+WihH1IVXlB7s4IS4uMX6wjnK2xS/yqUtXt3GhnCqZ8V+/4xly/PJA?=
- =?us-ascii?Q?SIbjOqvM6iFGwoA8RpLp/6+12uipAAWS2EUu6fzAsKNdv2nYaFajm3GtrbxV?=
- =?us-ascii?Q?qcvd9KxbpBaoTzAG6Zv3DTixuNaCA1504It/g3VVGs/xIYZazKZqz0LmeG9T?=
- =?us-ascii?Q?hUFwP7YYXaJknrJ16McgIciPnEEk7VOofaDXCd0xdFHLcVu60GTBjCmurIKw?=
- =?us-ascii?Q?YC4530E20sLPY+xUvBtxlImLzfH9+B050wVB+alvvgnNWLsiW3nYo/B1GudS?=
- =?us-ascii?Q?9SHY4Qk4khesI4NID2eS5WZH6QLQoNqMItOFHrZY/OUwSYX23X8WDqlfVG+V?=
- =?us-ascii?Q?AXTCwErZ5quagVg+oTfi5+TdmMT3KyuuCnp/yed7D3RQbysfd3TCE3aKJXfG?=
- =?us-ascii?Q?LNG1PPQ0Zl85EmoKmgEuW26T8eI2xqk6KYAxvRFCpFBwry8U+6WTauuv0LjY?=
- =?us-ascii?Q?mQgA7OCv4FARLWoXXa26rnvUT4FyDROKn5jFaA1rnoiUUvpT1DIiessYHk4t?=
- =?us-ascii?Q?89tdvRokHtZe51vgYQfX96chwicbJDKiJ3lJ9QOAqI3FedIHrlBD5gjKEces?=
- =?us-ascii?Q?NrQhMrzDMNMJ8AqfX+eSlShyJh2GKWl7Oj7Wup7PWfLQnVZspYgE/3Yg5UIV?=
- =?us-ascii?Q?IENlFZcjQ9Z5ca6ldqCO3/irkiHwuHeKZfyPWHSJJcLCJl9Hg8DK8fLGZPsj?=
- =?us-ascii?Q?86fKUu3T+IFWJlaxLN0FQY8eq41mwLuX9uSjTS3Y7ZmI13PiaidKwGKEHDPc?=
- =?us-ascii?Q?LdjbpZ9qV60p7wNpvkS0er+zsFJitRtDtEWCMN8R55dOn1OKiCe43i6gXMI5?=
- =?us-ascii?Q?PiKzbPUvyyKj0NboDU+zZpigtYIpxVuCVHRHOi4lMDhs+STYU46sZTAGQAQf?=
- =?us-ascii?Q?c1JhIC9vk7//GHzqdSo=3D?=
+	=?us-ascii?Q?u2KPHtnls7ysazULcKJbVQ5liMhB282ip5ITMBTV6Y+ryS6OrBzEj22j00Wd?=
+ =?us-ascii?Q?QyZcNZDyC8fr/8AeodFFdbp5qEi8JjGk7BAcr4OITj3qWkvF7AxLTLASpPvI?=
+ =?us-ascii?Q?XBHBiYcA1DRM0FC/eWcf70ripefRu//ELyf+FeZ1uKSPSQ+UVT66F2If2kbN?=
+ =?us-ascii?Q?1YlGVilxiFGjCRY5G27ArpqltJjtG2PvN7s1It8nGjRaD5CqbnTwSK1dMMGm?=
+ =?us-ascii?Q?X6SqWlAmOc7sKxw3bWuguKnKP8CzfV3TNfJn20Q6NUXqlM7JBou4ZeF+rYmg?=
+ =?us-ascii?Q?wxl9dWwdmLjaHLsuZfyuuV1odpA7Gm0Cceh8ZY9Jkebv/tX61Q+p/dEG+NN+?=
+ =?us-ascii?Q?tZ55UXYQtih7pgtsxl2VDCTx5JXnZoRWBBU+f61lSKpHLMaqWaHY+79SusYN?=
+ =?us-ascii?Q?BogvIPhDu1P/KMTAZzbY0vencqphoHdKXxqZ5edyFjWULFhXP6Wls2PhPnbU?=
+ =?us-ascii?Q?lOF9yqQX77tYSmH9OfAamrkV/WXWgeqge8swSvqKkzgbAeBXHWf82qmMTRS6?=
+ =?us-ascii?Q?aKjmMdZnBD/RuwPYcSIRNjzWuKvOBO99bdgb4fnJ322BM96vToO7obu2I/zq?=
+ =?us-ascii?Q?uXGySnZJBYVsip2qXNOZqBXrH2Zqw+CZksTqmoA0JyGOxgc0hXh59bOO0O+T?=
+ =?us-ascii?Q?QQcMCGqXBbyiCTkc7RST0zRB4aHXUSkgKFZsbfveDHJ8ke1sipPizpEUTBWS?=
+ =?us-ascii?Q?WH7pCg2u/TdCATwwQgfl/L0hsAzHoNsqBI01TgU08s4oGs02KJ9FogHgQwP9?=
+ =?us-ascii?Q?0fgUQLmO6zK+HoqJGShxvUKs9v290OAgTe1UgEFUEDHrw7f2Bzqc4q2apNAG?=
+ =?us-ascii?Q?fy5jWIm4V8BbZcLR4BeLPo1PUOuQBpONks6UMBDEAoHM4V/f6Z+i8V0SsuP2?=
+ =?us-ascii?Q?/MD6GL9KLlVPrbnQHDmYPWXHqTdLq71t4CxggaEj3QrMcQrC5mW/3kgWtFGi?=
+ =?us-ascii?Q?+iKVHRrVmyONiUFtYp9BRsCASJQ5eIlOAd7B2lfR5fUK9/h9fCFR/xyV1V7I?=
+ =?us-ascii?Q?gpCFvRCduNJMu+8pXNgRBNS0kjcdpmfR0gdOt5IkbEAylKSku8rXEOKbFAmJ?=
+ =?us-ascii?Q?ZoUCNSJGknYmIHTn71wVVv010PYBeGgtc3mLx0AupQAjGRgigFajIMMRkS09?=
+ =?us-ascii?Q?cTxHXAVvMLemxZeNrg8JNksJPGBI0chsRl8nqQ1tm8oY3aFrXEpaHp/H07km?=
+ =?us-ascii?Q?PNzt6VfRB0w351mDZHMPetsF4avozEDgzn5wL79VFXqkiZWgBY/t51+d6cee?=
+ =?us-ascii?Q?mAFbWDOhqGbNuWmCi2dWwOSrE4XOHX2mL164rpZ5yjzf5Alwdyiwk4ACgNTq?=
+ =?us-ascii?Q?vDtlgxdhY2m1cJ28vO7rokqJBiemhr7zwusb/W1iMRLNXK6ZK7LhW8DDtcJH?=
+ =?us-ascii?Q?0eOS9YxGP1KvtxtkfjFPdICGbzFqPQbWEb8uw43UQ/u1eZZSF58GzXWqpdDc?=
+ =?us-ascii?Q?pvWLw78/m/6Ls1jtyi/3KUAjIPwzz6fXXx2d5AEYDSA+iBPMVzsTBSECszGb?=
+ =?us-ascii?Q?U6+xnc4MpVAHONIEfsuBBsr3rOyLXZgVtYTrbGgynU/eqhNkyzO73DnTMvPZ?=
+ =?us-ascii?Q?RU9VBipXLpvQPdgrADw=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024);DIR:OUT;SFP:1101;
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 20:32:15.4926
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 20:32:16.1097
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dbf68ff8-ac61-44ed-d802-08de32ab0c04
+X-MS-Exchange-CrossTenant-Network-Message-Id: 35aacbe0-e2ee-4e95-235c-08de32ab0c68
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	CH2PEPF00000148.namprd02.prod.outlook.com
+	SJ1PEPF0000231D.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4276
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB5614
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Wed, 03 Dec 2025 20:32:29 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19328
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19327
 
-As AM57xx already defined both "dra7xx" and "am57xx" as SOC_FAMILY the
-AM57xx was effectively a superset MACHINE. Although not all features of
-AM57xx are needed for DRA7xx, make DRA7xx-EVM use the AM57xx definition.
-This allows us to still support DRA7xx as the only differences that
-impact device function are the selection of U-Boot defconfig, DTBs, and
-OPTEE, all handled by the MACHINE conf file which is left unchanged.
+As am57xx.inc is now the only user of omap-a15.inc, merge the content of
+omap-a15.inc into am57xx.inc and remove omap-a15.inc. As we no longer have
+this common include, also remove "omap-a15" and use "am57xx" in its place.
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- meta-ti-bsp/classes/ti-secdev.bbclass                        | 1 -
- meta-ti-bsp/conf/machine/dra7xx-evm.conf                     | 2 +-
- meta-ti-bsp/conf/machine/include/am57xx.inc                  | 1 -
- meta-ti-bsp/conf/machine/include/dra7xx.inc                  | 4 ----
- meta-ti-bsp/recipes-bsp/goodix-fw/goodix-fw_git.bb           | 2 +-
- meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb            | 2 +-
- meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb         | 2 +-
- meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc | 4 ++--
- meta-ti-bsp/recipes-ti/ipc/ti-ipc-common.inc                 | 2 +-
- meta-ti-bsp/recipes-ti/ipc/ti-ipc_git.bb                     | 4 ++--
- meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb          | 2 +-
- 11 files changed, 10 insertions(+), 16 deletions(-)
- delete mode 100644 meta-ti-bsp/conf/machine/include/dra7xx.inc
+ meta-ti-bsp/conf/machine/include/am57xx.inc   | 50 +++++++++++++++++--
+ meta-ti-bsp/conf/machine/include/omap-a15.inc | 50 -------------------
+ .../ti-sgx-ddk-km_1.17.4948957.bb             |  4 +-
+ .../libgal/ti-gc320-libs_5.0.11.p7.bb         |  2 +-
+ .../ti-sgx-ddk-um_1.17.4948957.bb             |  4 +-
+ .../dsptop/debugss-module-drv_git.bb          |  2 +-
+ .../recipes-bsp/dsptop/dsptop_git.bb          |  2 +-
+ .../recipes-bsp/dsptop/libulm_git.bb          |  2 +-
+ .../recipes-bsp/pru/pru-icss_git.bb           |  8 +--
+ .../recipes-devtools/gdbc6x/gdbc6x_git.bb     |  2 +-
+ .../gdbc6x/gdbserver-c6x_git.bb               |  2 +-
+ .../gdbc6x/gdbserverproxy-module-drv_git.bb   |  2 +-
+ .../recipes-ti/imglib/imglib-c66x.inc         |  2 +-
+ meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos.inc |  8 +--
+ .../recipes-ti/ipc/ti-ipc-rtos_git.bb         | 10 ++--
+ meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc  |  2 +-
+ 16 files changed, 73 insertions(+), 79 deletions(-)
+ delete mode 100644 meta-ti-bsp/conf/machine/include/omap-a15.inc
 
-diff --git a/meta-ti-bsp/classes/ti-secdev.bbclass b/meta-ti-bsp/classes/ti=
--secdev.bbclass
-index b3d70e5c..226e154d 100644
---- a/meta-ti-bsp/classes/ti-secdev.bbclass
-+++ b/meta-ti-bsp/classes/ti-secdev.bbclass
-@@ -15,7 +15,6 @@ TI_SECURE_DEV_PKG:k3r5 =3D "${@ d.getVar('TI_SECURE_DEV_P=
-KG_K3') or d.getVar('TI_K
- TI_SECURE_DEV_PKG:ti33x =3D "${TI_SECURE_DEV_PKG_CAT}/am3x"
- TI_SECURE_DEV_PKG:ti43x =3D "${TI_SECURE_DEV_PKG_CAT}/am4x"
- TI_SECURE_DEV_PKG:am57xx =3D "${TI_SECURE_DEV_PKG_AUTO}/am5x"
--TI_SECURE_DEV_PKG:dra7xx =3D "${TI_SECURE_DEV_PKG_AUTO}/dra7"
-=20
- # The SECDEV scripts may need their own location provided through the envi=
-ronment
- export TI_SECURE_DEV_PKG
-diff --git a/meta-ti-bsp/conf/machine/dra7xx-evm.conf b/meta-ti-bsp/conf/ma=
-chine/dra7xx-evm.conf
-index f9a3dd0b..237f27b9 100644
---- a/meta-ti-bsp/conf/machine/dra7xx-evm.conf
-+++ b/meta-ti-bsp/conf/machine/dra7xx-evm.conf
-@@ -2,7 +2,7 @@
- #@NAME: DRA7xx EVM
- #@DESCRIPTION: Machine configuration for the TI DRA7xx EVM
-=20
--require conf/machine/include/dra7xx.inc
-+require conf/machine/include/am57xx.inc
-=20
- MACHINE_FEATURES +=3D "touchscreen"
-=20
 diff --git a/meta-ti-bsp/conf/machine/include/am57xx.inc b/meta-ti-bsp/conf=
 /machine/include/am57xx.inc
-index 85290924..c7c8029f 100644
+index c7c8029f..6acc0cb0 100644
 --- a/meta-ti-bsp/conf/machine/include/am57xx.inc
 +++ b/meta-ti-bsp/conf/machine/include/am57xx.inc
-@@ -1,5 +1,4 @@
- require conf/machine/include/omap-a15.inc
--SOC_FAMILY:append =3D ":dra7xx"
+@@ -1,6 +1,50 @@
+-require conf/machine/include/omap-a15.inc
++require conf/machine/include/ti-soc.inc
  SOC_FAMILY:append =3D ":am57xx"
 =20
- MACHINE_FEATURES +=3D "pci"
-diff --git a/meta-ti-bsp/conf/machine/include/dra7xx.inc b/meta-ti-bsp/conf=
-/machine/include/dra7xx.inc
-deleted file mode 100644
-index a02421d9..00000000
---- a/meta-ti-bsp/conf/machine/include/dra7xx.inc
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require conf/machine/include/omap-a15.inc
--SOC_FAMILY:append =3D ":dra7xx"
--
 -MACHINE_FEATURES +=3D "pci"
-diff --git a/meta-ti-bsp/recipes-bsp/goodix-fw/goodix-fw_git.bb b/meta-ti-b=
-sp/recipes-bsp/goodix-fw/goodix-fw_git.bb
-index c43afb5b..11d877a6 100644
---- a/meta-ti-bsp/recipes-bsp/goodix-fw/goodix-fw_git.bb
-+++ b/meta-ti-bsp/recipes-bsp/goodix-fw/goodix-fw_git.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM =3D "file://LICENCE.Spectrum-GT9271;md5=3D=
-2a6de6be7af1fe46370c684da
- PV =3D "${GOODIX_FW_VERSION}"
- PR =3D "${INC_PR}.0"
++DEFAULTTUNE ?=3D "armv7athf-neon"
++require conf/machine/include/arm/armv7a/tune-cortexa15.inc
 =20
--COMPATIBLE_MACHINE =3D "dra7xx"
+-MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "prueth-fw prusw-fw pruhsr-fw pru=
+prp-fw"
++require conf/machine/include/ti-bsp.inc
++
++# Graphics providers and variables
++require conf/machine/include/mesa-pvr.inc
++PREFERRED_PROVIDER_virtual/gpudriver ?=3D "${BSP_SGX_DRIVER_PROVIDER}"
++
++KERNEL_IMAGETYPE =3D "zImage"
++KERNEL_IMAGETYPES =3D "zImage uImage"
++KERNEL_CLASSES +=3D "kernel-uimage"
++
++UBOOT_ARCH =3D "arm"
++UBOOT_ENTRYPOINT =3D "0x80008000"
++UBOOT_LOADADDRESS =3D "0x80008000"
++
++# Generate an extlinux.conf file
++UBOOT_EXTLINUX =3D "1"
++UBOOT_EXTLINUX_ROOT =3D "root=3DPARTUUID=3D${uuid}"
++UBOOT_EXTLINUX_BOOT_FILES =3D " \
++    extlinux.conf;extlinux/extlinux.conf \
++    ${KERNEL_IMAGETYPE} \
++    ${DEVICETREE_FILES} \
++"
++
++SPL_BINARY =3D "MLO"
++UBOOT_SUFFIX =3D "img"
++
++EXTRA_IMAGEDEPENDS +=3D "virtual/bootloader"
++
++MACHINE_ESSENTIAL_EXTRA_RDEPENDS +=3D "kernel-image-zimage"
++
++MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "vpdma-fw goodix-fw prueth-fw pru=
+sw-fw pruhsr-fw pruprp-fw"
++
++# Use the expected value of the ubifs filesystem's volume name in the kern=
+el
++# and u-boot.
++UBI_VOLNAME =3D "rootfs"
++
++# List common SoC features, may need to add touchscreen for specific machi=
+nes
++MACHINE_FEATURES =3D "apm usbgadget usbhost vfat ext2 screen alsa mmip dsp=
+ gc320 pci"
++
++IMAGE_FSTYPES +=3D "tar.xz wic.xz wic.bmap"
++WKS_FILE ?=3D "sdimage-2part.wks"
++IMAGE_BOOT_FILES ?=3D "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLIN=
+UX_BOOT_FILES} ipc/dra7-ipu1-fw.xem4;dra7-ipu1-fw.xem4"
++do_image_wic[depends] +=3D "virtual/bootloader:do_deploy"
++do_image_wic[depends] +=3D "ti-rtos-messageq-test-fw:do_deploy"
+diff --git a/meta-ti-bsp/conf/machine/include/omap-a15.inc b/meta-ti-bsp/co=
+nf/machine/include/omap-a15.inc
+deleted file mode 100644
+index 8e029431..00000000
+--- a/meta-ti-bsp/conf/machine/include/omap-a15.inc
++++ /dev/null
+@@ -1,50 +0,0 @@
+-require conf/machine/include/ti-soc.inc
+-SOC_FAMILY:append =3D ":omap-a15"
+-
+-DEFAULTTUNE ?=3D "armv7athf-neon"
+-require conf/machine/include/arm/armv7a/tune-cortexa15.inc
+-
+-require conf/machine/include/ti-bsp.inc
+-
+-# Graphics providers and variables
+-require conf/machine/include/mesa-pvr.inc
+-PREFERRED_PROVIDER_virtual/gpudriver ?=3D "${BSP_SGX_DRIVER_PROVIDER}"
+-
+-KERNEL_IMAGETYPE =3D "zImage"
+-KERNEL_IMAGETYPES =3D "zImage uImage"
+-KERNEL_CLASSES +=3D "kernel-uimage"
+-
+-UBOOT_ARCH =3D "arm"
+-UBOOT_ENTRYPOINT =3D "0x80008000"
+-UBOOT_LOADADDRESS =3D "0x80008000"
+-
+-# Generate an extlinux.conf file
+-UBOOT_EXTLINUX =3D "1"
+-UBOOT_EXTLINUX_ROOT =3D "root=3DPARTUUID=3D${uuid}"
+-UBOOT_EXTLINUX_BOOT_FILES =3D " \
+-    extlinux.conf;extlinux/extlinux.conf \
+-    ${KERNEL_IMAGETYPE} \
+-    ${DEVICETREE_FILES} \
+-"
+-
+-SPL_BINARY =3D "MLO"
+-UBOOT_SUFFIX =3D "img"
+-
+-EXTRA_IMAGEDEPENDS +=3D "virtual/bootloader"
+-
+-MACHINE_ESSENTIAL_EXTRA_RDEPENDS +=3D "kernel-image-zimage"
+-
+-MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "vpdma-fw goodix-fw"
+-
+-# Use the expected value of the ubifs filesystem's volume name in the kern=
+el
+-# and u-boot.
+-UBI_VOLNAME =3D "rootfs"
+-
+-# List common SoC features, may need to add touchscreen for specific machi=
+nes
+-MACHINE_FEATURES =3D "apm usbgadget usbhost vfat ext2 screen alsa mmip dsp=
+ gc320"
+-
+-IMAGE_FSTYPES +=3D "tar.xz wic.xz wic.bmap"
+-WKS_FILE ?=3D "sdimage-2part.wks"
+-IMAGE_BOOT_FILES ?=3D "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} ${UBOOT_EXTLIN=
+UX_BOOT_FILES} ipc/dra7-ipu1-fw.xem4;dra7-ipu1-fw.xem4"
+-do_image_wic[depends] +=3D "virtual/bootloader:do_deploy"
+-do_image_wic[depends] +=3D "ti-rtos-messageq-test-fw:do_deploy"
+diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.494=
+8957.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.494895=
+7.bb
+index f5cea270..343f09de 100644
+--- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
++++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+@@ -7,7 +7,7 @@ inherit module
+=20
+ PROVIDES =3D "virtual/gpudriver"
+=20
+-COMPATIBLE_MACHINE =3D "ti33x|ti43x|omap-a15|am65xx"
++COMPATIBLE_MACHINE =3D "ti33x|ti43x|am57xx|am65xx"
+=20
+ PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+=20
+@@ -19,9 +19,9 @@ SRC_URI =3D "git://git.ti.com/git/graphics/omap5-sgx-ddk-=
+linux.git;protocol=3Dhttps;
+=20
+ SRCREV =3D "9ae0fa4998b1c624408945e062bf8fb0ea7efb9d"
+=20
+-TARGET_PRODUCT:omap-a15 =3D "ti572x_linux"
+ TARGET_PRODUCT:ti33x =3D "ti335x_linux"
+ TARGET_PRODUCT:ti43x =3D "ti437x_linux"
++TARGET_PRODUCT:am57xx =3D "ti572x_linux"
+ TARGET_PRODUCT:am65xx =3D "ti654x_linux"
+ PVR_BUILD =3D "release"
+ PVR_WS =3D "lws-generic"
+diff --git a/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb=
+ b/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+index bd7cf015..86aa71b8 100644
+--- a/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
++++ b/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+@@ -7,7 +7,7 @@ inherit features_check
+=20
+ REQUIRED_MACHINE_FEATURES =3D "gc320"
+=20
+-COMPATIBLE_MACHINE =3D "omap-a15"
 +COMPATIBLE_MACHINE =3D "am57xx"
 =20
- ORIGIN =3D "DRA71x-RevA-GT9271_SpecDig_Config.bin"
- TARGET =3D "goodix_9271_cfg.bin"
-diff --git a/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb b/meta-ti-bs=
-p/recipes-bsp/vis-fw/vis_01.50.07.15.bb
-index ba320f5f..1b1cff6b 100644
---- a/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb
-+++ b/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb
-@@ -2,7 +2,7 @@ SUMMARY =3D "Radio Application Firmware"
- LICENSE =3D "TI-TSPA"
- LIC_FILES_CHKSUM =3D "file://${S}/J6_VIS_DEMO_LINUX_BINARY_01.50.07.15-Man=
-ifest.html;md5=3Da59aa54b9470f555cf086b91dca0afa3"
+ CLEANBROKEN =3D "1"
 =20
--COMPATIBLE_MACHINE =3D "dra7xx"
+diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17=
+.4948957.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.1=
+7.4948957.bb
+index af27981f..c4cc5f10 100644
+--- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.494895=
+7.bb
++++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.494895=
+7.bb
+@@ -4,7 +4,7 @@ LICENSE =3D "TI-TSPA"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D7232b98c1c58f99e3baa03de5207e76=
+f"
+=20
+ PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+-COMPATIBLE_MACHINE =3D "ti33x|ti43x|omap-a15|am65xx"
++COMPATIBLE_MACHINE =3D "ti33x|ti43x|am57xx|am65xx"
+=20
+ PR =3D "r38"
+=20
+@@ -37,7 +37,7 @@ inherit ${@pick_init(d)}
+=20
+ TARGET_PRODUCT:ti33x =3D "ti335x_linux"
+ TARGET_PRODUCT:ti43x =3D "ti437x_linux"
+-TARGET_PRODUCT:omap-a15 =3D "ti572x_linux"
++TARGET_PRODUCT:am57xx =3D "ti572x_linux"
+ TARGET_PRODUCT:am65xx =3D "ti654x_linux"
+=20
+ RDEPENDS:${PN} +=3D "libdrm ti-sgx-ddk-km"
+diff --git a/meta-ti-extras/recipes-bsp/dsptop/debugss-module-drv_git.bb b/=
+meta-ti-extras/recipes-bsp/dsptop/debugss-module-drv_git.bb
+index fdb16ec4..e80591b2 100644
+--- a/meta-ti-extras/recipes-bsp/dsptop/debugss-module-drv_git.bb
++++ b/meta-ti-extras/recipes-bsp/dsptop/debugss-module-drv_git.bb
+@@ -8,7 +8,7 @@ S:append =3D "/debugss_module/debugss-mod"
+=20
+ inherit module
+=20
+-COMPATIBLE_MACHINE =3D "omap-a15"
 +COMPATIBLE_MACHINE =3D "am57xx"
 =20
- PR =3D "r1"
+ EXTRA_OEMAKE =3D "PLATFORM=3DDRA7xx_PLATFORM KVERSION=3D${KERNEL_VERSION} =
+KERNEL_SRC=3D${STAGING_KERNEL_DIR}"
 =20
-diff --git a/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb b/meta-ti=
--bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
-index f147b234..4c2ea375 100644
---- a/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
-+++ b/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
-@@ -3,7 +3,7 @@ SUMMARY =3D "VPDMA firmware for Video Input Port and Video =
-Processing Engine"
- LICENSE =3D "TI-TSPA"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfd463c9500441ed91d07a0331baa635=
-c"
+diff --git a/meta-ti-extras/recipes-bsp/dsptop/dsptop_git.bb b/meta-ti-extr=
+as/recipes-bsp/dsptop/dsptop_git.bb
+index c1080468..c5242d5e 100644
+--- a/meta-ti-extras/recipes-bsp/dsptop/dsptop_git.bb
++++ b/meta-ti-extras/recipes-bsp/dsptop/dsptop_git.bb
+@@ -8,7 +8,7 @@ PR =3D "${INC_PR}.2"
 =20
--COMPATIBLE_MACHINE =3D "dra7xx"
+ S:append =3D "/dsptop"
+=20
+-COMPATIBLE_MACHINE =3D "omap-a15"
 +COMPATIBLE_MACHINE =3D "am57xx"
 =20
- SRC_URI =3D "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/vpdma-fw/03=
--2012/exports/vpdma-fw_03-2012.tar.gz;protocol=3Dhttp;name=3Ddra7xx-evm"
- SRC_URI[dra7xx-evm.md5sum] =3D "80176df1350c21d9efa90171789c546e"
-diff --git a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc b=
-/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
-index 61a74a06..83d0d128 100644
---- a/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
-+++ b/meta-ti-bsp/recipes-security/optee/optee-os-ti-overrides.inc
-@@ -41,7 +41,7 @@ do_compile:append:ti43x() {
-     optee_sign_legacyhs
+ EXTRA_OEMAKE =3D "release DEVICE=3DDRA7xx CROSS_COMPILE=3D${TARGET_PREFIX}=
+ CC=3D"${CC}""
+=20
+diff --git a/meta-ti-extras/recipes-bsp/dsptop/libulm_git.bb b/meta-ti-extr=
+as/recipes-bsp/dsptop/libulm_git.bb
+index 1bcaa0ea..638973c4 100644
+--- a/meta-ti-extras/recipes-bsp/dsptop/libulm_git.bb
++++ b/meta-ti-extras/recipes-bsp/dsptop/libulm_git.bb
+@@ -11,7 +11,7 @@ PR =3D "${INC_PR}.0"
+=20
+ S:append =3D "/dsptop/ulm"
+=20
+-COMPATIBLE_MACHINE =3D "omap-a15"
++COMPATIBLE_MACHINE =3D "am57xx"
+=20
+ EXTRA_OEMAKE =3D "release DEVICE=3DDRA7xx CROSS_COMPILE=3D${TARGET_PREFIX}=
+"
+=20
+diff --git a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb b/meta-ti-extra=
+s/recipes-bsp/pru/pru-icss_git.bb
+index 84d00eed..b7066583 100644
+--- a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
++++ b/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
+@@ -14,7 +14,7 @@ PV =3D "6.5.0"
+=20
+ require recipes-ti/includes/ti-paths.inc
+=20
+-COMPATIBLE_MACHINE =3D "ti33x|ti43x|omap-a15|am62xx|am64xx|am65xx|j721e"
++COMPATIBLE_MACHINE =3D "ti33x|ti43x|am57xx|am62xx|am64xx|am65xx|j721e"
+ PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+=20
+ PACKAGES:prepend =3D " \
+@@ -36,7 +36,7 @@ SUBDIRS =3D "examples pru_cape/pru_fw lib/src labs"
+=20
+ PLATFORM:ti33x =3D "am335x"
+ PLATFORM:ti43x =3D "am437x"
+-PLATFORM:omap-a15 =3D "am572x"
++PLATFORM:am57xx =3D "am572x"
+ PLATFORM:am62xx =3D "am62x"
+ PLATFORM:am64xx =3D "am64x"
+ PLATFORM:am65xx =3D "am65x"
+@@ -84,7 +84,7 @@ do_install:append:ti43x() {
+     done
  }
 =20
--do_compile:append:dra7xx() {
-+do_compile:append:am57xx() {
-     optee_sign_legacyhs
- }
-=20
-@@ -62,7 +62,7 @@ do_deploy:append:ti43x() {
-     optee_deploy_legacyhs
- }
-=20
--do_deploy:append:dra7xx() {
-+do_deploy:append:am57xx() {
-     optee_deploy_legacyhs
- }
-=20
-diff --git a/meta-ti-bsp/recipes-ti/ipc/ti-ipc-common.inc b/meta-ti-bsp/rec=
-ipes-ti/ipc/ti-ipc-common.inc
-index da7e4733..7006a9b6 100644
---- a/meta-ti-bsp/recipes-ti/ipc/ti-ipc-common.inc
-+++ b/meta-ti-bsp/recipes-ti/ipc/ti-ipc-common.inc
-@@ -6,7 +6,7 @@ COMPATIBLE_HOST ?=3D "null"
- COMPATIBLE_HOST:ti-soc =3D ".*-linux"
-=20
- PLATFORM =3D "UNKNOWN"
--PLATFORM:dra7xx =3D "DRA7XX"
-+PLATFORM:am57xx =3D "DRA7XX"
- PLATFORM:omapl138 =3D "OMAPL138"
-=20
- ALT_PLATFORM:am57xx =3D "AM572X AM571X"
-diff --git a/meta-ti-bsp/recipes-ti/ipc/ti-ipc_git.bb b/meta-ti-bsp/recipes=
--ti/ipc/ti-ipc_git.bb
-index 539a83f9..3e4be816 100644
---- a/meta-ti-bsp/recipes-ti/ipc/ti-ipc_git.bb
-+++ b/meta-ti-bsp/recipes-ti/ipc/ti-ipc_git.bb
-@@ -22,7 +22,7 @@ SRC_URI +=3D "file://tiipclad-daemon.sh \
- CFLAGS +=3D "-I${UNPACKDIR} -fdebug-prefix-map=3D${UNPACKDIR}=3D${TARGET_D=
-BGSRC_DIR}"
-=20
- DAEMON =3D "UNKNOWN"
--DAEMON:dra7xx =3D "lad_dra7xx"
-+DAEMON:am57xx =3D "lad_dra7xx"
- DAEMON:omapl138 =3D "lad_omapl138"
-=20
- inherit autotools-brokensep pkgconfig update-rc.d systemd
-@@ -55,7 +55,7 @@ do_install:append() {
-     install -c -m 755 ${UNPACKDIR}/tiipclad-daemon.sh ${D}${sysconfdir}/in=
-it.d/${INITSCRIPT_NAME}
- }
-=20
--do_install:append:dra7xx() {
+-do_install:append:omap-a15() {
 +do_install:append:am57xx() {
-     install -d ${D}${sysconfdir}/modprobe.d/
-     install -c -m 644 ${UNPACKDIR}/omap_remoteproc.conf ${D}${sysconfdir}/=
-modprobe.d/
- }
-diff --git a/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/meta-ti-=
-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-index bfdf1ac5..bca91df8 100644
---- a/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-+++ b/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-@@ -3,7 +3,7 @@ LICENSE =3D "TI-TSPA"
+     install -m 644 ${S}/examples/${PLATFORM}/PRU_Halt/gen/PRU_Halt.out \
+                    ${D}${nonarch_base_libdir}/firmware/pru
+     for i in 1 2
+@@ -182,7 +182,7 @@ FILES:${PN}-rpmsg-echo =3D "${nonarch_base_libdir}/firm=
+ware/pru/PRU_RPMsg_Echo_Int
+ # Set up names for the firmwares
+ PRU_ICSS_ALTERNATIVES:ti33x    =3D "am335x-pru0-fw am335x-pru1-fw"
+ PRU_ICSS_ALTERNATIVES:ti43x    =3D "am437x-pru0_0-fw am437x-pru0_1-fw am43=
+7x-pru1_0-fw am437x-pru1_1-fw"
+-PRU_ICSS_ALTERNATIVES:omap-a15 =3D "am57xx-pru1_0-fw am57xx-pru1_1-fw am57=
+xx-pru2_0-fw am57xx-pru2_1-fw"
++PRU_ICSS_ALTERNATIVES:am57xx   =3D "am57xx-pru1_0-fw am57xx-pru1_1-fw am57=
+xx-pru2_0-fw am57xx-pru2_1-fw"
+ PRU_ICSS_ALTERNATIVES:am62xx   =3D "am62x-pru0-fw am62x-pru1-fw"
+ PRU_ICSS_ALTERNATIVES:am64xx   =3D "am64x-pru0_0-fw am64x-pru0_1-fw am64x-=
+pru1_0-fw am64x-pru1_1-fw am64x-rtu0_0-fw am64x-rtu0_1-fw am64x-rtu1_0-fw a=
+m64x-rtu1_1-fw"
+ PRU_ICSS_ALTERNATIVES:am65xx   =3D "am65x-pru0_0-fw am65x-pru0_1-fw am65x-=
+pru1_0-fw am65x-pru1_1-fw am65x-pru2_0-fw am65x-pru2_1-fw am65x-rtu0_0-fw a=
+m65x-rtu0_1-fw am65x-rtu1_0-fw am65x-rtu1_1-fw am65x-rtu2_0-fw am65x-rtu2_1=
+-fw"
+diff --git a/meta-ti-extras/recipes-devtools/gdbc6x/gdbc6x_git.bb b/meta-ti=
+-extras/recipes-devtools/gdbc6x/gdbc6x_git.bb
+index 3e6dfbff..521d06fe 100644
+--- a/meta-ti-extras/recipes-devtools/gdbc6x/gdbc6x_git.bb
++++ b/meta-ti-extras/recipes-devtools/gdbc6x/gdbc6x_git.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D "file://debian/copyright;md5=3Dbf0fe28=
+72eb3dfeebb2cbe38206fe81f
 =20
- LIC_FILES_CHKSUM =3D "file://Texas_Instruments_ipumm_Manifest.pdf;md5=3D5c=
-c572579f07af266ab57fc17d762c7f"
+ DEPENDS =3D "ncurses bison-native texinfo flex-native gettext"
 =20
--COMPATIBLE_MACHINE =3D "dra7xx"
+-COMPATIBLE_MACHINE =3D "omap-a15"
 +COMPATIBLE_MACHINE =3D "am57xx"
 =20
- inherit features_check
+ PR =3D "${INC_PR}.1"
+=20
+diff --git a/meta-ti-extras/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb b/=
+meta-ti-extras/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
+index a2d8da75..bcb9624f 100644
+--- a/meta-ti-extras/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
++++ b/meta-ti-extras/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
+@@ -8,7 +8,7 @@ PR =3D "${INC_PR}.0"
+=20
+ S:append =3D "/gdbserver-c6x/src"
+=20
+-COMPATIBLE_MACHINE =3D "omap-a15"
++COMPATIBLE_MACHINE =3D "am57xx"
+=20
+ EXTRA_OEMAKE =3D "PLATFORM=3DDRA7xx_PLATFORM"
+=20
+diff --git a/meta-ti-extras/recipes-devtools/gdbc6x/gdbserverproxy-module-d=
+rv_git.bb b/meta-ti-extras/recipes-devtools/gdbc6x/gdbserverproxy-module-dr=
+v_git.bb
+index 1e4fd6c5..799ba019 100644
+--- a/meta-ti-extras/recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.=
+bb
++++ b/meta-ti-extras/recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.=
+bb
+@@ -13,7 +13,7 @@ S:append =3D "/kernel_module/gdbproxy-mod"
+=20
+ inherit module
+=20
+-COMPATIBLE_MACHINE =3D "omap-a15"
++COMPATIBLE_MACHINE =3D "am57xx"
+=20
+ EXTRA_OEMAKE =3D "PLATFORM=3DDRA7xx_PLATFORM KVERSION=3D${KERNEL_VERSION} =
+KERNEL_SRC=3D${STAGING_KERNEL_DIR}"
+=20
+diff --git a/meta-ti-extras/recipes-ti/imglib/imglib-c66x.inc b/meta-ti-ext=
+ras/recipes-ti/imglib/imglib-c66x.inc
+index 8fa2ceca..3c5efeb1 100644
+--- a/meta-ti-extras/recipes-ti/imglib/imglib-c66x.inc
++++ b/meta-ti-extras/recipes-ti/imglib/imglib-c66x.inc
+@@ -8,7 +8,7 @@ require ../includes/ti-paths.inc
+ require ../includes/ti-staging.inc
+ require ../includes/ti-unpack.inc
+=20
+-COMPATIBLE_MACHINE =3D "omap-a15"
++COMPATIBLE_MACHINE =3D "am57xx"
+=20
+ SRC_URI =3D "http://software-dl.ti.com/sdoemb/sdoemb_public_sw/imglib/${PV=
+}/exports/${BINFILE};name=3Dimglib"
+=20
+diff --git a/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos.inc b/meta-ti-extras=
+/recipes-ti/ipc/ti-ipc-rtos.inc
+index 2f93db72..0b2ef9f5 100644
+--- a/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -41,16 +41,16 @@ RELEASE_SUFFIX =3D ""
+=20
+ PR =3D "${INC_PR}.r0"
+=20
+-DEPENDS:append:omap-a15 =3D " ti-cgt6x-native \
+-                            ti-cgt-arm-native \
+-                            gcc-arm-baremetal-native \
++DEPENDS:append:am57xx =3D " ti-cgt6x-native \
++                          ti-cgt-arm-native \
++                          gcc-arm-baremetal-native \
+ "
+ DEPENDS:append:omapl138 =3D " ti-cgt6x-native \
+ "
+=20
+ IPC_TARGETS =3D ""
+=20
+-IPC_TARGETS:omap-a15 =3D "\
++IPC_TARGETS:am57xx =3D "\
+     gnu.targets.arm.A15F=3D"${GCC_ARM_NONE_TOOLCHAIN}" \
+     ti.targets.elf.C66=3D"${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
+     ti.targets.elf.C66_big_endian=3D"${STAGING_DIR_NATIVE}/usr/share/ti/cg=
+t-c6x" \
+diff --git a/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb b/meta-ti-ext=
+ras/recipes-ti/ipc/ti-ipc-rtos_git.bb
+index d2ac6276..2162a1ac 100644
+--- a/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb
++++ b/meta-ti-extras/recipes-ti/ipc/ti-ipc-rtos_git.bb
+@@ -81,11 +81,11 @@ KFPLAT =3D ""
+ ALTERNATIVE_PRIORITY =3D "5"
+=20
+ ALTERNATIVE:${PN}-fw:omapl138 =3D "rproc-dsp-fw"
+-ALTERNATIVE:${PN}-fw:omap-a15 =3D "dra7-dsp1-fw.xe66 \
+-                                 dra7-dsp2-fw.xe66 \
+-                                 dra7-ipu1-fw.xem4 \
+-                                 dra7-ipu2-fw.xem4 \
+-                                "
++ALTERNATIVE:${PN}-fw:am57xx =3D "dra7-dsp1-fw.xe66 \
++                               dra7-dsp2-fw.xe66 \
++                               dra7-ipu1-fw.xem4 \
++                               dra7-ipu2-fw.xem4 \
++                              "
+=20
+ ALTERNATIVE_LINK_NAME[rproc-dsp-fw] =3D "${nonarch_base_libdir}/firmware/r=
+proc-dsp-fw"
+ ALTERNATIVE_LINK_NAME[dra7-dsp1-fw.xe66] =3D "${nonarch_base_libdir}/firmw=
+are/dra7-dsp1-fw.xe66"
+diff --git a/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc b/meta-ti-extras/=
+recipes-ti/vlib/vlib-c66x.inc
+index 94c5d33b..c7c14f91 100644
+--- a/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc
++++ b/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc
+@@ -7,7 +7,7 @@ require ../includes/ti-paths.inc
+ require ../includes/ti-staging.inc
+ require ../includes/ti-eula-unpack.inc
+=20
+-COMPATIBLE_MACHINE =3D "omap-a15"
++COMPATIBLE_MACHINE =3D "am57xx"
+=20
+ SRC_URI =3D "http://software-dl.ti.com/libs/vlib/${PV}//exports/vlib_c66x_=
+obj_${PV}_Linux.bin;name=3Dvlibbin"
 =20
 --=20
 2.39.2
