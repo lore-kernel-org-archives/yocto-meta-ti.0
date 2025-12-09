@@ -2,316 +2,178 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45911D3B9A2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 474E4D3B99E
 	for <webhook@archiver.kernel.org>; Tue,  9 Dec 2025 21:41:43 +0000 (UTC)
-Received: from BYAPR05CU005.outbound.protection.outlook.com (BYAPR05CU005.outbound.protection.outlook.com [52.101.85.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2322.1765316498748023864
+Received: from BL0PR03CU003.outbound.protection.outlook.com (BL0PR03CU003.outbound.protection.outlook.com [52.101.53.37])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2327.1765316501080541275
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 09 Dec 2025 13:41:38 -0800
+ Tue, 09 Dec 2025 13:41:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=N1nr1Dsl;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.85.45, mailfrom: reatmon@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=GLvl6bf0;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.53.37, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ObJoHalwmS/JgUlVdrce2sNjUD+KSHMFXyQR6ONZytoXMNBg5NTSzM8YFRT07nTLa/KJ7khxmr7qrSqfRpGX/0a7aDBqT3JC6wXmnu/c5oRqdziOc4wPkYs4ElBLcuG9ClDrvbN3Y53LKEm2xlUOu7wGKeyXbalv9SiY2PHWNokS1X3bOeOsZHu5rxzMu0mivKpHz61FLTE9Ahrx+LeS1BUMO0XyQEMtwjlYTsjkuk50eBmRCFG5cI7meabNSX83hQpsEXVB6jJKwgpS0mX8WzkatvfqmExjwBJ4BY7MkleYbffXVE/UYXyS5tJQWC/WvFXSe6ce7AdE+Ht8vqEPiw==
+ b=TeAfJvgRxy9dtVcJ+UL09Mxjha9nlHYx0lICH/zqC43tkjZascLFGRj/t18GhRb2W76tM/88IqcBiuZsvwWFXjueFPFtCQGY8bhvdZCUtBwHNd4jtKnbP4azx9QpCE2J6j7mmBUatP3HQiffH4I++RhdkcR/nlIqB53vvNIQedAcBXKg5WZLm+noj6weOYGMzXuZjFxkRqFD2dlMLTPce49ExLtSMjGantg29kVI609G0KOHqOTG+yzSPV53si1wt/Gkz0AtkDEeKW1CHJYhYgbU/JaLihcqVGtR/SlgSiSO+RNWbHmeHzppIpVmIhlu9Wr+G0zccY5auKjk8tr84w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3dkXnZ8r0eU4sDViZFuW4DpY6ec8BVzKoQkbuObpYAY=;
- b=un9R922LNBnhY/BC3Bz3yluo8Pibm9I+HVj0shS7tOYkwf362GK15C+89AmNQgIH11kgS2LlxBTGoJ/b5insAsxOtG8Rme8KpzbygQRpiuFucLLITBt0vJe56vVfoFwDV85WYwwHj0Kbg/kVDorSoJRNaMfRxMjhcDI1M5L+cJdPSXGn9DoaYVlZrb8oedodQxYXSdZpUQYF+KNfmngJ1YKSjMP5S5h7IH3e0l5RzVFV9i84g+OX9hSYEW9S5IXC1NslK6oyNOFvnhdLRdEZoylxpBjHcKbYPXNZ3tNIuoOKAlIkj1hhiHsmsC4/SlxNKNFkv9MjwK0FhiUpNcwQAA==
+ bh=Bxms0kjKg2axAoUxMD+2pRLiSDwOa4HpH2GkFeANds4=;
+ b=mJhVYczPYpiFpnrNFZNiNANfh1yEnwxhW9ITJjbAP8nNW5DKnq9utxZZdduWKvV14MmDcOs2eVFJIgUpmEvOD/kR2FWWqRakaxG5KS8QiIixCyH4eRuXGV21GHzbCTQCMSEQK6x81XDxw923pq+wnoQxsdKjMo/k0RTDroZ8IaaGzn8uSGait4NfOu49oxd0uV1FoKCtYB7Do3nvr8AZrJyY3/YSVBwdWminBgOB92vD6fohw+W7XMhs8lO6SAmNgjxjMmE+jb3N5R/Xv6ZfWAkMuhZ9CE7ANydL1LuAITOE65V+4GCHEctoJl6HRxEpFNsK6NK1JPIEu7KDxgAx+A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3dkXnZ8r0eU4sDViZFuW4DpY6ec8BVzKoQkbuObpYAY=;
- b=N1nr1Dsl15qwD7tA8bRT3/bN4ebAiN84v4SjwJyyQE/PPHeZ8uTLHUTgb0NI20pjMISUg4OVl0370vAqGdHoC1hnt2au8NBI8zW5skQnh8Czvy/+zQtJ/qUB4J6N2NTrGn5wimtCMRtGPnrlj25jjjqGpfYvSmYnlCwIH/ZeJGY=
-Received: from BN9PR03CA0116.namprd03.prod.outlook.com (2603:10b6:408:fd::31)
- by CY5PR10MB6021.namprd10.prod.outlook.com (2603:10b6:930:3f::8) with
+ bh=Bxms0kjKg2axAoUxMD+2pRLiSDwOa4HpH2GkFeANds4=;
+ b=GLvl6bf0em1mUSD5JocLrXUMuF68nnunoI1Zp1s9z7yOZxCvIJsfOv8MGxOaxOxbYOSvpF0GQqew+Q74O/WRaG/pjTn1OfqQIM+U2cnszk5pLlAFY/9liJQMNjh+4E/Tape1paSTL4374Qam/dsZkfW0bSudQtdb8w3H947ltdE=
+Received: from YQBPR0101CA0136.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:c01:e::9)
+ by SA1PR10MB6390.namprd10.prod.outlook.com (2603:10b6:806:256::16) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.14; Tue, 9 Dec
- 2025 21:41:36 +0000
-Received: from BN3PEPF0000B071.namprd04.prod.outlook.com
- (2603:10b6:408:fd:cafe::90) by BN9PR03CA0116.outlook.office365.com
- (2603:10b6:408:fd::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.14 via Frontend Transport; Tue,
- 9 Dec 2025 21:41:06 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ 2025 21:41:37 +0000
+Received: from BN3PEPF0000B36F.namprd21.prod.outlook.com
+ (2603:10b6:c01:e:cafe::e) by YQBPR0101CA0136.outlook.office365.com
+ (2603:10b6:c01:e::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.6 via Frontend Transport; Tue, 9
+ Dec 2025 21:41:35 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- BN3PEPF0000B071.mail.protection.outlook.com (10.167.243.116) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BN3PEPF0000B36F.mail.protection.outlook.com (10.167.243.166) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Tue, 9 Dec 2025 21:41:35 +0000
-Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9434.0 via Frontend Transport; Tue, 9 Dec 2025 21:41:35 +0000
+Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 9 Dec
  2025 15:41:32 -0600
-Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE212.ent.ti.com
- (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE215.ent.ti.com (10.64.6.73) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 9 Dec
  2025 15:41:32 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Tue, 9 Dec 2025 15:41:32 -0600
 Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B9LfWVu1872068;
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B9LfWnD1872072;
 	Tue, 9 Dec 2025 15:41:32 -0600
 Received: from reatmon by grumpy with local (Exim 4.97)
 	(envelope-from <reatmon@ti.com>)
-	id 1vT5Se-0000000HIaB-0sBP;
+	id 1vT5Se-0000000HIaI-151O;
 	Tue, 09 Dec 2025 15:41:32 -0600
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
 	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH 1/3] linux-ti-staging: Add initial 6.18 recipes for LTS development
-Date: Tue, 9 Dec 2025 15:41:30 -0600
-Message-ID: <20251209214132.4122996-1-reatmon@ti.com>
+Subject: [meta-ti][master][PATCH 3/3] ti-bsp: Add ti-6_18 for LTS development
+Date: Tue, 9 Dec 2025 15:41:32 -0600
+Message-ID: <20251209214132.4122996-3-reatmon@ti.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251209214132.4122996-1-reatmon@ti.com>
+References: <20251209214132.4122996-1-reatmon@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B071:EE_|CY5PR10MB6021:EE_
-X-MS-Office365-Filtering-Correlation-Id: c437f0f4-9317-4f78-b46d-08de376bba46
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B36F:EE_|SA1PR10MB6390:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5ad4c6fb-5b09-4c84-01ea-08de376bba49
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|1800799024|376014|82310400026;
+	BCL:0;ARA:13230040|36860700013|376014|1800799024|82310400026;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?QdUDSSP6p+isZm9eqss9eXGW7YDaGk2g4q5xqwumEjfXdrqgQ5x+NCDWYJwm?=
- =?us-ascii?Q?4nPbsb6QRvbMElVZMTi7C7NoWqirc5t40zR9jCP/yYugIwb48VZlzT77uNwc?=
- =?us-ascii?Q?18QjwA0DcDo05lCyhX2yPAqehsH260TW8mbEk1k6mPDhlnNCszVVBNC1/jYC?=
- =?us-ascii?Q?1840sTkwvygZthW+qzlaBMjlPp/XmnY5T0jpLnLpvLGnjcMnQraBtsswqGju?=
- =?us-ascii?Q?sT7hMWvxG6AO94Of1SNGxieKM/7bkQyjZSvVTUmNByop9DxQf7p6rnBpAu8H?=
- =?us-ascii?Q?EbIFG/U8X2cl8XDS6G+Qo19/iQLMGdUEDsqeNcr54M1Hq+bexxzAPToQDI1v?=
- =?us-ascii?Q?ndmNlCotkXNYA8VZZIOxkyW4fyaQfhW+ILCOor4UxeyASX2sWgz4IxkIYnxT?=
- =?us-ascii?Q?+Ui1v4+vteKNs4IvMquJ1MAAVtZESpEjf78wmum9zaFznZomeUC7Ji7vK4Dv?=
- =?us-ascii?Q?HCN0GsjCVMME6gkI9tY//Fb03n82fcSC9xbK3Lspa+nNP7ZkuCo0v6w9WSTV?=
- =?us-ascii?Q?i/CBtZ1c9Ywlh2Psu2BbdoIs0kxjw5n5UB72hRhb63XUA80yAqwSLlNk9kmB?=
- =?us-ascii?Q?KV6zV+vB4iwiTXm7eRllZcg/4HpWdRPAWoNtOUODBvGo+0lGJqXaaw1ZvfHM?=
- =?us-ascii?Q?2N2EAtc9jKiQRs5gbJnEq/HChrVuz0cnUicukXipGwBuEIPvMrbR+IW2RUJF?=
- =?us-ascii?Q?GcZO+s9JwP7GZTLrXNlLDrksiRFBoza3uQqOhbKqkzL1jPAR8Qe7Ro5kFtyI?=
- =?us-ascii?Q?P2q+CylG/q7QhojlfRljsIYCXJZxS2H8rQ9en2kXxpxSuyDGXMv/UuIv9K2Z?=
- =?us-ascii?Q?0DEA/C2NnXTCwhh+MI9jmrO0jpkhn/F6+bbLm/gVNVjyaap+SvqQ197Xmpm8?=
- =?us-ascii?Q?2X9XHGWhcP1U/dVBRT7/YVuyiOGxiRjLyNDsiB/cnYoZ81Q4zQjR5q6FVczk?=
- =?us-ascii?Q?aKd2CF0dCe394kZJurkWqSmg7xPKcRUr13yx5lORFfgivqCdWmzQTiVCzehN?=
- =?us-ascii?Q?nJa+LjIe1IUY1k/A+45bXwBbRyqptXBjo1Yo+wgfE0h+TghSZnyMUZuguJqS?=
- =?us-ascii?Q?nErj3C6Ourmr8EAZ1kNuQNQjLHo55/2/OcfVPJvMc9h6lR2db4ySY/ZevUCW?=
- =?us-ascii?Q?uEvE9qu2fcZFfKkoXjFcqalEOPxhAIyUZM8uUgXHVpQ6tLrwcrnWqS9PQqjD?=
- =?us-ascii?Q?PQU+Lp3YOzA8rDY/CWicPi6Z9QUUsMOCaaZQ8sWsaMSkyy/B+0FU+voaqQ5w?=
- =?us-ascii?Q?jfGE7D8bD5seUb2/KgZFiAgxv2jOA8HMAMkBvkDHHvFqKE54lJ+nL6dYh6Bh?=
- =?us-ascii?Q?l/yN0uI3NWGScbPFyd9CqJInOQwqCpuWZRueLUTal+pvg/M68HOwXUWjQxJz?=
- =?us-ascii?Q?uAWXbVbqvICRTZiEeSnR2HP01Q4SHEQ57f00ADV/7vw9y8rLwo4FEvPDrT0E?=
- =?us-ascii?Q?0TMsLNaeypTjvX0T/qjVSHF8KenI8T5ZeSSLa6gVMq4BO0oEtSRZORUNU+25?=
- =?us-ascii?Q?WDuL2oy7FSuEIZzqBHMUJb3bXBKbwsgR2a4IRiEJAHFtY2ya0CRNdV4h+RoU?=
- =?us-ascii?Q?MkGIjCnIwxAwsZSRsp0=3D?=
+	=?us-ascii?Q?OLOGCharZ0DPy8dmiM3O6eABJNgFHMojaPCgFU6SBtAOt40o/P4IUukDNuNY?=
+ =?us-ascii?Q?RtYlTBuxo+s3Vy33NSv+778gWgHmbhbXWMPtJwEtJKvb/8p7XNRcIYuM6+yL?=
+ =?us-ascii?Q?VW/8cHLl9otr+kS4IA+Q5/Ib91PyHgUxWlenebUcsamMARIiufZjo/Rm8fVo?=
+ =?us-ascii?Q?dfli6QktJF0TUb2rep7izlen3WbfQF1eC4HJj9l6XqputKbvTUbPizZatnW0?=
+ =?us-ascii?Q?lpnyxYiBcMYbJU3GquUJmBaGk80tyjCo7RMg1wYC5B3HBgRKVVgEYccahQ97?=
+ =?us-ascii?Q?MfebZISIDffvqaAjFqQ/YegqENSXmupT+LO0edj+xTwzzHWhc98nX24e0fPz?=
+ =?us-ascii?Q?ILoywB7DE776RGQ9IdfF+7CNpKyfz4H25DaDjDi/uyYKruJBlmE0vv6zS4VA?=
+ =?us-ascii?Q?sCx4y/RC0Ja3HIJYc4Xv/rW/3GJaC7BBeTwWHdj91dmCWxN4ZSEQhscVKSWr?=
+ =?us-ascii?Q?PDuH3kZpCQcwll7O4ww0UoXWYazGs9DJo0bkAZy/e/g7Fh6jpzcH5s9XxP4C?=
+ =?us-ascii?Q?dnBbmpgXr3ZLi3TJk+okE0AXinugOfM6dlMi2vMvDAOc7XAXbPykDcN1jPAW?=
+ =?us-ascii?Q?6zQer4GvtfeLxAaLE9ddo3Db8RWRVb5VQvcvT1Cv+uQcU1Dmpqr+tHhIvv87?=
+ =?us-ascii?Q?n4DvI1bDIWy6VAXJdrEfyBmd6eewtVdh4UqG/Ha1uMDcQe1VxxqnZHkEfI2b?=
+ =?us-ascii?Q?7uF9iJEezHAF5k4dR83rF1H0u5phpRjH6lbwX6C/yb4QJ3HQpRbtd3s+CVo+?=
+ =?us-ascii?Q?2nqn+Ah2QJN8ueeErExwGzLNxyaAvq7H1klYePVRu4s5eUzhdowaF47PLjEU?=
+ =?us-ascii?Q?3YC/gZBc3N6FVBFBUVTPDEtdkVKv7APaTxvmgaTPANvRLA4y9RE0wQb7gVtT?=
+ =?us-ascii?Q?ELRrUsBKeJHs+JPONwdtzM1EqJG9tQ0RlJIbhFwp0b3DiJ9nuY2dMYHgcS3Y?=
+ =?us-ascii?Q?f4il5/rJU8bQpECcRnrGjbGCgVYp/AtRtycZsxLwUm8wt7ohPuYrORGZFQs/?=
+ =?us-ascii?Q?8BCCgcpD0K7hKc1WXxcZsnjYoy27MFuT0DEsp4kRDNA1gTpFKLADMZigecSf?=
+ =?us-ascii?Q?x2QmmbOPw14rKtZG5OUxuQZGb+DltPwy92dvUDkcKDtgx1Ij4q8pIvy20QDs?=
+ =?us-ascii?Q?wVsKGJqXC39622Q9cfXF4xx6nFzDYmOMQdyLIDVZQZZP5AOvHlH6ZENkNtlH?=
+ =?us-ascii?Q?wwTlcPRPIN5FMP8fGU6xQJye2JCQ5Jp6gI9iSEZ/3DSRLusb81KXfi7HmEQp?=
+ =?us-ascii?Q?FmMufWRJ501n8HHMkMoE+/q8m2i4tqqSqcUuSpAOi/217yCZAToE/QBVVxuf?=
+ =?us-ascii?Q?CP0ykol4D9sbvigH9YbG8LvC5P8colFG3ocmwhBOVKEnEVaMkjVAVyeOf3q1?=
+ =?us-ascii?Q?uQA2c+ACZlZp2jqtL+eWDzJ7LYsmQm0gbh4OFPDQr2Dv+YsSllkjXwMZl+Bd?=
+ =?us-ascii?Q?LL2blwnaaowTB9xlOQb55jFgihKBKyDXvjXgqSwEkjT8yWnfSV5Q5Q+wdc2B?=
+ =?us-ascii?Q?Xo1Z6SbAEABzGkYjSuZutq6LeUq4RzvOTAT06nMoWWSCeBHHwFjUAyeU02Wy?=
+ =?us-ascii?Q?CKkyiR4Reg4AjE/Ywww=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026);DIR:OUT;SFP:1101;
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026);DIR:OUT;SFP:1101;
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2025 21:41:35.8189
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2025 21:41:35.8415
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c437f0f4-9317-4f78-b46d-08de376bba46
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5ad4c6fb-5b09-4c84-01ea-08de376bba49
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	BN3PEPF0000B071.namprd04.prod.outlook.com
+	BN3PEPF0000B36F.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR10MB6021
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB6390
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Tue, 09 Dec 2025 21:41:43 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19335
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19336
 
-Add all of the initial recipes/files needed for 6.18 development.
+Add entries for ti-6_18 for the upcoming LTS development effort.  This
+includes:
+
+kernel: 6.18
+u-boot: 2026.01
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- .../defconfig                                      |  0
- .../k3/defconfig                                   |  0
- .../omapl138/defconfig                             |  0
- .../ti33x}/defconfig                               |  0
- .../ti43x}/defconfig                               |  0
- .../defconfig                                      |  0
- .../k3/defconfig                                   |  0
- .../omapl138/defconfig                             |  0
- .../ti33x}/defconfig                               |  0
- .../ti43x}/defconfig                               |  0
- ...aging-rt_6.6.bb =3D> linux-ti-staging-rt_6.18.bb} | 10 ++--------
- ...-ti-staging_6.6.bb =3D> linux-ti-staging_6.18.bb} | 14 ++++++--------
- 12 files changed, 8 insertions(+), 16 deletions(-)
- copy meta-ti-bsp/recipes-kernel/linux/{linux-ti-staging-6.12 =3D> linux-ti=
--staging-6.18}/defconfig (100%)
- copy meta-ti-bsp/recipes-kernel/linux/{linux-ti-staging-6.12 =3D> linux-ti=
--staging-6.18}/k3/defconfig (100%)
- copy meta-ti-bsp/recipes-kernel/linux/{linux-ti-staging-6.12 =3D> linux-ti=
--staging-6.18}/omapl138/defconfig (100%)
- copy meta-ti-bsp/recipes-kernel/linux/{linux-ti-staging-6.12 =3D> linux-ti=
--staging-6.18/ti33x}/defconfig (100%)
- copy meta-ti-bsp/recipes-kernel/linux/{linux-ti-staging-6.12 =3D> linux-ti=
--staging-6.18/ti43x}/defconfig (100%)
- copy meta-ti-bsp/recipes-kernel/linux/{linux-ti-staging-rt-6.12 =3D> linux=
--ti-staging-rt-6.18}/defconfig (100%)
- copy meta-ti-bsp/recipes-kernel/linux/{linux-ti-staging-rt-6.12 =3D> linux=
--ti-staging-rt-6.18}/k3/defconfig (100%)
- copy meta-ti-bsp/recipes-kernel/linux/{linux-ti-staging-rt-6.12 =3D> linux=
--ti-staging-rt-6.18}/omapl138/defconfig (100%)
- copy meta-ti-bsp/recipes-kernel/linux/{linux-ti-staging-rt-6.12 =3D> linux=
--ti-staging-rt-6.18/ti33x}/defconfig (100%)
- copy meta-ti-bsp/recipes-kernel/linux/{linux-ti-staging-rt-6.12 =3D> linux=
--ti-staging-rt-6.18/ti43x}/defconfig (100%)
- copy meta-ti-bsp/recipes-kernel/linux/{linux-ti-staging-rt_6.6.bb =3D> lin=
-ux-ti-staging-rt_6.18.bb} (55%)
- copy meta-ti-bsp/recipes-kernel/linux/{linux-ti-staging_6.6.bb =3D> linux-=
-ti-staging_6.18.bb} (79%)
+ meta-ti-bsp/conf/machine/include/ti-bsp.inc | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconf=
-ig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.18/defconfig
-similarity index 100%
-copy from meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
-copy to meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.18/defconfig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defc=
-onfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.18/k3/defconfig
-similarity index 100%
-copy from meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/k3/defconf=
-ig
-copy to meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.18/k3/defconfig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/omapl13=
-8/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.18/omapl1=
-38/defconfig
-similarity index 100%
-copy from meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/omapl138/d=
-efconfig
-copy to meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.18/omapl138/def=
-config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconf=
-ig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.18/ti33x/defconfig
-similarity index 100%
-copy from meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
-copy to meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.18/ti33x/defcon=
-fig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconf=
-ig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.18/ti43x/defconfig
-similarity index 100%
-copy from meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.12/defconfig
-copy to meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.18/ti43x/defcon=
-fig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defc=
-onfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.18/defconfig
-similarity index 100%
-copy from meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconf=
-ig
-copy to meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.18/defconfig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/d=
-efconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.18/k3/def=
-config
-similarity index 100%
-copy from meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/k3/defc=
-onfig
-copy to meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.18/k3/defcon=
-fig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/omap=
-l138/defconfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.18/=
-omapl138/defconfig
-similarity index 100%
-copy from meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/omapl13=
-8/defconfig
-copy to meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.18/omapl138/=
-defconfig
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defc=
-onfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.18/ti33x/def=
-config
-similarity index 100%
-copy from meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconf=
-ig
-copy to meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.18/ti33x/def=
-config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defc=
-onfig b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.18/ti43x/def=
-config
-similarity index 100%
-copy from meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.12/defconf=
-ig
-copy to meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt-6.18/ti43x/def=
-config
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb b/=
-meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.18.bb
-similarity index 55%
-copy from meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-copy to meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.18.bb
-index e817b530..a979668d 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.18.bb
-@@ -1,15 +1,9 @@
--require linux-ti-staging_6.6.bb
-+require linux-ti-staging_6.18.bb
+diff --git a/meta-ti-bsp/conf/machine/include/ti-bsp.inc b/meta-ti-bsp/conf=
+/machine/include/ti-bsp.inc
+index eaa501c3..0ca2de64 100644
+--- a/meta-ti-bsp/conf/machine/include/ti-bsp.inc
++++ b/meta-ti-bsp/conf/machine/include/ti-bsp.inc
+@@ -3,7 +3,7 @@
+ # preferences for kernel, bootloader and graphics components, as
+ # well as a dedicated machine override.
 =20
- KERNEL_LOCALVERSION:append =3D "-rt"
+-# Supported options are: mainline, next, ti-6_12, ti-6_6
++# Supported options are: mainline, next, ti-6_18, ti-6_12, ti-6_6
+ TI_PREFERRED_BSP ??=3D "ti-6_12"
 =20
- # Look in the generic major.minor directory for files
- # This will have priority over generic non-rt path
--FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-6.6:"
--
--BRANCH =3D "ti-rt-linux-6.6.y"
--
--SRCREV =3D "c79d7ef3a56ff61dd83d5527520b419a4f0e32e2"
-+FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-6.18:"
+ # Use bsp-* namespace for overrides
+@@ -33,6 +33,15 @@ BSP_BOOTLOADER_VERSION:bsp-next =3D "%"
+ # GC320 support requires out-of-tree drivers not yet available in next
+ MACHINE_FEATURES:remove:bsp-next =3D "gc320"
 =20
- include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS=
-') else ''}
--
--PV =3D "6.6.58+git"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb b/met=
-a-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb
-similarity index 79%
-copy from meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-copy to meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb
-index b6d882d8..ab75571e 100644
---- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.6.bb
-+++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb
-@@ -13,24 +13,22 @@ include ${@ 'recipes-kernel/linux/ti-extras.inc' if d.g=
-etVar('TI_EXTRAS') else '
- DEPENDS +=3D "gmp-native libmpc-native"
-=20
- # Look in the generic major.minor directory for files
--FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-6.6:"
-+FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-6.18:"
-=20
- KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT} \
- 		      ${EXTRA_DTC_ARGS}"
-=20
- S =3D "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}"
-=20
--BRANCH ?=3D "ti-linux-6.6.y"
-+BRANCH ?=3D "ti-linux-6.18.y"
-=20
--SRCREV ?=3D "a7758da17c2807e5285d6546b6797aae1d34a7d6"
--PV =3D "6.6.58+git"
--
--KERNEL_REPRODUCIBILITY_PATCHES =3D " \
--    file://0001-vt-conmakehash-improve-reproducibility.patch \
--"
-+SRCREV ?=3D "75433f843c99d1ab544808749a46a6e2f0151a56"
-+PV =3D "6.18.0+git"
-=20
- # Special configuration for remoteproc/rpmsg IPC modules
- module_conf_rpmsg_client_sample =3D "blacklist rpmsg_client_sample"
- module_conf_ti_k3_r5_remoteproc =3D "softdep ti_k3_r5_remoteproc pre: virt=
-io_rpmsg_bus"
- module_conf_ti_k3_dsp_remoteproc =3D "softdep ti_k3_dsp_remoteproc pre: vi=
-rtio_rpmsg_bus"
- KERNEL_MODULE_PROBECONF +=3D "rpmsg_client_sample ti_k3_r5_remoteproc ti_k=
-3_dsp_remoteproc"
++# =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++# ti-6_18
++# TI staging kernel 6.18, u-boot 2026.01
++# =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++BSP_KERNEL_PROVIDER:bsp-ti-6_18 =3D "linux-ti-staging"
++BSP_KERNEL_VERSION:bsp-ti-6_18 =3D "6.18%"
++BSP_BOOTLOADER_PROVIDER:bsp-ti-6_18 =3D "u-boot-ti-staging"
++BSP_BOOTLOADER_VERSION:bsp-ti-6_18 =3D "2026.01%"
 +
-+DEFAULT_PREFERENCE =3D "-1"
+ # =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+ # ti-6_12
+ # TI staging kernel 6.12, u-boot 2025.01
 --=20
 2.43.0
 
