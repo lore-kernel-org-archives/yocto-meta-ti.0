@@ -1,151 +1,159 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <afd@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 891D8D609A0
-	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 14:53:16 +0000 (UTC)
-Received: from CH1PR05CU001.outbound.protection.outlook.com (CH1PR05CU001.outbound.protection.outlook.com [52.101.193.19])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24567.1765896788931272063
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 95987D609A2
+	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 15:05:46 +0000 (UTC)
+Received: from CH1PR05CU001.outbound.protection.outlook.com (CH1PR05CU001.outbound.protection.outlook.com [52.101.193.9])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24674.1765897536516986260
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 16 Dec 2025 06:53:09 -0800
+ Tue, 16 Dec 2025 07:05:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=selector1 header.b=Gz6ZAV6S;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.193.19, mailfrom: reatmon@ti.com)
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=CKHxSOJB;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.193.9, mailfrom: afd@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=P3/EE8PtosWaDtWgyu/TyYyv9Mqq0AFj1x+cIfbzYN9YwcbBfNoiPS+ip/DxWjnB/uxQPO1XOGAbvIarMvxG4jI3fv4H41gfihnJq616UFtoqzJ4v3Ml3vaBTlM14dG8SWBYYJnQRQrBZLBQaQ+EWQhSzJUSkR2t11Lj8463DttboAIWJNU6anmANWUXyj7MSAa3Lny8Y6M4lcvvayblLj1jsHxpDuFnXg8l7ZrYV88+lVpdFVg+LTY4Qb3JYGvH5DlWqxVpm9m6tDCtF77yO0HRuR8KnxrSw2qohOaeeRM08YL7N1l2DXk1m887iJX1M2PsglZmqFFTic1KwmQntw==
+ b=XQUVfJ+FACJLOhY//CPCAaAuC3wwZId2R6L1aJLgEhRM/AvvD3tSMPuifdE8jcI3aT7vaUZbcwdWf88dwfhQT8ykFtDcPg+bD7KEzv6iz0wJ3ZZ4LOQ/cSU6o/jmTSCuQQy4vSI9QabKVEiFzycvZk2zH6B5jodJqf78MOltQvcX85Ajyq4YVVbsUXdM/em8MfCnLyA0/Xh+18mvKjPvnkJj+vNDyiuubRELUn32d32QWo7GYgIsuC4fRX+qKf/yRpTHJtSW1RrD7Lsd3UCop8PSA/iz0WBTkYgkAqH+aZlMAiu5vZkingnKmN7SKN5odz4RXNmLkGWJIGxM76fZ6g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5ER/B1yM5cKxiYtRhdn+c26TeCuZ4UJ3uwZ4qxxUKio=;
- b=h+ZjdME/MSOQ0PVdYuJcxZft47bdhDcGQoJgeoJzQQJSAeTYHBtsZMz0Lm+7RKuCLCCwNQPQNl4Mz//C2twSRJnKOsFg29crRuqAR7e2tt6pYdOofcLbZ7w9OFUBnHcXzVWUHfg8a5/LnMO+8ApvOLwU05+RR2FaXt+LIUrT8KxampA789JH0REUguv3CpJSJZl4HhWvho3rwuK3WT3mYWn3X/tmwVelDRyYaMwIH6NKECbtTZtgjx5sdkVsobMGqWZTdnKe9dRVqlg7PBXRm/RJyYX5zV4IZkK4qLrlw9Yh/HEaUwxw1HbWPaIp2Lj83nB7bKKE8ytmZ7j55wXgIw==
+ bh=VpzMMrF19EZS4T0gCRbT6vUrVRG2YdaUfnC5hLtFiZU=;
+ b=mfOeg4kDxGM09xU2yxE8mzZ8LPcohvNT7yeGwOs47aVVqfMeug5KQ87phVjFL3Xwy8zdqZbctn1PCWqrxEaQXvP4QJuPUDAK3JJkamx/vNc99F0PikDndj/irru+MtBg9ELiY+3d7muOLS8YpmS+/q9xNxqFoFrxVUlkbXWax20p5dUZuQimJ2xQUnVX+Vw/FIZQjo5zVm4XFkXna/WpLp4/ovIO7F8jcAJiMwXHfh0PFkseGeqv1laNtse0/8kPpsEJZGaOPpJ2CzI40ntJDJNx/EQA1VWByNdcOVQgu+xQsShc/Fc92YJ8ugcHNnQqAV0LlegB/g9dgKZj6kpp5w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=denix.org smtp.mailfrom=ti.com; dmarc=pass
+ 198.47.21.195) smtp.rcpttodomain=denix.org smtp.mailfrom=ti.com; dmarc=pass
  (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
  (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5ER/B1yM5cKxiYtRhdn+c26TeCuZ4UJ3uwZ4qxxUKio=;
- b=Gz6ZAV6S2x/ZK6S/qsIJYH8rq/lbFamOYIhXmLo1t4rMgo7pdeCmbPIEnqcXPVKBUgCs4PaUYjo6kubegmhW4H6kqtjKIaQKfpjNfhSrQU8zfTwdSRr+TyUCYH9R+HpKXENn3fwr1WTpQdts5juF8BPHeBIesv0VJgzHfak7l24=
-Received: from CH3P220CA0015.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:1e8::8)
- by DS7PR10MB7345.namprd10.prod.outlook.com (2603:10b6:8:ef::12) with
+ bh=VpzMMrF19EZS4T0gCRbT6vUrVRG2YdaUfnC5hLtFiZU=;
+ b=CKHxSOJBEtLJWBWLbNI/4FPglADlA+EfGapZ+9nrPEek+QN9e3LPBaJwXKlCxnaPnqROMIyVS4eu/AdfZF2QFN3yGKdxE9Zsqmrw2njXMPrmiUqNzpmf+nOkPPErbWUN91c07CPqI5Tlz1Buon8Cdrt9SFf7nItTFUXwFmXuovk=
+Received: from MN2PR15CA0010.namprd15.prod.outlook.com (2603:10b6:208:1b4::23)
+ by LV3PR10MB7817.namprd10.prod.outlook.com (2603:10b6:408:1b8::9) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Tue, 16 Dec
- 2025 14:53:06 +0000
-Received: from CH1PEPF0000A34B.namprd04.prod.outlook.com
- (2603:10b6:610:1e8:cafe::bc) by CH3P220CA0015.outlook.office365.com
- (2603:10b6:610:1e8::8) with Microsoft SMTP Server (version=TLS1_3,
+ 2025 15:05:31 +0000
+Received: from MN1PEPF0000F0DF.namprd04.prod.outlook.com
+ (2603:10b6:208:1b4:cafe::5b) by MN2PR15CA0010.outlook.office365.com
+ (2603:10b6:208:1b4::23) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.6 via Frontend Transport; Tue,
- 16 Dec 2025 14:53:06 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ 16 Dec 2025 15:05:30 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- CH1PEPF0000A34B.mail.protection.outlook.com (10.167.244.10) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ MN1PEPF0000F0DF.mail.protection.outlook.com (10.167.242.37) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9434.6 via Frontend Transport; Tue, 16 Dec 2025 14:53:04 +0000
-Received: from DFLE203.ent.ti.com (10.64.6.61) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9434.6 via Frontend Transport; Tue, 16 Dec 2025 15:05:29 +0000
+Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 16 Dec
- 2025 08:52:52 -0600
-Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 09:05:23 -0600
+Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 16 Dec
- 2025 08:52:51 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 09:05:23 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 16 Dec 2025 08:52:51 -0600
-Received: from [10.249.41.140] ([10.249.41.140])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BGEqpk5060302;
-	Tue, 16 Dec 2025 08:52:51 -0600
-Message-ID: <c4acdd6e-892e-46f0-8bf6-c613652d195b@ti.com>
-Date: Tue, 16 Dec 2025 08:52:51 -0600
+ Transport; Tue, 16 Dec 2025 09:05:23 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BGF5Nfx015154;
+	Tue, 16 Dec 2025 09:05:23 -0600
+Message-ID: <c9730700-a2c7-4f8e-9d5f-ed603459b36b@ti.com>
+Date: Tue, 16 Dec 2025 09:05:22 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [meta-ti][scarthgap][PATCH] meta-ti-bsp: Add support for
  beaglebadge
-To: Judith Mendez <jm@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: Denys Dmytriyenko <denis@denix.org>
+To: <jm@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: Ryan Eatmon <reatmon@ti.com>, Denys Dmytriyenko <denis@denix.org>
 References: <20251216003229.2229848-1-jm@ti.com>
 Content-Language: en-US
-From: Ryan Eatmon <reatmon@ti.com>
+From: Andrew Davis <afd@ti.com>
 In-Reply-To: <20251216003229.2229848-1-jm@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000A34B:EE_|DS7PR10MB7345:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6a2481b1-e531-41a1-1c57-08de3cb2d16e
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0DF:EE_|LV3PR10MB7817:EE_
+X-MS-Office365-Filtering-Correlation-Id: eb8eefb8-a121-4251-e269-08de3cb48d38
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|376014|1800799024|82310400026;
+	BCL:0;ARA:13230040|36860700013|376014|82310400026|1800799024;
 X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?VzkzQW95Zk9YTUs3RDM2b085RXFBQmpoR2pRVnk3OFBxa053aU5pZk5RYldO?=
- =?utf-8?B?WU1QZEp5ajBDOHZOOHRPd1U1c0xwdHZJS2dWQTZjOUUxN0tlcWw3SnU1MldC?=
- =?utf-8?B?QzVJeW5NSjhvUE80SktrMTFESFJ1cm5jUDNDU1lhU0N5RHBVUU1xekVHWFVH?=
- =?utf-8?B?d2FwQnR5bjFVY2lpeEtyNnBiaHlQYWhETWk1OTNodjlMdTBDQnNzTEUxZEVU?=
- =?utf-8?B?TkVKUzhlRDlaaDFKSkpTVDNlRUdFMUozK2pURTl6d3dnRXpQRGpKYk8wdUdL?=
- =?utf-8?B?MmptQ3I5TUhNTnhCQktLbDJBNXBDWlp6VmVubE91MnNmN05Mb0p4UVk0UGcv?=
- =?utf-8?B?LzFQeEphM1FwU3UzU2d3NTJpd0NYMzU4MkMzNCtWVG9WWnRjTkpod3p6NXdV?=
- =?utf-8?B?bWY2MzcrVzBteU1kN0FpSEpDbVJLaTRLSEFUNzYza3pJZk9JejVmTXJiZWJ5?=
- =?utf-8?B?dm83WU0zbGpHRWtYb0NWQ2pOYVBnRkJneGpyWGV5dFIwdjBreVZlS1dxK0V6?=
- =?utf-8?B?QVBsZFpidTBnZ0NjcmtxWGQyckcva2dhRzJ6VTVjTCttSnF5cDlkMmxXQmFp?=
- =?utf-8?B?b3ZBYUw1cGsxbDhhYk8vZStqYlFieUJjSFU0bE9lcTc2SlpPY1dUeE4ydjNE?=
- =?utf-8?B?V0d0MG1xeUhESmNGVlZyaExlM3V4L3E5dzFLc1o5RnVYZElyaTQyNGhpT054?=
- =?utf-8?B?NWE4cUQzN1NELzd4ZlBIb2d5aGVwSE9PUlNFcWdoS29PUXJyKzR0M3B3VVA5?=
- =?utf-8?B?T3QwVnJsd2lWNzM3OExPN1JuNjNXOE9PY3laY1ZaaUdGNEk5bFRjTHJOc1Q3?=
- =?utf-8?B?R1hPeE04alI2OXRSRkR3WlhFUElGOFhQRUw5TGhPdklUTlNXancxam54MTA4?=
- =?utf-8?B?ZWdSZG1pTjM3ajhDOG5rTTdPYkY0UXBFUTFmRXc5TG5BLzFTN2M1UFExZ0Z5?=
- =?utf-8?B?Uk5uYmwzTkk3VTl6TktTeHM1R095c05zUE5RYU5Kcy9yZkROUTJ2dXFCdjBH?=
- =?utf-8?B?cHJFVTNpM1JnQXVhZCtKZWg1S0Vpb0dEeHhRY3dtdGtsRkRXZlY3T2grR0hP?=
- =?utf-8?B?YTRmL2FXZDZ2cGZIOFprMDkwVzJJU2Fsb09PREh4dUlPUlVGdFcrdGtTUnY0?=
- =?utf-8?B?L1lNbUp2NE5ZRWxnWkVWR1FZYTlYdU9nSjh3VTE1OXMvTG01LzlJdElRNkRm?=
- =?utf-8?B?ZlNnNTdyU2JwRzl1akFRSHNxd2RQNWdvcUN2L3lJd0EvRnJLN2NjTitlU09y?=
- =?utf-8?B?MUNLTG5yb2E5N3Rnbkp5eHBDdzh5aDhhTk96VlM3N1JTMlV4dHQzUEVQR3ov?=
- =?utf-8?B?N2U2TkhRTlluaGhkcTlRQ1poWHNvb2hYZ2Vyd2grZGVSVUJXaDdRVzRxU2N5?=
- =?utf-8?B?MW5VUjZvZ2FEanovUWtpWXFEQ0Y1eVZ3ZDBXN010SFd5MExDdVl5ZjB4eXE1?=
- =?utf-8?B?SW5SZFBtV1F6QjVWdCtWbE9vRzZOdHJGWUVvUjMzc3M1allUYnFzaHc3RFVi?=
- =?utf-8?B?d2VkdjZnUWFYN2ppbW45TUVyOG04WUdkajhKd0wxQ1AxcmxHdWY4TnpCQ0Ex?=
- =?utf-8?B?eEtpMEUxdTM5THlQQm9YSStJVnJsMUpxUlVHSzB4ci80YjgzODNrRDJiL0FZ?=
- =?utf-8?B?S3pWVXlrb2xHYUswZzluNTlPK2ZWNVhnUVVTQkhRQ05xQnphd1VYL2pTWHBJ?=
- =?utf-8?B?Y2pjUWhuV3QzVk9JWDAvMVprR0R2R0lURmxkMEdQRGtrcUo1cDloTDJNZ2lW?=
- =?utf-8?B?dmZTc2tFTk9QUExCeUhXR1BRc1NMZ0RucytTZzJGaFROUWVGcmFnREhObG0z?=
- =?utf-8?B?OWZ2T1pvQjFud1hVUlpGL0E1U05GWHJGa2VYbmdWci8zM3hUU25Pa0loZzRs?=
- =?utf-8?B?dDB1MStmd1UzZjRYWDFRMnlLeDFkTnl4SWNBdzBUMjVpc3pmWnQzMDc1V2ov?=
- =?utf-8?B?ZXFtcXRTdXpLKzFuR3dlVmxHRHRQeXI3M2I3dlpwLzZadEU1dVg0NEluS0ZY?=
- =?utf-8?B?K0FkRk1LWVlua3lMcnpXL0g2MHY4cW9sY1hURDNoaElvVTJiU3l4RGlBZ0hW?=
- =?utf-8?B?eDYwNU9KY25TSjJGc0Qva2RxQUtQMmRuSUl0Nk41ZDBRUERGR3VrdTRIU0dk?=
- =?utf-8?Q?uMcw=3D?=
+	=?utf-8?B?d25Md3pBeXBhSWROQ3E5dUJRTzZGcEMyYzBidi9VMFVwNzU2R1E0MHhvNjFz?=
+ =?utf-8?B?V3pYdGxPN2JXU0dPa1ZoUC9DYzRvUGJnQ3B0ZXZuVzdhWDF5WStKdEIvditl?=
+ =?utf-8?B?cDJFMGx3b3BzOFBrdFJoN2kzVGNXVTltSkhCQVlpcmh3a0N6cVNoa2EwYndT?=
+ =?utf-8?B?TVZnbGZGYURjV0cwMVZkbEtCVFA0TDc2VFlMT1NFS2VCZE1hTHdQQnZlbXhZ?=
+ =?utf-8?B?UlZNNml5TnEwYnRENTY2Ym5TMG96WS9NL3V2N0lFdHpTWm1rcldtZDV4Z1pn?=
+ =?utf-8?B?VkNaRldJZ1JISzJwRStlVmNEZTlCSFdWNEJyaGE3ODZvRG1PdW5OMnZGTTha?=
+ =?utf-8?B?aWMrWDJQQVcyREs2QmozNVJzVVllTkZ0TjlnZDlHK2ZMaTZkTWV2WkZxWnQ2?=
+ =?utf-8?B?STFoc1A0NmNEcDhldHVwMDZFVmx1QkJZVnB5RFV3RXZTYW1YQ3k3SVpMdEVZ?=
+ =?utf-8?B?dkowUjRJSzJrQ3hrb3d5OWt3dFRJZ01XZnZOdDRtNXdoa0pzOU4yQ0trM24z?=
+ =?utf-8?B?cDN4aDRtMzFnSUlPd3hzY0pUdjB2QnRNemJIYWdoaklhV3drZk5lMjZwMDVn?=
+ =?utf-8?B?UnV2M2cxemdjVVVaWjNLZWt4Rk00UFpaS2RQRGQvL3hqL3ErOTh1UWh1UWVT?=
+ =?utf-8?B?QmNnREFxQmFYSUNMWFJzNitCaXRMbkh3Tjc2R3VuSGtEaUdiSzNXeFR0VTJT?=
+ =?utf-8?B?WWhVdXMvRWhFREMva0xXSzMwVlFZcDd5aTFmRnpDVEFmUEZCN1FNLzRhbm1p?=
+ =?utf-8?B?eFV1UTFtSmRwT3RnTjlFa3RUZSt3ekhVVytVNEZvRVdSb0FXQStRUVZlVWlu?=
+ =?utf-8?B?Zm1odXBuc0VWaDFVNlY4cHN1cUhUbXZUa2tjWjB6R1Y2dWpJL08xL0UweHU2?=
+ =?utf-8?B?VDR1dm9LTllLdUpkMGR6UzNhL1FKc0E0WkUvdCszTVVkeW9UUnZRZUZWUi93?=
+ =?utf-8?B?cTI5ck5WbDI2RVUzQmpmelAwYjA2L0FZampaV0g3cVJtK0ErelFVQVk2WjFB?=
+ =?utf-8?B?eFdNUVVmRUJxdGhjWVRJcXU4K0Uxd1BmdnlseEQ1cmh0L1hGRDVGTXl1T3I0?=
+ =?utf-8?B?M2I5TExnNnMrL1BWbUhtRkpyYmpqM0d1MmwxV1FEei9tM1Y1WVhXa2V6Vjcv?=
+ =?utf-8?B?NXFSYWtTZXFoQzhWQjdDZ3BFdFJhL2ZwSnkrTW1IeWFPUDZJTU1rVGtoK2lv?=
+ =?utf-8?B?RXA1NXg0aHpXQ1BYemxhTlZuRWVIditTeWwrd2lOb1dRR3RqTnRXZGRTS1Zj?=
+ =?utf-8?B?VTQ2a05wVnFwd1htSE1IeWxlNGZLVTcvb0o2czhGalFERWYwSk1wNk1ZaDNB?=
+ =?utf-8?B?RWg3SWRTTjdDNjd4Sm43SFJDUkpnQmlBNUNWWHV6QWw5MXBVVlFuQlpwNkkr?=
+ =?utf-8?B?WHQvMnhNRFUva0tyaWpvSEFBWXN0eTZvbG5JbUJiS05UMzdTVTIzQmJ5alpk?=
+ =?utf-8?B?T1d2MWcrS0ZkTnVwVno5bDJBclE4YjFueWtIVU9OR29Ud3ZFYlpDQzZ2dUtP?=
+ =?utf-8?B?ZERkNE5RbncvQWlLN0dXWjhicTUzQjN3R2Rxc0FkRFdsdzFXWTZaZWpGZ2lO?=
+ =?utf-8?B?L215L1ExeVdWK284UUFZejlhQys4QmhMdXA2NWtVb1NvcHBFd2t0SnR0UTlN?=
+ =?utf-8?B?ckUwY0xyaVZNWFpsMHZSQzhMMDV0QnJLWWduWUFvTTVTaEhSdE1aanZOdGRS?=
+ =?utf-8?B?eHJWTkVDR3k4Slo2YXJzMkI4TlFIcU9kbUkwekxXRnl6Qy8wY1hmUjhiUkZT?=
+ =?utf-8?B?RTVxYVRyeGFIY1REQjdXdCtLbFpIT3NKOXNwNjFoSHUyNVAxZnBseFlmaVQ5?=
+ =?utf-8?B?RlU4d0hKeGFoeFBlckl2bnNCK0cvRVp1ZlJQZUNwOVhMN3AvUmEwTWQyRi9p?=
+ =?utf-8?B?NDQwZmcwUWNaWTQ5Q1U0bWNjY0NOZHU3aVQ0cFdnL01zV0ZpZVFKTGh3eTd5?=
+ =?utf-8?B?a1BpaUZ1KzR3M0JDVW0rRnNHN2NRcnJqNEZjT3lycUdnL0ZXcGt2M3ZtbFRJ?=
+ =?utf-8?B?WU1USEQ3QmpCbHp1TzhGMENMWnlzS0YzQzk0UzE3QmFkVUFTRTNKQ0RSS0ZM?=
+ =?utf-8?B?MGVCdFRkcXlZbFhoY0JhZ3pMK2QxLzM4eTUxNDBzUEZlSUIyMFlxeUFmTEJx?=
+ =?utf-8?Q?ZWYs=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026);DIR:OUT;SFP:1101;
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2025 14:53:04.8026
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2025 15:05:29.3130
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6a2481b1-e531-41a1-1c57-08de3cb2d16e
+X-MS-Exchange-CrossTenant-Network-Message-Id: eb8eefb8-a121-4251-e269-08de3cb48d38
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	CH1PEPF0000A34B.namprd04.prod.outlook.com
+	MN1PEPF0000F0DF.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB7345
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB7817
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 16 Dec 2025 14:53:16 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19360
+ <meta-ti@lists.yoctoproject.org>; Tue, 16 Dec 2025 15:05:46 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19361
 
-
-
-On 12/15/2025 6:32 PM, Judith Mendez wrote:
+On 12/15/25 6:32 PM, Mendez, Judith via lists.yoctoproject.org wrote:
 > Add support for the beaglebadge which is an am62l
+
+Are we calling it this now? (meta-ti is a public list so I guess so)
+Will probably be capitalized like "BeagleBadge", same for "AM62L".
+
 > based device that requires new build configration
+
+s/configration/configuration
+
 > for u-boot and TF-A sources.
+
+s/u-boot/U-Boot
+
 > ---
 >   meta-ti-bsp/conf/machine/beaglebadge-ti.conf  | 19 +++++++++++++++++++
 >   .../conf/machine/include/beaglebadge.inc      |  9 +++++++++
@@ -192,21 +200,15 @@ On 12/15/2025 6:32 PM, Judith Mendez wrote:
 > +
 > +TFA_BOARD = "am62l-badge"
 > +TFA_K3_SYSTEM_SUSPEND = "1"
+
+This line isn't needed.
+
+Also, we probably do not need an include for this when everything
+is the same a am62lxx.inc (other than the TFA_BOARD which you can
+just override in the .conf file).
+
 > +
 > +OPTEEMACHINE = "k3-am62lx"
-
-
-You should be able to simplify this file down by just having:
-
-require conf/machine/include/am62lxx.inc
-
-TFA_BOARD = "am62l-badge"
-
-
-Only if we majorly change what goes in this file should we then 
-duplicate the entries.
-
-
 > diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
 > index 9e733448..7ef3dfb7 100644
 > --- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
@@ -217,19 +219,6 @@ duplicate the entries.
 >   
 > +SRCREV_tfa:beaglebadge-ti = "76800058f24e3eb3fcacdb12106a881ae279f8c3"
 > +
-
-This file is confusing.  Since beaglebadge-ti adds am62lxx to the 
-SOC_FAMILY *it is an am62lxx*.  So I don't think you need any of the 
-changes in this file at all.
-
-The only real difference is the SRCREV_tfa, but I'm thinking you are 
-just trying to pick a newer commit that has support for it, so you 
-should change the SRCREV_tfa:am62lxx and not create a new override.
-
-
-Does the new board really need a different SRCREV?  Or is just a newer 
-one that picks up support for it?
-
 >   SRC_URI = "${SRC_URI_TRUSTED_FIRMWARE_A};name=tfa;branch=${SRCBRANCH}"
 >   
 >   COMPATIBLE_MACHINE = "k3"
@@ -238,12 +227,13 @@ one that picks up support for it?
 >   # For am62lxx, install bl1 & bl31 using TFA_INSTALL_TARGET
 >   TFA_INSTALL_TARGET:am62lxx = "bl31 bl1"
 > +TFA_INSTALL_TARGET:beaglebadge-ti = "bl31 bl1"
+
+Line not needed, this board will also match the "am62lxx" line above.
+
+Andrew
+
 >   
 >   EXTRA_OEMAKE += "${@ 'K3_USART=' + d.getVar('TFA_K3_USART') if d.getVar('TFA_K3_USART') else ''}"
 >   EXTRA_OEMAKE += "${@ 'BL32_BASE=' + d.getVar('TFA_K3_BL32_BASE') if d.getVar('TFA_K3_BL32_BASE') else ''}"
 
--- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
 
