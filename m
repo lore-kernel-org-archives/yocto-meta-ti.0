@@ -1,211 +1,139 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <romain.naour@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5A97D78796
-	for <webhook@archiver.kernel.org>; Fri, 19 Dec 2025 16:02:30 +0000 (UTC)
-Received: from DM1PR04CU001.outbound.protection.outlook.com (DM1PR04CU001.outbound.protection.outlook.com [52.101.61.2])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.20077.1766160143945711003
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5015BE66882
+	for <webhook@archiver.kernel.org>; Fri, 19 Dec 2025 17:31:51 +0000 (UTC)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22087.1766165502762063682
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 19 Dec 2025 08:02:24 -0800
+ Fri, 19 Dec 2025 09:31:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=pWgXg01B;
- spf=pass (domain: list.ti.com, ip: 52.101.61.2, mailfrom: prc@list.ti.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oYIY14Nrl77hKZxGW6jgk+vvEUnJwhvF3/TulvEcqabNhazxt3c1OZifp6gp0rLYPT2vIcaPWF3mdgY2NzMH1CLUAzvjGyAJQLrshVun+xZyEvjZUK0zIOaOyz+q1JY1TjYFl8oGQB92IVkrZDvmY8lknNa4IDFJQ+fR5mxgeIde5i6FRElIezELaFOWvY3xfjHS/C93Sg1FE4VIZgAG+BovaMmytzhWo4NKRGgYTfgoKdicbUq7dcKvjddSNvPjQcRBAJ0ehG8yue0QvHHL9p2VPDIBv+CCxkRJAyo+CvRZXvt2SmGP6BKRPkPFsDCdm1dp4v2sjIZOC4zRt/pN9Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DDev7HOAP2wkgbx8h7LBI5nQcj8Sy6G4GyQJUwsq+Ow=;
- b=EbFZaq1Y+BEPQshTNl7vuP53AOkZm2sFcFzCo1H+QGM6Uy7CRQtrdA+9GgWLcvVqwLmenHxO6uXVo1D77JKx+bERmo9kSJTZHvt3itOnN7Dxb+A6o1KEVs7ZWyPDWg0SFVcPA34H3X1WfdRBmkMcDW9sPWLurUCbMw0WYXf/N/CVb6nlYp7hbdVkiKZsDOsixYKjPiHa9rrKG8BqXil2iIbK4on3TyUXGHTeKHYEq2NY4ZCGcJMHWpyXuO78f9WjADtr78Krlint6sSaLPQU4kIDPRIcjSEMFQhN9/6r01caQgEo0DUQeZsF2xiFFo59D3023Ox7admmnMnHAfle4A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org
- smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
- action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
- (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DDev7HOAP2wkgbx8h7LBI5nQcj8Sy6G4GyQJUwsq+Ow=;
- b=pWgXg01Bz4BgI4DuAjhETEHA29MnRTi6RF8jPYKI2xcq6Om+EiAguDFLyxsEuLoQ61wrnFgPqQ64d4PGYlSgBwrYnMwqgWrQkGSu5j/GFPXlkIVpxVSZlRyGbEFyYxyfIkM7ykI2bNYreLOkMpWYO+sJHdJfK+dmGaBNt6RNYBVG2BrDpcv6+6kQTBnq55lJ5Yco5efrwVI5FEw7uI9F/a3NI6qJZAhbkW7IcsqFGcGTrRuvhhUWnz2/42ulviddPrqcSAKIUkHsrkKgrbkp4e/QBWiRYctqAvobslDdeKNAPJiFdlvywOfwfuuZoE+44Q3AlfZ7TfIcb0uhRV/XKA==
-Received: from BYAPR04CA0035.namprd04.prod.outlook.com (2603:10b6:a03:40::48)
- by SJ2PR10MB7670.namprd10.prod.outlook.com (2603:10b6:a03:53b::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.8; Fri, 19 Dec
- 2025 16:02:15 +0000
-Received: from MWH0EPF000989EA.namprd02.prod.outlook.com
- (2603:10b6:a03:40:cafe::78) by BYAPR04CA0035.outlook.office365.com
- (2603:10b6:a03:40::48) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9434.9 via Frontend Transport; Fri,
- 19 Dec 2025 16:02:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=list.ti.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=list.ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- MWH0EPF000989EA.mail.protection.outlook.com (10.167.241.137) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Fri, 19 Dec 2025 16:02:14 +0000
-Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 19 Dec
- 2025 10:02:11 -0600
-Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE212.ent.ti.com
- (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 19 Dec
- 2025 10:02:11 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 19 Dec 2025 10:02:11 -0600
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5BJG2BbU1098957;
-	Fri, 19 Dec 2025 10:02:11 -0600
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id 57F0F9ACF4; Fri, 19 Dec 2025 10:02:11 -0600 (CST)
-From: PRC Automation <prc@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>
-CC: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
-	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][master][PATCH] u-boot: Update trusted-firmware-a locations
-Date: Fri, 19 Dec 2025 10:02:11 -0600
-Message-ID: <20251219160211.1790111-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20251219155144.161794-1-reatmon@ti.com>
-References: <20251219155144.161794-1-reatmon@ti.com>
+ dkim=pass header.i=@smile.fr header.s=google header.b=y1GrzMGp;
+ spf=pass (domain: smile.fr, ip: 209.85.221.52, mailfrom: romain.naour@smile.fr)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-42e2e628f8aso881536f8f.1
+        for <meta-ti@lists.yoctoproject.org>; Fri, 19 Dec 2025 09:31:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile.fr; s=google; t=1766165501; x=1766770301; darn=lists.yoctoproject.org;
+        h=content-transfer-encoding:in-reply-to:content-language:from
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=NwbsqaQOIWWBVAs3YWWxbfyxd/9p+Jtf6aRC0sxj7CI=;
+        b=y1GrzMGp8xiK8DSIFuK/faBGWBiJuyEoftnvnfVpYQ83pS8EuT4RjIyOn2EiVy80kh
+         wq+vqdL3Gck79HCKTykaKZ4UC2+S3aptpKUFxLy/OTdG+5bRXshAXJ+EM3axeeFfdt5k
+         QxeHExcbF7/LazlncAQ7Hc0SWxKOwl1oeSbTI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1766165501; x=1766770301;
+        h=content-transfer-encoding:in-reply-to:content-language:from
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=NwbsqaQOIWWBVAs3YWWxbfyxd/9p+Jtf6aRC0sxj7CI=;
+        b=RoD5/4/JiDLRpTO82gQs8nRZXAFKTLF6jPZNuUXLwReocHcE4P+Z+IjUhUOV9zHp1u
+         w27VsimFPyC36xB2ViYlt9Zx4ZxWccDysd0mT201kDnpasNP13UYkWS0AhjzqWtfHdye
+         YECjB/tdkT7xuShH+BEp0Q3J+z7Jtg2/Q9o2eLiIfuu6QYMzEdi0EZEK54/yEekqbwrw
+         305nzMyh6ZREKo0FSXqFD96Q5icRVhda7sqOaOYBgmrtqDX5jPuuUF4rel6XtX9M+kjc
+         gVsbM2QL5pJq7anPHn5hSIzFs2TA/01GnSn/Lhcczv6wcE4xm05GSn8OFyTyELK4mTcl
+         UMGQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUJp6AeaHM9E/atQwOCdAjh9Heug4ophpnKHPpJaFd5TXtdLFiBRq6OwAYZF4w9MkG5TGGMYZBL@lists.yoctoproject.org
+X-Gm-Message-State: AOJu0Yzkf1aUeBvf6h8VHieBhWXh5aV6B/37wWkbwFL5zT2GbcmA+GBt
+	JeerjkFzbYn0Jvr28x9AwILTgbF0/5pibSwa+xpBv7bmYBtIlxYk7NH4UxeE1N092kc=
+X-Gm-Gg: AY/fxX4V6J4I35ZKZ96Y72Hxt0vNyeyIpRNl6K8HQK/4jECOHcvqGxTy2f2yb1C8YQV
+	NsTY0Y4c3fQ9x8TepVf1aZM0mI3OWG02xILn0wgD4NqyAGEZPlqViGQ9fEiuB0V6jQVvApcQpM1
+	CH0djhM44Q8UESEFT+FO4XxRqIqpcLH04UCfSeMQ/5ZGs1YwSFJDoT7xnq/9v4hrmGrHVmbZpha
+	68Ro6uh6I8uP1njSt3O5Bhc/Dmd6n9ATXAlV/vzYDBK8NxssTNepyZ7EnH8umFZWLSOlAIegbSl
+	2ViBVYpdDwYMF+eMa+Fng5gbSpLs0iGcpg3G1nCPisu+Icv3sW26vyhCdDeDLNw63VFdDP4aAXg
+	6IljfeHHTrlseT7+bIuOfP29F27yf5w2BpSYu1tObvaauATEyaND9/VOcblsGHUb+HkwJaNbx0g
+	sl34Jp0Ux9HRzwj8Le8i9mWLNkblyYJHsyrStc0Yd+6rgviJ7YLT32mFal7hKY+gNRLhvG1kew3
+	XiLBg9tm/WPmSj1d1pAaTuUwigMlFq4OzlaI03xvo2fDNjhKwa2FQ==
+X-Google-Smtp-Source: AGHT+IG7dNB4vlIsZKeSefB+BLv1L2ff9bJiEamRy4LF5dtHrrQXcXwAVOJ5c2bbBFsx3nmyf2FJIQ==
+X-Received: by 2002:a5d:5d86:0:b0:431:fc:694a with SMTP id ffacd0b85a97d-4324e4c71bbmr4661025f8f.12.1766165501160;
+        Fri, 19 Dec 2025 09:31:41 -0800 (PST)
+Received: from ?IPV6:2a01:cb05:94a2:a200:2ad9:827a:59cb:148a? (2a01cb0594a2a2002ad9827a59cb148a.ipv6.abo.wanadoo.fr. [2a01:cb05:94a2:a200:2ad9:827a:59cb:148a])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea226d1sm6514009f8f.13.2025.12.19.09.31.40
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 19 Dec 2025 09:31:40 -0800 (PST)
+Message-ID: <cdc9c53a-4299-41b6-8da7-a65577dc11c2@smile.fr>
+Date: Fri, 19 Dec 2025 18:31:39 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000989EA:EE_|SJ2PR10MB7670:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4129ea6c-2380-478b-013e-08de3f17f9fd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|82310400026|36860700013;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?VtkWsgZOeHQRlxIvda+k7LE+rP/zXLa9mtRaRV2Zvs3zIFLp6PeepbGHz8py?=
- =?us-ascii?Q?2zz+I/0JGIfpdBfF2doAeL97V5cz+Ksyfvh2Tiud65wbtRttKUTivR2bl6Z9?=
- =?us-ascii?Q?1YKhsPqwuxR1h2rTVKv76m3Wo7sb3sg/edD8K5jLQO4rrngouEI7HTyK80Yf?=
- =?us-ascii?Q?Wj2Qf+/KcFcbz7m0ggNC2d/H2e4ROOaorF4CX/hCeNAKmLST4dvLIC4ODZKk?=
- =?us-ascii?Q?bjt4p52gK7y6RZutUblUfMkqV3E9RouLsTLyuAxB5KD3WC5kWldGr2o2Twtw?=
- =?us-ascii?Q?4NiYK+ntS7RtNKXrGbfFGoOD4yXdMJ0kY3eGwDo0dT54VpApiD9wwSbfx2oY?=
- =?us-ascii?Q?M4Nx1roYxTGKQYiI1cEuzLbUyRRPr+z3y2oSVvo6goU+plChslkWsc6i5r1E?=
- =?us-ascii?Q?hQ0Izt1Cuv/tK91UchEKC1Gg4fly3f3eL5jsDT5IbZz3se/J0VByFWp+bton?=
- =?us-ascii?Q?BtrgSjc8O3xvkS981wVWNqWhIElusPH9v8bNpe5BlGWt3L5X5vuvQMdeTQQh?=
- =?us-ascii?Q?DrumuzKqnBmnnoF1K0K9yqy2jo/RK16DWT2STtl48JphwWLWiXpAihUH2v1s?=
- =?us-ascii?Q?OtdPBSJi/YRQAdA7snMIZkXBKjR01Vt0+hbTNdOpcmExErpVeyN2jgnAMLnp?=
- =?us-ascii?Q?0bg/4tNjVzRLx03Yp9mei/Us871IulzDtTmDjwgElhnNfYsxi6LdPafZv8gD?=
- =?us-ascii?Q?HHCCXwM+s9+UdQRYzCeG2jzdsYFu7RnlwqSadOeeplWIr29Ww9JddsJaU9qd?=
- =?us-ascii?Q?hFdo60wENTGCxn78jAbZdBjkJAfRat2O/9a4PkThTw2OwyVBtc6ypzM3l3zP?=
- =?us-ascii?Q?m0HIRP/4kgxqt3vJoo/X2hdpJIjTEZI+EVdypXLFwi4u2QF118aot97rnFm0?=
- =?us-ascii?Q?/eqcc6p4/kXhv5NYIIWHW7mBsTMUmbulm/pq9uFHWvRff6kvZOF3fQYeZ+bN?=
- =?us-ascii?Q?JLZYDqbmJKGrNddIQ9XPIwoGdQNikZKLCePcuCyyieHb98iUqr+kg4ZJkuYA?=
- =?us-ascii?Q?vIT5iDNAgxyHppp+cYylXGdN/CWIkDk/q5Q2G1KZhD0ducjVyYqD2rEtCS4n?=
- =?us-ascii?Q?7Z5dVYCDkVkQmH3rgOD3EbTZItknh2iYGpHXjfOfA/WqXjppV9a8VOCoIYAP?=
- =?us-ascii?Q?v7EQw/t+CatyU5fQuCda1ZGUgY5p+J3noxu72oFI74CCahzyufKUM2W81S8d?=
- =?us-ascii?Q?66HFXHmcBkN0oc3r2IGpbvTPuQ38uZyGk6uKlFhx/mubvFJzk12kX7cQ93nQ?=
- =?us-ascii?Q?8zuaRL79rmFBfVul5RqtPotfPq+ut2SW2/UEjrUqK2Q05RW14nsCegPBDXb2?=
- =?us-ascii?Q?+69XR5gwsov6XC6TWB2WBeZ3hqQHFIXAsF1VeXSSi99FFXO4/b/NGuvJOGMr?=
- =?us-ascii?Q?K69tIZ7pU8dKp98Grd/Zlc+6Y/iPJGDOAkUTnSf1ZzcqEFQzu+NR3ImHqqG+?=
- =?us-ascii?Q?iQ+V9NXzAt15hFixzaYSsSNNT/zztM8GP8YiurXYgAHXL+tUVXqsbQU22jT4?=
- =?us-ascii?Q?QIc6Qf8uC8Jvejn/CLAzwiC1dc6sAM2C9TA1khMYHpkG1Zd/oeSIheaji200?=
- =?us-ascii?Q?PXWo3OMN1/sLAWpFT38=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: list.ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2025 16:02:14.2707
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4129ea6c-2380-478b-013e-08de3f17f9fd
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	MWH0EPF000989EA.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR10MB7670
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti][master/scarthgap][PATCH 1/4] linux-ti-staging: Add
+ v6.12 recipe
+To: reatmon@ti.com, Praneeth Bajjuri <praneeth@ti.com>,
+ Denys Dmytriyenko <denys@konsulko.com>, meta-ti@lists.yoctoproject.org
+References: <20241004151857.24578-1-reatmon@ti.com>
+From: Romain Naour <romain.naour@smile.fr>
+Content-Language: fr, en-US
+In-Reply-To: <20241004151857.24578-1-reatmon@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 19 Dec 2025 16:02:30 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19377
+ <meta-ti@lists.yoctoproject.org>; Fri, 19 Dec 2025 17:31:51 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19378
 
-meta-ti / na / 20251219155144.161794-1-reatmon
+Hello,
 
-PRC Results: PASS
+Le 04/10/2024 à 17:18, Ryan Eatmon via lists.yoctoproject.org a écrit :
+> Adding needed recipes for initial testing and development of the 6.12
+> kernel for the next LTS.
+> 
+> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+> ---
+...
+>  .../linux/linux-ti-staging-rt_6.12.bb         |  9 +++++
+>  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+...
+> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+> new file mode 100644
+> index 00000000..9e5c4ee4
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+> @@ -0,0 +1,9 @@
+> +require linux-ti-staging_6.12.bb
+> +
+> +KERNEL_LOCALVERSION:append = "-rt"
+> +
+> +# Look in the generic major.minor directory for files
+> +# This will have priority over generic non-rt path
+> +FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.12:"
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-patches: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-Patches
-----------------------------------------
-All patches passed
+Previous linux-ti-staging-rt recipes [1] used a specific branch
+"ti-rt-linux-6.1.y" obtained by merging the TI vendor "ti-linux-6.1.y" branch
+and the preempt-rt v6.1-rt branch [2].
 
+  BRANCH = "ti-rt-linux-6.1.y"
 
+Since preempt-rt is now merged in the kernel 6.12, indeed we can use the same
+kernel sources with a specific configuration fragment (hence there is no
+ti-rt-linux-6.12.y [3]).
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  apply-yocto-patch: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Summary:
-- Patch Series: [meta-ti][master][PATCH] u-boot: Update trusted-firmware-a =
-locations
-- Submitter: From: Ryan Eatmon <reatmon@ti.com>
-- Date: Date: Fri, 19 Dec 2025 09:51:44 -0600
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: eea2d449bbda53aa3bb99ad82700937a8=
-0c1177d
+But the preempt-rt project still maintain a v6.12-rt branch with all remaining
+patches [4]. Actually the project still recommend to apply the latest PREEMPT_RT
+patches [5].
 
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-next
-- Commit Author: LCPD Automation Script <lcpdbld@list.ti.com>
-- Commit Subject: CI/CD Auto-Merger: cicd.master.202512190100
-- Commit SHA: 6093ac7c4688919ff146b20ea0a5f5f6607dd385
+Should the linux-ti-staging-rt recipe follow the preempt-rt stable branch as before?
 
-Patches
-----------------------------------------
-All patches applied
+Porting existing project (kirkstone 6.1 -> scarthgap 6.12) using
+linux-ti-staging-rt recipe, users may expect that this recipe still use the
+preempt-rt stable branch.
 
+Thoughts?
 
+[1]
+https://git.yoctoproject.org/meta-ti/tree/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.1.bb?h=kirkstone#n9
+[2]
+https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git/log/?h=v6.1-rt
+[3] https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel
+[4]
+https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git/log/?h=v6.12-rt
+[5] https://realtime-linux.org/getting-started-with-preempt_rt-guide/
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-repo: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-PASS
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  yocto-check-layers: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master - PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-All checks passed
+Best regards,
+Romain
 
 
-
+> +
+> +include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS') else ''}
 
