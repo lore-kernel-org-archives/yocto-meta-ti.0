@@ -1,226 +1,204 @@
-Return-Path: <denis@denix.org>
+Return-Path: <romain.naour@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0058E67482
-	for <webhook@archiver.kernel.org>; Sun, 21 Dec 2025 18:47:45 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.65851.1766342855288231388
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F94DE6748D
+	for <webhook@archiver.kernel.org>; Mon, 22 Dec 2025 11:34:11 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.78465.1766403250730562264
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 21 Dec 2025 10:47:36 -0800
+ Mon, 22 Dec 2025 03:34:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 6C1D440C81;
-	Sun, 21 Dec 2025 18:47:34 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7cPt_PicgJFA; Sun, 21 Dec 2025 18:47:34 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 39C40406B5;
-	Sun, 21 Dec 2025 18:47:32 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 52D52176DE5; Sun, 21 Dec 2025 13:47:31 -0500 (EST)
-Date: Sun, 21 Dec 2025 13:47:31 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Haixiao.Yan.CN@windriver.com
-Cc: reatmon@ti.com, meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti] [scarthgap][PATCH v2] trusted-firmware-a/optee-os:
- Add LPM support on few platforms
-Message-ID: <20251221184731.GZ11121@denix.org>
-References: <20251128184125.3220124-1-m-chawdhry@ti.com>
- <20251128185058.4131726-1-prc@list.ti.com>
- <281355.1766243294658107429@lists.yoctoproject.org>
- <c0dadd48-6d6b-444f-8ff9-170919398571@ti.com>
- <c4181c69-e719-494f-9864-563a22cd7980@windriver.com>
+ dkim=pass header.i=@smile.fr header.s=google header.b=0YhieVoN;
+ spf=pass (domain: smile.fr, ip: 209.85.128.49, mailfrom: romain.naour@smile.fr)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4775e891b5eso15457045e9.2
+        for <meta-ti@lists.yoctoproject.org>; Mon, 22 Dec 2025 03:34:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile.fr; s=google; t=1766403249; x=1767008049; darn=lists.yoctoproject.org;
+        h=content-transfer-encoding:in-reply-to:content-language:from
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=4Kt4rcOfPU2oL7oGYvJq9t28mDFk/yTrhL/f56PKsBM=;
+        b=0YhieVoNUxDgn9whjKTcrGZHeK5mN+Pyd9dy0gFz4Kl8yPrze6LehVuIrTzeF3YLil
+         8MCFjX4v5Q6Ilbs0VHbmvmwpz23ya+xgw7VC/I8vegMn8xro+R97qTXz27/B6HMTx8JK
+         qXxW2p1ZYll77NGlNnIPcTJttW2SKyYwolTqY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1766403249; x=1767008049;
+        h=content-transfer-encoding:in-reply-to:content-language:from
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=4Kt4rcOfPU2oL7oGYvJq9t28mDFk/yTrhL/f56PKsBM=;
+        b=LtqZ9xg4p81yOltKjpInhW+xM6qO7V3p5uWw7Gf0+JAKUxBM2l5P37NohVGeqPexhT
+         dC3BTfZrWdv9vxKMotF2RnW+Y9F+34zbsziyzCndAUqyQN+MXqWcHDveuFQKviT6Dne9
+         6kApOJNFkTgp8Qv2tV/2DXBsDNNLrIR/HwfDYNO/mY7buXzyhS4QNar+TzUcwUT/LmrC
+         rrtGydMHK903OMH3be5JrRMIGDGbnyMRlzP+D992+CZOa+BcYJdTMiQ5AhJnRUf3TFfh
+         O5NlnIamPS0/yLZRtwkoW3O7/e0q6j2WsYoTqLqXrAS8oMc0q7q0usqqCwx70RAkO6O4
+         GOTQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXmGyPrDnnBU4GN0klWgDs4RDYQOw6fKF/HfRFCLNptF7j3IHoDWPOslw/Cl6ixbXTidRe2+Yol@lists.yoctoproject.org
+X-Gm-Message-State: AOJu0YzrbhJsTL9Ji/S9jodgyl6tLD+T6LO/fCOQ4PqoBu/bjnuCKwjx
+	EV+AIa2Ani9Ogtr04zQeW+Z9g4cv8+N0jQVQCE0LJCn26myklUL8W1Q5Qji2Z4zHeSc=
+X-Gm-Gg: AY/fxX6Ref33kdiGFekLprwqthxlGq9V3R57AGCI5+aS8VybWMXOuLxgB5BmMRBP4pV
+	uKsWgPvYBt6gnwWvsltbOjLiUwyTtW0gWvZ09ePLKyZKpgJGZSfWMpiR4hWCSRE8yitoWDTXPQk
+	LZ0uiG0NstQx1p/QqT5f7xtVXFU0JWfMwGXaN44ND3aKqVhIcGVmzUHtPOQlAvup970krqSdhVP
+	4MXsznN9eDReytoIm+Ya1f+5/TRklbN2Vt/aC5gKPlqZCyuNOaY7vFL7d5XfD0jNhnXZ2k0hrHh
+	knl+64CmJj3is8gQqz1XioGnTIuk8N65E0yPPjLnZhP+4cBGoIKPYyNaaMTgTepyRHd1cn2QCT/
+	Xggkoc62H+6Rf+ELlYM2XHVwK7D0VI59CuQHjHkH1YnSK1GKjijOFcrwQWba9GlRwO2mQSm04FY
+	bDv7b1eBpB1No6P4gyKneEnwQADVBRKiRYTqzMLBpm3A/Z6fykh+ZpeMf9VTAMNGz5fJVjCkHpW
+	oBrUP8Rm8JtlwO+LAnMJnXROyLnvMffA56sOdJFA4XKmZaUWm29JFIFFG9vU2c2
+X-Google-Smtp-Source: AGHT+IGKNe9zeDlVk43yNqRvh7O6Zf+2o6Fm8d5Gq4yH40pVkW0A47KgrmTiyXDL2ryZl3uvI20p/Q==
+X-Received: by 2002:a05:600c:1c21:b0:47b:e2a9:2bd9 with SMTP id 5b1f17b1804b1-47d19583142mr125552825e9.31.1766403248962;
+        Mon, 22 Dec 2025 03:34:08 -0800 (PST)
+Received: from ?IPV6:2a01:cb05:94a2:a200:2ad9:827a:59cb:148a? (2a01cb0594a2a2002ad9827a59cb148a.ipv6.abo.wanadoo.fr. [2a01:cb05:94a2:a200:2ad9:827a:59cb:148a])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be3ad0c60sm99572675e9.5.2025.12.22.03.34.08
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 22 Dec 2025 03:34:08 -0800 (PST)
+Message-ID: <ffb128e1-ec2b-4ec0-a4f5-8a3f94fe8dca@smile.fr>
+Date: Mon, 22 Dec 2025 12:34:07 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-In-Reply-To: <c4181c69-e719-494f-9864-563a22cd7980@windriver.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti][master/scarthgap][PATCH 1/4] linux-ti-staging: Add
+ v6.12 recipe
+To: "Bajjuri, Praneeth" <praneeth@ti.com>, reatmon@ti.com,
+ Denys Dmytriyenko <denys@konsulko.com>, meta-ti@lists.yoctoproject.org,
+ Bryan Brattlof <bb@ti.com>
+References: <20241004151857.24578-1-reatmon@ti.com>
+ <cdc9c53a-4299-41b6-8da7-a65577dc11c2@smile.fr>
+ <9496e24f-a730-415f-ad0a-f72510ec8040@ti.com>
+From: Romain Naour <romain.naour@smile.fr>
+Content-Language: fr
+In-Reply-To: <9496e24f-a730-415f-ad0a-f72510ec8040@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sun, 21 Dec 2025 18:47:45 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19387
+ <meta-ti@lists.yoctoproject.org>; Mon, 22 Dec 2025 11:34:11 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19388
 
-On Sun, Dec 21, 2025 at 08:09:57AM +0800, Yan, Haixiao (CN) via lists.yoc=
-toproject.org wrote:
->=20
-> On 12/21/2025 1:10 AM, Ryan Eatmon via lists.yoctoproject.org wrote:
-> >CAUTION: This email comes from a non Wind River email account!
-> >Do not click links or open attachments unless you recognize the
-> >sender and know the content is safe.
-> >
-> >On 12/20/2025 9:08 AM, Yan, Haixiao (CN) via
-> >lists.yoctoproject.org wrote:
-> >>This patch failed to apply on scarthgap.
-> >>the version of trusted-firmware-a is 2.10.4, the patch is not
-> >>suitable for this version.
-> >
-> >The recipe in meta-ti-bsp that applies this patch, also moves the
-> >version to 2.13+.=A0 So I'm not sure how you are trying to apply this
-> >patch to meta-ti scarthgap against a 2.10 trusted-firmware-a version.
-> >
-> >Clearly you are trying to do something more than taking meta-ti-bsp
-> >scarthgap at face value.=A0 Do you have your own layer in your build t=
-hat
-> >is also changing the SRCREV of trusted-firmware-a to a version that
-> >might not accept these patches?
-> >
-> >
->=20
-> There is no 2.13+ version=A0trusted-firmware-a on=A0scarthgap.
->=20
-> https://git.yoctoproject.org/meta-arm/tree/meta-arm/recipes-bsp/trusted=
--firmware-a/trusted-firmware-a_2.10.4.bb?h=3Dscarthgap
->=20
-> $ bitbake-layers show-recipes trusted-firmware-a
-> NOTE: Starting bitbake server...
-> Loading cache: 100% |##################################################=
-###################|
-> Time: 0:00:02
-> Loaded 15169 entries from dependency cache.
-> =3D=3D=3D Matching recipes: =3D=3D=3D
-> trusted-firmware-a:
-> =A0 meta-arm=A0 =A0 =A0 =A0 =A0 =A0 =A02.10+git
->=20
-> $ bitbake-layers show-appends | grep trusted-firmware-a
-> trusted-firmware-a_2.10.4.bb:
-> layers/meta-arm/meta-arm/recipes-bsp/trusted-firmware-a/trusted-firmwar=
-e-a_%.bbappend
-> layers/meta-ti/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmw=
-are-a_%.bbappend
+Hello Bajjuri,
 
-^^^ This bbappend in meta-ti-bsp conditionally includes the following fil=
-e:
-https://git.yoctoproject.org/meta-ti/tree/meta-ti-bsp/recipes-bsp/trusted=
--firmware-a/trusted-firmware-a-ti.inc?h=3Dscarthgap
+Le 19/12/2025 à 21:58, Bajjuri, Praneeth a écrit :
+> Hi Romain,
+> 
+> On 12/19/2025 11:31 AM, Romain Naour wrote:
+>> Hello,
+>>
+>> Le 04/10/2024 à 17:18, Ryan Eatmon via lists.yoctoproject.org a écrit :
+>>> Adding needed recipes for initial testing and development of the 6.12
+>>> kernel for the next LTS.
+>>>
+>>> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+>>> ---
+>> ...
+>>>   .../linux/linux-ti-staging-rt_6.12.bb         |  9 +++++
+>>>   create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-
+>>> rt_6.12.bb
+>> ...
+>>> diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb b/
+>>> meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+>>> new file mode 100644
+>>> index 00000000..9e5c4ee4
+>>> --- /dev/null
+>>> +++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+>>> @@ -0,0 +1,9 @@
+>>> +require linux-ti-staging_6.12.bb
+>>> +
+>>> +KERNEL_LOCALVERSION:append = "-rt"
+>>> +
+>>> +# Look in the generic major.minor directory for files
+>>> +# This will have priority over generic non-rt path
+>>> +FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.12:"
+>>
+>> Previous linux-ti-staging-rt recipes [1] used a specific branch
+>> "ti-rt-linux-6.1.y" obtained by merging the TI vendor "ti-linux-6.1.y" branch
+>> and the preempt-rt v6.1-rt branch [2].
+>>
+>>    BRANCH = "ti-rt-linux-6.1.y"
+>>
+>> Since preempt-rt is now merged in the kernel 6.12, indeed we can use the same
+>> kernel sources with a specific configuration fragment (hence there is no
+>> ti-rt-linux-6.12.y [3]).
+>>
+>> But the preempt-rt project still maintain a v6.12-rt branch with all remaining
+>> patches [4]. Actually the project still recommend to apply the latest PREEMPT_RT
+>> patches [5].
+>>
+>> Should the linux-ti-staging-rt recipe follow the preempt-rt stable branch as
+>> before?
+>>
+>> Porting existing project (kirkstone 6.1 -> scarthgap 6.12) using
+>> linux-ti-staging-rt recipe, users may expect that this recipe still use the
+>> preempt-rt stable branch.
+>>
+>> Thoughts?
+> 
+> Indeed when we started 6.12 LTS baseline migration, Since PREEMPT_RT is part of
+> mainline we have started using a unified kernel branch ( With config fragment
+> switch) to build RT and non RT baselines.
+> 
+> The preempt-rt project didnt have a 6.12 branch till august in the year at
+> https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git/
+> 
+> The development and hosting of v6.12-rt including additional on the fly features
+> is something new and i hope it continue with next LTS (6.18 as well)
 
-Which bumps the version from meta-arm to 2.13+, as Ryan explained above.
+Preempt-rt issues are fixed over the time, especially for the 6.12 kernel since
+it's the first release with preempt-rt included. But Preempt-rt specific changes
+might be too risky to backport to linux-stable branches. We can hope that
+v6.18-rt will never exist but who knows...
 
+In other hand, it's only a few dozen of commits (as of today), some of them not
+related to TI SoCs.
 
-> =A0layers/ti-j7xxx/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.=
-bbappend
+> 
+> As you can see with https://patchwork.yoctoproject.org/project/ti/list/?
+> series=41242 , we are in process of switching development with master and next
+> LTS yocto to 6.18 baseline and we are assessing how and if RT need to be
+> maintained as linux-ti-staging-rt-6.18 recipe based on the feature differences
+> in v6.18-rt vs mainline kernel.
 
-^^^ I would recommend inspecting this bbappend in your "ti-j7xxx" layer t=
-o see=20
-if it conflicts with the one in meta-ti-bsp...
+The linux-ti-staging-6.18 is too recent, some TI specific changes (like the
+DMA-BUF support in remoteproc) is not yet rebased:
 
+https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/drivers/remoteproc/remoteproc_cdev.c?h=ti-linux-6.12.y&id=3119d723957038270225867130678d76081dee0c
 
-> trusted-firmware-a_2.10.4.bb (skipped):
-> layers/meta-arm/meta-arm/recipes-bsp/trusted-firmware-a/trusted-firmwar=
-e-a_%.bbappend
-> layers/meta-ti/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmw=
-are-a_%.bbappend
->=20
-> =A0layers/ti-j7xxx/recipes-bsp/trusted-firmware-a/trusted-firmware-a_%.=
-bbappend
->=20
->=20
-> Thanks,
->=20
-> Haixiao
->=20
-> >>NOTE: Applying patch
-> >>'0001-feat-k3-choose-cluster_start_id-depending-on-the-soc.patch' (..=
-/layers/meta-ti/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmwa=
-re-a/0001-feat-k3-choose-cluster_start_id-depending-on-the-soc.patch)
-> >>
-> >>NOTE: Applying patch
-> >>'0002-feat-ti-add-message-to-encrypt-tfa-during-suspend.patch' (../la=
-yers/meta-ti/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-=
-a/0002-feat-ti-add-message-to-encrypt-tfa-during-suspend.patch)
-> >>ERROR: Applying patch
-> >>'0002-feat-ti-add-message-to-encrypt-tfa-during-suspend.patch'
-> >>on target directory '/build-ti/tmp-glibc/work/ti_j78xx-wrs-linux/trus=
-ted-firmware-a/2.10+git/git'
-> >>CmdError('quilt --quiltrc /build-ti/tmp-glibc/work/ti_j78xx-wrs-linux=
-/trusted-firmware-a/2.10+git/recipe-sysroot-native/etc/quiltrc
-> >>push', 0, "stdout: Applying patch
-> >>0002-feat-ti-add-message-to-encrypt-tfa-during-suspend.patch
-> >>can't find file to patch at input line 39
-> >>Perhaps you used the wrong -p or --strip option?
-> >>The text leading up to this was:
-> >>--------------------------
-> >>|From c79ff3679a4360bb848b01d4036c365533fcf791 Mon Sep 17 00:00:00 20=
-01
-> >>|From: Richard Genoud <richard.genoud@bootlin.com>
-> >>|Date: Tue, 11 Feb 2025 18:20:17 +0100
-> >>|Subject: [PATCH 2/3] feat(ti): add message to encrypt tfa
-> >>during suspend
-> >>|
-> >>|At suspend, BL31 with its context will be encrypted by TIFS in DDR.
-> >>|Encryption is needed for security matters, so that the BL31 is not
-> >>|modified before entering suspend or early at resume.
-> >>|
-> >>|We only need the encryption function here because the
-> >>decryption message
-> >>|will be send by the R5 SPL at resume.
-> >>|
-> >>|Also introduce the LPM_ENCRYPT_IMAGE cap signals that FW has
-> >>the support
-> >>|to encrypt the image using the TISCI_MSG_LPM_ENCRYPT tisci message.
-> >>|
-> >>|This is useful in suspend to ram cases where we would like to
-> >>|store the encrypted image of a secure fw instead of the original ima=
-ge
-> >>|itself in the DDR.
-> >>|
-> >>|Check for LPM_ENCRYPT_IMAGE flag in the FW capabilities, and only th=
-en
-> >>|call encrypt.
-> >>|
-> >>|Upstream-Status: Pending
-> >>|
-> >>|Change-Id: I266472da87dd0821493019b2d9853f8886f33811
-> >>|Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
-> >>|Signed-off-by: Abhash Kumar Jha <a-kumar2@ti.com>
-> >>|---
-> >>| drivers/ti/ti_sci/ti_sci.c=A0=A0=A0=A0=A0=A0=A0=A0=A0 | 36 ++++++++=
-+++++++++++++++++++++
-> >>| drivers/ti/ti_sci/ti_sci.h=A0=A0=A0=A0=A0=A0=A0=A0=A0 |=A0 7 ++++++
-> >>| drivers/ti/ti_sci/ti_sci_protocol.h | 32 +++++++++++++++++++++++++
-> >>| plat/ti/k3/common/k3_psci.c=A0=A0=A0=A0=A0=A0=A0=A0 | 10 ++++++++
-> >>| 4 files changed, 85 insertions(+)
-> >>|
-> >>|diff --git a/drivers/ti/ti_sci/ti_sci.c b/drivers/ti/ti_sci/ti_sci.c
-> >>|index f0813e5b0..ee5f7166f 100644
-> >>|--- a/drivers/ti/ti_sci/ti_sci.c
-> >>|+++ b/drivers/ti/ti_sci/ti_sci.c
-> >>--------------------------
-> >>No file to patch.=A0 Skipping patch.
-> >>1 out of 1 hunk ignored
-> >>can't find file to patch at input line 83
-> >>Perhaps you used the wrong -p or --strip option?
-> >>The text leading up to this was:
-> >>--------------------------
-> >>|diff --git a/drivers/ti/ti_sci/ti_sci.h b/drivers/ti/ti_sci/ti_sci.h
-> >>|index 1f1963274..2afa11317 100644
-> >>|--- a/drivers/ti/ti_sci/ti_sci.h
-> >>|+++ b/drivers/ti/ti_sci/ti_sci.h
-> >>--------------------------
-> >>No file to patch.=A0 Skipping patch.
-> >>2 out of 2 hunks ignored
-> >>can't find file to patch at input line 107
-> >>Perhaps you used the wrong -p or --strip option?
-> >>The text leading up to this was:
-> >>--------------------------
-> >>|diff --git a/drivers/ti/ti_sci/ti_sci_protocol.h
-> >>b/drivers/ti/ti_sci/ti_sci_protocol.h
-> >>|index bdd24622a..a165cda99 100644
-> >>|--- a/drivers/ti/ti_sci/ti_sci_protocol.h
-> >>|+++ b/drivers/ti/ti_sci/ti_sci_protocol.h
-> >>--------------------------
-> >>No file to patch.=A0 Skipping patch.
-> >>3 out of 3 hunks ignored
-> >>patching file plat/ti/k3/common/k3_psci.c
-> >>Hunk #2 succeeded at 269 with fuzz 1 (offset -14 lines).
-> >>Hunk #3 succeeded at 321 (offset -32 lines).
-> >>Patch
-> >>0002-feat-ti-add-message-to-encrypt-tfa-during-suspend.patch
-> >>does not apply (enforce with -f)
+> 
+> 6.12 combination with scarthgap is in maintenance mode at this moment.
+
+Ok.
+
+> The evaluation of linux-ti-staging-rt moving forward will be for master and
+> wrynose in 2026.
+
+kernel 6.18 was released only few weeks ago (uboot 2026.01 is not released yet)
+
+We will consider switching to Wrynose as soons as the TI-SDK will be released.
+
+Best regards,
+Romain
+
+> 
+> 
+>>
+>> [1]
+>> https://git.yoctoproject.org/meta-ti/tree/meta-ti-bsp/recipes-kernel/linux/
+>> linux-ti-staging-rt_6.1.bb?h=kirkstone#n9
+>> [2]
+>> https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git/log/?
+>> h=v6.1-rt
+>> [3] https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel
+>> [4]
+>> https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git/log/?
+>> h=v6.12-rt
+>> [5] https://realtime-linux.org/getting-started-with-preempt_rt-guide/
+>>
+>> Best regards,
+>> Romain
+>>
+>>
+>>> +
+>>> +include ${@ 'recipes-kernel/linux/ti-extras-rt.inc' if d.getVar('TI_EXTRAS')
+>>> else ''}
+
 
