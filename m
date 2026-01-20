@@ -1,253 +1,220 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <prc@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 354E9D26293
-	for <webhook@archiver.kernel.org>; Tue, 20 Jan 2026 19:15:49 +0000 (UTC)
-Received: from CH4PR04CU002.outbound.protection.outlook.com (CH4PR04CU002.outbound.protection.outlook.com [40.107.201.38])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14413.1768936547953607197
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A535D26296
+	for <webhook@archiver.kernel.org>; Tue, 20 Jan 2026 19:37:19 +0000 (UTC)
+Received: from CH4PR04CU002.outbound.protection.outlook.com (CH4PR04CU002.outbound.protection.outlook.com [40.107.201.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15018.1768937832191016167
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 20 Jan 2026 11:15:48 -0800
+ Tue, 20 Jan 2026 11:37:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=jE14FXZC;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.107.201.38, mailfrom: reatmon@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=F6bZTOkZ;
+ spf=pass (domain: list.ti.com, ip: 40.107.201.42, mailfrom: prc@list.ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=o/AiPn8/po8BkaVYLLHJCP3VbNP/De5mJOOrDYLQq/VjnLr4WqwisIS4wtqmHtA7JepsNx04geTUDvNxuvT4AjDe02qSPiAw3B/TCIJUPnOTpz+xp9L+CsDjsKqfivb6bRXFx4msTtJPxvJl8rYsjOIpMiHhktGZukVtDciPFBFTUfPtFEuany4matIEeX3iTAt5MSVu/bxMY4cZP02nKayjgu2I3NcSYRVc6WyjcZlG9xKzd3496Lv10/OJ4UfYPctmsYU9DbssoASsrZJ2oNrYmOLk7zjHbOZYg1SLG1anjT1xk9EUONzqR4mH5U7OLN3LJ2w8wIYEAPSnmQHp7A==
+ b=vP/N1G8Tg4IMcdPWwm1N4K2/KhX5gQeXwMIpxYLwW8MMWPqff7d4J+wPduObKQKcaN3dqr6Ve5EAQxBRsuqEE0sdU6RZXnBrxs+fwOtA/UgK+h06aIBtv8fFM7FX4GYTJg2R7g61VvnUEvOxB7O1Fazt5G5BAMvE51jp3xv6In8u86C4/ZCGz8N6cF2T5f5CChdKqSaCVjcJCJK4+J8ihsHScfJPOclMXWwnTp7fZrUqLL8CDWRZ7kTrPPxR25OhKd3BCMMdXfJ5z95Zp8bW5MZpm4ClaD5qe2+B1dn58LpAPQfHQ7o0eyzmrCpZE54vmmMk2R3spoEbfR8y4Is4JQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=E60fuvyNvSNp3Mk8s/OSet94VfU2wjri256wgV2/uPs=;
- b=VJw3klvad+M71htdOWg83HzcqSTVe3TiiUBNHyckRGSj2smBGCaLvIaHelmepaJQFNqPvigfY9yCrbhajg6vLvtIeiGqoeitzdlw0tJxSJk0WDI58kNawNrgNskHFOccTHmRXWrnAE/kNTss66dXA8IRwiGQNxaOxOtfF4qeG7lWGUeAXQXBfIDm5LEJdKKXl/JLqJZUsPxs9A9YcKs5Rz+Nk+MBMRNuLXXuIj3SYglQeKgCnv9WgD2Jsgl2XO5E9uKbItTdGH1Hx9DaDVzFUU/jTZvdTpE3r79HI95/Rn30uNNQZpwTfbFhKxAEd5bq9fBR+CZggwH46nVqK7mB9A==
+ bh=KAfPOnu7p+v9yeJFygPlrVTGs1nljDqIoZKAo1Gzd+8=;
+ b=DfxYHdc856B4FO+EamAtVp+ZW89MUWZV579GXDKQnFz/agY8PHdYS+SBVyuBnFDDK0pKpXtqAT3ImcW9qduFYaRJlOMZSsaY7y3qgBtaCfTEjjBI61ocJD/jsCK0zIfqpPcDhhM8rhPJIiaz2IpKbwQuenClg4ol+MgYM3jwyrHxg7Da7vc/s5yNUZJWreOx/0hCbSWlm47dwzUMYRrN/8YGVh+4VqqD/R/9oOmCsfhEh2Ss11U69DySolpx7YAO5uuFXT9Pm9y3+UVHyZTxnCQ1htHn+MTVdmwwhgEDeT6Zm1k21b+FeiONayHHh8vRrgxlLSmPOWbdc98hTLwiqg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ 198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org
+ smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
+ action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
+ (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=E60fuvyNvSNp3Mk8s/OSet94VfU2wjri256wgV2/uPs=;
- b=jE14FXZCIQ/4ysyHr5WlsVoNebXPUG498NwjGg+B/UBq78HLiHHnSAxnaHPeGF+mhmPuZRd1bO7bL+OBPv0VSwJ/MPgTzPvRQ+ZlVA8QU4Kaz5h7gtCq32T6FeB35ra0ACHoqFq7wOGz7DlvFtPaTH7reIKveYDchfTcs/IFAHY=
-Received: from SN7PR04CA0027.namprd04.prod.outlook.com (2603:10b6:806:f2::32)
- by SJ1PR10MB5954.namprd10.prod.outlook.com (2603:10b6:a03:48b::13) with
+ bh=KAfPOnu7p+v9yeJFygPlrVTGs1nljDqIoZKAo1Gzd+8=;
+ b=F6bZTOkZ+W2LNnnY3OdXxHYtnB/LfiOdhdD/jbTSHPw5ClzXZew0qSYou4EeGzCLAPSmp2srg5sdTW/FtQ1rRhvx+QjcVrfwB7J+rx0a19EzzQOF+ApvYuOymbDaHDoaqZAhiyOBBznedFk4n8QQkZngZM7ukY0MfmTJNBgPZ77sNl9HPgbBW4lelgyrYFmqdeIytBVgZ5r2Wy9wmL1zK1HMo7vG0TZwxJ3wcc9zCWUEACxgWEUlX9FiSw9pdb2phGgvDpwDQ+sb4iBe2nZ9k3VKrO90XMn3fSVux445oy2wmZ5MsU5LfedQxjZfaKC16D/NpFwXDWCGlmReQCatyg==
+Received: from CH0PR03CA0206.namprd03.prod.outlook.com (2603:10b6:610:e4::31)
+ by LV0PR10MB997613.namprd10.prod.outlook.com (2603:10b6:408:345::21) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.12; Tue, 20 Jan
- 2026 19:15:44 +0000
-Received: from SA2PEPF00003F64.namprd04.prod.outlook.com
- (2603:10b6:806:f2:cafe::4a) by SN7PR04CA0027.outlook.office365.com
- (2603:10b6:806:f2::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.12 via Frontend Transport; Tue,
- 20 Jan 2026 19:15:43 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SA2PEPF00003F64.mail.protection.outlook.com (10.167.248.39) with Microsoft
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.9; Tue, 20 Jan
+ 2026 19:37:09 +0000
+Received: from CH2PEPF00000148.namprd02.prod.outlook.com
+ (2603:10b6:610:e4:cafe::a9) by CH0PR03CA0206.outlook.office365.com
+ (2603:10b6:610:e4::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.9 via Frontend Transport; Tue,
+ 20 Jan 2026 19:37:07 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=list.ti.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=list.ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ CH2PEPF00000148.mail.protection.outlook.com (10.167.244.105) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9542.4 via Frontend Transport; Tue, 20 Jan 2026 19:15:43 +0000
-Received: from DLEE208.ent.ti.com (157.170.170.97) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9542.4 via Frontend Transport; Tue, 20 Jan 2026 19:37:08 +0000
+Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 20 Jan
- 2026 13:15:42 -0600
-Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE208.ent.ti.com
- (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 13:37:06 -0600
+Received: from DFLE209.ent.ti.com (10.64.6.67) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 20 Jan
- 2026 13:15:42 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 13:37:06 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE209.ent.ti.com
+ (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 20 Jan 2026 13:15:42 -0600
-Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60KJFgwr1577707;
-	Tue, 20 Jan 2026 13:15:42 -0600
-Received: from reatmon by grumpy with local (Exim 4.97)
-	(envelope-from <reatmon@ti.com>)
-	id 1viHCY-00000009I4T-0AYK;
-	Tue, 20 Jan 2026 13:15:42 -0600
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
+ Transport; Tue, 20 Jan 2026 13:37:06 -0600
+Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60KJb6CI1746653;
+	Tue, 20 Jan 2026 13:37:06 -0600
+Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
+	id 865AF9ACF4; Tue, 20 Jan 2026 13:37:06 -0600 (CST)
+From: PRC Automation <prc@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>
+CC: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
 	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] u-boot: Adapt to upstream change to UBOOT_CONFIG flow
-Date: Tue, 20 Jan 2026 13:15:41 -0600
-Message-ID: <20260120191542.2214409-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.43.0
+Subject: Re: [meta-ti][master][PATCH] u-boot: Adapt to upstream change to UBOOT_CONFIG flow
+Date: Tue, 20 Jan 2026 13:37:06 -0600
+Message-ID: <20260120193706.1540600-1-prc@list.ti.com>
+X-Mailer: git-send-email 2.43.5
+In-Reply-To: <20260120191542.2214409-1-reatmon@ti.com>
+References: <20260120191542.2214409-1-reatmon@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003F64:EE_|SJ1PR10MB5954:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5744892e-a8f7-4cb6-a6c2-08de58584e84
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000148:EE_|LV0PR10MB997613:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5b7f485b-0276-4008-7dbb-08de585b4ce0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700013;
+	BCL:0;ARA:13230040|376014|36860700013|1800799024|82310400026;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?BPzScPfIePNpFy1fBPk1M0WEBhBjgKJUx8HdAWW5ws1XojOcrUD4PD98fDNc?=
- =?us-ascii?Q?anlK3bVR8jLScNrre5zrxSPqllYv5GiWb+3t4By4PadNWYESEATiHmEgLIuj?=
- =?us-ascii?Q?LuDf/5xsBBawafYsRRRHhqn1U4m8H1fliYh7dmzPahIpq9AvOil50HHuri3E?=
- =?us-ascii?Q?VcrUeWBlhI6iKnSoKwu/oY1MOe13junCjnTM0/B/dcKR9aTNb31xkVoSIdy/?=
- =?us-ascii?Q?1+TiMp7ks1FozyCD8AfuQTU61WgxVofhSn0OrM/6xrJhWQMFQGyb70B6ryKd?=
- =?us-ascii?Q?fB8VLbGvehEcg7tKjlQ4oFWji59+5HYPZsdGwPCbzz6/rfW7+mmyzOe0hA+c?=
- =?us-ascii?Q?ajhQykPvHH/4VuT6TEf/aL0VjCftS+XmgtMU79d3WD4SBmQOg5e8tg1jwF/D?=
- =?us-ascii?Q?MpAaLX/zfZYXPvqQ9nC/gatC18omFRxL75lHE90cy2fC7UMpLPpZV0QlRfdl?=
- =?us-ascii?Q?ujmRzbjh2Giu+QMDHg9A7YXdGqMaU5lXCOUwXrOP+nUJfLtO5BeC9NLKy046?=
- =?us-ascii?Q?5CxpwsIxlolTyAkEw5NKI67do11YRfrgAEK6Rj/lz241K+CA1MsB6vxT4wDR?=
- =?us-ascii?Q?PFdw8bNVs8m0DtRKyrDuqGXa1yVCJ637I41P9lUR5BN2V5gSsKRTbDPQFq+n?=
- =?us-ascii?Q?IbO52tw3CJxZT4ketF81h6PFF35tOOC0m8nxZoFzvYYc5HUJbpXHMnaF1yFR?=
- =?us-ascii?Q?rT39NieqrJ5z2MEpSLGCKUoNC6ZdPELTI1AK+I8TPH6pJk7MaluLHv/iD3wb?=
- =?us-ascii?Q?i6tq3dkAxiW1SHKRxToo0cclhQGjBUCAWepoI2Z30MGElB8Uj04fcnKVdzHC?=
- =?us-ascii?Q?VSSsAAZh/A9NCVOxKwBXx/xIQVMqhpVJ8t3B5y9CVCu5/o/5TeFPsmN9pyTu?=
- =?us-ascii?Q?lvfpLdVz5ktvVNjoh1Z/rcJ17LsUrPMVogzlM0KxVSxajxDo3LzSRYgnmB8Q?=
- =?us-ascii?Q?WofZKcV/SfXh2jIiNsrW7xacuzxBBiGka6j2jUdrI1Ecp4lz+dZVRT4m4Pad?=
- =?us-ascii?Q?fQWw3lBBYE0sFTRs9HFXX/Fx69YsQVKHzr/zb3TBVM4HWmto9ARJ9t1dYkG+?=
- =?us-ascii?Q?D04PM150yEdBTkb+Gbg7yqVMB8A87fDgR8cQHydY2eAEn8ja4ykniP09g8Lg?=
- =?us-ascii?Q?Ls0gqqOO05NPvi0gCbP+z6NHnVO+ZrYfX6nJdscvrD6zUcLEzdtBCPBAvBUR?=
- =?us-ascii?Q?xSXMffu789l8dv6NDURdMzvuRymQb13rN+IMIZj5QtlZZWJ64j7CNvKIQHhA?=
- =?us-ascii?Q?dQBG466B4OaAbsRTJIkBD02At3sdRhz8owlpBY1YIffyM9gb3UY98iJK+EvC?=
- =?us-ascii?Q?voOu8jE5lmxw7CHosgzJpJSq53Kj7Ja+y+IMayFqnVIDucgH0HiCZNVoislg?=
- =?us-ascii?Q?N1bzDEewK7N9RHH5PBYLP7yTAz6DVT22M0sN1PkLk0cqnxNpV8Ysnpx3KwSU?=
- =?us-ascii?Q?rAaV9pl2Vk6qxf5mzEyhWhsPKWMRWg3xoJNyAxovLAF1KgzaCcw6x7rb6x6i?=
- =?us-ascii?Q?VSl0MaBhuTMEEZgvxTXXKfT/ogACe+WJXNSCkTrKEFbmrScnJXAav7tgnXwH?=
- =?us-ascii?Q?EjL19gZLbHMzC8rIThZ29XxJHU2+xUeWbmcHu9129J3TenTIHj1jgQiu8coC?=
- =?us-ascii?Q?e7cPHAdh9NiLXbYrHh/iYiIcchxo0NRtMsvbROobHyZmjwnST4VPRYnm0N5a?=
- =?us-ascii?Q?7uRR5w=3D=3D?=
+	=?us-ascii?Q?ZSBw9GiYGfQdwAoun9bWHcn7iZzgZqoUvGLOqoRtS9pOdh4tDIiDUY9e1AVP?=
+ =?us-ascii?Q?NbU2297wcFdNgwZl2cq1EkUgkacT9pQRHQfNCRdzPdRlwjtBwMVWvZE0wKhl?=
+ =?us-ascii?Q?A3oW/2OIeULb9s8DIQzMYYaZho/G8Gw4z8mf56QzwfMN6uJAaL3X623r0Axd?=
+ =?us-ascii?Q?ca0ofje3uZP5/PIE44Eu1IbVhFt63dDlDpUuuDnvipGYjQNHQI2YH2n1DpIy?=
+ =?us-ascii?Q?XFv9RsGhjWw7XT+7XdMH4Zw+nOFwJCkgZJ1C+HmZpsNIRxxJU6HYOgMc0Nel?=
+ =?us-ascii?Q?btX8gdjWqLyf8S/4oUakEnrfgJ/6DEbkMzYst3DBwuOemusjdH2XZhNRbLTe?=
+ =?us-ascii?Q?amVyAEfRaG+lvMXbueHdAHxtaQ2LV813OAlWu0IlT6pepbvSz5t4SkjS0bxi?=
+ =?us-ascii?Q?gaQK2bghRnZ/Hqj5BILKfoOVzWsa5xo9sJSC+cFXdMTUPnvqOLW5XwZE206T?=
+ =?us-ascii?Q?68X8PDDWHnMHDoBOz6SV5288kX+/p5gP6DZVTSadKHXHnzgpcN+8n91pR3Lo?=
+ =?us-ascii?Q?LJoUUPmcUway/2IGVidgA/DTalHtNuOz30TUqGOGJIjCQOHD5w5kbFN83wxz?=
+ =?us-ascii?Q?QN39oKe6joAxhWsQA0sN/HVARvVzqlW4Owb+fT0mdwhcco3Imq9hvg5Zn64h?=
+ =?us-ascii?Q?qcR4mu9jpyybrugGjRhM+yjErSlQ+WkKdlZosZzNgNYcXyy7I58UdOUDnyNn?=
+ =?us-ascii?Q?BL9y4b7uYWNtZcIs9CmxQlytIQKKVfa1PPNDaXwx5X+uWMjkNcgt4PgkZizv?=
+ =?us-ascii?Q?squzihfATPWfGP/oEPO4ouqy5f6WQ6dByy2eHvYaOdvzek3mWoz/DBLaRhie?=
+ =?us-ascii?Q?57xpbKdJxhjnlc7Vom2qDpVilonYc63+9jn41gOj1xh/Bj05G4RdSpI1qdYh?=
+ =?us-ascii?Q?/kCfxwr1WDhYvmLVxua70y50KxvOPmqxAVxpnZ4NQm+GQn4jjrEZXG3Rt3mX?=
+ =?us-ascii?Q?TXv6XqFNIN8dQtXhvKoPi7DQOH562ljmNEwMVaiOjjTC5rN56JaRR0cnL2wH?=
+ =?us-ascii?Q?dzWWUO78PBoaCssNYAKNzY8ry5wBlfVlllWuUZ0Z2XkYnX93p4QiCBuNDcrk?=
+ =?us-ascii?Q?24S0q1P0ocp6iQAttGjmN9aZOQ/U2R842b0r9pxjRD0H3t2hrhpAt2bZqNOm?=
+ =?us-ascii?Q?80ZTDgkOXs/iKIRA4aqCdzzDPpHmqHd1rppPtY7idfvHLKh5jiH4YE0FHgoc?=
+ =?us-ascii?Q?+7TlSh+B86HqPbePezqtYbguHdShKLxOoE90m3BZRy6EOtJbV6W7FgxTAgnw?=
+ =?us-ascii?Q?OEvAio5ZDD0p2Xvw9zh9JEQs97N5dBoykXlvrgV+dPa0Q15nsxkP2vwcdofq?=
+ =?us-ascii?Q?/RiVKwtQZCx3S+ZaC8yjoU+X1IIRQ94pixoYufV/cal5TRAoiY0DGwSF0dSp?=
+ =?us-ascii?Q?fbYVDknb+buCc3sQliypAQjXrUZ3yMMcZhFwf0cw8i28xCbY/BMuX7EPI7eP?=
+ =?us-ascii?Q?0NR8tEvGdkS3fgqjz3GkxQVnCJhnOItMPRNaSbfiuK3owUkoUBHvvNvCBguc?=
+ =?us-ascii?Q?+BH13CHwxkC0ySvylXWqZSCahEtXVgM1vTTLk5sKqvAMvCOHYxa1h9T8vi7j?=
+ =?us-ascii?Q?xMmiTXasM9FBdbSAQoTIBbRMpx3Cm6Fs+NgE/W1L0qb2m3FYc2I+gctKAnSz?=
+ =?us-ascii?Q?3Qs8HsDLecwYi0v4gyOEHQQ7vZDowOw9BwYuzhuiV2IqvX0UbRaWKCuCMpBj?=
+ =?us-ascii?Q?kdSTdQ=3D=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2026 19:15:43.0107
+	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026);DIR:OUT;SFP:1101;
+X-OriginatorOrg: list.ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2026 19:37:08.7185
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5744892e-a8f7-4cb6-a6c2-08de58584e84
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5b7f485b-0276-4008-7dbb-08de585b4ce0
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	SA2PEPF00003F64.namprd04.prod.outlook.com
+	CH2PEPF00000148.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR10MB5954
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV0PR10MB997613
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 20 Jan 2026 19:15:49 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19429
+ <meta-ti@lists.yoctoproject.org>; Tue, 20 Jan 2026 19:37:19 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19430
 
-A recent change to the UBOOT_CONFIG flow in oe-core [1], introduced
-support for UBOOT_FRAGMENTS.  We need to stop using our internal
-UBOOT_CONFIG_FRAGMENTS and start using the new UBOOT_FRAGMENTS.
+meta-ti / na / 20260120191542.2214409-1-reatmon
 
-[1] https://git.openembedded.org/openembedded-core/commit/?id=3Dcd9e7304481=
-b24b27df61c03ad73496d18e4d47c
+PRC Results: PASS
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf        | 2 +-
- meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf        | 2 +-
- meta-ti-bsp/conf/machine/am62pxx-evm.conf             | 4 ++--
- meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf         | 2 +-
- meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf      | 2 +-
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-mergeconfig.inc | 7 -------
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc          | 1 -
- 7 files changed, 6 insertions(+), 14 deletions(-)
- delete mode 100644 meta-ti-bsp/recipes-bsp/u-boot/u-boot-mergeconfig.inc
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  check-yocto-patches: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+Patches
+----------------------------------------
+WARN - [meta-ti][master][PATCH] u-boot: Adapt to upstream change to UBOOT_C=
+ONFIG flow
+    WARN: Commit message does not include file/recipe name: u-boot: Adapt t=
+o upstream change to UBOOT_CONFIG flow. (COMMIT-MESSAGE-2)
+        patch
+   =20
+    For details on the above errors/warnings visit: https://lists.yoctoproj=
+ect.org/g/meta-ti/wiki/40887
 
-diff --git a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf b/meta-ti-bsp/c=
-onf/machine/am62axx-evm-k3r5.conf
-index e02e10ed..30c7ea7e 100644
---- a/meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/am62axx-evm-k3r5.conf
-@@ -6,4 +6,4 @@ require conf/machine/include/k3r5.inc
-=20
- UBOOT_MACHINE =3D "am62ax_evm_r5_defconfig"
-=20
--UBOOT_CONFIG_FRAGMENTS:ti-falcon =3D "k3_r5_falcon.config"
-+UBOOT_FRAGMENTS:ti-falcon =3D "k3_r5_falcon.config"
-diff --git a/meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf b/meta-ti-bsp/c=
-onf/machine/am62pxx-evm-k3r5.conf
-index 44744c46..27cc7c40 100644
---- a/meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/am62pxx-evm-k3r5.conf
-@@ -6,4 +6,4 @@ require conf/machine/include/k3r5.inc
-=20
- UBOOT_MACHINE =3D "am62px_evm_r5_defconfig"
-=20
--UBOOT_CONFIG_FRAGMENTS:ti-falcon =3D "k3_r5_falcon.config"
-+UBOOT_FRAGMENTS:ti-falcon =3D "k3_r5_falcon.config"
-diff --git a/meta-ti-bsp/conf/machine/am62pxx-evm.conf b/meta-ti-bsp/conf/m=
-achine/am62pxx-evm.conf
-index fd5f269a..4bebe510 100644
---- a/meta-ti-bsp/conf/machine/am62pxx-evm.conf
-+++ b/meta-ti-bsp/conf/machine/am62pxx-evm.conf
-@@ -25,9 +25,9 @@ FIT_CONF_DEFAULT_DTB =3D "k3-am62p5-sk.dtb"
-=20
- UBOOT_MACHINE =3D "am62px_evm_a53_defconfig"
-=20
--# UBOOT_CONFIG_FRAGMENTS holds the list of u-boot config fragments which h=
-as to be build
-+# UBOOT_FRAGMENTS holds the list of u-boot config fragments which has to b=
-e build
- # along with the base defconfig mentioned in UBOOT_MACHINE. Refer u-boot-m=
-ergeconfig.inc
- # under meta-ti-bsp/recipes-bsp/u-boot/ for more details.
- # For AM62P tisdk-display-cluster image, splash screen is handled by SBL.
- # Hence, disable the A53 based splash screen using the am62x_evm_prune_spl=
-ashscreen.config fragment present in ti-u-boot tree
--UBOOT_CONFIG_FRAGMENTS =3D "${@oe.utils.conditional('DISPLAY_CLUSTER_ENABL=
-E', '1', 'am62x_evm_prune_splashscreen.config', '', d)}"
-+UBOOT_FRAGMENTS =3D "${@oe.utils.conditional('DISPLAY_CLUSTER_ENABLE', '1'=
-, 'am62x_evm_prune_splashscreen.config', '', d)}"
-diff --git a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf b/meta-ti-bsp/co=
-nf/machine/am62xx-evm-k3r5.conf
-index 1665f586..e8d7fd05 100644
---- a/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/am62xx-evm-k3r5.conf
-@@ -6,4 +6,4 @@ require conf/machine/include/k3r5.inc
-=20
- UBOOT_MACHINE =3D "am62x_evm_r5_defconfig"
-=20
--UBOOT_CONFIG_FRAGMENTS:ti-falcon =3D "k3_r5_falcon.config"
-+UBOOT_FRAGMENTS:ti-falcon =3D "k3_r5_falcon.config"
-diff --git a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf b/meta-ti-bsp=
-/conf/machine/am62xx-lp-evm-k3r5.conf
-index 8319ae19..8ae4af36 100644
---- a/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
-+++ b/meta-ti-bsp/conf/machine/am62xx-lp-evm-k3r5.conf
-@@ -6,4 +6,4 @@ require conf/machine/include/k3r5.inc
-=20
- UBOOT_MACHINE =3D "am62x_lpsk_r5_defconfig"
-=20
--UBOOT_CONFIG_FRAGMENTS:ti-falcon =3D "k3_r5_falcon.config"
-+UBOOT_FRAGMENTS:ti-falcon =3D "k3_r5_falcon.config"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-mergeconfig.inc b/meta-t=
-i-bsp/recipes-bsp/u-boot/u-boot-mergeconfig.inc
-deleted file mode 100644
-index c7ce5047..00000000
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-mergeconfig.inc
-+++ /dev/null
-@@ -1,7 +0,0 @@
--do_configure:append () {
--   if [ -n "${UBOOT_CONFIG_FRAGMENTS}" ] && [ -n "${UBOOT_MACHINE}" ]
--   then
--       oe_runmake -C ${S} O=3D${B} ${UBOOT_MACHINE} ${UBOOT_CONFIG_FRAGMEN=
-TS}
--       oe_runmake -C ${S} O=3D${B} olddefconfig
--   fi
--}
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/rec=
-ipes-bsp/u-boot/u-boot-ti.inc
-index 9801ffbe..97a895b0 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -7,7 +7,6 @@ do_compile:prepend () {
-=20
- require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot-common.inc
- require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
--require u-boot-mergeconfig.inc
-=20
- FILESEXTRAPATHS:prepend :=3D "${THISDIR}/u-boot:"
-=20
---=20
-2.43.0
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  apply-yocto-patch: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+master
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Summary:
+- Patch Series: [meta-ti][master][PATCH] u-boot: Adapt to upstream change t=
+o UBOOT_CONFIG flow
+- Submitter: From: Ryan Eatmon <reatmon@ti.com>
+- Date: Date: Tue, 20 Jan 2026 13:15:41 -0600
+- Num Patches: 1
+- Mailing List (public inbox) Commit SHA: e55a6808d46ba3601c1c4d1390897e07b=
+91b3b91
+
+Applied to:
+- Repository: lcpd-prc-meta-ti
+- Base Branch: master-next
+- Commit Author: LCPD Automation Script <lcpdbld@list.ti.com>
+- Commit Subject: CI/CD Auto-Merger: cicd.master.202601171053
+- Commit SHA: fc26d5dc11e24ba44afe8cbd9fa7639631b3d209
+
+Patches
+----------------------------------------
+All patches applied
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  check-yocto-repo: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+master
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+PASS
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  yocto-check-layers: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+master - PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+All checks passed
+
+
 
 
