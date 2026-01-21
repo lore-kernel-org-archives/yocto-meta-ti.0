@@ -2,191 +2,163 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 556D0C44506
-	for <webhook@archiver.kernel.org>; Wed, 21 Jan 2026 20:47:34 +0000 (UTC)
-Received: from SA9PR02CU001.outbound.protection.outlook.com (SA9PR02CU001.outbound.protection.outlook.com [40.93.196.32])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.22118.1769028449270503400
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53B5CC44508
+	for <webhook@archiver.kernel.org>; Wed, 21 Jan 2026 20:49:04 +0000 (UTC)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com (SN4PR2101CU001.outbound.protection.outlook.com [40.93.195.64])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22155.1769028539562543129
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 21 Jan 2026 12:47:29 -0800
+ Wed, 21 Jan 2026 12:48:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=r5eG8bGR;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.196.32, mailfrom: reatmon@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=Xmi6/d+2;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.195.64, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=R3vfQkykBsobsk+l7auSRjdsUx/NfE35ttrCllvT+l0z56cUWVCGQShf8l7Zy6Gr1dmcgFIaD8w5RJSmta6LQUznXZQOYn3fqCxlP57824qUXPSimPP6oSS6sp0aZqAQE7gMvbpMpOKJfNchyq+iEBuCV2BlRYQVWF01UlvFOcJCfwP88LKGNDWPy7fhxGoTnrGfDQgFkm6BatP7pKc2J5ShmfnGf9zuzI5jYCHUMyaLVu0Jn/sBmoaCUi5QdSyo+SrvwKlC2XYxg76Vo4Cc8MIcjsbMg+xBXvv9Vko9XNnsHpoQUceYoUavq2x48wRhRcW6uIlAX896brqggv7THQ==
+ b=G+FnoiTjfaRxv91TkEr7RwPtyqllwAV1f7ttsONfMmx5BHNrHR/CwS3qmgHzy9L7Si/oydO3YoPs49RBiEKKspn7XGjshlIz/fpsrMlY/AJ9TIWtBu08XcZhr+exmXGWPhnHBoOLmKCDE+mM9raP8ddu/vDl8i1xPVP1fR7gHl06q9ze3VJ8Oi8qOJQV/4r6ZnmpddJkd/9EVsqmyW8admNetQ2WWkpHh5HzbrGbWv86rtDNaMV6ViKXA911dtgO5tPa8C6m7VWwVojM+ul+w+opKItaOHPdtAjdFGH9++zleVxDqpfGpWvX5OLVCC97P41BKfJ2wl8YrGpU0kX/nQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2eJQcD+EkbAqzkMJh5X3GZjl7hK76ugBKAmGzjmjwT4=;
- b=Ht6h2mWl6VBeH3Ewssi5pL4xb4EhcUEoF/DlPuJ3q+jizZTbP4SeQWd1RE/3/g9MN42iG/QhMusVYa+ZiDIbkYIz5IQwIpLPyJG6ZQFouB7svbHAOjtScSBzWfHExUUPXhQPwTuUPbAO6pdfyCX/uA2eF/5ux+wBHmtOYygPG4m0SYSw9tPArPvSH2LYv274BmPeKVN79LocyDzthk8wQDU52hxCkTBChFazmA9dWWAdXMxfA8x6hDI2tYeK/Lqs0Aeub5q2WdMdvCARRxQPIO+4yixVHhrstT++UuBjLdwjAs7mCioeYdKndnFj/Iv2E0MvLr4JBYMHyk3LH+/hLw==
+ bh=cnt4gusVXs+QpqkIqEi7gVXeHFyN4fdeTyNx68nU8oU=;
+ b=TUWkIEHanE8lQqlNKDWzUPlWqaY25e180fLKHsCiFVvefCzsykNSi27u12ACAGZJYGIDmf7Y4vvUgXFIr3em2AJdqIVCwUISLyMmqnPaoZNJHMn0sltieUobY9xPHdrS6R/tpF1zLplYkJvRlh2INop/STji28WLniVms2GFuzxedL7L8Duz9tKeWsFI5mqWkSRSwmmRuWPfxqx2p5c+iSjNrTHC7lJu+V9Vle0IBN9z7RK45p53JJ0CsludS0dFWN5DWSWN825KHLML6gf2nC9zeLKj0aNmfxvjXOR02Etzd8SgxuOuAUg75DXosHiyNtaKA8BNqPOJw2Rnv0+HXg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2eJQcD+EkbAqzkMJh5X3GZjl7hK76ugBKAmGzjmjwT4=;
- b=r5eG8bGRuZ6gs8k/xv/ZAiF2JtTg6ez2FPeCrjswKicTdvmjkrHcFviiUfmgvN75SnAk7fCPJwNqSG6AdXJPhS49h6C9bJYll+lEKpPrAxUqkdc2WxFSJuc4DilA2WtBmXpWvLUdPROxAdxIl5KNdBESt69dmA/1fDgDyenGX5k=
-Received: from SA0PR11CA0116.namprd11.prod.outlook.com (2603:10b6:806:d1::31)
- by BN0PR10MB4885.namprd10.prod.outlook.com (2603:10b6:408:126::21) with
+ bh=cnt4gusVXs+QpqkIqEi7gVXeHFyN4fdeTyNx68nU8oU=;
+ b=Xmi6/d+2wLLf1jYEq6BnnUVqNrBY8Zy99P40qUzdjkFxXfCv7FizFT82dplAfOVw2bKj8T3+4Z28zN8P/GBEEbO1D8CiQNx6yMJLiHkiwuKwLWYOU0pe2qfEDyVs3JDy3Lbjlid5C9BcmgIMMxVOXJ0HcrAfyunWvqY4CsDc5Iw=
+Received: from BN9PR03CA0709.namprd03.prod.outlook.com (2603:10b6:408:ef::24)
+ by DM3PPFE9EDA11A0.namprd10.prod.outlook.com (2603:10b6:f:fc00::c52) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.9; Wed, 21 Jan
- 2026 20:47:26 +0000
-Received: from SN1PEPF0002636D.namprd02.prod.outlook.com
- (2603:10b6:806:d1:cafe::db) by SA0PR11CA0116.outlook.office365.com
- (2603:10b6:806:d1::31) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 20:48:57 +0000
+Received: from BN3PEPF0000B06E.namprd21.prod.outlook.com
+ (2603:10b6:408:ef:cafe::26) by BN9PR03CA0709.outlook.office365.com
+ (2603:10b6:408:ef::24) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.10 via Frontend Transport; Wed,
- 21 Jan 2026 20:47:25 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ 21 Jan 2026 20:48:56 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SN1PEPF0002636D.mail.protection.outlook.com (10.167.241.138) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ BN3PEPF0000B06E.mail.protection.outlook.com (10.167.243.73) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9542.4 via Frontend Transport; Wed, 21 Jan 2026 20:47:26 +0000
-Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9564.0 via Frontend Transport; Wed, 21 Jan 2026 20:48:56 +0000
+Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 21 Jan
- 2026 14:47:26 -0600
-Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 21 Jan
- 2026 14:47:26 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE215.ent.ti.com
+ 2026 14:48:56 -0600
+Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE215.ent.ti.com
  (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 21 Jan
+ 2026 14:48:55 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE201.ent.ti.com
+ (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 21 Jan 2026 14:47:26 -0600
+ Transport; Wed, 21 Jan 2026 14:48:55 -0600
 Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60LKlQAA3484742;
-	Wed, 21 Jan 2026 14:47:26 -0600
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 60LKmtZe3485846;
+	Wed, 21 Jan 2026 14:48:55 -0600
 Received: from reatmon by grumpy with local (Exim 4.97)
 	(envelope-from <reatmon@ti.com>)
-	id 1vif6s-00000003P5y-0PaD;
-	Wed, 21 Jan 2026 14:47:26 -0600
+	id 1vif8J-00000003Pp1-3wwl;
+	Wed, 21 Jan 2026 14:48:55 -0600
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
 	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] u-boot: Move ti-extras.inc into u-boot-ti.inc
-Date: Wed, 21 Jan 2026 14:47:26 -0600
-Message-ID: <20260121204726.811442-1-reatmon@ti.com>
+Subject: [meta-ti][master][PATCH 2/2] conf: am65: Add usbdfu tie-test-builds config
+Date: Wed, 21 Jan 2026 14:48:55 -0600
+Message-ID: <20260121204855.814231-2-reatmon@ti.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260121204855.814231-1-reatmon@ti.com>
+References: <20260121204855.814231-1-reatmon@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002636D:EE_|BN0PR10MB4885:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8cba91a1-872d-4ab4-d4b8-08de592e4954
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06E:EE_|DM3PPFE9EDA11A0:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0fa7246d-e0b1-4536-a600-08de592e7f0f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|376014|82310400026|36860700013;
+	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?9tKG3HRzT1n+32TbQ7nWw8S10xOK6N7LJ21uDtwAZMbo4KahqWkQX6oFwhU5?=
- =?us-ascii?Q?qta672dIMX9csg7CFRDcMi/4ZF5/SneqvLJetG2Hs6tbJo2UewKGRBRpsxu9?=
- =?us-ascii?Q?ssVCF1nDfZYFFAHzEpSqhh72RDMerNi/v98sfuPheHxpejTdhE4B3R7EkkbS?=
- =?us-ascii?Q?otesva79X7P+2xaQAaCcbif5d+i6AZ2UEfQGByfGVNMDXNaL6t3GKl9dxHnD?=
- =?us-ascii?Q?fJj7F0ilvH1zB3EZJuIccKK/UqERINQvmUFKZ178AjOdBO69g9m852Yf4hTF?=
- =?us-ascii?Q?98AJGzXXJoqERKrrL+3guCSDAcV9B6TFsJ8XaI90Xi+8mWbU8PVlvlyMMdL2?=
- =?us-ascii?Q?bNalo4dc6ky86BezNm0ss1wA1m+XItYeAuDzbjFtqt8BZqTs0lhXfZiwRt2S?=
- =?us-ascii?Q?jzfRAEmYwqrkSWzh7N2fQzbwZJit6g3FxxC6FuOazMEicRyUh1Cj/iuga3t3?=
- =?us-ascii?Q?f1JYcSMooS570q+PRrGGKSxwU5LQlErvL+N/+Bpi5CARlV91rvDF4q4TGAI0?=
- =?us-ascii?Q?sGYuV+EN3eziexKTjyO9hssatJvXreCdgn9GLbe/fmdpJnxGFuZ5MNwOjnrJ?=
- =?us-ascii?Q?aR2+gY6bFWWtfBWS42Eq4qwVD4g0ewYKuHg/WWatjIqnvMkrwYTMjLdcYvIO?=
- =?us-ascii?Q?jEs8VWPR2Laj/Sm3gYGEVioDe9Vojjpjgv8DWdIBYEmOBWPkvF6ugICzlsCb?=
- =?us-ascii?Q?vrLU1qsb5WnEWHGWtNPI56ntva+6nMx29WVeJ4E13iB6Bf92WGjNB4kyi4xT?=
- =?us-ascii?Q?7R1Ibv4z6G34kPWTey2TC9fwvgmCjolKUCKDBAggbdjuN0BINB3OODPt1pZq?=
- =?us-ascii?Q?C2Y31zCPjHWdfAs5frGWZA8cWe1ZzXFwCVTL4DA5hthaYMZ5j5T9LwFTmwN6?=
- =?us-ascii?Q?22eF/NT/XfHbSqVD3wxY9dEWFQl2waYnSgovIOc3KRwyptOTBw8nwX7Lptb/?=
- =?us-ascii?Q?5doksRdAMwxdq85z+udOX7g0tmRsKhxpAUVfMjqRzCUmaiRGCykKCLO+H40B?=
- =?us-ascii?Q?epp4bA2ldPo9nJ4VErwQznkoBO0Bbmo3pSItLzPqGbMSgZCHnLmN52VVTDfL?=
- =?us-ascii?Q?zFN3X2SSaKIxeQXUCOuyrX9yEtEd/TBT+MSEEf3s/Qw85LfjtnwDb4XzYgVr?=
- =?us-ascii?Q?pNE0CGWA6JFMurrbBeLl0NsDMikJwA43pxAzemMjlLOwacEwVD4XpI5AwPeo?=
- =?us-ascii?Q?xxwoh5zJeWMHTRBOLtM+tp1f2Sb+7UQRlVTfj2P7kkoL+jXmtBF3ZQA4vOKR?=
- =?us-ascii?Q?gPqE83LxR3Hdv5yJgZKr/nJYlmm0+JYtoLM1UNiJPpydGBmaG2mYytAXpIaV?=
- =?us-ascii?Q?zXNok2Uuwt1pe28IVo1j4l25Sy9kx+gWbHAIpxcJ9z0d7vOUEBG5wGAFz5Wu?=
- =?us-ascii?Q?ClRda+1PLGwNTzopXR4Fmb8xx7gxAA2mFfyyL6C3tduGlmdFT3S669Kucx6h?=
- =?us-ascii?Q?5rpUcf69Ab5IPhqKNfYi02QwTtQ0QtyUC5V7fd6ehHP28N1QEXY7JuXab9CU?=
- =?us-ascii?Q?lFUqRBB+gRu4dap7NOBnhAVWsCgn8LZsu5WataUDwv3+wisbs5NBFpaGqq6I?=
- =?us-ascii?Q?feb18/6/k2ZU93PDIgdXvhyLBvlkqJbLUSyekXxXO3YL9fL+m4zD6Q2eH+QI?=
- =?us-ascii?Q?A7C6zldd4muy4g098fNgHIWHs4taCDyTpBFXDr4KZ+pGS/e60B+kxus9Mg+y?=
- =?us-ascii?Q?aekmSw=3D=3D?=
+	=?us-ascii?Q?mdj3sfrW2fLu4PgmZv5YVnXfdkgQJB6jw8s9bD51qiAo3tc60iJ70oeAALwF?=
+ =?us-ascii?Q?kgWqZsIGzr0IVx2IUjXZ3jJtJD5xA4r7exZqaBP5UYS9ej0sghFNPnNv2JxQ?=
+ =?us-ascii?Q?h66EDzByWA1FhczW1qdczK+oRspnmAomYofZowzMwe0V/iw8tdcEP+IbsoK0?=
+ =?us-ascii?Q?3k7sSbn9FjANYFS0/FWWcY4nPfgCfw7iGWfNOomNzPxPStocKElSLPG7+hun?=
+ =?us-ascii?Q?kygs0RAmye7c/NlzX84Bp9nSbwlC6BAJnu5ZJEH0XvRP19J96HPZw90Z88Bc?=
+ =?us-ascii?Q?yckj/g1YpV4xRZUJf0kfMPOUDVNvKIli8ZnAieJuXV/j6JNoYZ4ejP+G9xru?=
+ =?us-ascii?Q?Z1crRMkcthdfYWtIHMuqXh7GWXtU7lnpvxLKezEgzEAAubVw4LEsO+1goyPH?=
+ =?us-ascii?Q?NnLNcE5Gn//NJ4s0MZYU0iP26zoIRQcT+DcVpdiEPx88e+2x9NxUt/hDXeDc?=
+ =?us-ascii?Q?W7sbEQ9ayhaCOy3EUZA9VMUuoi+uDeDGjK+/P8MIE7F4SrAR9mpuhcMFfFBm?=
+ =?us-ascii?Q?Snwln1OJTH+6uZjFZBydlI9ZkSfY+Qpdhl1xNYMv/UBeGPjCDaeCh8X5jxOO?=
+ =?us-ascii?Q?l+gaIcJA2pndF61p4Qv2mYNHL0h2/AYLjdk8ME547mih0FYu8AUgMk8pb17y?=
+ =?us-ascii?Q?aB0aW1tCTErulMnJaMBvGVtt85+ko8LAv5MYmOoG96HSz/XIFaBEYsK3m4vW?=
+ =?us-ascii?Q?z8h2pjmAgx6E0rylIv9OZak62r8P0j+xsApx/mqLtkPFLC2VZsuwYvmSTbsj?=
+ =?us-ascii?Q?Fua+mwwjE5ukJWrFWy9rcUht+skz6eVM8L+5mN5p3cultP9BFVz6dzFSV2Iz?=
+ =?us-ascii?Q?ANAJ/pLolF4EdPQPDrmt83bQOH/i0/Te1ynXjlT2sHqpjlAEijiTusX6WBuW?=
+ =?us-ascii?Q?VSs5haLnewjm6h29GYd5NB8KmRAgUoCDoYxLTqkR9ZuyZdscSvd/6o+S7HIl?=
+ =?us-ascii?Q?TnFX9/Tuj3+CRO6K5U6SWUuKl/FXIHRDtMa+hWjLzHLyjhRgYdy+HPimuqLP?=
+ =?us-ascii?Q?m6Hu6LAziFPlwoZtt9rOREIYHDaTzdGvwk20kMPedjiy3ppESZAOl4rh0AnK?=
+ =?us-ascii?Q?reaAd5wLp80I92TgJrEdQEemirZQJyflfGYODQiwzPez/Ex+1C5q10+oluDR?=
+ =?us-ascii?Q?q9hSLtjYMriyVznlfanckcx346/B2jClmw4fd4Xq+c0GdJogjwsycLtXihHj?=
+ =?us-ascii?Q?K6g+ft8CWvvPKrx2pFMqeePiZM7Y4SxZZsUANUkGbydphnZB6UnVqNGPanGU?=
+ =?us-ascii?Q?+RNdS1PID97koqLnzDhxaePYhs7Gu3CstevRfFLPgMgx3cVy9iZFNiewT7Tl?=
+ =?us-ascii?Q?pyuoNC1fyZdVc6X9qNw10Pv87zEtzxZJh/kSJxMKdohUEC7KuHrgkYbVLhFx?=
+ =?us-ascii?Q?9tCIBDOVJR3DskFFn3sntXYCiA6WM0yUJ7462nV0YX23JRgMvGelhHdpa5S0?=
+ =?us-ascii?Q?+2jDo6i0L9mOO8i1v5vPsBZhFljzQ6BHLNg5H+l4HxJmI9cSVUh1pqdhEqwg?=
+ =?us-ascii?Q?imK4XfhH6Yhuz7+hBEy6QsuLxxRfWMEqovA0BKB/eKDneDea2NqmNjx4uo43?=
+ =?us-ascii?Q?6gqMWONOqe+tytAWQ4/ef0xwQHioH1xsMZs4VC6xwdQAr7C9nkUGFr/atYha?=
+ =?us-ascii?Q?XDjaUjdHQGeSzWUTR3UZyUppw/f/8tBP54snldAtK5dd/8SLQONJNJTq2c/L?=
+ =?us-ascii?Q?7RE5mw=3D=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013);DIR:OUT;SFP:1101;
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2026 20:47:26.6147
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2026 20:48:56.7052
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8cba91a1-872d-4ab4-d4b8-08de592e4954
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0fa7246d-e0b1-4536-a600-08de592e7f0f
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	SN1PEPF0002636D.namprd02.prod.outlook.com
+	BN3PEPF0000B06E.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB4885
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PPFE9EDA11A0
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 21 Jan 2026 20:47:34 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19433
+ <meta-ti@lists.yoctoproject.org>; Wed, 21 Jan 2026 20:49:04 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19434
 
-Since the extras stuff should "theoretically" apply to all u-boot
-versions, move the include out of each recipe and into the central
-include file.
+Using the new UBOOT_CONFIG flow, enable a mode where additional uboot
+configurations can be built along side the main config.  In this case,
+turning on USBDFU for a board for testing purposes.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb | 2 --
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb | 2 --
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc                | 2 ++
- 3 files changed, 2 insertions(+), 4 deletions(-)
+ meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/=
-meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-index 83179aee..d3a78d8b 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-@@ -1,7 +1,5 @@
- require u-boot-ti.inc
+diff --git a/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf b/meta-ti-bsp/co=
+nf/machine/am65xx-evm-k3r5.conf
+index 23e302a8..4450ef57 100644
+--- a/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf
++++ b/meta-ti-bsp/conf/machine/am65xx-evm-k3r5.conf
+@@ -5,3 +5,9 @@
+ require conf/machine/include/k3r5.inc
 =20
--include ${@ 'recipes-bsp/u-boot/ti-extras.inc' if d.getVar('TI_EXTRAS') el=
-se ''}
--
- PR =3D "r0"
-=20
- BRANCH =3D "ti-u-boot-2024.04"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/=
-meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-index b85c5cfb..4b6e0d03 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-@@ -1,7 +1,5 @@
- require u-boot-ti.inc
-=20
--include ${@ 'recipes-bsp/u-boot/ti-extras.inc' if d.getVar('TI_EXTRAS') el=
-se ''}
--
- PR =3D "r0"
-=20
- BRANCH =3D "ti-u-boot-2025.01"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/rec=
-ipes-bsp/u-boot/u-boot-ti.inc
-index 97a895b0..773fa1e2 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -8,6 +8,8 @@ do_compile:prepend () {
- require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot-common.inc
- require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
-=20
-+include ${@ 'recipes-bsp/u-boot/ti-extras.inc' if d.getVar('TI_EXTRAS') el=
-se ''}
+ UBOOT_MACHINE =3D "am65x_evm_r5_defconfig"
++UBOOT_MACHINE:tie-test-builds =3D ""
 +
- FILESEXTRAPATHS:prepend :=3D "${THISDIR}/u-boot:"
-=20
- FILES:${PN}-falcon =3D "boot/tifalcon.bin"
++UBOOT_CONFIG =3D ""
++UBOOT_CONFIG:prepend:tie-test-builds =3D "usbdfu main"
++UBOOT_CONFIG[main] =3D "am62x_evm_r5_defconfig"
++UBOOT_CONFIG[usbdfu] =3D "am65x_evm_r5_usbdfu_defconfig"
 --=20
 2.43.0
 
