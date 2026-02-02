@@ -1,96 +1,139 @@
-Return-Path: <ManWag@FastMail.FM>
+Return-Path: <jcormier@criticallink.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5D2DE7DF19
-	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 18:13:00 +0000 (UTC)
-Received: from fhigh-b1-smtp.messagingengine.com (fhigh-b1-smtp.messagingengine.com [202.12.124.152])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.59608.1770055972450860056
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 236C1E7DF1F
+	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 18:53:51 +0000 (UTC)
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.60977.1770058423844136552
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 02 Feb 2026 10:12:52 -0800
+ Mon, 02 Feb 2026 10:53:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fastmail.fm header.s=fm3 header.b=PGfU9Z0i;
- dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=ZuEIu/oO;
- spf=pass (domain: fastmail.fm, ip: 202.12.124.152, mailfrom: manwag@fastmail.fm)
-Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
-	by mailfhigh.stl.internal (Postfix) with ESMTP id D91627A002F
-	for <meta-ti@lists.yoctoproject.org>; Mon,  2 Feb 2026 13:12:51 -0500 (EST)
-Received: from phl-imap-12 ([10.202.2.86])
-  by phl-compute-03.internal (MEProxy); Mon, 02 Feb 2026 13:12:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.fm; h=
-	cc:content-transfer-encoding:content-type:content-type:date:date
-	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
-	:subject:to:to; s=fm3; t=1770055971; x=1770142371; bh=pwILFBHwQR
-	mmEAeWt6ldnWPUpLHXTr3AXkzGDDQtusU=; b=PGfU9Z0ithdhq/S2mRzEcqrYoE
-	2rUsA1ZpEGlDkiZr1P39TlLEMdbpBMJHJUvFhRBmygwF2LqLpAsRF6nH2RrkaDR4
-	2nBwT6izNXoOotmZlyVeM/KxlCceurUfLz1fMeuUevnjOt53ByE2PHJmFlutDuvq
-	JtU9zjZiPSt1c40o940G5buh4si4r4v/yCQw+p7rQ0qOS6UF/S77SItqrGvH10vg
-	NnZdEF0UGYHY0yGmZEfOBTf1rz0KzT3pqYSl9cgni46DqT2MIiK8RLFJdAuDrnfE
-	2urDD5SVu9Re52y23D6xW+buUE5azFL2FZOcpvg8V8C0C4sJCf5GpPfws4DA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:content-type
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
-	1770055971; x=1770142371; bh=pwILFBHwQRmmEAeWt6ldnWPUpLHXTr3AXkz
-	GDDQtusU=; b=ZuEIu/oOSEmrZnvlVSnW0JpRInAgCu5bTU6MQHC2rRaHuL+UOHi
-	J6PwFa+fUOHtUwxsyfVKKOzuZZ3vxgbCm7L77tJSIAjgi7yrDgXD+NpL3NsTg6E8
-	QAO24aTkARZPVFQYtbBi3kk8e9K/TRUDCX5CeWLbi7Jqw1/e/dJGujCOm6KOzRbC
-	RQ7G6ZY1dRHWA5P7FqKVhLA3+Wn1vrundTcFXTKJfVR9kjm/wgveaAIHIcCsSUR3
-	9hRRpzSc1JAvbACpScQ+bIzVIluoarcVgErE4wEXU3xD/+K39/LIunm1ahhtYrMu
-	zPpf7IWv8NyO99Yk0GvL9lRUs5lJyeb+gKQ==
-X-ME-Sender: <xms:I-mAaTEmnY5XMGjxRBXBlJ0yCGgT2prOeQkmf9etNCwzIz-y5ij5Qw>
-    <xme:I-mAabIc9Hc0s30q1Va83462-9cXhAOKLkRXBiHJ4kn11lPFRxDrnu20Sll7LRxd-
-    iZvAj4AjCZl_7J4FCe0jZRTcPPYRsHq5s_c3JlWwGgd_LhEbC9XSw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddujeekfeefucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
-    rghilhhouhhtmecufedttdenucenucfjughrpefoggffhffvkffutgfgsehtqhertdertd
-    ejnecuhfhrohhmpedfofgrnhhuvghlucghrghgvghsrhgvihhthhgvrhdfuceoofgrnhgh
-    rghgsefhrghsthforghilhdrhffoqeenucggtffrrghtthgvrhhnpeevgeegleeiuddvue
-    eljeeuveffjeekjeefhedvhffgfefggeetieeukeegfefhleenucffohhmrghinhepthhi
-    rdgtohhmpdihohgtthhophhrohhjvggtthdrohhrghenucevlhhushhtvghrufhiiigvpe
-    dtnecurfgrrhgrmhepmhgrihhlfhhrohhmpeforghnhggrgheshfgrshhtofgrihhlrdfh
-    ofdpnhgspghrtghpthhtohepuddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepmh
-    gvthgrqdhtiheslhhishhtshdrhihotghtohhprhhojhgvtghtrdhorhhg
-X-ME-Proxy: <xmx:I-mAaQ2_AzPWMuRG01gkrjEQTohbpOaXDkAgcjK-l9pS8GFaLvuW_w>
-    <xmx:I-mAabCHr-TKbdB9gEXgb6FTc9mUXzAipm8ggmAqTadj-7Rr8mkr5Q>
-    <xmx:I-mAaVzbCWpRX1j2dazxSwRdHRxOsCkjuAl1ub57M2fTaeK8GcSruw>
-    <xmx:I-mAaRn7wcMfcWOFW1F1Ped8CqbcVOFVlnPTVo6R-coWqyOOIZAVGQ>
-    <xmx:I-mAaaNfceDcmGyQ4ImnmxDOLFTfeMHgRxjH5lBjyeYMdOlrIgC5Kejq>
-Feedback-ID: icb4a41f2:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
-	id 6BC101060065; Mon,  2 Feb 2026 13:12:51 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
+ dkim=pass header.i=@criticallink.com header.s=google header.b=NVYYdQ/Z;
+ spf=pass (domain: criticallink.com, ip: 209.85.128.173, mailfrom: jcormier@criticallink.com)
+Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-794d05dbe22so15282067b3.3
+        for <meta-ti@lists.yoctoproject.org>; Mon, 02 Feb 2026 10:53:43 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770058423; cv=none;
+        d=google.com; s=arc-20240605;
+        b=iW8Jc4l4+wQmOAkiLlPMpD+K3j7FlxS/602ljdVX+lsoLKoOXqiuGDoeoctHuTYhsB
+         wc7noZoFBx1DkQF+7SbIS8HlYORN1PqLaqc1Vt1OOcXjZJlx7hMtZf1oPA02m9ocfDB2
+         Q3nnDDvuGNM12DAnUJvsWEczDz2mWLn9qW5/V+eWOyTR+5Etty07Oa1IQsM2DiP9Snpx
+         +4ey63wQf6RnyEMtDbkVfY812a6VxE/F1OQ5MtbqwfTpmqp4wyKIXxlDGV2Ew3oUiBv9
+         P3XB+jTCZcpE1TAegv0Ldow9y7UlBmropv9NJOQrBPOJx52wjOrk1l3f4ZPMMYNS3BtV
+         o87A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=ePjHcEXWyigbcI6bp+Tu/+aJ4gkVzvID4lovqwFHXck=;
+        fh=tbSYAoWLikc+Qs1J0N8rUBuPZtAu4KBZsX86NZa77Fc=;
+        b=RV7pvzJhMpFFl3tkAV630u1SnHLkYUOSYwNBVK0pV8yBeP8tn6PTNqTMcqQQe37/ew
+         ROuyANAMpUAKDb6DCGrYlhduX17wIkcjIXckS3gh9ycn2jHzBVUg/VW33WQtkAUVqCEU
+         wVJ4yEIgVvj+a21GSEopXNAjr7LRCbRosC9eE763LTevlnQaepcDQI2+qgFsKnxWt9Sy
+         zS7eRVktcLtyGgI+OduChxpZ8h3aG+yctq8pzd22mMJi+cDqZPoweEJ2UEpRFfHFhuCK
+         Y5Kpi5MgayysF4dKK7/g0IoiEES/TBgEk2YFsieynVqQ/WWWnmlRaQR8G7lqm2+MR3ke
+         TZug==;
+        darn=lists.yoctoproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=criticallink.com; s=google; t=1770058423; x=1770663223; darn=lists.yoctoproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ePjHcEXWyigbcI6bp+Tu/+aJ4gkVzvID4lovqwFHXck=;
+        b=NVYYdQ/Z0gHb+zB9eO8uVZzYfDDtsbAsiDZNV/qjJWAQOvApqAAiIjysIqIX9Nrdyw
+         0heUIE/oWP8ryyw5EvLS9uLyBUnDC4WSboQ4XMuTb/Yzs746szhjQHu9YId+Luki3ZNq
+         P2m7dno/3lURrsLh0MDESEdSn+bwjAUET/zAGyiJOBPtM+100v+zorpB3Hlvx/52cnX7
+         aIvlIhDYm0IODdB+tlu/EYo6/9Si3LIHXjMrDeGTcz73ckGDzvhVgLu2M20hZr9JDWjq
+         8KhcKKjmmJKUUzFmR9PXZ2qai7CnZYYiw1qTv5YCqVQIcsHhLLPYrWEMtIuTjY8AdSB8
+         Zlgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770058423; x=1770663223;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=ePjHcEXWyigbcI6bp+Tu/+aJ4gkVzvID4lovqwFHXck=;
+        b=EZ653UP7bia1BeWWScudJTrJmfz3IX5q7EdAbxy3/N0DfH0DSpUPHoFFFv1c8hSkhl
+         2q2OclHCy2HO6zga+IgiuQZFGpzD8j6fWOcIPiOB1cpsWPv4+nIY2yOD6Z9/hXZz9nu2
+         5ZGA/8hiftdCKqeaPFgGtZRD8u98vf/vMTjrf2ZXxGznrviDhZbwtBvDwrbeGBpeJyl+
+         QSQwxUHrZLVarcx8chvkMZXNWUVw2pCr8JkJKyRSpdyMjnv1tvlknPMbAl61wYI3fU9c
+         kkoRvf9LQp+7qrr3UJ1V3IgE686Mi6V+REt5ONsebZ5QjfN12lUACe3QC5WYD1ebZLCg
+         AkWQ==
+X-Gm-Message-State: AOJu0YxT4CFr7kYVZ3ziVr8PBbqRvjdeQf8iHsGHJxhP1+bc9kKBCctO
+	V9C31tNfM8Oiz/5ldDuLiOOo1v5cPpAEbPb6O0is4fHeJcVATYhacZo+W+D3NXHJ9OZaE8NHdYB
+	iuMKUBBoWf1RUKM2vMOC3C95CYiu0PX0s/PgLrwjJ
+X-Gm-Gg: AZuq6aKSpegwtQyGJ0a+IYQssEIxxDkn+khuxAQsw553DLtUaDeFFjfPLYjnz064+88
+	5e6Xa0hQjN4M68iMVHorhmBXUFXFSolo8qI0JsE34ZTLUFhg7LSJNMLmYLp3PKtL3vQrZqlvcgg
+	KsqKSwajrljWDxBcXSswyAR5eSrdrLu5LfzyX5tqdlhaHeX2FRo4AzA78nFR3MhspZ9m9G3oJBT
+	38CD6Nru8qAG849gQyOazp85vfMj2bXWo02x+qfsu0AQFHHKqw0V6h01HpBO5FNM/VGiQ==
+X-Received: by 2002:a05:690c:9a03:b0:792:7828:b709 with SMTP id
+ 00721157ae682-7949dec1ed6mr104937547b3.22.1770058422795; Mon, 02 Feb 2026
+ 10:53:42 -0800 (PST)
 MIME-Version: 1.0
-Date: Mon, 02 Feb 2026 19:12:31 +0100
-From: "Manuel Wagesreither" <ManWag@FastMail.FM>
-To: meta-ti@lists.yoctoproject.org
-Message-Id: <cfc1ab6b-fb2d-4f62-ba4d-acf95c568f68@app.fastmail.com>
-Subject: Which MACHINE for AM62A starter kit?
-Content-Type: text/plain; charset=utf-8
+References: <cfc1ab6b-fb2d-4f62-ba4d-acf95c568f68@app.fastmail.com>
+In-Reply-To: <cfc1ab6b-fb2d-4f62-ba4d-acf95c568f68@app.fastmail.com>
+From: Jon Cormier <jcormier@criticallink.com>
+Date: Mon, 2 Feb 2026 13:53:30 -0500
+X-Gm-Features: AZwV_QgZ6pxRpxrMFfRXDh6dK0zof3hovPiogbIifafgZiO3lmlfUCWk7PkSlTY
+Message-ID: <CADL8D3bQMEEBVcgNQO7-TM_iygeBtwhy+EsVyHrJM_S405XGuA@mail.gmail.com>
+Subject: Re: [meta-ti] Which MACHINE for AM62A starter kit?
+To: ManWag@fastmail.fm
+Cc: meta-ti@lists.yoctoproject.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 02 Feb 2026 18:13:00 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19451
+ <meta-ti@lists.yoctoproject.org>; Mon, 02 Feb 2026 18:53:51 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19452
 
-Dear all,
+On Mon, Feb 2, 2026 at 1:12=E2=80=AFPM Manuel Wagesreither via
+lists.yoctoproject.org <ManWag=3DFastMail.FM@lists.yoctoproject.org>
+wrote:
+>
+> Dear all,
+>
+> I'd like to build an image for the SK-AM62A-LP "AM62A starter kit for low=
+-power Sitara=E2=84=A2 processors". [1]
+>
+> I'm not sure which of those two MACHINEs to choose:
+> * am62axx-evm [2], which seems to be specifically for the AM62 *A*
+> * am62xx-lp-evm [3], probably being specifically for the *LP* (whatever t=
+hat stands for)
+https://software-dl.ti.com/processor-sdk-linux/esd/AM62AX/11_01_07_05/expor=
+ts/docs/linux/Overview_Building_the_SDK.html#build-steps
 
-I'd like to build an image for the SK-AM62A-LP "AM62A starter kit for lo=
-w-power Sitara=E2=84=A2 processors". [1]
+MACHINE=3Dam62axx-evm bitbake -k tisdk-edgeai-image
 
-I'm not sure which of those two MACHINEs to choose:
-* am62axx-evm [2], which seems to be specifically for the AM62 *A*
-* am62xx-lp-evm [3], probably being specifically for the *LP* (whatever =
-that stands for)
+>
+> [1] https://www.ti.com/tool/SK-AM62A-LP
+> [2] http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/meta-ti-bsp/co=
+nf/machine/am62axx-evm.conf?h=3Dmaster
+> [3] http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/meta-ti-bsp/co=
+nf/machine/am62xx-lp-evm.conf?h=3Dmaster
+The 62xx is a slightly different processor...
+https://www.ti.com/tool/SK-AM62-LP
+>
+> Thanks for advice,
+> Manuel
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#19451): https://lists.yoctoproject.org/g/meta-ti/mess=
+age/19451
+> Mute This Topic: https://lists.yoctoproject.org/mt/117601305/7902621
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [jcormier@cri=
+ticallink.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
-[1] https://www.ti.com/tool/SK-AM62A-LP
-[2] http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/meta-ti-bsp/c=
-onf/machine/am62axx-evm.conf?h=3Dmaster
-[3] http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/meta-ti-bsp/c=
-onf/machine/am62xx-lp-evm.conf?h=3Dmaster
 
-Thanks for advice,
-Manuel
+--=20
+Jonathan Cormier
+Senior Software Engineer
+
+Office:  315.425.4045 x222
+
+http://www.CriticalLink.com
+6712 Brooklawn Parkway, Syracuse, NY 13211
 
