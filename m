@@ -1,317 +1,168 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3DF2E87844
-	for <webhook@archiver.kernel.org>; Tue,  3 Feb 2026 16:06:16 +0000 (UTC)
-Received: from CY7PR03CU001.outbound.protection.outlook.com (CY7PR03CU001.outbound.protection.outlook.com [40.93.198.25])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.19990.1770134773001073498
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A2CBE87858
+	for <webhook@archiver.kernel.org>; Tue,  3 Feb 2026 18:58:00 +0000 (UTC)
+Received: from BYAPR05CU005.outbound.protection.outlook.com (BYAPR05CU005.outbound.protection.outlook.com [52.101.85.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1241.1770145076886273259
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 03 Feb 2026 08:06:13 -0800
+ Tue, 03 Feb 2026 10:57:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=selector1 header.b=qyNwkSFB;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.198.25, mailfrom: reatmon@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=n8vlgmRH;
+ spf=pass (domain: list.ti.com, ip: 52.101.85.53, mailfrom: lcpdbld@list.ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CmIeRVjnrZP3A68Zed3xHYRiZqN5WGTAZhpLsQe7/SoYhBgVxLbxbgGRP23XsbGr6N/DNUkAS/CW6OZ0xKUBtlvKQ5bCz8vhQlerDXrE+F7L3KDJ0e0Q3pG2Y8MQ8ICuKp5kXVuitkLlH5VTw4DMiSiKVLGKTl0I61fW7iOL3LdtPq+n73Y9C4sw27CCB9N2G6ocoMEU77KVDFkTJFb3L+7g1mLRSI7/+VL4W1dUkCd9485Jlb2bpS0Il9czbB8NSlUKM7w32SDaBE+y//4dpQak/fPMbI5dKHx3zbZa6pImO6YI0ws8cs9eC3CyJKJUnn5baTfdgIqLD2mGGtN4ug==
+ b=ER7EM1v4EjIaZNnZ6ZIFLGhlu40+yNUnIijTqU63Dwzq61oxiHakzj58D5i90cMyQQdrruaAAQEDyqvru6TVj/Dn4Fzr8ybzAy5o3u/wENQzZTmKvD1bDh66x6qwxAVrSCzOy7V544Lt59mltKCu8ENeWWw/eoyuIYk5HYsw32v+LY1POquDL80xgjpijoE9KJ2k1IZuGezNu6r8sT1YaE0ODGGsMlvvc8dc8Szr7AFnvD4gG+tJWI98fBZu4aOu3X3V5muvnzRGmCoy24f4TkgJrrAyFOP9Al/hyB632TOJELsmLDCHQe+f2EVhAmrPnr35R1GhI7RGcLtWMPJl4g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zg1jAwAUsM7La01oKU1yKKVAzvT3As0YvbELzsM72ZU=;
- b=ahgYtR7LtfnXzdTYSNJ4mYiZ0tql2Tq+1LYKZMPT9Rpn84f4TeJnt2ItHsPdSPRX/Nd4YAR/QSceH4DjdyTld4p2sv6chQohTTtPTZmL0B7FY+YQ/ujdbty9upp1H+0nY3H5uP5Geh53TjEXsU8sg7imV5rra0pR0yGo4FZrgltnQaw05nW9sJMHziNEAG9QU5JxyJB8pQoV+3sPrBtHchQwlxfkY10u9fCjscJqIyzBX1XlQeGcuBT4dh7BnPsDVfe9V/iKFMdHtllGsOVZqnFLI72HmX9CWi9sj2fcQWoQkJXLyEcUywk/fWer59YOGUptikHM4WUuevv1YxMZeg==
+ bh=0HSS2VMUTY2fLPnrBr/6O+3DH81HGZsYCQP8YxfTc78=;
+ b=GfJeB/4Dd+bAPUBNtCGaL/+flFmXlJtilKDkTLFNnyjkDCo1qj0oUGrRaBZ15DlmZ1uldDj5/AD797dBSF7jnosP+uwYWVHkkrByZwayXwB7QCJn6TWEZLhROPncf5OuZ06SkhL8DmIEVKRadUQ14E5yNamDvI6DXJXHSiVwOl3ELOfW8Kc0aH3RrmWGC7oUui4llzhmDkKZPxT6YgsIeo8Icn+Mia7PZBJujhIFKciybqyHj5S9Ew2cOdRDPi3wWx5fd6FuLjhqb8ZkImQsgUud0vPQbn2U0boZWxzlc4zxgLPsesC+8rtrYxo/7KajK2BfiIvueuXqRpxsnByG7A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org
+ smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
+ action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
+ (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zg1jAwAUsM7La01oKU1yKKVAzvT3As0YvbELzsM72ZU=;
- b=qyNwkSFBTApPUPRKFZFLyEwX/1slo5WSmIVe8BMpUnAbGPEGFmzemwcQuQ3sXUiKED3FGtdG4eryPKUj+lgeguXVLt3QsrnYoazs4WSV9TaUlJsV5PSJ4ZJVB/zEWEz/XfX3cY/jjJ/8bjdrCgmppkIov0tEPRvQWrA6ujNAvTw=
-Received: from PH8PR21CA0009.namprd21.prod.outlook.com (2603:10b6:510:2ce::26)
- by BN0PR10MB5048.namprd10.prod.outlook.com (2603:10b6:408:117::7) with
+ bh=0HSS2VMUTY2fLPnrBr/6O+3DH81HGZsYCQP8YxfTc78=;
+ b=n8vlgmRHE62kHfo23INwhQjKJ8SJUX1afYQrWoP3CE4YGN338DwGy8W2ZUnoPqFx8ggBZxUji31bETQr4QCDFpA5p+q6z/W4Q2f99Wm0jmZzREECCYW9UZA7PWK0ELCMLuPRtKs8XaPc081Li0gDJnAWYFUIxUjlXmhBAqrFRb/qH5PAPSTx8L0EXauf5/krlduV1mubH1p1a0Yrxkan8wPULC32mGp/ekJS9gNCFHEl3pzMYR8xj97G5eG7biNHnBU+wxHpFpuBmTI1zzh7HMjG/9EtexITTJmTABkEl+g9vN6k2PaKk5fAJDxgA7Wn+LMQDLbNs35KBvuikRs4HQ==
+Received: from SA1PR02CA0004.namprd02.prod.outlook.com (2603:10b6:806:2cf::8)
+ by PH0PR10MB5817.namprd10.prod.outlook.com (2603:10b6:510:12a::5) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.7; Tue, 3 Feb
- 2026 16:06:08 +0000
-Received: from CY4PEPF0000EE3D.namprd03.prod.outlook.com
- (2603:10b6:510:2ce:cafe::c0) by PH8PR21CA0009.outlook.office365.com
- (2603:10b6:510:2ce::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.12 via Frontend Transport; Tue,
- 3 Feb 2026 16:06:07 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- CY4PEPF0000EE3D.mail.protection.outlook.com (10.167.242.15) with Microsoft
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Tue, 3 Feb
+ 2026 18:57:54 +0000
+Received: from SN1PEPF00036F43.namprd05.prod.outlook.com
+ (2603:10b6:806:2cf:cafe::c5) by SA1PR02CA0004.outlook.office365.com
+ (2603:10b6:806:2cf::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.16 via Frontend Transport; Tue,
+ 3 Feb 2026 18:57:56 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=list.ti.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=list.ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ SN1PEPF00036F43.mail.protection.outlook.com (10.167.248.27) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 16:06:07 +0000
-Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 18:57:53 +0000
+Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 3 Feb
- 2026 10:06:06 -0600
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 12:57:53 -0600
+Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 3 Feb
- 2026 10:06:06 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 12:57:53 -0600
+Received: from fllvem-mr07.itg.ti.com (10.64.41.89) by DLEE201.ent.ti.com
+ (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 3 Feb 2026 10:06:06 -0600
-Received: from [10.249.64.47] ([10.249.64.47])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 613G66Gd019022;
-	Tue, 3 Feb 2026 10:06:06 -0600
-Message-ID: <347eb022-bead-4c37-8046-ebfef716bbcb@ti.com>
-Date: Tue, 3 Feb 2026 10:06:06 -0600
+ Transport; Tue, 3 Feb 2026 12:57:53 -0600
+Received: from fllvdckhpci102.itg.ti.com (fllvdckhpci102.itg.ti.com [10.64.72.97])
+	by fllvem-mr07.itg.ti.com (8.18.1/8.18.1) with ESMTP id 613Ivr5M2736031;
+	Tue, 3 Feb 2026 12:57:53 -0600
+Received: by fllvdckhpci102.itg.ti.com (Postfix, from userid 60899)
+	id 404972A61; Tue,  3 Feb 2026 12:57:53 -0600 (CST)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>, "Denys
+ Dmytriyenko" <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202602031100
+Date: Tue, 3 Feb 2026 12:57:53 -0600
+Message-ID: <20260203185753.3259517-1-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][master][PATCH v2] ti-core-initramfs: Shrink size of
- initramfs
-To: Denys Dmytriyenko <denis@denix.org>
-CC: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
-	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-References: <20260109182737.2973551-1-reatmon@ti.com>
- <188C8BB97D98E175.3496637@lists.yoctoproject.org>
- <188C96B95948D0CB.2979268@lists.yoctoproject.org>
- <20260203153538.GV11121@denix.org>
-Content-Language: en-US
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20260203153538.GV11121@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3D:EE_|BN0PR10MB5048:EE_
-X-MS-Office365-Filtering-Correlation-Id: 534eb761-41e9-4459-babc-08de633e23b8
+X-MS-TrafficTypeDiagnostic: SN1PEPF00036F43:EE_|PH0PR10MB5817:EE_
+X-MS-Office365-Filtering-Correlation-Id: d5bf7371-1f3f-4069-17bf-08de63562316
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|36860700013|82310400026|4022899009|7142099003;
+	BCL:0;ARA:13230040|1800799024|376014|36860700013|82310400026;
 X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?TlhsQkJXN3pDL0NnaHZ4MGpIVjdrTkk5ZjdQMEsrYWZDQ09uRDYxczVmeHhs?=
- =?utf-8?B?NEg5alpTcitIKysyNjVoRDNZekxpbExaYUtlaFVFb1ArWG5LbUN6RjljTjA1?=
- =?utf-8?B?WWlZWDRRQU5mazNtazA2MEQrcHFXSHlsMFlvL25KUVhtY3p3VFZrTXVJcm1Z?=
- =?utf-8?B?NHcwSks1cTJ1Yzl3bm0wYm5YMENZaG1BSGF1cWFIb3pINXA0aXFMaE1PNFpo?=
- =?utf-8?B?Qkg1SlgvU1JGZnV3TU1ZL3FWVDdQckgwdlh2QWFYSzRidWkycHNaM2QzZWdj?=
- =?utf-8?B?ZU1Tc1V5dmR6TXNYbkM2Z2lEcUR4MkFTb3dkN28ya01UbVFQWnU0YkIxVzcv?=
- =?utf-8?B?S2FUeWR6S2IzTTBLSVN4Q1poWW9vNDJlSDFLRTJESVJIbTY2VkdmbllHcnFh?=
- =?utf-8?B?TUorVnB1RmFXOXZqTHNkNklOVlRiVzZaVExmVUVYNTRRVmt2RjNSZnV2NTg1?=
- =?utf-8?B?Sm1veTZZQS9ZVGNSTHRTSldacEVxUG85Q1NXazZNZ2NhK2ptUCszcjk3SG9p?=
- =?utf-8?B?WFFMU1Z4cUNZME80Zm0xM0ovRDBUcGR2ejdFUWpXSEdSNy9vTUU0c3RkUG53?=
- =?utf-8?B?RkRCaG1KaWxYMkUxNEV0Y2lsaDRuUUVYemhRY25LNFUvanB2enZEVThnYzRT?=
- =?utf-8?B?MkhSS0pkREM2Z25lQ3RBU3hRclltbDNFSFNXQmIxeWxFNFBQZmhOSkxpeFd3?=
- =?utf-8?B?U3NHcThwU3ZOVmMySGt5eVY0SEdabHkwbXZuVWhla2Y1cWZBc0c1aUVrclUw?=
- =?utf-8?B?T0x3K2RyTXpRQTY1aDJBVTV2cy9jMHZ6aWlVQVZrNXdieGVwTkxmUkJWaFl3?=
- =?utf-8?B?UXdzOHNVeHozRlJVQnIvR3NRU3FoTFExSnExNzZvd0VrWlRNNlJMU1dUOXRo?=
- =?utf-8?B?QktWSGVMRGhhc3Z3aE9OQVNPYldTeCtpNEg5ZVFONWMzN2NRREV5V29CTFhv?=
- =?utf-8?B?NWNGNXZPaDFGZ3hRNkNiYjE2RkErNStVYWQyYjgrOXVaNStEVjloa3Y2QjZq?=
- =?utf-8?B?MXZYUFhRN0dmdlBycmcybnlZQ3BtZnl6VzdicXZPWVBKclUyam5yRzByb0Jr?=
- =?utf-8?B?SnRtc003ZjRMS29udndySGxWamNyVkQvZWxtNCszeFZPUzJrc0dIeXptSmds?=
- =?utf-8?B?S1o0S3JmZmhuMW9MQ0NJcERIY2UrSEtvQnJyREFIKy9ZUU9zNnp6cDBvZFhO?=
- =?utf-8?B?RWJsbFcveXVlaXRNeW50UmEyT3ZQa3FvakJPa213NGhYSFA5Z2xyZnhvZGFH?=
- =?utf-8?B?Z1FkQmlHRWhrUGFwOHFQUTVHR2RsWWhZZVpRUHVvTFdzMENIMlJ0OUNlWmx4?=
- =?utf-8?B?N2ROUUVoQjh5TzNFZE1yelRKWHZGOWxNS2JNeDg2QkFTTTdBLys1S1grQmhC?=
- =?utf-8?B?eGx3bURyVDZ5TzVKN0ZQdTBqdVBoaDVvQzI5TncvMDI3YklsUCs4R0RiYlJu?=
- =?utf-8?B?cThCd2xnZjVJSWZuZ0Q2Y1Z3V3JiYUVlWldQdWp6bVlDK2hzbmtkTHNRUEZV?=
- =?utf-8?B?RGtHUzBpYjdOc2FwZU90YWh4aUppRWhGWUxXZGxaUktiOUZSZ2ZvKzVmN25x?=
- =?utf-8?B?U0xHKzdKZzdFcDMxa2JqZ3h5ekdSb3I5bTZLTUFnMC9mQ3FIejkzTTUzUjk0?=
- =?utf-8?B?SWU5bGhQNkpVNTRGQUphMGYvQUk2ZXh6ZjFDUzNPUUFid25GQ0xVeFZtL1lK?=
- =?utf-8?B?WXRmSmluMzhGRW5IZW9WM0Y3Y1NyMVpVR096azNXNUFlSWVVMEsvb3ZIbUdY?=
- =?utf-8?B?enhoWWI0cXJzMFNFYTZDa3Exai9rRS9tZnN0VC92N01lOG81S0JlVmRBTSsy?=
- =?utf-8?B?cXAxRlJuR1lTOHArTWhkbWNvWGtvazdUdFpFNGNBZVAxR1VaSlMvdHplc1VY?=
- =?utf-8?B?WTZlREhmU1NJU3hXbXd2cm5WMW8wWnk1dTh1VjM5N05WUHd4cHJGbTF4TG53?=
- =?utf-8?B?UlI2bWFFcHh1S0JVTWpSRGVGK3lPb0xBOG9aU013dEEwZGZGblZ3VnJyVzVx?=
- =?utf-8?B?VUlaSXRXUXJVM2FlK0taNFFNZ0hnNWMxZkFkZUdQSnZDck1yU1d4OHZ4ejRQ?=
- =?utf-8?B?Y0VzaUNaRnpNRHR2cG1GNVdpRzc0YUlzaWI5RzYxSDczUC9PamdFZnU0eU9s?=
- =?utf-8?B?M0R2enBOWEpvdHVMVGg3V1lmeXhRZ2xMcWxDUXNGdXVXTkhDbzZxQ1ErZ0dC?=
- =?utf-8?B?aXc9PQ==?=
+	=?us-ascii?Q?DnFSjSl3LDWHWWKGS/VWPVl/4nPFxTgPSa0DYQ14vMtaF8rK6HMYOHnU5M4S?=
+ =?us-ascii?Q?VxZ6ZLjMpXK47ba1D+AKklZ3FV2vkMk1HjUO1L0ZHRAyj5U4eFeDX9y8blkq?=
+ =?us-ascii?Q?5sP8uzgpwmy2veOfcwWjp3AK6L+W/EPOnBAaWlC+QULy3G7RfbJo6xESXsCy?=
+ =?us-ascii?Q?2tGrz6kqdBTsqQkMidni/WUlaFAXT+CDuzHtRTG0dfJTjhvOiGqAIW4wXcCm?=
+ =?us-ascii?Q?2+gzxQDKkhMY8EwjYNfWnbAXjpB19vP/UMug6qYwrvbEgBXUIfWP1QqL9RSY?=
+ =?us-ascii?Q?D3XEze7VduQqiPcTE9qNFe2QGLYVSC6NgfMDaKm46pqazcCVhFFUwLy9K/w6?=
+ =?us-ascii?Q?85c7X5gM6uF2YshNCKR+Ii91YzwgO3doD8Wb/IxueD33bjDKmdnHBLkYMoUi?=
+ =?us-ascii?Q?MEC8DJg4IZ560cCrFbm9KJx7AlSFaBsom1tJHJ2/xvVEXKrQMxajD1MHFCuh?=
+ =?us-ascii?Q?4Qsz5MX3l1FRKKaFmyT56i1lUeBjilecEa4AB//XQcf4aXLhAMaSZaq9/Vfw?=
+ =?us-ascii?Q?vzfxn3Gg6nhglMgxt+C6lYrNNL9OVMWl2ZM8gJjrSAFeTAUfnaqXS9ebuiy6?=
+ =?us-ascii?Q?PlNQlpah3DzDsacpbxfPJ4W6l66BKuk0MyH+fJJ/WrstLuEC8m3yiErRyYK8?=
+ =?us-ascii?Q?ZNT59ZCmjloZYxH25jGN2uJEZLoEX9prrgot/0DMS1fo6UCqrKnKrRYmTkxv?=
+ =?us-ascii?Q?YvakikBuIdNv4ZZR6JnobrzGNPCO+ao3HVG3wbKZC2DYrgwmFlNc9SUXAnFD?=
+ =?us-ascii?Q?PEWhIrVKWpQh3qy2oF/DAmobfB6oxle6eOPo8e8D3eWxOXaDNDsCINoP+jpu?=
+ =?us-ascii?Q?TJEgjNDImuHMoDAu5z8aghvrZQkkY0DQMufnz6nDmET3FRDABUzu+PhqrnOz?=
+ =?us-ascii?Q?yh5qIaeiiZu/SgFy0MULK5DVR0HLvGs06LrcwwPm+1GhlajyUfJESfMMXTGj?=
+ =?us-ascii?Q?TY0J5nl5oT1z1O0r5EzF9a0Z9x/h0HXZBS9Z+2g+ZHcN2sGeXg8S0h8C+FTH?=
+ =?us-ascii?Q?Z0Mm+UyQL5FrKShNpXt5srFmxBdMUoujT2BYX+3I0E3R0MEJnWA7u7HwRkkN?=
+ =?us-ascii?Q?89fKFNggSebmJBCVgGKYhK8ITPvelKvBMxWitosTksXh8W3gONm0notCj2Yp?=
+ =?us-ascii?Q?J2lAR8LDNo8rtUsBHmMLaBUAqSjkFQXiHs8DWx56jfCuoHcbhYfcYuvZh2P2?=
+ =?us-ascii?Q?Fem+pVZHKNwHiEeHv1VN+/VdKAOD7SF4JuZ7Lo64TVo2iaAFoT0K9MB1VTK4?=
+ =?us-ascii?Q?8nhex3Jua2c4WoskzZf8/KbUHl/n8pVsZLg6eUpaznppc4WB7NVc5isqWl08?=
+ =?us-ascii?Q?aLQizPquvwPeLApG+SNgO5+et/5Dn/ACptIKcnai8qqn65bnF2SUzr4FSVif?=
+ =?us-ascii?Q?pxaIO1/cqnNTJWa2MMIPDE5LVaEoxLGQvlaqbYdiHH8tRuwsM+99TmTfjy6g?=
+ =?us-ascii?Q?EkWmC8cR9uCLxrVvQrawSa21nwg7pbcF54jQyh7+IxMlglu2D6j7akDlD2jz?=
+ =?us-ascii?Q?FujvDR2SpvG98gnNDhUEr8+JIQoE89EF6rlOJMzUBkEB7ufQFzPuo6OPmJ0d?=
+ =?us-ascii?Q?sIsZOksZUmfqoPs5zuUqEe9GtxcHOqwgrqHjEt09dgOneibhTrR0aTUJ58gk?=
+ =?us-ascii?Q?uiUDHm9YRwqGlKvdfefT2l8aPovR/7rRafs3W/P0p43huDfPs+/9j4jq2e6V?=
+ =?us-ascii?Q?qkcWTQ=3D=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026)(4022899009)(7142099003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	9sJgRQoxCzVtb3VnBDTEDNZw9Uvi6E6pM66402l1RAZEd/rkIhVzFUiidbogyOf9Za7On7UddaXVRy6WQMsLY/4qT2PoPYcYpuRhS5QBYb4Kgubn9fMnRNQFK4RsEwMc85qBX0hRsYqDeqL4tF+3QdggGK8b1Qnl/2Lr8SVDoyWwcrWn8js0tyTUOs3eAuL1Gg0xzrwnSB5mvHfE/Y+yIToBKKm+rvDheRtkDQubg0H+5oPiv4PJxBc8r1cIKWDILGuXE2SkO1Djh6zcTZXFBYpKNjqESITHe4JHJFIYvtY8h7oWXLsqn+xLf/BXeb4vWW3VsC8Nrzi4rvqTkwZ1MBXlz2Fd3euytv5j2g4jBoO6oOAlIlh2gby+NuE6a+B6+qpNTZS52H2KYW1RNls67kUpohk0kzIK96e8RMqasdMicSWO7eG5ueWh+brrKHvV
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 16:06:07.0812
+	UcUv7u8e9puslF5O49nUQp4Usizrxew0wI4NoLIoy5Yw/XsfYvD6zxjKxeN/xOVMf/IGbalinIFXo0mJ9j+MQu01xsYK8PEzAtSwaGd9yoeUNfQIFk/5GFfV4dxUlZw62NUJMjDx8MuQYWmXBgvg1BO+Ze9gOCOWQ14tg7h3JX/HYqkjSPSmN9ztO9qy3C4BuWiSuXp4PfQC4G7mr68DlhVSeOCrKFymXBmTE5VMJJxR4ho51CwFtIbAUif/6gQOdtQLICus6Qoi0t6BJPIv1AeDL37cnqmXGqgNfdJAaGaYKyObwsBLzyyNmzpdn3RZ+tfUMJkTTS4Wty4bk6e/vQ0zb2Qrdx6e0tVW3mAforwVdELrjVvv2LaYaGGmCT9ZCoY6yVqn8any6/6uAB5Pj8mwN6Qvi+/Sw2y1NjWbbZ8O/eREfeJjhW0b3DK3OOJV
+X-OriginatorOrg: list.ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 18:57:53.9465
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 534eb761-41e9-4459-babc-08de633e23b8
+X-MS-Exchange-CrossTenant-Network-Message-Id: d5bf7371-1f3f-4069-17bf-08de63562316
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	CY4PEPF0000EE3D.namprd03.prod.outlook.com
+	SN1PEPF00036F43.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB5048
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB5817
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 03 Feb 2026 16:06:16 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19459
+ <meta-ti@lists.yoctoproject.org>; Tue, 03 Feb 2026 18:58:00 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19460
 
+Updated the value(s) for:
+  atf: SRCREV_tfa:am62lxx
 
-Yes.  Please send a patch.
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ .../recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-=
+ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.i=
+nc
+index 510940f6..d933dc43 100644
+--- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
++++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
+@@ -10,7 +10,7 @@ SRC_URI_TRUSTED_FIRMWARE_A =3D "git://git.trustedfirmware=
+.org/TF-A/trusted-firmwar
+ SRCBRANCH =3D "master"
+=20
+ LIC_FILES_CHKSUM:am62lxx =3D "file://docs/license.rst;md5=3D1118e32884721c=
+0be33267bd7ae11130"
+-SRCREV_tfa:am62lxx =3D "b1237f2794c47501d2d5e7d533720ec48c8af20f"
++SRCREV_tfa:am62lxx =3D "40660e2a494f3fe38a40525bc9b9bf9d55e84d11"
+ SRC_URI_TRUSTED_FIRMWARE_A:am62lxx =3D "git://github.com/TexasInstruments/=
+arm-trusted-firmware.git;protocol=3Dhttps"
+ SRCBRANCH:am62lxx =3D "ti-master"
+=20
+--=20
+2.43.5
 
-On 2/3/2026 9:35 AM, Denys Dmytriyenko wrote:
-> Any thoughts or commentns on this? Should I send a formal patch?
-> 
-> 
-> On Tue, Jan 20, 2026 at 07:14:30PM -0500, Denys Dmytriyenko wrote:
->> So, if systemd is required and to respect other VIRTUAL_RUNTIME vars, need to
->> double the initramfs size to 128 MB.
->>
->> Yes, maybe systemd recipe in OE-Core needs more granular packaging for only
->> pulling minimal dependencies in order to get even smaller...
->>
->> =========================
->> diff --git a/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb b/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
->> index c759808c..5ed9391e 100644
->> --- a/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
->> +++ b/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
->> @@ -11,6 +11,12 @@ TI_INITRAMFS_KERNEL_MODULES ?= ""
->>   RDEPENDS:${PN} += "\
->>       ${TI_INITRAMFS_KERNEL_MODULES} \
->>       ${VIRTUAL-RUNTIME_base-utils} \
->> +    ${VIRTUAL-RUNTIME_login_manager} \
->> +    ${VIRTUAL-RUNTIME_init_manager} \
->> +    ${VIRTUAL-RUNTIME_dev_manager} \
->> +    ${VIRTUAL-RUNTIME_update-alternatives} \
->> +    netbase \
->> +    base-files \
->>       base-passwd \
->>       initramfs-framework-base \
->>       initramfs-module-udev \
->> diff --git a/meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb b/meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb
->> index 223fef7a..ddf4e5b4 100644
->> --- a/meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb
->> +++ b/meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb
->> @@ -9,7 +9,7 @@ LICENSE = "MIT"
->>   
->>   INITRAMFS_FSTYPES = "cpio cpio.xz"
->>   
->> -INITRAMFS_MAXSIZE = "65536"
->> +INITRAMFS_MAXSIZE = "131072"
->>   
->>   IMAGE_NAME = "ti-core-initramfs"
->> =========================
->>   
->>
->>
->> On Tue, Jan 20, 2026 at 03:52:56PM -0500, Denys Dmytriyenko wrote:
->>> I'm not sure this is a fully correct change for the ti-core-initramfs.
->>> It might be fine for the tisdk-tiny-initramfs though.
->>>
->>> If I recall, the requirement was for this initramfs to use systemd as
->>> init manager...
->>>
->>>
->>> On Fri, Jan 09, 2026 at 12:27:37PM -0600, Ryan Eatmon via lists.yoctoproject.org wrote:
->>>> License-Update: Moving away from packagegroup-core-boot.bb removed the
->>>> LICENSE setting.  Just adding it back in.
->>>>
->>>> It looks like we were modelling this initramfs off of the wrong example
->>>> from poky.  This setup produces a much smaller initramfs.
->>>>
->>>> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
->>>> ---
->>>> v2: Add missing License-Udate.
->>>>
->>>>   .../packagegroup-ti-core-initramfs.bb         | 12 ++++---
->>>>   .../recipes-ti/initramfs/ti-core-initramfs.bb | 33 +++++++++----------
->>>>   2 files changed, 22 insertions(+), 23 deletions(-)
->>>>
->>>> diff --git a/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb b/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
->>>> index 86b69aff..c759808c 100644
->>>> --- a/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
->>>> +++ b/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
->>>> @@ -1,16 +1,18 @@
->>>>   SUMMARY = "Minimal initramfs for boot requirements"
->>>>   
->>>> -require recipes-core/packagegroups/packagegroup-core-boot.bb
->>>> +LICENSE = "MIT"
->>>> +
->>>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
->>>> +
->>>> +inherit packagegroup
->>>>   
->>>>   TI_INITRAMFS_KERNEL_MODULES ?= ""
->>>>   
->>>>   RDEPENDS:${PN} += "\
->>>>       ${TI_INITRAMFS_KERNEL_MODULES} \
->>>> +    ${VIRTUAL-RUNTIME_base-utils} \
->>>> +    base-passwd \
->>>>       initramfs-framework-base \
->>>>       initramfs-module-udev \
->>>>       initramfs-module-nfsrootfs \
->>>> -    nfs-utils \
->>>> -    nfs-utils-client \
->>>>   "
->>>> -
->>>> -RDEPENDS:${PN}:remove = "grub-efi kernel"
->>>> diff --git a/meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb b/meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb
->>>> index 1a102d82..223fef7a 100644
->>>> --- a/meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb
->>>> +++ b/meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb
->>>> @@ -7,29 +7,26 @@ DESCRIPTION = "Image meant to probe boot essential modules\
->>>>   
->>>>   LICENSE = "MIT"
->>>>   
->>>> -inherit core-image
->>>> -
->>>> -IMAGE_NAME = "ti-core-initramfs"
->>>> -
->>>> -IMAGE_NAME_SUFFIX = ""
->>>> +INITRAMFS_FSTYPES = "cpio cpio.xz"
->>>>   
->>>> -IMAGE_FEATURES:remove = "package-management"
->>>> +INITRAMFS_MAXSIZE = "65536"
->>>>   
->>>> -INITRAMFS_FSTYPES = "cpio cpio.xz"
->>>> +IMAGE_NAME = "ti-core-initramfs"
->>>>   
->>>> -IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
->>>> +export IMAGE_BASENAME = "${IMAGE_NAME}"
->>>>   
->>>>   PACKAGE_INSTALL = "packagegroup-ti-core-initramfs"
->>>>   
->>>> -export IMAGE_BASENAME = "${IMAGE_NAME}"
->>>> +# Ensure the initramfs only contains the bare minimum
->>>> +IMAGE_FEATURES = ""
->>>> +IMAGE_LINGUAS = ""
->>>>   
->>>> -IMAGE_OVERHEAD_FACTOR = "1.1"
->>>> +# on the kernel image.
->>>> +PACKAGE_EXCLUDE = "kernel-image-*"
->>>> +
->>>> +IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
->>>> +IMAGE_NAME_SUFFIX ?= ""
->>>> +IMAGE_ROOTFS_SIZE = "8192"
->>>> +IMAGE_ROOTFS_EXTRA_SPACE = "0"
->>>>   
->>>> -# To further reduce the size of the rootfs, remove the /boot directory from
->>>> -# the final image this is usually done by adding RDEPENDS_kernel-base = ""
->>>> -# in the configuration file. In our case we can't use this method. Instead we
->>>> -# just wipe out the content of "/boot" before creating the image.
->>>> -ROOTFS_POSTPROCESS_COMMAND += "empty_boot_dir; "
->>>> -empty_boot_dir () {
->>>> -	rm -rf ${IMAGE_ROOTFS}/boot/*
->>>> -}
->>>> +inherit image
->>>> -- 
->>>> 2.43.0
->>>>
->>>>
->>>> -=-=-=-=-=-=-=-=-=-=-=-
->>>> Links: You receive all messages sent to this group.
->>>> View/Reply Online (#19458): https://lists.yoctoproject.org/g/meta-ti/message/19458
->>>> Mute This Topic: https://lists.yoctoproject.org/mt/117180106/6551054
->>>> Group Owner: meta-ti+owner@lists.yoctoproject.org
->>>> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [reatmon@ti.com]
->>>> -=-=-=-=-=-=-=-=-=-=-=-
->>>>
-
--- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
 
