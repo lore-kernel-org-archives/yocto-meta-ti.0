@@ -2,72 +2,72 @@ Return-Path: <p-bhagat@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9B6EEB28C5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B17A3EB28C1
 	for <webhook@archiver.kernel.org>; Fri,  6 Feb 2026 05:06:29 +0000 (UTC)
-Received: from SA9PR02CU001.outbound.protection.outlook.com (SA9PR02CU001.outbound.protection.outlook.com [40.93.196.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4841.1770354384366995761
+Received: from CO1PR03CU002.outbound.protection.outlook.com (CO1PR03CU002.outbound.protection.outlook.com [52.101.46.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5116.1770354385631072843
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 05 Feb 2026 21:06:24 -0800
+ Thu, 05 Feb 2026 21:06:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=FkQ1u1F6;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.196.51, mailfrom: p-bhagat@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=gg/Dr5vH;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.46.50, mailfrom: p-bhagat@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xT46cpIIbFvfNr0uosHskoj6oh2H+1BPP0vtY1NHbodNkv6iJ7LXT5TPI4aRMegUhG26+M1Q+etlwUBW8ogStypm52SA8FqjXxr/l/mlR7aIvjARqJnvMrzn/Kty5xg5M5OyFeBfLD1cgnGqhbD0Zge5eRaMF8lWs7wuXR+r0AlX0R1HBCl1NkwIjJRoZnh7RovIZSnIxT3qY5EEDK+GDcRr3kBsKwm9JXpwlpMkhHPYmPFG9Ut1iHNBIT7M+xcykeZ2KXkwupmYcqn9dhjhuZXrPQIvXhUaiBdLXCaojnhvfQSV1P+BYxhXRmLzHP1+NP3vJYJ4J5UkzWT2T3hRRA==
+ b=haz+DpDRJDI9mN7Cyugf3bJ8Bvkow1fmz8xNvz/XYbQxYO+8ZnuUSXq82wMdS2jKWuBqDOmC3jXIrKCsqydd5fULRU2xj3ornVBry5/yVjOXsYq++Xw2ZCeccYYaDuXgr73fbpFvR7F4RjYm89QmEeJ/kHB5RZjPWTwklYR6iO4FhBXuZGENxCQxGUvpjAQaA3y+yn0YvB4zWJ07nJTdnFd0vZq4J7acnWjl8Ccve3y292gx+O0jgTcrPcTxkVBswchYj9CB764jiipDM0HkYuZbPuWCOPquyUsaebFyyKahn9rdg9cdsvH0tfbwrsvL54gQvvnDkhJwP72Pb5K/3g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qDMbkguX9xqAteyDY6OmdYIGuUqqv3tONsVlpZ6/MbY=;
- b=e/hLxrd4BuL4wP5cuM0rXC43QeN5f3we/ZjXoIpVjsXoYDVAj1zPPPeHBqHFvX4FnEM02ABk969KwJqiL/eRSgSXV9fsDmaUjKG0YbF4qP7KGfvnxozaqtjRalhLJR8sJfUG1FUvJba17cktwn0+Ctm3Uq+M6JvX37wfsGblmUjaOzxFZyX7l39nM4LvRGD7/MUbE2q2vZOwyeYf+UAQjkB+WzdY5F71zaaCOBqLP9XVlOT4W7q8LggFCrGuRwu8u4rGwu4ILjaej/etVIxJwT8de0kR5xmNtjyOGulGC8EIbKN2y/xli6twD5iB/9RXr05tUR72T7119bzjifk34A==
+ bh=sSVoLvnboVIE1BMwBzziSNXZnuoJ4NMhEIYO7d5h4iI=;
+ b=CSwzPw0ZFpjqhMsRxjSxnudMsDjdTWl/D7u6zakzg+qoI+e4TDyUUU39NN8jCTm8nnssOTLwPPHaV19YbO/V6H/UQk5hdSkE3eQXQzle7wAM13znbkPGjCjRNn8qOapT+OL9V3CqlL7PkAZO0UwEtbegTw3GvF2otB5Zgueo3+zfQLdMl0SxsoScB0Ulfc/xpt7rgQUXGPt+o/ciEIbaPSPCU//vVGqe9dDNr2o4oNJ3eIMNIbWUOUqykagEf79Qx/f4/se5lXKEp3eCq9zLWfKQfC+NaHRtDDrjnXFsUE/7J7iAFJh8tRvcbVbkK1uBLOp8uC/KUrw61FsJGdKm5w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=denix.org smtp.mailfrom=ti.com; dmarc=pass
+ 198.47.23.194) smtp.rcpttodomain=denix.org smtp.mailfrom=ti.com; dmarc=pass
  (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
  (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qDMbkguX9xqAteyDY6OmdYIGuUqqv3tONsVlpZ6/MbY=;
- b=FkQ1u1F6kIa+Oc5nx438PnhFfFCDOcR00APpYamlkdf9lib5tkl0Y/1e+u3LIPbJVOtAv9xuNftA3csnrLVuH+FrOtjnsN7cEGH9Od54t0XE0HL+iWlbU1e5H23ySmt/YPvhIMPX+TPB7M6y4O4lbAdYBFurtFO86Xr9XE8uGfc=
-Received: from BY3PR03CA0020.namprd03.prod.outlook.com (2603:10b6:a03:39a::25)
- by SJ1PR10MB5908.namprd10.prod.outlook.com (2603:10b6:a03:489::12) with
+ bh=sSVoLvnboVIE1BMwBzziSNXZnuoJ4NMhEIYO7d5h4iI=;
+ b=gg/Dr5vHmZRFzIndSdKxslO6G/bKimVtosVjo9VFkCBdaiXTouAwcA0LlSQzBtGTw2mE/F9VB4AOmwozdpJUDgd/DUIvZcLFqTaXVepmwfnTlmEh/MpuUloiz3xNaTtu3LdGMoA0X0IfUkQPmNxPv8dzQ3yy8GqyIRrBGRX55aY=
+Received: from BN9PR03CA0319.namprd03.prod.outlook.com (2603:10b6:408:112::24)
+ by SJ5PPF2D96878B0.namprd10.prod.outlook.com (2603:10b6:a0f:fc02::79a) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.13; Fri, 6 Feb
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.15; Fri, 6 Feb
  2026 05:06:22 +0000
-Received: from SJ5PEPF000001D1.namprd05.prod.outlook.com
- (2603:10b6:a03:39a:cafe::47) by BY3PR03CA0020.outlook.office365.com
- (2603:10b6:a03:39a::25) with Microsoft SMTP Server (version=TLS1_3,
+Received: from BN3PEPF0000B077.namprd04.prod.outlook.com
+ (2603:10b6:408:112:cafe::ae) by BN9PR03CA0319.outlook.office365.com
+ (2603:10b6:408:112::24) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.14 via Frontend Transport; Fri,
- 6 Feb 2026 05:06:05 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ 6 Feb 2026 05:06:07 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- SJ5PEPF000001D1.mail.protection.outlook.com (10.167.242.53) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ BN3PEPF0000B077.mail.protection.outlook.com (10.167.243.122) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Fri, 6 Feb 2026 05:06:20 +0000
-Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9587.10 via Frontend Transport; Fri, 6 Feb 2026 05:06:21 +0000
+Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 5 Feb
- 2026 23:06:18 -0600
-Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE215.ent.ti.com
- (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 23:06:20 -0600
+Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 5 Feb
- 2026 23:06:17 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 23:06:20 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 5 Feb 2026 23:06:17 -0600
+ Transport; Thu, 5 Feb 2026 23:06:20 -0600
 Received: from localhost (ula0502350.dhcp.ti.com [172.24.233.249])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61656G9o127796;
-	Thu, 5 Feb 2026 23:06:17 -0600
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61656J6q557080;
+	Thu, 5 Feb 2026 23:06:19 -0600
 From: Paresh Bhagat <p-bhagat@ti.com>
 To: <meta-ti@lists.yoctoproject.org>, <denis@denix.org>, <praneeth@ti.com>,
 	<reatmon@ti.com>
 CC: <v-singh1@ti.com>, <c-shilwant@ti.com>, <khasim@ti.com>
-Subject: [master][PATCH 1/2] recipes-bsp: Add TI PCM6240 ADC firmware recipe
-Date: Fri, 6 Feb 2026 10:36:07 +0530
-Message-ID: <20260206050608.1929093-2-p-bhagat@ti.com>
+Subject: [master][PATCH 2/2] recipes-bsp: Remove TI TAD5212 DAC firmware recipe
+Date: Fri, 6 Feb 2026 10:36:08 +0530
+Message-ID: <20260206050608.1929093-3-p-bhagat@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260206050608.1929093-1-p-bhagat@ti.com>
 References: <20260206050608.1929093-1-p-bhagat@ti.com>
@@ -77,125 +77,125 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D1:EE_|SJ1PR10MB5908:EE_
-X-MS-Office365-Filtering-Correlation-Id: fd145b69-0be9-4ed0-d651-08de653d7741
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B077:EE_|SJ5PPF2D96878B0:EE_
+X-MS-Office365-Filtering-Correlation-Id: a67571d5-bb67-439c-2068-08de653d77fc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|36860700013|82310400026|1800799024;
+	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?kPUB/hxDcGZnzxavLxd3lfNlBjc85cJM7TMeKAsCZy4HHUWSbn2R5i12zWos?=
- =?us-ascii?Q?5Kud2DehSArE64//JKghcNl7R4ai1nnBufifouElCpiWt7ygs7yei0QISWD2?=
- =?us-ascii?Q?y5TFQBluUbyaNTDQaNK4K1zWc/Oey8YS0LpUTV1c+PmdSvrQTI7SajNwKrur?=
- =?us-ascii?Q?QeSyw4AkSlv2COOEjit+TF/dLtqBuL8OUoBDCjk2OxV1R/9pAsvsaeMI0YWk?=
- =?us-ascii?Q?4KU/OVV7+BPq3Qwz1/swApieIx9pE2j7F4uKXecDL2UGkvoady+5ySeh8ClF?=
- =?us-ascii?Q?7nEbkK78MOqLZ9s+ow3G20E9IskRdglZ5exj9g+7elahYdp1bjNAlXVvzXSZ?=
- =?us-ascii?Q?vf7MOid04rf9XrzYI6pGRch7L1NnOBIaxThbLcM1wHisOB92Yp9VayBRmIVo?=
- =?us-ascii?Q?Pfv5B7tvaA6Upd+enWh6qgZsS6pWIupAkq8En9U8QtGbgHMl2ZDOLjTNMKOT?=
- =?us-ascii?Q?k3f3MG1gj2gDFOnBpZFzbxeRpB7EYuxU8Lkkjx/hOhZpdiElWvuPB+jfeOlU?=
- =?us-ascii?Q?7HXBK8G8/uGtykJt8A9JSZankT6k+8qPRv96Gonx6IK90bGKEDsNPVo77mBM?=
- =?us-ascii?Q?SlXumySQSUSPmnIF4Mad8+ElWRdWutTFZ48iQyRPSGqBKrzMLbWielm2KogE?=
- =?us-ascii?Q?CpjCs8jb3WZXsM3pwdFdT8HqJvTUF4ZGfOG2RSO0P18uJWgL7BPHmr2O4wdh?=
- =?us-ascii?Q?/r6T9NMwxfZwcGbLIELtDkPtyZ/Qjiko2k5BcoULo9MN/vrKpTgdx24ONEAa?=
- =?us-ascii?Q?Y2WeojzYhtI2k3L73VL2IN5o4v6ZeRGe70Dxwm1nCHQwKQ0HCpc9ppYjvQnb?=
- =?us-ascii?Q?GaoQK4X2YckCNg0ke7oV8QrJFR+fpWivuu7sfajg9OW3qLXQSkHi1UP6yXrQ?=
- =?us-ascii?Q?esBxi9yrql+wXVj5fPEQeDvLpSRD0BctQguB4GVZna5aJC/Fl70ZY5YjxkG7?=
- =?us-ascii?Q?8wgeuKxojxmxFcd1WIRwiQ+QimSJi8IomgdgbIkO+fpijgSDR6aEeUKIKA8r?=
- =?us-ascii?Q?l3LWQCREkjY8RgVHMTUHCXSAJH2xwxYs0Tqx83Ko6wTHj9wCjP+m2oVnKyJQ?=
- =?us-ascii?Q?YxioZ49vSh7c0aZCHNAzOhqLCKltvrsucfnAHDFZz5iPWR0Q/EDGE1LdwWum?=
- =?us-ascii?Q?F2dbNSf223hvpbdqEWNu6qdtFcODCWSYbRoqtUbN9+cOCqScifgJtdbgCirA?=
- =?us-ascii?Q?VPiL8BIycDhvBqjp+KlZiWYiwYKH8oyjOteSqUNVwl8PwH7bPMdB7RWDGxQ+?=
- =?us-ascii?Q?wJnrX5DfwqGf/MqJbaf1/nwtjEgIIGAlVUsjo1qZ3ikkISkTUjOLhcOwUfrT?=
- =?us-ascii?Q?cwnvarGlPghAYz0cxCVkrFFj4AoGkof3/u6ndg/m6wW3sew/fCNpbgp/RTHC?=
- =?us-ascii?Q?OkB/Lg/Mq3HkSn5ENj0SBGafYjVLLdrWcTgu7nbwYMCrw02oNrlXJKtjtiqZ?=
- =?us-ascii?Q?cxNKq4Q0uEouQumQfaQkuHUP3yPP8HNNFaPswg0Q+FaZS/co/DAqphe6hlES?=
- =?us-ascii?Q?AVI1nYgqV2fOYUKGdZkPR+Bkz6O5TaFuXUOq8OuiJMuIF+jPNdXT6v2Q4/WI?=
- =?us-ascii?Q?ulJWvBaVd6a85A+D/8+VXRxpc6+uoGZKfBfI54D/aj0bmvr+kTMfqG5OlweR?=
- =?us-ascii?Q?bgiOYCgWKq4/CCAg3MzxYFOtbsiUwVe2deqhVrJguaYRy+J72S94T70j/7Lh?=
- =?us-ascii?Q?t99gyQ=3D=3D?=
+	=?us-ascii?Q?ZF8BaOmh48PSewxN278DgZeYRyiEczq8fNqlrK9W9EQE7DKHEHtBEn+oGoSe?=
+ =?us-ascii?Q?qsG8QazTGEfNkQrOAfSLZ3Wba3CeVxgE7p5AqpiedjOTf8CVB0NpO88/rhuO?=
+ =?us-ascii?Q?ilsr7Sv13lMqvky71zR+DUyGSKDitykOQzQH1O1Uctgmbrk03MmX0IwpeaG4?=
+ =?us-ascii?Q?CnBhs3ete1GLE71VdzagcLFiCppUhS+l9lC1NPMlPeDnBkYX1d0lunenkrGD?=
+ =?us-ascii?Q?8Jicg7y/WnIxLeQK1QvUVIVsdST0MCsY1Z7aiG6IwwbnI4MVeOUC2+EWgjfD?=
+ =?us-ascii?Q?lkG4MiNMBVMP17jw0eQnCc2+++fIuJ5Iv7dpNKe/iBzP8DoNBNQzz0OWGhtV?=
+ =?us-ascii?Q?Ynbmbc4xUSf6C8BdQOnOu59WVD77QZXfAeK1bZ35nTsC0nRab8YkTKt1zEcQ?=
+ =?us-ascii?Q?KQjXu1Tei68IrU6TZFmhNL9+9yO6EPkPUwQc+crfBMNXQNUMBACI9xlFYyJz?=
+ =?us-ascii?Q?2dV5iuxQJirCf1Fi3/YhIOiRJ+ZHRQXmQDmvY6aY6ZyO3VSyL07s7fvtPFcE?=
+ =?us-ascii?Q?/hAUSshQsZf/fauMc2NDVW5+gHCOnuUYz7fnpSGC2wgp3FHMJNI7GQw2kP+i?=
+ =?us-ascii?Q?YD4XK0ft3ZLuP1yJCBv5uBfIb/lFXe21Za040J/KXJ6r5ZLthHwAn3Ux0V0P?=
+ =?us-ascii?Q?7DG1QZsIc0vzYTd6GOvVDMmyMsBxGNORjuHjoa/uyuDc530tRbkhBCHptzUd?=
+ =?us-ascii?Q?rhcGr2HK0geM1HeLKWSkeTf/VBFCbmFXxZLmWiTXBPbCnvGa497QtxXNQIuD?=
+ =?us-ascii?Q?Q036/tRAZoU1Lsq7ktQoDne3MPHhMYh2iYkQg4btnY2v6JK9h/YPy7cpQJcY?=
+ =?us-ascii?Q?HeZ6+gdHHi8iggud29P6EjVjGAabEOlyBjhAyK/wYCb5R4LfRCnncMBrzk/m?=
+ =?us-ascii?Q?+8o5olzeMLWVzRPkorfTCQbCrujXWDQHamIGnaKAlrMZTX8Q0rz3AQwooCq6?=
+ =?us-ascii?Q?ySjNsIQSiLf7qidy17RKiGt0BliuA4KXoRk6ui3Zz3X1ftHG/cW7/9ZTcBhD?=
+ =?us-ascii?Q?irJUb8ayavLcYKH/hwLGoSXAr2+Zed779k3M6MbUVjXfpwKOx/IAE2GNhwkx?=
+ =?us-ascii?Q?Ydc9oGlyN0evX4iVn72WCGRAs6ZGJiB54+CmR7X8Uph4mhnnF5bsWRK0cm5m?=
+ =?us-ascii?Q?U3OoZ1dydxtyrkKAn8u9bQU2TAIaObodOz8gpvva1Bk9GxS/1B/p+e1YF0ki?=
+ =?us-ascii?Q?vMlzTAkpMHk6JX22VFsSeD3ROwl8hlZiD98rvkzrX0UPYoWBArUxcwsR4Stv?=
+ =?us-ascii?Q?n+FTSSZN0L2bI54inEDk8DwZcxWGz/A7OknIquuMs2mlkDzhJvWihnnuv3f9?=
+ =?us-ascii?Q?Yd5uGZksq8dXAPABaGy3Mhjwf8cNrjBqcwDsQmOf+K4+MnQzeuERf0RY/7l0?=
+ =?us-ascii?Q?jaN/g3KW+TaRx/zifng/AZ+Vxed4mRoPlkTnCOQKaizzFFwPdkiBxQRd6Hmn?=
+ =?us-ascii?Q?RzMKRSCDKfvDEDUjocOkb9J/7X5OdOIYneNMEAcNfx+eQcJH56Eqcbz2PQye?=
+ =?us-ascii?Q?koqdD11VUD7D6zfq3AAUH6v40VULO61cjCkNifKPzJ2f6Q2tuQM2MoA9y4Wl?=
+ =?us-ascii?Q?yZNO90UkpYpJTbGY7RXdgqg5hTZGPvU+jvdrdqLrZTaF+iJb/jLiZNtFuBBN?=
+ =?us-ascii?Q?EJprF6DHOGY+oy3+xecB6xJPXZkWGXnBHLxt/hN1ffQB?=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024);DIR:OUT;SFP:1101;
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	JoSaiVACZ3aDWtZo+ht+bIp/gKSX50y628U5342IM6MaKxb4ZZvGYsjreMBB5YOtGj9g1hAqqE89aWlt2OdFFfO90RglEbPpAaQehjw6jJvnCw6TERjHxWbl9kzsqbj38IoYj+32rOLced07IqqdUTS5N44I9VkSW+N1GAY3lpBSKHlYa7Ly35bZ5Pgp6LcL+5Xg6uNqdygn47EQw6LPGz/J1PlMBfe3f4a7+RMonmGXsdRyWEZtI9Itqx+1AoelCfea8D3caVhEjDsChH+Njens+KVUuGIEcAfFKvd4P7QIna7r0ILP2K2jaKXvNIXFbBreBw5f+REffD1BWyBrTxluhg0wLpCNWKBTfy6yIGes0dpDPCxAKkPsUqPfhamY8YAPSatAfHyngbeVRvHc1JrcfVE/uXt+07glWIPGqA2OXG1gXdUNrvOsm6Q21jzi
+	Kz5GGhhSpDcUIUsRQ76R848Tw2QsB/gfhXanbctOXejZsPG/qCJKsTwyCFIVWS2Q2nhXvXBKg/x8tr8KYSnGY45QLbEsCkYKslwhp4ltdSJyYvyY6skRjTvt/77uEXfvKPIFcCLWK5WvgyUaGUlB3hQXAx93ykb30SZSTJ6TQXEN7abvghkgmGXDd6YWxV9vTQKMFz5NDgCEvYCMDUJoi9VyvwkIBUCO//ImOISK/RzpGZV6gwZ0tG9cMvdQJNqL+gDYrno50okPV8fzVXHb8v7iUmMDxD9s6soOdkTJQQBDBtld3z5pz02E15SY9xLb5jIdqpI9vRNL5K3oE7hAH/zJihCuJ7heWgATsyMRqRCBQz2HoJ89wfqerniJZ/jTi17NLgqlwMDhODTA4Nv89A6b3SQ8FtA6jc+T/KRILO90AZAK04n4rUKgaHCQ11lo
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 05:06:20.0078
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 05:06:21.2364
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd145b69-0be9-4ed0-d651-08de653d7741
+X-MS-Exchange-CrossTenant-Network-Message-Id: a67571d5-bb67-439c-2068-08de653d77fc
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	SJ5PEPF000001D1.namprd05.prod.outlook.com
+	BN3PEPF0000B077.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR10MB5908
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF2D96878B0
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Fri, 06 Feb 2026 05:06:29 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19465
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19466
 
-From: Vishnu Singh <v-singh1@ti.com>
+TAD5212 now uses a dedicated driver instead of the PCM6240 driver,
+making the firmware files no longer needed. So remove the recipe and
+corresponding changes.
 
-Add PCM6240 ADC firmware recipe for am62dxx-evm to support 2 PCM6240
-ADC's, each supporting 4 channel recording.
-
-Signed-off-by: Vishnu Singh <v-singh1@ti.com>
 Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
 ---
- meta-ti-bsp/conf/machine/am62dxx-evm.conf         |  2 +-
- meta-ti-bsp/recipes-bsp/ti-adc-fw/ti-adc-fw.bb    | 15 +++++++++++++++
- .../recipes-bsp/ti-linux-fw/ti-linux-fw.inc       |  1 +
- 3 files changed, 17 insertions(+), 1 deletion(-)
- create mode 100644 meta-ti-bsp/recipes-bsp/ti-adc-fw/ti-adc-fw.bb
+ meta-ti-bsp/conf/machine/am62dxx-evm.conf       |  2 +-
+ meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb  | 17 -----------------
+ .../recipes-bsp/ti-linux-fw/ti-linux-fw.inc     |  1 -
+ 3 files changed, 1 insertion(+), 19 deletions(-)
+ delete mode 100644 meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb
 
 diff --git a/meta-ti-bsp/conf/machine/am62dxx-evm.conf b/meta-ti-bsp/conf/m=
 achine/am62dxx-evm.conf
-index ea851d8d..4b77656d 100644
+index 4b77656d..d19d4790 100644
 --- a/meta-ti-bsp/conf/machine/am62dxx-evm.conf
 +++ b/meta-ti-bsp/conf/machine/am62dxx-evm.conf
 @@ -17,4 +17,4 @@ FIT_CONF_DEFAULT_DTB =3D "k3-am62d2-evm.dtb"
 =20
  UBOOT_MACHINE =3D "am62dx_evm_a53_defconfig"
 =20
--MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "ti-dac-fw"
-+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "ti-dac-fw ti-adc-fw"
-diff --git a/meta-ti-bsp/recipes-bsp/ti-adc-fw/ti-adc-fw.bb b/meta-ti-bsp/r=
-ecipes-bsp/ti-adc-fw/ti-adc-fw.bb
-new file mode 100644
-index 00000000..ad025483
---- /dev/null
-+++ b/meta-ti-bsp/recipes-bsp/ti-adc-fw/ti-adc-fw.bb
-@@ -0,0 +1,15 @@
-+DESCRIPTION =3D "TI ADC PCM6240 config prebuild binary firmware"
-+
-+require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-+
-+PV =3D "${PCM6240_FW_VERSION}"
-+PR =3D "${INC_PR}.0"
-+
-+COMPATIBLE_MACHINE =3D "am62dxx"
-+
-+PCM6240_2DEV =3D "pcm6240-2dev-reg.bin"
-+
-+do_install() {
-+	install -d ${D}${nonarch_base_libdir}/firmware
-+	install -m 0644 ${S}/ti/pcm6240/${PCM6240_2DEV} ${D}${nonarch_base_libdir=
+-MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "ti-dac-fw ti-adc-fw"
++MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "ti-adc-fw"
+diff --git a/meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb b/meta-ti-bsp/r=
+ecipes-bsp/ti-dac-fw/ti-dac-fw.bb
+deleted file mode 100644
+index 8f68009d..00000000
+--- a/meta-ti-bsp/recipes-bsp/ti-dac-fw/ti-dac-fw.bb
++++ /dev/null
+@@ -1,17 +0,0 @@
+-DESCRIPTION =3D "TI DAC TAD5212 config prebuild binary firmware"
+-
+-require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+-
+-PV =3D "${TAD5212_FW_VERSION}"
+-PR =3D "${INC_PR}.0"
+-
+-COMPATIBLE_MACHINE =3D "am62dxx"
+-
+-TAD5212_1DEV =3D "tad5212_01.bin"
+-TAD5212_4DEV =3D "tad5212_04.bin"
+-
+-do_install() {
+-	install -d ${D}${nonarch_base_libdir}/firmware
+-	install -m 0644 ${S}/ti/tad5212/${TAD5212_1DEV} ${D}${nonarch_base_libdir=
 }/firmware/
-+}
+-	install -m 0644 ${S}/ti/tad5212/${TAD5212_4DEV} ${D}${nonarch_base_libdir=
+}/firmware/
+-}
 diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-=
 bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-index df200716..ecd4e350 100644
+index ecd4e350..d01e3f07 100644
 --- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
 +++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-@@ -20,6 +20,7 @@ TI_HSM_DEMO_FW_VERSION =3D "11.00.09"
- TAD5212_FW_VERSION =3D "1.0.0.0"
+@@ -17,7 +17,6 @@ CNM_WAVE521_FW_VERSION =3D "1.0.8"
+ TI_DM_FW_VERSION =3D "11.02.07"
+ TI_SYSFW_VERSION =3D "11.02.05"
+ TI_HSM_DEMO_FW_VERSION =3D "11.00.09"
+-TAD5212_FW_VERSION =3D "1.0.0.0"
  TI_PKA_FW_VERSION =3D "2.1.0"
  TI_IPC_EXAMPLES_FW_VERSION =3D "3.52.00.01"
-+PCM6240_FW_VERSION =3D "1.0.0.0"
-=20
- TI_LINUX_FW_SRCREV ?=3D "8ec0c42b8ccf2c9e8bebfd7c4e03d93fed555442"
- SRCREV =3D "${TI_LINUX_FW_SRCREV}"
+ PCM6240_FW_VERSION =3D "1.0.0.0"
 --=20
 2.34.1
 
