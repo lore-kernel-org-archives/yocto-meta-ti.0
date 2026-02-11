@@ -1,258 +1,343 @@
-Return-Path: <ivitro@gmail.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C069ECD6DA
-	for <webhook@archiver.kernel.org>; Wed, 11 Feb 2026 18:48:29 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.26776.1770835700377986109
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C717CECD6E8
+	for <webhook@archiver.kernel.org>; Wed, 11 Feb 2026 20:04:29 +0000 (UTC)
+Received: from BL2PR02CU003.outbound.protection.outlook.com (BL2PR02CU003.outbound.protection.outlook.com [52.101.52.11])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.28427.1770840259448237678
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 11 Feb 2026 10:48:20 -0800
+ Wed, 11 Feb 2026 12:04:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=h0xbvgGN;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: ivitro@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-436e87589e8so3368677f8f.3
-        for <meta-ti@lists.yoctoproject.org>; Wed, 11 Feb 2026 10:48:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770835699; x=1771440499; darn=lists.yoctoproject.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=AFFYuqduAWuDaNq9E7dlk8opJe7LSAo6zyHnK347jTo=;
-        b=h0xbvgGNafkGm7JYPVa/GwE3s9JZHHgMxmrS9ur+zsE4tDohzU081w6IFXVagAcV1M
-         spLKdeLAVutb07BUMS/caLUk4lmwBkRsNTcz/77NmJuxnHmXhR/FBIzV05J3K4JJbh5h
-         VOxAq0tLh9M3tlk/ER2brXcINaMweKA1VxBWZeirXS6LWOR69NZv9q3wKd56UbT1zR3T
-         eIURpjARu4ESiuDV+SOYorYJperkv8zsjyx+fFM3hSBuJ6D6FxwWHtnawSISOyZJcwrf
-         6sTIwIkvir4ZBvMDx7Slo/s9RBt4yo3ouJNiCLm+AGmNMepUZdkJ4gv1K0Dkw10vIED6
-         LydA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770835699; x=1771440499;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=AFFYuqduAWuDaNq9E7dlk8opJe7LSAo6zyHnK347jTo=;
-        b=ETzshj6MTUpxFb2C2JGTYgE4cREbYeklpTKmnmOoMmeQ8tegNk5saVMxtbH32F9eqy
-         iHr6JSmtl0GQFOPvdf+dKczFml+hmXu7qZdnTx1XNHmfg2WmIIdq2OGTNDPBmHv97xbV
-         y//69uUA47pvvudt8lSCy7FMpb3cTxDfW3plevO1uhYxEi9VHvjAbQgtpAcG1TM4p32C
-         0Y7Sq4Yfq89AQvNyQ1/vNiZesSuxgSainrcdnuHPI4aaDJTrqCrnRkw92TlRcclUoQOk
-         A7+9rEJ6yABJDbWJggM230XpwIc24j4J66f6MpOS9DnoaIlDzkujLXBhqGFZwj1Ytj3t
-         +ckw==
-X-Forwarded-Encrypted: i=1; AJvYcCXFYt/jnE9QeTZCHBwdTKuADRlyd6grajmNvdhODdAQZTOJrMf+ID267I+fN9yRV8iU1HN7mWa4@lists.yoctoproject.org
-X-Gm-Message-State: AOJu0YwbcaKDNZ+uoZYTu1oLtZPXjeAOUfD/JahcNzT+1hEnglbwXH4v
-	eopVYOYPxhcVU1X2zIK24+SGhAmrW0uITXz1zZCPZfn3AQ+OKaA8Vy3/
-X-Gm-Gg: AZuq6aJ79DujKL9L34vurB9q7f+K7K/WZSwtI9vnvlJZXLLjvw6vYi1HDKnRhtE9ZQr
-	tmr/DyC58IBOn6hqT8ghMvfOllHt2kKwTZgTOId/VDPiHiLtZG1OvmxY9HuuDLN+zmyao115RCQ
-	D40WdrmBaltpp0qh7CV+LFB7GA5xeGvtDaGAvluVdGRcKVF1ib6m+XVJO9q8oDMk1R2VSiTp4Vi
-	eBR3dypKEIGMNKgAHWc+qDYRnJyLogEGiXpND2byuexcR+9ST0+u4DX2K5aAyjUNfEy97knzBLG
-	T2SDWVMGCL5Z/a4cl/8lYhWvMozsDhF80jKXjrPQuBeFLfZy21qUizmlQGMb3iEawVLA8aZPGOV
-	hneSH8U10AhCLp9YrRM0o1ACJ4fQj829uUY3uhDlNpxmWmjZLdOBDO8ByZVn61gand9jOy+aAXO
-	Q5bp/PsfFbOST/SF1H72YEE6+OAQn8mWUnk9ZAeW3uNpvJ8g==
-X-Received: by 2002:a05:6000:4008:b0:435:bcbe:d104 with SMTP id ffacd0b85a97d-4378ad959f3mr527727f8f.34.1770835698453;
-        Wed, 11 Feb 2026 10:48:18 -0800 (PST)
-Received: from vitor-nb.Home (bl19-170-125.dsl.telepac.pt. [2.80.170.125])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43783dfda66sm6603500f8f.22.2026.02.11.10.48.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Feb 2026 10:48:18 -0800 (PST)
-Message-ID: <4b862070791c1b8fca67bf19a09a34d5c1180684.camel@gmail.com>
-Subject: Re: [meta-ti] BSP version selection forces initramfs integration
-From: Vitor Soares <ivitro@gmail.com>
-To: Ryan Eatmon <reatmon@ti.com>, meta-ti@lists.yoctoproject.org
-Cc: denys@konsulko.com, vitor.soares@toradex.com
-Date: Wed, 11 Feb 2026 18:48:16 +0000
-In-Reply-To: <205a16be-e76e-4658-966a-f585eb84943e@ti.com>
-References: <78ec394aae8a141ceb87a6b67f109665e7c96122.camel@gmail.com>
-	 <af751f95-21e8-4965-ab98-4c973287ca67@ti.com>
-	 <f209ae25048674fe300084b618138e6216d83afb.camel@gmail.com>
-	 <205a16be-e76e-4658-966a-f585eb84943e@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2.1 
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=q06m3mf6;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.52.11, mailfrom: reatmon@ti.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=IHnhrY22yHjoIcXkf1RbrA6g1E2B1R3HBuWx8TnvETvNO95fhVchbZN0IeE0bnz+YM90LgpsXRshWRbvhG+SJ54Xq3mgOQXV0N/WL0vg2zQVSSzMMj5bTCpRL+FC+ycgfhTMeaxV5BSk4+C4+JrdO5IaO9u13xRVQXm5S9hDDrB2qBsWspnemw0HD+5ZH0IPvh7KyYpOQyJZ32rfYKPIMun5D84A3Jqu4MpFsOeIN3IXFwHqgme4gRQ3F/5pTcDwgGUQtsevbAuDM9dyawEu+uVvWJDJKQIlqRU72jDv/LybBHaqFSLG2ohfurE5P7De4oeXaVxzJICz0X897pfdWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eAp1/4/iaYV23Emd9lkAJs8GYVjvb7z3JybY+nQknEU=;
+ b=kkkMO0p8MpgZ0unZuBfPp3qIqoU1Kc4cwMZ13zzjb/ZIYUFwseHuvXw3JeSbq3ZPMwFPV/mD4M678rvdxlqu5cIRk/kxPlJB4X/MzXBH1+Zyjvm+N6x8Q0/tG8YJCh49rmPfhKEZBfYHC6QrioIfCc8AlYWptNdohjn3dceNSwuzjWYFS2Pa203yEP0oEFk3MMQI6YmN/hivqZsQ+PACqziuV5ZHORUg9W1GuTdMrae5/QevJ1gmXwUcHnlTjjdXytrpMTuY1JH6DgH38a8mwebqFJR6W2muUKR7MoCjzQyHq1QmEsDw0dljslIfoitoQTly6YvGVT/KuxhZPUr5Mg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eAp1/4/iaYV23Emd9lkAJs8GYVjvb7z3JybY+nQknEU=;
+ b=q06m3mf6MyrD/kriLd6pDkv2dYhkUjBkW73r3NKJAQrBDRwkPnIc6/dnFFE5fzl0G4eUHFafvrZSavQ8DcpSjH8fjQY82wU7acFCwpoCMnEYQeGwxToLZDpOG8MD8P5COZ2rJ+90CYfEX+t5MUkj+T6MrJ8pTyEHK554cpzyso0=
+Received: from SA1P222CA0074.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:2c1::20)
+ by DS5PR10MB997706.namprd10.prod.outlook.com (2603:10b6:8:341::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.19; Wed, 11 Feb
+ 2026 20:04:16 +0000
+Received: from SN1PEPF000397B0.namprd05.prod.outlook.com
+ (2603:10b6:806:2c1:cafe::3b) by SA1P222CA0074.outlook.office365.com
+ (2603:10b6:806:2c1::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.10 via Frontend Transport; Wed,
+ 11 Feb 2026 20:04:13 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ SN1PEPF000397B0.mail.protection.outlook.com (10.167.248.54) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9611.8 via Frontend Transport; Wed, 11 Feb 2026 20:04:15 +0000
+Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 11 Feb
+ 2026 14:04:15 -0600
+Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 11 Feb
+ 2026 14:04:14 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 11 Feb 2026 14:04:14 -0600
+Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61BK4Eww1805010;
+	Wed, 11 Feb 2026 14:04:14 -0600
+Received: from reatmon by grumpy with local (Exim 4.97)
+	(envelope-from <reatmon@ti.com>)
+	id 1vqGRa-00000006tBU-2kzZ;
+	Wed, 11 Feb 2026 14:04:14 -0600
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
+	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH] ti-core-initramfs: Rework logic
+Date: Wed, 11 Feb 2026 14:04:14 -0600
+Message-ID: <20260211200414.1642061-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF000397B0:EE_|DS5PR10MB997706:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9b387a82-1ee7-4859-92fc-08de69a8bb6e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|36860700013|82310400026|1800799024|7142099003;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?pApBMSOZsz8U5lNXyKnuFYwOHEHUTYbJE3wgP5IYJH74igzy7zA2ZXgeN+63?=
+ =?us-ascii?Q?AeRV9zzi/iSpNmdYm9MMqrSVuQFmlzdHcPJehR06+b9YdXSNpbAKz8UBw93T?=
+ =?us-ascii?Q?VEe1spEmp/w+P21lG5xvuS7Vr/+dH1BxdFRADt8XI0wAGVf2rhCwed30GcTP?=
+ =?us-ascii?Q?6FSrmQe9Fn2ey7VfYZicPlPv5xEOVw6vIIkv3zgtHNJeXh83eMMFeaZMpL5j?=
+ =?us-ascii?Q?k5r8is+V/RitPgoB5JGrCZF3Q2KyOcEURgOdyNFbkdUk6PSmOJymmKHviuBX?=
+ =?us-ascii?Q?aK7Sf1KwSXclhZqYDAo5yR8t7WgnSZ5IAHPiEFUg26S2McoYbOPpl4CdcIrM?=
+ =?us-ascii?Q?wevOPrNqcxYOSX2iEmfW/5SrvfLf+GvjmtFchw48VJ8BAI0GxILDQKUG+os6?=
+ =?us-ascii?Q?eV84qwHFH6LtNu5YwhOzo+O7kzT83VsmwDNKWufNlam+MrpkV/qQWF1oC3J8?=
+ =?us-ascii?Q?aPa9nuUYVqlAof0zQL3JwOeL1QSWQm0ZGkeso/oBMEGssBKH7YX8k0ru/6oc?=
+ =?us-ascii?Q?Lp5S3PI4Qr2NNjOVLjehAVld95BDPNXjjcd31UC9CSrq8ylGqXmxGJbPbd9q?=
+ =?us-ascii?Q?u7zixZ1HuG43vwNhWOFb3IuLHfQhNaVfULRIHoeHipou8kAec17c1DvT430o?=
+ =?us-ascii?Q?n2iwboW5EVdms12jEblQ4c2zVVcH3BbGCPXPG2kuD8Al2YT8sX0GcjBY3TfN?=
+ =?us-ascii?Q?7ENLAEjXL2GzX8X9jTEhjxV+wra2HAYCGMBEBEB50fknkErDZBTMZBQuwngW?=
+ =?us-ascii?Q?TUVBpF0HMC3qEJfjzxinzKRZDwcMq4u52fP2xqaC01/CZdBfc/MYmF1BqMrG?=
+ =?us-ascii?Q?XPDl/aNbB3Q8K8AWHz8bQfaX0uV026tP7JwKJadG7GVVS376JV3y20XKgC1z?=
+ =?us-ascii?Q?CdOZfNQjZbNixnwAknL9f+L3C56Zj8U/pMnPWP2eH1SuDO+BD7YbRwPU6KUB?=
+ =?us-ascii?Q?Seo6VeRiXLJffb87HugWZ9bkkKhCTz1xS+g0k7GJO5z6t9aqB3ySq3zzMatA?=
+ =?us-ascii?Q?nVfOsiw+MOQW1Tt1df6aUP/W/lXxiGl1l06yAaibFeHc3phDIREhEzvLBZ7u?=
+ =?us-ascii?Q?FVgwX94rfZ1+DUz6kOMnb6qWLHUx4qu8O1XtvLr8Qx6MMytusBkh8kYLbPW6?=
+ =?us-ascii?Q?j9oggDUX9QFQ9HEa//qy66M2WWzTOBrCAfaoSWZC7+KYxmz7O+scaUOUobrx?=
+ =?us-ascii?Q?AtEF+2Hgv5WH14jmO+uzN+CxAKFGKr4bqA2Vc6u4j2xdkCAjtcsgsKOZrD7P?=
+ =?us-ascii?Q?XoWQFyQJFv5YD7upflBFL+4yMnuWtgNRsWGk9MTAyk9+XJwWCbIqpdVzjSPL?=
+ =?us-ascii?Q?hKO4yMSPMo9F1YqszbrlmH/GUxs3b32pwNFdu3vXiAnsDjW/jRoMcJIZqkJR?=
+ =?us-ascii?Q?iRk4SCd3Iv40SQxKaDpLbr3fqtPy9Ykz6wTiragRKharx4W5iJ8q/ARK5FU3?=
+ =?us-ascii?Q?0j75sZHNZs4gSpf9Y2LQqEEZM04tthH4fvjtgIftGbvF7kBnR3t6/FREiUyX?=
+ =?us-ascii?Q?kuVnL9aD2C5QeGa5KSlJhKN1DAhb2Q/P3sLCOAmdygnS2p/nydJnnKBCI3Ms?=
+ =?us-ascii?Q?Bc2X3LJnu4zhLLEedTcIVPE5+qteSLeokpsVdlau6ylVVCHicVBoyYCjCLP8?=
+ =?us-ascii?Q?9YbtClUn7lr6+hWdAOoT6jJO5rXv+6hZ3vE7DO2hbrjf2zzQlqWd8ErN1Mbk?=
+ =?us-ascii?Q?7qbDMg=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024)(7142099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	ehz3Cb5G05B2SraniNVNjnut5iKf24Bj+PZitmwblZqv04w961/G6O9EQ+IXcsjDBzSNj9osx8+T95okFFVwvJ31cSSu4llw2uMBnX8f9HMKAAThVrlMED1ndy8hVGCVFbiip2xADazvPcLp5e3wNmWzPXcqbQwZO3E5IEIee99gQQ/6+5zfKvSONLocx3f+VzDNwuq5v+t5QKXskQRtDoT6GEI43QFkIO51jw+Ob93j32MzVBPidpKq1L6wxHQC/EcGxnQD3AawA1JykrX02vY0EycohkIxLui0oEncHFuQTyhEQOJGIER5ywW/GwuIovecKvZNn30cy5Ok+fOuPJsIBpG82c8j5RTdtq5ErPWfwEKWwfFFYBMOe1wTxLrzK6pRUuHY6Fwt6SfkGq094sGDda/kR7CvvlOzRTyeSrMqEqF6nuUb7AjlAE1lhiZg
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2026 20:04:15.2832
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9b387a82-1ee7-4859-92fc-08de69a8bb6e
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	SN1PEPF000397B0.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS5PR10MB997706
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 11 Feb 2026 18:48:29 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19485
+ <meta-ti@lists.yoctoproject.org>; Wed, 11 Feb 2026 20:04:29 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19486
 
-On Wed, 2026-02-11 at 11:50 -0600, Ryan Eatmon wrote:
->=20
->=20
-> On 2/9/2026 10:31 AM, Vitor Soares via lists.yoctoproject.org wrote:
-> > On Mon, 2026-02-09 at 09:11 -0600, Ryan Eatmon wrote:
-> > >=20
-> > >=20
-> > > On 2/9/2026 5:21 AM, Vitor Soares via lists.yoctoproject.org wrote:
-> > > > Hi meta-ti maintainers,
-> > > >=20
-> > > > We've hit an issue where selecting a BSP version (e.g. TI_PREFERRED=
-_BSP
-> > > > =3D
-> > > > "mainline") also forces initramfs integration via ti-soc.inc (lines=
- 32-
-> > > > 49).
-> > > > The
-> > > > bsp-mainline, bsp-next, and bsp-ti_6_18 overrides all unconditional=
-ly
-> > > > set
-> > > > BUILD_CORE_INITRAMFS_IMAGE_STEP, TI_WKS_INITRAMFS, and IMAGE_BOOT_F=
-ILES.
-> > > >=20
-> > > > This means we can't use bsp-mainline without also pulling in ti-cor=
-e-
-> > > > initramfs =E2=80=94
-> > > > even when our images don't need it.
-> > > >=20
-> > > > Since we can't use bsp-mainline, we also lose the correct override
-> > > > context
-> > > > for
-> > > > other components. For example, we end up having to manually overrid=
-e all
-> > > > the
-> > > > mesa-pvr.inc virtual providers in our machine config to use upstrea=
-m
-> > > > mesa =E2=80=94
-> > > > something that bsp-mainline would handle naturally.
-> > > >=20
-> > > > The root issue is that initramfs integration (an image-level concer=
-n) is
-> > > > tied to
-> > > > BSP version selection (a machine-level concern) in ti-soc.inc.
-> > > >=20
-> > > > A possible fix would be to move the initramfs logic to an image cla=
-ss
-> > > > (e.g.
-> > > > ti-
-> > > > image.bbclass) that images explicitly opt into. This would be a bre=
-aking
-> > > > change
-> > > > for images relying on the current automatic behavior, but it would
-> > > > properly
-> > > > separate these concerns.
-> > >=20
-> > > I recognize what you are saying as an issue.
-> > >=20
-> > > We are in the process of moving to require an initramfs for all of ou=
-r
-> > > platforms as we transition to using modules for kernel features that =
-the
-> > > upstream kernel is unwilling to turn on by default (to keep the kerne=
-l
-> > > small).=C2=A0 We have been turning these features on by default in ou=
-r vendor
-> > > kernel, and we moving away from that.
-> > >=20
-> > > So there is a need to balance our need to make sure that everything i=
-s
-> > > in place at the BSP level, and the need for downstream customers in
-> > > distro layers to build upon that initramfs and include their own chan=
-ges.
-> > >=20
-> > > As I see it, we have two options.
-> > >=20
-> > > 1) Provide a mechanism to extend the ti-core-initramfs recipe to allo=
-w
-> > > you to put more stuff in there.
-> > >=20
-> > > 2) Go the class route and make it so that your initramfs (using the
-> > > class) would make sure to include ALL of the needed modules into your
-> > > initramfs and still register your initramfs with the images.
-> > >=20
-> > > Can you point me at the recipe that your initramfs is using so that w=
-e
-> > > can get an example of usage so we can plan for the best solution?
-> > >=20
-> > >=20
-> >=20
-> > Thanks for the quick response.
-> >=20
-> > For context: we don't plan to use initramfs (at least not currently) - =
-our
-> > images boot directly to rootfs. The issue is that selecting bsp-mainlin=
-e
-> > forces
-> > initramfs integration we don't need, and prevents us from benefiting fr=
-om
-> > bsp-
-> > mainline's other configurations.
-> >=20
-> > Proposed solution:
-> > Move initramfs logic from ti-soc.inc to classes/ti-image.bbclass, and i=
-mages
-> > that need initramfs explicitly inherit ti-image. This separates machine=
+Clean up the logic of the new ti-core-initramfs to reduce the impact on
+downstream layers.
+
+- Flip the logic in the machine .conf files to track the list of
+  required kernel modules for that platform, but if the variable is set
+  to "" then the ti-core-initramfs will not be created.
+
+- Redo the logic of when we require creation/usage of the initramfs to
+  just platforms that need it (ie that set TI_CORE_INITRAMFS_KERNEL_MODULES=
+).
+
+- Add a big switch to disable the initramfs entirely.  In that case, the
+  user is on their own to make sure that the kernel has everything it
+  needs to boot either via config fragments to turn on the needed
+  modules, or by using the TI_CORE_INITRAMFS_KERNEL_MODULES
+  variable to populate their own initramfs.
+
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ meta-ti-bsp/conf/machine/include/am62axx.inc  |  6 ++--
+ meta-ti-bsp/conf/machine/include/j721e.inc    |  6 ++--
+ meta-ti-bsp/conf/machine/include/j784s4.inc   |  6 ++--
+ .../machine/include/ti-core-initramfs.inc     | 29 +++++++++++++++++++
+ meta-ti-bsp/conf/machine/include/ti-soc.inc   | 20 +------------
+ .../packagegroup-ti-core-initramfs.bb         |  4 +--
+ 6 files changed, 41 insertions(+), 30 deletions(-)
+ create mode 100644 meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc
+
+diff --git a/meta-ti-bsp/conf/machine/include/am62axx.inc b/meta-ti-bsp/con=
+f/machine/include/am62axx.inc
+index 1fd4a1ac..0577ffaa 100644
+--- a/meta-ti-bsp/conf/machine/include/am62axx.inc
++++ b/meta-ti-bsp/conf/machine/include/am62axx.inc
+@@ -12,6 +12,6 @@ OPTEEMACHINE =3D "k3-am62x"
+=20
+ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "cnm-wave-fw"
+=20
+-TI_INITRAMFS_KERNEL_MODULES:append:bsp-ti-6_18 =3D " kernel-module-tps6594=
+-i2c kernel-module-tps6594-regulator kernel-module-tps6594-core"
+-TI_INITRAMFS_KERNEL_MODULES:append:bsp-mainline =3D " kernel-module-tps659=
+4-i2c kernel-module-tps6594-regulator kernel-module-tps6594-core"
+-TI_INITRAMFS_KERNEL_MODULES:append:bsp-next =3D " kernel-module-tps6594-i2=
+c kernel-module-tps6594-regulator kernel-module-tps6594-core"
++TI_CORE_INITRAMFS_KERNEL_MODULES =3D "kernel-module-tps6594-i2c kernel-mod=
+ule-tps6594-regulator kernel-module-tps6594-core"
++TI_CORE_INITRAMFS_KERNEL_MODULES:bsp-ti-6_6 =3D ""
++TI_CORE_INITRAMFS_KERNEL_MODULES:bsp-ti-6_12 =3D ""
+diff --git a/meta-ti-bsp/conf/machine/include/j721e.inc b/meta-ti-bsp/conf/=
+machine/include/j721e.inc
+index f329e269..3e4fbf17 100644
+--- a/meta-ti-bsp/conf/machine/include/j721e.inc
++++ b/meta-ti-bsp/conf/machine/include/j721e.inc
+@@ -21,6 +21,6 @@ TI_VXE_VXD_DRIVER:bsp-ti-6_18 =3D ""
+=20
+ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "cadence-mhdp-fw vxd-dec-fw ti-et=
+h-fw-j721e ${TI_VXE_VXD_DRIVER}"
+=20
+-TI_INITRAMFS_KERNEL_MODULES:append:bsp-ti-6_18 =3D " kernel-module-cdns-pl=
+tfrm kernel-module-ti-j721e-ufs"
+-TI_INITRAMFS_KERNEL_MODULES:append:bsp-mainline =3D " kernel-module-cdns-p=
+ltfrm kernel-module-ti-j721e-ufs"
+-TI_INITRAMFS_KERNEL_MODULES:append:bsp-next =3D " kernel-module-cdns-pltfr=
+m kernel-module-ti-j721e-ufs"
++TI_CORE_INITRAMFS_KERNEL_MODULES =3D "kernel-module-cdns-pltfrm kernel-mod=
+ule-ti-j721e-ufs"
++TI_CORE_INITRAMFS_KERNEL_MODULES:bsp-ti-6_6 =3D ""
++TI_CORE_INITRAMFS_KERNEL_MODULES:bsp-ti-6_12 =3D ""
+diff --git a/meta-ti-bsp/conf/machine/include/j784s4.inc b/meta-ti-bsp/conf=
+/machine/include/j784s4.inc
+index 42c95b11..4dc3a71b 100644
+--- a/meta-ti-bsp/conf/machine/include/j784s4.inc
++++ b/meta-ti-bsp/conf/machine/include/j784s4.inc
+@@ -14,6 +14,6 @@ OPTEEMACHINE =3D "k3-j784s4"
+=20
+ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS +=3D "cadence-mhdp-fw cnm-wave-fw ti-e=
+th-fw-j784s4"
+=20
+-TI_INITRAMFS_KERNEL_MODULES:append:bsp-ti-6_18 =3D " kernel-module-cdns-pl=
+tfrm kernel-module-ti-j721e-ufs"
+-TI_INITRAMFS_KERNEL_MODULES:append:bsp-mainline =3D " kernel-module-cdns-p=
+ltfrm kernel-module-ti-j721e-ufs"
+-TI_INITRAMFS_KERNEL_MODULES:append:bsp-next =3D " kernel-module-cdns-pltfr=
+m kernel-module-ti-j721e-ufs"
++TI_CORE_INITRAMFS_KERNEL_MODULES =3D "kernel-module-cdns-pltfrm kernel-mod=
+ule-ti-j721e-ufs"
++TI_CORE_INITRAMFS_KERNEL_MODULES:bsp-ti-6_6 =3D ""
++TI_CORE_INITRAMFS_KERNEL_MODULES:bsp-ti-6_12 =3D ""
+diff --git a/meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc b/meta-=
+ti-bsp/conf/machine/include/ti-core-initramfs.inc
+new file mode 100644
+index 00000000..2b210169
+--- /dev/null
++++ b/meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc
+@@ -0,0 +1,29 @@
++#-------------------------------------------------------------------------=
+-----
++#
++# To turn off the ti-core-initramfs.cpio creation just set:
++#
++#   TI_CORE_INITRAMFS_ENABLED =3D "0"
++#
++#-------------------------------------------------------------------------=
+-----
++TI_CORE_INITRAMFS_ENABLED ?=3D "0"
++
++TI_CORE_INITRAMFS_KERNEL_MODULES ?=3D ""
++
++TI_CORE_INITRAMFS_IMAGE =3D "ti-core-initramfs"
++TI_CORE_INITRAMFS_IMAGE_FILE =3D "${TI_CORE_INITRAMFS_IMAGE}.cpio.xz"
++
++#-------------------------------------------------------------------------=
+-----
++# Only enable the initramf code if TI_CORE_INITRAMFS_KERNEL_MODULES is set=
+.
++#-------------------------------------------------------------------------=
+-----
++TI_CORE_INITRAMFS_DO_IMAGE_WIC =3D "${@ '${TI_CORE_INITRAMFS_IMAGE}:do_ima=
+ge_complete' if d.getVar('TI_CORE_INITRAMFS_KERNEL_MODULES') else ''}"
++TI_CORE_INITRAMFS_WKS_FLAG =3D "${@ ',initrd=3D${TI_CORE_INITRAMFS_IMAGE_F=
+ILE}' if d.getVar('TI_CORE_INITRAMFS_KERNEL_MODULES') else ''}"
++TI_CORE_INITRAMFS_IMAGE_BOOT_FILES =3D "${@ '${TI_CORE_INITRAMFS_IMAGE_FIL=
+E}' if d.getVar('TI_CORE_INITRAMFS_KERNEL_MODULES') else ''}"
++
++#-------------------------------------------------------------------------=
+-----
++# Apply all of the needed changes to create/use the initramfs (if enabled)=
+.
++#-------------------------------------------------------------------------=
+-----
++do_image_wic[depends] +=3D "${@ '${TI_CORE_INITRAMFS_DO_IMAGE_WIC}' if d.g=
+etVar('TI_CORE_INITRAMFS_ENABLED') =3D=3D "1" else ''}"
++
++TI_WKS_INITRAMFS ?=3D "${@ '${TI_CORE_INITRAMFS_WKS_FLAG}' if d.getVar('TI=
+_CORE_INITRAMFS_ENABLED') =3D=3D "1" else ''}"
++
++IMAGE_BOOT_FILES +=3D "${@ '${TI_CORE_INITRAMFS_IMAGE_BOOT_FILES}' if d.ge=
+tVar('TI_CORE_INITRAMFS_ENABLED') =3D=3D "1" else ''}"
+diff --git a/meta-ti-bsp/conf/machine/include/ti-soc.inc b/meta-ti-bsp/conf=
+/machine/include/ti-soc.inc
+index 74346430..c4472113 100644
+--- a/meta-ti-bsp/conf/machine/include/ti-soc.inc
++++ b/meta-ti-bsp/conf/machine/include/ti-soc.inc
+@@ -3,6 +3,7 @@
+ SOC_FAMILY =3D "ti-soc"
+ require conf/machine/include/soc-family.inc
+ require conf/machine/include/ti-extras.inc
++require conf/machine/include/ti-core-initramfs.inc
+=20
+ # kernel, initrd load addresses for the fitImage in all TI platforms
+ UBOOT_ENTRYPOINT =3D "0x82000000"
+@@ -28,22 +29,3 @@ CLASS_DEVICETREE_PREFIX =3D "${@ 'ti-devicetree-prefix' =
+if d.getVar('KERNEL_DEVICE
+=20
+ KERNEL_CLASSES +=3D "${CLASS_DEVICETREE_PREFIX}"
+ IMAGE_CLASSES +=3D "${CLASS_DEVICETREE_PREFIX}"
 -
-> > level
-> > BSP selection from image-level features (standard Yocto pattern). Break=
-ing
-> > change: your reference images need inherit ti-image added.
-> >=20
-> > Thoughts?
->=20
-> I'm not sure you are 100% understanding what I'm saying.
->=20
-> Starting with 6.18 and forward (including mainline and next since they=
+-BUILD_CORE_INITRAMFS_IMAGE =3D "ti-core-initramfs"
+-BUILD_CORE_INITRAMFS_IMAGE_FILE =3D "${BUILD_CORE_INITRAMFS_IMAGE}.cpio.xz=
+"
+-
+-BUILD_CORE_INITRAMFS_IMAGE_STEP ?=3D ""
+-BUILD_CORE_INITRAMFS_IMAGE_STEP:bsp-ti-6_18 =3D "${BUILD_CORE_INITRAMFS_IM=
+AGE}:do_image_complete"
+-BUILD_CORE_INITRAMFS_IMAGE_STEP:bsp-mainline =3D "${BUILD_CORE_INITRAMFS_I=
+MAGE}:do_image_complete"
+-BUILD_CORE_INITRAMFS_IMAGE_STEP:bsp-next =3D "${BUILD_CORE_INITRAMFS_IMAGE=
+}:do_image_complete"
+-
+-do_image_wic[depends] +=3D "${BUILD_CORE_INITRAMFS_IMAGE_STEP}"
+-
+-TI_WKS_INITRAMFS ?=3D ""
+-TI_WKS_INITRAMFS:bsp-ti-6_18 =3D ",initrd=3D${BUILD_CORE_INITRAMFS_IMAGE_F=
+ILE}"
+-TI_WKS_INITRAMFS:bsp-mainline =3D ",initrd=3D${BUILD_CORE_INITRAMFS_IMAGE_=
+FILE}"
+-TI_WKS_INITRAMFS:bsp-next =3D ",initrd=3D${BUILD_CORE_INITRAMFS_IMAGE_FILE=
+}"
+-
+-IMAGE_BOOT_FILES:append:bsp-ti-6_18 =3D " ${BUILD_CORE_INITRAMFS_IMAGE_FIL=
+E}"
+-IMAGE_BOOT_FILES:append:bsp-mainline =3D " ${BUILD_CORE_INITRAMFS_IMAGE_FI=
+LE}"
+-IMAGE_BOOT_FILES:append:bsp-next =3D " ${BUILD_CORE_INITRAMFS_IMAGE_FILE}"
+diff --git a/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramf=
+s.bb b/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
+index c759808c..aae63495 100644
+--- a/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
++++ b/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
+@@ -6,10 +6,10 @@ PACKAGE_ARCH =3D "${MACHINE_ARCH}"
 =20
-> are always "forward"), we are requiring the initramfs for some of the=20
-> platforms (am62a, j721e, j784s4).=C2=A0 Without the initramfs providing t=
-he=20
-> needed kernel modules you will not boot to the rootfs.=C2=A0 The board wi=
-ll=20
-> just not work.
->=20
-> So even if right now you are not using an initramfs, then for those=20
-> platforms you will need to start unless you take extra steps to force=20
-> the required modules to be compiled into the kernel via config fragments.
->=20
-> Those modules were previously turned on in our vendor kernel (and never=
+ inherit packagegroup
 =20
-> for mainline/next), and we are no longer going to do that.
->=20
-> That all being said, I will send a patch soon (need to test things=20
-> first) that will do the following:
->=20
-> 1) Limit creation/requirement for the ti-core-initramfs to just=20
-> platforms that require it.
->=20
-> 2) Allow you to disable the ti-core-initramfs completely by setting a=20
-> variable.=C2=A0 BUT... you will be required to provide the needed modules=
- in=20
-> some way to get your image to boot either by adding a config fragment in=
+-TI_INITRAMFS_KERNEL_MODULES ?=3D ""
++TI_CORE_INITRAMFS_KERNEL_MODULES ?=3D ""
 =20
-> the kernel, or doing your own initramfs and including the needed modules=
-=20
-> (which you can use the variable from the machine conf files to get that=
-=20
-> list).
->=20
-Thanks for the detailed explanation and apologies for not providing enough
-context upfront.
+ RDEPENDS:${PN} +=3D "\
+-    ${TI_INITRAMFS_KERNEL_MODULES} \
++    ${TI_CORE_INITRAMFS_KERNEL_MODULES} \
+     ${VIRTUAL-RUNTIME_base-utils} \
+     base-passwd \
+     initramfs-framework-base \
+--=20
+2.43.0
 
-We're Toradex, maintaining meta-toradex-ti BSP layer for our TI-based SoMs,
-including Aquila AM69. We use our own kernel and bootloader recipes based o=
-n
-vanilla mainline with our own defconfigs.
-
-Since we control our own kernel config, we can build needed drivers as buil=
-t-in
-if necessary. Currently we don't plan to use initramfs.
-
-The issue we're trying to solve: we want to use `TI_PREFERRED_BSP =3D "main=
-line"`
-to get the BSP override context without being forced into the initramfs
-workflow.
-
-Your proposed opt-out variable would work for our immediate need. We'd disa=
-ble
-ti-core-initramfs and manage our own kernel configuration as needed.
-
-That said, I still think the class-based approach is cleaner long-term
-architecture - it properly separates BSP selection (machine-level) from
-initramfs integration (image-level). If you're open to exploring that direc=
-tion,
-I'm happy to help.
-
-Thanks for working on this.
-
-Best regards,
-Vitor Soares
-Toradex
 
