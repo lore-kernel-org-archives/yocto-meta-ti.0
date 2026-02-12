@@ -2,250 +2,191 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 006ABEE3694
-	for <webhook@archiver.kernel.org>; Thu, 12 Feb 2026 14:55:44 +0000 (UTC)
-Received: from SA9PR02CU001.outbound.protection.outlook.com (SA9PR02CU001.outbound.protection.outlook.com [40.93.196.67])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.47159.1770908135449624285
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81905EE368C
+	for <webhook@archiver.kernel.org>; Thu, 12 Feb 2026 15:11:15 +0000 (UTC)
+Received: from CH1PR05CU001.outbound.protection.outlook.com (CH1PR05CU001.outbound.protection.outlook.com [52.101.193.68])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.47579.1770909069330582799
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 12 Feb 2026 06:55:36 -0800
+ Thu, 12 Feb 2026 07:11:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=FieFhsfN;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.196.67, mailfrom: reatmon@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=ZjW8uLJ5;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.193.68, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=e7pQU0zQlDao2yAcpgWr9Ph0U4MTbr8dPDRroxb6iwU9UxdQMH5KBBBmEGoEAfuZQ7nY0zfkn9tMGpHW+8qJc1TIOyOOynIEs1XL/5lULNqyjAiuriS5DQvXxVu6JvESrfu3JtXG3l8074mPhaPyweff59KRdA5/ST+oVo0lvichEaMmrCTr+Noxl8KpZUhTa1hXwYVIz+/dDErrRA3PpyLl1ddjKl3kaiXAbPqRylkBDIvX5/ToYgx2bB09D3HGel60C7JZz1eV82Hoo0BeRCqhY89QYgmHuUrbNShQ7G0jpIn+kJ6P1LaWfvOu5cDIeztjZ73XH8mOu/Axh/cwtQ==
+ b=GlqhMyNBNwElXYS6n22hbQhxE7TM5xOcvHHkLQ3KXO4uv/BeH65YR9SVF3ENzYzQJoP0N3ysJ6W5++9JMrdZRMxVrXi0/h21qNGY+lTfEVAMdrcscZzb1hCwyqXV2G4wQMQNeXuXZNMbpsS8Xkvlzc9ebw3lXGKpkFvwibMqWzDc11nXLJARA99vf07KEe3Np7xoAYf2HZT8XDCv0/X4x4G7btH0IaH+PYOhDEorVjKOjS8nW2sxzaSKd8o5anDlSlFIn92i8fvSM1HgTNdhKcz3JEd57Yrwk7wm8Oz7yRKMw7hg5WE6dEgDj1npluxtmOVdQHLo1p05DfekXzkPuQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wcxkD5J8qOV8TRjT0frhiMalZmVZdzj7N1X75hvGczE=;
- b=XzxzrCMrx4SpqLsK/t04lBGTfVoDY1soVb6hJywr6JOOLLhu527FzV+8uJPNq5tvP3EPpFJV9ougz8p3SZ4OoQr3V4EBhD/xExDXqCC86mxTlHVDanGUfg0hxMjEmf6ERU9ZBzI2rqE+QUNQVqj8qpatNvD2YjHACFYFVpiujBpHBP9zDxYzGhfefl6D2u66s60z2waChO3IAlDl7VGSYRLgq5KoUor136EkGFlqzeuYP8Jqc7Tx8nuAtciwhl6CJNvydMMblmNf+AjpcpVnu9Ye256Cb8hHlyhEPXMywDfb8GexqGw5U8eQzXnf5syYfsKuUOVql93NsuEutl2Iwg==
+ bh=nPDDXuN9KK1dXX51VNHjfA4dLXBfL5Kn00c4O86y1GI=;
+ b=aZQ6gp54oUNS7mJfEa+HWtc8vW3XCDQO8fBakcq0HQ1UTi6rdYlWQY9Br2QbocrWht7X+v21+wtbTqvvZHqOIswx2CN4Wc0h597WxiCTU+BbjkPER1/qKSc0YdWtXHe2pIb9oPB9ltGvR4Yon2y+BSAxs19TnwaLvvQAvAm0kdoTz8KVlzgiUY6oLUHJhePrRo4lOQqdB4Hur1z9hTatccghh0rUY0IBnkG6mthig9SIfBJWDSWH7TzNiPjun3YUxl6dYzUbvgg2eVi9nAN1wGp3yaTaoPRFRbYPS/dZvBNVvZkaKxOcHlgsseQDEU2tK5XPbeMKZezgPvh/B79GHA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wcxkD5J8qOV8TRjT0frhiMalZmVZdzj7N1X75hvGczE=;
- b=FieFhsfNEOuhz+qj09tUBCVxtHX3eL8rD4MMXDvoqORV08pBcdl1im+s97FCWd8ZOnA6wDQwdTXdWLTT06yafVPg12WDmAlmhwYrl8WTQ5SoIgMy5P44RWW+vhMUmyTOTnXZLJS5E2nR9/dnbkWDFd2jvuP6QVcxJQapETiE7xQ=
-Received: from BN9PR03CA0759.namprd03.prod.outlook.com (2603:10b6:408:13a::14)
- by CH3PR10MB7777.namprd10.prod.outlook.com (2603:10b6:610:1ad::14) with
+ bh=nPDDXuN9KK1dXX51VNHjfA4dLXBfL5Kn00c4O86y1GI=;
+ b=ZjW8uLJ5iqG/4bvGndyhW6ocWKw51b2kqozJW+PPPcBiVsEbFCPwEt0IAvgpcZ6bNnMzOzArAjYRK7+P3qvMZyWEgtdg4NlB5xMsECMcvVbaBCALgreIDZSu8meKzI0W8YoPaoRvovY9UCktamGTV7W3WMvB2k+CiPspWyPDIsk=
+Received: from PH7PR02CA0024.namprd02.prod.outlook.com (2603:10b6:510:33d::10)
+ by CY8PR10MB6852.namprd10.prod.outlook.com (2603:10b6:930:84::10) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.10; Thu, 12 Feb
- 2026 14:55:33 +0000
-Received: from BN3PEPF0000B36D.namprd21.prod.outlook.com
- (2603:10b6:408:13a:cafe::73) by BN9PR03CA0759.outlook.office365.com
- (2603:10b6:408:13a::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.13; Thu, 12 Feb
+ 2026 15:11:00 +0000
+Received: from SJ1PEPF000023D6.namprd21.prod.outlook.com
+ (2603:10b6:510:33d:cafe::14) by PH7PR02CA0024.outlook.office365.com
+ (2603:10b6:510:33d::10) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.11 via Frontend Transport; Thu,
- 12 Feb 2026 14:55:18 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ 12 Feb 2026 15:10:54 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BN3PEPF0000B36D.mail.protection.outlook.com (10.167.243.164) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SJ1PEPF000023D6.mail.protection.outlook.com (10.167.244.71) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.0 via Frontend Transport; Thu, 12 Feb 2026 14:55:31 +0000
-Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9632.0 via Frontend Transport; Thu, 12 Feb 2026 15:10:58 +0000
+Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Feb
- 2026 08:55:31 -0600
-Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 09:10:52 -0600
+Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE214.ent.ti.com
+ (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Feb
- 2026 08:55:31 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 09:10:51 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 12 Feb 2026 08:55:31 -0600
-Received: from [10.249.65.90] ([10.249.65.90])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61CEtVPG3679336;
-	Thu, 12 Feb 2026 08:55:31 -0600
-Message-ID: <c46cdf45-3594-4531-946a-2ac32195a38e@ti.com>
-Date: Thu, 12 Feb 2026 08:55:31 -0600
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][master][PATCH] ti-core-initramfs: Rework logic
-To: Jon Cormier <jcormier@criticallink.com>, <denis@denix.org>
-CC: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
-	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-References: <20260211200414.1642061-1-reatmon@ti.com>
- <20260211202546.GJ11121@denix.org>
- <07050526-1409-40cf-9882-6233bbcebfbb@ti.com>
- <20260211220502.GK11121@denix.org>
- <CADL8D3bSMPw-GQ=7HMWGqW1axWoPSVV=PUbZvCsUKKKWjV2nfw@mail.gmail.com>
-Content-Language: en-US
+ Transport; Thu, 12 Feb 2026 09:10:51 -0600
+Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61CFAp3r3265776;
+	Thu, 12 Feb 2026 09:10:51 -0600
+Received: from reatmon by grumpy with local (Exim 4.97)
+	(envelope-from <reatmon@ti.com>)
+	id 1vqYLD-00000008XnP-3W6A;
+	Thu, 12 Feb 2026 09:10:51 -0600
 From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <CADL8D3bSMPw-GQ=7HMWGqW1axWoPSVV=PUbZvCsUKKKWjV2nfw@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
+	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH] ti-core-initramfs: Add TI_CORE_INITRAMFS_EXTRA_INSTALL
+Date: Thu, 12 Feb 2026 09:10:51 -0600
+Message-ID: <20260212151051.2036528-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B36D:EE_|CH3PR10MB7777:EE_
-X-MS-Office365-Filtering-Correlation-Id: cefece3e-56ec-4474-09ac-08de6a46c525
-X-LD-Processed: e5b49634-450b-4709-8abb-1e2b19b982b7,ExtAddr
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D6:EE_|CY8PR10MB6852:EE_
+X-MS-Office365-Filtering-Correlation-Id: 57a424f1-fbce-4d3d-cf33-08de6a48ed9a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|1800799024|4022899009|82310400026|376014;
+	BCL:0;ARA:13230040|82310400026|376014|36860700013|1800799024;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?35YEJOWLv+68EMBZgD/XlM0b8t/tNTJWnK+ieidJtgO97J613+MlIc3oNLQa?=
- =?us-ascii?Q?sId9jvqdG/fVs/LS9pAm6AK61mjUeRP9M5Ew+F0k4/Qhewnd+eYOo0tVT3KG?=
- =?us-ascii?Q?NskJgrwBBQooEbQwy5RFtktx+uvrUw0REkmz5YFGCFvewDGigl36O3nn0apN?=
- =?us-ascii?Q?+NUpxQ9GCvaeAmnWWa4o0IFwWcHiyxHvvtcvGYibrz6uNr558qwAy+2PTR6z?=
- =?us-ascii?Q?tcjhooJocGix4SmT72D5pGQ9n1kWIUmqIqTgBI8kd0SFIieRdjCD+nsalV1l?=
- =?us-ascii?Q?oZAHeVsGHnoR4XHEBMESeUHFwU9O15Mtq++qVsrezXKwOave1pe8f2iJudvN?=
- =?us-ascii?Q?moyw5aIrRogptnUjw2aTvFi301T6ADVzWjCTd4vrOoX1Zv/GhbdFDXSd7UMV?=
- =?us-ascii?Q?6xJ1nHs792jOD/E2pi92dEWQ1CkEteY4NTfkZMK7Onx67xq8dIkyuBGlmPEx?=
- =?us-ascii?Q?8fLcrX+QT4EwAlOZY86uJsCdlAwrDIrTq62jhgIvrGkB6yse7E6IMomnISoY?=
- =?us-ascii?Q?r+ua6MboEKJWUMTQDrTnqX9Eek7hdbNuHobGP2Qkv6EkW+fmCoAcPHYEZ48K?=
- =?us-ascii?Q?/u2UfhdsSHbMVTfxwlVk9f+AcnUlslaZv41LeIwkteinv2bNxWle6u7I/x2n?=
- =?us-ascii?Q?uUZCc7tnby9k+2OusUOZhW3Gp1GIKOcCkP8briLoegBftjB2YrCxYZjqftmM?=
- =?us-ascii?Q?VmPYlZkMgtLwf/Zwa3Y7blwF7rHC6tLYxcE7etvQpjEizXVqA6g1oRvpAxbT?=
- =?us-ascii?Q?ZiehqaQzwqq3ywkcvnZrt6ynbenH4VvdV/utn+7YzAFcvTQD+5wTuenZEtmi?=
- =?us-ascii?Q?9dfZrSiKi9/ofMWCqf31W/coSUuUVceZj/21cwxsD2Y2HjtMM3fyxBRywIgs?=
- =?us-ascii?Q?Rd2QojluWQUoMYcvqHKf/la0egC7/vTZm7cR2P8FxBjRj3O++WwkMHs2A+Fd?=
- =?us-ascii?Q?QpdO3wAe1JKfqmiJQoQ+8P94Q7oQirEvZMe0OuKZkPsLuT/b+le9kB+eH9mc?=
- =?us-ascii?Q?bx0EfFNn2KfFtW/3UZQGAyQjhMh+UIHJOqEOcXb/fSlQ+0xRuTTs07Yxs58I?=
- =?us-ascii?Q?Lmma3vMhnqDz9rXyOgAWz7hZTc3JLfKQvB6w8BhzapW3pQZp+GF8cARwSnfV?=
- =?us-ascii?Q?AUJkbS3kz6Mo5OVPz0TvuH97F50MikJQOes/ZTZY4tPQktGIe9j7dGGY/DlX?=
- =?us-ascii?Q?PE6KBhsbkLBKIu1AGPZWhWU5ZT3tc3r1MUZI6dLKJC/li2yOLkuvrqiMv75C?=
- =?us-ascii?Q?rkbKG9MQn4o2hs1DpKkpTg3Q9jd7PBu5ya0LJBOuKfb1CyiF/dIRIefdmYDm?=
- =?us-ascii?Q?xOptfnmeWib8V78+dgBRhVwKf09hx/0PYY4UHesGHck/ZEQUh5QMprkGfH8M?=
- =?us-ascii?Q?UeO5GbXl9a53hlGb7e/eRIngyIZlNUMyfn++fqX7njixpgCMiaD4h2IltbSn?=
- =?us-ascii?Q?7JltxuCgQJiVcS++Abw0qpm4JZGV6d50c5NIH+4CcmmSUdJxR2Wb5n8ieyOc?=
- =?us-ascii?Q?mJz60+D/hcaQyISVmAE9Rvi2ytW8+06EQ27fqj/dzhmsG+RDxkPY0szM08uV?=
- =?us-ascii?Q?FpocowMI+OFeQv7IK7vp1k0pUWwNbshcqpjEeTVANjyO1CoGv/TwEBM1xtR6?=
- =?us-ascii?Q?GQ=3D=3D?=
+	=?us-ascii?Q?DpTc+zCMLXjJiXchF0j9GvlTXfP6wRwFODDedmGByTvfy9gnATXfp04kwLjL?=
+ =?us-ascii?Q?TmwHdHjHI10Ps6yGniaM1U5prNYKmzrU8xee2Jkn8QbatI3zfEr4cTRyKl/9?=
+ =?us-ascii?Q?1O1x00JUIn91AnLPGeJdWVxWfj8eyUiEuiqIG0P3P/G0OlyzbdLT8jsarEsD?=
+ =?us-ascii?Q?tjCte8X1rwt9q3wOi3x7Hk2RJFB2DZ6+Iqrzd/fvvSAE1EP6Poo/NJXgF72V?=
+ =?us-ascii?Q?TO7Hi/fvH0nBivisB/LSkusa5TwWx6HLR+hvcefCtRDc9g9LwjLnKYEJ+FTl?=
+ =?us-ascii?Q?BnVxMC41lPopVyRd6+c09+AClNb1IFQulOSLoC5Q2eSszSRdi32CGxl9x32O?=
+ =?us-ascii?Q?HCyPcKLYqU+Ew8XVsovZ4ZqMRVht3fKToNT2AZqYehosc5T2mgl5ksGdiTM7?=
+ =?us-ascii?Q?QY0bHxk5y2crXa/39eBRqb4IgDX9aP6WypMksoY0Si0CHZ2CE7xSbhcb90WW?=
+ =?us-ascii?Q?I/eNQ0wy9aVjPtZ+UmAfo1Xtgp65qasxhGwT2eQNPOghF3rjvDoanSScVCPp?=
+ =?us-ascii?Q?ZQ4wI8RtpgYhdXvnsP7SDiR/iWnJy9+bMI8O5EhQn8OEmeNr5JO6d9VFD+MM?=
+ =?us-ascii?Q?ntBpz1+/Epj0IQn1wMFiDXcy0fdhvoy++W8dp4kVYamsEioPf6MCTz7Qqa2X?=
+ =?us-ascii?Q?500jEA47o1xSwx3FEMMdsByhecTOQLiLvaL6IJIt0Sgc3Huy4dCZeKliyoTF?=
+ =?us-ascii?Q?NWMcCHWchvVz3yLj/7Fv1Sf+21whqAL9mpjdbgskaNWYbBI3ZMLZhjQUSo7v?=
+ =?us-ascii?Q?O+K9YrD1Fr7VvQT0L4wmMIZev9LvmRIpq51qyn2WM3BtepZgZeW/to83kT2s?=
+ =?us-ascii?Q?5zFjaVYJ4TLvfnpax8pSXLN8FiFYKutl175sdVVCv8sZurtEftBnhHAhIEa9?=
+ =?us-ascii?Q?nT2NR5agJltdEh74rm6f/0gBwauKl2IRcPLyOLRHlhDR0NLmaTop+3PbYJH/?=
+ =?us-ascii?Q?m+03BZQIOdMAKifpu1kXg058s1ib/oSEBR29kK3A8tFW6YVFjX/IzsngRPbG?=
+ =?us-ascii?Q?IPT6Rucc/2i52Vez6vWDw52SDdFdufX/TOHbGdO5JHXMjroBWSY+fItbFTIF?=
+ =?us-ascii?Q?GeWI7VL80L1nUVdbYXLaaMnvyyvv8PzXGpuJOCL9qZwh0PhsiLgxhQN6nlr8?=
+ =?us-ascii?Q?PsyObSIredQMBnSZhRIBRL1ZFUQ5/ySOJDfy3v9xTLmVxj4rGW0gub47hvvU?=
+ =?us-ascii?Q?u9fS0xL16ci3Pv/QtCSZPDqNFpaU+KIiAfVyWtnkCmmGn1KwxFiFc6n4+vN0?=
+ =?us-ascii?Q?HtHIqiCXtenPrCfKhQqPi/ysy/XkKVJfG++Pikr8qmZUZ2dkfMTLS7FBCMr+?=
+ =?us-ascii?Q?fOsgKTTBKP9XREqoinQTYiVKR0MN1sMHFT9SKqDTmNSsR5D6THZQfdfTT8FS?=
+ =?us-ascii?Q?F5BYiR43RR/Pm7VmPZB+Y4mq1XnIbk3jYzI400QXis4vDxSZv1T+lK/HZzuZ?=
+ =?us-ascii?Q?g3cykYT11I+UoOvHHPPn4/QWdECToX+4FDuAgbUWh44xkcE5vTT9ESfu+7bx?=
+ =?us-ascii?Q?iZynJY0cBQpqMDlBTwF6HTDRTb1Gr5+0a/4PXlEwKCV4Ij1Yig9eZnHiUnc9?=
+ =?us-ascii?Q?qrfZqwR8tL6pvHX2mY/KKGd16IV4FUPOC5o5yJ4FaBHWEbpqJ5dQGQdP7mPt?=
+ =?us-ascii?Q?kP/TfMVlWXbb5p6j01CNwsULkLd8J0bE0pDvKkFoTXklXQ7CtFAgJroXRbPu?=
+ =?us-ascii?Q?6zMjww=3D=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(4022899009)(82310400026)(376014);DIR:OUT;SFP:1101;
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	/QT7nGL3T/3RWeJkNyHRTaWqroNQ8ulmOYY64OxyKXvqVJ4AqzWtw5ZbwSTDrfsuNHP7gbMdDiKtXfHFLMNEZ+4MhfwfiJvs//MSacC3pumAtEYlBanonToBR8RHOvSo2c54mXSUIXuegCosxJFdu2616oen/EEwclU+oscxk2F+e7B3lwr3eQMbmBFz9GtOXOfaHDcA2jn9CSlqRhw3aOwIyMudzlKPw/mjC9sfSEySVTY4ETyff16i/Pv8rmVYeiYKQFeR8POg+RgBPZ0hvolNWaK7UD3nuOPHQbCx9yk/cI1MengPbR0q9ESXBzGgNxHjDpE4nw8i5Qk1m7DEn46qPSvCnbfBGZfFMSaJyBvPGfW8ftaWckKxABMtzZqBIVSmyfsdPV8GCO5WqUQhkt7hC1/tybk+IROTHOPWtSdt6sviUqYReHttRl3wjcZy
+	BgorT2isR4zqlUFzDbg/sP53dTm1Z19IiyQLFpsxRDqLKOK1dr2lzbHNDKpWCTiHi0uwrxIU+DI9KLMbGlmm+Bi8i24gOqgydZBP4pomSHtFi4q3kikmzQgDcwuKljlhUlor2keP7O0D6TOvIM/RiDCh+SRfxAIiRNdbF+Y7RHdUFJVD1/6J687ycPwddw373k/mjmhQMVUMCd1HEasW+PI6xiLxYUQKLN1Z6r5VxrwExoWXowiQXeb+LTs4lUeF2fcTECQEypAsy5Uddr0bAYTFJjnI1ymf9Mp/jTp8DIQvde16Lj9z7kN2EVCm1NYdSMaNWe5ffaZWMi2+prA9bntaoEnXYXxFUrrWejEKYGNlaVGYS9iSQabQnmbzf4uYpzdquDd9K4sYHZTkoIxLS1MV7AcQ4M+C0xHxEjckrYhiGlik+HDJasgmVDkVZHxj
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Feb 2026 14:55:31.9856
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Feb 2026 15:10:58.8456
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: cefece3e-56ec-4474-09ac-08de6a46c525
+X-MS-Exchange-CrossTenant-Network-Message-Id: 57a424f1-fbce-4d3d-cf33-08de6a48ed9a
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	BN3PEPF0000B36D.namprd21.prod.outlook.com
+	SJ1PEPF000023D6.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7777
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR10MB6852
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 12 Feb 2026 14:55:44 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19502
+ <meta-ti@lists.yoctoproject.org>; Thu, 12 Feb 2026 15:11:15 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19503
 
+Add TI_CORE_INITRAMFS_EXTRA_INSTALL variable that another layer can use to
+install additional packages/changes into the initramfs.  Setting this
+variable will also turn on the initramfs even if the platform does not
+have kernel modules to include.
 
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc | 3 ++-
+ meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb  | 7 ++++++-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
 
-On 2/12/2026 8:52 AM, Jon Cormier wrote:
-> On Wed, Feb 11, 2026 at 5:05=E2=80=AFPM Denys Dmytriyenko via
-> lists.yoctoproject.org <denis=3Ddenix.org@lists.yoctoproject.org> wrote:
->>
->> On Wed, Feb 11, 2026 at 03:57:28PM -0600, Ryan Eatmon via lists.yoctopro=
-ject.org wrote:
->>>
->>>
->>> On 2/11/2026 2:25 PM, Denys Dmytriyenko wrote:
->>>> On Wed, Feb 11, 2026 at 02:04:14PM -0600, Ryan Eatmon via lists.yoctop=
-roject.org wrote:
->>>>> Clean up the logic of the new ti-core-initramfs to reduce the impact =
-on
->>>>> downstream layers.
->>>>>
->>>>> - Flip the logic in the machine .conf files to track the list of
->>>>>    required kernel modules for that platform, but if the variable is =
-set
->>>>>    to "" then the ti-core-initramfs will not be created.
->>>>>
->>>>> - Redo the logic of when we require creation/usage of the initramfs t=
-o
->>>>>    just platforms that need it (ie that set TI_CORE_INITRAMFS_KERNEL_=
-MODULES).
->>>>>
->>>>> - Add a big switch to disable the initramfs entirely.  In that case, =
-the
->>>>>    user is on their own to make sure that the kernel has everything i=
-t
->>>>>    needs to boot either via config fragments to turn on the needed
->>>>>    modules, or by using the TI_CORE_INITRAMFS_KERNEL_MODULES
->>>>>    variable to populate their own initramfs.
->>>>
->>>> In our discussion we agreed to use TI_CORE_INITRAMFS_KERNEL_MODULES to
->>>> determine whether to enable initramfs or not. While I don't mind addin=
-g
->>>> a separate global TI_CORE_INITRAMFS_ENABLED switch, but I now wonder i=
-f
->>>> two checks are redundant and whether it makes sense to create initramf=
-s
->>>> even when the list of modules is empty, if it's enabled?
->>>
->>> I thought about this and went this way for a reason.  If you want to
->>> turn off the initramfs, but you still want the list of what modules
->>> are required say for your own initramfs, then the list is gone.
->>> Because the list was the switch.
->>>
->>> By splitting them into two lists, we gain the fact that we don't
->>> force the initramfs on platforms that don't need it, and you can
->>> still turn it all off if you want but have all of the infrastructure
->>> in place to use it in your own layer later.
->>
->> I think you missed my point - I'm not against the "enable" flag, but sin=
-ce we
->> now have it explicitly, does it make sense to also build the initramfs w=
-ith an
->> empty modules list when the "enable" flag is set to "1"?
-> Being able to create an initramfs without modules makes sense to me.
-> We've had to use initramfs before for mounting filesystems in a
-> particular order for example.  And didn't really need extra modules at
-> the time. Just a thought.
-
-I am going to send a second patch that adds support for adding=20
-additional packages to the ti-core-initramfs that also turns it on.=20
-That way a distro can chose to always turn it on and add in that kind of=20
-change.
-
-
->>
->>>> Also see below for another comment.
->>>>
->>>>
->>>>> +++ b/meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc
->>>>> @@ -0,0 +1,29 @@
->>>>> +#-------------------------------------------------------------------=
------------
->>>>> +#
->>>>> +# To turn off the ti-core-initramfs.cpio creation just set:
->>>>> +#
->>>>> +#   TI_CORE_INITRAMFS_ENABLED =3D "0"
->>>>> +#
->>>>> +#-------------------------------------------------------------------=
------------
->>>>> +TI_CORE_INITRAMFS_ENABLED ?=3D "0"
->>>>
->>>> Did you mean to weakly set it to "1" here? :)
->>>
->>> Doh.  I did.  That was from testing.  I'll send a v2.  Good catch.
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#19491): https://lists.yoctoproject.org/g/meta-ti/mes=
-sage/19491
->> Mute This Topic: https://lists.yoctoproject.org/mt/117763070/7902621
->> Group Owner: meta-ti+owner@lists.yoctoproject.org
->> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [jcormier@cr=
-iticallink.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
->=20
->=20
-
+diff --git a/meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc b/meta-=
+ti-bsp/conf/machine/include/ti-core-initramfs.inc
+index 3b749e37..9d3cc612 100644
+--- a/meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc
++++ b/meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc
+@@ -5,9 +5,10 @@
+ #   TI_CORE_INITRAMFS_ENABLED =3D "0"
+ #
+ #-------------------------------------------------------------------------=
+-----
+-TI_CORE_INITRAMFS_ENABLED ?=3D "${@ '1' if d.getVar('TI_CORE_INITRAMFS_KER=
+NEL_MODULES') else '0'}"
++TI_CORE_INITRAMFS_ENABLED ?=3D "${@ '1' if d.getVar('TI_CORE_INITRAMFS_KER=
+NEL_MODULES') or d.getVar('TI_CORE_INITRAMFS_EXTRA_INSTALL') else '0'}"
+=20
+ TI_CORE_INITRAMFS_KERNEL_MODULES ?=3D ""
++TI_CORE_INITRAMFS_EXTRA_INSTALL ?=3D ""
+=20
+ TI_CORE_INITRAMFS_IMAGE =3D "ti-core-initramfs"
+ TI_CORE_INITRAMFS_IMAGE_FILE =3D "${TI_CORE_INITRAMFS_IMAGE}.cpio.xz"
+diff --git a/meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb b/meta-t=
+i-bsp/recipes-ti/initramfs/ti-core-initramfs.bb
+index ddf4e5b4..0180f09e 100644
+--- a/meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb
++++ b/meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb
+@@ -15,7 +15,12 @@ IMAGE_NAME =3D "ti-core-initramfs"
+=20
+ export IMAGE_BASENAME =3D "${IMAGE_NAME}"
+=20
+-PACKAGE_INSTALL =3D "packagegroup-ti-core-initramfs"
++TI_CORE_INITRAMFS_EXTRA_INSTALL ?=3D ""
++
++PACKAGE_INSTALL =3D "\
++    packagegroup-ti-core-initramfs \
++    ${TI_CORE_INITRAMFS_EXTRA_INSTALL} \
++"
+=20
+ # Ensure the initramfs only contains the bare minimum
+ IMAGE_FEATURES =3D ""
 --=20
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+2.43.0
+
 
