@@ -1,191 +1,195 @@
-Return-Path: <ivitro@gmail.com>
+Return-Path: <jcormier@criticallink.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1121DEB4911
-	for <webhook@archiver.kernel.org>; Thu, 12 Feb 2026 11:42:44 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.43199.1770896563018819491
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DD93EE3694
+	for <webhook@archiver.kernel.org>; Thu, 12 Feb 2026 14:52:25 +0000 (UTC)
+Received: from mail-yx1-f42.google.com (mail-yx1-f42.google.com [74.125.224.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.46772.1770907943335968256
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 12 Feb 2026 03:42:43 -0800
+ Thu, 12 Feb 2026 06:52:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kEi+GeQ5;
- spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: ivitro@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-436309f1ad7so4379546f8f.3
-        for <meta-ti@lists.yoctoproject.org>; Thu, 12 Feb 2026 03:42:42 -0800 (PST)
+ dkim=pass header.i=@criticallink.com header.s=google header.b=fwZCAQwy;
+ spf=pass (domain: criticallink.com, ip: 74.125.224.42, mailfrom: jcormier@criticallink.com)
+Received: by mail-yx1-f42.google.com with SMTP id 956f58d0204a3-64aea64bf15so3370504d50.2
+        for <meta-ti@lists.yoctoproject.org>; Thu, 12 Feb 2026 06:52:23 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770907942; cv=none;
+        d=google.com; s=arc-20240605;
+        b=E5x57nFACMw8Xiv0+ZiDzLcV6SWyu+LsFkFUQJoBwnwknYGA2zzZVI18qfqPHzuAPX
+         f1fINlt9AGm1ibqLenTN+1TqP6YYMI8KsGZ9yWPngx8IVa/PVEmy9M23MMuzguVz4lbA
+         G7B1MG6RTiUwZrQ04DekwsS5Qq1la/r7kg55hCnT6WEspknsVOaKkNzP6jY028yvoA+d
+         XAf4stuDo/vfG/Pl2U1iggmVd6Ly7SDu+O0wj6ySKKPMSwutlR5xUFpxOc7OAlFtkqtV
+         TJwfKm22UKWCDN74E3m5e+yRNFESzMUZBQZxBjtDHp/T3KLeBcF4y/yGRX36nghzh4kl
+         c42g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=szxgbDfyIvpa8dCN5yAK54rhmK+rDfNfsiH9z/Pg/rQ=;
+        fh=959eXkufwdK22WQlpVLcoCgV6cE4uduL0EUGYljt8ss=;
+        b=Hb9VGqyCcPZ7CA2k0IoZv4hophvQYb9Whoh1MCBCbLNt+3psRM4ctpTD0b6Q1mEvcl
+         HLovBN10lC7JyiBfjhp//gZQQxdvaNQcATbMsGzQK28H25ekj47F9Tt6ISB3WsKias1M
+         lqIacu4qvrDaKUkNvbuCLT0ns4thupYmC1Msgek6bx8GRpcgjR32Z9O84ALSBTELk4Zv
+         txF/xhM+fCajjLwy2y7gEAEJ0ItGP9jlhuTKSwxHj9DBR4RCNnhph4mPWybLQs50Lgkz
+         mx5bBg8NaS2lMWNKhMyTDcf5lEIrEsclhDOyu64k5kg2GXcYPG+YVihY1GyK+cFUuvMc
+         8xqg==;
+        darn=lists.yoctoproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770896561; x=1771501361; darn=lists.yoctoproject.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=w7l5NHd6+59alQ1XwLCaxyxiNVzro/Y0ZtvVE+iKvhc=;
-        b=kEi+GeQ5rmDeLOLsDJ/WjkVRAXHdxemsJLHK5fhDYoHeZ5yV9UcNHUUeYgAq2B39M6
-         EiE7UseB+/SUJTYsxI0rNMAIRmbU+v0CFkB9fltP24szMi/2ratBkKQgyk90gzmNKRm0
-         jpmqiVhoDPyH1LO0hYY9wn4ZLEFQc8hkINzDd0j3MqrwzJIvDCrL5KiVtjdc0sr2OlIn
-         7tUXXBt1LGIPSW1ob4ZcnoectRFe7KVtiDKhgBtt3O+l+M6g44ZV9AWEIvFpp/Ovyvml
-         bceVfEzj1vaEA2hXdnVk+cJYWWeyaqCamXCnNjkPl4NzlkNtymQxDnHJHp2E41ljGr7q
-         dqiQ==
+        d=criticallink.com; s=google; t=1770907942; x=1771512742; darn=lists.yoctoproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=szxgbDfyIvpa8dCN5yAK54rhmK+rDfNfsiH9z/Pg/rQ=;
+        b=fwZCAQwyN1ekrT0zl0/NqpCu6DbO6Ozb9DXTZ+XHMH14YbUXdCBjvKaGavMfV3kwAl
+         k0CWXM/6Q2qnwYfGHat81cHPclyWCtQR5zvbFDf8vxnEuDxX3NrHLNNnhsCcJ4tEeIwc
+         uDNRAktnhlYMFofjvolMrbaz/1CWzqiiDGs1zqg+AS5naWSjJcwla0+6ZnsMdJTzRjLE
+         LKcG9KIhmaC6MZrr6VwqOoSvEywXCwkBnDd0clnsyxuVIjqFA03GsX67k7o9lzTFHWci
+         W5kTOp5plscFsI46NAOBX6uJPILBMXvE3A12wBLGpAJslKXlf8GEbYygQcLp01nO1u74
+         bLDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770896561; x=1771501361;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=w7l5NHd6+59alQ1XwLCaxyxiNVzro/Y0ZtvVE+iKvhc=;
-        b=rU8UZxGZ9HXKMk1Qhfrtz+0pbfpilU61j3YqDfnYWNHSjr4J+YHd8T0E30UHFboRZw
-         V+2tkBHtMZ7iYV0rrIHYqUj3DksfnBPnh3RK5KqFd84t+WjJN2xMUpu+bDw3r48cRMa9
-         aFQFt8bjG2ZndHF9sKhBgZFjYJugPpJdJKygYEV8V8Eb9ptqLtLXN1AvSgBohQrs0s0S
-         Fo/PmGgwOGYoPrz31HW/dp5errb/nJgmiTJJp5EaSS1cl4d6QLM6YFQxIpPbdJnSkWOl
-         W7Ogj+Uvaad1Jo0v++ooAOut9VqzCYNY5u/YI9BwsPPQ/EFC7gkdAuBIN4z7VX9ECABA
-         VSqg==
-X-Forwarded-Encrypted: i=1; AJvYcCWtkXBhmR2WrHePm2Xk5rzm3brejSb2//INWsBJR61RLPHtzSlrNwKAQT3vBrWsGvkhYf/ONm/b@lists.yoctoproject.org
-X-Gm-Message-State: AOJu0YxpLFl4tPxXiiaz7MM0NpZQdi3cS3MxdiogPcwxTam+WlSMwyHm
-	fmPhJ3NcQdUUUzPn3lFWzHmPW29ZpS9aNObbV5uKo/h0xCvwwyrWbLBH
-X-Gm-Gg: AZuq6aK3JStawC2gh0NsaHf+0slC/Lev/16IciVdUx8qz5NDGO46hfJsWiqKwmFomKa
-	b0EZk4mVsWIZD9sNENKn+V7sbtR1pL8Aiy77UwEnxXp8F7B0GT5zOoVObWlSiM52N+ee/Cxbu9T
-	V46dNylAseX5HG5XcQVfv1GCdxpfb7HbisucJx4MlKdp0lKrM/YiD2TwyQc2i6Xcn7+LjPWIOAh
-	hY35V9NDjn8YVKyWvthFDaARiQ+M9rVIIAW50/nnsnJfNfsi2RQkXOEkSLkoB+298pqOsavfOO4
-	bohjUleHdjWjyjQsafiWU/FxM8lPK1p1YRtuxYhn27AjadCZhE2QwYnk92kDbcWivAhVTxhF+YG
-	y37Bu/6EBL2BHFmIoVhCduCBogj5SDWyGAxiPDY5TgG1LkylCafIe/RfGJldCmZleS6im2s1n++
-	4xnDCekuowMRHPkHk3wBxFh18iyzQR41SxAUjzrol/eDXGAA==
-X-Received: by 2002:a05:6000:60f:b0:432:5c34:fb32 with SMTP id ffacd0b85a97d-4378acb1979mr4914954f8f.23.1770896561025;
-        Thu, 12 Feb 2026 03:42:41 -0800 (PST)
-Received: from vitor-nb.Home (bl19-170-125.dsl.telepac.pt. [2.80.170.125])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43783d50f3asm12042685f8f.13.2026.02.12.03.42.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Feb 2026 03:42:40 -0800 (PST)
-Message-ID: <bb0eb4c0bf8543175b3aa50f0d954aafce56d576.camel@gmail.com>
-Subject: Re: [meta-ti] [meta-ti-bsp] SERIAL_CONSOLES defined at SoC level
-From: Vitor Soares <ivitro@gmail.com>
-To: Andrew Davis <afd@ti.com>, meta-ti@lists.yoctoproject.org
-Cc: reatmon@ti.com, denys@konsulko.com, vitor.soares@toradex.com, 
-	francesco.dolcini@toradex.com
-Date: Thu, 12 Feb 2026 11:42:39 +0000
-In-Reply-To: <d0aabf72-f9b8-4864-b07e-7a0d4b3bab93@ti.com>
-References: <4e08fa3658b1e54add6d5476c7234e86dbcbb60c.camel@gmail.com>
-	 <d0aabf72-f9b8-4864-b07e-7a0d4b3bab93@ti.com>
+        d=1e100.net; s=20230601; t=1770907942; x=1771512742;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=szxgbDfyIvpa8dCN5yAK54rhmK+rDfNfsiH9z/Pg/rQ=;
+        b=SVj+qMk+jT+9MQWEaNTaOdjYYu/WyQHHAt0gq76yBvj13RaKXQAnyedmeNOlASi66m
+         x6yQIDt6JhrTkzFstvo9K2XBClpnrJAuuUX/VGcdUO6y5b9seKPgDjnZFqN+IZlQsalY
+         GuIhR7pJYtceUFfUmZGm03K5+AHxTligygFSvMRneYE/jzAS3UjOeaeyuOvg2xwmHgRe
+         nbYoXM5aUG9eS6GwkNGNa2VBuZw1IUdTX7vESwlzkhi6RiEt5Z/Tvyl9yAcEyIFzupH5
+         gLUnR5P8kqjQFATv8CHdlMZHpWvUcrW9o1GyfBEbrsHq3WltKEUw1nmjdxpWZNp5MXGc
+         L3Sg==
+X-Forwarded-Encrypted: i=1; AJvYcCXj7YR4qVyggb9H+D4vZcy3YH9M7/lLwQXw74B7XH/v4BrvBnSivhBDLZFFTxyrj6haFudtPKLe@lists.yoctoproject.org
+X-Gm-Message-State: AOJu0Yz2RqWPSMzotYyFpbNy3/oN2KSRZxJbXXf7hO+ph2OLUTu+IiOo
+	0HjpPLIHmAjaczfXcHpvxy7KTYyp0qHgK4493F4IGeK/mrAymbQEGRpbt3lB/xqk0Uco1yufDeG
+	3ek76dm6kn067AfLPyvNE4ejapFVQ/awYFXmzXdFn
+X-Gm-Gg: AZuq6aKLeCm6zXnZ4QqsKwzeo0XSYyQgyTOMNOFss84EC1NOCP5d5Fp9c8lWzPb5x/G
+	/I1FPcIppfGkFo1MQUIFpEVD3hOtGaGrWL2xVD87rP76b3jOpmf8HZugzC8buF3RVRNmt5xvIDe
+	XI8sOgitgVLeV5rZQ4cumcmOyRKN4LleAxxd+Oht5ITxnUF80TGMcJT0XMMplzUvrNbCU9dDLJS
+	ToUOpB212kjexbuNEQBVe149rfmsFxdHUoOlOXuvf4ZKN8muB96nCCzcbf1U1wkLDWf4eFUhcEJ
+	uUskzA==
+X-Received: by 2002:a05:690c:6c0e:b0:794:ef94:1222 with SMTP id
+ 00721157ae682-797931dd700mr43307737b3.55.1770907942208; Thu, 12 Feb 2026
+ 06:52:22 -0800 (PST)
+MIME-Version: 1.0
+References: <20260211200414.1642061-1-reatmon@ti.com> <20260211202546.GJ11121@denix.org>
+ <07050526-1409-40cf-9882-6233bbcebfbb@ti.com> <20260211220502.GK11121@denix.org>
+In-Reply-To: <20260211220502.GK11121@denix.org>
+From: Jon Cormier <jcormier@criticallink.com>
+Date: Thu, 12 Feb 2026 09:52:10 -0500
+X-Gm-Features: AZwV_QhhihsMk-tMV0sXTvkHKAcs45-TcUdqppEm-Ei7g39fIC5wdgxD5ialOSo
+Message-ID: <CADL8D3bSMPw-GQ=7HMWGqW1axWoPSVV=PUbZvCsUKKKWjV2nfw@mail.gmail.com>
+Subject: Re: [meta-ti][master][PATCH] ti-core-initramfs: Rework logic
+To: denis@denix.org
+Cc: reatmon@ti.com, Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko <denys@konsulko.com>, 
+	meta-ti@lists.yoctoproject.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2.1 
-MIME-Version: 1.0
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 12 Feb 2026 11:42:44 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19500
+ <meta-ti@lists.yoctoproject.org>; Thu, 12 Feb 2026 14:52:25 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19501
 
-On Wed, 2026-02-11 at 18:52 -0600, Andrew Davis wrote:
-> On 2/11/26 11:15 AM, Vitor Soares via lists.yoctoproject.org wrote:
-> > Hi,
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=20
-> > While working on our Toradex Aquila AM69 SoM support, we noticed that k=
-3.inc
-> > defines:
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=20
-> > SERIAL_CONSOLES =3D "115200;ttyS0 115200;ttyS2"
-> >=20
-> > This caused systemd to enable serial-getty@ttyS0.service=C2=A0on our bo=
-ard, where
-> > ttyS0 maps to main_uart4 - a user-facing UART, not a debug/console UART=
-. The
-> > getty continuously outputs a login prompt, interfering with the interfa=
-ce.
-> >=20
-> > This made us question whether SERIAL_CONSOLES belongs in SoC-level incl=
-ude
-> > files
-> > at all. Our understanding is that the console getty is already handled
-> > automatically by systemd-getty-generator from the console=3D kernel com=
-mand
-> > line argument, which makes SERIAL_CONSOLES potentially redundant for th=
-e
-> > console
-> > UART. Any additional UARTs beyond the console are board-specific and
-> > arguably
-> > belong in each machine config rather than a shared SoC include.
-> >=20
-> > We are not 100% certain about this reasoning and would love to hear the
-> > rationale behind the current approach. Are we missing something? Would =
-it
-> > make
-> > sense to either remove SERIAL_CONSOLES from the SoC includes or at mini=
-mum
-> > use
-> > =C2=A0 a weak assignment (?=3D) to allow boards to override cleanly?
->=20
-> We simply noticed almost all our EVM boards used the same console UARTs a=
-nd so
-> refactored the definition into a more common place. But yes you are corre=
-ct
-> that a file like k3.inc seems like it should contain only items common to=
- all
-> users of the K3 SoC family, and not simply common to TI EVM boards. Chang=
-ing
-> the assignment in k3.inc to a weak one seem reasonable (although I think =
-you
-> can still just override regular assignments after you include k3.conf in
-> your board conf)
->=20
-
-
-You're right we can override it in our board configs, but I wanted to share=
- why
-we think this is worth reconsidering.
-
-The issue is that SERIAL_CONSOLES in k3.inc mixes SoC capabilities with boa=
-rd-
-specific UART usage.
-
-The K3 SoC provides the UART peripherals, but doesn't determine which ones =
-are
-used for console, user interfaces, or other purposes - that's decided at th=
-e
-board level.
-
-Different boards use UARTs differently. On TI EVMs, ttyS2 or ttyS0 might be=
- the
-debug console. On our Aquila AM69, ttyS2 is the console but ttyS0 is a user=
--
-facing UART. Same SoC, different UART assignments.
-
-SERIAL_CONSOLES creates getty login prompts on listed UARTs, which is a
-board/system integration concern.
-
-If TI's EVM boards share the same UART configuration, would it make sense t=
+On Wed, Feb 11, 2026 at 5:05=E2=80=AFPM Denys Dmytriyenko via
+lists.yoctoproject.org <denis=3Ddenix.org@lists.yoctoproject.org> wrote:
+>
+> On Wed, Feb 11, 2026 at 03:57:28PM -0600, Ryan Eatmon via lists.yoctoproj=
+ect.org wrote:
+> >
+> >
+> > On 2/11/2026 2:25 PM, Denys Dmytriyenko wrote:
+> > >On Wed, Feb 11, 2026 at 02:04:14PM -0600, Ryan Eatmon via lists.yoctop=
+roject.org wrote:
+> > >>Clean up the logic of the new ti-core-initramfs to reduce the impact =
+on
+> > >>downstream layers.
+> > >>
+> > >>- Flip the logic in the machine .conf files to track the list of
+> > >>   required kernel modules for that platform, but if the variable is =
+set
+> > >>   to "" then the ti-core-initramfs will not be created.
+> > >>
+> > >>- Redo the logic of when we require creation/usage of the initramfs t=
 o
-have a ti-evm-common.inc instead of putting it in the SoC include?
+> > >>   just platforms that need it (ie that set TI_CORE_INITRAMFS_KERNEL_=
+MODULES).
+> > >>
+> > >>- Add a big switch to disable the initramfs entirely.  In that case, =
+the
+> > >>   user is on their own to make sure that the kernel has everything i=
+t
+> > >>   needs to boot either via config fragments to turn on the needed
+> > >>   modules, or by using the TI_CORE_INITRAMFS_KERNEL_MODULES
+> > >>   variable to populate their own initramfs.
+> > >
+> > >In our discussion we agreed to use TI_CORE_INITRAMFS_KERNEL_MODULES to
+> > >determine whether to enable initramfs or not. While I don't mind addin=
+g
+> > >a separate global TI_CORE_INITRAMFS_ENABLED switch, but I now wonder i=
+f
+> > >two checks are redundant and whether it makes sense to create initramf=
+s
+> > >even when the list of modules is empty, if it's enabled?
+> >
+> > I thought about this and went this way for a reason.  If you want to
+> > turn off the initramfs, but you still want the list of what modules
+> > are required say for your own initramfs, then the list is gone.
+> > Because the list was the switch.
+> >
+> > By splitting them into two lists, we gain the fact that we don't
+> > force the initramfs on platforms that don't need it, and you can
+> > still turn it all off if you want but have all of the infrastructure
+> > in place to use it in your own layer later.
+>
+> I think you missed my point - I'm not against the "enable" flag, but sinc=
+e we
+> now have it explicitly, does it make sense to also build the initramfs wi=
+th an
+> empty modules list when the "enable" flag is set to "1"?
+Being able to create an initramfs without modules makes sense to me.
+We've had to use initramfs before for mounting filesystems in a
+particular order for example.  And didn't really need extra modules at
+the time. Just a thought.
+>
+>
+> > >Also see below for another comment.
+> > >
+> > >
+> > >>+++ b/meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc
+> > >>@@ -0,0 +1,29 @@
+> > >>+#-------------------------------------------------------------------=
+-----------
+> > >>+#
+> > >>+# To turn off the ti-core-initramfs.cpio creation just set:
+> > >>+#
+> > >>+#   TI_CORE_INITRAMFS_ENABLED =3D "0"
+> > >>+#
+> > >>+#-------------------------------------------------------------------=
+-----------
+> > >>+TI_CORE_INITRAMFS_ENABLED ?=3D "0"
+> > >
+> > >Did you mean to weakly set it to "1" here? :)
+> >
+> > Doh.  I did.  That was from testing.  I'll send a v2.  Good catch.
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#19491): https://lists.yoctoproject.org/g/meta-ti/mess=
+age/19491
+> Mute This Topic: https://lists.yoctoproject.org/mt/117763070/7902621
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [jcormier@cri=
+ticallink.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
-Happy to help with refactoring if you think this direction makes sense.
 
-Thanks,
-Vitor
+--=20
+Jonathan Cormier
+Senior Software Engineer
 
+Office:  315.425.4045 x222
 
-
-> Andrew
->=20
-> >=20
-> > Thanks,
-> > Vitor Soares
-> > Toradex
-> >=20
-> >=20
-> >=20
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#19482):
-> > https://lists.yoctoproject.org/g/meta-ti/message/19482
-> > Mute This Topic: https://lists.yoctoproject.org/mt/117760181/3619733
-> > Group Owner: meta-ti+owner@lists.yoctoproject.org
-> > Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub=C2=A0[afd@t=
-i.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >=20
->=20
-
+http://www.CriticalLink.com
+6712 Brooklawn Parkway, Syracuse, NY 13211
 
