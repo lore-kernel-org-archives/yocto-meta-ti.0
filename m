@@ -1,216 +1,286 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <ivitro@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54D0EE83842
-	for <webhook@archiver.kernel.org>; Mon, 16 Feb 2026 23:13:02 +0000 (UTC)
-Received: from BL2PR02CU003.outbound.protection.outlook.com (BL2PR02CU003.outbound.protection.outlook.com [52.101.52.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.882.1771283572448910433
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 852AAE83848
+	for <webhook@archiver.kernel.org>; Mon, 16 Feb 2026 23:50:32 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1467.1771285823467890089
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 16 Feb 2026 15:12:53 -0800
+ Mon, 16 Feb 2026 15:50:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=dybRgDe5;
- spf=pass (domain: list.ti.com, ip: 52.101.52.41, mailfrom: prc@list.ti.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bbhGDEaULQQNmAWSHdIUl6a+6uJOY698YnTBjrw+QGIzzF8cQ+BRKDznO9KnV81l8SeBlOGgdVU5IndCUA8Id8k+edcu0VkwhAfUBJKaWAY1r/qDhCwHCGeVY/Smq2yQePp0dOK/SvLDBo0pOL+DMjS3Oy7k54kOf8grJ/w4BIVVD1KLPlsIL6rT53NtmPPo9iWqcD/u6Aff/tZCHRsBj9tx5b8aiT89Y+66nRU45KZD719wkHg9r0aa5ZRHhnP5Hc+iUSE5TtxcMMXk6OgiY4EHSPaM4LbbGvX3GpE88OWdvR1OgWRdKyqVYCPYA3hYLdiCESd/igzsACHsVbfKTA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7de3NPrdX2x3iicPOJJ6qUlLhJ2aBA9WcVtLQtJDc5g=;
- b=ppIc/ngd2hesJOkB9lpr2AJ0+I+ny2+qC0mytL3cuptb+7RWMTx8QlKIyUGR3NBgHXIlCdszEf2eHNkP8j0hU7na6vkdP7SqXo5CAXD44MxwhCWwNa1b7JQE3K+/bOZBr8STF4AWXDnTyZd0/Afhu1QFtMkLJrSV9/LccJWqba+7C1gkcIJCKSzclmJjj1CYdb6u6zZDMDxZL8A7Pq+jAZLumUsSUBuWAI5eGJ496lCfrZrXzTLI9axy4hFNEzoS+UlLqjL7m7GuR+lexH9kdFagGswmbc1N4Ev6ROxnqH2VIZ3BHa/Tx26mdRNf/pK+6nrRNJVtCDd5Hrwra7gRyw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=toradex.com smtp.mailfrom=list.ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none
- header.from=list.ti.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7de3NPrdX2x3iicPOJJ6qUlLhJ2aBA9WcVtLQtJDc5g=;
- b=dybRgDe5hDQtsRMEnCGcmHS14ad9dcQVT+wS7BjXuYMBoHZOkxWfO0SbetslC8LNnbZdpy660TblAyWqoZGyhud+/DJpbJXP9V+CI22wrKCk8z4+MXlS4N22B5ryHNQwDTqMadKRaI9gyli2IvDFne2YIOaUU8AHQoHdu5cAKKIKI+5+IMf3qax4c2U1bmefPPJTYW2efxiUXpO8NB6dTKnPx3Ob7icIebAQh3W1JcgEMZ4WttbcjHT2dxOBWbo9kiYsg4t6z+eHavupYJJGlMrkBI6nRq+4oR5NKxLNaewK0zgFW66RqJjIzDR17mzTpDJGgI/2IoNkmcDC3ochbA==
-Received: from SJ0PR13CA0213.namprd13.prod.outlook.com (2603:10b6:a03:2c1::8)
- by MW6PR10MB7658.namprd10.prod.outlook.com (2603:10b6:303:244::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.16; Mon, 16 Feb
- 2026 23:12:46 +0000
-Received: from SJ5PEPF000001F5.namprd05.prod.outlook.com
- (2603:10b6:a03:2c1:cafe::1c) by SJ0PR13CA0213.outlook.office365.com
- (2603:10b6:a03:2c1::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.13 via Frontend Transport; Mon,
- 16 Feb 2026 23:12:34 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=list.ti.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=list.ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SJ5PEPF000001F5.mail.protection.outlook.com (10.167.242.73) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Mon, 16 Feb 2026 23:12:45 +0000
-Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 16 Feb
- 2026 17:12:44 -0600
-Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 16 Feb
- 2026 17:12:44 -0600
-Received: from fllvem-mr08.itg.ti.com (10.64.41.88) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 16 Feb 2026 17:12:44 -0600
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by fllvem-mr08.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61GNCiM0273828;
-	Mon, 16 Feb 2026 17:12:44 -0600
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id 19D569ACF4; Mon, 16 Feb 2026 17:12:44 -0600 (CST)
-From: PRC Automation <prc@list.ti.com>
-To: Vitor Soares <ivitro@gmail.com>
-CC: <meta-ti@lists.yoctoproject.org>, Vitor Soares <vitor.soares@toradex.com>,
-	Ryan Eatmon <reatmon@ti.com>, Denys Dmytriyenko <denys@konsulko.com>
-Subject: Re: [meta-ti][master][PATCH v2] j784s4: move TI_CORE_INITRAMFS_KERNEL_MODULES to j784s4-evm.conf
-Date: Mon, 16 Feb 2026 17:12:44 -0600
-Message-ID: <20260216231244.3094395-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20260216230422.635024-2-ivitro@gmail.com>
-References: <20260216230422.635024-2-ivitro@gmail.com>
-MIME-Version: 1.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=C+4zEspY;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: ivitro@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4836f363ad2so41156925e9.1
+        for <meta-ti@lists.yoctoproject.org>; Mon, 16 Feb 2026 15:50:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1771285822; x=1771890622; darn=lists.yoctoproject.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=LthLS0gxDuQRUX/nLox/vLPrCMxshG/P7Uopkr1a1XE=;
+        b=C+4zEspYN6P7gS8kCqZRUJ2dcbspRJctF6/Sc5HA2nOHc+/zKNQCXTZ27iJX6eMZ8k
+         L6Sqd3k0kMFVs2gzloHY6qpfeTUphSUy7Ga1zkN9dM+8qaSw5Uq9rTUMuXNts+JAcX6l
+         CJsAbsUF4nYxBhWFWJ+y5c86HzcYSwgZMEHpVUp06kTeWJKSiqPAtaLOGa8WGRoec3IV
+         15ZSWQXstc/Al8mAFQVuMFY0K6EN5DoYlnIDR9h++00RkzBXuQoaJQmX5qL7T/pnHD4E
+         WfmAPBXM9WJEtUEh+SnDnJT9YoHAhF1icR7PYvP5p4u3yc2WvoXw/jz43KHjeqGILt5r
+         loMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771285822; x=1771890622;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=LthLS0gxDuQRUX/nLox/vLPrCMxshG/P7Uopkr1a1XE=;
+        b=RlqsG8ZrVP7SUjTCC0c1zS+D47UvFd3dkpkNR33jzT+fw9c44eNcOO4mGT3jviXBLS
+         uQO3+4g4xLT3pCzAnxG95v11ul5TjWbGXexU3wthyZhEQWbm9DzBQpDFLe4TDHaGJdQU
+         ovipa3xhVzwHqJRzzsHrTZCjCVnbKgjjZaG2sDZiD3xigIkwGUe0kw+isC2UrSbKvohM
+         lYwJFbSyz7L/tZ35Isvs7HdqmYTLH7yQMwFymVk9CIu3Em5c8X8WtLFuk1s8hQ5Y8R6X
+         KcdsVAkBDyBjLUdo7KsHKaJ+P0y1BCo1xTlDgu/z0LR+JJxedRtRsLdvAmBTjmVGuQkR
+         F+9w==
+X-Gm-Message-State: AOJu0YwZ04f2v83eVu02D4Gt6MdqGHfN64iiV4fLad947lwdJI3s8hEe
+	leiB3ee0Q0XKBEmzAnCZsTmhCMeOwUDTuyyvLxQj4+AWk+QaafNpjiuX
+X-Gm-Gg: AZuq6aKTpFURSCVUFd0WQ+4PbgZivBTI/gd3MvnmBP11lgjMXSZCO1x1HRTa/ksnGz6
+	uH/7+j/9vy2N+iC4ocvOKSq98MXcaAySzGjsvOlaY3tdCa8X5h2Kj9p7P5i3zdZvV5UVOTCJijz
+	1DNB/t8589mMEhCXOQQmhtC5h4LBGbjGz1LImbxbSDwpwHdoUduxcYnfn27lGzrIwrdJKMWecpy
+	smmyXjyAKyUwwVOWwmpIBL2pkANKCyCokhZC7tiYJwGmd9RFa7ZL0IUN3b4MFaEbJr2HH8m5KpU
+	HIeO8+4L5UsitFgYOymxYVh5ki4RZmz3Z+q4fy6pIrqrVXcTHWkMQedDp5/9v/A1kA998BsRdp0
+	XAHAYHDnCCE5aI+qweQ5bysIgH31qQ1x2iMNVC3RzM5og1/cqCWiX3WEjsm06lwtmbCacgEAJAZ
+	s0AogdN7ur6rX04PTjh6IofZJXTTXrBD0RYRfDpF+HT+BkvQ==
+X-Received: by 2002:a05:600c:3e87:b0:480:32da:f338 with SMTP id 5b1f17b1804b1-48373a0f961mr183709835e9.14.1771285821408;
+        Mon, 16 Feb 2026 15:50:21 -0800 (PST)
+Received: from vitor-nb.Home (bl19-170-125.dsl.telepac.pt. [2.80.170.125])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4836cd7af87sm343052185e9.1.2026.02.16.15.50.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 16 Feb 2026 15:50:20 -0800 (PST)
+Message-ID: <a3d9320657dd150ce981741d56a85356d289d361.camel@gmail.com>
+Subject: Re: [meta-ti] [meta-ti-bsp] SERIAL_CONSOLES defined at SoC level
+From: Vitor Soares <ivitro@gmail.com>
+To: Andrew Davis <afd@ti.com>, Denys Dmytriyenko <denis@denix.org>
+Cc: meta-ti@lists.yoctoproject.org, reatmon@ti.com, denys@konsulko.com, 
+	vitor.soares@toradex.com, francesco.dolcini@toradex.com
+Date: Mon, 16 Feb 2026 23:50:19 +0000
+In-Reply-To: <67b83eee-aeb9-4727-94bb-fe0015684675@ti.com>
+References: <4e08fa3658b1e54add6d5476c7234e86dbcbb60c.camel@gmail.com>
+	 <d0aabf72-f9b8-4864-b07e-7a0d4b3bab93@ti.com>
+	 <bb0eb4c0bf8543175b3aa50f0d954aafce56d576.camel@gmail.com>
+	 <8a5487a0-824a-4f39-aa50-cf6466764574@ti.com>
+	 <20260214162932.GN11121@denix.org>
+	 <67b83eee-aeb9-4727-94bb-fe0015684675@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F5:EE_|MW6PR10MB7658:EE_
-X-MS-Office365-Filtering-Correlation-Id: b8bbf3a8-a56a-4b62-0373-08de6db0e4e9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|82310400026|36860700013|7053199007;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?urmu3IemYhmb5cqHfCyg/1xn+07/wwgcLA96z6Z+29m2VhaghVDyK4T7VbuY?=
- =?us-ascii?Q?/vKJV85kN+sUxzbbDdSbThJRhDvjqY4TUYwrUEHiQOr6hKOK/LmfYtamV1Fj?=
- =?us-ascii?Q?udZmNcVXggG14bdwYvos0DYfwhBk2x1edt0J77JPSSESO8JXTw8CeG7kuoZo?=
- =?us-ascii?Q?paPHKQcImQJv7H5XxhVvN9BVm6JIot0nYDWImadqMAPYdzmSCx5r/KWU0NA9?=
- =?us-ascii?Q?NeqW0S03H8S3mq3rttF9DrAUuhGVZnKmW1P2CzhW1DdQrtTZ+eUXx0LJf/YP?=
- =?us-ascii?Q?KMDYdz5RZFYSXzeka9d6cp/Kgt7M2t9oB+T4reR7iVylcqWsdXLPoohT50Bt?=
- =?us-ascii?Q?1vC8QAky3rkZ7Lx1rMeb7toE/IZ0Cywf7v2gxHF5YK6iHQJit33902lUFGSc?=
- =?us-ascii?Q?f8D6qGZ2oVA1kDEbtWul/tPHn6vcNVDJnv+oAVQHZ4jWcClxtgcE89vGwSA+?=
- =?us-ascii?Q?lqT4KxlRK0wVG4gPYR1z/wDMl13+pFOQdymVknxTH0qZ8Cc62hAj8pBbJ4eM?=
- =?us-ascii?Q?hdKrrdsOKlqer4+JcBWFbvT/6Go8OhFOWC9grwNlaY9zSfsMMmk7t9PW0+RT?=
- =?us-ascii?Q?ogG5SBdKfPbrx5ZTVGf/ZfxB+RjAYGqJPcrA3pr0RZlgMrXP6Z/SA3UlCLTu?=
- =?us-ascii?Q?PwHDTGptWqCwpzd0bhTUuipdcR3MTgagnzS4JhTaTcySBK5QJBt8npEj2adZ?=
- =?us-ascii?Q?stb4ddkybxww17/AaEZ6HG5d4e5x7gnUCAvCmTjjQ1vKcaYi+q7AGfSjqVJX?=
- =?us-ascii?Q?wV+duQDXbeJcAVmv8tVX0alti8v1SP9jTdelU7q2YF51ThWT9rl0jnnnrvCS?=
- =?us-ascii?Q?ciZNbD5OpdGRXZ6Y4hB+saH5ULu3R+iOJvVOLGErn8WOg2AQu3kenYwASO3w?=
- =?us-ascii?Q?TB9GyipMUurgV9tQ0NZob2Kskfzk66T46TxMfl1ByCp3+lLa535hnscUnKSQ?=
- =?us-ascii?Q?QJ7dhlb/szweEsR3bHqxyySzjZzdsZzUbM9JFwXBUDPXhBPubbTGV5mUF/MX?=
- =?us-ascii?Q?dFM08+epOP4EoCHMnIv6ITpSReDPvlAO/YLpbHPGN0jRKEXtg9nuPWJsLCaG?=
- =?us-ascii?Q?BG+D4RujM4tL84loFcnZVlOE2vlMzjcV3HItJyYNhHt1TNxGdCaZykXsykQz?=
- =?us-ascii?Q?NgWSA3xT35kyz6xJTrBbSVjhUFGkAKv305eVF5QdBnjz2o0TyqalZQkNXukf?=
- =?us-ascii?Q?VDQLb3MZuCNw3g7kKs3vGuliSHPK+YIxy4wpzTYwhe1qktcTNmjR5Xt5EDho?=
- =?us-ascii?Q?W/cmgcZyAKNFF/XAswJ/NQT8yWJxooWlu/V6P5CUHX39Z9WYZ+zc3fZojLGd?=
- =?us-ascii?Q?KDbvVKDbwoHZZYCe9Vwcor+vdlPLOhE+L9xId/sDKvNMkVgrT4jK+vkRU6x3?=
- =?us-ascii?Q?ClefkIiyU9C8dqLwhsLWFWBMHmQ4ZCnkP4TynrGcOKjCpE5SN6wJ1fXmcGhP?=
- =?us-ascii?Q?oHZN4KW8XlfxdP68GH8gSByRkHDn7dnTNovSpM/kRAT8Z7m+K1HaomNW53zO?=
- =?us-ascii?Q?Qgw+BRvApBITFvLT/yH/srvH0hKrtIACmePI7ulwpTx/toE3v7jF1i+Xug6S?=
- =?us-ascii?Q?LHAV2fJgV1HUuhdFcAhGgrvH3BJeXtIsMWrW4jcU0nWXA0oDcflCGvjanU0x?=
- =?us-ascii?Q?y3Dr+NMer/WYMYfSHuVAkixthoOLbnSnQfn+TISWUW9BzFYtnR7PfidfrqnD?=
- =?us-ascii?Q?eWYbVw=3D=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013)(7053199007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	W4+cGD3bHlGqU2yvafEW2nY+ttPEm0jTUnQbPseMy4dvgBg4z7E18HYdJo8GvU1Z9pBWUDwPif+Qwzwm6Zs594hqSuUJy4d2TW6J78ggNDofuRRfTS8YyI7zkggg7oFDWG/fOE7aE9++hOJmCd5HfW7eG7Fpdtj/rYK2KOIwFDsmi0hKok//wHvR0aZ+cNV6u96ZQZd2aF/Ti3BYgPcTHxZ4c1Nc259ysd5BU7iEXA/t4+9G+lfFgbzo4HxwnCUGDn+hPXgYWq9AD6xB97avr8gxTVov3T4CzdN7VEHAzedq3J1rle7ehTkc285EAQdt7AEWntk6Bw/JbA90WNMMpL5cV9KZR3AKucAiKyvUWAJ+/AEGQcReurEyd1CiYsYsGAhz6CZTwd9Jcaz9P3f4rbyTolIpDkNBJlZvLk/dQIEQhpfNlwt96GRP3bFREnHP
-X-OriginatorOrg: list.ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Feb 2026 23:12:45.4012
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b8bbf3a8-a56a-4b62-0373-08de6db0e4e9
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	SJ5PEPF000001F5.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR10MB7658
+User-Agent: Evolution 3.44.4-0ubuntu2.1 
+MIME-Version: 1.0
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 16 Feb 2026 23:13:02 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19519
+ <meta-ti@lists.yoctoproject.org>; Mon, 16 Feb 2026 23:50:32 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19520
 
-meta-ti / na / 20260216230422.635024-2-ivitro
+On Mon, 2026-02-16 at 11:32 -0600, Andrew Davis wrote:
+> On 2/14/26 10:29 AM, Denys Dmytriyenko wrote:
+> > On Thu, Feb 12, 2026 at 04:03:34PM -0600, Andrew Davis via
+> > lists.yoctoproject.org wrote:
+> > > On 2/12/26 5:42 AM, Vitor Soares wrote:
+> > > > On Wed, 2026-02-11 at 18:52 -0600, Andrew Davis wrote:
+> > > > > On 2/11/26 11:15 AM, Vitor Soares via lists.yoctoproject.org wrot=
+e:
+> > > > > > Hi,
+> > > > > > While working on our Toradex Aquila AM69 SoM support, we notice=
+d
+> > > > > > that k3.inc
+> > > > > > defines:
+> > > > > > SERIAL_CONSOLES =3D "115200;ttyS0 115200;ttyS2"
+> > > > > >=20
+> > > > > > This caused systemd to enable serial-getty@ttyS0.service=C2=A0o=
+n our
+> > > > > > board, where
+> > > > > > ttyS0 maps to main_uart4 - a user-facing UART, not a debug/cons=
+ole
+> > > > > > UART. The
+> > > > > > getty continuously outputs a login prompt, interfering with the
+> > > > > > interface.
+> > > > > >=20
+> > > > > > This made us question whether SERIAL_CONSOLES belongs in SoC-le=
+vel
+> > > > > > include
+> > > > > > files
+> > > > > > at all. Our understanding is that the console getty is already
+> > > > > > handled
+> > > > > > automatically by systemd-getty-generator from the console=3D ke=
+rnel
+> > > > > > command
+> > > > > > line argument, which makes SERIAL_CONSOLES potentially redundan=
+t for
+> > > > > > the
+> > > > > > console
+> > > > > > UART. Any additional UARTs beyond the console are board-specifi=
+c and
+> > > > > > arguably
+> > > > > > belong in each machine config rather than a shared SoC include.
+> > > > > >=20
+> > > > > > We are not 100% certain about this reasoning and would love to =
+hear
+> > > > > > the
+> > > > > > rationale behind the current approach. Are we missing something=
+?
+> > > > > > Would it
+> > > > > > make
+> > > > > > sense to either remove SERIAL_CONSOLES from the SoC includes or=
+ at
+> > > > > > minimum
+> > > > > > use
+> > > > > > =C2=A0=C2=A0 a weak assignment (?=3D) to allow boards to overri=
+de cleanly?
+> > > > >=20
+> > > > > We simply noticed almost all our EVM boards used the same console
+> > > > > UARTs and so
+> > > > > refactored the definition into a more common place. But yes you a=
+re
+> > > > > correct
+> > > > > that a file like k3.inc seems like it should contain only items c=
+ommon
+> > > > > to all
+> > > > > users of the K3 SoC family, and not simply common to TI EVM board=
+s.
+> > > > > Changing
+> > > > > the assignment in k3.inc to a weak one seem reasonable (although =
+I
+> > > > > think you
+> > > > > can still just override regular assignments after you include k3.=
+conf
+> > > > > in
+> > > > > your board conf)
+> > > > >=20
+> > > >=20
+> > > >=20
+> > > > You're right we can override it in our board configs, but I wanted =
+to
+> > > > share why
+> > > > we think this is worth reconsidering.
+> > > >=20
+> > > > The issue is that SERIAL_CONSOLES in k3.inc mixes SoC capabilities =
+with
+> > > > board-
+> > > > specific UART usage.
+> > > >=20
+> > > > The K3 SoC provides the UART peripherals, but doesn't determine whi=
+ch
+> > > > ones are
+> > > > used for console, user interfaces, or other purposes - that's decid=
+ed at
+> > > > the
+> > > > board level.
+> > > >=20
+> > > > Different boards use UARTs differently. On TI EVMs, ttyS2 or ttyS0 =
+might
+> > > > be the
+> > > > debug console. On our Aquila AM69, ttyS2 is the console but ttyS0 i=
+s a
+> > > > user-
+> > > > facing UART. Same SoC, different UART assignments.
+> > > >=20
+> > > > SERIAL_CONSOLES creates getty login prompts on listed UARTs, which =
+is a
+> > > > board/system integration concern.
+> > > >=20
+> > >=20
+> > > I think the same could be said about `IMAGE_FSTYPES` which is also in
+> > > `k3.inc`
+> > > but really should depend on the type of media on a board.
+> > >=20
+> > > > If TI's EVM boards share the same UART configuration, would it make
+> > > > sense to
+> > > > have a ti-evm-common.inc instead of putting it in the SoC include?
+> > > >=20
+> > > > Happy to help with refactoring if you think this direction makes se=
+nse.
+> > > >=20
+> > >=20
+> > > This directions makes sense to me, I'd have no issue with a ti-evm-
+> > > common.inc.
+> >=20
+> > This seems like an overkill for a single variable that can be easily
+> > resolved
+> > with a weak assignment. Moreover, this can quickly get out of hand with=
+ SKs
+> > and Beagles and how those sometimes have convoluted mixed ownership...
+> >=20
+> >=20
+> > > Or even since it is just 1 or 2 lines that would need to be moved out=
+,
+> > > might
+> > > be easier to just move those lines back out to the different board
+> > > configs.
+> > > If you want to send the patch then up to you.
+> >=20
+> > Isn't it how it used to be originally?
+>=20
+> Yes, I'm basically saying I'm okay with reverting my patch[0] that
+> consolidated
+> these[0].
+>=20
+> >=20
+> > The idea of a generic setting getting weakly assigned with a sane defau=
+lt
+> > is specifically to make it easy for downstream layers to change, while =
+keep
+> > things maintainable upstream.
+> >=20
+> > We've been slowly trying to unify, cleanup and consolidate such setting=
+s in
+> > the past. To that extent, I keep reminding Ryan and others to avoid usi=
+ng
+> > :append override, which is hard to undo downstream, as well as use weak=
+ +=3D
+> > instead of =3D for assigning SoC and machine settings.
+> >=20
+>=20
+> The patch that moved these to k3.inc used =3D, it should have used +=3D, =
+so
+> changing that to +=3D is also an option if we don't want to revert [0].
+>=20
+> Andrew
+>=20
+> [0]
+> https://git.yoctoproject.org/meta-ti/commit/?id=3Dbc894bf52eaa4359eaa64a6=
+4e950accd099a81cb
+>=20
+> > We've seen instances where a sane generic default works for most of the
+> > cases,
+> > but for a couple of cases need to be changed in more specific location.
+> > That's
+> > why we have hierarchical include structure from most generic to most
+> > specific:
+> >=20
+> > ti-soc.inc -> k3.inc -> j784s4.inc -> j784s4-evm.conf
+> >=20
+> > On the other hand, specifying U-boot defconfig (UBOOT_MACHINE/UBOOT_CON=
+FIG)
+> > is
+> > almost always done in corresponding specific machine configs, simply be=
+casue
+> > there's no generic default...
+> >=20
+>=20
 
-PRC Results: PASS
+Thanks for looking into this.=20
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-patches: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-Patches
-----------------------------------------
-All patches passed
+From an integrator perspective, I wanted to share the challenge we faced: w=
+hen=20
+getty appeared on our user-facing UART, it wasn't immediately obvious this =
+came
+from an inherited k3.inc default rather than our board configuration.=20
+We spent time investigating our device tree, systemd configs, and bootargs
+before discovering it was set at the SoC level.
 
+With systemd handling console getty automatically from console=3D, SERIAL_C=
+ONSOLES
+is mainly useful for additional serial ports with a login prompt, which are=
+=20
+inherently board-specific decisions.
 
+Just wanted to share our experience as you consider the best approach.
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  apply-yocto-patch: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Summary:
-- Patch Series: [meta-ti][master][PATCH v2] j784s4: move TI_CORE_INITRAMFS_=
-KERNEL_MODULES to j784s4-evm.conf
-- Submitter: From: Vitor Soares <ivitro@gmail.com>
-From: Vitor Soares <vitor.soares@toradex.com>
-- Date: Date: Mon, 16 Feb 2026 23:04:20 +0000
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: f82153d1c2ea00de3fe0137a0fb077adf=
-1538de2
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-wip
-- Commit Author: Ryan Eatmon <reatmon@ti.com>
-- Commit Subject: conf: Add falcon support natively
-- Commit SHA: e9a0af0f3815c30ebcca6d098cfb935cffbe2311
-
-Patches
-----------------------------------------
-All patches applied
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-repo: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-PASS
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  yocto-check-layers: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master - PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-All checks passed
-
-
-
+Thanks,
+Vitor
 
