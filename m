@@ -1,286 +1,182 @@
-Return-Path: <ivitro@gmail.com>
+Return-Path: <w.egorov@phytec.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 852AAE83848
-	for <webhook@archiver.kernel.org>; Mon, 16 Feb 2026 23:50:32 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1467.1771285823467890089
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E279E68157
+	for <webhook@archiver.kernel.org>; Tue, 17 Feb 2026 09:46:55 +0000 (UTC)
+Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.111])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8799.1771321605882581712
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 16 Feb 2026 15:50:23 -0800
+ Tue, 17 Feb 2026 01:46:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=C+4zEspY;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: ivitro@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4836f363ad2so41156925e9.1
-        for <meta-ti@lists.yoctoproject.org>; Mon, 16 Feb 2026 15:50:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771285822; x=1771890622; darn=lists.yoctoproject.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=LthLS0gxDuQRUX/nLox/vLPrCMxshG/P7Uopkr1a1XE=;
-        b=C+4zEspYN6P7gS8kCqZRUJ2dcbspRJctF6/Sc5HA2nOHc+/zKNQCXTZ27iJX6eMZ8k
-         L6Sqd3k0kMFVs2gzloHY6qpfeTUphSUy7Ga1zkN9dM+8qaSw5Uq9rTUMuXNts+JAcX6l
-         CJsAbsUF4nYxBhWFWJ+y5c86HzcYSwgZMEHpVUp06kTeWJKSiqPAtaLOGa8WGRoec3IV
-         15ZSWQXstc/Al8mAFQVuMFY0K6EN5DoYlnIDR9h++00RkzBXuQoaJQmX5qL7T/pnHD4E
-         WfmAPBXM9WJEtUEh+SnDnJT9YoHAhF1icR7PYvP5p4u3yc2WvoXw/jz43KHjeqGILt5r
-         loMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771285822; x=1771890622;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=LthLS0gxDuQRUX/nLox/vLPrCMxshG/P7Uopkr1a1XE=;
-        b=RlqsG8ZrVP7SUjTCC0c1zS+D47UvFd3dkpkNR33jzT+fw9c44eNcOO4mGT3jviXBLS
-         uQO3+4g4xLT3pCzAnxG95v11ul5TjWbGXexU3wthyZhEQWbm9DzBQpDFLe4TDHaGJdQU
-         ovipa3xhVzwHqJRzzsHrTZCjCVnbKgjjZaG2sDZiD3xigIkwGUe0kw+isC2UrSbKvohM
-         lYwJFbSyz7L/tZ35Isvs7HdqmYTLH7yQMwFymVk9CIu3Em5c8X8WtLFuk1s8hQ5Y8R6X
-         KcdsVAkBDyBjLUdo7KsHKaJ+P0y1BCo1xTlDgu/z0LR+JJxedRtRsLdvAmBTjmVGuQkR
-         F+9w==
-X-Gm-Message-State: AOJu0YwZ04f2v83eVu02D4Gt6MdqGHfN64iiV4fLad947lwdJI3s8hEe
-	leiB3ee0Q0XKBEmzAnCZsTmhCMeOwUDTuyyvLxQj4+AWk+QaafNpjiuX
-X-Gm-Gg: AZuq6aKTpFURSCVUFd0WQ+4PbgZivBTI/gd3MvnmBP11lgjMXSZCO1x1HRTa/ksnGz6
-	uH/7+j/9vy2N+iC4ocvOKSq98MXcaAySzGjsvOlaY3tdCa8X5h2Kj9p7P5i3zdZvV5UVOTCJijz
-	1DNB/t8589mMEhCXOQQmhtC5h4LBGbjGz1LImbxbSDwpwHdoUduxcYnfn27lGzrIwrdJKMWecpy
-	smmyXjyAKyUwwVOWwmpIBL2pkANKCyCokhZC7tiYJwGmd9RFa7ZL0IUN3b4MFaEbJr2HH8m5KpU
-	HIeO8+4L5UsitFgYOymxYVh5ki4RZmz3Z+q4fy6pIrqrVXcTHWkMQedDp5/9v/A1kA998BsRdp0
-	XAHAYHDnCCE5aI+qweQ5bysIgH31qQ1x2iMNVC3RzM5og1/cqCWiX3WEjsm06lwtmbCacgEAJAZ
-	s0AogdN7ur6rX04PTjh6IofZJXTTXrBD0RYRfDpF+HT+BkvQ==
-X-Received: by 2002:a05:600c:3e87:b0:480:32da:f338 with SMTP id 5b1f17b1804b1-48373a0f961mr183709835e9.14.1771285821408;
-        Mon, 16 Feb 2026 15:50:21 -0800 (PST)
-Received: from vitor-nb.Home (bl19-170-125.dsl.telepac.pt. [2.80.170.125])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4836cd7af87sm343052185e9.1.2026.02.16.15.50.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Feb 2026 15:50:20 -0800 (PST)
-Message-ID: <a3d9320657dd150ce981741d56a85356d289d361.camel@gmail.com>
-Subject: Re: [meta-ti] [meta-ti-bsp] SERIAL_CONSOLES defined at SoC level
-From: Vitor Soares <ivitro@gmail.com>
-To: Andrew Davis <afd@ti.com>, Denys Dmytriyenko <denis@denix.org>
-Cc: meta-ti@lists.yoctoproject.org, reatmon@ti.com, denys@konsulko.com, 
-	vitor.soares@toradex.com, francesco.dolcini@toradex.com
-Date: Mon, 16 Feb 2026 23:50:19 +0000
-In-Reply-To: <67b83eee-aeb9-4727-94bb-fe0015684675@ti.com>
-References: <4e08fa3658b1e54add6d5476c7234e86dbcbb60c.camel@gmail.com>
-	 <d0aabf72-f9b8-4864-b07e-7a0d4b3bab93@ti.com>
-	 <bb0eb4c0bf8543175b3aa50f0d954aafce56d576.camel@gmail.com>
-	 <8a5487a0-824a-4f39-aa50-cf6466764574@ti.com>
-	 <20260214162932.GN11121@denix.org>
-	 <67b83eee-aeb9-4727-94bb-fe0015684675@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2.1 
+ dkim=fail reason="dkim: body hash did not verify" header.i=@phytec.de header.s=selector2 header.b=X2rIKVvr;
+ spf=pass (domain: phytec.de, ip: 52.101.70.111, mailfrom: w.egorov@phytec.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=syQpYh643h2nWT8eQtTyhPeIjr/bH2dy2jqcIIh2zCgO7LxOEEJItglJBpnj2nTIbMymaPdd8NuTjhCFektH7YHCxqEuGjfsxux8DBrWz4q/qJ+Jwz0m9VscGYyabMohRmstGCu2INB49OjwtJfdxC8A9FCzcydBrS8dVyxLm9pjjBjpweTjKxd4LMMZM0cEcRfgl4N//l4r+EDWkhQhJsSn8bf4TanVvejnwHrf+rkO9MmunAQrytRVbCh6RqdizWL35EeOoWt1fw4116ul3WtnOJXpxtUvoOKx7Qs+nPN0mDpfDG1prKNFQXTDKkBgzg403RhK/Wf6yHI/sHayiA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ard28/WMHb7DwWBHQS8/z6PXq24zv66/P6IgZsQmajI=;
+ b=ynMVmpuW1mlGq4ayJuRu0aEXbKXpJp8taIVtLlFNOcMzNmaM/Tw5gRmHrJPp99igqsRoj9soiN3nuJ/RWVCAuo0B7tWZnybABvz6OPwMmyFuSLUaPAoT8jQi47hF923pZsVto5LywFCAoLhtjEs5DK+lxsrO9TqBcaeR6ok+bo1WCkXNI6nMXbu7CC4WWJuDc4gO1LOK/NGcMozwSBb0e0P2MkBIgSl5YE7+PCpmMVBoGMEqM5tpdDmL1u9teHVJcjyL8cEFDSStOIrLd00y1XDvokbWpoXeEXs9AhE+pPxAXatea+sJTtgIh5rMikCvPAHay8K7tBI7dzTqsthQWQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=lists.yoctoproject.org
+ smtp.mailfrom=phytec.de; dmarc=fail (p=quarantine sp=quarantine pct=100)
+ action=quarantine header.from=phytec.de; dkim=none (message not signed);
+ arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ard28/WMHb7DwWBHQS8/z6PXq24zv66/P6IgZsQmajI=;
+ b=X2rIKVvr4V9OlPI44ISbz5FQKGsc8WLovGbpvmRA71MnR5zOOCK8ON6A13ddSP9LQWlKmgB8Mlqhj4FBI80m6kEnVbN8vwYI852AKzElJXPrLhVHtvUZR6Z81l+6/qYUKnvDv14y6wJyaoIpbuJYVN5xlQSoviVFvaSzBceuc/8SkI/0i8yMykw5orVcagHlguYhD53FZZ4OHHtp92UNY3m+RKhK9LWi0gn81Ys2PZ7VTfKy6EqMdm4gHeFG16A4Iu7xA23ye59yg59JG1plwHvZNUYfc/h1CHob5IX5yqmVYe4z+EtO2fnr4230vjof5akDu/p4U49lKoCPsOMWbQ==
+Received: from DU6P191CA0060.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:53e::10)
+ by AM8P195MB2748.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:32c::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.16; Tue, 17 Feb
+ 2026 09:46:40 +0000
+Received: from DB5PEPF00014B99.eurprd02.prod.outlook.com
+ (2603:10a6:10:53e:cafe::ae) by DU6P191CA0060.outlook.office365.com
+ (2603:10a6:10:53e::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.16 via Frontend Transport; Tue,
+ 17 Feb 2026 09:46:34 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Postix.phytec.de (91.26.50.189) by
+ DB5PEPF00014B99.mail.protection.outlook.com (10.167.8.166) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.12 via Frontend Transport; Tue, 17 Feb 2026 09:46:39 +0000
+Received: from phytec.de (172.25.0.51) by Postix.phytec.de (172.25.0.11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 17 Feb
+ 2026 10:46:39 +0100
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <reatmon@ti.com>, <denys@konsulko.com>
+Subject: [scarthgap] meta-ti-bsp: ti-img-rogue-driver: Avoid TMPDIR in debug paths
+Date: Tue, 17 Feb 2026 10:46:14 +0100
+Message-ID: <20260217094614.1925493-1-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.51]
+X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
+ (172.25.0.11)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B99:EE_|AM8P195MB2748:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8045d67d-3811-4e13-c275-08de6e09732d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|36860700013|82310400026|1800799024;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?Nvh+0pXJnFaUIMaLTCjnaOR8fAVowxOjx8OCufobedmQMxkILZ2j8SfuS0kH?=
+ =?us-ascii?Q?6yLHA1WkPPC2oo95DOI6+2HeSL1SUMu3joApbTAyfuluOXlS0SpcMvI5Fqu1?=
+ =?us-ascii?Q?xIHocazjdu3T/ESrM5hv0w0gbXS3y1q7GEP73DDn7FEhWa/fSX8xXe8rlJR9?=
+ =?us-ascii?Q?OlArDCZkG0ZVST/f7Gpwic+ht+rQS6PtmiMUSK44JFsDf7GbQMJygWdBLKVz?=
+ =?us-ascii?Q?B7eNy+9d74Q6fyLTnIfMJfnqrM78UMV3dS2fQdcjbLZsAzhbjgfmhr7vuyVd?=
+ =?us-ascii?Q?jDtBW7y5Sp+gUaG7+JyODhQ1Xcmtb9CAmoYWw3JhIqJOssdjA6AKTP/0LDp4?=
+ =?us-ascii?Q?S14H6SY7SLBNdb03uXrEJ2Xdre4iGbdbB6ziEBupANAoaqlGKAo380bG+usp?=
+ =?us-ascii?Q?8/PMBcDQlSy+9mC1SVQrDf1SsxTp5y7+dkq3103B4u5Fr7jns9ozXJgC8d/x?=
+ =?us-ascii?Q?2bJR1UIjvl9dCekEZzEH+8JbQYRtMETZwgQk9dDkw65KnI4O21ShoRnhn3JH?=
+ =?us-ascii?Q?uKW7rmmfSvCWzFqXQ4gDjJemDBOVkIrJaXWHbHdUZMjOoxYKhq+EwX0iFor+?=
+ =?us-ascii?Q?YFuyQOC+cbXbyrHFbGr1C+WruqG4MohMtcd5m8P/9l5+7r0xZIIo5SkQ0niO?=
+ =?us-ascii?Q?8ubZBx7iGDDqwfGQPasTBIizHqlu20zlu6TqRXOiIZo0NLivanpjCrHXPor1?=
+ =?us-ascii?Q?711cxb6REzfh1fwO+etnKT6dbY2ZnDHcuDD8HtvEUYXZaIWCHKgTPifLUoGf?=
+ =?us-ascii?Q?p3Kd2dKXxYZM0fNZ7j94BvK4ZM7yhmoq1apPmm3znWyrqvxpucMDUi/oXs4Z?=
+ =?us-ascii?Q?Th29RXkvQmkSdxozKpMEw1dKK6G4cYxWh0QA99LNLzP0emU9efB7PJ5n7ZeY?=
+ =?us-ascii?Q?oKq/OTA6uW3iCcXcEDEURHHV5QvGznU73JXOaUPif4aaGN2snQuHQgE7n4bX?=
+ =?us-ascii?Q?J70IPGosT96Op/ChnSJ0SsmftgNWwgT4iu8cZA+eA6B9X1a9suwyRGcddj0S?=
+ =?us-ascii?Q?IXXGj3eik9VWVrhWNA0FxvjWr7/+sE8yil8DmaGgyyY09cc5PhIdUiauhfFl?=
+ =?us-ascii?Q?tAcBO15BfWd+FXfysHOTMLo/YhgNJNsUqAtcdx47ZEP+GBkI5fH8Vq7/YB/0?=
+ =?us-ascii?Q?WPBzY4ojXLsQXWd44Ns32V1LLNUnVZ2UJx/u1zN60js/Par7fIvU0VbU1O4L?=
+ =?us-ascii?Q?Hr32jy15dk93q92VcBjgL2MIeG0GjGclw+6GBcdLeq9oMy4TaDjV0m6Z8Q35?=
+ =?us-ascii?Q?RwshBobS5wU8X14gGDGlo4RR9k1YzEnEva9xOm741Y0eOZ4uy6fMTtcpYnTQ?=
+ =?us-ascii?Q?GFawgsSzQRwjOe16iTUXQYBq4nqR6CIb9UvQdW/AHMhGGZ7cQaMNiJGvFcc+?=
+ =?us-ascii?Q?HAd+VJTCO+a6YpxBEdiAOT9N/uXba9T4WszFldRItsFYO7CXw6vcZgbLyrnD?=
+ =?us-ascii?Q?PLvPfarne5HNR1IvuYENxuPb0vS0pFIQKuQ1UWweIblHBaK1Nqa2w9t8lufj?=
+ =?us-ascii?Q?YUYSHLM3tHKf/12Oz8IOZ9vDhd/dGYrpfZqvecch+kIU7ppUZ9iSCtEZ8U2W?=
+ =?us-ascii?Q?fKVgBrr6j4k7ox8W8JobtMKRMFdYzvRl8abrIWoIpHTKk1/jymEHFHph0k6H?=
+ =?us-ascii?Q?MmxxhdwHyxgKgFQrbs85hKr5paO228aydcjh4QcRx+IuDfRGsh1MrI5hDcLj?=
+ =?us-ascii?Q?MJ2QbQ=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:91.26.50.189;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:Postix.phytec.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	UWdYCYvGAigiVCNf9u2q3mlkW7qCKVi2+ePhVhcgRDT1DKJROGMa+fMXTOhoI5R6LTXEpbSCA4bBHNiNaK2qyGEMCi5xjwDnKbnqUQQZaai/A7ptu0LNzdeztqN+9QyGNALwQpGn6DVVgf5ryoZInn3HC6b2AhYC1mNqsg/DIY3K1G+IZAs7nbCUMHy+8fADS7g86b/CvVZpC9lbiZ7nQ4HtslPrJZIo/4xv2oX6cEvojzUXP5+XMgwJ3CnqEQPSyqZHb+wOkuUHoor6ScV9w9aLs4NmtscNGmOrFSKKHhA/+aCV49rOS8qGxWuI0M4g5nQF8o5W/C2fa+fca+Gj5GFn9693+J6s6jQGHp7fBiGZHjvoxSNtJVaC4zy961l15pSYCYnwl2VLbNt4fE0Sf7vRUvjJZqiUQAMfL7Duzfz64gIw0UOSB9IW5S5TOmx2
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Feb 2026 09:46:39.8594
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8045d67d-3811-4e13-c275-08de6e09732d
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29;Ip=[91.26.50.189];Helo=[Postix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DB5PEPF00014B99.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8P195MB2748
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 16 Feb 2026 23:50:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19520
+ <meta-ti@lists.yoctoproject.org>; Tue, 17 Feb 2026 09:46:55 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19521
 
-On Mon, 2026-02-16 at 11:32 -0600, Andrew Davis wrote:
-> On 2/14/26 10:29 AM, Denys Dmytriyenko wrote:
-> > On Thu, Feb 12, 2026 at 04:03:34PM -0600, Andrew Davis via
-> > lists.yoctoproject.org wrote:
-> > > On 2/12/26 5:42 AM, Vitor Soares wrote:
-> > > > On Wed, 2026-02-11 at 18:52 -0600, Andrew Davis wrote:
-> > > > > On 2/11/26 11:15 AM, Vitor Soares via lists.yoctoproject.org wrot=
-e:
-> > > > > > Hi,
-> > > > > > While working on our Toradex Aquila AM69 SoM support, we notice=
-d
-> > > > > > that k3.inc
-> > > > > > defines:
-> > > > > > SERIAL_CONSOLES =3D "115200;ttyS0 115200;ttyS2"
-> > > > > >=20
-> > > > > > This caused systemd to enable serial-getty@ttyS0.service=C2=A0o=
-n our
-> > > > > > board, where
-> > > > > > ttyS0 maps to main_uart4 - a user-facing UART, not a debug/cons=
-ole
-> > > > > > UART. The
-> > > > > > getty continuously outputs a login prompt, interfering with the
-> > > > > > interface.
-> > > > > >=20
-> > > > > > This made us question whether SERIAL_CONSOLES belongs in SoC-le=
-vel
-> > > > > > include
-> > > > > > files
-> > > > > > at all. Our understanding is that the console getty is already
-> > > > > > handled
-> > > > > > automatically by systemd-getty-generator from the console=3D ke=
-rnel
-> > > > > > command
-> > > > > > line argument, which makes SERIAL_CONSOLES potentially redundan=
-t for
-> > > > > > the
-> > > > > > console
-> > > > > > UART. Any additional UARTs beyond the console are board-specifi=
-c and
-> > > > > > arguably
-> > > > > > belong in each machine config rather than a shared SoC include.
-> > > > > >=20
-> > > > > > We are not 100% certain about this reasoning and would love to =
-hear
-> > > > > > the
-> > > > > > rationale behind the current approach. Are we missing something=
-?
-> > > > > > Would it
-> > > > > > make
-> > > > > > sense to either remove SERIAL_CONSOLES from the SoC includes or=
- at
-> > > > > > minimum
-> > > > > > use
-> > > > > > =C2=A0=C2=A0 a weak assignment (?=3D) to allow boards to overri=
-de cleanly?
-> > > > >=20
-> > > > > We simply noticed almost all our EVM boards used the same console
-> > > > > UARTs and so
-> > > > > refactored the definition into a more common place. But yes you a=
-re
-> > > > > correct
-> > > > > that a file like k3.inc seems like it should contain only items c=
-ommon
-> > > > > to all
-> > > > > users of the K3 SoC family, and not simply common to TI EVM board=
-s.
-> > > > > Changing
-> > > > > the assignment in k3.inc to a weak one seem reasonable (although =
-I
-> > > > > think you
-> > > > > can still just override regular assignments after you include k3.=
-conf
-> > > > > in
-> > > > > your board conf)
-> > > > >=20
-> > > >=20
-> > > >=20
-> > > > You're right we can override it in our board configs, but I wanted =
-to
-> > > > share why
-> > > > we think this is worth reconsidering.
-> > > >=20
-> > > > The issue is that SERIAL_CONSOLES in k3.inc mixes SoC capabilities =
-with
-> > > > board-
-> > > > specific UART usage.
-> > > >=20
-> > > > The K3 SoC provides the UART peripherals, but doesn't determine whi=
-ch
-> > > > ones are
-> > > > used for console, user interfaces, or other purposes - that's decid=
-ed at
-> > > > the
-> > > > board level.
-> > > >=20
-> > > > Different boards use UARTs differently. On TI EVMs, ttyS2 or ttyS0 =
-might
-> > > > be the
-> > > > debug console. On our Aquila AM69, ttyS2 is the console but ttyS0 i=
-s a
-> > > > user-
-> > > > facing UART. Same SoC, different UART assignments.
-> > > >=20
-> > > > SERIAL_CONSOLES creates getty login prompts on listed UARTs, which =
-is a
-> > > > board/system integration concern.
-> > > >=20
-> > >=20
-> > > I think the same could be said about `IMAGE_FSTYPES` which is also in
-> > > `k3.inc`
-> > > but really should depend on the type of media on a board.
-> > >=20
-> > > > If TI's EVM boards share the same UART configuration, would it make
-> > > > sense to
-> > > > have a ti-evm-common.inc instead of putting it in the SoC include?
-> > > >=20
-> > > > Happy to help with refactoring if you think this direction makes se=
-nse.
-> > > >=20
-> > >=20
-> > > This directions makes sense to me, I'd have no issue with a ti-evm-
-> > > common.inc.
-> >=20
-> > This seems like an overkill for a single variable that can be easily
-> > resolved
-> > with a weak assignment. Moreover, this can quickly get out of hand with=
- SKs
-> > and Beagles and how those sometimes have convoluted mixed ownership...
-> >=20
-> >=20
-> > > Or even since it is just 1 or 2 lines that would need to be moved out=
-,
-> > > might
-> > > be easier to just move those lines back out to the different board
-> > > configs.
-> > > If you want to send the patch then up to you.
-> >=20
-> > Isn't it how it used to be originally?
->=20
-> Yes, I'm basically saying I'm okay with reverting my patch[0] that
-> consolidated
-> these[0].
->=20
-> >=20
-> > The idea of a generic setting getting weakly assigned with a sane defau=
-lt
-> > is specifically to make it easy for downstream layers to change, while =
-keep
-> > things maintainable upstream.
-> >=20
-> > We've been slowly trying to unify, cleanup and consolidate such setting=
-s in
-> > the past. To that extent, I keep reminding Ryan and others to avoid usi=
-ng
-> > :append override, which is hard to undo downstream, as well as use weak=
- +=3D
-> > instead of =3D for assigning SoC and machine settings.
-> >=20
->=20
-> The patch that moved these to k3.inc used =3D, it should have used +=3D, =
-so
-> changing that to +=3D is also an option if we don't want to revert [0].
->=20
-> Andrew
->=20
-> [0]
-> https://git.yoctoproject.org/meta-ti/commit/?id=3Dbc894bf52eaa4359eaa64a6=
-4e950accd099a81cb
->=20
-> > We've seen instances where a sane generic default works for most of the
-> > cases,
-> > but for a couple of cases need to be changed in more specific location.
-> > That's
-> > why we have hierarchical include structure from most generic to most
-> > specific:
-> >=20
-> > ti-soc.inc -> k3.inc -> j784s4.inc -> j784s4-evm.conf
-> >=20
-> > On the other hand, specifying U-boot defconfig (UBOOT_MACHINE/UBOOT_CON=
-FIG)
-> > is
-> > almost always done in corresponding specific machine configs, simply be=
-casue
-> > there's no generic default...
-> >=20
->=20
+Build module with KBUILD_OUTPUT to avoid TMPDIR in debug info
+(buildpaths QA). Also bump SRCREV to include upstream path/prefix-map fixes=
+.
 
-Thanks for looking into this.=20
+Fixes the following warning:
 
-From an integrator perspective, I wanted to share the challenge we faced: w=
-hen=20
-getty appeared on our user-facing UART, it wasn't immediately obvious this =
-came
-from an inherited k3.inc default rather than our board configuration.=20
-We spent time investigating our device tree, systemd configs, and bootargs
-before discovering it was set at the SoC level.
+WARNING: ti-img-rogue-driver-25.2.6850647-r0 do_package_qa: QA Issue: File =
+/usr/lib/modules/6.12.57-g7af20799-g7af207992070/updates/.debug/pvrsrvkm.ko=
+ in package ti-img-rogue-driver-dbg contains reference to TMPDIR [buildpath=
+s]
 
-With systemd handling console getty automatically from console=3D, SERIAL_C=
-ONSOLES
-is mainly useful for additional serial ports with a login prompt, which are=
+Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+---
+ .../powervr-drivers/ti-img-rogue-driver_25.2.6850647.bb  | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25=
+.2.6850647.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver=
+_25.2.6850647.bb
+index 0f50026a..54c80480 100644
+--- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.2.6850=
+647.bb
++++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.2.6850=
+647.bb
+@@ -19,7 +19,7 @@ SRC_URI =3D "git://git.ti.com/git/graphics/ti-img-rogue-d=
+river.git;protocol=3Dhttps;
 =20
-inherently board-specific decisions.
+ S =3D "${WORKDIR}/git"
+=20
+-SRCREV =3D "a838ac0074db640ebd1b64be6364417b1bbca3cd"
++SRCREV =3D "72723eea0cab47c20e5734c1c7b9a441ed2d74c2"
+=20
+ TARGET_PRODUCT:j721e =3D "j721e_linux"
+ TARGET_PRODUCT:j721s2 =3D "j721s2_linux"
+@@ -31,7 +31,12 @@ TARGET_PRODUCT:j722s =3D "j722s_linux"
+ PVR_BUILD =3D "release"
+ PVR_WS =3D "lws-generic"
+=20
+-EXTRA_OEMAKE +=3D 'KERNELDIR=3D"${STAGING_KERNEL_DIR}" BUILD=3D${PVR_BUILD=
+} PVR_BUILD_DIR=3D${TARGET_PRODUCT} WINDOW_SYSTEM=3D${PVR_WS}'
++EXTRA_OEMAKE +=3D 'KERNELDIR=3D"${KBUILD_OUTPUT}" BUILD=3D${PVR_BUILD} PVR=
+_BUILD_DIR=3D${TARGET_PRODUCT} WINDOW_SYSTEM=3D${PVR_WS}'
++
++do_compile() {
++    unset CC
++    oe_runmake
++}
+=20
+ do_install() {
+     make -C ${STAGING_KERNEL_DIR} M=3D${B}/binary_${TARGET_PRODUCT}_${PVR_=
+WS}_${PVR_BUILD}/target_aarch64/kbuild INSTALL_MOD_PATH=3D${D}${root_prefix=
+} PREFIX=3D${STAGING_DIR_HOST} modules_install
+--=20
+2.43.0
 
-Just wanted to share our experience as you consider the best approach.
-
-Thanks,
-Vitor
 
