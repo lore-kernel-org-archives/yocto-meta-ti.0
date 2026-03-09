@@ -1,41 +1,41 @@
-Return-Path: <s-sadik@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F10E1F41819
-	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 17:02:36 +0000 (UTC)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com (SN4PR2101CU001.outbound.protection.outlook.com [40.93.195.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.19706.1773075753274845808
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 335B7F4181C
+	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 17:08:47 +0000 (UTC)
+Received: from CY7PR03CU001.outbound.protection.outlook.com (CY7PR03CU001.outbound.protection.outlook.com [40.93.198.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.19836.1773076123412137237
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 09 Mar 2026 10:02:33 -0700
+ Mon, 09 Mar 2026 10:08:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=nYjfkUW2;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.195.47, mailfrom: s-sadik@ti.com)
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=aR7BAl/a;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.198.52, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=M4Gn04n6fClaXZC2X9rjSkNWNjlF2KVfJBZs7HJJ6oy+boQTn9Mobw/OTQOyqPlZrqFymOsPFwt0B9oPQTGjx0MmzI5tm6CsVGpVf6hIYejmx2nHYyM11bhjHXMa9YCohCucE/SWKmWv8a+FI+Q6rPp2H0EbXrvselCnEN9k/oEHGpJWU9nTCXmDconkwWjFaRV33mn23rvuW2zKpYHd34A6RdhtxpwmQsMyRcCbd/FaNRkOXbrSE5Bs2CMZWKPwEMBxjQV2JyHhnTjim125VunVuNQndPFMpdkHSTGkUntgo5gGrGAgHBY5WkDlKadO2kiveFR0UxWiRW0/YcBr7g==
+ b=ICpY0Y2ZiBCGsRFuPdCZfidMdQPS4dahoyWVdkhSKafYqH1HwiT6vaDHO+BaQLXnR15M1IUpzv6aklhey2tZsd4vPCHrFI7LcNmFlsD8y4qVGvCaXG7zgKQpRmHD0Pf1DApzzvr6gZPV1ZUZBMPmei50+dyEuoJQjiJvDMqkYcmc2X05BjAbkCk2sp2MoDnFXjMv1gocTy7C9QskRS8xtH3zzps4b/NRIm1TmsddvO/lh8EcwMsdKstWZnWQfYKfWoE4nqKtOXZAnbd1hSyJ0HwWOi/1s00Y/NIiPWrGrecH6G0V6lSUTClwUqgnmu++7BbNNNfdGtraKwvc0JSqUg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XldSEPXE0zM2mLx2ujDyY9BeDaskxTm3K+2Zz8mceA0=;
- b=l0v5zj+wY3W5favGl5UOUWnV1jK+dNZTg8zvi9FbJOzxj2FAPTJJuFIZbM/S7PZt6rt2J/PRaBRnBlp6akUEXdFEDJ2eojYEYOzWfTSXyYqrJq6KnmRsrLQXKFjfOrnn1MsnEvSJhUCsWEL0Pzhn2SxMDAd1fe7D0WuEYaGs3S7WdXW7GP5gpu6sAn5ATJjmeg6KnXN9fUdIt33a38LTOn5KNec7QImszdfvanq+TBW8+132vnwYUJ+opJUckDbxIwK28k6gNYYoxSlCLR3eZBrGIcJ7+d2abQ33gI5jVL4doXF5yYKnKZOwCWL3tpbJSw6c88HZypMkngINa2Tp4A==
+ bh=/4YM0OdlL3i5oO56ThOH/SwtIM12paZZJm5pE0+d6OY=;
+ b=wjiOEisiG9Xv2PFR6YHZ5Cou/P6TCZ3bUWAX8aRivZRrEyZh0y1ocmdrUqvBQzylhlEMudB2TRe8WkOdmYop+kds2yVQSpSQ0mxbsGB5Z86mNhtzePL8u255AMICNP/RfLfGB40uC5WK9iGlFU9EcJpYIf9tPxe4UWKYRgB31OyTA4NB9vF24/0LY91XM+5W2TPTefSOMzirervx4wMkj7Ww3aVYaiOgwryiUMRnDOSiiKCG4VYDCYpkn9QdXiuUfeSHDYK0BUlHnPsZ+nM43p+3cURcj8HL8+JBuNFhASS4SkRKXWCNZFqU80UINNnbx35xxyU9uo6EOu4T+dNOiQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XldSEPXE0zM2mLx2ujDyY9BeDaskxTm3K+2Zz8mceA0=;
- b=nYjfkUW23GrSnnCYxqx+9lToQVjRXJ45IpjXFEsUTLG2DnAPFlchGdtugGNWXZeIYpG82ugkOQnH+xiwGSrKN7IxpsHJkn2GMPpQoBV14Fs99cYcCotbBRK5GoEtvs14NyUUrB2lNR+fFDYPTTZF329Y1SraYVgTR49weXK4HZo=
-Received: from PH8PR07CA0040.namprd07.prod.outlook.com (2603:10b6:510:2cf::26)
- by PH7PR10MB6227.namprd10.prod.outlook.com (2603:10b6:510:1f0::12) with
+ bh=/4YM0OdlL3i5oO56ThOH/SwtIM12paZZJm5pE0+d6OY=;
+ b=aR7BAl/a+Y8IGRYTJFXrmBnUzC3o5xOuJribsbTcEz+fG448/FwOdNuFXA9AY6Z84JSukUmGWuNib5vSS2GQLoVN6BSSgibwbB9IexYoKitptImOSn3VUF/EH6y/fIpaVKAnPzoBejmL1wWJxLH9pF+GhbmewF+JOG3/s/zbGGU=
+Received: from BN9P220CA0026.NAMP220.PROD.OUTLOOK.COM (2603:10b6:408:13e::31)
+ by SJ0PR10MB4797.namprd10.prod.outlook.com (2603:10b6:a03:2d8::17) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.25; Mon, 9 Mar
- 2026 17:02:30 +0000
-Received: from CY4PEPF0000EDD0.namprd03.prod.outlook.com
- (2603:10b6:510:2cf:cafe::a8) by PH8PR07CA0040.outlook.office365.com
- (2603:10b6:510:2cf::26) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 17:08:40 +0000
+Received: from BN2PEPF000044A7.namprd04.prod.outlook.com
+ (2603:10b6:408:13e:cafe::30) by BN9P220CA0026.outlook.office365.com
+ (2603:10b6:408:13e::31) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.25 via Frontend Transport; Mon,
- 9 Mar 2026 17:02:30 +0000
+ 9 Mar 2026 17:08:35 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
@@ -43,95 +43,105 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.21.195 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
 Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CY4PEPF0000EDD0.mail.protection.outlook.com (10.167.241.196) with Microsoft
+ BN2PEPF000044A7.mail.protection.outlook.com (10.167.243.101) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9678.18 via Frontend Transport; Mon, 9 Mar 2026 17:02:29 +0000
-Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet201.ext.ti.com
+ 15.20.9678.18 via Frontend Transport; Mon, 9 Mar 2026 17:08:37 +0000
+Received: from DFLE206.ent.ti.com (10.64.6.64) by flwvzet201.ext.ti.com
  (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 9 Mar
- 2026 12:01:48 -0500
-Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 12:08:37 -0500
+Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 9 Mar
- 2026 12:01:48 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 12:08:37 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 9 Mar 2026 12:01:48 -0500
-Received: from sadik-PC.dhcp.ti.com (sadik-pc.dhcp.ti.com [172.24.233.244])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 629H1egC977422;
-	Mon, 9 Mar 2026 12:01:46 -0500
-From: Mahammed Sadik Shaik <s-sadik@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-CC: Ryan Eatmon <reatmon@ti.com>, Prudhvi Veeramachaneni <prudhvi@ti.com>,
-	Mahammed Sadik Shaik <s-sadik@ti.com>
-Subject: [master][PATCH v2 2/3] jailhouse-inmate: Inhibit debug package split
-Date: Mon, 9 Mar 2026 22:31:33 +0530
-Message-ID: <20260309170134.2779295-3-s-sadik@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260309170134.2779295-1-s-sadik@ti.com>
-References: <20260309170134.2779295-1-s-sadik@ti.com>
+ Transport; Mon, 9 Mar 2026 12:08:37 -0500
+Received: from [10.249.65.90] ([10.249.65.90])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 629H8bJP1498131;
+	Mon, 9 Mar 2026 12:08:37 -0500
+Message-ID: <db6c1dd0-b13d-42d0-9d81-73fe1b2d9e9e@ti.com>
+Date: Mon, 9 Mar 2026 12:08:36 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [master][PATCH v2 3/3] ti-jailhouse: Fix buildpaths QA warning
+To: Mahammed Sadik Shaik <s-sadik@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: Prudhvi Veeramachaneni <prudhvi@ti.com>
+References: <20260309170134.2779295-1-s-sadik@ti.com>
+ <20260309170134.2779295-4-s-sadik@ti.com>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20260309170134.2779295-4-s-sadik@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD0:EE_|PH7PR10MB6227:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4b07f083-82df-4937-6cb4-08de7dfda5a1
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A7:EE_|SJ0PR10MB4797:EE_
+X-MS-Office365-Filtering-Correlation-Id: 15d882cc-1af8-48ff-c74f-08de7dfe8176
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|1800799024|82310400026|376014;
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700016;
 X-Microsoft-Antispam-Message-Info: 
-	D7XejG45lUMhIh3bA5j2Y5x822hQsi8rw3ErFhZfCak/rkN3NGim/vbwbhBSvLFw7ccrwXzJLACGDcqp1/wAE5to9+1kAJSSz5wfPDFEthl05rMkMZyjfs+L7CGxrfp6vXYrwba7aZj2hX3FLT8LAqSvWrVo/v/4bf2c7JQgsC3wZ8k/4JurXqCfrqiPwRdHEuTXI5nNm3Z22EOYEnW3+cUi302Y2GPEkTFWQLueCWRxfIV2AjgO3/0xmPS8D2ARI46xR0gSHCGL8ohDaaikgjyJie+e4dLQMwzh+4/zP8Yxin0hLQdQBVofHFf726hIsBvM7gmLZE0zsegvgrsOMmLGE1saO2htD8T+JSlxyEmNT8awWpQQoItrc4vum0mi7IJOOvYQU0G5kGLnuNXx3kVI5DIYAC6drKQC7fparbd1lcLXvE26fRyeiE8hY4TLN5APkxr+TNfqTMXgFkOIq5MO+1meQkbTCGK8V6UhvUY2DHEHtWAEAIbSbl/TRzpUOi+QeQgWLcT/trH6Elb5k5g2TmbQCn75a7gooHajU/+rJ3RGanlrZIxVuTqqn4xMRRM/bxWHTs/rTdzIbXAaTOdCpsdYt4yH8F8ztW16cKGM4HGEjdHzY4lpznybvW0yIIbPP1tcZGIhenYVPuJoGvxBVJ1N/vB800ERSgkGC5ZURxOv/xFl85XFWrxUsOlM2Dl1FhMBRwkwtOyyuXQCRCi4JhDJfhBQ96XdLgKXWbhRoh20FIYGmHEcoTeBYKTg44My12rM7kUFoaDTAGAYGA==
+	yDaLrjNBfSkXd4VRLs6tJTszZpeNCEp4z4NEMBzH22hpzsslxhgSbPyoLLHMVQhHVWBPpuM9all/jMYTayyvs6rqAFU/110pHZ5lczHAJPPfyjPsbGvXUICdzgY0fjuBm1tR17E+gyXOnwKvgkza7EFW5yzsjLKizFIAHsz/x1iYWWV6mNLJqT5tNS5QImL8e3o2KK8Ao8yc0vjRvUHDhJeGFWbq5oqJwg03RFWb0UQGI4inucK7dTTJmLASJ9DVg/O9jf34srL4aZB4JVbplvmsbIUxa4shXZSXnrYjI0Lq+3HBzNuQD1DpiPBa9rsfJdZQmJzfzYAwNoI1C9WU0Gk4Y0oDot2gHwbJ03dc493+/1+W1faTTXYm/4LWm9EeXrzApRTDIATJCYH5AVKUyC8NxxFhk41r5JZy+c+/jiG8H0ejcuHAh9yJ30+U9l8o8bFlQZ0xWpx929d+tgx+H9SLkOrxWV8aswP4DhapjvhGZE51qrJzOaA+mvxbUfK4PsVj3j7/iB0KLCotgA4erIk7YU6iOdQmErutjL4Pi0V86xDW7UZjUN/D0fQO9wxuJMeohXmGOylxKbBOnuwQIHFdx1HyvjT9yrO6tdsUO2icriIR3BwBL5mm6CXTibTtGc+E47sJx6kv98udLAvvJTKYCPkqmijuOI6vWKjRrFuJER4IbL1omvOER/VI2BQP2EFNmaccg76e9C8UF/xXNPvp7BFSTLh9TKeIqfmbGAczOvV2Q+Aj2DGbwSacU/t4YYDfiyhpLrI981jbfmdiOg==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(82310400026)(376014);DIR:OUT;SFP:1101;
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	N09aIsvJ/2BJJdhtOP9GinIcQpZZRkDpQaeWe6lsYKHJKeWnDddRCG6WF3QiIvYY3l+V6lRwl/m3UxbsYLK9IK1yjVin53UgT/DgSit4JmZav9yA0L2NjLg2evlgtvUtE/3Wwryhp4ibazRbqrkRswO/Dz/BfcpGeB9XoeQLO31ja+EdvnoftxsQak6iohHCAA81bCeOTSIhoKDSoNGlk4MeHGtcAHikbZcDkX3u87iPWgmXJ5ZpKIjI4yw2v/yE5SmPS/+R8GJhUIz+kgHPMb/caGqoYbRarplxNg01ZKC1+luZp0Z2G9ZdFgkez2RiAoey5Upp7pZCUxGJrd2ckoKhfuo8nZm8sGCJeuR4fDFZjs1T2AOBJPhsenl+g4MfZwxdiQFi9nICfkbuhxE5J2mFqUOYTbFBX7rwGpKXuxp8uIIP8RECpCepmG1tmxzc
+	pP2G4Nj6lJlRcngFwujldze/GxKBM8J9lBX9IDgFUgrCB8xN3e7k2ueCY3cpfP3laz0Ega2wHDHsJB0WnVq86lfBXRSaZZh2e0xVFVHdICOLSdSZwSqz5EEjqYyk92Vsz1a8LYAWoWbChRmrzsrFW8QmLQGBY9lKRfnQI9dDMX7WQK5pSHWe+3a6HbJAHu59/XxNtIUBIsWl/V5wMnO4DAWRNyz8JdzO5RSOWr47YCENqfxp9HAxpK2v5/WqZIPeT9KvU7SabO71jhVoDZcFkb/f11ZhstNRQyBEb/iyiGzhAWMtqsB0rgYdtdXjWTWDNe7hn3s84bj7KztS4CyaKFn7Vp/+A/PCUimWqWakm4tjH/WCjg2qDaEonzJOBL+QTL5ob0gyoFuA2ROTxIHchJZOrUt3ATMcClFxibk2CZY3EmyEk2ZTDRp1RG/O0404
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Mar 2026 17:02:29.1426
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Mar 2026 17:08:37.9259
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4b07f083-82df-4937-6cb4-08de7dfda5a1
+X-MS-Exchange-CrossTenant-Network-Message-Id: 15d882cc-1af8-48ff-c74f-08de7dfe8176
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	CY4PEPF0000EDD0.namprd03.prod.outlook.com
+	BN2PEPF000044A7.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB6227
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4797
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 09 Mar 2026 17:02:36 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19681
+ <meta-ti@lists.yoctoproject.org>; Mon, 09 Mar 2026 17:08:47 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19682
 
-Inmate binaries are bare-metal applications without standard debug
-symbols that can be meaningfully split. Inhibit debug package
-creation to avoid unnecessary packaging overhead and potential
-QA warnings.
 
-Signed-off-by: Mahammed Sadik Shaik <s-sadik@ti.com>
----
- meta-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb | 3 +++
- 1 file changed, 3 insertions(+)
 
-diff --git a/meta-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb b/meta=
--ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb
-index 39654a53..c6b3b85b 100644
---- a/meta-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb
-+++ b/meta-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb
-@@ -1,5 +1,8 @@
- require ti-jailhouse.inc
-=20
-+# Inmate binaries are bare-metal; no debug package needed
-+INHIBIT_PACKAGE_DEBUG_SPLIT =3D "1"
-+
- do_install() {
-=20
- 	install -d ${D}${bindir}
---=20
-2.34.1
+On 3/9/2026 12:01 PM, Mahammed Sadik Shaik wrote:
+> Add -ffile-prefix-map flags to KCFLAGS to remove build path
+> references from kernel module compilation, ensuring reproducible
+> builds and preventing absolute path leakage in binaries.
+> 
+> This resolves buildpaths QA warnings during packaging.
+> 
+> Signed-off-by: Mahammed Sadik Shaik <s-sadik@ti.com>
+> ---
+>   meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
+> index 91076c9e..8308f0e5 100644
+> --- a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
+> +++ b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
+> @@ -80,8 +80,8 @@ USER_SPACE_CFLAGS = '${CFLAGS} -DLIBEXECDIR=\\\"${libexecdir}\\\" \
+>   
+>   TOOLS_SRC_DIR = "${S}/tools"
+>   
+> -EXTRA_OEMAKE = "ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}" KDIR=${STAGING_KERNEL_BUILDDIR}"
+> -
+> +EXTRA_OEMAKE = "ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}" KDIR=${STAGING_KERNEL_BUILDDIR} \
+> +    KCFLAGS='-ffile-prefix-map=${STAGING_KERNEL_BUILDDIR}/= -ffile-prefix-map=${STAGING_KERNEL_DIR}/='"
+>   do_compile() {
+>           oe_runmake V=1
+>   }
 
+Thank you.  I was going to comment on the v1 to not disable buildpaths.
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
