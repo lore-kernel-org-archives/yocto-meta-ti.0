@@ -2,72 +2,72 @@ Return-Path: <s-sadik@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B18EF417EE
-	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 14:44:20 +0000 (UTC)
-Received: from PH7PR06CU001.outbound.protection.outlook.com (PH7PR06CU001.outbound.protection.outlook.com [52.101.201.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16206.1773067458923989074
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1598F417EE
+	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 14:44:29 +0000 (UTC)
+Received: from BN8PR05CU002.outbound.protection.outlook.com (BN8PR05CU002.outbound.protection.outlook.com [52.101.57.69])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16153.1773067461476647813
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 09 Mar 2026 07:44:19 -0700
+ Mon, 09 Mar 2026 07:44:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=afhsxFqh;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.201.53, mailfrom: s-sadik@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=WDktupar;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.57.69, mailfrom: s-sadik@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=upfNDfaJgtsvTNxquZoi6bgHnc3ATf5M2r2Yfwu+nOqpzYkSkOu89F8Jh7XK2H4Uiya++673UaF9Tt6HthA320GqDn91Ob96QSnSPXGbJ8U51yqUBtKv31KLGdPVGwK22ykfZzikw+UTtQfJJcDuuKRHYuJisCS6y7b8kQKOKZg9StrZ6lSeJUnwS7HkKminWodkMcxN1i1s47ez3AaEFnE+ohiaAd2pTH6T0fWKwNE+gqolipcWSHb2krW6tU0t2RJryB4YD4mwTK+L83iY7Uufp6I10NiPZlxyFQ/UMWdHeMsaQaOzzQ0inh7L+ZMVVbAf/HNOnGW+jw22jovldQ==
+ b=zRzxZN8jPdUZyrJ0v2uaIzHW6WsqHwaOO9U7rJusQy05cXAcgMSyX+RMfmnybZnZmfPYVPMa4MbXVhrZOlEoh/+usrbbV/zJXkS/ZrxgdEPq6T8izTiQXImTynxhZ5s1u1BDWMwUaKlvsku6sWAwKUnCENPrvtYckE3p5A+7xpk0cqnD0yQnRCOfkzy1YAXqZsc2wapiw36+tZeniPkXKvPrYfNxIsm2sjfjIQODdYhHdhfN2Q7PK3L9DwI/PICVtEMI7BJ86gUiCQ4YjYH7x19Of0yAN+Qbm5sBw+jSFsSMIcXNojDm7D7Z2jF+LIG4CNwWo8Evh2Lstv/pZO4UlA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pOkr56VJjeIhc16G2HwjypjDOB1Bd4FUW1dtJKyznCc=;
- b=Sy8iFABntr9UEmoc5z3REFciFn6mTQE1wrH07sFeXoICsGnxOleJ/8qnL4kuuC6H4hRBvjffb59/pphihoygiBJue5A1TtWe8aUdRFKAUcluvmzhXJoQboJXxzMxeQUF5eVd+AcBNJhnXTIerDaOe4YmBDevvkp+Roa4a3w2gGI/CiFNnNwY4pETPS1RZ8GAih6ap8ZXx9U3SpgxXM7jIjpF37LU4qJQMwO+GM0St8ufLG1zGBdHvRTtHiQoQZNb39scg6DKQQrq6AKnygQGzx3eG3lZpfA8yQI/vK02NK0Kxf2B1Y2lT9WeRcygkxqViLSaJX7mdcQyL3aBa55YGA==
+ bh=f5wSi3nij3w76ksSuHgx7/Xr9ACOWwll0pPS4y+JYK4=;
+ b=M2W2tZJ4F6rJhbnE0jcWo0z1MaEAh5k58Mjd8Q7AyP877htWbQtmra7lymqGNl6i1Plg2vShvntjW6F3MNajivBt6Q4ZXi/0csxZqvkak+XFfF2W6A/Vs+P7wt2gOa+0vLHwhYeH7AUWOzakaNligb9mWN3R4w0UQX4aicfaIYOaesZaINYpN7GT4mIJzdvdJdGwfWYbcIv+x45XdqKguUSqOy9N+YcFotYC618wdg23ZoR+f1/zfHnM3gG+h61nolES++lrj1SIeTyqJTvZW20XEVzrfvgkcsWTmT1gCMNW9OlBw0nRjDxfD+g5zKk6hD5i3YQX3ZT0auQpls0yiQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pOkr56VJjeIhc16G2HwjypjDOB1Bd4FUW1dtJKyznCc=;
- b=afhsxFqhb8xdiI+OPWWtJZKoXGWBfCkXQqoYPGp95Q584Si3ndaUmbUq6C9ctHRgpZUtyUw2pSOGt+lphaPgNCdog8UeAZOcfxZs8BuNJLB8T89AeqQDBrrLpz8Ia+HAlnjcHX3lCWPs1zPkae1kmY2qo1N7QeN23s2NHZPq0Ic=
-Received: from SN7PR18CA0018.namprd18.prod.outlook.com (2603:10b6:806:f3::10)
- by IA4PR10MB8566.namprd10.prod.outlook.com (2603:10b6:208:568::7) with
+ bh=f5wSi3nij3w76ksSuHgx7/Xr9ACOWwll0pPS4y+JYK4=;
+ b=WDktuparvi75vzYHUqThsTsn4DI5KjAzqMeLlpyfxXaL6bsqa/nE2we2zZOtUN+M+90f5RKWGhXF4R4lqpC0EZiXLncrG80oEvVs5P1khiBS1sWTIlvko7Xjd5tjAnsku664r7dKxC7KeeSQAweydaA9whnHED1JnVLWIYZSHU0=
+Received: from SJ0PR13CA0197.namprd13.prod.outlook.com (2603:10b6:a03:2c3::22)
+ by SA1PR10MB7792.namprd10.prod.outlook.com (2603:10b6:806:3b5::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.24; Mon, 9 Mar
- 2026 14:44:16 +0000
-Received: from SN1PEPF000397B2.namprd05.prod.outlook.com
- (2603:10b6:806:f3:cafe::50) by SN7PR18CA0018.outlook.office365.com
- (2603:10b6:806:f3::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.25 via Frontend Transport; Mon,
- 9 Mar 2026 14:44:12 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.25; Mon, 9 Mar
+ 2026 14:44:18 +0000
+Received: from MWH0EPF000A672E.namprd04.prod.outlook.com
+ (2603:10b6:a03:2c3:cafe::7b) by SJ0PR13CA0197.outlook.office365.com
+ (2603:10b6:a03:2c3::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.23 via Frontend Transport; Mon,
+ 9 Mar 2026 14:44:17 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SN1PEPF000397B2.mail.protection.outlook.com (10.167.248.56) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ MWH0EPF000A672E.mail.protection.outlook.com (10.167.249.20) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9678.18 via Frontend Transport; Mon, 9 Mar 2026 14:44:16 +0000
-Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9678.18 via Frontend Transport; Mon, 9 Mar 2026 14:44:15 +0000
+Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 9 Mar
- 2026 09:44:09 -0500
-Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 09:44:12 -0500
+Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 9 Mar
- 2026 09:44:08 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 09:44:12 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 9 Mar 2026 09:44:08 -0500
+ Transport; Mon, 9 Mar 2026 09:44:12 -0500
 Received: from sadik-PC.dhcp.ti.com (sadik-pc.dhcp.ti.com [172.24.233.244])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 629Ei3V5778250;
-	Mon, 9 Mar 2026 09:44:07 -0500
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 629Ei3V6778250;
+	Mon, 9 Mar 2026 09:44:10 -0500
 From: Mahammed Sadik Shaik <s-sadik@ti.com>
 To: <meta-ti@lists.yoctoproject.org>
 CC: Ryan Eatmon <reatmon@ti.com>, Prudhvi Veeramachaneni <prudhvi@ti.com>,
 	Mahammed Sadik Shaik <s-sadik@ti.com>
-Subject: [master][PATCH 1/2] jailhouse: Fix JH_RAMFS image path and QA warnings
-Date: Mon, 9 Mar 2026 20:13:55 +0530
-Message-ID: <20260309144356.2709949-2-s-sadik@ti.com>
+Subject: [master][PATCH 2/2] jailhouse-inmate: Inhibit debug package split
+Date: Mon, 9 Mar 2026 20:13:56 +0530
+Message-ID: <20260309144356.2709949-3-s-sadik@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260309144356.2709949-1-s-sadik@ti.com>
 References: <20260309144356.2709949-1-s-sadik@ti.com>
@@ -77,90 +77,60 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000397B2:EE_|IA4PR10MB8566:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6c914709-07b8-4179-0c0e-08de7dea56c0
+X-MS-TrafficTypeDiagnostic: MWH0EPF000A672E:EE_|SA1PR10MB7792:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4763e617-1ae7-491c-402a-08de7dea565f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|82310400026|1800799024|376014;
+	BCL:0;ARA:13230040|82310400026|376014|36860700016|1800799024;
 X-Microsoft-Antispam-Message-Info: 
-	A7vvM1a4YB3e6zp1pOhJZ1cDpM106E1ED/jU9QlM6NHbpFeq4qTH8LqOxQqWOHAVE41pyGCvd2XHGqgdT4Q5d8dDtdnX6XAH4Pcb2U++Aofr+/3owqz5lAsVNaCO8BGJO4pGLpQeJTgQmu+7T36aWxXH7sa4maW5cpEM40OJ59+uN7cBEPo159cU7KXtj1a+EPTSDQp11GmBNO0HUA7VdwXbuGlon6OGdkkTz+LBkPXj89nm7f9ewUv1/ER0h1sPbc/s5OS1I+q2Sqh+GfHWDNzeR3Bdqw77LJCX5z69H6TlensrBeCiNZZZb1BCMJL6cLqvb1AscIRX2TCtAR1KkcKkymmASJcainS/e8FT4iHLRAXm1UsItsZyjdNyzQh54fPxSYQomIiwLWLyiVmVveXADelR+7Ta0PllIHxSma3wpRbbU+SHt5B3cjOKl4ossdGF7jJLXHDx1jb2rnwa44T9RoKqoLz+PWUQgFCMpQDMRhMimArba01W5IuxH7wCVllMGXO5/bOb+djXXLmcsT40Ulc4eQz9Y3Vyq82BlZ6oT3qViL4KtHunb9mykOW7J1LTgvCLyB3OuDalGVsAr1kct7QOeeJqxzOXk9DhT4NbbEtdjmdhibbJluZMsy1bRbkvwPL2TDyZdBMZGgdbGTu2o787Q/UKEZ9DIctKRK/Hpzrk70j9FwDsf/av1m81EYSmmvVwWiXY0SpjCrKOj6TMx8LP6M/XFSa3NMSN2kWpvN3BW6n/9VQH6DYfmibhGV/yvJyQn1o7iFl2ceVOCA==
+	eUY2lXbXup0d94yzZVWXe66EbKRHp47GHc63MR1Up1TUgWqM8aQTZGkRovQJPwFdkgdtWlQ31siGdWaN3Ss2pA+QRdm0weE3JzEWEDyVZpf7cpOmIXFMcY/YotN+UCtdNKKh4kwDzL8llk4dNVbkhlU349Y7hYmDBb8RJaQ4yNiCj92cbs2Coe08EB/EDar+DEW21EyHgi31TLcsE1RnEoFFUscUUKI0EL3Ju7Vstp3eqJC5coUHKXAphyBK7IbuVsmMLa7h2+nmFa65oeubntuvxoTmwZGxQ7Vop5C1GszoPfUoB021WVJ1vIQtCbPa2NJ4yP5B4fGIJ1lv9ds7TGH3FQbqKO3//+kEOaeIpRqdxTwGlS1e2ksbdzAXT9T+DEaoEggvSVfNz5S03QH61/VUQ9AfgjGhvNhGX7UKkUX911+7RzAuts4axuse9KXZdCosAA+F1oC4IranQ4cSv95cvK7nwlbCyRnCAnwi/nM+ty+FO60j6SE8s8vZF1jsxhX4MRKHp2qNINYpgvtziXCjTubTjCrj8eains0hk39gjNqoCPddFX4GCtEflY/89Gfc9UCVxhEskaO2ltWA7MZQ4whsEaXoZHpecXMWm7JFiGXP4vFrp9XsHyknuirfn8Fm9k1QSh2P3NHY1QjuF/gAUL+aLjZUy5c/0i3cnsd3GwwxdjPlMdCByQxuZoNMfqC/jztecfOQsRlIC5VBoDKSw68nnDOWkXWawiVhCnk69FvNzg1wcVyNlo5G1/EccLXErISBvw3JK1D9CwdEAQ==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014);DIR:OUT;SFP:1101;
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700016)(1800799024);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	6Tdp/RRsIsjDZHiKQ+WYK5Aivc53UheKpkrCpV6n3ZcqgOMF5larp6E8CC6akWZm0PU1Qx5cbUOcP2NMriuWCvN3z6vPnG9uXaptF8AeWlLyZfRJ0E+yWuQzZ9z+URTTzhVbli6B+/tQK+BxiHbkut87sbAQMHvpABffT/QVzacWjtd4uWtz6Mw8VMrVq1062cq6UANRgCmhF3ebsoTvh358h+TlnIAoU3JSkW9grDYkHZoLJVsDjDnsf9NL+fkv0566e3Gr0qVKz31Q7IvcXWl2ioZHuj2vuJlDiwvwXhYadhJtalpdeCb3a7pOAo68HYGm4dNWQM6A1niyVWwndMtftzbXW/Fg20p9doBpHpq//d4Wai8mvZ5cZJz6iaB/cK/oIdTtNHtAdiRmMQeHCFMo74VYYI/MVdVUJbsbOdAwn6aGyXRz4dKfBSpVyfam
+	Osz9JsTUnH8+mljhzOQuPDDeKysxcBLddAU67LljRCeKXMWVXIpYMXyYIJSn9ln6URmWN9F9TgbUdPeXf6TmI6MO4KiCK395K4dae76eUFuf5R8m3EaXhKbwQxiSdL2/OkCkEm0ZPtLBYU7//om4k9Isd958duNltZjBQ5reO59VOnQIiwgtlaWAiGPOvcfMZNteGm++Jmeqx5mBVkRRH/aHwZsPU2jN3iM1YQG4V8npIROgYuQYhxYPNErTIjFQyqMHU67J7cNlN+CwPcffAf0gTizi8WxolydLj24WHx6CZKATfwn+p8bVYvOjYlROyLKJAJkuUbxwpeqfF6aWGXuCuspkHUHYmh3RC//Y9IT7u9MHbEx6BhFWKtfmabQypJjS4y32vnB/voopIs1sGAm6wq/wMapIvqfBg5djOamFQceJ1sodb4pUlRopLDch
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Mar 2026 14:44:16.3729
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Mar 2026 14:44:15.6845
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6c914709-07b8-4179-0c0e-08de7dea56c0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4763e617-1ae7-491c-402a-08de7dea565f
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	SN1PEPF000397B2.namprd05.prod.outlook.com
+	MWH0EPF000A672E.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA4PR10MB8566
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB7792
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 09 Mar 2026 14:44:20 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19675
+ <meta-ti@lists.yoctoproject.org>; Mon, 09 Mar 2026 14:44:29 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19676
 
-Update JH_RAMFS_IMAGE references to use correct .cpio
-extension instead of .rootfs.cpio to match current image
-naming convention
-Add 'buildpaths' to INSANE_SKIP for main package to resolve
-QA errors during build process
+Inmate binaries are bare-metal applications without
+standard debug symbols that can be meaningfully split.
+Inhibit debug package creation to avoid unnecessary
+packaging overhead and potential QA warnings.
 
 Signed-off-by: Mahammed Sadik Shaik <s-sadik@ti.com>
 ---
- meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ meta-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb b/meta-ti=
--extras/recipes-ti/jailhouse/jailhouse_git.bb
-index 0113a916..bfaa2e16 100644
---- a/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-+++ b/meta-ti-extras/recipes-ti/jailhouse/jailhouse_git.bb
-@@ -55,11 +55,11 @@ do_install() {
- 	install -d ${D}/boot
- 	if [ -n "${JH_RAMFS_IMAGE}" ]
- 	then
--		if [ -f ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}*-${MACHINE}.rootfs.cpio ]
-+		if [ -f ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}*-${MACHINE}.cpio ]
- 		then
--			install -m 0644 ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}*-${MACHINE}.rootf=
-s.cpio ${D}/boot
-+			install -m 0644 ${DEPLOY_DIR_IMAGE}/${JH_RAMFS_IMAGE}*-${MACHINE}.cpio =
-${D}/boot
- 		else
--			bberror "Could not find JH_RAMFS_IMAGE (${JH_RAMFS_IMAGE}*-${MACHINE}.r=
-ootfs.cpio)!"
-+			bberror "Could not find JH_RAMFS_IMAGE (${JH_RAMFS_IMAGE}*-${MACHINE}.c=
-pio)!"
- 			bberror "Please make sure that \"cpio\" is in IMAGE_FSTYPES."
- 		fi
- 	fi
-@@ -72,7 +72,7 @@ do_install() {
- 		./jailhouse-cell-linux -w ${D}${JH_DATADIR}/${JH_INMATE_DTB} \
- 			-a ${JH_ARCH} -c "${JH_CMDLINE}" \
- 			-d ../configs/${JH_ARCH}/dts/${JH_INMATE_DTB} \
--			-i ${D}/boot/${JH_RAMFS_IMAGE}*-${MACHINE}.rootfs.cpio \
-+			-i ${D}/boot/${JH_RAMFS_IMAGE}*-${MACHINE}.cpio \
- 			${D}${CELL_DIR}/${JH_LINUX_DEMO_CELL} \
- 			${DEPLOY_DIR_IMAGE}/Image \
- 			| tr -cd '\11\12\15\40-\176' \
-@@ -100,7 +100,7 @@ RDEPENDS:pyjailhouse =3D "python3-core python3-ctypes p=
-ython3-fcntl python3-shell"
+diff --git a/meta-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb b/meta=
+-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb
+index 39654a53..c6b3b85b 100644
+--- a/meta-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb
++++ b/meta-ti-extras/recipes-ti/jailhouse/jailhouse-inmate.bb
+@@ -1,5 +1,8 @@
+ require ti-jailhouse.inc
 =20
- RRECOMMENDS:${PN} =3D "${PN}-tools"
++# Inmate binaries are bare-metal; no debug package needed
++INHIBIT_PACKAGE_DEBUG_SPLIT =3D "1"
++
+ do_install() {
 =20
--INSANE_SKIP:${PN} =3D "ldflags usrmerge"
-+INSANE_SKIP:${PN} =3D "ldflags usrmerge buildpaths"
- INSANE_SKIP:${PN}-dbg =3D "usrmerge buildpaths"
-=20
- KERNEL_MODULE_AUTOLOAD +=3D "jailhouse"
+ 	install -d ${D}${bindir}
 --=20
 2.34.1
 
