@@ -1,129 +1,194 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <prc@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA578F33815
-	for <webhook@archiver.kernel.org>; Tue, 17 Mar 2026 08:37:38 +0000 (UTC)
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.71447.1773736654976264185
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C1E6F33817
+	for <webhook@archiver.kernel.org>; Tue, 17 Mar 2026 08:40:59 +0000 (UTC)
+Received: from BN1PR04CU002.outbound.protection.outlook.com (BN1PR04CU002.outbound.protection.outlook.com [52.101.56.20])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.71240.1773736852491406542
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 17 Mar 2026 01:37:35 -0700
+ Tue, 17 Mar 2026 01:40:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=bk/UNVwf;
- spf=pass (domain: konsulko.com, ip: 209.85.221.44, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-439b94a19fdso4970159f8f.0
-        for <meta-ti@lists.yoctoproject.org>; Tue, 17 Mar 2026 01:37:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1773736653; x=1774341453; darn=lists.yoctoproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=GJUGmDyHFjZr8C3S/ObH0GyD/e8PF106Ds0hlgpD3lU=;
-        b=bk/UNVwfo4F6CDKIVv5oEAQIipXaui5Q/av7JY6b4xdaYJF/igkRfhbjDlu11/C8M6
-         H1hEkVR1rr8sppu2cyQavoAzRnR1q6IjcDE/do8Gujd4hHH8aO5WTt8MCq1Bkwf1GLIo
-         YmkwwU/ofBkPlF4jm3A1vyyllvkSZswEnAHBY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773736653; x=1774341453;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GJUGmDyHFjZr8C3S/ObH0GyD/e8PF106Ds0hlgpD3lU=;
-        b=HIGF0lcO++fgqBqEo0RtFHJElB/qcy6mAL5YZO3yodljQMNZHEC1Su+OxNBLex0LqG
-         ilGlYpbLG3iYgwwb7Pe+LpYJt5xBaXKBkeaFtWEgPP28TuewrOCF2wj17fQslIqNeQnc
-         eFlEffYPpjVoFwDsXwtUSucfKzy7yCbdI0C2Q6ECjXxyTW5K51TK3Nk7Hrb39F2Y9svE
-         fbz53uPiu+I9GxACLzpOp6zNychkfiFbF6JA5KHabtQqefavWOZu+EnQ+iUyhypFo/EU
-         3ma1iFbgNhTvbeJlVjDGNgnUZgms6096cpCjt03k33y2SJ8Inl7rM1sSrM+LpS6foDb9
-         6KOQ==
-X-Gm-Message-State: AOJu0YwaqAxCpMStfy4ZLqTHfVRHQjcJSPkmOKGBf6nP4nrpPG5Le7Xp
-	yrPVvVR52sCufm3bUJgzaGJj29IacmryBk2fgt6GC8v9H0hztd+IoODjDWwb2rY8XnF/hG1UYUW
-	JclgG
-X-Gm-Gg: ATEYQzy9p3eGU5YmWNngm9EaierKosIw1AktYWYp9giTqVE3D27qUwrfMh5GGH4nvwm
-	LayqWfYdAlUz7CiEftP0zt2SI7K/+lKcre7b06Z75hk8ZtNShZ9dNTDPBMf/6MN77VNzlW4tOhD
-	1DgJEpVeenxWxvT1B44GTUn+FooibkB0+gYmoyTlEDgwMeavGFXHaelFS3DAJk1MTPGERGG4Dcu
-	cj2IO8sS9m54I4iouMDMsOLCHy4ihDYbjKprRWPuTr4/q1+oHUyJ/xYQEm0WQrkxfZ12Q22i+ht
-	ezeX1D/TZ+KAlwU9Y24EIj88ehrHM+ov5grkl5N4uq8CSL3lN77TzkZaq/kFSLhLnZpA0L6NJxN
-	NbZmqTWlEMWNggtvAf07FxnQm5K6nEzW9t8SIR4nF5+SJ6hQnmjpxKXt05Xca3f3+w/9sHjKI4A
-	wsrfzJw+/vjMxO79+Zolrn2+ldo2pAYeWre8t1gxuM6pZTmhQ=
-X-Received: by 2002:a05:6000:26d0:b0:43b:4489:d450 with SMTP id ffacd0b85a97d-43b4489d53emr10266732f8f.30.1773736652849;
-        Tue, 17 Mar 2026 01:37:32 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b45e51681sm10604741f8f.25.2026.03.17.01.37.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Mar 2026 01:37:32 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: meta-ti@lists.yoctoproject.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-beagle][PATCHv2] u-boot-bb.org: Add a tick-timer for PocketBeagle
-Date: Tue, 17 Mar 2026 10:37:29 +0200
-Message-ID: <20260317083729.1640948-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
+ dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=tnLVDPVK;
+ spf=pass (domain: list.ti.com, ip: 52.101.56.20, mailfrom: prc@list.ti.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=W9xr46MEip0Lb/J3Mf0tWC0IwzEFCK6RkQghiuIrWvQFsbwwOnwmGsfB0wphyFyX0Kpb7+1YRVW0jAM5ipjhWOfwXBMgD/jdYR7ro6jwB2f0SD+IlWajCWXyaBOiDCqMUfKtvKDL3Ixo29YgglhlapTyjUgiry9+2w7sw3datvUNX/y4WBNRD++RRJ+KYn25eGfN0p+jDvycR+VEWWx7rPtdeLpE6/3v6933fl3kDur1PO3opS63v8ddjgLvzVzS66tpX1RWEP8S5GrD35OOMR3NG/oIzgZKbcL7zGHVZL7514tdflkrjkhSakqS7Wuj9Er8OUJ7faAoBN51s5nyDw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=37pEDMK9oWfBvgJRPzeYfhyV6nLNQlLJS7kCTMKvL5s=;
+ b=qgBhkHeH2X5WLfuGT0cUO14MHmObQUvDnI+wWo3YIqDli0oVoU1rIo5AGs6dqtgjt49PGcqSIurdx4NMX/Tlc+r+0KJEeqev23Bzr2xDbfze2nqIohUhlzPWxFes/8SUkdrCZfkxK/Co1yYkl1oiMEbAqhwo1BFha3m7TNF3+uMsy6OEYOaO1uaQAdbMBCu4zSMV4O/e7gBwb5gRBH+cpCj44m6RRUSFOuJYNwb3VIn3auc9r9QLVecupoppgE0VvFgijBkbjxRDoTKulaRrPzW41y7HDqx7TCElR9wuMOFV8l7ItrKaEgptvF6KoU4L2HED4Qta+aJw1aYSXQ1/kQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org
+ smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
+ action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
+ (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=37pEDMK9oWfBvgJRPzeYfhyV6nLNQlLJS7kCTMKvL5s=;
+ b=tnLVDPVKZMHPqAnCZpOhQFU9vw5W2W8QVdY3UL5NzFN9OxNhx6IjIhUFF0HWGV6RaOIM+XIdcrHHPF225H5M60poMbNULpoq9qsnTCYQNHYkGcqukXqgQZovYL8O0Mxb1H1zcXXJHUA2VXTh0N7qy/W8+949hRl7CF1r243N53e/9W8LhyVm2gY19ZcF3rDs9cflRL0GXC4DxtFj963nxXXnoIVYqyULEmhqGZuxWEthVVgdwv1LLZQtpw8c9iGApRT0bY1Bl++uYwKS7a+iU6wbJBzIEnSLAFFYz2/hKpdhwBNIUYS4y02u3u2QTm2nUjS1Oupe35YKTwKzQOMdoQ==
+Received: from BL0PR02CA0047.namprd02.prod.outlook.com (2603:10b6:207:3d::24)
+ by PH5PR10MB997709.namprd10.prod.outlook.com (2603:10b6:510:39c::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.24; Tue, 17 Mar
+ 2026 08:40:50 +0000
+Received: from BL02EPF0001A103.namprd05.prod.outlook.com
+ (2603:10b6:207:3d:cafe::1f) by BL0PR02CA0047.outlook.office365.com
+ (2603:10b6:207:3d::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.25 via Frontend Transport; Tue,
+ 17 Mar 2026 08:40:47 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=list.ti.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=list.ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BL02EPF0001A103.mail.protection.outlook.com (10.167.241.133) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9700.17 via Frontend Transport; Tue, 17 Mar 2026 08:40:47 +0000
+Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 17 Mar
+ 2026 03:40:36 -0500
+Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 17 Mar
+ 2026 03:40:36 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 17 Mar 2026 03:40:36 -0500
+Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62H8eaNo2380679;
+	Tue, 17 Mar 2026 03:40:36 -0500
+Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
+	id 3784E9ACF4; Tue, 17 Mar 2026 03:40:36 -0500 (CDT)
+From: PRC Automation <prc@list.ti.com>
+To: Leon Anavi <leon.anavi@konsulko.com>
+CC: <meta-ti@lists.yoctoproject.org>
+Subject: Re: [meta-beagle][PATCHv2] u-boot-bb.org: Add a tick-timer for PocketBeagle
+Date: Tue, 17 Mar 2026 03:40:36 -0500
+Message-ID: <20260317084036.3635287-1-prc@list.ti.com>
+X-Mailer: git-send-email 2.43.5
+In-Reply-To: <20260317083729.1640948-1-leon.anavi@konsulko.com>
+References: <20260317083729.1640948-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A103:EE_|PH5PR10MB997709:EE_
+X-MS-Office365-Filtering-Correlation-Id: 73ceeb51-bccb-4b01-5be5-08de8400e2f7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|36860700016|1800799024|82310400026|13003099007|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 
+	juPxN2bcSO4TlhyMq7PxYQ0IeDYRIDGlo8+KRhvb/b9CMXo6f8O2vpG3NiFRm1ykEpWPcmhedoLHvrUTRELJ4i3E9XzOeTOw6QYsEpD9jJ8J4eCy9f/r6m4k4wIaVqg6JntUX5nclRusTyCBs55wCkX3DA+XwrfFl5Yq+BmcRAZ8qMDgFZ8vF2JcTVsoM/s1eYCdfXNmsj/DbCCRKBWY1K7Uzm8d/+F4dAybK5p1UmAUYLhisCgRkgLCu9Z7rl0zhW24I2XHiApcZXBMdsgwgCb0gFtOfXQXoWRH7o0bW3euee2FS3tTjf7mpTApecIThvTwlMTNdIW1kDiL5dgyAzhlqO1O9ezGQUqHiq7sT2YycVRGc1ZdNNdD8WEcYHPKTcldPbTPQtYt7+WbrTjc0CcKtt6ZIHENzKVt1lxyOJQ5Js5YwIQ78wk+9Ze9DIBOgJALXoyeN2NV+Qwl+zRi88yNojUAgn9qQvkPDvLoWAtfgaXaVy7922U20cgTS73mv1xLc5qmzZ6wfZraP62BExbClRfMT5yDoPLVi8+fVrZRQv3jVGTefDHoHlOaKTMXb1lJY3teON+vcP/WFwtsr28eVWeVmVfKkpJrkT5r4KkmisGglIS4CCpHpZmOhbKxv1Gzv5cibQzN5TfSJiMBqFQgWDkHt/fs3Zd8vyx3sDXi9bzucIEAn2zJVCeR58hPUlhxbhQlAP4a19+MalP4Vt+xKnDDINjdQo9E0fv9z2gh+cwgbQ/dzRraHm5E1GQD219q8VNzAIw3uNLtREfVSw==
+X-Forefront-Antispam-Report: 
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(13003099007)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	pP102gmLWoI5VA30zzepgcEvAY3HebtbHmX6choFnol/HDlP8mZCCv4KJBdl36Z6Zl8od26wOSpSCFiTjwgGBdggPyz1/dL7Mcyu7VpIL9PxKNS0hqbXdO7dkhSc4gEo5NyHfOf58+uv9XzE3iOQiwSWFbB3VWPYo9s09XrgM4GPCrQOpKOR4/oS3Uc0B3VQBxh2SlaFeuSod/b8RoqHegJ1VulryiLb3cQ+GLy16A9S8ths8qQtSq5QOkltbtjQHH16H60kpofJGODqZSUb6R7aFofoIIY4wvzBrEK3N65wnoqLozTJOW6rWuLqpn/44Muw6vlsu2fqjE3V2pkdyb2aDd+pQKE4h7UTsI5yQgBXZRT3yc/eff2iNoaXf8HPphzxlna2oEGa7GQE66oitgNvQNuiO7O5D+HZ8fCfyh3wYYK2aUa20f1tFcxSZv5F
+X-OriginatorOrg: list.ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 08:40:47.4764
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73ceeb51-bccb-4b01-5be5-08de8400e2f7
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	BL02EPF0001A103.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH5PR10MB997709
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 17 Mar 2026 08:37:38 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19732
+ <meta-ti@lists.yoctoproject.org>; Tue, 17 Mar 2026 08:40:59 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19733
 
-Add a chosen tick-timer in version 2025.10 to boot on PocketBeagle.
+meta-ti / na / 20260317083729.1640948-1-leon.anavi
 
-Fixes:
+PRC Results: FAIL
 
-CPU  : AM335X-GP rev 2.1
-Model: TI AM335x PocketBeagle
-DRAM:  512 MiB
-Core:  155 devices, 16 uclasses, devicetree: separate
-Could not initialize timer (err -19)
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  check-yocto-patches: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+Patches
+----------------------------------------
+WARN - [meta-beagle][PATCHv2] u-boot-bb.org: Add a tick-timer for PocketBea=
+gle
+    WARN: Missing branches specifier [master/scarthgap/XXXXX]. (META-2)
+        patch:55
+            Subject: [meta-beagle][PATCHv2] u-boot-bb.org: Add a tick-timer=
+ for PocketBeagle
+   =20
+    WARN: Commit message does not include file/recipe name: u-boot-bb.org: =
+Add a tick-timer for PocketBeagle. (COMMIT-MESSAGE-2)
+        patch
+   =20
+    For details on the above errors/warnings visit: https://lists.yoctoproj=
+ect.org/g/meta-ti/wiki/40887
 
-The patch is based on the following related discussions:
 
-- arm: dts: am335x-*-u-boot: Add chosen tick-timer
-https://lists.denx.de/pipermail/u-boot/2026-January/608684.html
 
-- pocketbeagle stuck in boot loop with timer error
-https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=269124
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...s-am335x-pocketbeagle-Add-tick-timer.patch | 29 +++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-beagle/recipes-bsp/u-boot/u-boot-bb.org-2025.10+git/0001-arm-dts-am335x-pocketbeagle-Add-tick-timer.patch
-
-diff --git a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org-2025.10+git/0001-arm-dts-am335x-pocketbeagle-Add-tick-timer.patch b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org-2025.10+git/0001-arm-dts-am335x-pocketbeagle-Add-tick-timer.patch
-new file mode 100644
-index 00000000..424a4bb3
---- /dev/null
-+++ b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org-2025.10+git/0001-arm-dts-am335x-pocketbeagle-Add-tick-timer.patch
-@@ -0,0 +1,29 @@
-+From 55ee5fecd68d0858ba6743137162252adedf2f72 Mon Sep 17 00:00:00 2001
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  apply-yocto-patch: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+master
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Summary:
+- Patch Series: [meta-beagle][PATCHv2] u-boot-bb.org: Add a tick-timer for =
+PocketBeagle
+- Submitter: From: Leon Anavi <leon.anavi@konsulko.com>
 +From: Leon Anavi <leon.anavi@konsulko.com>
+- Date: Date: Tue, 17 Mar 2026 10:37:29 +0200
 +Date: Mon, 16 Mar 2026 18:34:58 +0000
-+Subject: [PATCH] arm: dts: am335x-pocketbeagle: Add tick-timer
-+
-+Add a binding for the tick-timer for PocketBeagle.
-+
-+Upstream-Status: Pending [https://lists.denx.de/pipermail/u-boot/2026-January/608684.html]
-+
-+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-+---
-+ arch/arm/dts/am335x-pocketbeagle.dts | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/arch/arm/dts/am335x-pocketbeagle.dts b/arch/arm/dts/am335x-pocketbeagle.dts
-+index b379e3a5570..02e3aac5606 100644
-+--- a/arch/arm/dts/am335x-pocketbeagle.dts
-++++ b/arch/arm/dts/am335x-pocketbeagle.dts
-+@@ -15,6 +15,7 @@
-+ 
-+ 	chosen {
-+ 		stdout-path = &uart0;
-++		tick-timer = &timer2;
-+ 	};
-+ 
-+ 	leds {
-+-- 
-+2.53.0
-+
--- 
-2.47.3
+- Num Patches: 1
+- Mailing List (public inbox) Commit SHA: fb58dade2bb8bfeb0b70202050bf34254=
+ee64c8a
+
+Applied to:
+- Repository: lcpd-prc-meta-ti
+- Base Branch: master-wip
+- Commit Author: Ryan Eatmon <reatmon@ti.com>
+- Commit Subject: conf: Add falcon support natively
+- Commit SHA: 00d3d9ec970580d296870c0886bd6836c3caca0d
+
+Patches
+----------------------------------------
+All patches applied
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  check-yocto-repo: FAIL
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+master
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+FAIL
+    ERROR: Patch is not referenced in any recipe. (REPO-1)
+        meta-beagle/recipes-bsp/u-boot/u-boot-bb.org-2025.10+git/0001-arm-d=
+ts-am335x-pocketbeagle-Add-tick-timer.patch
+   =20
+    For details on the above errors/warnings visit: https://lists.yoctoproj=
+ect.org/g/meta-ti/wiki/40887
+
+
 
 
