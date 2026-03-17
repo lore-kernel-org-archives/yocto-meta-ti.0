@@ -1,193 +1,211 @@
-Return-Path: <s-sadik@ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8B23FB5EA3
-	for <webhook@archiver.kernel.org>; Tue, 17 Mar 2026 01:42:26 +0000 (UTC)
-Received: from SA9PR02CU001.outbound.protection.outlook.com (SA9PR02CU001.outbound.protection.outlook.com [40.93.196.14])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.67144.1773711738072443234
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4DA6FB5EA4
+	for <webhook@archiver.kernel.org>; Tue, 17 Mar 2026 01:52:46 +0000 (UTC)
+Received: from CY7PR03CU001.outbound.protection.outlook.com (CY7PR03CU001.outbound.protection.outlook.com [40.93.198.12])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.67147.1773712357604704303
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 16 Mar 2026 18:42:18 -0700
+ Mon, 16 Mar 2026 18:52:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=JBhvZwsi;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.196.14, mailfrom: s-sadik@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=B8ng5HHj;
+ spf=pass (domain: list.ti.com, ip: 40.93.198.12, mailfrom: lcpdbld@list.ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AxYmrf94XcaPMc7AoBWpeq/7ccI0R8/aMPw/brJt/LmOIWERl5XU5JGjXN29d++UulysUk9bceXg/4v/wZEu19x9bSNIvewW31cQPEtSWxdEgAPWtDPfMFhfF2lxPL7O+DtKs1WXvBhpuyqgXfWjSoFjW2eqFZ+t/xSS9Sg7f0JiNx734kebp+ASl2JaOA3N9lOz1qienBqJgBIcMOqfE4SO1stVmOekHXsvVfP2WnXcgu8v7Wj8jvqpf9l4vsHBe2chGfWlAv0wda5m7x5UsQs3MYjyfXifDSQug9rQ+qii1lOisC7r1Alovv9bn2xt9h9rSbilFcYDKr8ITwXTYQ==
+ b=BOE837dbWlnIL9FWwL5UdCux4S6kX2f3/CPIUSOTwkJDlBk8xgsLRIr94Bb2sDoY+UkmT0VZ1tQIeX2lzCTGP8fkr4mB97bl14xcOpdYBhnqceSwzYXjhfqqDhrWPHuCq2m7eRqYSebCFccpzGMtRrgytlHp/VfDojEraUnnr0Z7tGu64DPRC2l7UDHQcVfkdkHrNIvHnc2enRwJJ52s4g2XrtmwlkTT6f+S1m0GuclF5/9mxFnZ3hr8/zJZH+bBE32se+K0/5CvkRRfe/yi0WGK8YHiJphfMHor+QWFG1fdUcfxIw/RYHAm5YCF+jDU+l8p/dJVxvsZ1otliWEubg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ge6MDBfYNT01ThOid+M0obYC1H2HKLzrDJbdP4QYeWA=;
- b=BGRiHPxuyGPSnDG5d84wqqFhIjdRzH7Jm6iVOTDKYPEn9IHFdI+6T3LBsJw2xRjJoaJanTdme/F/zgYsiQl4CP6sYraBCBpvanHe/MGtCgB7JwStaShEe2QXZUDeqV30KWx5UH25v0TI5bL2hSt7sxGx4Lrbm8HhlznQ/jEZIuBSrrVe7doHHhuzzbsEFwcOIW3EM2aBamYTeR6eWUKqsnc6OWhRuDGbCa9booat7l8xAj970S/krA/8avcwQGSZq2O7SRIDt1UthER50bB7cNWnryp1A8oIQzus7kW7Xx6o3jrMOQV3/huHrP1AQ61ZZw28sAit4vrKR2eYxaIWog==
+ bh=ErMM3RtWkQiS4+YdkUOWb/HMgJJlL16wDfKHSSQY/+A=;
+ b=KyIO5YhUASA4W0sVTL7TZvQXWu9uSw2xCmQ7CCqdC70lsVTAMQDINb1MjecqtCWbtCwR5YiPX2FjRcL9p06OBZegYXKZtdQShyZAzYM2a3tJey0a079jQHEbFQJ8wrxXNq6urMNbmZNXyDs+UKcJu2aXCMYQ9C9QLPWX03j5KEyAn6WP0U8YoV3D0inLtz5J6T/yCJHErvPZksbZRbg5NAyiJ9MrhQ5duljFIhxgRCorsAtFG3S7NPnYLVXA6krlFy4P+LH/npFhy0BjBoXginmv2Do8r60s+v38hKZCvZNv8T0Pu5Ks34bXmJzjTbL965tyMwvQ1hMpPp6oYhCP1w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org
+ smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
+ action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
+ (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ge6MDBfYNT01ThOid+M0obYC1H2HKLzrDJbdP4QYeWA=;
- b=JBhvZwsiO5vyNM/4fhDZ1LTTX3dhMwmEMpwkK252fWvcmWDy0lUKk4nFXScXhtiONLAttlE7ihXBYtwVlFYX7JiR6HiYJCO9Itj/ReR4CJV5sNUcoTYnV4wQIr7pjf6e+ZAY+rR1su96GetDkXcTOyCyq39h2Co9ssoi1T1GatA=
-Received: from BL0PR02CA0058.namprd02.prod.outlook.com (2603:10b6:207:3d::35)
- by MW4PR10MB6510.namprd10.prod.outlook.com (2603:10b6:303:224::8) with
+ bh=ErMM3RtWkQiS4+YdkUOWb/HMgJJlL16wDfKHSSQY/+A=;
+ b=B8ng5HHjJMKbKTv9ja3XB0dNNsOogopbjzxW0uDyFur5bbtP/ejQt4qUvOkHgW3emz3oJy/bJlbgwV5L4E85S3NMxMicXm57FDnFgcCPoAHTwNWas1wNmE/RJWGGVJKhm3InAJzHTgQdgzX111UrQCUG6jxmrxbmk9zIXPTsM3cTFxD25QcWKB4gBEIS16LG1bpfzQt8ZS5E3AJ2z3QUBTnaD33OGWYGy/ry62N5P833DOTXhhMAwwZUVeT60jyXvJSOxHVGta/rAY5TwSSwZ2TbELhrzw55YeNHYJXEBsA79Yn9EnRfS1xyJo0DgYKUtN9D9EpeG4MuVsbK/1cfKw==
+Received: from CH5PR02CA0012.namprd02.prod.outlook.com (2603:10b6:610:1ed::11)
+ by PH7PR10MB6156.namprd10.prod.outlook.com (2603:10b6:510:1f3::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.22; Tue, 17 Mar
- 2026 01:42:14 +0000
-Received: from MN1PEPF0000F0DE.namprd04.prod.outlook.com
- (2603:10b6:207:3d:cafe::fa) by BL0PR02CA0058.outlook.office365.com
- (2603:10b6:207:3d::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.25 via Frontend Transport; Tue,
- 17 Mar 2026 01:42:15 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- MN1PEPF0000F0DE.mail.protection.outlook.com (10.167.242.36) with Microsoft
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.24; Tue, 17 Mar
+ 2026 01:52:34 +0000
+Received: from CH3PEPF00000009.namprd04.prod.outlook.com
+ (2603:10b6:610:1ed:cafe::e3) by CH5PR02CA0012.outlook.office365.com
+ (2603:10b6:610:1ed::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.25 via Frontend
+ Transport; Tue, 17 Mar 2026 01:52:29 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=list.ti.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=list.ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CH3PEPF00000009.mail.protection.outlook.com (10.167.244.36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9700.17 via Frontend Transport; Tue, 17 Mar 2026 01:42:13 +0000
-Received: from DLEE203.ent.ti.com (157.170.170.78) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9700.17 via Frontend Transport; Tue, 17 Mar 2026 01:52:34 +0000
+Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 16 Mar
- 2026 20:42:13 -0500
-Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 20:52:32 -0500
+Received: from DLEE206.ent.ti.com (157.170.170.90) by DLEE214.ent.ti.com
+ (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 16 Mar
- 2026 20:42:13 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 20:52:31 -0500
+Received: from fllvem-mr07.itg.ti.com (10.64.41.89) by DLEE206.ent.ti.com
+ (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 16 Mar 2026 20:42:13 -0500
-Received: from sadik-PC.dhcp.ti.com (sadik-pc.dhcp.ti.com [172.24.233.244])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62H1gBEY1798687;
-	Mon, 16 Mar 2026 20:42:11 -0500
-From: Mahammed Sadik Shaik <s-sadik@ti.com>
-To: <meta-ti@lists.yoctoproject.org>
-CC: Ryan Eatmon <reatmon@ti.com>, Prudhvi Veeramachaneni <prudhvi@ti.com>
-Subject: [meta-ti][master][PATCH] ti-extras: Update SRCREV for Jailhouse
-Date: Tue, 17 Mar 2026 07:11:55 +0530
-Message-ID: <20260317014155.2776707-1-s-sadik@ti.com>
-X-Mailer: git-send-email 2.34.1
+ Transport; Mon, 16 Mar 2026 20:52:31 -0500
+Received: from fllvdckhpci102.itg.ti.com (fllvdckhpci102.itg.ti.com [10.64.72.97])
+	by fllvem-mr07.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62H1qVR32008556;
+	Mon, 16 Mar 2026 20:52:31 -0500
+Received: by fllvdckhpci102.itg.ti.com (Postfix, from userid 60899)
+	id B16EF2A61; Mon, 16 Mar 2026 20:52:31 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>, "Denys
+ Dmytriyenko" <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202603161800
+Date: Mon, 16 Mar 2026 20:52:31 -0500
+Message-ID: <20260317015231.85449-1-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0DE:EE_|MW4PR10MB6510:EE_
-X-MS-Office365-Filtering-Correlation-Id: df8205d2-8510-4dae-8b83-08de83c66a16
+X-MS-TrafficTypeDiagnostic: CH3PEPF00000009:EE_|PH7PR10MB6156:EE_
+X-MS-Office365-Filtering-Correlation-Id: b84f7b52-adf2-452f-c996-08de83c7dbe4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700016|18002099003|56012099003;
+	BCL:0;ARA:13230040|376014|82310400026|36860700016|1800799024|56012099003|18002099003;
 X-Microsoft-Antispam-Message-Info: 
-	Z5pJecTdWOKigBiMG8lsoGFNaDvlYjnutTTBydLVdUeqzTIrBH3igvs+P6Yiv+7MyLQoEQ2LoOmMyKTXZ5uSxfMBw7YL8b6XXk0lIxgsWoKKGao4aAtK/l8l22YCOnq6bJ5cN4nXMNUiJq0baKn0rT9JTFvmfzeZqXdJpyeATihpEif7BdKhAt/4+2KNionPEh3Jszp46B7Pc045tGNNjwy5o3Tz2OfG5PUp1fTq0H+XJaPuVh5A1eC/c3HmiaVqT48Hsht9Kk2z9+8tyALydgd/F30Pmksi6Nl6mxwiOunZIa8qAMhJ5HysAiJvt/qxyKudD+AF7P03tNsFBy++ku0HMuqBoDCN/Uez7d6nW6H7sk4iyzreHoKTnXtRjoJZfkw8wuZyeI7QLTmOKw6idPRcpbo3B/wEaofjdTAWW9t2Y9Tk6Zse8D9qDRx3pT72+VRLT2hL9l0BeoWm2Z9K4OewmZhKP8uQyS4TChSrBXZ83D04lc7szdvjca34WHIWY7DY5wGD0x4KJZKM+fiYQholjlo4gjOgpuCw3lJE64GPmDdYUduVYFk6kMNgQs44/dKkvuSCcStIX06jlLd7q4nQlfl+jj2VFJAGWDBCQ8J8zk7ZMHoZhvX4272/JWq3Y0kRnf4Ik0268/f1yGxL1lvdN1grHg7091oJGLkwayR+cvE3kNg3J55dlNByhGUPVMrnc0efFy/i10aVO2fdc2R5AtKRvlk+I8oiQ8kLyznxTtkMKL2LC+e82cFYR08V/LbIt4mnjTej5DQfsiJhDw==
+	tTmGueg3KnBBg1z5+pwjwKqFPjQlMy1mN9g94aOhvZbANXQRYwH2wOy+xfaG6nJ7SXEtYMLtz53DYTog8HW9ZGA6VDSq7TV8krnHXT1Z+GNZHuIxV43fNGCmF+Sbs/kvgCj6J3nS3AZ9HdxLZavTbfXO/eUaH9EfrR7RFNdXCkA0HlFQJ/qfryniRwwHVoMfkdRrX2Z3bDzn5O38PswHALrJDJgA+W/LEztS8Z1XVYOFxdv0tSx+cnQnMPJ3o1oYXMEmVVyMAlDKwt9f37LHeAz0uhpCmL5fo9veGpS3k1d/zZPBzCapyJpUnJrfNwO+EpGGBEKMkTSzcbBq8BHiVbi6wvmH+hexMw3YuYNFU6AOBQQUJHg8inO6dCQKXfCrHN4NUt/lHPhqfLhtnghGt3MT8f905mtv7SutdBkygRnuL2fW2Gb+HEC4nbdDdB8TabDLMW9db3P34zX+1KJUpnoNgymRrVQrsLQm5/Vv92HEOHaTh/owqhVMFjHj4dQ9q5kQl5ZdxuBf/CW9GAb/XlRsp6cdGLBDJYRPA48Pz4V+OuoXZjMD60E5IWXIXWWvfTO6NwhXNs8nRE6umb8O7NxbChDj7UMNYalqBhLfuLkzvRJI/qokIMyxGpbylats1HVahT26QZGbl59MEshj/cbx41PmkWpV/77XF4Pg8HHnxaxRfireGtzT0pje85QLeqEy1hHiwIkDWN6y9QBvsmL9+jWjhQtRv7l0sGYVeu3++UPNwJn9TdyyVNQ2jT6YIx83mD8bnqaSwDzqbuSBYQ==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700016)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(56012099003)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	kCFHL2a30nOJvN6WTYex2ihppYSvibRyXwA0wUOaCmiKi39w84T9aCMb5uJCdZ42GoYRoHfSlSI56Cpr+JQJLPVEbm67lDXkaaIwPBw9BqQJwsHv+FcDU8ND3h/0kkq4apENF941YT0mH+qWU+mNT6o63TKoBttzAz3ubSgDoGKZxN02t4O73wTfavGJ4phb5oOksyo9MUqY9TwMN27nVA0KpWuynzCWS1OFr7MvHtHi01MPjdYB3JhW68IsR/WNQN63s9WE6L92f6GZIxAM4ZfT/a+YasaQjXH1EO8BDSlj2ia+C1LZcLhC3mdzQ6VKQnIi3t4JWe61d+TT50YHN4b3UlUAeRXYIZciBhiQBKA9qZng8qJrFNZN67gXtNhATuhtSTc6G3mlsHvWHDg+QxQAjvRrzV2q4Kz1y/EokU4G0vptWRVJCI9zNe1qVppN
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 01:42:13.8699
+	89OO4sFgPQ/6q/x/KePKb4+XtrkFsxjAU/cDAwoFYE3zDR74aajeAqOnd4HiVa4ZyGbRN5WURLZv586UhAN+yAoea0hbcuje7CxK+f1jjHMqkRI7aCsO8XvW6Nr6D8RlfL0iyU92/x+3C1H/bDtlP7NMyP7wnTnuWym0KdWKYaoyawav4y1Y/gmJHrhQ/eaH97bcbW+suSdLHobu0ySSsfwObqytq+Yy2ZO/WsyLzm8zIG0Up7uO9J3xhEHfZgAqCwkVSBbC1vNPaaNH70D56anstX6qo+r5KICpymKN/IyyTbjH39KWUcs4WdMxy/7rt2zPXimuAzh16BMPRMGJg9Rn25k3Lo+800UrLMm9Pwp9JRLAV2e76u9ZXroDpIjwvWfnKVZuneLTSg5chTqKuf4BE0eUPKV6mNGpURvIg85g64BPnH4jOr+4B4fOgndh
+X-OriginatorOrg: list.ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 01:52:34.3140
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: df8205d2-8510-4dae-8b83-08de83c66a16
+X-MS-Exchange-CrossTenant-Network-Message-Id: b84f7b52-adf2-452f-c996-08de83c7dbe4
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	MN1PEPF0000F0DE.namprd04.prod.outlook.com
+	CH3PEPF00000009.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6510
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB6156
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 17 Mar 2026 01:42:26 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19726
+ <meta-ti@lists.yoctoproject.org>; Tue, 17 Mar 2026 01:52:46 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19727
 
-Update SRCREV for Jailhouse-enabled U-Boot and Linux kernel
-and ti-jailhouse for the bsp-ti-6_18
+Updated the value(s) for:
+  ti-linux-fw: PRUETH_FW_AM65X_SR2_VERSION,TI_LINUX_FW_SRCREV,TI_SYSFW_VERS=
+ION
+  atf: SRCREV_tfa:am62lxx
+  u-boot-ti-staging_2026.01: SRCREV_uboot
+  linux-ti-staging_6.18: SRCREV
 
-Changes include:
-- u-boot/ti-extras.inc: Update to latest SRCREV
-- linux/ti-extras.inc: Update to latest SRCREV
-- linux/ti-extras-rt.inc: Update to latest SRCREV
-- jailhouse/ti-jailhouse: Update to latest SRCREV
+Changelogs:
+  ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware=
+/log/?qt=3Drange&q=3D58a8a47f9063cfcd9eebcfb2825b99a34ef19b80..a85ebd5c5b21=
+6646779b3d34efa09f0a7d818d62
+  u-boot-ti-staging_2026.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/lo=
+g/?qt=3Drange&q=3De585d2fccbb4c11389ecd9afb00ec5e707267afc..81a97a3303f8c78=
+6014d8644d185a368fba902c5
+  linux-ti-staging_6.18: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-k=
+ernel/log/?qt=3Drange&q=3Df13c6190c45bc24cc6640e39c36304bbc4ff22e7..d6380d7=
+40b3af3be9a9ebbd347b5b0c34cd82e81
 
-Signed-off-by: Mahammed Sadik Shaik <s-sadik@ti.com>
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
 ---
- meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc         | 2 +-
- meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc    | 2 +-
- meta-ti-bsp/recipes-kernel/linux/ti-extras.inc       | 2 +-
- meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc         | 6 +++---
+ .../trusted-firmware-a/trusted-firmware-a-ti.inc            | 2 +-
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb   | 2 +-
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc b/meta-ti-bsp/rec=
-ipes-bsp/u-boot/ti-extras.inc
-index a793a3e7..2160e1ec 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
-@@ -7,6 +7,6 @@ BRANCH:tie-jailhouse:bsp-ti-6_12 =3D "ti-u-boot-2025.01-jai=
-lhouse"
- BRANCH:tie-jailhouse:bsp-ti-6_18 =3D "ti-u-boot-2026.01-jailhouse"
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-=
+bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 2a1aba95..23b3eaa1 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -9,19 +9,19 @@ INC_PR =3D "r4"
+ # Firmware versions
+ CORESDK_RTOS_VERSION =3D "08.02.00.04"
+ PRUETH_FW_AM65X_VERSION =3D "08.00.00.20"
+-PRUETH_FW_AM65X_SR2_VERSION =3D "02.02.15.10"
++PRUETH_FW_AM65X_SR2_VERSION =3D "02.02.16.00"
+ GOODIX_FW_VERSION =3D "1.0.0.0"
+ CADENCE_MHDP_FW_VERSION =3D "2.1.0"
+ IMG_DEC_FW_VERSION =3D "1.0"
+ CNM_WAVE521_FW_VERSION =3D "1.0.8"
+ TI_DM_FW_VERSION =3D "11.02.07"
+-TI_SYSFW_VERSION =3D "11.02.09"
++TI_SYSFW_VERSION =3D "12.00.02"
+ TI_HSM_DEMO_FW_VERSION =3D "11.00.09"
+ TI_PKA_FW_VERSION =3D "2.1.0"
+ TI_IPC_EXAMPLES_FW_VERSION =3D "3.52.00.01"
+ PCM6240_FW_VERSION =3D "1.0.0.0"
 =20
- SRCREV_uboot:tie-jailhouse:bsp-ti-6_12 =3D "e718bbcec3ebf663c021839753034a=
-224be4cc53"
--SRCREV_uboot:tie-jailhouse:bsp-ti-6_18 =3D "257704a4a690f221064e0210028e89=
-86a4b4ccae"
-+SRCREV_uboot:tie-jailhouse:bsp-ti-6_18 =3D "cfac87057b6fed15c4be4f1d35bf0c=
-4001807484"
+-TI_LINUX_FW_SRCREV ?=3D "58a8a47f9063cfcd9eebcfb2825b99a34ef19b80"
++TI_LINUX_FW_SRCREV ?=3D "a85ebd5c5b216646779b3d34efa09f0a7d818d62"
+ SRCREV =3D "${TI_LINUX_FW_SRCREV}"
 =20
- UBOOT_GIT_URI:tie-jailhouse =3D "git://git.ti.com/git/processor-sdk/u-boot=
-.git"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc b/meta-ti-bs=
-p/recipes-kernel/linux/ti-extras-rt.inc
-index 907fbbbc..10e5988c 100644
---- a/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc
-+++ b/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc
-@@ -5,4 +5,4 @@ BRANCH:tie-jailhouse:bsp-ti-6_12 =3D "ti-linux-6.12.y-jailh=
-ouse"
- BRANCH:tie-jailhouse:bsp-ti-6_18 =3D "ti-linux-6.18.y-jailhouse"
+ BRANCH ?=3D "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-=
+ti.inc b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.i=
+nc
+index 82a4bc9d..535c75d8 100644
+--- a/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
++++ b/meta-ti-bsp/recipes-bsp/trusted-firmware-a/trusted-firmware-a-ti.inc
+@@ -10,7 +10,7 @@ SRC_URI_TRUSTED_FIRMWARE_A =3D "git://git.trustedfirmware=
+.org/TF-A/trusted-firmwar
+ SRCBRANCH =3D "master"
 =20
- SRCREV:tie-jailhouse:bsp-ti-6_12 =3D "229a48602ad1557612a4ffabec6a3cbcdd74=
-5f87"
--SRCREV:tie-jailhouse:bsp-ti-6_18 =3D "e9ebc825175636714e0ffa113133ef038797=
-48df"
-+SRCREV:tie-jailhouse:bsp-ti-6_18 =3D "e80c3501e727c8c01454594ca5b10555377d=
-fd60"
-diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc b/meta-ti-bsp/r=
-ecipes-kernel/linux/ti-extras.inc
-index f38336e9..515db47d 100644
---- a/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
-+++ b/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
-@@ -9,6 +9,6 @@ BRANCH:tie-jailhouse:bsp-ti-6_12 =3D "ti-linux-6.12.y-jailh=
-ouse"
- BRANCH:tie-jailhouse:bsp-ti-6_18 =3D "ti-linux-6.18.y-jailhouse"
+ LIC_FILES_CHKSUM:am62lxx =3D "file://docs/license.rst;md5=3D6ed7bace7b0bc6=
+3021c6eba7b524039e"
+-SRCREV_tfa:am62lxx =3D "50dc9697b977bf8491aee7a591195dac0b027f35"
++SRCREV_tfa:am62lxx =3D "8e4153d49c98ce5309b41b33e1d3da709d17afa4"
+ SRC_URI_TRUSTED_FIRMWARE_A:am62lxx =3D "git://github.com/TexasInstruments/=
+arm-trusted-firmware.git;protocol=3Dhttps"
+ SRCBRANCH:am62lxx =3D "ti-tfa-2.14.y"
 =20
- SRCREV:tie-jailhouse:bsp-ti-6_12 =3D "229a48602ad1557612a4ffabec6a3cbcdd74=
-5f87"
--SRCREV:tie-jailhouse:bsp-ti-6_18 =3D "e9ebc825175636714e0ffa113133ef038797=
-48df"
-+SRCREV:tie-jailhouse:bsp-ti-6_18 =3D "e80c3501e727c8c01454594ca5b10555377d=
-fd60"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb b/=
+meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb
+index a843d246..323e42e8 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb
+@@ -4,4 +4,4 @@ PR =3D "r0"
 =20
- KERNEL_GIT_URI:tie-jailhouse =3D "git://git.ti.com/git/processor-sdk/linux=
-.git"
-diff --git a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc b/meta-ti=
--extras/recipes-ti/jailhouse/ti-jailhouse.inc
-index e8374201..44408192 100644
---- a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-+++ b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM =3D " \
- COMPATIBLE_MACHINE =3D "am62xx|am62pxx|am62lxx"
- TARGET_CC_ARCH +=3D "${LDFLAGS}"
- PV =3D "0.12+git"
--SRCREV =3D "ef512f9591febed854d8f07ad8c1fa731c2d3c69"
-+SRCREV =3D "b44c3548252bb3818b0dd0815728ca210d8fac2b"
- BRANCH =3D "master"
- SRC_URI =3D " \
-     git://git.ti.com/git/jailhouse/ti-jailhouse.git;protocol=3Dhttps;branc=
-h=3D${BRANCH} \
+ BRANCH =3D "ti-u-boot-2026.01"
+=20
+-SRCREV_uboot =3D "e585d2fccbb4c11389ecd9afb00ec5e707267afc"
++SRCREV_uboot =3D "81a97a3303f8c786014d8644d185a368fba902c5"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb b/me=
+ta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb
+index 60995e09..05a85d58 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb
+@@ -22,7 +22,7 @@ S =3D "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}"
+=20
+ BRANCH ?=3D "ti-linux-6.18.y"
+=20
+-SRCREV ?=3D "f13c6190c45bc24cc6640e39c36304bbc4ff22e7"
++SRCREV ?=3D "d6380d740b3af3be9a9ebbd347b5b0c34cd82e81"
+ PV =3D "6.18.13+git"
+=20
+ KERNEL_REPRODUCIBILITY_PATCHES =3D " \
 --=20
-2.34.1
+2.43.5
 
 
