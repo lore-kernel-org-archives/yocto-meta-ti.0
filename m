@@ -1,176 +1,151 @@
-Return-Path: <denis@denix.org>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58FECFEDA1C
-	for <webhook@archiver.kernel.org>; Tue, 17 Mar 2026 19:52:43 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.85229.1773777142805804799
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 582F0FF6E8D
+	for <webhook@archiver.kernel.org>; Tue, 17 Mar 2026 22:24:22 +0000 (UTC)
+Received: from MW6PR02CU001.outbound.protection.outlook.com (MW6PR02CU001.outbound.protection.outlook.com [52.101.48.43])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1465.1773786252052148734
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 17 Mar 2026 12:52:23 -0700
+ Tue, 17 Mar 2026 15:24:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id F049040C2A;
-	Tue, 17 Mar 2026 19:52:21 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JexDwDXunow8; Tue, 17 Mar 2026 19:52:21 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5F37D40BEC;
-	Tue, 17 Mar 2026 19:52:11 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id BF13C17A439; Tue, 17 Mar 2026 15:52:10 -0400 (EDT)
-Date: Tue, 17 Mar 2026 15:52:10 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: s-tripathi1@ti.com
-Cc: meta-ti@lists.yoctoproject.org, reatmon@ti.com, rs@ti.com,
-	jcormier@criticallink.com, praneeth@ti.com, kamlesh@ti.com,
-	vishalm@ti.com, k-malarvizhi@ti.com, vigneshr@ti.com, afd@ti.com
-Subject: Re: [meta-ti][master][PATCH v5 0/3] Add LUKS encryption with fTPM
- support
-Message-ID: <20260317195210.GB11121@denix.org>
-References: <20260306163735.1316257-1-s-tripathi1@ti.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=oAQu1dCL;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.48.43, mailfrom: reatmon@ti.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=uZltyBQ1XcIp1Tux9NEuL6wVVJWqTODnJ6s70yCwOZnuIB/78RDynhCGX5C3m5QImZgCinwum8w0w11UWInSk16W66r7stPZ5P8kgnrUNCN+MH5MrZKuOS3zY7Yvi+Au5sQqjBGAoUtbgTPnSb+B5pT77TXGMm4Zqk0FC24zMbsVKPQuLVksyzb91whYADB6bLy2wLFLgRrJ2sNB6HvhbKpZ+YITLfnOQyBxmboiffU4n9sta8MWz5Bqf4EjYkML1F7ssuKmDq8eIthrPqDqtkrtBgqSsPNqou4v/FHJQaA0k0geRfeFFIF/gELYxotx+/shLl9/HafSZumbx6LskA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VXKuy5uDt3V5KEbIXnT1uoXRKsu0YYrroC82EPyPdrM=;
+ b=APMqf/6JCdXlzoZWW1/8Z+un73flBmTJtfwy/wb6ePCDTOKKbfndKs9jcjtFmNUJm2nLp5q2Dw2AVeWMhkpHIIt6BSpXF1s9prPEg8Oxtm8rhNodGuZfWjRdUlbVnt5kjMbIr6gbWveJAKSXDBSLGP+sSxAQz37v+mJZpeN4OoxI38BHwzeBf8+W21yZm3e3TSn08KH+ahZy8cQZIoSch0wlkg3SkqOX6KeyjI4rkuG5Wm3uw0KNbTVw07rfdE2l+xNe1J951pViwOB+9gvZ3e2P2TEFSz0Ia52spwXwgs3EnpyjyB1faXNOniAMt7nRHrItS+GpjkCMffxt6xDdrw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VXKuy5uDt3V5KEbIXnT1uoXRKsu0YYrroC82EPyPdrM=;
+ b=oAQu1dCL0OnBxToDQGNEEgHP7uk18unUrlO+W7WkvHhMt8Ng0zCfTJ3KBC71MHUWpBpRwETgKaI+MQZyMFPeyR4M7z7F+G25vpw/aE3jtSj2GFtY4dNXY+ZznV0y7QK286+FhVQeC2+UbLv72D7KyK6t0cjieBIBevdm90inY1U=
+Received: from BL1PR13CA0379.namprd13.prod.outlook.com (2603:10b6:208:2c0::24)
+ by DM4PR10MB7525.namprd10.prod.outlook.com (2603:10b6:8:188::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Tue, 17 Mar
+ 2026 22:24:07 +0000
+Received: from BL02EPF00021F6C.namprd02.prod.outlook.com
+ (2603:10b6:208:2c0:cafe::4d) by BL1PR13CA0379.outlook.office365.com
+ (2603:10b6:208:2c0::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.19 via Frontend Transport; Tue,
+ 17 Mar 2026 22:24:04 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BL02EPF00021F6C.mail.protection.outlook.com (10.167.249.8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9700.17 via Frontend Transport; Tue, 17 Mar 2026 22:24:07 +0000
+Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 17 Mar
+ 2026 17:24:06 -0500
+Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 17 Mar
+ 2026 17:24:06 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE201.ent.ti.com
+ (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 17 Mar 2026 17:24:06 -0500
+Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62HMO6Wd3934789;
+	Tue, 17 Mar 2026 17:24:06 -0500
+Received: from reatmon by grumpy with local (Exim 4.97)
+	(envelope-from <reatmon@ti.com>)
+	id 1w2cpa-00000008HBv-2FnQ;
+	Tue, 17 Mar 2026 17:24:06 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
+	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][master][PATCH] linux-bb.org_6.12: Backport C23 compile fix from linux-stable
+Date: Tue, 17 Mar 2026 17:24:06 -0500
+Message-ID: <20260317222406.1972700-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260306163735.1316257-1-s-tripathi1@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL02EPF00021F6C:EE_|DM4PR10MB7525:EE_
+X-MS-Office365-Filtering-Correlation-Id: b4a31df6-c60a-41a3-4248-08de8473e794
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700016|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	bjWS4pPRmb3rPqRbJUkA13xuCz8bh9Lv9WVERuSDkQijXIw/porY1eOBmQiYRInZpPgQs7h4MKX8MuUUxJTxRmeeerMrCVSNvjtALH7HjIg2KbQDzrdwGaUSW0NDU25ldELMtEjGIerSNE1GZTHaxR/MEpr7XC295CtPOexRjQFpVcKVWIuZdw109XjBzse7nsLdSvL2ezO+as4Z7s9LQX6VdV2NVOMCRAjB6pOy+KQUg/svUhXQ9PiZ6I/Q5DFjnbZhYNDsEHoxxDX+FO9lOXpu1jnuffSxvlzH/dVMQa5McegSIMVsN/+T3TBIpWESyIIuE9fgk1vCncuLGBlF99sviD82ITIQrbcJHu/Bgc/YWhXGJzmUTTR2xQGbr1rpdbxXzYNbNe4QssN/R02u9K7N79GwJ/jFV3fJ9Ccl00R8uzl0SHrGHfB5bIhDlKHPrkVlB1xdf5XkfMy9pJt9v86Iuo6gTjH9zYNnAnXsNSZuNu8y1oIvHJuTPLq8AKQA/zctpMzfKHq1lsTMD3I2UCaV0+TJV2PusxDQ+WpUxur8JV1vezRycIlsIiTbX4T1zLAVYKUpOedax2OesIZkgbyztNNRPAZ1MTRUQ4iEH/YFY9wF6H3wTHdF1KEy4sBc7ZuU62jNcyDTpSy/XwSLDqtjION9/4CKbgcuE972RAv/PQFxwPdFUcIAgGU7h0taVCtQ0VvNR6QTOPW0sx5qWIq1P81jdYOHT3gzTOyYrwo=
+X-Forefront-Antispam-Report: 
+	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700016)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	535q5gzyIFATyc5dlZ4NZw4CtWDaXkJzexX4aPG4Cpgw5PpxzQVqwn8+hmL4idVs5ivWk8diV64ene34XkRS3pIkL7zgmYQTGBphr/R7//9GvWD6iu75gBQCp/rtg40nD0TKv2wgXPM4irrMBW5sWQ5Z11g/zheCjXUnR0a7QzrHpPK7aIJkeE6k1LZF/HaWL3DQ/O5mHb3a2mkU+hT0AsXRV+hXNdxpWKPkcKgSfyn/YFCrEuP3+7B+00WF4OCGfnF+Qg5ffOWQg/mNrjTu78UD27S/DVLqxhIpNYFsKETh9zxrKzpIUBIfyzFy4AFv/sYjsgsEaJUUKKM7ho89eegfjFNdzCFb0Yn6BfdSLMAfeJ31T4/eeCRVwPd1nTMjeb7EXbY1ThkEuDl3Oeg+O88tYdbsAlbkr3FTQtUCYXKnrJS8VtDVia6HBWvpw7CQ
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 22:24:07.3317
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b4a31df6-c60a-41a3-4248-08de8473e794
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	BL02EPF00021F6C.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB7525
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 17 Mar 2026 19:52:43 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19746
+ <meta-ti@lists.yoctoproject.org>; Tue, 17 Mar 2026 22:24:22 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19747
 
-Sorry for the delay and thanks for waiting!
+A recent change in oe-core [1] to glibc 2.43 has introduced a build
+error with 6.12 kernels.  Backport a patch [2] from linux-stable to
+address this.
 
-Below are some high-level questions and comments I've got reviewing your 
-patches.
+[1] https://git.openembedded.org/openembedded-core/commit/?id=3Df791d6c5287=
+0f3571e740ff7818d45bb0a717934
+[2] https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit=
+/?h=3Dlinux-6.12.y&id=3D3dedeeecd1ae42a751721d83dc21877122cc1795
 
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ .../files/0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch | 0
+ meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb           | 2 ++
+ 2 files changed, 2 insertions(+)
+ copy {meta-ti-bsp =3D> meta-beagle}/recipes-kernel/linux/files/0001-libbpf=
+-Fix-Wdiscarded-qualifiers-under-C23.patch (100%)
 
-On Fri, Mar 06, 2026 at 10:07:32PM +0530, Shiva Tripathi via lists.yoctoproject.org wrote:
-> This patch series adds LUKS full disk encryption support using firmware TPM
-> (fTPM) for TI K3 platforms. The implementation provides hardware-backed
-> encryption with keys sealed by TPM running in OP-TEE and stored in eMMC RPMB.
+diff --git a/meta-ti-bsp/recipes-kernel/linux/files/0001-libbpf-Fix-Wdiscar=
+ded-qualifiers-under-C23.patch b/meta-beagle/recipes-kernel/linux/files/000=
+1-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch
+similarity index 100%
+copy from meta-ti-bsp/recipes-kernel/linux/files/0001-libbpf-Fix-Wdiscarded=
+-qualifiers-under-C23.patch
+copy to meta-beagle/recipes-kernel/linux/files/0001-libbpf-Fix-Wdiscarded-q=
+ualifiers-under-C23.patch
+diff --git a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb b/meta-b=
+eagle/recipes-kernel/linux/linux-bb.org_6.12.bb
+index 64b11045..77097d83 100644
+--- a/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
++++ b/meta-beagle/recipes-kernel/linux/linux-bb.org_6.12.bb
+@@ -65,3 +65,5 @@ PV:aarch64 =3D "6.12.43+git"
+ BRANCH:aarch64 =3D "v6.12.43-ti-arm64-r54"
+=20
+ KERNEL_GIT_URI =3D "git://github.com/beagleboard/linux.git"
++
++SRC_URI +=3D "file://0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch=
+"
+--=20
+2.43.0
 
-What are the HW requirements for this implementation?
-Does it work on any K3 platform, even GP, or does it require an HS variant?
-What about eMMC requirement?
-
-
-> Background:
-> TI K3 platforms do not have integrated discrete TPM hardware. To provide
-> TPM 2.0 functionality, this implementation uses firmware TPM (fTPM) - a
-> Trusted Application running in OP-TEE secure world. The fTPM provides
-> standard TPM 2.0 interfaces while leveraging ARM TrustZone for isolation
-> and eMMC RPMB (Replay Protected Memory Block) for secure persistent storage.
-> 
-> Key features:
-> - Conditional builds: Enabled via DISTRO_FEATURES += "luks" with MACHINE_FEATURES as 'optee-ftpm'
-
-Why is it being added to meta-ti? This seems heavily distro-specific, maybe 
-even product-specific...
-
-Moreover, there are run-time dependencies on TPM packages that are not in any 
-of the layers that meta-ti depends on.
-
-In order to enable this feature, you'd need to add a corresponding layer to 
-bblayers.conf - should this at a minimum go into a dynamic-layer?
-
-
-> - No impact on default SDK builds
-
-Since this is disabled by default, this never gets built by the CI/CD and 
-hence, there's no way to ensure future changes don't break this.
-Arguably, there are other features that are not enabled by default 
-(jailhouse, falcon), so it may be a moot point...
-
-
-> - In-place encryption on first boot
-> - TPM persistent handle for key storage (0x81080001)
-> - Secure key storage in eMMC RPMB via OP-TEE
-> - Security model similar to CIP Core
-> 
-> Use case:
-> This is designed for K3 platforms requiring secure boot and encrypted
-
-How are you protecting boot partition from getting tampered with?
-Besides encrypting rootfs, are there any other Secure Boot steps taken to 
-protect the boot flow from a MITM attack?
-
-
-> storage, such as industrial automation, automotive, and IoT gateways where
-> discrete TPM chips are cost-prohibitive but security requirements demand
-> hardware-backed encryption.
-> 
-> Testing:
-> - Tested on AM62x platform with kernel 6.18
-> - First boot: Successful in-place LUKS encryption
-
-Have you considered pre-encrypting the image during the build and then 
-only changing the key, if needed, on the first boot?
-
-How long does it take to encrypt the rootfs on the first boot? I would imagine 
-it being very expensive operation to encrypt and overwrite the entire 
-partition.
-
-Also, have you considered binding the key to a PCR, so it is not easily 
-extractable during a MITM attack?
-
-Anyway, I'm guessing this is just a sample implementation of this one 
-particular feature - encrypted rootfs - and not a complete Secure Boot ready 
-for production...
-
-
-> - Subsequent boots: Successful TPM unsealing and boot
-> 
-> The series is structured as follows:
-> 1. Kernel configuration for LUKS and crypto support
-> 2. LUKS encryption initramfs module with fTPM key management
-> 3. Initramfs generation trigger and packagegroup with dual gating
-> 
-> ---
-> Changes in v5:
-> - change from MACHINE_FEATURES 'luks-encryption' to DISTRO_FEATURES 'luks'
-> - implement dual gating using existing MACHINE_FEATURES 'optee-ftpm'
-> - optimize kernel config - remove unnecessary CBC, ECB, ESSIV, LRW, PCBC, SHA256_ARM64
-> - packagegroup-ti-core-initramfs.bb changes moved to patch 3 from patch2
-> - Link to v4: https://lore.kernel.org/all/20260305172115.3684326-1-s-tripathi1@ti.com/
-> 
-> Changes in v4:
-> - remove encrypted-boot-common.inc and use existing ti-core-initramfs.inc
-> - Link to v3: https://lore.kernel.org/all/20260304193824.2495898-1-s-tripathi1@ti.com/
-> 
-> Changes in v3:
->  - remove separate sdimage.wks for encrypted boot, default works
->  - update encrypted-boot-common.inc to use existing hook for adding TI_CORE_INITRAMFS_ENABLED dependency on luks-encryption flag
->  - add logic to verify if partition has enough space for LUKS header before starting encryption
-> 
-> Changes in v2:
-> - changes to use existing ti-core-initramfs instead of adding separate
-> - cleanup in previous init script as per comments in v1
-> - /usr/bin/busybox logs updated to echo, mesg, info
-> - WORKDIR changed to UNPACKDIR
-> - Link to v1: https://lore.kernel.org/all/20260302144647.1705408-1-s-tripathi1@ti.com/
-> 
-> Shiva Tripathi (3):
->   linux-ti-staging: Add LUKS encryption config
->   initramfs: Add LUKS encryption module with fTPM
->   ti-core-initramfs: Enable initramfs for LUKS encryption
-> 
->  .../machine/include/ti-core-initramfs.inc     |   2 +-
->  .../linux/linux-ti-staging-6.18/luks-ftpm.cfg |  22 ++
->  .../linux/linux-ti-staging_6.18.bb            |   9 +
->  .../initramfs-module-luks-ftpm/luksftpm       | 341 ++++++++++++++++++
->  .../initramfs-module-luks-ftpm_1.0.bb         |  41 +++
->  .../packagegroup-ti-core-initramfs.bb         |   3 +
->  6 files changed, 417 insertions(+), 1 deletion(-)
->  create mode 100644 meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-6.18/luks-ftpm.cfg
->  create mode 100644 meta-ti-bsp/recipes-ti/initramfs/initramfs-module-luks-ftpm/luksftpm
->  create mode 100644 meta-ti-bsp/recipes-ti/initramfs/initramfs-module-luks-ftpm_1.0.bb
-> 
-> -- 
-> 2.34.1
 
