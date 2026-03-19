@@ -1,205 +1,178 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD675108E1E5
-	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 10:45:36 +0000 (UTC)
-Received: from CY7PR03CU001.outbound.protection.outlook.com (CY7PR03CU001.outbound.protection.outlook.com [40.93.198.9])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8292.1773917135320964858
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E81E4109022C
+	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 13:59:40 +0000 (UTC)
+Received: from SA9PR02CU001.outbound.protection.outlook.com (SA9PR02CU001.outbound.protection.outlook.com [40.93.196.71])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11839.1773928770980610863
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 19 Mar 2026 03:45:35 -0700
+ Thu, 19 Mar 2026 06:59:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=ENiF/exf;
- spf=pass (domain: list.ti.com, ip: 40.93.198.9, mailfrom: prc@list.ti.com)
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=KnONZQIg;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.196.71, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=O3TzZJyM13tUqJMdXfmsER3v7Nm6TxQgq/ohqVMAYbq6sZceFYXTZv8+t0J0Vjw9uJB5mgyh6Abilq6cEpJPHzMUALfF4q70A+0z5M80RBPGE0SiIFlorIs79Wa3Lol4rq+o8A5hWIoiPbBqUjigoFwBRh/aiCVT9hTVrKduFN7gxy+A2GAC+B9DioaPPQohplFxwDMqpiwhBx3zkYFbABXLFQSMLI2L8OzztO/NPghXnN7uxXa2wSW3WapWkHanUYzswVHoZFWgGSFElkBt1aQSzWCWdAdQ5wK/E6ZtSSZYncZ3c4BYy/TA8pN7EboMt640yeuZJtZSPOzEHHvQsA==
+ b=V9H6rGfDImbwlmgm/GqKvVkDh0ADVl+/0sLdQUYgfYK6eFufutwDHFwFteF4s5/nRo+dh2rqJ/j5jvzD4iSyBuToTcaCdkfwQ7qMEdGxluPJAFmEusFYHej9lJjkMObaxF81AkczNrt0e/fZe+Qw8xsFcGQyAI6QB01ofsjTD1lNDGGRIJQlOXO0buV5hMkDoMsEuC0OL29ICx0JQbb9cDTQlVltY8yFFBzYMX71015G0Xd1LKnSvhkRuJTbgiNcxo2y64KXQoZ/TMqFHfovsEQwpX6gnD02bsADksuULl+02HwSE2dy019/K70Ytk4AGm889boA1lEs1nAx2Tcpew==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OF+gqvaHlPpV+sXfdx7hikBh3qtk1wi7+UwTPJJDoQA=;
- b=AqIRSyiIAy0PfsnysOIRbK7TwoRD+rIy8IwTdtb0svjtZ7LYH5nwc9kmnn/2MXURgHmY60zOk1t2ZUh6C282ESf1WzMxitFKzHK8LUKg9hwxDuKeWHnW7myCjDA5SqHuPboqkm9L+vrMOAPJkvw9w/Lg0MOkqhaTLjm5CbyVOWQJZ9oMQIr9JqcMYxY3CxdUy0rN4gczyTrHNOjRJaFQAAVdAUOpr+zVDALtAaUeaLuiw/1PGlO0/uujO1SvOujMY4c/OizpgQEYxLBLzK0zqURy8EqkPnng8x4NpHzeVqfNt618CvRevkABOYVjJzl2Lbry7YzR5RSAnN2linEIMw==
+ bh=HPUPOcyYkOSbBzjaGip+0LCrDjkS3asI80bpy0IIALM=;
+ b=rlHcC5CfhLZT0esT9K+UQV9APWDZ51PwkYH4oZOsF6jHdNhNPBbcwE8+VS8k/lYEvHFme7iguQJ9Fap+Io/LVqyh4UJpsnxBlQGN1cqD9cktPLg00PxlCssFyio6fy6Rb8KomLNQYZCi8G1+s/45ZGfIGjV3xNXscQyOlFPPbGYNVw9o2r54dOiQDYVS3Cvuyj8PydGx+fiuNS5Bw+4Bb2PpET84R1oC6bSo08droBDogICUtU0++l+QdngBd0c1x1kmnIdGZ0Xxu81NYi2ouX9JvcTmmWx1+Uwqn1HCC3r6x6danz8ksb/wYGY/AjR6G5IbPCbsFfKWOKcyC9o2Ew==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org
- smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
- action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
- (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
- s=selector1;
+ 198.47.23.195) smtp.rcpttodomain=denix.org smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OF+gqvaHlPpV+sXfdx7hikBh3qtk1wi7+UwTPJJDoQA=;
- b=ENiF/exfrTMew7BMNUsDYjcW7Yoa9t3cEz7v+BD4nYnbXZToDHojKrjkmmOEMhmc51mYoh/5mWXPqG+pu8xNAZVmqsavyZ1VEtkmMD7J4urlzFjae27rp8ITCwhNhBrmSWnOtS8LloFBHao2c9hr/GN/0YEPnFfs39tRsofedQvG8ULiV4AVWju4plv9Ie6k17Vx8WwlsnGmDBSizOMpn9xEv4lGUiC8qZcg7HWb80MtW3WBM+nRStnwIGV7e4CAPk7jQwfjcuMT4lhEdNBmI1GkrQqRDz6N4jG08T+sAdd5Y8CYVd/+YXqRZoFEU6ADmJN/qLW++I0o28VUgvU4Ow==
-Received: from SA1P222CA0048.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:2d0::23)
- by DS0PR10MB6919.namprd10.prod.outlook.com (2603:10b6:8:11c::22) with
+ bh=HPUPOcyYkOSbBzjaGip+0LCrDjkS3asI80bpy0IIALM=;
+ b=KnONZQIgxWjhT0aY/ie136LGiI4dSI4Rg/PLcVQKmkggoT4yeFysNhHqkHgSeaLhTt6uI881ckOY13Z3kTYWOrIamanQf6tZFb9G0qq8qCJWTWUKnP+KeWiOqWA9D0xu0KiEFPcCSedfKOOTLQl4r6k/lkbtqnzh8JdjB8DeCWQ=
+Received: from CH0PR13CA0021.namprd13.prod.outlook.com (2603:10b6:610:b1::26)
+ by BLAPR10MB5043.namprd10.prod.outlook.com (2603:10b6:208:332::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Thu, 19 Mar
- 2026 10:45:32 +0000
-Received: from SA2PEPF00001508.namprd04.prod.outlook.com
- (2603:10b6:806:2d0:cafe::ae) by SA1P222CA0048.outlook.office365.com
- (2603:10b6:806:2d0::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.20 via Frontend Transport; Thu,
- 19 Mar 2026 10:45:32 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=list.ti.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=list.ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SA2PEPF00001508.mail.protection.outlook.com (10.167.242.40) with Microsoft
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.20; Thu, 19 Mar
+ 2026 13:59:28 +0000
+Received: from CH2PEPF0000014A.namprd02.prod.outlook.com
+ (2603:10b6:610:b1:cafe::a3) by CH0PR13CA0021.outlook.office365.com
+ (2603:10b6:610:b1::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.19 via Frontend Transport; Thu,
+ 19 Mar 2026 13:59:25 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CH2PEPF0000014A.mail.protection.outlook.com (10.167.244.107) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9723.19 via Frontend Transport; Thu, 19 Mar 2026 10:45:31 +0000
-Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9723.19 via Frontend Transport; Thu, 19 Mar 2026 13:59:26 +0000
+Received: from DLEE209.ent.ti.com (157.170.170.98) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 19 Mar
- 2026 05:45:31 -0500
-Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 08:59:25 -0500
+Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 19 Mar
- 2026 05:45:30 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 08:59:25 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 19 Mar 2026 05:45:30 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62JAjUQh2443462;
-	Thu, 19 Mar 2026 05:45:30 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id B8C50136F37; Thu, 19 Mar 2026 05:45:30 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: Shiva Tripathi <s-tripathi1@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, <reatmon@ti.com>, <rs@ti.com>,
-	<jcormier@criticallink.com>, <praneeth@ti.com>, <kamlesh@ti.com>,
-	<vishalm@ti.com>, <k-malarvizhi@ti.com>, <denis@denix.org>,
-	<vigneshr@ti.com>, <afd@ti.com>
-Subject: Re: [meta-ti][master][PATCH v7 0/3] Add LUKS encryption with fTPM support
-Date: Thu, 19 Mar 2026 05:45:30 -0500
-Message-ID: <20260319104530.2934205-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20260319103533.2431033-1-s-tripathi1@ti.com>
-References: <20260319103533.2431033-1-s-tripathi1@ti.com>
+ Transport; Thu, 19 Mar 2026 08:59:25 -0500
+Received: from [10.249.32.190] ([10.249.32.190])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62JDxO512652675;
+	Thu, 19 Mar 2026 08:59:25 -0500
+Message-ID: <d9e195a7-5735-410c-be03-734eff2a7497@ti.com>
+Date: Thu, 19 Mar 2026 08:59:24 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti][master][PATCH v7 3/3] conf: Enable dynamic security
+ layer for LUKS
+To: Shiva Tripathi <s-tripathi1@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: <rs@ti.com>, <jcormier@criticallink.com>, <praneeth@ti.com>,
+	<kamlesh@ti.com>, <vishalm@ti.com>, <k-malarvizhi@ti.com>, <denis@denix.org>,
+	<vigneshr@ti.com>, <afd@ti.com>
+References: <20260319103533.2431033-1-s-tripathi1@ti.com>
+ <20260319103533.2431033-4-s-tripathi1@ti.com>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20260319103533.2431033-4-s-tripathi1@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00001508:EE_|DS0PR10MB6919:EE_
-X-MS-Office365-Filtering-Correlation-Id: e7062a6c-d16f-4615-cfa7-08de85a4a48d
+X-MS-TrafficTypeDiagnostic: CH2PEPF0000014A:EE_|BLAPR10MB5043:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5c2e936e-a934-41c3-e9a9-08de85bfbb6d
 X-LD-Processed: e5b49634-450b-4709-8abb-1e2b19b982b7,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|36860700016|376014|1800799024|13003099007|18002099003|22082099003|56012099003;
+	BCL:0;ARA:13230040|36860700016|82310400026|376014|1800799024|18002099003|56012099003|22082099003;
 X-Microsoft-Antispam-Message-Info: 
-	+ft1SPRF9AvTsoBlHgDmLEkOFwetIMUR+61vsZRnMYDsW6V88ld0227zrnTpRFGavYQUVN0Cb8k3pbrM6yirpBtVtAyEjY2Q6uW/B9vro4t/viQH8gxwu5IGpkFnAzgEhBHRvwiK5C3eGvoQ5iAE5+hiSdn5+5WWbRUsnauubUCZ3VSH1IY6Ogh4fdmrnG4jSM0Oh8kWzoTlCF05xi/owR809KtEmtcoCMyyeJHX6B4mVDN/EBRajyGRiieuo4dZfhfO0MPk7RQOWdNBG24OAJkeZDYRCQxUK87X569tXuKuQteigvqQMrVB8QZJgSO1CunQLxaBtWeRqnVxoJ6FoXAKL982cK/ovVQNNQ9PHSoWrbyBlHp03KY+8Uj1u6R8snQd2YzKSYtakze6wk/t07+NJYJBUpJuVw/y+cX7bbiZAZOyaME0MG8mc4ZevrVZMbeSkLzExVSDK4bE4Z+RRP0d8+/9johSxJMMrLeMSA0nkH8M8SGu5qgzNmf7jXYXz9lpP1p2sq8BwsiYkGA1YGpEKWuZmtXvPCLcazlNLCENnI52+ERNYckGoPKza4vggCSqSUiEYLtCD4M4VtM/xPmOL/zj6qS9aKloIWN9YqbL6zv9OY0M51ub/q46VxfD5oDLNisalsF7FYsXV4SEymXX8bpJsaf0+e8tFqExq65+EOzZC+kfFi6cbxTx5H3ocb1IRtwk2AbLKAHipByGGtosLoypGuy7TFpWo7mFpDkdmBc/tTBBgDVUybCopHWv2Ov1uGNZmtVKFCqoOQykwQ==
+	vDDgG3Ee5RFyez6xDIeIcApW21yOq/idKl0KTDoUEhfcWBiX4rCBnBPyWaH6l5g67hddofMJ49U+PXCw/gx/Nw8xT2HlO2Q5KFQvpQKqk2Kp99whc4FrZpTKFiMFZp6MtOwiAJ8ItW6T6NtLNLaCmsfk5v0cqKwq6DiNWQsVn7uLJo651yyWE1ozh5SmjBD0e0TjmdTTz9jpH1QLQzDxVIbmqPXMZtZi9dexEDFQQsj32YYgcykrGD6ZU6Rsta5/0F/9uqm/1XuD4Y9ghVMvifVvjcKLlhX/8qe1hAvZfkfZvfhdbeyaMjrmd62lObkyl+bbQbREJw6ClVlPyf10YRtBhOpM7isSNHtGsSsPDmCDG48xYJPNww4BJpQ0RJiVa2jsrKw2srwxQkGZCPMpX3amZl8FGcR1yafYJzHH7WTaRX8/swJlqkW+3BVFsS8lQ8rUW3zuwU+WkIMbGOtbe5mMett7WzSih7UK38pgKjcCDSJhQqwQNQmIGb4kzivEFswudVa9f6gMtjktjEQTyLKJzc1kYV/ghhE978WKsxt+w498MJMwUJKZQevPWiw/ARjZs4SvBr1RQyeDMEO2qM8N4KgZFnxLFjTz41GChRspDZvfg34YluE2Da464hrfUhFhh2RSkWllW2pZOntryvsgd+1/5/2Wc2HjO7w4m25Fw6+fClDkkFX5WMwzlfD0bDv9sjbWMKC0n58B9nIF9crB/ZJQowx6eqlHZOEGRMRAFcSwopqkCfc/qOCPAwqPPBw9XvQLA+PF2eBep0gpFQ==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(13003099007)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	khQ/3kKfbhlbcoUtIpBvwU89fxZlkFps+FPSHVk4RtakWSRg/DPhDBOxbyMjCZvKz/YpQeuSpEFsnSg+Q1ZoZt9ClpN7j3Q16psPWAlBPQAkk3/Xh9nRPyTE/44Jtko90CpNRwjBWTyBYQOy9Ufst6SwPu1Vu8VM0ZC17GLfdaA8sVgLAPhqM/VBYXNhmQYHHwjaOR/6k9DX2BRLhIEVqrD9OlSs6I0LD3r55rnrpzmDpDK4V00UIOW257g6z+f4h2W1x/P62uWJNtjvg6R+d+PAxACsT/U/jvz4TjvP4NxS9dDksqotlOyi9ieiynUTxxzgsFgZoJ9W056yibbPin5rH/DvvoWlfkUVFxKzrdgQbCkBZiApPitfCP3yJJpjNGJ2+I7J/evt+cGF3YfdQ9E49wSU0XlGribeASPYzPXXQjESTt7HaouIQIWWDFHX
-X-OriginatorOrg: list.ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2026 10:45:31.4265
+	U4Dm7XDwXsmlt0ytCsUcMJSMdkf3S/ZcLHIsGzv8NPIgunnNMR8MOFdK3KfNkFImVCzGAdhj3c8FF7lx+GEoYuKXtFhKMewA3bah2PKUSjpckSIEdrVrD28gPjEc0yTctkZiUjPhhh2XVSjIwBv+viSww0TbAGQb5pj1kAGXk01/gAXaKRmTyn9B4y2ZHtFXWUBOK6omeRI43k41ivvFy4cAZH3kr8NiKOcOHbdyXtwAJbi0ADPsBsQ3q7Q3M9HUu8oMHX1oQqQHesqeXSGRNqkdNUo9I8sk0ULyl6RUQXQawhQXWcS/c78Ms0wr3wi2KBpBKzTeU57CweSogYBBxe7+5ozt9hJLF/zN5Ukbl2iXebHlMnm9FswxAueZRwmPCt2qgILxL961wnXeOndGGyupHFayIjExNAddRJPBiImYeO5kWte+SktCPGH/k0pK
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2026 13:59:26.2005
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e7062a6c-d16f-4615-cfa7-08de85a4a48d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5c2e936e-a934-41c3-e9a9-08de85bfbb6d
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	SA2PEPF00001508.namprd04.prod.outlook.com
+	CH2PEPF0000014A.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB6919
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR10MB5043
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 19 Mar 2026 10:45:36 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19777
-
-meta-ti / na / 20260319103533.2431033-1-s-tripathi1
-
-PRC Results: FAIL
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-patches: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-Patches
-----------------------------------------
-WARN - [meta-ti][master][PATCH v7 1/3] linux-ti-staging: Add LUKS encryptio=
-n config
-    WARN: Revised patch missing a comment. (REVISION-1)
-        patch
-   =20
-    For details on the above errors/warnings visit: https://lists.yoctoproj=
-ect.org/g/meta-ti/wiki/40887
-WARN - [meta-ti][master][PATCH v7 2/3] initramfs-module-luks-ftpm: Add fTPM=
- support
-    WARN: Revised patch missing a comment. (REVISION-1)
-        patch
-   =20
-    For details on the above errors/warnings visit: https://lists.yoctoproj=
-ect.org/g/meta-ti/wiki/40887
-WARN - [meta-ti][master][PATCH v7 3/3] conf: Enable dynamic security layer =
-for LUKS
-    WARN: Revised patch missing a comment. (REVISION-1)
-        patch
-   =20
-    For details on the above errors/warnings visit: https://lists.yoctoproj=
-ect.org/g/meta-ti/wiki/40887
+ <meta-ti@lists.yoctoproject.org>; Thu, 19 Mar 2026 13:59:40 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19778
 
 
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  apply-yocto-patch: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Summary:
-- Patch Series: [meta-ti][master][PATCH v7 0/3] Add LUKS encryption with fT=
-PM support
-- Submitter: From: Shiva Tripathi <s-tripathi1@ti.com>
-- Date: Date: Thu, 19 Mar 2026 16:05:30 +0530
-- Num Patches: 3
-- Mailing List (public inbox) Commit SHA: 509e15023c33e5c515959e07bb3a4376a=
-b769e89
+On 3/19/2026 5:35 AM, Shiva Tripathi wrote:
+> Register dynamic-layers/security in layer.conf with BBFILES_DYNAMIC
+> for both 'security' and 'tpm-layer' collections to conditionally
+> build LUKS encryption support when meta-security/meta-tpm layers
+> are present.
+> 
+> Add meta-security to LAYERRECOMMENDS to document the optional
+> dependency for LUKS functionality.
+> 
+> Update ti-core-initramfs.inc to auto-enable initramfs generation
+> when DISTRO_FEATURES contains 'luks'.
+> 
+> Signed-off-by: Shiva Tripathi <s-tripathi1@ti.com>
+> ---
+>   meta-ti-bsp/conf/layer.conf                            | 5 +++++
+>   meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc | 2 +-
+>   2 files changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
+> index f78da573..36d05b5a 100644
+> --- a/meta-ti-bsp/conf/layer.conf
+> +++ b/meta-ti-bsp/conf/layer.conf
+> @@ -20,10 +20,15 @@ LAYERDEPENDS_meta-ti-bsp = " \
+>   
+>   LAYERRECOMMENDS_meta-ti-bsp = " \
+>       openembedded-layer \
+> +    meta-security \
+>   "
 
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-wip
-- Commit Author: Ryan Eatmon <reatmon@ti.com>
-- Commit Subject: conf: Add falcon support natively
-- Commit SHA: 1ce070a6b1f8bb797c65b51a7968ffe0348ba053
-
-Patches
-----------------------------------------
-All patches applied
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-repo: FAIL
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-FAIL
-    WARN: .bbappend files might need a guard to make them check-layer compl=
-iant. (GUARD-1)
-        meta-ti-bsp/dynamic-layers/security/recipes-ti/initramfs/packagegro=
-up-ti-core-initramfs.bbappend
-   =20
-    For details on the above errors/warnings visit: https://lists.yoctoproj=
-ect.org/g/meta-ti/wiki/40887
+The layer should be same as below:  security and tpm-layer  I was just 
+using meta-security as a placeholder.
 
 
 
+>   BBFILES_DYNAMIC += " \
+>       openembedded-layer:${LAYERDIR}/dynamic-layers/openembedded-layer/recipes*/*/*.bbappend \
+> +    security:${LAYERDIR}/dynamic-layers/security/recipes*/*/*.bb \
+> +    security:${LAYERDIR}/dynamic-layers/security/recipes*/*/*.bbappend \
+> +    tpm-layer:${LAYERDIR}/dynamic-layers/security/recipes*/*/*.bb \
+> +    tpm-layer:${LAYERDIR}/dynamic-layers/security/recipes*/*/*.bbappend \
+>   "
+>   
+>   SIGGEN_EXCLUDERECIPES_ABISAFE += " \
+> diff --git a/meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc b/meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc
+> index 9d3cc612..15c05e04 100644
+> --- a/meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc
+> +++ b/meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc
+> @@ -5,7 +5,7 @@
+>   #   TI_CORE_INITRAMFS_ENABLED = "0"
+>   #
+>   #------------------------------------------------------------------------------
+> -TI_CORE_INITRAMFS_ENABLED ?= "${@ '1' if d.getVar('TI_CORE_INITRAMFS_KERNEL_MODULES') or d.getVar('TI_CORE_INITRAMFS_EXTRA_INSTALL') else '0'}"
+> +TI_CORE_INITRAMFS_ENABLED ?= "${@ '1' if d.getVar('TI_CORE_INITRAMFS_KERNEL_MODULES') or d.getVar('TI_CORE_INITRAMFS_EXTRA_INSTALL') or bb.utils.contains('DISTRO_FEATURES', 'luks', True, False, d) else '0'}"
+>   
+>   TI_CORE_INITRAMFS_KERNEL_MODULES ?= ""
+>   TI_CORE_INITRAMFS_EXTRA_INSTALL ?= ""
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
