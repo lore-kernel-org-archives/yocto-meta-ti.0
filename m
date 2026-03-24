@@ -1,249 +1,170 @@
-Return-Path: <denis@denix.org>
+Return-Path: <s-sadik@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C783FFEC0F6
-	for <webhook@archiver.kernel.org>; Tue, 24 Mar 2026 18:43:35 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4727.1774377811798204390
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE1D7FEC0FC
+	for <webhook@archiver.kernel.org>; Tue, 24 Mar 2026 19:29:17 +0000 (UTC)
+Received: from CH5PR02CU005.outbound.protection.outlook.com (CH5PR02CU005.outbound.protection.outlook.com [40.107.200.67])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5560.1774380551809485607
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 24 Mar 2026 11:43:32 -0700
+ Tue, 24 Mar 2026 12:29:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 0EBFA40CB0;
-	Tue, 24 Mar 2026 18:43:31 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id s5Ea5ZvnYyWI; Tue, 24 Mar 2026 18:43:31 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C20A440A30;
-	Tue, 24 Mar 2026 18:43:27 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 7023617ABB7; Tue, 24 Mar 2026 14:43:27 -0400 (EDT)
-Date: Tue, 24 Mar 2026 14:43:27 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: reatmon@ti.com
-Cc: Praneeth Bajjuri <praneeth@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][master][PATCH] weston: Update to 15.0.0
-Message-ID: <20260324184327.GX11121@denix.org>
-References: <20260324162004.3215160-1-reatmon@ti.com>
- <20260324164438.GU11121@denix.org>
- <88c431e4-862d-48eb-b2ab-d2502596bf9f@ti.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=Cm8Hj/p3;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.107.200.67, mailfrom: s-sadik@ti.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rSOD4DXuqQZ7kxY0yrae+HD2rvJDjSDbApP+VLPrbKwSAtlOUf7/Kued67d0wKF98KkS5hd/09VH9Q9qoc8QvpwREN7TIGW4hvabOBnt5IXpN6LSSeG26ga3B16/N2W/u7JsJhJeVGdIpzhwwgykvJWRKEDZwIEU3wT3uTf5eGCQ/fJeKQQrzQp8qfsM+etozVBQhODfDXdBROUx9H/wcYa0ChpfVBb3pxiOhHHOm779uMIHtX/gdFl5au+bd3chNVw2tKlAP5vQzE4Ba1qyyWZu2AKryDZsgua8yi65paHm+ae7l107yaaxno+OfRwr2wfeQXFDaiTwqucIPv36fw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oM4vDiE4Roadh3stJqOoq2GyGkU4ggHGhAhYCj9mg7Y=;
+ b=Bdj/7dgEEPGajFwLU0Mn/2DIjDNFS7S5Psre6JL3MLkw4hOcbgjxoI900bR2VOmJFOCO7cxolgOJ4Lv3Jyhq/OLrKh1UB9nlN8y7xHaF1JvSNNaP8g0neREvUodZs4UMem3wImhln5y9Jjq6BmjFnuTcHZTWEt7EoT9iIDnCZrE452vSxAAviy0VJaTsCW0F4ecv7wzFU8Pvn2WM3M+wug/CiyTmUBgNr3hj64If1pehbtDgLbiP5pTq+4bi/WJpEKq+AODC5My2xuqLA5uxoH7dngNwIO3x9tmwZJTb6gV+HWtWhcfwYBLX8yro6cAy6at6roxBrarNbZUV7FrJyQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oM4vDiE4Roadh3stJqOoq2GyGkU4ggHGhAhYCj9mg7Y=;
+ b=Cm8Hj/p31JbrqgyH34RpVMXsIcTZ5XBVaiEO65RQ3pe40Epmh/7Vhsq79WGor2Ekyb3wP+oAYNLkkYvOmmR1/LGt3xdtMBmT+85ASQ9v4H5UIXuzZIp2MmSIaAoLMEStuBtBIBrwiW0t6oUte1Z7lgrjvkM0f8xcrsbXIPBivgQ=
+Received: from SJ0PR03CA0334.namprd03.prod.outlook.com (2603:10b6:a03:39c::9)
+ by SA1PR10MB997605.namprd10.prod.outlook.com (2603:10b6:806:4b4::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Tue, 24 Mar
+ 2026 19:29:09 +0000
+Received: from CO1PEPF000066EC.namprd05.prod.outlook.com
+ (2603:10b6:a03:39c:cafe::b2) by SJ0PR03CA0334.outlook.office365.com
+ (2603:10b6:a03:39c::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.31 via Frontend Transport; Tue,
+ 24 Mar 2026 19:29:07 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ CO1PEPF000066EC.mail.protection.outlook.com (10.167.249.8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9723.19 via Frontend Transport; Tue, 24 Mar 2026 19:29:08 +0000
+Received: from DFLE203.ent.ti.com (10.64.6.61) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 24 Mar
+ 2026 14:29:03 -0500
+Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 24 Mar
+ 2026 14:29:03 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 24 Mar 2026 14:29:03 -0500
+Received: from sadik-PC.dhcp.ti.com (sadik-pc.dhcp.ti.com [172.24.233.244])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62OJT1402707203;
+	Tue, 24 Mar 2026 14:29:02 -0500
+From: Mahammed Sadik Shaik <s-sadik@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: Prudhvi Veeramachaneni <prudhvi@ti.com>, Ryan Eatmon <reatmon@ti.com>
+Subject: [meta-ti] [master] [PATCH] ti-extras: update srcrev for jailhouse
+Date: Wed, 25 Mar 2026 00:58:49 +0530
+Message-ID: <20260324192849.615116-1-s-sadik@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <88c431e4-862d-48eb-b2ab-d2502596bf9f@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000066EC:EE_|SA1PR10MB997605:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8d552852-95b1-4b7c-a50a-08de89db9e67
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|82310400026|36860700016|376014|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 
+	qrXbn/nsIoZkhRLNT0HuyIpYJVOJs8ej4GDbFQPvIFdAcfY7KyvIywZjArvh7hVFwYbLNUkYBeRQmS1X7/F6l1fUOmpVNyLU7iqgta1XQ5aT6O3bmFiE6JlLzVPBNfwb4sry32i9uQ2X8BuvBrMeRAAtpi34Qc+nU7csov4Ipp7FME7wq4WFsJ5wtl6I4HO/6R9Z2/bbPXJ5hiejriN34y6I7Sy0zNiGQizeVizlpol900KQEGWoyhru08IkjuygjDjqzXEja6fnSNSL4qokNV68P5U2/hKucaDkgx53BnksPpVFuirXqiBYJCcwaLrzFd2joU0O+YdBMDIFg2ioeczgm/pUmUxIkHMZzE3XLVAw2CB1ygVlchx3PfU096cbiNpKyHUu7zfYeCGK16FGT4Ff+TQwlGAtpD/W2w1s+D5nbW+jSUT/v1BtymDMg1KSe1wWIBZQVryJMOz513I7gFxZQkQMt0lfEH0GDhAt18M+pAj+tTowRrgeXDx/Q9k+WL/ACRowWVveDn4A0lgybv2Z8Zx/77CWbu6LzaD/gjH24D53hYYZzzUjfkXotxHP0xmSse1A6EP2AjW26+PFXQemcFVrgEOHjU/JyD4cpicMqnD6wjuN/EXvvnw5SD8/hIk7Z4fEWMDVgcmgcq5m9PQpa1VienYOy3Y/b9qyfBEZo79KRdh1kJG3n6i13QlRapYQrnmM402nhkY1rjlj3tGGIyflRe52PIInowJ1xnoJH0MI0iYqyexYCUEu6qUhWXqQmi2NMeZi7fmFdyStGA==
+X-Forefront-Antispam-Report: 
+	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	WheUJASSMp2y1HPr1nvQXTuex6BIllIvFXqQCSudgZeNWo8uAK3iDofqSSnoe4eXieI3Ge/RtoZ5BL13cShF6AvLwyv/sDjBSH3m1U9rKY2GyZS/v1DBRSVuH9DZPPxbQpXAGvJiXogVZxm6UpYHKEjQIIY5tqrQtyvQ0EgqC0vg+ut53mgkXYvNGL9LKwCO0Ty8U2C/w2PaEZu10xwRtu5m2pvMwNmXepV5T590b1tKSa6W5YTuaXlOaCbmykC7+ku+bPp/HqwjNtUyx1WIcDaEo2931bOPa4Xvjuj0REA+xjAbNzP+kuZdxMDi3FJ2jd8Y4jPG0JECeDSleTY1Ug/O2I3ROa+wKpNCvNVd8dsaoWlCHZWdBHs9lcKZfxkylvz/SRPAmONXf19PigYf56JgxagMowbsmLXyBoxWKoOmRzsdhJ7x4N+FB5uTJ7JU
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2026 19:29:08.0321
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8d552852-95b1-4b7c-a50a-08de89db9e67
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	CO1PEPF000066EC.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB997605
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 24 Mar 2026 18:43:35 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19808
+ <meta-ti@lists.yoctoproject.org>; Tue, 24 Mar 2026 19:29:17 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19809
 
-On Tue, Mar 24, 2026 at 01:18:32PM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
-> 
-> 
-> On 3/24/2026 11:44 AM, Denys Dmytriyenko wrote:
-> >On Tue, Mar 24, 2026 at 11:20:04AM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
-> >>oe-core has bumped the version to 15.0.0 [1].
-> >
-> >
-> >>We need to adjust the bbappend version to % to better match future version
-> >>changes.
-> >
-> >You shouldn't be doing this rename.
-> >
-> >
-> >>Additionally, the patch needs to be updated to match the weston code
-> >>changes.
-> >
-> >The bbappend is version-specific on purpose exactly due to the fact that the
-> >patch won't apply against different versions - it has to be massaged every
-> >time there's a major version bump, we've done it many times before.
-> 
-> But... if the patch won't apply then the build will fail.  But it
-> fails in a manner that is more obvious then just an upfront error
-> about the bbappend not applying to a recipe.
-> 
-> Either way, with the new bbappend logic they put in, the build will
-> not go through.  So what does it really matter if the bbappend if
-> version specific or not?
+update jailhouse linux and uboot to latest
 
-Yes, the build will fail in both cases now.
+Signed-off-by: Mahammed Sadik Shaik <s-sadik@ti.com>
+---
+ meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc      | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/ti-extras.inc    | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-I guess from my perspective, getting a patch failing to apply all of a sudden 
-is less clear indication that a major version update just happened upstream. 
-Versus an error message saying no recipe is available for this versioned 
-bbappend. Moreover, do_patch() error happens much further down the build 
-process, vs. a dangling bbappend error comes very early during parsing...
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc b/meta-ti-bsp/rec=
+ipes-bsp/u-boot/ti-extras.inc
+index 2160e1ec..7d784ac8 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
++++ b/meta-ti-bsp/recipes-bsp/u-boot/ti-extras.inc
+@@ -7,6 +7,6 @@ BRANCH:tie-jailhouse:bsp-ti-6_12 =3D "ti-u-boot-2025.01-jai=
+lhouse"
+ BRANCH:tie-jailhouse:bsp-ti-6_18 =3D "ti-u-boot-2026.01-jailhouse"
+=20
+ SRCREV_uboot:tie-jailhouse:bsp-ti-6_12 =3D "e718bbcec3ebf663c021839753034a=
+224be4cc53"
+-SRCREV_uboot:tie-jailhouse:bsp-ti-6_18 =3D "cfac87057b6fed15c4be4f1d35bf0c=
+4001807484"
++SRCREV_uboot:tie-jailhouse:bsp-ti-6_18 =3D "53a287d24610f0747ae4e35cff2afa=
+3af23a48e3"
+=20
+ UBOOT_GIT_URI:tie-jailhouse =3D "git://git.ti.com/git/processor-sdk/u-boot=
+.git"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc b/meta-ti-bs=
+p/recipes-kernel/linux/ti-extras-rt.inc
+index 10e5988c..63de122e 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc
++++ b/meta-ti-bsp/recipes-kernel/linux/ti-extras-rt.inc
+@@ -5,4 +5,4 @@ BRANCH:tie-jailhouse:bsp-ti-6_12 =3D "ti-linux-6.12.y-jailh=
+ouse"
+ BRANCH:tie-jailhouse:bsp-ti-6_18 =3D "ti-linux-6.18.y-jailhouse"
+=20
+ SRCREV:tie-jailhouse:bsp-ti-6_12 =3D "229a48602ad1557612a4ffabec6a3cbcdd74=
+5f87"
+-SRCREV:tie-jailhouse:bsp-ti-6_18 =3D "e80c3501e727c8c01454594ca5b10555377d=
+fd60"
++SRCREV:tie-jailhouse:bsp-ti-6_18 =3D "b27ed9ea7bdad936265fe38c6e112d86743f=
+d379"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc b/meta-ti-bsp/r=
+ecipes-kernel/linux/ti-extras.inc
+index 515db47d..ff8b6f6b 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
++++ b/meta-ti-bsp/recipes-kernel/linux/ti-extras.inc
+@@ -9,6 +9,6 @@ BRANCH:tie-jailhouse:bsp-ti-6_12 =3D "ti-linux-6.12.y-jailh=
+ouse"
+ BRANCH:tie-jailhouse:bsp-ti-6_18 =3D "ti-linux-6.18.y-jailhouse"
+=20
+ SRCREV:tie-jailhouse:bsp-ti-6_12 =3D "229a48602ad1557612a4ffabec6a3cbcdd74=
+5f87"
+-SRCREV:tie-jailhouse:bsp-ti-6_18 =3D "e80c3501e727c8c01454594ca5b10555377d=
+fd60"
++SRCREV:tie-jailhouse:bsp-ti-6_18 =3D "b27ed9ea7bdad936265fe38c6e112d86743f=
+d379"
+=20
+ KERNEL_GIT_URI:tie-jailhouse =3D "git://git.ti.com/git/processor-sdk/linux=
+.git"
+--=20
+2.34.1
 
-On the other hand, with your way, if the patch happens to apply cleanly to the 
-next major version, no intervention will be required.
-
-So, pros and cons for both ways - I'll be fine with either...
-
-
-> >>[1] https://git.openembedded.org/openembedded-core/commit/?id=a1ed6fddd99171536e23d63a5d5b180019d672ad
-> >>
-> >>Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-> >>---
-> >>  ...equire-GL_EXT_unpack_subimage-commit.patch | 109 ++++++++----------
-> >>  ...ston_14.0.%.bbappend => weston_%.bbappend} |   0
-> >>  2 files changed, 51 insertions(+), 58 deletions(-)
-> >>  rename meta-ti-bsp/recipes-graphics/wayland/{weston_14.0.%.bbappend => weston_%.bbappend} (100%)
-> >>
-> >>diff --git a/meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch b/meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch
-> >>index fbe8f2bb..4b3b4a1f 100644
-> >>--- a/meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch
-> >>+++ b/meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch
-> >>@@ -1,6 +1,6 @@
-> >>-From 5a05e5b66dd3831a9c9c2b3f64bd42419d9ade2d Mon Sep 17 00:00:00 2001
-> >>-From: Denys Dmytriyenko <denys@konsulko.com>
-> >>-Date: Thu, 6 Jul 2023 01:48:41 +0000
-> >>+From 3cddacaa9ea3cfd75732ea9a84312fa68e0bfda7 Mon Sep 17 00:00:00 2001
-> >>+From: Ryan Eatmon <reatmon@ti.com>
-> >>+Date: Tue, 24 Mar 2026 10:52:59 -0500
-> >>  Subject: [PATCH] Revert require GL_EXT_unpack_subimage commit
-> >>  This reverts commit 593d5af43a8e2c2a3371088fa7ae430d0517c82d.
-> >>@@ -13,83 +13,76 @@ Upstream-Status: Inappropriate [specific to TI SGX]
-> >>  Signed-off-by: Andrew Davis <afd@ti.com>
-> >>  Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
-> >>-
-> >>+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-> >>  ---
-> >>   libweston/renderer-gl/gl-renderer-internal.h |  2 ++
-> >>- libweston/renderer-gl/gl-renderer.c          | 29 ++++++++++++++++----
-> >>- 2 files changed, 26 insertions(+), 5 deletions(-)
-> >>+ libweston/renderer-gl/gl-renderer.c          | 26 ++++++++++++++++----
-> >>+ 2 files changed, 23 insertions(+), 5 deletions(-)
-> >>  diff --git a/libweston/renderer-gl/gl-renderer-internal.h b/libweston/renderer-gl/gl-renderer-internal.h
-> >>-index 5032035..85616c9 100644
-> >>+index 1afffbda..dbf7b1c3 100644
-> >>  --- a/libweston/renderer-gl/gl-renderer-internal.h
-> >>  +++ b/libweston/renderer-gl/gl-renderer-internal.h
-> >>-@@ -229,6 +229,8 @@ struct gl_renderer {
-> >>-	PFNEGLCREATEPLATFORMWINDOWSURFACEEXTPROC create_platform_window;
-> >>-	bool has_platform_base;
-> >>-
-> >>-+	bool has_unpack_subimage;
-> >>+@@ -526,6 +526,8 @@ struct gl_renderer {
-> >>+ 	struct weston_log_scope *shader_scope;
-> >>+
-> >>+ 	struct dmabuf_allocator *allocator;
-> >>  +
-> >>-	PFNEGLBINDWAYLANDDISPLAYWL bind_display;
-> >>-	PFNEGLUNBINDWAYLANDDISPLAYWL unbind_display;
-> >>-	PFNEGLQUERYWAYLANDBUFFERWL query_buffer;
-> >>++    bool has_unpack_subimage;
-> >>+ };
-> >>+
-> >>+ static inline uint32_t
-> >>  diff --git a/libweston/renderer-gl/gl-renderer.c b/libweston/renderer-gl/gl-renderer.c
-> >>-index e694418b..2be6d621 100644
-> >>+index 45a2a148..8b238208 100644
-> >>  --- a/libweston/renderer-gl/gl-renderer.c
-> >>  +++ b/libweston/renderer-gl/gl-renderer.c
-> >>-@@ -2523,6 +2523,7 @@ gl_renderer_flush_damage(struct weston_paint_node *pnode)
-> >>-	struct weston_surface *surface = pnode->surface;
-> >>-	const struct weston_testsuite_quirks *quirks =
-> >>-		&surface->compositor->test_data.test_quirks;
-> >>-+	struct gl_renderer *gr = get_renderer(surface->compositor);
-> >>-	struct weston_buffer *buffer = surface->buffer_ref.buffer;
-> >>-	struct gl_surface_state *gs = get_surface_state(surface);
-> >>-	struct gl_buffer_state *gb = gs->buffer;
-> >>-@@ -2550,6 +2551,24 @@ gl_renderer_flush_damage(struct weston_paint_node *pnode)
-> >>-
-> >>-	data = wl_shm_buffer_get_data(buffer->shm_buffer);
-> >>-
-> >>+@@ -3021,6 +3021,22 @@ gl_renderer_flush_damage(struct weston_paint_node *pnode)
-> >>+
-> >>+ 	data = wl_shm_buffer_get_data(buffer->shm_buffer);
-> >>+
-> >>  +	if (!gr->has_unpack_subimage) {
-> >>  +		wl_shm_buffer_begin_access(buffer->shm_buffer);
-> >>-+		for (j = 0; j < gs->buffer->num_textures; j++) {
-> >>-+			glBindTexture(GL_TEXTURE_2D, gs->buffer->textures[j]);
-> >>-+			glTexImage2D(GL_TEXTURE_2D, 0,
-> >>-+				     gs->buffer->gl_format[j],
-> >>-+				     gs->buffer->pitch / pixel_format_hsub(buffer->pixel_format, j),
-> >>-+				     buffer->height / pixel_format_vsub(buffer->pixel_format, j),
-> >>-+				     0,
-> >>-+				     gl_format_from_internal(gs->buffer->gl_format[j]),
-> >>-+				     gs->buffer->gl_pixel_type,
-> >>-+				     data + gs->buffer->offset[j]);
-> >>++		for (j = 0; j < gb->num_textures; j++) {
-> >>++			glBindTexture(GL_TEXTURE_2D, gb->textures[j]);
-> >>++			gl_texture_2d_store(gr, 0, 0, 0,
-> >>++                        gb->pitch / pixel_format_hsub(buffer->pixel_format, j),
-> >>++				        buffer->height / pixel_format_vsub(buffer->pixel_format, j),
-> >>++					    gb->texture_format[j].external,
-> >>++					    gb->texture_format[j].type,
-> >>++					    data + gb->offset[j]);
-> >>  +		}
-> >>  +		wl_shm_buffer_end_access(buffer->shm_buffer);
-> >>  +
-> >>  +		goto done;
-> >>  +	}
-> >>  +
-> >>-	if (gb->needs_full_upload || quirks->gl_force_full_upload) {
-> >>-		wl_shm_buffer_begin_access(buffer->shm_buffer);
-> >>-
-> >>-@@ -4754,11 +4773,9 @@ gl_renderer_setup(struct weston_compositor *ec)
-> >>-	else
-> >>-		ec->read_format = pixel_format_get_info(DRM_FORMAT_ABGR8888);
-> >>-
-> >>--	if (gr->gl_version < gr_gl_version(3, 0) &&
-> >>--	    !weston_check_egl_extension(extensions, "GL_EXT_unpack_subimage")) {
-> >>+ 	if (gb->needs_full_upload || quirks->force_full_upload) {
-> >>+ 		wl_shm_buffer_begin_access(buffer->shm_buffer);
-> >>+
-> >>+@@ -5171,11 +5187,9 @@ gl_renderer_setup(struct weston_compositor *ec)
-> >>+ 	else
-> >>+ 		ec->read_format = pixel_format_get_info(DRM_FORMAT_ABGR8888);
-> >>+
-> >>+-	if (gr->gl_version < gl_version(3, 0) &&
-> >>+-	    !gl_extensions_has(gr, EXTENSION_EXT_UNPACK_SUBIMAGE)) {
-> >>  -		weston_log("GL_EXT_unpack_subimage not available.\n");
-> >>  -		return -1;
-> >>  -	}
-> >>-+	if (gr->gl_version >= gr_gl_version(3, 0) ||
-> >>++	if (gr->gl_version >= gl_version(3, 0) ||
-> >>  +	    weston_check_egl_extension(extensions, "GL_EXT_unpack_subimage"))
-> >>  +		gr->has_unpack_subimage = true;
-> >>-
-> >>-	if (gr->gl_version >= gr_gl_version(3, 0) ||
-> >>-	    weston_check_egl_extension(extensions, "GL_EXT_texture_type_2_10_10_10_REV"))
-> >>-@@ -4880,6 +4897,8 @@ gl_renderer_setup(struct weston_compositor *ec)
-> >>-		   gr_gl_version_minor(gr->gl_version));
-> >>-	weston_log_continue(STAMP_SPACE "read-back format: %s\n",
-> >>-			    ec->read_format->drm_format_name);
-> >>+
-> >>+ 	if (gl_extensions_has(gr, EXTENSION_OES_MAPBUFFER))
-> >>+ 		GET_PROC_ADDRESS(gr->unmap_buffer, "glUnmapBufferOES");
-> >>+@@ -5303,6 +5317,8 @@ gl_renderer_setup(struct weston_compositor *ec)
-> >>+ 		   gl_version_minor(gr->gl_version));
-> >>+ 	weston_log_continue(STAMP_SPACE "read-back format: %s\n",
-> >>+ 			    ec->read_format->drm_format_name);
-> >>  +	weston_log_continue(STAMP_SPACE "wl_shm sub-image to texture: %s\n",
-> >>  +			    gr->has_unpack_subimage ? "yes" : "no");
-> >>-	weston_log_continue(STAMP_SPACE "glReadPixels supports y-flip: %s\n",
-> >>-			    yesno(gr->has_pack_reverse));
-> >>-	weston_log_continue(STAMP_SPACE "glReadPixels supports PBO: %s\n",
-> >>+ 	weston_log_continue(STAMP_SPACE "glReadPixels supports y-flip: %s\n",
-> >>+ 			    yesno(gl_extensions_has(gr, EXTENSION_ANGLE_PACK_REVERSE_ROW_ORDER)));
-> >>+ 	weston_log_continue(STAMP_SPACE "glReadPixels supports PBO: %s\n",
-> >>+--
-> >>+2.43.0
-> >>+
-> >>diff --git a/meta-ti-bsp/recipes-graphics/wayland/weston_14.0.%.bbappend b/meta-ti-bsp/recipes-graphics/wayland/weston_%.bbappend
-> >>similarity index 100%
-> >>rename from meta-ti-bsp/recipes-graphics/wayland/weston_14.0.%.bbappend
-> >>rename to meta-ti-bsp/recipes-graphics/wayland/weston_%.bbappend
-> >>-- 
-> >>2.43.0
 
