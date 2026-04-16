@@ -1,165 +1,176 @@
-Return-Path: <francesco@dolcini.it>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CAE09F8A148
-	for <webhook@archiver.kernel.org>; Thu, 16 Apr 2026 08:43:06 +0000 (UTC)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8966.1776328981687398450
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70ED2F8D766
+	for <webhook@archiver.kernel.org>; Thu, 16 Apr 2026 18:33:26 +0000 (UTC)
+Received: from BL2PR02CU003.outbound.protection.outlook.com (BL2PR02CU003.outbound.protection.outlook.com [52.101.52.11])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22435.1776364398980038091
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 16 Apr 2026 01:43:02 -0700
+ Thu, 16 Apr 2026 11:33:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@dolcini.it header.s=default header.b=wwH9s1by;
- spf=pass (domain: dolcini.it, ip: 217.194.8.81, mailfrom: francesco@dolcini.it)
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
-	by mail11.truemail.it (Postfix) with ESMTPA id 8CB121F9E7;
-	Thu, 16 Apr 2026 10:42:58 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
-	s=default; t=1776328978;
-	bh=EAmOvIXYo46o5j3XSlNy77tLUcukmWTNZEKN2vdcmCM=; h=From:To:Subject;
-	b=wwH9s1byCBXN0uXo58fDfDRT8Y9InBUTDpOnwk5rqikcxAP5M4N+B6JtfuvEBpG0W
-	 5C7Rs2T8Wm+B2/zEefeK4k9lr6i6CtxvfywA8UZWVIO0qAyVNVlCNjx261gZYWyv7M
-	 YnHyUuW5UTZPcxJa34sbQLEBUH8URPOAUBWpSJdO3X+AkkRaQxfzl9NHTBeGm+1wPA
-	 POeFZzo1f4NkbjwQ0wZgZdh2sh1Tc4nHdJcoqTBwAnco5qpxALbmZN6vv8Oa9FYHTI
-	 ShCjxBUfNGo1QqS5rcKt19Tdy+dTxu3u8LNOjFgcxeQTss2fwtswHyY0OM4nL3Grw4
-	 ED9kiuyRLCbvw==
-Date: Thu, 16 Apr 2026 10:42:54 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: afd@ti.com, Francesco Dolcini <francesco@dolcini.it>,
-	Ryan Eatmon <reatmon@ti.com>, meta-ti@lists.yoctoproject.org,
-	Franz Schnyder <franz.schnyder@toradex.com>,
-	Franz Schnyder <fra.schnyder@gmail.com>
-Subject: Re: [meta-ti][master][PATCH v1] conf: machine: j784s4: Move
- ti-eth-fw-j784s4 to EVM conf
-Message-ID: <20260416084254.GA27930@francesco-nb>
-References: <20260415114107.1643556-1-fra.schnyder@gmail.com>
- <20260415115820.GA26023@francesco-nb>
- <6a59459c-9843-4a9c-9e43-b3697b7d4203@ti.com>
- <20260415211059.GD4186@denix.org>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=Sa9cKLMl;
+ spf=pass (domain: list.ti.com, ip: 52.101.52.11, mailfrom: lcpdbld@list.ti.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=w6s9Mt/zxc8VMe/bLMzvA9WazgSt5oQrkHlYyHqtoAKkKHMqln5WVuSNKEDy5m9OVMwRRFQkRbafiG49saY2qlbVo8cNZmUKW/SMjkDQkeLHPs2lypM5+O3DT3AtJJb0hUu5hwBjJGV/1Vj3Fi1EFPcgXTB0dMI4jOQfPGh4y1drYG98Yz2k1p+1VYF2oMQLD8x49UcExNYKNy4h07hpCUQHi47ZJ554KmEU2RhFAqw300ZHh2tIlvHCcuKhr60k39ayDGZ81ua/en25U9WXuBkYtL9fZi+wxYXftViuUChvC8N7oSfO8MoCQ7be05d5aeWULyscRnwHGH13kdZ9bw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7lCZPFs8oajHpjyWQ7H/Pm1VZ9iwCmjrSwPhxfaHu9c=;
+ b=xVkn76xEmNelpa8X+tbARF9hFIHUctNWYSWeK0YqS5YtyTp8hyUfOJtZZNJcOWFfBxYih8vphNMojDeTSJHm7xvdQ+y2dPiaKVS3AE7JOgHPim+Y8gdPouBVMdoLQ8+EByEyl6/VZQMH0ohQ+eGkzCqLPDtIDA3IAfdUGV+JnHuV3e8wYvuSlDs7zRWEJUEeYLYVkqplcYPlCokX0BlwhXN5x6Z7RKOEUt95ilkCN5ZjMPpaxmPzghkk82n9rul37m/eTMpBhZJ6cnzdtAeIGGosFcX7EOPzrni6RF5lvLAfPqkWAs4Jp3FdtnTdZB/7iCI+hx/dLRLQJA/pBrlWsA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org
+ smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
+ action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
+ (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7lCZPFs8oajHpjyWQ7H/Pm1VZ9iwCmjrSwPhxfaHu9c=;
+ b=Sa9cKLMlHr68GqtDr7gG/W0wB+OrpRulr09y7nRvElIqZKKxWfXlWVIOz/FpY8WxNODVGxRDYC/EAmYxhUDGUMBfiBK8MIy8as4KjnFLD1eiXUPvJSzYM1MkG2HVZ0OSAQz4u5VRVEDOKooiED3O4Wg1omHEO4vc+S993yrWOEK59co+XJUk68dodNYoVT1wnc8bDA/jvDvkuE732HfHAHu/DNPm3oybdAw0BYAWClYHY45SEW1FVX8dDvE1nH6rLduCdloBe2OvIbjlW/UfFShKLmnNNQeEsXhTBZ1vAKm2kEadcP9jJeUadrFKPM0SsDPm1z76Qf5paUcbx1rjlg==
+Received: from DM6PR06CA0085.namprd06.prod.outlook.com (2603:10b6:5:336::18)
+ by CH3PR10MB6858.namprd10.prod.outlook.com (2603:10b6:610:152::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.21; Thu, 16 Apr
+ 2026 18:33:16 +0000
+Received: from DS2PEPF00003444.namprd04.prod.outlook.com
+ (2603:10b6:5:336:cafe::9b) by DM6PR06CA0085.outlook.office365.com
+ (2603:10b6:5:336::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.52 via Frontend Transport; Thu,
+ 16 Apr 2026 18:33:15 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=list.ti.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=list.ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ DS2PEPF00003444.mail.protection.outlook.com (10.167.17.71) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Thu, 16 Apr 2026 18:33:15 +0000
+Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 16 Apr
+ 2026 13:33:13 -0500
+Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 16 Apr
+ 2026 13:33:13 -0500
+Received: from fllvem-mr08.itg.ti.com (10.64.41.88) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 16 Apr 2026 13:33:13 -0500
+Received: from fllvdckhpci102.itg.ti.com (fllvdckhpci102.itg.ti.com [10.64.72.97])
+	by fllvem-mr08.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63GIXD9Y1556550;
+	Thu, 16 Apr 2026 13:33:13 -0500
+Received: by fllvdckhpci102.itg.ti.com (Postfix, from userid 60899)
+	id 3F18F2A61; Thu, 16 Apr 2026 13:33:13 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>, "Denys
+ Dmytriyenko" <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][scarthgap][PATCH] CI/CD Auto-Merger: cicd.scarthgap.202604160814
+Date: Thu, 16 Apr 2026 13:33:13 -0500
+Message-ID: <20260416183313.682787-1-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260415211059.GD4186@denix.org>
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF00003444:EE_|CH3PR10MB6858:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1be808f2-82dc-4f6a-78c3-08de9be69fcc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|82310400026|36860700016|376014|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 
+	URSKaxxHsYyW7TCx1/i8QJnBvP3YWLkQrKL+AMnbIpezjyFMxf+JYVkUu/r26W7m43uowXpOIbjwYoMPrXqO5NOoCeUmpnS8c/8TkRJ5Cz/ZODPI6r++Z0+3UoxQUmcRGJtBbwAI7HHh6qVbvVTl9CuTbJ4h34MVSq+1/IpeY8QkvsnQxn/GSBdMZUX2UYWpUMWcpQ3VM0BQT9wgUBHgilmcRq3CcJdk22KzQKH8Mk4AVhXBy5r6+AYQMI59psP7R4BMcIQZdhnzeqPI2zXPsCEPtdEUcjc8HIiqvVnPqd9hQn3xSbqTadALdYvwpbIlXwBEDDrehuyFZ0+YA1kVThHtgvOw4gaorpziPQ82mcmfyOzAxCvZOYdxNqSoqw5QtmLxAdHCqGcNmyIzR+QvI2MjM6kz2BWcjkQKnBwPI91USF9ZhkqwtoTVGznmWY3PrC6SEmniANlLWwVUBVe1bZJYGyTvLpSRwai/ZB43suPVKN16hn9WTGsy5GMtMyJYBrqA2iO+rsuiQNuU7uHlDLY+ow4XRF7vsSjvAtnYkRTv7KM9pF4z5C0ctefCsO5TGJT2XiPYzyVOzzckXfy+Dr/YWVBf96OCe9o/1rS5A7zy8LZEJWVCNdiJmCUdRGqZr9AU7aL2Z2N+rRqvvS2N3XfHQXBX/dRPV7h5p2363PIfEz3DElsKqs0uAkh5g8orxUZ7a7nIiWIAYWi713arC/riSckXeMh+Zfqjug+/Ks36zZqVReiIz9T2n03vwQmqql2CboCUNqWlistX4kK1ng==
+X-Forefront-Antispam-Report: 
+	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	9XcXGlDifGwMJJqrBQl/0ieC1yGeDT9uG1z5n0dMpg3oiSMbLfcMFJm8M7go+LlsKRllafoe20HP/zAwYVluZ8A/cXtreavaU3HAt1k2yln+054f+FFklFVzc8WUOGjydYHsr5ePNhvDw1my6ViIzC2K7AwqJix2OzGrBtcPtY1fIaAWoRlIN0oqaMueEwuMVYxjaB30+yQLsKbUC9cHZWdTDS9q197EBWwZUPzq0txk7AP7z8XFtAv7j2l4uK/DpS6d4RNCagYexJtWxj2Ar9S5suoMMLBzMrhBHNiQ2hxLZYAZU7UVycYIhygDkH04y2jBnaTuzSxClfBrpHUaMUD6tfFhhlHH2qRRSKGCtw7pQ5PhM+R9kJYkOSYcIphuZHfXQrrbWY7lXXSbJ8ZRaFXZTzbNYmCCvuCZzDGLqSwtSNseozfpZLniJxx+6z6z
+X-OriginatorOrg: list.ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2026 18:33:15.7910
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1be808f2-82dc-4f6a-78c3-08de9be69fcc
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DS2PEPF00003444.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB6858
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 16 Apr 2026 08:43:06 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19856
+ <meta-ti@lists.yoctoproject.org>; Thu, 16 Apr 2026 18:33:26 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19857
 
-On Wed, Apr 15, 2026 at 05:10:59PM -0400, Denys Dmytriyenko wrote:
-> On Wed, Apr 15, 2026 at 09:43:31AM -0500, Andrew Davis via lists.yoctoproject.org wrote:
-> > On 4/15/26 6:58 AM, Francesco Dolcini wrote:
-> > >On Wed, Apr 15, 2026 at 01:41:04PM +0200, Franz Schnyder wrote:
-> > >>From: Franz Schnyder <franz.schnyder@toradex.com>
-> > >>
-> > >>The `ti-eth-fw-j784s4` firmware is added in the generic J784s4 SoC
-> > >>include, which is therefore used for all the J784s4-based machines.
-> > >>That firmware seems to be developed specifically for the EVM, as it
-> > >>takes control of pins used for the Ethernet board setup on the EVM. On
-> > >>non-EVM boards, like the Aquila-AM69, those signals are used for other
-> > >>functions, so enabling the firmware in the SoC include is too broad
-> > >>and breaks functionality.
-> > >>
-> > >>Move the machine-essential recommend from the SoC include
-> > >>to the EVM configuration.
-> > >>
-> > >>Signed-off-by: Franz Schnyder <franz.schnyder@toradex.com>
-> > >
-> > >This seems to be the 3rd time, in a relatively short time, in which
-> > >we are affected by your decision to put into the SoC file, configuration
-> > >that are not about the SOC
-> > >
-> > >  1 - the initramfs topic [https://lore.kernel.org/yocto-meta-ti/78ec394aae8a141ceb87a6b67f109665e7c96122.camel@gmail.com/]
-> > >  2 - the console uart [https://lore.kernel.org/yocto-meta-ti/4e08fa3658b1e54add6d5476c7234e86dbcbb60c.camel@gmail.com/]
-> > 
-> > I thought we solved this one by making the console selection more easily
-> > updated in the board files. If we want to go one step further and remove
-> > the defaults from the SoC level and always select the board specific UART
-> > in each board config I wouldn't oppose that either.
-> 
-> I was going to reply to the end of the thread, but this entire section of the 
-> discussion was completely removed, hence I will do it here.
-> 
-> We've discussed this quite a lot internally and we ended up going with what 
-> Andrew is saying here.
-> 
-> There's this concept of "sane defaults" that covers most of the cases and it 
-> makes sense to set them as such. We have tens of platforms using this default 
-> UART configuration and it makes perfect sense to set it once, instead of 
-> copying the same over and over again - it is a maintenance pitfall. But we 
-> also make sure to allow very easy and effortless overriding of this default, 
-> if, for some reason, a specific board implementation doesn't follow this 
-> default.
-> 
-> There are lots and lots of similar examples when an upstream layer, including 
-> OE-Core, sets a sane default that may not match your configuration, but as 
-> long as it allows easy override downstream, it's not the end of the world.
-> 
-> 
-> > >  3 - this firmware
-> > >
-> > 
-> > This firmware was a miss on our part, we were not aware that it was
-> > not generic for all boards using this SoC but instead does some EVM
-> > specific pinmuxing. I've looked into the FW source and can see where
-> > that happens, I'll work to see how we can fix that. In the mean time
-> > I agree then we should move this firmware to the board level (as the
-> > patch does).
-> 
-> Here I agree with Andrew - it was an oversight and if it does per-board 
-> pinmuxing, then it belongs in a board config. That said, please address my 
-> comment for the patch before merging.
-> 
-> 
-> > >Can I ask TI once more to rethink this considering that meta-ti is used
-> > >by users of your SoC, but not of your EVK/SK ?
-> > >
-> > 
-> > We do think a lot about external users of meta-ti, we even made a whole
-> > split out reference layer (meta-beagle) that we treat like a normal vendor
-> > layer so that we can more easily identify when we are making bad assumptions
-> > that only apply to our EVM/SK boards. Yes we do still sometimes get it wrong,
-> > and so we are very happy that you are providing the feedback that you have
-> > and helping point out those cases.
-> > 
-> > If I'm not mistaken the initramfs topic is the only outstanding case
-> > where what goes in the SoC file vs board files is still open and we
-> > should continue to try to find the best solution.
-> 
-> Again, there's been a lot of internal discussion and as Ryan mentioned 
-> earlier, we do believe it is very easy to disable initramfs by several 
-> different methods and hence still falls into a "sane default" bucket.
-> 
-> As an example, to extend what Andrew said, meta-beagle as a vendor layer 
-> already had to deal with several such instances, showcasing how easy it is 
-> to override meta-ti defaults, when you disagree with them:
-> 
-> https://git.yoctoproject.org/meta-ti/commit/?id=b07a909654ac542353a7108f7a82bd5e1e2d4a82
-> https://git.yoctoproject.org/meta-ti/commit/?id=92c2198288fb19ce6f92084687b42f7d0af2adc7
+Updated the value(s) for:
+  u-boot-ti-staging_2025.01: SRCREV_uboot
+  linux-ti-staging-rt_6.12: SRCREV_ARM32
+  linux-ti-staging_6.12: SRCREV
 
-Denys, I understand your need to avoid duplication, I understand and I
-agree with it, and I just disagree on your solution and I think
-that is just wrong from an architecture point of view.
+Changelogs:
+  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/lo=
+g/?qt=3Drange&q=3D7b9dedb046eb6a720997f61582c7b13da1b5b9f0..19795f63be7ee27=
+e38b6e800ff6c88a2feaae13f
+  linux-ti-staging-rt_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linu=
+x-kernel/log/?qt=3Drange&q=3Da3bc6dc973a99822f0707b1c9ba06b56bf142076..62fd=
+c7890cde3197051743120ff44162b7356cc5
+  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-k=
+ernel/log/?qt=3Drange&q=3Dda3c0f0a33ac00f7138c695a16d90301cf7ec02b..c52c558=
+9aab8c376f975b1feb7b8746b7b6624bd
 
-Mixing the concept that is something is shared between multiple boards
-to the fact that is a default at the SoC level is plain wrong.
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb  | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb    | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-There is no such thing as a default console uart in the TI SoC reference
-manual.
-
-And the concept of pushing the initramfs into something that depends on
-the HW is event worst, this is purely a SW decision. Our machine are
-used in setup with/without initramfs, and forcing it at the SoC
-level is technically wrong.
-
-With that said, you made very clear what is your decision, I can just be
-as clear and state that this decision is making the life of us, a TI
-customer, way more painful than it should be.
-
-And we'll deal with it, no need to explain us how to work with OE, we
-are aware of it and we can work-around it in our layers.
-
-Francesco
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/=
+meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+index f5d40a3e..0b49e559 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+@@ -6,4 +6,4 @@ PR =3D "r0"
+=20
+ BRANCH =3D "ti-u-boot-2025.01"
+=20
+-SRCREV_uboot =3D "7b9dedb046eb6a720997f61582c7b13da1b5b9f0"
++SRCREV_uboot =3D "19795f63be7ee27e38b6e800ff6c88a2feaae13f"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb b=
+/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+index 5957194c..0d974c0b 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+@@ -10,7 +10,7 @@ BRANCH_ARM64 =3D "ti-linux-6.12.y"
+ BRANCH =3D "${BRANCH_ARM64}"
+=20
+ BRANCH_ARM32 =3D "ti-rt-linux-6.12.y-arm32"
+-SRCREV_ARM32 =3D "a3bc6dc973a99822f0707b1c9ba06b56bf142076"
++SRCREV_ARM32 =3D "62fdc7890cde3197051743120ff44162b7356cc5"
+ PV_ARM32 =3D "6.12.57+git"
+=20
+ BRANCH:ti33x =3D "${BRANCH_ARM32}"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/me=
+ta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+index 45db13fc..d0d76d74 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+@@ -22,7 +22,7 @@ S =3D "${WORKDIR}/git"
+=20
+ BRANCH ?=3D "ti-linux-6.12.y"
+=20
+-SRCREV ?=3D "da3c0f0a33ac00f7138c695a16d90301cf7ec02b"
++SRCREV ?=3D "c52c5589aab8c376f975b1feb7b8746b7b6624bd"
+ PV =3D "6.12.57+git"
+=20
+ # Special configuration for remoteproc/rpmsg IPC modules
+--=20
+2.43.5
 
 
