@@ -1,191 +1,140 @@
-Return-Path: <gehariprasath@ti.com>
+Return-Path: <nm@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69F1AF94CD7
-	for <webhook@archiver.kernel.org>; Wed, 22 Apr 2026 06:54:00 +0000 (UTC)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com (SN4PR0501CU005.outbound.protection.outlook.com [40.93.194.10])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.73032.1776840834399448042
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A12DF9B60D
+	for <webhook@archiver.kernel.org>; Wed, 22 Apr 2026 10:32:28 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.78560.1776850641650205245
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 21 Apr 2026 23:53:54 -0700
+ Wed, 22 Apr 2026 02:37:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=selector1 header.b=ERJEfgM3;
- spf=pass (domain: ti.com, ip: 40.93.194.10, mailfrom: gehariprasath@ti.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lTQSRFSU/7hnncpdg3yL2tmCVK91B8HiOtBFpx4QBTvUsKesoTOspRCkj14VTJ3XI7w6RLkOVJQbooltk5lrxz14ECuEo7MwqnXBPrZ3Al/0dwczV2eZLr4InJ4oVt2yJ5XxJQ8129K69pFOZCI2mbsz99ZDMqxZxxt0m+SbfrN4YfcIHQLq0zpNOdHw9OETYgT3Xh5dO0fS3B0gq+A2MlgntqOOritJZkQfgmBIlLfVTjj4BnbKkbC98kojo/IvhrZBe8foAy7L4QRqQAcZTvwPeIG5sAB46ewROJPgC0AtCCL2HOguQNBI2yfvDZOmCVe0zoSOQbOQP7byWM0jeA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uzZFKDl6jMn+Ttoi9+wlWufMViTZtmvDcOC3NMTwYRI=;
- b=pRQqygd/oT+Q58w+FuuHfwXI2XkN2x3rUNZ3WjOGVSj5B/J8AgOZZrNatzyrMcfHGyQk8CymsCzQ+cYX1RQi1EziqH/2Aj0XtcRIRBm2y2KVfjoTKtBT6veVIG+jZ+qvwl5dyi4ckAfUML/EM21FmOnLz1EuzXeRJs+eB95qpdlrrvdhfgK/rs4vNx3VymTd10nP74jhDaXDTRYZX/ZPnXXqDYVXqTv2TJy1BR+9vzMRnT+hXtR0aYiYaWNfSk+jDXC4KcBZ0lKXOIuqi2A91F7P7/U76QjFKy2VIS8m+nB1GXo2pF5k8WDOFe10GC8WBFGz4KdRwPQVan5OesoUxA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uzZFKDl6jMn+Ttoi9+wlWufMViTZtmvDcOC3NMTwYRI=;
- b=ERJEfgM3f/nnpli+6m2FRBLlUkNixXMcZQlLDDcd3Q7qSsAxqdtDYGQFg30bToE5gRwrmEEi5xTk9RqH+TYAo1mjdfG7jWeXkn1ZjFY/suKz61AjaglLGRh8bW696I2SBdZJORZ3Vlpf80pYdg9uD1TbuYHNXij7u7abtbZnCPs=
-Received: from BLAPR03CA0068.namprd03.prod.outlook.com (2603:10b6:208:329::13)
- by BN0PR10MB5205.namprd10.prod.outlook.com (2603:10b6:408:116::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Wed, 22 Apr
- 2026 06:53:51 +0000
-Received: from BL02EPF0002992B.namprd02.prod.outlook.com
- (2603:10b6:208:329:cafe::7a) by BLAPR03CA0068.outlook.office365.com
- (2603:10b6:208:329::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Wed,
- 22 Apr 2026 06:53:51 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BL02EPF0002992B.mail.protection.outlook.com (10.167.249.56) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Wed, 22 Apr 2026 06:53:51 +0000
-Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 22 Apr
- 2026 01:53:50 -0500
-Received: from DLEE205.ent.ti.com (157.170.170.85) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 22 Apr
- 2026 01:53:50 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE205.ent.ti.com
- (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 22 Apr 2026 01:53:50 -0500
-Received: from [10.24.52.136] (gehariprasath.dhcp.ti.com [10.24.52.136])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63M6rlVa1923038;
-	Wed, 22 Apr 2026 01:53:48 -0500
-Message-ID: <1bcfb891-a9c4-4371-9ccf-3bdec183e4e0@ti.com>
-Date: Wed, 22 Apr 2026 12:23:47 +0530
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=dfI5LcX/;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: ernestvanhoecke@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-4411e1eba51so1888325f8f.3
+        for <meta-ti@lists.yoctoproject.org>; Wed, 22 Apr 2026 02:37:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1776850640; x=1777455440; darn=lists.yoctoproject.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=V1lKVVGVwyijlmQCU9+J6YHsGuDWgcivNClzHAte8+Q=;
+        b=dfI5LcX/UU0LvRQZz0Y2GoYq/TR0Lqhvr+u+4TrnRh6d6pDS7XNi4calI9W0gzZUvk
+         3NgQoszNhM7uvhx6TLOsLuJpSxLzIxIHi5LlfxjIi07NPPJAjQllGXKjv7Sh9SPPzw1q
+         yzYBE/1XihaKK+6GdCrDK5+O1WWfMaywmOkpGiBi4hKl4GLGLYtbT92Z4I8OKOJtAT2E
+         NFrEoDp+pbi/tZzvefzn0nggv2i7SZnVHjKUDQlqOdji0jgUQgbD7ODPlvw9S4BWFacR
+         rkb7GIUGE1UiaB5YCgCQOSMCBzptIdc2qU2BamSmMx0OKLnOD5McRlJcmTbC99e142BJ
+         fHtA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776850640; x=1777455440;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=V1lKVVGVwyijlmQCU9+J6YHsGuDWgcivNClzHAte8+Q=;
+        b=B/rL7C/r4LrcQGLsFiF7Nx6pN6d0BVC+l6NAV45P9EpPa1S1VgieuJHYZWgeFvvVfv
+         17M69y9Ba9qI4qy2GRZ3AgNtzkrkeHsjT5xqPfqGDo95/efH8FKYI2UZubHmOFeK0TlP
+         FwFcqb0144CeXtpzVFbGifER7U8RObjhvZZQdcm4GCgkrc+3/1gz3pzWpMHxhlfTIPHW
+         HYzNdnJZlPdh7GNdJ/mHGQX0WuJwwYX3AKZ/nIWbRBX3/2IDkbPtd+814y7SxvV7gB0n
+         Jbp0ZLyTTgC7Fx91SkO4C2uqXjIaBmHOHzdYHnJufBFsh1UbMWZyAWD6SwRw98vqPHx2
+         C8Ow==
+X-Forwarded-Encrypted: i=1; AFNElJ+P+eNitLuWZPZQ2eah3Dlefm04xh95LEXMZr+Fwc7C0rPWqTNUOholZvgoLQ/z+43Tb2g8s+XB@lists.yoctoproject.org
+X-Gm-Message-State: AOJu0Yy8zV2GN0JrSPFpdjtvwp3EJSK1NbONyZJattVwk0cLizYgODMc
+	Uji7EQxZT+6yybs6l5O+qf7OEClUgWfjUs3Lyqxzkv0/LkbvnYS5IEwyWJdICRN7
+X-Gm-Gg: AeBDietUK3s+d7gQLKipmbMYXUEd06v1aQzQIGbnS3yK7VgU3dpuiYGZNHK1kOlvIkj
+	+mxg8trymEBuhGOWeHWEzaSYsKfArr6sygZMGZ6Jkk5ax0a3FAiwBgRwILy5P26PA4Gbz0eWoQL
+	X5cIMU1eQd9R2AM0zQTbLxpU2GskjPF+sL+OGR6RbQuSH70axGJYp+catHgRhCqCXYWKNfY/ZHR
+	6xy9+dTgTLDay10BeVoYmeSO6GBWvA2sRsdPUGk/43g60IseWu5oHENlwiyh8nuglKs3Lhet/VR
+	V71OKfuAKc954UN8YPOuqZo2sfv5ORLD8DMXS6/1Ccyqa0PV/d8SKPj4C4T37NqxyQ6D/nDBG3D
+	ZrzSinjPX8flwzlgeJvIUZ/DIqYNjwJ4mpPnTqBk5YRW9TktfPHQujUm6DjMSTR4oBvm4bMLM7L
+	0TMzWI0r4vB4rrC1BUnWgQM11ERcb7WMeFWOVwxjtRr4/O2Xtsp/B6lp+sVV/M/8h1gmjQb87Ve
+	FtxhxE9uulB4inbkOe9Vuk+JMjoioSARXbdlw==
+X-Received: by 2002:a05:600c:8717:b0:48a:568f:ae6d with SMTP id 5b1f17b1804b1-48a568faffemr82497945e9.8.1776850206647;
+        Wed, 22 Apr 2026 02:30:06 -0700 (PDT)
+Received: from ernest.hoecke-nb (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488fb75c695sm131031325e9.14.2026.04.22.02.30.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Apr 2026 02:30:06 -0700 (PDT)
+Date: Wed, 22 Apr 2026 11:30:05 +0200
+From: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: reatmon@ti.com, Praneeth Bajjuri <praneeth@ti.com>, 
+	Denys Dmytriyenko <denys@konsulko.com>, meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][master][PATCH] weston: Update to 15.0.0
+Message-ID: <wawx3v6oo27qezvbdiaq4gmuytwquwlxxev7kjtqni3mtxol7b@rgr2c6nppzdq>
+References: <20260324162004.3215160-1-reatmon@ti.com>
+ <20260324164438.GU11121@denix.org>
+ <88c431e4-862d-48eb-b2ab-d2502596bf9f@ti.com>
+ <20260324184327.GX11121@denix.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti] [master][PATCH] am62lxx-evm: Override serial console to
- ttyS0 only
-To: <y-hegde@ti.com>, <meta-ti@lists.yoctoproject.org>
-CC: <praneeth@ti.com>, <prudhvi@ti.com>, <rs@ti.com>, <jm@ti.com>,
-	<reatmon@ti.com>
-References: <20260422062227.4098420-1-y-hegde@ti.com>
-Content-Language: en-US
-From: Hari Prasath <gehariprasath@ti.com>
-In-Reply-To: <20260422062227.4098420-1-y-hegde@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0002992B:EE_|BN0PR10MB5205:EE_
-X-MS-Office365-Filtering-Correlation-Id: f465732f-12d3-4b8c-07c7-08dea03be96d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|36860700016|82310400026|1800799024|4022899009|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 
-	gefdQZhBhbj8rhJMsZJ6TVFBkeK7OPqZaq60pLY1BHHi+8Kx6SArP6wAIFCmd8tL7TABj68wRLj8ByfxxUdAPXqD11WlLvq6SJDMdYduL5g5rdnOAZEvF2cW6/FtUaOhIlfWUcHFjgJT39Ep4EEa7tZ94UxZq6D7UcUtNB/I/50bIxfUJxsxJYrNb3sJTcRA/HgXGKwCWRsPy2pOdv4GVzu6+SamvGHxfK+gyM87tuwjrOIdRdybUZfksBQWHb+Q5wy5kH69pGLtKnkwuPL0P/iJyW+7TZMiKxbQbA/J0bCpzUZZM5unlP0mL33BgrCFz4DkWKmPSEHQFgu9rLsJgdKJnW6eAl3CW58R4MpofEaCVFkE7NYTYkotv5uon4dIl/fRgMTc6qtTNatGpEemUX4T8l7qC5Yc2V33M01Huu+t0zgTuxcDIGbiogcIDFcLRs0JOy48+okG1PYr+ycTVlKJduphNfeNCOaDpTCGWiqZy48OrNlXvSiYxLq3VoaE3646eOg8ezcdAXDn0vsQmhgVdsN9raRP8IXNAGtL3lSaeGerwsVaGlQCMjhDMr+195Syzqyafliip51c7xcsCTg46Ti1YdaIeTxTmISVIPrx8E4CiwIdxVO+ujiMu3mj4PeF5EmznPxoLtdfwMlcR+o4BTkXq588MSHwHJAxsjQp981rDHkW3oKkyNbY6uMNYw/fJKAwzMXsqW1SP0/GtCCxZsuKEbhTlJJsVZlI8Zo=
-X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(4022899009)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	akVtPqtp/020FNP5IKrdVurcibiJLpkkla31FfPNdq7o8UqIwtBDsrcqxW25B+iNFmq4KfcNTemhAcjWPVrtpxQELiydBefLeY2mMY92ihzzBptJFPg0aJ5qzdDHFDcJnltZxDOcZzIJQZiON1l+CZx0KOsEhBsiaS28z5XafcmYmaTz8Bi4CqSWwLZUuSBywdP42cJBUUU8eWcOlj1Mbixg6yc3261sz2n0/6fu9ccxasRQ/0tM5dfuw659Sxlzxy6LH5GCRjFE5C2bucRryxeBdmShbZt/i+64QHhS664MPkTmGdsS/5gVGgb1gjG0+JQyc5yuH+MjX8x30CVi6Ulra7OQ2SP7ivP+Q/U1L7ONtwFkQRQbFj/+MYL/Oz6JfwOi22LVpNNjWZMylOV8VjrdeMJVLrP4VKuRNP67WQbW5VguoBFaBHIsmh8rwwnE
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2026 06:53:51.1776
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f465732f-12d3-4b8c-07c7-08dea03be96d
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	BL02EPF0002992B.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB5205
+In-Reply-To: <20260324184327.GX11121@denix.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 22 Apr 2026 06:54:00 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19864
+ <meta-ti@lists.yoctoproject.org>; Wed, 22 Apr 2026 10:32:28 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19865
 
-On 22/04/26 11:52 am, Yogesh Hegde via lists.yoctoproject.org wrote:
-> The am62lxx-evm board only has ttyS0 available. The k3 default
-> SERIAL_CONSOLES inherited includes ttyS2, which causes
-> systemd to wait indefinitely for a console that never appears,
-> significantly increasing boot time and degrading user experience.
+On Tue, Mar 24, 2026 at 02:43:27PM -0400, Denys Dmytriyenko wrote:
+> On Tue, Mar 24, 2026 at 01:18:32PM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
+> > 
+> > 
+> > On 3/24/2026 11:44 AM, Denys Dmytriyenko wrote:
+> > >On Tue, Mar 24, 2026 at 11:20:04AM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
+> > >>oe-core has bumped the version to 15.0.0 [1].
+> > >
+> > >
+> > >>We need to adjust the bbappend version to % to better match future version
+> > >>changes.
+> > >
+> > >You shouldn't be doing this rename.
+> > >
+> > >
+> > >>Additionally, the patch needs to be updated to match the weston code
+> > >>changes.
+> > >
+> > >The bbappend is version-specific on purpose exactly due to the fact that the
+> > >patch won't apply against different versions - it has to be massaged every
+> > >time there's a major version bump, we've done it many times before.
+> > 
+> > But... if the patch won't apply then the build will fail.  But it
+> > fails in a manner that is more obvious then just an upfront error
+> > about the bbappend not applying to a recipe.
+> > 
+> > Either way, with the new bbappend logic they put in, the build will
+> > not go through.  So what does it really matter if the bbappend if
+> > version specific or not?
 > 
-> Override SERIAL_CONSOLES to specify only ttyS0, allowing the boot
-> process to proceed normally without waiting for unavailable consoles.
+> Yes, the build will fail in both cases now.
 > 
-> Signed-off-by: Yogesh Hegde <y-hegde@ti.com>
-
-Assuming this is only an am62lxx-evm only constraint and not at a SoC 
-level, this override in machine conf looks good to me.
-
-Reviewed-by: Hari Prasath Gujulan Elango <gehariprasath@ti.com>
-
-
-> ---
+> I guess from my perspective, getting a patch failing to apply all of a sudden 
+> is less clear indication that a major version update just happened upstream. 
+> Versus an error message saying no recipe is available for this versioned 
+> bbappend. Moreover, do_patch() error happens much further down the build 
+> process, vs. a dangling bbappend error comes very early during parsing...
 > 
-> Boot time is increased from 33s to 2m18s.
-> Boot time is measured from power on to TI LVGL demo
-> running on HDMI Display.
+> On the other hand, with your way, if the patch happens to apply cleanly to the 
+> next major version, no intervention will be required.
 > 
-> Logs:
-> 
-> root@am62lxx-evm:~# systemd-analyze critical-chain ti-lvgl-demo.service
-> The time when unit became active or started is printed after the "@" character.
-> The time the unit took to start is printed after the "+" character.
-> ti-lvgl-demo.service @1min 32.588s
-> `-multi-user.target @1min 32.577s
->    `-getty.target @1min 32.575s
->      `-serial-getty@ttyS0.service @13.002s
->        `-systemd-user-sessions.service @10.847s +660ms
->          `-network.target @10.582s
->            `-systemd-networkd.service @8.748s +1.799s
->              `-network-pre.target @8.735s
->                `-iptables.service @7.477s +920ms
->                  `-basic.target @7.363s
->                    `-dbus-broker.service @6.661s +466ms
->                      `-dbus.socket @6.310s +434us
->                        `-sysinit.target @6.263s
->                          `-systemd-vconsole-setup.service @18.198s +391ms
->                            `-systemd-journald.socket @2.781s +335us
->                              `-system.slice @1.282s
->                                `--.slice @1.282s
-> 
->  From the time analysis log, `getty.target` takes 1min 32 secs to bootup due to
-> serial-getty@ttyS2.service failed. This service fails because there is no
-> hardware associated with ttyS2.
-> 
-> ---
->   meta-ti-bsp/conf/machine/am62lxx-evm.conf | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/meta-ti-bsp/conf/machine/am62lxx-evm.conf b/meta-ti-bsp/conf/machine/am62lxx-evm.conf
-> index 677d6955..edfb4057 100644
-> --- a/meta-ti-bsp/conf/machine/am62lxx-evm.conf
-> +++ b/meta-ti-bsp/conf/machine/am62lxx-evm.conf
-> @@ -4,6 +4,8 @@
->   
->   require conf/machine/include/am62lxx.inc
->   
-> +SERIAL_CONSOLES = "115200;ttyS0"
-> +
->   IMAGE_FSTYPES += "ubifs ubi"
->   
->   MKUBIFS_ARGS ?= "-F -m 4096 -e 258048 -c 12000"
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#19862): https://lists.yoctoproject.org/g/meta-ti/message/19862
-> Mute This Topic: https://lists.yoctoproject.org/mt/118950880/10119719
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [gehariprasath@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+> So, pros and cons for both ways - I'll be fine with either...
 > 
 
+Hi Ryan,
+Hi Denys,
+
+We have our own weston_9.0.0.bb recipe in a layer that is used alongside
+meta-ti. Because of this rename, the bbappend from meta-ti started to
+apply onto this recipe as well, and of course the patch is not
+compatible with that version of weston.
+
+Probably we should not be keeping such an old version around, but while
+I initially also thought that it is just a choice of which error, this
+situation shows that there is a real reason to keep the bbappend version
+specific. It's not just about getting an error during parsing vs during
+patching (which personally I do prefer) but also about not applying to
+the wrong version where the patch might be irrelevant. Please let me
+know if I misunderstood the situation here.
+
+Thanks and kind regards,
+Ernest
+ 
 
