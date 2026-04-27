@@ -1,112 +1,197 @@
-Return-Path: <fra.schnyder@gmail.com>
+Return-Path: <prc@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E2212FF8860
-	for <webhook@archiver.kernel.org>; Mon, 27 Apr 2026 16:25:00 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.71.1777307092533599459
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67636FF8860
+	for <webhook@archiver.kernel.org>; Mon, 27 Apr 2026 16:35:31 +0000 (UTC)
+Received: from BN8PR05CU002.outbound.protection.outlook.com (BN8PR05CU002.outbound.protection.outlook.com [52.101.57.57])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.285.1777307728017990867
  for <meta-ti@lists.yoctoproject.org>;
- Mon, 27 Apr 2026 09:24:52 -0700
+ Mon, 27 Apr 2026 09:35:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=eIqHw1Q5;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: fra.schnyder@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-488b0046078so95651715e9.1
-        for <meta-ti@lists.yoctoproject.org>; Mon, 27 Apr 2026 09:24:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777307091; x=1777911891; darn=lists.yoctoproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=sr/2dUgH4TaQVOxNt5LgmdgzwpX35PiqNHahYfkoMWQ=;
-        b=eIqHw1Q50ugX3VmKIima1nudHIhyQY64luNaZQ0T9wxtVqmTTpyhGpofBy7ANfdeyW
-         Arlcxk368BYlyac/Z9Y/uFHAZ27XqMUPvks0yqoDq/Nb5/D59Z/mpqRcYcrhZfLGHCoC
-         LuSOMR5gVdpHYFr7JGCnKSRpAAZxi+ZKA0E7HHSlua9H4xzOVI0Y6nmoDDrf17xVZD4z
-         d4All3w7u/fUc3I6Yt5gav5nrmTwfzOJLjeZR/MfpMjQBp9bkR5YAtxaJQMC3WGfDzVv
-         +M2bVkEcW6TUQS9JUl+vgF3KAoa3DUN75P+knGeFH3EWvH77ednP8CRac4i3WGpnYctN
-         lFlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777307091; x=1777911891;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=sr/2dUgH4TaQVOxNt5LgmdgzwpX35PiqNHahYfkoMWQ=;
-        b=LebjY+21T6FCbkQqy2icqZ59ZAKhgQMyPYZGRQGqKPh85l9Krrnjd3awxVNvfvMQQE
-         9xrnzVEHCWrz0Jc3Bl9/qhKidZwdaW/UH4nUa3a0grvUWEreEWlUWJT+zM4P+HIrtBM5
-         dDWtRNNSIoYlSs0fgQcqNZ0Wev3Q4Z65fQRWaux9nvFgXYzG4F3LdkqZWTAUxFoe5CwO
-         RKplIshC/vIHW/MzcJwnhge0yFHRLyRo7SbNhdfT48CUwJbchi41AXbWMK4pGyUb6mKB
-         UA8Py3WQpcNcq8o4tgyh98isXkTrt7GzAcuWGYnYJId0/lX0ZkOOTn/FP9JsarG+kx6S
-         Yarg==
-X-Gm-Message-State: AOJu0Yz7qo1KTo2W2omPU/ygjpKVFm03TE5RttP2IpgG3sHSqzoSSmmB
-	fzzsiSgVc0uAb+lXzbb/lruzzFz615C5SIaSCTlJBjtTxtKAcCjcpvg/DtM7D0g0
-X-Gm-Gg: AeBDiesnmMhDYJ3hZ33k0SA3gVg3b44RNLFvdrtjH1LGasUCEJkiQpfPRDGXdhK30LV
-	FL0I6g8K0qodcJTtzWvGb2pIW4drSKQzofV440zHZrpJzpi2whtq+ch9g1c0MKdDG/I+hwjjC33
-	qeWmeCxgFlr4NnEJ5edCIrfdJNsDNQst2lAoHzhbXEWV2Ef9dHeWsS7q/XDnWzvbi35JDHFj0c6
-	iyffPu28P27HhXZR3JhGJDuY+X/n8quHOisTKt79zmj1ua1ifxfPC9urLs3ZBqt/UkGoKCPpK53
-	v//3Ljr7Vb/j0Jfv6JCsp7y88SIKMcgy7PFB/+pFB3W03Xrafa32O8v4+m6850nl64J93bCV5+S
-	d5JMEW0H+l7BKUDCZWyMZlYRT6bZv6PDTyPZbbSbZij0qCug8HOkpk0KUIqF7oP1iJDhzOWOjzG
-	qtkluRlBmbfVzUv/JANKdB6NLkf35xYw+3qdm4pESBBOtpv+af2UDPfZVs1L/hB30TobWdBQq24
-	5LUrsDBTcY5rZC7UtbyEDDy3J5Gi+MF6k1nr28C+MBHVRBFJFc/n1YXQAr0PXa5/CB++7V9iNOq
-	JjmgiOU9aySPfGzlFpedM2yrVd3PhY+idhQ6BQ==
-X-Received: by 2002:a05:600d:8:b0:48a:5339:ef0e with SMTP id 5b1f17b1804b1-48a76f4b36cmr1319895e9.3.1777307090574;
-        Mon, 27 Apr 2026 09:24:50 -0700 (PDT)
-Received: from franzs-nb.clients.bit.guest.onway.cloud (mob-194-230-144-174.cgn.sunrise.net. [194.230.144.174])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488fb78d1bcsm353532095e9.5.2026.04.27.09.24.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Apr 2026 09:24:50 -0700 (PDT)
-From: Franz Schnyder <fra.schnyder@gmail.com>
-To: meta-ti@lists.yoctoproject.org
-Cc: Franz Schnyder <franz.schnyder@toradex.com>,
-	Ryan Eatmon <reatmon@ti.com>,
-	Francesco Dolcini <francesco@dolcini.it>
-Subject: [meta-ti][master][PATCH v1] conf: machine: Move ti-eth-fw-j784s4 to AM69-SK conf
-Date: Mon, 27 Apr 2026 18:23:46 +0200
-Message-ID: <20260427162430.24979-1-fra.schnyder@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=WMN8Fzxu;
+ spf=pass (domain: list.ti.com, ip: 52.101.57.57, mailfrom: prc@list.ti.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mH2JbCFd67k26c/yB31ymjZ0zjUz7scDAEGaFTOb9lP9ECUAYSjEOv7l8sk9Iud682BrVWm7x19A3sqxw2JAzenCJkskg9ojS0DwV5S0tfotux1OokIPySmgSVG3xkHcqBuCB8SXVc20LDTupp8vJo/ptjbouncnb0F2xPp6ux8lkw/yfiiu1FAbC3eLDHSsfaVuWL1ih9BqZOm7Uz1HTjifMrVv7WmtFtRjciwL/fcfR5SWdLD2A2cjfRJIFgHXQBp1D7RFmIO4KT7kmK1Bt7HNskOwoJkRX+SU2ysKxZXwKUqP7FtRNEZuKpg8ZzCinLFbNebDpl3QCp3dmYfINQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=q1/zhgnDbbqTHswhXUuxvF89zvKdO/wn29qcJVtkkL4=;
+ b=oMGJs9kBTIg5lrkFbNs07acJHzMMmyeQ1vzNWtJWp62qDYj2CySPa9urQu5kZ2zIrLfcq7kzTC0U9GrMXtQGJbOBhNWfMJBOaYQuJOpHuoO2M3rXhQRakA7wvCaRZl9E3ibec8L6FnlIpK0VuOdBdMy3nx9T2UwdODGOOcUHhgjZbOZ7d9yH9OGTjd1GhSwFb0o722lL5cW9P/gjGDFnFQbBfmAZyWOhWOWLwx+GnYr2YazBlozF7T1JUuA51FBZeP6TNGGK2sVY9LRY90tfGB0BHnGgfxxyrTMCfrLTlAiHqZgOSvfWEpEg5A9k2a+jN/Kq65aqtl+r0L9SSLhKow==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=toradex.com smtp.mailfrom=list.ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none
+ header.from=list.ti.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=q1/zhgnDbbqTHswhXUuxvF89zvKdO/wn29qcJVtkkL4=;
+ b=WMN8FzxuPv4fRfqMlHoPPd9zxWcZ/NJvbw3vesM68I5SvEuTVilAo2oJOYc1VvO+3N12XaoZLNUbpsTHmhGnMYQ9PkYrPIFP6gVuqBs9lB5+koZgEozIXdCHwnDHKwgqXXwqIbPwSaVGQPiwoUE1/Y5sAgx0BYh/OqKLf6ztg99sBlvX2zU27dE4xdQHka7KFQ86rTqwW0fdJxwjcmcF1XjJq24t5jk/Nrm+/WNJ3RnRjPV8TfjQ3Af7PHiRH8uZnUFiInxNXWg0wlRNWh3iBFZHvDSGorVd206UZi9kdrpyaWW8w36VpY5TedsxZ575mcIbLTbT1bEb6fveN0itrQ==
+Received: from DM6PR02CA0129.namprd02.prod.outlook.com (2603:10b6:5:1b4::31)
+ by BL3PR10MB6260.namprd10.prod.outlook.com (2603:10b6:208:38f::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Mon, 27 Apr
+ 2026 16:35:24 +0000
+Received: from DS3PEPF000099E2.namprd04.prod.outlook.com
+ (2603:10b6:5:1b4:cafe::eb) by DM6PR02CA0129.outlook.office365.com
+ (2603:10b6:5:1b4::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.26 via Frontend Transport; Mon,
+ 27 Apr 2026 16:35:24 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=list.ti.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=list.ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ DS3PEPF000099E2.mail.protection.outlook.com (10.167.17.201) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9846.18 via Frontend Transport; Mon, 27 Apr 2026 16:35:23 +0000
+Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 27 Apr
+ 2026 11:35:22 -0500
+Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 27 Apr
+ 2026 11:35:21 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE200.ent.ti.com
+ (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 27 Apr 2026 11:35:21 -0500
+Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63RGZLma3664154;
+	Mon, 27 Apr 2026 11:35:21 -0500
+Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
+	id C62652A57; Mon, 27 Apr 2026 11:35:21 -0500 (CDT)
+From: PRC Automation <prc@list.ti.com>
+To: Franz Schnyder <fra.schnyder@gmail.com>
+CC: <meta-ti@lists.yoctoproject.org>, Franz Schnyder
+	<franz.schnyder@toradex.com>, Ryan Eatmon <reatmon@ti.com>, Francesco Dolcini
+	<francesco@dolcini.it>
+Subject: Re: [meta-ti][master][PATCH v1] conf: machine: Move ti-eth-fw-j784s4 to AM69-SK conf
+Date: Mon, 27 Apr 2026 11:35:21 -0500
+Message-ID: <20260427163521.3751099-1-prc@list.ti.com>
+X-Mailer: git-send-email 2.43.5
+In-Reply-To: <20260427162430.24979-1-fra.schnyder@gmail.com>
+References: <20260427162430.24979-1-fra.schnyder@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099E2:EE_|BL3PR10MB6260:EE_
+X-MS-Office365-Filtering-Correlation-Id: c5922b4d-3b98-4357-58a2-08dea47afaae
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|36860700016|376014|1800799024|82310400026|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: 
+	htKH8+u1PgWZJpXxA+oUj91sgY5P+zPkjXdWzLjH4Y+njilbWS7pGBKGa0T00zAKwp1jm09Be1RnjugtLDn4pqsoEZbJPkH3O4+epCBT1weDtXQxlVcYJkZjFaEYSTmX58HLbJwqEz3D7u6hvfWDXQW8z5ONDSpBf4psfrSXWjq5QgAMOmr1YieVcIHhBBdocnZpg3C/xAH7tvn7FuZqi1bV4AeYy3M+dAJgY8jGayEKLHx6/sRx0T55gW0sKgBgwgGsTd3BkzWZ26Eej6FZK1hDGwllVCUzy3TXD5xQnbTnJOGygi2Ws5pLaXDwaniMkTEfUWVYy4ZPgU08mpxeMmg+neVqvtxvbNfSmHZ84B1L7g6egNKQiB8brz0n7sM20KakxFupaFtfpziRj409a/a94A6BNFMneZRoIne0vw7EbGxLus3l51yogbklL5PD+G/m+69x1yJgBUfkIbGjwzGinJkcVQlWLdoj4ciLx9BGZEwUSA6U8OPqXFv1Dm0UexP9ZhGVjpJS9pSuTFT55I+RyG0b6SwDO99OaGD0pD0+7lIPQ0xe2x0KKru5Iyfg0NW+082C6bCJ0z1qmCfFEYWfshyDVrn6EkCAeyLOrncvgb7oRjKr5kNuTTvIC0pB9HddO8LcMISOMS8unYvuGNlxbpj1UXAdsfszWzzUnIYeabybkSmXtKGxbAcjz6ES4PmIUD8IRxr1TLLW55DREOUys4YJoh74474otIIT+Bc=
+X-Forefront-Antispam-Report: 
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	63FNHWP8bYmxoHOB7LD6b2fIHZvm8Tjk9443QSexHuTxxdSTWKKrDuMoOTrqNcsqeaTRIIhSnwfF09Vl/MZ7W7ew28ap/mZ7Jv6D/3+5b3sHjFyQ8uOLxCkd1vdsGsTvv+KlHbLkovRLLCjNM6KXXkNYFgDnetS/P92jy/NdA9QffC6KooZyxy37Tecyt+L/CQl16i41eqgBhWMMtOEzbYywNjtiE+MFBcl6i5YhV8xz1cAVSG00o5GDn0stkn3OxB0RJ1pjo9BBs3HfBrYl+f+W2Rdnn1omox2151IZbz46+1E2QuJ4B/qCyAI9eCyJ3khGSIHYP5HqxSBuwPJEnCj2jcHv6PmeWKJnTI4HoU5fjskcl2h/ZiN0DlBiYbCFk9dxFddsknU5Mfs5e4qmTR3eDrCarX8nkEEddBeXbecPmb97NhrilN+slNwd8ES7
+X-OriginatorOrg: list.ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Apr 2026 16:35:23.0879
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c5922b4d-3b98-4357-58a2-08dea47afaae
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DS3PEPF000099E2.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR10MB6260
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Mon, 27 Apr 2026 16:25:00 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19877
+ <meta-ti@lists.yoctoproject.org>; Mon, 27 Apr 2026 16:35:31 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19878
 
+meta-ti / na / 20260427162430.24979-1-fra.schnyder
+
+PRC Results: PASS
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  check-yocto-patches: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+Patches
+----------------------------------------
+WARN - [meta-ti][master][PATCH v1] conf: machine: Move ti-eth-fw-j784s4 to =
+AM69-SK conf
+    WARN: Commit message should not include directory path to recipe: conf:=
+ machine: Move ti-eth-fw-j784s4 to AM69-SK conf.
+              conf (COMMIT-MESSAGE-3)
+        patch
+   =20
+    For details on the above errors/warnings visit: https://lists.yoctoproj=
+ect.org/g/meta-ti/wiki/40887
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  apply-yocto-patch: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+master
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Summary:
+- Patch Series: [meta-ti][master][PATCH v1] conf: machine: Move ti-eth-fw-j=
+784s4 to AM69-SK conf
+- Submitter: From: Franz Schnyder <fra.schnyder@gmail.com>
 From: Franz Schnyder <franz.schnyder@toradex.com>
+- Date: Date: Mon, 27 Apr 2026 18:23:46 +0200
+- Num Patches: 1
+- Mailing List (public inbox) Commit SHA: 630c21806e347fdb92ef43f4a7e2fba23=
+8dde30f
 
-The board specific firmware is added in the generic AM69 SoC include
-instead of the AM69-SK board configuration. This follows the changes
-already made for the J784s4 SoC and EVM board in
-commit 27615406 ("conf: machine: j784s4: Move ti-eth-fw-j784s4 to EVM conf")
+Applied to:
+- Repository: lcpd-prc-meta-ti
+- Base Branch: master-wip
+- Commit Author: Yogesh Hegde <y-hegde@ti.com>
+- Commit Subject: am62lxx: Override serial console to ttyS0 only
+- Commit SHA: 9596245b1d9c904da596b9ae553c7ed3c132620d
 
-Move the machine-essential recommend from the SoC include
-to the AM69-SK configuration.
+Patches
+----------------------------------------
+All patches applied
 
-Signed-off-by: Franz Schnyder <franz.schnyder@toradex.com>
----
- meta-ti-bsp/conf/machine/am69-sk.conf     | 2 ++
- meta-ti-bsp/conf/machine/include/am69.inc | 2 +-
- 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-ti-bsp/conf/machine/am69-sk.conf b/meta-ti-bsp/conf/machine/am69-sk.conf
-index 9531cc27..3785dca6 100644
---- a/meta-ti-bsp/conf/machine/am69-sk.conf
-+++ b/meta-ti-bsp/conf/machine/am69-sk.conf
-@@ -22,3 +22,5 @@ KERNEL_DEVICETREE = " \
- "
- 
- UBOOT_MACHINE = "am69_sk_a72_defconfig"
-+
-+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "ti-eth-fw-j784s4"
-diff --git a/meta-ti-bsp/conf/machine/include/am69.inc b/meta-ti-bsp/conf/machine/include/am69.inc
-index 7956e355..aaed2f61 100644
---- a/meta-ti-bsp/conf/machine/include/am69.inc
-+++ b/meta-ti-bsp/conf/machine/include/am69.inc
-@@ -12,4 +12,4 @@ TFA_BOARD = "j784s4"
- 
- OPTEEMACHINE = "k3-j784s4"
- 
--MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "cadence-mhdp-fw cnm-wave-fw ti-eth-fw-j784s4"
-+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "cadence-mhdp-fw cnm-wave-fw"
--- 
-2.43.0
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  check-yocto-repo: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+master
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+PASS
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  yocto-check-layers: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+master - PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+All checks passed
+
+
 
 
