@@ -2,40 +2,40 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67EEBCD13D2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 833A5CD13D3
 	for <webhook@archiver.kernel.org>; Wed, 29 Apr 2026 16:44:46 +0000 (UTC)
-Received: from BN1PR04CU002.outbound.protection.outlook.com (BN1PR04CU002.outbound.protection.outlook.com [52.101.56.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.832.1777481082467453221
+Received: from BL2PR02CU003.outbound.protection.outlook.com (BL2PR02CU003.outbound.protection.outlook.com [52.101.52.15])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.829.1777481081210335153
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 29 Apr 2026 09:44:42 -0700
+ Wed, 29 Apr 2026 09:44:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=r1qd3z01;
- spf=pass (domain: ti.com, ip: 52.101.56.50, mailfrom: reatmon@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=LVQJmoTE;
+ spf=pass (domain: ti.com, ip: 52.101.52.15, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WLwgMr75b1XSFKZshMOU4XJjTYFq6oiYTtBSwbRSzaeQ2pEAGHviji7G9mztokn/fs47q2MLU5ZPRp+0DVnAqokLDVs/L9ivOvciSbRqFxTMA1GETSZW7039S0bWurrzxfEofzPlxeww+5kvKQXBRLPwnuUMFD2C1hjOrAAFth1mokA5gqrCMWFHIRoforWtVyfMCQPUxeOs6M1HtqrRz5buZLaAEv3UM5SNqS7leCr0xbBS7a3qgmNxU/VB78IbYgFr1r80yhxtUfUJhwfe6IrNgHNjGHYcaldnxHHeLgbxSH82i3UHMJwefSvbJuXGP6wzYlXRI1qfyJTcoDyyIg==
+ b=wkk3Ng5yn2bit3CUusKP0LxFroUNUQJHTUVmH93PDrprHrTlDAlj4W6kM43Njnrul9yOuoSGtuxlKHdO5KvILeU4Dc/lfosUK+7naphMhKVtXQEHUArRtmkeCQVXhWy64Dhh++TpKtOArzPlpIVW9cKg/pORc1KvYqFroLgVLm1xBVukZGuWeLsvHYOWxmAtdMyVIIsOGhYO36kAI2sCHDDO2aIcONTlhHC1yn3c95AW2Q/dqjPzM9ZCrwngZ3uoCoQY2ilBY5cXHQSSHxB3PeL/n7tXcI359KfVAtLdEKRY2A03iJ9ucQbtc6fbv9AOd/amIKGxepZjc69AK1yeug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XILUQQg2iA9wini/jeLlsnj73KHWaYohi8Jc5IZ4+pw=;
- b=iQBd6+OE6p2PL3nDW8fvlGTcRvJ1n6Ew5mGWOLCSpoddLv1OuN9g1T2Pq0i6tTaOwLcShWRWKfu7DJP5uU8BaxQKD5KwdHsoN9J56DYI2dOyji6vD5WhT4m/LLPKnMlLuhw51cKuNhusOAGNkioxaXwEwE/OvAX6BD/rCBFn7NYYvGKiEIGIu5z8hAa9DqulDlub0xHpSTbtv4hQQkqfMY0Cec5IS17F21Hg1X3eT1DJ6IaFfVH7LZM0vkTqsabMtksvJGERHu/soQ/MDGHL7QsN6t+Dj7AwOHvoUslCuFIewUgjWeQY2YSHnDs/tJl9XEdkgOv+UDsvSMED46Iy6A==
+ bh=I2kXXxM1+u7a/lVFRHs/eY+GBotaZj1av2J3s7SBmfA=;
+ b=DEsQuop5IuHUV+0zQjfP8ggdauztCZvCsq5SEmKgTZbsZrVm/+V4tQz7/uE7Ez+QXtlpxkDQUAPlE8A1DnzetecN+hjZbAGenpq00s/v2sVTYPVyjw1E6lKI6VntwL241B+2Vj3b8l194ieQJijbm3ezlKmCw2/g1IBjMiy+bFOvs4GyG4gBoh2uZYK4xwYCj5DJLeGnUhKpAjaWvsunZ3qVXg+uG8P6cWeYnQwieqLEIVrcm8w+Rekq7zMl0vyd4rKOuJk2qCm56LvAmOsXIXnZfP+PMQMZpl7Tt0MzY7uIqzM/GUAy/FjaZQpwymI8jRAnvTtS/5YdYdssX4h5PQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XILUQQg2iA9wini/jeLlsnj73KHWaYohi8Jc5IZ4+pw=;
- b=r1qd3z01d4pcj8gOGOZA857PKCS7pk+85K7xsdftlqt/aT0GosNAG9ZMcAgEdm7OKk295wmMJ6XG5jG4lwVDwEOJVqpYL5+ktCuHloUtgj1S8g2wK/toDqj+A+xvL1Fl8YFW6Wesx0FaCItbEkBgUX/7WpUKuHHXXdm4EXanel4=
-Received: from BN9PR03CA0741.namprd03.prod.outlook.com (2603:10b6:408:110::26)
- by MN6PR10MB7424.namprd10.prod.outlook.com (2603:10b6:208:473::13) with
+ bh=I2kXXxM1+u7a/lVFRHs/eY+GBotaZj1av2J3s7SBmfA=;
+ b=LVQJmoTEMjrZOcRg6JaXb5Xa+TizFGu71BMzSPDdKbua0R9ei6XB/xtjCvMFGNjSmGEKaH+qI0O+dAF4GnzvzA+jBnPJgxxVlu+9IiVJwdpv28evRzTPZUvAnwdK1htWP3sMj3q6Or1+QX2ob46us30volbBwmAFQfKOQo9M+fs=
+Received: from BN9PR03CA0734.namprd03.prod.outlook.com (2603:10b6:408:110::19)
+ by SA1PR10MB7634.namprd10.prod.outlook.com (2603:10b6:806:38a::17) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.19; Wed, 29 Apr
- 2026 16:44:34 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Wed, 29 Apr
+ 2026 16:44:35 +0000
 Received: from BN2PEPF000044AB.namprd04.prod.outlook.com
- (2603:10b6:408:110:cafe::c7) by BN9PR03CA0741.outlook.office365.com
- (2603:10b6:408:110::26) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:408:110:cafe::74) by BN9PR03CA0734.outlook.office365.com
+ (2603:10b6:408:110::19) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.28 via Frontend Transport; Wed,
- 29 Apr 2026 16:44:34 +0000
+ 29 Apr 2026 16:44:35 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
@@ -46,31 +46,31 @@ Received: from lewvzet201.ext.ti.com (198.47.23.195) by
  BN2PEPF000044AB.mail.protection.outlook.com (10.167.243.106) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
  15.20.9846.18 via Frontend Transport; Wed, 29 Apr 2026 16:44:34 +0000
-Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet201.ext.ti.com
+Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet201.ext.ti.com
  (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
  2026 11:44:32 -0500
-Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE214.ent.ti.com
+ (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
  2026 11:44:32 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Wed, 29 Apr 2026 11:44:32 -0500
 Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TGiWNw3719622;
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TGiWPx3487240;
 	Wed, 29 Apr 2026 11:44:32 -0500
 Received: from reatmon by grumpy with local (Exim 4.97)
 	(envelope-from <reatmon@ti.com>)
-	id 1wI81Y-00000006oNy-35to;
+	id 1wI81Y-00000006oNa-2e63;
 	Wed, 29 Apr 2026 11:44:32 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
 	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH v3 07/12] meta-ti-test: Import the recipes-graphics recipes
-Date: Wed, 29 Apr 2026 11:44:27 -0500
-Message-ID: <20260429164432.1623594-7-reatmon@ti.com>
+Subject: [meta-ti][master][PATCH v3 02/12] meta-ti-test: Import the recipes-benchmark recipes
+Date: Wed, 29 Apr 2026 11:44:22 -0500
+Message-ID: <20260429164432.1623594-2-reatmon@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260429164432.1623594-1-reatmon@ti.com>
 References: <20260429164432.1623594-1-reatmon@ti.com>
@@ -80,313 +80,429 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044AB:EE_|MN6PR10MB7424:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0db9939a-17a3-4cd7-c402-08dea60e981d
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044AB:EE_|SA1PR10MB7634:EE_
+X-MS-Office365-Filtering-Correlation-Id: 45713e22-fad2-4eb6-f149-08dea60e9877
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|376014|1800799024|82310400026|56012099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|376014|36860700016|1800799024|82310400026|13003099007|22082099003|18002099003|56012099003;
 X-Microsoft-Antispam-Message-Info: 
-	I+bRFHPnL5S3I7a7m/2APkHGtrYa4dOkmIMPvL8K28LtUDdJaOh6aHG43zF56/OjATmpOci2b4vFhHMID4kjKVpNMNtTOXKeBRzE1UprDPHgbbxY6P4Dijtf01bC0jUC36zbfUtJs25Q05K1YqaYDSx7ldu+sDdtKWFMOCQXLPRW3OQJzzmbtBULvqzZKbZw2ZUSQvaYNzIedwVj6h7648rTLYK3TZ84dYc8oni6RxMv/eZwT4qqD5M/6HQLW2fIC8/NsqBulSO5JZEkG4xJaNPkLC8bwHLHLq8cSAsp8dpI/wY6yW3w1fmm6+IP34gNP70hs8r8oTSV/P86hTH6//S/5tMkZ6x3fZj/qgBktdvxyL+Hl2+b8lKu4b+L2XjK6+rpt9E/ushsFmCXDSOAyvnYkc/p1OWA2gRMdcZ3vRUJ/kHqLQUfZ5jJGjtizTy7Dr9KDR0mVYujrPCOUljmxDSRh8X4QoNGJNcaGYA8tvwwXHZDyqWHC6uv4GiXQjVQK2xQoBzlueNUcm/i5cO3f5Q/MO5irHLzAxALGfji/NGDpQisOWPTyQWYXYpXtQhLkJbSjsUX70zl1eNw/BrTRgpxejKf0iWbLjRrxU8b/DS2i8LqDWWj4v0PqxCU8KjTFIesX40iAmm55Bxk9kzYElj/ys04vJOOLvw9A9eCzxMUVa+7HzCl4Vb4GjQHPmabjUm8ra56qjG8yo9mN95F2O7jFG/4ceMRp4qpiVrO9xk=
+	2A6+jQDXMKmHV4FRt3hHtqtEBdyUMMXg4U6Ij6/Gs0qNVhUTTohxAJpFa1nvXeTThS4oeOlHHL1RmtbafYwKrb4LjmHvcPSFZC/aGoZq1FCgiyTA3Ln/wvEKh8mXeRdKHjYMACAXck9r2/3dMzyyaOfv0djlTKYLhclGz6c5qkXCWEznakAc/moxqY999khnavGG9QEVG91HdfTSZ9JF0kxYQFBs3q7VvxDPOlKuUH5ssce4T+WoPzM3E8P4qI9hluQoGWDSutUS3WGzDdLfHpfR1UQhp20rLItvICvLFsVzdISl8m14U6KkmMCFMXPo/ilpduJ5pG7zzb8ie3zZ08uhBYnlNog78J45CTW2TsiKjI65thvuJtCyT/g5a2azOXxgrH1t3jJaCZMtAbhhp7Zz9kQ8ZZ6JBmCudg3L3Tzf8opLQUPmm1srXkZFSD2U6ViUbvgpkVja3FspBQFT3zZvRyVD+CLgG3gMwtFtOauj6wRum/FnSLrx3PcNdYxXt0+DlKzjluuGbzK1Sb7fyvT7Sys4JfzDsic8uFpdoZFRcIdvHTHN2UTf2MgYxFHRpkHjFe32CjfyaGAlcEP6aYQ7x4k7rdH9nMSapWWBXnVfVsvztzy6g4kGPwW0beyySTSTQNqrW3qZRQ5LvzyScw4KUfVKyViuRKtsVle5/fFZO4cjIX6LZey3YP0K0Ozy22uxALQRtZPudZnE/vhR+8kvDB73BTfYxG4YgDM6pBQ=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(13003099007)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	nXD9vd0uw8buL0mG3qHcLrzRANBaotkv4cDRmtGw4J40x6LiK1sQUJGlnQ1q4q7MDq+kq9rVVaYCZAtnJI+M1pdGI4p5h39ccPpAVPVLKTF3A7OYhLYh9anNs4/o8sY6g5wrHrBkPhqN4s6WUbUxxPTpI5CfBVxve2CM3sX6+1QaN4aoZPqSvhlEeMYk3QMGGsrnLDlbfA77LKl82VQ64ds1qtnvbZ98oyQZNueS3yRgGHHWoFli0hLeK+j9h0d8HYFAbJEgWSYNogdeXnESwRmU29wiGHwQA+Gtk9J5VDdJUVbsH+XaddeGsfA5IS8Yeup3YfTDHmi0di97yAFX4o9c4Fw/X3b/NzynjaX0GN5YynsgXbPQi2hOL2dJdNqXXK6LlrJE/XgxPLqdeFZe8yXrZev9PqD8zeQ4HC07xnQmd/RTI3ySDPSPkROMsfP7
+	hBVdN/6v3oTdVFQWscvJEMi4/nelpASAx1GolFJNpd5359QKViDcmh3bRDVMHyQ4MhTax052QSfyDgJuGKDx/nrtncpipAwhcTITv2SpAjMO4txd8hJFoi8EZ3rt+K2SSl/ded7zJgVtKHTSIbh+/PjfLU3ozOBb3YrcjNbLB0DvoWZBMqCVFv6Ms8ObiTpbLfOAJ7c9Mxzq6+Yd4sWQNAYIICj6XQUJmcUsJWM7MSPrwtGbxdi0cb3yejF6XShV8rsPBEBDfRhm1wi9uYzwa2y3qPMWnYCdJwYj1HLf2Y7zYwlpKJoGbSY4xJlTCfssSTOGRtcwyic3rz9AjzbzN5nrYh/QStFFe93ek9PPWhPKNEOroDN6gg9TEOJU1nJqGumk2bruaxcR+/D9SCf7WwMEKz0Z0pAwz7vVSJ8klEFgBDUhRtX0V9MbgEXtE0Oe
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 16:44:34.3667
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 16:44:34.9790
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0db9939a-17a3-4cd7-c402-08dea60e981d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45713e22-fad2-4eb6-f149-08dea60e9877
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
 	BN2PEPF000044AB.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR10MB7424
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB7634
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Wed, 29 Apr 2026 16:44:46 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19911
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19910
 
 We are moving the meta-arago-test layer to meta-ti-test.  This commit
-imports all of the recipes under recipes-graphics.
+imports all of the recipes under recipes-benchmark.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
 v3: No changes.
 v2: No changes.
 
- .../recipes-graphics/libsdl2/libsdl2-ti.inc   |   5 +
- .../libsdl2/libsdl2_%.bbappend                |   4 +
- .../offscreen-demo/offscreendemo_0.0.1.bb     |  16 +++
- .../recipes-graphics/piglit/piglit-ti.inc     |  32 +++++
- ...-add-and-use-TestPlaceholder-objects.patch | 128 ++++++++++++++++++
- .../recipes-graphics/piglit/piglit_%.bbappend |   4 +
- 6 files changed, 189 insertions(+)
- create mode 100644 meta-ti-test/recipes-graphics/libsdl2/libsdl2-ti.inc
- create mode 100644 meta-ti-test/recipes-graphics/libsdl2/libsdl2_%.bbappen=
-d
- create mode 100644 meta-ti-test/recipes-graphics/offscreen-demo/offscreend=
-emo_0.0.1.bb
- create mode 100644 meta-ti-test/recipes-graphics/piglit/piglit-ti.inc
- create mode 100644 meta-ti-test/recipes-graphics/piglit/piglit/0001-framew=
-ork-add-and-use-TestPlaceholder-objects.patch
- create mode 100644 meta-ti-test/recipes-graphics/piglit/piglit_%.bbappend
+ .../licenses/Stream_Benchmark_License         | 34 +++++++++++++
+ .../arm-benchmarks/arm-benchmarks_1.3.bb      | 23 +++++++++
+ .../arm-ddr-bandwidth/arm-ddr-bandwidth.bb    | 28 +++++++++++
+ .../coremark/coremark-ti.inc                  |  3 ++
+ ..._main-Remove-printing-compiler-flags.patch | 41 ++++++++++++++++
+ .../coremark/coremark_%.bbappend              |  4 ++
+ .../nbench-byte/nbench-byte-ti.inc            |  1 +
+ .../nbench-byte/nbench-byte_%.bbappend        |  4 ++
+ .../openssl-perf/openssl-perf.bb              | 49 +++++++++++++++++++
+ .../stream/stream_%.bbappend                  | 13 +++++
+ .../recipes-benchmark/stream/stream_5.10.bb   | 26 ++++++++++
+ 11 files changed, 226 insertions(+)
+ create mode 100644 meta-ti-test/licenses/Stream_Benchmark_License
+ create mode 100644 meta-ti-test/recipes-benchmark/arm-benchmarks/arm-bench=
+marks_1.3.bb
+ create mode 100644 meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-dd=
+r-bandwidth.bb
+ create mode 100644 meta-ti-test/recipes-benchmark/coremark/coremark-ti.inc
+ create mode 100644 meta-ti-test/recipes-benchmark/coremark/coremark/0001-c=
+ore_main-Remove-printing-compiler-flags.patch
+ create mode 100644 meta-ti-test/recipes-benchmark/coremark/coremark_%.bbap=
+pend
+ create mode 100644 meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-=
+ti.inc
+ create mode 100644 meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_=
+%.bbappend
+ create mode 100644 meta-ti-test/recipes-benchmark/openssl-perf/openssl-per=
+f.bb
+ create mode 100644 meta-ti-test/recipes-benchmark/stream/stream_%.bbappend
+ create mode 100644 meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
 
-diff --git a/meta-ti-test/recipes-graphics/libsdl2/libsdl2-ti.inc b/meta-ti=
--test/recipes-graphics/libsdl2/libsdl2-ti.inc
+diff --git a/meta-ti-test/licenses/Stream_Benchmark_License b/meta-ti-test/=
+licenses/Stream_Benchmark_License
 new file mode 100644
-index 00000000..33ff0632
+index 00000000..cf1c8e00
 --- /dev/null
-+++ b/meta-ti-test/recipes-graphics/libsdl2/libsdl2-ti.inc
-@@ -0,0 +1,5 @@
-+EXTRA_OECMAKE +=3D "-DSDL_TESTS=3DON \
-+                  -DSDL_INSTALL_TESTS=3DON \
-+                 "
-+PACKAGE_BEFORE_PN =3D "${PN}-tests"
-+FILES:${PN}-tests +=3D "${libexecdir} ${datadir}/installed-tests/SDL2"
-diff --git a/meta-ti-test/recipes-graphics/libsdl2/libsdl2_%.bbappend b/met=
-a-ti-test/recipes-graphics/libsdl2/libsdl2_%.bbappend
++++ b/meta-ti-test/licenses/Stream_Benchmark_License
+@@ -0,0 +1,34 @@
++*=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++*-----------------------------------------------------------------------
++* Copyright 1991-2003: John D. McCalpin
++*-----------------------------------------------------------------------
++* License:
++*  1. You are free to use this program and/or to redistribute
++*     this program.
++*  2. You are free to modify this program for your own use,
++*     including commercial use, subject to the publication
++*     restrictions in item 3.
++*  3. You are free to publish results obtained from running this
++*     program, or from works that you derive from this program,
++*     with the following limitations:
++*     3a. In order to be referred to as "STREAM benchmark results",
++*         published results must be in conformance to the STREAM
++*         Run Rules, (briefly reviewed below) published at
++*         http://www.cs.virginia.edu/stream/ref.html
++*         and incorporated herein by reference.
++*         As the copyright holder, John McCalpin retains the
++*         right to determine conformity with the Run Rules.
++*     3b. Results based on modified source code or on runs not in
++*         accordance with the STREAM Run Rules must be clearly
++*         labelled whenever they are published.  Examples of
++*         proper labelling include:
++*         "tuned STREAM benchmark results"=20
++*         "based on a variant of the STREAM benchmark code"
++*         Other comparable, clear and reasonable labelling is
++*         acceptable.
++*     3c. Submission of results to the STREAM benchmark web site
++*         is encouraged, but not required.
++*  4. Use of this program or creation of derived works based on this
++*     program constitutes acceptance of these licensing restrictions.
++*  5. Absolutely no warranty is expressed or implied.
++*-----------------------------------------------------------------------
+diff --git a/meta-ti-test/recipes-benchmark/arm-benchmarks/arm-benchmarks_1=
+.3.bb b/meta-ti-test/recipes-benchmark/arm-benchmarks/arm-benchmarks_1.3.bb
 new file mode 100644
-index 00000000..385aa801
+index 00000000..8cdd1a6f
 --- /dev/null
-+++ b/meta-ti-test/recipes-graphics/libsdl2/libsdl2_%.bbappend
-@@ -0,0 +1,4 @@
-+LIBSDL2_TI =3D ""
-+LIBSDL2_TI:ti-soc =3D "libsdl2-ti.inc"
-+
-+require ${LIBSDL2_TI}
-diff --git a/meta-ti-test/recipes-graphics/offscreen-demo/offscreendemo_0.0=
-.1.bb b/meta-ti-test/recipes-graphics/offscreen-demo/offscreendemo_0.0.1.bb
-new file mode 100644
-index 00000000..6dc0e526
---- /dev/null
-+++ b/meta-ti-test/recipes-graphics/offscreen-demo/offscreendemo_0.0.1.bb
-@@ -0,0 +1,16 @@
-+SUMMARY =3D "Lightweight Render Example"
-+DESCRIPTION =3D "Lightweight Render Example. Heavily inspired by Eduardo L=
-ima's gpu-playground, this attempts to act as the smallest demo of offscree=
-n rendering."
-+
-+HOMEPAGE =3D "https://github.com/TexasInstruments/graphics-tests.git"
-+
-+SRC_URI =3D "git://github.com/TexasInstruments/graphics-tests.git;protocol=
-=3Dhttps;branch=3Dmaster"
-+SRCREV =3D "eac40e0073cb5f81688aee890e0a67f99678a290"
-+
-+LICENSE =3D "CC0-1.0"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D65d3616852dbf7b1a6d4b53b0062603=
++++ b/meta-ti-test/recipes-benchmark/arm-benchmarks/arm-benchmarks_1.3.bb
+@@ -0,0 +1,23 @@
++SUMMARY =3D "ARM Benchmarks"
++HOMEPAGE =3D "https://gforge.ti.com/gf/project/am_benchmarks/"
++LICENSE =3D "BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7aefb5e1cffc7b6a3ef18b803f95792=
 2"
++SECTION =3D "system"
 +
-+DEPENDS +=3D "virtual/egl virtual/libgles2"
++PR =3D "r13"
 +
-+inherit pkgconfig meson features_check
++BRANCH ?=3D "master"
++SRCREV =3D "fefaf9bdd6f36ab0cebaab8dbf34e5beb50f471c"
 +
-+REQUIRED_DISTRO_FEATURES =3D "opengl"
-diff --git a/meta-ti-test/recipes-graphics/piglit/piglit-ti.inc b/meta-ti-t=
-est/recipes-graphics/piglit/piglit-ti.inc
-new file mode 100644
-index 00000000..707ef6a4
---- /dev/null
-+++ b/meta-ti-test/recipes-graphics/piglit/piglit-ti.inc
-@@ -0,0 +1,32 @@
-+# add a config to point piglit at the default install location for deqp te=
-sts
-+# if they are selected
++SRC_URI =3D "git://git.ti.com/git/apps/arm_benchmarks.git;protocol=3Dhttps=
+;branch=3D${BRANCH}"
 +
-+FILESEXTRAPATHS:prepend :=3D "${THISDIR}/piglit:"
-+
-+SRC_URI +=3D "file://0001-framework-add-and-use-TestPlaceholder-objects.pa=
-tch"
-+
-+PACKAGECONFIG[deqp-gles] =3D ",,,opengl-es-cts"
-+PACKAGECONFIG[deqp-vk] =3D ",,,vulkan-cts"
-+
-+do_install:append() {
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'deqp-gles', 'true', 'false',=
- d)}; then
-+        printf "%s\n" \
-+            "[deqp-egl]" \
-+            "bin=3D/usr/lib/opengl-es-cts/deqp-egl" \
-+            "[deqp-gles2]" \
-+            "bin=3D/usr/lib/opengl-es-cts/deqp-gles2" \
-+            "[deqp-gles3]" \
-+            "bin=3D/usr/lib/opengl-es-cts/deqp-gles3" \
-+            "[deqp-gles31]" \
-+            "bin=3D/usr/lib/opengl-es-cts/deqp-gles31" \
-+            >> ${D}/${libdir}/piglit/piglit.conf
-+    fi
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'deqp-vk', 'true', 'false', d=
-)}; then
-+        printf "%s\n" \
-+            "[deqp-vk]" \
-+            "bin=3D/usr/lib/vulkan-cts/deqp-vk" \
-+            "[deqp-vksc]" \
-+            "bin=3D/usr/lib/vulkan-cts/deqp-vksc" \
-+            >> ${D}/${libdir}/piglit/piglit.conf
-+    fi
++do_compile() {
++	export CROSS_COMPILE=3D${TARGET_PREFIX}
++	export CFLAGS=3D'${TARGET_CC_ARCH} -std=3Dgnu11'
++	# build the release version
++	oe_runmake release CC=3D"${CC}"
 +}
-diff --git a/meta-ti-test/recipes-graphics/piglit/piglit/0001-framework-add=
--and-use-TestPlaceholder-objects.patch b/meta-ti-test/recipes-graphics/pigl=
-it/piglit/0001-framework-add-and-use-TestPlaceholder-objects.patch
++do_install() {
++
++	oe_runmake DESTDIR=3D${D} install
++}
+diff --git a/meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-ddr-bandw=
+idth.bb b/meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-ddr-bandwidt=
+h.bb
 new file mode 100644
-index 00000000..26e0b21e
+index 00000000..29db78c3
 --- /dev/null
-+++ b/meta-ti-test/recipes-graphics/piglit/piglit/0001-framework-add-and-us=
-e-TestPlaceholder-objects.patch
-@@ -0,0 +1,128 @@
-+From 2803263ccf460ced705fd4da589e2f09e3ec89d7 Mon Sep 17 00:00:00 2001
-+From: Randolph Sapp <rs@ti.com>
-+Date: Wed, 13 Aug 2025 17:52:42 -0500
-+Subject: [PATCH] framework: add and use TestPlaceholder objects
++++ b/meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-ddr-bandwidth.bb
+@@ -0,0 +1,28 @@
++SUMMARY =3D "Benchmark for checking DDR bandwidth"
++HOMEPAGE =3D "https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/tre=
+e/arm_apps/arm_ddr_bandwidth/runLmDDRBandwidth.sh"
++LICENSE =3D "CC-BY-SA-3.0"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6e0ae7214f6c74c149cb25f373057fa=
+9"
 +
-+The actual Test classes are not that big, but with deqp-vk creating
-+around 2800 instances currently, we quickly consume around 3GB of ram
-+before beginning any tests. Given that a lot of these objects may not
-+even be used, we can reduce memory overhead by using a placeholder
-+namedtuple that is expanded to a full Test instance when requested from
-+the TestDict class. This cuts the initial memory usage back to 1.6 GB.
++PV =3D "1.0"
 +
-+This does add a small lookup penalty, but given the lookup penalty is
-+still smaller that the time it takes to create an instance of a Test, it
-+results in a net improvement for most subsets of deqp tests. Not to
-+mention this penalty can be split between threads, unlike previously
-+when it was occurring in the single-threadded profile creation step.
++SRC_URI =3D " \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/arm_app=
+s/arm_ddr_bandwidth/runLmDDRBandwidth.sh;name=3DrunLmDDRBandwidth \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/LICENSE=
+;name=3Dlicense \
++"
++SRC_URI[runLmDDRBandwidth.sha256sum] =3D "67997d721b351344d8788200a15bb364=
+0093045bc25f2b5307dd331ebd1556a3"
++SRC_URI[license.sha256sum] =3D "7febd1df714fa4b1e44fe0b0f73ceac7f9b9f97326=
+695a0cc7074bd6c8d263e3"
 +
-+The following data was collected using a subset of 3151 deqp-vk tests:
++S =3D "${UNPACKDIR}"
 +
-+Threads   Test Execution Time (s)   TestPlaceholder Execution Time (s)
-+-------   -----------------------   ----------------------------------
-+1         2613.93                   2599.95
-+8          413.31                    400.01
-+32         299.75                    286.73
++do_install() {
++    install -d ${D}${datadir}/matrix-gui-2.0/apps
 +
-+Upstream-Status: Submitted [https://gitlab.freedesktop.org/mesa/piglit/-/m=
-erge_requests/1032]
-+Signed-off-by: Randolph Sapp <rs@ti.com>
++    install -d ${D}${bindir}
++    install -m 0755 ${S}/runLmDDRBandwidth.sh ${D}${bindir}/runLmDDRBandwi=
+dth.sh
++}
++
++FILES:${PN} =3D " \
++    ${datadir}/matrix-gui-2.0/apps \
++    ${bindir}/runLmDDRBandwidth.sh \
++"
++
+diff --git a/meta-ti-test/recipes-benchmark/coremark/coremark-ti.inc b/meta=
+-ti-test/recipes-benchmark/coremark/coremark-ti.inc
+new file mode 100644
+index 00000000..9a1d9b89
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/coremark/coremark-ti.inc
+@@ -0,0 +1,3 @@
++FILESEXTRAPATHS:prepend :=3D "${THISDIR}/coremark:"
++
++SRC_URI +=3D "file://0001-core_main-Remove-printing-compiler-flags.patch"
+diff --git a/meta-ti-test/recipes-benchmark/coremark/coremark/0001-core_mai=
+n-Remove-printing-compiler-flags.patch b/meta-ti-test/recipes-benchmark/cor=
+emark/coremark/0001-core_main-Remove-printing-compiler-flags.patch
+new file mode 100644
+index 00000000..ef7c78b2
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/coremark/coremark/0001-core_main-Remov=
+e-printing-compiler-flags.patch
+@@ -0,0 +1,41 @@
++From 0af4e2298ccacc8afc0294b7a731f0e866155427 Mon Sep 17 00:00:00 2001
++From: Ryan Eatmon <reatmon@ti.com>
++Date: Mon, 1 Dec 2025 12:21:23 -0600
++Subject: [PATCH] core_main: Remove printing compiler flags
++
++Reproducible builds do not like including anything that references the
++build environment on the host machine.  This would include printing out
++the COMPILER_FLAGS macro.  Substitute it with "".
++
++Upstream-Status: Inappropriate [OE-Specific]
++
++Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 +---
-+ framework/profile.py   | 23 ++++++++++++++++++-----
-+ framework/test/base.py |  3 +++
-+ framework/test/deqp.py |  4 ++--
-+ 3 files changed, 23 insertions(+), 7 deletions(-)
++ core_main.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/framework/profile.py b/framework/profile.py
-+index 678e9d87c..969e0032e 100644
-+--- a/framework/profile.py
-++++ b/framework/profile.py
-+@@ -45,7 +45,7 @@ from framework import grouptools, exceptions, status
-+ from framework.dmesg import get_dmesg
-+ from framework.log import LogManager
-+ from framework.monitoring import Monitoring
-+-from framework.test.base import Test, DummyTest
-++from framework.test.base import Test, DummyTest, TestPlaceholder
-+ from framework.test.piglit_test import (
-+     PiglitCLTest, PiglitGLTest, ASMParserTest, BuiltInConstantsTest,
-+     CLProgramTester, VkRunnerTest, ROOT_DIR,
-+@@ -135,9 +135,9 @@ class TestDict(collections.abc.MutableMapping):
-+                 "TestDict keys must be strings, but was {}".format(type(k=
-ey)))
++diff --git a/core_main.c b/core_main.c
++index a4beeb6..f0ab87f 100644
++--- a/core_main.c
+++++ b/core_main.c
++@@ -380,7 +380,7 @@ for (i =3D 0; i < MULTITHREAD; i++)
++     ee_printf("Iterations       : %lu\n",
++               (long unsigned)default_num_contexts * results[0].iterations=
+);
++     ee_printf("Compiler version : %s\n", COMPILER_VERSION);
++-    ee_printf("Compiler flags   : %s\n", COMPILER_FLAGS);
+++    ee_printf("Compiler flags   : %s\n", ""); //Reproducible build fix: C=
+OMPILER_FLAGS);
++ #if (MULTITHREAD > 1)
++     ee_printf("Parallel %s : %d\n", PARALLEL_METHOD, default_num_contexts=
+);
++ #endif
++@@ -410,7 +410,7 @@ for (i =3D 0; i < MULTITHREAD; i++)
++                       default_num_contexts * results[0].iterations
++                           / time_in_secs(total_time),
++                       COMPILER_VERSION,
++-                      COMPILER_FLAGS);
+++                      ""); //Reproducible build fix: COMPILER_FLAGS);
++ #if defined(MEM_LOCATION) && !defined(MEM_LOCATION_UNSPEC)
++             ee_printf(" / %s", MEM_LOCATION);
++ #else
++--=20
++2.43.0
 +
-+         # Values should either be more Tests
-+-        if not isinstance(value, Test):
-++        if not (isinstance(value, Test) or isinstance(value, TestPlacehol=
-der)):
-+             raise exceptions.PiglitFatalError(
-+-                "TestDict values must be a Test, but was a {}".format(
-++                "TestDict values must be a Test or TestPlaceholder, but w=
-as a {}".format(
-+                     type(value)))
-+
-+         # This must be lowered before the following test, or the test can=
- pass
-+@@ -164,8 +164,21 @@ class TestDict(collections.abc.MutableMapping):
-+         self.__container[key] =3D value
-+
-+     def __getitem__(self, key):
-+-        """Lower the value before returning."""
-+-        return self.__container[key.lower()]
-++        """Lower the value before returning. Remove placeholders as neede=
-d."""
-++        item =3D self.__container[key.lower()]
-++        if isinstance(item, TestPlaceholder):
-++            try:
-++                real_item =3D item.test_class(item.test_name)
-++            except TypeError:
-++                raise exceptions.PiglitFatalError(
-++                    "Unable to expand the TestPlaceholder for the class: =
-{}\n"
-++                    "This was associated with the following key: {}".form=
-at(
-++                        type(item), key
-++                    )
-++                )
-++            self.__container[key.lower()] =3D real_item
-++            return real_item
-++        return item
-+
-+     def __delitem__(self, key):
-+         """Lower the value before returning."""
-+diff --git a/framework/test/base.py b/framework/test/base.py
-+index 430064b9b..0efa38336 100644
-+--- a/framework/test/base.py
-++++ b/framework/test/base.py
-+@@ -24,6 +24,7 @@
-+ """ Module provides a base class for Tests """
-+
-+ import abc
-++import collections
-+ import copy
-+ import errno
-+ import itertools
-+@@ -97,6 +98,8 @@ def is_crash_returncode(returncode):
-+         return returncode < 0
-+
-+
-++TestPlaceholder =3D collections.namedtuple('TestPlaceholder', ['test_clas=
-s', 'test_name'])
-++
-+ class Test(metaclass=3Dabc.ABCMeta):
-+     """ Abstract base class for Test classes
-+
-+diff --git a/framework/test/deqp.py b/framework/test/deqp.py
-+index 849ffbd96..ccfeaeff2 100644
-+--- a/framework/test/deqp.py
-++++ b/framework/test/deqp.py
-+@@ -26,7 +26,7 @@ import subprocess
-+ from framework import core, grouptools, exceptions
-+ from framework import options
-+ from framework.profile import TestProfile
-+-from framework.test.base import Test, is_crash_returncode, TestRunError
-++from framework.test.base import Test, is_crash_returncode, TestRunError, =
-TestPlaceholder
-+
-+ __all__ =3D [
-+     'DEQPBaseTest',
-+@@ -56,7 +56,7 @@ def make_profile(test_list, test_class):
-+     for testname in test_list:
-+         # deqp uses '.' as the testgroup separator.
-+         piglit_name =3D testname.replace('.', grouptools.SEPARATOR)
-+-        profile.test_list[piglit_name] =3D test_class(testname)
-++        profile.test_list[piglit_name] =3D TestPlaceholder(test_class, te=
-stname)
-+
-+     return profile
-+
-+--
-+2.50.1
-diff --git a/meta-ti-test/recipes-graphics/piglit/piglit_%.bbappend b/meta-=
-ti-test/recipes-graphics/piglit/piglit_%.bbappend
+diff --git a/meta-ti-test/recipes-benchmark/coremark/coremark_%.bbappend b/=
+meta-ti-test/recipes-benchmark/coremark/coremark_%.bbappend
 new file mode 100644
-index 00000000..d93e5d48
+index 00000000..952d6e99
 --- /dev/null
-+++ b/meta-ti-test/recipes-graphics/piglit/piglit_%.bbappend
++++ b/meta-ti-test/recipes-benchmark/coremark/coremark_%.bbappend
 @@ -0,0 +1,4 @@
-+PIGLIT_TI =3D ""
-+PIGLIT_TI:ti-soc =3D "piglit-ti.inc"
++COREMARK_TI =3D ""
++COREMARK_TI:ti-soc =3D "coremark-ti.inc"
 +
-+require ${PIGLIT_TI}
++require ${COREMARK_TI}
+diff --git a/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-ti.inc =
+b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-ti.inc
+new file mode 100644
+index 00000000..f571f368
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-ti.inc
+@@ -0,0 +1 @@
++ARM_INSTRUCTION_SET =3D "arm"
+diff --git a/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_%.bbapp=
+end b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_%.bbappend
+new file mode 100644
+index 00000000..dfe5ea96
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_%.bbappend
+@@ -0,0 +1,4 @@
++NBENCH_BYTE_TI =3D ""
++NBENCH_BYTE_TI:ti-soc =3D "nbench-byte-ti.inc"
++
++require ${NBENCH_BYTE_TI}
+diff --git a/meta-ti-test/recipes-benchmark/openssl-perf/openssl-perf.bb b/=
+meta-ti-test/recipes-benchmark/openssl-perf/openssl-perf.bb
+new file mode 100644
+index 00000000..04a3fb79
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/openssl-perf/openssl-perf.bb
+@@ -0,0 +1,49 @@
++SUMMARY =3D "Benchmarks for checking various OpenSSL performance functions=
+"
++HOMEPAGE =3D "https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/tre=
+e/cryptos_apps_scripts/"
++LICENSE =3D "CC-BY-SA-3.0"
++LIC_FILES_CHKSUM =3D "file://${UNPACKDIR}/LICENSE;md5=3D6e0ae7214f6c74c149=
+cb25f373057fa9"
++
++PV =3D "1.0"
++
++SRC_URI =3D " \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_perf_scripts/openssl_perf.sh;name=3Dopenssl_perf \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_aes256_encdec_scripts/openssl_aes256_encdec.sh;name=
+=3Dopenssl_aes256_encdec \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_display_cert_scripts/openssl_display_cert.sh;name=3Do=
+penssl_display_cert \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_gen_cert_scripts/openssl_gen_cert.sh;name=3Dopenssl_g=
+en_cert \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_gen_pubkey_scripts/openssl_gen_pubkey.sh;name=3Dopens=
+sl_gen_pubkey \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_gen_sha1hash_scripts/openssl_gen_sha1hash.sh;name=3Do=
+penssl_gen_sha1hash \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_start_server_scripts/openssl_start_server.sh;name=3Do=
+penssl_start_server \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/LICENSE=
+;name=3Dlicense \
++"
++SRC_URI[openssl_perf.sha256sum] =3D "5769e841b977d6a858da38826c2cf47c288ed=
+642614c5b6f802409cb3601ab29"
++SRC_URI[openssl_aes256_encdec.sha256sum] =3D "1a488e3ba98f6f2e5f73c14681b0=
+452ba902aecbb174e4e74b524dda4c5eda7a"
++SRC_URI[openssl_display_cert.sha256sum] =3D "fbe80fe1afe29f777e346ecd86d89=
+e1f27cedc1bb745a9a9bc5cd38f2d566a3e"
++SRC_URI[openssl_gen_cert.sha256sum] =3D "47bfc80b88edebcc4d82ee3816bc05b95=
+ca0d42c42e7f3b83e74fa6f9c6c01ef"
++SRC_URI[openssl_gen_pubkey.sha256sum] =3D "4581e2329afeb814602c4874ffa038d=
+95a4bcc8b23df24d7be25822d0dd6c433"
++SRC_URI[openssl_gen_sha1hash.sha256sum] =3D "f338f8c3067ebb1c5710b16b91e8b=
+9e38685b05fcc072060ec0c62bd10cefd97"
++SRC_URI[openssl_start_server.sha256sum] =3D "e23499210f701ef831d39a8c732f3=
+4f4b06fb3ba2d069c4a95ef25ae59f3c93e"
++SRC_URI[license.sha256sum] =3D "7febd1df714fa4b1e44fe0b0f73ceac7f9b9f97326=
+695a0cc7074bd6c8d263e3"
++
++S =3D "${UNPACKDIR}"
++
++do_install() {
++    install -d ${D}${bindir}
++    install -m 0755 ${S}/openssl_perf.sh ${D}${bindir}/openssl_perf.sh
++    install -m 0755 ${S}/openssl_aes256_encdec.sh ${D}${bindir}/openssl_ae=
+s256_encdec.sh
++    install -m 0755 ${S}/openssl_display_cert.sh ${D}${bindir}/openssl_dis=
+play_cert.sh
++    install -m 0755 ${S}/openssl_gen_cert.sh ${D}${bindir}/openssl_gen_cer=
+t.sh
++    install -m 0755 ${S}/openssl_gen_pubkey.sh ${D}${bindir}/openssl_gen_p=
+ubkey.sh
++    install -m 0755 ${S}/openssl_gen_sha1hash.sh ${D}${bindir}/openssl_gen=
+_sha1hash.sh
++    install -m 0755 ${S}/openssl_start_server.sh ${D}${bindir}/openssl_sta=
+rt_server.sh
++}
++
++FILES:${PN} =3D "\
++    ${bindir}/openssl_perf.sh \
++    ${bindir}/openssl_aes256_encdec.sh \
++    ${bindir}/openssl_display_cert.sh \
++    ${bindir}/openssl_gen_cert.sh \
++    ${bindir}/openssl_gen_pubkey.sh \
++    ${bindir}/openssl_gen_sha1hash.sh \
++    ${bindir}/openssl_start_server.sh \
++"
++
+diff --git a/meta-ti-test/recipes-benchmark/stream/stream_%.bbappend b/meta=
+-ti-test/recipes-benchmark/stream/stream_%.bbappend
+new file mode 100644
+index 00000000..97e0c6a0
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/stream/stream_%.bbappend
+@@ -0,0 +1,13 @@
++INSANE_SKIP:${PN} +=3D "ldflags"
++INSANE_SKIP:${PN}-openmp +=3D "ldflags"
++
++PR:append =3D ".ti1"
++
++BRANCH =3D "sdk"
++SRCREV =3D "96156d407d9a4e5fac4513f3d3f60a414b3355cd"
++
++do_compile:prepend() {
++    #Explicitly clear some variables to insure no unexpected optimizations=
+ are being passed in.
++    unset CFLAGS
++    unset LDFLAGS
++}
+diff --git a/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb b/meta-ti=
+-test/recipes-benchmark/stream/stream_5.10.bb
+new file mode 100644
+index 00000000..484be34d
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
+@@ -0,0 +1,26 @@
++SUMMARY =3D "Stream Benchmark"
++HOMEPAGE =3D "http://www.cs.virginia.edu/stream/"
++LICENSE =3D "Stream_Benchmark_License"
++LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dbca8cbe07976fe64c8946378d08=
+314b0"
++SECTION =3D "system"
++
++PR =3D "r0"
++
++BRANCH ?=3D "master"
++SRCREV =3D "b66f2bab5d6d0b35732ef8406ae03873725a3306"
++
++SRC_URI =3D "git://git.ti.com/git/arago-project-org/stream.git;protocol=3D=
+https;branch=3D${BRANCH}"
++
++PACKAGES =3D+ "${PN}-openmp"
++
++do_compile() {
++	oe_runmake CC=3D"${CC}"
++}
++
++do_install() {
++	install -d ${D}/${bindir}
++	install -m 0755 ${S}/stream_c ${D}/${bindir}/
++	install -m 0755 ${S}/stream_c_openmp ${D}/${bindir}/
++}
++
++FILES:${PN}-openmp =3D "${bindir}/stream_c_openmp"
 --=20
 2.43.0
 
