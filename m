@@ -2,40 +2,40 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77883CCFA13
-	for <webhook@archiver.kernel.org>; Wed, 29 Apr 2026 15:09:32 +0000 (UTC)
-Received: from MW6PR02CU001.outbound.protection.outlook.com (MW6PR02CU001.outbound.protection.outlook.com [52.101.48.24])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13769.1777475370549969521
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0D44CCFA13
+	for <webhook@archiver.kernel.org>; Wed, 29 Apr 2026 15:09:45 +0000 (UTC)
+Received: from CH1PR05CU001.outbound.protection.outlook.com (CH1PR05CU001.outbound.protection.outlook.com [52.101.193.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13590.1777475376442573561
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 29 Apr 2026 08:09:30 -0700
+ Wed, 29 Apr 2026 08:09:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=Qc0YWcIm;
- spf=pass (domain: ti.com, ip: 52.101.48.24, mailfrom: reatmon@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=FiXy6yK0;
+ spf=pass (domain: ti.com, ip: 52.101.193.43, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QX57vykovVEqxt7VUenlewJdCiSPX7zFmYyotMVdAmdIwPL4Cuh/EzzeChIQ/ajjTt4ugLs59Sw527TyZjMzrxWmrL50A8+61l+JUeuPHREJteGq42TNWHvha5VJnTZEdoGcTZPPZ8SLBr+jJ/vN/ayWNx+L1sTfrh2TgZTjyUsf4AP8FBMtAu9Cx90xl+PscYKE1t78MoOmASAk2Tw1k9sFGt114Zt09lrWvBC7FQpfgsL9JIHrrg6hA3xy0zZ3s1S2JM34PgYcI82qaGviqh7i2+1b2AsDLcpgkXYKLZmFdcga2YdT1nJnD6mdVreqtgz5H0ElqSFmqEKdndg1zA==
+ b=m36JNzsZ9VPmbSmUeHkZjBtGVgFaPPLEYPKRInnvQAxBfv73h2u3fULHam6LyXuiYBYZiAduoNOmt55/aS6zl9Vl4bWbC1Rg53j1Iw3kNAsGi2JWXaxD/DFwC9/20KM83rLlYOCoOnlO/4omVtEiYtiVmASt2UzMUtY3is4/1U3QtIZY5munDQyFJFDDZ/2wFaLulesSmjRjkmpA7O8MYVxhEvyLNm6dGa6Wi9FdKDm4oYLWReoDhe8CFsMGwhRIaKGEBrx4trqKAIJKWrKJ5kI0aVLeXig8DPgzCi7r+zgBgnQO2QPs0ekfH+NmfRxc83ahzvwZRz8B/OFkE4Wf8w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Hh7NFf8F4Y5+S0KleQ7kREBZYaVfLnB6lbgqqANdj5s=;
- b=AieMWnfI6ckkgX6vT4AD23xqh13/2TrdCA2JxJWSZjZQUCwt9cP+KEECU5L/uPdM/yBp70C0Uh3XqaQUQSuU34pZq4L0gd45Jycgjwf/fyTmetC5nV6KXmNizrXJVFZG85IFOVPWy1lYBtUZmj+s30UJD1/e4fR5hRZNpCrPLW9H/cwIF/tvxqoDW4P8UVYPTdHroPe1V7fMQ3QM4QRQ7hQkOUG01xODSp+DOXMjJL/k1n0oiDQeRAbIbDqiRALPO40agPggX6FhqJK9b5C/zk1NUyIyX3FXi5USwI4KQoQsLHxjXwV2xy4+dpHbA+jV9yFVmU63jhXsOwP4BNz9TA==
+ bh=X98TASVki32rWTiZ59KHdZYDzUo2FdUgMK39MJh9+lY=;
+ b=rfoqFSp8Fx8RWu12HukqrbM61QCIwOHOC7nzkBVCC/sHjaGXi9zcS6lqjjNn/o85iZ07CWq8So05SeXDg5zCB0M18gDFk7fbp3DrDnYQqKaHy9Le1s1OXKiNXm8eJWiYXzDvBlXpTFwxZhDsThWJOeYwSpPcwPXR4RYKvP/nyQVQRGJjTlS8J6EqQbG1eAk+nH3sefO7PkkLffCn8gGeUkKTNFV0MOnrBlMA0g5cn+S9uYuJ21iGnXys5wH+ipg26bR8Dwl0PLWvxhqlQoJjCNklpbPB65iwsd72XjkxcMakbcL/cRdtemsrCagrt06im5SyBHU0wB9VTc2udgKzRA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Hh7NFf8F4Y5+S0KleQ7kREBZYaVfLnB6lbgqqANdj5s=;
- b=Qc0YWcImFRBF6ezY5wl195QKvk5SVow0BX7psIPV4dUT2qypI7DVWVBt60sCACXmVEDDyXUXnJ9UBdHgOBCkEUdwlTZObi0dC2Jbq3yqfCeXcsQO01YJ7QcvNJuy52s+ibntrdxvkKwF/bXkMwPb26tF6eWLAnJlzr7MRdvWbNk=
-Received: from BLAPR03CA0054.namprd03.prod.outlook.com (2603:10b6:208:32d::29)
- by MN2PR10MB4143.namprd10.prod.outlook.com (2603:10b6:208:1dd::23) with
+ bh=X98TASVki32rWTiZ59KHdZYDzUo2FdUgMK39MJh9+lY=;
+ b=FiXy6yK0GlrlQHaXC+q0hKWJUYRJALsyMn3P+O6BJMI7Msojg4Qk7AHjynfcZIVITyO9U12dEtYaCVym0rp7sgO5CAl4vhbheEXboWOYWl58qhY3sAE8uoZqJT/YvZ92BOz8ECRHguYAc1M+dKmGCKnw0UHC/w0OA7KMb7qj8KI=
+Received: from BLAPR03CA0055.namprd03.prod.outlook.com (2603:10b6:208:32d::30)
+ by DS0PR10MB6151.namprd10.prod.outlook.com (2603:10b6:8:c5::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.19; Wed, 29 Apr
- 2026 15:09:28 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.20; Wed, 29 Apr
+ 2026 15:09:33 +0000
 Received: from BN3PEPF0000B06D.namprd21.prod.outlook.com
- (2603:10b6:208:32d:cafe::7a) by BLAPR03CA0054.outlook.office365.com
- (2603:10b6:208:32d::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.30 via Frontend Transport; Wed,
- 29 Apr 2026 15:09:28 +0000
+ (2603:10b6:208:32d:cafe::8e) by BLAPR03CA0055.outlook.office365.com
+ (2603:10b6:208:32d::30) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.26 via Frontend Transport; Wed,
+ 29 Apr 2026 15:09:33 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
@@ -45,32 +45,32 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
 Received: from flwvzet200.ext.ti.com (198.47.21.194) by
  BN3PEPF0000B06D.mail.protection.outlook.com (10.167.243.72) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9891.0 via Frontend Transport; Wed, 29 Apr 2026 15:09:27 +0000
-Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet200.ext.ti.com
+ 15.20.9891.0 via Frontend Transport; Wed, 29 Apr 2026 15:09:31 +0000
+Received: from DFLE209.ent.ti.com (10.64.6.67) by flwvzet200.ext.ti.com
  (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
  2026 10:09:20 -0500
-Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE209.ent.ti.com
+ (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
  2026 10:09:20 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Wed, 29 Apr 2026 10:09:20 -0500
 Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TF9KSd3333896;
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TF9Klt3565167;
 	Wed, 29 Apr 2026 10:09:20 -0500
 Received: from reatmon by grumpy with local (Exim 4.97)
 	(envelope-from <reatmon@ti.com>)
-	id 1wI6XQ-000000046V1-1Hve;
+	id 1wI6XQ-000000046Ve-1zKr;
 	Wed, 29 Apr 2026 10:09:20 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
 	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH 02/12] meta-ti-test: Import the recipes-benchmark recipes
-Date: Wed, 29 Apr 2026 10:09:10 -0500
-Message-ID: <20260429150920.978263-2-reatmon@ti.com>
+Subject: [meta-ti][master][PATCH 10/12] meta-ti-test: Import the dynamic-layers recipes
+Date: Wed, 29 Apr 2026 10:09:18 -0500
+Message-ID: <20260429150920.978263-10-reatmon@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260429150920.978263-1-reatmon@ti.com>
 References: <20260429150920.978263-1-reatmon@ti.com>
@@ -80,426 +80,270 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06D:EE_|MN2PR10MB4143:EE_
-X-MS-Office365-Filtering-Correlation-Id: 36b78dbb-f971-48ac-661b-08dea6014e94
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06D:EE_|DS0PR10MB6151:EE_
+X-MS-Office365-Filtering-Correlation-Id: f7b2315d-c870-463a-2c03-08dea6015124
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|376014|1800799024|82310400026|22082099003|56012099003|18002099003|13003099007;
+	BCL:0;ARA:13230040|376014|82310400026|36860700016|1800799024|56012099003|18002099003|22082099003|20052099010;
 X-Microsoft-Antispam-Message-Info: 
-	ObwZ2UP/lT/mP0OgDSBAvn99y4xySIoo1mAS9bN93CMGXVweppAbp349ajXwQlEH3jkWWfmlCtOE2Ed0xlZJ8NLvPDyukYaxjMwmyudTHcOyPTVG1ZfAcBEOcHbaOulPBf7usW/zzGe6NkqSl865XXVcuTLKoFom4wjIxerpSw4quklE4PrBYcJzBB6GfiCGMrZ85IoYPQ4Y6M0swQdLvgjTeV0UdhwxcsJSgOBqgxGu/yXjqWYZbJOuuBrn0AqoGj5vARnFaPyiqqpS4toJsASAKGckcmTupNUglWWUEE5feegZXjdjj+dI45DLOdJ6+6WZJ9ei92KGVLfB1CBepkPJUqoR0IE3P6IPd+LIWAyVAkd/z7rlpwRdj205yA4PKS0ZTF3L1NssOwWxeKy/YXVBhkJ5kXel84p9UPTywQ9sz+TES/LefkLsb+FHNGoXGeEV1ql5HKEB89yMGtMZLIsaUgpRK4Aw6tIm7EfUzT+q/OdHepgoPDqJhJs/oHIfxWobWB02Ybxzpp61GVYQDq1v0aoie9E6QnN0npKYjicU1ptj+pGXcK8XvWvQakwLNQdzXznIEJpS8iJdRRwshuYfZFxH31+LY+RjfQnd6HFH3M1X1r7SLkp0cz8ORAQf29wI+6WD+nOAE+hCnLXKSVroYY9SB5eDiHNCbO3WqdkpMIKEDw7eKxZEsYkPFLjI
+	4JFxNMkqonh9F+aPKbqiiD7E6W+F7Xo4wRDTbQLouqrOFZrHMIWeP9svGpiK2lHgGUW6ZOtiqK2IxVBmEG/7KP5qijW5APONrqcTM9BNKBiH5L27PFFfln6+T2nVup9qlw+Qjx1OcGkNwMigqa/xkneEvLg5SgEnsXbdxtOb4j64rhMceZuZLPaxwRbh+8Uo2WmVeJCgyrm1cwv6a6neeH4G8tgEKvB2HNLj6ipxK5hWOTVljnr+GsU7kgWKBUJ7qnq8loZJ3/Ul/H5i6pPF6ZcxY8Aixg211yXeG0iBwxv2w3i6IQiZGmnrw5DwPSEmvqCQhND6pfvvnk52cvrqfm6e7wzBjCQJV3d1oIRCAIzwUJy3ix/Lp+WreAg+uXdu0ISmeD0uIgTo8o/CC1L1bOXUw2vN5bnceQ7cKOxGoHvPPFx6U9LioJxU4DktocpuyEfhg00HWL1Ew4utnZXn6NrN1OlJYnj1LZi+UTwwi1QDIcarmvSHG1B9gGeEppHcnI2MDt4soRVtvWmgyMBKcwz82hHdXKgLryBEWcBnlMnr+CrOOZE4p85MAKTV98Kmya3rJKEI34IqD6VrfNAUFhFZW9OO5HYn1wq+VR2G+lak6YKwtTPaB2VyeaDPsknkY3uXd+nRmOu5flTCSMYXJ8496IV6+TzEJU9ON4Ia+SmsIWvFuzadN67pwe4ynMFxsHuO/QKUGow39x8y5F+UMTruCJ74LEuiL4vibH7HgBo=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(22082099003)(56012099003)(18002099003)(13003099007);DIR:OUT;SFP:1101;
+	CIP:198.47.21.194;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(56012099003)(18002099003)(22082099003)(20052099010);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	jr5gycdvQR/AbSba+kmtHnEE34RtdfXZC84KUVi6DkovpdGJB+E37U41ZFvurY/MWg0GChGe2qpu7kVF5yFuo6xTYf13EIOuQm4BSQwhyPzRA9HfvUc9v9T1gZOEOko9SYC5IgachHQZOrO6bS4cLWJzkRjGz0Ofrq76q13Rv1KWi9poy4jJpjHDbu2xs0vR70holQs1j2b8Y4/Fb2J7ls4/XJtXge1znPuE8OIR800qed5DZaqJmXAfpYKHwZdEAprUSquIrspGiyBzBc2nLe2NnvKs9t+276/9OdKscO9SROHAtrp4UqFudZ0QvRLpwTpAlsJrPgwvZhcsXKRnY+c4S6YnDCFD+jdytf/SnpNgXUjS1CjjstCaeUrjnPUdjq1oThppHEdM50d9hEstGYukRkX6bN0BXJr8HJ97MkiNd8xbZxacg1s00f/yRy4Z
+	ga6sW23p58qgW5MkfZrNzhftNChf69D2i2hrt0f9s61raUMiay2P75GkgbxRA9w+1/6yqmlsDK7DdSzrECOyGffa1AuJ1VqP3+XCAU1yGQJsRZ9AI8PcWsbr4QHX/1LTY2Y1+Jf+g0PbYSlC0TC9DZOS+lRI9UXOoR9e1MNLJv25zZGKpYWtGmUCzlF9GepRV05Leaq6EHhJBG2lTVRJpI5qVNlGOHZTMH2OPa2Amewz3hhjAUIcaP3j0WC6ED6vECZGpXhePpkNJ6ZOT8GwBL3ThUHa8NlOGtUOQdBTBxRRHQKV+qDC66ZZvVGzvZsjAVPub1HGrUgbbNlJivzOfuYlDSjKCUBjtm3tHEN56Glq4BWXajFdLHZchGR+SxBlLH/+9xwkVWdqBbe3Az/mi5Bw47yDxclacuYY80uv+eEujLak5zv/pmfKY3zJdqVw
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 15:09:27.5536
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 15:09:31.8497
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 36b78dbb-f971-48ac-661b-08dea6014e94
+X-MS-Exchange-CrossTenant-Network-Message-Id: f7b2315d-c870-463a-2c03-08dea6015124
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
 	BN3PEPF0000B06D.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR10MB4143
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB6151
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 29 Apr 2026 15:09:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19883
+ <meta-ti@lists.yoctoproject.org>; Wed, 29 Apr 2026 15:09:45 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19885
 
 We are moving the meta-arago-test layer to meta-ti-test.  This commit
-imports all of the recipes under recipes-benchmark.
+imports all of the recipes under dynamic-layers.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- .../licenses/Stream_Benchmark_License         | 34 +++++++++++++
- .../arm-benchmarks/arm-benchmarks_1.3.bb      | 23 +++++++++
- .../arm-ddr-bandwidth/arm-ddr-bandwidth.bb    | 28 +++++++++++
- .../coremark/coremark-ti.inc                  |  3 ++
- ..._main-Remove-printing-compiler-flags.patch | 41 ++++++++++++++++
- .../coremark/coremark_%.bbappend              |  4 ++
- .../nbench-byte/nbench-byte-ti.inc            |  1 +
- .../nbench-byte/nbench-byte_%.bbappend        |  4 ++
- .../openssl-perf/openssl-perf.bb              | 49 +++++++++++++++++++
- .../stream/stream_%.bbappend                  | 13 +++++
- .../recipes-benchmark/stream/stream_5.10.bb   | 26 ++++++++++
- 11 files changed, 226 insertions(+)
- create mode 100644 meta-ti-test/licenses/Stream_Benchmark_License
- create mode 100644 meta-ti-test/recipes-benchmark/arm-benchmarks/arm-bench=
-marks_1.3.bb
- create mode 100644 meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-dd=
-r-bandwidth.bb
- create mode 100644 meta-ti-test/recipes-benchmark/coremark/coremark-ti.inc
- create mode 100644 meta-ti-test/recipes-benchmark/coremark/coremark/0001-c=
-ore_main-Remove-printing-compiler-flags.patch
- create mode 100644 meta-ti-test/recipes-benchmark/coremark/coremark_%.bbap=
-pend
- create mode 100644 meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-=
-ti.inc
- create mode 100644 meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_=
-%.bbappend
- create mode 100644 meta-ti-test/recipes-benchmark/openssl-perf/openssl-per=
-f.bb
- create mode 100644 meta-ti-test/recipes-benchmark/stream/stream_%.bbappend
- create mode 100644 meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
+ meta-ti-test/conf/layer.conf                  |  2 +
+ .../flutter-samples-material-3-demo-ti.inc    |  1 +
+ ...flutter-samples-material-3-demo_%.bbappend |  4 +
+ .../flutter/flutter-wayland-client-ti.inc     |  3 +
+ .../flutter/flutter-wayland-client_%.bbappend |  4 +
+ ...-message_codec.h-Include-cstdint-lib.patch | 93 +++++++++++++++++++
+ .../packagegroups/ti-test.bbappend            |  7 ++
+ 7 files changed, 114 insertions(+)
+ create mode 100644 meta-ti-test/dynamic-layers/flutter-layer/recipes-graph=
+ics/flutter/flutter-samples-material-3-demo-ti.inc
+ create mode 100644 meta-ti-test/dynamic-layers/flutter-layer/recipes-graph=
+ics/flutter/flutter-samples-material-3-demo_%.bbappend
+ create mode 100644 meta-ti-test/dynamic-layers/flutter-layer/recipes-graph=
+ics/flutter/flutter-wayland-client-ti.inc
+ create mode 100644 meta-ti-test/dynamic-layers/flutter-layer/recipes-graph=
+ics/flutter/flutter-wayland-client_%.bbappend
+ create mode 100644 meta-ti-test/dynamic-layers/flutter-layer/recipes-graph=
+ics/flutter/flutter/0001-message_codec.h-Include-cstdint-lib.patch
+ create mode 100644 meta-ti-test/dynamic-layers/qt6-layer/recipes-core/pack=
+agegroups/ti-test.bbappend
 
-diff --git a/meta-ti-test/licenses/Stream_Benchmark_License b/meta-ti-test/=
-licenses/Stream_Benchmark_License
+diff --git a/meta-ti-test/conf/layer.conf b/meta-ti-test/conf/layer.conf
+index 1997f0b4..216ab344 100644
+--- a/meta-ti-test/conf/layer.conf
++++ b/meta-ti-test/conf/layer.conf
+@@ -24,6 +24,8 @@ LAYERDEPENDS_meta-ti-test =3D " \
+ "
+=20
+ BBFILES_DYNAMIC +=3D " \
++    qt6-layer:${LAYERDIR}/dynamic-layers/qt6-layer/recipes*/*/*.bbappend \
++    flutter-layer:${LAYERDIR}/dynamic-layers/flutter-layer/recipes*/*/*.bb=
+append \
+ "
+=20
+ # Codecs in ffmpeg with questionable patent status are not included by
+diff --git a/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flu=
+tter/flutter-samples-material-3-demo-ti.inc b/meta-ti-test/dynamic-layers/f=
+lutter-layer/recipes-graphics/flutter/flutter-samples-material-3-demo-ti.in=
+c
 new file mode 100644
-index 00000000..cf1c8e00
+index 00000000..b2c9e13d
 --- /dev/null
-+++ b/meta-ti-test/licenses/Stream_Benchmark_License
-@@ -0,0 +1,34 @@
-+*=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+*-----------------------------------------------------------------------
-+* Copyright 1991-2003: John D. McCalpin
-+*-----------------------------------------------------------------------
-+* License:
-+*  1. You are free to use this program and/or to redistribute
-+*     this program.
-+*  2. You are free to modify this program for your own use,
-+*     including commercial use, subject to the publication
-+*     restrictions in item 3.
-+*  3. You are free to publish results obtained from running this
-+*     program, or from works that you derive from this program,
-+*     with the following limitations:
-+*     3a. In order to be referred to as "STREAM benchmark results",
-+*         published results must be in conformance to the STREAM
-+*         Run Rules, (briefly reviewed below) published at
-+*         http://www.cs.virginia.edu/stream/ref.html
-+*         and incorporated herein by reference.
-+*         As the copyright holder, John McCalpin retains the
-+*         right to determine conformity with the Run Rules.
-+*     3b. Results based on modified source code or on runs not in
-+*         accordance with the STREAM Run Rules must be clearly
-+*         labelled whenever they are published.  Examples of
-+*         proper labelling include:
-+*         "tuned STREAM benchmark results"=20
-+*         "based on a variant of the STREAM benchmark code"
-+*         Other comparable, clear and reasonable labelling is
-+*         acceptable.
-+*     3c. Submission of results to the STREAM benchmark web site
-+*         is encouraged, but not required.
-+*  4. Use of this program or creation of derived works based on this
-+*     program constitutes acceptance of these licensing restrictions.
-+*  5. Absolutely no warranty is expressed or implied.
-+*-----------------------------------------------------------------------
-diff --git a/meta-ti-test/recipes-benchmark/arm-benchmarks/arm-benchmarks_1=
-.3.bb b/meta-ti-test/recipes-benchmark/arm-benchmarks/arm-benchmarks_1.3.bb
-new file mode 100644
-index 00000000..8cdd1a6f
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/arm-benchmarks/arm-benchmarks_1.3.bb
-@@ -0,0 +1,23 @@
-+SUMMARY =3D "ARM Benchmarks"
-+HOMEPAGE =3D "https://gforge.ti.com/gf/project/am_benchmarks/"
-+LICENSE =3D "BSD-3-Clause"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7aefb5e1cffc7b6a3ef18b803f95792=
-2"
-+SECTION =3D "system"
-+
-+PR =3D "r13"
-+
-+BRANCH ?=3D "master"
-+SRCREV =3D "fefaf9bdd6f36ab0cebaab8dbf34e5beb50f471c"
-+
-+SRC_URI =3D "git://git.ti.com/git/apps/arm_benchmarks.git;protocol=3Dhttps=
-;branch=3D${BRANCH}"
-+
-+do_compile() {
-+	export CROSS_COMPILE=3D${TARGET_PREFIX}
-+	export CFLAGS=3D'${TARGET_CC_ARCH} -std=3Dgnu11'
-+	# build the release version
-+	oe_runmake release CC=3D"${CC}"
-+}
-+do_install() {
-+
-+	oe_runmake DESTDIR=3D${D} install
-+}
-diff --git a/meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-ddr-bandw=
-idth.bb b/meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-ddr-bandwidt=
-h.bb
-new file mode 100644
-index 00000000..29db78c3
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-ddr-bandwidth.bb
-@@ -0,0 +1,28 @@
-+SUMMARY =3D "Benchmark for checking DDR bandwidth"
-+HOMEPAGE =3D "https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/tre=
-e/arm_apps/arm_ddr_bandwidth/runLmDDRBandwidth.sh"
-+LICENSE =3D "CC-BY-SA-3.0"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6e0ae7214f6c74c149cb25f373057fa=
-9"
-+
-+PV =3D "1.0"
-+
-+SRC_URI =3D " \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/arm_app=
-s/arm_ddr_bandwidth/runLmDDRBandwidth.sh;name=3DrunLmDDRBandwidth \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/LICENSE=
-;name=3Dlicense \
-+"
-+SRC_URI[runLmDDRBandwidth.sha256sum] =3D "67997d721b351344d8788200a15bb364=
-0093045bc25f2b5307dd331ebd1556a3"
-+SRC_URI[license.sha256sum] =3D "7febd1df714fa4b1e44fe0b0f73ceac7f9b9f97326=
-695a0cc7074bd6c8d263e3"
-+
-+S =3D "${UNPACKDIR}"
-+
-+do_install() {
-+    install -d ${D}${datadir}/matrix-gui-2.0/apps
-+
-+    install -d ${D}${bindir}
-+    install -m 0755 ${S}/runLmDDRBandwidth.sh ${D}${bindir}/runLmDDRBandwi=
-dth.sh
-+}
-+
-+FILES:${PN} =3D " \
-+    ${datadir}/matrix-gui-2.0/apps \
-+    ${bindir}/runLmDDRBandwidth.sh \
-+"
-+
-diff --git a/meta-ti-test/recipes-benchmark/coremark/coremark-ti.inc b/meta=
--ti-test/recipes-benchmark/coremark/coremark-ti.inc
-new file mode 100644
-index 00000000..9a1d9b89
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/coremark/coremark-ti.inc
-@@ -0,0 +1,3 @@
-+FILESEXTRAPATHS:prepend :=3D "${THISDIR}/coremark:"
-+
-+SRC_URI +=3D "file://0001-core_main-Remove-printing-compiler-flags.patch"
-diff --git a/meta-ti-test/recipes-benchmark/coremark/coremark/0001-core_mai=
-n-Remove-printing-compiler-flags.patch b/meta-ti-test/recipes-benchmark/cor=
-emark/coremark/0001-core_main-Remove-printing-compiler-flags.patch
-new file mode 100644
-index 00000000..ef7c78b2
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/coremark/coremark/0001-core_main-Remov=
-e-printing-compiler-flags.patch
-@@ -0,0 +1,41 @@
-+From 0af4e2298ccacc8afc0294b7a731f0e866155427 Mon Sep 17 00:00:00 2001
-+From: Ryan Eatmon <reatmon@ti.com>
-+Date: Mon, 1 Dec 2025 12:21:23 -0600
-+Subject: [PATCH] core_main: Remove printing compiler flags
-+
-+Reproducible builds do not like including anything that references the
-+build environment on the host machine.  This would include printing out
-+the COMPILER_FLAGS macro.  Substitute it with "".
-+
-+Upstream-Status: Inappropriate [OE-Specific]
-+
-+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-+---
-+ core_main.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/core_main.c b/core_main.c
-+index a4beeb6..f0ab87f 100644
-+--- a/core_main.c
-++++ b/core_main.c
-+@@ -380,7 +380,7 @@ for (i =3D 0; i < MULTITHREAD; i++)
-+     ee_printf("Iterations       : %lu\n",
-+               (long unsigned)default_num_contexts * results[0].iterations=
-);
-+     ee_printf("Compiler version : %s\n", COMPILER_VERSION);
-+-    ee_printf("Compiler flags   : %s\n", COMPILER_FLAGS);
-++    ee_printf("Compiler flags   : %s\n", ""); //Reproducible build fix: C=
-OMPILER_FLAGS);
-+ #if (MULTITHREAD > 1)
-+     ee_printf("Parallel %s : %d\n", PARALLEL_METHOD, default_num_contexts=
-);
-+ #endif
-+@@ -410,7 +410,7 @@ for (i =3D 0; i < MULTITHREAD; i++)
-+                       default_num_contexts * results[0].iterations
-+                           / time_in_secs(total_time),
-+                       COMPILER_VERSION,
-+-                      COMPILER_FLAGS);
-++                      ""); //Reproducible build fix: COMPILER_FLAGS);
-+ #if defined(MEM_LOCATION) && !defined(MEM_LOCATION_UNSPEC)
-+             ee_printf(" / %s", MEM_LOCATION);
-+ #else
-+--=20
-+2.43.0
-+
-diff --git a/meta-ti-test/recipes-benchmark/coremark/coremark_%.bbappend b/=
-meta-ti-test/recipes-benchmark/coremark/coremark_%.bbappend
-new file mode 100644
-index 00000000..952d6e99
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/coremark/coremark_%.bbappend
-@@ -0,0 +1,4 @@
-+COREMARK_TI =3D ""
-+COREMARK_TI:ti-soc =3D "coremark-ti.inc"
-+
-+require ${COREMARK_TI}
-diff --git a/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-ti.inc =
-b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-ti.inc
-new file mode 100644
-index 00000000..f571f368
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-ti.inc
++++ b/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flutter/fl=
+utter-samples-material-3-demo-ti.inc
 @@ -0,0 +1 @@
-+ARM_INSTRUCTION_SET =3D "arm"
-diff --git a/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_%.bbapp=
-end b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_%.bbappend
++FLUTTER_BUILD_ARGS:append =3D " --no-pub"
+diff --git a/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flu=
+tter/flutter-samples-material-3-demo_%.bbappend b/meta-ti-test/dynamic-laye=
+rs/flutter-layer/recipes-graphics/flutter/flutter-samples-material-3-demo_%=
+.bbappend
 new file mode 100644
-index 00000000..dfe5ea96
+index 00000000..985615c8
 --- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_%.bbappend
++++ b/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flutter/fl=
+utter-samples-material-3-demo_%.bbappend
 @@ -0,0 +1,4 @@
-+NBENCH_BYTE_TI =3D ""
-+NBENCH_BYTE_TI:ti-soc =3D "nbench-byte-ti.inc"
++FLUTTER_TI =3D ""
++FLUTTER_TI:ti-soc =3D "flutter-samples-material-3-demo-ti.inc"
 +
-+require ${NBENCH_BYTE_TI}
-diff --git a/meta-ti-test/recipes-benchmark/openssl-perf/openssl-perf.bb b/=
-meta-ti-test/recipes-benchmark/openssl-perf/openssl-perf.bb
++require ${FLUTTER_TI}
+diff --git a/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flu=
+tter/flutter-wayland-client-ti.inc b/meta-ti-test/dynamic-layers/flutter-la=
+yer/recipes-graphics/flutter/flutter-wayland-client-ti.inc
 new file mode 100644
-index 00000000..04a3fb79
+index 00000000..4d211568
 --- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/openssl-perf/openssl-perf.bb
-@@ -0,0 +1,49 @@
-+SUMMARY =3D "Benchmarks for checking various OpenSSL performance functions=
-"
-+HOMEPAGE =3D "https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/tre=
-e/cryptos_apps_scripts/"
-+LICENSE =3D "CC-BY-SA-3.0"
-+LIC_FILES_CHKSUM =3D "file://${UNPACKDIR}/LICENSE;md5=3D6e0ae7214f6c74c149=
-cb25f373057fa9"
++++ b/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flutter/fl=
+utter-wayland-client-ti.inc
+@@ -0,0 +1,3 @@
++FILESEXTRAPATHS:prepend :=3D "${THISDIR}/flutter:"
 +
-+PV =3D "1.0"
++SRC_URI +=3D "file://0001-message_codec.h-Include-cstdint-lib.patch"
+diff --git a/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flu=
+tter/flutter-wayland-client_%.bbappend b/meta-ti-test/dynamic-layers/flutte=
+r-layer/recipes-graphics/flutter/flutter-wayland-client_%.bbappend
+new file mode 100644
+index 00000000..46fdd2af
+--- /dev/null
++++ b/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flutter/fl=
+utter-wayland-client_%.bbappend
+@@ -0,0 +1,4 @@
++FLUTTER_TI =3D ""
++FLUTTER_TI:ti-soc =3D "flutter-wayland-client-ti.inc"
 +
-+SRC_URI =3D " \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_perf_scripts/openssl_perf.sh;name=3Dopenssl_perf \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_aes256_encdec_scripts/openssl_aes256_encdec.sh;name=
-=3Dopenssl_aes256_encdec \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_display_cert_scripts/openssl_display_cert.sh;name=3Do=
-penssl_display_cert \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_gen_cert_scripts/openssl_gen_cert.sh;name=3Dopenssl_g=
-en_cert \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_gen_pubkey_scripts/openssl_gen_pubkey.sh;name=3Dopens=
-sl_gen_pubkey \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_gen_sha1hash_scripts/openssl_gen_sha1hash.sh;name=3Do=
-penssl_gen_sha1hash \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_start_server_scripts/openssl_start_server.sh;name=3Do=
-penssl_start_server \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/LICENSE=
-;name=3Dlicense \
++require ${FLUTTER_TI}
+diff --git a/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flu=
+tter/flutter/0001-message_codec.h-Include-cstdint-lib.patch b/meta-ti-test/=
+dynamic-layers/flutter-layer/recipes-graphics/flutter/flutter/0001-message_=
+codec.h-Include-cstdint-lib.patch
+new file mode 100644
+index 00000000..7a9bff41
+--- /dev/null
++++ b/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flutter/fl=
+utter/0001-message_codec.h-Include-cstdint-lib.patch
+@@ -0,0 +1,93 @@
++From dcfcb92c7f42cd6bd92b1048b5e4ea6f01d40e21 Mon Sep 17 00:00:00 2001
++From: Antonios Christidis <a-christidis@ti.com>
++Date: Tue, 10 Mar 2026 11:01:28 -0500
++Subject: [PATCH] message_codec.h: Include cstdint lib
++
++Include cstdint lib within message_codec.h.
++
++Upstream-Status: Inactive-Upstream
++
++Signed-off-by: Antonios Christidis <a-christidis@ti.com>
++---
++ .../client_wrapper/include/flutter/basic_message_channel.h       | 1 +
++ .../common/client_wrapper/include/flutter/binary_messenger.h     | 1 +
++ .../common/client_wrapper/include/flutter/engine_method_result.h | 1 +
++ .../common/client_wrapper/include/flutter/message_codec.h        | 1 +
++ .../common/client_wrapper/include/flutter/method_channel.h       | 1 +
++ .../common/client_wrapper/include/flutter/method_codec.h         | 1 +
++ 6 files changed, 6 insertions(+)
++
++diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flut=
+ter/basic_message_channel.h b/src/flutter/shell/platform/common/client_wrap=
+per/include/flutter/basic_message_channel.h
++index c081946..fcc6b23 100644
++--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/bas=
+ic_message_channel.h
+++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/bas=
+ic_message_channel.h
++@@ -7,6 +7,7 @@
++
++ #include <iostream>
++ #include <string>
+++#include <cstdint>
++
++ #include "binary_messenger.h"
++ #include "message_codec.h"
++diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flut=
+ter/binary_messenger.h b/src/flutter/shell/platform/common/client_wrapper/i=
+nclude/flutter/binary_messenger.h
++index d552b49..82e47da 100644
++--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/bin=
+ary_messenger.h
+++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/bin=
+ary_messenger.h
++@@ -7,6 +7,7 @@
++
++ #include <functional>
++ #include <string>
+++#include <cstdint>
++
++ namespace flutter {
++
++diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flut=
+ter/engine_method_result.h b/src/flutter/shell/platform/common/client_wrapp=
+er/include/flutter/engine_method_result.h
++index 3cc8b6a..9634ead 100644
++--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/eng=
+ine_method_result.h
+++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/eng=
+ine_method_result.h
++@@ -8,6 +8,7 @@
++ #include <memory>
++ #include <string>
++ #include <vector>
+++#include <cstdint>
++
++ #include "binary_messenger.h"
++ #include "method_codec.h"
++diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flut=
+ter/message_codec.h b/src/flutter/shell/platform/common/client_wrapper/incl=
+ude/flutter/message_codec.h
++index c84d25f..c007b1e 100644
++--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/mes=
+sage_codec.h
+++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/mes=
+sage_codec.h
++@@ -8,6 +8,7 @@
++ #include <memory>
++ #include <string>
++ #include <vector>
+++#include <cstdint>
++
++ namespace flutter {
++
++diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flut=
+ter/method_channel.h b/src/flutter/shell/platform/common/client_wrapper/inc=
+lude/flutter/method_channel.h
++index 6e39a64..34687a6 100644
++--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/met=
+hod_channel.h
+++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/met=
+hod_channel.h
++@@ -7,6 +7,7 @@
++
++ #include <iostream>
++ #include <string>
+++#include <cstdint>
++
++ #include "binary_messenger.h"
++ #include "engine_method_result.h"
++diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flut=
+ter/method_codec.h b/src/flutter/shell/platform/common/client_wrapper/inclu=
+de/flutter/method_codec.h
++index b40fa64..edd14d6 100644
++--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/met=
+hod_codec.h
+++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/met=
+hod_codec.h
++@@ -8,6 +8,7 @@
++ #include <memory>
++ #include <string>
++ #include <vector>
+++#include <cstdint>
++
++ #include "method_call.h"
++ #include "method_result.h"
++--
++2.34.1
+diff --git a/meta-ti-test/dynamic-layers/qt6-layer/recipes-core/packagegrou=
+ps/ti-test.bbappend b/meta-ti-test/dynamic-layers/qt6-layer/recipes-core/pa=
+ckagegroups/ti-test.bbappend
+new file mode 100644
+index 00000000..8d1f95f7
+--- /dev/null
++++ b/meta-ti-test/dynamic-layers/qt6-layer/recipes-core/packagegroups/ti-t=
+est.bbappend
+@@ -0,0 +1,7 @@
++# Include the examples for Qt6 related tests
++# Include qtwayland for wayland support if the distro enables it
++
++TI_TEST_EXTRAS:append =3D " \
++    qtbase-examples \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland', '', d)=
+} \
 +"
-+SRC_URI[openssl_perf.sha256sum] =3D "5769e841b977d6a858da38826c2cf47c288ed=
-642614c5b6f802409cb3601ab29"
-+SRC_URI[openssl_aes256_encdec.sha256sum] =3D "1a488e3ba98f6f2e5f73c14681b0=
-452ba902aecbb174e4e74b524dda4c5eda7a"
-+SRC_URI[openssl_display_cert.sha256sum] =3D "fbe80fe1afe29f777e346ecd86d89=
-e1f27cedc1bb745a9a9bc5cd38f2d566a3e"
-+SRC_URI[openssl_gen_cert.sha256sum] =3D "47bfc80b88edebcc4d82ee3816bc05b95=
-ca0d42c42e7f3b83e74fa6f9c6c01ef"
-+SRC_URI[openssl_gen_pubkey.sha256sum] =3D "4581e2329afeb814602c4874ffa038d=
-95a4bcc8b23df24d7be25822d0dd6c433"
-+SRC_URI[openssl_gen_sha1hash.sha256sum] =3D "f338f8c3067ebb1c5710b16b91e8b=
-9e38685b05fcc072060ec0c62bd10cefd97"
-+SRC_URI[openssl_start_server.sha256sum] =3D "e23499210f701ef831d39a8c732f3=
-4f4b06fb3ba2d069c4a95ef25ae59f3c93e"
-+SRC_URI[license.sha256sum] =3D "7febd1df714fa4b1e44fe0b0f73ceac7f9b9f97326=
-695a0cc7074bd6c8d263e3"
-+
-+S =3D "${UNPACKDIR}"
-+
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m 0755 ${S}/openssl_perf.sh ${D}${bindir}/openssl_perf.sh
-+    install -m 0755 ${S}/openssl_aes256_encdec.sh ${D}${bindir}/openssl_ae=
-s256_encdec.sh
-+    install -m 0755 ${S}/openssl_display_cert.sh ${D}${bindir}/openssl_dis=
-play_cert.sh
-+    install -m 0755 ${S}/openssl_gen_cert.sh ${D}${bindir}/openssl_gen_cer=
-t.sh
-+    install -m 0755 ${S}/openssl_gen_pubkey.sh ${D}${bindir}/openssl_gen_p=
-ubkey.sh
-+    install -m 0755 ${S}/openssl_gen_sha1hash.sh ${D}${bindir}/openssl_gen=
-_sha1hash.sh
-+    install -m 0755 ${S}/openssl_start_server.sh ${D}${bindir}/openssl_sta=
-rt_server.sh
-+}
-+
-+FILES:${PN} =3D "\
-+    ${bindir}/openssl_perf.sh \
-+    ${bindir}/openssl_aes256_encdec.sh \
-+    ${bindir}/openssl_display_cert.sh \
-+    ${bindir}/openssl_gen_cert.sh \
-+    ${bindir}/openssl_gen_pubkey.sh \
-+    ${bindir}/openssl_gen_sha1hash.sh \
-+    ${bindir}/openssl_start_server.sh \
-+"
-+
-diff --git a/meta-ti-test/recipes-benchmark/stream/stream_%.bbappend b/meta=
--ti-test/recipes-benchmark/stream/stream_%.bbappend
-new file mode 100644
-index 00000000..97e0c6a0
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/stream/stream_%.bbappend
-@@ -0,0 +1,13 @@
-+INSANE_SKIP:${PN} +=3D "ldflags"
-+INSANE_SKIP:${PN}-openmp +=3D "ldflags"
-+
-+PR:append =3D ".ti1"
-+
-+BRANCH =3D "sdk"
-+SRCREV =3D "96156d407d9a4e5fac4513f3d3f60a414b3355cd"
-+
-+do_compile:prepend() {
-+    #Explicitly clear some variables to insure no unexpected optimizations=
- are being passed in.
-+    unset CFLAGS
-+    unset LDFLAGS
-+}
-diff --git a/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb b/meta-ti=
--test/recipes-benchmark/stream/stream_5.10.bb
-new file mode 100644
-index 00000000..484be34d
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
-@@ -0,0 +1,26 @@
-+SUMMARY =3D "Stream Benchmark"
-+HOMEPAGE =3D "http://www.cs.virginia.edu/stream/"
-+LICENSE =3D "Stream_Benchmark_License"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dbca8cbe07976fe64c8946378d08=
-314b0"
-+SECTION =3D "system"
-+
-+PR =3D "r0"
-+
-+BRANCH ?=3D "master"
-+SRCREV =3D "b66f2bab5d6d0b35732ef8406ae03873725a3306"
-+
-+SRC_URI =3D "git://git.ti.com/git/arago-project-org/stream.git;protocol=3D=
-https;branch=3D${BRANCH}"
-+
-+PACKAGES =3D+ "${PN}-openmp"
-+
-+do_compile() {
-+	oe_runmake CC=3D"${CC}"
-+}
-+
-+do_install() {
-+	install -d ${D}/${bindir}
-+	install -m 0755 ${S}/stream_c ${D}/${bindir}/
-+	install -m 0755 ${S}/stream_c_openmp ${D}/${bindir}/
-+}
-+
-+FILES:${PN}-openmp =3D "${bindir}/stream_c_openmp"
 --=20
 2.43.0
 
