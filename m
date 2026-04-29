@@ -1,190 +1,189 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <prc@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA4C3FF8873
-	for <webhook@archiver.kernel.org>; Wed, 29 Apr 2026 20:47:56 +0000 (UTC)
-Received: from PH0PR06CU001.outbound.protection.outlook.com (PH0PR06CU001.outbound.protection.outlook.com [40.107.208.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6038.1777495672428805509
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DAE66FF8873
+	for <webhook@archiver.kernel.org>; Wed, 29 Apr 2026 21:07:16 +0000 (UTC)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com (SN4PR0501CU005.outbound.protection.outlook.com [40.93.194.61])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6449.1777496826460684254
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 29 Apr 2026 13:47:53 -0700
+ Wed, 29 Apr 2026 14:07:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=TG8dAAP8;
- spf=pass (domain: ti.com, ip: 40.107.208.51, mailfrom: reatmon@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=blJyWVzn;
+ spf=pass (domain: list.ti.com, ip: 40.93.194.61, mailfrom: prc@list.ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PgU0b++hr3gFPUlSIoLHZfN5poV1Ti7PEESDe8Kp3iHHcpTFIhz5Ldnb0X5Nzc9Ozbe9vDGVHDYUS0yto8NeE67ER5b9YffzdH5Sk2T9kCNVqJrqhIuN+EEn0dP2pCYPGqRsccOHns7mBRKvmtPm8PIj8o9ychrxb1a1G5UnApNW5d39h6fdapR7ZzRBQdk5GNPhXrATo7eAEtWRDWrzNjB+PRO7WSEDC537y+Kq7EKpmgtdtlCyUqirf/3u/PkHS4BWX7pixJeNDfboC4hTQktisVlGy3AK3dekQvypT+afle13SWcH5Rz1FzZ5qrQZqO3RZSTsJfuWSLXVO6S7Ig==
+ b=t57x5HseHCNPk81X1IETGL/+7d27HoiX/yXxJGYx1olpPbiGQUm/HejIXlIbwHWInFC2o/QaZayhGgzEygjUilt+YnP9XJfLtm/39sUZIq1sutY2ciRMSRTvYphNvV0DLCdsqPTCrTL92NL9o3VBbz/I/Oth+CoeVY+TVuxNLMaGR7kaYGmhjRXAmcO2Tu8Tm0FB01Z25Dq2lryXMDh7elhddaiKhxww7auuTEEMMlgcBMX6r+/Sp16eTpXLA1dK8ex2u0kUZ7ZbkQrQdt25DioiaTPsZXAAnBeBCvlb0p6GKnSLPELBZmunSRuTGZJ+9BkId8TCf9jZSmK0AM9KdA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UhlBmm6go2NPyIymT/wwWwrpI1XovoVuc/iVQkyNMqk=;
- b=Qzy0dq9wV+zx2QnmM1LtSKYONOOML2VF1/eFoqWUEtpFy/Uu3+clC66Ic2xl8c9QOf+lSKPIlJ/e9cMrzE0dX06m6erFuXG1ZsCiLVMteu/ZdfCseeXiyZD20L1O9E4wA5gA64oZV4yfGvBkrvXxkB0yN2zf3LDIHl6gCB3qwStx5M8sQ7ouJwFLKCWL+K4+R1ztG0EuiGmkYCF4ORQ8FTwN2VSIOOCx+QONwAeowy7lR9O6l8dd6LMlNCnxyYgJA69xoaFC6deMv/Yt5M6ojb+Qeb6Db1duJFdOLYcY7iCcdt4Pdh36dEcPECTR0slUOuM0x5i2miSoBsAYVzh9kg==
+ bh=YF9QYtMlrlEUre1ZjEZ+AIqYNOZSDn2apgojNXs2BCY=;
+ b=NWG+TPbCepQ9xfgLwwl7Q1Y+PtJJanoAtLEGRZQ24gxS76OVR/6oe8Wh7WCs5J9aioFaCFeDmYuhtH/zvQ86QZxo4G35OylgDDRN15cynQ6IVEHB1457k215Hzt4Uk3p02pUDfl4+FMN23UuY1x11DSaUHY9T3MI8nh+o08LUayF8Vq2I5ta8uG3ECQo+k1Ou4qtjtBkJx7AkfJB25E2SFZEfYkDua3MSyDrUgsZqDcSsZtAcD9RZ4RbZPwbTi+Z5Q2hz1HL9L4TFeloGD/WIJR3jhy4ZBw8ndJK4/tWXITzas4WPOC77EAE+lxGecEXCQgJNbGo1lf2ZRBoDfbitQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ 198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org
+ smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
+ action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
+ (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UhlBmm6go2NPyIymT/wwWwrpI1XovoVuc/iVQkyNMqk=;
- b=TG8dAAP8eqXfJ39cdECmb9RMCWjWwRSKiRSsTDZXGks30qtIqRkSDhDgn+9L67R1BOZIpus/6fGK1UNPNGNMVmsfQPOBd43bbteOxrTaC6Pk7DXMR0fkpsQe7DvyxSSJ6mwLTRy75Yhh1XD7fON7+7qCenFnF3x+qeTXMKO2eeM=
-Received: from BYAPR03CA0031.namprd03.prod.outlook.com (2603:10b6:a02:a8::44)
- by PH8PR10MB6574.namprd10.prod.outlook.com (2603:10b6:510:226::14) with
+ bh=YF9QYtMlrlEUre1ZjEZ+AIqYNOZSDn2apgojNXs2BCY=;
+ b=blJyWVznYO3xVKILfzXPjcClLfp0NsWxtJlgLRhbIjv3oeHo88zIeqoBxCX+o/C6nwRFhttVKPKb/DD3LWHqS2fFm5UQkmVRRsU19Wul5qceZk+u/Y5eRoOeF7KLJ9BlonIh2ZRLWhgPKNjG0z+lQCyHtVFz1FG2aia/v5+BaQdy0WQOEx6lMx4XvDDuXCobHAe16p32kpX/JtBEb2x/tYThMC8OATQvNRQdnNO6u35psJzr5AXE1XEjkLEGeG6j/ILPxDyIt2pXNs0VD5garR97oVjBWUEINvibWjTio5qd2tyC975aVVhlAv7d42kKkQEnLa67JV3kVlfrFDCzkw==
+Received: from DM6PR06CA0080.namprd06.prod.outlook.com (2603:10b6:5:336::13)
+ by IA1PR10MB6686.namprd10.prod.outlook.com (2603:10b6:208:41a::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.20; Wed, 29 Apr
- 2026 20:47:48 +0000
-Received: from SJ1PEPF00002320.namprd03.prod.outlook.com
- (2603:10b6:a02:a8:cafe::9c) by BYAPR03CA0031.outlook.office365.com
- (2603:10b6:a02:a8::44) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 21:07:01 +0000
+Received: from DS1PEPF0001709A.namprd05.prod.outlook.com
+ (2603:10b6:5:336:cafe::fd) by DM6PR06CA0080.outlook.office365.com
+ (2603:10b6:5:336::13) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.30 via Frontend Transport; Wed,
- 29 Apr 2026 20:47:48 +0000
+ 29 Apr 2026 21:06:59 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ smtp.mailfrom=list.ti.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=list.ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
  198.47.21.194 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
 Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- SJ1PEPF00002320.mail.protection.outlook.com (10.167.242.86) with Microsoft
+ DS1PEPF0001709A.mail.protection.outlook.com (10.167.18.104) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Wed, 29 Apr 2026 20:47:47 +0000
-Received: from DFLE209.ent.ti.com (10.64.6.67) by flwvzet200.ext.ti.com
+ 15.20.9846.18 via Frontend Transport; Wed, 29 Apr 2026 21:06:57 +0000
+Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet200.ext.ti.com
  (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
- 2026 15:47:46 -0500
-Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE209.ent.ti.com
- (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 16:06:56 -0500
+Received: from DFLE202.ent.ti.com (10.64.6.60) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
- 2026 15:47:45 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 16:06:56 -0500
+Received: from fllvem-mr08.itg.ti.com (10.64.41.88) by DFLE202.ent.ti.com
+ (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 29 Apr 2026 15:47:45 -0500
-Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TKlj9D3857176;
-	Wed, 29 Apr 2026 15:47:45 -0500
-Received: from reatmon by grumpy with local (Exim 4.97)
-	(envelope-from <reatmon@ti.com>)
-	id 1wIBov-0000000AshS-37co;
-	Wed, 29 Apr 2026 15:47:45 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
+ Transport; Wed, 29 Apr 2026 16:06:56 -0500
+Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
+	by fllvem-mr08.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TL6uiU605023;
+	Wed, 29 Apr 2026 16:06:56 -0500
+Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
+	id 70E689ACF4; Wed, 29 Apr 2026 16:06:56 -0500 (CDT)
+From: PRC Automation <prc@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>
+CC: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
 	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] ltp-ddt: Remove orphaned patch
-Date: Wed, 29 Apr 2026 15:47:45 -0500
-Message-ID: <20260429204745.2593539-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.43.0
+Subject: Re: [meta-ti][master][PATCH] ltp-ddt: Remove orphaned patch
+Date: Wed, 29 Apr 2026 16:06:56 -0500
+Message-ID: <20260429210656.197683-1-prc@list.ti.com>
+X-Mailer: git-send-email 2.43.5
+In-Reply-To: <20260429204745.2593539-1-reatmon@ti.com>
+References: <20260429204745.2593539-1-reatmon@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002320:EE_|PH8PR10MB6574:EE_
-X-MS-Office365-Filtering-Correlation-Id: d7eb8735-1c97-4375-50dc-08dea630922c
+X-MS-TrafficTypeDiagnostic: DS1PEPF0001709A:EE_|IA1PR10MB6686:EE_
+X-MS-Office365-Filtering-Correlation-Id: 21194c10-b25a-4f70-5af9-08dea6333fd7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|1800799024|376014|82310400026|56012099003|18002099003;
+	BCL:0;ARA:13230040|36860700016|1800799024|376014|82310400026|22082099003|56012099003|18002099003;
 X-Microsoft-Antispam-Message-Info: 
-	KM6aPl3mVdQmUKRzicmWg170XyIzhsWyzUBBrDs3bNqpcSZL0u41eDOArOtIzBTh1Z0uzWPK29lQxi+nX6LcNrWvPYx2Fe5CrU8oev5RMt2acGHopOb8LEXh2wELvc19Sz+WbASup/DLahSSpnpu/IWHus3uwUCvhS4Tjw82j4DyCnPgXizxvy1pKQCgJLZ6KL7nJ5+Ol7Be5NOZJJ9T4DHBPVRlahJU2vT7QxiJkq7wM4sxTo9olUvqVkxIP/tdFZ4Ygmjyey2V+0riMUCI+TAO+3jHyZhtVMO2gCufQi0DxLyN7piyA78O0DjzCUif7wUJ0TcdFPY7aAroiSUg0aXbA3IaI2+BKJpc+KJ/RFPvqGCivdC8QL+MhblCD9qdeBffWA7ZwMUwjBDAsp9CvzBkAp51dDr4WgXpMHANgfXZO1KkptxR03sphySBvJPsK2JI9lklbdC3C1y78PH2hGOwaV9rABE0Lws/Vb0yJPy2HKmXmF+uhF51SkIp1c4573L375H+dY5h0t8Y/PRQla3NhfFY74gXv4tYXw48TkiiwW4EvMxMHc3MiqTD0r3BHWlIexTHOBz5qyZlDidpb7BZS/V4OT7Io9DZnjC2nRHbQA6Q0jOrcj3U54DHWrQIpxC5I3LQVkWEfxPnZSl365bUNSfBj5XtKu5DDn2qHQWUzuvLGvrA/Pg9+ieowRocXbKwr36tDiH8GRfpJZT1289pG0K1mGPu4GWDIG/d1H+953nUWZG6vzNo74nJ5j5IdWC+uBsBOBwv2/fVXziHzA==
+	GL0BZhah6W8TABfPuZ4Xyr62hX/7NbwdAIwPJxQVwyxH2DdAWQmMaxDDTntBUkAKXIdPSY7FW/SB1+ty1XYUaQyyVMc9q9InBIj+bLCRjEuxI1gkfMWpfGY3VmlfGZv04N4k0YWJRfPXqHzEStYhk2SvLxE/fNbefPJzUx/PmzR0/ao3ePkN9nxcaEVXqqj7vEvPGbF0HKaxvIabOC4VkIvSuK2JHwCVKpOW7uSi5f8rFbwjRFsgv8BizoUm2wPVFE6x9Lcmb068fJPhLMBYZAKuOoklsyO9fnTdt+3PqKljkyGf9mczKarcOaUsfCxJl5iSaH7gJ9dq/Dz+MQSQiSZ0VqKFOvHHB5wrDRwrsUE4Bn8ykyyoCXhcwcGeJKNmynDFyajV/V8zaJDH5lXDlUtaQ+Rfp0FbioaUhrDA/mzANKBO+etRglhU/acFbmgthS3n2ODJv6Hr/L2+31QPozTCnjpDkbUk5R2uMkgLvvQsR8Zl4PW0EVojSNzdjkW6Hvt1BwZ5/PUwGTynGY5cNlqFvFSoODqdixs+gY1gkfN9DLtlQbk6y6uh4kE416BDAsT6/3HSLRK0E1ZeChgxxlIhg8rOaJDmWD2P5poAoHjM9ee01sfKMxrwxjW155VND++oa+hkmA0N6XOu5vQfaNto8VkgrZ4AgbjHauL4b3P8AoUda5/Bv/KI+5CltCr8NJhDJ/MCZlhRP80Eq+VLx/JMI3ElDOwZI/1MScgTwKtc7J2IXWFkwTeM26RD3tXM9PVJYlPXayM8poNoLb4zXQ==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(376014)(82310400026)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(376014)(82310400026)(22082099003)(56012099003)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	vtZtT/bFT25eNDwnDyrVRJvuLXEiUGacK2HcB6jlGdZ/jyDA4nZtFR0qO0+kRjcFx4CeRfvUFcuSKlMKfBoL5Pi56Ku79np5GzJKBngNX6egE0PJAbvVbE5Zwpd4pPPYBjy5iR+a8+DfVzqj/j2eE5lgxGmKNX5XrPe4ujOmoGq3IJD71uWqF7udDb210QEc3EiGpCuO+0CePpIHkn+8QbGswaVSpx5JgvxbrTdMtTpzZJGF+P6/B1ziw56e8V9YOfaFamqmIW3N1UMfUZOVQyjWdceTiqh0oN7uW5YF8o0pJRN+jIfVe2leCRAdsnTKihumwOHv2xmdN3xcgfo8YqGMGewJux065jMMPdHZl+2OvT2vV0q30NjXcnah0iGJ9QtMvpSnxgMwEoiUENyUv9TdWPAI68bBbrM7hTxtn+hwnGNAVjsr6RocN6+C/8xE
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 20:47:47.2859
+	9hnnfux9rff6QyVgGeXb3rSKlEKjfCwTdRXzCnOywHos0jINX1lEXWF5qVfxQpHWpxa8aRO0CIKDsyLArzi5+wXjGyogdhMAzJZiq206fBYwzolM6S3aickTr2sUpG6gMiIR+g+lf2fsEytChwQNiNOPr9bXPoyf2hQfy0jUF8i3UJ5vLBqZyddrETc+UWnGS24wh4e2+vAeYw5tKU9EBg6zhhYVEtyHH/nETLu5+DksQxHFmtf7Z5tNwIz/1fi4FfzlAp+D5ghFlXzRb1HemO3Mbc5IDOT0i32XoeuQ1AV923ZHa9fBl9p8Ec2TduUVeTor0TSmlxgXZ85Ox3uyFf7l9LPmKnJ7BpvVPePzScsv3KOEgRE70Q5hMXeppPI4QjVZCqQ0/O4dUlhWPFXctMafRnhByS94N6qf//0FibVlnAUDhLah3mfi2Z7Qxj2d
+X-OriginatorOrg: list.ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 21:06:57.6881
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d7eb8735-1c97-4375-50dc-08dea630922c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 21194c10-b25a-4f70-5af9-08dea6333fd7
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	SJ1PEPF00002320.namprd03.prod.outlook.com
+	DS1PEPF0001709A.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR10MB6574
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB6686
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 29 Apr 2026 20:47:56 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19920
+ <meta-ti@lists.yoctoproject.org>; Wed, 29 Apr 2026 21:07:16 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19921
 
-When I rebased before moving from meta-arago to meta-ti, I accidentally
-removed the wrong patch.  Net result was this orphaned patch was left
-and imported incorrectly.  Remove it.
+meta-ti / na / 20260429204745.2593539-1-reatmon
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- ...01-include-mk-Fix-installing-subdirs.patch | 49 -------------------
- 1 file changed, 49 deletions(-)
- delete mode 100644 meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt/0001-incl=
-ude-mk-Fix-installing-subdirs.patch
+PRC Results: PASS
 
-diff --git a/meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt/0001-include-mk-=
-Fix-installing-subdirs.patch b/meta-ti-test/recipes-devtools/ltp-ddt/ltp-dd=
-t/0001-include-mk-Fix-installing-subdirs.patch
-deleted file mode 100644
-index 5f970a12..00000000
---- a/meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt/0001-include-mk-Fix-ins=
-talling-subdirs.patch
-+++ /dev/null
-@@ -1,49 +0,0 @@
--From 5907227ad86a93b084a52a7ff8dd8cb791c228a5 Mon Sep 17 00:00:00 2001
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  check-yocto-patches: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+Patches
+----------------------------------------
+All patches passed
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  apply-yocto-patch: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+master
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Summary:
+- Patch Series: [meta-ti][master][PATCH] ltp-ddt: Remove orphaned patch
+- Submitter: From: Ryan Eatmon <reatmon@ti.com>
 -From: Ryan Eatmon <reatmon@ti.com>
+- Date: Date: Wed, 29 Apr 2026 15:47:45 -0500
 -Date: Mon, 27 Apr 2026 11:02:32 -0500
--Subject: [PATCH] include/mk: Fix installing subdirs
--
--When installing sub directories, the INSTALL_MODE was being used for the
--dirs as well.  But in runtest/Makefile the INSTALL_MODE is being set to
--00644.  This causes the ddt dir to lose the execute bits and stop acting
--like a directory.
--
--Simple fix is create INSTALL_MODE_DIR and use it when installing
--directories.
--
--Upstream-Status: Pending
--
--Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-----
-- include/mk/env_post.mk  | 1 +
-- include/mk/functions.mk | 2 +-
-- 2 files changed, 2 insertions(+), 1 deletion(-)
--
--diff --git a/include/mk/env_post.mk b/include/mk/env_post.mk
--index ab31da73a..c2e85439a 100644
----- a/include/mk/env_post.mk
--+++ b/include/mk/env_post.mk
--@@ -58,6 +58,7 @@ INSTALL_TARGETS			:=3D $(patsubst $(abs_srcdir)/%,%,$(IN=
-STALL_TARGETS))
-- # The large majority of the files that we install are going to be apps an=
-d
-- # scripts, so let's chmod them like that.
-- INSTALL_MODE			?=3D 00775
--+INSTALL_MODE_DIR		?=3D 00775
--=20
-- $(abspath $(addprefix $(DESTDIR)/$(INSTALL_DIR)/,$(sort $(dir $(INSTALL_T=
-ARGETS) $(MAKE_TARGETS))))):
-- 	mkdir -p "$@"
--diff --git a/include/mk/functions.mk b/include/mk/functions.mk
--index 60dbed395..8e4bc973c 100644
----- a/include/mk/functions.mk
--+++ b/include/mk/functions.mk
--@@ -18,7 +18,7 @@ INSTALL_FILES		+=3D $$(abspath $$(DESTDIR)/$(3)/$(1))
--=20
-- $$(abspath $$(DESTDIR)/$(3)/$(1)): \
--     $$(abspath $$(dir $$(DESTDIR)/$(3)/$(1)))
---	install -m $$(INSTALL_MODE) $(shell test -d "$(2)/$(1)" && echo "-d") $(=
-PARAM) "$(2)/$(1)" $$@
--+	install $(shell test -d "$(2)/$(1)" || echo "-m $(INSTALL_MODE)") $(shel=
-l test -d "$(2)/$(1)" && echo "-m $(INSTALL_MODE_DIR) -d") $(PARAM) "$(2)/$=
-(1)" $$@
-- 	$(shell test -d "$(2)/$(1)" && echo "install -m "'$$(INSTALL_MODE) $(PAR=
-AM)' "$(2)/$(1)/*" -t '$$@')
-- endef
--=20
----=20
--2.43.0
--
---=20
-2.43.0
+- Num Patches: 1
+- Mailing List (public inbox) Commit SHA: 7ffd91c9bb4746cf4365c5888ad89627f=
+2d796aa
+
+Applied to:
+- Repository: lcpd-prc-meta-ti
+- Base Branch: master-wip
+- Commit Author: Ryan Eatmon <reatmon@ti.com>
+- Commit Subject: conf: Add falcon support natively
+- Commit SHA: 82ae4b828b3c5adcf725f73d2a91de05e4da81ec
+
+Patches
+----------------------------------------
+All patches applied
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  check-yocto-repo: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+master
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+PASS
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+  yocto-check-layers: PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+master - PASS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+All checks passed
+
+
 
 
