@@ -2,75 +2,75 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 833A5CD13D3
-	for <webhook@archiver.kernel.org>; Wed, 29 Apr 2026 16:44:46 +0000 (UTC)
-Received: from BL2PR02CU003.outbound.protection.outlook.com (BL2PR02CU003.outbound.protection.outlook.com [52.101.52.15])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.829.1777481081210335153
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 326EFCD13DD
+	for <webhook@archiver.kernel.org>; Wed, 29 Apr 2026 16:44:47 +0000 (UTC)
+Received: from CH5PR02CU005.outbound.protection.outlook.com (CH5PR02CU005.outbound.protection.outlook.com [40.107.200.32])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.796.1777481080363381090
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 29 Apr 2026 09:44:41 -0700
+ Wed, 29 Apr 2026 09:44:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=LVQJmoTE;
- spf=pass (domain: ti.com, ip: 52.101.52.15, mailfrom: reatmon@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=QsROpTxG;
+ spf=pass (domain: ti.com, ip: 40.107.200.32, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wkk3Ng5yn2bit3CUusKP0LxFroUNUQJHTUVmH93PDrprHrTlDAlj4W6kM43Njnrul9yOuoSGtuxlKHdO5KvILeU4Dc/lfosUK+7naphMhKVtXQEHUArRtmkeCQVXhWy64Dhh++TpKtOArzPlpIVW9cKg/pORc1KvYqFroLgVLm1xBVukZGuWeLsvHYOWxmAtdMyVIIsOGhYO36kAI2sCHDDO2aIcONTlhHC1yn3c95AW2Q/dqjPzM9ZCrwngZ3uoCoQY2ilBY5cXHQSSHxB3PeL/n7tXcI359KfVAtLdEKRY2A03iJ9ucQbtc6fbv9AOd/amIKGxepZjc69AK1yeug==
+ b=zEw3xvk1XMkStNF08Ybf+VFYwIRiz4/aGgL7slIghHP8n1RZCp9PueFCderWU6DHmubpwNynuYrsptdK1P5bJx9ftV/lrTq6KOsnqa7CTeWLA+vxYbxCYL4+hB6QmIz6eDGfL2TrKKO+TfYiKZCCTK2yXp056aaaxN4jwJbPApgvHtX0LoApUWJL0l8ciZVHN5LIXIovvdk4H1uDXHJ619Q8D8Zv1q2T2bcm6xys4s6w1sP0OPvGFKrpBcBr8f1WC0Rjhb+avaAt0RT92a3+UCjNbVe89ndlcd/Rk4ZZYlL+vUp1LgvKvt1kOO6SL12xWzC1XlHiKT3w86i5MTWQkw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=I2kXXxM1+u7a/lVFRHs/eY+GBotaZj1av2J3s7SBmfA=;
- b=DEsQuop5IuHUV+0zQjfP8ggdauztCZvCsq5SEmKgTZbsZrVm/+V4tQz7/uE7Ez+QXtlpxkDQUAPlE8A1DnzetecN+hjZbAGenpq00s/v2sVTYPVyjw1E6lKI6VntwL241B+2Vj3b8l194ieQJijbm3ezlKmCw2/g1IBjMiy+bFOvs4GyG4gBoh2uZYK4xwYCj5DJLeGnUhKpAjaWvsunZ3qVXg+uG8P6cWeYnQwieqLEIVrcm8w+Rekq7zMl0vyd4rKOuJk2qCm56LvAmOsXIXnZfP+PMQMZpl7Tt0MzY7uIqzM/GUAy/FjaZQpwymI8jRAnvTtS/5YdYdssX4h5PQ==
+ bh=vlXdrr89wDpoh2OWKsU4Cx2WWcS0daNsGLJ73lo6qk4=;
+ b=Z7yKl7INQxzkEQ6q2R1lIS5xEF74SnG8AKSAqFPuw+T9ozl9YMUGv53+MOvkprCL8RG1QMJ8S320CJVzWw+EIkjRvnaBlENcs9QmxSw6octhX9wP1NmMzP5TA6LHFXLFgP8RdnKv6q1rqZMFoiHNP/XrUXQsUtyZu8qFwh9QBhj59+inE3JaNTSTifsu5q5vDPMiy12/aBa57efaQyvnYn498ltGaPjgobqd1T5cQQ7x9oEgfTzXLMNqm+qeTlSbY0VQooPCtAN4umxpBAqK9NS6WFCv2OT14hV8XFhvIsANmPNvfwKZhMbrbXtpjTFsEwaX2DzmPVafPjLaqjYWPQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=I2kXXxM1+u7a/lVFRHs/eY+GBotaZj1av2J3s7SBmfA=;
- b=LVQJmoTEMjrZOcRg6JaXb5Xa+TizFGu71BMzSPDdKbua0R9ei6XB/xtjCvMFGNjSmGEKaH+qI0O+dAF4GnzvzA+jBnPJgxxVlu+9IiVJwdpv28evRzTPZUvAnwdK1htWP3sMj3q6Or1+QX2ob46us30volbBwmAFQfKOQo9M+fs=
-Received: from BN9PR03CA0734.namprd03.prod.outlook.com (2603:10b6:408:110::19)
- by SA1PR10MB7634.namprd10.prod.outlook.com (2603:10b6:806:38a::17) with
+ bh=vlXdrr89wDpoh2OWKsU4Cx2WWcS0daNsGLJ73lo6qk4=;
+ b=QsROpTxGhYhiAhGrcm5xvsSh371K53fhR/r84UDgMpstowyh/00IAK3KKX2K0EGGiVgXYgzAE2Vq5DAd0whubzbQ9ZvtN8eVteqWI4c8BknrJh41oKTXmlr1kuxGbv47o8/GI+4eCxzsF6Gsy9qmUJ5gowb44p/1jCB74itTBQI=
+Received: from BY5PR17CA0039.namprd17.prod.outlook.com (2603:10b6:a03:167::16)
+ by IA3PR10MB8736.namprd10.prod.outlook.com (2603:10b6:208:57f::16) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Wed, 29 Apr
- 2026 16:44:35 +0000
-Received: from BN2PEPF000044AB.namprd04.prod.outlook.com
- (2603:10b6:408:110:cafe::74) by BN9PR03CA0734.outlook.office365.com
- (2603:10b6:408:110::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.28 via Frontend Transport; Wed,
+ 2026 16:44:36 +0000
+Received: from MWH0EPF000C6193.namprd02.prod.outlook.com
+ (2603:10b6:a03:167:cafe::69) by BY5PR17CA0039.outlook.office365.com
+ (2603:10b6:a03:167::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.30 via Frontend Transport; Wed,
  29 Apr 2026 16:44:35 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BN2PEPF000044AB.mail.protection.outlook.com (10.167.243.106) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ MWH0EPF000C6193.mail.protection.outlook.com (10.167.249.107) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
  15.20.9846.18 via Frontend Transport; Wed, 29 Apr 2026 16:44:34 +0000
-Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
+ 2026 11:44:33 -0500
+Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
  2026 11:44:32 -0500
-Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
- 2026 11:44:32 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Wed, 29 Apr 2026 11:44:32 -0500
 Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TGiWPx3487240;
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TGiWED3487246;
 	Wed, 29 Apr 2026 11:44:32 -0500
 Received: from reatmon by grumpy with local (Exim 4.97)
 	(envelope-from <reatmon@ti.com>)
-	id 1wI81Y-00000006oNa-2e63;
+	id 1wI81Y-00000006oO3-3BLx;
 	Wed, 29 Apr 2026 11:44:32 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
 	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH v3 02/12] meta-ti-test: Import the recipes-benchmark recipes
-Date: Wed, 29 Apr 2026 11:44:22 -0500
-Message-ID: <20260429164432.1623594-2-reatmon@ti.com>
+Subject: [meta-ti][master][PATCH v3 08/12] meta-ti-test: Import the recipes-kernel recipes
+Date: Wed, 29 Apr 2026 11:44:28 -0500
+Message-ID: <20260429164432.1623594-8-reatmon@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260429164432.1623594-1-reatmon@ti.com>
 References: <20260429164432.1623594-1-reatmon@ti.com>
@@ -80,429 +80,243 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044AB:EE_|SA1PR10MB7634:EE_
-X-MS-Office365-Filtering-Correlation-Id: 45713e22-fad2-4eb6-f149-08dea60e9877
+X-MS-TrafficTypeDiagnostic: MWH0EPF000C6193:EE_|IA3PR10MB8736:EE_
+X-MS-Office365-Filtering-Correlation-Id: 159e0292-3c89-4478-cdbb-08dea60e9845
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|36860700016|1800799024|82310400026|13003099007|22082099003|18002099003|56012099003;
+	BCL:0;ARA:13230040|82310400026|1800799024|376014|36860700016|22082099003|18002099003|56012099003;
 X-Microsoft-Antispam-Message-Info: 
-	2A6+jQDXMKmHV4FRt3hHtqtEBdyUMMXg4U6Ij6/Gs0qNVhUTTohxAJpFa1nvXeTThS4oeOlHHL1RmtbafYwKrb4LjmHvcPSFZC/aGoZq1FCgiyTA3Ln/wvEKh8mXeRdKHjYMACAXck9r2/3dMzyyaOfv0djlTKYLhclGz6c5qkXCWEznakAc/moxqY999khnavGG9QEVG91HdfTSZ9JF0kxYQFBs3q7VvxDPOlKuUH5ssce4T+WoPzM3E8P4qI9hluQoGWDSutUS3WGzDdLfHpfR1UQhp20rLItvICvLFsVzdISl8m14U6KkmMCFMXPo/ilpduJ5pG7zzb8ie3zZ08uhBYnlNog78J45CTW2TsiKjI65thvuJtCyT/g5a2azOXxgrH1t3jJaCZMtAbhhp7Zz9kQ8ZZ6JBmCudg3L3Tzf8opLQUPmm1srXkZFSD2U6ViUbvgpkVja3FspBQFT3zZvRyVD+CLgG3gMwtFtOauj6wRum/FnSLrx3PcNdYxXt0+DlKzjluuGbzK1Sb7fyvT7Sys4JfzDsic8uFpdoZFRcIdvHTHN2UTf2MgYxFHRpkHjFe32CjfyaGAlcEP6aYQ7x4k7rdH9nMSapWWBXnVfVsvztzy6g4kGPwW0beyySTSTQNqrW3qZRQ5LvzyScw4KUfVKyViuRKtsVle5/fFZO4cjIX6LZey3YP0K0Ozy22uxALQRtZPudZnE/vhR+8kvDB73BTfYxG4YgDM6pBQ=
+	nrmxKP7fGjXcGvwEEa+2juxYsGCKPUKKJmc03MC4k81Y1zjWlOOX6rV7sxb6/0rknjm/Qz9iYaiUUcxdH7HyxUlKWD5D560LksB3gqkbmmV1yUcBXUnsM/8O3dtm9opyttySzOnbtqf9oPvj1+jkvhHfcAIaMNsULkD9mYhIgY8w5mJuOO+zF5Aok4fy8NuBI7IWrdqd6cy8oXiBWq/CqEiMmeKyPyqAdC8i+nf89RiDBUvcpqfCw2SVzz9LcTWQTmVEex0OKXHeq0IYhspfzpMYqta2Xzm1DFfpDAaWnTxxENFLfurf6qpIQfFS8mIvfhUqndaNZstY4DYEz/OpCBoMLYcGz0zNJBO2bA4zqVMttJ0ciZKTdAHExLKTs739B7Hri8/Y1a9cwZhB4+Wig4/r9phTNDOFPImlAH+rvDtqWxnzgVtR5Syrk9hW6otqVOi6NStpLuMjTPxD2bGnjWRFp3ZX/fZsGrw8kT/j3UX3yfX9OBo6gALza6DfOmwcYiG3hUdRfCED8Fm9RQJkVnC5/8Y6nzCjAmpazZzWCxd4ddHtbOJvglx7g2LMFWUM5VoA9TaW5U+sdrK1H7sryX6+5sZvr3SWYdL+47Y9hTvVhGF5PcsDCiAEpTX6u5asjYyqmBZ9zmoeSgXXjhRqNL1acWHMqlgCRYrRrAU1SmIcLGx3BzkPblt2dSjHL8/gaKDA35kx8MPZHw34PMcdA3AEXqolvwcanQw/KTiS4642DZy69Do6qHd/e4xiGDRH0PGqdMDMoaLKvF7mREw9+Q==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(13003099007)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(376014)(36860700016)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	hBVdN/6v3oTdVFQWscvJEMi4/nelpASAx1GolFJNpd5359QKViDcmh3bRDVMHyQ4MhTax052QSfyDgJuGKDx/nrtncpipAwhcTITv2SpAjMO4txd8hJFoi8EZ3rt+K2SSl/ded7zJgVtKHTSIbh+/PjfLU3ozOBb3YrcjNbLB0DvoWZBMqCVFv6Ms8ObiTpbLfOAJ7c9Mxzq6+Yd4sWQNAYIICj6XQUJmcUsJWM7MSPrwtGbxdi0cb3yejF6XShV8rsPBEBDfRhm1wi9uYzwa2y3qPMWnYCdJwYj1HLf2Y7zYwlpKJoGbSY4xJlTCfssSTOGRtcwyic3rz9AjzbzN5nrYh/QStFFe93ek9PPWhPKNEOroDN6gg9TEOJU1nJqGumk2bruaxcR+/D9SCf7WwMEKz0Z0pAwz7vVSJ8klEFgBDUhRtX0V9MbgEXtE0Oe
+	di24MabSEVzMsQteiZ0CtwHnUvKZUI+NSjhIgRYOkpTOiL00943u+DkwAWF4aU/5WnZI4Vix1NVSbsp72nDmk4fRm6CIq9SQ0b5Et0AumYP0wfyIBP5/WI3zaTMlWeKfNAq8G9fznFPPWG2qopmovFpjQMfp6USF79kpnAFHJUE1A0041fj6oYyzumt/oVB/Yel3hXXXA7kQiW47jJJ/tF24U1sFThv8R/0TeHoBVJiudR+xxwi58ygnOxesqlBuaVCINZqHqSBhAIfhqHUFjQltJWItn9fhKDaPPo1NDEwIda+CdgV7Ql7q//wG+uRbNgOTLeE5rzzsaXt/GLAXsqjZ2+QkwVRW2klHA04U4lYhG+pVkJghXGW1q5NQqpQ9kXFZzSnwOuH/WxIQWAE4GnA8QsSz08hhtqxZmoTzkz57L89x7frLQlgOAx4pcJrk
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 16:44:34.9790
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 16:44:34.6378
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 45713e22-fad2-4eb6-f149-08dea60e9877
+X-MS-Exchange-CrossTenant-Network-Message-Id: 159e0292-3c89-4478-cdbb-08dea60e9845
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	BN2PEPF000044AB.namprd04.prod.outlook.com
+	MWH0EPF000C6193.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB7634
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR10MB8736
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 29 Apr 2026 16:44:46 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19910
+ <meta-ti@lists.yoctoproject.org>; Wed, 29 Apr 2026 16:44:47 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19907
 
 We are moving the meta-arago-test layer to meta-ti-test.  This commit
-imports all of the recipes under recipes-benchmark.
+imports all of the recipes under recipes-kernel.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
 v3: No changes.
 v2: No changes.
 
- .../licenses/Stream_Benchmark_License         | 34 +++++++++++++
- .../arm-benchmarks/arm-benchmarks_1.3.bb      | 23 +++++++++
- .../arm-ddr-bandwidth/arm-ddr-bandwidth.bb    | 28 +++++++++++
- .../coremark/coremark-ti.inc                  |  3 ++
- ..._main-Remove-printing-compiler-flags.patch | 41 ++++++++++++++++
- .../coremark/coremark_%.bbappend              |  4 ++
- .../nbench-byte/nbench-byte-ti.inc            |  1 +
- .../nbench-byte/nbench-byte_%.bbappend        |  4 ++
- .../openssl-perf/openssl-perf.bb              | 49 +++++++++++++++++++
- .../stream/stream_%.bbappend                  | 13 +++++
- .../recipes-benchmark/stream/stream_5.10.bb   | 26 ++++++++++
- 11 files changed, 226 insertions(+)
- create mode 100644 meta-ti-test/licenses/Stream_Benchmark_License
- create mode 100644 meta-ti-test/recipes-benchmark/arm-benchmarks/arm-bench=
-marks_1.3.bb
- create mode 100644 meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-dd=
-r-bandwidth.bb
- create mode 100644 meta-ti-test/recipes-benchmark/coremark/coremark-ti.inc
- create mode 100644 meta-ti-test/recipes-benchmark/coremark/coremark/0001-c=
-ore_main-Remove-printing-compiler-flags.patch
- create mode 100644 meta-ti-test/recipes-benchmark/coremark/coremark_%.bbap=
-pend
- create mode 100644 meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-=
-ti.inc
- create mode 100644 meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_=
-%.bbappend
- create mode 100644 meta-ti-test/recipes-benchmark/openssl-perf/openssl-per=
-f.bb
- create mode 100644 meta-ti-test/recipes-benchmark/stream/stream_%.bbappend
- create mode 100644 meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
+ ...Fix-Makefile-for-to-build-with-yocto.patch | 46 ++++++++++++++++
+ .../hwspinlocktest/hwspinlocktest_0.1.bb      | 18 +++++++
+ .../kernel-selftest/kernel-selftest-ti.inc    | 53 +++++++++++++++++++
+ .../kernel-selftest/kernel-selftest.bbappend  |  4 ++
+ .../recipes-kernel/pcitest/pcitest_5.10.bb    | 18 +++++++
+ 5 files changed, 139 insertions(+)
+ create mode 100644 meta-ti-test/recipes-kernel/hwspinlocktest/files/0001-F=
+ix-Makefile-for-to-build-with-yocto.patch
+ create mode 100644 meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlockte=
+st_0.1.bb
+ create mode 100644 meta-ti-test/recipes-kernel/kernel-selftest/kernel-self=
+test-ti.inc
+ create mode 100644 meta-ti-test/recipes-kernel/kernel-selftest/kernel-self=
+test.bbappend
+ create mode 100644 meta-ti-test/recipes-kernel/pcitest/pcitest_5.10.bb
 
-diff --git a/meta-ti-test/licenses/Stream_Benchmark_License b/meta-ti-test/=
-licenses/Stream_Benchmark_License
+diff --git a/meta-ti-test/recipes-kernel/hwspinlocktest/files/0001-Fix-Make=
+file-for-to-build-with-yocto.patch b/meta-ti-test/recipes-kernel/hwspinlock=
+test/files/0001-Fix-Makefile-for-to-build-with-yocto.patch
 new file mode 100644
-index 00000000..cf1c8e00
+index 00000000..3386337f
 --- /dev/null
-+++ b/meta-ti-test/licenses/Stream_Benchmark_License
-@@ -0,0 +1,34 @@
-+*=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+*-----------------------------------------------------------------------
-+* Copyright 1991-2003: John D. McCalpin
-+*-----------------------------------------------------------------------
-+* License:
-+*  1. You are free to use this program and/or to redistribute
-+*     this program.
-+*  2. You are free to modify this program for your own use,
-+*     including commercial use, subject to the publication
-+*     restrictions in item 3.
-+*  3. You are free to publish results obtained from running this
-+*     program, or from works that you derive from this program,
-+*     with the following limitations:
-+*     3a. In order to be referred to as "STREAM benchmark results",
-+*         published results must be in conformance to the STREAM
-+*         Run Rules, (briefly reviewed below) published at
-+*         http://www.cs.virginia.edu/stream/ref.html
-+*         and incorporated herein by reference.
-+*         As the copyright holder, John McCalpin retains the
-+*         right to determine conformity with the Run Rules.
-+*     3b. Results based on modified source code or on runs not in
-+*         accordance with the STREAM Run Rules must be clearly
-+*         labelled whenever they are published.  Examples of
-+*         proper labelling include:
-+*         "tuned STREAM benchmark results"=20
-+*         "based on a variant of the STREAM benchmark code"
-+*         Other comparable, clear and reasonable labelling is
-+*         acceptable.
-+*     3c. Submission of results to the STREAM benchmark web site
-+*         is encouraged, but not required.
-+*  4. Use of this program or creation of derived works based on this
-+*     program constitutes acceptance of these licensing restrictions.
-+*  5. Absolutely no warranty is expressed or implied.
-+*-----------------------------------------------------------------------
-diff --git a/meta-ti-test/recipes-benchmark/arm-benchmarks/arm-benchmarks_1=
-.3.bb b/meta-ti-test/recipes-benchmark/arm-benchmarks/arm-benchmarks_1.3.bb
-new file mode 100644
-index 00000000..8cdd1a6f
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/arm-benchmarks/arm-benchmarks_1.3.bb
-@@ -0,0 +1,23 @@
-+SUMMARY =3D "ARM Benchmarks"
-+HOMEPAGE =3D "https://gforge.ti.com/gf/project/am_benchmarks/"
-+LICENSE =3D "BSD-3-Clause"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7aefb5e1cffc7b6a3ef18b803f95792=
-2"
-+SECTION =3D "system"
++++ b/meta-ti-test/recipes-kernel/hwspinlocktest/files/0001-Fix-Makefile-fo=
+r-to-build-with-yocto.patch
+@@ -0,0 +1,46 @@
++From 0a085bff54c3f02c20412c5f5a4060c2acb20d4c Mon Sep 17 00:00:00 2001
++From: Judith Mendez <jm@ti.com>
++Date: Mon, 18 Nov 2024 10:26:55 -0600
++Subject: [PATCH 1/2] Fix Makefile for to build with yocto
 +
-+PR =3D "r13"
++Fix Makefile that builds hwspinlocktest out-of-tree-module
++for yocto recipie to be able to build the module.
 +
-+BRANCH ?=3D "master"
-+SRCREV =3D "fefaf9bdd6f36ab0cebaab8dbf34e5beb50f471c"
-+
-+SRC_URI =3D "git://git.ti.com/git/apps/arm_benchmarks.git;protocol=3Dhttps=
-;branch=3D${BRANCH}"
-+
-+do_compile() {
-+	export CROSS_COMPILE=3D${TARGET_PREFIX}
-+	export CFLAGS=3D'${TARGET_CC_ARCH} -std=3Dgnu11'
-+	# build the release version
-+	oe_runmake release CC=3D"${CC}"
-+}
-+do_install() {
-+
-+	oe_runmake DESTDIR=3D${D} install
-+}
-diff --git a/meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-ddr-bandw=
-idth.bb b/meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-ddr-bandwidt=
-h.bb
-new file mode 100644
-index 00000000..29db78c3
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-ddr-bandwidth.bb
-@@ -0,0 +1,28 @@
-+SUMMARY =3D "Benchmark for checking DDR bandwidth"
-+HOMEPAGE =3D "https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/tre=
-e/arm_apps/arm_ddr_bandwidth/runLmDDRBandwidth.sh"
-+LICENSE =3D "CC-BY-SA-3.0"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6e0ae7214f6c74c149cb25f373057fa=
-9"
-+
-+PV =3D "1.0"
-+
-+SRC_URI =3D " \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/arm_app=
-s/arm_ddr_bandwidth/runLmDDRBandwidth.sh;name=3DrunLmDDRBandwidth \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/LICENSE=
-;name=3Dlicense \
-+"
-+SRC_URI[runLmDDRBandwidth.sha256sum] =3D "67997d721b351344d8788200a15bb364=
-0093045bc25f2b5307dd331ebd1556a3"
-+SRC_URI[license.sha256sum] =3D "7febd1df714fa4b1e44fe0b0f73ceac7f9b9f97326=
-695a0cc7074bd6c8d263e3"
-+
-+S =3D "${UNPACKDIR}"
-+
-+do_install() {
-+    install -d ${D}${datadir}/matrix-gui-2.0/apps
-+
-+    install -d ${D}${bindir}
-+    install -m 0755 ${S}/runLmDDRBandwidth.sh ${D}${bindir}/runLmDDRBandwi=
-dth.sh
-+}
-+
-+FILES:${PN} =3D " \
-+    ${datadir}/matrix-gui-2.0/apps \
-+    ${bindir}/runLmDDRBandwidth.sh \
-+"
-+
-diff --git a/meta-ti-test/recipes-benchmark/coremark/coremark-ti.inc b/meta=
--ti-test/recipes-benchmark/coremark/coremark-ti.inc
-new file mode 100644
-index 00000000..9a1d9b89
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/coremark/coremark-ti.inc
-@@ -0,0 +1,3 @@
-+FILESEXTRAPATHS:prepend :=3D "${THISDIR}/coremark:"
-+
-+SRC_URI +=3D "file://0001-core_main-Remove-printing-compiler-flags.patch"
-diff --git a/meta-ti-test/recipes-benchmark/coremark/coremark/0001-core_mai=
-n-Remove-printing-compiler-flags.patch b/meta-ti-test/recipes-benchmark/cor=
-emark/coremark/0001-core_main-Remove-printing-compiler-flags.patch
-new file mode 100644
-index 00000000..ef7c78b2
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/coremark/coremark/0001-core_main-Remov=
-e-printing-compiler-flags.patch
-@@ -0,0 +1,41 @@
-+From 0af4e2298ccacc8afc0294b7a731f0e866155427 Mon Sep 17 00:00:00 2001
-+From: Ryan Eatmon <reatmon@ti.com>
-+Date: Mon, 1 Dec 2025 12:21:23 -0600
-+Subject: [PATCH] core_main: Remove printing compiler flags
-+
-+Reproducible builds do not like including anything that references the
-+build environment on the host machine.  This would include printing out
-+the COMPILER_FLAGS macro.  Substitute it with "".
-+
-+Upstream-Status: Inappropriate [OE-Specific]
-+
-+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
++Upstream-Status: Inactive-Upstream [private repo]
++Signed-off-by: Judith Mendez <jm@ti.com>
 +---
-+ core_main.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ Makefile | 18 ++++++++++--------
++ 1 file changed, 10 insertions(+), 8 deletions(-)
 +
-+diff --git a/core_main.c b/core_main.c
-+index a4beeb6..f0ab87f 100644
-+--- a/core_main.c
-++++ b/core_main.c
-+@@ -380,7 +380,7 @@ for (i =3D 0; i < MULTITHREAD; i++)
-+     ee_printf("Iterations       : %lu\n",
-+               (long unsigned)default_num_contexts * results[0].iterations=
-);
-+     ee_printf("Compiler version : %s\n", COMPILER_VERSION);
-+-    ee_printf("Compiler flags   : %s\n", COMPILER_FLAGS);
-++    ee_printf("Compiler flags   : %s\n", ""); //Reproducible build fix: C=
-OMPILER_FLAGS);
-+ #if (MULTITHREAD > 1)
-+     ee_printf("Parallel %s : %d\n", PARALLEL_METHOD, default_num_contexts=
-);
-+ #endif
-+@@ -410,7 +410,7 @@ for (i =3D 0; i < MULTITHREAD; i++)
-+                       default_num_contexts * results[0].iterations
-+                           / time_in_secs(total_time),
-+                       COMPILER_VERSION,
-+-                      COMPILER_FLAGS);
-++                      ""); //Reproducible build fix: COMPILER_FLAGS);
-+ #if defined(MEM_LOCATION) && !defined(MEM_LOCATION_UNSPEC)
-+             ee_printf(" / %s", MEM_LOCATION);
-+ #else
-+--=20
-+2.43.0
++diff --git a/Makefile b/Makefile
++index 23ee629..d8fe76d 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -3,15 +3,17 @@
++ # TI OMAP HwSpinlock Unit Test
++ #
 +
-diff --git a/meta-ti-test/recipes-benchmark/coremark/coremark_%.bbappend b/=
-meta-ti-test/recipes-benchmark/coremark/coremark_%.bbappend
++-obj-m =3D omap_hwspinlock_test.o
+++obj-m :=3D omap_hwspinlock_test.o
+++
+++SRC :=3D $(shell pwd)
++
++ all:
++-ifeq ($(KERNELDIR),)
++-	@echo "Error: KERNELDIR not set, exiting..."
++-	@echo "Eg: make ARCH=3Darm CROSS_COMPILE=3Darm-linux-gnueabihf- KERNELDI=
+R=3D<linux-kernel rootdir>"
++-	@exit 1
++-endif
++-	make ${MAKE_OPTS} -C $(KERNELDIR) M=3D$(PWD) modules
+++	$(MAKE) -C $(KERNEL_SRC) M=3D$(SRC)
+++
+++modules_install:
+++	$(MAKE) -C $(KERNEL_SRC) M=3D$(SRC) modules_install
++
++ clean:
++-	$(RM) -r *.o *.ko *.mod* *.dwo .*.dwo .*.cmd *.symvers modules.order
+++	rm -f *.o *~ core .depend .*.cmd *.ko *.mod.c
+++	rm -f Module.markers Module.symvers modules.order
+++	rm -rf .tmp_versions Modules.symvers
++--
++2.47.0
+diff --git a/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.=
+bb b/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb
 new file mode 100644
-index 00000000..952d6e99
+index 00000000..cc566b37
 --- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/coremark/coremark_%.bbappend
-@@ -0,0 +1,4 @@
-+COREMARK_TI =3D ""
-+COREMARK_TI:ti-soc =3D "coremark-ti.inc"
++++ b/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb
+@@ -0,0 +1,18 @@
++SUMMARY =3D "Build hwspinlock test as an external Linux kernel module"
++DESCRIPTION =3D "${SUMMARY}"
++LICENSE =3D "GPL-2.0-only | BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dbfa02c83df161e37647ee23a2c7eacd=
+4"
 +
-+require ${COREMARK_TI}
-diff --git a/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-ti.inc =
-b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-ti.inc
-new file mode 100644
-index 00000000..f571f368
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-ti.inc
-@@ -0,0 +1 @@
-+ARM_INSTRUCTION_SET =3D "arm"
-diff --git a/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_%.bbapp=
-end b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_%.bbappend
-new file mode 100644
-index 00000000..dfe5ea96
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_%.bbappend
-@@ -0,0 +1,4 @@
-+NBENCH_BYTE_TI =3D ""
-+NBENCH_BYTE_TI:ti-soc =3D "nbench-byte-ti.inc"
++inherit module
 +
-+require ${NBENCH_BYTE_TI}
-diff --git a/meta-ti-test/recipes-benchmark/openssl-perf/openssl-perf.bb b/=
-meta-ti-test/recipes-benchmark/openssl-perf/openssl-perf.bb
-new file mode 100644
-index 00000000..04a3fb79
---- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/openssl-perf/openssl-perf.bb
-@@ -0,0 +1,49 @@
-+SUMMARY =3D "Benchmarks for checking various OpenSSL performance functions=
-"
-+HOMEPAGE =3D "https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/tre=
-e/cryptos_apps_scripts/"
-+LICENSE =3D "CC-BY-SA-3.0"
-+LIC_FILES_CHKSUM =3D "file://${UNPACKDIR}/LICENSE;md5=3D6e0ae7214f6c74c149=
-cb25f373057fa9"
-+
-+PV =3D "1.0"
-+
-+SRC_URI =3D " \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_perf_scripts/openssl_perf.sh;name=3Dopenssl_perf \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_aes256_encdec_scripts/openssl_aes256_encdec.sh;name=
-=3Dopenssl_aes256_encdec \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_display_cert_scripts/openssl_display_cert.sh;name=3Do=
-penssl_display_cert \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_gen_cert_scripts/openssl_gen_cert.sh;name=3Dopenssl_g=
-en_cert \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_gen_pubkey_scripts/openssl_gen_pubkey.sh;name=3Dopens=
-sl_gen_pubkey \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_gen_sha1hash_scripts/openssl_gen_sha1hash.sh;name=3Do=
-penssl_gen_sha1hash \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
-_apps_scripts/openssl_start_server_scripts/openssl_start_server.sh;name=3Do=
-penssl_start_server \
-+    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/LICENSE=
-;name=3Dlicense \
-+"
-+SRC_URI[openssl_perf.sha256sum] =3D "5769e841b977d6a858da38826c2cf47c288ed=
-642614c5b6f802409cb3601ab29"
-+SRC_URI[openssl_aes256_encdec.sha256sum] =3D "1a488e3ba98f6f2e5f73c14681b0=
-452ba902aecbb174e4e74b524dda4c5eda7a"
-+SRC_URI[openssl_display_cert.sha256sum] =3D "fbe80fe1afe29f777e346ecd86d89=
-e1f27cedc1bb745a9a9bc5cd38f2d566a3e"
-+SRC_URI[openssl_gen_cert.sha256sum] =3D "47bfc80b88edebcc4d82ee3816bc05b95=
-ca0d42c42e7f3b83e74fa6f9c6c01ef"
-+SRC_URI[openssl_gen_pubkey.sha256sum] =3D "4581e2329afeb814602c4874ffa038d=
-95a4bcc8b23df24d7be25822d0dd6c433"
-+SRC_URI[openssl_gen_sha1hash.sha256sum] =3D "f338f8c3067ebb1c5710b16b91e8b=
-9e38685b05fcc072060ec0c62bd10cefd97"
-+SRC_URI[openssl_start_server.sha256sum] =3D "e23499210f701ef831d39a8c732f3=
-4f4b06fb3ba2d069c4a95ef25ae59f3c93e"
-+SRC_URI[license.sha256sum] =3D "7febd1df714fa4b1e44fe0b0f73ceac7f9b9f97326=
-695a0cc7074bd6c8d263e3"
-+
-+S =3D "${UNPACKDIR}"
-+
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m 0755 ${S}/openssl_perf.sh ${D}${bindir}/openssl_perf.sh
-+    install -m 0755 ${S}/openssl_aes256_encdec.sh ${D}${bindir}/openssl_ae=
-s256_encdec.sh
-+    install -m 0755 ${S}/openssl_display_cert.sh ${D}${bindir}/openssl_dis=
-play_cert.sh
-+    install -m 0755 ${S}/openssl_gen_cert.sh ${D}${bindir}/openssl_gen_cer=
-t.sh
-+    install -m 0755 ${S}/openssl_gen_pubkey.sh ${D}${bindir}/openssl_gen_p=
-ubkey.sh
-+    install -m 0755 ${S}/openssl_gen_sha1hash.sh ${D}${bindir}/openssl_gen=
-_sha1hash.sh
-+    install -m 0755 ${S}/openssl_start_server.sh ${D}${bindir}/openssl_sta=
-rt_server.sh
-+}
-+
-+FILES:${PN} =3D "\
-+    ${bindir}/openssl_perf.sh \
-+    ${bindir}/openssl_aes256_encdec.sh \
-+    ${bindir}/openssl_display_cert.sh \
-+    ${bindir}/openssl_gen_cert.sh \
-+    ${bindir}/openssl_gen_pubkey.sh \
-+    ${bindir}/openssl_gen_sha1hash.sh \
-+    ${bindir}/openssl_start_server.sh \
++SRC_URI =3D "\
++    git://github.com/TexasInstruments/omap-hwspinlock-test;protocol=3Dhttp=
+s;branch=3Dmaster \
++    file://0001-Fix-Makefile-for-to-build-with-yocto.patch \
 +"
 +
-diff --git a/meta-ti-test/recipes-benchmark/stream/stream_%.bbappend b/meta=
--ti-test/recipes-benchmark/stream/stream_%.bbappend
++SRCREV =3D "1d154fbe5b56ef81045763f574c2098a35d6a8b8"
++
++# The inherit of module.bbclass will automatically name module packages wi=
+th
++# "kernel-module-" prefix as required by the oe-core build environment.
++
++RPROVIDES:${PN} +=3D "kernel-module-hwspinlocktest"
+diff --git a/meta-ti-test/recipes-kernel/kernel-selftest/kernel-selftest-ti=
+.inc b/meta-ti-test/recipes-kernel/kernel-selftest/kernel-selftest-ti.inc
 new file mode 100644
-index 00000000..97e0c6a0
+index 00000000..bae5b7ab
 --- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/stream/stream_%.bbappend
-@@ -0,0 +1,13 @@
-+INSANE_SKIP:${PN} +=3D "ldflags"
-+INSANE_SKIP:${PN}-openmp +=3D "ldflags"
++++ b/meta-ti-test/recipes-kernel/kernel-selftest/kernel-selftest-ti.inc
+@@ -0,0 +1,53 @@
++# Tests not enabled:
++#   openat2 has buildpath errors
 +
-+PR:append =3D ".ti1"
++TEST_LIST +=3D "\
++    arm64 \
++    breakpoints \
++    capabilities \
++    cgroup \
++    clone3 \
++    core \
++    cpu-hotplug \
++    cpufreq \
++    efivarfs \
++    exec \
++    filesystems \
++    filesystems/binderfs \
++    filesystems/epoll \
++    firmware \
++    fpu \
++    ftrace \
++    futex \
++    gpio \
++    intel_pstate \
++    ipc \
++    kcmp \
++    kvm \
++    livepatch \
++    membarrier \
++    memfd \
++    mqueue \
++    mincore \
++    net \
++    net/mptcp \
++    ptrace \
++    resq \
++    rtc \
++    seccomp \
++    sigaltstack \
++    size \
++    tc-testing \
++    timers \
++    tmpfs \
++    tpm2 \
++    user_events \
++    vDSO \
++    watchdog \
++"
 +
-+BRANCH =3D "sdk"
-+SRCREV =3D "96156d407d9a4e5fac4513f3d3f60a414b3355cd"
++TEST_LIST:append:bsp-ti-6_18 =3D " \
++    pci_endpoint \
++"
 +
-+do_compile:prepend() {
-+    #Explicitly clear some variables to insure no unexpected optimizations=
- are being passed in.
-+    unset CFLAGS
-+    unset LDFLAGS
-+}
-diff --git a/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb b/meta-ti=
--test/recipes-benchmark/stream/stream_5.10.bb
++INSANE_SKIP:${PN} +=3D "staticdev textrel"
+diff --git a/meta-ti-test/recipes-kernel/kernel-selftest/kernel-selftest.bb=
+append b/meta-ti-test/recipes-kernel/kernel-selftest/kernel-selftest.bbappe=
+nd
 new file mode 100644
-index 00000000..484be34d
+index 00000000..163a074d
 --- /dev/null
-+++ b/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
-@@ -0,0 +1,26 @@
-+SUMMARY =3D "Stream Benchmark"
-+HOMEPAGE =3D "http://www.cs.virginia.edu/stream/"
-+LICENSE =3D "Stream_Benchmark_License"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dbca8cbe07976fe64c8946378d08=
-314b0"
-+SECTION =3D "system"
++++ b/meta-ti-test/recipes-kernel/kernel-selftest/kernel-selftest.bbappend
+@@ -0,0 +1,4 @@
++KERNEL_SELFTEST_TI =3D ""
++KERNEL_SELFTEST_TI:ti-soc =3D "kernel-selftest-ti.inc"
 +
-+PR =3D "r0"
++require ${KERNEL_SELFTEST_TI}
+diff --git a/meta-ti-test/recipes-kernel/pcitest/pcitest_5.10.bb b/meta-ti-=
+test/recipes-kernel/pcitest/pcitest_5.10.bb
+new file mode 100644
+index 00000000..9ab0dbed
+--- /dev/null
++++ b/meta-ti-test/recipes-kernel/pcitest/pcitest_5.10.bb
+@@ -0,0 +1,18 @@
++SUMMARY =3D "Linux Kernel PCI test"
++LICENSE =3D "GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6bc538ed5bd9a7fc9398086aedcd7e4=
+6"
 +
-+BRANCH ?=3D "master"
-+SRCREV =3D "b66f2bab5d6d0b35732ef8406ae03873725a3306"
++BRANCH =3D "ti-linux-5.10.y"
++SRCREV =3D "73aa709ca10103b61fba3a07471dbb4dcb56db45"
++SRC_URI =3D "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git;prot=
+ocol=3Dhttps;branch=3D${BRANCH}"
 +
-+SRC_URI =3D "git://git.ti.com/git/arago-project-org/stream.git;protocol=3D=
-https;branch=3D${BRANCH}"
-+
-+PACKAGES =3D+ "${PN}-openmp"
-+
-+do_compile() {
-+	oe_runmake CC=3D"${CC}"
++do_compile () {
++	cd ${S}/tools/pci
++	${CC} ${CFLAGS} ${LDFLAGS} -o pcitest pcitest.c
 +}
 +
-+do_install() {
-+	install -d ${D}/${bindir}
-+	install -m 0755 ${S}/stream_c ${D}/${bindir}/
-+	install -m 0755 ${S}/stream_c_openmp ${D}/${bindir}/
++do_install () {
++	install -d ${D}${bindir}
++	install -m 0755 ${S}/tools/pci/pcitest ${D}${bindir}
++	install -m 0755 ${S}/tools/pci/pcitest.sh ${D}${bindir}
 +}
-+
-+FILES:${PN}-openmp =3D "${bindir}/stream_c_openmp"
 --=20
 2.43.0
 
