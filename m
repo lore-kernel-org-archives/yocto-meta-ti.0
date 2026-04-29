@@ -2,40 +2,40 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE255CD13D2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD65ECCFA13
 	for <webhook@archiver.kernel.org>; Wed, 29 Apr 2026 15:23:43 +0000 (UTC)
-Received: from CH5PR02CU005.outbound.protection.outlook.com (CH5PR02CU005.outbound.protection.outlook.com [40.107.200.12])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13938.1777476216704667281
+Received: from BL0PR03CU003.outbound.protection.outlook.com (BL0PR03CU003.outbound.protection.outlook.com [52.101.53.55])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14123.1777476214848625778
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 29 Apr 2026 08:23:36 -0700
+ Wed, 29 Apr 2026 08:23:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=rRXUOrAj;
- spf=pass (domain: ti.com, ip: 40.107.200.12, mailfrom: reatmon@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=l0RZZ7fD;
+ spf=pass (domain: ti.com, ip: 52.101.53.55, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oPmv3rSwhxFV50nqO4HXoYFEjdtwhjYJuRkz1tpHyEDev77i3DhVPrs4KjAN/2fZaoRH7P9wWoAeYvQsRknqzwDbZQYSu86xi4udlSrRlwck5k4BUwYPZgUVFgy/GKaq2uqVfERv2iHJT578cPwyU3jJEXqYtw+bEPnMHG5woAF4D4MX/imkcNYtlPWX58XQ+2LEhK2nv+6vCqUxZ8AmWhfV1VldbP0+eAFG+7j2vls1FHaZrC7cewuxgKfBmwcGoyex0+5nd5+Ammbr32ejnoUotMfK+8DZlQMGw34qpxAJlbPVHWqYrZOnsWBKNtgImuSqDv9mmOHLrG7PhlBICQ==
+ b=EiP0DE62SYvqLHjQdhlVfBW4hhUnh2NyIULprTR0fbb8bJ4c8o5fFpxROHsYDUuRnrG2n5Xnk/EuLhYGlXvaXWN+RZQn3vzEfSarTV0zV1ukKzZe5LHXy33JMelFbijPY4ORJ2Ar7g4qlJ5WsgLSwpkpGmUJs6FGy8FZdMsQUfHSVznRJwkU6qm4ivxuOyZEmhjeGQ4uaUsD95lq/CINZAiGWURde0540UxvaXjSSCvJ8rPgfD9sumy+LCI/B9Jnij3oHI14dNrcXjKJsIn83I8uN9UOT+B/PaxhFlAylKRZdoimakMwo/QJpfY24+EeIGjsN6n9pAN7zsiSKpXnTA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HUydSic3KoDzu2HKqurLYuaYK+9Oh0JmzBDOTC22BrA=;
- b=Bb/lZpTaqJbTW3xEKOq6asJ13S2g2f76MWMJS2V7F9gbx4x5t8JLVgQxS9gCOBw2CRrib1Qf+cP5TZw3ocjbPEvUxTMB+zc/Uml9mvhfXQTJ0/ZW+uRGzVswhJe6YCydsHXon6VRbOhms9KAkIiSKdB4WBlrc/ms2LIIKDNccNbgZZB3XlhDy+cEkgypjzvHrktRhOjl/x6gYK+V8jLFea9nXrJbqooyoRh4PbCpczLiCiHjtfHKQ+lkpiZPfuTtTvu8QwUK4j5jbfRRdc8XPjktx9ByyRszgomrpZG8XQaSU1JTkkNze8lw44zXVGIQ7US94Ad+V3L2NRi6ehe6Tw==
+ bh=f1Z7UZVTHu+UdMXUxbVE3GqWlES8lRmHTmWnXZCu+Ok=;
+ b=INN46tuMXmOcpeAfS95jZLbOXv1U/gvMzzXhztqglY75r4idXvAZ6UoMA3o3OYd0fBzWX1/ioaYFu3A5Jgqg67Fse9AvI0g5czGiEUc2UEfchXWqoRFaVCfG3EJI0VOLqG6o9lSAMQK8tHfEK406hA4c8lggWxxdxnT7436Bvus0JiZfpkHUE2UH2gXkCnIvpXLrnlnxmPWSpvKZtyEshaAfpNJNNI0n4YnBe8X/H4E+IWi4Tec+Vfk7IcWaA5vIL0qkiU4mdUtZj449faCaSiDoFAY+qLiAK4ma3GES70euA4W/fDTUCUQWhH3AejjmJw/fwFowAKZw95vxLoQkPA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HUydSic3KoDzu2HKqurLYuaYK+9Oh0JmzBDOTC22BrA=;
- b=rRXUOrAjPQwuB6vQDqCxooGe1dyJQF89adyLMeTZi0pd6xkg2t8x/0FQc2ln347oqc3werdbxQTK0mkUsajZqguGs/U5bXT6Fqeqau7xbLMOugT6MhRpMmuoFxq4nFEohQ8UyG3McugAfXxR0Bh0zSk+WB1cbfEnwz0WBsytnFo=
-Received: from BYAPR04CA0008.namprd04.prod.outlook.com (2603:10b6:a03:40::21)
- by CY8PR10MB6467.namprd10.prod.outlook.com (2603:10b6:930:61::19) with
+ bh=f1Z7UZVTHu+UdMXUxbVE3GqWlES8lRmHTmWnXZCu+Ok=;
+ b=l0RZZ7fD4ysOeER1/HqdyarelzLukCsiEf+cejr0eSwX/qp8Te64EpF0C5yOW16UssCZCN6Xy+6lj6Rx4YtkjhmISiQOtls8sV50T68gZf4klqjcPPl1BRB+zBVWj+THOnEHqemortk/N0cQrH04tOpymz2jvKjodJAlgxhi5dM=
+Received: from BYAPR04CA0032.namprd04.prod.outlook.com (2603:10b6:a03:40::45)
+ by DS0PR10MB997672.namprd10.prod.outlook.com (2603:10b6:8:311::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.20; Wed, 29 Apr
- 2026 15:23:33 +0000
+ 2026 15:23:31 +0000
 Received: from SJ1PEPF00002314.namprd03.prod.outlook.com
- (2603:10b6:a03:40:cafe::f3) by BYAPR04CA0008.outlook.office365.com
- (2603:10b6:a03:40::21) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:a03:40:cafe::6a) by BYAPR04CA0032.outlook.office365.com
+ (2603:10b6:a03:40::45) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.30 via Frontend Transport; Wed,
- 29 Apr 2026 15:23:33 +0000
+ 29 Apr 2026 15:23:31 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
@@ -45,32 +45,32 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
 Received: from flwvzet200.ext.ti.com (198.47.21.194) by
  SJ1PEPF00002314.mail.protection.outlook.com (10.167.242.168) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Wed, 29 Apr 2026 15:23:31 +0000
-Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet200.ext.ti.com
+ 15.20.9846.18 via Frontend Transport; Wed, 29 Apr 2026 15:23:30 +0000
+Received: from DFLE209.ent.ti.com (10.64.6.67) by flwvzet200.ext.ti.com
  (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
- 2026 10:23:01 -0500
-Received: from DFLE202.ent.ti.com (10.64.6.60) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 10:23:00 -0500
+Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE209.ent.ti.com
+ (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
  2026 10:23:00 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Wed, 29 Apr 2026 10:23:00 -0500
 Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TFN0X73585468;
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TFN0LJ3353825;
 	Wed, 29 Apr 2026 10:23:00 -0500
 Received: from reatmon by grumpy with local (Exim 4.97)
 	(envelope-from <reatmon@ti.com>)
-	id 1wI6ke-000000046sa-2xTH;
+	id 1wI6ke-000000046sQ-2nqS;
 	Wed, 29 Apr 2026 10:23:00 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
 	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH v2 10/12] meta-ti-test: Import the dynamic-layers recipes
-Date: Wed, 29 Apr 2026 10:22:58 -0500
-Message-ID: <20260429152300.979685-10-reatmon@ti.com>
+Subject: [meta-ti][master][PATCH v2 08/12] meta-ti-test: Import the recipes-kernel recipes
+Date: Wed, 29 Apr 2026 10:22:56 -0500
+Message-ID: <20260429152300.979685-8-reatmon@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260429152300.979685-1-reatmon@ti.com>
 References: <20260429152300.979685-1-reatmon@ti.com>
@@ -80,272 +80,242 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002314:EE_|CY8PR10MB6467:EE_
-X-MS-Office365-Filtering-Correlation-Id: 024daf5c-2a3c-4129-903c-08dea60345e4
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00002314:EE_|DS0PR10MB997672:EE_
+X-MS-Office365-Filtering-Correlation-Id: 462049e4-828d-4014-5539-08dea60344ca
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|376014|1800799024|82310400026|18002099003|22082099003|56012099003|20052099010;
+	BCL:0;ARA:13230040|376014|82310400026|36860700016|1800799024|56012099003|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info: 
-	sDjWkac9iBewkoVbSwY5jr+xQDMb3EXzlMElVevl2fK1B1q/RwQ8gT6nqOzNdxfLv11x4ch/xPMmQXp4o9+qYN6utTOSW4qHZKsgNou7ID6vGjyCFzHUzHqSlD62KULoaCV5iPyigj7DDS/waeS2X1eDAqCKj5EPXm7zyrWU2HkM+5+OEbs8gbIbM4SijEkCH2+VZHPsOPXX1Vng5IE+hyHlLPcsQskCuCv5rUxDjLLJCs14ucahsFVro0OQcvhEI6lfog8d0tZV3tsNZ5cTAoLMz5662fJDfTrUfrFBMSvzx2REmC77nbFsZWAFUEBHFCxNee0efdNiQ6mrhkxQ89bPV2p5TySAUrf4Bhaphwg4XSLrVq8eRk8/0FFFGK31sd7NPrWlKnvvSVgyiZCtKOI4MRBRJvQY5scdacJynya8A//EVxjSiNXVwWZbL69ax+NeYz3swl8Lbolxkz2uTEIZfbbLGA91Brfc8AsMtOYntio3SU8pp63yCDbvYzciayBSr4tixoyHj6Ys3c+CfbIn1+b0zTHrTk/EmMEAX+xyOOzr1br1O72LijheEAPPZhxW+rPS4HDDpO+ISTn2hD8fk9+AyZIFpulNORasx3nMRGVxb+ciM4enuqu66eK/VZ6gq/QwILhnHHZ5U2fi0gnGTux6IbEPS9Nlg8ovNLNsIX2zjJo9RfF84lEU/QMW4dME1f2IrSQEs8OzY6kbaTcYfouzyqsLjwFfI6NV1D9x1DM1Iy9F6Zyq1MQePsFbp5HaTvfNFy54+utjS/uPuA==
+	qKBKmvH3UEV6ozNbaLSz605qtCIyMhXRz63syrv9zkcCYl0LEyVP1ccbhvX0470X6TDkQ3RnUn9xOd629L6WNvpwmJICGVh6mcEInseOC2poYk6HPe+2xODpYn3S6F3uNCXpya9wJDR6UpKcYkzhGDtMymOrXg7rd2F8mnyNhvec3QlBQoM1s3Rr/HNcG1o8sTq7dzrVFTPuWhHNyUuW9m8q424MdrkOhp6awoSFytuGTyOp685xC4gs/RT1y5COting/V79QWpZGUFc9TZKF+ncdmkCTEJf+gNfjx4mKiEnyswRE3FKQZTdLHVMiCTlraTJAZWLTOAhtV132wxlrvw7NBGkEat1qOnlBulPJuTm7SjtJRaUtY8YYz7A2OeZL53823gqDhXJ1MHue9ccYEY76LLY/Zd8wJ+r6CmGraZaukFpLNGJWkJbfOQ7jx3FHMI+8VhxABA0Efj2lN9OdY7clKLSaRiBKyHYEPqjnGa6iEytEhvCMJqJTVi06cLm8KGZIA53kLdcVSyu9RYWAdhEv0/qZEQD7o2OnXnNNhJL8ouPg2A4ntb459pCgXmsu3ro9AlpohD1RBgrWSMfKk3lSmFJz/ZlQ59m+vZ3oeSC5J5S1GqMglq6rsSfjqTuW3xxDFfgn7S9N/gkpaxSNU+nF3RD1jVvnePA1sAf3maibttgc9dr98A/iqvQpUO4NLf34P4jD3i9D7loZ2L795ABtl2oyNCU1VQhsMx7ujBTBWJiInRmYnxZTywfXB4886zL9MLzyYzbrj3IkajGpA==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(18002099003)(22082099003)(56012099003)(20052099010);DIR:OUT;SFP:1101;
+	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	U9LtWX+ER4+IrXa7VQb94Fn1E3T2jTDCX9OEs3Daj0NumxmynlH4yLI2Yv+99no1cdwpZK86O5D5aeTdALH0See0Cj/qpyOXsBzWP6/VrxHOrg6ZcqrqeR3ehw3Yl0gu/C3GCFZWwHtTfCXSOaeS3u8jplEYkh2FcfHGUe/SvCZrLpoEiAckJpTpL7iVuBZ0iM0FFwC8K4OESzGvuz55zTLkzx981EAeAa0pg5kKpr55qwbN1E2iIlHZQnc0hF63Z4SwrC/w1i/vqU9WCVHhM9uWi6B8WZw/rOYE1lI5hLTQK/7CfaebF8byOjlT90r5j0u66a3BjEJiOCEZas5beRLenY7sPexL+4wd7fKyd9ft/xYLE83nUVrH1wMs+IYW/jJiq0Q2+aQjuMKQCcGgbnghymjkxK2F2k4hFbvOk2Hn56FAzprufrO/UnOx/9Lh
+	XhCBPExc4LCsyBqUrRIcUTpwvS9k+NVNhwIBq/bJBOzk1gGWIwAqWncR9oQL94CO4wd0i0nb8fyaMkuy52DtPFEzPCE/ohrwNbqQUDfTIaprDvM+Y2Gej9XbRQC78KHJZ5UFaqoFrEi7rvZ/LrASh169D3Ql/ifvfrSG1rph5hhZgB4ic4pX8EvCOoKnGfH8IfHNmIeXNZtMZD17LV0J1nttg6nYJTgSr6wWrHaBmFqvV3QKLbtkDWs/M+WrVLjpCeK5c+2IN11gthxESUuLcn2+uZHnaBEwk/iDsmd0Dhk0BK6ppPXEqYoikiOXg98DT/a17YAgdDLaVGqjpQq1enIGQBtcx86NWmgmtcj2EFlihF/pkdw+FtBqFnABVXa32WThDdU0fs2iJOG6dAdR1PSknEWceZL0XkY5oJv6wOF06KD4FO4WGwn+rBZUj+ap
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 15:23:31.9519
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 15:23:30.1113
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 024daf5c-2a3c-4129-903c-08dea60345e4
+X-MS-Exchange-CrossTenant-Network-Message-Id: 462049e4-828d-4014-5539-08dea60344ca
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
 	SJ1PEPF00002314.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR10MB6467
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB997672
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Wed, 29 Apr 2026 15:23:43 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19902
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19901
 
 We are moving the meta-arago-test layer to meta-ti-test.  This commit
-imports all of the recipes under dynamic-layers.
+imports all of the recipes under recipes-kernel.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
 v2: No changes.
 
- meta-ti-test/conf/layer.conf                  |  2 +
- .../flutter-samples-material-3-demo-ti.inc    |  1 +
- ...flutter-samples-material-3-demo_%.bbappend |  4 +
- .../flutter/flutter-wayland-client-ti.inc     |  3 +
- .../flutter/flutter-wayland-client_%.bbappend |  4 +
- ...-message_codec.h-Include-cstdint-lib.patch | 93 +++++++++++++++++++
- .../packagegroups/ti-test.bbappend            |  7 ++
- 7 files changed, 114 insertions(+)
- create mode 100644 meta-ti-test/dynamic-layers/flutter-layer/recipes-graph=
-ics/flutter/flutter-samples-material-3-demo-ti.inc
- create mode 100644 meta-ti-test/dynamic-layers/flutter-layer/recipes-graph=
-ics/flutter/flutter-samples-material-3-demo_%.bbappend
- create mode 100644 meta-ti-test/dynamic-layers/flutter-layer/recipes-graph=
-ics/flutter/flutter-wayland-client-ti.inc
- create mode 100644 meta-ti-test/dynamic-layers/flutter-layer/recipes-graph=
-ics/flutter/flutter-wayland-client_%.bbappend
- create mode 100644 meta-ti-test/dynamic-layers/flutter-layer/recipes-graph=
-ics/flutter/flutter/0001-message_codec.h-Include-cstdint-lib.patch
- create mode 100644 meta-ti-test/dynamic-layers/qt6-layer/recipes-core/pack=
-agegroups/ti-test.bbappend
+ ...Fix-Makefile-for-to-build-with-yocto.patch | 46 ++++++++++++++++
+ .../hwspinlocktest/hwspinlocktest_0.1.bb      | 18 +++++++
+ .../kernel-selftest/kernel-selftest-ti.inc    | 53 +++++++++++++++++++
+ .../kernel-selftest/kernel-selftest.bbappend  |  4 ++
+ .../recipes-kernel/pcitest/pcitest_5.10.bb    | 18 +++++++
+ 5 files changed, 139 insertions(+)
+ create mode 100644 meta-ti-test/recipes-kernel/hwspinlocktest/files/0001-F=
+ix-Makefile-for-to-build-with-yocto.patch
+ create mode 100644 meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlockte=
+st_0.1.bb
+ create mode 100644 meta-ti-test/recipes-kernel/kernel-selftest/kernel-self=
+test-ti.inc
+ create mode 100644 meta-ti-test/recipes-kernel/kernel-selftest/kernel-self=
+test.bbappend
+ create mode 100644 meta-ti-test/recipes-kernel/pcitest/pcitest_5.10.bb
 
-diff --git a/meta-ti-test/conf/layer.conf b/meta-ti-test/conf/layer.conf
-index 1997f0b4..216ab344 100644
---- a/meta-ti-test/conf/layer.conf
-+++ b/meta-ti-test/conf/layer.conf
-@@ -24,6 +24,8 @@ LAYERDEPENDS_meta-ti-test =3D " \
- "
-=20
- BBFILES_DYNAMIC +=3D " \
-+    qt6-layer:${LAYERDIR}/dynamic-layers/qt6-layer/recipes*/*/*.bbappend \
-+    flutter-layer:${LAYERDIR}/dynamic-layers/flutter-layer/recipes*/*/*.bb=
-append \
- "
-=20
- # Codecs in ffmpeg with questionable patent status are not included by
-diff --git a/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flu=
-tter/flutter-samples-material-3-demo-ti.inc b/meta-ti-test/dynamic-layers/f=
-lutter-layer/recipes-graphics/flutter/flutter-samples-material-3-demo-ti.in=
-c
+diff --git a/meta-ti-test/recipes-kernel/hwspinlocktest/files/0001-Fix-Make=
+file-for-to-build-with-yocto.patch b/meta-ti-test/recipes-kernel/hwspinlock=
+test/files/0001-Fix-Makefile-for-to-build-with-yocto.patch
 new file mode 100644
-index 00000000..b2c9e13d
+index 00000000..3386337f
 --- /dev/null
-+++ b/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flutter/fl=
-utter-samples-material-3-demo-ti.inc
-@@ -0,0 +1 @@
-+FLUTTER_BUILD_ARGS:append =3D " --no-pub"
-diff --git a/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flu=
-tter/flutter-samples-material-3-demo_%.bbappend b/meta-ti-test/dynamic-laye=
-rs/flutter-layer/recipes-graphics/flutter/flutter-samples-material-3-demo_%=
-.bbappend
-new file mode 100644
-index 00000000..985615c8
---- /dev/null
-+++ b/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flutter/fl=
-utter-samples-material-3-demo_%.bbappend
-@@ -0,0 +1,4 @@
-+FLUTTER_TI =3D ""
-+FLUTTER_TI:ti-soc =3D "flutter-samples-material-3-demo-ti.inc"
++++ b/meta-ti-test/recipes-kernel/hwspinlocktest/files/0001-Fix-Makefile-fo=
+r-to-build-with-yocto.patch
+@@ -0,0 +1,46 @@
++From 0a085bff54c3f02c20412c5f5a4060c2acb20d4c Mon Sep 17 00:00:00 2001
++From: Judith Mendez <jm@ti.com>
++Date: Mon, 18 Nov 2024 10:26:55 -0600
++Subject: [PATCH 1/2] Fix Makefile for to build with yocto
 +
-+require ${FLUTTER_TI}
-diff --git a/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flu=
-tter/flutter-wayland-client-ti.inc b/meta-ti-test/dynamic-layers/flutter-la=
-yer/recipes-graphics/flutter/flutter-wayland-client-ti.inc
-new file mode 100644
-index 00000000..4d211568
---- /dev/null
-+++ b/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flutter/fl=
-utter-wayland-client-ti.inc
-@@ -0,0 +1,3 @@
-+FILESEXTRAPATHS:prepend :=3D "${THISDIR}/flutter:"
++Fix Makefile that builds hwspinlocktest out-of-tree-module
++for yocto recipie to be able to build the module.
 +
-+SRC_URI +=3D "file://0001-message_codec.h-Include-cstdint-lib.patch"
-diff --git a/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flu=
-tter/flutter-wayland-client_%.bbappend b/meta-ti-test/dynamic-layers/flutte=
-r-layer/recipes-graphics/flutter/flutter-wayland-client_%.bbappend
-new file mode 100644
-index 00000000..46fdd2af
---- /dev/null
-+++ b/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flutter/fl=
-utter-wayland-client_%.bbappend
-@@ -0,0 +1,4 @@
-+FLUTTER_TI =3D ""
-+FLUTTER_TI:ti-soc =3D "flutter-wayland-client-ti.inc"
-+
-+require ${FLUTTER_TI}
-diff --git a/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flu=
-tter/flutter/0001-message_codec.h-Include-cstdint-lib.patch b/meta-ti-test/=
-dynamic-layers/flutter-layer/recipes-graphics/flutter/flutter/0001-message_=
-codec.h-Include-cstdint-lib.patch
-new file mode 100644
-index 00000000..7a9bff41
---- /dev/null
-+++ b/meta-ti-test/dynamic-layers/flutter-layer/recipes-graphics/flutter/fl=
-utter/0001-message_codec.h-Include-cstdint-lib.patch
-@@ -0,0 +1,93 @@
-+From dcfcb92c7f42cd6bd92b1048b5e4ea6f01d40e21 Mon Sep 17 00:00:00 2001
-+From: Antonios Christidis <a-christidis@ti.com>
-+Date: Tue, 10 Mar 2026 11:01:28 -0500
-+Subject: [PATCH] message_codec.h: Include cstdint lib
-+
-+Include cstdint lib within message_codec.h.
-+
-+Upstream-Status: Inactive-Upstream
-+
-+Signed-off-by: Antonios Christidis <a-christidis@ti.com>
++Upstream-Status: Inactive-Upstream [private repo]
++Signed-off-by: Judith Mendez <jm@ti.com>
 +---
-+ .../client_wrapper/include/flutter/basic_message_channel.h       | 1 +
-+ .../common/client_wrapper/include/flutter/binary_messenger.h     | 1 +
-+ .../common/client_wrapper/include/flutter/engine_method_result.h | 1 +
-+ .../common/client_wrapper/include/flutter/message_codec.h        | 1 +
-+ .../common/client_wrapper/include/flutter/method_channel.h       | 1 +
-+ .../common/client_wrapper/include/flutter/method_codec.h         | 1 +
-+ 6 files changed, 6 insertions(+)
++ Makefile | 18 ++++++++++--------
++ 1 file changed, 10 insertions(+), 8 deletions(-)
 +
-+diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flut=
-ter/basic_message_channel.h b/src/flutter/shell/platform/common/client_wrap=
-per/include/flutter/basic_message_channel.h
-+index c081946..fcc6b23 100644
-+--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/bas=
-ic_message_channel.h
-++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/bas=
-ic_message_channel.h
-+@@ -7,6 +7,7 @@
++diff --git a/Makefile b/Makefile
++index 23ee629..d8fe76d 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -3,15 +3,17 @@
++ # TI OMAP HwSpinlock Unit Test
++ #
 +
-+ #include <iostream>
-+ #include <string>
-++#include <cstdint>
++-obj-m =3D omap_hwspinlock_test.o
+++obj-m :=3D omap_hwspinlock_test.o
+++
+++SRC :=3D $(shell pwd)
 +
-+ #include "binary_messenger.h"
-+ #include "message_codec.h"
-+diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flut=
-ter/binary_messenger.h b/src/flutter/shell/platform/common/client_wrapper/i=
-nclude/flutter/binary_messenger.h
-+index d552b49..82e47da 100644
-+--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/bin=
-ary_messenger.h
-++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/bin=
-ary_messenger.h
-+@@ -7,6 +7,7 @@
++ all:
++-ifeq ($(KERNELDIR),)
++-	@echo "Error: KERNELDIR not set, exiting..."
++-	@echo "Eg: make ARCH=3Darm CROSS_COMPILE=3Darm-linux-gnueabihf- KERNELDI=
+R=3D<linux-kernel rootdir>"
++-	@exit 1
++-endif
++-	make ${MAKE_OPTS} -C $(KERNELDIR) M=3D$(PWD) modules
+++	$(MAKE) -C $(KERNEL_SRC) M=3D$(SRC)
+++
+++modules_install:
+++	$(MAKE) -C $(KERNEL_SRC) M=3D$(SRC) modules_install
 +
-+ #include <functional>
-+ #include <string>
-++#include <cstdint>
-+
-+ namespace flutter {
-+
-+diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flut=
-ter/engine_method_result.h b/src/flutter/shell/platform/common/client_wrapp=
-er/include/flutter/engine_method_result.h
-+index 3cc8b6a..9634ead 100644
-+--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/eng=
-ine_method_result.h
-++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/eng=
-ine_method_result.h
-+@@ -8,6 +8,7 @@
-+ #include <memory>
-+ #include <string>
-+ #include <vector>
-++#include <cstdint>
-+
-+ #include "binary_messenger.h"
-+ #include "method_codec.h"
-+diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flut=
-ter/message_codec.h b/src/flutter/shell/platform/common/client_wrapper/incl=
-ude/flutter/message_codec.h
-+index c84d25f..c007b1e 100644
-+--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/mes=
-sage_codec.h
-++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/mes=
-sage_codec.h
-+@@ -8,6 +8,7 @@
-+ #include <memory>
-+ #include <string>
-+ #include <vector>
-++#include <cstdint>
-+
-+ namespace flutter {
-+
-+diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flut=
-ter/method_channel.h b/src/flutter/shell/platform/common/client_wrapper/inc=
-lude/flutter/method_channel.h
-+index 6e39a64..34687a6 100644
-+--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/met=
-hod_channel.h
-++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/met=
-hod_channel.h
-+@@ -7,6 +7,7 @@
-+
-+ #include <iostream>
-+ #include <string>
-++#include <cstdint>
-+
-+ #include "binary_messenger.h"
-+ #include "engine_method_result.h"
-+diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flut=
-ter/method_codec.h b/src/flutter/shell/platform/common/client_wrapper/inclu=
-de/flutter/method_codec.h
-+index b40fa64..edd14d6 100644
-+--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/met=
-hod_codec.h
-++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/met=
-hod_codec.h
-+@@ -8,6 +8,7 @@
-+ #include <memory>
-+ #include <string>
-+ #include <vector>
-++#include <cstdint>
-+
-+ #include "method_call.h"
-+ #include "method_result.h"
++ clean:
++-	$(RM) -r *.o *.ko *.mod* *.dwo .*.dwo .*.cmd *.symvers modules.order
+++	rm -f *.o *~ core .depend .*.cmd *.ko *.mod.c
+++	rm -f Module.markers Module.symvers modules.order
+++	rm -rf .tmp_versions Modules.symvers
 +--
-+2.34.1
-diff --git a/meta-ti-test/dynamic-layers/qt6-layer/recipes-core/packagegrou=
-ps/ti-test.bbappend b/meta-ti-test/dynamic-layers/qt6-layer/recipes-core/pa=
-ckagegroups/ti-test.bbappend
++2.47.0
+diff --git a/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.=
+bb b/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb
 new file mode 100644
-index 00000000..8d1f95f7
+index 00000000..cc566b37
 --- /dev/null
-+++ b/meta-ti-test/dynamic-layers/qt6-layer/recipes-core/packagegroups/ti-t=
-est.bbappend
-@@ -0,0 +1,7 @@
-+# Include the examples for Qt6 related tests
-+# Include qtwayland for wayland support if the distro enables it
++++ b/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb
+@@ -0,0 +1,18 @@
++SUMMARY =3D "Build hwspinlock test as an external Linux kernel module"
++DESCRIPTION =3D "${SUMMARY}"
++LICENSE =3D "GPL-2.0-only | BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dbfa02c83df161e37647ee23a2c7eacd=
+4"
 +
-+TI_TEST_EXTRAS:append =3D " \
-+    qtbase-examples \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland', '', d)=
-} \
++inherit module
++
++SRC_URI =3D "\
++    git://github.com/TexasInstruments/omap-hwspinlock-test;protocol=3Dhttp=
+s;branch=3Dmaster \
++    file://0001-Fix-Makefile-for-to-build-with-yocto.patch \
 +"
++
++SRCREV =3D "1d154fbe5b56ef81045763f574c2098a35d6a8b8"
++
++# The inherit of module.bbclass will automatically name module packages wi=
+th
++# "kernel-module-" prefix as required by the oe-core build environment.
++
++RPROVIDES:${PN} +=3D "kernel-module-hwspinlocktest"
+diff --git a/meta-ti-test/recipes-kernel/kernel-selftest/kernel-selftest-ti=
+.inc b/meta-ti-test/recipes-kernel/kernel-selftest/kernel-selftest-ti.inc
+new file mode 100644
+index 00000000..bae5b7ab
+--- /dev/null
++++ b/meta-ti-test/recipes-kernel/kernel-selftest/kernel-selftest-ti.inc
+@@ -0,0 +1,53 @@
++# Tests not enabled:
++#   openat2 has buildpath errors
++
++TEST_LIST +=3D "\
++    arm64 \
++    breakpoints \
++    capabilities \
++    cgroup \
++    clone3 \
++    core \
++    cpu-hotplug \
++    cpufreq \
++    efivarfs \
++    exec \
++    filesystems \
++    filesystems/binderfs \
++    filesystems/epoll \
++    firmware \
++    fpu \
++    ftrace \
++    futex \
++    gpio \
++    intel_pstate \
++    ipc \
++    kcmp \
++    kvm \
++    livepatch \
++    membarrier \
++    memfd \
++    mqueue \
++    mincore \
++    net \
++    net/mptcp \
++    ptrace \
++    resq \
++    rtc \
++    seccomp \
++    sigaltstack \
++    size \
++    tc-testing \
++    timers \
++    tmpfs \
++    tpm2 \
++    user_events \
++    vDSO \
++    watchdog \
++"
++
++TEST_LIST:append:bsp-ti-6_18 =3D " \
++    pci_endpoint \
++"
++
++INSANE_SKIP:${PN} +=3D "staticdev textrel"
+diff --git a/meta-ti-test/recipes-kernel/kernel-selftest/kernel-selftest.bb=
+append b/meta-ti-test/recipes-kernel/kernel-selftest/kernel-selftest.bbappe=
+nd
+new file mode 100644
+index 00000000..163a074d
+--- /dev/null
++++ b/meta-ti-test/recipes-kernel/kernel-selftest/kernel-selftest.bbappend
+@@ -0,0 +1,4 @@
++KERNEL_SELFTEST_TI =3D ""
++KERNEL_SELFTEST_TI:ti-soc =3D "kernel-selftest-ti.inc"
++
++require ${KERNEL_SELFTEST_TI}
+diff --git a/meta-ti-test/recipes-kernel/pcitest/pcitest_5.10.bb b/meta-ti-=
+test/recipes-kernel/pcitest/pcitest_5.10.bb
+new file mode 100644
+index 00000000..9ab0dbed
+--- /dev/null
++++ b/meta-ti-test/recipes-kernel/pcitest/pcitest_5.10.bb
+@@ -0,0 +1,18 @@
++SUMMARY =3D "Linux Kernel PCI test"
++LICENSE =3D "GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6bc538ed5bd9a7fc9398086aedcd7e4=
+6"
++
++BRANCH =3D "ti-linux-5.10.y"
++SRCREV =3D "73aa709ca10103b61fba3a07471dbb4dcb56db45"
++SRC_URI =3D "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git;prot=
+ocol=3Dhttps;branch=3D${BRANCH}"
++
++do_compile () {
++	cd ${S}/tools/pci
++	${CC} ${CFLAGS} ${LDFLAGS} -o pcitest pcitest.c
++}
++
++do_install () {
++	install -d ${D}${bindir}
++	install -m 0755 ${S}/tools/pci/pcitest ${D}${bindir}
++	install -m 0755 ${S}/tools/pci/pcitest.sh ${D}${bindir}
++}
 --=20
 2.43.0
 
