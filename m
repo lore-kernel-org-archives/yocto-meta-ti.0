@@ -2,40 +2,40 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 18B7CCD13DE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09B44CD13DD
 	for <webhook@archiver.kernel.org>; Wed, 29 Apr 2026 15:09:47 +0000 (UTC)
-Received: from CH4PR04CU002.outbound.protection.outlook.com (CH4PR04CU002.outbound.protection.outlook.com [40.107.201.31])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13791.1777475383164406435
+Received: from CH5PR02CU005.outbound.protection.outlook.com (CH5PR02CU005.outbound.protection.outlook.com [40.107.200.26])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13792.1777475384527425520
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 29 Apr 2026 08:09:43 -0700
+ Wed, 29 Apr 2026 08:09:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=n8JIP4OT;
- spf=pass (domain: ti.com, ip: 40.107.201.31, mailfrom: reatmon@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=PwnrkuSK;
+ spf=pass (domain: ti.com, ip: 40.107.200.26, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xkBUslJpxk3rKp16Riz0MngNv51sB4pEAShYL5QOUwSogGrfT7tMKtocasPKCSEELjTkJ/JViAgnWcZ74eUuxujhijmNLCfz3dUM+LgcnZzWBl9JU3s5jgbd0VYdSZgK3zjpY/yr/fk6dK3oDqDUti7WITsFsYuGNH7kvLPJotGmA+bMc8zEZO6rREW/FfEn0hKrA+Gt6YKYqlx3zc7jI/AKYGm340oe8y1LBWvGACm04cVo9LI7ySSZZcm0ZWCwAohXHeMEtJ69HdPJ0au4vSUipYxGhfeTdnhiNxJvwCL3vgeABu/8PZyahVIV1rRUtqTDlhrkpCxdUl9akG7E2Q==
+ b=Cex9AsAJiFk6lmQO3CVkb8ZdNTWQUB6kTrkceHpsEeIr04xtEUsbHbU+5h3SjEjB039N25jcYnIQD7IXsO1lHXMLKuqGU9O7iHuwNySJ75yhKZAZbJtdT9Gu984UGvZPS6YI4vZ3HMbv7MLKdNzogURfe5zbfJED1F1YYaqPrRCoilEcoOVUrOI87O5gmkMhqPAZtfo6bwtv0dEPvjUg4Z4ss+8H4jy6fAPHQOOZZbyLGfGh3jb4Wzv0RF5p2X9sZDzqLJFZmE3d4vITzTJXpLqkj4T8KxY45ARYXhIohLDqDo6wyIxB2GOFPjzwBR5zrn1yBG6x9+a/7Hq4062AgA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hVKWKw4n4tXZjdzbygYLQUY70TcXwE02IRHPB2pV/FE=;
- b=Qwk1d7BJX45Xins0gKy/+JW8qiuXTgZvYj1uqF4XvKeXa6JX/3VvtpHIii85nhg+4wKN1kKIQsxJ7eWuBhn8xCD2eknkGDxvQIjrSDkY3M7ONiI9LYxGGHEOgx9VzWyMi2EuF695AL5TSUb+OvlJOB2Xzcb1rf4XwTj9l80FAPlxZQjIszh0IkPoSXdlGMRH0SCcHvM8HFni9O3d9fqnsROaa0WVfpzzdEjIT5W/ziwCS2jeTrgH/+m3pvNvw2sj4Cnp20qrupr0iTyRQiN3/fwdGuUhVputVh78ZzAxTg7NExTtK8ROzXnGhbnAD0F2KCISVuRtzvejCLUUWWgXlA==
+ bh=nWt5hIiDjsOw1gcuIj5GjlSB0Nwycd97LW4vBqFJSi0=;
+ b=SDEEOtjUGfu2KIj5z9aPLEWqMJchYq+UXZOvvFVtVjURHmMo2c9J/V0w2z80UJC8ErxvHCS3tabmJvkZ5RaMG5nXkAMfbUXm/AB2c9Zsq/mJ3fJzPs6F3YGcJMa0PBpjwd8N1+aA+ifxRa7ynwX0fzpYfpYsaIgy16Jotw50pYL2fP11i8AgZtkLUdJA0rEpqx96BckKc8VjS29Fb84KJoiMjgNNpx1Zm3aAIcFynY0PxGBEpAkfi+gdyxJ15UH0GdaaDzPArkoBV7o7pCQd0XmRxBWfNvmmtItEJuWO07StcMWGIaSRr+iWYI60hB+T6oowkAZLDXHgEXs5XnFgbw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hVKWKw4n4tXZjdzbygYLQUY70TcXwE02IRHPB2pV/FE=;
- b=n8JIP4OTDrrHMFAcw7uhbbkf6RRHWGE1qJLjmrZukskdI0CaQmlZ3aMBl9VQNwqLPR8U+au8WqaOnjHClQ355eHAIZvaHQWwSBW13v9Hc8NyGirCxXLjgm383BZnAHk6j+kluHBpBaAxk9cpgHAmsoNmLc0S334V37y7r4OICpw=
-Received: from SJ0PR03CA0111.namprd03.prod.outlook.com (2603:10b6:a03:333::26)
- by PH0PR10MB5796.namprd10.prod.outlook.com (2603:10b6:510:da::7) with
+ bh=nWt5hIiDjsOw1gcuIj5GjlSB0Nwycd97LW4vBqFJSi0=;
+ b=PwnrkuSKw01NStVXLTWL3KuxAUwA1m/QAc/VKQsfkhWT8PqvNVsU/gvlsjE9vzXUJZ05H75XWlUJ5r0PANnLiNlfnrdYulRCnSPj0k6MOVPUmZ8C5PPINMJvfqbKI39OWynL34X/GpDnLnKw8px9+zL5KQhR3Xu4lfyWOMLLETY=
+Received: from SJ0PR03CA0100.namprd03.prod.outlook.com (2603:10b6:a03:333::15)
+ by DS0PR10MB6199.namprd10.prod.outlook.com (2603:10b6:8:c1::17) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Wed, 29 Apr
- 2026 15:09:39 +0000
+ 2026 15:09:41 +0000
 Received: from CO1PEPF00012E82.namprd03.prod.outlook.com
- (2603:10b6:a03:333:cafe::40) by SJ0PR03CA0111.outlook.office365.com
- (2603:10b6:a03:333::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.30 via Frontend Transport; Wed,
- 29 Apr 2026 15:09:39 +0000
+ (2603:10b6:a03:333:cafe::23) by SJ0PR03CA0100.outlook.office365.com
+ (2603:10b6:a03:333::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.28 via Frontend Transport; Wed,
+ 29 Apr 2026 15:09:41 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
@@ -45,32 +45,32 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
 Received: from flwvzet201.ext.ti.com (198.47.21.195) by
  CO1PEPF00012E82.mail.protection.outlook.com (10.167.249.57) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Wed, 29 Apr 2026 15:09:37 +0000
+ 15.20.9846.18 via Frontend Transport; Wed, 29 Apr 2026 15:09:40 +0000
 Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet201.ext.ti.com
  (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
  2026 10:09:20 -0500
-Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE210.ent.ti.com
+Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE210.ent.ti.com
  (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
  2026 10:09:20 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE205.ent.ti.com
- (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Wed, 29 Apr 2026 10:09:20 -0500
 Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TF9Knm3565164;
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TF9K1p3565170;
 	Wed, 29 Apr 2026 10:09:20 -0500
 Received: from reatmon by grumpy with local (Exim 4.97)
 	(envelope-from <reatmon@ti.com>)
-	id 1wI6XQ-000000046VP-1ils;
+	id 1wI6XQ-000000046Vj-21w3;
 	Wed, 29 Apr 2026 10:09:20 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
 	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH 07/12] meta-ti-test: Import the recipes-graphics recipes
-Date: Wed, 29 Apr 2026 10:09:15 -0500
-Message-ID: <20260429150920.978263-7-reatmon@ti.com>
+Subject: [meta-ti][master][PATCH 11/12] meta-ti-test: Import the ti-test packagegroup
+Date: Wed, 29 Apr 2026 10:09:19 -0500
+Message-ID: <20260429150920.978263-11-reatmon@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260429150920.978263-1-reatmon@ti.com>
 References: <20260429150920.978263-1-reatmon@ti.com>
@@ -80,310 +80,281 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF00012E82:EE_|PH0PR10MB5796:EE_
-X-MS-Office365-Filtering-Correlation-Id: cd0d1151-7884-4f6e-c161-08dea6015493
+X-MS-TrafficTypeDiagnostic: CO1PEPF00012E82:EE_|DS0PR10MB6199:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6759f626-be8c-4b69-87a1-08dea6015627
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|36860700016|82310400026|22082099003|18002099003|56012099003;
+	BCL:0;ARA:13230040|36860700016|376014|1800799024|82310400026|56012099003|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info: 
-	4VSPzIC0OjHQHuYSDwRDxL7n5E3cOhZU71jvD6HQrCyVjQ30236ljPlkkEudYi/2pS2Adgv3Mgl7Uoa1Y6Te3DabL1kSMbXPL8+qOSTpSKjvnKRIUJmfDekd1K27h9IsQMCN6p9lBIsg2o2nWF/TcxPCp1f+kyk8UA9C/aFDU+G/TZ8KOilR78bBmFPiIlBt9y55TMj0rbS9qKFj7MOyUlXNnMGupidK/Xq9nSmubnnmZCEIeHQyyxAVRy2W8bqntCEStJAtTcCawQR6nYwTMXHOTXLzWvWTAlUD5jP0ZYjY/ePh0ALFUOzINIfMaR1mreEJ1V7fHsXEVgICNOGuPdtAVn6f89iBQ6qdyVkiVtt/bHEpNBYdgvXQGmIhIR1UlYnbc4twmAMgdWyzlvMKrNy/ymJ01ehASZ8WuFfjjkS3O5O89i/pPjmoJ0svFQ3NCKLKCP6MsT5i5mmVuuG7ywxS9zFbR4gv1RZX4V9AMwI8JHI67r6NSZtZREyUQtOagxrIvq/N/C0pdCx5F+2qdRYPcsf96u7TbmwPL72d/UaVmyddgw4pm9KTTLSYnvrhH/n1TSFNJdoqNOl5dbG7aL1KMfZ8zeKCiKrpCbaHzPar5hz7pUxmqyNoZElE2ROYj60BS1v2nqAtRvUTmVRz7QbuLaGCVj6toyd/mF6qGWou2P3rxmAO2Gor7oXBMDqQafEdw/91pZwW2DnhRKzYrBxyJYb+EgDoWxBVYCM7+Pc=
+	jxicIbZekK9QXRQuYdXdJ2OjqLt6a4Z6lY0RjRgJT7yGfeDT4iU+Of12GvttRDORREWS0CFNlYOVcTgUKVEjLeIgkip7miQUsSz8NJbQOLzh1jai3xMzLeGoOMdmpcms2Fx74ldRzz7GDXMLNEtaKBomS3LxSC1y2svY9Y++5CzUizwxeF737C99A1fIY8VdNn8USX7n0wSeCKKwiSQ7OCEqsHtKtN784C/DTLJw9/jr8I6zQWgpGfIKH4/oaibzskvZ90+hjm/Qmk+4zPsfstdDhB9Z3LTnIzl6ZwVw4Mohivr88MqSMJLGrCfpeIkn4brIfK1480RK0V2DmCyNFELNaJh8KXHrYashgTK/1KprwfDAyGXowF57h6J02QE4TgwA+7yHId8GqOC8PufamaTmcMVrg4z7aXRIo8wTLCkJqw0aSPgONoRz9NDdBkAUonRDVoPRB8o+tIUoMi4M4dDrkh996/IXT5s8BpsT3Bj1cnmYFf42F606SOL5cveUXJFbDrGq/A6fTPYupd6gaChSZRiKwiu6tdTmJEhLpJPge5ebQXCOnoIA5vLGnRzRxZkQVQkXBqNKZONUt67zmcFWefuBIwIYOkF2VyK6IfHNkvc3lUZHAdrR/fs70hVEmPCNuBLG8Gd+N/u0VnrJ5w7SLt7uJT1j6tco1QYtvu9P8QrQYLA/ZywlmdMfUFnQDxK5/okRo+yzU2O/4PMho2Esg5tkjOD0OOZCyaFoMrys2IfCsjT1+sQl4Nbj2q7IC/Rkb2J79q2KsI3gfYy/mw==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700016)(82310400026)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	Dv2Hd7NWVkByp4V/I5m5QUIieDayzXmKNlTcuxIf7yfvspP5V2ztpDhAm9AhAf1ik9zvWBSz6Jxu5pEX9RSI15e/HH+XbyT1lPXN4py2e6Xop+DSG4C2ayqY5dWMKL6O+OeMbFq5kGJet2qx2EmfqNYqIYj9a/pwWludqyfGqBLspT2j1AZ2GGhvgrKAjZWLPied0o+UtQJcoJ0UDyU+eA9Ir4xHsdfunTkob2O29dGTPe059VlGUpkTtqpKpXo+wopB4wijAdd8FL9S/30XUKUkZSKyQYUhq/ozPjTqNOtjDH74ENXum2YApF7kFOYEjtyIdmr3CqTbxThf0XOLh7J+emILQTMdT159llwJPZsoMfqyjI0HoTAmb93yhOxMlic/Wyh7Wzy4WrMG2YKzAO9EtR+/oyMQINtiDkf9JZ1LfNX4n0PHkBXMXY8RsQfd
+	es5EXnm1WHeBVMK4t6HVDsPArM5EnJ2SFnnzPP21HwFRrEbZL9ApTLqlntm8tGENvm4vIVfmUCyjYF+imdFiDxbn73aqc7SOu2HTURos3pd+1CtcpHXi7UiTEZhOu+L3dQ+9OBWg5BMGaxJEVE2yOW10zzan6Ow8qaBUeHznjOE4/f02+87HvJuHy3lUNiXZyxV235K22Unm/OXuGxxr4T93Fx4IPiyfwZp/TL/RyD0EsD9WU2ZZBeK24IinrbbE7xY0JoL8AgSwwhSq94Bc0aTYciTjE/Plp4gkmB9/4ccl7MdM8oYZtC9rqjerheec82A5ckOeIpUYsbBF+vdhJMNM+pU0Epq7ACC8EytZcc+buz4s4ffDCciUmcFLXxMeVY+C6P0YJ6uRKDH3+AQzqc20VYPw3o2paqO1ATupOlcPR3n+itXHh0t15FzACL/Q
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 15:09:37.6045
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 15:09:40.2398
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: cd0d1151-7884-4f6e-c161-08dea6015493
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6759f626-be8c-4b69-87a1-08dea6015627
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
 	CO1PEPF00012E82.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB5796
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB6199
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Wed, 29 Apr 2026 15:09:47 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19889
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19890
 
 We are moving the meta-arago-test layer to meta-ti-test.  This commit
-imports all of the recipes under recipes-graphics.
+imports the ti-test packagegroup that uses all of the previous commits..
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- .../recipes-graphics/libsdl2/libsdl2-ti.inc   |   5 +
- .../libsdl2/libsdl2_%.bbappend                |   4 +
- .../offscreen-demo/offscreendemo_0.0.1.bb     |  16 +++
- .../recipes-graphics/piglit/piglit-ti.inc     |  32 +++++
- ...-add-and-use-TestPlaceholder-objects.patch | 128 ++++++++++++++++++
- .../recipes-graphics/piglit/piglit_%.bbappend |   4 +
- 6 files changed, 189 insertions(+)
- create mode 100644 meta-ti-test/recipes-graphics/libsdl2/libsdl2-ti.inc
- create mode 100644 meta-ti-test/recipes-graphics/libsdl2/libsdl2_%.bbappen=
-d
- create mode 100644 meta-ti-test/recipes-graphics/offscreen-demo/offscreend=
-emo_0.0.1.bb
- create mode 100644 meta-ti-test/recipes-graphics/piglit/piglit-ti.inc
- create mode 100644 meta-ti-test/recipes-graphics/piglit/piglit/0001-framew=
-ork-add-and-use-TestPlaceholder-objects.patch
- create mode 100644 meta-ti-test/recipes-graphics/piglit/piglit_%.bbappend
+ .../recipes-core/packagegroups/ti-test.bb     | 227 ++++++++++++++++++
+ 1 file changed, 227 insertions(+)
+ create mode 100644 meta-ti-test/recipes-core/packagegroups/ti-test.bb
 
-diff --git a/meta-ti-test/recipes-graphics/libsdl2/libsdl2-ti.inc b/meta-ti=
--test/recipes-graphics/libsdl2/libsdl2-ti.inc
+diff --git a/meta-ti-test/recipes-core/packagegroups/ti-test.bb b/meta-ti-t=
+est/recipes-core/packagegroups/ti-test.bb
 new file mode 100644
-index 00000000..33ff0632
+index 00000000..8a348c26
 --- /dev/null
-+++ b/meta-ti-test/recipes-graphics/libsdl2/libsdl2-ti.inc
-@@ -0,0 +1,5 @@
-+EXTRA_OECMAKE +=3D "-DSDL_TESTS=3DON \
-+                  -DSDL_INSTALL_TESTS=3DON \
-+                 "
-+PACKAGE_BEFORE_PN =3D "${PN}-tests"
-+FILES:${PN}-tests +=3D "${libexecdir} ${datadir}/installed-tests/SDL2"
-diff --git a/meta-ti-test/recipes-graphics/libsdl2/libsdl2_%.bbappend b/met=
-a-ti-test/recipes-graphics/libsdl2/libsdl2_%.bbappend
-new file mode 100644
-index 00000000..385aa801
---- /dev/null
-+++ b/meta-ti-test/recipes-graphics/libsdl2/libsdl2_%.bbappend
-@@ -0,0 +1,4 @@
-+LIBSDL2_TI =3D ""
-+LIBSDL2_TI:ti-soc =3D "libsdl2-ti.inc"
++++ b/meta-ti-test/recipes-core/packagegroups/ti-test.bb
+@@ -0,0 +1,227 @@
++SUMMARY =3D "TI Testing packagegroup"
++LICENSE =3D "MIT"
 +
-+require ${LIBSDL2_TI}
-diff --git a/meta-ti-test/recipes-graphics/offscreen-demo/offscreendemo_0.0=
-.1.bb b/meta-ti-test/recipes-graphics/offscreen-demo/offscreendemo_0.0.1.bb
-new file mode 100644
-index 00000000..6dc0e526
---- /dev/null
-+++ b/meta-ti-test/recipes-graphics/offscreen-demo/offscreendemo_0.0.1.bb
-@@ -0,0 +1,16 @@
-+SUMMARY =3D "Lightweight Render Example"
-+DESCRIPTION =3D "Lightweight Render Example. Heavily inspired by Eduardo L=
-ima's gpu-playground, this attempts to act as the smallest demo of offscree=
-n rendering."
++PACKAGE_ARCH =3D "${MACHINE_ARCH}"
 +
-+HOMEPAGE =3D "https://github.com/TexasInstruments/graphics-tests.git"
++inherit packagegroup
 +
-+SRC_URI =3D "git://github.com/TexasInstruments/graphics-tests.git;protocol=
-=3Dhttps;branch=3Dmaster"
-+SRCREV =3D "eac40e0073cb5f81688aee890e0a67f99678a290"
++PACKAGES +=3D " \
++    ${PN}-audio \
++    ${PN}-extras \
++    ${PN}-graphics \
++    ${PN}-multimedia \
++    ${PN}-networking \
++    ${PN}-storage \
++    ${PN}-ti-tools \
++"
 +
-+LICENSE =3D "CC0-1.0"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D65d3616852dbf7b1a6d4b53b0062603=
-2"
++TI_TEST_BASE =3D "\
++    bc \
++    bonnie++ \
++    cryptodev-tests \
++    devmem2 \
++    dma-heap-tests \
++    evtest \
++    git \
++    i2c-tools \
++    kernel-modules \
++    kernel-selftest \
++    kmsxx \
++    kmsxx-python \
++    libdrm-tests \
++    linuxptp \
++    lmbench \
++    lsof \
++    media-ctl \
++    memtester \
++    nbench-byte \
++    openntpd \
++    ${@"optee-test" if d.getVar('OPTEEMACHINE') else ""} \
++    pcitest \
++    pciutils \
++    perf \
++    powertop \
++    procps \
++    rng-tools \
++    rt-tests \
++    rwmem \
++    smcroute \
++    stream \
++    stress \
++    stress-ng \
++"
 +
-+DEPENDS +=3D "virtual/egl virtual/libgles2"
++TI_TEST_BASE:remove:bsp-ti-6_18 =3D "pcitest"
 +
-+inherit pkgconfig meson features_check
++TI_TEST_BASE:append:armv7a =3D " \
++    cpuburn-neon \
++"
 +
-+REQUIRED_DISTRO_FEATURES =3D "opengl"
-diff --git a/meta-ti-test/recipes-graphics/piglit/piglit-ti.inc b/meta-ti-t=
-est/recipes-graphics/piglit/piglit-ti.inc
-new file mode 100644
-index 00000000..707ef6a4
---- /dev/null
-+++ b/meta-ti-test/recipes-graphics/piglit/piglit-ti.inc
-@@ -0,0 +1,32 @@
-+# add a config to point piglit at the default install location for deqp te=
-sts
-+# if they are selected
++TI_TEST_BASE:append:armv7ve =3D " \
++    cpuburn-neon \
++"
 +
-+FILESEXTRAPATHS:prepend :=3D "${THISDIR}/piglit:"
++TI_TEST_AUDIO =3D "\
++    alsa-utils \
++    pulseaudio-misc \
++"
 +
-+SRC_URI +=3D "file://0001-framework-add-and-use-TestPlaceholder-objects.pa=
-tch"
++TI_TEST_EXTRAS_OPENCL =3D " \
++    opencl-cts \
++"
 +
-+PACKAGECONFIG[deqp-gles] =3D ",,,opengl-es-cts"
-+PACKAGECONFIG[deqp-vk] =3D ",,,vulkan-cts"
++TI_TEST_EXTRAS =3D " \
++    python3-pillow \
++    pytesseract \
++    python3-numpy \
++    python3-requests \
++    python3-websocket-client \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'opencl', '${TI_TEST_EXTRAS_OP=
+ENCL}', '', d)} \
++"
 +
-+do_install:append() {
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'deqp-gles', 'true', 'false',=
- d)}; then
-+        printf "%s\n" \
-+            "[deqp-egl]" \
-+            "bin=3D/usr/lib/opengl-es-cts/deqp-egl" \
-+            "[deqp-gles2]" \
-+            "bin=3D/usr/lib/opengl-es-cts/deqp-gles2" \
-+            "[deqp-gles3]" \
-+            "bin=3D/usr/lib/opengl-es-cts/deqp-gles3" \
-+            "[deqp-gles31]" \
-+            "bin=3D/usr/lib/opengl-es-cts/deqp-gles31" \
-+            >> ${D}/${libdir}/piglit/piglit.conf
-+    fi
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'deqp-vk', 'true', 'false', d=
-)}; then
-+        printf "%s\n" \
-+            "[deqp-vk]" \
-+            "bin=3D/usr/lib/vulkan-cts/deqp-vk" \
-+            "[deqp-vksc]" \
-+            "bin=3D/usr/lib/vulkan-cts/deqp-vksc" \
-+            >> ${D}/${libdir}/piglit/piglit.conf
-+    fi
-+}
-diff --git a/meta-ti-test/recipes-graphics/piglit/piglit/0001-framework-add=
--and-use-TestPlaceholder-objects.patch b/meta-ti-test/recipes-graphics/pigl=
-it/piglit/0001-framework-add-and-use-TestPlaceholder-objects.patch
-new file mode 100644
-index 00000000..26e0b21e
---- /dev/null
-+++ b/meta-ti-test/recipes-graphics/piglit/piglit/0001-framework-add-and-us=
-e-TestPlaceholder-objects.patch
-@@ -0,0 +1,128 @@
-+From 2803263ccf460ced705fd4da589e2f09e3ec89d7 Mon Sep 17 00:00:00 2001
-+From: Randolph Sapp <rs@ti.com>
-+Date: Wed, 13 Aug 2025 17:52:42 -0500
-+Subject: [PATCH] framework: add and use TestPlaceholder objects
++TI_TEST_EXTRAS:append:ti-soc =3D " \
++    libsdl2-tests \
++"
 +
-+The actual Test classes are not that big, but with deqp-vk creating
-+around 2800 instances currently, we quickly consume around 3GB of ram
-+before beginning any tests. Given that a lot of these objects may not
-+even be used, we can reduce memory overhead by using a placeholder
-+namedtuple that is expanded to a full Test instance when requested from
-+the TestDict class. This cuts the initial memory usage back to 1.6 GB.
++TI_TEST_GRAPHICS_OPENGL =3D " \
++    piglit \
++    offscreendemo \
++"
 +
-+This does add a small lookup penalty, but given the lookup penalty is
-+still smaller that the time it takes to create an instance of a Test, it
-+results in a net improvement for most subsets of deqp tests. Not to
-+mention this penalty can be split between threads, unlike previously
-+when it was occurring in the single-threadded profile creation step.
++TI_TEST_GRAPHICS =3D " \
++    wayland-utils \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', '${TI_TEST_GRAPHICS_=
+OPENGL}', '', d)} \
++"
 +
-+The following data was collected using a subset of 3151 deqp-vk tests:
++TI_TEST_MULTIMEDIA =3D "\
++    gst-devtools \
++    v4l-utils \
++    yavta \
++"
 +
-+Threads   Test Execution Time (s)   TestPlaceholder Execution Time (s)
-+-------   -----------------------   ----------------------------------
-+1         2613.93                   2599.95
-+8          413.31                    400.01
-+32         299.75                    286.73
++TI_TEST_MULTIMEDIA:append:ti-soc =3D " \
++    mpv \
++    ffmpeg \
++"
 +
-+Upstream-Status: Submitted [https://gitlab.freedesktop.org/mesa/piglit/-/m=
-erge_requests/1032]
-+Signed-off-by: Randolph Sapp <rs@ti.com>
-+---
-+ framework/profile.py   | 23 ++++++++++++++++++-----
-+ framework/test/base.py |  3 +++
-+ framework/test/deqp.py |  4 ++--
-+ 3 files changed, 23 insertions(+), 7 deletions(-)
++TI_TEST_NETWORKING =3D "\
++    bridge-utils \
++    ethtool \
++    iperf3 \
++    iproute2-bridge \
++    iproute2-devlink \
++    iproute2-tc \
++    lldpd \
++    mstpd \
++    netperf \
++    strongswan \
++    tcpdump \
++    xdp-tools-ti \
++"
 +
-+diff --git a/framework/profile.py b/framework/profile.py
-+index 678e9d87c..969e0032e 100644
-+--- a/framework/profile.py
-++++ b/framework/profile.py
-+@@ -45,7 +45,7 @@ from framework import grouptools, exceptions, status
-+ from framework.dmesg import get_dmesg
-+ from framework.log import LogManager
-+ from framework.monitoring import Monitoring
-+-from framework.test.base import Test, DummyTest
-++from framework.test.base import Test, DummyTest, TestPlaceholder
-+ from framework.test.piglit_test import (
-+     PiglitCLTest, PiglitGLTest, ASMParserTest, BuiltInConstantsTest,
-+     CLProgramTester, VkRunnerTest, ROOT_DIR,
-+@@ -135,9 +135,9 @@ class TestDict(collections.abc.MutableMapping):
-+                 "TestDict keys must be strings, but was {}".format(type(k=
-ey)))
++TI_TEST_STORAGE =3D "\
++    dosfstools \
++    fio \
++    hdparm \
++    iozone3 \
++    mtd-utils \
++    mtd-utils-ubifs \
++"
 +
-+         # Values should either be more Tests
-+-        if not isinstance(value, Test):
-++        if not (isinstance(value, Test) or isinstance(value, TestPlacehol=
-der)):
-+             raise exceptions.PiglitFatalError(
-+-                "TestDict values must be a Test, but was a {}".format(
-++                "TestDict values must be a Test or TestPlaceholder, but w=
-as a {}".format(
-+                     type(value)))
++TI_TEST_STORAGE:append:ti-soc =3D " \
++    mtd-utils-ubifs-tests \
++"
 +
-+         # This must be lowered before the following test, or the test can=
- pass
-+@@ -164,8 +164,21 @@ class TestDict(collections.abc.MutableMapping):
-+         self.__container[key] =3D value
++TI_TEST_TI_TOOLS =3D " \
++    arm-benchmarks \
++    arm-ddr-bandwidth \
++    coremark \
++    hwspinlocktest \
++    input-utils \
++    ltp-ddt \
++    openssl-perf \
++    uvc-gadget \
++"
 +
-+     def __getitem__(self, key):
-+-        """Lower the value before returning."""
-+-        return self.__container[key.lower()]
-++        """Lower the value before returning. Remove placeholders as neede=
-d."""
-++        item =3D self.__container[key.lower()]
-++        if isinstance(item, TestPlaceholder):
-++            try:
-++                real_item =3D item.test_class(item.test_name)
-++            except TypeError:
-++                raise exceptions.PiglitFatalError(
-++                    "Unable to expand the TestPlaceholder for the class: =
-{}\n"
-++                    "This was associated with the following key: {}".form=
-at(
-++                        type(item), key
-++                    )
-++                )
-++            self.__container[key.lower()] =3D real_item
-++            return real_item
-++        return item
++TI_TEST_TI_TOOLS:append:ti33x =3D " \
++    omapconf \
++    pru-icss \
++    switch-config \
++"
 +
-+     def __delitem__(self, key):
-+         """Lower the value before returning."""
-+diff --git a/framework/test/base.py b/framework/test/base.py
-+index 430064b9b..0efa38336 100644
-+--- a/framework/test/base.py
-++++ b/framework/test/base.py
-+@@ -24,6 +24,7 @@
-+ """ Module provides a base class for Tests """
++TI_TEST_TI_TOOLS:append:ti43x =3D " \
++    omapconf \
++    pru-icss \
++    switch-config \
++"
 +
-+ import abc
-++import collections
-+ import copy
-+ import errno
-+ import itertools
-+@@ -97,6 +98,8 @@ def is_crash_returncode(returncode):
-+         return returncode < 0
++TI_TEST_TI_TOOLS:append:am57xx =3D " \
++    omapconf \
++    pru-icss \
++    switch-config \
++    ti-ipc-test \
++"
 +
++TI_TEST_TI_TOOLS:append:k3 =3D " \
++    k3conf \
++    switch-config \
++    ti-rtos-echo-test-fw \
++    ti-rpmsg-char \
++    ti-rpmsg-char-examples \
++"
 +
-++TestPlaceholder =3D collections.namedtuple('TestPlaceholder', ['test_clas=
-s', 'test_name'])
-++
-+ class Test(metaclass=3Dabc.ABCMeta):
-+     """ Abstract base class for Test classes
++TI_TEST_TI_TOOLS:append:am62xx   =3D " \
++    pru-icss \
++"
 +
-+diff --git a/framework/test/deqp.py b/framework/test/deqp.py
-+index 849ffbd96..ccfeaeff2 100644
-+--- a/framework/test/deqp.py
-++++ b/framework/test/deqp.py
-+@@ -26,7 +26,7 @@ import subprocess
-+ from framework import core, grouptools, exceptions
-+ from framework import options
-+ from framework.profile import TestProfile
-+-from framework.test.base import Test, is_crash_returncode, TestRunError
-++from framework.test.base import Test, is_crash_returncode, TestRunError, =
-TestPlaceholder
++TI_TEST_TI_TOOLS:append:am64xx   =3D " \
++    pru-icss \
++"
 +
-+ __all__ =3D [
-+     'DEQPBaseTest',
-+@@ -56,7 +56,7 @@ def make_profile(test_list, test_class):
-+     for testname in test_list:
-+         # deqp uses '.' as the testgroup separator.
-+         piglit_name =3D testname.replace('.', grouptools.SEPARATOR)
-+-        profile.test_list[piglit_name] =3D test_class(testname)
-++        profile.test_list[piglit_name] =3D TestPlaceholder(test_class, te=
-stname)
++TI_TEST_TI_TOOLS:append:am65xx   =3D " \
++    pru-icss \
++"
 +
-+     return profile
++# Disable due to breakage
++#    viddec-test-app=20
++TI_TEST_TI_TOOLS:append:j721e =3D " \
++    pru-icss \
++    ufs-utils \
++    videnc-test-app \
++"
 +
-+--
-+2.50.1
-diff --git a/meta-ti-test/recipes-graphics/piglit/piglit_%.bbappend b/meta-=
-ti-test/recipes-graphics/piglit/piglit_%.bbappend
-new file mode 100644
-index 00000000..d93e5d48
---- /dev/null
-+++ b/meta-ti-test/recipes-graphics/piglit/piglit_%.bbappend
-@@ -0,0 +1,4 @@
-+PIGLIT_TI =3D ""
-+PIGLIT_TI:ti-soc =3D "piglit-ti.inc"
++TI_TEST_TI_TOOLS:append:j784s4 =3D " \
++    ufs-utils \
++"
 +
-+require ${PIGLIT_TI}
++TI_TEST_TI_TOOLS:append:j742s2 =3D " \
++    ufs-utils \
++"
++
++TI_TEST_TI_TOOLS:append:omapl138 =3D " \
++    ti-ipc-test \
++"
++
++TI_TEST_TI_TOOLS:remove:bsp-mainline =3D "ti-ipc-test"
++TI_TEST_TI_TOOLS:remove:bsp-next =3D "ti-ipc-test"
++
++RDEPENDS:${PN}-audio =3D "${TI_TEST_AUDIO}"
++RDEPENDS:${PN}-extras =3D "${TI_TEST_EXTRAS}"
++RDEPENDS:${PN}-graphics =3D "${TI_TEST_GRAPHICS}"
++RDEPENDS:${PN}-multimedia =3D "${TI_TEST_MULTIMEDIA}"
++RDEPENDS:${PN}-networking =3D "${TI_TEST_NETWORKING}"
++RDEPENDS:${PN}-storage =3D "${TI_TEST_STORAGE}"
++RDEPENDS:${PN}-ti-tools =3D "${TI_TEST_TI_TOOLS}"
++
++RDEPENDS:${PN} =3D "\
++    ${TI_TEST_BASE} \
++    ${PN}-networking \
++    ${PN}-storage \
++    ${PN}-ti-tools \
++"
++
++RDEPENDS:${PN}-extras +=3D "\
++    ${PN}-audio \
++    ${PN}-graphics \
++    ${PN}-multimedia \
++"
 --=20
 2.43.0
 
