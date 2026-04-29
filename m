@@ -2,40 +2,40 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57E95CD13D2
-	for <webhook@archiver.kernel.org>; Wed, 29 Apr 2026 15:09:33 +0000 (UTC)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com (SN4PR0501CU005.outbound.protection.outlook.com [40.93.194.70])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13586.1777475371434242399
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77883CCFA13
+	for <webhook@archiver.kernel.org>; Wed, 29 Apr 2026 15:09:32 +0000 (UTC)
+Received: from MW6PR02CU001.outbound.protection.outlook.com (MW6PR02CU001.outbound.protection.outlook.com [52.101.48.24])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13769.1777475370549969521
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 29 Apr 2026 08:09:31 -0700
+ Wed, 29 Apr 2026 08:09:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=SyRK7Fog;
- spf=pass (domain: ti.com, ip: 40.93.194.70, mailfrom: reatmon@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=Qc0YWcIm;
+ spf=pass (domain: ti.com, ip: 52.101.48.24, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Dni0P1PA3Fj48SY+GWkME6FzG+ZIXmN3uPUmQlC3htC1HnUU5sT8G+NdwfvUN90rnnltcwXxmFsKV2O8R7iYiPEW5nifvd4fTpJANokXiRKiQYuCGdMubTOxsxjX3/ON56HBUHFCC0sAXrwRc2jk2B45kFMy3oyeALw4enn7KF8+A3see35dkYQUbWnuEkomxeVqzKlKRq1azwEfj+mrZtshz1CzQvr4DjYut++W9PBztrtdiObaGVPNrSabjY74ZRk0XzIotzfe0ZHeo+xveNABoS30ndms9vquYEhEsUUWC5BPtimpxEEOGMMyuXD+48h8okJpFoOZ1jzm4w9tCQ==
+ b=QX57vykovVEqxt7VUenlewJdCiSPX7zFmYyotMVdAmdIwPL4Cuh/EzzeChIQ/ajjTt4ugLs59Sw527TyZjMzrxWmrL50A8+61l+JUeuPHREJteGq42TNWHvha5VJnTZEdoGcTZPPZ8SLBr+jJ/vN/ayWNx+L1sTfrh2TgZTjyUsf4AP8FBMtAu9Cx90xl+PscYKE1t78MoOmASAk2Tw1k9sFGt114Zt09lrWvBC7FQpfgsL9JIHrrg6hA3xy0zZ3s1S2JM34PgYcI82qaGviqh7i2+1b2AsDLcpgkXYKLZmFdcga2YdT1nJnD6mdVreqtgz5H0ElqSFmqEKdndg1zA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=faz9EVb/Foc1JHrC6gECubccUSovWNa5d45ZxtKlayQ=;
- b=tXUQBKKmptkjVDehEbauyWd8dGkXv8NjiHmIV/Gch+ENUL2c44tt/wKZhAQy8kxULhHr6hDTS/9l/C+De3tm28UcokHE525bvPsBuKH1eerHqil57Y22W/GpkTkuN5tEA5A6Ocvg5hVxg1Udnr/IsDuxkWQEG7nVxe79M7F2+o0etZf5DRZgdzoDLiJPe1TmwBLKggoa6zBh4u0BjtpnVVjrAjgqueJTgMtsxsV2hyDaiKj43LgOhk1BSiDf8WEHCnKsZQE6CZp/nxK9rKBl748eBMYxRnEgm3CD6n8f7MSOVUadc8BHEJqYlXjii1ESF0Clv0f5zo5goAMcf3sxEg==
+ bh=Hh7NFf8F4Y5+S0KleQ7kREBZYaVfLnB6lbgqqANdj5s=;
+ b=AieMWnfI6ckkgX6vT4AD23xqh13/2TrdCA2JxJWSZjZQUCwt9cP+KEECU5L/uPdM/yBp70C0Uh3XqaQUQSuU34pZq4L0gd45Jycgjwf/fyTmetC5nV6KXmNizrXJVFZG85IFOVPWy1lYBtUZmj+s30UJD1/e4fR5hRZNpCrPLW9H/cwIF/tvxqoDW4P8UVYPTdHroPe1V7fMQ3QM4QRQ7hQkOUG01xODSp+DOXMjJL/k1n0oiDQeRAbIbDqiRALPO40agPggX6FhqJK9b5C/zk1NUyIyX3FXi5USwI4KQoQsLHxjXwV2xy4+dpHbA+jV9yFVmU63jhXsOwP4BNz9TA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=faz9EVb/Foc1JHrC6gECubccUSovWNa5d45ZxtKlayQ=;
- b=SyRK7Fogp1wiuqZtuIw+XVDs0NUWNPCaaKGlor2xnAabhchi3ZiPxv50S0gMWdL4qY0NhGJnBwCkGm+hAK4wcqSflivcvTVJ1iaKDaAGDPgmPDubbSiqFbk/PLdhW9f558K0r+GuRk8w4ZkcuJW45P8k4zPSZ5R9c3y1PnQ9c9I=
-Received: from BLAPR03CA0052.namprd03.prod.outlook.com (2603:10b6:208:32d::27)
- by MW4PR10MB5861.namprd10.prod.outlook.com (2603:10b6:303:180::8) with
+ bh=Hh7NFf8F4Y5+S0KleQ7kREBZYaVfLnB6lbgqqANdj5s=;
+ b=Qc0YWcImFRBF6ezY5wl195QKvk5SVow0BX7psIPV4dUT2qypI7DVWVBt60sCACXmVEDDyXUXnJ9UBdHgOBCkEUdwlTZObi0dC2Jbq3yqfCeXcsQO01YJ7QcvNJuy52s+ibntrdxvkKwF/bXkMwPb26tF6eWLAnJlzr7MRdvWbNk=
+Received: from BLAPR03CA0054.namprd03.prod.outlook.com (2603:10b6:208:32d::29)
+ by MN2PR10MB4143.namprd10.prod.outlook.com (2603:10b6:208:1dd::23) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.20; Wed, 29 Apr
- 2026 15:09:27 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.19; Wed, 29 Apr
+ 2026 15:09:28 +0000
 Received: from BN3PEPF0000B06D.namprd21.prod.outlook.com
- (2603:10b6:208:32d:cafe::5d) by BLAPR03CA0052.outlook.office365.com
- (2603:10b6:208:32d::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.26 via Frontend Transport; Wed,
- 29 Apr 2026 15:09:26 +0000
+ (2603:10b6:208:32d:cafe::7a) by BLAPR03CA0054.outlook.office365.com
+ (2603:10b6:208:32d::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.30 via Frontend Transport; Wed,
+ 29 Apr 2026 15:09:28 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
@@ -45,32 +45,32 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
 Received: from flwvzet200.ext.ti.com (198.47.21.194) by
  BN3PEPF0000B06D.mail.protection.outlook.com (10.167.243.72) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9891.0 via Frontend Transport; Wed, 29 Apr 2026 15:09:25 +0000
-Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet200.ext.ti.com
+ 15.20.9891.0 via Frontend Transport; Wed, 29 Apr 2026 15:09:27 +0000
+Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet200.ext.ti.com
  (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
  2026 10:09:20 -0500
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Apr
  2026 10:09:20 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Wed, 29 Apr 2026 10:09:20 -0500
 Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TF9KMH3565154;
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63TF9KSd3333896;
 	Wed, 29 Apr 2026 10:09:20 -0500
 Received: from reatmon by grumpy with local (Exim 4.97)
 	(envelope-from <reatmon@ti.com>)
-	id 1wI6XQ-000000046V5-1NFD;
+	id 1wI6XQ-000000046V1-1Hve;
 	Wed, 29 Apr 2026 10:09:20 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>, Denys Dmytriyenko
 	<denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH 03/12] meta-ti-test: Import the recipes-bsp recipes
-Date: Wed, 29 Apr 2026 10:09:11 -0500
-Message-ID: <20260429150920.978263-3-reatmon@ti.com>
+Subject: [meta-ti][master][PATCH 02/12] meta-ti-test: Import the recipes-benchmark recipes
+Date: Wed, 29 Apr 2026 10:09:10 -0500
+Message-ID: <20260429150920.978263-2-reatmon@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260429150920.978263-1-reatmon@ti.com>
 References: <20260429150920.978263-1-reatmon@ti.com>
@@ -80,128 +80,426 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06D:EE_|MW4PR10MB5861:EE_
-X-MS-Office365-Filtering-Correlation-Id: b963fb79-4626-4f18-ff3b-08dea6014d23
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06D:EE_|MN2PR10MB4143:EE_
+X-MS-Office365-Filtering-Correlation-Id: 36b78dbb-f971-48ac-661b-08dea6014e94
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|1800799024|36860700016|376014|56012099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|36860700016|376014|1800799024|82310400026|22082099003|56012099003|18002099003|13003099007;
 X-Microsoft-Antispam-Message-Info: 
-	4MpAz0Peci9cT8u1TzX0cWgWlHgXLE0ST9X3jU3AQ0dEZ2yWsvBt5m77SS8nHvOHeuQKhA0YxzIA22EhuBrkQCbb8V+IpMIZQMTKwaJupRu5zDcmNzHZoB3RBme1jr56e2RF/T/ROvzSgs6+2VIR9qUSh1c3G2wURlxAFdRV3MxLnzZdpITcM5IAxDw18q3EUhM7Z7Ix57mDhTdNE9/q34XJ4kLV/UGJp6bNUZNNpfm+huXEme/dDL3wMwkvZ6OWccSGkZq+F+dfLrB3jW/K1322TZQV4zlMfrmOO31jGxa3RoqmQ+y6gbBtp+8Tj+ophCePRAXNy091ARjdkUQ60DG3sEyqlaXoJoOoXcKI2TkO8XTEb4FTqWBKvsa9IkP50ACnEv5Ruxt52ZWwRUEzW9Xvo5PwSSjZzRy1CKvAe4vOeuiUOY8SJzgtAIBkzuv8P8tNHMgD8L3daurlUvvCVbzgbwtHMK00aSZcP9iNhpZVXRIOmKoNAZucIyDWxWICy0M/izf2MUQqBIJom8s3WOB2gvT2rjZ5M9pU3/nDFS6MSmjir6E8eac2oz2hKPh2aZava8CYsxAQIRXHWtYnlcoZIRuDH8SVsSH3MFMV8V9qpJph0sjBE+EbEPzfWo7v3VpjnheFRAmLyW7A+fny8AwL3DtWmuKHtnERWgBMvbLMChb/WvhdeWUukIlwpsTmWn6LSNK643DbmRiMVKFB6KVob52quYf79b00XEeBk4Y=
+	ObwZ2UP/lT/mP0OgDSBAvn99y4xySIoo1mAS9bN93CMGXVweppAbp349ajXwQlEH3jkWWfmlCtOE2Ed0xlZJ8NLvPDyukYaxjMwmyudTHcOyPTVG1ZfAcBEOcHbaOulPBf7usW/zzGe6NkqSl865XXVcuTLKoFom4wjIxerpSw4quklE4PrBYcJzBB6GfiCGMrZ85IoYPQ4Y6M0swQdLvgjTeV0UdhwxcsJSgOBqgxGu/yXjqWYZbJOuuBrn0AqoGj5vARnFaPyiqqpS4toJsASAKGckcmTupNUglWWUEE5feegZXjdjj+dI45DLOdJ6+6WZJ9ei92KGVLfB1CBepkPJUqoR0IE3P6IPd+LIWAyVAkd/z7rlpwRdj205yA4PKS0ZTF3L1NssOwWxeKy/YXVBhkJ5kXel84p9UPTywQ9sz+TES/LefkLsb+FHNGoXGeEV1ql5HKEB89yMGtMZLIsaUgpRK4Aw6tIm7EfUzT+q/OdHepgoPDqJhJs/oHIfxWobWB02Ybxzpp61GVYQDq1v0aoie9E6QnN0npKYjicU1ptj+pGXcK8XvWvQakwLNQdzXznIEJpS8iJdRRwshuYfZFxH31+LY+RjfQnd6HFH3M1X1r7SLkp0cz8ORAQf29wI+6WD+nOAE+hCnLXKSVroYY9SB5eDiHNCbO3WqdkpMIKEDw7eKxZEsYkPFLjI
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(36860700016)(376014)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:198.47.21.194;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(22082099003)(56012099003)(18002099003)(13003099007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	Umth5OkZQryuRGOnAPGM3jF4WvK+HlnGP9iu+3HSCGAO9YcKmNiwJEpyuMBTFrvebfiIRZSQKz6R4y/SCfTBH12ALV8Fthuy4C2ZeEhtUaRWEHXvm3ROhnMvCDToXSbaLBpdGNlJzjHbQayr3TEsRiA0MDR6TNlIa8i1c2bq3JN3S4khHwTRE+DCNppFlSyAVhgqwKVov6HsRA7W7LKR/0Cz3wcqjaflYSNWVinhExxLdwmBt/8AVztUvHfa362G5c+IzQ5RdwSm6zJRFY/psPMM/NKgmaza+zACWcf088hKIpfYPOMqmZ9bLq7p06WI80Doc+ibfglmc1wZkHLRUnWcByridJH26c+zuJTjzbrPHC4kUex3Y/RQfo0MLohDERsujW+BLA+usLG8Z5P6RKXCEc4Onyj1BWSbPiITXPNxGn+TxqrcViDZNVoMDPeP
+	jr5gycdvQR/AbSba+kmtHnEE34RtdfXZC84KUVi6DkovpdGJB+E37U41ZFvurY/MWg0GChGe2qpu7kVF5yFuo6xTYf13EIOuQm4BSQwhyPzRA9HfvUc9v9T1gZOEOko9SYC5IgachHQZOrO6bS4cLWJzkRjGz0Ofrq76q13Rv1KWi9poy4jJpjHDbu2xs0vR70holQs1j2b8Y4/Fb2J7ls4/XJtXge1znPuE8OIR800qed5DZaqJmXAfpYKHwZdEAprUSquIrspGiyBzBc2nLe2NnvKs9t+276/9OdKscO9SROHAtrp4UqFudZ0QvRLpwTpAlsJrPgwvZhcsXKRnY+c4S6YnDCFD+jdytf/SnpNgXUjS1CjjstCaeUrjnPUdjq1oThppHEdM50d9hEstGYukRkX6bN0BXJr8HJ97MkiNd8xbZxacg1s00f/yRy4Z
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 15:09:25.1330
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 15:09:27.5536
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b963fb79-4626-4f18-ff3b-08dea6014d23
+X-MS-Exchange-CrossTenant-Network-Message-Id: 36b78dbb-f971-48ac-661b-08dea6014e94
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
 	BN3PEPF0000B06D.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB5861
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR10MB4143
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 29 Apr 2026 15:09:33 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19884
+ <meta-ti@lists.yoctoproject.org>; Wed, 29 Apr 2026 15:09:32 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19883
 
 We are moving the meta-arago-test layer to meta-ti-test.  This commit
-imports all of the recipes under recipes-bsp.
+imports all of the recipes under recipes-benchmark.
 
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- ...se-proper-definition-of-boolean-type.patch | 33 +++++++++++++++++++
- .../switch-config/switch-config_git.bb        | 27 +++++++++++++++
- 2 files changed, 60 insertions(+)
- create mode 100644 meta-ti-test/recipes-bsp/switch-config/files/0001-Use-p=
-roper-definition-of-boolean-type.patch
- create mode 100644 meta-ti-test/recipes-bsp/switch-config/switch-config_gi=
-t.bb
+ .../licenses/Stream_Benchmark_License         | 34 +++++++++++++
+ .../arm-benchmarks/arm-benchmarks_1.3.bb      | 23 +++++++++
+ .../arm-ddr-bandwidth/arm-ddr-bandwidth.bb    | 28 +++++++++++
+ .../coremark/coremark-ti.inc                  |  3 ++
+ ..._main-Remove-printing-compiler-flags.patch | 41 ++++++++++++++++
+ .../coremark/coremark_%.bbappend              |  4 ++
+ .../nbench-byte/nbench-byte-ti.inc            |  1 +
+ .../nbench-byte/nbench-byte_%.bbappend        |  4 ++
+ .../openssl-perf/openssl-perf.bb              | 49 +++++++++++++++++++
+ .../stream/stream_%.bbappend                  | 13 +++++
+ .../recipes-benchmark/stream/stream_5.10.bb   | 26 ++++++++++
+ 11 files changed, 226 insertions(+)
+ create mode 100644 meta-ti-test/licenses/Stream_Benchmark_License
+ create mode 100644 meta-ti-test/recipes-benchmark/arm-benchmarks/arm-bench=
+marks_1.3.bb
+ create mode 100644 meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-dd=
+r-bandwidth.bb
+ create mode 100644 meta-ti-test/recipes-benchmark/coremark/coremark-ti.inc
+ create mode 100644 meta-ti-test/recipes-benchmark/coremark/coremark/0001-c=
+ore_main-Remove-printing-compiler-flags.patch
+ create mode 100644 meta-ti-test/recipes-benchmark/coremark/coremark_%.bbap=
+pend
+ create mode 100644 meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-=
+ti.inc
+ create mode 100644 meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_=
+%.bbappend
+ create mode 100644 meta-ti-test/recipes-benchmark/openssl-perf/openssl-per=
+f.bb
+ create mode 100644 meta-ti-test/recipes-benchmark/stream/stream_%.bbappend
+ create mode 100644 meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
 
-diff --git a/meta-ti-test/recipes-bsp/switch-config/files/0001-Use-proper-d=
-efinition-of-boolean-type.patch b/meta-ti-test/recipes-bsp/switch-config/fi=
-les/0001-Use-proper-definition-of-boolean-type.patch
+diff --git a/meta-ti-test/licenses/Stream_Benchmark_License b/meta-ti-test/=
+licenses/Stream_Benchmark_License
 new file mode 100644
-index 00000000..fe18b3b0
+index 00000000..cf1c8e00
 --- /dev/null
-+++ b/meta-ti-test/recipes-bsp/switch-config/files/0001-Use-proper-definiti=
-on-of-boolean-type.patch
-@@ -0,0 +1,33 @@
-+From 5190913c7a86cd36b91dc3a6ff4c1eb22ea6375e Mon Sep 17 00:00:00 2001
-+From: Denys Dmytriyenko <denys@konsulko.com>
-+Date: Tue, 6 May 2025 12:52:14 -0400
-+Subject: [PATCH] Use proper definition of boolean type
++++ b/meta-ti-test/licenses/Stream_Benchmark_License
+@@ -0,0 +1,34 @@
++*=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++*-----------------------------------------------------------------------
++* Copyright 1991-2003: John D. McCalpin
++*-----------------------------------------------------------------------
++* License:
++*  1. You are free to use this program and/or to redistribute
++*     this program.
++*  2. You are free to modify this program for your own use,
++*     including commercial use, subject to the publication
++*     restrictions in item 3.
++*  3. You are free to publish results obtained from running this
++*     program, or from works that you derive from this program,
++*     with the following limitations:
++*     3a. In order to be referred to as "STREAM benchmark results",
++*         published results must be in conformance to the STREAM
++*         Run Rules, (briefly reviewed below) published at
++*         http://www.cs.virginia.edu/stream/ref.html
++*         and incorporated herein by reference.
++*         As the copyright holder, John McCalpin retains the
++*         right to determine conformity with the Run Rules.
++*     3b. Results based on modified source code or on runs not in
++*         accordance with the STREAM Run Rules must be clearly
++*         labelled whenever they are published.  Examples of
++*         proper labelling include:
++*         "tuned STREAM benchmark results"=20
++*         "based on a variant of the STREAM benchmark code"
++*         Other comparable, clear and reasonable labelling is
++*         acceptable.
++*     3c. Submission of results to the STREAM benchmark web site
++*         is encouraged, but not required.
++*  4. Use of this program or creation of derived works based on this
++*     program constitutes acceptance of these licensing restrictions.
++*  5. Absolutely no warranty is expressed or implied.
++*-----------------------------------------------------------------------
+diff --git a/meta-ti-test/recipes-benchmark/arm-benchmarks/arm-benchmarks_1=
+.3.bb b/meta-ti-test/recipes-benchmark/arm-benchmarks/arm-benchmarks_1.3.bb
+new file mode 100644
+index 00000000..8cdd1a6f
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/arm-benchmarks/arm-benchmarks_1.3.bb
+@@ -0,0 +1,23 @@
++SUMMARY =3D "ARM Benchmarks"
++HOMEPAGE =3D "https://gforge.ti.com/gf/project/am_benchmarks/"
++LICENSE =3D "BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7aefb5e1cffc7b6a3ef18b803f95792=
+2"
++SECTION =3D "system"
 +
-+Newer versions of GCC and C standard have bool as a built-in
-+keyword - use a standard stdbool.h header to properly handle it.
++PR =3D "r13"
 +
-+Upstream-Status: Inactive-Upstream
++BRANCH ?=3D "master"
++SRCREV =3D "fefaf9bdd6f36ab0cebaab8dbf34e5beb50f471c"
 +
-+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
++SRC_URI =3D "git://git.ti.com/git/apps/arm_benchmarks.git;protocol=3Dhttps=
+;branch=3D${BRANCH}"
++
++do_compile() {
++	export CROSS_COMPILE=3D${TARGET_PREFIX}
++	export CFLAGS=3D'${TARGET_CC_ARCH} -std=3Dgnu11'
++	# build the release version
++	oe_runmake release CC=3D"${CC}"
++}
++do_install() {
++
++	oe_runmake DESTDIR=3D${D} install
++}
+diff --git a/meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-ddr-bandw=
+idth.bb b/meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-ddr-bandwidt=
+h.bb
+new file mode 100644
+index 00000000..29db78c3
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/arm-ddr-bandwidth/arm-ddr-bandwidth.bb
+@@ -0,0 +1,28 @@
++SUMMARY =3D "Benchmark for checking DDR bandwidth"
++HOMEPAGE =3D "https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/tre=
+e/arm_apps/arm_ddr_bandwidth/runLmDDRBandwidth.sh"
++LICENSE =3D "CC-BY-SA-3.0"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6e0ae7214f6c74c149cb25f373057fa=
+9"
++
++PV =3D "1.0"
++
++SRC_URI =3D " \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/arm_app=
+s/arm_ddr_bandwidth/runLmDDRBandwidth.sh;name=3DrunLmDDRBandwidth \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/LICENSE=
+;name=3Dlicense \
++"
++SRC_URI[runLmDDRBandwidth.sha256sum] =3D "67997d721b351344d8788200a15bb364=
+0093045bc25f2b5307dd331ebd1556a3"
++SRC_URI[license.sha256sum] =3D "7febd1df714fa4b1e44fe0b0f73ceac7f9b9f97326=
+695a0cc7074bd6c8d263e3"
++
++S =3D "${UNPACKDIR}"
++
++do_install() {
++    install -d ${D}${datadir}/matrix-gui-2.0/apps
++
++    install -d ${D}${bindir}
++    install -m 0755 ${S}/runLmDDRBandwidth.sh ${D}${bindir}/runLmDDRBandwi=
+dth.sh
++}
++
++FILES:${PN} =3D " \
++    ${datadir}/matrix-gui-2.0/apps \
++    ${bindir}/runLmDDRBandwidth.sh \
++"
++
+diff --git a/meta-ti-test/recipes-benchmark/coremark/coremark-ti.inc b/meta=
+-ti-test/recipes-benchmark/coremark/coremark-ti.inc
+new file mode 100644
+index 00000000..9a1d9b89
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/coremark/coremark-ti.inc
+@@ -0,0 +1,3 @@
++FILESEXTRAPATHS:prepend :=3D "${THISDIR}/coremark:"
++
++SRC_URI +=3D "file://0001-core_main-Remove-printing-compiler-flags.patch"
+diff --git a/meta-ti-test/recipes-benchmark/coremark/coremark/0001-core_mai=
+n-Remove-printing-compiler-flags.patch b/meta-ti-test/recipes-benchmark/cor=
+emark/coremark/0001-core_main-Remove-printing-compiler-flags.patch
+new file mode 100644
+index 00000000..ef7c78b2
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/coremark/coremark/0001-core_main-Remov=
+e-printing-compiler-flags.patch
+@@ -0,0 +1,41 @@
++From 0af4e2298ccacc8afc0294b7a731f0e866155427 Mon Sep 17 00:00:00 2001
++From: Ryan Eatmon <reatmon@ti.com>
++Date: Mon, 1 Dec 2025 12:21:23 -0600
++Subject: [PATCH] core_main: Remove printing compiler flags
++
++Reproducible builds do not like including anything that references the
++build environment on the host machine.  This would include printing out
++the COMPILER_FLAGS macro.  Substitute it with "".
++
++Upstream-Status: Inappropriate [OE-Specific]
++
++Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 +---
-+ switch-config.c | 5 +----
-+ 1 file changed, 1 insertion(+), 4 deletions(-)
++ core_main.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/switch-config.c b/switch-config.c
-+index d31a237..5b5db3a 100644
-+--- a/switch-config.c
-++++ b/switch-config.c
-+@@ -13,10 +13,7 @@
-+  * GNU General Public License for more details.
-+  */
++diff --git a/core_main.c b/core_main.c
++index a4beeb6..f0ab87f 100644
++--- a/core_main.c
+++++ b/core_main.c
++@@ -380,7 +380,7 @@ for (i =3D 0; i < MULTITHREAD; i++)
++     ee_printf("Iterations       : %lu\n",
++               (long unsigned)default_num_contexts * results[0].iterations=
+);
++     ee_printf("Compiler version : %s\n", COMPILER_VERSION);
++-    ee_printf("Compiler flags   : %s\n", COMPILER_FLAGS);
+++    ee_printf("Compiler flags   : %s\n", ""); //Reproducible build fix: C=
+OMPILER_FLAGS);
++ #if (MULTITHREAD > 1)
++     ee_printf("Parallel %s : %d\n", PARALLEL_METHOD, default_num_contexts=
+);
++ #endif
++@@ -410,7 +410,7 @@ for (i =3D 0; i < MULTITHREAD; i++)
++                       default_num_contexts * results[0].iterations
++                           / time_in_secs(total_time),
++                       COMPILER_VERSION,
++-                      COMPILER_FLAGS);
+++                      ""); //Reproducible build fix: COMPILER_FLAGS);
++ #if defined(MEM_LOCATION) && !defined(MEM_LOCATION_UNSPEC)
++             ee_printf(" / %s", MEM_LOCATION);
++ #else
++--=20
++2.43.0
 +
-+-#define true 1
-+-#define false 0
-+-typedef int bool;
-+-
-++#include <stdbool.h>
-+ #include <stdio.h>
-+ #include <stdlib.h>
-+ #include <unistd.h>
-+--
-+2.25.1
-diff --git a/meta-ti-test/recipes-bsp/switch-config/switch-config_git.bb b/=
-meta-ti-test/recipes-bsp/switch-config/switch-config_git.bb
+diff --git a/meta-ti-test/recipes-benchmark/coremark/coremark_%.bbappend b/=
+meta-ti-test/recipes-benchmark/coremark/coremark_%.bbappend
 new file mode 100644
-index 00000000..90834edb
+index 00000000..952d6e99
 --- /dev/null
-+++ b/meta-ti-test/recipes-bsp/switch-config/switch-config_git.bb
-@@ -0,0 +1,27 @@
-+SUMMARY =3D "Ethernet Switch configuration management"
-+LICENSE =3D "GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "file://switch-config.c;beginline=3D1;endline=3D14;md=
-5=3D659ff9658cbaba3110b81804af60de75"
++++ b/meta-ti-test/recipes-benchmark/coremark/coremark_%.bbappend
+@@ -0,0 +1,4 @@
++COREMARK_TI =3D ""
++COREMARK_TI:ti-soc =3D "coremark-ti.inc"
 +
-+PV =3D "2.0"
-+PR =3D "r5"
++require ${COREMARK_TI}
+diff --git a/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-ti.inc =
+b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-ti.inc
+new file mode 100644
+index 00000000..f571f368
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte-ti.inc
+@@ -0,0 +1 @@
++ARM_INSTRUCTION_SET =3D "arm"
+diff --git a/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_%.bbapp=
+end b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_%.bbappend
+new file mode 100644
+index 00000000..dfe5ea96
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/nbench-byte/nbench-byte_%.bbappend
+@@ -0,0 +1,4 @@
++NBENCH_BYTE_TI =3D ""
++NBENCH_BYTE_TI:ti-soc =3D "nbench-byte-ti.inc"
 +
-+BRANCH ?=3D "v4.1"
-+BRANCH:aarch64 ?=3D "am65x-v1.0"
++require ${NBENCH_BYTE_TI}
+diff --git a/meta-ti-test/recipes-benchmark/openssl-perf/openssl-perf.bb b/=
+meta-ti-test/recipes-benchmark/openssl-perf/openssl-perf.bb
+new file mode 100644
+index 00000000..04a3fb79
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/openssl-perf/openssl-perf.bb
+@@ -0,0 +1,49 @@
++SUMMARY =3D "Benchmarks for checking various OpenSSL performance functions=
+"
++HOMEPAGE =3D "https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/tre=
+e/cryptos_apps_scripts/"
++LICENSE =3D "CC-BY-SA-3.0"
++LIC_FILES_CHKSUM =3D "file://${UNPACKDIR}/LICENSE;md5=3D6e0ae7214f6c74c149=
+cb25f373057fa9"
 +
-+SRCREV =3D "412dce4e65cfe5af729be38fd1b4c1d59e9a8828"
-+SRCREV:aarch64 =3D "0f52dcb3c4e3678e96427d546d6c2e1fabc2ad91"
++PV =3D "1.0"
 +
-+SRC_URI =3D "git://git.ti.com/git/switch-config/switch-config.git;protocol=
-=3Dhttps;branch=3D${BRANCH}"
++SRC_URI =3D " \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_perf_scripts/openssl_perf.sh;name=3Dopenssl_perf \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_aes256_encdec_scripts/openssl_aes256_encdec.sh;name=
+=3Dopenssl_aes256_encdec \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_display_cert_scripts/openssl_display_cert.sh;name=3Do=
+penssl_display_cert \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_gen_cert_scripts/openssl_gen_cert.sh;name=3Dopenssl_g=
+en_cert \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_gen_pubkey_scripts/openssl_gen_pubkey.sh;name=3Dopens=
+sl_gen_pubkey \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_gen_sha1hash_scripts/openssl_gen_sha1hash.sh;name=3Do=
+penssl_gen_sha1hash \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/cryptos=
+_apps_scripts/openssl_start_server_scripts/openssl_start_server.sh;name=3Do=
+penssl_start_server \
++    https://git.ti.com/cgit/matrix-gui-v2/matrix-gui-v2-apps/plain/LICENSE=
+;name=3Dlicense \
++"
++SRC_URI[openssl_perf.sha256sum] =3D "5769e841b977d6a858da38826c2cf47c288ed=
+642614c5b6f802409cb3601ab29"
++SRC_URI[openssl_aes256_encdec.sha256sum] =3D "1a488e3ba98f6f2e5f73c14681b0=
+452ba902aecbb174e4e74b524dda4c5eda7a"
++SRC_URI[openssl_display_cert.sha256sum] =3D "fbe80fe1afe29f777e346ecd86d89=
+e1f27cedc1bb745a9a9bc5cd38f2d566a3e"
++SRC_URI[openssl_gen_cert.sha256sum] =3D "47bfc80b88edebcc4d82ee3816bc05b95=
+ca0d42c42e7f3b83e74fa6f9c6c01ef"
++SRC_URI[openssl_gen_pubkey.sha256sum] =3D "4581e2329afeb814602c4874ffa038d=
+95a4bcc8b23df24d7be25822d0dd6c433"
++SRC_URI[openssl_gen_sha1hash.sha256sum] =3D "f338f8c3067ebb1c5710b16b91e8b=
+9e38685b05fcc072060ec0c62bd10cefd97"
++SRC_URI[openssl_start_server.sha256sum] =3D "e23499210f701ef831d39a8c732f3=
+4f4b06fb3ba2d069c4a95ef25ae59f3c93e"
++SRC_URI[license.sha256sum] =3D "7febd1df714fa4b1e44fe0b0f73ceac7f9b9f97326=
+695a0cc7074bd6c8d263e3"
 +
-+SRC_URI +=3D "file://0001-Use-proper-definition-of-boolean-type.patch"
++S =3D "${UNPACKDIR}"
 +
-+EXTRA_OEMAKE =3D "CROSS_COMPILE=3D${TARGET_PREFIX} CC=3D"${CC}""
++do_install() {
++    install -d ${D}${bindir}
++    install -m 0755 ${S}/openssl_perf.sh ${D}${bindir}/openssl_perf.sh
++    install -m 0755 ${S}/openssl_aes256_encdec.sh ${D}${bindir}/openssl_ae=
+s256_encdec.sh
++    install -m 0755 ${S}/openssl_display_cert.sh ${D}${bindir}/openssl_dis=
+play_cert.sh
++    install -m 0755 ${S}/openssl_gen_cert.sh ${D}${bindir}/openssl_gen_cer=
+t.sh
++    install -m 0755 ${S}/openssl_gen_pubkey.sh ${D}${bindir}/openssl_gen_p=
+ubkey.sh
++    install -m 0755 ${S}/openssl_gen_sha1hash.sh ${D}${bindir}/openssl_gen=
+_sha1hash.sh
++    install -m 0755 ${S}/openssl_start_server.sh ${D}${bindir}/openssl_sta=
+rt_server.sh
++}
 +
-+do_configure() {
-+	sed 's|-I$(KBUILD_OUTPUT)/usr/include|${TOOLCHAIN_OPTIONS} -I.|' -i ${S}/=
-Makefile
++FILES:${PN} =3D "\
++    ${bindir}/openssl_perf.sh \
++    ${bindir}/openssl_aes256_encdec.sh \
++    ${bindir}/openssl_display_cert.sh \
++    ${bindir}/openssl_gen_cert.sh \
++    ${bindir}/openssl_gen_pubkey.sh \
++    ${bindir}/openssl_gen_sha1hash.sh \
++    ${bindir}/openssl_start_server.sh \
++"
++
+diff --git a/meta-ti-test/recipes-benchmark/stream/stream_%.bbappend b/meta=
+-ti-test/recipes-benchmark/stream/stream_%.bbappend
+new file mode 100644
+index 00000000..97e0c6a0
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/stream/stream_%.bbappend
+@@ -0,0 +1,13 @@
++INSANE_SKIP:${PN} +=3D "ldflags"
++INSANE_SKIP:${PN}-openmp +=3D "ldflags"
++
++PR:append =3D ".ti1"
++
++BRANCH =3D "sdk"
++SRCREV =3D "96156d407d9a4e5fac4513f3d3f60a414b3355cd"
++
++do_compile:prepend() {
++    #Explicitly clear some variables to insure no unexpected optimizations=
+ are being passed in.
++    unset CFLAGS
++    unset LDFLAGS
++}
+diff --git a/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb b/meta-ti=
+-test/recipes-benchmark/stream/stream_5.10.bb
+new file mode 100644
+index 00000000..484be34d
+--- /dev/null
++++ b/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
+@@ -0,0 +1,26 @@
++SUMMARY =3D "Stream Benchmark"
++HOMEPAGE =3D "http://www.cs.virginia.edu/stream/"
++LICENSE =3D "Stream_Benchmark_License"
++LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dbca8cbe07976fe64c8946378d08=
+314b0"
++SECTION =3D "system"
++
++PR =3D "r0"
++
++BRANCH ?=3D "master"
++SRCREV =3D "b66f2bab5d6d0b35732ef8406ae03873725a3306"
++
++SRC_URI =3D "git://git.ti.com/git/arago-project-org/stream.git;protocol=3D=
+https;branch=3D${BRANCH}"
++
++PACKAGES =3D+ "${PN}-openmp"
++
++do_compile() {
++	oe_runmake CC=3D"${CC}"
 +}
 +
 +do_install() {
-+	install -d ${D}${bindir}/
-+	install -c -m 755 ${S}/switch-config ${D}${bindir}/switch-config
++	install -d ${D}/${bindir}
++	install -m 0755 ${S}/stream_c ${D}/${bindir}/
++	install -m 0755 ${S}/stream_c_openmp ${D}/${bindir}/
 +}
++
++FILES:${PN}-openmp =3D "${bindir}/stream_c_openmp"
 --=20
 2.43.0
 
