@@ -1,263 +1,144 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <m-shah@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCE5DCD6E57
-	for <webhook@archiver.kernel.org>; Wed,  3 Jun 2026 00:49:13 +0000 (UTC)
-Received: from BN8PR05CU002.outbound.protection.outlook.com (BN8PR05CU002.outbound.protection.outlook.com [52.101.57.28])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10024.1780447749695731606
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5DB1CD6E55
+	for <webhook@archiver.kernel.org>; Wed,  3 Jun 2026 07:25:49 +0000 (UTC)
+Received: from CY7PR03CU001.outbound.protection.outlook.com (CY7PR03CU001.outbound.protection.outlook.com [40.93.198.66])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14457.1780471546416627255
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 02 Jun 2026 17:49:10 -0700
+ Wed, 03 Jun 2026 00:25:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=fJGLvuYV;
- spf=pass (domain: list.ti.com, ip: 52.101.57.28, mailfrom: prc@list.ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=ert1DsCI;
+ spf=pass (domain: ti.com, ip: 40.93.198.66, mailfrom: m-shah@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VsLAFAWn2ztcUlrtUA04vG0rb2+KoZ0ndo/YjVLqyzk6aejmOoz9VQ3zOacahk8vxVi+Nu38TS9PBUaaZnDUPOdJ/IRYDF24M3OittxnYhzIjSTixCryC8W4LdRvghzjkSpWPsI/f4yN+eCdrjyqULRCMOtXtCdeKW7oQq1kI5fYZTlx0SAUdA34W6Li2BuzAPTf/sZRkyiYYJ3AFQWBLgkz92cLfvOuDeBRfKbqk1/jnNBdqJniWjYqaKSEDwB+FWwQ18gKgFSWHPmjemm9hGacmV4z3WLKoe0Uh63MZj7KVrE10KtTcHNobb11Y5LQq7/XoxAKHLct8RzDJ1MMEA==
+ b=jPNpu3Rfy7gcd2HL268djTXOdD34aCHFM30FINZwV41dFlXKUHRORvO9PSurJFe3rHikRJVH2JniOmPC+ROk3ihVTW0R63qsm6hcc2uMg6tFlz94Mse7v9rd24jdQMXE/UQHx7hf5M21HT7GKlWId4tYfNpigk1RSzdFsZZPF0IDmjVLUJD+LTTyUeGIFduSr2yAlrzz77IUJo0Fd6b/MczZ3WkaI7owFxFjUw1T7xe0Aj+ezU546mQZEkL0jKBesB7NCXiZLTIySRpIzSIBSa2zA21VZ+8ayldDvNvsmH2N6tF9Fy8Y+ckLkCWMWkye+ORFGo3fO8PKJxatfLfrlg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=t8ia9O6tT6mgbazyQDZFX+MzK42N0q9oiyL+zMsu19M=;
- b=sU9e/7viPmHI02o62DTPv9ZiO9WqHfpSYX0yPZNYkFswCZyz5Y/T75wf2RyNRbQIrYtz3rujD9Wx/lmersWtjTB8RWZkTeTJYlz9xbbOQetq0w80FuoY3d7250htYPJmMepUmYhSLhP1qavNr8AE0dQZLmIDG/ipU7aYmVMZ9f4aJzwuXQTo3uPMiGQAPVolgzYZ3HrT8FghyP4qKMfxvlq1LsGB7dle2M3ODSo1Z2UegsFl1gZQqBI/yGjCdkG2VJeco59Y9xOX9ZP4//VdmfdILmq5CHItCuUSXYuPAMde2FPipRGPol0AK4SF+F+5tKbq6jjQ8PxLWlG25eEb/Q==
+ bh=6YaDRtIgMZi4PfGwZ4awLhH/yHdtRIWXvO4YIICkUuY=;
+ b=uJs0bpomVUr1G6Gt3W9V7XIkxQgd6nFZsFiPnTPJT6Ze/OADYbhEF0+HGHpvYjpxA+xWC3inNB9XGzkR7ZnfOpH95j4lLg1Qcf0uPYWw+u+w2LAKBYQYoKKVpEwdA6yfKnnOmtg2UvAmGR3w5oPL6GGkRVr2rmL9byEK3/FCgFOFIq6hCZqKnHCn31PsdvnNmH5G43DV+n/nL+t+8VBVFlX4r0d/woVE1hUs585CotuyRVXqjF0gaiICyLxetESdAJb5HVnr1DCrkbbobq+Gjla9r8NOOMV9tJ8D8PrRZi5PIMQP2eLxhZ3ZPlQTUB8SbPpN5ivFs6QNEYzetOo3PA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org
- smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
- action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
- (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
- s=selector1;
+ 198.47.23.194) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t8ia9O6tT6mgbazyQDZFX+MzK42N0q9oiyL+zMsu19M=;
- b=fJGLvuYVwxFlKXb/o+LKh9YqMW8gfd2xyXbG9UWFNCuH0nmUK5kqqjlekEzNe7t7m0CeCwl+8Pq8iC9UsfhGefobmQxpS7pkROx6jgRC5HthdBr38hFGNIi8/r3zflIY8KATySh75fRVlnDmPj8Vgmm9V892f1MDpjnMJI5Bh8wI5TDy4Mm3WJyJgcjNG0s8qOglMW7jVTQcMT9r3C4FnQzPWw95DGQoO96XNaDcxqv6dnWw4Blw8DokmD5a3L8RUXiiNjOk9uFAxcLbBXJvxGD+EiYrWtJPFi512lLdyMvbaLu+q+wTggaZb/mvv/zP2YBqNGxMAufhdtUDSh0KjQ==
-Received: from CH0PR03CA0380.namprd03.prod.outlook.com (2603:10b6:610:119::8)
- by DS4PPFD91C619EF.namprd10.prod.outlook.com (2603:10b6:f:fc00::d4e) with
+ bh=6YaDRtIgMZi4PfGwZ4awLhH/yHdtRIWXvO4YIICkUuY=;
+ b=ert1DsCIgoFbuP4cZVDM3Kt6sLiRCf5GUdCF8W/qCVpQAEqzYd30iP0yaCBCovrkOfWJMrJsZl0vEc+93SmbEziD1+kkFQgs4Cf7IFJ8c+dk5ZM0krax2uY527ZJGHBiR23/+9bMZLp1ettNTRvewMUw3X1/sRE4DotM4AZTY/Q=
+Received: from SJ0PR05CA0007.namprd05.prod.outlook.com (2603:10b6:a03:33b::12)
+ by CH3PR10MB7833.namprd10.prod.outlook.com (2603:10b6:610:1ad::7) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Wed, 3 Jun 2026
- 00:49:07 +0000
-Received: from CH1PEPF0000A34B.namprd04.prod.outlook.com
- (2603:10b6:610:119:cafe::6a) by CH0PR03CA0380.outlook.office365.com
- (2603:10b6:610:119::8) with Microsoft SMTP Server (version=TLS1_3,
+ 07:25:43 +0000
+Received: from CO1PEPF00012E64.namprd05.prod.outlook.com
+ (2603:10b6:a03:33b:cafe::19) by SJ0PR05CA0007.outlook.office365.com
+ (2603:10b6:a03:33b::12) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.7 via Frontend Transport; Wed, 3
- Jun 2026 00:49:07 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=list.ti.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=list.ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CH1PEPF0000A34B.mail.protection.outlook.com (10.167.244.10) with Microsoft
+ Jun 2026 07:25:42 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ CO1PEPF00012E64.mail.protection.outlook.com (10.167.249.73) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.92.5 via Frontend Transport; Wed, 3 Jun 2026 00:49:05 +0000
-Received: from DFLE200.ent.ti.com (10.64.6.58) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 2 Jun
- 2026 19:48:56 -0500
-Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 2 Jun
- 2026 19:48:56 -0500
-Received: from fllvem-mr07.itg.ti.com (10.64.41.89) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.92.5 via Frontend Transport; Wed, 3 Jun 2026 07:25:42 +0000
+Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 3 Jun
+ 2026 02:25:26 -0500
+Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 3 Jun
+ 2026 02:25:26 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Tue, 2 Jun 2026 19:48:56 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by fllvem-mr07.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6530musE353607;
-	Tue, 2 Jun 2026 19:48:56 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id 3EC8E9ACF4; Tue,  2 Jun 2026 19:48:56 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <meta-ti@lists.yoctoproject.org>, "Denys Dmytriyenko (TI)"
+ Transport; Wed, 3 Jun 2026 02:25:26 -0500
+Received: from moteen-ubuntu-desk.dhcp.ti.com (moteen-ubuntu-desk.dhcp.ti.com [10.24.50.20])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6537PMiB1260483;
+	Wed, 3 Jun 2026 02:25:23 -0500
+From: Moteen Shah <m-shah@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <reatmon@ti.com>, <nm@ti.com>, <u-kumar1@ti.com>, <s-vadapalli@ti.com>,
+	<a-limaye@ti.com>, <m-shah@ti.com>, <gehariprasath@ti.com>,
 	<denys@konsulko.com>
-Subject: Re: [master/wrynose/scarthgap][PATCH] meta-beagle: linux-bb.org: upgrade 6.12.43 -> 6.12.57
-Date: Tue, 2 Jun 2026 19:48:56 -0500
-Message-ID: <20260603004856.1298710-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20260603002844.2413801-1-denis@denix.org>
-References: <20260603002844.2413801-1-denis@denix.org>
+Subject: [meta-ti][master/wrynose][PATCH v2 0/2] Fix NFS boot on K3 platforms with bsp-next kernel
+Date: Wed, 3 Jun 2026 12:55:19 +0530
+Message-ID: <20260603072522.1272337-1-m-shah@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000A34B:EE_|DS4PPFD91C619EF:EE_
-X-MS-Office365-Filtering-Correlation-Id: 72e2ef6d-07b0-4e37-9f60-08dec109ea1f
+X-MS-TrafficTypeDiagnostic: CO1PEPF00012E64:EE_|CH3PR10MB7833:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7c92abee-34c0-4203-6159-08dec1415218
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|36860700016|1800799024|82310400026|22082099003|18002099003|56012099006;
+	BCL:0;ARA:13230040|1800799024|36860700016|82310400026|376014|6133799003|18002099003|56012099006;
 X-Microsoft-Antispam-Message-Info: 
-	NMRYVbDAQA+XgCwMfyRLRNYtMIsqj3vFY1zJ7e/CjjwWYWm3yvRIw0JMV0cJdN724jwEcOGFIy5Ee+ULhIZrVU3Kfj4sYmmh9OrNSWV/bF/GA5g5cV90Hc8MgILsIa/s8uLDJ+g4hgl00cNrcmS/3HcMEl5NbYCzfXgi1rTiXjs/gWi6CKbbFeXQvYV5ztwzBF7kIiwIFtM74F2KyZj9wuOr0FbMN4BMa+Vd/Lxawhi/bmkp6y0gCF33LA0STI8BlxsxFv1+SlA2/+Dv06wwNct7vU09MkNDfK2RdYJE2V4Y3e4V3byku/G/vOnjti5AyS/8aNDExeGwCN+xvs4BAOBAXTa4GTnAZtvJrog2iowyBj9bAMd7iYeqmEI2joGGy773LAIfFgTsDkXoXCVMnAQSg1nMcZPSHthjNUb7SzN6dKaKJfmKjLmGepM2PKNfG0OrdAdxum5vVeq98LHr9Equr8z/hNi4KUT2yBe0sw9flrNbLZs44GUoWlzvalV1WREu8CqzhGVFBKkXQNPcKjD2Tbbk3tSH2Pt/zipMROj5+J8QY207gG29unBhClR7NAmf5nrRpXy+DVwZEbRUru1uyaFaZqFGCGNexypWmnLjrNn4VKdqdeMAqQGXAkrmFDiyyA52XGY2hVSB3vUXk4yQ6oxpq11LJSWuWpRlMBLjNYuDCB8uw4q8185kYR8PMzKNiBJ/TdzAqlcM+fjAsgzJ41DNEvBkbPZnmFrNAjo=
+	ft50ss7xdu2zPtZWPwPOp2wvNzOazT2oeMgF/pSTz+8C82Z07I08D/0q6fwY7ZdMdy2dAQA7XmPmWL4ztC5q4bQIwO2cLmeLtd0a6JFq6srzpexWiQF/lS9P4MV5F6PBPvIJ0TrfVgqnZgpGwyXUYng/EvWi//hsopWfGGyKSuiucWe73whBuKtIMrEIxJ58iFCGDBSpu/e846t3wSESWrSTH8YkQjxcM52O84SbygUoL8dmEG7UZ389O4Exu8/iZC1mxUiBBIOYDtg+tp9EoPqbc0HNXhbDXoxaSFlzjw/8yDz4FhI4rI1QdRrdQBFr9k9BEuHpntfUUJQJc5knrLGVOY9iCRO86Rs69JuIz4XEgMoF6qqT33epTptobfe3xwTg7kSof2oERb8v3Q1NRoJZofadLMTEeGpplrmxp+m/aPoPRNg/W1tDVeUP1zLWaMOxNv6Y/55XJA6MpBWJZiAbrFFvlNoDYoFqf5/tkCl1bw9A3HtjOJfkRfUEXJJBweVsiE1rpQzhVw4g1G+F912rihOmteyaNlHyyBq28DwLEyi/PozsIXCCOmiT7WdPoXe3vGyb+TaYp7+29qCV//ZGHj+XymF1xz9rt2Beo5It9874lkiKv/UdnXe7yNzwwcD3TPkLniU1Xdw2rjaDGwr2SlRU+G3RmZ/ew93px4SS5SS8UnDikDmjkqPFM1tkUbGb7FgtkkRoA4NpANYnrXyeNy0y2HXPUWVVhtDTdT0=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(22082099003)(18002099003)(56012099006);DIR:OUT;SFP:1101;
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(82310400026)(376014)(6133799003)(18002099003)(56012099006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	+T21PYD+RNcp7WbkGtnxwn1okjnamGMCJ7uq9gUotPBL3hl3OXjcPPMg9cX0ClFxAWWM5yGlslQjX8qjLEPSxgdMYfDngXUR8NFC9yqOtwNWzvXXF+K7efS0V2r0Mv8OGApWj/XcotjldYSxHSYwMlW3FWPqQifGBRLzZCpsZkyG1g3QP0AcltoDC+NvYzg6mIE/I0LlUFcFfe5F/PNV/jiiKlUcxxCykTiHyNQUO3rBFXFjXw58a1fLP8bEyLExDPZM7XkSmiFBJPeoU1JARWSXJfOycYn6jCOYOb1lAML/GJDlPcSrM4pA820tUBkIHJMgIC3VfekH0l1EoX8viop0yDjlDtFob4QPNwN0Ioqplb7D+L5jcbuda6DUO3VXaYT2p2o7CsSQzdhkIqBlDGz7lJrMux5I1fGZFZgMU/twULfvKwOGNhAl3djZ6siw
-X-OriginatorOrg: list.ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2026 00:49:05.8999
+	B96mgPrtsgzblGxeU/x4Z/be8Gx9yoD5ZSc889q51FzMPtCPWAqIzthhib4Ubwuw1USx+SmJlzEQ0/Ynw6h8ZED6uYj/JPzQ5QGX4mlZogBa1xcILX7FlLhIeHqVTzsvIL/qi/og37E3tGGRHHKNiBV/S1y/NXS2iareR7rLHZNJrHTbjiHccomkchRwGBaem7siqFewB+tky7l3ndTohuAlaaDzFsW5IDRXgFEWnOgpo3j1viadZFHOFy3Aix784NRCAuKk9QuKQ3s0SrM/QnKftw4gY74gHdoiBx1itpd/EdwYUW8pubc97bd21yXqeldpIbH49TzjbqScY7wpCkMicSMeK8O0kR46i58gYZrB9TEVPvB1ajoCn+q+zefwTJAyoaGZy9OpZ4bXvimYQhMiJArUJ3XYtdenIrfOXv9VSkjKti5JCkN6CzyrOL/a
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2026 07:25:42.6248
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 72e2ef6d-07b0-4e37-9f60-08dec109ea1f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7c92abee-34c0-4203-6159-08dec1415218
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	CH1PEPF0000A34B.namprd04.prod.outlook.com
+	CO1PEPF00012E64.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PPFD91C619EF
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7833
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 03 Jun 2026 00:49:13 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19955
+ <meta-ti@lists.yoctoproject.org>; Wed, 03 Jun 2026 07:25:49 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19956
 
-meta-ti / na / 20260603002844.2413801-1-denis
+AM65_CPSW_NUSS and its dependencies changed from built-in (=3Dy) to
+loadable modules (=3Dm) in linux-next. This breaks NFS boot because the
+Ethernet driver is no longer available before the NFS root mount.
 
-PRC Results: PASS
+Patch 1 adds the CPSW module set to TI_CORE_INITRAMFS_KERNEL_MODULES
+for bsp-next so udev can load them during early boot.
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-patches: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-Patches
-----------------------------------------
-WARN - [master/wrynose/scarthgap][PATCH] meta-beagle: linux-bb.org: upgrade=
- 6.12.43 -> 6.12.57
-    WARN: Commit message should not include directory path to recipe: meta-=
-beagle: linux-bb.org: upgrade 6.12.43 -> 6.12.57.
-              meta-beagle (COMMIT-MESSAGE-3)
-        patch
-   =20
-    WARN: Missing Signed-off-by by sender in commit message. (SIGNED-OFF-BY=
--2)
-        patch
-   =20
-    For details on the above errors/warnings visit: https://lists.yoctoproj=
-ect.org/g/meta-ti/wiki/40887
+Patch 2 adds a standalone initramfs-module-netsetup recipe that waits
+for the Ethernet interface to appear after udev loads the modules and
+then configures it via DHCP before the nfsrootfs module runs.
 
+Changes in v2:
+- Move netsetup from an initramfs-framework bbappend subpackage to a
+  standalone initramfs-module-netsetup_1.0.bb recipe (Denys, Ryan)
 
+Bootlogs: https://gist.github.com/Jamm02/351d46885e20b6043d464166ee313614
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  apply-yocto-patch: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Summary:
-- Patch Series: [master/wrynose/scarthgap][PATCH] meta-beagle: linux-bb.org=
-: upgrade 6.12.43 -> 6.12.57
-- Submitter: From: Denys Dmytriyenko <denis@denix.org>
-From: "Denys Dmytriyenko (TI)" <denys@konsulko.com>
-- Date: Date: Tue,  2 Jun 2026 20:28:44 -0400
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 47c5f035d274bcb750251f0f1e299cb9c=
-5178c57
+Moteen Shah (2):
+  k3.inc: Add CPSW modules to initramfs for bsp-next NFS boot
+  initramfs: Add initramfs-module-netsetup recipe for DHCP network
+    configuration
 
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-wip
-- Commit Author: Thorsten Lannynd <t-lannynd@ti.com>
-- Commit Subject: weston: fix assert firing when subsurfaces have no views
-- Commit SHA: 1fb5f1718d4673b2a9c794f83e9e5e4769c39d23
+ meta-ti-bsp/conf/machine/include/k3.inc       |  6 +++
+ .../initramfs-module-netsetup/83-netsetup     | 54 +++++++++++++++++++
+ .../initramfs-module-netsetup_1.0.bb          | 24 +++++++++
+ .../packagegroup-ti-core-initramfs.bb         |  1 +
+ 4 files changed, 85 insertions(+)
+ create mode 100644 meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netse=
+tup/83-netsetup
+ create mode 100644 meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netse=
+tup_1.0.bb
 
-Patches
-----------------------------------------
-All patches applied
-
-wrynose
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Summary:
-- Patch Series: [master/wrynose/scarthgap][PATCH] meta-beagle: linux-bb.org=
-: upgrade 6.12.43 -> 6.12.57
-- Submitter: From: Denys Dmytriyenko <denis@denix.org>
-From: "Denys Dmytriyenko (TI)" <denys@konsulko.com>
-- Date: Date: Tue,  2 Jun 2026 20:28:44 -0400
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 47c5f035d274bcb750251f0f1e299cb9c=
-5178c57
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: wrynose-wip
-- Commit Author: Thorsten Lannynd <t-lannynd@ti.com>
-- Commit Subject: weston: fix assert firing when subsurfaces have no views
-- Commit SHA: ae9f90cf0baf823a20d10b5e4e3c6af465dabe98
-
-Patches
-----------------------------------------
-All patches applied
-
-scarthgap
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Summary:
-- Patch Series: [master/wrynose/scarthgap][PATCH] meta-beagle: linux-bb.org=
-: upgrade 6.12.43 -> 6.12.57
-- Submitter: From: Denys Dmytriyenko <denis@denix.org>
-From: "Denys Dmytriyenko (TI)" <denys@konsulko.com>
-- Date: Date: Tue,  2 Jun 2026 20:28:44 -0400
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 47c5f035d274bcb750251f0f1e299cb9c=
-5178c57
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: scarthgap-wip
-- Commit Author: LCPD Automation Script <lcpdbld@list.ti.com>
-- Commit Subject: CI/CD Auto-Merger: cicd.scarthgap.202604020811
-- Commit SHA: edac88403004bb712bf1711ce83750dc26c7fee3
-
-Patches
-----------------------------------------
-All patches applied
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-repo: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-PASS
-
-wrynose
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-PASS
-
-scarthgap
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-PASS
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  yocto-check-layers: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master - PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-All checks passed
-
-wrynose - PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-All checks passed
-
-scarthgap - PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-All checks passed
-
-
+--=20
+2.34.1
 
 
