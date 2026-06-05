@@ -1,219 +1,293 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <jcormier@criticallink.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63947CD6E7C
-	for <webhook@archiver.kernel.org>; Fri,  5 Jun 2026 12:38:58 +0000 (UTC)
-Received: from CY3PR05CU001.outbound.protection.outlook.com (CY3PR05CU001.outbound.protection.outlook.com [40.93.201.16])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7064.1780663130521316131
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EBCEACD6E7E
+	for <webhook@archiver.kernel.org>; Fri,  5 Jun 2026 18:28:38 +0000 (UTC)
+Received: from mail-yx1-f46.google.com (mail-yx1-f46.google.com [74.125.224.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1708.1780684108480799430
  for <meta-ti@lists.yoctoproject.org>;
- Fri, 05 Jun 2026 05:38:50 -0700
+ Fri, 05 Jun 2026 11:28:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@list.ti.com header.s=selector1 header.b=RmL37UZY;
- spf=pass (domain: list.ti.com, ip: 40.93.201.16, mailfrom: prc@list.ti.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=l56SktA+vFOZow7qvOY480dw/vSAH71FFzs3g8VU9MtB55Ftmn/M3aIk3hF8VY7Dl/enlzLN3hArauF0SDccMkbHlo4NZUMFTQIO0nMhln1c+fWCz5UUlKn8GyyrcSRff5Nkfd8HRHDqDVtYEOicWT1u+BSkhmf75OLc5uaSIBGcWtw+x+vVTbY8fFQCc9+s5OyBTo48Rfz4rZkQsUhb3hHb2Nc28DklbFWkPQ4arOyGVYxrG+DpW44iG+k8nd3gX5XsB5dsW604WplTPoX85RHwiCWtGlOEV0uEiCZJjKyKNRQ0Hd4zkiJOfNBwajQrGD2TbqHeLPaATf9QTPrVZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mXIDnWgUt97JODrJqFNcKbzRZr0v2j9rKF02s7FVudI=;
- b=r/EAxyvWpWS4Y6s6z6HjDNW7bib/CZ3ZLl3CLTBHdWALrJt/cpzuPGEP3zQDCwdHnFheHBb2pnRGe3VTeuFdYtA/AifYOBACXDPCsX6z0C+DiqKRyXn1raRcpwgjtomX/o0A0Jmc/s0daRNYhiL4WUQo0r++WE3Sy/siuMp/meButliSiMPH4d484bI3neKGUJGVO9rqFW4XGjaqWjrsZlz34F0xPHZu7rYHnUHw4s5dt+LetYnXNzx1VAl6jq4UvRqQcWCWdDPG+ozTMy78A7/BosYF0zAnemryhC4JtrgB18vfPXbmH1YzjZzNS7F4RasAgqknzAvKfv24VenRbA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org
- smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
- action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
- (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mXIDnWgUt97JODrJqFNcKbzRZr0v2j9rKF02s7FVudI=;
- b=RmL37UZYcr/BVUPpYbfPPAWbuOG7Hf18jK4gRGCbao/IHP423SGplGw+zJHuMB9TpFrDj693XwnHcZe0P+XxmgA5q2jkkdOHmUcTaKBHIfimX+c2b5U0oph2gwS4nALk399Prjfm9fITsk9HhvvLahsXmL1k/8X2z3BW+LWp6SboG2jVJw+N5SUWKQwUq260FGUwSfz8Bep7T8LBzZ36SihTP1YpKTYpo72DJHIbybM+LP7GTfU0p97GZnnofAEc8Nea0kUlOb29YMJDiRdB1G71tsEsqed13fhglbnvGB5y7qLTt0oNHCahNou7aaTgfraMlUzIb2m6LdGwwhcwNA==
-Received: from PH7P220CA0167.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:33b::9)
- by SA1PR10MB6520.namprd10.prod.outlook.com (2603:10b6:806:2b2::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Fri, 5 Jun 2026
- 12:38:48 +0000
-Received: from CY4PEPF0000EE39.namprd03.prod.outlook.com
- (2603:10b6:510:33b:cafe::92) by PH7P220CA0167.outlook.office365.com
- (2603:10b6:510:33b::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.10 via Frontend Transport; Fri, 5
- Jun 2026 12:38:48 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=list.ti.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=list.ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- CY4PEPF0000EE39.mail.protection.outlook.com (10.167.242.11) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.92.5 via Frontend Transport; Fri, 5 Jun 2026 12:38:46 +0000
-Received: from DLEE203.ent.ti.com (157.170.170.78) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 5 Jun
- 2026 07:38:44 -0500
-Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 5 Jun
- 2026 07:38:44 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE208.ent.ti.com
- (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Fri, 5 Jun 2026 07:38:44 -0500
-Received: from fllvdckhpci021.itg.ti.com (fllvdckhpci021.itg.ti.com [10.64.72.33])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 655Ccidc1893856;
-	Fri, 5 Jun 2026 07:38:44 -0500
-Received: by fllvdckhpci021.itg.ti.com (Postfix, from userid 60899)
-	id 3020E142E1D; Fri,  5 Jun 2026 07:38:44 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: Moteen Shah <m-shah@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, <reatmon@ti.com>, <nm@ti.com>,
-	<u-kumar1@ti.com>, <s-vadapalli@ti.com>, <a-limaye@ti.com>,
-	<gehariprasath@ti.com>, <denys@konsulko.com>
-Subject: Re: [meta-ti][master/wrynose][PATCH v3] initramfs: Add initramfs-module-netsetup recipe for NFS boot
-Date: Fri, 5 Jun 2026 07:38:44 -0500
-Message-ID: <20260605123844.3149438-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20260605121720.1850683-1-m-shah@ti.com>
-References: <20260605121720.1850683-1-m-shah@ti.com>
+ dkim=pass header.i=@criticallink.com header.s=google header.b=ekgXrhY8;
+ spf=pass (domain: criticallink.com, ip: 74.125.224.46, mailfrom: jcormier@criticallink.com)
+Received: by mail-yx1-f46.google.com with SMTP id 956f58d0204a3-6607048fa62so2376453d50.1
+        for <meta-ti@lists.yoctoproject.org>; Fri, 05 Jun 2026 11:28:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780684107; cv=none;
+        d=google.com; s=arc-20240605;
+        b=aBg8wFUL7I1IWtldvSpLUai9eIjdCdK9+Tw91pvSDloyhwnx/ttJg6PNdX5YNrPxev
+         /xf2kqadBljMPTzy4qA4Zubn66E03MwCZt0S0/Y8PREgsklqiK05LfxF4p0UpqvU3rPc
+         aRGL02RZu/fiBvFL8ce420el5tMILxVXnOt1yVMMircJMzltDybQR/HmtO5dI4x8jjdY
+         ha2s/d9myW1h5+1oQffevU4XcDbNFtLKT5qLm8SDFea6d3cUHuSHoM/xOdVYJbNxZheg
+         YfzC5NpysKZi9Yu+34KVU7XObWiCEU4wFY1q5VwHAE506X0uza6pY31HkcpW8oo1eZnp
+         oo6Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=joyXMNGTTWZn4Lr0hXVwJYFa9FvkXUbiL5LifO3kz+s=;
+        fh=LDxwcELlN9Zg1aJUJZt+oK5Zib/ytqJrymME92bsGag=;
+        b=C1ij7TBneFvjG4QjtY4zlWBgT7Ju1eTYc79KXSQwo2VEjhf1l8D3T8hKYQxBtmySzx
+         B+YRj3uWTSMqmgKkfh2rI/lRGotQ3v5cH+YteUu7bGzKBTUW3W/KI0zW7Ob49ZepNJ/c
+         ScDdmqcQtMpEhz0yIDxING/sVSajA/xlgnuuxrkwSMDMMNfrTYKPTW76dQdhSMJxm0DA
+         uf6tBVjfhRrOZcuQhpR6sYgG9eoul5jCIwTJt+2clw9shis2dcs2TX/KRFFiAg8xaD3m
+         7weZY7nuf5WFpJDN7DDfoQRAsBJD7Lwi6Jnw2jQ8abJVYtdj4zfJOXh24fivM13P0+Ed
+         ukFg==;
+        darn=lists.yoctoproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=criticallink.com; s=google; t=1780684107; x=1781288907; darn=lists.yoctoproject.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=joyXMNGTTWZn4Lr0hXVwJYFa9FvkXUbiL5LifO3kz+s=;
+        b=ekgXrhY8bxLfiC62+zLu0FU89VM0fCYEiaUrelt0iUrQ5gUpB9oFEaRVj5eqGAMoJB
+         a9yFpvxklpk542MZY7tmDop9e/H5K0UMRsX2qrRqqBFBFQqbGSjeZHJQwyrlB1ndtohc
+         esWkhEjVZz9q5wvHcJTtQzzb6pHxaQYFlhvmicoRyMUH0B0SWrOezcWZGhebOohs7vIp
+         HJHwUfPX3Z45r3MxjzwK3AA2U389ZhJQ1HP6tewQ5tng/cblwK0a1+rn1+MOsFtCROW8
+         rmz0XFl4V4/XUbBCpHU5JKLzf7lstFzI8ggutzpDJUxcPS4MTcab/VtqM+RfW72DWwtb
+         OKiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780684107; x=1781288907;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=joyXMNGTTWZn4Lr0hXVwJYFa9FvkXUbiL5LifO3kz+s=;
+        b=FGxjiWObAHoAMFrKwzJrzvivLfyEzDQXYOJL62pcByyU8VJOluHaFoLGAhgGoZ2G8y
+         HbI/rTOP6n9T0SdlKjfdyWixWIXsKTfnrqoPF0zg83S0nsz1eUvPSSkUhGcPj0KfxDSI
+         KmjnlnYUb49UtNsy6se19QjybBi5Ir1tQoYYZKLXTChY2uDpzaSpn37nxkirq4J8xrBw
+         NHgITqyq86BAM3VegZrlbEBB8vWtn7aQngKqqoHf9rkpJfb1QKEcBdAMl5RuYf/eWU21
+         TXeL9aQAzT14DRGITWiPSyMzmSSp15PMe6JgbblRzxLFTFlxWxfWOFq0xf3bsS8pJGzK
+         Eg/A==
+X-Gm-Message-State: AOJu0YwS0nCPQsfIBELZQMhneo46yX+bKyG8c1qHJhmv1n6ZV2dQaZk1
+	3/gje37hdNTI6y67zXaLDsHjpYgmprZAfhmWE+1zKf5nnHbDrEcQyCI8iRSIDh1Wg02TTpHEu7s
+	Gpw1edRdYG4rDMCRMIa95+aQZMI2QtAWDLgVgjc9C
+X-Gm-Gg: Acq92OHsOfJanIHmkWzrEB+aszR4gSGzM3V1jLzSAIUOiWa9X04Qk/R5Xbv1NxbU3ul
+	ShscW2GhkvYnpq6+RjkCJWCIHLQ6k7elPKw6thy41L82NE1NwlUE2bSwawuXHOlBS9yNQj+0Yu3
+	ewTkJ3FxMUZ3t+072jG1v5mn+OqTmikZ5ZKyjxa84uua58Pq/r1/2apa08OvibXSjzrSBi1BS85
+	3hseIob/H7dqF0fAI+e+EwyKhVS0CQhMObyEHJFP0WyvFbM6fGMxgbA9rL4e34Rsh4Njo15mXIN
+	bgweX21vUqm9jzT0
+X-Received: by 2002:a53:ac87:0:b0:661:1307:3d49 with SMTP id
+ 956f58d0204a3-66113074155mr2314357d50.7.1780684107336; Fri, 05 Jun 2026
+ 11:28:27 -0700 (PDT)
 MIME-Version: 1.0
+References: <20260605121720.1850683-1-m-shah@ti.com>
+In-Reply-To: <20260605121720.1850683-1-m-shah@ti.com>
+From: Jon Cormier <jcormier@criticallink.com>
+Date: Fri, 5 Jun 2026 14:28:15 -0400
+X-Gm-Features: AVHnY4LjxZEg18D5yOZrJRgRqG0qvvKxcN2ggLtwN8pjMTQ88Rx_Nr8gdrqfGF4
+Message-ID: <CADL8D3bs2LrmFjLmKu+WwJ-RiEKHcwkjJmrtC4OJgwWLigLxkw@mail.gmail.com>
+Subject: Re: [meta-ti][master/wrynose][PATCH v3] initramfs: Add
+ initramfs-module-netsetup recipe for NFS boot
+To: m-shah@ti.com
+Cc: meta-ti@lists.yoctoproject.org, reatmon@ti.com, nm@ti.com, u-kumar1@ti.com, 
+	s-vadapalli@ti.com, a-limaye@ti.com, gehariprasath@ti.com, denys@konsulko.com
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE39:EE_|SA1PR10MB6520:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2b92b315-0123-4207-5e9c-08dec2ff62e3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|82310400026|376014|1800799024|22082099003|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info: 
-	uYuambgM0+ZYrMWVZpWUOYauKtDorU7oqhxOFqWhiV6Hn6p2mhqoAjTngTx0Hlaxc6OpYyaEaHKKLTgEJSiX+2o4CcD7XZJuRTk7UsyJuJbPLkkxjKXj/MKG7DOw8CnUHEfj1NEZ3AJk/ay3Q7Cj+jnRCwagSXB3J2UllaV7NmVSDgtqapSEyLSOoaOl//zLnZz+qEV84CTvmxlfoMyMKEVziG7jmuJgOIxxXp1W2ikmm8RRpuBcr8lgutlSooiGX9+V6/x0qS/gW6CE9akf/8H4KmAGl4ZKA/akZqteFGEgfR5GCc7BgAjxxtZ84KYLam7BHkQaQYCyNxzzqM53BXxgdMqvaUcAyFIk2FlscivSQiEZxIxPLqni8j51ixNRX9TyBXmIBb3lhwRWEMqxwsi6EnK/+eCOfwIPSDULpU20NGfka+a2hLJP8/N0bLTv8u5zjhJG4s+wbLM+Xy27fJ7qy4TcqInwFFZPgz6TJsWlRJPiLl9Ow42DLcPJ2pjpCDWGQIuJ7t9x++dyT8FmY1X/EynkJrDTrji/StS7ZutmVDFY3Vf0fijU/QSIEC8jFePyqIBACKKDni0VIsA89dRyg63M1Ed/RvLNmlT2g1B5R+FSW1N+b7Q9r0aU/PJeiR2AFWnZ4UQcqCvsctXOvQFxkaXuTi0XkvEeEv81mDCXUj4onsmzQLIe8TXqE3pYE3TDGTLtXB+V6v8KBVwlYoOmoQESqA0M5OLX2yUF5eA=
-X-Forefront-Antispam-Report: 
-	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(22082099003)(18002099003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	mjrDD8tNcVcGzB3hBGAvLeA2mSoy/ATSZRLTSL6isfC7z6scYQEWFoo5sc0PpEB43Dnn09jHqb18k+HMrLWIFkhn2YYLpdhRQmIZ7AI3OE0SvfTNlyelzgmmfna6jBH35fM1yNMvzqJBF7mjEhgWK0cxIC3/R8fhrfzn6hNmwbwN6dH7An0HKfCM/3dfQAQgCcQNv5bfU5Q47HLr9XnoYWYvKnNYIhBXCeMoaAXUTI/KQP04FijPqIV325V2p4uH6+PXVIlVEB9B2d0ta+BtsdAht0EPtU3+NCqIDwRiara4l4FmxYGKN/lpYCuZ79Zass1Nom7vYSg2ZBVpU1vrxX3tqxQsSkMNhgr1SMKzBO5tv5fwcJMSoQE5dT+LG86jjJ4bw71PGIVjLnOG0UG8GtzPxc5/oaZcrmb/9LZAdbtznfM507JuxF90T7UF+WAX
-X-OriginatorOrg: list.ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2026 12:38:46.3794
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2b92b315-0123-4207-5e9c-08dec2ff62e3
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	CY4PEPF0000EE39.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB6520
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Fri, 05 Jun 2026 12:38:58 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19980
+ <meta-ti@lists.yoctoproject.org>; Fri, 05 Jun 2026 18:28:38 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/19981
 
-meta-ti / na / 20260605121720.1850683-1-m-shah
+On Fri, Jun 5, 2026 at 8:17=E2=80=AFAM Moteen Shah via lists.yoctoproject.o=
+rg
+<m-shah=3Dti.com@lists.yoctoproject.org> wrote:
+>
+> Add a standalone initramfs-module-netsetup recipe that installs
+> 83-netsetup, an initramfs-framework module that configures the network
+> interface via DHCP before the NFS root mount. The recipe's RDEPENDS
+> pulls in CPSW and its dependencies, so the kernel modules and DHCP
+> client are only included when NFS boot support is needed.
+>
+> Include initramfs-module-netsetup in packagegroup-ti-core-initramfs
+> gated on :bsp-next, where AM65_CPSW_NUSS became a loadable module.
+> TI staging kernels (6.6/6.12/6.18) still have CPSW built-in (=3Dy).
+>
+> Signed-off-by: Moteen Shah <m-shah@ti.com>
+> ---
+> Hi everyone,
+> AM65_CPSW_NUSS and its dependencies changed from built-in (=3Dy) to
+> loadable modules (=3Dm) in linux-next. This breaks NFS boot because the
+> Ethernet driver is no longer available before the NFS root mount.
+>
+> Add a standalone initramfs-module-netsetup recipe that waits for the
+> Ethernet interface to appear after udev loads the modules and then
+> configures it via DHCP before the nfsrootfs module runs. The CPSW
+> kernel modules are declared as RDEPENDS:append:bsp-next of the recipe
+> so they are only pulled in for bsp-next kernels and only when NFS boot
+> support is needed.
+>
+> Changes in v3:
+> - Remove FILESEXTRAPATHS:prepend - redundant in a standalone recipe (Deny=
+s)
+> - Remove PACKAGE_ARCH =3D "${MACHINE_ARCH}" - script is not machine-speci=
+fic (Denys)
+> - Drop k3.inc patch; move CPSW modules into RDEPENDS:append:bsp-next of
+>   the recipe, linking module inclusion to NFS boot recipe inclusion
+> - Gate initramfs-module-netsetup on :bsp-next in packagegroup so staging
+>   kernels (where CPSW is built-in =3Dy) are unaffected
+>
+>  .../initramfs-module-netsetup/83-netsetup     | 54 +++++++++++++++++++
+>  .../initramfs-module-netsetup_1.0.bb          | 31 +++++++++++
+>  .../packagegroup-ti-core-initramfs.bb         |  2 +
+>  3 files changed, 87 insertions(+)
+>  create mode 100644 meta-ti-bsp/recipes-ti/initramfs/initramfs-module-net=
+setup/83-netsetup
+>  create mode 100644 meta-ti-bsp/recipes-ti/initramfs/initramfs-module-net=
+setup_1.0.bb
+>
+> diff --git a/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup/8=
+3-netsetup b/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup/83-=
+netsetup
+> new file mode 100644
+> index 00000000..b71bc3b3
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup/83-netse=
+tup
+> @@ -0,0 +1,54 @@
+> +#!/bin/sh
+> +# Configure network via DHCP before NFS root mount. Polls for an Etherne=
+t
+> +# interface with sleep 1 per iteration to allow the Ethernet driver defe=
+rred
+> +# probe chain to settle after udev loads the modules.
+> +
+> +netsetup_enabled() {
+> +    [ "${bootparam_root}" =3D "/dev/nfs" ] || return 1
+> +    return 0
+> +}
+> +
+> +netsetup_run() {
+> +    local iface timeout devtype
+> +
+> +    # Extract interface from ip=3D kernel param (format: client:server:g=
+w:mask:host:device:autoconf)
+> +    iface=3D""
+> +    case "${bootparam_ip}" in
+> +        dhcp|on|any|"")
+> +            ;;
+> +        *)
+> +            iface=3D$(echo "${bootparam_ip}" | cut -d: -f6)
+> +            ;;
+> +    esac
+> +
+> +    udevadm trigger --action=3Dadd --subsystem-match=3Dnet
+> +    udevadm settle --timeout=3D10
+> +
+> +    # Poll up to 60 seconds for an Ethernet interface (ARPHRD_ETHER =3D =
+type 1).
+> +    msg "netsetup: waiting for ethernet interface..."
+> +    timeout=3D60
+> +    while [ "${timeout}" -gt 0 ]; do
+> +        if [ -n "${iface}" ] && [ -d "/sys/class/net/${iface}" ]; then
+> +            break
+> +        fi
+> +        for dev in /sys/class/net/*; do
+> +            [ -f "${dev}/type" ] || continue
+> +            devtype=3D$(cat "${dev}/type")
+> +            [ "${devtype}" =3D "1" ] || continue
+> +            iface=3D$(basename "${dev}")
+> +            break
+> +        done
+> +        [ -n "${iface}" ] && [ -d "/sys/class/net/${iface}" ] && break
+> +        sleep 1
+> +        timeout=3D$((timeout - 1))
+> +    done
+> +
+> +    if [ -z "${iface}" ] || [ ! -d "/sys/class/net/${iface}" ]; then
+> +        msg "netsetup: no ethernet interface found after 60s, skipping D=
+HCP"
+> +        return
+> +    fi
+> +
+> +    msg "netsetup: configuring ${iface} via DHCP"
+> +
+> +    dhcpcd --waitip "${iface}"
+> +}
+> diff --git a/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup_1=
+.0.bb b/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup_1.0.bb
+> new file mode 100644
+> index 00000000..cdb6116a
+> --- /dev/null
+> +++ b/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup_1.0.bb
+> @@ -0,0 +1,31 @@
+> +SUMMARY =3D "initramfs support for DHCP network configuration before NFS=
+ root mount"
+> +
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/COPYING.MIT;md5=3D3da9cfbc=
+b788c80a0384361b4de20420"
+> +
+> +SRC_URI =3D "file://83-netsetup"
+> +
+> +S =3D "${UNPACKDIR}"
+> +
+> +do_install() {
+> +    install -d ${D}/init.d
+> +    install -m 0755 ${UNPACKDIR}/83-netsetup ${D}/init.d/83-netsetup
+> +}
+> +
+> +FILES:${PN} =3D "/init.d/83-netsetup"
+> +
+> +RDEPENDS:${PN} =3D "\
+> +    initramfs-framework-base \
+> +    dhcpcd \
+Sorry, I didn't notice this earlier. Is there a reason not to use
+busybox-udhcpc which is already included?
 
-PRC Results: PASS
+This adds two packages:
++dhcpcd aarch64 10.3.0-r0.0
++libudev1 aarch64 1:259.5-r0.arago7.0
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-patches: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-Patches
-----------------------------------------
-All patches passed
+And increased the size by 1.6MB on arago-wrynose
+ +1,685,504  ti-core-initramfs.cpio
+ +327,560  ti-core-initramfs.cpio.xz
 
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  apply-yocto-patch: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Summary:
-- Patch Series: [meta-ti][master/wrynose][PATCH v3] initramfs: Add initramf=
-s-module-netsetup recipe for NFS boot
-- Submitter: From: Moteen Shah <m-shah@ti.com>
-- Date: Date: Fri, 5 Jun 2026 17:47:20 +0530
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 23874c54376b899b3847f24dfd658aa92=
-d05d6ac
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-wip
-- Commit Author: Thorsten Lannynd <t-lannynd@ti.com>
-- Commit Subject: weston: fix assert firing when subsurfaces have no views
-- Commit SHA: 1fb5f1718d4673b2a9c794f83e9e5e4769c39d23
-
-Patches
-----------------------------------------
-All patches applied
-
-wrynose
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Summary:
-- Patch Series: [meta-ti][master/wrynose][PATCH v3] initramfs: Add initramf=
-s-module-netsetup recipe for NFS boot
-- Submitter: From: Moteen Shah <m-shah@ti.com>
-- Date: Date: Fri, 5 Jun 2026 17:47:20 +0530
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 23874c54376b899b3847f24dfd658aa92=
-d05d6ac
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: wrynose-wip
-- Commit Author: Thorsten Lannynd <t-lannynd@ti.com>
-- Commit Subject: weston: fix assert firing when subsurfaces have no views
-- Commit SHA: ae9f90cf0baf823a20d10b5e4e3c6af465dabe98
-
-Patches
-----------------------------------------
-All patches applied
+> +"
+> +
+> +RDEPENDS:${PN}:append:bsp-next =3D " \
+> +    kernel-module-ti-am65-cpsw-nuss \
+> +    kernel-module-k3-cppi-desc-pool \
+> +    kernel-module-davinci-mdio \
+> +    kernel-module-ti-cpsw-ale \
+> +    kernel-module-ti-cpsw-sl \
+> +    kernel-module-phylink \
+> +    kernel-module-mdio-bitbang \
+> +    kernel-module-phy-gmii-sel \
+> +"
+> diff --git a/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initra=
+mfs.bb b/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
+> index a9eff847..b4e6adff 100644
+> --- a/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
+> +++ b/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
+> @@ -23,3 +23,5 @@ RDEPENDS:${PN} +=3D "\
+>      initramfs-module-nfsrootfs \
+>      nfs-utils-mount \
+>  "
+> +
+> +RDEPENDS:${PN}:append:bsp-next =3D " initramfs-module-netsetup"
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#19979): https://lists.yoctoproject.org/g/meta-ti/mess=
+age/19979
+> Mute This Topic: https://lists.yoctoproject.org/mt/119661032/7902621
+> Group Owner: meta-ti+owner@lists.yoctoproject.org
+> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [jcormier@cri=
+ticallink.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
 
+--=20
+Jonathan Cormier
+Senior Software Engineer
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  check-yocto-repo: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-PASS
+Office:  315.425.4045 x222
 
-wrynose
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-PASS
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-  yocto-check-layers: PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-master - PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-All checks passed
-
-wrynose - PASS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-All checks passed
-
-
-
+http://www.CriticalLink.com
+6712 Brooklawn Parkway, Syracuse, NY 13211
 
