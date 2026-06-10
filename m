@@ -1,41 +1,41 @@
-Return-Path: <jm@ti.com>
+Return-Path: <y-hegde@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD652CD98C6
-	for <webhook@archiver.kernel.org>; Tue,  9 Jun 2026 22:54:31 +0000 (UTC)
-Received: from CH5PR02CU005.outbound.protection.outlook.com (CH5PR02CU005.outbound.protection.outlook.com [40.107.200.56])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8299.1781045662803083158
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 071A6CD98C7
+	for <webhook@archiver.kernel.org>; Wed, 10 Jun 2026 10:26:24 +0000 (UTC)
+Received: from CY7PR03CU001.outbound.protection.outlook.com (CY7PR03CU001.outbound.protection.outlook.com [40.93.198.65])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.17073.1781087181223039797
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 09 Jun 2026 15:54:23 -0700
+ Wed, 10 Jun 2026 03:26:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=selector1 header.b=K1EF7QK1;
- spf=pass (domain: ti.com, ip: 40.107.200.56, mailfrom: jm@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=ABIsnajX;
+ spf=pass (domain: ti.com, ip: 40.93.198.65, mailfrom: y-hegde@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rGDo0u1+zNJLAIMRRdZf1eaENcvahBij9Yb+8WbEGvkAPxgcgVmeQmQNO159iAt8jT6iFIJYQ76biUk23ofc5opdy7jLTHPAa8z7E4LiHqyoocxkC+48J896L0fkjTTTxER04phut+ttb1I4xyV8ZZoI1BvPv8wJadWlKSRz9bCxI1QH/QC/HcjTRoMn6tBwrdanGtZ1jrHuSUbOomcseBuB1K0S0gs+xQgz19DenpCTy+g4LCIL4FW5FjTTt4imX/4iqlvIu0dIVVOhflv07b5XUV/vsPqCafvtk1YTNmsOJS4bCAGMUc5q4PxM8DaKh0aEE5MlCbjYGNKT7qqixQ==
+ b=ks8NA2P7B8EFarm5Ue7U+QJ8jF4bVFYsGAhnJBNwbz4GqkzixfPUo1n3SHt8bPEeqcfsL3/clWm4Hnqgfu3e+G1LHeO8iOEBTM54zVVFh8ckUA1/kIWs1dcGiijQRkmmPIQlQqJvqYNhpV5qcFn+LK/EV9GWVV7VwGIMyJQkOgsY65cOFhwyiST+V9i0ElI0CrVMywRzdZgjF19T8uOzQ9XgKbUFnndUftGN0l3wfQjbU/exeP1Xs9+72d8Kx0nIahFicALr2vc5iPexxZ0hgSuWaRfL+ZntR3F478QvyH/AnPznCpp6v7zyQrZ1qXAh/7gNpSPEQrh21uofxU4MxA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pvqNk4Tbs/gLLlRtNCCdpmDLEc03sqdHTeDf9kyQE/Q=;
- b=xOY4FnfGy6o9xH7gCCmT1D1XEBKZ6MsiwhbIjZ0DNCsl93RrklsG4SVd95aoCHfNia2+q1TmPcX1b6CPxCszoO5QXARtHY9ZpT6E74EA++aB+iflounKsRBRUwdlyZITziGYAF2tQuQXsk9qdpnRBNmrJBhNkCbI7ZQewWwNZw5KqGtHtrAq7aIPaf/kJzK2xqc9NZ3D+9hljD1W8rmF4iwRGVLkSUo0Jp9WftcNmDZUNC7aqSl+glEiIQpYY0wO2wQixTPI9V16w+UrFu+YckiCHHGWhL6rayVWHAEhly/J1dwaNimPJwkfBlYsF+JTYqd5/wx/Xs6Ams08qQVbsw==
+ bh=xjoPbPa1C9GaUGvGoF4aZfe74u3G02XgItpJHa2KUws=;
+ b=kTfqiYRl58uK6mJumTYa3vk+c+CKTq/ClVcPjJ3zjK0MfqHyRrozG3M6f/F9pY28uq3CojHaWeOiQnnLPM834RGu5K9lrGEl1IR19RAHWV5Q1MUB+Bwiw2LSLGbsoP1MsFnmHQgKcsXMxq2qAX9rGiW9YBaMSWgpg60R1aYrr5+d9pCbqHYQR1PfVInN4Ghrenm4Udokq9HwVBnKKh2CFLmrtAE7vxQIm10HkbgEZ2PX9KvPF9KGVRv0V5FBF4hLYZkuAzUE4y7AKtIRj+EA93kM5H4BR7mZDRzq256ijna4DD20LPJHkVLoaCJPL7j0/hEmkTjM5lhG/+svnOfrdQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pvqNk4Tbs/gLLlRtNCCdpmDLEc03sqdHTeDf9kyQE/Q=;
- b=K1EF7QK1kk48X3nnnaHlMaZd78h1iBYsFZWAFtFgtzWb6x+HcYQG6/Yj1TveMr3zsfbJyC4I3aHb9kVO0xpb295z+BsTeYYpaFV48qb+uFyAYJyCm1qEEtdk5+tHlXzoZEIMqrPqV3VmiQYhdhvzFyEuw2c9DjlQAPGBygV0K8g=
-Received: from BN9PR03CA0629.namprd03.prod.outlook.com (2603:10b6:408:106::34)
- by BY5PR10MB4371.namprd10.prod.outlook.com (2603:10b6:a03:210::10) with
+ bh=xjoPbPa1C9GaUGvGoF4aZfe74u3G02XgItpJHa2KUws=;
+ b=ABIsnajX50XSr1ov2a9ywyJjVSZXwJCrGx5qs58GkeeM2oB+qcMWYtX3m5DtPLrZT97DRPQJAOOy/HxAWh1VRukn0ZzP3pNc0NhKScQw6QZ8KkMzI0YGfDSVfBLcFBNNQxORBLjQ6LKvVsCGlHpJWG65cy6UmeF+BAbXAD9AiyY=
+Received: from PH0PR07CA0061.namprd07.prod.outlook.com (2603:10b6:510:f::6) by
+ SA3PR10MB7096.namprd10.prod.outlook.com (2603:10b6:806:306::21) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Tue, 9 Jun
- 2026 22:54:18 +0000
-Received: from BN2PEPF000055E1.namprd21.prod.outlook.com
- (2603:10b6:408:106:cafe::28) by BN9PR03CA0629.outlook.office365.com
- (2603:10b6:408:106::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.10 via Frontend Transport; Tue, 9
- Jun 2026 22:54:18 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.13; Wed, 10 Jun
+ 2026 10:26:18 +0000
+Received: from CY4PEPF0000E9D1.namprd03.prod.outlook.com
+ (2603:10b6:510:f:cafe::28) by PH0PR07CA0061.outlook.office365.com
+ (2603:10b6:510:f::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.11 via Frontend Transport; Wed,
+ 10 Jun 2026 10:26:18 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
@@ -43,133 +43,123 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.23.195 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
 Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BN2PEPF000055E1.mail.protection.outlook.com (10.167.245.11) with Microsoft
+ CY4PEPF0000E9D1.mail.protection.outlook.com (10.167.241.136) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.139.1 via Frontend Transport; Tue, 9 Jun 2026 22:54:18 +0000
-Received: from DLEE209.ent.ti.com (157.170.170.98) by lewvzet201.ext.ti.com
+ 15.21.113.7 via Frontend Transport; Wed, 10 Jun 2026 10:26:18 +0000
+Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet201.ext.ti.com
  (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 9 Jun
- 2026 17:54:17 -0500
-Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 9 Jun
- 2026 17:54:17 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE204.ent.ti.com
- (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 10 Jun
+ 2026 05:26:17 -0500
+Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 10 Jun
+ 2026 05:26:17 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE207.ent.ti.com
+ (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Tue, 9 Jun 2026 17:54:17 -0500
-Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 659MsHb32019247;
-	Tue, 9 Jun 2026 17:54:17 -0500
-Message-ID: <a388f348-5fc2-4afe-bef4-f6e837aebd98@ti.com>
-Date: Tue, 9 Jun 2026 17:54:17 -0500
+ Transport; Wed, 10 Jun 2026 05:26:17 -0500
+Received: from [172.24.233.89] (yogi-work-pc.dhcp.ti.com [172.24.233.89])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65AAQFjk3089523;
+	Wed, 10 Jun 2026 05:26:16 -0500
+Message-ID: <7b465487-5987-4420-9550-2e016fb4fe9d@ti.com>
+Date: Wed, 10 Jun 2026 15:56:14 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][master][PATCH] conf: am62dxx-evm: Fixup packaged
- overlay list
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
-	<meta-ti@lists.yoctoproject.org>, <denys@konsulko.com>
-References: <20260609202801.18252-1-jm@ti.com>
- <2da95be9-31a6-4224-9706-323e5d51c2fb@ti.com>
- <20260609205307.GJ23325@denix.org>
- <fe136348-e605-46f2-8cc1-52ff83578e33@ti.com>
- <20260609224658.GK23325@denix.org>
+Subject: Re: [master/wrynose][PATCH] beaglebadge-ti: avoid building ubifs and
+ ubi for beaglebadge by default
+To: Ryan Eatmon <reatmon@ti.com>, <meta-ti@lists.yoctoproject.org>
+CC: <praneeth@ti.com>, <prudhvi@ti.com>
+References: <20260609103052.2451227-1-y-hegde@ti.com>
+ <c6c07667-08a3-4b22-88ad-9ae5542a4d14@ti.com>
 Content-Language: en-US
-From: Judith Mendez <jm@ti.com>
-In-Reply-To: <20260609224658.GK23325@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Yogesh Hegde <y-hegde@ti.com>
+In-Reply-To: <c6c07667-08a3-4b22-88ad-9ae5542a4d14@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055E1:EE_|BY5PR10MB4371:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7d060fe2-84df-4dd3-8783-08dec67a0999
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D1:EE_|SA3PR10MB7096:EE_
+X-MS-Office365-Filtering-Correlation-Id: e1aa8e51-910d-4363-7f45-08dec6dab562
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700016|23010399003|56012099006|4143699003|22082099003|18002099003;
+	BCL:0;ARA:13230040|1800799024|23010399003|36860700016|376014|82310400026|18002099003|22082099003|4143699003|56012099006;
 X-Microsoft-Antispam-Message-Info: 
-	HZoUo0TVZZSCTpVESETrn41wCax1GZBSu8BWsjHTAbPnT3kou0xplM8CpaRIVP5fdzRCFX09hbWav8Ymn7/7UI/i+8LilbtbW4OosFSP8SAJW4OPhD3WbbR7OTl59ysvpcersfC0mWAKOMtYpZjICfvAXeEhum5ll4QCz6NcNu1cfEZr8HCGqdkCXtwQF30rx366xn1jOM2R47Tt+QaCqwNIpAwEQZkG+e1uj0n48IF2vURSXLlKXR+ZCmZye+AADgdo4raeYC9yEULB2nA4gUzpkR29C9OOJn9PmsKzmnef+Jd6kCUAxtaacVlYOBr4+7ZJ0MnfbFvfMU9H2DHHV6+mU0HtjrRGCcuBBvMuvFsJHA6VZBPu6zVW6wdzUmPtkamtnYeEzD7XsE5MKtwouUQ7Oj481FrETwW9pNC0wYkE58aWAIARUm3d/OpUdt/ygiB8ER3U0OZwA0nvqBPQHfd98cZcv/sA5QoXEry0wqOWZwUTG3w9sdUO14w1qxClurO+JVb/s1oENCMU3PlBWzIUJezFBL4kN14LE+52mvUf0rCTJrVL5NMeE7+05lAWqc6EDaawS77ArDqMuetY5oJCj7GCiW/3RDtaHAESlXGWq4u00HIrIxVwi6GyGFlW01y6DVpjTBqXdnQxtEqJcX/JXHvisUwcaayc7dt+VrZUMRV2bj/dVAoW9FckjPwDAPvYPWkM5x2X/ByjdZlOBTXmbvouFW9BHUno5RcsDh0=
+	VRSDiY3pi5R2euyC3sUAU/Xj7KAP2kUcfcKJM4JQCzqBCxSSw8FSxNXyLopsKyaQM0ZaaSlWoXjrOIxMmLhdnJM7BeFB6GTFHZTB5315VQS6RnZ92EUvoG3GmsRNZmhtCa9O1zoCtviYe83ODXkt1RCrk9zDZEiGeEc6lPOB3MA5qqvIX5n0oYDZvnvRql28MqDODK6G/KgyflDYc094oIJEkOWqWW0ePMsZzSQKE09+5G09JSKthF6zyNtP9xfGnI6PsqgscyceJr67pQ8fwIpYYXhFESIxQSay6+gcBSakxKIATvxUh+mlfN0Qiydm4HbEICQTdOrqiLT/WseZiyYktmQuwk49WtsjuBvKV4Vwf2laM1P14cVCHmrB000xWo3dO1/VOA6ErGD70BHf1MBtK4/1gfKCMQB8zB9k5JeRyV3SA7ttRzJAjKwAHnzcNFibeHNiE5hQWE4VhWq2mSrY8CxNI1Zpt+r+mlynidYtDh9D3gLumkda89PE3R4fkVAVB9/9QlCisw5yi4Qv4BZDbIbi8uLShdflDK8hBqHseURrxY3FjQQXgc1o5I2tk+t1YIx9AUsRayGWrGEzsqCkF/oLudNKBi6ccxCPpgNUy1REhwryiOubAx9e7/VdUDv8NWSICBMHFLT/Lh3MVFV73t/7IEkdlFeWHJpqARFFstyI18ojmfYSD8q4oXl4izQI8/uPIAHOhxXm8DPP4nwa/GpuHQKO7m7rqr+xfAg=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700016)(23010399003)(56012099006)(4143699003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(36860700016)(376014)(82310400026)(18002099003)(22082099003)(4143699003)(56012099006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	0J5CXnSILpBzhM0gf19PtKpUWtEPMLvK8OApEstkgmKG0lrJNBu34aVsfEAKH2G2Ix23njhmHDVl32MqcSbURDDLB7z9At63Tc59he8ItfGCYUzB9DBtv07pa0n43wMjPGQvCZBhUgUdjUvC5NrFaZj3GKfj8q37KOAOet0zKQem4M4J6VEMrs/lLU0pzo9/NulylHaK/q0Zz4cwtm66Vmn8EHCXg1oCZYWY5cnVLUnZrML6vdfHs1a5uReO6cZCAi6/iGF+a+b84MC8KN0DctnTu44GtpmN1zLB+Y7kbUcbHr91mRJV2BD+TWCe+139amRg/mWo7nW0cdWis9KjvqQ7keimShgOvu6N/t4O4pze9EthGmFoI9ZGq+EE5XTWRefGftlG66ZKKKwjbiq4Bsfme4d5Ro+CpuGUWT5ZwlMZmVyJIB/57fiachrTLpi7
+	xHcRNF8dNForpaHuroSe5TLPnlSLruZVpGqXD/f6fet91SxTsqr7ztJSQ8/9ifHE8mWg29zvoOH+dpX6uhnAQk0f1CSKMkNnTYVF+2VgHShwBYHTWPYKvcRrm8s0aIf0CSx0dpFYMj/tPBOHt0cYYN8vv86QPO3blvQrtfDf9+xpo9z1MDRAdiLH6qK9pIsEy7LWAXIZ2jVmq9cZci5bdH5enTWMmSjueFr7S3PSWExqpHaRvxVHcfeCyAddnHGt2Q3hwB1Ubbqn/FDfEqg8kK+Nu+LFZS38/QzBFUWf5bpYZbVE8ghbTWRyNQ9kkj8OFWd3N+x69szfILRrVuvPREqTpMh6doOIqpEtzXcOTi9I00zFMblQBVyR+0E2i+W8m967kQrt+vlz0jH0LmimV8oph8dSU4MJK02ulGIBM1XqdaymiXgbGdw9KP7vUqcr
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 22:54:18.1420
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 10:26:18.0626
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7d060fe2-84df-4dd3-8783-08dec67a0999
+X-MS-Exchange-CrossTenant-Network-Message-Id: e1aa8e51-910d-4363-7f45-08dec6dab562
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	BN2PEPF000055E1.namprd21.prod.outlook.com
+	CY4PEPF0000E9D1.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4371
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR10MB7096
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 09 Jun 2026 22:54:31 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20004
+ <meta-ti@lists.yoctoproject.org>; Wed, 10 Jun 2026 10:26:24 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20005
 
-On 6/9/26 5:46 PM, Denys Dmytriyenko wrote:
-> On Tue, Jun 09, 2026 at 04:07:51PM -0500, Judith Mendez wrote:
->> Hi Denys,
+
+
+On 6/9/26 19:35, Ryan Eatmon wrote:
+>=20
+>=20
+> On 6/9/2026 5:30 AM, Yogesh Hegde wrote:
+>> Beaglebadge has only 256Mb OSPI flash and except for
+>> arago-bootstrap-base-image and arago-tiny-image other arago images
+>> doesn't fit into OSPI flash. Hence remove ubifs and ubi from
+>> IMAGE_FSTYPES to prevent unnecessary image generation and build
+>> failures when adding packages to the arago-default-image.
 >>
->> On 6/9/26 3:53 PM, Denys Dmytriyenko wrote:
->>> On Tue, Jun 09, 2026 at 03:45:05PM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
->>>>
->>>> I assume this is for wrynose as well?  If so, please make sure to
->>>> add it on the subject going forward.
->>>>
->>>>
->>>> On 6/9/2026 3:28 PM, Judith Mendez wrote:
->>>>> Some k3-am62x-sk* overlays no longer apply to AM62A/AM62D boards,
->>>>> update overlay list packaged for AM62D mostly to include the new
->>>>> k3-am62a7-sk-mcan.dtbo without dropping applicable overlays.
->>>>>
->>>>> Signed-off-by: Judith Mendez <jm@ti.com>
->>>>> ---
->>>>>   meta-ti-bsp/conf/machine/am62dxx-evm.conf | 9 ++++++++-
->>>>>   1 file changed, 8 insertions(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/meta-ti-bsp/conf/machine/am62dxx-evm.conf b/meta-ti-bsp/conf/machine/am62dxx-evm.conf
->>>>> index ef9df2f7..c776ffbf 100644
->>>>> --- a/meta-ti-bsp/conf/machine/am62dxx-evm.conf
->>>>> +++ b/meta-ti-bsp/conf/machine/am62dxx-evm.conf
->>>>> @@ -7,7 +7,14 @@ require conf/machine/include/am62dxx.inc
->>>>>   KERNEL_DEVICETREE_PREFIX = " \
->>>>>       ti/k3-am62d2 \
->>>>>       ti/k3-am62a7-sk-edgeai \
->>>>> -    ti/k3-am62x-sk \
->>>>> +    ti/k3-am62x-sk-csi2 \
->>>>> +    ti/k3-am62x-sk-ecap-capture \
->>>>> +    ti/k3-am62x-sk-eqep \
->>>>> +    ti/k3-am62x-sk-hdmi \
->>>>> +    ti/k3-am62x-sk-lpm \
->>>>> +    ti/k3-am62x-sk-mcspi-loopback \
->>>>> +    ti/k3-am62x-sk-pwm \
->>>
->>> Why are these needed? Shouldn't the first removed more generic prefix cover
->>> them all?
+>> Those who want to run arago-bootstrap-base-image and arago-tiny-image
+>> on OSPI can enable UBIFS in local.conf .
 >>
->> Its explained in the commit message, some of the am62x-sk* overlays
->> no longer apply to am62a or am62d. I did not go test each overlay,
->> but for now, I removed the overlays that no longer apply to am62a/
->> am62d with this change
-> 
-> Yeah, I saw the commit message, but I understood it backwards - it sounded
-> like the prefix functionality no longer worked with a generic prefix and you
-> needed to list the overlays more explicitly. While in reality the generic
-> prefix now is too broad and it picks up unneeded overlays for this platform.
-> 
-> Please disregard my previous question, but if you are going to re-send the
-> patch, you might want to rephrase the commit message a bit more clearer...
-> 
+>> Signed-off-by: Yogesh Hegde <y-hegde@ti.com>
+>> ---
+>> =C2=A0 meta-beagle/conf/machine/beaglebadge-ti.conf | 2 --
+>> =C2=A0 1 file changed, 2 deletions(-)
+>>
+>> diff --git a/meta-beagle/conf/machine/beaglebadge-ti.conf b/meta-beagle/=
+conf/machine/beaglebadge-ti.conf
+>> index 78525030..5295296d 100644
+>> --- a/meta-beagle/conf/machine/beaglebadge-ti.conf
+>> +++ b/meta-beagle/conf/machine/beaglebadge-ti.conf
+>> @@ -4,8 +4,6 @@
+>> =C2=A0 =C2=A0 require conf/machine/include/am62lxx.inc
+>> =C2=A0 -IMAGE_FSTYPES +=3D "ubifs ubi"
+>> -
+>=20
+> If you are going to remove that then shouldn't ALL of the UBI settings (b=
+elow) also be removed as it does not make sense to configure something we a=
+re not building?
 
-Sorry denys, recieved your comment before sending out v2, if needed, i
-will send v3.
+The intention behind keeping `MKUBIFS_ARGS` and `UBINIZE_ARGS` is to give a=
+ reference for those who want to enable UBIFS
+via local.conf. They don't have to calculate these values.
+=20
+Machine config still defines the hardware max limits while users get to cho=
+ose if they build UBIFS or not.=20
 
-~ Judith
+If this is not valid reason, I will send a v2 with fixes.
+
+>=20
+>=20
+>> =C2=A0 MKUBIFS_ARGS ?=3D "-F -m 4096 -e 258048 -c 8500"
+>> =C2=A0 =C2=A0 UBINIZE_ARGS ?=3D "-m 4096 -p 256KiB -s 1024 -O 1024"
+>=20
+
+--=20
+Regards
+Yogesh
+
 
