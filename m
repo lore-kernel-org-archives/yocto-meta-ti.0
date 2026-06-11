@@ -1,220 +1,131 @@
-Return-Path: <denis@denix.org>
+Return-Path: <s-tripathi1@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC5E0CD98CE
-	for <webhook@archiver.kernel.org>; Thu, 11 Jun 2026 14:45:40 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.47471.1781189137843646590
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E7FCCD98CC
+	for <webhook@archiver.kernel.org>; Thu, 11 Jun 2026 15:22:11 +0000 (UTC)
+Received: from PH0PR06CU001.outbound.protection.outlook.com (PH0PR06CU001.outbound.protection.outlook.com [40.107.208.69])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.48678.1781191330507136598
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 11 Jun 2026 07:45:38 -0700
+ Thu, 11 Jun 2026 08:22:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id D43B940C8C;
-	Thu, 11 Jun 2026 14:45:36 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xl6kzaRivt5K; Thu, 11 Jun 2026 14:45:36 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2F34540C1C;
-	Thu, 11 Jun 2026 14:45:27 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 63B8A17EE7C; Thu, 11 Jun 2026 10:45:26 -0400 (EDT)
-Date: Thu, 11 Jun 2026 10:45:26 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: m-shah@ti.com
-Cc: meta-ti@lists.yoctoproject.org, reatmon@ti.com, nm@ti.com,
-	u-kumar1@ti.com, s-vadapalli@ti.com, a-limaye@ti.com,
-	gehariprasath@ti.com, denys@konsulko.com, jcormier@criticallink.com
-Subject: Re: [meta-ti][master/wrynose][PATCH v4] initramfs: Add
- initramfs-module-netsetup recipe for NFS boot
-Message-ID: <20260611144526.GP23325@denix.org>
-References: <20260608080906.2266315-1-m-shah@ti.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=DCtHF4jK;
+ spf=pass (domain: ti.com, ip: 40.107.208.69, mailfrom: s-tripathi1@ti.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pIb/mwc353npIVR1QHel8aBJFL5TGc/eYUrzC2x4ICOmMCXw1OEV2yNu2apEXw9LBwqlAd9cHbQYePalHRadtFdMSwxEbl0LRegmLtiNLOabpwtqYM4/cQrN8BpVd7EBuy+qw1RX/e571fjG95VxeyFA4ojRwC2VY2XIruUWypLCV3/aeBvGhCQNACCQk9kqFV6idtFdOOWsOkdZYPGIDH3jIxvKPFETbdBAR6WgCx/fqY9KGB3DSQGaIJL6fzyrj5vKxUTFTw5QJYBWz+L7gLSf3majyx7CQXLSzGXSfEyYLg+b6Hr5///kzVnxcjBGHpqyP5QGAv2bqrjKsdqB9Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zD6NlWlaCteYQ9LOdfXrP0NBCspIFq2DAo7MNm+6Z6Y=;
+ b=dsOsj61dXFhCFd9PnB5mOSMF3GLYTT3dYVemWbF+BMUtj4OG9O2tFOdgtlYwKXuxlgv4uaXh5gOXMC4BrGi9YOdxiyFYZqdr4z6FLy0KC8Kk2gB6P8+VUacbOensb4j6o7DunYU/CeK6FOBYOlFgDrC2/7t1f3+QnBDE8cCI4Z/cKJJ4xICIUnsnunIzKGCBz2coaXDXqxLof/ussme86DDVbS/p31j4X3CPPhJfffiUAWoQ44cLNPD5MTSZYQyZzv34z1mWMxpjFIG0AdayW5ZvzGW+iaiXC2WSmKLn0No8LYeQ2dHQiqHQHsxhsoswewscMUQTbSZXgFDkukJ7Sg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=dolcini.it smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zD6NlWlaCteYQ9LOdfXrP0NBCspIFq2DAo7MNm+6Z6Y=;
+ b=DCtHF4jKSO6NyYQwj99aZb+8i6nvaE2HbcS/v3vyWCyb+t7mr+xgig+rx1sijGS1j6kJcDpnR3xxcSuyjFiBoV6KHC9Tt50p8Urg5khctXagh1M0sgEjav1+/yI2n2UK8SGjn1/QwERyd+sLpZokWzDT8YlET7zSxLSCqztV3EE=
+Received: from SJ0PR13CA0170.namprd13.prod.outlook.com (2603:10b6:a03:2c7::25)
+ by SJ0PR10MB4640.namprd10.prod.outlook.com (2603:10b6:a03:2af::24) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.13; Thu, 11 Jun
+ 2026 15:22:08 +0000
+Received: from MWH0EPF000C6184.namprd02.prod.outlook.com
+ (2603:10b6:a03:2c7:cafe::82) by SJ0PR13CA0170.outlook.office365.com
+ (2603:10b6:a03:2c7::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.12 via Frontend Transport; Thu,
+ 11 Jun 2026 15:22:08 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ MWH0EPF000C6184.mail.protection.outlook.com (10.167.249.116) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.113.7 via Frontend Transport; Thu, 11 Jun 2026 15:22:06 +0000
+Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 11 Jun
+ 2026 10:21:53 -0500
+Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 11 Jun
+ 2026 10:21:53 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Thu, 11 Jun 2026 10:21:53 -0500
+Received: from HP-Z2-Tower-G9.dhcp.ti.com (hp-z2-tower-g9.dhcp.ti.com [10.24.68.200])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65BFLofb2134043;
+	Thu, 11 Jun 2026 10:21:50 -0500
+From: Shiva Tripathi <s-tripathi1@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <reatmon@ti.com>, <praneeth@ti.com>, <vishalm@ti.com>,
+	<k-malarvizhi@ti.com>, <francesco@dolcini.it>, <s-tripathi1@ti.com>
+Subject: [meta-ti][master][PATCH] optee-ftpm: Update commit to include TA panic fix
+Date: Thu, 11 Jun 2026 20:51:23 +0530
+Message-ID: <20260611152123.2494690-1-s-tripathi1@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260608080906.2266315-1-m-shah@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000C6184:EE_|SJ0PR10MB4640:EE_
+X-MS-Office365-Filtering-Correlation-Id: 21c6839f-d7ec-4364-b19f-08dec7cd32e9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|23010399003|82310400026|36860700016|376014|6133799003|18002099003|56012099006;
+X-Microsoft-Antispam-Message-Info: 
+	pF5bCzSiQY0tR8IJrcdml/PyHYxv4q4jzpj2vrtz/RfNyiZkphPc0VTxqm/xu2JHgDU+OEVR3McVICD7nYewkm3rOPkJ4A6k6P2dzTUWZOV/RnidJZ+OOU6Az6P4F7VRCoXjZ6pzDDckGhAMOBR70mw+9rX1ijS1ap7nQ5AnKpczSwq6nrjgkBvwoF8oD/uzLjTmOIQTtRGxlic2Woy01AjyWC18CSWqkcdFAzuT8+Fa0wj9oOleYBZsgI07qlMxhCoo1mJF1imxxaJVWn277F+iO7HI+EsR4eYRwwJCkQ92ZOdw1QqIfP1AGnHRGbjAfMjnWlMLiRbgrDKy3uyY57SY49+Fn/s0g+QLWD+G/GFMvTtwsPJhVmD5Yw3GpJk6phK5AeOG4DYU9rF6TSyy25pQMDnK7D8qFruIOwgMDqjFAnB7IGb9z7+mJDG/nM+OOgFyIzfinqVacIunFzXgtZi54jR0wOee1K51ei+UHPEjPw4A4JnrH1tF+9Bln0NYG2gDZEDHXd1LO2edX6bFKYE9D+6R5SSHDGWvEYbXDdGaaqq8LD/uWd+Uj7bpCZWyxOlL+scbK1nvKNvWtvqPU7caFzKIOeb5nybAitqqocG8rjRKmh5uI1xgjIm6yUQtI/kjSBiTyIv77J0z68tVW6Pdec19em5PBidLukKfsM1pWkieY2xx2Ntj6jaQAoMiTp49dCCcEYqdTPsFTkpdTFu5pYKkBGiQvCOn3okMXE0=
+X-Forefront-Antispam-Report: 
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(82310400026)(36860700016)(376014)(6133799003)(18002099003)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	BPfyU6MWeRpLvJXrbrEC9csbGfE9zlgKQZ5OoqMzlrTInI6C7xtIcv0nbW0cwPvZ4minPbQmXXO8Egwi1VgVjTF9apyuWgVdezRTH6ULI0HJD5oKKzDeF4Q68cCChpyFtMqFuRj8wQqmDpUaqxeSDqhs9f+zd8Q+1NryPGaj3LmH7G4Tl1LXeKVl2J6wNBahuw+jXWx/m30dB2AgAYbA5CxnFVGJ6BzZwsJimWNDUtqflhDOTAePQDKBQ3oP0c1pKRI29eWbK3luaalsJqQgPiuzECdsRpon/k92TzCDJD7E/6TYWJBZ3zt+kvPORKj1LvrRyTfZXsFZspCi2TOwfk46BowJO5BMBKY3UihaTr4bv+qr2pnW6zsjxge6J8+E3KZSqt0xbfDUPSYf2sFqf0Qz0e2vCmeF9ceADKvXOFD8o0pTDbwCvwO6sSOSCEZe
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2026 15:22:06.8302
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 21c6839f-d7ec-4364-b19f-08dec7cd32e9
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	MWH0EPF000C6184.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4640
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 11 Jun 2026 14:45:40 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20026
+ <meta-ti@lists.yoctoproject.org>; Thu, 11 Jun 2026 15:22:11 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20027
 
-On Mon, Jun 08, 2026 at 01:39:06PM +0530, Moteen Shah via lists.yoctoproject.org wrote:
-> Add a standalone initramfs-module-netsetup recipe that installs
-> 83-netsetup, an initramfs-framework module that configures the network
-> interface via DHCP before the NFS root mount. The recipe's RDEPENDS
-> pulls in CPSW and its dependencies, so the kernel modules and DHCP
-> client are only included when NFS boot support is needed.
-> 
-> Include initramfs-module-netsetup in packagegroup-ti-core-initramfs
-> gated on :bsp-next, where AM65_CPSW_NUSS became a loadable module.
-> TI staging kernels (6.6/6.12/6.18) still have CPSW built-in (=y).
-> 
-> Signed-off-by: Moteen Shah <m-shah@ti.com>
-> ---
-> 
-> Hello all,
-> AM65_CPSW_NUSS and its dependencies changed from built-in (=y) to
-> loadable modules (=m) in linux-next. This breaks NFS boot because the
-> Ethernet driver is no longer available before the NFS root mount.
-> 
-> Add a standalone initramfs-module-netsetup recipe that waits for the
-> Ethernet interface to appear after udev loads the modules and then
-> configures it via DHCP before the nfsrootfs module runs. The CPSW
-> kernel modules are declared as RDEPENDS:append:bsp-next of the recipe
-> so they are only pulled in for bsp-next kernels and only when NFS boot
-> support is needed.
-> 
-> Changes in v4:
-> - Switch from dhcpcd to udhcpc -q (busybox, already in initramfs); 
->   -q exits after obtaining lease so no background service survives
->   switch-root (Jonathan)
-> - Drop dhcpcd from RDEPENDS (Jonathan)
-> 
-> Changes in v3:
-> - Remove FILESEXTRAPATHS:prepend - redundant in a standalone recipe (Denys)
-> - Remove PACKAGE_ARCH = "${MACHINE_ARCH}" - script is not machine-specific (Denys)
+Bump to commit e3b1e426 which includes graceful degradation of fTPM TA
+when RPMB storage is unavailable, preventing TA panic and memory dumps.
 
-> - Drop k3.inc patch; move CPSW modules into RDEPENDS:append:bsp-next of
->   the recipe, linking module inclusion to NFS boot recipe inclusion
+Signed-off-by: Shiva Tripathi <s-tripathi1@ti.com>
+---
+ meta-ti-bsp/recipes-security/optee/optee-ftpm-ti-version.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I have 2 more comments for v3 and v4 due to this ^^^ change:
+diff --git a/meta-ti-bsp/recipes-security/optee/optee-ftpm-ti-version.inc b=
+/meta-ti-bsp/recipes-security/optee/optee-ftpm-ti-version.inc
+index b961c70f..ea40ba27 100644
+--- a/meta-ti-bsp/recipes-security/optee/optee-ftpm-ti-version.inc
++++ b/meta-ti-bsp/recipes-security/optee/optee-ftpm-ti-version.inc
+@@ -1,3 +1,3 @@
+ PV =3D "4.10.0+git"
+ OPTEE_TA_GIT_TAG =3D "${@'branch=3Dmaster' if d.getVar('PV') =3D=3D 'git' =
+or d.getVar('PV').endswith('+git') else 'tag=3D%s;nobranch=3D1' % d.getVar(=
+'PV')}"
+-SRCREV_optee-ta =3D "a09269b15de635e1816fe832e26adfbfb44c5455"
++SRCREV_optee-ta =3D "e3b1e426a605e0537a3c3c9c24228eb22e354b80"
+--=20
+2.34.1
 
-1. At least some, if not all of those CPSW-related modules are K3-specific. 
-Since you moved them out of k3.inc into netsetup recipe, I suspect it will 
-break for any legacy non-K3 platforms building with bsp-next.
-
-2. And that in turn now makes netsetup recipe machine-specific, unlike 
-previous revisions of your patch. Depending on how you intend to fix #1 
-comment, you may need to bring back PACKAGE_ARCH = "${MACHINE_ARCH}"
-
--- 
-Denys
-
-
-> - Gate initramfs-module-netsetup on :bsp-next in packagegroup so staging
->   kernels (where CPSW is built-in =y) are unaffected
-> 
-> Bootlogs: https://gist.github.com/Jamm02/2d078c20f0062394b0b7d09da7ee0a57
-> 
->  .../initramfs-module-netsetup/83-netsetup     | 54 +++++++++++++++++++
->  .../initramfs-module-netsetup_1.0.bb          | 30 +++++++++++
->  .../packagegroup-ti-core-initramfs.bb         |  2 +
->  3 files changed, 86 insertions(+)
->  create mode 100644 meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup/83-netsetup
->  create mode 100644 meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup_1.0.bb
-> 
-> diff --git a/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup/83-netsetup b/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup/83-netsetup
-> new file mode 100644
-> index 00000000..8e76bac4
-> --- /dev/null
-> +++ b/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup/83-netsetup
-> @@ -0,0 +1,54 @@
-> +#!/bin/sh
-> +# Configure network via DHCP before NFS root mount. Polls for an Ethernet
-> +# interface with sleep 1 per iteration to allow the Ethernet driver deferred
-> +# probe chain to settle after udev loads the modules.
-> +
-> +netsetup_enabled() {
-> +    [ "${bootparam_root}" = "/dev/nfs" ] || return 1
-> +    return 0
-> +}
-> +
-> +netsetup_run() {
-> +    local iface timeout devtype
-> +
-> +    # Extract interface from ip= kernel param (format: client:server:gw:mask:host:device:autoconf)
-> +    iface=""
-> +    case "${bootparam_ip}" in
-> +        dhcp|on|any|"")
-> +            ;;
-> +        *)
-> +            iface=$(echo "${bootparam_ip}" | cut -d: -f6)
-> +            ;;
-> +    esac
-> +
-> +    udevadm trigger --action=add --subsystem-match=net
-> +    udevadm settle --timeout=10
-> +
-> +    # Poll up to 60 seconds for an Ethernet interface (ARPHRD_ETHER = type 1).
-> +    msg "netsetup: waiting for ethernet interface..."
-> +    timeout=60
-> +    while [ "${timeout}" -gt 0 ]; do
-> +        if [ -n "${iface}" ] && [ -d "/sys/class/net/${iface}" ]; then
-> +            break
-> +        fi
-> +        for dev in /sys/class/net/*; do
-> +            [ -f "${dev}/type" ] || continue
-> +            devtype=$(cat "${dev}/type")
-> +            [ "${devtype}" = "1" ] || continue
-> +            iface=$(basename "${dev}")
-> +            break
-> +        done
-> +        [ -n "${iface}" ] && [ -d "/sys/class/net/${iface}" ] && break
-> +        sleep 1
-> +        timeout=$((timeout - 1))
-> +    done
-> +
-> +    if [ -z "${iface}" ] || [ ! -d "/sys/class/net/${iface}" ]; then
-> +        msg "netsetup: no ethernet interface found after 60s, skipping DHCP"
-> +        return
-> +    fi
-> +
-> +    msg "netsetup: configuring ${iface} via DHCP"
-> +
-> +    udhcpc -q -i "${iface}"
-> +}
-> diff --git a/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup_1.0.bb b/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup_1.0.bb
-> new file mode 100644
-> index 00000000..ec04ea9d
-> --- /dev/null
-> +++ b/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup_1.0.bb
-> @@ -0,0 +1,30 @@
-> +SUMMARY = "initramfs support for DHCP network configuration before NFS root mount"
-> +
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-> +
-> +SRC_URI = "file://83-netsetup"
-> +
-> +S = "${UNPACKDIR}"
-> +
-> +do_install() {
-> +    install -d ${D}/init.d
-> +    install -m 0755 ${UNPACKDIR}/83-netsetup ${D}/init.d/83-netsetup
-> +}
-> +
-> +FILES:${PN} = "/init.d/83-netsetup"
-> +
-> +RDEPENDS:${PN} = "\
-> +    initramfs-framework-base \
-> +"
-> +
-> +RDEPENDS:${PN}:append:bsp-next = " \
-> +    kernel-module-ti-am65-cpsw-nuss \
-> +    kernel-module-k3-cppi-desc-pool \
-> +    kernel-module-davinci-mdio \
-> +    kernel-module-ti-cpsw-ale \
-> +    kernel-module-ti-cpsw-sl \
-> +    kernel-module-phylink \
-> +    kernel-module-mdio-bitbang \
-> +    kernel-module-phy-gmii-sel \
-> +"
-> diff --git a/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb b/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
-> index a9eff847..b4e6adff 100644
-> --- a/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
-> +++ b/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
-> @@ -23,3 +23,5 @@ RDEPENDS:${PN} += "\
->      initramfs-module-nfsrootfs \
->      nfs-utils-mount \
->  "
-> +
-> +RDEPENDS:${PN}:append:bsp-next = " initramfs-module-netsetup"
-> -- 
-> 2.34.1
 
