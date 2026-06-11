@@ -1,131 +1,168 @@
-Return-Path: <a-christidis@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1C6BCD98C7
-	for <webhook@archiver.kernel.org>; Wed, 10 Jun 2026 23:33:01 +0000 (UTC)
-Received: from DM5PR21CU001.outbound.protection.outlook.com (DM5PR21CU001.outbound.protection.outlook.com [52.101.62.60])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.34116.1781134376572887137
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D81FCD98C5
+	for <webhook@archiver.kernel.org>; Thu, 11 Jun 2026 02:17:47 +0000 (UTC)
+Received: from CH4PR04CU002.outbound.protection.outlook.com (CH4PR04CU002.outbound.protection.outlook.com [40.107.201.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36871.1781144261408594690
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 10 Jun 2026 16:32:56 -0700
+ Wed, 10 Jun 2026 19:17:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=fQjesxov;
- spf=pass (domain: ti.com, ip: 52.101.62.60, mailfrom: a-christidis@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=xaRYLc+d;
+ spf=pass (domain: ti.com, ip: 40.107.201.42, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=H5gYNum+zYhsS1NqDJz0tdRM0fCk1xrR0HCshEFclgm5/iQra3wY8B8bdZroeMKc04owzPaJf0g2dMvg3FFPo/oaK1KAxT5VAWcBuV6oKVqaEnssOmB/xnnM+JNWvMjgzGplU3xNi3R2siaFRhyuaB1hhxx9chUw2I3GORs/fkzooVr4ZHSv4bPqL9uBf1QegBL6Bzvzh4kkkEjMKcVjgY/QBpjBNxMI8BpsrloJ2hQYzAqPujmrki0F1ceqhIBaFHrAOxNkC84wIvETMZoOK3xXoo+tRiwclDw5K7v1StRgGBg/67rBrz+vxmJrF7AS7ZvVtBOrCunp9hx5q0Wsfw==
+ b=wcmLPOISW6TQ11qCGPhpvYScmg1TgYoJJhnrzmE+Nc/POJ39nxpZoej19QX0bgcqpIaTlUITkjIBqe0XK4MqgBMMi6O2Q1iCXVQRaoxUSBD7zhMRxj8zTy8YXWWG5sdtbYjmY56hasQN5yzT0QaXY/H17I1ElYusYnElDLIdQVm6grqfJaI5zGR9RBPHlIcv4zsWcrTCAb9dDk4c0lXvrTEV39ByabQSEHpjR/uwZ5boUoZAnNXbllBG2WTrkR2kZjY1AgMyOm0z1D1aDZCZNKDGrjhRm5fBNLdZnMLS4ftA5KgC+eceKIh2Mf7eeZ/QL69u76yDHlz5lTnT3Evd0w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=g6HUu224Ba03shop0cXtS3hhXIsoA14x8DGc/WUtlQE=;
- b=u0srOY5rp0wMKxVsh/FudYjy0UzFb5uFq3/9uIYtT7cUv3VO+Xz39FyVARCB3ZIppeaR8gEk64ItaQklSEZe/VAaqJ8bDO28a5MTgOmFXznORAeNqvXzmr4Lps/y9wCUbC70eiDZi+hIhxuAbbP+PF1Ax8nnvEqFcihj8eutF1GbMQT/6Q2m6hQsO4ctgiGOw/t3OAlWykd213sgE9+M4fTSE/i7dS0ErE3UbI4vOHhfJPSfIqq2SQBdPDgXLfYa89SxfhVZgUVruPG8LnKy3hxAI/I3rIBBw7vxjQA2HNv/kw78CZrLrKO1c1UcUi09aZWNO8mo2Hf2KuYbFtOamg==
+ bh=eSCx9pJco6sGgiNyFnfSElIPdN/SPf841/APlBxqJLg=;
+ b=ljbVnFMZ2mghLn6UZNR3uE1CprU2ISd9F0K9JgrXNoJMXgvviXTK+hJmH42caYU2Ty4e9MUPmTOMYyfxQg3YYSQWv8NpIgUjakNGINf/lNdvsxti7gTb/q0cE3zV9DLxnvS0nbmo966I4sT4hX0sVVWU8+Ko64Xp/ARo77Qs8ZX6KUvDF7eh3lGDLn1n+VRtM21qtlCgsAAF5bza1p2HTmUP/VR0Oh3YGQ74+KEcRD+CYdN8mvKEPGL4OOlGalCxTeZrNnBACucVNILkBfVetRcbaACRGJdjS1GXjG8bfWivGOgqOQzuAg2o27JSjv/prfhax7Kan8FGrrPcddPb/g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=g6HUu224Ba03shop0cXtS3hhXIsoA14x8DGc/WUtlQE=;
- b=fQjesxovrFAJPXLucuDDUhWAz525s52w9OdcteRrtK2kl94ntubYPVG7gQsdmiJ/Ijz9NFLN2lUm2rtSYNKY9eJPuf8v+kpzC361t0jQ8cHZ01iLP7X6MjauWGxq5gXxyTa7YxIef3MeANWn7Zo/wMtfku3KqLB5dOR6yCjEXo0=
-Received: from MN2PR08CA0012.namprd08.prod.outlook.com (2603:10b6:208:239::17)
- by CH3PR10MB7561.namprd10.prod.outlook.com (2603:10b6:610:178::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.13; Wed, 10 Jun
- 2026 23:32:33 +0000
-Received: from MN1PEPF0000ECDA.namprd02.prod.outlook.com
- (2603:10b6:208:239:cafe::16) by MN2PR08CA0012.outlook.office365.com
- (2603:10b6:208:239::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.12 via Frontend Transport; Wed,
- 10 Jun 2026 23:32:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ bh=eSCx9pJco6sGgiNyFnfSElIPdN/SPf841/APlBxqJLg=;
+ b=xaRYLc+dMUzkm4aI8EHTzp0R3BF+l+f6d/Rkz+KR8QhW57sJdGTwO9YyL8momIqFe/RS3pI6IqKi4jVcBXYaISgwQngTpIdhD3tPp5o2UCWSvLErt5uIMut3VH9GQs+/YjMA2ecy2w5cKOg3PfPmYTHIOZkQW9TqCPzBViA7KIE=
+Received: from DS3P220CA0002.NAMP220.PROD.OUTLOOK.COM (2603:10b6:8:45f::16) by
+ CO1PR10MB4484.namprd10.prod.outlook.com (2603:10b6:303:90::12) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.92.13; Thu, 11 Jun 2026 02:17:38 +0000
+Received: from DM2PEPF00003FC2.namprd04.prod.outlook.com
+ (2603:10b6:8:45f:cafe::9c) by DS3P220CA0002.outlook.office365.com
+ (2603:10b6:8:45f::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.13 via Frontend Transport; Thu,
+ 11 Jun 2026 02:17:38 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- MN1PEPF0000ECDA.mail.protection.outlook.com (10.167.242.134) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ DM2PEPF00003FC2.mail.protection.outlook.com (10.167.23.20) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.113.7 via Frontend Transport; Wed, 10 Jun 2026 23:32:31 +0000
-Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.113.7 via Frontend Transport; Thu, 11 Jun 2026 02:17:37 +0000
+Received: from DLEE204.ent.ti.com (157.170.170.84) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 10 Jun
- 2026 18:32:27 -0500
-Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 21:17:37 -0500
+Received: from DLEE205.ent.ti.com (157.170.170.85) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 10 Jun
- 2026 18:32:27 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 21:17:37 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE205.ent.ti.com
+ (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Wed, 10 Jun 2026 18:32:27 -0500
-Received: from [128.247.81.216] (antonios-thinkstation-p3-tower.dhcp.ti.com [128.247.81.216])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65ANWRa8106534;
-	Wed, 10 Jun 2026 18:32:27 -0500
-Message-ID: <61d26bbf-d344-4bc8-a154-101324478bdc@ti.com>
-Date: Wed, 10 Jun 2026 18:32:27 -0500
+ Transport; Wed, 10 Jun 2026 21:17:37 -0500
+Received: from [10.249.64.82] ([10.249.64.82])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65B2HbpS921927;
+	Wed, 10 Jun 2026 21:17:37 -0500
+Message-ID: <d5d84531-360e-4f57-b4bf-699614b3d749@ti.com>
+Date: Wed, 10 Jun 2026 21:17:37 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [meta-ti][wrynose/master][PATCH V2] mesa-pvr: Migration from
  v24.0.1 -> v25.2.8
-To: Ryan Eatmon <reatmon@ti.com>
-CC: <denys@konsulko.com>, <meta-ti@lists.yoctoproject.org>
-References: <20260610225153.154945-1-a-christidis@ti.com>
- <20260610225547.1343744-1-prc@list.ti.com>
- <a84f838d-55a1-4bb0-8f98-acec3ceaa771@ti.com>
+To: Antonios Christidis <a-christidis@ti.com>, <denys@konsulko.com>
+CC: <meta-ti@lists.yoctoproject.org>
+References: <18B7DA0BBD971E15.267903@lists.yoctoproject.org>
+ <150e8bb6-2aba-4292-8053-51231e3e0928@ti.com>
 Content-Language: en-US
-From: Antonios Christidis <a-christidis@ti.com>
-In-Reply-To: <a84f838d-55a1-4bb0-8f98-acec3ceaa771@ti.com>
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <150e8bb6-2aba-4292-8053-51231e3e0928@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: quoted-printable
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECDA:EE_|CH3PR10MB7561:EE_
-X-MS-Office365-Filtering-Correlation-Id: b02aeff7-723d-4288-7d96-08dec7488afb
+X-MS-TrafficTypeDiagnostic: DM2PEPF00003FC2:EE_|CO1PR10MB4484:EE_
+X-MS-Office365-Filtering-Correlation-Id: b220a300-30bd-417e-635d-08dec75f9b98
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|376014|36860700016|82310400026|23010399003|22082099003|18002099003|56012099006|4143699003;
+	BCL:0;ARA:13230040|23010399003|36860700016|1800799024|82310400026|376014|4143699003|3023799007|56012099006|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info: 
-	mEUZA3p29j+OK0WpYA7DSa+xDnnSdykpEidT/9Kn+KRd4ShPUgBdJHErD9tLxxXfDjkGb1G49uNGQ4OeV8Scq1rBNfek9ZxSkMmeCXEczjjcKl+3aSoGhH0K1AuRCEPLv8zxOCo0U2a1Ex/F+i1yWaezy/GTMTPwNVxUs8ppa7wyeVACGLczc6iX0Yf/peGTJIDS+btPk4DpWA+OEo3XrrLLmA4qIe+Xk6NzUoSjLCT4qQYdm7VW4MDPF8I66GVxWUxCIegLOHPrr1H+UJGR5IAGbA/m7fYxuhsvB+VK68XJkqIEeUTQsdwq/2euL+c7gxWF+V2UI8rF3jPidUGJ17c3srVkv7fbI4Qg1nZtEJ6DM/RHJiUYAytPCx5oynzcGU1XkNbGml0ilzF7AAa5ybkIDUag62R8uXctUj2qmpl9eNEo1/sbPL2Cz24DOZfnBcwEp9iRrvCDfzNrIUgFxL10CotMrg0R17SOtwoPif1o/UpJgZbzaeac+PWFBXcJ1Zu5kCU5bZ02LDRKMCrbBLqR2N3GQR6133e8aVYD67QRgMlFpC5OOUOjIOFVgG37V3njzeQnikoTCAZUFIvfm3rt76AQaScgu28C0dy+bOuuA7APTc/IpkJ58T0f8tXja4KId48ho0boz/6GvxQVBmfYXsWnEEtlxbbxQd0lqVErR86OLBcw1v0E4MjLbZ9qmnY/a/61rG3tQL6L5PeojtpBHp8DsISnVysX42+zUSw=
+	rNPyNbS8Jy3zFS+oBjjy9jETEu4el5vaD9+5XdqMQdOITsgw3NSYf15Wq4cdOEr2KzdkRMP9dT2A3KUXMTAFO6jJQCXoDeVKK9zLNsbraYObaNrWAEUdM8J6QHEfj0zKSHjCb9/a0bjT5xdz3mfV5wyj5TUl0S2Myl8UgBEtMQGBHN1QY/0ePn4EdyowATZSjpkeirBJGJQQQJagzqevhJHYcFZBMWGiuq3PKZEwgS5ivkHam3PimOK8q9ZHNU+AGz4+dwx363Jokh5Up+AAStjQBN7c0d6mb9ZCX0kfPF0PCBPF0ZRY8qOea1vEWmbyYB4zBc2uyTsuPJDKhvHqM3hYMTl9NyDxZsmoaP9E9oLMNx/+r9HphRi58tpsRA0+mZHsJMIJ0rUZdFgJL0+rVvD27EcQH18tnNCA+jnXRR0MvGTfVih8NQsVYGq3b6XTBn9kRZ1CZUSICU1hxq9hf/WyMBgnzp3wrT8sAZMDYLI3IE/lhreiz9Z1+x1k0qqszbnCFsS1473AtnTNv454blRMIMK6qlgd+OjcUzIhdQa8pFLOa21QARv932SBAvX4WXDT1dUu9xJLumKsA9VaDt6qH024B6OnMrhTjel4WMixTag94UMQwpIO8jVOfZ5iKvoCx+Dq595/qs3NETXiMN8tbwXo+OMWzlVy7NbtYdCQccaF9tAxaZ8CDsxKUs1HtJGf8Xp7SCVc5NeR1ge7xnXm3B9D9kyvWYR0iWj0kV0=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(1800799024)(376014)(36860700016)(82310400026)(23010399003)(22082099003)(18002099003)(56012099006)(4143699003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(36860700016)(1800799024)(82310400026)(376014)(4143699003)(3023799007)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	b/zjQwyGBPeP6gsVSpqb+FXVhoQfibI5LZZew1Vsg3TvBhCd7zlJnEx1f7D47lgukXl+z7yFZK9qXYLIgSV1s/QxrjZaWXDJN4sWr6v/fKI/BSqiYozS64RxW++F9TYNf5zEHBusqd2gj7//0McZ62trsjKQSSkci+N3Nhcr+Txi1bVAKOSPH3K/0L2DnovmNvyn4M2nfYBBsXJRVaWlel2VjjkUNHTMW+XFmarppW/kDIO/z3icwJbA22lVGIFgJJo4GChyeEAYVwu76ktPLHF+aKUAnnpDiLQrsHjodLyE9ARoGhpPkKlwItxnX3zuflMoU0GtjEX0xvfce3P3jgeVH8+p+QmD/bSbZXqdaMScm3ymsK73SwS6GKooE290SuRwBV38RvA0p9mvh6r0cn3KJknuIRxnPqxscx5Rf3z0QgYM1BQ8oemVYWquD/Gt
+	RrT1wg35QQOcda/TCPWifP5itvxsqcBSpW9vPXVhxYZGldFazZtKLi9r8FkQhV48QvLEi2arpvGA/YFR9HfA2rpVjxtYA+s4EytuLm/9MxPEjyrPYNqL+uaC6AJpDB01YLaVPH7o0yJF7JR4cDBCewl79KzXU4I8pPANoXPccZt8WPl9rrffz7yzmRCobYjAZJiAR8pJn8cuhgSh9fVQfiHCiy3c2t7o9GRMTywNQ/hmcpqRSomnkdv8fU1H/3oj4o12sdSTmEE1cdXKwmnPkYs9B7u5xqVbXGOu3kdlUzSbuguWhFRu/a4R1IKbUwdTMhlVvZnzJpcVdko6fw8mzx7SV8DUs4WB5Z1uXGQwK7dkQ/R/u1KtfS3ono85hjLC+EQgmYUp7n7uT08eNs4AsoX2qCYJLaSTPiYwOnbqn+q+R2Xp5JzmOHnHcBlEbguM
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 23:32:31.5241
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2026 02:17:37.8402
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b02aeff7-723d-4288-7d96-08dec7488afb
+X-MS-Exchange-CrossTenant-Network-Message-Id: b220a300-30bd-417e-635d-08dec75f9b98
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	MN1PEPF0000ECDA.namprd02.prod.outlook.com
+	DM2PEPF00003FC2.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7561
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4484
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 10 Jun 2026 23:33:01 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20017
-
-Dear Ryan,
+ <meta-ti@lists.yoctoproject.org>; Thu, 11 Jun 2026 02:17:47 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20018
 
 
-On 6/10/26 6:28 PM, Ryan Eatmon wrote:
-> You need to also update the meta-ti/check_yocto_rules.json file since=20
-> you renamed the file that we were looking for.=C2=A0 That will help clear=
-=20
-> up these warnings if you did that as part of this patch.
+
+On 6/10/2026 5:58 PM, Antonios Christidis wrote:
+> Dear Ryan Denys,
+>=20
+>=20
+> Let me know your thoughts on the overall patch. I am particularly=20
+> interested on your opinions on the following change:
+>=20
+> On 6/10/26 5:51 PM, Antonios Christidis via lists.yoctoproject.org wrote:
+>> BSP_MESA_PVR_VERSION:bsp-ti-6_18: =3D "2%"
+
+So... I think what this does is establish the pattern for which version=20
+it will match to.  And then from that pattern it will pick the highest=20
+version.
+
+So for ALL 6_18 builds it will probably choose 25 and never 24.  Which=20
+is not what you want.
+
+... I think ...
+
+We have never tried to mix versions like this in the past, so I'm not=20
+100% sure what the best course is.
+
+Likely a mixture of the override based on machine needs to be in there.=20
+And for that I'm thinking you might need an extra variable.
+
+BSP_MESA_PVR_VERSION_6_18 ?=3D "25%"
+BSP_MESA_PVR_VERSION_6_18:am57 =3D "24%"
+BSP_MESA_PVR_VERSION_6_18:ti33 =3D "24%"
+etc...
+
+BSP_MESA_PVR_VERSION:bsp-ti-6_18 =3D "${BSP_MESA_PVR_VERSION_6_18}"
 
 
-Noted. Let me know if this is all the feedback on the patch, then I'll=20
-send a v3.
+Something along those lines?  That would be the most clear for people to=20
+follow as well.
 
 
-Kind Regards,
+>=20
+> I wish there was a way to use syntax like=20
+> "BSP_MESA_PVR_VERSION:bsp-ti-6_18 =3D "24%|25%" or even=20
+> "24.0.1|25.2.8".=C2=A0Is there a better way of enabling this logic ?
+>=20
+> Also already aware of the extra ":" post-pended to the variable, I can=20
+> send a v3 if that's all the feedback.
+>=20
+>=20
+> Kind Regards,
+>=20
+> Antonios
+>=20
 
-Antonios
-
+--=20
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
