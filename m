@@ -1,77 +1,110 @@
-Return-Path: <rpjday@crashcourse.ca>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4B21CD98CC
-	for <webhook@archiver.kernel.org>; Thu, 11 Jun 2026 13:19:16 +0000 (UTC)
-Received: from cpanel10.indieserve.net (cpanel10.indieserve.net [199.212.143.9])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.45409.1781183951586462223
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6054CD98CE
+	for <webhook@archiver.kernel.org>; Thu, 11 Jun 2026 13:23:26 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.45502.1781184205222128653
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 11 Jun 2026 06:19:11 -0700
+ Thu, 11 Jun 2026 06:23:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@crashcourse.ca header.s=default header.b=j8O/e7nT;
- spf=pass (domain: crashcourse.ca, ip: 199.212.143.9, mailfrom: rpjday@crashcourse.ca)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=crashcourse.ca; s=default; h=Content-Type:MIME-Version:Message-ID:Subject:
-	To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=WwCuA+gq+rvoXjk91BDtGbT0V6DjZ0P3joGuSj7BHKQ=; b=j8O/e7nTFAwGt0e+OnH8XOJMMh
-	gpx4sjlQL9IcSzo8oaEKANtr1Xn2xSeDHCAGVI8YnK0U/fhuKxM4auN8zEFtaKwtX2DBkjCNIxjic
-	/yPpLt1EqDfv/punECLyFd+DDRjlK40gGXTAiLkoFfKHO2WmsME1ZeFNtsF2L5Qqjj1D4aAx80+VV
-	5nKhNWyRdnWYwQJos7C1Tb3rj+wn5GDAe2YjyLLkcSrEKo+ZUcMaBQCdHXoD6+YQ7yzsDCxgOUYiW
-	4XcYMmmdJBDTLkaNlO9rFw/C9bqHdOaaKDLLC9QajMd30iF0rAhmy8dQjOIv6fV/HMcrVqM+deBfD
-	J2eCrZ9g==;
-Received: from pool-174-114-114-5.cpe.net.cable.rogers.com ([174.114.114.5]:50792 helo=trixie)
-	by cpanel10.indieserve.net with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
-	(Exim 4.99.4)
-	(envelope-from <rpjday@crashcourse.ca>)
-	id 1wXfJM-0000000BfQA-3woc
-	for meta-ti@lists.yoctoproject.org;
-	Thu, 11 Jun 2026 09:19:09 -0400
-Date: Thu, 11 Jun 2026 09:19:07 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-To: meta-ti mailing list <meta-ti@lists.yoctoproject.org>
-Subject: want to clarify (simple) instructions to build for beagleplay
-Message-ID: <fae8ab1f-e451-9357-de74-ba776a3ca658@crashcourse.ca>
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 40F5B40CD8;
+	Thu, 11 Jun 2026 13:23:24 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id fRYo5P5IBfCo; Thu, 11 Jun 2026 13:23:24 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id F3C5440C8C;
+	Thu, 11 Jun 2026 13:23:20 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 35DAC17EE67; Thu, 11 Jun 2026 09:23:20 -0400 (EDT)
+Date: Thu, 11 Jun 2026 09:23:20 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: reatmon@ti.com
+Cc: Antonios Christidis <a-christidis@ti.com>, denys@konsulko.com,
+	meta-ti@lists.yoctoproject.org
+Subject: Re: [meta-ti][wrynose/master][PATCH V2] mesa-pvr: Migration from
+ v24.0.1 -> v25.2.8
+Message-ID: <20260611132320.GM23325@denix.org>
+References: <18B7DA0BBD971E15.267903@lists.yoctoproject.org>
+ <150e8bb6-2aba-4292-8053-51231e3e0928@ti.com>
+ <d5d84531-360e-4f57-b4bf-699614b3d749@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel10.indieserve.net
-X-AntiAbuse: Original Domain - lists.yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Get-Message-Sender-Via: cpanel10.indieserve.net: authenticated_id: rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
-X-Authenticated-Sender: cpanel10.indieserve.net: rpjday@crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+In-Reply-To: <d5d84531-360e-4f57-b4bf-699614b3d749@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 11 Jun 2026 13:19:16 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20021
+ <meta-ti@lists.yoctoproject.org>; Thu, 11 Jun 2026 13:23:26 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20022
+
+On Wed, Jun 10, 2026 at 09:17:37PM -0500, Ryan Eatmon via lists.yoctoproj=
+ect.org wrote:
+>=20
+>=20
+> On 6/10/2026 5:58 PM, Antonios Christidis wrote:
+> >Dear Ryan Denys,
+> >
+> >
+> >Let me know your thoughts on the overall patch. I am particularly
+> >interested on your opinions on the following change:
+> >
+> >On 6/10/26 5:51 PM, Antonios Christidis via lists.yoctoproject.org wro=
+te:
+> >>BSP_MESA_PVR_VERSION:bsp-ti-6_18: =3D "2%"
+>=20
+> So... I think what this does is establish the pattern for which
+> version it will match to.  And then from that pattern it will pick
+> the highest version.
+>=20
+> So for ALL 6_18 builds it will probably choose 25 and never 24.
+> Which is not what you want.
+>=20
+> ... I think ...
+>=20
+> We have never tried to mix versions like this in the past, so I'm
+> not 100% sure what the best course is.
+>=20
+> Likely a mixture of the override based on machine needs to be in
+> there. And for that I'm thinking you might need an extra variable.
+>=20
+> BSP_MESA_PVR_VERSION_6_18 ?=3D "25%"
+> BSP_MESA_PVR_VERSION_6_18:am57 =3D "24%"
+> BSP_MESA_PVR_VERSION_6_18:ti33 =3D "24%"
+> etc...
+>=20
+> BSP_MESA_PVR_VERSION:bsp-ti-6_18 =3D "${BSP_MESA_PVR_VERSION_6_18}"
+>=20
+>=20
+> Something along those lines?  That would be the most clear for
+> people to follow as well.
+
+It was done differently in this patch:
+
+mesa-pvr 24 was maked compatible only with SGX platforms, while mesa-pvr =
+25=20
+was marked compatible with the rest of the platforms. Also not ideal thou=
+gh.
 
 
-  friend just got a beagleplay, asked me whether there was any
-complication in building a simple core-image-minimal with yocto
-project ... i did some quick research and, from what i read, it's as
-simple as:
-
-  1) check out oe-core, meta-ti and meta-arm layers
-  2) add all the relevant layers to bblayers.conf
-  3) Set MACHINE = "beagleplay"
-  4) "bitbake core-image-minimal"
-
-and one should get an appropriate wic image.
-
-  one question -- are the "master" branches safe for all of the above,
-or should one play it safe and check out "wrynose" for all of the
-above?
-
-  seems pretty straightforward.
-
-rday
-
+> >I wish there was a way to use syntax like
+> >"BSP_MESA_PVR_VERSION:bsp-ti-6_18 =3D "24%|25%" or even
+> >"24.0.1|25.2.8".=A0Is there a better way of enabling this logic ?
+> >
+> >Also already aware of the extra ":" post-pended to the variable, I
+> >can send a v3 if that's all the feedback.
+> >
+> >
+> >Kind Regards,
+> >
+> >Antonios
+> >
 
