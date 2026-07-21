@@ -1,632 +1,760 @@
-Return-Path: <denis@denix.org>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F933C4452B
-	for <webhook@archiver.kernel.org>; Tue, 21 Jul 2026 18:59:20 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.31048.1784660357396302032
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDEB5C4452B
+	for <webhook@archiver.kernel.org>; Tue, 21 Jul 2026 19:16:41 +0000 (UTC)
+Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com [148.163.154.28])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.31464.1784661393965505225
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 21 Jul 2026 11:59:18 -0700
+ Tue, 21 Jul 2026 12:16:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 61B7B40CB1;
-	Tue, 21 Jul 2026 18:59:16 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id k-G0uDTvnZHK; Tue, 21 Jul 2026 18:59:16 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id EEA0340BD6;
-	Tue, 21 Jul 2026 18:59:12 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 2753C1769F1; Tue, 21 Jul 2026 14:59:12 -0400 (EDT)
-Date: Tue, 21 Jul 2026 14:59:12 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: reatmon@ti.com
-Cc: Praneeth Bajjuri <praneeth@ti.com>,
-	Denys Dmytriyenko <denys@konsulko.com>,
-	meta-ti@lists.yoctoproject.org
-Subject: Re: [meta-ti][master][PATCH] recipes: Convert to SPDX license
- strings
-Message-ID: <20260721185912.GP10186@denix.org>
-References: <20260721185343.3006427-1-reatmon@ti.com>
+ dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=YDEQrNv4;
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=mKHSFURQ;
+ spf=pass (domain: ti.com, ip: 148.163.154.28, mailfrom: reatmon@ti.com)
+Received: from pps.filterd (m0374956.ppops.net [127.0.0.1])
+	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LH60Bo1392495;
+	Tue, 21 Jul 2026 14:16:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	proofpoint-05-2026; bh=BFJK/GHBoeqCR7QcXzbCvMn3vu/OlQH/qDe16HsUj
+	tw=; b=YDEQrNv4IUfz+ElR3Oaf2NTH08mWQarHJ35xhh2Lz/0g73G8igunVs22W
+	jo/CMUX4urLe4xPHGj04rFyauNZpxmjAgCMl1g434HSa8nYHswyp9N+ZDl0g8Kcm
+	jvUpMy+VbE3rWzaqGuCzEHjX/XGKaQvXfhagInr27OiO4aOVSC3cUdVVgHiHIKrC
+	efZ3bdJbOyD1qDzWsEo07oZS7qFbvdwCrgvRQEM4gBDPhgtfS3lUGS3b2ZUZJVRU
+	56jTS5yjCWH1a05JP7/xk4K1MRIf26+z49WtXA4BeBP4BjTixtcoeAJ91lWp7Gsz
+	otc348x/GYuefvSZAo0sTtIBSAifA==
+Received: from ph7pr06cu001.outbound.protection.outlook.com (mail-westus3azon11010062.outbound.protection.outlook.com [52.101.201.62])
+	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4fj7pvu09u-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Tue, 21 Jul 2026 14:16:29 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FQnFT50IHEXs8lk9FsmZMbZSwLB1prQ7+/3AKdvQXZSC1+7YMNk5h0l/Ai2p9F+EkFne6ObjOEohUEk583c5eWN7+J4P/6j8xtEP/+tU0IzGcUAsjCfBmIfBPe0zStsgfQlXGjRV5m9z4rkHK4uJp0UXltl3eSdPD9dkvMMwTy2XMpZZnVjbk4OqDuQDTL9i44IGtICq3AHS0p1V6oRKKUUTp0pcuHOQ8uyEJBlT6urpOgpU76qKlJvyRSDX1XnchKQ5HRKMy7IP5WFTjRvxTpnJce5XfKEb0ayn8ciKoeRBEMNTTb0NY3Hl9By+O5mI4iwnZaEC0tNLqv0LSrXoWQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BFJK/GHBoeqCR7QcXzbCvMn3vu/OlQH/qDe16HsUjtw=;
+ b=G+nZVyd3gOrBElLBuDNqHKkZG7xV9GgzA3EmbyXOxjBw7KcwoenScEpLkFj73vT8wSQoZaJ5BzfMz+xMKPImKVj4u3x27Kc1cavF5e5xUIXihirswS2ghI3PLGfrfOAWHvJAl97JefxZKBTWD+4ixYDrLG7a/zmQp+dEOepahR+pA1ULv0vMExACmXM1aiLKFr/Ldhm6O/pwM1rerZ2ip3um9UbGD2gw+Q009NHdN6Mjl6dL1le+llooVaj4po+6Lrn4XVPgcn1Oox4PghQzT/pvzq4e+w48Cl2dpfpXn1TvAEZrdbB83hYR1Z0xFH3GTDMhkSVL90ht1XDF2OT/vQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BFJK/GHBoeqCR7QcXzbCvMn3vu/OlQH/qDe16HsUjtw=;
+ b=mKHSFURQbaGEYdqJ0qy0b/P1IIOt8zYDRPkRg3fR2JHwziGfz2OVNbA2nan/9YynyBbmmS9MEdqBy7JkRHddijdCuODYdUWZj3oeekUwl9Nn5bGdhtuWCrbFCM3AayVio1WdyQzDewbwSveyCBO5ncRQrMKaruQ1syVyg3R0aDY=
+Received: from SN7PR04CA0017.namprd04.prod.outlook.com (2603:10b6:806:f2::22)
+ by IA4PR10MB8754.namprd10.prod.outlook.com (2603:10b6:208:568::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.18; Tue, 21 Jul
+ 2026 19:16:20 +0000
+Received: from SA2PEPF00001507.namprd04.prod.outlook.com
+ (2603:10b6:806:f2:cafe::63) by SN7PR04CA0017.outlook.office365.com
+ (2603:10b6:806:f2::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.223.18 via Frontend Transport; Tue,
+ 21 Jul 2026 19:16:19 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ SA2PEPF00001507.mail.protection.outlook.com (10.167.242.39) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.245.5 via Frontend Transport; Tue, 21 Jul 2026 19:16:18 +0000
+Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 21 Jul
+ 2026 14:15:49 -0500
+Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 21 Jul
+ 2026 14:15:49 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Tue, 21 Jul 2026 14:15:49 -0500
+Received: from [10.249.65.118] ([10.249.65.118])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66LJFnsd1424027;
+	Tue, 21 Jul 2026 14:15:49 -0500
+Message-ID: <98a3a57d-f4a4-4cbb-9563-4852626f4de0@ti.com>
+Date: Tue, 21 Jul 2026 14:15:49 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260721185343.3006427-1-reatmon@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-ti][master][PATCH] recipes: Convert to SPDX license strings
+To: Denys Dmytriyenko <denis@denix.org>
+CC: Praneeth Bajjuri <praneeth@ti.com>,
+        Denys Dmytriyenko
+	<denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+References: <20260721185343.3006427-1-reatmon@ti.com>
+ <20260721185912.GP10186@denix.org>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20260721185912.GP10186@denix.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001507:EE_|IA4PR10MB8754:EE_
+X-MS-Office365-Filtering-Correlation-Id: 38329cfd-491a-4be7-9f66-08dee75c8ad1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|23010399003|82310400026|36860700016|376014|1800799024|3023799007|6133799003|10067099003|4143699003|56012099006|13003099007|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: 
+	KL6X6mWRUif2YuulSFy+uUL9wPRR1L3VYMieefWdXG/16HDJ0C2O2VmTalJHoOSkCTgomxzW3RV/fZJm55iAhFya/zKyLK8y7anS+xB56COZTbmtTJF9oSkBdNSY7rNN+wMGQ5L20OzlqjSLmeCO1iIFv1JcfM1yOEGA5SehtIPKIJxFL03SSis6B+Fkl0wHqGJ+II5KwsSeO1iVTY4U9sfIJRTPJgmIVQeugnlH6y+F5GxxyZUGGS7uUIQBc9t1WVrXkkvylAzT9t7nMnEL17+Sj9u7PDZ5kvuqrBypaVo9umq6IbWdLG2mtwrikbnI54fGeZbx64on2wMS4PCw2BTU6nM0jEtR91d5McBph3N0FgC2BIwandVlOmwi3v150GFdvskLU3IzdpffOUW5h07R24f8kSrgsmIdFJILWGJz8/SXnoxysUTBr7NHoFesARw2Dorw0vr70+313y80x8LafTdr8cDf6aMNlyIYTBH4TIrssvPt84WfAUmrNAe8je3jjtCvvBPLKHA645ekJRYDjpDyfcoXLBDaieZAgzNwOKBp3g2ceaMOcZPfnr1iNG6pCEc5unUaSjq3jJwWRVGbTiOBdslGX2AOTPKkF7t5vKNYPbEkfH8OeG3HsHqeRy7+NMdE9J23bNpu4ZMs1A==
+X-Forefront-Antispam-Report: 
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(23010399003)(82310400026)(36860700016)(376014)(1800799024)(3023799007)(6133799003)(10067099003)(4143699003)(56012099006)(13003099007)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	M5liyMCjpbJUZvxtC1dj9mWZceOf9YM/z/nzgv8P9UcLlhGCs2zWvI7qZFoqefmTg7QznNLPtmSD5OsyFIpptBtpLc3qaF3GA7+T6XGqH2tcrbOumewhGs7GpXk0KiE7BkuCueGXmst6qDa+gffQCiJjgzhaNu6ToT3cHSqMzV5GC7D30f0kp28u2VVZknpGnCoNhgStzaOpVK+uscao3zXnYQhl2NARKpCdqMjXcuyal/TBY/ob/ANFgrG0jG/MmiCSHnXOptP8yQvbxfQ88/NmVEEuNu9cFGK/wUNOdRpeTquX7Hf4KlNPesxsj9iwhIrInj2zakr0u939cwNPhPu/fap/x+HXNQ312n4VpwOhmTyg8ko4MU6/sFdH7rPpm6FB5ZfDZ0G62M9c0jDVi/EYIqbIcVezH7RzBIPcDlbLud+iGERLTQtmKdDZ+nPM
+X-Exchange-RoutingPolicyChecked: 
+	sTUhq5Qcwq0KPbNKotOF2BiEyUbpW2Zm5KJix2NiwHKgbjGYGf6VPohy0fwcR+mX76i+Vwd4gzBTTctTWTRJ2S6IN6Nl3EUEqWrAsA1QEmmkrKh/D2XcwSCazECGQOqHTM5ujyg308cNGv2ePR/LAHKV1+Nj3qdo3DY9vdTcgPUrBgbVqVCpIrXniiWMLgb1PgPOYeJpSENigKDXISTXcxdIZjAL/7hZFsvHzdVyBoqbHSYIw2PsnxaRiZThyLWf11atWC/CeucuevGsDAzlHEPXKr45F0QijRXMnQjsgK51QmLZTd7LC0ezKKaJzxYvJ30Bpg3zOqDG5PSVuGk0Nw==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2026 19:16:18.4776
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 38329cfd-491a-4be7-9f66-08dee75c8ad1
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	SA2PEPF00001507.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA4PR10MB8754
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDIwMiBTYWx0ZWRfX6QyXifh1znfr
+ p3wbHBW/rAf+RYeu2allbr/SDN2CpQfveAFk9nsODWOGYBFG/5z9/mbUJoc/3y3QKX+Va0ngxSE
+ LTBosK9mTCJzVR1VckqMPgpiy/EUpk4=
+X-Proofpoint-ORIG-GUID: 2uuXBoYNpLxjQ3ZiTYW8RUFSmzlUSI6d
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDIwMiBTYWx0ZWRfX80BJ9qWRRP6r
+ S6ZK8CP6uGavvyRbMhmxaEieOeY+MExs4wU8QVQQ9m/9IUprchuZuFBj6P2F1gTGKYNpL5MFIl/
+ fzf24hHVLWSAdweacFVqp20bQD2cfQvG/hytuao/R8qcF6vmqMxurD4MI9kBjZlxX2nQqn8WSxo
+ lFCT46mV8nLiK7tpN3xJhmvowb/4KQnT6xJmdFaFZKhad9KH5k3p1BVKfk77Hhr+ndZJrDrG4nu
+ TL2XPssSWtLgcZNAbW5xefne67xLl1KiAeQ5NB8NK2nEeN88mCyZ5gbineiGsH449lNU6lNJa6j
+ idlyy5DoOewQ6lWwifzQKUSObLlE5mY0d7TL0AiGlDC3nvLE7Xqf2tvRIg/iUAavqz3pWiOqZqs
+ RbE7x0BBK0LNjpe4HXvQ70EcaDlLtzszI+MRJYmsvvp1WNF59dhLOhVnWcgtDfdK6DXNPbYb939
+ 4dnwvlkrPzqrFUtjsXQ==
+X-Proofpoint-GUID: 2uuXBoYNpLxjQ3ZiTYW8RUFSmzlUSI6d
+X-Authority-Analysis: v=2.4 cv=MbFcfZ/f c=1 sm=1 tr=0 ts=6a5fc58d cx=c_pps
+ a=V+mzYH1ZSfwt9Wwm8MCB5w==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
+ a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=jwouBfj2j3NM8CExmVVE:22 a=sozttTNsAAAA:8 a=JIVOxcAaAAAA:8 a=NEAV23lmAAAA:8
+ a=kP6i_H-9AAAA:8 a=lRBHAqtIAAAA:8 a=2vtMdsJAAAAA:8 a=iGHA9ds3AAAA:8
+ a=7lj8yT_hraqH8QJqgKUA:9 a=qcg49hLlgF0N60+LroqrWnV/Vu4=:19 a=QEXdDO2ut3YA:10
+ a=J5pkMzmISTnxyTq7C2yO:22 a=MdDwjtskJbVj7SMrG5yS:22 a=nM-MV4yxpKKO9kiQg6Ot:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-21_03,2026-07-21_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 adultscore=0 phishscore=0 bulkscore=0 impostorscore=0
+ lowpriorityscore=0 priorityscore=1501 malwarescore=0 spamscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607210202
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 21 Jul 2026 18:59:20 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20180
-
-Heh, have almost the same changes testing here, but my build hasn't finished 
-yet.
-
-Also, there are couple of manual changes and removal of very old recipes with 
-obviously incorrect licenses - the series I just submitted earlier...
+ <meta-ti@lists.yoctoproject.org>; Tue, 21 Jul 2026 19:16:41 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20181
 
 
-On Tue, Jul 21, 2026 at 01:53:43PM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
-> Converts all LICENSE strings to SPDX licenses expressions
+
+On 7/21/2026 1:59 PM, Denys Dmytriyenko wrote:
+> Heh, have almost the same changes testing here, but my build hasn't finished
+> yet.
 > 
-> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-> ---
->  meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb  | 2 +-
->  meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb         | 2 +-
->  meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb      | 2 +-
->  .../recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb      | 2 +-
->  .../powervr-drivers/ti-img-rogue-driver_25.3.6908880.bb         | 2 +-
->  .../powervr-drivers/ti-img-rogue-driver_26.1.6967606.bb         | 2 +-
->  .../recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb   | 2 +-
->  meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb                    | 2 +-
->  meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb                  | 2 +-
->  meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb  | 2 +-
->  meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc             | 2 +-
->  meta-ti-bsp/recipes-bsp/ti-pka-fw/ti-pka-fw_git.bb              | 2 +-
->  meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb      | 2 +-
->  .../recipes-bsp/ti-rtos-fw/ti-rtos-messageq-test-fw_git.bb      | 2 +-
->  meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb               | 2 +-
->  meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb            | 2 +-
->  meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb  | 2 +-
->  .../powervr-umlibs/ti-img-rogue-umlibs_25.3.6908880.bb          | 2 +-
->  .../powervr-umlibs/ti-img-rogue-umlibs_26.1.6967606.bb          | 2 +-
->  .../powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb                | 2 +-
->  meta-ti-bsp/recipes-ti/ti-librpmsg-dma/ti-librpmsg-dma_1.0.bb   | 2 +-
->  meta-ti-extras/recipes-bsp/bt-fw/bt-fw_git.bb                   | 2 +-
->  meta-ti-extras/recipes-bsp/cc33xx-fw/cc33xx-fw_git.bb           | 2 +-
->  meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb             | 2 +-
->  meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb                  | 2 +-
->  meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb    | 2 +-
->  .../recipes-ti/beagleboard/beaglebone-getting-started.bb        | 2 +-
->  .../recipes-ti/devtools/gcc-arm-baremetal_7-2018-q2-update.bb   | 2 +-
->  meta-ti-extras/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb        | 2 +-
->  meta-ti-extras/recipes-ti/devtools/ti-cgt-pru_2.3.3.bb          | 2 +-
->  meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc                | 2 +-
->  meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb         | 2 +-
->  meta-ti-extras/recipes-ti/devtools/ti-cgt6x_8.3.2.bb            | 2 +-
->  meta-ti-extras/recipes-ti/devtools/ti-cgt7x_1.2.0.bb            | 2 +-
->  meta-ti-extras/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb    | 2 +-
->  meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc            | 2 +-
->  meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc                    | 2 +-
->  .../{Stream_Benchmark_License => Stream-Benchmark-License}      | 0
->  meta-ti-test/recipes-benchmark/stream/stream_5.10.bb            | 2 +-
->  meta-ti-test/recipes-connectivity/openntpd/openntpd_6.8p1.bb    | 2 +-
->  meta-ti-test/recipes-devtools/ltp-ddt/ltp_20260130.inc          | 2 +-
->  meta-ti-test/recipes-devtools/omapconf/omapconf_git.bb          | 2 +-
->  .../recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb         | 2 +-
->  meta-ti-test/recipes-support/xdp-tools/xdp-tools-ti_1.6.1.bb    | 2 +-
->  44 files changed, 43 insertions(+), 43 deletions(-)
->  rename meta-ti-test/licenses/{Stream_Benchmark_License => Stream-Benchmark-License} (100%)
+> Also, there are couple of manual changes and removal of very old recipes with
+> obviously incorrect licenses - the series I just submitted earlier...
+
+Yeah.  I'll do the needed merging when the time comes.
+
+
 > 
-> diff --git a/meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb b/meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
-> index b25e04d2..023eb914 100644
-> --- a/meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
-> +++ b/meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
-> @@ -2,7 +2,7 @@ SUMMARY = "Cadence MHDP DP bridge firmware"
->  
->  require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
->  
-> -LICENSE = "BSD-3-Clause | Apache-2.0"
-> +LICENSE = "Apache-2.0 OR BSD-3-Clause"
->  LIC_FILES_CHKSUM = "file://LICENSES/LICENCE.cadence;md5=009f46816f6956cfb75ede13d3e1cee0"
->  
->  PV = "${CADENCE_MHDP_FW_VERSION}"
-> diff --git a/meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-> index db080c62..ce0ab176 100644
-> --- a/meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-> +++ b/meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "Cortex-M3 binary blob for suspend-resume"
->  
-> -LICENSE = "TI-TSPA"
-> +LICENSE = "LicenseRef-TI-TSPA"
->  LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
->  
->  PV = "1.9.2"
-> diff --git a/meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb b/meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
-> index 4e379c5d..272b850b 100755
-> --- a/meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
-> +++ b/meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "R5 PSDK CPSW9G Ethernet Switch Firmware"
->  
-> -LICENSE = "TI-TFL"
-> +LICENSE = "LicenseRef-TI-TFL"
->  LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=04ad0a015d4bb63c2b9e7b112debf3db"
->  
->  PV = "6.2+git"
-> diff --git a/meta-ti-bsp/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/meta-ti-bsp/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-> index 336f4ce4..ab0df0a5 100644
-> --- a/meta-ti-bsp/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-> +++ b/meta-ti-bsp/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "Kernel drivers for the Vivante GC320 chipset found in TI SoCs"
->  HOMEPAGE = "https://git.ti.com/graphics/ti-gc320-driver"
-> -LICENSE = "MIT | GPL-2.0-only"
-> +LICENSE = "GPL-2.0-only OR MIT"
->  LIC_FILES_CHKSUM = "file://../LICENSE;md5=78d9818a51b9a8e9bb89dea418bac297"
->  
->  inherit module features_check
-> diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.3.6908880.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.3.6908880.bb
-> index 190417ca..a095fcf9 100644
-> --- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.3.6908880.bb
-> +++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.3.6908880.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY =  "Kernel drivers for the PowerVR Rogue GPU found in the TI SoCs"
->  HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-driver"
-> -LICENSE = "MIT | GPL-2.0-only"
-> +LICENSE = "GPL-2.0-only OR MIT"
->  LIC_FILES_CHKSUM = "file://README;beginline=14;endline=19;md5=0403c7dea01a2b8232261e805325fac2"
->  
->  inherit module
-> diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_26.1.6967606.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_26.1.6967606.bb
-> index 876c3e50..3731cec6 100644
-> --- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_26.1.6967606.bb
-> +++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_26.1.6967606.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY =  "Kernel drivers for the PowerVR Rogue GPU found in the TI SoCs"
->  HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-driver"
-> -LICENSE = "MIT | GPL-2.0-only"
-> +LICENSE = "GPL-2.0-only OR MIT"
->  LIC_FILES_CHKSUM = "file://README;beginline=14;endline=19;md5=0403c7dea01a2b8232261e805325fac2"
->  
->  inherit module
-> diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> index 343f09de..e858d608 100644
-> --- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> +++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY =  "Kernel drivers for the PowerVR SGX chipset found in the TI SoCs"
->  HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-linux"
-> -LICENSE = "MIT | GPL-2.0-only"
-> +LICENSE = "GPL-2.0-only OR MIT"
->  LIC_FILES_CHKSUM = "file://GPL-COPYING;md5=60422928ba677faaa13d6ab5f5baaa1e"
->  
->  inherit module
-> diff --git a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
-> index 2d9ad499..92671833 100644
-> --- a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
-> +++ b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "TI DM prebuilt binary firmware images"
->  
-> -LICENSE = "TI-TFL"
-> +LICENSE = "LicenseRef-TI-TFL"
->  LIC_FILES_CHKSUM = "file://${THISDIR}/../../licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
->  
->  COMPATIBLE_MACHINE = "k3"
-> diff --git a/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb b/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
-> index 04e43609..a985188c 100644
-> --- a/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
-> +++ b/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "TI Ethernet prebuilt binary firmware images"
->  
-> -LICENSE = "TI-TFL"
-> +LICENSE = "LicenseRef-TI-TFL"
->  LIC_FILES_CHKSUM = "file://${THISDIR}/../../licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
->  
->  COMPATIBLE_MACHINE = "j721e|j7200|j784s4"
-> diff --git a/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb b/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
-> index 74729c16..ebd3d868 100644
-> --- a/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
-> +++ b/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
-> @@ -1,5 +1,5 @@
->  SUMMARY = "Video Decoding Firmware"
-> -LICENSE = "TI-IMG"
-> +LICENSE = "LicenseRef-TI-IMG"
->  LIC_FILES_CHKSUM = "file://LICENSE.ti-img;md5=84ca7278930db001870686ad997d6bb1"
->  
->  require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> index 982a3512..cfb8ac0d 100644
-> --- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> +++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
-> @@ -1,6 +1,6 @@
->  SUMMARY = "Common include for TI Linux firmware"
->  
-> -LICENSE = "TI-TFL"
-> +LICENSE = "LicenseRef-TI-TFL"
->  LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
->  
->  PV = "2022.01"
-> diff --git a/meta-ti-bsp/recipes-bsp/ti-pka-fw/ti-pka-fw_git.bb b/meta-ti-bsp/recipes-bsp/ti-pka-fw/ti-pka-fw_git.bb
-> index c3d2bce4..5b022edd 100644
-> --- a/meta-ti-bsp/recipes-bsp/ti-pka-fw/ti-pka-fw_git.bb
-> +++ b/meta-ti-bsp/recipes-bsp/ti-pka-fw/ti-pka-fw_git.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "PKA prebuilt binary firmware image"
->  
-> -LICENSE = "TI-TFL & INSIDE-Secure"
-> +LICENSE = "LicenseRef-INSIDE-Secure AND LicenseRef-TI-TFL"
->  LIC_FILES_CHKSUM = "file://LICENCE.pka_fw;md5=dc20391b287874f0dce069cf87917206"
->  
->  COMPATIBLE_MACHINE = "k3"
-> diff --git a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
-> index 20c6b531..d5353e82 100644
-> --- a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
-> +++ b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "TI Echo Test prebuilt binary firmware images"
->  
-> -LICENSE = "TI-TFL"
-> +LICENSE = "LicenseRef-TI-TFL"
->  LIC_FILES_CHKSUM = "file://${THISDIR}/../../licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
->  
->  COMPATIBLE_MACHINE = "k3"
-> diff --git a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-messageq-test-fw_git.bb b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-messageq-test-fw_git.bb
-> index 980fe5cc..26a2f665 100644
-> --- a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-messageq-test-fw_git.bb
-> +++ b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-messageq-test-fw_git.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "TI MessageQ prebuilt binary firmware images"
->  
-> -LICENSE = "TI-TFL"
-> +LICENSE = "LicenseRef-TI-TFL"
->  LIC_FILES_CHKSUM = "file://${THISDIR}/../../licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
->  
->  COMPATIBLE_MACHINE = "am57xx"
-> diff --git a/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb b/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb
-> index 1b1cff6b..b088f589 100644
-> --- a/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb
-> +++ b/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb
-> @@ -1,5 +1,5 @@
->  SUMMARY = "Radio Application Firmware"
-> -LICENSE = "TI-TSPA"
-> +LICENSE = "LicenseRef-TI-TSPA"
->  LIC_FILES_CHKSUM = "file://${S}/J6_VIS_DEMO_LINUX_BINARY_01.50.07.15-Manifest.html;md5=a59aa54b9470f555cf086b91dca0afa3"
->  
->  COMPATIBLE_MACHINE = "am57xx"
-> diff --git a/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb b/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
-> index 4c2ea375..6958c603 100644
-> --- a/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
-> +++ b/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "VPDMA firmware for Video Input Port and Video Processing Engine"
->  
-> -LICENSE = "TI-TSPA"
-> +LICENSE = "LicenseRef-TI-TSPA"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=fd463c9500441ed91d07a0331baa635c"
->  
->  COMPATIBLE_MACHINE = "am57xx"
-> diff --git a/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-> index 86aa71b8..563f72eb 100644
-> --- a/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-> +++ b/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "Userspace libraries for GC320 chipset on TI SoCs"
->  HOMEPAGE = "https://git.ti.com/graphics/ti-gc320-libs"
-> -LICENSE = "TI-TSPA"
-> +LICENSE = "LicenseRef-TI-TSPA"
->  LIC_FILES_CHKSUM = "file://Manifest.html;md5=a9121e8936ace09820d23f7626daaca5"
->  
->  inherit features_check
-> diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_25.3.6908880.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_25.3.6908880.bb
-> index fad29691..f5f01633 100644
-> --- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_25.3.6908880.bb
-> +++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_25.3.6908880.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "Userspace libraries for PowerVR Rogue GPU on TI SoCs"
->  HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-umlibs"
-> -LICENSE = "TI-TFL"
-> +LICENSE = "LicenseRef-TI-TFL"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=7232b98c1c58f99e3baa03de5207e76f"
->  
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_26.1.6967606.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_26.1.6967606.bb
-> index 29c5154f..a3c3c08a 100644
-> --- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_26.1.6967606.bb
-> +++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_26.1.6967606.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "Userspace libraries for PowerVR Rogue GPU on TI SoCs"
->  HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-umlibs"
-> -LICENSE = "TI-TFL"
-> +LICENSE = "LicenseRef-TI-TFL"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=7232b98c1c58f99e3baa03de5207e76f"
->  
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb
-> index c4cc5f10..44c2a2c5 100644
-> --- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb
-> +++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "Userspace libraries for PowerVR SGX chipset on TI SoCs"
->  HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
-> -LICENSE = "TI-TSPA"
-> +LICENSE = "LicenseRef-TI-TSPA"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=7232b98c1c58f99e3baa03de5207e76f"
->  
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> diff --git a/meta-ti-bsp/recipes-ti/ti-librpmsg-dma/ti-librpmsg-dma_1.0.bb b/meta-ti-bsp/recipes-ti/ti-librpmsg-dma/ti-librpmsg-dma_1.0.bb
-> index 13599d99..70733c96 100644
-> --- a/meta-ti-bsp/recipes-ti/ti-librpmsg-dma/ti-librpmsg-dma_1.0.bb
-> +++ b/meta-ti-bsp/recipes-ti/ti-librpmsg-dma/ti-librpmsg-dma_1.0.bb
-> @@ -1,5 +1,5 @@
->  SUMMARY = "RPMsg DMA shared library"
-> -LICENSE = "TI-TFL"
-> +LICENSE = "LicenseRef-TI-TFL"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=91dc4ee6d125d0aaba4e5bd2fcc50ed3"
->  
->  SRC_URI = "git://github.com/TexasInstruments/rpmsg-dma.git;protocol=https;branch=main"
-> diff --git a/meta-ti-extras/recipes-bsp/bt-fw/bt-fw_git.bb b/meta-ti-extras/recipes-bsp/bt-fw/bt-fw_git.bb
-> index 0d856362..ba767916 100644
-> --- a/meta-ti-extras/recipes-bsp/bt-fw/bt-fw_git.bb
-> +++ b/meta-ti-extras/recipes-bsp/bt-fw/bt-fw_git.bb
-> @@ -1,5 +1,5 @@
->  SUMMARY = "Firmware files for Bluetooth"
-> -LICENSE = "TI-TSPA"
-> +LICENSE = "LicenseRef-TI-TSPA"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=f39eac9f4573be5b012e8313831e72a9"
->  
->  PV = "8.7.1+git"
-> diff --git a/meta-ti-extras/recipes-bsp/cc33xx-fw/cc33xx-fw_git.bb b/meta-ti-extras/recipes-bsp/cc33xx-fw/cc33xx-fw_git.bb
-> index a4dfc4da..915ee64b 100644
-> --- a/meta-ti-extras/recipes-bsp/cc33xx-fw/cc33xx-fw_git.bb
-> +++ b/meta-ti-extras/recipes-bsp/cc33xx-fw/cc33xx-fw_git.bb
-> @@ -1,5 +1,5 @@
->  SUMMARY = "Firmware files for use with TI cc33xx"
-> -LICENSE = "TI-TSPA"
-> +LICENSE = "LicenseRef-TI-TSPA"
->  LIC_FILES_CHKSUM = "file://LICENCE;md5=df68504cbd0a4da1643ebcfd5783dbc9"
->  
->  SRCREV = "0b4f850d6c0fd8e0fe0ae1d3e80ac6733aced29b"
-> diff --git a/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-> index fbc6d956..cc27df41 100644
-> --- a/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-> +++ b/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "Firmware for IPU to support Accelerated MM decode and encode"
->  
-> -LICENSE = "TI-TSPA"
-> +LICENSE = "LicenseRef-TI-TSPA"
->  LIC_FILES_CHKSUM = "file://LICENCE.ti-tspa;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
->  
->  COMPATIBLE_MACHINE = "am57xx"
-> diff --git a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb b/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
-> index b7066583..30ff2bcc 100644
-> --- a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
-> +++ b/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "Programmable Real-time Unit Software Package"
->  HOMEPAGE = "http://processors.wiki.ti.com/index.php/PRU-ICSS"
-> -LICENSE = "BSD-3-Clause & PD"
-> +LICENSE = "BSD-3-Clause AND LicenseRef-PD"
->  
->  LIC_FILES_CHKSUM = "file://PRU-Package-v6.1-Manifest.html;md5=1e37797ebe9254922f4278bb6047211c"
->  
-> diff --git a/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb b/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb
-> index 3e61db88..b49ed736 100644
-> --- a/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb
-> +++ b/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb
-> @@ -1,5 +1,5 @@
->  SUMMARY = "Firmware files for use with TI wl18xx"
-> -LICENSE = "TI-TSPA"
-> +LICENSE = "LicenseRef-TI-TSPA"
->  LIC_FILES_CHKSUM = "file://LICENCE;md5=4977a0fe767ee17765ae63c435a32a9e"
->  
->  SRC_URI = "git://git.ti.com/git/wilink8-wlan/wl18xx_fw.git;protocol=https;branch=${BRANCH}"
-> diff --git a/meta-ti-extras/recipes-ti/beagleboard/beaglebone-getting-started.bb b/meta-ti-extras/recipes-ti/beagleboard/beaglebone-getting-started.bb
-> index 8ad75f26..41eea044 100644
-> --- a/meta-ti-extras/recipes-ti/beagleboard/beaglebone-getting-started.bb
-> +++ b/meta-ti-extras/recipes-ti/beagleboard/beaglebone-getting-started.bb
-> @@ -4,7 +4,7 @@ PR = "r22"
->  
->  inherit allarch
->  
-> -LICENSE = "CC-BY-SA-3.0 & GPL-3.0-or-later & MIT & PD"
-> +LICENSE = "CC-BY-SA-3.0 AND GPL-3.0-or-later AND MIT AND LicenseRef-PD"
->  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f6f02761e31334c48f7021fb94c89aaa"
->  
->  SRCREV = "05bedba192646152b7bc80b0accaea75aef864e5"
-> diff --git a/meta-ti-extras/recipes-ti/devtools/gcc-arm-baremetal_7-2018-q2-update.bb b/meta-ti-extras/recipes-ti/devtools/gcc-arm-baremetal_7-2018-q2-update.bb
-> index df34a39e..2e9c0938 100644
-> --- a/meta-ti-extras/recipes-ti/devtools/gcc-arm-baremetal_7-2018-q2-update.bb
-> +++ b/meta-ti-extras/recipes-ti/devtools/gcc-arm-baremetal_7-2018-q2-update.bb
-> @@ -1,5 +1,5 @@
->  SUMMARY = "Baremetal GCC for ARM"
-> -LICENSE = "GPL-3.0-with-GCC-exception & GPL-3.0-only"
-> +LICENSE = "GPL-3.0-only AND GPL-3.0-with-GCC-exception"
->  
->  LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=f77466c63f5787f4bd669c402aabe061"
->  
-> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb b/meta-ti-extras/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
-> index 031d889f..07d7b6dc 100644
-> --- a/meta-ti-extras/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
-> +++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "TI ARM Code Generation Tools"
->  HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
-> -LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD & BSD-4-Clause"
-> +LICENSE = "AFL-3.0 AND BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND BSL-1.0 AND MIT AND LicenseRef-PD AND LicenseRef-Patrick-Powell AND LicenseRef-TI-TSPA AND LicenseRef-Thai-Open-Source-Software-Center"
->  
->  LIC_FILES_CHKSUM = "file://ti-cgt-arm_${PV}.LTS/README.txt;md5=79631eb21b2e5b7190cd3ff1dfd41108"
->  
-> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt-pru_2.3.3.bb b/meta-ti-extras/recipes-ti/devtools/ti-cgt-pru_2.3.3.bb
-> index 7ef20b7a..b83064c6 100644
-> --- a/meta-ti-extras/recipes-ti/devtools/ti-cgt-pru_2.3.3.bb
-> +++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt-pru_2.3.3.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "TI PRU Code Generation Tools"
->  HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
-> -LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
-> +LICENSE = "AFL-3.0 AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND MIT AND LicenseRef-Hewlett-Packard AND LicenseRef-PD AND LicenseRef-TI-TSPA AND LicenseRef-Thai-Open-Source-Software-Center"
->  
->  LIC_FILES_CHKSUM = "file://${UNPACKDIR}/ti-cgt-pru_${PV}/PRU_Code_Generation_Tools_2.3.x_manifest.html;md5=e22f9d8240f7cca0c0aa5242d9ffa5bc"
->  LIC_FILES_CHKSUM:class-target = "file://usr/share/doc/ti/cgt-pru/PRU_Code_Generation_Tools_2.3.x_manifest.html;md5=e22f9d8240f7cca0c0aa5242d9ffa5bc"
-> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc b/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
-> index f32bc0d3..cba6d14a 100644
-> --- a/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
-> +++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
-> @@ -1,7 +1,7 @@
->  SUMMARY = "TI ARM Code Generation Tools"
->  HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/CodeGenerationTools.htm"
->  SECTION = "devel"
-> -LICENSE = "TI"
-> +LICENSE = "LicenseRef-TI-TSPA"
->  
->  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=62f46f1125a152a2e213b414db7ac600"
->  
-> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb b/meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb
-> index adf21563..16f5a36d 100644
-> --- a/meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb
-> +++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb
-> @@ -7,7 +7,7 @@ compiler, linker, assembler, etc. This also includes C runtime \
->  libraries and standard header files needed to produce a working DSP application."
->  
->  HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
-> -LICENSE = "TI-TSPA"
-> +LICENSE = "LicenseRef-TI-TSPA"
->  
->  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
->  
-> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt6x_8.3.2.bb b/meta-ti-extras/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
-> index 25e0f596..24157360 100644
-> --- a/meta-ti-extras/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
-> +++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "TI DSP Code Generation Tools"
->  HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
-> -LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD"
-> +LICENSE = "AFL-3.0 AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND MIT AND LicenseRef-PD AND LicenseRef-Patrick-Powell AND LicenseRef-TI-TSPA AND LicenseRef-Thai-Open-Source-Software-Center"
->  
->  LIC_FILES_CHKSUM = "file://ti-cgt-c6000_${PV}/C6000CodeGenerationTools_8.3.x_manifest.html;md5=d06c6f9acebf78df4108a8535396e9f1"
->  LIC_FILES_CHKSUM:class-target = "file://usr/share/doc/ti/cgt-c6x/C6000CodeGenerationTools_8.3.x_manifest.html;md5=d06c6f9acebf78df4108a8535396e9f1"
-> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt7x_1.2.0.bb b/meta-ti-extras/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
-> index 04b16032..30116b02 100644
-> --- a/meta-ti-extras/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
-> +++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
-> @@ -6,7 +6,7 @@ applications for the C7000 DSP family. This includes tools such as: \
->  compiler, linker, assembler, etc. This also includes C runtime \
->  libraries and standard header files needed to produce a working DSP application."
->  HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
-> -LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD"
-> +LICENSE = "AFL-3.0 AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND MIT AND LicenseRef-PD AND LicenseRef-Patrick-Powell AND LicenseRef-TI-TSPA AND LicenseRef-Thai-Open-Source-Software-Center"
->  
->  LIC_FILES_CHKSUM = "file://ti-cgt-c7000_${PV}.STS/C7000_Code_Generation_Tools_1.x_manifest.html;md5=f1156d241d104c281bc64a6ec8eadc64"
->  
-> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb b/meta-ti-extras/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb
-> index 969518e2..7d297d65 100644
-> --- a/meta-ti-extras/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb
-> +++ b/meta-ti-extras/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb
-> @@ -2,7 +2,7 @@ SUMMARY = "TI XDCtools (RTSC - Real Time Software Components"
->  DESCRIPTION = "TI XDCtools (RTSC - Real Time Software Components - http://rtsc.eclipse.org)"
->  HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc"
->  SECTION = "devel"
-> -LICENSE = "BSD-3-Clause & GPL-2.0-only"
-> +LICENSE = "BSD-3-Clause AND GPL-2.0-only"
->  
->  require recipes-ti/includes/ti-paths.inc
->  require recipes-ti/includes/ti-staging.inc
-> diff --git a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-> index bad264d8..23a10e35 100644
-> --- a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-> +++ b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
-> @@ -5,7 +5,7 @@ platform in a way that none of these domains, called 'cells' here, can interfere
->  HOMEPAGE = "https://github.com/siemens/jailhouse"
->  SECTION = "jailhouse"
->  
-> -LICENSE = "GPL-2.0-only & BSD-2-Clause"
-> +LICENSE = "BSD-2-Clause AND GPL-2.0-only"
->  
->  LIC_FILES_CHKSUM = " \
->      file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
-> diff --git a/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc b/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc
-> index c7c14f91..aa0ad8bb 100644
-> --- a/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc
-> +++ b/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc
-> @@ -1,7 +1,7 @@
->  SUMMARY = "TI Vision Library (VLIB) for C66x"
->  HOMEPAGE = "http://software-dl.ti.com/libs/vlib/latest/index_FDS.html"
->  SECTION = "devel"
-> -LICENSE = "TI-TSPA & BSD-3-Clause"
-> +LICENSE = "BSD-3-Clause AND LicenseRef-TI-TSPA"
->  
->  require ../includes/ti-paths.inc
->  require ../includes/ti-staging.inc
-> diff --git a/meta-ti-test/licenses/Stream_Benchmark_License b/meta-ti-test/licenses/Stream-Benchmark-License
-> similarity index 100%
-> rename from meta-ti-test/licenses/Stream_Benchmark_License
-> rename to meta-ti-test/licenses/Stream-Benchmark-License
-> diff --git a/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb b/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
-> index 484be34d..3084c040 100644
-> --- a/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
-> +++ b/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "Stream Benchmark"
->  HOMEPAGE = "http://www.cs.virginia.edu/stream/"
-> -LICENSE = "Stream_Benchmark_License"
-> +LICENSE = "LicenseRef-Stream-Benchmark-License"
->  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=bca8cbe07976fe64c8946378d08314b0"
->  SECTION = "system"
->  
-> diff --git a/meta-ti-test/recipes-connectivity/openntpd/openntpd_6.8p1.bb b/meta-ti-test/recipes-connectivity/openntpd/openntpd_6.8p1.bb
-> index 6a3c64d1..ec604a94 100644
-> --- a/meta-ti-test/recipes-connectivity/openntpd/openntpd_6.8p1.bb
-> +++ b/meta-ti-test/recipes-connectivity/openntpd/openntpd_6.8p1.bb
-> @@ -2,7 +2,7 @@ SUMMARY = "OpenNTPD is an implementation of the Network Time Protocol."
->  DESCRIPTION = "OpenNTPD is a FREE, easy to use implementation of the Network Time Protocol."
->  HOMEPAGE = "http://www.openntpd.org/"
->  SECTION = "console/network"
-> -LICENSE = "BSD-3-Clause & ISC"
-> +LICENSE = "BSD-3-Clause AND ISC"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=fe922aad2b6ad1c359cf2adfdaaab1b6"
->  
->  PR = "r0"
-> diff --git a/meta-ti-test/recipes-devtools/ltp-ddt/ltp_20260130.inc b/meta-ti-test/recipes-devtools/ltp-ddt/ltp_20260130.inc
-> index 4183b5d4..5d71837c 100644
-> --- a/meta-ti-test/recipes-devtools/ltp-ddt/ltp_20260130.inc
-> +++ b/meta-ti-test/recipes-devtools/ltp-ddt/ltp_20260130.inc
-> @@ -2,7 +2,7 @@ SUMMARY = "Linux Test Project"
->  DESCRIPTION = "The Linux Test Project is a joint project with SGI, IBM, OSDL, and Bull with a goal to deliver test suites to the open source community that validate the reliability, robustness, and stability of Linux. The Linux Test Project is a collection of tools for testing the Linux kernel and related features."
->  HOMEPAGE = "https://linux-test-project.github.io/"
->  SECTION = "console/utils"
-> -LICENSE = "GPL-2.0-only & GPL-2.0-or-later & LGPL-2.0-or-later & LGPL-2.1-or-later & BSD-2-Clause"
-> +LICENSE = "BSD-2-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.0-or-later AND LGPL-2.1-or-later"
->  LIC_FILES_CHKSUM = "\
->      file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
->      file://testcases/open_posix_testsuite/COPYING;md5=48b1c5ec633e3e30ec2cf884ae699947 \
-> diff --git a/meta-ti-test/recipes-devtools/omapconf/omapconf_git.bb b/meta-ti-test/recipes-devtools/omapconf/omapconf_git.bb
-> index 84226dd8..5ea2ac77 100644
-> --- a/meta-ti-test/recipes-devtools/omapconf/omapconf_git.bb
-> +++ b/meta-ti-test/recipes-devtools/omapconf/omapconf_git.bb
-> @@ -1,7 +1,7 @@
->  SUMMARY = "Diagnostic tool for TI OMAP processors"
->  HOMEPAGE = "https://github.com/omapconf/omapconf"
->  
-> -LICENSE = "GPL-2.0-only | BSD-3-Clause"
-> +LICENSE = "BSD-3-Clause OR GPL-2.0-only"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=205c83c4e2242a765acb923fc766e914"
->  
->  PV = "1.75+git"
-> diff --git a/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb b/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb
-> index cc566b37..54b454f3 100644
-> --- a/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb
-> +++ b/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "Build hwspinlock test as an external Linux kernel module"
->  DESCRIPTION = "${SUMMARY}"
-> -LICENSE = "GPL-2.0-only | BSD-3-Clause"
-> +LICENSE = "BSD-3-Clause OR GPL-2.0-only"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=bfa02c83df161e37647ee23a2c7eacd4"
->  
->  inherit module
-> diff --git a/meta-ti-test/recipes-support/xdp-tools/xdp-tools-ti_1.6.1.bb b/meta-ti-test/recipes-support/xdp-tools/xdp-tools-ti_1.6.1.bb
-> index e25ae146..a3ffc52f 100644
-> --- a/meta-ti-test/recipes-support/xdp-tools/xdp-tools-ti_1.6.1.bb
-> +++ b/meta-ti-test/recipes-support/xdp-tools/xdp-tools-ti_1.6.1.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "Utilities and example programs for use with XDP"
->  HOMEPAGE = "https://github.com/xdp-project/xdp-tools"
-> -LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later & BSD-2-Clause"
-> +LICENSE = "BSD-2-Clause AND GPL-2.0-or-later AND LGPL-2.1-or-later"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=9ee53f8d06bbdb4c11b1557ecc4f8cd5 \
->                      file://LICENSES/GPL-2.0;md5=994331978b428511800bfbd17eea3001 \
->                      file://LICENSES/LGPL-2.1;md5=b370887980db5dd40659b50909238dbd \
-> -- 
-> 2.43.0
+> On Tue, Jul 21, 2026 at 01:53:43PM -0500, Ryan Eatmon via lists.yoctoproject.org wrote:
+>> Converts all LICENSE strings to SPDX licenses expressions
+>>
+>> Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+>> ---
+>>   meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb  | 2 +-
+>>   meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb         | 2 +-
+>>   meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb      | 2 +-
+>>   .../recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb      | 2 +-
+>>   .../powervr-drivers/ti-img-rogue-driver_25.3.6908880.bb         | 2 +-
+>>   .../powervr-drivers/ti-img-rogue-driver_26.1.6967606.bb         | 2 +-
+>>   .../recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb   | 2 +-
+>>   meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb                    | 2 +-
+>>   meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb                  | 2 +-
+>>   meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb  | 2 +-
+>>   meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc             | 2 +-
+>>   meta-ti-bsp/recipes-bsp/ti-pka-fw/ti-pka-fw_git.bb              | 2 +-
+>>   meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb      | 2 +-
+>>   .../recipes-bsp/ti-rtos-fw/ti-rtos-messageq-test-fw_git.bb      | 2 +-
+>>   meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb               | 2 +-
+>>   meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb            | 2 +-
+>>   meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb  | 2 +-
+>>   .../powervr-umlibs/ti-img-rogue-umlibs_25.3.6908880.bb          | 2 +-
+>>   .../powervr-umlibs/ti-img-rogue-umlibs_26.1.6967606.bb          | 2 +-
+>>   .../powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb                | 2 +-
+>>   meta-ti-bsp/recipes-ti/ti-librpmsg-dma/ti-librpmsg-dma_1.0.bb   | 2 +-
+>>   meta-ti-extras/recipes-bsp/bt-fw/bt-fw_git.bb                   | 2 +-
+>>   meta-ti-extras/recipes-bsp/cc33xx-fw/cc33xx-fw_git.bb           | 2 +-
+>>   meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb             | 2 +-
+>>   meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb                  | 2 +-
+>>   meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb    | 2 +-
+>>   .../recipes-ti/beagleboard/beaglebone-getting-started.bb        | 2 +-
+>>   .../recipes-ti/devtools/gcc-arm-baremetal_7-2018-q2-update.bb   | 2 +-
+>>   meta-ti-extras/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb        | 2 +-
+>>   meta-ti-extras/recipes-ti/devtools/ti-cgt-pru_2.3.3.bb          | 2 +-
+>>   meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc                | 2 +-
+>>   meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb         | 2 +-
+>>   meta-ti-extras/recipes-ti/devtools/ti-cgt6x_8.3.2.bb            | 2 +-
+>>   meta-ti-extras/recipes-ti/devtools/ti-cgt7x_1.2.0.bb            | 2 +-
+>>   meta-ti-extras/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb    | 2 +-
+>>   meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc            | 2 +-
+>>   meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc                    | 2 +-
+>>   .../{Stream_Benchmark_License => Stream-Benchmark-License}      | 0
+>>   meta-ti-test/recipes-benchmark/stream/stream_5.10.bb            | 2 +-
+>>   meta-ti-test/recipes-connectivity/openntpd/openntpd_6.8p1.bb    | 2 +-
+>>   meta-ti-test/recipes-devtools/ltp-ddt/ltp_20260130.inc          | 2 +-
+>>   meta-ti-test/recipes-devtools/omapconf/omapconf_git.bb          | 2 +-
+>>   .../recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb         | 2 +-
+>>   meta-ti-test/recipes-support/xdp-tools/xdp-tools-ti_1.6.1.bb    | 2 +-
+>>   44 files changed, 43 insertions(+), 43 deletions(-)
+>>   rename meta-ti-test/licenses/{Stream_Benchmark_License => Stream-Benchmark-License} (100%)
+>>
+>> diff --git a/meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb b/meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
+>> index b25e04d2..023eb914 100644
+>> --- a/meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/cadence-mhdp-fw/cadence-mhdp-fw_git.bb
+>> @@ -2,7 +2,7 @@ SUMMARY = "Cadence MHDP DP bridge firmware"
+>>   
+>>   require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+>>   
+>> -LICENSE = "BSD-3-Clause | Apache-2.0"
+>> +LICENSE = "Apache-2.0 OR BSD-3-Clause"
+>>   LIC_FILES_CHKSUM = "file://LICENSES/LICENCE.cadence;md5=009f46816f6956cfb75ede13d3e1cee0"
+>>   
+>>   PV = "${CADENCE_MHDP_FW_VERSION}"
+>> diff --git a/meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb b/meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
+>> index db080c62..ce0ab176 100644
+>> --- a/meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/cm3-pm-firmware/amx3-cm3_git.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "Cortex-M3 binary blob for suspend-resume"
+>>   
+>> -LICENSE = "TI-TSPA"
+>> +LICENSE = "LicenseRef-TI-TSPA"
+>>   LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
+>>   
+>>   PV = "1.9.2"
+>> diff --git a/meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb b/meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
+>> index 4e379c5d..272b850b 100755
+>> --- a/meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/cpsw9g-eth-fw/cpsw9g-eth-fw_git.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "R5 PSDK CPSW9G Ethernet Switch Firmware"
+>>   
+>> -LICENSE = "TI-TFL"
+>> +LICENSE = "LicenseRef-TI-TFL"
+>>   LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=04ad0a015d4bb63c2b9e7b112debf3db"
+>>   
+>>   PV = "6.2+git"
+>> diff --git a/meta-ti-bsp/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb b/meta-ti-bsp/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+>> index 336f4ce4..ab0df0a5 100644
+>> --- a/meta-ti-bsp/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/gc320-drivers/ti-gc320-driver_5.0.11.p7.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "Kernel drivers for the Vivante GC320 chipset found in TI SoCs"
+>>   HOMEPAGE = "https://git.ti.com/graphics/ti-gc320-driver"
+>> -LICENSE = "MIT | GPL-2.0-only"
+>> +LICENSE = "GPL-2.0-only OR MIT"
+>>   LIC_FILES_CHKSUM = "file://../LICENSE;md5=78d9818a51b9a8e9bb89dea418bac297"
+>>   
+>>   inherit module features_check
+>> diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.3.6908880.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.3.6908880.bb
+>> index 190417ca..a095fcf9 100644
+>> --- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.3.6908880.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_25.3.6908880.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY =  "Kernel drivers for the PowerVR Rogue GPU found in the TI SoCs"
+>>   HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-driver"
+>> -LICENSE = "MIT | GPL-2.0-only"
+>> +LICENSE = "GPL-2.0-only OR MIT"
+>>   LIC_FILES_CHKSUM = "file://README;beginline=14;endline=19;md5=0403c7dea01a2b8232261e805325fac2"
+>>   
+>>   inherit module
+>> diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_26.1.6967606.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_26.1.6967606.bb
+>> index 876c3e50..3731cec6 100644
+>> --- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_26.1.6967606.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-img-rogue-driver_26.1.6967606.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY =  "Kernel drivers for the PowerVR Rogue GPU found in the TI SoCs"
+>>   HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-driver"
+>> -LICENSE = "MIT | GPL-2.0-only"
+>> +LICENSE = "GPL-2.0-only OR MIT"
+>>   LIC_FILES_CHKSUM = "file://README;beginline=14;endline=19;md5=0403c7dea01a2b8232261e805325fac2"
+>>   
+>>   inherit module
+>> diff --git a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+>> index 343f09de..e858d608 100644
+>> --- a/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY =  "Kernel drivers for the PowerVR SGX chipset found in the TI SoCs"
+>>   HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-linux"
+>> -LICENSE = "MIT | GPL-2.0-only"
+>> +LICENSE = "GPL-2.0-only OR MIT"
+>>   LIC_FILES_CHKSUM = "file://GPL-COPYING;md5=60422928ba677faaa13d6ab5f5baaa1e"
+>>   
+>>   inherit module
+>> diff --git a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
+>> index 2d9ad499..92671833 100644
+>> --- a/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/ti-dm-fw/ti-dm-fw.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "TI DM prebuilt binary firmware images"
+>>   
+>> -LICENSE = "TI-TFL"
+>> +LICENSE = "LicenseRef-TI-TFL"
+>>   LIC_FILES_CHKSUM = "file://${THISDIR}/../../licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
+>>   
+>>   COMPATIBLE_MACHINE = "k3"
+>> diff --git a/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb b/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
+>> index 04e43609..a985188c 100644
+>> --- a/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/ti-eth-fw/ti-eth-fw.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "TI Ethernet prebuilt binary firmware images"
+>>   
+>> -LICENSE = "TI-TFL"
+>> +LICENSE = "LicenseRef-TI-TFL"
+>>   LIC_FILES_CHKSUM = "file://${THISDIR}/../../licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
+>>   
+>>   COMPATIBLE_MACHINE = "j721e|j7200|j784s4"
+>> diff --git a/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb b/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
+>> index 74729c16..ebd3d868 100644
+>> --- a/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/ti-img-encode-decode/vxd-dec-fw_git.bb
+>> @@ -1,5 +1,5 @@
+>>   SUMMARY = "Video Decoding Firmware"
+>> -LICENSE = "TI-IMG"
+>> +LICENSE = "LicenseRef-TI-IMG"
+>>   LIC_FILES_CHKSUM = "file://LICENSE.ti-img;md5=84ca7278930db001870686ad997d6bb1"
+>>   
+>>   require recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+>> diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+>> index 982a3512..cfb8ac0d 100644
+>> --- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+>> +++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "Common include for TI Linux firmware"
+>>   
+>> -LICENSE = "TI-TFL"
+>> +LICENSE = "LicenseRef-TI-TFL"
+>>   LIC_FILES_CHKSUM = "file://LICENSE.ti;md5=b5aebf0668bdf95621259288c4a46d76"
+>>   
+>>   PV = "2022.01"
+>> diff --git a/meta-ti-bsp/recipes-bsp/ti-pka-fw/ti-pka-fw_git.bb b/meta-ti-bsp/recipes-bsp/ti-pka-fw/ti-pka-fw_git.bb
+>> index c3d2bce4..5b022edd 100644
+>> --- a/meta-ti-bsp/recipes-bsp/ti-pka-fw/ti-pka-fw_git.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/ti-pka-fw/ti-pka-fw_git.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "PKA prebuilt binary firmware image"
+>>   
+>> -LICENSE = "TI-TFL & INSIDE-Secure"
+>> +LICENSE = "LicenseRef-INSIDE-Secure AND LicenseRef-TI-TFL"
+>>   LIC_FILES_CHKSUM = "file://LICENCE.pka_fw;md5=dc20391b287874f0dce069cf87917206"
+>>   
+>>   COMPATIBLE_MACHINE = "k3"
+>> diff --git a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
+>> index 20c6b531..d5353e82 100644
+>> --- a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "TI Echo Test prebuilt binary firmware images"
+>>   
+>> -LICENSE = "TI-TFL"
+>> +LICENSE = "LicenseRef-TI-TFL"
+>>   LIC_FILES_CHKSUM = "file://${THISDIR}/../../licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
+>>   
+>>   COMPATIBLE_MACHINE = "k3"
+>> diff --git a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-messageq-test-fw_git.bb b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-messageq-test-fw_git.bb
+>> index 980fe5cc..26a2f665 100644
+>> --- a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-messageq-test-fw_git.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-messageq-test-fw_git.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "TI MessageQ prebuilt binary firmware images"
+>>   
+>> -LICENSE = "TI-TFL"
+>> +LICENSE = "LicenseRef-TI-TFL"
+>>   LIC_FILES_CHKSUM = "file://${THISDIR}/../../licenses/TI-TFL;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
+>>   
+>>   COMPATIBLE_MACHINE = "am57xx"
+>> diff --git a/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb b/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb
+>> index 1b1cff6b..b088f589 100644
+>> --- a/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/vis-fw/vis_01.50.07.15.bb
+>> @@ -1,5 +1,5 @@
+>>   SUMMARY = "Radio Application Firmware"
+>> -LICENSE = "TI-TSPA"
+>> +LICENSE = "LicenseRef-TI-TSPA"
+>>   LIC_FILES_CHKSUM = "file://${S}/J6_VIS_DEMO_LINUX_BINARY_01.50.07.15-Manifest.html;md5=a59aa54b9470f555cf086b91dca0afa3"
+>>   
+>>   COMPATIBLE_MACHINE = "am57xx"
+>> diff --git a/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb b/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
+>> index 4c2ea375..6958c603 100644
+>> --- a/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
+>> +++ b/meta-ti-bsp/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "VPDMA firmware for Video Input Port and Video Processing Engine"
+>>   
+>> -LICENSE = "TI-TSPA"
+>> +LICENSE = "LicenseRef-TI-TSPA"
+>>   LIC_FILES_CHKSUM = "file://COPYING;md5=fd463c9500441ed91d07a0331baa635c"
+>>   
+>>   COMPATIBLE_MACHINE = "am57xx"
+>> diff --git a/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb b/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+>> index 86aa71b8..563f72eb 100644
+>> --- a/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+>> +++ b/meta-ti-bsp/recipes-graphics/libgal/ti-gc320-libs_5.0.11.p7.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "Userspace libraries for GC320 chipset on TI SoCs"
+>>   HOMEPAGE = "https://git.ti.com/graphics/ti-gc320-libs"
+>> -LICENSE = "TI-TSPA"
+>> +LICENSE = "LicenseRef-TI-TSPA"
+>>   LIC_FILES_CHKSUM = "file://Manifest.html;md5=a9121e8936ace09820d23f7626daaca5"
+>>   
+>>   inherit features_check
+>> diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_25.3.6908880.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_25.3.6908880.bb
+>> index fad29691..f5f01633 100644
+>> --- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_25.3.6908880.bb
+>> +++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_25.3.6908880.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "Userspace libraries for PowerVR Rogue GPU on TI SoCs"
+>>   HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-umlibs"
+>> -LICENSE = "TI-TFL"
+>> +LICENSE = "LicenseRef-TI-TFL"
+>>   LIC_FILES_CHKSUM = "file://LICENSE;md5=7232b98c1c58f99e3baa03de5207e76f"
+>>   
+>>   PACKAGE_ARCH = "${MACHINE_ARCH}"
+>> diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_26.1.6967606.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_26.1.6967606.bb
+>> index 29c5154f..a3c3c08a 100644
+>> --- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_26.1.6967606.bb
+>> +++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-img-rogue-umlibs_26.1.6967606.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "Userspace libraries for PowerVR Rogue GPU on TI SoCs"
+>>   HOMEPAGE = "http://git.ti.com/graphics/ti-img-rogue-umlibs"
+>> -LICENSE = "TI-TFL"
+>> +LICENSE = "LicenseRef-TI-TFL"
+>>   LIC_FILES_CHKSUM = "file://LICENSE;md5=7232b98c1c58f99e3baa03de5207e76f"
+>>   
+>>   PACKAGE_ARCH = "${MACHINE_ARCH}"
+>> diff --git a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb
+>> index c4cc5f10..44c2a2c5 100644
+>> --- a/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb
+>> +++ b/meta-ti-bsp/recipes-graphics/powervr-umlibs/ti-sgx-ddk-um_1.17.4948957.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "Userspace libraries for PowerVR SGX chipset on TI SoCs"
+>>   HOMEPAGE = "https://git.ti.com/graphics/omap5-sgx-ddk-um-linux"
+>> -LICENSE = "TI-TSPA"
+>> +LICENSE = "LicenseRef-TI-TSPA"
+>>   LIC_FILES_CHKSUM = "file://LICENSE;md5=7232b98c1c58f99e3baa03de5207e76f"
+>>   
+>>   PACKAGE_ARCH = "${MACHINE_ARCH}"
+>> diff --git a/meta-ti-bsp/recipes-ti/ti-librpmsg-dma/ti-librpmsg-dma_1.0.bb b/meta-ti-bsp/recipes-ti/ti-librpmsg-dma/ti-librpmsg-dma_1.0.bb
+>> index 13599d99..70733c96 100644
+>> --- a/meta-ti-bsp/recipes-ti/ti-librpmsg-dma/ti-librpmsg-dma_1.0.bb
+>> +++ b/meta-ti-bsp/recipes-ti/ti-librpmsg-dma/ti-librpmsg-dma_1.0.bb
+>> @@ -1,5 +1,5 @@
+>>   SUMMARY = "RPMsg DMA shared library"
+>> -LICENSE = "TI-TFL"
+>> +LICENSE = "LicenseRef-TI-TFL"
+>>   LIC_FILES_CHKSUM = "file://LICENSE;md5=91dc4ee6d125d0aaba4e5bd2fcc50ed3"
+>>   
+>>   SRC_URI = "git://github.com/TexasInstruments/rpmsg-dma.git;protocol=https;branch=main"
+>> diff --git a/meta-ti-extras/recipes-bsp/bt-fw/bt-fw_git.bb b/meta-ti-extras/recipes-bsp/bt-fw/bt-fw_git.bb
+>> index 0d856362..ba767916 100644
+>> --- a/meta-ti-extras/recipes-bsp/bt-fw/bt-fw_git.bb
+>> +++ b/meta-ti-extras/recipes-bsp/bt-fw/bt-fw_git.bb
+>> @@ -1,5 +1,5 @@
+>>   SUMMARY = "Firmware files for Bluetooth"
+>> -LICENSE = "TI-TSPA"
+>> +LICENSE = "LicenseRef-TI-TSPA"
+>>   LIC_FILES_CHKSUM = "file://LICENSE;md5=f39eac9f4573be5b012e8313831e72a9"
+>>   
+>>   PV = "8.7.1+git"
+>> diff --git a/meta-ti-extras/recipes-bsp/cc33xx-fw/cc33xx-fw_git.bb b/meta-ti-extras/recipes-bsp/cc33xx-fw/cc33xx-fw_git.bb
+>> index a4dfc4da..915ee64b 100644
+>> --- a/meta-ti-extras/recipes-bsp/cc33xx-fw/cc33xx-fw_git.bb
+>> +++ b/meta-ti-extras/recipes-bsp/cc33xx-fw/cc33xx-fw_git.bb
+>> @@ -1,5 +1,5 @@
+>>   SUMMARY = "Firmware files for use with TI cc33xx"
+>> -LICENSE = "TI-TSPA"
+>> +LICENSE = "LicenseRef-TI-TSPA"
+>>   LIC_FILES_CHKSUM = "file://LICENCE;md5=df68504cbd0a4da1643ebcfd5783dbc9"
+>>   
+>>   SRCREV = "0b4f850d6c0fd8e0fe0ae1d3e80ac6733aced29b"
+>> diff --git a/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb b/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+>> index fbc6d956..cc27df41 100644
+>> --- a/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+>> +++ b/meta-ti-extras/recipes-bsp/ipumm-fw/ipumm-fw_git.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "Firmware for IPU to support Accelerated MM decode and encode"
+>>   
+>> -LICENSE = "TI-TSPA"
+>> +LICENSE = "LicenseRef-TI-TSPA"
+>>   LIC_FILES_CHKSUM = "file://LICENCE.ti-tspa;md5=a1b59cb7ba626b9dbbcbf00f3fbc438a"
+>>   
+>>   COMPATIBLE_MACHINE = "am57xx"
+>> diff --git a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb b/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
+>> index b7066583..30ff2bcc 100644
+>> --- a/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
+>> +++ b/meta-ti-extras/recipes-bsp/pru/pru-icss_git.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "Programmable Real-time Unit Software Package"
+>>   HOMEPAGE = "http://processors.wiki.ti.com/index.php/PRU-ICSS"
+>> -LICENSE = "BSD-3-Clause & PD"
+>> +LICENSE = "BSD-3-Clause AND LicenseRef-PD"
+>>   
+>>   LIC_FILES_CHKSUM = "file://PRU-Package-v6.1-Manifest.html;md5=1e37797ebe9254922f4278bb6047211c"
+>>   
+>> diff --git a/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb b/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb
+>> index 3e61db88..b49ed736 100644
+>> --- a/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb
+>> +++ b/meta-ti-extras/recipes-bsp/wl18xx-fw/wl18xx-fw_8.9.0.0.86.bb
+>> @@ -1,5 +1,5 @@
+>>   SUMMARY = "Firmware files for use with TI wl18xx"
+>> -LICENSE = "TI-TSPA"
+>> +LICENSE = "LicenseRef-TI-TSPA"
+>>   LIC_FILES_CHKSUM = "file://LICENCE;md5=4977a0fe767ee17765ae63c435a32a9e"
+>>   
+>>   SRC_URI = "git://git.ti.com/git/wilink8-wlan/wl18xx_fw.git;protocol=https;branch=${BRANCH}"
+>> diff --git a/meta-ti-extras/recipes-ti/beagleboard/beaglebone-getting-started.bb b/meta-ti-extras/recipes-ti/beagleboard/beaglebone-getting-started.bb
+>> index 8ad75f26..41eea044 100644
+>> --- a/meta-ti-extras/recipes-ti/beagleboard/beaglebone-getting-started.bb
+>> +++ b/meta-ti-extras/recipes-ti/beagleboard/beaglebone-getting-started.bb
+>> @@ -4,7 +4,7 @@ PR = "r22"
+>>   
+>>   inherit allarch
+>>   
+>> -LICENSE = "CC-BY-SA-3.0 & GPL-3.0-or-later & MIT & PD"
+>> +LICENSE = "CC-BY-SA-3.0 AND GPL-3.0-or-later AND MIT AND LicenseRef-PD"
+>>   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f6f02761e31334c48f7021fb94c89aaa"
+>>   
+>>   SRCREV = "05bedba192646152b7bc80b0accaea75aef864e5"
+>> diff --git a/meta-ti-extras/recipes-ti/devtools/gcc-arm-baremetal_7-2018-q2-update.bb b/meta-ti-extras/recipes-ti/devtools/gcc-arm-baremetal_7-2018-q2-update.bb
+>> index df34a39e..2e9c0938 100644
+>> --- a/meta-ti-extras/recipes-ti/devtools/gcc-arm-baremetal_7-2018-q2-update.bb
+>> +++ b/meta-ti-extras/recipes-ti/devtools/gcc-arm-baremetal_7-2018-q2-update.bb
+>> @@ -1,5 +1,5 @@
+>>   SUMMARY = "Baremetal GCC for ARM"
+>> -LICENSE = "GPL-3.0-with-GCC-exception & GPL-3.0-only"
+>> +LICENSE = "GPL-3.0-only AND GPL-3.0-with-GCC-exception"
+>>   
+>>   LIC_FILES_CHKSUM = "file://share/doc/gcc-arm-none-eabi/license.txt;md5=f77466c63f5787f4bd669c402aabe061"
+>>   
+>> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb b/meta-ti-extras/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
+>> index 031d889f..07d7b6dc 100644
+>> --- a/meta-ti-extras/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
+>> +++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt-arm_18.12.5.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "TI ARM Code Generation Tools"
+>>   HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+>> -LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD & BSD-4-Clause"
+>> +LICENSE = "AFL-3.0 AND BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND BSL-1.0 AND MIT AND LicenseRef-PD AND LicenseRef-Patrick-Powell AND LicenseRef-TI-TSPA AND LicenseRef-Thai-Open-Source-Software-Center"
+>>   
+>>   LIC_FILES_CHKSUM = "file://ti-cgt-arm_${PV}.LTS/README.txt;md5=79631eb21b2e5b7190cd3ff1dfd41108"
+>>   
+>> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt-pru_2.3.3.bb b/meta-ti-extras/recipes-ti/devtools/ti-cgt-pru_2.3.3.bb
+>> index 7ef20b7a..b83064c6 100644
+>> --- a/meta-ti-extras/recipes-ti/devtools/ti-cgt-pru_2.3.3.bb
+>> +++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt-pru_2.3.3.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "TI PRU Code Generation Tools"
+>>   HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+>> -LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & PD"
+>> +LICENSE = "AFL-3.0 AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND MIT AND LicenseRef-Hewlett-Packard AND LicenseRef-PD AND LicenseRef-TI-TSPA AND LicenseRef-Thai-Open-Source-Software-Center"
+>>   
+>>   LIC_FILES_CHKSUM = "file://${UNPACKDIR}/ti-cgt-pru_${PV}/PRU_Code_Generation_Tools_2.3.x_manifest.html;md5=e22f9d8240f7cca0c0aa5242d9ffa5bc"
+>>   LIC_FILES_CHKSUM:class-target = "file://usr/share/doc/ti/cgt-pru/PRU_Code_Generation_Tools_2.3.x_manifest.html;md5=e22f9d8240f7cca0c0aa5242d9ffa5bc"
+>> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc b/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
+>> index f32bc0d3..cba6d14a 100644
+>> --- a/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
+>> +++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt470.inc
+>> @@ -1,7 +1,7 @@
+>>   SUMMARY = "TI ARM Code Generation Tools"
+>>   HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/CodeGenerationTools.htm"
+>>   SECTION = "devel"
+>> -LICENSE = "TI"
+>> +LICENSE = "LicenseRef-TI-TSPA"
+>>   
+>>   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=62f46f1125a152a2e213b414db7ac600"
+>>   
+>> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb b/meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb
+>> index adf21563..16f5a36d 100644
+>> --- a/meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb
+>> +++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt6x-7_7.4.16.bb
+>> @@ -7,7 +7,7 @@ compiler, linker, assembler, etc. This also includes C runtime \
+>>   libraries and standard header files needed to produce a working DSP application."
+>>   
+>>   HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+>> -LICENSE = "TI-TSPA"
+>> +LICENSE = "LicenseRef-TI-TSPA"
+>>   
+>>   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
+>>   
+>> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt6x_8.3.2.bb b/meta-ti-extras/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+>> index 25e0f596..24157360 100644
+>> --- a/meta-ti-extras/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+>> +++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt6x_8.3.2.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "TI DSP Code Generation Tools"
+>>   HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+>> -LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD"
+>> +LICENSE = "AFL-3.0 AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND MIT AND LicenseRef-PD AND LicenseRef-Patrick-Powell AND LicenseRef-TI-TSPA AND LicenseRef-Thai-Open-Source-Software-Center"
+>>   
+>>   LIC_FILES_CHKSUM = "file://ti-cgt-c6000_${PV}/C6000CodeGenerationTools_8.3.x_manifest.html;md5=d06c6f9acebf78df4108a8535396e9f1"
+>>   LIC_FILES_CHKSUM:class-target = "file://usr/share/doc/ti/cgt-c6x/C6000CodeGenerationTools_8.3.x_manifest.html;md5=d06c6f9acebf78df4108a8535396e9f1"
+>> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-cgt7x_1.2.0.bb b/meta-ti-extras/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+>> index 04b16032..30116b02 100644
+>> --- a/meta-ti-extras/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+>> +++ b/meta-ti-extras/recipes-ti/devtools/ti-cgt7x_1.2.0.bb
+>> @@ -6,7 +6,7 @@ applications for the C7000 DSP family. This includes tools such as: \
+>>   compiler, linker, assembler, etc. This also includes C runtime \
+>>   libraries and standard header files needed to produce a working DSP application."
+>>   HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+>> -LICENSE = "(TI-TSPA & Thai-Open-Source-Software-Center) & BSD-3-Clause & BSL-1.0 & Patrick-Powell & AFL-3.0 & MIT & BSD-2-Clause & PD"
+>> +LICENSE = "AFL-3.0 AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND MIT AND LicenseRef-PD AND LicenseRef-Patrick-Powell AND LicenseRef-TI-TSPA AND LicenseRef-Thai-Open-Source-Software-Center"
+>>   
+>>   LIC_FILES_CHKSUM = "file://ti-cgt-c7000_${PV}.STS/C7000_Code_Generation_Tools_1.x_manifest.html;md5=f1156d241d104c281bc64a6ec8eadc64"
+>>   
+>> diff --git a/meta-ti-extras/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb b/meta-ti-extras/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb
+>> index 969518e2..7d297d65 100644
+>> --- a/meta-ti-extras/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb
+>> +++ b/meta-ti-extras/recipes-ti/devtools/ti-xdctools_3.55.02.22.bb
+>> @@ -2,7 +2,7 @@ SUMMARY = "TI XDCtools (RTSC - Real Time Software Components"
+>>   DESCRIPTION = "TI XDCtools (RTSC - Real Time Software Components - http://rtsc.eclipse.org)"
+>>   HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc"
+>>   SECTION = "devel"
+>> -LICENSE = "BSD-3-Clause & GPL-2.0-only"
+>> +LICENSE = "BSD-3-Clause AND GPL-2.0-only"
+>>   
+>>   require recipes-ti/includes/ti-paths.inc
+>>   require recipes-ti/includes/ti-staging.inc
+>> diff --git a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
+>> index bad264d8..23a10e35 100644
+>> --- a/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
+>> +++ b/meta-ti-extras/recipes-ti/jailhouse/ti-jailhouse.inc
+>> @@ -5,7 +5,7 @@ platform in a way that none of these domains, called 'cells' here, can interfere
+>>   HOMEPAGE = "https://github.com/siemens/jailhouse"
+>>   SECTION = "jailhouse"
+>>   
+>> -LICENSE = "GPL-2.0-only & BSD-2-Clause"
+>> +LICENSE = "BSD-2-Clause AND GPL-2.0-only"
+>>   
+>>   LIC_FILES_CHKSUM = " \
+>>       file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
+>> diff --git a/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc b/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc
+>> index c7c14f91..aa0ad8bb 100644
+>> --- a/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc
+>> +++ b/meta-ti-extras/recipes-ti/vlib/vlib-c66x.inc
+>> @@ -1,7 +1,7 @@
+>>   SUMMARY = "TI Vision Library (VLIB) for C66x"
+>>   HOMEPAGE = "http://software-dl.ti.com/libs/vlib/latest/index_FDS.html"
+>>   SECTION = "devel"
+>> -LICENSE = "TI-TSPA & BSD-3-Clause"
+>> +LICENSE = "BSD-3-Clause AND LicenseRef-TI-TSPA"
+>>   
+>>   require ../includes/ti-paths.inc
+>>   require ../includes/ti-staging.inc
+>> diff --git a/meta-ti-test/licenses/Stream_Benchmark_License b/meta-ti-test/licenses/Stream-Benchmark-License
+>> similarity index 100%
+>> rename from meta-ti-test/licenses/Stream_Benchmark_License
+>> rename to meta-ti-test/licenses/Stream-Benchmark-License
+>> diff --git a/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb b/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
+>> index 484be34d..3084c040 100644
+>> --- a/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
+>> +++ b/meta-ti-test/recipes-benchmark/stream/stream_5.10.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "Stream Benchmark"
+>>   HOMEPAGE = "http://www.cs.virginia.edu/stream/"
+>> -LICENSE = "Stream_Benchmark_License"
+>> +LICENSE = "LicenseRef-Stream-Benchmark-License"
+>>   LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=bca8cbe07976fe64c8946378d08314b0"
+>>   SECTION = "system"
+>>   
+>> diff --git a/meta-ti-test/recipes-connectivity/openntpd/openntpd_6.8p1.bb b/meta-ti-test/recipes-connectivity/openntpd/openntpd_6.8p1.bb
+>> index 6a3c64d1..ec604a94 100644
+>> --- a/meta-ti-test/recipes-connectivity/openntpd/openntpd_6.8p1.bb
+>> +++ b/meta-ti-test/recipes-connectivity/openntpd/openntpd_6.8p1.bb
+>> @@ -2,7 +2,7 @@ SUMMARY = "OpenNTPD is an implementation of the Network Time Protocol."
+>>   DESCRIPTION = "OpenNTPD is a FREE, easy to use implementation of the Network Time Protocol."
+>>   HOMEPAGE = "http://www.openntpd.org/"
+>>   SECTION = "console/network"
+>> -LICENSE = "BSD-3-Clause & ISC"
+>> +LICENSE = "BSD-3-Clause AND ISC"
+>>   LIC_FILES_CHKSUM = "file://COPYING;md5=fe922aad2b6ad1c359cf2adfdaaab1b6"
+>>   
+>>   PR = "r0"
+>> diff --git a/meta-ti-test/recipes-devtools/ltp-ddt/ltp_20260130.inc b/meta-ti-test/recipes-devtools/ltp-ddt/ltp_20260130.inc
+>> index 4183b5d4..5d71837c 100644
+>> --- a/meta-ti-test/recipes-devtools/ltp-ddt/ltp_20260130.inc
+>> +++ b/meta-ti-test/recipes-devtools/ltp-ddt/ltp_20260130.inc
+>> @@ -2,7 +2,7 @@ SUMMARY = "Linux Test Project"
+>>   DESCRIPTION = "The Linux Test Project is a joint project with SGI, IBM, OSDL, and Bull with a goal to deliver test suites to the open source community that validate the reliability, robustness, and stability of Linux. The Linux Test Project is a collection of tools for testing the Linux kernel and related features."
+>>   HOMEPAGE = "https://linux-test-project.github.io/"
+>>   SECTION = "console/utils"
+>> -LICENSE = "GPL-2.0-only & GPL-2.0-or-later & LGPL-2.0-or-later & LGPL-2.1-or-later & BSD-2-Clause"
+>> +LICENSE = "BSD-2-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.0-or-later AND LGPL-2.1-or-later"
+>>   LIC_FILES_CHKSUM = "\
+>>       file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+>>       file://testcases/open_posix_testsuite/COPYING;md5=48b1c5ec633e3e30ec2cf884ae699947 \
+>> diff --git a/meta-ti-test/recipes-devtools/omapconf/omapconf_git.bb b/meta-ti-test/recipes-devtools/omapconf/omapconf_git.bb
+>> index 84226dd8..5ea2ac77 100644
+>> --- a/meta-ti-test/recipes-devtools/omapconf/omapconf_git.bb
+>> +++ b/meta-ti-test/recipes-devtools/omapconf/omapconf_git.bb
+>> @@ -1,7 +1,7 @@
+>>   SUMMARY = "Diagnostic tool for TI OMAP processors"
+>>   HOMEPAGE = "https://github.com/omapconf/omapconf"
+>>   
+>> -LICENSE = "GPL-2.0-only | BSD-3-Clause"
+>> +LICENSE = "BSD-3-Clause OR GPL-2.0-only"
+>>   LIC_FILES_CHKSUM = "file://LICENSE;md5=205c83c4e2242a765acb923fc766e914"
+>>   
+>>   PV = "1.75+git"
+>> diff --git a/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb b/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb
+>> index cc566b37..54b454f3 100644
+>> --- a/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb
+>> +++ b/meta-ti-test/recipes-kernel/hwspinlocktest/hwspinlocktest_0.1.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "Build hwspinlock test as an external Linux kernel module"
+>>   DESCRIPTION = "${SUMMARY}"
+>> -LICENSE = "GPL-2.0-only | BSD-3-Clause"
+>> +LICENSE = "BSD-3-Clause OR GPL-2.0-only"
+>>   LIC_FILES_CHKSUM = "file://LICENSE;md5=bfa02c83df161e37647ee23a2c7eacd4"
+>>   
+>>   inherit module
+>> diff --git a/meta-ti-test/recipes-support/xdp-tools/xdp-tools-ti_1.6.1.bb b/meta-ti-test/recipes-support/xdp-tools/xdp-tools-ti_1.6.1.bb
+>> index e25ae146..a3ffc52f 100644
+>> --- a/meta-ti-test/recipes-support/xdp-tools/xdp-tools-ti_1.6.1.bb
+>> +++ b/meta-ti-test/recipes-support/xdp-tools/xdp-tools-ti_1.6.1.bb
+>> @@ -1,6 +1,6 @@
+>>   SUMMARY = "Utilities and example programs for use with XDP"
+>>   HOMEPAGE = "https://github.com/xdp-project/xdp-tools"
+>> -LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later & BSD-2-Clause"
+>> +LICENSE = "BSD-2-Clause AND GPL-2.0-or-later AND LGPL-2.1-or-later"
+>>   LIC_FILES_CHKSUM = "file://LICENSE;md5=9ee53f8d06bbdb4c11b1557ecc4f8cd5 \
+>>                       file://LICENSES/GPL-2.0;md5=994331978b428511800bfbd17eea3001 \
+>>                       file://LICENSES/LGPL-2.1;md5=b370887980db5dd40659b50909238dbd \
+>> -- 
+>> 2.43.0
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
