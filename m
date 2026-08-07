@@ -2,141 +2,144 @@ Return-Path: <m-shah@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BE13C2A09B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F0B1C5AC7A
 	for <webhook@archiver.kernel.org>; Fri,  7 Aug 2026 06:02:32 +0000 (UTC)
 Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com [148.163.150.75])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.36614.1786082551120073368
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.36613.1786082545643275067
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 06 Aug 2026 23:02:31 -0700
+ Thu, 06 Aug 2026 23:02:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=Mugt7qPU;
- dkim=pass header.i=@ti.com header.s=selector1 header.b=gV9VXEXB;
+ dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=MDZNyVFg;
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=guqRNIY/;
  spf=pass (domain: ti.com, ip: 148.163.150.75, mailfrom: m-shah@ti.com)
 Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
-	by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 6770GQTH2309346;
-	Fri, 7 Aug 2026 01:02:30 -0500
+	by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 6770GQTG2309346;
+	Fri, 7 Aug 2026 01:02:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
-	:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=proofpoint-05-2026; bh=3kcQaiFHwe0eD
-	x08wT4zk+qOUvKBvQ/T07Cdb6vu85w=; b=Mugt7qPUWh1cRvQPh1ti+xL3DRJFG
-	i+p1xdNgrpx9WlOf5Tc+nEd0fAiHmpOH7eGpR5ceqYURSoezDs0pSfN3hFo1LzlW
-	2XuDXHvJyvULToDg7FXyscLK2hhVbDw5mtJjcE4EKYG8nzFzUTb0ufecIWlvKdFF
-	mKjlTB9XGrop11vE/V65vCPQYX5LGOvKg4dcH8LUU1UsTX+Rpku7lsuiyUzr1AZM
-	syozagAtcIlcOQu6+okL6N64y/MkKcC1JhgbdO4r18632eEFXr1jCpDl4YXNYLyC
-	oCDqza9qiNxTkemjSNQxN4zg3kqmt0fDiAqxMvwe+zgJnAlQPVgYuLT8w==
-Received: from bl2pr02cu003.outbound.protection.outlook.com (mail-eastusazon11011018.outbound.protection.outlook.com [52.101.52.18])
-	by m0384305.ppops.net (PPS) with ESMTPS id 4fvqjgg08a-1
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	proofpoint-05-2026; bh=oqubnM39PKAQ8VXWgJma0ioPxltpWdrJ1QdV/XrHm
+	ks=; b=MDZNyVFgKDbHdXduJ1ml02jVO/mJYgJL7oR7Dv7x5E1Y7N6YwyxbM53h9
+	9upYT2dH4kQ5R0v7dSVkR97TH2Xd5+r5aNU3tVTvf/LrJwQJhC8w76JKZnPn3xPx
+	vD848bLWuHAYB4GwJAkNJtjFd3zB7CZDEZD0ajn9IugI2lbfWmKce1Y5Vic5qat3
+	NdQ/z32+N7uBkUSraiY81FO2Bg7SCYvdXwgmoreoHTGxmXVfX6Q32mq9UaBHtXcp
+	rDDnf3CeOyPkw2xiFFuyOsk02cwk78NaqmvfCbWbAsnuNJcwkUx/xsg0hU7yF8YI
+	UacZdpl2swsnuQazX9yGBFJDmU8fA==
+Received: from bl0pr03cu003.outbound.protection.outlook.com (mail-eastusazon11012069.outbound.protection.outlook.com [52.101.53.69])
+	by m0384305.ppops.net (PPS) with ESMTPS id 4fvqjgg07b-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 07 Aug 2026 01:02:29 -0500 (CDT)
+	Fri, 07 Aug 2026 01:02:24 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xIf2wCaaO/iveKBfvrRkBPFMbBDv6Ygik8IBTLRh1dxAOgzvEXOnCMURLJW+4wzCXK2QYDDmwcQSsMwXy4KbLIOTq7hSUfeP1jwwhoswUoo0EE2q4uKRdICMDrgO1wbx5PLq1gn4NnqALzr4YWbRn/xzWgK9o9eYMj/50zAif99aHDJ/N6PUbOqaHYcQPxSa0jAM9TqFu2Rc3DG9QWKsKcYZzx4IEhTNej4wYvSDHvEAwEjATBlNDC7zevx7yJSgo1+mpKlO603ujOXRQst9OgnqZIDjsbVfp+kpviHxg5fGXUo9WLTdioFAu7OjnTBg9dO6RI4F4T6EQLhxvtrRUQ==
+ b=jfni/eupcIKoGRDc1vSixGIKsPQP7sM70uGrhR7YahrHKybpyeJdAcM+inR1z/3F1U0jKU/1/JNVnpNQftxRBpeju5CH8D2h0awva2VLISo63ej/Y7YdvxLVSqCWZTh7YDgsdxYZd8QFFfZggJ2pEcKiCJb1KsrKV0KalhaHIpNsEM5h4cWwpi6gbnfo8Vc6q2N1eTbairLTofCRzjLkM1vTfaG4TSCrmOrDwCd7zHM2V3f6LQm6d2CpKAHN9zrrr3/D5ASBowSnZjhDFh2K6iYgBiELOmVvnxmgyN4+LP4nTuLxQZVw5VWn93kLeFT2AtZvnaGHQjA7P8BzWlVVPw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3kcQaiFHwe0eDx08wT4zk+qOUvKBvQ/T07Cdb6vu85w=;
- b=vn+p2sv9UVGjb5Dq3KZlRjQl1byDEFzPhJ4yXjaVrVStlFVwiG7QQkv7DGwMSJwAyP+AXHZb/mGIjq3NfLEJf0RqdrQksiRrbLsaxq1gWDDN9lM2PcpH1RhGXzLVKup3rExbLVY3lmRls57QFdlmMP9pZBkVc+d1I4v0RVdwYBRTADjCV6BXSERsfN+9SvVVrpw2VpVjhBHereJb/ea8QuTlDgEM0Q4OYxolY6g7MAJe4jNm4x8yWlHHNi0UvFi3TDk2k+jmnthVOWAM75jDS44LUNXuLyNuOwme/dD8vI9nlhwNQxoudWzG98FR6DoZGNeBzkLqZZCVJUaNeCwnDw==
+ bh=oqubnM39PKAQ8VXWgJma0ioPxltpWdrJ1QdV/XrHmks=;
+ b=xsF7dzOz7ROVmQS2GCIwYCLhFDrZuHXB0YGShzO8YU0aSTs2SXvecL03fQtt8jKAOeBg5jzngC18OF5MR9+VfoP3eLPoe5TB99KYwCOGXk5Tn9AU8bxlgjHe5ONqvI3YOXcIZVsZVzYz6xhelWM2otGX1JeX5OjanUQz2TA/9R4Td7/N2cHl3MoKhq0Nv8jXNvC2dXAx4mr6YbaJcyFllVwXT/SefcsjetyeVgxtI1LnMYs1P5kgMlIfWquiomd6moFWQAsvnhQWnrEudzjK29+2X2Zd0l4/XGK8CQQzlFxXtYvx69B42poDcfae83qNZOmmA9ojedJs7gKV901DgQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3kcQaiFHwe0eDx08wT4zk+qOUvKBvQ/T07Cdb6vu85w=;
- b=gV9VXEXBD14Zavv9Q/9DT5M0b4XPgnKSUPzeftiH0ZRYEAiTmWgazJ7EJRi+uV2Xmgd0rbriKtu01QTyhgjO+k8jDs5OaYLwy5d6jDW6D5hRNLA3K/KuRvYXs09lUCVTCtdJEKeXC0Tvj1ufwEZpemSxm/DV96fcxQjDJX5BiDU=
-Received: from BLAPR03CA0088.namprd03.prod.outlook.com (2603:10b6:208:329::33)
- by CH3PR10MB7503.namprd10.prod.outlook.com (2603:10b6:610:15f::8) with
+ bh=oqubnM39PKAQ8VXWgJma0ioPxltpWdrJ1QdV/XrHmks=;
+ b=guqRNIY/dEzUlQnL8DnXO6azp2m1FbdDmabu1Okdsv2hPZz0H9kNciar1k6r/0lyNxhANK81syhxwE58KpmzN4Pbx0cNCqB3YdccKOhZT0JwQrBV5/sqBaJmYuIZpmxjkRXqnSpa2fBAv49MHTmkiHd+cpn8ln1eSCC0AKyr9E4=
+Received: from BY5PR03CA0024.namprd03.prod.outlook.com (2603:10b6:a03:1e0::34)
+ by PH3PPF898A57FC1.namprd10.prod.outlook.com (2603:10b6:518:1::7b5) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.20; Fri, 7 Aug
- 2026 06:02:26 +0000
-Received: from BL6PEPF0001AB51.namprd04.prod.outlook.com
- (2603:10b6:208:329:cafe::29) by BLAPR03CA0088.outlook.office365.com
- (2603:10b6:208:329::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.23 via Frontend Transport; Fri, 7
- Aug 2026 06:02:25 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.23; Fri, 7 Aug
+ 2026 06:02:17 +0000
+Received: from CO1PEPF00012E84.namprd03.prod.outlook.com
+ (2603:10b6:a03:1e0:cafe::3a) by BY5PR03CA0024.outlook.office365.com
+ (2603:10b6:a03:1e0::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.21 via Frontend Transport; Fri, 7
+ Aug 2026 06:02:16 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- BL6PEPF0001AB51.mail.protection.outlook.com (10.167.242.75) with Microsoft
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CO1PEPF00012E84.mail.protection.outlook.com (10.167.249.59) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.315.6 via Frontend Transport; Fri, 7 Aug 2026 06:02:24 +0000
-Received: from DFLE206.ent.ti.com (10.64.6.64) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.315.6 via Frontend Transport; Fri, 7 Aug 2026 06:02:16 +0000
+Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 7 Aug
- 2026 01:01:59 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 01:02:08 -0500
+Received: from DLEE205.ent.ti.com (157.170.170.85) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 7 Aug
- 2026 01:01:59 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 01:02:08 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE205.ent.ti.com
+ (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Fri, 7 Aug 2026 01:01:59 -0500
+ Transport; Fri, 7 Aug 2026 01:02:08 -0500
 Received: from aniket-z2-workstation.dhcp.ti.com (aniket-z2-workstation.dhcp.ti.com [10.24.53.43])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67761uDm508776;
-	Fri, 7 Aug 2026 01:01:56 -0500
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67761uDp508776;
+	Fri, 7 Aug 2026 01:02:06 -0500
 From: Moteen Shah <m-shah@ti.com>
 To: <meta-ti@lists.yoctoproject.org>
 CC: <reatmon@ti.com>, <u-kumar1@ti.com>, <s-vadapalli@ti.com>,
         <a-limaye@ti.com>, <m-shah@ti.com>, <gehariprasath@ti.com>,
         <denys@konsulko.com>
-Subject: [meta-ti][scarthgap][PATCH 0/4] Backport ti-core-initramfs to scarthgap for j722s NFS boot
-Date: Fri, 7 Aug 2026 11:31:51 +0530
-Message-ID: <20260807060155.1381364-1-m-shah@ti.com>
+Subject: [meta-ti][scarthgap][PATCH 3/4] recipes-ti: initramfs: add initramfs-module-netsetup for DHCP before NFS root mount
+Date: Fri, 7 Aug 2026 11:31:54 +0530
+Message-ID: <20260807060155.1381364-4-m-shah@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260807060155.1381364-1-m-shah@ti.com>
+References: <20260807060155.1381364-1-m-shah@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB51:EE_|CH3PR10MB7503:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6f43ca6a-3d59-42f0-1b7d-08def44973c3
+X-MS-TrafficTypeDiagnostic: CO1PEPF00012E84:EE_|PH3PPF898A57FC1:EE_
+X-MS-Office365-Filtering-Correlation-Id: d04c19af-0260-4bb9-3d1d-08def4496f23
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|23010399003|376014|1800799024|36860700016|18002099003|56012099006|10067099003;
+	BCL:0;ARA:13230040|23010399003|376014|36860700016|1800799024|82310400026|6133799003|10067099003|56012099006|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info: 
-	TX1/uR0RQpACNbGYyjZvOEcBsGlcAI4PUrYk17ZGMUG/pBTme2pM1/r/V56iO4Lf/ovgNfD8b0n98dVuL2LEkG7Iyhj3kRhQ9ZY+Qq7J4AhChhEMZcCPrB5doDI8ZRN3JpewuJoS+c3UvhBffuqGF7CrkkjA2hfoIA7IXSVCpqFesf0AzYMjCsoS7+H9dAVyLmMKD/sYR0iC6Oi5L9Zr3mGf3lquh1DSMcsnUO3ACZ584W6yK9pDERe7wzoOYeclFY4t2VLQFcpnqVGwe3gSOKmeTWIx2xYt2/yzUZiQAc0i4TasItC14/Vb/fw28lz/+chA7YqkXaOafE8E+Gmm7r7wNFao1uSNKSzmI4OcSwS7NExV8TyNYH1GP5dNJ1Q7gPUQMUl2w5C4YXcKm9Hj/IKA3zrP0O1im8s0RGOnT7an+FS1rmMXQkRD/M9RZEImbakU7Mrq01hNDeGPXWeSPw9izuwWE/Q9779wHTUAE6Ip5D1XnyKDEnermZnHmCK1dMKy31N/cMLQ57rDyN5L+OFeuOBGVWFkz4C+wFF0vzmC28vuiA/Isnt8WmyydN1yRyZFi/A5a1uRcJNFCsAWv0zS88pt9w0FRQi/G99mHI5yxAvUx4ahKfbyffY1IxHRouQRbnXUbua2rwISFSJOxC5+IkbwYnMVvVFGfCN5/yc0CcF3o17xZYgOTeEyHaxt
+	5uubRhPi3LqAYQucdykXRTNTw8UeUY2vUfMj7MAkVGTUMohyMzGOWLubzKKS/GJwmP9/AjgrKixNLwVeZIZ+tBRtpT0Sidww/9+0areTe+u28+l2eMtGWbII6HpdooZc+isl0Bt0qY2EFPU/TPrjDWK0zT/M3XHhYEvMawsjC1+PwLyM1DO3i6r9m3d6eHCO3p4UliFRP5NRdr0MF1+SaKQDwSyjBvBLOZNAesEElofj36SS/x6wk3yJ7hJCcz1MCSA88irfCUYS2R3Jk7Kg7E2CzI1qwde8nLVb8nvYtZjglaZ98JV5jQFuNKPO4xNc+JPPufCAuuQFfzOjLVXeyy8UJdE5xI0ij8qYsXTlu4JokTuzIHQabmgqLWHZ4wx2MiMD78ZlK4/6OrzVA+mCkYTBuaVsBV89puKEZFFbVcpDXPS4PRgTQpCgcLhKl8czFbw3jwh9+HLT8TWaq38GLGny/MilCRYmnRkDV+00E7kostHbrXf8S0xYk62iCRSsCUtOvHjIBYZbU2oDr9yoc8R7o+3wYu9JElTl0f6yeq1DhxZSHT56TM7uMloEglRoXfAygFs7Q8oIPG2Tb+jNYAxHE/NFzKYxKpEvFGW2B5dtUcNm4S23Mfvzb+Q0nuOJwDa8rWndtmmBQAGiQWGpDgP3otq2zz/B/xXxbkP80BtZbY7hpkuNaNWp5WBfaHoGN9NAy0xxHJNA0YCMIKkIag==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(82310400026)(23010399003)(376014)(1800799024)(36860700016)(18002099003)(56012099006)(10067099003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(376014)(36860700016)(1800799024)(82310400026)(6133799003)(10067099003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	UDE+fj4nEAfDauA/ealmPFKwBHvGYqx3MK8iBG0fzP1YNR2RlTWJKFexpayTCkYKxisYUJKOzKqco3yT/spzpETh/GniwPAZZFgff6Za8di841YpqIRNOJD7SVIlrWhTW/2ANoJB7Wc3VLtBTuHeVY9H7by/d0pZMWcQD1viopmPekwlBvpQbBZ1kr9qq9IAIUKiS7LVnArcXbEBBM5p2TIk8BDXoFBWngeYCp92s2RbkyuJfTfFW/lhLXIKKPZQO1wqbAxp+oJmxvIuq9FHiOUm+UpnYdbBa/9p4lj1NbpvVaXAcv82px0FB4Dgb/TfKpTSEtKNPncuzZ2wkLfl0Cr6UGrJ71iN8Ni92aW7FYbHEBfOACXPJ84yzrQDhsn7onV5zxriA4WHN4gPbpiSRV08afbPB7V4MrrdPxFH3LdYPnF0sGxl3aaIZ+zs1VOV
+	5aGYQq/3naoMTrtuTIdnPrQE+qTTajtalK7P6fbnSrOlJ6UYDL/671XaC3nc7x0NYAb1DRw7fmzHQOjzAp/ynB1py7uaiLAkz4WpO3UG8eP2LyiJRyhmuLwZL8xG9xOoR49EEyoVwGtLO3bPFFGWSQCAmrR9uiy5S6+soqx0BRDhTQafrnND0NOiAMPU+YEDYE1fgDuMbID6rK9o1ICAy49WLy+U0Fgv4QqCtfdnhOash2Ltoj9zJx5EBUbD46ES/2ZWPhlO0gx2paaPTvpRYTKHp0tO+GDiiPikQ7BMVm+gZY3cZsNdNdSjON6pRg3G8Lh35/8XkDMuLEzoe8FbnknbeWwnO0jAjBKAPnKrJzGqtEZqpgOVPMWWA8t/93nMK+1P0eLFgwl3RTiIULFysC1tk3MQgWujmHLyzKgyoaK+1AQeg+NZWMHoNLpZthWe
 X-Exchange-RoutingPolicyChecked: 
-	LrOjd+yMVBncA3ZYJGHkehG0Q/yJMQLLIy25cdXmQnOb45Im26kdeS+ZPu4nHkl1lgxkqe1KM3CGMIEIaOlpZ0Z4PXKEZpwdbusSAOtDoTIob9SDCWqAfu1APt9cGGebAk4jdfZ2d2K2lURfXibJJ00Npl6bkIQnrjcbSxVjz1o9aHYejPrJUp5Wy27Fu/UISm1OkNE6uvFKUSr1UQUtWMtnRtFlAiXTE21WGqjTcz3L/SQ3yjDOJRoOBlBt1P0aQcwDUtxHR3tAw603FtoC9O0HQdCHa+At/J3dRx0NDIQrG3dsZXve9hW8M0/Mnz1CBbxZwByKa3PDKRgbQgVQ0g==
+	a0HFKpbqaTqbtuPpZP4e65ZWcE8wZy/hT8Tz5OaucfA6t7lkUwCzMjJavvJfbae74zKuzEJzQTE0mhJOMjeUhHBHvkhp3bl+ndzHAJ+as2DDX79vWMGeU5+ikB8MgDLf7e27B7mJYyry9U+SAFG0R5Is/EMJ596FV4xnIdMEKMKxRU8SNdZqtUu6vjtsRI78bkkJgRqCz55RW3jol15wulrPHzOuUBQyHQVxcev9QJT6Q/wZprmlGWjfvZNBMt42JsF0iolk3T0dEPzms7B+l8fFAXF0jdeFTkwHHvEA86Z47cXr6QL3YhD8AyC0ZDYar9hsBXf5CAmi8ZhLm7Dspg==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Aug 2026 06:02:24.3898
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Aug 2026 06:02:16.6246
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6f43ca6a-3d59-42f0-1b7d-08def44973c3
+X-MS-Exchange-CrossTenant-Network-Message-Id: d04c19af-0260-4bb9-3d1d-08def4496f23
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	BL6PEPF0001AB51.namprd04.prod.outlook.com
+	CO1PEPF00012E84.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7503
-X-Proofpoint-ORIG-GUID: -k3prgH33Ey6bsxBeloiTKM62iPX_veZ
-X-Authority-Analysis: v=2.4 cv=WNdPmHsR c=1 sm=1 tr=0 ts=6a7574f5 cx=c_pps
- a=gE6CMw9pMCRGQsgsFAL45Q==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=Sv0fKeRqtYgA:10 a=V5UXEbMT0ywA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=taLDd7a_hP9WKsMzeGRc:22
- a=lYREvPIXgFM1O4-5EgwA:9
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDA0MiBTYWx0ZWRfXxpU1HiD21To9
- ONzhYVKQTbgbSg0d/7vT0BpStLGCG6buGqa8Hj+MMPXifRAp8KiZi3JsOPVVxFeVbOUvvYZACGb
- Zpx00tugdpckAo/o/F03SFDvJ7ma2T0=
-X-Proofpoint-GUID: -k3prgH33Ey6bsxBeloiTKM62iPX_veZ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDA0MiBTYWx0ZWRfX1u4Qx4qS0jv0
- OXp4f3kYrSSYgWd30nH1d7xyIQjj8/jgHX4eg0Mox0Fd3/zOhYeotxDbPxiqc2VPeG1dpxpA1VH
- Iu7UsLLzQMRWI2DcAmymY0fhqSip40mUUc77iCJ69xYEVH5fdspYvSrTv3b0WnXUdmYJl3xjTmL
- rS7VU2+WpJlDP05kRXMyp2lzNImxbicfflrv++WVCgYe+9XgdbI+3fNr7amieJxHKYs0RBWJ7+/
- gSrDt6uJrlrXJMeB8Z3648LdSquyr0NkXwqNDsWJoiRIcY79wH/kC6TaeDoPZFLoyyHE3kllh6A
- V74nd6b7l1tuUX3mZDGEnv3mHezE9mgViRZVl20ZDjq1gOY79ewgyHfsb3XqdDKIi+aI5zWoEPT
- aG47HFIE70eoAOC70lIRN4a2D2ydjj587Fk6/DNt6qtHI04ZvkGSrP+SBThX/FU7BX/wtSpCLzq
- wBS5kcSIm05Fi4jryhA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH3PPF898A57FC1
+X-Proofpoint-ORIG-GUID: Yzp3OBmyPyl0bDKrF_gz4Di2-OgJiOH5
+X-Authority-Analysis: v=2.4 cv=WNdPmHsR c=1 sm=1 tr=0 ts=6a7574f0 cx=c_pps
+ a=XnoXs6g8SJkBXVwgXvPJGw==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=Sv0fKeRqtYgA:10 a=s63m1ICgrNkA:10
+ a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=taLDd7a_hP9WKsMzeGRc:22 a=sozttTNsAAAA:8 a=Y7y5GAGdEv-jaJFZO70A:9
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDA0MiBTYWx0ZWRfX9bU4/+Pq6X6v
+ OsXrlUsRKiItqs6MOn9gixV5KO8tTK85EydGLmwUIVzOvflcuK54967WwNQRfaPMnUzFNLJA89k
+ pNYci+2ty0WGXJcZCxb0UFGi1CM3UOc=
+X-Proofpoint-GUID: Yzp3OBmyPyl0bDKrF_gz4Di2-OgJiOH5
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDA0MiBTYWx0ZWRfXwZfG/SptA+Jy
+ elqPyoYSqJTfTv0uT2k46hucHxGEVwqmFvaEppXfuqa6cs3C10DXvHQYTOAKHggWJWYcgltpHTj
+ LhD+tISQj74oSc/cZsb4tBzFVo1n3z+flClwKm1YaMap9yOyJC3r28O9bc/Jn/vu9UIfvm9D42W
+ iobAY39AlVreMgItS34Do6+DAg3cDvgl4GgI93c9I4yITSzrLMunnSPDTBlO1nweU6CzdT7ApV1
+ +C1SR4slwUGlc1IpdJeBEe14aBo2tMCMFzN8PAda3/BFLEgc6tqiVj2FOhjre+7fglhixTjTmjz
+ sL8s8m9SDTXTLrbjKVuhbZqaD7gTKEnf5t+0jkHOdkZ9VpLgsU78N4Cf0tktfexa/YOQV3w0OVS
+ SAHh63aA8bsAlMdYwoESgGrOexz3gWSuVNMo+Y7CEm+VbpLnbc5ijWvx8zI7zAgedmxs/m9K+s4
+ sdxiYika1VLMRHtUUnw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-07_01,2026-08-06_01,2025-10-01_01
@@ -150,36 +153,131 @@ List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <meta-ti@lists.yoctoproject.org>; Fri, 07 Aug 2026 06:02:32 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20227
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20226
 
-Backport of the ti-core-initramfs + initramfs-module-netsetup
-infrastructure (originally developed on wrynose/master-next) to
-scarthgap, scoped to what j722s NFS boot actually needs.
+Add an initramfs-framework module (83-netsetup) that brings up an
+Ethernet interface via DHCP before mounting an NFS root, polling for
+the interface to allow the driver's deferred-probe chain to settle
+after udev loads modules. Pull it into the initramfs packagegroup
+under bsp-next and bsp-ti-6_12, matching the kernel-module CPSW driver
+sets those brandings need for the direct (non-proxy) CPSW path.
 
-Moteen Shah (3):
-  recipes-ti: initramfs: add ti-core-initramfs image and packagegroup
-  recipes-ti: initramfs: add initramfs-module-netsetup for DHCP before
-    NFS root mount
-  recipes-ti: initramfs: add j722s CPSW proxy-client kernel modules to
-    netsetup
-
-Ryan Eatmon (1):
-  conf: machine: k3: fix weak IMAGE_BOOT_FILES assignment
-
- meta-ti-bsp/conf/machine/include/k3.inc       |  2 +-
- .../machine/include/ti-core-initramfs.inc     | 23 ++++++++
- meta-ti-bsp/conf/machine/include/ti-soc.inc   |  1 +
+Signed-off-by: Moteen Shah <m-shah@ti.com>
+---
  .../initramfs-module-netsetup/83-netsetup     | 54 +++++++++++++++++++
- .../initramfs-module-netsetup_1.0.bb          | 45 ++++++++++++++++
- .../packagegroup-ti-core-initramfs.bb         | 28 ++++++++++
- .../recipes-ti/initramfs/ti-core-initramfs.bb | 37 +++++++++++++
- 7 files changed, 189 insertions(+), 1 deletion(-)
- create mode 100644 meta-ti-bsp/conf/machine/include/ti-core-initramfs.inc
+ .../initramfs-module-netsetup_1.0.bb          | 30 +++++++++++
+ .../packagegroup-ti-core-initramfs.bb         |  3 ++
+ 3 files changed, 87 insertions(+)
  create mode 100755 meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup/83-netsetup
  create mode 100644 meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup_1.0.bb
- create mode 100644 meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
- create mode 100644 meta-ti-bsp/recipes-ti/initramfs/ti-core-initramfs.bb
 
+diff --git a/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup/83-netsetup b/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup/83-netsetup
+new file mode 100755
+index 00000000..8e76bac4
+--- /dev/null
++++ b/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup/83-netsetup
+@@ -0,0 +1,54 @@
++#!/bin/sh
++# Configure network via DHCP before NFS root mount. Polls for an Ethernet
++# interface with sleep 1 per iteration to allow the Ethernet driver deferred
++# probe chain to settle after udev loads the modules.
++
++netsetup_enabled() {
++    [ "${bootparam_root}" = "/dev/nfs" ] || return 1
++    return 0
++}
++
++netsetup_run() {
++    local iface timeout devtype
++
++    # Extract interface from ip= kernel param (format: client:server:gw:mask:host:device:autoconf)
++    iface=""
++    case "${bootparam_ip}" in
++        dhcp|on|any|"")
++            ;;
++        *)
++            iface=$(echo "${bootparam_ip}" | cut -d: -f6)
++            ;;
++    esac
++
++    udevadm trigger --action=add --subsystem-match=net
++    udevadm settle --timeout=10
++
++    # Poll up to 60 seconds for an Ethernet interface (ARPHRD_ETHER = type 1).
++    msg "netsetup: waiting for ethernet interface..."
++    timeout=60
++    while [ "${timeout}" -gt 0 ]; do
++        if [ -n "${iface}" ] && [ -d "/sys/class/net/${iface}" ]; then
++            break
++        fi
++        for dev in /sys/class/net/*; do
++            [ -f "${dev}/type" ] || continue
++            devtype=$(cat "${dev}/type")
++            [ "${devtype}" = "1" ] || continue
++            iface=$(basename "${dev}")
++            break
++        done
++        [ -n "${iface}" ] && [ -d "/sys/class/net/${iface}" ] && break
++        sleep 1
++        timeout=$((timeout - 1))
++    done
++
++    if [ -z "${iface}" ] || [ ! -d "/sys/class/net/${iface}" ]; then
++        msg "netsetup: no ethernet interface found after 60s, skipping DHCP"
++        return
++    fi
++
++    msg "netsetup: configuring ${iface} via DHCP"
++
++    udhcpc -q -i "${iface}"
++}
+diff --git a/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup_1.0.bb b/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup_1.0.bb
+new file mode 100644
+index 00000000..6b465462
+--- /dev/null
++++ b/meta-ti-bsp/recipes-ti/initramfs/initramfs-module-netsetup_1.0.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "initramfs support for DHCP network configuration before NFS root mount"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
++
++SRC_URI = "file://83-netsetup"
++
++S = "${WORKDIR}"
++
++do_install() {
++    install -d ${D}/init.d
++    install -m 0755 ${WORKDIR}/83-netsetup ${D}/init.d/83-netsetup
++}
++
++FILES:${PN} = "/init.d/83-netsetup"
++
++RDEPENDS:${PN} = "\
++    initramfs-framework-base \
++"
++
++RDEPENDS:${PN}:append:bsp-next = " \
++    kernel-module-ti-am65-cpsw-nuss \
++    kernel-module-k3-cppi-desc-pool \
++    kernel-module-davinci-mdio \
++    kernel-module-ti-cpsw-ale \
++    kernel-module-ti-cpsw-sl \
++    kernel-module-phylink \
++    kernel-module-mdio-bitbang \
++    kernel-module-phy-gmii-sel \
++"
+diff --git a/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb b/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
+index a9eff847..e1d75327 100644
+--- a/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
++++ b/meta-ti-bsp/recipes-ti/initramfs/packagegroup-ti-core-initramfs.bb
+@@ -23,3 +23,6 @@ RDEPENDS:${PN} += "\
+     initramfs-module-nfsrootfs \
+     nfs-utils-mount \
+ "
++
++RDEPENDS:${PN}:append:bsp-next = " initramfs-module-netsetup"
++RDEPENDS:${PN}:append:bsp-ti-6_12 = " initramfs-module-netsetup"
 --
 2.34.1
 
