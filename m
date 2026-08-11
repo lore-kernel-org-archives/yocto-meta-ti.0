@@ -1,229 +1,221 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11203C5AC67
-	for <webhook@archiver.kernel.org>; Tue, 11 Aug 2026 20:05:24 +0000 (UTC)
-Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com [148.163.150.75])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.63623.1786478723219354519
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68D44C5B56A
+	for <webhook@archiver.kernel.org>; Tue, 11 Aug 2026 20:22:46 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.63622.1786479763075342555
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 11 Aug 2026 13:05:23 -0700
+ Tue, 11 Aug 2026 13:22:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=iehDjk4r;
- dkim=pass header.i=@list.ti.com header.s=selector1 header.b=YUSe6uT6;
- spf=pass (domain: list.ti.com, ip: 148.163.150.75, mailfrom: prc@list.ti.com)
-Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
-	by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 67BJJno22797094;
-	Tue, 11 Aug 2026 15:05:18 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	proofpoint-05-2026; bh=tY872SiI+lD7Sjwed+t79XBNKaYcZGgxW/qV6Pitu
-	UE=; b=iehDjk4rajAVbErhbGbV8Rs51ferw1d4690RoQujpbOuwHveqLktUJfIx
-	2JRRjHwUmUQX9DDcVMbRgQ8a2Fif6UZ6pnQaFLisyqs6bz3ZmU0k3wQzHY29qyYQ
-	vFjvpE3yNyilUNEwy8oPgmN/Gph0Qf6PzeuqhLzfOBHyfpLFl4AFju35yn6KpZDH
-	CFPxt7ys+coJfFxxGyu8cJmid62vxLhddzt8uA2ZRNVEXksrFP7A9d1qU6f9Jvh3
-	kSDKHrjm6WV5HxTywf33dWHwe37P+TiUUKGgbrtueyRazO7erfBWLnuz9TytCyue
-	QyCOKPKRofFkfUbM/QDzMZCJGobyA==
-Received: from sn4pr0501cu005.outbound.protection.outlook.com (mail-southcentralusazon11011014.outbound.protection.outlook.com [40.93.194.14])
-	by m0384305.ppops.net (PPS) with ESMTPS id 4g00wu422n-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Tue, 11 Aug 2026 15:05:18 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bB64+m6BVmlqKW8OaX6vnS7F+hXTGp1VqaPYFR27HherofLSMDsMFXVwsHz1rBV2pbSyhO9yP9tAuKtkQl4CDC1/3bQ7A+wO1z++AYP7opWmWvvP9/H3b/I/85s3icFmfK3xpXY4qmpcVD5QADKdIX8HZsmK6maQx71yu+XPsYqtmktP8/eSA0GLw2PK31d1EqZl86u6k+4CqcoxyBcZS+F1sOSwoH8ZpEiZRrJ1Kj/dxmVnH+qEvUXQhTfOzz35STYZUyJSTwWHzgAphmFfJ/Fak/Fl9ivv9dlgvvaucorfPismA1ji0XlYLUhsq5VJL23QMFoAQQMddiwnc4RJlg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tY872SiI+lD7Sjwed+t79XBNKaYcZGgxW/qV6PituUE=;
- b=b1+tXvVgccRdYLp2QQQ1GjWOvlHRxN7XQutS1dkXiQxZYujn9Ynj/749xAHLvZ93wCgLuFL83AaaV5mlex0BzUVCaDEAJv88BFHtyZWld5dLoVNXcpoDQE8zKfajjqZGwcvbhE5YVucg0FGcxA5TQs95syOOr2dBMON6rWNiCAzBV8gLME7MqVXBU+ne/MqOBedNBwIAfYbIqvtEO0tXIfxpfVBk4KElnyKa7cLkYXSuU/Rs5NPskcvfzNfydrdrE0fhU8O0TLmMrsFTGKzyK762LAobdPadh8b+0Tfj7VHsjhMmKko2+DaNbOXAR3+THG5Ndpa0G/nS/08lFZ3KDQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org
- smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
- action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
- (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tY872SiI+lD7Sjwed+t79XBNKaYcZGgxW/qV6PituUE=;
- b=YUSe6uT6V50w6tNJRQMmAX+M5WYtLYm4Uh6MBZW2cGy4p2TRQuMyES23wAb5MGyQRwjjfKIucdH5qiMKmMmCT1IojBoF82qHZvDmzNJxEvAkPH9Qk6PHMK3bc1RS/xm5AsWcYaw4/73jHt1a8RtQyZ7MuZ6YRQkcPRy5F/q83dJddnMwENJOUZzohQo0WicE8avwXqOY1jS687KQ/XR/eVUO/KPnnqe0h+XqdEk0fuW+1bRNAXS9RErpK1/WRigrOWpyP6lYYZanbbwIKEh9+A/vpqSjRxf29nFXnEP0BxMRlThogRR4Cj9/UB04l0UCRPzsq/nepS0RaGGhhdRLxw==
-Received: from MW4P223CA0019.NAMP223.PROD.OUTLOOK.COM (2603:10b6:303:80::24)
- by IA1PR10MB7215.namprd10.prod.outlook.com (2603:10b6:208:3f9::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Tue, 11 Aug
- 2026 20:05:15 +0000
-Received: from CO1PEPF000075EE.namprd03.prod.outlook.com
- (2603:10b6:303:80:cafe::63) by MW4P223CA0019.outlook.office365.com
- (2603:10b6:303:80::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.25 via Frontend Transport; Tue,
- 11 Aug 2026 20:05:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=list.ti.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=list.ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CO1PEPF000075EE.mail.protection.outlook.com (10.167.249.37) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.315.6 via Frontend Transport; Tue, 11 Aug 2026 20:05:13 +0000
-Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 11 Aug
- 2026 15:05:09 -0500
-Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 11 Aug
- 2026 15:05:09 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Tue, 11 Aug 2026 15:05:09 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67BK59VN770876;
-	Tue, 11 Aug 2026 15:05:09 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id 3B69C9ACF4; Tue, 11 Aug 2026 15:05:09 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: Denys Dmytriyenko <denis@denix.org>
-CC: <meta-ti@lists.yoctoproject.org>,
-        "Denys Dmytriyenko (TI)"
-	<denys@konsulko.com>
-Subject: Re: [master][PATCH] weston: update bbappend for version 16.0.x
-Date: Tue, 11 Aug 2026 15:05:09 -0500
-Message-ID: <20260811200509.2993821-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20260811195945.53759-1-denis@denix.org>
-References: <20260811195945.53759-1-denis@denix.org>
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 0C37A40C79;
+	Tue, 11 Aug 2026 20:22:42 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id CO4ktNLzp1W8; Tue, 11 Aug 2026 20:22:41 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CE3B840B88;
+	Tue, 11 Aug 2026 20:22:40 +0000 (UTC)
+Received: from gimli.cabin (argonath.cabin [172.31.1.2])
+	by mail.denix.org (Postfix) with ESMTP id 62831176A01;
+	Tue, 11 Aug 2026 16:22:40 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@lists.yoctoproject.org
+Cc: "Denys Dmytriyenko (TI)" <denys@konsulko.com>
+Subject: [master][PATCH v2] weston: update bbappend for version 16.0.x
+Date: Tue, 11 Aug 2026 16:22:39 -0400
+Message-Id: <20260811202239.40060-1-denis@denix.org>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000075EE:EE_|IA1PR10MB7215:EE_
-X-MS-Office365-Filtering-Correlation-Id: af777696-767b-407a-bae0-08def7e3dafc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700016|82310400026|23010399003|376014|1800799024|13003099007|10067099003|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 
-	Evd3x1XCs3PYAgCqTXr0oxhpKZlL5RXLjYAzXAb4DxaSbkzKsdEDExrb5KCs2NosMeiqKXBpAXhVgGid+DkSkipdNyh8P3GDIb1RTLft6z0lQvp+FocR9B8+Sl3Bnw2hC5QVxwrIJ85qxdsZQ6TtMKzNhJ7Z/8O8/QPRkZWitQ2n/xHenfkoGss8iJiJ4SI45w1uSKC6tGY95l9tA1OtN/BkRIJAeo3l6Ao806SVoQWp/YZHC2y0PQ9aZzM139bdlzKKaKHAK7rRhOnneN+AtFOWFBt+5w/72DbHOwas5zdSEVzSqBC36S9e5xyRL8nqD9AqDHtjXLEhr7bHj7LRAVpkASBwK2bBKcYAuXLXezK6DVCMbHUNaWjGceJz5rGFZs4w1ZWtSSXUeYpGpIdqBbMmXFhvHAeT+s1NzLhV5nkjnA35+D+ZaQYZhhju1tgCXjJYMZvbOTYTpdLGKqPsCw04B8gPsmRZLBmFe9cTk0S1tn2jah4tb0y0FA2xBwc81ZpyISlItBKzVAa/DRqo737bA6gMGjrOCMznUGwwisHeY6D1vaBro8GzbaVWcabMgWiiaTm6/YhBmc8gaqN8NXdlHxy37Q+jTkTW8y8xpf5lrYIaXCYfu8R+bpUkrZn3GRZiAcaB1x03X+GXa1fv47A5SUaK1rwuc50S1F6KWU87i3ilp5dLfrsLAI8U//6RxS/PrkuNVJO1GErEiyW8cA==
-X-Forefront-Antispam-Report: 
-	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(23010399003)(376014)(1800799024)(13003099007)(10067099003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	8PYSdp9DNl4ZmAsmcxvCCjzYsAgKU5k/yLg0M9UnVAbOpZKdDs0/Q0JOeZsfNvv8dmaABN3qVrCMGrF2QQwlIruQ1CeiqUHy+MW6BzmAe4JjgRCwKX1PXkeQTcpN95EAANyrmkH5MOH2Zc5yINKoqzAmNez71PgxFKxtde6odrWAOKx7TS5aCx6BYriv8g47lCyRlogGesSIO4t/dXV8FkophRLUw4jW8s2MnR1mR3D+Uwklp5b2X5h5cDpmfZHR5aLXkYjJAbE3UtqDLLtPmYPWCLjlZTpBUEhLcFSiPhrgYSfUlvagI4H2UsrhAdv86vb3Gj6KBjJcs6OGXIZQ/t7JDZwHladMZKuz70MfUceQRKUjNuoaSTIXgcK5Bew/Vbcx77avOpypgOG9iKXPTSTlubxqVtobSLFwxYaehktWFQVOhK3TeWD4fcmguGPd
-X-Exchange-RoutingPolicyChecked: 
-	KAUEvYDK+HORIBL+GEOWZ7IdxRflkoiBqU9TYv2GP9qo0juG8XsWwpBRSGUJgKIrDkjtQOQW/RXjKTruzAITfXxgc9xdU/p9sZ9nDnvRFYeo3cINrcHNm1du3KKhwxqa4EzlKd6oEGhVJRg5+Zrfab3xOwKTTxrPVKP/+fe1AkdgiyeHd2LJe0XEPQ3DWpqLEjTYk66qcXyY6U/YhkvLX2XebBYhcf7S1/lx0Ro8zpH0Ou5ZDGAW0gYZ/vg30kvL/9+jtv5ABlgOTmZARt4JDUx4doHnBpH0zFNChoTDikzr8t14hgtO0aezIEw2tZOMFZw+tIcWFCY+4Nz2Z/XOVg==
-X-OriginatorOrg: list.ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2026 20:05:13.5500
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: af777696-767b-407a-bae0-08def7e3dafc
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	CO1PEPF000075EE.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB7215
-X-Authority-Analysis: v=2.4 cv=M+V97Sws c=1 sm=1 tr=0 ts=6a7b807e cx=c_pps
- a=u5a0R1DJIqwdmu/eAz29vw==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=Sv0fKeRqtYgA:10 a=Vs-ZokuVWRQA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=taLDd7a_hP9WKsMzeGRc:22
- a=iGHA9ds3AAAA:8 a=0gcC27t9AAAA:8 a=k-42gJp3AAAA:8 a=sozttTNsAAAA:8
- a=QX4gbG5DAAAA:8 a=ef_xxL1EtnS6UrlDfdMA:9 a=nM-MV4yxpKKO9kiQg6Ot:22
- a=f5sM90hAhNS9OGT-JDKn:22 a=uCSXFHLys93vLW5PjgO_:22 a=AbAUZ8qAyYyZVLSsDulk:22
-X-Proofpoint-ORIG-GUID: ZrM_1gp2_v7ukDndiYXeVikTGwU3sv5E
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDE2OSBTYWx0ZWRfX3gIdrCGIsiqR
- eL9IYJWwAf3LJB4k0yVoetlDMqxjuD5Vr3QSXPiBMfGtcYM1zDo6NbzK1HgyQXcwfVXk4qd2UY8
- 8dtuqfBYhe6eDUBMi/feHwaXiHnYoN4=
-X-Proofpoint-GUID: ZrM_1gp2_v7ukDndiYXeVikTGwU3sv5E
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDE2OSBTYWx0ZWRfXwZpmnd368g2C
- o9zYT0/Na+g2MWRKeX1JWHk8scFPVk55Nx1NMWnqJqCLAQhdb3s8+vTsJOvWANjDW2GXTbqgDSz
- Au2DKJ3U3HCGCz52kPQU82VaRhCREhVhUoKhXjfV7nTHwrqL2IsgWJCZmk88YL5BsvM5oc//Yvq
- kmuwkeHvDf4T2yepoJbCzd2PS8/r6RJba1Df68Mmtrqi75oX6Jd9tLfCa7AwbOfha1n8NEiYwJI
- +JUSMTkelF5CGIYKJjGAktYWre3k+hJGgVs55bYMKvdUPt0NcnvWYVghVCh+UhpYjao1H5crTiL
- xH5iaNHVdzUPBRoApsnjd0+/wenJ3eykctafO2wqlyaH9r0lZ5NLAEvGG9fjfME4P4SmhMXWMK+
- uVSuHGlDL/DUvHBsjP89lt+7MB+UG/7HbYuQyX7rZh+G9kcY0mrGwh/7dsvCiNK9TBT9xhXlGyk
- fkNwsMF1wEfPO5u5zPA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-11_05,2026-08-10_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 adultscore=0 spamscore=0
- impostorscore=0 bulkscore=0 malwarescore=0 clxscore=1015 phishscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608110169
+Content-Transfer-Encoding: quoted-printable
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 11 Aug 2026 20:05:24 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20252
+ <meta-ti@lists.yoctoproject.org>; Tue, 11 Aug 2026 20:22:46 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20253
 
-meta-ti / na / 20260811195945.53759-1-denis
-
-PRC Results: FAIL
-
-=========================================================
-  check-yocto-patches: PASS
-=========================================================
-Patches
-----------------------------------------
-WARN - [master][PATCH] weston: update bbappend for version 16.0.x
-    WARN: Missing Signed-off-by by sender in commit message. (SIGNED-OFF-BY-2)
-        patch
-    
-    For details on the above errors/warnings visit: https://lists.yoctoproject.org/g/meta-ti/wiki/40887
-
-
-
-=========================================================
-  apply-yocto-patch: PASS
-=========================================================
-master
-=====================
-Summary:
-- Patch Series: [master][PATCH] weston: update bbappend for version 16.0.x
-- Submitter: From: Denys Dmytriyenko <denis@denix.org>
 From: "Denys Dmytriyenko (TI)" <denys@konsulko.com>
+
+OE-Core updated weston to version 16.0.0 in master [1]
+
+Our bbappend applied 2 patches to version 15.0.x and those
+need to be updated for version 16.0.0 accordingly.
+
+Patch 1 updated to remove fuzz.
+Patch 2 removed as it was accepted upstream.
+
+[1] https://git.openembedded.org/openembedded-core/commit/?id=3Dad85da159=
+d415f1aad6ea9fb50cd1b630a89692e
+
+Signed-off-by: Denys Dmytriyenko (TI) <denys@konsulko.com>
+---
+v2 - actually rename the bbappend, as it ended up in a separate commit
+
+ .../wayland/weston-ti-version.inc             |  1 -
+ ...equire-GL_EXT_unpack_subimage-commit.patch | 17 +++----
+ ...x-assert-firing-when-subsurfaces-hav.patch | 47 -------------------
+ ...15.0.%.bbappend =3D> weston_16.0.%.bbappend} |  0
+ 4 files changed, 7 insertions(+), 58 deletions(-)
+ delete mode 100644 meta-ti-bsp/recipes-graphics/wayland/weston/0002-surf=
+ace-state-Fix-assert-firing-when-subsurfaces-hav.patch
+ rename meta-ti-bsp/recipes-graphics/wayland/{weston_15.0.%.bbappend =3D>=
+ weston_16.0.%.bbappend} (100%)
+
+diff --git a/meta-ti-bsp/recipes-graphics/wayland/weston-ti-version.inc b=
+/meta-ti-bsp/recipes-graphics/wayland/weston-ti-version.inc
+index c8624f0e..42e6b6ac 100644
+--- a/meta-ti-bsp/recipes-graphics/wayland/weston-ti-version.inc
++++ b/meta-ti-bsp/recipes-graphics/wayland/weston-ti-version.inc
+@@ -4,5 +4,4 @@ PR:append =3D ".tisoc1"
+=20
+ SRC_URI +=3D " \
+         file://0001-Revert-require-GL_EXT_unpack_subimage-commit.patch \
+-        file://0002-surface-state-Fix-assert-firing-when-subsurfaces-hav=
+.patch \
+ "
+diff --git a/meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-requ=
+ire-GL_EXT_unpack_subimage-commit.patch b/meta-ti-bsp/recipes-graphics/wa=
+yland/weston/0001-Revert-require-GL_EXT_unpack_subimage-commit.patch
+index 4b3b4a1f..2e650234 100644
+--- a/meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-require-GL_=
+EXT_unpack_subimage-commit.patch
++++ b/meta-ti-bsp/recipes-graphics/wayland/weston/0001-Revert-require-GL_=
+EXT_unpack_subimage-commit.patch
+@@ -1,4 +1,4 @@
+-From 3cddacaa9ea3cfd75732ea9a84312fa68e0bfda7 Mon Sep 17 00:00:00 2001
++From a64f81b25e678026fa2d6a6715a9c63823235dd5 Mon Sep 17 00:00:00 2001
  From: Ryan Eatmon <reatmon@ti.com>
--From: Derek Foreman <derek.foreman@collabora.com>
-- Date: Date: Tue, 11 Aug 2026 15:59:45 -0400
  Date: Tue, 24 Mar 2026 10:52:59 -0500
+ Subject: [PATCH] Revert require GL_EXT_unpack_subimage commit
+@@ -20,10 +20,10 @@ Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+  2 files changed, 23 insertions(+), 5 deletions(-)
+=20
+ diff --git a/libweston/renderer-gl/gl-renderer-internal.h b/libweston/re=
+nderer-gl/gl-renderer-internal.h
+-index 1afffbda..dbf7b1c3 100644
++index 1752db2..6a27019 100644
+ --- a/libweston/renderer-gl/gl-renderer-internal.h
+ +++ b/libweston/renderer-gl/gl-renderer-internal.h
+-@@ -526,6 +526,8 @@ struct gl_renderer {
++@@ -558,6 +558,8 @@ struct gl_renderer {
+  	struct weston_log_scope *shader_scope;
+ =20
+  	struct dmabuf_allocator *allocator;
+@@ -33,10 +33,10 @@ index 1afffbda..dbf7b1c3 100644
+ =20
+  static inline uint32_t
+ diff --git a/libweston/renderer-gl/gl-renderer.c b/libweston/renderer-gl=
+/gl-renderer.c
+-index 45a2a148..8b238208 100644
++index 81bb5e5..0e04073 100644
+ --- a/libweston/renderer-gl/gl-renderer.c
+ +++ b/libweston/renderer-gl/gl-renderer.c
+-@@ -3021,6 +3021,22 @@ gl_renderer_flush_damage(struct weston_paint_node=
+ *pnode)
++@@ -3404,6 +3404,22 @@ gl_renderer_flush_damage(struct weston_paint_node=
+ *pnode)
+ =20
+  	data =3D wl_shm_buffer_get_data(buffer->shm_buffer);
+ =20
+@@ -59,7 +59,7 @@ index 45a2a148..8b238208 100644
+  	if (gb->needs_full_upload || quirks->force_full_upload) {
+  		wl_shm_buffer_begin_access(buffer->shm_buffer);
+ =20
+-@@ -5171,11 +5187,9 @@ gl_renderer_setup(struct weston_compositor *ec)
++@@ -5652,11 +5668,9 @@ gl_renderer_setup(struct weston_compositor *ec)
+  	else
+  		ec->read_format =3D pixel_format_get_info(DRM_FORMAT_ABGR8888);
+ =20
+@@ -74,7 +74,7 @@ index 45a2a148..8b238208 100644
+ =20
+  	if (gl_extensions_has(gr, EXTENSION_OES_MAPBUFFER))
+  		GET_PROC_ADDRESS(gr->unmap_buffer, "glUnmapBufferOES");
+-@@ -5303,6 +5317,8 @@ gl_renderer_setup(struct weston_compositor *ec)
++@@ -5792,6 +5806,8 @@ gl_renderer_setup(struct weston_compositor *ec)
+  		   gl_version_minor(gr->gl_version));
+  	weston_log_continue(STAMP_SPACE "read-back format: %s\n",
+  			    ec->read_format->drm_format_name);
+@@ -83,6 +83,3 @@ index 45a2a148..8b238208 100644
+  	weston_log_continue(STAMP_SPACE "glReadPixels supports y-flip: %s\n",
+  			    yesno(gl_extensions_has(gr, EXTENSION_ANGLE_PACK_REVERSE_ROW_ORD=
+ER)));
+  	weston_log_continue(STAMP_SPACE "glReadPixels supports PBO: %s\n",
+---=20
+-2.43.0
+-
+diff --git a/meta-ti-bsp/recipes-graphics/wayland/weston/0002-surface-sta=
+te-Fix-assert-firing-when-subsurfaces-hav.patch b/meta-ti-bsp/recipes-gra=
+phics/wayland/weston/0002-surface-state-Fix-assert-firing-when-subsurface=
+s-hav.patch
+deleted file mode 100644
+index d370577c..00000000
+--- a/meta-ti-bsp/recipes-graphics/wayland/weston/0002-surface-state-Fix-=
+assert-firing-when-subsurfaces-hav.patch
++++ /dev/null
+@@ -1,47 +0,0 @@
+-From 12ecd8d4b5095c120efef76493546ead3f41ab5b Mon Sep 17 00:00:00 2001
+-From: Derek Foreman <derek.foreman@collabora.com>
 -Date: Wed, 27 May 2026 14:12:36 -0500
-- Num Patches: 1
-- Mailing List (public inbox) Commit SHA: 728d3c7bd42eb6ad708d34f3fb4d2c900b5aee96
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master-wip
-- Commit Author: Ryan Eatmon <reatmon@ti.com>
-- Commit Subject: TEST: linux-ti-staging: Add testing dtbo and build command
-- Commit SHA: dee29d47fde9ce17751e65d565bdea69d66dd659
-
-Patches
-----------------------------------------
-All patches applied
-
-
-
-=========================================================
-  check-yocto-repo: PASS
-=========================================================
-master
-=====================
-PASS
-
-
-
-=========================================================
-  yocto-check-layers: FAIL
-=========================================================
-master - FAIL
-=====================
-ERROR: No recipes in default available for:
-
-
+-Subject: [PATCH] surface-state: Fix assert firing when subsurfaces have =
+no
+- views
+-
+-Upstream-Status: Submitted [https://gitlab.freedesktop.org/wayland/westo=
+n/-/merge_requests/2085]
+-
+-I've not been able to reproduce this, but have a report that this fires
+-when running Chromium on aarch64.
+-
+-It seems plausible that we can get here when none of the subsurfaces hav=
+e
+-views, and thus the flag won't be set.
+-
+-Let's just remove the assert.
+-
+-Fixes 6a280a8f
+-Fixes #1117
+-
+-Signed-off-by: Derek Foreman <derek.foreman@collabora.com>
+-Signed-off-by: Thorsten Lannynd <t-lannynd@ti.com>
+----
+- libweston/surface-state.c | 2 --
+- 1 file changed, 2 deletions(-)
+-
+-diff --git a/libweston/surface-state.c b/libweston/surface-state.c
+-index 3c31a0aa..65dc70bb 100644
+---- a/libweston/surface-state.c
+-+++ b/libweston/surface-state.c
+-@@ -268,7 +268,6 @@ weston_surface_attach(struct weston_surface *surface=
+,
+- static void
+- weston_surface_apply_subsurface_order(struct weston_surface *surface)
+- {
+--	struct weston_compositor *comp =3D surface->compositor;
+-	struct weston_subsurface *sub;
+-	struct weston_view *view;
+-
+-@@ -279,7 +278,6 @@ weston_surface_apply_subsurface_order(struct weston_=
+surface *surface)
+-		wl_list_for_each(view, &sub->surface->views, surface_link)
+-			weston_view_geometry_dirty(view);
+-	}
+--	weston_assert_true(comp, comp->view_list_needs_rebuild);
+- }
+-
+- /* Translate pending damage in buffer co-ordinates to surface
+---
+-2.34.1
+diff --git a/meta-ti-bsp/recipes-graphics/wayland/weston_15.0.%.bbappend =
+b/meta-ti-bsp/recipes-graphics/wayland/weston_16.0.%.bbappend
+similarity index 100%
+rename from meta-ti-bsp/recipes-graphics/wayland/weston_15.0.%.bbappend
+rename to meta-ti-bsp/recipes-graphics/wayland/weston_16.0.%.bbappend
+--=20
+2.35.3
 
 
