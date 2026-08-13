@@ -1,218 +1,248 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <lcpdbld@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD0D7C5CFEB
-	for <webhook@archiver.kernel.org>; Wed, 12 Aug 2026 21:55:24 +0000 (UTC)
-Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com [148.163.154.28])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6317.1786571716902721955
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEDB7C5B572
+	for <webhook@archiver.kernel.org>; Thu, 13 Aug 2026 06:38:10 +0000 (UTC)
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com [148.163.150.75])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13408.1786603082334754061
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 12 Aug 2026 14:55:17 -0700
+ Wed, 12 Aug 2026 23:38:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=l3bEM6/g;
- dkim=pass header.i=@list.ti.com header.s=selector1 header.b=Sg5wmRUB;
- spf=pass (domain: list.ti.com, ip: 148.163.154.28, mailfrom: prc@list.ti.com)
-Received: from pps.filterd (m0374956.ppops.net [127.0.0.1])
-	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67CK0Kla862888;
-	Wed, 12 Aug 2026 16:55:15 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	proofpoint-05-2026; bh=zAYsAwIrywKrR+V0ybXkBlZBrZxSzSWIQNWSvuays
-	do=; b=l3bEM6/gSq2c6gYrlt8jljyIIuGlFT2VHXrHTcwfZHT3yRCZsmE22SHTq
-	otZz43CZmltFC8i3EWXFI3gNhllCGe8C3g16EEG3QQy7UeVhYhmrVFjN8JfCnoAA
-	O++HWgBKGNdwNl3/WR6U2kmGpEChT+ANOgl3xLfyeScVpT/VF0O8mxzrFlGV59NR
-	sAmvsjv5nZSigBLE8z/ccUe0r/lbUdlzcsgFBKRch0xRshRWF+ASPopP0GDg3ua2
-	uP7otwfak2B8JO4mq0wZj0X+fvEdbB1iL2U/tNKMZE9hagV7zeABFpcTWhwrZD2b
-	VNiIYZfOZ6LyvjMbOBgw8sj6l6Efw==
-Received: from sj2pr03cu001.outbound.protection.outlook.com (mail-westusazon11012037.outbound.protection.outlook.com [52.101.43.37])
-	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4g09c28pqa-1
+ dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=iRl+7Y3Z;
+ dkim=pass header.i=@list.ti.com header.s=selector1 header.b=aVqeGZds;
+ spf=pass (domain: list.ti.com, ip: 148.163.150.75, mailfrom: lcpdbld@list.ti.com)
+Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
+	by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 67D5gLvo2148651;
+	Thu, 13 Aug 2026 01:38:00 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=
+	content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=proofpoint-05-2026; bh=/dY+6cIpBUzsm
+	IsqavKbN57K9JM4mW9uXTdp+ScG1XM=; b=iRl+7Y3ZEHRNS4NFDpQhz7du1qUfu
+	ZHydW38nDTD2Y815pJ26DZ/3NN4iHf8ICFon9Qu1TcKUtPxOsUGZABvlqIe/OwkK
+	tdDpZCOgK+irdwxi1/BEy8B6JZTbwzHV7Uqgz9JiRMNlcvoH27J+g+/NgGFB875l
+	fC5coGbKFrrKCwDDFPOpQt3G9dsJaoY0anNRlwESUrvg9X8lpU74xnxFUoMahTcv
+	AorezMz18wD9Agc7i5QaJNMUpfO7YAEpixvv5OOGga+IoPBRLEiktm5b2ltAHs41
+	PZDvWA8PMb4PV4Ql4rN+H1sZ7cQfy92JF6UG73ISmj1Lbb6yFNuT8EBUA==
+Received: from sa9pr02cu001.outbound.protection.outlook.com (mail-southcentralusazon11013061.outbound.protection.outlook.com [40.93.196.61])
+	by m0380145.ppops.net (PPS) with ESMTPS id 4g17mtrcey-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 12 Aug 2026 16:55:15 -0500 (CDT)
+	Thu, 13 Aug 2026 01:38:00 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CuPN8XWDgpyzLe55oF53CTpxCwxjwql49G6h9kmqvw6TZ0d27MQIA9cC2f5IeTViMpc1VcIFNPgSyN2fYjZbOY0ICz6TybTh9E04UMTnBnnXWC+M3fI+QNDnlwiQCvll+wXX4JySw3R1HxfeXExij3cAUq1vZu4NHm6iAFMi9l9HUFenn3U61yNCP3UiYK81b/epjWDcZZf5Og7DzF3W0GLkku7faTwPzDBWNUCk00I6523vZzj76P/e9k591DWm5hfLSpPGxagTw+7X+KYQ3D9yAaxENud5fdvt24KFJf0FJenXeoCjnU4vkz3cTNadhStkm1FO/AllNOLYMQ92ow==
+ b=LU9fGCnp7mVmJVDX/jRMfiihcpCXGjC2rG4iE155t3/mWjWgC2S2uTdWfve4kwYBkdO4UEtHq1qXgpzYMOxdTPT+S8kxP3c0cBSDpSIf4pSvhiOqq9Q5ADcwIC2+hxy4LgTteXGIyOtXSeuMkBd3BMh5DTRFL7MD1iW2rX3cdmBMLo8sBgt3iga5YDKgcPvquSrVw5cU3Qh8ROT6NBXLCtao6F70RTONgGI9/TEevkgLKpf5xh6+EEOxuMOLZjFux6GFa5hTaKAKkqlsmHwLGbOmDANZsv6YHg7VGMWTasVuwfiE0lOqaghdRqIIGAVe8621PzUbFGG126VqUL5sRg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zAYsAwIrywKrR+V0ybXkBlZBrZxSzSWIQNWSvuaysdo=;
- b=W6Dm5xi0ylet1br4WKACG4h5Tufpw0Sk+bvNhXF4xCIqtN8EoLyJeWtgqr4TsRxlC0uv7Stx/ZFFfUvJOUJgzH6PnHZ4ZE/SaSh5oDOqNIad2BAZ3jxzu943MRF3kzmeW7gY2v750eovSD0Z+2s7x9n2ghDk55DWFxzOdQvKF7zV0WYgn8GKQJCC5l7RpRWbgsdiPh3maQzBFtBWv4lbyy6BJfpJBpvoWNmYFApYgu2ZO1q3+Owilu27AbGTO4L/eDtIOaWZWxXDa44iW6TumIYfTRSxUS8a/tu2+m4lN7KaAh1fORStyATE6TM3gVyoEK/vjfycf8alRNPm1M2a6w==
+ bh=/dY+6cIpBUzsmIsqavKbN57K9JM4mW9uXTdp+ScG1XM=;
+ b=teaOhOg4WhdY28rtAHmEtcPrTgr9wUJuai5WG8iS0x4Rkx0waNXysr8gCs60djYAAIMnEWB2V6T1r2vuhzMXUX8TjJYE+nNV4ZCa3XMswRRznrfBMoAQecfjzJyn4erigCwPdtZ73R1WF1sJzZl78+TbjhTi17Spem7T/5375JujadFnmIWhY6m8vjj2fnvQNQLLmIffIQiRnaxZQFqstkkh/Fp7teAcIlVkZgLXImOXFhq5fTMiYt70ZWB0idTcHOWwaLLfMiMEBm7cv/56osar1Fi7sha8Qshbq1+K47J6hH+fCmS9u28iuBZa5VAVYyHgubb8Qu6GWRUMQzr5tQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org
+ 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org
  smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
  action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
  (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zAYsAwIrywKrR+V0ybXkBlZBrZxSzSWIQNWSvuaysdo=;
- b=Sg5wmRUBiBlmhgsG20La8PrRnNtqvaWREzDR7sKXl1boqk7rl3iqrYEC8hY69N/Qpg4GV2VQoc8OnNPyXjo+XLlT4YJGuF3CrPNPWiufHO37j0WK9WNEY5vz25iaJEF6XC51vTFAZIRPf8Hv3trLmNq80chajanYvuKeBCGyHhqzQHNtg3JaKEc+59kNQAEly1qpevf85iUbtMa1++Pb2icxLEuCJYclrm0KyrDYDjZYwa7ngAbU37kQ3d17to0cQljz66gASE5JxXJC0PloiZkreej5/rJ97R3Xzvktmdng5ZSuARS3rMxmIjC5wsO3M8yU5WVPSulRSE7Y5ANseg==
-Received: from SJ0PR03CA0103.namprd03.prod.outlook.com (2603:10b6:a03:333::18)
- by IA1PR10MB7286.namprd10.prod.outlook.com (2603:10b6:208:3ff::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.13; Wed, 12 Aug
- 2026 21:55:10 +0000
-Received: from SJ1PEPF000026C6.namprd04.prod.outlook.com
- (2603:10b6:a03:333:cafe::5) by SJ0PR03CA0103.outlook.office365.com
- (2603:10b6:a03:333::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.11 via Frontend Transport; Wed,
- 12 Aug 2026 21:55:07 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ bh=/dY+6cIpBUzsmIsqavKbN57K9JM4mW9uXTdp+ScG1XM=;
+ b=aVqeGZdsnkw2fDXzGSkLWliUwQTNxqcIjD2xilvhQ/8gSgy0gD3V+so4ENTd3E/CyWYu8E5le5WTxhBTfJT22E/uRlLw156bSW2yy/Y/8FjgPhk9Jvo1jx+/oo33KQk+o9lnwoPFHmw0gl5g33NAu0W8MHMCPIYbANYhtvIEpSbgsHWymkD9Z3m5Zx8kkmYGbNwN1HrflqlnaeJ4Y1L6ui768Vdh+ugBio86vs86RJFfWxb5R+fiFKrfxQaDNUcABpiN2ZVFXxyPGxyDPh9XgV8thDbYycfugC2IxHCvX0XFqYxkpdst97b+yexfA/cZOtsPVXWEiR1RQqvCI2S5Sw==
+Received: from BN9PR03CA0492.namprd03.prod.outlook.com (2603:10b6:408:130::17)
+ by DS7PR10MB7300.namprd10.prod.outlook.com (2603:10b6:8:e3::5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.315.15; Thu, 13 Aug 2026 06:37:56 +0000
+Received: from MN1PEPF0000F0E0.namprd04.prod.outlook.com
+ (2603:10b6:408:130:cafe::a2) by BN9PR03CA0492.outlook.office365.com
+ (2603:10b6:408:130::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.13 via Frontend Transport; Thu,
+ 13 Aug 2026 06:37:56 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=list.ti.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=list.ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SJ1PEPF000026C6.mail.protection.outlook.com (10.167.244.103) with Microsoft
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ MN1PEPF0000F0E0.mail.protection.outlook.com (10.167.242.38) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.339.3 via Frontend Transport; Wed, 12 Aug 2026 21:55:05 +0000
-Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 12 Aug
- 2026 16:54:54 -0500
-Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 12 Aug
- 2026 16:54:54 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.339.3 via Frontend Transport; Thu, 13 Aug 2026 06:37:55 +0000
+Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 13 Aug
+ 2026 01:37:55 -0500
+Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 13 Aug
+ 2026 01:37:55 -0500
+Received: from fllvem-mr07.itg.ti.com (10.64.41.89) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Wed, 12 Aug 2026 16:54:53 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67CLsrbA3853017;
-	Wed, 12 Aug 2026 16:54:53 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id E2F329ACF4; Wed, 12 Aug 2026 16:54:53 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: Ryan Eatmon <reatmon@ti.com>
-CC: Praneeth Bajjuri <praneeth@ti.com>,
-        Denys Dmytriyenko
-	<denys@konsulko.com>,
+ Transport; Thu, 13 Aug 2026 01:37:55 -0500
+Received: from fllvdckhpci102.itg.ti.com (fllvdckhpci102.itg.ti.com [10.64.72.97])
+	by fllvem-mr07.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67D6btTq631158;
+	Thu, 13 Aug 2026 01:37:55 -0500
+Received: by fllvdckhpci102.itg.ti.com (Postfix, from userid 60899)
+	id 13E5D2A65; Thu, 13 Aug 2026 01:37:55 -0500 (CDT)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        "Denys
+ Dmytriyenko" <denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: Re: [meta-ti][master][PATCH v3 1/3] kernel_legacyhs: Adapt to recent changes in oe-core
-Date: Wed, 12 Aug 2026 16:54:53 -0500
-Message-ID: <20260812215453.3479369-1-prc@list.ti.com>
+Subject: [meta-ti][master][PATCH] CI/CD Auto-Merger: cicd.master.202608122200
+Date: Thu, 13 Aug 2026 01:37:55 -0500
+Message-ID: <20260813063755.824401-1-lcpdbld@list.ti.com>
 X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20260812214920.3639941-1-reatmon@ti.com>
-References: <20260812214920.3639941-1-reatmon@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000026C6:EE_|IA1PR10MB7286:EE_
-X-MS-Office365-Filtering-Correlation-Id: f075412d-165c-4c73-d3cf-08def8bc5ec1
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E0:EE_|DS7PR10MB7300:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9f03aa32-671c-4b4c-e714-08def90568a6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|36860700016|82310400026|23010399003|18002099003|56012099006|10067099003|22082099003;
+	BCL:0;ARA:13230040|36860700016|23010399003|376014|82310400026|1800799024|13003099007|6133799003|10067099003|56012099006|18002099003|3023799007;
 X-Microsoft-Antispam-Message-Info: 
-	QH3MYT8/akxUwFVhX9PjeafDm0rl7KAG5m2xZ1t8vpGxyERLLu19U7CoAX5ul0nIGpX8sb9j3gUh9yVkzsc7nx0e23sNF8H3E1IuVJW+d3+aXHGxiIAAyXQvew1nepuceTk6d86PZGefHbfVLIa+Ynu5an8uvs5RJTEbqxsGZeIxv5VpDtg+NTL35L8RiY7MsfXDKqsWnTznj5YbBYM/9YFl2TngE/YsDc7ArBDJwOE5HK28g3Z+aKI3K9ITzdAibFzXw6AB04ljbiXRKPxytvJz6g7MO+L9181j4k5g/4RxEzj9B2IfXst23K2o3XXxkHeC5XcTuWMTbUvAT8vubboNwMFp9lpp77LG/CmJ080799WYj9m/iv+c2tkDbiYmaUXADbD7/lHtVPp+c9a5AGzVqQdiA1+Ny/1iyuBWH1t06sd0rwL35+OuikSZ1mVtrs7gUB3/quP08cGRwGpf8vehCJ3rPkIKZKnT9n1cj5an2takvsRmksi0Vh1HX9dIXzZQnxEpfllP5iy2yDiugpbJtt1Q0pjy4TPReeUZNLGR/M8X+fcjTEsfVmQ95fE1NTqhHGTMFK330OazzV11dLl376/1G4vuqwICstYdhC7HdC8xmCpRBgnMoqNxJjvRVWh+uVgJoC0bl8tJU/xcDi/NyKNETrh1iOhBQtmKdxGHwnHSApbm/g+yEmgz+IPm
+	mJc9quboza+AoxiZVsAcnB/InnjSMyu4z7sUIOzK9mKnlhCztMuVAEZHBrKLNOcDJ7mJnojHUcua/HoodXZ0WluPeNsGZY744af59VkuwyflqkdjfZXL0mheDS3D+/djHO4iIHtWZp19oK7pclNwthyQGFA2awS32DD2RwUZZ5XTtU63cAyM7VdC3cBIHyKcBHcqFxhTSQyue0Nw0VgxBi1Yq4GPjp8PxerooVxA5cAesfoUaft6jOf/zE8CKhsHgCWauO/J8bT/MuCsBr5zyPhO2eopHdNKzt2IEZ7S93gGYyiUB6FpSIUxUl5mvBsJhwSgeQhPaqaGptxKxWzrlxS7gaiWrCQsr9PnUjOMhqtvWk1P6btPOEPA5oJdrHsvwptF+GvZNCYRHH5pK216Mn/0+4JXIRF15Bw6JbR2a+7QPT7FUrPdgzTUDyinVXnhuCxva1zzXLv5pgqcVD9ZazfK1Zv/+fAF9p2bjUvmdFSQe3jsCHYsecRXHyBMTU1csZHvALFj8Ix5Tsgl12SE44FAM5klHnEOwDgO0P/ddsBgp9HmWlpWBr7j2E+vT8qMMDIw2068thB5z9yBAYFKDBrtiHQgxluBt4yzN4sYCI4KBztWLTFn921/y84t4b96pzxcuFWlRsTXIOr48nlCopdfOZyIjtxrzbL9Vc2E6w+Lf038irFdO+oM67Dxix3J/wO02Pog5n/R4NvpfEsV6g==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700016)(82310400026)(23010399003)(18002099003)(56012099006)(10067099003)(22082099003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(23010399003)(376014)(82310400026)(1800799024)(13003099007)(6133799003)(10067099003)(56012099006)(18002099003)(3023799007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	JdsvzvVw8fKHq6i5xvoRhEWKTnDe99ftAbBAwh4Yi7sv+MGSrsGIQhyr6CIAQO5/gw1AubNZ5iYmUlfw5WwAvO28duYKU77ZEPLYUC1JjRn4Mm6Tq+Ki498BhAcI5BDXA7pUu6drgaX9gGci5D9UwjEZDKG/zVvo0/SFOdB4nY9nrL0gVN4f/Yo5utxlQcb44JSNBdmikRRIjvZA2qY/e3kPoDasDeVfFlo3I9QsVa0oVyQ2ENGDB32BuUjdZxb4Xzgz/GiAIQ747ZZvayMNa/S1TNEFgWPmTqhutAJ6Hhv2CAIbQSBDACn+KLgHqrvH0YK/C1PEmroS80KxKpFllqKAMonueK2bQyBRtW0kCiMordz3f4iVza/g4s+mg0jC5Vx71XcS3QO6OW2MAydbOmZs2CMhYy28WpvdaW+AQHkyjUDUbWts0Vdot6YyX4UP
+	6yJyk3Crxe87tR7+dzKKYSAv5/6wVswallMrC6CkPLfSaHDs8rL657l9Xvg5w/ml6Pt2zI1leHIngc7SLblgcK284q00ROYyl22VKFHFEuChIsA4opoje0Jul8UFPDKR6Pnt47cc4rhIUGnYivXXs86GmFFDLJqtAmNgZqqGUfaJE2jtGg3umBimp28ZLM13KXbTTvoDHA2VCol/kcWN6kMpJDNlvuPNI7Xk3a4S5mfY1RC8DtwHDLPbF+jguKnyvcJ8sorVjMD2oKFLBEVZK4dkUIzUtXGdIX4Y55ySnkycEJAwCfz1pAjT8C721dPOcBjCJzvhFd7lDyP5Dmi2osDBkP0fpDt5x7LgT+snCiitTxcNsQF+qan0EbmW7nYEJvChJWnxNN5FNN3WfBQePUrJxzwUPkqkPqxWw9tpOdXm//fClBZgmj8WvVu/Y2vj
 X-Exchange-RoutingPolicyChecked: 
-	rLvw9GLNfo/0WfwRsey5X9/lrG7jOCXh7sMWPIVnjEpzwjrdRy9zR/4IlkNVQu/NhUg6pLnUJQYwNsdqiJgUbxh8FqlqtvS4s8h/xWcwyDbOAiQ4tsmX4G1DNcIqhENUXhmOd/l8G36co82VqGxm+zyxdQiIZ3P0IAJ3RHXQejCKyHwrZjyzv9LMZ5LZFGZ79j+MDFkkfHG8GZq+P28c+brLVFH07aX+5oIERuKTACfU7v7PGeBCvzAq+E4UC3/XT+o1PfgUHhAGuJQcDk+IQg3e3LLIVp9QmKM/+qsIeUmNAU/VRmlR/+sE0MGdu4XoqOqyzg1gVfvGL9GpH2kPaw==
+	bvtyNgg+HDlyQZo2C2s/HoU9C0wilSYPqPQ3EtPxebzJvExYzS5jNPdiMweTfmno+NVeGAiRJdCNepuau4pR03f1a30iMzxX3/5cAWAF/LmXfXPJh5xvZYf7w07wcvZPF6YfKWrkjb3JJZjm/GJeq5JO/mcULz2FZDlc6evw9q334FeAM0+sNCfLoD4fQ5rEELdKjJquX9n/zsIvGQ2dqQW6iMcyxP880K51KzIgglXZKMBY0uotuYdqMho3nWcVKuZm56/yNHsnVOE2kZBODCSz6pMPWS7YBE645l/3wX6+KF/yLXimI41878eT65tQOscGFCk7yo7cXszxeVZ3Yg==
 X-OriginatorOrg: list.ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2026 21:55:05.9219
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Aug 2026 06:37:55.7962
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f075412d-165c-4c73-d3cf-08def8bc5ec1
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9f03aa32-671c-4b4c-e714-08def90568a6
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	SJ1PEPF000026C6.namprd04.prod.outlook.com
+	MN1PEPF0000F0E0.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB7286
-X-Proofpoint-GUID: -QVd2R0g5jR4MhU_FygCQ2HbL4dY6Kkx
-X-Proofpoint-ORIG-GUID: -QVd2R0g5jR4MhU_FygCQ2HbL4dY6Kkx
-X-Authority-Analysis: v=2.4 cv=PrCjqQM3 c=1 sm=1 tr=0 ts=6a7cebc3 cx=c_pps
- a=ZegHLSctVnYqdC7w6owYpw==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=Sv0fKeRqtYgA:10 a=Vs-ZokuVWRQA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=jwouBfj2j3NM8CExmVVE:22
- a=sozttTNsAAAA:8 a=di3swuCc6Ctu-C67fWsA:9
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEyMDE3NiBTYWx0ZWRfX8+oZjbOW5n52
- Msco7JgaS3n3LYECmL6TH9CScrcuufy0TdOrRek72nLs8bo7JDvNRV+XJWdYgVqHYjxGYOYcoLm
- yptTfMhyHyWLdEpn60Xh0Ed5f0KC5Bk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEyMDE3NiBTYWx0ZWRfXxNrQvni4UIDe
- 5NvT5v+8WSOeYOW6YitnFsFOkDYXOSCjNZnHGzVvSA59pjFkX2S3HNaE/XP9Yc674Wr23SB2iTa
- taXgTgmP//dxvkHc5wvQFZfIKQbkp5tGTrjeiHiOqzrwTH/3jqi8V2HK48Zv9O//zMEPYU2rYjC
- i5HM/GqXOh8i0JC7QqEecG6o2hI89By2hMpxOkgV8UaNvw74ARSDBgSN5VmRNsCubtnrCCxto5x
- 85obIQ5vOwwvcMBssE31w7d9RwI/NGzaNvGEwKW+wZhvCoKZDfmDDQoNW1xeTUa+ACJOHjX1A3P
- Yf2HMovAZ8Zjm8+NvnQKDq919OAUbfF0+mLS66WHksWGaUcg2CIc5yB8ef1keKwHjctI7kzjJu6
- jRpHoyY7OxvmyD/al+XFGQCvYyA2JxCdCZhlEi4a6Jh0UT97W7PzGwvni2H8eVjdwVG6n15vOv8
- swzsWlokfaqOuCEQL7A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB7300
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDA0NCBTYWx0ZWRfX+J0jZEbAA/8Y
+ 5GCWcdJ6w+lmJwNX7r6BKznlhUuDO7GoufF4lpypnd3WRLRo51w6MgsmSziJiJv/WQpyUVn7aYa
+ TwU8jtp0KsySvG6xEGcGr5brJiIKaenHdJJsyyh39NYIBsmGs8rPddzrZ8vqNuT1Ks2EOCClTd+
+ aygrLwZYyAVaJJ6FCJhbX+9aHBj3WBIVC6DExkQF6bzIcD7WbrWuDnTEqJEslKtZwMEOcvwBcgV
+ kFgVryHkruC+lZEc9UOUOvTrv1DDfogo1dHgjl9jyMA84JwTiqSNl5gmWQUTfUdJVu8PL7xWE/U
+ F4687TuuVggD25y1ADC63E6aNUZ8UHIcebo3DaJa34L5zASTBLbKXMg5jpIS96XCKsH7UPViHd8
+ /Xe+HOiMzsEkB/BBRZhCW/Od1Gy97yVEGJFrnJa05gSQaKup6eAyFCK4TAmlfbjxM2uxlhNoKSX
+ 64eCKTI5ghZpgnSerHw==
+X-Proofpoint-GUID: efxv3b_F99K_Pw9M1BtwoMjYnmb6Mejm
+X-Proofpoint-ORIG-GUID: efxv3b_F99K_Pw9M1BtwoMjYnmb6Mejm
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDA0NCBTYWx0ZWRfX8eiolHrg0xGZ
+ F4CkzJy4kecirLh7oaONcy58+UVq8ovEdimke6pHBMpTelWJDHQGAEEde0PEamwtQLjuIHAhZry
+ COgwcRHOyMRTZzrL4khu4JPE6ye5C/U=
+X-Authority-Analysis: v=2.4 cv=boZ8wkai c=1 sm=1 tr=0 ts=6a7d6648 cx=c_pps
+ a=DPCWJwWgIuHEo730oqIOaQ==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=Sv0fKeRqtYgA:10 a=s63m1ICgrNkA:10
+ a=f7IdgyKtn90A:10 a=Vs-ZokuVWRQA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Z8NIEmU8O1QQgoT56wFK:22 a=gO1vWkAQAl3rybz1DQOp:22 a=sozttTNsAAAA:8
+ a=NEAV23lmAAAA:8 a=NdMnjpG6G9tW9_JZIX0A:9
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-12_06,2026-08-12_01,2025-10-01_01
+ definitions=2026-08-13_02,2026-08-12_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 priorityscore=1501 malwarescore=0 adultscore=0
- phishscore=0 bulkscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0
+ malwarescore=0 priorityscore=1501 clxscore=1015 impostorscore=0 phishscore=0
+ lowpriorityscore=0 suspectscore=0 adultscore=0 spamscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608120176
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608130044
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 12 Aug 2026 21:55:24 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20260
+ <meta-ti@lists.yoctoproject.org>; Thu, 13 Aug 2026 06:38:10 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20261
 
-meta-ti / na / 20260812214920.3639941-1-reatmon
+Updated the value(s) for:
+  u-boot-ti-staging_2025.01: SRCREV_uboot
+  linux-ti-staging-rt_6.12: SRCREV_ARM32
+  linux-ti-staging_6.12: SRCREV
+  linux-ti-staging_6.18: SRCREV
+  ltp-ddt: SRCREV
 
-PRC Results: FAIL
+Changelogs:
+  u-boot-ti-staging_2025.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=1612e4d1deb11d49304c715576854b28cc10e34d..13f4e50ff203b9581dec599a620b57bb9ff1ed9d
+  linux-ti-staging-rt_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=c6cc0cab5b8575a2a70f0c4f9dbc9981f367d8e3..43493bcb9d02b98e4e52e0fa6639c25d97eaab78
+  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=5ae038766eda6647bee6dc52c88308a0a280878d..7bbb58844e0ba096c6fc4f078fe20b5f9419bc6c
+  linux-ti-staging_6.18: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=1510cd916429bb025e2d0fdbad7ceae652820d82..9098671a2d2ce1876543f6d6fd576285a184f5a4
+  ltp-ddt: https://git.ti.com/cgit/test-automation/ltp-ddt/log/?qt=range&q=26fc7b1db82d7852bdb804a21cda9e1c997702e5..7b143203fef1c7b774a49b459c092eaf0b2718e9
 
-=========================================================
-  check-yocto-patches: PASS
-=========================================================
-Patches
-----------------------------------------
-All patches passed
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb  | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb    | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb    | 2 +-
+ meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt_20260130.bb    | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
 
-
-
-=========================================================
-  apply-yocto-patch: PASS
-=========================================================
-master
-=====================
-Summary:
-- Patch Series: [meta-ti][master][PATCH v3 1/3] kernel_legacyhs: Adapt to recent changes in oe-core
-- Submitter: From: Ryan Eatmon <reatmon@ti.com>
-- Date: Date: Wed, 12 Aug 2026 16:49:18 -0500
-- Num Patches: 3
-- Mailing List (public inbox) Commit SHA: d0412f705767e28857162a634630bafbd2358cec
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master
-- Commit Author: Ryan Eatmon <reatmon@ti.com>
-- Commit Subject: ti-core-initramfs: Decrease IMAGE_OVERHEAD_FACTOR
-- Commit SHA: 9a5228e56c20f4b3ae65cec904010ba208e635d2
-
-Patches
-----------------------------------------
-All patches applied
-
-
-
-=========================================================
-  check-yocto-repo: PASS
-=========================================================
-master
-=====================
-PASS
-
-
-
-=========================================================
-  yocto-check-layers: FAIL
-=========================================================
-master - FAIL
-=====================
-ERROR: No recipes in default available for:
-
-
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+index bb841fc3..005f06e3 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
+@@ -4,6 +4,6 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2025.01"
+ 
+-SRCREV_uboot = "1612e4d1deb11d49304c715576854b28cc10e34d"
++SRCREV_uboot = "13f4e50ff203b9581dec599a620b57bb9ff1ed9d"
+ 
+ SRC_URI += "file://0001-binman-migrate-form-pkg_resources-to-importlib.patch"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+index 64a5e0d1..eff4c1f5 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.12.bb
+@@ -10,7 +10,7 @@ BRANCH_ARM64 = "ti-linux-6.12.y"
+ BRANCH = "${BRANCH_ARM64}"
+ 
+ BRANCH_ARM32 = "ti-rt-linux-6.12.y-arm32"
+-SRCREV_ARM32 = "c6cc0cab5b8575a2a70f0c4f9dbc9981f367d8e3"
++SRCREV_ARM32 = "43493bcb9d02b98e4e52e0fa6639c25d97eaab78"
+ PV_ARM32 = "6.12.57+git"
+ 
+ BRANCH:ti33x = "${BRANCH_ARM32}"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+index 5e7e8cd2..a6524670 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+@@ -21,7 +21,7 @@ S = "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}"
+ 
+ BRANCH ?= "ti-linux-6.12.y"
+ 
+-SRCREV ?= "5ae038766eda6647bee6dc52c88308a0a280878d"
++SRCREV ?= "7bbb58844e0ba096c6fc4f078fe20b5f9419bc6c"
+ PV = "6.12.57+git"
+ 
+ SRC_URI += "file://0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb
+index f2f27e83..aedc2cc8 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb
+@@ -25,7 +25,7 @@ S = "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}"
+ 
+ BRANCH ?= "ti-linux-6.18.y"
+ 
+-SRCREV ?= "1510cd916429bb025e2d0fdbad7ceae652820d82"
++SRCREV ?= "9098671a2d2ce1876543f6d6fd576285a184f5a4"
+ PV = "6.18.38+git"
+ 
+ KERNEL_REPRODUCIBILITY_PATCHES = " \
+diff --git a/meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt_20260130.bb b/meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt_20260130.bb
+index e455267b..cdfc185e 100644
+--- a/meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt_20260130.bb
++++ b/meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt_20260130.bb
+@@ -11,7 +11,7 @@ PE = "1"
+ PR = "r1"
+ PV:append = "+git"
+ 
+-SRCREV = "26fc7b1db82d7852bdb804a21cda9e1c997702e5"
++SRCREV = "7b143203fef1c7b774a49b459c092eaf0b2718e9"
+ BRANCH ?= "master"
+ 
+ SRC_URI:remove = "git://github.com/linux-test-project/ltp.git;branch=master;protocol=https"
+-- 
+2.43.5
 
 
