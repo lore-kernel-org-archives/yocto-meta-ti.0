@@ -1,284 +1,215 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <prc@list.ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06FB7C5DF7D
-	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 20:06:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 277CBC5DF7D
+	for <webhook@archiver.kernel.org>; Tue, 18 Aug 2026 20:10:51 +0000 (UTC)
 Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com [148.163.154.28])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.17655.1787083556517669065
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17740.1787083841365147490
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 18 Aug 2026 13:05:56 -0700
+ Tue, 18 Aug 2026 13:10:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=CU3vBlZV;
- dkim=pass header.i=@ti.com header.s=selector1 header.b=Ac5vLwwE;
- spf=pass (domain: ti.com, ip: 148.163.154.28, mailfrom: reatmon@ti.com)
-Received: from pps.filterd (m0374956.ppops.net [127.0.0.1])
-	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67IJVTkF126908;
-	Tue, 18 Aug 2026 15:05:54 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=
-	content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=proofpoint-05-2026; bh=1WrVZkdjlvJSi
-	iQbhpuSMCuJHM96blft+FtGuOhbbbo=; b=CU3vBlZVYjQ79m9EztCd8fPqadpto
-	DZyf7eo+LD6skTlQEEi4nv03BLuRi2zg4upZieTOZnyovQ4Uxs8ZF+RmEwfE0WYa
-	kfGJGBrEbZANQ0SB/eMgKgNba1XgVXM+o2+lDKhaFVkv+QOLeulx6WJU/Ck1fvVR
-	tar9mjdXsHYjbqoO/VQxDi/9be9s84J9cuHvfyNIGmbeBJC+TMC/WHXd7QKJsQtM
-	NojbF4vZsvfaexxTLMErC6qH4p7uIGJDheiU5gySghAxF8OQev8lN3nmQ5ZV6lNw
-	edwG6Rx0FYr4C3rg9aBt1VJL2KfYxxUQ8xDlCSH/IPfYvQ0sbIZjMCc5g==
-Received: from sn4pr2101cu001.outbound.protection.outlook.com (mail-southcentralusazon11012027.outbound.protection.outlook.com [40.93.195.27])
-	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4g4mpk3hr5-1
+ dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=Db0aymPi;
+ dkim=pass header.i=@list.ti.com header.s=selector1 header.b=TkYTauBJ;
+ spf=pass (domain: list.ti.com, ip: 148.163.154.28, mailfrom: prc@list.ti.com)
+Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
+	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67IJUm0X487799;
+	Tue, 18 Aug 2026 15:10:39 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	proofpoint-05-2026; bh=VcP5FprB4lnvA3qhu9hzB/wLM/lQ7OA7mb7hFQROV
+	Ew=; b=Db0aymPiqYQ8+ii/1VgMLJtU3j6bEUWV2lSHf3gGcu43dHkjrZAtPj+jc
+	hnVUGj4sGILwnbeDkn422XnJZ9j5Pab0G2LCqNQ1wyTU5Rqsxv7XHf6x0PhpwgxY
+	4+XmTNiIQJFaOEoowhqkzarrc8ncgxmcHxfJcejPh5p5xIEfTO4Ou/YsBm3qDLPR
+	xDpS+uPDTKudvfmP9/YeTUqROrA4cmH/5qA3VwG5yV/PxR98eETh+aGhf9D/2YtU
+	xz67N66eVCJvcSM27+Prf1pL7rIfpq/c1NZXn1GVu2PfXZVvdtzVkwzWrqa2UgdQ
+	y6gZYg2vKe/AvOjaBo0ga2nxynKtg==
+Received: from sn4pr2101cu001.outbound.protection.outlook.com (mail-southcentralusazon11012049.outbound.protection.outlook.com [40.93.195.49])
+	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4g4k73v50v-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Tue, 18 Aug 2026 15:05:54 -0500 (CDT)
+	Tue, 18 Aug 2026 15:10:39 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zErWrPiC9ElY1AHVfnViu3qiSgBeiSkKUo/jrPPcTMX6Tyrj+6z1Y/Wt9p5Yl26kDp0/9YswPHrjyFWrcEFTwNYygIau9kQygDlW2tvZbTFDyQJu891/ABHrbzBW38Ll88h3wl19/A00fadBZI/E6Tn94H0fJd/PQJEUlcglBGPdDa4Bp+rGvq+9ZzguZ2dQRA8gRW0Uo4yVKtEnyoGiemkTUsYZx4LNnq5f82NfcmMS1Ty4pc+GV1hWCLCylU8yYO1exPehTVxWIMLF6EbIOF57u3TSIxEYqm+mAaQmOBXw61u4h+tFm6Ugatnkt85/3c2FlxsFPKWIQErAtD1hZQ==
+ b=G7j39AHpSCoTdTTNJiXYXYaXVL9icNI0MAvZ8UZnuFImtYL9HogSyJVxIX0FNBb+vpCKxfc9y4bx0OpXHIis/eqzFd9IudKT5y6iOiwqJ73lrdBd6Fd/JtZgmiu8RFMrMzGK/bAnccAenvl6JsshxC59E86YwrfjsRbXFfq/7gIxwLRUSKTceLpkk4LqlgZDBSwSBH+KHHryOZhHpA63Qmxq3mvCnV/olU1Y04ujAmoASAo3c44EcueYmALRmcpkiqCTJH3gcVJ1XDtBPuzbEhj/bzbrFSTD3/e4bJ0MDE4r+9j7txNQAXIrp0Q3YdZQ2yPrBvreJx9x+6LXV6RYqA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1WrVZkdjlvJSiiQbhpuSMCuJHM96blft+FtGuOhbbbo=;
- b=WK9qruTcwCJ1AeeMxuGkc2l0yZlH+F5auIYAAmI3HCsTH7P80TL3XLX7wmehrOzTrFaErAXqFnAvouv9orSJG3UJJ47y9xckBPi6C5NEK9jXgWf668eTxM6U25IlnUflSQxybaGvbNWAFERRFFcmG1sCX8aTZJbqQQOChCkjiGnvYdtdAWJW0N0aQfFAz0y9LqE998sRJgFcEDjofuJCdv2lgF1CTz73Nz98R84MfpP41iw1uDlOQ5CpoCVyToUyRsqrOD7vqtHQJ6N2503oa1jxGjP3bbKmTVfjdKjDw8WtlET4irO6Fd+QNGG0og9Oqb84k4G+tLIXHeyVjq+emw==
+ bh=VcP5FprB4lnvA3qhu9hzB/wLM/lQ7OA7mb7hFQROVEw=;
+ b=blzHlCEWrcUa9K+yCf6wXolck63WXX0VQySq8Cg6SirO+MO3vgrPo8wqBrcoTzWSpy/ydcvPg3Hs2K1KPK9ZJ9DYc87CdV6ncZn9Zb+RH9iL11BrWOj25jJ8ilPZtydQKfTOg2eDZRfS2G60LVZk+6XpQaCoKoSFsk7ybx1RJYcSqcpuV/NYDy5+1k4INzbs+vT9oYnOrg5sz5t1TjejBfpnNZfMjhKP6HgAPwcUPsHV0EATNL4qiRWlUu+LflDZnDN5pZ0RKu8oqd38yd5ih1r77UwJlczishUOQOTEG1sVAQyMxCJaBlARa5gQSnPH2NmTvi7ZObsEDK89PEt9WA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org
+ smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
+ action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
+ (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1WrVZkdjlvJSiiQbhpuSMCuJHM96blft+FtGuOhbbbo=;
- b=Ac5vLwwE9UlGHLFwzc8Da2gBBCwM3VXEbxE5v76ezxyoDRc3ReuI9D/VZtwkYHs1NnHxtBq70BmBJCCsdwbEpwdT42zTDBLrBIdtlPtPrwx5iSBu6z/mkaSnFUx1yH3teAKRV5+CA/oqftV2rsv+BiSaQNBLtlRp5I0l0QIGuVg=
-Received: from BL1PR13CA0332.namprd13.prod.outlook.com (2603:10b6:208:2c6::7)
- by SJ5PPFACCDEE1A8.namprd10.prod.outlook.com (2603:10b6:a0f:fc02::7c3) with
+ bh=VcP5FprB4lnvA3qhu9hzB/wLM/lQ7OA7mb7hFQROVEw=;
+ b=TkYTauBJ9/s/W2328IiKRkUfIdMI2CV3uI/NqFulwGHbIyTZCvuBew97AVRyUuZyzUN84nTEB3TrxRa6i+I8mY+Z0xAvCHisoYBJFI59OQZbIi8R9Siny7S4B/vJEgO00fZl3c5QQk9gf6I/nNPjeoRvikUvPK5H3ir7Vi9BFd9+kj9UmHX/sZ/hF16z598/MLZ+uOBqSWIYt2TrLw7j5jinmwbwNgYEuuFdKRF0B801fHdUmwBssptjOGIhb8ydzsGikQ6IMzu+e0S6t51JqVfQ/hRZ+fj3hKhDE+GD03vZOzcBp/Pjw6wjhU70X3u7FtSGZUWemFehMWmLdmOcjQ==
+Received: from SN7P220CA0006.NAMP220.PROD.OUTLOOK.COM (2603:10b6:806:123::11)
+ by BLAPR10MB5154.namprd10.prod.outlook.com (2603:10b6:208:328::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.8; Tue, 18 Aug
- 2026 20:05:52 +0000
-Received: from BN3PEPF0000B076.namprd04.prod.outlook.com
- (2603:10b6:208:2c6:cafe::3a) by BL1PR13CA0332.outlook.office365.com
- (2603:10b6:208:2c6::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.17; Tue, 18 Aug
+ 2026 20:10:37 +0000
+Received: from SN1PEPF00036F3D.namprd05.prod.outlook.com
+ (2603:10b6:806:123:cafe::46) by SN7P220CA0006.outlook.office365.com
+ (2603:10b6:806:123::11) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.8 via Frontend Transport; Tue, 18
- Aug 2026 20:05:52 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BN3PEPF0000B076.mail.protection.outlook.com (10.167.243.121) with Microsoft
+ Aug 2026 20:10:37 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=list.ti.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=list.ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SN1PEPF00036F3D.mail.protection.outlook.com (10.167.248.21) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.339.3 via Frontend Transport; Tue, 18 Aug 2026 20:05:51 +0000
-Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.339.3 via Frontend Transport; Tue, 18 Aug 2026 20:10:37 +0000
+Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 18 Aug
- 2026 15:05:37 -0500
-Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 15:10:37 -0500
+Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE214.ent.ti.com
+ (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 18 Aug
- 2026 15:05:37 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE205.ent.ti.com
- (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 15:10:36 -0500
+Received: from fllvem-mr08.itg.ti.com (10.64.41.88) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Tue, 18 Aug 2026 15:05:37 -0500
-Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67IK5bJb1001678;
-	Tue, 18 Aug 2026 15:05:37 -0500
-Received: from reatmon by grumpy with local (Exim 4.97)
-	(envelope-from <reatmon@ti.com>)
-	id 1wwQ41-0000000GcTx-2OL8;
-	Tue, 18 Aug 2026 15:05:37 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: Praneeth Bajjuri <praneeth@ti.com>,
+ Transport; Tue, 18 Aug 2026 15:10:36 -0500
+Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
+	by fllvem-mr08.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67IKAaWF1967286;
+	Tue, 18 Aug 2026 15:10:36 -0500
+Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
+	id D2F1A9ACF4; Tue, 18 Aug 2026 15:10:36 -0500 (CDT)
+From: PRC Automation <prc@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>
+CC: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH] u-boot: fix pylibfdt build with swig 4.5.0
-Date: Tue, 18 Aug 2026 15:05:37 -0500
-Message-ID: <20260818200537.3961166-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.43.0
+Subject: Re: [meta-ti][master][PATCH] u-boot: fix pylibfdt build with swig 4.5.0
+Date: Tue, 18 Aug 2026 15:10:36 -0500
+Message-ID: <20260818201036.4020507-1-prc@list.ti.com>
+X-Mailer: git-send-email 2.43.5
+In-Reply-To: <20260818200537.3961166-1-reatmon@ti.com>
+References: <20260818200537.3961166-1-reatmon@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B076:EE_|SJ5PPFACCDEE1A8:EE_
-X-MS-Office365-Filtering-Correlation-Id: 43064176-cbf7-42d6-22aa-08defd641a3d
+X-MS-TrafficTypeDiagnostic: SN1PEPF00036F3D:EE_|BLAPR10MB5154:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9c9ca0d6-374a-47cc-d720-08defd64c4dc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|82310400026|23010399003|36860700016|1800799024|6133799003|3023799007|56012099006|10067099003|18002099003;
+	BCL:0;ARA:13230040|36860700016|376014|23010399003|82310400026|1800799024|10067099003|56012099006|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info: 
-	yl3qdYlKsGL0wHlsgkruQJDCpYJ36GaxtnKsuClj/zU3sKPcDlpwGHhkStRX43FOBvinkPpVDFQDKpK+MbD+V5Y6/hygwY/4Au1flMa0F4vujE1AfeHsgnnbWMlTma4bgoidUHyXJQyavXr8HyzGt3mxX8V5Qp6ofj5SJvCLsJwUZMUmlK5JJx8pFFZ/tbPt6Gqv5x0IhP42va3XK44X3r6nywHCfM6H3EUiLNbsIH30Oo66DxcCGHhxkuvSa5tTfTEnfZTJemaUfE+fMarWToq59cp2jbFDxxbApMeRUrRajNQhy9SLPWqHnN15vTOIg0Kc9nbInuLt4ykKJ2SMFppkaYE1lvpbA1x9tNKdSclAfwSVKZmmzG9QB9V5stzuc6jPRlPMHLKBZO7VFwJEFtHQ8t6733sOot5sVdIPmI9zLtgkbT+wkDOLd7C39i0MFwkxfJuqlIx9VXccJVLM7qVTvllCajbFkAfNENmXoIvD2R035wtmEaiFaM5ZsmWqbS9jQWJqrvAc9ZXnrQzHO/TF6hu0SQwDcmeX5qePTsOwA8l4D7+1DfzLFx2qurFmNvl3hD/FnbK5aNu1U7Jny+XePi7L+C34s2QJouldKudNRqPLWPfj4rSjkYaCIYmNQ8WHGkfga5mkhpCYitLoOeY8L+sBZqxfCbAdP3DPohg=
+	9rs762NOO3U2jNlIcKTMZPeZvsADUcXOnXoPZX1xwCz4hdejjD9EsO2OXUDwXWWcR4uES76508S4jgUFW2a9YjSTIOgccVxELNP6x8FRAqghpIZRp2u2KIGuKzgXuS27fFsfvFXM6Jq5v1R67hS0rkt03q9vlh4xbsFA3FQFQ6doWQiuur9jv7iPWgZVaFciZFWSSPQI9SfDyliVCx4RcwxolhaolY++4/ktIetudqvPTERAAagK8MzQS2yAdPvJfia2byTtzJU0FZfijj0McBc/rx2tV5UylZ3F43f4lfe+I9t8V/RNVLYIvSWXoHaMWU7H4x/Xo6iJMAVifVPvlVTfgxS0GQaq++3FWsDMWR4wcs8nV6nZXOEsedAg1BTEV4aoFcsck6fx2jUBONCUIusGECTvgtgLj0xN4SRIWfhnN6eRElclAr+yF3d7jMP8EOZ6m0r58hhu9dB5Qp8vlw7zdcaoTlYs7ZmbQHQ+Q5zF6ihCb9bcM1u/EGU+w9y3JrmLHhktVDoaZQD5RIzjDqe6+yx5FKBEueQuheFrfRmTW7/lG61mzGZAZOVFGS057W1aBo72VuZxB2ttP3uvicZnyRQ3CiX9sObGBK13njqjyUZ/87J+Wr/eoA37JeyC3cSBSMKHM9QsUkpJ2CE2bVmIukSCyLkYpHoJnps+JiWI0GSXJW7iZLP/TOmTEn9cfPTbuWdRDnOGDZlzWGmp6Q==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(82310400026)(23010399003)(36860700016)(1800799024)(6133799003)(3023799007)(56012099006)(10067099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(376014)(23010399003)(82310400026)(1800799024)(10067099003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	JWTnafTltJcJJ6SQOYXmjwTDvS4/OWb7eauiniKkhW/Dul3l1sAoEXpYeMn+HDgEoO9CWu07wALJcvgzbTD/Ncsli+6bbbSQDt0xJPdoIG/X19wfN0hxoeW5Xt3r7CNDgRgn5GxdZWmur9ofDfZUOcbicjRg8QMhJFOK1X+ducICAldyZvqFmV7MHQ7XFx0Y+AZ1UvFClKAT7DheGAGITMhDCXwFeinq5HI0IO80eJhD7vFsm3wvqAC2npfz/oHhkJfqa7YIgTwWkwcevfS9riNqKPRVLkFfQG8L0P+dZmP8atp3Bh0Ja1jFHTW9KaptDsPdrs4o+62uSCwLTI0vM3LCm/T1f8vo+UiVlfFGLD4kA2soFW/qX1l6CgxnxuSv4/1BZuAFyecdiwz8qPhDWb5DENiV7uPIHnLKDetPkXT+E7BczurCf7SLISMhKSIE
+	OjoBYO1lMp2j+pDAZNub8ySD6rK1zTtWhi/CeJPhePH+7clKjLZS1mKZ7Y0nDp2T3s3FfBDKbJZy0SCC5cIInLg2iRJGbjNaU2LQF6fhFMCfsylTYOZtSoWcFX6E4kcvXzcYbXuxyzhpXVQXs0yLNxm+vrOMNK04h88OHG8qQQ/ZGmJBKkc3R9nKvaVP/T/D3SjoKG/VfNY+d+7ee6D5auE9/UMVL+in/M+siXCjV+CCNhoZx0JVuxUPrWWVK5FhI+mvyBKjF6xSEzrNAomAQiuIRcSPXerXPJn1gBe8mXmWCkYsBLpqDg6ed3am/9nDzyEGWO5Kyz1jjfMQbhGrLgzyg2ldkoG31lGb6c6eN2S12v6vmu70kjHvsh8AR6rK/xBaqg3nfsRuK0WP0R4jL7BjWD+8hDFIVZ5ktB7im9LZgHvc5KdLw1y1XY9A3CC3
 X-Exchange-RoutingPolicyChecked: 
-	H/cJPcIQXJC2VWYqGrQ30u5B9ET9OfsMfPwy6A1YBinqVe5WqL/YmOG4KLdvMt120grm08eN630ysP/CXLNSze6ahYlU3iRoW96NLxzZLXeA5yYq9LEsSZv+xpr9hvyfwjQ2pzIADMGa+cSvzApojrx1gATpBl8MhVzNeEFZm2Mv070n5tLkGsMQeuunVPJ0fj4bKQDFMFhYEfHq53DTziBS7t9d4ShF19p7TmAmnQNqQERUC5O0B0G5qsglLcRO1r/U2VZ6L20NKeNZVQVdbwsO/Hue/dpijfzaaGvcBZvEidIe5qkkWmJgrNUU3USxcNQT8fB2c6kiR8Tn7a8yXQ==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2026 20:05:51.0730
+	K/jxJIAPl1Pu4tQ1gzL175FUZOZeo8KItwizn3huxRdZsCU2Ole5Qxz0sEyJdg+IQ8P8/DX/GKfnKIeBm78zj4RPx35Wdz4JjY8magtcIOj2Dmklzn8z4M7WAzR3eMiSRm4kOtccbt2iNjXKigJCKU3Su3kT2ZfmTeU1tS35SmJCMSGTjVi8crye4KY+V4XuEpDYlfzDgxxAkFDjB6PAAZbX/pRSKbINtP2D7+pE/IdbgYm87rGAsao91ZB8Z8yrYh2kA6zLz0/xuskp+zznPLvrNZ5x9pulIOiUydSL1z0tZQ2dyVoDc4/1zSYYDpWEPBXXtZi395sfndGLzCxajw==
+X-OriginatorOrg: list.ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2026 20:10:37.3845
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 43064176-cbf7-42d6-22aa-08defd641a3d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9c9ca0d6-374a-47cc-d720-08defd64c4dc
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	BN3PEPF0000B076.namprd04.prod.outlook.com
+	SN1PEPF00036F3D.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPFACCDEE1A8
-X-Proofpoint-GUID: 3b5xwyoMmbzeIiA3PZRiRz78WkTY-sQj
-X-Authority-Analysis: v=2.4 cv=Ytc/gYYX c=1 sm=1 tr=0 ts=6a84bb22 cx=c_pps
- a=0pMqp0B7/3h4ah4p3fuJNw==:117 a=iwqwCZQqcuTv3JOpYdM7/Q==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=Sv0fKeRqtYgA:10 a=V5UXEbMT0ywA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=jwouBfj2j3NM8CExmVVE:22
- a=Q4-j1AaZAAAA:8 a=voM4FWlXAAAA:8 a=sozttTNsAAAA:8 a=NEAV23lmAAAA:8
- a=gXIa7o-KbvLm6WiVocUA:9 a=9H3Qd4_ONW2Ztcrla5EB:22 a=IC2XNlieTeVoXbcui8wp:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDE0NyBTYWx0ZWRfX5A5buJP22rcb
- Lnh2K2l/L8hbO8pnKCLRazHAiguRGwTCX8xCh0GjYMn9s+Tw1zw2NMFcDJi6NAzYmXss8IrDdy0
- TQRF4yy/tYdc/YHRfqx4AghEAu4oZJgB2vTSwoUktXmNqtYH5UAcArLnUmigup7MCF2l3oH8kMg
- OJQz/D3x7dKUHXYK5KVjV+HBJrixTx5Uze+HwQmR3V+hZECvr+CpCgUBCMrUvvxmJSVcFcjyJ4G
- THdEMuMnI0I4nBtCLF17FdLIKl5dQmuFxsi5qE9bKnFR9eo0beAmZELPhw/m49pxyhl2WhixF/7
- 0UlMtTNtwqGe5z+amrQqfiHAfUHbeD3XWxyFx87IXaalXfOj0d6qpdezg8n4ga+IdsUWw1CS2Gz
- OsFykybNviwGffF9KEfkf50Va4VaLrSBHsDj3BOqFBjUG7a24Dfw9kDgt9yVchFyADEqugzDNE3
- PV438eFsj0J48N/SnEA==
-X-Proofpoint-ORIG-GUID: 3b5xwyoMmbzeIiA3PZRiRz78WkTY-sQj
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDE0NyBTYWx0ZWRfX2Zqoetcj49dm
- 6DxPr7AAsQ9sUB4+0XTtPESuOX+ieQ/JVZlgXfaljPfYPD5ACS/X3kIvKlEXCO30V+oFbKPvQyf
- fX/6TRdLpkFn/uxNWAPYbxz8wkaYBDk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR10MB5154
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDE0OCBTYWx0ZWRfX+uc+PKVfHqiM
+ VzeCGEp+Tyg67CgvXgu2zhDT816RneU6cwYEKGSVcQfXJ5nd+y3QMrvq/HfF7ON/oepOCyHpjyn
+ XUhXITxgfsY5rEWjNl7VEF4+7twSVzA=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDE0OCBTYWx0ZWRfX5/yvV4cO1voJ
+ OAs8VZACVWQwpr+h0b1FXOYyzhB+D+xpkHeD0e8f5pfoPL+NQC383ihhkpPfcG9gXJEvKns+cu6
+ eJNLZ9ynRxZw4kg82NQv4viyvvii4APWkSx3fnLEGpJ4+6bcxpbhOGindUU9ezXbv9do5Xkmy01
+ usBrweciXNBUEqFEZWgC+u16LWjZwncW3mUJoEBFP7CoEfL3B1LvDiKAyUQBAVWbHEzryLK+qDC
+ bxhTtbHtNaRX6teM/bGqQetdgP1fya5spLWfdgRB2dVWC4yyV3hXBVKr87skGq9rccRwHWcPtHd
+ qiAXo3S3+5CIpdyZns2nP6QxESLr00miDrz3tiQdBc4WVT0rR90e5RZ4r+Vo5xr3FLKG/QvQIqc
+ NHJhtCYC1pUv2AhBM6ZA1EMV3IbBx1LfhSTkNs1fNE4nRYJGBL52aqBDOElQE88LBu/IxoXMuja
+ qUteE37elzRCdKCwoQw==
+X-Proofpoint-GUID: d4JKBRvbIqx2zUZgbIdwe4uykZIF2886
+X-Authority-Analysis: v=2.4 cv=CZI4Irrl c=1 sm=1 tr=0 ts=6a84bc3f cx=c_pps
+ a=nvwb1BjkeYK3HDx+lqLWkw==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=Sv0fKeRqtYgA:10 a=s63m1ICgrNkA:10
+ a=Vs-ZokuVWRQA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=fPAWb5peG099m5CrUpKH:22 a=sozttTNsAAAA:8 a=xE1FiokqEDOv69rCTxIA:9
+X-Proofpoint-ORIG-GUID: d4JKBRvbIqx2zUZgbIdwe4uykZIF2886
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-18_04,2026-08-18_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 impostorscore=0 phishscore=0 suspectscore=0
- malwarescore=0 bulkscore=0 adultscore=0 spamscore=0 lowpriorityscore=0
+ phishscore=0 clxscore=1015 malwarescore=0 impostorscore=0 adultscore=0
+ suspectscore=0 lowpriorityscore=0 spamscore=0 priorityscore=1501 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608180147
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608180148
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 18 Aug 2026 20:06:01 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20275
+ <meta-ti@lists.yoctoproject.org>; Tue, 18 Aug 2026 20:10:51 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20276
 
-A recent change in oe-core [1] updated the version of SWIG which caused
-a build error in u-boot.  This was fixed by adding a patch [2] in
-oe-core for u-boot which we are copying into our u-boot recipes as well.
+meta-ti / na / 20260818200537.3961166-1-reatmon
 
-[1]
-https://git.openembedded.org/openembedded-core/commit/?id=84476421d9ccfcc1d2714026ad7caa6ca901853b
-[2] https://git.openembedded.org/openembedded-core/commit/?id=299a82a9c909b73a9b93877d6c1b381ec8f83b04
+PRC Results: FAIL
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- .../u-boot/u-boot-bb.org_2024.10.bb           |  1 +
- .../u-boot/u-boot-bb.org_2025.10.bb           |  2 +
- ...-removed-SWIG-Python-2-compatibility.patch | 55 +++++++++++++++++++
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc  |  5 +-
- 4 files changed, 62 insertions(+), 1 deletion(-)
- create mode 100644 meta-ti-bsp/recipes-bsp/u-boot/files/0001-pylibfdt-Replace-removed-SWIG-Python-2-compatibility.patch
+=========================================================
+  check-yocto-patches: PASS
+=========================================================
+Patches
+----------------------------------------
+All patches passed
 
-diff --git a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.bb b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.bb
-index 389893b0..23a5a3af 100644
---- a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.bb
-+++ b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.bb
-@@ -7,6 +7,7 @@ COMPATIBLE_MACHINE = "beagle.*"
- PV = "2024.10"
- 
- SRC_URI += "file://0001-scripts-dtc-pylibfdt-libfdt.i_shipped-Use-SWIG_Appen.patch"
-+SRC_URI += "file://0001-pylibfdt-Replace-removed-SWIG-Python-2-compatibility.patch"
- 
- UBOOT_GIT_URI = "git://github.com/beagleboard/u-boot.git"
- UBOOT_GIT_PROTOCOL = "https"
-diff --git a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.10.bb b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.10.bb
-index 1c4f0691..a6284193 100644
---- a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.10.bb
-+++ b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.10.bb
-@@ -18,3 +18,5 @@ SRCREV:pocketbeagle2-k3r5 = "4e0b6294a1185029d34eff6ed91f3ad1734b643f"
- 
- SRC_URI:append:pocketbeagle2 = " file://bootcmd-ti-mmc.cfg"
- SRC_URI:append:beaglebone = " file://0001-arm-dts-am335x-pocketbeagle-Add-tick-timer.patch"
-+
-+SRC_URI += "file://0001-pylibfdt-Replace-removed-SWIG-Python-2-compatibility.patch"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/files/0001-pylibfdt-Replace-removed-SWIG-Python-2-compatibility.patch b/meta-ti-bsp/recipes-bsp/u-boot/files/0001-pylibfdt-Replace-removed-SWIG-Python-2-compatibility.patch
-new file mode 100644
-index 00000000..c1d0204e
---- /dev/null
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/files/0001-pylibfdt-Replace-removed-SWIG-Python-2-compatibility.patch
-@@ -0,0 +1,55 @@
-+From 886616d03b6afcc5ce8b34e7af91f7ccfbb0a5c Mon Sep 17 00:00:00 2001
+
+
+=========================================================
+  apply-yocto-patch: FAIL
+=========================================================
+master
+=====================
+Summary:
+- Patch Series: [meta-ti][master][PATCH] u-boot: fix pylibfdt build with swig 4.5.0
+- Submitter: From: Ryan Eatmon <reatmon@ti.com>
 +From: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
+- Date: Date: Tue, 18 Aug 2026 15:05:37 -0500
 +Date: Tue, 11 Aug 2026 13:21:01 +0000
-+Subject: [PATCH] pylibfdt: Replace removed SWIG Python 2 compatibility macros
-+
-+SWIG 4.5.0 removed Python 2 compatibility macros (PyInt_*, PyString_*)
-+from its runtime header pyhead.swg (see commit 79f7a2b7cb7d). Replace
-+them with their Python 3 C API equivalents:
-+
-+- PyString_FromString -> PyUnicode_FromString
-+- PyString_AsString -> PyBytes_AsString
-+- PyInt_AsLong -> PyLong_AsLong
-+
-+The replacements are safe since the macros were already aliased to
-+these exact functions in SWIG's Python 3 code path.
-+
-+This is a backport of dtc commit 5008d1d6a356 ("pylibfdt: Replace
-+removed SWIG Python 2 compatibility macros").
-+
-+Upstream-Status: Submitted [https://patchwork.ozlabs.org/patch/2283713/]
-+
-+Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-+---
-+ scripts/dtc/pylibfdt/libfdt.i_shipped | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/scripts/dtc/pylibfdt/libfdt.i_shipped b/scripts/dtc/pylibfdt/libfdt.i_shipped
-+index e4659489..326a15c7 100644
-+--- a/scripts/dtc/pylibfdt/libfdt.i_shipped
-++++ b/scripts/dtc/pylibfdt/libfdt.i_shipped
-+@@ -1033,7 +1033,7 @@ typedef uint32_t fdt32_t;
-+ 	PyObject *buff;
-+ 
-+ 	if ($1) {
-+-		resultobj = PyString_FromString(
-++		resultobj = PyUnicode_FromString(
-+ 			fdt_string(fdt1, fdt32_to_cpu($1->nameoff)));
-+ 		buff = PyByteArray_FromStringAndSize(
-+ 			(const char *)($1 + 1), fdt32_to_cpu($1->len));
-+@@ -1064,13 +1064,13 @@ typedef uint32_t fdt32_t;
-+         }
-+         $1 = PyBytes_AsString($input);
-+     %#else
-+-        $1 = PyString_AsString($input);   /* char *str */
-++        $1 = PyBytes_AsString($input);   /* char *str */
-+     %#endif
-+ }
-+ 
-+ /* typemaps used for fdt_next_node() */
-+ %typemap(in, numinputs=1) int *depth (int depth) {
-+-   depth = (int) PyInt_AsLong($input);
-++   depth = (int) PyLong_AsLong($input);
-+    $1 = &depth;
-+ }
-+ 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-index 1c3efebb..9c760854 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -10,7 +10,7 @@ require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
- 
- include ${@ 'recipes-bsp/u-boot/ti-extras.inc' if d.getVar('TI_EXTRAS') else ''}
- 
--FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot:"
-+FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot:${THISDIR}/files:"
- 
- FILES:${PN}-falcon = "boot/tifalcon.bin"
- 
-@@ -25,6 +25,9 @@ UBOOT_GIT_PROTOCOL ?= "https"
- UBOOT_GIT_BRANCH ?= "branch=${BRANCH}"
- SRC_URI = "${UBOOT_GIT_URI};protocol=${UBOOT_GIT_PROTOCOL};${UBOOT_GIT_BRANCH};name=uboot"
- 
-+SRC_URI:append:bsp-ti-6_12 = " file://0001-pylibfdt-Replace-removed-SWIG-Python-2-compatibility.patch"
-+SRC_URI:append:bsp-ti-6_18 = " file://0001-pylibfdt-Replace-removed-SWIG-Python-2-compatibility.patch"
-+
- # Match the meta-ti trusted-firmware-a specific changes to memory locations
- # for bl33 and k3 hardware.
- TI_K3_TFA_CFG_FILES = "\
--- 
-2.43.0
+- Num Patches: 1
+- Mailing List (public inbox) Commit SHA: 137c44d8b5dc03638c36d68d7bfbb8566ef99e6a
+
+Applied to:
+- Repository: lcpd-prc-meta-ti
+- Base Branch: master
+- Commit Author: LCPD Automation Script <lcpdbld@list.ti.com>
+- Commit Subject: CI/CD Auto-Merger: cicd.master.202608122200
+- Commit SHA: 9b61f80281b2f3d1c48be8086c9cea6e1c93c083
+
+Patches
+----------------------------------------
+FAIL - [meta-ti][master][PATCH] u-boot: fix pylibfdt build with swig 4.5.0
+    .git/rebase-apply/patch:68: space before tab in indent.
+     	PyObject *buff;
+    .git/rebase-apply/patch:69: trailing whitespace.
+     
+    .git/rebase-apply/patch:70: space before tab in indent.
+     	if ($1) {
+    .git/rebase-apply/patch:73: space before tab in indent.
+     			fdt_string(fdt1, fdt32_to_cpu($1->nameoff)));
+    .git/rebase-apply/patch:74: space before tab in indent.
+     		buff = PyByteArray_FromStringAndSize(
+    error: patch failed: meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc:25
+    error: meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc: patch does not apply
+    Applying: u-boot: fix pylibfdt build with swig 4.5.0
+    Patch failed at 0001 u-boot: fix pylibfdt build with swig 4.5.0
+
+
 
 
