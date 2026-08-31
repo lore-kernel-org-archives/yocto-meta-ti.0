@@ -1,249 +1,193 @@
-Return-Path: <gehariprasath@ti.com>
+Return-Path: <p-bhagat@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DAE2C61DD9
-	for <webhook@archiver.kernel.org>; Sun, 30 Aug 2026 16:28:47 +0000 (UTC)
-Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com [148.163.154.28])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11542.1788107317148020342
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2AC8C61DD3
+	for <webhook@archiver.kernel.org>; Mon, 31 Aug 2026 09:44:58 +0000 (UTC)
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com [148.163.150.75])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.26002.1788169496598169531
  for <meta-ti@lists.yoctoproject.org>;
- Sun, 30 Aug 2026 09:28:37 -0700
+ Mon, 31 Aug 2026 02:44:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=bTA7PcHP;
- dkim=pass header.i=@ti.com header.s=selector1 header.b=Hp5cvgqV;
- spf=pass (domain: ti.com, ip: 148.163.154.28, mailfrom: gehariprasath@ti.com)
-Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
-	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67UDfqrQ2787204;
-	Sun, 30 Aug 2026 11:28:33 -0500
+ dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=lwSIWzAm;
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=vb9zlQsR;
+ spf=pass (domain: ti.com, ip: 148.163.150.75, mailfrom: p-bhagat@ti.com)
+Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
+	by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 67V801573459014;
+	Mon, 31 Aug 2026 04:44:52 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	proofpoint-05-2026; bh=GCL9A1/6Li//v8GEmYDjgLggmzSjZ4cZ4HHbvIpxL
-	a0=; b=bTA7PcHPa/JO1WN/pMC5laDACqx74BJXXIe5JdIzd41KqO9qqDO+PSKxW
-	Qsz7E2ZXsNFoUCV4vZq2b9jMdd/xP8L/oRfNir0N0LwJDBhMo3OEqXmc04oEK5Nq
-	JLRw6PKsBjPMDLE/KeMjiXo62Km1cHsBdCHh7/kLSwVQc/Yh/jMoYP/1JhL4aBge
-	ZUEUrzLYHqJ6L3lvfPy3ZLJg6+4lTIrTJuEaOjuce0JWNSAfaz+/lVaVSBEQRBfy
-	gGV2xy4J6w3rfzL9mJOhl8JxLXjcTxprEVNyALisr2L3skY8fvWIvi3rx7vacrfX
-	laml7Z6bVI/l+Bg1dGeIXJpVNR9JA==
-Received: from dm1pr04cu001.outbound.protection.outlook.com (mail-centralusazon11010060.outbound.protection.outlook.com [52.101.61.60])
-	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4gcet41gkf-1
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=proofpoint-05-2026; bh=LH8WHq6noRBrF
+	3Kgo4lekIIVCAG7zME0vCMhoYJoZOg=; b=lwSIWzAmRK3VUt2lW42tIK9qeEjrF
+	7UuQ/y9+JeEzgVN5sDvnZD6GtApyxLSg/ifdmulz2NsoEChONCTAsbwlwTLJr/bN
+	hCf0+MJRR82GuVCfB192PwwXtkRRD7V16UdXLZ7V4HGA7Dd3F35UScuxgmb0pOfJ
+	dUF/+wtIha29HQ3lP6ewAg3q/LNeT31PUKey50vsTxPwSQjfBxx0+u7WzALIvFqY
+	8JhUfNX4ZxlVqTmRuXbxY4HmXa2/UiX9xWOtyTw+6GKpBFqYDC/VjdShY3YGCZCA
+	4LlM3H2yD/qGRACnef679ssOD/T3cvYYJGyuT3VNzTKlo7j93/CbK0cAw==
+Received: from cy7pr03cu001.outbound.protection.outlook.com (mail-westcentralusazon11010011.outbound.protection.outlook.com [40.93.198.11])
+	by m0384305.ppops.net (PPS) with ESMTPS id 4gchcnckhq-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Sun, 30 Aug 2026 11:28:33 -0500 (CDT)
+	Mon, 31 Aug 2026 04:44:52 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dYmW0661NvOFE2/LQ3TUGBdw0n6iorHPy9gUVoczEE2gt/B0jieiKnuTYO35PVOxbuyyeM8LpkJJUXfXtWUirvs+T378ub8gmx4W+NeRaFxjTStYwjheK9qTVi97+W2Zrwd5/Pj4l9dw2J5Y7fYa41o8Ab8Tc6LfOtDIyfADEgyA7rCnG4ReaZSNNOLuBu6ok2iF3/ib51J9DTJG1EwSl6maFJcW5fIy3h3Z1NBv//ypsFNT7GGNiivFglYiwNDePOsiVME7oXCAbA7NZ19jNu/xGmRYC/g0BfVNvOjhCtzVLQMmxYfvyg0z/mATiUCEC+aP0ShhDlD/Cior/7aRSg==
+ b=jWbhHmnIi8LDOaRhTJXL2FN+yokkkhD+R09DaQCvXCrL6+jpKIl5CFHMgL7oqkE4oE7b+P6eVVgvk0aXFs0MQE1nCg+ysTYrJfwjnyqNOHXkd8p0qyPEFm4V5HzFdO6OzntPAHb3LUvtZXAkdkJ62UV08YFTy3kFezTgxISE/fQwzgdQ0Lv3MFuf1D64O+LO2mo9vu2vIXvk24qXODDby0VZpaiunQR9oGBQuJ4LJZoQZ4dxoLoldggoirDjdEXXuBmKnRNsr983m3H9qNESnv3fU7ko7xaezTTfVoLdGoNAgt7y/FDZjFF6NUKDu/V7KMXYha3V/V0zBGHr96LxNg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GCL9A1/6Li//v8GEmYDjgLggmzSjZ4cZ4HHbvIpxLa0=;
- b=u7q/4oOYHqdhR2QzK63Ofu7Z+zSD600D4Q2Gy42jU7ZmKRui8ec1D9O+N6m5cnRX9jO5kYb2h8ZSVwKjBEsVVLHB/Z8ugsKzuxnHDPmpUM2iB2HquMsvWobn7FPRha2lrPzrTjEdQbu3s2sRLq5/l/ZOKTWqJRYz6XGXBEiFGigARFMHqQ+kqqNhsQ9YeSRIO1lclEO01S+AnJnRGCutYMrzmpMLpL0g2D/H6C7irzsdAxN6vL/8U0inTEwdMuWvLmYDX5V6ZGuCMF6ZUChjC+IFEw9bP18bZuN4+vYpDDQz9tbj7jTklqIEA8o/YvMr5m48b7aNnPJpMevKPAlxSw==
+ bh=LH8WHq6noRBrF3Kgo4lekIIVCAG7zME0vCMhoYJoZOg=;
+ b=EF+D3xxf8HuEUwl54cmmrc6QGi1thzBjqk7EArdSYlpfqI04SbVWlDS9SFh1dWBofjd3Y+C9RaSplcE3mUlHnBhwlfrAoSMZia8WxAGFNSKmRxRESpVsmXoMXednRLAQV9BsQAFiHwwhmDLeSufXG4LAz+TphhIXOKQI6dvzMyFtJuIYowaKLDasOxf17Leghe3Xw1U22gh+hBEw1Z/3vJeaVNdwlCHZ5xtLAeiKuTnwWqE92b/eaVG0XL+VfF7QyCFhmRHqzVtbMN1BkrAq4vFFzNeC/XjmMkN7Eq6qqp3n4stascXX7kov+z8B9v6zmgrRcqmH93CjCpX9/rr0cA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
+ 198.47.23.195) smtp.rcpttodomain=denix.org smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GCL9A1/6Li//v8GEmYDjgLggmzSjZ4cZ4HHbvIpxLa0=;
- b=Hp5cvgqVplwCyfg3u6nbSc3s+TdYQHl3b1Bn8FDC8hrHn4TECD6s+pcwg43KkSbTNtg6jjdACIal7qInOo5XNu7XM/h1nU79fLgtIuA6bvKHV2DANmAVgH+uOp+paS4DPvevRFtOCluU9S0K5GP0fIUPT117pEgfqXJKhwLo5dk=
-Received: from BN1PR10CA0022.namprd10.prod.outlook.com (2603:10b6:408:e0::27)
- by BY5PR10MB4292.namprd10.prod.outlook.com (2603:10b6:a03:20d::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.10; Sun, 30 Aug
- 2026 16:28:29 +0000
-Received: from BL6PEPF00022572.namprd02.prod.outlook.com
- (2603:10b6:408:e0:cafe::8f) by BN1PR10CA0022.outlook.office365.com
- (2603:10b6:408:e0::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.13 via Frontend Transport; Sun,
- 30 Aug 2026 16:28:28 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ bh=LH8WHq6noRBrF3Kgo4lekIIVCAG7zME0vCMhoYJoZOg=;
+ b=vb9zlQsRDqE9BWeJCyTHS96xQ9017s8zSsC3f6+Uk+2+hsFudQsyCjH2QpEOZ6MYrCu9q0MH0b6tLDBI1hez231yWLo2W44Zx3ozGfaU6AlktaJAtpmW7efOmsEDeo77cJdfF2N5zAufYnhPBMxEmeiL64G5iVZuYTFse4gMZyI=
+Received: from DS7P220CA0094.NAMP220.PROD.OUTLOOK.COM (2603:10b6:8:25a::14) by
+ SA6PR10MB8136.namprd10.prod.outlook.com (2603:10b6:806:438::7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.382.10; Mon, 31 Aug 2026 09:44:50 +0000
+Received: from DS3PEPF000099DB.namprd04.prod.outlook.com
+ (2603:10b6:8:25a:cafe::3c) by DS7P220CA0094.outlook.office365.com
+ (2603:10b6:8:25a::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.13 via Frontend Transport; Mon,
+ 31 Aug 2026 09:44:50 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BL6PEPF00022572.mail.protection.outlook.com (10.167.249.40) with Microsoft
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ DS3PEPF000099DB.mail.protection.outlook.com (10.167.17.197) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.382.8 via Frontend Transport; Sun, 30 Aug 2026 16:28:27 +0000
-Received: from DFLE206.ent.ti.com (10.64.6.64) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Sun, 30 Aug
- 2026 11:28:19 -0500
-Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Sun, 30 Aug
- 2026 11:28:18 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.382.8 via Frontend Transport; Mon, 31 Aug 2026 09:44:48 +0000
+Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 31 Aug
+ 2026 04:44:47 -0500
+Received: from DLEE214.ent.ti.com (157.170.170.117) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 31 Aug
+ 2026 04:44:47 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE214.ent.ti.com
+ (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Sun, 30 Aug 2026 11:28:18 -0500
-Received: from [10.249.138.105] ([10.249.138.105])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67UGSFar3358208;
-	Sun, 30 Aug 2026 11:28:16 -0500
-Message-ID: <2dd753e0-ec47-49b7-89ff-e285af71eea9@ti.com>
-Date: Sun, 30 Aug 2026 21:58:15 +0530
+ Transport; Mon, 31 Aug 2026 04:44:47 -0500
+Received: from localhost (ula0502350.dhcp.ti.com [10.24.52.241])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 67V9ij77528773;
+	Mon, 31 Aug 2026 04:44:46 -0500
+From: Paresh Bhagat <p-bhagat@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
+CC: <denis@denix.org>, <praneeth@ti.com>, <reatmon@ti.com>, <afd@ti.com>,
+        <v-singh1@ti.com>, <p-deshmukh@ti.com>, <j-sahu@ti.com>,
+        <c-shilwant@ti.com>, <y-hegde@ti.com>
+Subject: [master/wrynose][PATCH v2] meta-ti-bsp: ti-rtos-fw: Set EdgeAI DSP firmware as default for am62dxx
+Date: Mon, 31 Aug 2026 15:14:38 +0530
+Message-ID: <20260831094438.2986368-1-p-bhagat@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-ti][scarthgap][PATCH v3] ti-vendor-kernel-headers: add
- recipe for TI-only dma-heap.h ioctl
-To: Denys Dmytriyenko <denis@denix.org>, Ryan Eatmon <reatmon@ti.com>
-CC: <afd@ti.com>, <praneeth@ti.com>, <denys@konsulko.com>,
-        <meta-ti@lists.yoctoproject.org>, <s-kapoor@ti.com>, <p-gupta5@ti.com>,
-        <u-kumar1@ti.com>
-References: <20260828145834.1304057-1-gehariprasath@ti.com>
- <20260828174448.GK19759@denix.org>
- <f12fc893-5928-45e0-ad9d-3966d3bbbf87@ti.com>
- <20260829200440.GL19759@denix.org>
-Content-Language: en-US
-From: Hari Prasath G E <gehariprasath@ti.com>
-In-Reply-To: <20260829200440.GL19759@denix.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF00022572:EE_|BY5PR10MB4292:EE_
-X-MS-Office365-Filtering-Correlation-Id: eaa73ea7-9891-45f8-311e-08df06b3b87c
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099DB:EE_|SA6PR10MB8136:EE_
+X-MS-Office365-Filtering-Correlation-Id: 84c2d448-8074-4d03-e9e3-08df07447f47
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|82310400026|36860700016|23010399003|376014|18002099003|22082099003|56012099006|3023799007|10067099003|4143699003;
+	BCL:0;ARA:13230040|1800799024|376014|36860700016|23010399003|82310400026|10067099003|56012099006|13003099007|18002099003;
 X-Microsoft-Antispam-Message-Info: 
-	Cql3jp7BbqBoMYT3DV/r2jMqT7mtej6CDWrRLPe+eytmnOPw5k05pDsM8IpUU8nMyPt+chU9VQGxP+QiWjJUN5EOU+M3ZDqG7lGWrkcK/FhddFQIggNTL3/P64TVYBoW6IlYeaGeJJKGppv7iPq9vJdDYKyy1S3LWPq2xoxt4n4K9bHSgu2l2gWdXJ985KHKUK3bewV1QSEIsGFHNMhwTfuPL/7yVUkdNppmzmQtlAx7Tl94TZw5WGvhMxLKqjmrksmmg9WeAl8OEAEI7hNBckjtrTEZA0oP1t/FgA5Cvs7sz/aruyjuA60c7RppXqDulVnXrzvywITCDcqhcRRWYUClNaEPULVhXw35Ks3GiCFXNWbWj12e0RHWwEzzsx0MyiwSKn1Ya2xecvwvXk/bv8tC2ihMooj823V8GJoD74k6aVldeesTJei4ZmwaSIDZ2AbpGjzJvVJjjIf/oinM1AAx2onUBJ3I3tg/yrfXsUcibZNDceSGvWKQYtPP/A6vIh9yZAkNxaONmg3O1eAgxpm9U1tSUSRKAC6uO1pUOuaJ/la/W8ZVo0QRohOo7V4f3wuPloY7nK69mhmBcM38rLzTMnSLevfcYDPoVAf/uf5fqlTVBJ82CejrYpmOYvJ6S80Dsxd4LajeLniD/QXLTDFXX7r3uUQBD5wOpPiu4BAYHcvwiPDzgZXfJjpS/4B1/xsgg3x0zThOKxYyPDaJHw==
+	F2XafYps+n1u4YFnN8O4BHenqDSD36j4NFtyAX0inStt9B1u/VNGC6fmChHIxHkvj6THMin6so8Ixe602GgzKrIMtS2QPh/DVJEFzOgqxtJahd+3LB/CwFssqiWB/U49wIfX30R1mZXffUbXvklst7S+fhMUMiCARd/zWkL2ZJfISmQ14nVIKwX+UmzM/4IlUpiU0YpVd9J5ii8LugWAXRiVUY4ZQ4A3OVJgXvidb1ReDaYsxXNFxlgPT2c7kzxTn2UGCHOMjdBbQyxLmVWsyaX0Brf1KL9LMHBMAqBmasvbJHqZsxsIPSMuCjf5DRp/eRCkzJZNbLRQeJYYCnkT3qqHWT+7cEQB9s8kAPNue7ewoCfBrnOa/H9JdZS/U6JNm7IIkSladDfK2IrMggcuZqIGanMX9apQ63sMa+JSabt0rf3FWmcxP6Vd9iTrYzrzG9U1sjtmf+i537F8WwoM5rf77E6UdL1S0EnFP0BDQUXUFWh8SwaW9QziZRCDBJi6KydWeFBMPlDMLOLnfSMh36/OZ28I7vqeJLzJ+JhFm7u25ABVEASk9nclauCuRecp4oVq2PV598lX+X2cz1PIwiRJZPPfkktzkYXnBW8UNKNNtHgBkmj6uKn1sPx/LR4QX7tWe8eV49vn/THIJuBEV40RgLrUs2UERosUuL38suU=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700016)(23010399003)(376014)(18002099003)(22082099003)(56012099006)(3023799007)(10067099003)(4143699003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(36860700016)(23010399003)(82310400026)(10067099003)(56012099006)(13003099007)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	+QBMmqdjQhCr6gH1Su9tEsNd/3A23zRbxFCrHxWwXq8Bjx1V3flUKnIHb1TUaYCMC5QQjRaE9w1PjaTfnI1a8jJbCt3xZKtWUuoFmca0lfn3bg7WMr0dQIfOrDoyCgNwxk09lZGs0hkgn+zTQTWlru8KXh9TEIRCDvcWVoGZGnpJfnuiLt3QzfNXZwzi7iFiM61lH+fZyNPGRWKTVYJAXZ70vr6MMe/E9u+IftBF7zXDyyT1ylw5NUkrL+BbBG4KqLXliYeuoYj+o6FBsiCpr5nRL4PhYLpuM5R29tvNph+aie2FVvM/Aa4GK0j0COfsoVCvcuH6ledUEmLzIUu7hMr1NbpRtSRw2DdCiw4VXX5tUw/DJ2tZoeQn0XG+TTFOKj8WEzluUut4zOkZ8x2CI5+2QAFUAgfaSfP/i5PvdvSWattyEJ1eAWptoL5LKQSo
+	sxdeLijZfG3y/4+9EsIwgeIAU9EXsB+rsJ03RWmFlGPZ8RRldT4t9YJF5LjBmtMHxRKWBI47ZARiPyKfUwY8h+bZdcfZiOvML8q3bAEJIydhwVucv0aLLljoN/uzfT5mFMHveFAzc4doTQI2TbImuuhhjOyxYT4id8z1NykBN4x77QOTYGkUuuqkXsVJwZFLhJd55afKsOCoVsvNpFg4DP/a1yb2eE7iTqCP4//IfIEqctHSKxcTXrtwsSeoK7Epp42ISo56tCQiYCI3iZKbY8h9buSTqstVRvsZyJvpZJh0DaQmB8TXBs5olCCPpfs3jPcVkoqRzkLYkEL52MopcOT4pmL+hQR1fxNBxWegf0P53SEIjhQm+KF6FrK7wZrAslSIt+oG+j3fE9EZ+Ug8Xw12BJvWnR67nMaD1+jjWDk80ON/yy9zDdEL5/FX6yXI
 X-Exchange-RoutingPolicyChecked: 
-	iawtDeVedEp1O+BTpGKrYerrWTRY5M90pGMLiI2B5nht9VcWeIo6WjiignS43u7onKEhsJMkcRRwrrAkSzfLX/psgzBt3AU282SToRI821+IJCeS/ZPAcTv0bvh7SSOUqPLucJvmCg+wzNHIbC9UV02SAZBUEoLVbe1WC4cvniqWpPeNrmLGdbydEoHP1OkKPsBYMHXGV9bxvfFo2Gu1knyG8xfKpXbXwPIbxeK6ILFuGmpIp+Su7o0BS4Rgo6nOAbnev7R+ZwqWrk8fcT7bSAe9Sbtjwqjj4JhQW3z9Xwz2/uk1yD4zZv45nH2//1iGH4cWV0bdDwFNlBkTgO28Pw==
+	DyeYppF9/JGzojOSxOHSE22Tc3Iqbce0CVYTAgQRTM/WzWih+M0lgDy9y2UuQ+ZIZH4FO0Z28lWHJyYpgqnJIIslxW/o5o35MVkoo2YO3Fzt89scuekPh8VMMyU3UNwDm8vNWC7MZ7qvCyPvjjHjZQJu8zqzcGolcAPbe6a7RhyME5DUWC4xq59qRlu0Etj35mait/Kmbt0w8dsiie0vvIPwtHtUVDM+2s869CyikAlSvqHOrAs0w6n7EXU397mQDG7PKbKVwPrhNibHUWAwE6WMHsLpfT00fYzhGHA6wEM0Yn80c7J8OUhqNW3+zcKiZtezrjtfrw9kfQaSB6AsNg==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Aug 2026 16:28:27.2795
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Aug 2026 09:44:48.3422
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: eaa73ea7-9891-45f8-311e-08df06b3b87c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 84c2d448-8074-4d03-e9e3-08df07447f47
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	BL6PEPF00022572.namprd02.prod.outlook.com
+	DS3PEPF000099DB.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4292
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMwMDE0MyBTYWx0ZWRfX2pZHQK7BAF3t
- 6gCTjTZo3+gzhOCYCkV3TMKNIn6FjcACano4NoTFV5XPdrhhdHcC6IRINxJBIOnaI9GjBxqI2tT
- hI5aXpNvMRvWNTOs+DpVJ33eVzeSnEa2BWXPewupHvXKj557/hhlv+GkYuVMcdokMsME7Ne4p2E
- 65EwXhU3z2mWTUxw8tJOmUIkoX3qALySJbhpoHZnZZBBbFVAjAromAehvYm6u/WeEsiKT10CFtt
- TkrLgPkLNMTORE4X7dEewOqNXiY7ftucoiQCV+t2OG5fzY62N/RAkS3vh3KQhNZqqwWQ5hHfunu
- ilHht8tevrZGB5Fx/s73dDWBTI0Q2mVlXZNYk8qqd+z8XLdxXIIaQVWFxFF1KJOpq5gOfFczWaA
- GKHLF7p5KxJiQ0IG0ZoQHdnfEht74yuGLs3L4jZ3fccHg654xpUUbiCLbtK6SE+dfa2KKdwoplP
- Go2COTedmKLPAW9pzHQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODMwMDE0MyBTYWx0ZWRfX6FnnPO357zmO
- +2bBQfbcm6MpeqYulTY0M6vkpQqneKePS+C2vGZDPC0oEUd5WB8i8yDyVAUjubWzZo57wRnfpFd
- t4SWHuNJP4RPP7FUCHclPssasbCe6Pk=
-X-Proofpoint-ORIG-GUID: dfbX_kfoQaWwMCYvuEjj6jc6HU2sifRj
-X-Proofpoint-GUID: dfbX_kfoQaWwMCYvuEjj6jc6HU2sifRj
-X-Authority-Analysis: v=2.4 cv=LrSiDHdc c=1 sm=1 tr=0 ts=6a945a31 cx=c_pps
- a=p/cDci9/Gahjm/bBNnPm7Q==:117 a=iwqwCZQqcuTv3JOpYdM7/Q==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA6PR10MB8136
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMxMDA4NCBTYWx0ZWRfXwDdrbu9A6jFw
+ s1zkEdFxp5bNfyC+3TxGmLTymSY3brHcKzd3LIL0dreAw/0NBw6kllGsXEZIC1XItF7QSRYttfR
+ GUHURksmMejo5OF2C/V9+B49RlcMDmN/YUw4jcMblQF9udoUGfa97MCuKPTxqnBahUkZTjSCfmD
+ 81znd8LdGqaNVrFsCqRXAsccpdNKHPBP4thYy9uIDjaZw5pU5oVEJyjCl1dJlnCEnr58me5lgT6
+ twJPFUHae+cCGWiGDmHn5cyCeyqwukoqOg33ancA/x4LrL3X3BJCtN9lz5FfAUQcOZj8YIVL+2j
+ TCGzWb5oC8nYnXMtcY5iuKN8O80aDCo+zqUtBk498GqjunQ5ELapQ6mT9UAJauZAV9HB8xT3iZS
+ mpofSCq7gmFiL0FKnPbsy6CigOuIbB1WvwTvUpqhG2N+Z137/rjVG0NYsmHMANKb2u8jud/oyQM
+ x9Zyl2KwqUhygV6SqZA==
+X-Proofpoint-GUID: sA-mnMUOEP9OnT98neLDPh_qZk9MJhhx
+X-Authority-Analysis: v=2.4 cv=OpB/DS/t c=1 sm=1 tr=0 ts=6a954d14 cx=c_pps
+ a=EUTAWq9+kh0QDJjqgNTvsw==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=Sv0fKeRqtYgA:10 a=s63m1ICgrNkA:10
  a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=fPAWb5peG099m5CrUpKH:22 a=iGHA9ds3AAAA:8 a=sozttTNsAAAA:8
- a=S9v12bvdLZJKoic-7JAA:9 a=QEXdDO2ut3YA:10 a=nM-MV4yxpKKO9kiQg6Ot:22
+ a=taLDd7a_hP9WKsMzeGRc:22 a=iGHA9ds3AAAA:8 a=sozttTNsAAAA:8
+ a=GjcEPfTXUfHWH2LR4BAA:9 a=nM-MV4yxpKKO9kiQg6Ot:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODMxMDA4NCBTYWx0ZWRfXxE3HZ3ZiKiYs
+ 4qJ2XpiAz/8X7eMjgFSGjxtlYnFrAdyA1WEmvWepB1O9izgfWa2lPqWyZGKruUSA9DRIop9w2pw
+ iN0zdbqkL+sXtDJLCwylYeAXCexz7AQ=
+X-Proofpoint-ORIG-GUID: sA-mnMUOEP9OnT98neLDPh_qZk9MJhhx
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-30_04,2026-08-27_02,2025-10-01_01
+ definitions=2026-08-31_03,2026-08-27_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 clxscore=1015 spamscore=0 adultscore=0
- lowpriorityscore=0 bulkscore=0 suspectscore=0 impostorscore=0 phishscore=0
+ suspectscore=0 bulkscore=0 priorityscore=1501 adultscore=0 clxscore=1015
+ spamscore=0 lowpriorityscore=0 malwarescore=0 phishscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608300143
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608310084
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Sun, 30 Aug 2026 16:28:47 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20314
+ <meta-ti@lists.yoctoproject.org>; Mon, 31 Aug 2026 09:44:58 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20315
 
-On 8/30/2026 1:34 AM, Denys Dmytriyenko wrote:
-> On Fri, Aug 28, 2026 at 03:54:00PM -0500, Ryan Eatmon wrote:
->>
->>
->> On 8/28/2026 12:44 PM, Denys Dmytriyenko wrote:
->>> On Fri, Aug 28, 2026 at 08:28:34PM +0530, Hari Prasath via lists.yoctoproject.org wrote:
->>>> The TI vendor kernel's dma-heap.h carries DMA_HEAP_IOCTL_EXPORT in
->>>> downstream. The standard header provided by linux-libc-headers' wouldn't
->>>> have the custom changes.Copy it straight from the kernel's staged
->>>> source tree (STAGING_KERNEL_DIR) into a separate /usr/include/ti/linux
->>>> path instead, for userspace code that needs it.
->>>>
->>>> Signed-off-by: Hari Prasath Gujulan Elango <gehariprasath@ti.com>
->>>> ---
->>>> 	v1->v2: Address review comments in commit message and recipe description
->>>> 	v2->v3: Fix the patch subject prefix
->>>>
->>>>   .../ti-vendor-kernel-headers_1.0.bb             | 17 +++++++++++++++++
->>>>   1 file changed, 17 insertions(+)
->>>>   create mode 100644 meta-ti-bsp/recipes-kernel/ti-vendor-kernel-headers/ti-vendor-kernel-headers_1.0.bb
->>>>
->>>> diff --git a/meta-ti-bsp/recipes-kernel/ti-vendor-kernel-headers/ti-vendor-kernel-headers_1.0.bb b/meta-ti-bsp/recipes-kernel/ti-vendor-kernel-headers/ti-vendor-kernel-headers_1.0.bb
->>>> new file mode 100644
->>>> index 000000000..5d570689a
->>>> --- /dev/null
->>>> +++ b/meta-ti-bsp/recipes-kernel/ti-vendor-kernel-headers/ti-vendor-kernel-headers_1.0.bb
->>>> @@ -0,0 +1,17 @@
->>>> +SUMMARY = "TI vendor kernel uapi headers not present in mainline linux-libc-headers"
->>>> +DESCRIPTION = "Copies select UAPI headers straight from the TI vendor kernel source \
->>>> +tree into a TI-specific include path (/usr/include/ti/linux), for userspace code \
->>>> +that needs them but can't rely on linux-libc-headers carrying TI-only additions."
->>>> +LICENSE = "GPL-2.0-only"
->>>> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
->>>> +
->>>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
->>>> +
->>>> +do_configure[depends] += "virtual/kernel:do_shared_workdir"
->>>
->>> Why do you need this dependency for do_configure? Moreover, since you don't
->>> have do_configure nor do_compile, you might want to mark them as "noexec"
->>>
->>>
->>>> +do_install[depends] += "virtual/kernel:do_shared_workdir"
->>>
->>> How do you ensure that virtual/kernel is the TI vendor kernel? If it's not,
->>> you'll be copying the original unmodified header into the ti/linux location.
->>
->>
->> Should this just be part of the linux-ti-staging recipes?  That way
->> we can correctly only include it in the versions that have this
->> file?
-> 
-> Yeah, probably the easiest and cleanest approach...
-> 
-> 
+Set dsp_edgeai_c7x_1_release_strip.out as the default C7x firmware for
+AM62d to support EdgeAI and DSP based audio pipeline.
 
-I dropped this patch and instead I added a simple do_install:append() to 
-ti-linux-staging_6.12 recipe.The header doesn't get installed into the 
-rootfs, but I could see it landing in the kernel-dev's ${D} output 
-correctly 
-(arago-tmp-default-glibc/work/j784s4_evm-oe-linux/linux-ti-staging/6.12.57+git/image/usr/include/ti/linux/). 
-It doesn't get installed in the rootfs since kernel-dev package is a 
-build-time-only package.
+Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+---
+This patch requires the corresponding firmware patch in
+ti-linux-firmware to be merged first.
 
-  Since the only consumer of this header is in meta-edgeai, it makes 
-more sense to keep the whole thing self-contained there instead of 
-modifying linux-ti-staging upstream.A linux-ti-staging_6.12.bbappend in 
-that layer can install the header and split it into its own package, and 
-the consuming recipe can RDEPENDS on that package directly. That keeps 
-meta-ti-bsp untouched, ties the header to the recipe that actually needs 
-it, and avoids shipping it into every image that happens to build this 
-kernel.
+Change log:
+v1->v2:
+	- Updated name of firmware.
 
-Saurabh,Puyush let us know your thoughts.
+v1-https://lists.yoctoproject.org/g/meta-ti/topic/master_wrynose_patch/120772787
 
-Regards,
-Hari
+ meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->>>> +
->>>> +do_install() {
->>>> +    install -d ${D}${includedir}/ti/linux
->>>> +    install -m 0644 ${STAGING_KERNEL_DIR}/include/uapi/linux/dma-heap.h ${D}${includedir}/ti/linux/dma-heap.h
->>>> +}
->>>> +
->>>> -- 
->>>> 2.34.1
+diff --git a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
+index 20c6b531..aad5ea06 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
++++ b/meta-ti-bsp/recipes-bsp/ti-rtos-fw/ti-rtos-echo-test-fw.bb
+@@ -47,6 +47,7 @@ C66_1_FW =         "ipc_echo_test_c66xdsp_1_release_strip.xe66"
+ C66_2_FW =         "ipc_echo_test_c66xdsp_2_release_strip.xe66"
+ C7X_1_FW =         "ipc_echo_test_c7x_1_release_strip.xe71"
+ C7X_1_FW:am62axx = "dsp_edgeai_c7x_1_release_strip.out"
++C7X_1_FW:am62dxx = "dsp_edgeai_c7x_1_release_strip.out"
+ C7X_2_FW =         "ipc_echo_test_c7x_2_release_strip.xe71"
+ C7X_3_FW =         "ipc_echo_test_c7x_3_release_strip.xe71"
+ C7X_4_FW =         "ipc_echo_test_c7x_4_release_strip.xe71"
+@@ -101,7 +102,6 @@ do_install:prepend:am62axx() {
+ do_install:prepend:am62dxx() {
+         ( cd ${S}/${IPC_FW_DIR}; \
+                 ln -sf ipc_rpmsg_echo.mcu-r5f0_0.release.strip.out ${MCU_2_0_FW}; \
+-                ln -sf ipc_rpmsg_echo.c75ss0-0.release.strip.out ${C7X_1_FW}; \
+         )
+ }
+ 
+-- 
+2.34.1
 
 
