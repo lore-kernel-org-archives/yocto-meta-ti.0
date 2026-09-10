@@ -2,95 +2,95 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 391EAC79FBF
-	for <webhook@archiver.kernel.org>; Thu, 10 Sep 2026 01:55:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 140BBC79FB7
+	for <webhook@archiver.kernel.org>; Thu, 10 Sep 2026 01:55:19 +0000 (UTC)
 Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com [148.163.154.28])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4272.1789005308210935730
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4292.1789005315265988865
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 09 Sep 2026 18:55:08 -0700
+ Wed, 09 Sep 2026 18:55:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=j1LRPaSQ;
- dkim=pass header.i=@ti.com header.s=selector1 header.b=TG2op2iZ;
+ dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=HaD7BzUX;
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=jwyGTHKH;
  spf=pass (domain: ti.com, ip: 148.163.154.28, mailfrom: reatmon@ti.com)
 Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
-	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68A1jhD82100000;
-	Wed, 9 Sep 2026 20:55:06 -0500
+	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68A1jboC2099843;
+	Wed, 9 Sep 2026 20:55:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=
 	content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=
-	proofpoint-05-2026; bh=EpXTQ3Dvy1fR0jh6yE8JkF6ybJ3ItNpqS7kXjV7mh
-	Wg=; b=j1LRPaSQDYc/INmmExPNcgxwjq3oOtn7NKu0YfMMAeEwIChgtQ45Rcfce
-	53ahqDDzrkscLkSdun9kGBgqZXrUD0weB/qwqfKnWov4G+sMk+4shHuIcy6tdGdv
-	6ovw7WK0lsi+3/PStAwo2gwBYd/1464e02HKpgulaNAZGEezyBtXEdjiW9yzwMLy
-	GtU8EfmKQPfOLZcc5xAYiOuqytRBm4Ye7oilJqChWhpSuC7eG1/6AMRhzcnCnPy9
-	iRWQWvSvcQdBn3XWGFP6mqavSIe/GIPMC2Flk6uwixg4dG3T7Q2i1HzrytGVCs+V
-	UswbVL65xQut4DoNY9fifHBgmVTMA==
-Received: from sa9pr02cu001.outbound.protection.outlook.com (mail-southcentralusazon11013004.outbound.protection.outlook.com [40.93.196.4])
-	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4gkcxg2jed-1
+	proofpoint-05-2026; bh=LmK+1IxSECOUhbgufKmr1hf61YXK7Xj30wIn98q/n
+	kI=; b=HaD7BzUXltaLqHXYYurOfC8gae8eIwn/ndkQQRglCWajzsww2zaOEmE0S
+	up2zKsMIPHIDQIeQLitP9NUg9wMvjxVhLoYDqNQJq4AjqXxLGUPrB1JEu7AesWoD
+	OUbRJKIfFmPoVNuzUPwPaILAMw6vyxvmdCtAAuUB4UUKu+uKIYTgr23CNz298b7I
+	eZ8wuVJsC9xHTaIaG36LtyDro12+6zYJ/9jG6JmGnY/QbMRx8xqp1kbNwMwzeMiy
+	jsQW9rVP1T1Mdzou22XurQTZIHNsHZAMRn3bJie3L02qjScMFb12dU5Mnkgvc5PE
+	6B+gy27xdUOZQrhSFrbnPdtqZD5kw==
+Received: from ph8pr06cu001.outbound.protection.outlook.com (mail-westus3azon11012050.outbound.protection.outlook.com [40.107.209.50])
+	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4gkcxg2jfw-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 09 Sep 2026 20:55:06 -0500 (CDT)
+	Wed, 09 Sep 2026 20:55:13 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JYTdLYEqEdMlNlt6XQtwUVeMaT4QxseeU04pu+1IyhhPKsOrjgDCyzIzKHvDl7HpBrnB5va8faxiNv1UxpdPJbZ8jUAOy1c58UvJNKA4yTPmTC203zaQ4IwFhjUmag/VNmoPjw5juh4ag9ZC63MzGsj1fS7a4wBcuSmlmAe5WFHm7vgEJ9/c0lAJTQT3oPwjuqtSGrLtk7llb7Bss9AhSpy8AMZ3KeIKhntXTvQjR0+H2kX0bwTj2TBmUFeGDuHOZOVvoKmKgWjaHwlAHBgoRG6wWw/q7zH9KeiVGgihCZ13SKq8DY4dnrdj0ObOSYe87qY60qkqjmdDs17YDLD4DA==
+ b=N4HkJpuK/otIUQwVqtkrQcjedOphn5MgiQTuEhKFcDQIFNxnvcBKfh3xuIJCBn3wwJIVzOyozY0OGQFPQYT9Bz2z1CHbxL0p6XcLDWemjgBYdP+tfYXDbFN0FbiYYXov/1gitQ9zZ/xB9+nyKLuJe9aUq5VNqWptIituJsxNvvpvGxBST+eSTM2MZfLge6fd4LMyYG/BKCnZLf8a+9/KgiJfjhbLKZhV/2uUKNb5YDHfblbuALE8XQgq23NwPCuXwWUPn8Z+wQ5vz6oh1cd8RsFX3zc9liakC+EW4IXn/ntdbWs70tXkXgzSHClrN2OSBQFieuJ1jpS271PzooKKYg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EpXTQ3Dvy1fR0jh6yE8JkF6ybJ3ItNpqS7kXjV7mhWg=;
- b=ZG/uMqSVaLsfWiEUyGz9kO9juiuxErohlNNHRVhnbDyqJoiH7d9C4pI4x85M/AeKXkTgZaZzox0of2t2EOOp68b7GW50ZXkTuZJGXL/u1Fz/fJVEDQy+DvyLAAW2l6gMJwvw4ojGutR8VBOx5FsZMCE7Yq9OoOMF0RbIdv9NaiYY47L49/5LjtaKXxzUBa+qDfL5k9IPX+fCyf483XjAFyCGgFI4+nBO/gIlPKigS9CPBR71AVt7M2bfkjNK/rwXgw2c8Xzkj7SMMTh/PqQ/ya5tleO0kf4BrkPScTAeG6knlU6YFUDPC4bqq/GkMXbBUJeIPyy135dwCLhPjGAz/g==
+ bh=LmK+1IxSECOUhbgufKmr1hf61YXK7Xj30wIn98q/nkI=;
+ b=Ncc5QjPvguBfbcXjCtihE/Vz3dlE3kDyb40Mugt41xvBFVrMdsit16G2/VGvVDOS1Ce1Yoovq3+xNT0NITlv0Rijt5VFMMBcNWaXPTz+jrETKyMPRR1RFm6/AMBg00dH2zqGGjzGXreCVw1cehBpo/hnJX9eAm3HfLLdbTXtUzumQVtR2xCKnxgjnIcaUOjQSsXqo6dDkCn2JsYlCoHENUoPKUQVBmx66fb8YsFsae/k0KH5nAc4TRM8MWyL5OXm4jpXT/CrB4K9e/YHItVyPr/ps4cR4GxGB+7P4exkxLPRuYh88NJyGFRDsCEsjw3TG6UTKllDY6/SX/nZqDg2Jw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ 198.47.23.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EpXTQ3Dvy1fR0jh6yE8JkF6ybJ3ItNpqS7kXjV7mhWg=;
- b=TG2op2iZ8EYb0aY8gIUDTCMQhhvYjtTq3G8jDhfxPpo/t/cYMhV7eTDzuGm5LAFSfi6o77gt7J4asRHmLCgyjcFwxO2vzS2e2CrI3xcxAxWius7JWeYsjAhMob8JOlQ1TKx1SmHhscJinbdgvf5xemUK3ybz2ZMvHi5yKIRYAXw=
-Received: from SJ0PR03CA0109.namprd03.prod.outlook.com (2603:10b6:a03:333::24)
- by SJ0PR10MB6375.namprd10.prod.outlook.com (2603:10b6:a03:484::13) with
+ bh=LmK+1IxSECOUhbgufKmr1hf61YXK7Xj30wIn98q/nkI=;
+ b=jwyGTHKHMJLUm+TnYiRLjB3rzY9WOeC5ttxwplg5CLE8uTQdih15eZ/340A5tssg7Ql9DTg+o9WKZZlS2C1Hbo6VT8ZmxmeLPrfCQEqXMZGcQZscOLWAKWdidvzkzwFx/cCWRre1yLzrAa66iRzx+8sk3HsCWvue7l7eDxPsEwg=
+Received: from SA0PR12CA0027.namprd12.prod.outlook.com (2603:10b6:806:6f::32)
+ by SJ2PR10MB6989.namprd10.prod.outlook.com (2603:10b6:a03:4cf::5) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.5; Thu, 10 Sep
- 2026 01:55:02 +0000
-Received: from SJ1PEPF000023DA.namprd21.prod.outlook.com
- (2603:10b6:a03:333:cafe::57) by SJ0PR03CA0109.outlook.office365.com
- (2603:10b6:a03:333::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.6; Thu, 10 Sep
+ 2026 01:55:07 +0000
+Received: from SA2PEPF00003AE6.namprd02.prod.outlook.com
+ (2603:10b6:806:6f:cafe::10) by SA0PR12CA0027.outlook.office365.com
+ (2603:10b6:806:6f::32) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.8 via Frontend Transport; Thu, 10
- Sep 2026 01:55:02 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 198.47.23.194) smtp.mailfrom=ti.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=ti.com;
+ Sep 2026 01:55:07 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SJ1PEPF000023DA.mail.protection.outlook.com (10.167.244.75) with Microsoft
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ SA2PEPF00003AE6.mail.protection.outlook.com (10.167.248.6) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.428.0 via Frontend Transport; Thu, 10 Sep 2026 01:55:02 +0000
-Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.406.5 via Frontend Transport; Thu, 10 Sep 2026 01:55:06 +0000
+Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 9 Sep
  2026 20:54:54 -0500
-Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 9 Sep
  2026 20:54:54 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
  Transport; Wed, 9 Sep 2026 20:54:54 -0500
 Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 68A1ss3E2381560;
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 68A1ssb92381555;
 	Wed, 9 Sep 2026 20:54:54 -0500
 Received: from reatmon by grumpy with local (Exim 4.97)
 	(envelope-from <reatmon@ti.com>)
-	id 1x4U06-0000000CJbe-1sph;
+	id 1x4U06-0000000CJb9-1kkU;
 	Wed, 09 Sep 2026 20:54:54 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH v2 5/5] mesa-pvr: Fix for building with new LLVM version
-Date: Wed, 9 Sep 2026 20:54:52 -0500
-Message-ID: <20260910015454.2933250-5-reatmon@ti.com>
+Subject: [meta-ti][master][PATCH v2 3/5] mesa-pvr: Remove makedepend dependency
+Date: Wed, 9 Sep 2026 20:54:50 -0500
+Message-ID: <20260910015454.2933250-3-reatmon@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260910015454.2933250-1-reatmon@ti.com>
 References: <20260910015454.2933250-1-reatmon@ti.com>
@@ -99,52 +99,51 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023DA:EE_|SJ0PR10MB6375:EE_
-X-MS-Office365-Filtering-Correlation-Id: d121191b-d16c-44eb-734e-08df0ede8734
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE6:EE_|SJ2PR10MB6989:EE_
+X-MS-Office365-Filtering-Correlation-Id: e165ace0-8891-4dc7-81ee-08df0ede89aa
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|23010399003|376014|1800799024|36860700016|10067099003|3023799007|18002099003|22082099003|56012099006|13003099007;
+	BCL:0;ARA:13230040|36860700016|1800799024|23010399003|82310400026|376014|10067099003|18002099003|56012099006|22082099003;
 X-Microsoft-Antispam-Message-Info: 
-	dxCVrYlRT4v/9w19iJjaRzx+u/VXlgXwjOO3KVRzxx7Rj/9Yf89GU6ygEBLYGklJHSfiMxfRW7qyVglHymBdGW8sSCBF96OQjQWH3V/ScZqFZRsx08oDGym981kZUQ45WxY5xGuLcyFLokv5qoPWT7cbuBwkQdJBjep2Ks/i5Y5VHswofRJBJ72o4X+WiV8SSyhkRbOfz9tbN3kOgjh4SzYTVe9T6Vzd3Nrj5WRGmbqaW09KsVNFKgC4wmkD9DA7WwYqpm2Ev20uPwa53I4FYokxGUlwOJqSDohJTcKEQcPZyxClXmoY1AeN8C2LCt/v4dhUCMWaXKo6Fj0cqaMiANuYxDzyuCrZQGhVKMSPh8p/TOv+bj2hMc7UrhJdM9/jF7iCGqLP7Mrb8r9mApw0OcMRcIzPf9NHBrI9TYa9nllKyegJv+KaXArOS39c2IxYymWnnSlJlJUA2hwli3KP5DNMCaRqkvIv2+IHIx6EZXZdNAQAhtD/0I93WCxg5dAauU1ulAWWBSgiqbKrqUe6MNhrS3DaplGYXQn+qD22xfkGaxny8hEpVn8f8AceY7YbT8Pk00Bra3xCF7a0ICqil3sbNKbSEiouw/jUjJaKhJ8npi/IJ8Jm/BBsMXPY1ZG7MMROCYjLLGv/IQilSwPyFA==
+	tpa8O6aHSSmVke3LTUB+NwES9kYlPWfJX7xveANkqkpx5ln+GP+jkLnr1dXYDywclyvozVkWKnXczCa6KuIvgkomutZHXZ8VRYyAhCymqO6H0KlO6aFoYD3PIENpDqUE+jUvTJTrCZjWQaxE5abpvhI1S1A+4huyqqFJ+YBinxWbTEnTMw4LpuCfdMRNMXwRY40/GdR15NBVkPbM7+YJCsRy6Vb4u2uwAKhyZI9o8wgcftI3BwtN5F3O+CPpfqaDw7dsEWUtvaNO0E31TfuvUq3H+ya9B6natNg3kE0xLqPVaD48OKE9Qms9PDc7Xb64ozdOX+tiE53hvXrNhbURr4IyiSrl3wcVVNENkPcQunpiPRl8lWv5f/Swmx6Q7PSHqlLQ4sL17SHvNKYzSgVAct9K6E9zu6mSVl0LU1EnP7DyOp6NVC8/CKiWrVsiZDfRTiwo8qM6nZ32uEyhqAcdQrDodJ40oErWx3NqxOruRzBzMr9lJhkf9l22S+YDpJWoEGW5Vd+w9Xlk0/9SSEwRFG5/7MfUOXOeABMRaqTQ23sHvBQ6wgrpncaDZVOMs4ro4Y+M1fgxSbqEZnRAAo8vpa01RL6p9hkfaZHEgoJnkeZ6TVLEQz7cdBgQDuW2GX8D5+QdRgEXx8oGkup2IVZoZ+BUzg97iFdrv+fklUyONcvGhrQm8ojzGqV8qzTsmDlZ+oYMmMW+WN9tsQuTyTWPtg==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(23010399003)(376014)(1800799024)(36860700016)(10067099003)(3023799007)(18002099003)(22082099003)(56012099006)(13003099007);DIR:OUT;SFP:1101;
+	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(23010399003)(82310400026)(376014)(10067099003)(18002099003)(56012099006)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	Rdn0O/YeFuu8bMdRsGyJixiQoouNcDBKuSrHhnrrKLwrLAhogoTRY8nzPjXE8vIYe/d65ufeHLdTIVTUElkAPK/BNc1wuPb9Zf9KxaKs24g6akhZE8CduXof3spFfvAWahrdw0i+YBxwT4RW9IneibCWIsoKZx0/cicWO8jHm8b19IwkPwSNpbuDVnAtER9rqorEZpo6k0znMp/1T1eMO1hSll2aScSWNGjw7FPX7y8pw9O4SO/hJXcacmnbEshXo0kj1BE+eiWQHsD3RTuDYbD9vdWsGDM+9YvPEy21KLedMVPRI2HcIVegpqNKNk5Y7/vYsXPLiwMuJiFdwrjG8XBrJrsd35PspBx9XYEMtwaRdMB2AYlQgHVmIOyWshIhDaTlHyMp4znqL7pIg54hQdKdBcIclU0A0lZC51zyzzG9S0xrfUOoXgNNe4QERvrG
+	GigJmkVfn458oUhYL+77/0YPE3he/pCVUi0RMlMvyB9dS3N6I7ceZ6myZeL8dRm9/QhPuQ7ZZsb4hLBNcsdzPo2vFOmTNqTF7j54lbVahaKNWB0XaFy0z8KpvO1dp6S9dYD09C0pHj+5IOX4R/S2NG/fJ/kYGNHQx4HHGkMBK85N+Xrbq7gzqUDRoCJGd1awxJeVOvARXAIDDdUiMAKa/jpUQd9yCVDdjyJwTYmSGmnF4AuYuIxRls9ls5RWPsSWdSB0dD2Hn/+NHCr9yMNO2oJ3c5kSBT2EUcbhmPT3qfRYwKxzz5kT6qji4y9wGY56P2irWnN6FAKRpK/DJMPAffZAYHjnnbm87CD9MDBD/Pmp30fJRY5c5blvSm4g5rd2lFbKj6eRGWngXvbwofaTuXnprqdrAnacJs0kGEQe3kbjstbi7qntJs+prAlSdaft
 X-Exchange-RoutingPolicyChecked: 
-	pAbZUWhFD5ZujYnqYkW7RWcMcjCGRIJfZp02khoX0WP6Io1FO/H7h6dyeHRxSX3O5DGsb5xNcRSzCllp+UiMTU/G72TIzsYRA9oNeRE8EKkYZD7tbfwYEjAaxlWNDHEN84Igdi2owdU1cLeRXzigeqjOgcpr4pBT8sb44OITxya1ukNUffAaHbRE7yOT1KAq68oLpF6lfz/+VSKzbt64Dc/iBZlwWZySZxyQgNt92ymWiFpzRjwfP/uAa3bsEt0e2ID0Owk6o68WJQqAnZEOF3PLGGVmDG8OXqOaV5Ur8x3cM9C3/h/TWHU23b3VUVMVC3Po/nhXsjN/cQ5Ko8gEig==
+	sgXwApLmjA4vFhZpp5v6FInkpKXIL50erYFGePHDc9MWrHt29I8Cbe6vyt+9rfLXs3mp1juYHS7rortsDOib9CtFz9ROIC8YWU7tIW7wIsY9UK6XGN3hTkpqLPaxUOH4i8xj2sxXHHcjALXEl58L/U4ON8DSkGz/ufMnQELkX5zdx/ABtH1NXOsc6rmZPiGz2/qvXUm6VI+pEtHFmQXXkTMzcDoIbKj7AJQ/rmmMRKoSQR8f9loUytHclQwb9dzTPZc2Nbe3lipukpvATBhexgFavzIMFdrKhHshJgWRM30XSCye5ZNTCjnYCG4aCkznRZvneXN/jTLggMb/aGJ+fw==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2026 01:55:02.2488
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2026 01:55:06.4338
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d121191b-d16c-44eb-734e-08df0ede8734
+X-MS-Exchange-CrossTenant-Network-Message-Id: e165ace0-8891-4dc7-81ee-08df0ede89aa
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	SJ1PEPF000023DA.namprd21.prod.outlook.com
+	SA2PEPF00003AE6.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB6375
-X-Authority-Analysis: v=2.4 cv=MpPHeGae c=1 sm=1 tr=0 ts=6aa20dfa cx=c_pps
- a=pKtxidU6TXaQx3FGc3VI+g==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR10MB6989
+X-Authority-Analysis: v=2.4 cv=MpPHeGae c=1 sm=1 tr=0 ts=6aa20e01 cx=c_pps
+ a=S4kVa+swf+0AvQ92Y/0yGw==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=VdqzKS8jKosA:10 a=s63m1ICgrNkA:10
  a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=fPAWb5peG099m5CrUpKH:22 a=Q4-j1AaZAAAA:8 a=e5mUnYsNAAAA:8 a=NEAV23lmAAAA:8
- a=sozttTNsAAAA:8 a=n7Gf2nL6AAAA:8 a=bYn3EmMyiyyb5WVhYGQA:9
- a=9H3Qd4_ONW2Ztcrla5EB:22 a=Vxmtnl_E_bksehYqCbjh:22 a=mHLeZRWHYWOIOYBL6xkx:22
-X-Proofpoint-ORIG-GUID: UEtf5jqF-aYV3jIahkUahpMl5btgo0NB
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEwMDAxOCBTYWx0ZWRfX1kNAtFoCJKRZ
- K1a9EEI/KliCC3sLw2B359jKQVeKzbEAlqVJr0XiZ3eg+ClomPZtYRxby3CuKBUS1xfPsMehJrI
- 4SzxXX73uD8OyiAST79wP3zpr/iVl6s=
-X-Proofpoint-GUID: UEtf5jqF-aYV3jIahkUahpMl5btgo0NB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEwMDAxOCBTYWx0ZWRfX5vwLabRh69mn
- BpXq3JK5C2KaZiUKr9rbIPNtbykb9BtbvbQcL9C8EaeKbNGYhFKGTJ/7shkCEQuYNc35z+o+lKH
- R9x5IkMSaigNsiazfkaMA2mlcb0Ks6aO1cDN6JBuBS7DKS7hXo4/n5v3glicx/U84mK0uw+pTcH
- 3jKYDamBUe/pEQtAzF28yyk6RAOk6YRlvKa6vIVhZzYltsf49cC12T+cKgfEesXrTOALoZl+Mz9
- E/pEjsBUQY2Zc045C3rbKd4xahCyUufJzNyYNmkAOmwP2CE4LzRIYjb7U21xggJJoP05T98B6Ro
- LMmKF+y0SdI+PXUHlh2C2CWIbYQ9p7jQ6S5YIWRabkBzpNeJt59gLAZR9BVLrTZz8WV3im0PP4g
- c8hQpLNaNPX7eL4w5XEjSxkFAzUoncT6F3sGMphFwLiBf0BdOZioqgKT42DH5tFTv6O6ji0aaey
- nfl0rtX3QM5Kbt9mZ1g==
+ a=fPAWb5peG099m5CrUpKH:22 a=m8ToADvmAAAA:8 a=sozttTNsAAAA:8
+ a=haCKF7tZICal-DEMtOIA:9 a=kCrBFHLFDAq2jDEeoMj9:22
+X-Proofpoint-ORIG-GUID: FA9tM0i-9vguGSSBPL1d4wxhykEIy9qg
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEwMDAxOCBTYWx0ZWRfX6c1cWncDK9a6
+ aQaAC6cm9QoiwDEM1rXbOhZoTBjGeCgCZpSdCrSQ3m6YIeH0jZflzVxzcyAWsCiF8k3kX61/RbW
+ yOSoELI2acYR24rPBwo7nPw6cGsQesw=
+X-Proofpoint-GUID: FA9tM0i-9vguGSSBPL1d4wxhykEIy9qg
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEwMDAxOCBTYWx0ZWRfX2GKGTVByR7yb
+ hmjYrcetfLlB+Vo0+rRh8yzYbodnDxHW1mkd8ASgXvIIeUcwmjdqpvC+h/BjWir8FDeEvjB5XxE
+ jLeNZ2wy6Hp8cttEsGqUvE5gLmf8nTrNRPODYwD9wiLbcnOqHHpxjO3P+a/o3/6WFvSyTIsD9Bt
+ CfVQxx1FMLyLXRkssKA281D7eY2nXDFVmGITtIp80N9UJIjkDc94qP02nVF/xfJM3cUx3IGrSSs
+ 52yY7Wg4Z/3Jqr6FRlHpqWvuCgOWAG7RMDk38+pJme2IT34vrtQc3DeFnhkOTf/RxvULcl2tRHy
+ DFgS8UFHQu0VaxdRry6Ep9O2tIDWpqz+Lg8wLdWViQ7e9ciKyUXuUkct9CZX2Hg2we74sLdt4jW
+ yKkgXbsIrYebSL5JSNhGYEOfF/u2VgdwAV1kCkwsTsSIn0QA7fkX8vF9JKMXrUlfBA8tTamZoNQ
+ 7v5qVjE8QAc5AQwe2Cg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-10_01,2026-09-09_02,2025-10-01_01
@@ -157,90 +156,49 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Thu, 10 Sep 2026 01:55:09 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20356
+ <meta-ti@lists.yoctoproject.org>; Thu, 10 Sep 2026 01:55:19 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20357
 
-A recnet version change [1] caused a build failure.  Backport a patch
-from the mesa repo to address it [2].
+Commit 7e696b1fa0 ("makedepend: remove recipe") removed the recipe from
+oe-core. Makedepend was removed from mesa already in version 9.1.
 
-[1] https://git.openembedded.org/openembedded-core/commit/?id=d1575787a815fbe1ca60b20664665f92a95b2264
-[2] https://gitlab.freedesktop.org/mesa/mesa/-/commit/f958ad11955638758c19170d9df4d67bf1ff8bcb
+Follow oe-core and remove the makedepend dependency from mesa-pvr.
 
+Signed-off-by: Franz Schnyder <franz.schnyder@toradex.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
 v2; No change.
 
- .../0001-clc-fix-build-with-LLVM13.patch      | 45 +++++++++++++++++++
- .../recipes-graphics/mesa/mesa-pvr_25.2.8.bb  |  4 +-
- 2 files changed, 48 insertions(+), 1 deletion(-)
- create mode 100644 meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-25.2.8/0001-clc-fix-build-with-LLVM13.patch
+ meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.inc | 2 +-
+ meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-25.inc | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-25.2.8/0001-clc-fix-build-with-LLVM13.patch b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-25.2.8/0001-clc-fix-build-with-LLVM13.patch
-new file mode 100644
-index 00000000..77bd993a
---- /dev/null
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-25.2.8/0001-clc-fix-build-with-LLVM13.patch
-@@ -0,0 +1,45 @@
-+From f958ad11955638758c19170d9df4d67bf1ff8bcb Mon Sep 17 00:00:00 2001
-+From: Lone_Wolf <lone_wolf@klaas-de-kat.nl>
-+Date: Wed, 13 May 2026 22:54:45 +0200
-+Subject: [PATCH] clc: fix build with LLVM23 (TargetRegistry::lookupTarget)
-+
-+See https://github.com/llvm/llvm-project/commit/d50631faad3003e73589528c83d3bbbad7ba72f1
-+
-+Closes: https://gitlab.freedesktop.org/mesa/mesa/-/work_items/15471
-+Cc: mesa-stable
-+Part-of: <https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/41558>
-+
-+Upstream-Status: Inappropriate [OE-specific]
-+
-+---
-+ src/compiler/clc/clc_helpers.cpp | 11 +++++------
-+ 1 file changed, 5 insertions(+), 6 deletions(-)
-+
-+diff --git a/src/compiler/clc/clc_helpers.cpp b/src/compiler/clc/clc_helpers.cpp
-+index 66d4af43a36a..e5c3d158b290 100644
-+--- a/src/compiler/clc/clc_helpers.cpp
-++++ b/src/compiler/clc/clc_helpers.cpp
-+@@ -1186,15 +1186,14 @@ llvm_mod_to_spirv(std::unique_ptr<::llvm::Module> mod,
-+    if (args->use_llvm_spirv_target) {
-+       const char *triple = args->address_bits == 32 ? "spirv-unknown-unknown" : "spirv64-unknown-unknown";
-+       std::string error_msg("");
-+-      auto target = TargetRegistry::lookupTarget(triple, error_msg);
-+-      if (target) {
-+-         auto TM = target->createTargetMachine(
-+ #if LLVM_VERSION_MAJOR >= 21
-+-            llvm::Triple(triple),
-++      auto temp_triple = llvm::Triple(triple);
-+ #else
-+-            triple,
-++      auto temp_triple = triple;
-+ #endif
-+-            "", "", {}, std::nullopt, std::nullopt,
-++      auto target = TargetRegistry::lookupTarget(temp_triple, error_msg);
-++      if (target) {
-++         auto TM = target->createTargetMachine(temp_triple, "", "", {}, std::nullopt, std::nullopt,
-+ #if LLVM_VERSION_MAJOR >= 18
-+             ::llvm::CodeGenOptLevel::None
-+ #else
-+-- 
-+GitLab
-+
-diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_25.2.8.bb b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_25.2.8.bb
-index 03b0b9bf..cd622864 100644
---- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_25.2.8.bb
-+++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr_25.2.8.bb
-@@ -11,7 +11,9 @@ LIC_FILES_CHKSUM = "file://docs/license.rst;md5=ffe678546d4337b732cfd12262e6af11
- BRANCH = "powervr/${PV}"
+diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.inc b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.inc
+index 2c4299c7..a9c6b8b2 100644
+--- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.inc
++++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-24.inc
+@@ -40,7 +40,7 @@ do_install:append() {
+   fi
+ }
  
- SRC_URI = "git://github.com/TexasInstruments/mesa.git;protocol=https;branch=${BRANCH} \
--           file://0001-meson-misdetects-64bit-atomics-on-mips-clang.patch"
-+           file://0001-meson-misdetects-64bit-atomics-on-mips-clang.patch \
-+           file://0001-clc-fix-build-with-LLVM13.patch \
-+           "
+-DEPENDS = "expat makedepend-native flex-native bison-native libxml2-native zlib chrpath-replacement-native python3-mako-native gettext-native"
++DEPENDS = "expat flex-native bison-native libxml2-native zlib chrpath-replacement-native python3-mako-native gettext-native"
+ DEPENDS:append:class-target = " ${@bb.utils.contains('PACKAGECONFIG', 'opencl', 'mesa-native', '', d)}"
+ EXTRANATIVEPATH += "chrpath-native"
+ PROVIDES = " \
+diff --git a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-25.inc b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-25.inc
+index fbb865ad..3be87b38 100644
+--- a/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-25.inc
++++ b/meta-ti-bsp/recipes-graphics/mesa/mesa-pvr-25.inc
+@@ -32,7 +32,7 @@ do_install:append() {
+   fi
+ }
  
- SRCREV = "7b6e8de7b0acdaff684f1109c6acb575644a93ea"
- PV = "25.2.8"
+-DEPENDS = "expat makedepend-native flex-native bison-native libxml2-native zlib chrpath-replacement-native python3-mako-native gettext-native python3-pyyaml-native"
++DEPENDS = "expat flex-native bison-native libxml2-native zlib chrpath-replacement-native python3-mako-native gettext-native python3-pyyaml-native"
+ EXTRANATIVEPATH += "chrpath-native"
+ 
+ inherit meson pkgconfig python3native gettext features_check rust
 -- 
 2.43.0
 
