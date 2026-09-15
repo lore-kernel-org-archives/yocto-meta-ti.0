@@ -2,145 +2,149 @@ Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2065BC88E77
-	for <webhook@archiver.kernel.org>; Tue, 15 Sep 2026 19:33:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB6A9C88E75
+	for <webhook@archiver.kernel.org>; Tue, 15 Sep 2026 19:34:13 +0000 (UTC)
 Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com [148.163.154.28])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5105.1789500822206574590
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5113.1789500848515159504
  for <meta-ti@lists.yoctoproject.org>;
- Tue, 15 Sep 2026 12:33:42 -0700
+ Tue, 15 Sep 2026 12:34:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=WoLfsBWw;
- dkim=pass header.i=@ti.com header.s=selector1 header.b=uE85dzbo;
+ dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=lPxsdDms;
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=jWc49WV2;
  spf=pass (domain: ti.com, ip: 148.163.154.28, mailfrom: reatmon@ti.com)
 Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
-	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68FJN9k21179410;
-	Tue, 15 Sep 2026 14:33:40 -0500
+	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68FJN7mr1179355;
+	Tue, 15 Sep 2026 14:34:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=
-	content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=proofpoint-05-2026; bh=uuX/vPTsqWsDm
-	/wEH48jF7Yf1Mry5gV6eI8I5L/oSyk=; b=WoLfsBWw3H/nNi4Db44ynmz0VNc9w
-	c6R8ZCTz7CLH1jyMaTURFYP/AUqziIYmqU/T3quZAOtnsN1pFabJmakmAUMFB7uG
-	jVh0ZciK+ap86UggeALS9lLK8ZqXPf3AGxcgvyYBxMtJ+9hh+uQ7jilLyHZMOICa
-	OAKLh6FklfWLJ8rVGAXaJNkHoKEDD9qQkXefNq+4Me9BSa4pnT87pEVqTbOmaYKf
-	hHgMan+VS052gXrWpAvwUNOr2kgAGvOlgGbqS1OZe+NuS0jpIzKzNR3A4sV6CiT4
-	a0RvSX3dx3fOumM7CmohTKsRG/6ZnNQ8DuwpibXit+OAML89ZFAQghB1A==
-Received: from dm5pr21cu001.outbound.protection.outlook.com (mail-centralusazon11011064.outbound.protection.outlook.com [52.101.62.64])
-	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4gqc4p830k-1
+	content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	proofpoint-05-2026; bh=kqa8NwenvhQvHS3YLlu3fwYWz9dYBXF0VicI02UnR
+	Zs=; b=lPxsdDmsuX1f8Bmp1GY5P1/ZgbDB8fFGnNkQZGZ+kz6k5oDfUtoK93oOl
+	xIVS04GTmBavNfOMpTOHFYpDXCMmTy+rMzsnsWxedDQoN0fAmcnqdGeNGmivlc8k
+	2R+nv7xRoYUmMwsp6pE6iypU9t8mJ8Lp1d+wB7layCAcPi9G4mUKGp5jxv1fX6xW
+	MBJ3h4EClG1FqN3mKyOd2adCSaYptSTv3LeB2PNVzuscpkuPmfZ2KDSF7fcCM/SE
+	IBIYVByIOnhrfnoAWtYwoX9jq+2+HfESnoq7Pn9fr+J8MgeWxI7zay2HqS+JKgjo
+	/0N1bk2fyQ76nDYHS2cowTcsVIdHg==
+Received: from sj2pr03cu001.outbound.protection.outlook.com (mail-westusazon11012001.outbound.protection.outlook.com [52.101.43.1])
+	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4gqc4p8344-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Tue, 15 Sep 2026 14:33:39 -0500 (CDT)
+	Tue, 15 Sep 2026 14:34:06 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Czm6EoCAVenddEnz6YVDJksYBS7bNNhxSoAS0UbAC8BOoEHiiKVHKUXLGL4r9kFdrHwT1STHI5aDU94Ayoafabi0fnZ7ZecxQbqDS4WOHnigZn/FA8fWQQPw9zqO/IjZ2ZLSKm4UuzXfdtKSdE5afZQKwPU/EpIT7UdQRpDDqeEiWjdY8j7PCqe4n4h9t5X5prQBF2A8L9x3tlGxGTeQJ84LfXIhYORT+zNLUAIOwG5qaw9VPTXCTLROqfXRy5z2dm1E68ZosqvhwIK9uTtPo9PXI0XT5eM2T08QttaXeBUaApwH/Pp1xlvaBro4jvvdnb9r02xo15UXnUIN3VYYIQ==
+ b=SWOu2ofzocS2hlWCdpjmaEJQiTEdeAbLZnhXb7qAv5lr6lMOKnN6s7ImjMAfnO0OML3UWDCUvLpCYlK2XEKL//YW/bLAcmvGJojV9LxuajJRx/8sXbuJcMU7Nim6jPDIFDVtLUVKCePwS3HhXsqe2B7TgNqhrqfBZgF5T5I/pt4yTN6Y5OBAiz7jjWIVVPFRMAupdQ+9nhlUUMHBT5WHPSxq3sXcVAhsxTuH2jvxGhHJBO7RvqSQQc2CDH4V9ysH8BFwstI8GkyCzTAmHpGpg8g6rLpqTSywwcL6wBpWqgIz2+sjQzusgPDicxM8EU4IPrM/GKr/9NzMKt4UiYH3VA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uuX/vPTsqWsDm/wEH48jF7Yf1Mry5gV6eI8I5L/oSyk=;
- b=DtbAjzYJLwcmVyh5XDQehOTdU3u2XnvxYZmp3v9eECvrCh//Bai9R/UxuyQ/i6+AD+82cx6dn/WD4hsayga+VqKNVR/EnjrXscFoZ+HuTAL/TTsyItdAB4Fjbttjt5P1gFJzBWzgk934LnmO1jnWzOfFlgX2xM6ofr+Y62L77Ovq2LLUObzK2uCJWki67HOandUEU25prWKYYMOUDB9XE4yrk0wxdjfZZX5V80SdteotOkeh5VS9x1+hakXlxWny4sZvJV0lJdWG61EIsyTenj5GQcMCspnAwSnHB2oRaBrG+xZXNNkzFuqM/ZIw7v9IMiyoWo9zf3tjp8ah1fFnsA==
+ bh=kqa8NwenvhQvHS3YLlu3fwYWz9dYBXF0VicI02UnRZs=;
+ b=BMgqrt63vj+RYixl9yu5LbM7lHkhMtCF2visAMzofyTls+9LyZ5g0il9xKQxQWcFdPI7CjjXpa4fSzkrpWyXGcrRP3HAhghCGOltaBX7zpwbY1/iOEp2yA/ESae4xD76jwNX5YJhw8OwpevQmAUK3zdBZikBv9OXLJWQFUPNT44uMMrwTiIPcJbPeDDsA9MczLwuwhyfdbPJC645gfNdgGuNbdflKtEcSG9DougK4IJg6fA9/q3VhISHS2oCo87QjAS3xV+KrDFjByDMwYw5m7+G3ZpWeAAommXtXAulBTJWaZ3iiwDG+bv9JJM0pwqdT4CDssmy8/QHmgtpi4xk1w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uuX/vPTsqWsDm/wEH48jF7Yf1Mry5gV6eI8I5L/oSyk=;
- b=uE85dzbouRw46wSj3oEFETB1vbt2lW+4HCJEDwSf/VPdp+dOTJiCOcLwYFmkF8jwvtT3DjxMbRsVvJCj3sAlXu6iiVQZCImfOnHEi3GxlYxU5fC2rftZl1O77HBZWjEeiXIZKrC4bnsHIy4D/LRZ6ancFxK+RrXKQ68ov2m0xoM=
-Received: from DM6PR06CA0092.namprd06.prod.outlook.com (2603:10b6:5:336::25)
- by DS4PR10MB997596.namprd10.prod.outlook.com (2603:10b6:8:31a::24) with
+ bh=kqa8NwenvhQvHS3YLlu3fwYWz9dYBXF0VicI02UnRZs=;
+ b=jWc49WV2Xr6ACk1D70ijZtw5k2zfKrrhftrK2q8uzBQSgl6ITyLsxtGJUXiPIPpg1HyAopGI9iskWzhcmvK4DessUHsk7104u/3Nogk7iFC3ByTw2sKRJw4/BF8K/8W5H5c/yvn5iv7loWQ0E9NI1wQGAedfjFaCXovzYg0V6Xw=
+Received: from BN9PR03CA0323.namprd03.prod.outlook.com (2603:10b6:408:112::28)
+ by CH3PR10MB7531.namprd10.prod.outlook.com (2603:10b6:610:139::15) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.9; Tue, 15 Sep
- 2026 19:33:33 +0000
-Received: from CH2PEPF00000147.namprd02.prod.outlook.com
- (2603:10b6:5:336:cafe::9) by DM6PR06CA0092.outlook.office365.com
- (2603:10b6:5:336::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.9 via Frontend Transport; Tue, 15
- Sep 2026 19:33:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ 2026 19:33:56 +0000
+Received: from BN2PEPF0000449D.namprd02.prod.outlook.com
+ (2603:10b6:408:112:cafe::13) by BN9PR03CA0323.outlook.office365.com
+ (2603:10b6:408:112::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.12 via Frontend Transport; Tue,
+ 15 Sep 2026 19:33:56 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- CH2PEPF00000147.mail.protection.outlook.com (10.167.244.104) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BN2PEPF0000449D.mail.protection.outlook.com (10.167.243.148) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.428.7 via Frontend Transport; Tue, 15 Sep 2026 19:33:33 +0000
-Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.428.7 via Frontend Transport; Tue, 15 Sep 2026 19:33:55 +0000
+Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 15 Sep
  2026 14:33:11 -0500
-Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 15 Sep
  2026 14:33:11 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
  Transport; Tue, 15 Sep 2026 14:33:11 -0500
 Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 68FJXBC13817099;
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 68FJXBA2583621;
 	Tue, 15 Sep 2026 14:33:11 -0500
 Received: from reatmon by grumpy with local (Exim 4.97)
 	(envelope-from <reatmon@ti.com>)
-	id 1x6Ytz-00000009wQV-0iqw;
+	id 1x6Ytz-00000009wQd-0xEo;
 	Tue, 15 Sep 2026 14:33:11 -0500
 From: Ryan Eatmon <reatmon@ti.com>
 To: Praneeth Bajjuri <praneeth@ti.com>,
         Denys Dmytriyenko
 	<denys@konsulko.com>,
         <meta-ti@lists.yoctoproject.org>
-Subject: [meta-ti][master][PATCH v2 1/3] Revert "u-boot-ti-staging: Fixes for OpenSSL 4.0"
-Date: Tue, 15 Sep 2026 14:33:09 -0500
-Message-ID: <20260915193311.2369532-1-reatmon@ti.com>
+Subject: [meta-ti][master][PATCH v2 3/3] u-boot-*: Change openssl fix to build option
+Date: Tue, 15 Sep 2026 14:33:11 -0500
+Message-ID: <20260915193311.2369532-3-reatmon@ti.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260915193311.2369532-1-reatmon@ti.com>
+References: <20260915193311.2369532-1-reatmon@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000147:EE_|DS4PR10MB997596:EE_
-X-MS-Office365-Filtering-Correlation-Id: 77066ac3-157d-49f0-e31a-08df13603ae7
+X-MS-TrafficTypeDiagnostic: BN2PEPF0000449D:EE_|CH3PR10MB7531:EE_
+X-MS-Office365-Filtering-Correlation-Id: 35925f5e-988f-4dac-9a4f-08df136047f4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|36860700016|23010399003|376014|82310400026|10067099003|56012099006|6133799003|3023799007|18002099003|13003099007;
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700016|23010399003|18002099003|22082099003|3023799007|13003099007|10067099003|56012099006;
 X-Microsoft-Antispam-Message-Info: 
-	BCQaCfjmoNDn2h40mbN23qn/flMScKztHrWLmfk8BQqaiUzHpLYS3Ua3PnG4RASnUepCgaHmPh0QPfEhYq0kPA//ED3SjVaLTW/u0W/IZzEk8ZebUu/GKSBLibNFfpCw8sWygK0cjPhdWC7WwRYN/aobRVBiFyRtE/K2+yyFYmcStk3MGCH8b9DmvgdOPXOhbpITpZl7FeRNVzTd/cusMBcYE1Z+0OVeh/2PJowdv1Tz+M53H6Tv6Rk2C8t3y08K1LdsOmUB4DaJbAQOEA1DqGYe3J5fsexVoZTH52RyILzY4fbGzrBuqlJtI/YdSSJ0RE8vC+YisR6kiVemqYv5lQ8votmHIBQ2k1574j6uy+NfgAW2IIF149no4JYrlLthvXy1FIcI0Lhmwnqj+J78lOpAD0RBlu13J5Ye/FZFaOVyLryVsVAMkEAW8ME+rM26FeBbwO4u7TlutuvyuysTQg6lRb5YzeWomTZd1i9TY22E09cLiJLlGUt2zRlRC3EZivyPyRGo5oerdE9UP/uUYNglz9B8RRuihY5z0Ft7IaX0GHkaQifp3ZXrE81YdHeKnFjdmlnPEBR9TOC+vnqR2+p4rK12aF37RKdl4mZON023prDW3jnWFiYivszixMczPJvFPtk9WMTBjSI0v1zfew6QZntv73MYSWLz2Z1lm1iMtDpTRBsHMXnlyVLGI7bqU2+QdjAMRW79518wKne2PQ==
+	s6sQEx9rPbmJxFQvgdCv9HM9qLU1A0V7u5XzfB4RrdX03eeQnIQUhwhD4IYU9qzHcxadZCWcFCLFp8ZUAtgjkyF4l4ZtNAySGdKR5OAEnFf23kdP4QRSIkIqlbs4/aWlv92dxkpGFJRktq/2b1X0pH2FftpUGGjA06CTs8zMTsAuwZCXZ24MgNlHwLhMP6mU7g9E83sKXSb+oiRg7UgseT0XGYD8ZzLNsmVMD8+VPH6JwJcSKhvsUWQPCx9OKZkXWJaxo/m8rVH7xgDgsA3CM5MMCN1bnZ1YiBiXySB6mKWZaX09mzx7+gDTaAILJTyj8eunFlUWhMeLZegds4k4mCtPaPnf+/EeINXr0bi5DtwQ3jWJNEdBMvPdbjlMZ12wVLs/UG1n5bbwSjWN1yOPdhm3UKVtM6yesi84rgoB694j+Ccv8XdDzWCVTw2raV25OH9Nkvz9mnuYCkz1oBbABgr3kX88LLiEuonu3pUXLs675yTGMzKhcebVG7tys+CFQG5KfpaxHvqCPVyjVcljnVZITsH8ixe6F0TDuXoRLl1qEF+K1UtlxQG2Jaaj7bptUQHRkh48Krw7Im4utX6RBi8955I54umDXAIZk4N97HRLzOeCYTTIDlihDYrstIZAQPSpugHKVZ8FCo0l+gHd2w==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(23010399003)(376014)(82310400026)(10067099003)(56012099006)(6133799003)(3023799007)(18002099003)(13003099007);DIR:OUT;SFP:1101;
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(23010399003)(18002099003)(22082099003)(3023799007)(13003099007)(10067099003)(56012099006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	QAA2Cci2b8bt6rMngq0SnpHMBjIXxtMQjGHIXH9ULLNl7SMctdaC33BUPbVqb2h0vt8XM8JTuRkJGwIfbAMwhYAGb/KBbknBITvaAezZBG+vinUIgythWcG5oWWt+X//WC60ZpNWXLR/05AtoTucMdjygtCvP3//gV8gvzcYb8ZhH9btRBIk39e1UJOCggJJ/9Uf8btrI/VhL+YE3NgEh5B1FBAyhKn41Z1AmByAHEmam79nJY7jzdZTs+2DWrDmcXDX6hus+Oc//aR4jYONTIS+ltfkTjyaLW7O2LVtpbLaMAthKLivOCRekJToh5dDpFAg2OyXanmCGu7BllBF2zvot2JoFdrJ+qVvZOp35UbGr9m6NP9RBFKIQGeVUUs1uB1IQM/XTguDbGPaAPU16eUaOkRsN2pV/OOohhzNT+Sw/uM8+FVZcZHNWPdtagll
+	zWQ940YeoJ3EmUU5yV1Lf98mtBn1ixbGn2e2T6ZiBr6XLZODrWwqtmQ+windQ30ih2lvzR/pnGfg+eKiXJiIXB7VsyQd2NWDDECvzWu0EXVRFNUma13ZYWrJFI0TkmEYAWu8aI3/ZeO7jdcnEf8DU2cN46KB6YKvPJWTkczh95cnBzYVLoyx5pDvMZGH/KY8M9B5RmiclfeQinpvCjJ7rpkuJvEpitxCTXxoOFNHMeOrchWp80ooJp76oHiJWv7NRqojtUjwDFJjF7QHZURfseUcxGpi5PeVrNlG0yiudagnyiJiWz4HJliGuFUKV6UDEwGA+lf1h5C4g8o0DWRUNM0zxVEl4rO/5Nq85PeIlEmIHiyGPo5EfHPT/2hpI18G3QiGEMbzZVIfVzsUeFDl5wE6XUctHlKiN89hyXvRd5rRa4Nt7VtQjRaw+H0MjUnX
 X-Exchange-RoutingPolicyChecked: 
-	peQh6a9LPPBpkmFx2dgQ0dAc0A7GnarjhTBYdAA/D667nrvpY2UT949wAwHDaWXgr1nGxQSvja1y7S1R2qjt87fpCqkHY+UiIARvjIOjkXQzbd9LJJY0QOTs8zJKYqbiw8MHwjA1JKNFojQeArqaUfXiEhOfgbytcSe2LZ64eRWDF0NLFxhf/O51EvYGWQL8MNy91OFcaRoNF+0Geg1VgRjqd87zu3ctPUnLRiHcFl79/cfhn4py3MA3iVGQG3ltgx0nxmBGdvVIZGnvtDpVwuxTuAaghPqIfEgQuUMzp6wxqAykUD79DlcFChyrN6KcIEnZjrRf9yVgha+MjdWVCA==
+	uq7T21rbyPzahBgitSqvmw04GAEmT0uTRwAaH/Fl834yLU6Vw1LW0G8ml21CCZPIckLpv/jSxR3uE4WKiDlqRLAfS1L/ilYyaZW6QvmH9eJ50r9cHokd1MUtDw6CDqRaIPedY6rXb4QZhDzvA3PyCGqEb7qK2VC+ZhJgTVlrA/G2e2Gm5UpXR6wHNdH0/W2vN0jGwrW1n+b+ER5xZYewROQk1TS+pU7qI48WnG08IkkKtKlIcOdwYzxb4gFpHK7PKiqNKRJWf432ihsxfQ88i0cQPR0CxuxuNkP4rFqyphmHwE9x79mdxPnThJk+9i9dKa1/p5R7JtbYXhm4MmdmwQ==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 19:33:33.5008
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 19:33:55.3746
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 77066ac3-157d-49f0-e31a-08df13603ae7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 35925f5e-988f-4dac-9a4f-08df136047f4
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	CH2PEPF00000147.namprd02.prod.outlook.com
+	BN2PEPF0000449D.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR10MB997596
-X-Authority-Analysis: v=2.4 cv=HP9WhYtv c=1 sm=1 tr=0 ts=6aa99d94 cx=c_pps
- a=ImwGUT2bfrWU7DBu6bNfJw==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=VdqzKS8jKosA:10 a=s63m1ICgrNkA:10
- a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=fPAWb5peG099m5CrUpKH:22 a=VwQbUJbxAAAA:8 a=20KFwNOVAAAA:8 a=sozttTNsAAAA:8
- a=ptNznvi-AAAA:8 a=eXIX07nra3o8fY77v5kA:9 a=__MQohX_fo54y4GeBRKl:22
-X-Proofpoint-GUID: zZc7mzkREgBpBAQz2HhfejxnUSS2TaEm
-X-Proofpoint-ORIG-GUID: zZc7mzkREgBpBAQz2HhfejxnUSS2TaEm
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDI4NSBTYWx0ZWRfXwdbP38KdxmyW
- NA1e/lwmLd6bY0q3pW+/6WHvha/CWCh+OTsOnyLaTy2vzYK3hT7r+d+Nq2Ic58Oe8s0QPAXyQUV
- 2AhsOvkkxJFjlw/CJdiZ3J+vseaGT60=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDI4NSBTYWx0ZWRfX39UC++anakS7
- DSt+qtRVMJ8zzpEjZxVcREscJKa18KYZSU+Ojf44TqkTNT8H1b11nMDKrvwfD4EYh0yFDeXzQVT
- ZcGhsVcFgTUxhT8t+foXhBcPKeFV8Y6FtcKHxVzJE15CrAHyWUGu2V6xAIVOmIk2GfKEgMrvpzX
- WdGUOe5L4LD0cxhsrJl+xKbR7xEnwDoAqP/bX13SPMW+EIMgeknBNck/NE+Fw2sA824+2sseyen
- eNTTA5WQPo99DDVQkA6el995MkdaGCvBEh4LYqG8QX3NCI8VlSARP5wmEgth+y5ss9Q+XE8zOR1
- Eh8YyGMuim3Zvy4TeJt/33YKjzbIjwfRSYFEjs18/own5E6a5QzSJI09n3vqUOPavam9QH12q1R
- UTdCTpSBDQ/41fM42/mTd7Zc3QBg+2Mm/I70tOYLWIOkuSJ+7/IJ907B6Y6NUWbBCwUyR+1n7o5
- 4eAD+r1wd0xsqA5L+hA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7531
+X-Authority-Analysis: v=2.4 cv=HP9WhYtv c=1 sm=1 tr=0 ts=6aa99dae cx=c_pps
+ a=JgVaYur/QNM9XUS2zzqRTA==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=VdqzKS8jKosA:10 a=V5UXEbMT0ywA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=fPAWb5peG099m5CrUpKH:22
+ a=iGHA9ds3AAAA:8 a=7CQSdrXTAAAA:8 a=k-42gJp3AAAA:8 a=sozttTNsAAAA:8
+ a=NEAV23lmAAAA:8 a=xVlQdPV1REGw4ApZ5fQA:9 a=nM-MV4yxpKKO9kiQg6Ot:22
+ a=a-qgeE7W1pNrGK8U0ZQC:22 a=uCSXFHLys93vLW5PjgO_:22
+X-Proofpoint-GUID: IUWCWTzZ-fZYu0zOUnVMP0_uequEOfxv
+X-Proofpoint-ORIG-GUID: IUWCWTzZ-fZYu0zOUnVMP0_uequEOfxv
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDI4NSBTYWx0ZWRfX8QQEK0+y4rkH
+ B+XPqZKe0BLGDipOqnhXaDPqg0yW0j93wCx6s6ruiG1uctlKkfftr8WEPIHtcOsl+XzhW+51Ow1
+ MpxLyd14vduw0K6FmTKtBIylD3Qclhw=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDI4NSBTYWx0ZWRfX/jYQCX5J1eUv
+ KZqt4me+GFW+BbG5wcId2QixV0AyWL3Iw5OibjUVzeaSQjWNA6AibIAqdZQ7h/csgIgUrLs7zYG
+ Mjbm+y+kz7MG0yaf0NXUTkwdG+PUKUJwux1YeR59qEAsR30zqUTGACWKYeBe5gS08rjQaAj9Zw6
+ rNpFwLXeps/c0q2trKTVLa9q740a7kRE3r417jkmxhNxrwG4+ZfV39eDKckcYez9Qc9f8MZRvsD
+ j8HUgMT/JExJOwDKxRnAbi9ZBRwRCeOJhGLNUjqUj+V82gXt1qsTfBkSCmhs+Gn1cPPSLuVYXtI
+ X5YIxLYTC+hLWmaqOwe7ifyOV+JEWojLdmvoA2dZIBpn2OD+xd0MbTmL6J+JCRGRFC9BTbin4i9
+ MP+kzJPgtbvNUTISBM7T6t0n1jEnxxksH9t5io0192d9vu31PKP9DaVa2VnsW5SesTSja9b07+C
+ 7kRfJG5MmuVPM6E3hFQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
@@ -152,1031 +156,92 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Tue, 15 Sep 2026 19:33:44 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20381
+ <meta-ti@lists.yoctoproject.org>; Tue, 15 Sep 2026 19:34:13 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20382
 
-This reverts commit f06fbe6712395dff2df8fdc145c9c24db7101c50.
+Rather than carrying multiple patches for the same fix for all of the
+u-boot versions, we should copy the meta-arm solution [1] of just adding
+a build option to turn on the engine stubs.
 
+[1] https://patchwork.yoctoproject.org/project/arm/patch/20260909180341.3858400-1-ross.burton@arm.com/
+
+Suggested-by: Denys Dmytriyenko (TI) <denys@konsulko.com>
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
-v2: Add Signed-off-by
+v2: No change
 
- ...ort-for-OpenSSL-Provider-API-2024-04.patch | 300 ----------------
- ...ort-for-OpenSSL-Provider-API-2025-01.patch | 300 ----------------
- ...ort-for-OpenSSL-Provider-API-2026-01.patch | 340 ------------------
- .../u-boot/u-boot-ti-staging_2024.04.bb       |   6 +-
- .../u-boot/u-boot-ti-staging_2025.01.bb       |   1 -
- .../u-boot/u-boot-ti-staging_2026.01.bb       |   2 -
- meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc  |   1 -
- 7 files changed, 2 insertions(+), 948 deletions(-)
- delete mode 100644 meta-ti-bsp/recipes-bsp/u-boot/files/0001-Add-support-for-OpenSSL-Provider-API-2024-04.patch
- delete mode 100644 meta-ti-bsp/recipes-bsp/u-boot/files/0001-Add-support-for-OpenSSL-Provider-API-2025-01.patch
- delete mode 100644 meta-ti-bsp/recipes-bsp/u-boot/files/0001-Add-support-for-OpenSSL-Provider-API-2026-01.patch
+ meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.bb     | 5 +++++
+ meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.10.bb     | 5 +++++
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb | 5 +++++
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb | 5 +++++
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb | 5 +++++
+ 5 files changed, 25 insertions(+)
 
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/files/0001-Add-support-for-OpenSSL-Provider-API-2024-04.patch b/meta-ti-bsp/recipes-bsp/u-boot/files/0001-Add-support-for-OpenSSL-Provider-API-2024-04.patch
-deleted file mode 100644
-index 9f67644b..00000000
---- a/meta-ti-bsp/recipes-bsp/u-boot/files/0001-Add-support-for-OpenSSL-Provider-API-2024-04.patch
-+++ /dev/null
-@@ -1,300 +0,0 @@
--From 401c19f6b0a7c63afad92e9d3f2cbb75d6ed8566 Mon Sep 17 00:00:00 2001
--From: Ryan Eatmon <reatmon@ti.com>
--Date: Wed, 9 Sep 2026 10:04:50 -0500
--Subject: [PATCH] Add support for OpenSSL Provider API
--
--Backport from 2026.01 patch [1] by Ryan Eatmon <reatmon@ti.com>
--
--Upsatream-Status: Inappropriate [OE-specific]
--
--The Engine API has been deprecated since the release of OpenSSL 3.0. End
--users have been advised to migrate to the new Provider interface.
--Several distributions have already removed support for engines, which is
--preventing U-Boot from being compiled in those environments.
--
--Add support for the Provider API while continuing to support the existing
--Engine API on distros shipping older releases of OpenSSL.
--
--This is based on similar work contributed by Jan Stancek updating Linux
--to use the Provider interface.
--
--    commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
--    Author: Jan Stancek <jstancek@redhat.com>
--    Date:   Fri Sep 20 19:52:48 2024 +0300
--
--        sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >= 3
--
--The changes have been tested with the FIT signature verification vboot
--tests on Fedora 42 and Debian 13. All 30 tests pass with both the legacy
--Engine library installed and with the Provider API.
--
--Signed-off-by: Eddie Kovsky <ewk@edkovsky.org>
--
--Upstream-Status: Submitted [https://lore.kernel.org/u-boot/20260429180247.83091-1-ekovsky@redhat.com/]
--
--Note: Modified to make pkcs11 provider loading optional. The upstream
--patch unconditionally requires the pkcs11 provider, which is not
--available in the OE build environment. File-based key signing only needs
--the default provider; pkcs11 is only required for pkcs11: URI keys.
--Changes from upstream:
-- - Load default provider first (was pkcs11 first)
-- - Make pkcs11 provider load failure non-fatal (ERR_clear_error instead
--   of ERR(1, ...) which calls errx/abort)
--
--Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
--
--Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-----
-- lib/aes/aes-encrypt.c |  4 +-
-- lib/rsa/rsa-sign.c    | 95 ++++++++++++++++++++++++++++++++++++++++++-
-- 2 files changed, 97 insertions(+), 2 deletions(-)
--
--diff --git a/lib/aes/aes-encrypt.c b/lib/aes/aes-encrypt.c
--index e74e35eaa28..8a6f7715df9 100644
----- a/lib/aes/aes-encrypt.c
--+++ b/lib/aes/aes-encrypt.c
--@@ -16,7 +16,9 @@
-- #include <openssl/err.h>
-- #include <openssl/ssl.h>
-- #include <openssl/evp.h>
---#include <openssl/engine.h>
--+#if !defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
--+# include <openssl/engine.h>
--+#endif
-- #include <uboot_aes.h>
-- 
-- #if OPENSSL_VERSION_NUMBER >= 0x10000000L
--diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
--index 2304030e32f..29b3bd3dbb1 100644
----- a/lib/rsa/rsa-sign.c
--+++ b/lib/rsa/rsa-sign.c
--@@ -19,7 +19,47 @@
-- #include <openssl/err.h>
-- #include <openssl/ssl.h>
-- #include <openssl/evp.h>
---#include <openssl/engine.h>
--+#if OPENSSL_VERSION_MAJOR >= 3
--+# define USE_PKCS11_PROVIDER
--+# include <err.h>
--+# include <openssl/provider.h>
--+# include <openssl/store.h>
--+#else
--+# if !defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
--+#  define USE_PKCS11_ENGINE
--+#  include <openssl/engine.h>
--+# endif
--+#endif
--+
--+#ifdef USE_PKCS11_PROVIDER
--+#define ERR(cond, fmt, ...)				\
--+	do {						\
--+		bool __cond = (cond);			\
--+		drain_openssl_errors(__LINE__, 0);	\
--+		if (__cond) {				\
--+			errx(1, fmt, ## __VA_ARGS__);	\
--+		}					\
--+	} while (0)
--+
--+static void drain_openssl_errors(int l, int silent)
--+{
--+	const char *file;
--+	char buf[120];
--+	int e, line;
--+
--+	if (ERR_peek_error() == 0)
--+		return;
--+	if (!silent)
--+		fprintf(stderr, "At main.c:%d:\n", l);
--+
--+	while ((e = ERR_peek_error_line(&file, &line))) {
--+		ERR_error_string(e, buf);
--+		if (!silent)
--+			fprintf(stderr, "- SSL %s: %s:%d\n", buf, file, line);
--+		ERR_get_error();
--+	}
--+}
--+#endif
-- 
-- static int rsa_err(const char *msg)
-- {
--@@ -98,6 +138,7 @@ err_cert:
--  * @evpp	Returns EVP_PKEY object, or NULL on failure
--  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
--  */
--+#ifdef USE_PKCS11_ENGINE
-- static int rsa_engine_get_pub_key(const char *keydir, const char *name,
-- 				  ENGINE *engine, EVP_PKEY **evpp)
-- {
--@@ -157,6 +198,7 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
-- 
-- 	return 0;
-- }
--+#endif
-- 
-- /**
--  * rsa_get_pub_key() - read a public key
--@@ -170,8 +212,10 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
-- static int rsa_get_pub_key(const char *keydir, const char *name,
-- 			   ENGINE *engine, EVP_PKEY **evpp)
-- {
--+#ifdef USE_PKCS11_ENGINE
-- 	if (engine)
-- 		return rsa_engine_get_pub_key(keydir, name, engine, evpp);
--+#endif
-- 	return rsa_pem_get_pub_key(keydir, name, evpp);
-- }
-- 
--@@ -207,6 +251,38 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
-- 		return -ENOENT;
-- 	}
-- 
--+#ifdef USE_PKCS11_PROVIDER
--+	EVP_PKEY *private_key = NULL;
--+	OSSL_STORE_CTX *store;
--+
--+	if (!OSSL_PROVIDER_try_load(NULL, "default", true))
--+		ERR(1, "OSSL_PROVIDER_try_load(default)");
--+	/* pkcs11 provider is optional; only needed for pkcs11: URIs */
--+	if (!OSSL_PROVIDER_try_load(NULL, "pkcs11", true))
--+		ERR_clear_error();
--+
--+	store = OSSL_STORE_open(path, NULL, NULL, NULL, NULL);
--+	ERR(!store, "OSSL_STORE_open");
--+
--+	while (!OSSL_STORE_eof(store)) {
--+		OSSL_STORE_INFO *info = OSSL_STORE_load(store);
--+
--+		if (!info) {
--+			drain_openssl_errors(__LINE__, 0);
--+			continue;
--+		}
--+		if (OSSL_STORE_INFO_get_type(info) == OSSL_STORE_INFO_PKEY) {
--+			private_key = OSSL_STORE_INFO_get1_PKEY(info);
--+			ERR(!private_key, "OSSL_STORE_INFO_get1_PKEY");
--+		}
--+		OSSL_STORE_INFO_free(info);
--+		if (private_key)
--+			break;
--+	}
--+	OSSL_STORE_close(store);
--+
--+	*evpp = private_key;
--+#else
-- 	if (!PEM_read_PrivateKey(f, evpp, NULL, path)) {
-- 		rsa_err("Failure reading private key");
-- 		fclose(f);
--@@ -214,6 +290,7 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
-- 	}
-- 	fclose(f);
-- 
--+#endif
-- 	return 0;
-- }
-- 
--@@ -226,6 +303,7 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
--  * @evpp	Returns EVP_PKEY object, or NULL on failure
--  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
--  */
--+#ifdef USE_PKCS11_ENGINE
-- static int rsa_engine_get_priv_key(const char *keydir, const char *name,
-- 				   const char *keyfile,
-- 				   ENGINE *engine, EVP_PKEY **evpp)
--@@ -293,6 +371,7 @@ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
-- 
-- 	return 0;
-- }
--+#endif
-- 
-- /**
--  * rsa_get_priv_key() - read a private key
--@@ -306,9 +385,11 @@ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
-- static int rsa_get_priv_key(const char *keydir, const char *name,
-- 			    const char *keyfile, ENGINE *engine, EVP_PKEY **evpp)
-- {
--+#ifdef USE_PKCS11_ENGINE
-- 	if (engine)
-- 		return rsa_engine_get_priv_key(keydir, name, keyfile, engine,
-- 					       evpp);
--+#endif
-- 	return rsa_pem_get_priv_key(keydir, name, keyfile, evpp);
-- }
-- 
--@@ -325,6 +406,7 @@ static int rsa_init(void)
-- 	return 0;
-- }
-- 
--+#ifdef USE_PKCS11_ENGINE
-- static int rsa_engine_init(const char *engine_id, ENGINE **pe)
-- {
-- 	const char *key_pass;
--@@ -372,6 +454,7 @@ err_engine_init:
-- 	ENGINE_free(e);
-- 	return ret;
-- }
--+#endif
-- 
-- static void rsa_engine_remove(ENGINE *e)
-- {
--@@ -471,11 +554,13 @@ int rsa_sign(struct image_sign_info *info,
-- 	if (ret)
-- 		return ret;
-- 
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id) {
-- 		ret = rsa_engine_init(info->engine_id, &e);
-- 		if (ret)
-- 			return ret;
-- 	}
--+#endif
-- 
-- 	ret = rsa_get_priv_key(info->keydir, info->keyname, info->keyfile,
-- 			       e, &pkey);
--@@ -487,16 +572,20 @@ int rsa_sign(struct image_sign_info *info,
-- 		goto err_sign;
-- 
-- 	EVP_PKEY_free(pkey);
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id)
-- 		rsa_engine_remove(e);
--+#endif
-- 
-- 	return ret;
-- 
-- err_sign:
-- 	EVP_PKEY_free(pkey);
-- err_priv:
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id)
-- 		rsa_engine_remove(e);
--+#endif
-- 	return ret;
-- }
-- 
--@@ -636,11 +725,13 @@ int rsa_add_verify_data(struct image_sign_info *info, void *keydest)
-- 	ENGINE *e = NULL;
-- 
-- 	debug("%s: Getting verification data\n", __func__);
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id) {
-- 		ret = rsa_engine_init(info->engine_id, &e);
-- 		if (ret)
-- 			return ret;
-- 	}
--+#endif
-- 	ret = rsa_get_pub_key(info->keydir, info->keyname, e, &pkey);
-- 	if (ret)
-- 		goto err_get_pub_key;
--@@ -717,8 +808,10 @@ done:
-- err_get_params:
-- 	EVP_PKEY_free(pkey);
-- err_get_pub_key:
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id)
-- 		rsa_engine_remove(e);
--+#endif
-- 
-- 	if (ret)
-- 		return ret;
---- 
--2.43.0
--
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/files/0001-Add-support-for-OpenSSL-Provider-API-2025-01.patch b/meta-ti-bsp/recipes-bsp/u-boot/files/0001-Add-support-for-OpenSSL-Provider-API-2025-01.patch
-deleted file mode 100644
-index c5f3655e..00000000
---- a/meta-ti-bsp/recipes-bsp/u-boot/files/0001-Add-support-for-OpenSSL-Provider-API-2025-01.patch
-+++ /dev/null
-@@ -1,300 +0,0 @@
--From 0525693750b1b7a8fb7228dbb97bf592a21322fc Mon Sep 17 00:00:00 2001
--From: Ryan Eatmon <reatmon@ti.com>
--Date: Wed, 9 Sep 2026 10:04:50 -0500
--Subject: [PATCH] Add support for OpenSSL Provider API
--
--Backport from 2026.01 patch [1] by Ryan Eatmon <reatmon@ti.com>
--
--Upsatream-Status: Inappropriate [OE-specific]
--
--The Engine API has been deprecated since the release of OpenSSL 3.0. End
--users have been advised to migrate to the new Provider interface.
--Several distributions have already removed support for engines, which is
--preventing U-Boot from being compiled in those environments.
--
--Add support for the Provider API while continuing to support the existing
--Engine API on distros shipping older releases of OpenSSL.
--
--This is based on similar work contributed by Jan Stancek updating Linux
--to use the Provider interface.
--
--    commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
--    Author: Jan Stancek <jstancek@redhat.com>
--    Date:   Fri Sep 20 19:52:48 2024 +0300
--
--        sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >= 3
--
--The changes have been tested with the FIT signature verification vboot
--tests on Fedora 42 and Debian 13. All 30 tests pass with both the legacy
--Engine library installed and with the Provider API.
--
--Signed-off-by: Eddie Kovsky <ewk@edkovsky.org>
--
--Upstream-Status: Submitted [https://lore.kernel.org/u-boot/20260429180247.83091-1-ekovsky@redhat.com/]
--
--Note: Modified to make pkcs11 provider loading optional. The upstream
--patch unconditionally requires the pkcs11 provider, which is not
--available in the OE build environment. File-based key signing only needs
--the default provider; pkcs11 is only required for pkcs11: URI keys.
--Changes from upstream:
-- - Load default provider first (was pkcs11 first)
-- - Make pkcs11 provider load failure non-fatal (ERR_clear_error instead
--   of ERR(1, ...) which calls errx/abort)
--
--Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
--
--Signed-off-by: Ryan Eatmon <reatmon@ti.com>
-----
-- lib/aes/aes-encrypt.c |  4 +-
-- lib/rsa/rsa-sign.c    | 95 ++++++++++++++++++++++++++++++++++++++++++-
-- 2 files changed, 97 insertions(+), 2 deletions(-)
--
--diff --git a/lib/aes/aes-encrypt.c b/lib/aes/aes-encrypt.c
--index e74e35eaa28..8a6f7715df9 100644
----- a/lib/aes/aes-encrypt.c
--+++ b/lib/aes/aes-encrypt.c
--@@ -16,7 +16,9 @@
-- #include <openssl/err.h>
-- #include <openssl/ssl.h>
-- #include <openssl/evp.h>
---#include <openssl/engine.h>
--+#if !defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
--+# include <openssl/engine.h>
--+#endif
-- #include <uboot_aes.h>
-- 
-- #if OPENSSL_VERSION_NUMBER >= 0x10000000L
--diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
--index fa9e143b4ca..af5b18e0c95 100644
----- a/lib/rsa/rsa-sign.c
--+++ b/lib/rsa/rsa-sign.c
--@@ -19,7 +19,47 @@
-- #include <openssl/err.h>
-- #include <openssl/ssl.h>
-- #include <openssl/evp.h>
---#include <openssl/engine.h>
--+#if OPENSSL_VERSION_MAJOR >= 3
--+# define USE_PKCS11_PROVIDER
--+# include <err.h>
--+# include <openssl/provider.h>
--+# include <openssl/store.h>
--+#else
--+# if !defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
--+#  define USE_PKCS11_ENGINE
--+#  include <openssl/engine.h>
--+# endif
--+#endif
--+
--+#ifdef USE_PKCS11_PROVIDER
--+#define ERR(cond, fmt, ...)				\
--+	do {						\
--+		bool __cond = (cond);			\
--+		drain_openssl_errors(__LINE__, 0);	\
--+		if (__cond) {				\
--+			errx(1, fmt, ## __VA_ARGS__);	\
--+		}					\
--+	} while (0)
--+
--+static void drain_openssl_errors(int l, int silent)
--+{
--+	const char *file;
--+	char buf[120];
--+	int e, line;
--+
--+	if (ERR_peek_error() == 0)
--+		return;
--+	if (!silent)
--+		fprintf(stderr, "At main.c:%d:\n", l);
--+
--+	while ((e = ERR_peek_error_line(&file, &line))) {
--+		ERR_error_string(e, buf);
--+		if (!silent)
--+			fprintf(stderr, "- SSL %s: %s:%d\n", buf, file, line);
--+		ERR_get_error();
--+	}
--+}
--+#endif
-- 
-- static int rsa_err(const char *msg)
-- {
--@@ -98,6 +138,7 @@ err_cert:
--  * @evpp	Returns EVP_PKEY object, or NULL on failure
--  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
--  */
--+#ifdef USE_PKCS11_ENGINE
-- static int rsa_engine_get_pub_key(const char *keydir, const char *name,
-- 				  ENGINE *engine, EVP_PKEY **evpp)
-- {
--@@ -157,6 +198,7 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
-- 
-- 	return 0;
-- }
--+#endif
-- 
-- /**
--  * rsa_get_pub_key() - read a public key
--@@ -170,8 +212,10 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
-- static int rsa_get_pub_key(const char *keydir, const char *name,
-- 			   ENGINE *engine, EVP_PKEY **evpp)
-- {
--+#ifdef USE_PKCS11_ENGINE
-- 	if (engine)
-- 		return rsa_engine_get_pub_key(keydir, name, engine, evpp);
--+#endif
-- 	return rsa_pem_get_pub_key(keydir, name, evpp);
-- }
-- 
--@@ -207,6 +251,38 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
-- 		return -ENOENT;
-- 	}
-- 
--+#ifdef USE_PKCS11_PROVIDER
--+	EVP_PKEY *private_key = NULL;
--+	OSSL_STORE_CTX *store;
--+
--+	if (!OSSL_PROVIDER_try_load(NULL, "default", true))
--+		ERR(1, "OSSL_PROVIDER_try_load(default)");
--+	/* pkcs11 provider is optional; only needed for pkcs11: URIs */
--+	if (!OSSL_PROVIDER_try_load(NULL, "pkcs11", true))
--+		ERR_clear_error();
--+
--+	store = OSSL_STORE_open(path, NULL, NULL, NULL, NULL);
--+	ERR(!store, "OSSL_STORE_open");
--+
--+	while (!OSSL_STORE_eof(store)) {
--+		OSSL_STORE_INFO *info = OSSL_STORE_load(store);
--+
--+		if (!info) {
--+			drain_openssl_errors(__LINE__, 0);
--+			continue;
--+		}
--+		if (OSSL_STORE_INFO_get_type(info) == OSSL_STORE_INFO_PKEY) {
--+			private_key = OSSL_STORE_INFO_get1_PKEY(info);
--+			ERR(!private_key, "OSSL_STORE_INFO_get1_PKEY");
--+		}
--+		OSSL_STORE_INFO_free(info);
--+		if (private_key)
--+			break;
--+	}
--+	OSSL_STORE_close(store);
--+
--+	*evpp = private_key;
--+#else
-- 	if (!PEM_read_PrivateKey(f, evpp, NULL, path)) {
-- 		rsa_err("Failure reading private key");
-- 		fclose(f);
--@@ -214,6 +290,7 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
-- 	}
-- 	fclose(f);
-- 
--+#endif
-- 	return 0;
-- }
-- 
--@@ -226,6 +303,7 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
--  * @evpp	Returns EVP_PKEY object, or NULL on failure
--  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
--  */
--+#ifdef USE_PKCS11_ENGINE
-- static int rsa_engine_get_priv_key(const char *keydir, const char *name,
-- 				   const char *keyfile,
-- 				   ENGINE *engine, EVP_PKEY **evpp)
--@@ -293,6 +371,7 @@ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
-- 
-- 	return 0;
-- }
--+#endif
-- 
-- /**
--  * rsa_get_priv_key() - read a private key
--@@ -306,9 +385,11 @@ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
-- static int rsa_get_priv_key(const char *keydir, const char *name,
-- 			    const char *keyfile, ENGINE *engine, EVP_PKEY **evpp)
-- {
--+#ifdef USE_PKCS11_ENGINE
-- 	if (engine)
-- 		return rsa_engine_get_priv_key(keydir, name, keyfile, engine,
-- 					       evpp);
--+#endif
-- 	return rsa_pem_get_priv_key(keydir, name, keyfile, evpp);
-- }
-- 
--@@ -325,6 +406,7 @@ static int rsa_init(void)
-- 	return 0;
-- }
-- 
--+#ifdef USE_PKCS11_ENGINE
-- static int rsa_engine_init(const char *engine_id, ENGINE **pe)
-- {
-- 	const char *key_pass;
--@@ -372,6 +454,7 @@ err_engine_init:
-- 	ENGINE_free(e);
-- 	return ret;
-- }
--+#endif
-- 
-- static void rsa_engine_remove(ENGINE *e)
-- {
--@@ -480,11 +563,13 @@ int rsa_sign(struct image_sign_info *info,
-- 	if (ret)
-- 		return ret;
-- 
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id) {
-- 		ret = rsa_engine_init(info->engine_id, &e);
-- 		if (ret)
-- 			return ret;
-- 	}
--+#endif
-- 
-- 	ret = rsa_get_priv_key(info->keydir, info->keyname, info->keyfile,
-- 			       e, &pkey);
--@@ -496,16 +581,20 @@ int rsa_sign(struct image_sign_info *info,
-- 		goto err_sign;
-- 
-- 	EVP_PKEY_free(pkey);
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id)
-- 		rsa_engine_remove(e);
--+#endif
-- 
-- 	return ret;
-- 
-- err_sign:
-- 	EVP_PKEY_free(pkey);
-- err_priv:
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id)
-- 		rsa_engine_remove(e);
--+#endif
-- 	return ret;
-- }
-- 
--@@ -645,11 +734,13 @@ int rsa_add_verify_data(struct image_sign_info *info, void *keydest)
-- 	ENGINE *e = NULL;
-- 
-- 	debug("%s: Getting verification data\n", __func__);
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id) {
-- 		ret = rsa_engine_init(info->engine_id, &e);
-- 		if (ret)
-- 			return ret;
-- 	}
--+#endif
-- 	ret = rsa_get_pub_key(info->keydir, info->keyname, e, &pkey);
-- 	if (ret)
-- 		goto err_get_pub_key;
--@@ -726,8 +817,10 @@ done:
-- err_get_params:
-- 	EVP_PKEY_free(pkey);
-- err_get_pub_key:
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id)
-- 		rsa_engine_remove(e);
--+#endif
-- 
-- 	if (ret)
-- 		return ret;
---- 
--2.43.0
--
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/files/0001-Add-support-for-OpenSSL-Provider-API-2026-01.patch b/meta-ti-bsp/recipes-bsp/u-boot/files/0001-Add-support-for-OpenSSL-Provider-API-2026-01.patch
-deleted file mode 100644
-index 346d0584..00000000
---- a/meta-ti-bsp/recipes-bsp/u-boot/files/0001-Add-support-for-OpenSSL-Provider-API-2026-01.patch
-+++ /dev/null
-@@ -1,340 +0,0 @@
--From a81cb0932dce109af44d7245d47489fe54ae390f Mon Sep 17 00:00:00 2001
--From: Eddie Kovsky <ewk@edkovsky.org>
--Date: Mon, 23 Feb 2026 09:43:22 -0700
--Subject: [PATCH] Add support for OpenSSL Provider API
--
--The Engine API has been deprecated since the release of OpenSSL 3.0. End
--users have been advised to migrate to the new Provider interface.
--Several distributions have already removed support for engines, which is
--preventing U-Boot from being compiled in those environments.
--
--Add support for the Provider API while continuing to support the existing
--Engine API on distros shipping older releases of OpenSSL.
--
--This is based on similar work contributed by Jan Stancek updating Linux
--to use the Provider interface.
--
--    commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
--    Author: Jan Stancek <jstancek@redhat.com>
--    Date:   Fri Sep 20 19:52:48 2024 +0300
--
--        sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >= 3
--
--The changes have been tested with the FIT signature verification vboot
--tests on Fedora 42 and Debian 13. All 30 tests pass with both the legacy
--Engine library installed and with the Provider API.
--
--Signed-off-by: Eddie Kovsky <ewk@edkovsky.org>
--
--Upstream-Status: Submitted [https://lore.kernel.org/u-boot/20260429180247.83091-1-ekovsky@redhat.com/]
--
--Note: Modified to make pkcs11 provider loading optional. The upstream
--patch unconditionally requires the pkcs11 provider, which is not
--available in the OE build environment. File-based key signing only needs
--the default provider; pkcs11 is only required for pkcs11: URI keys.
--Changes from upstream:
-- - Load default provider first (was pkcs11 first)
-- - Make pkcs11 provider load failure non-fatal (ERR_clear_error instead
--   of ERR(1, ...) which calls errx/abort)
--
--Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-----
-- doc/build/gcc.rst      |   4 +-
-- lib/aes/aes-encrypt.c |   4 +-
-- lib/rsa/rsa-sign.c    | 102 +++++++++++++++++++++++++++++++++++++++---
-- tools/docker/Dockerfile |  1 +
-- 4 files changed, 103 insertions(+), 8 deletions(-)
--
--diff --git a/doc/build/gcc.rst b/doc/build/gcc.rst
--index 1fef718ceecb..29a6a632e7e3 100644
----- a/doc/build/gcc.rst
--+++ b/doc/build/gcc.rst
--@@ -25,8 +25,8 @@ Depending on the build targets further packages maybe needed
-- 
--     sudo apt-get install bc bison build-essential coccinelle \
--       device-tree-compiler dfu-util efitools flex gdisk graphviz imagemagick \
---      libgnutls28-dev libguestfs-tools libncurses-dev \
---      libpython3-dev libsdl2-dev libssl-dev lz4 lzma lzma-alone openssl \
--+      libgnutls28-dev libguestfs-tools libncurses-dev libpython3-dev \
--+      libsdl2-dev libssl-dev lz4 lzma lzma-alone openssl pkcs11-provider \
--       pkg-config python3 python3-asteval python3-coverage python3-filelock \
--       python3-pkg-resources python3-pycryptodome python3-pyelftools \
--       python3-pytest python3-pytest-xdist python3-sphinxcontrib.apidoc \
--diff --git a/lib/aes/aes-encrypt.c b/lib/aes/aes-encrypt.c
--index 90e1407b4f09..4fc4ce232478 100644
----- a/lib/aes/aes-encrypt.c
--+++ b/lib/aes/aes-encrypt.c
--@@ -16,7 +16,9 @@
-- #include <openssl/err.h>
-- #include <openssl/ssl.h>
-- #include <openssl/evp.h>
---#include <openssl/engine.h>
--+#if !defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
--+# include <openssl/engine.h>
--+#endif
-- #include <uboot_aes.h>
-- 
-- #if OPENSSL_VERSION_NUMBER >= 0x10000000L
--diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
--index 0e38c9e802fd..f456f3c58e65 100644
----- a/lib/rsa/rsa-sign.c
--+++ b/lib/rsa/rsa-sign.c
--@@ -19,7 +19,47 @@
-- #include <openssl/err.h>
-- #include <openssl/ssl.h>
-- #include <openssl/evp.h>
---#include <openssl/engine.h>
--+#if OPENSSL_VERSION_MAJOR >= 3
--+# define USE_PKCS11_PROVIDER
--+# include <err.h>
--+# include <openssl/provider.h>
--+# include <openssl/store.h>
--+#else
--+# if !defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
--+#  define USE_PKCS11_ENGINE
--+#  include <openssl/engine.h>
--+# endif
--+#endif
--+
--+#ifdef USE_PKCS11_PROVIDER
--+#define ERR(cond, fmt, ...)				\
--+	do {						\
--+		bool __cond = (cond);			\
--+		drain_openssl_errors(__LINE__, 0);	\
--+		if (__cond) {				\
--+			errx(1, fmt, ## __VA_ARGS__);	\
--+		}					\
--+	} while (0)
--+
--+static void drain_openssl_errors(int l, int silent)
--+{
--+	const char *file;
--+	char buf[120];
--+	int e, line;
--+
--+	if (ERR_peek_error() == 0)
--+		return;
--+	if (!silent)
--+		fprintf(stderr, "At main.c:%d:\n", l);
--+
--+	while ((e = ERR_peek_error_line(&file, &line))) {
--+		ERR_error_string(e, buf);
--+		if (!silent)
--+			fprintf(stderr, "- SSL %s: %s:%d\n", buf, file, line);
--+		ERR_get_error();
--+	}
--+}
--+#endif
-- 
-- static int rsa_err(const char *msg)
-- {
--@@ -94,10 +134,11 @@ static int rsa_pem_get_pub_key(const char *keydir, const char *name, EVP_PKEY **
--  *
--  * @keydir:	Key prefix
--  * @name	Name of key
--- * @engine	Engine to use
--+ * @engine	Engine to use or NULL when using pkcs11 provider
--  * @evpp	Returns EVP_PKEY object, or NULL on failure
--  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
--  */
--+#ifdef USE_PKCS11_ENGINE
-- static int rsa_engine_get_pub_key(const char *keydir, const char *name,
-- 				  ENGINE *engine, EVP_PKEY **evpp)
-- {
--@@ -157,21 +198,24 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
-- 
-- 	return 0;
-- }
--+#endif
-- 
-- /**
--  * rsa_get_pub_key() - read a public key
--  *
--  * @keydir:	Directory containing the key (PEM file) or key prefix (engine)
--  * @name	Name of key file (will have a .crt extension)
--- * @engine	Engine to use
--+ * @engine	Engine to use or NULL when using pkcs11 provider
--  * @evpp	Returns EVP_PKEY object, or NULL on failure
--  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
--  */
-- static int rsa_get_pub_key(const char *keydir, const char *name,
-- 			   ENGINE *engine, EVP_PKEY **evpp)
-- {
--+#ifdef USE_PKCS11_ENGINE
-- 	if (engine)
-- 		return rsa_engine_get_pub_key(keydir, name, engine, evpp);
--+#endif
-- 	return rsa_pem_get_pub_key(keydir, name, evpp);
-- }
-- 
--@@ -207,13 +251,45 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
-- 		return -ENOENT;
-- 	}
-- 
--+#ifdef USE_PKCS11_PROVIDER
--+	EVP_PKEY *private_key = NULL;
--+	OSSL_STORE_CTX *store;
--+
--+	if (!OSSL_PROVIDER_try_load(NULL, "default", true))
--+		ERR(1, "OSSL_PROVIDER_try_load(default)");
--+	/* pkcs11 provider is optional; only needed for pkcs11: URIs */
--+	if (!OSSL_PROVIDER_try_load(NULL, "pkcs11", true))
--+		ERR_clear_error();
--+
--+	store = OSSL_STORE_open(path, NULL, NULL, NULL, NULL);
--+	ERR(!store, "OSSL_STORE_open");
--+
--+	while (!OSSL_STORE_eof(store)) {
--+		OSSL_STORE_INFO *info = OSSL_STORE_load(store);
--+
--+		if (!info) {
--+			drain_openssl_errors(__LINE__, 0);
--+			continue;
--+		}
--+		if (OSSL_STORE_INFO_get_type(info) == OSSL_STORE_INFO_PKEY) {
--+			private_key = OSSL_STORE_INFO_get1_PKEY(info);
--+			ERR(!private_key, "OSSL_STORE_INFO_get1_PKEY");
--+		}
--+		OSSL_STORE_INFO_free(info);
--+		if (private_key)
--+			break;
--+	}
--+	OSSL_STORE_close(store);
--+
--+	*evpp = private_key;
--+#else
-- 	if (!PEM_read_PrivateKey(f, evpp, NULL, path)) {
-- 		rsa_err("Failure reading private key");
-- 		fclose(f);
-- 		return -EPROTO;
-- 	}
-- 	fclose(f);
---
--+#endif
-- 	return 0;
-- }
-- 
--@@ -226,6 +301,7 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
--  * @evpp	Returns EVP_PKEY object, or NULL on failure
--  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
--  */
--+#ifdef USE_PKCS11_ENGINE
-- static int rsa_engine_get_priv_key(const char *keydir, const char *name,
-- 				   const char *keyfile,
-- 				   ENGINE *engine, EVP_PKEY **evpp)
--@@ -293,22 +369,25 @@ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
-- 
-- 	return 0;
-- }
--+#endif
-- 
-- /**
--  * rsa_get_priv_key() - read a private key
--  *
--  * @keydir:	Directory containing the key (PEM file) or key prefix (engine)
--  * @name	Name of key
--- * @engine	Engine to use for signing
--+ * @engine	Engine to use or NULL when using pkcs11 provider
--  * @evpp	Returns EVP_PKEY object, or NULL on failure
--  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
--  */
-- static int rsa_get_priv_key(const char *keydir, const char *name,
-- 			    const char *keyfile, ENGINE *engine, EVP_PKEY **evpp)
-- {
--+#ifdef USE_PKCS11_ENGINE
-- 	if (engine)
-- 		return rsa_engine_get_priv_key(keydir, name, keyfile, engine,
-- 					       evpp);
--+#endif
-- 	return rsa_pem_get_priv_key(keydir, name, keyfile, evpp);
-- }
-- 
--@@ -325,6 +404,7 @@ static int rsa_init(void)
-- 	return 0;
-- }
-- 
--+#ifdef USE_PKCS11_ENGINE
-- static int rsa_engine_init(const char *engine_id, ENGINE **pe)
-- {
-- 	const char *key_pass;
--@@ -380,6 +460,7 @@ static void rsa_engine_remove(ENGINE *e)
-- 		ENGINE_free(e);
-- 	}
-- }
--+#endif
-- 
-- static int rsa_sign_with_key(EVP_PKEY *pkey, struct padding_algo *padding_algo,
-- 			     struct checksum_algo *checksum_algo,
--@@ -480,11 +561,13 @@ int rsa_sign(struct image_sign_info *info,
-- 	if (ret)
-- 		return ret;
-- 
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id) {
-- 		ret = rsa_engine_init(info->engine_id, &e);
-- 		if (ret)
-- 			return ret;
-- 	}
--+#endif
-- 
-- 	ret = rsa_get_priv_key(info->keydir, info->keyname, info->keyfile,
-- 			       e, &pkey);
--@@ -496,16 +579,21 @@ int rsa_sign(struct image_sign_info *info,
-- 		goto err_sign;
-- 
-- 	EVP_PKEY_free(pkey);
--+
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id)
-- 		rsa_engine_remove(e);
--+#endif
-- 
-- 	return ret;
-- 
-- err_sign:
-- 	EVP_PKEY_free(pkey);
-- err_priv:
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id)
-- 		rsa_engine_remove(e);
--+#endif
-- 	return ret;
-- }
-- 
--@@ -645,11 +733,13 @@ int rsa_add_verify_data(struct image_sign_info *info, void *keydest)
-- 	ENGINE *e = NULL;
-- 
-- 	debug("%s: Getting verification data\n", __func__);
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id) {
-- 		ret = rsa_engine_init(info->engine_id, &e);
-- 		if (ret)
-- 			return ret;
-- 	}
--+#endif
-- 	ret = rsa_get_pub_key(info->keydir, info->keyname, e, &pkey);
-- 	if (ret)
-- 		goto err_get_pub_key;
--@@ -726,8 +816,10 @@ int rsa_add_verify_data(struct image_sign_info *info, void *keydest)
-- err_get_params:
-- 	EVP_PKEY_free(pkey);
-- err_get_pub_key:
--+#ifdef USE_PKCS11_ENGINE
-- 	if (info->engine_id)
-- 		rsa_engine_remove(e);
--+#endif
-- 
-- 	if (ret)
-- 		return ret;
--diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
--index 73bf6cdd2c52..50e98e83dc20 100644
----- a/tools/docker/Dockerfile
--+++ b/tools/docker/Dockerfile
--@@ -122,6 +122,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-- 	openssl \
-- 	picocom \
-- 	parted \
--+	pkcs11-provider \
-- 	pkg-config \
-- 	python-is-python3 \
-- 	python3 \
+diff --git a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.bb b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.bb
+index 23a5a3af..58108945 100644
+--- a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.bb
++++ b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2024.10.bb
+@@ -13,3 +13,8 @@ UBOOT_GIT_URI = "git://github.com/beagleboard/u-boot.git"
+ UBOOT_GIT_PROTOCOL = "https"
+ BRANCH = "v2024.10-Beagle"
+ SRCREV = "bf0e9d0b7274d2b561bd24c858affec2038250f9"
++
++# u-boot/lib/rsa/rsa-sign.c uses the OpenSSL engine API, but this has been
++# removed from OpenSSL 4.  Upstream u-boot has been fixed but we can enable
++# the stub engine API in OpenSSL until this recipe is removed.
++BUILD_CFLAGS += "-DOPENSSL_ENGINE_STUBS"
+diff --git a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.10.bb b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.10.bb
+index a6284193..5070eef4 100644
+--- a/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.10.bb
++++ b/meta-beagle/recipes-bsp/u-boot/u-boot-bb.org_2025.10.bb
+@@ -20,3 +20,8 @@ SRC_URI:append:pocketbeagle2 = " file://bootcmd-ti-mmc.cfg"
+ SRC_URI:append:beaglebone = " file://0001-arm-dts-am335x-pocketbeagle-Add-tick-timer.patch"
+ 
+ SRC_URI += "file://0001-pylibfdt-Replace-removed-SWIG-Python-2-compatibility.patch"
++
++# u-boot/lib/rsa/rsa-sign.c uses the OpenSSL engine API, but this has been
++# removed from OpenSSL 4.  Upstream u-boot has been fixed but we can enable
++# the stub engine API in OpenSSL until this recipe is removed.
++BUILD_CFLAGS += "-DOPENSSL_ENGINE_STUBS"
 diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-index 5812b914..d3a78d8b 100644
+index d3a78d8b..8d641bbe 100644
 --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
 +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2024.04.bb
-@@ -4,8 +4,6 @@ PR = "r0"
- 
- BRANCH = "ti-u-boot-2024.04"
- 
--SRCREV_uboot = "29d0c23d67ee7b88e46fe1753cd020e2b04c2ef6"
--
+@@ -7,3 +7,8 @@ BRANCH = "ti-u-boot-2024.04"
  SRC_URI += "file://0001-scripts-dtc-pylibfdt-libfdt.i_shipped-Use-SWIG_Appen.patch"
--SRC_URI += "file://0001-binman-migrate-form-pkg_resources-to-importlib.patch"
--SRC_URI += "file://0001-Add-support-for-OpenSSL-Provider-API-2024-04.patch"
+ 
+ SRCREV_uboot = "29d0c23d67ee7b88e46fe1753cd020e2b04c2ef6"
 +
-+SRCREV_uboot = "29d0c23d67ee7b88e46fe1753cd020e2b04c2ef6"
++# u-boot/lib/rsa/rsa-sign.c uses the OpenSSL engine API, but this has been
++# removed from OpenSSL 4.  Upstream u-boot has been fixed but we can enable
++# the stub engine API in OpenSSL until this recipe is removed.
++BUILD_CFLAGS += "-DOPENSSL_ENGINE_STUBS"
 diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-index af4b1b77..f7475c2b 100644
+index f7475c2b..2b28383b 100644
 --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
 +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2025.01.bb
-@@ -7,4 +7,3 @@ BRANCH = "ti-u-boot-2025.01"
+@@ -7,3 +7,8 @@ BRANCH = "ti-u-boot-2025.01"
  SRCREV_uboot = "4ca322ca563a21cccad8c9ba65e386b9fd34dd16"
  
  SRC_URI += "file://0001-binman-migrate-form-pkg_resources-to-importlib.patch"
--SRC_URI += "file://0001-Add-support-for-OpenSSL-Provider-API-2025-01.patch"
++
++# u-boot/lib/rsa/rsa-sign.c uses the OpenSSL engine API, but this has been
++# removed from OpenSSL 4.  Upstream u-boot has been fixed but we can enable
++# the stub engine API in OpenSSL until this recipe is removed.
++BUILD_CFLAGS += "-DOPENSSL_ENGINE_STUBS"
 diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb
-index d1ef241d..7637cfaf 100644
+index 7637cfaf..f5bddad8 100644
 --- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb
 +++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb
-@@ -5,5 +5,3 @@ PR = "r0"
+@@ -5,3 +5,8 @@ PR = "r0"
  BRANCH = "ti-u-boot-2026.01"
  
  SRCREV_uboot = "2a85f4bcffc50ddc8b443d8e4162e9e46ed0f200"
--
--SRC_URI += "file://0001-Add-support-for-OpenSSL-Provider-API-2026-01.patch"
-diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-index 8213ac60..3d6769bf 100644
---- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -25,7 +25,6 @@ UBOOT_GIT_PROTOCOL ?= "https"
- UBOOT_GIT_BRANCH ?= "branch=${BRANCH}"
- SRC_URI = "${UBOOT_GIT_URI};protocol=${UBOOT_GIT_PROTOCOL};${UBOOT_GIT_BRANCH};name=uboot"
- 
--SRC_URI:append:bsp-ti-6_6 = " file://0001-pylibfdt-Replace-removed-SWIG-Python-2-compatibility.patch"
- SRC_URI:append:bsp-ti-6_12 = " file://0001-pylibfdt-Replace-removed-SWIG-Python-2-compatibility.patch"
- SRC_URI:append:bsp-ti-6_18 = " file://0001-pylibfdt-Replace-removed-SWIG-Python-2-compatibility.patch"
- 
++
++# u-boot/lib/rsa/rsa-sign.c uses the OpenSSL engine API, but this has been
++# removed from OpenSSL 4.  Upstream u-boot has been fixed but we can enable
++# the stub engine API in OpenSSL until this recipe is removed.
++BUILD_CFLAGS += "-DOPENSSL_ENGINE_STUBS"
 -- 
 2.43.0
 
