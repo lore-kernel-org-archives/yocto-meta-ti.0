@@ -1,284 +1,259 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <p-bhagat@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34D77C98304
-	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 14:12:20 +0000 (UTC)
-Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com [148.163.154.28])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8027.1790172734372054626
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00E7CC98312
+	for <webhook@archiver.kernel.org>; Wed, 23 Sep 2026 15:39:58 +0000 (UTC)
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com [148.163.150.75])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.772.1790177989157189064
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 23 Sep 2026 07:12:14 -0700
+ Wed, 23 Sep 2026 08:39:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=proofpoint-05-2026 header.b=DIoKIy9M;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=B5nsgabA;
- spf=pass (domain: ti.com, ip: 148.163.154.28, mailfrom: reatmon@ti.com)
-Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
-	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NDOKYV775597;
-	Wed, 23 Sep 2026 09:12:11 -0500
+ dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=LbyL3qPd;
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=mI3kVgJG;
+ spf=pass (domain: ti.com, ip: 148.163.150.75, mailfrom: p-bhagat@ti.com)
+Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
+	by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 68NDFBUA1611727;
+	Wed, 23 Sep 2026 10:39:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
 	:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=
-	proofpoint-05-2026; bh=r+w2+z965PdX+rOPkaVsgYp+l9TXu0taZyU1wX0dK
-	Do=; b=DIoKIy9Mz+aUS6gPQvp3RGdbZxMDl0prP39/VqkE2W4YE2BooRlBdIZ+2
-	687ih7uUOD3MBrYTGb7m1WZ00e8tun1y5llM3zaM/5dJPc0TNbpIBnJa8MJB4fLJ
-	6/IcKBSej3uRn8FkeXJyUUI2EzeBHBPjEFoDxYos/XHAosRNpwGiE0z0P23qRuu0
-	cMpN3xVelYRzpT3ZCsYIy/YUDVjCMtQMmChyKKuGjieiCrCdtQRc/7eACa64gcut
-	iZJuiHQC66Q3jI8wO8PkM1PixiH8aMHnypT6D0t4u3VuMoD/pLLjnzGxuMtTJj6j
-	kGVqh0py2e45rtkSoQaxHkpHjLdPw==
-Received: from byapr05cu005.outbound.protection.outlook.com (mail-westusazon11010034.outbound.protection.outlook.com [52.101.85.34])
-	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4gv2ycvpvq-1
+	proofpoint-05-2026; bh=pyDWiX+LL/+pelgk8PXWFDRWHnoMnlMtlrsxCq71/
+	lU=; b=LbyL3qPdjVSb19A6lYy18766t06T30XhXqtN70nZ/p2bXVhUm6kWW8WrC
+	D4znyYMvn6/OefZLzowIy+MAPzj3nOxVK/DTq0+I6eCC75nBqNmbtC49ZIWYppoD
+	Oqr4kgpajIki0NslDnbc1h+tdTm5fUXSqq5hV5LltOJ5cIoZpelyPW7pjr124WN7
+	DmUe74xwTijAfWe+G2/TuFVqVFWg5hXdnkKgwaCsR1CcMxDmN5rXF3MQYpvSa1/d
+	zoz7ctP0q0TzBfF6gfVLOFXrbVetUtTXZy7FgPnyoX3arVFR4l1NUAqNQPm7g4Pm
+	0DX6ZlMU0T927HL8kaPDuxjLusmeg==
+Received: from dm5pr21cu001.outbound.protection.outlook.com (mail-centralusazon11011066.outbound.protection.outlook.com [52.101.62.66])
+	by m0384305.ppops.net (PPS) with ESMTPS id 4gvb77tq7v-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 23 Sep 2026 09:12:10 -0500 (CDT)
+	Wed, 23 Sep 2026 10:39:46 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TkzNRiPtNCO4Hgguhp1Dnksnec79q0Y5mSRtE4PW6pwBEAzqFUF0TEKR8M2HEKYK2vUJPN25AZaAB6oMmheIPlkgs8e6353eLBs2DXtITtAr4+tpN8v06Q48D1cLb0bqrpW3IHDuS/rweHSKn0dB3xr3RdOA+RJredSmNDoj3jW6HfvlF9JBK0yCSJexaVzZ6WEAMeqyqR41DqoBDGqO1WKIVO0pkQ4yhpvDYx797t+PCH7Xn/UpqO/kMIymUdFYF8ASDd0AJ6Q0yOFRs5Q0sF8NrE+J/GbiimF8oNMyql/AuhSTlgfRGSBQ/HyvJ2Sv73em19h4o7kgaPAPKb3vxA==
+ b=i4cXIQ0Fe7HstWwgKGzR8xQESmcCW+o2iRD8mEN/htsswbgGAEmxvYYPEToCiO2+OcVLJEzOdQUais3a/l3or5alSTKL/TOlHcffVwwIsAQWe1jskiQOVMOG5w0fyfBM5uc+NNStzabr/lwf2Sk+eNn4CtHXehrOr7z6yD6JS817RIOlAFx2kshen1tpt3W8/2vH5NivaePSHoeurzlYK8au619pxCy0J9Dw0ZHpEvaJkGsdnGsk3BrY8wqU4ydJ6y+No8ahY+mKb2aIk8Gtna+gX5sORKm6EvkyUiRg/1OGIrMLFO1PGv6fHpkTZnHctyEX6YZXgSzqfdxcgi3XrQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=r+w2+z965PdX+rOPkaVsgYp+l9TXu0taZyU1wX0dKDo=;
- b=BCS732idqdOohDSBCQ8Scv5IBlJZGW4XKNXapJ5Vk/bn9FkmzXfKCuxcWxKKdE2CKOWocbCXwJfRD7J9K7FX594ZwORwR34SH+fMqGWpjRqDRBANaswSjloHdjD+rhPrPXK1ECuKOCC4oVEu/m4nTIHfa/6mCKCc+2YeF9CtDRJKMXS9LBHb523dzHXjqJCjVYg1HiiJN909xa4jgH6ZqvOqysE7f+fwW0pMAWz2sPIkyDOu/hfyra5azEhCp7geHuR0szT7jp1R216Kyo+tZi8cJc6lZO0WL0KIlyLbQdbi+FRzKwF1LIoN8mht0JbtsKT5NDdxRKbkY15ArTb/ew==
+ bh=pyDWiX+LL/+pelgk8PXWFDRWHnoMnlMtlrsxCq71/lU=;
+ b=Foa0Sr5frMocZUV6X1w0KWqLtCEEh12X4816zQHq3bRfWz2q34Z/2V93IJ13gai7jmLMSZjzWd3rrq7gUda4ZWCfEdV1f31Z35IthNnmC938e/OU1Dhd3O0b4KcAit6F7jufxNk+Q8fKvQaI6jFgZO8/Le8TEZ1LZYT07pcjvDoUlPIgvFO0/mYdR+xWOAdjL/2i4vf3pQS/fnWYwP7iTPgCC5LYRUPzGoPtnjnR4gYJFamWM3VQzqN5tFCmmYS+E6iMZhxcHFJm5rcDW0kU/8+z1z963pQYHYrIoMx12WXixKkks7/K+SgXb6QAVZFtFZdd4BqsQZVspPhkMFL1kg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=denix.org smtp.mailfrom=ti.com; dmarc=pass
+ 198.47.23.194) smtp.rcpttodomain=denix.org smtp.mailfrom=ti.com; dmarc=pass
  (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
  (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=r+w2+z965PdX+rOPkaVsgYp+l9TXu0taZyU1wX0dKDo=;
- b=B5nsgabAVDhReLe1axgxl7B5ErScY8HLbBoQmJiQy77Q3G9FgHDhETWsuW2yyQsV4hjRdV0RgZ8OAvPvLtlxCQrBwNkZ5IExSGl4Ppi9SIBpKp1xZw89mlJJ8/PedSlZuwhniVegvraCqjD9HX8WO3NN7gehGWtMmSa220HYnVE=
-Received: from BN0PR03CA0018.namprd03.prod.outlook.com (2603:10b6:408:e6::23)
- by IA6PR10MB849052.namprd10.prod.outlook.com (2603:10b6:208:5ec::11) with
+ bh=pyDWiX+LL/+pelgk8PXWFDRWHnoMnlMtlrsxCq71/lU=;
+ b=mI3kVgJGM4vtsOY3s3tMeMt2QWejq6r7JlMTPYS0RRFlBQZN7jddw/sZ43AfJb5fRA6dJp2743mcnY9OVSlw3a+Q9yjD4nWc1N/vjsI5s7j0zOTcoCjMBILvIysdTjtWYODhjVaEt56QykjKT/LNpe5T5tFSq73WTHNybmGQWMA=
+Received: from BL1PR13CA0171.namprd13.prod.outlook.com (2603:10b6:208:2bd::26)
+ by DS0PR10MB6173.namprd10.prod.outlook.com (2603:10b6:8:c3::12) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.13; Wed, 23 Sep
- 2026 14:12:08 +0000
-Received: from BN1PEPF00018075.namprd04.prod.outlook.com
- (2603:10b6:408:e6:cafe::1) by BN0PR03CA0018.outlook.office365.com
- (2603:10b6:408:e6::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.14 via Frontend Transport; Wed,
- 23 Sep 2026 14:12:08 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.14; Wed, 23 Sep
+ 2026 15:39:37 +0000
+Received: from LV8PEPF00000069.namprd03.prod.outlook.com
+ (2603:10b6:208:2bd:cafe::12) by BL1PR13CA0171.outlook.office365.com
+ (2603:10b6:208:2bd::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.7 via Frontend Transport; Wed, 23
+ Sep 2026 15:39:36 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BN1PEPF00018075.mail.protection.outlook.com (10.167.245.203) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ LV8PEPF00000069.mail.protection.outlook.com (10.167.248.42) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.451.8 via Frontend Transport; Wed, 23 Sep 2026 14:12:07 +0000
-Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.451.8 via Frontend Transport; Wed, 23 Sep 2026 15:39:36 +0000
+Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 23 Sep
- 2026 09:11:45 -0500
-Received: from DLEE214.ent.ti.com (157.170.170.117) by DLEE211.ent.ti.com
+ 2026 10:39:16 -0500
+Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 23 Sep
+ 2026 10:39:15 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE211.ent.ti.com
  (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 23 Sep
- 2026 09:11:45 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Wed, 23 Sep 2026 09:11:45 -0500
-Received: from [10.249.33.88] ([10.249.33.88])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 68NEBjJ12171022;
-	Wed, 23 Sep 2026 09:11:45 -0500
-Message-ID: <e6390483-42ae-48cf-82e3-fd6e334c259b@ti.com>
-Date: Wed, 23 Sep 2026 09:11:44 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [master/wrynose][PATCH] recipes-multimedia: Add PipeWire bbappend
- for config files
-To: Paresh Bhagat <p-bhagat@ti.com>, <meta-ti@lists.yoctoproject.org>
+ Transport; Wed, 23 Sep 2026 10:39:15 -0500
+Received: from localhost (ula0502350.dhcp.ti.com [10.24.52.241])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 68NFdEFk2302124;
+	Wed, 23 Sep 2026 10:39:15 -0500
+From: Paresh Bhagat <p-bhagat@ti.com>
+To: <meta-ti@lists.yoctoproject.org>
 CC: <praneeth@ti.com>, <v-singh1@ti.com>, <afd@ti.com>, <denis@denix.org>,
-        <j-sahu@ti.com>, <p-gupta5@ti.com>, <r-soni@ti.com>, <s-kapoor@ti.com>,
-        <s-sinha@ti.com>, <sen@ti.com>, <y-hegde@ti.com>
-References: <20260922103002.3723697-1-p-bhagat@ti.com>
- <edb0e4e5-f125-4bf7-9292-c15b1be85ecc@ti.com>
- <df233001-5b8e-48d3-9e19-20f560041761@ti.com>
-Content-Language: en-US
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <df233001-5b8e-48d3-9e19-20f560041761@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+        <j-sahu@ti.com>, <p-gupta5@ti.com>, <r-soni@ti.com>, <reatmon@ti.com>,
+        <s-kapoor@ti.com>, <s-sinha@ti.com>, <sen@ti.com>, <y-hegde@ti.com>
+Subject: [master/wrynose][PATCH v2 1/2] pipewire: Add platform specific configuration
+Date: Wed, 23 Sep 2026 21:09:03 +0530
+Message-ID: <20260923153904.2153823-2-p-bhagat@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260923153904.2153823-1-p-bhagat@ti.com>
+References: <20260923153904.2153823-1-p-bhagat@ti.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00018075:EE_|IA6PR10MB849052:EE_
-X-MS-Office365-Filtering-Correlation-Id: a4a56df1-7a10-47eb-6076-08df197ca6f0
+X-MS-TrafficTypeDiagnostic: LV8PEPF00000069:EE_|DS0PR10MB6173:EE_
+X-MS-Office365-Filtering-Correlation-Id: eadbfeec-00fd-479d-8471-08df1988df3c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|36860700016|23010399003|1800799024|376014|10067099003|56012099006|4143699003|3023799007|6133799003|18002099003|22082099003;
+	BCL:0;ARA:13230040|376014|1800799024|23010399003|82310400026|36860700016|3023799007|6133799003|10067099003|56012099006|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info: 
-	VOgnSl42ATYHhfOqnHEz5dDGTvnRxgyOCcU45Eupq8C2DptZo/mFrs7+PD/GuIPqpCBBcHqvVByfl75Kc55Nhp9THJ1uoiwuqDSW4xkJ2eR3pLQH+zRts+KQW7bJJ2xt3QOmEdjT8hCkMy3P5xxsnBxV1USF/rnay2WjgLai7PeLuJxwLYhyUVbsWAlhD0YwwoPg/h0LR1TV4EerVIEU2HIfMkCosv6skrT1bjkIOt5LyzcBVjzd8TnFcPEYvD1GoU4cOHUNnrDXq8MQDYiFwdTyqYTvmC2HHj/I2JxhS6wTgjmlsgV0y3UaYfoWFKee+g/PIdfr7+tpzuZ9b6TKAIYcl0MKaIgL2qcJO9jDtlY5z5ICqSJ7y70K+AZBdUHuSb1sDmdNm2bD3NjS70blt8LqU5c/MRvOy/vM/gAopRXPsrXOO+qNSOddBkBzh7ucimk405ZKP4kG78Sf72y6BTbt21pv821wOo/CXvwDcK5hoJpTLtnW4NR3/AVk+wDZftokghKZSjmsO6htodK35JXekCXJV2rPB4lJfpg6amq6Fnj2sx5kiSYIu07X70nZarCm01SYqOCL3VdMFRs3wpelJ70bcH39mke1kl0sLKTDe5Pd7gKMBUZt7xbA5fwRhpq7mkN+JP5GDb9tkOPIPB+PajnmtVaDXDnCWV4ebLli7lepdFqUDeWTWPiQ05gFu9wgtMzNoHJI8fxAqgFsCA==
+	iSud0ciBomeRqz3W2h2psD/CcXRs6nqfkZPrShIYDwcmhIntidwE260iBTUdGuTBs77lGZ1U+LOmE4KfXPuCC8YhMZt2/2FYQf8NmpIZsqzdUNFIiVpUskmggEGI8/JIlSR8LmCY6Yuqk+mwhvWFB2qgQMjbRFAKtMu45gQvJmAYGb2XKnv2LM9YZbeeIdUCx2nM9vPAl11zbicoIIpYI822PNGqSTFOvzMH7F3bnJ7Dxa04AIpIJ2oKhhVEq326VxIpUi3ZUBSyl9Emeb8h2YsIFC47rZApUEfEG0rB/NeYJ3LBkA23de0v+s1LV02XRHAxb0RLmmjm+Uu5pHPpeZgJI6hrZiLKlmwrF2fHfTTaG+WzUj9VaAu5JAnYDfWVcENMTBlCIUVHQHGITq7VXlIRhj7QDVqBh8ISmCNEq8TqM76x8S2WMq0Zl1PoX0lQclp+KzGa72tCgcKGWiALIK4saCdr8mVPb4+kYsBe9NBECANF65S+Px5rqu1pBF5iPwE/YDblgvtLPx4xuufDGiFRpaVL3L8nPN/9vrQ/rWAdkppRdOHW1/joIekgD6+NM7xvjtGE/rHEEoZXeUnnh5X8NXd4plEmOeJotg8Qi9j2ziqFu2a3fKFQSbwGAcWFPPKtZCcmieV725YBCUGVlUY+2/9Dd90X1uE7EdeZ4eXb/y/x6bqVuR6cSTLmVSxSRdlHlM3M+PqWRfQwjt2GQg==
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(23010399003)(1800799024)(376014)(10067099003)(56012099006)(4143699003)(3023799007)(6133799003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(82310400026)(36860700016)(3023799007)(6133799003)(10067099003)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	TlcKy9i2Kik9TrFYmyb8SamSIgeFlXkNIxxDoXG8Yy4nhNazB/SbUqqe6cXj2Ptrz0Vw/9aVT/9/h3ltnb0fDzR+hUwJ7tY/w7/e1HfL1LnpRxDL6jiVNhXQ3sv0v46040+RbR+cqRgwigZk2K67yC0cvXpdOzQUbJ2w6f2gdpEuf8B2kfFDCYb9RmqzIf37b4uoaMGVI8EBC+5bV8xG6qZIQ/BrA0U8/j4qGkOnZsGIcxU6v3e9v2hSkcsvsy55mMrRw2NMchqDX4HyGRN+usKGs1Xw75Yh0atTjoUKIQFsnPDDQhJZn7InqBNXk7G2Fk4UmZvFbzOF5Kxn0CMYameYVIhyeVKWPxnKoPSspygXDhJhock8a9N+jRUfAXTig3TcI3hM1YVO/oawofqXHuCM9kmm//HDwrBhQUReNzWmPC5FWCADT3E85VKgtVgN
+	yxy29Sllr3ilS7m6OXqq+d44E+A9DsOrqXy8Rm54OmxJ8tA2dgR8yU7sn+wHjb7yW0sT+IJcvwGq84TwyQIDrU2LTvbJ0oIQeXuO1AOjEt81w/Fjc+EnD4g4SNK4pUqAYwpNBFlG3jlClP9yom0tsZdEeHIyleo4l5AVfbx6xBIm9gvzykB617F99Fo9cKxH+DVBlPHsljeX4TNDg2yGefdOCthsfSUSFK46tuXVz/wZJo+9LYoxzTEjWGk0x1KtlVXQxWwBbQutJYiu/eQ9nsCotOTKkj/zxXLB+rZWTVRs95RI0oXSOaIyiYs6TJm158QOtjvrcfRoPgtgjdRHd1VTQGcoekSJKAWeY3HnghqTxzYyP/8DHYeGBHSnmVVzDT9xn5iwvRy0A/2rQ6/aphz4WMUd61xXXPJKFjIczKDDj/k0pZ6QLshihah91VNv
 X-Exchange-RoutingPolicyChecked: 
-	j16r6dechvEIkfJrA0Yottog5l2xnZ9BdCoNv/w5qzoP0tPqErOQYGga64M9Xv+xDLhgDRmtMs9bp8ZyzSD3D50ncAYPoS2P8btD/l0mPjmUayhJme7o9ZTknJ/6TLUYVHJl1nuy7iBmgLy9XK5hhUR56epDsLuIjXdKjW/qYj6OBd3/hzvdcvvPBBtRxi264YDmYbyGHRPSV4LDhmLTbFXnq+PcnA9d1lrKLxxRxRxsdjV+pJk/qlaBGfPD7BwaXt98tdl678tm4u/Es9D0vymxtysrwLRw89RxWdQV92MvV+GgRsJpvtt0OiOAtQbmb6vUfvNh+S+r8H0sJttWug==
+	udGTBTUJdFJx0mHlF+ihJA44NP9tse/7IpDdBY0M+CZREaY0n6k6KnPjdCdWatyVrargrRjFSeyMM92K9Brq68i5M4ZLKZN4H8oJyQ/cfZuGOQkdqU/nUNBUuAnFhe1GIm7ViSPxpNPGaaKSwykCCkHMYw1+rgNA0TbW/6VNmBpZ7E9LuuhmweJJVldaoVZP/bXROvPgESWdbFMnZ0rDAF1JI6N4V11dEV+dcHErnm6seLc8x4gwNFtYkAyUsLPceDzmA3qhs6n5jH491awi9nV9S9pgv95HFDxowAQzhiE5/F4CUQtoO+xNXJB+aXWjRp9pZGcxkizILeiEKsVRMw==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2026 14:12:07.6061
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2026 15:39:36.0299
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4a56df1-7a10-47eb-6076-08df197ca6f0
+X-MS-Exchange-CrossTenant-Network-Message-Id: eadbfeec-00fd-479d-8471-08df1988df3c
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	BN1PEPF00018075.namprd04.prod.outlook.com
+	LV8PEPF00000069.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA6PR10MB849052
-X-Proofpoint-GUID: Sjk2nPkKTja-wqcQuUDfP8rcGocaqoW-
-X-Authority-Analysis: v=2.4 cv=WZKZ+EhX c=1 sm=1 tr=0 ts=6ab3de3a cx=c_pps
- a=h6NrD5D8j3GnK3ckJnoRDA==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=Z8NIEmU8O1QQgoT56wFK:22 a=fPAWb5peG099m5CrUpKH:22 a=sozttTNsAAAA:8
- a=Dm9dxDc33IPCQTXqrqQA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA1NiBTYWx0ZWRfX1Ofpd3y+8pKX
- a+uQBoMWsqzgp7CfAigvDcB4yLGnUhBCJTqycjpfWfvcVo78cAjmuWof2yKG4hB9Dku3Iin+i8k
- 5VZyo7BIPfegsfRHO4Bn62ScyMc+caZxdV0jx00L+8ey0drKf2ae1DwUsuQbm1moyzu1xz9bcyk
- pUnlmTjLGGeH2qSuqQ8i1ABBfcI6DVYsC3OSDoYsw/bdJuc34QGWiDmh3xwKPP9MPgr9KdOaxjf
- zKDbnnVfYLIoxIx1/6B1HFTDO4DAzV0UF6v6VuVxONSTuDyjQJd6IZ1eBUzZmlhnqqEaycLnAxF
- gIwImtFeyLqXE9p/MmA84yTFyItCpd9G01H/VWF77stSYRiZkFKlk7M/N10y4ZJcOEWQHKmTR3R
- fVgktWGmTJ4s5Gw+87WbL6jwtREBfnFTpGzIr2UBChOKmrI0r24AkjBd4eawgZFb7uoxxvTSYUt
- lDyHsa1bR+zHE28Dr9w==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA1NiBTYWx0ZWRfX/4xYFqY3hylB
- v8HhdRozJ7pTTzqOazuPaliu8qCvgXIAYWqxbqo6TVqcbdhlc8H9g/yxTJbV075u/Gpc9JQR++V
- I0E6aCEp17rhL09jZB9mNEbdIMJsRYc=
-X-Proofpoint-ORIG-GUID: Sjk2nPkKTja-wqcQuUDfP8rcGocaqoW-
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB6173
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA2MiBTYWx0ZWRfX832kO/Yf/SCr
+ 7Y6Z14+WMMjcmBGsLxU9U6wjLnoH5p9A7eDtHe0Txu7wzPTkcsk9WGKicnNHjUrRJ4cQtYqLluN
+ tn0SBEfAq5LhPEhF9Bfjm6HiKldVzdPCPiJf0mTlKfdfXRBZ5da3kdpQk+ZpPG+V89OlbxcuYod
+ 2AJe3UWW3V2PX+FRRHnxiNJAjGEb4FgLm8KVm+PdueNAmxaBIvIyDMzQcu3GUSr7oIbGTQatCQf
+ PVjGmY2rKBqAsQ5vDzHnxWCAhtB2/DrUszI7bvf7uWR4q2TKNiU4fobnjxXuJYf7lRYDElPAzQy
+ ZI/t4XHnknowDWhGnF1QupImU3B3bc1Q1GaDd+y8nRRu+04SzvOzB46p7CjHEM43Up27Oe2dklv
+ LGWC4o44sEpRQl4W29/1oy7Gln64UovjmvidyLlRGllCIFWwkOfIaSE5CKL9QIEtdya1tTAfJ7T
+ PZmiQNKsHIcXl9rjKSg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA2MiBTYWx0ZWRfX+geL4U0uGN6G
+ SAFp2g1m2B7Yg6Pcs1084hE79yJ+FHCAwpPvKKI8u45mKudvrbTqsVY+1dXeE7P7Vym4IKQIxVs
+ iWcwsrKCqKXup4vn53uUCnyQOIT+fxU=
+X-Proofpoint-GUID: kruNhGNjEumsqbSik-5uJGGrFMnDm-qS
+X-Proofpoint-ORIG-GUID: kruNhGNjEumsqbSik-5uJGGrFMnDm-qS
+X-Authority-Analysis: v=2.4 cv=cPt1IVeN c=1 sm=1 tr=0 ts=6ab3f2c2 cx=c_pps
+ a=OANxLEngf0bc/nxW+UjZ1w==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=VdqzKS8jKosA:10 a=s63m1ICgrNkA:10
+ a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=taLDd7a_hP9WKsMzeGRc:22 a=sozttTNsAAAA:8 a=XgT7tb4lZfqlI_RVjF0A:9
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 priorityscore=1501 impostorscore=0
- malwarescore=0 spamscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609230056
-Content-Transfer-Encoding: base64
-X-MIME-Autoconverted: from 8bit to base64 by mx0b-0002e601.pphosted.com id 68NDOKYV775597
+ bulkscore=0 malwarescore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501
+ impostorscore=0 phishscore=0 suspectscore=0 clxscore=1015 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230062
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 23 Sep 2026 14:12:20 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20401
+ <meta-ti@lists.yoctoproject.org>; Wed, 23 Sep 2026 15:39:57 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20402
 
-DQoNCk9uIDkvMjMvMjAyNiAyOjMyIEFNLCBQYXJlc2ggQmhhZ2F0IHdyb3RlOg0KPiBIaSBS
-eWFuLA0KPiANCj4gDQo+IE9uIDIzLzA5LzI2IDAyOjUzLCBSeWFuIEVhdG1vbiB3cm90ZToN
-Cj4+DQo+PiBPay7CoCBEZW55cyBhbmQgSSB3ZXJlIGRpc2N1c3NpbmcgdGhpcyBhbmQgd2Ug
-aGF2ZSBhIGZldyBjaGFuZ2VzIGZvciANCj4+IHRoaXMgcGF0Y2ggc2VyaWVzIHRoYXQgd2Ug
-d291bGQgbGlrZSB0byBzZWUuDQo+Pg0KPj4gMSkgVGhpcyBjYW4gbW92ZSB0byBtZXRhLXRp
-LWJzcCBzbyB0aGF0IGlzIGVhc2llciB0byBnZXQgaW50byB1c2VycycgDQo+PiBoYW5kcy4N
-Cj4+IDIpIFdoZW4gaXQgbW92ZXMgdG8gbWV0YS10aS1ic3AgbW92ZSBpdCBpbnRvIGEgZHlu
-YW1pYy1sYXllciBmb3IgDQo+PiBtdWx0aW1lZGlhLWxheWVyIGFuZCBhZGQgbXVsdGltZWRp
-YS1sYXllciB0byB0aGUgDQo+PiBMQVlFUlJFQ09NTUVORFNfbWV0YS10aS1ic3Agc2V0IG9m
-IGxheWVycy4NCj4+IDMpIE1ha2Ugc3VyZSB0byBsYXllciB0aGUgY2hhbmdlcyBpbnRvIG11
-bHRpcGxlIHBhdGNoZXMgYW5kIG5vdCBqdXN0IA0KPj4gZ2xvYiB0aGVtIGFsbCBpbnRvIG9u
-ZS4NCj4+IMKgIGEpIENyZWF0ZSB0aGUgZHluYW1pYyBsYXllciBkaXJlY3RvcnkgYW5kIHVw
-ZGF0ZSBsYXllci5jb25mDQo+PiDCoCBiKSBBZGQgdGhlIHBpcGV3aXJlIGJiYXBwZW5kICh0
-aGUgY3VycmVudCBwYXRjaCkgdG8gdGhlIGR5bmFtaWMgDQo+PiBsYXllciBkaXJlY3Rvcnku
-DQo+Pg0KPj4gSSB0aGluayB0aGF0IHdpbGwgYmUgY2xlYW5lc3QgZm9ybWF0aW9uIGZvciB0
-aGlzLg0KPj4NCj4+IERvIGFsbCB0aGF0IGZvciBhIHYyIHBsZWFzZS4NCj4gDQo+IA0KPiBU
-aGVyZSBpcyBvbmUgc21hbGwgaXNzdWUuIEFuIGVtcHR5IG11bHRpbWVkaWEtbGF5ZXIgZGly
-ZWN0b3J5IHdpbGwgbm90IA0KPiBiZSB0cmFja2VkIGJ5IGdpdC4gRWl0aGVyIGkgd2lsbCBo
-YXZlIHNxdWFzaCBpbnRvIG9uZSBjb21taXQgb3Igb25seSBhZGQgDQo+IGxheWVyLmNvbmYg
-aW4gZmlyc3QgcGF0Y2guDQo+IA0KDQpWYWxpZCBwb2ludC4gIFRoZW4gZmxpcCB0aGVtLiAg
-VGhlIGZpcnN0IHBhdGNoIGFkZHMgdGhlIHJlY2lwZXMsIHRoZSANCnNlY29uZCBwYXRjaCBh
-ZGRzIHRvIHRoZSBsYXllci5jb25mLg0KDQoNCj4+DQo+Pg0KPj4gT24gOS8yMi8yMDI2IDU6
-MzAgQU0sIFBhcmVzaCBCaGFnYXQgd3JvdGU6DQo+Pj4gRXh0ZW5kIHRoZSBQaXBlV2lyZSBy
-ZWNpcGUgdG8gYWRkIHBsYXRmb3JtLXNwZWNpZmljIEFMU0EgY29uZmlndXJhdGlvbi4NCj4+
-PiBBZGQgc2luayBhbmQgc291cmNlIGNvbmZpZ3VyYXRpb24gZm9yIDgtY2hhbm5lbCBhdWRp
-byBwbGF5YmFjayBhbmQNCj4+PiBjYXB0dXJlIG9uIHRoZSBBTTYyRDJFVk0gYXMgdGhlIGRl
-ZmF1bHQgY29uZmlndXJhdGlvbiBpcyAyLWNoYW5uZWwuDQo+Pj4NCj4+PiBTaWduZWQtb2Zm
-LWJ5OiBQYXJlc2ggQmhhZ2F0IDxwLWJoYWdhdEB0aS5jb20+DQo+Pj4gLS0tDQo+Pj4gwqAg
-Li4uL3BpcGV3aXJlL3BpcGV3aXJlLXRpLmluY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqAgfCAyMCArKysrKysrKysrKysrKysrKysrDQo+Pj4gwqAgLi4uL2FtNjJkeHgt
-ZXZtLzkwLXBpcGV3aXJlLXNpbmsuY29uZsKgwqDCoMKgwqDCoMKgwqAgfCAxNyArKysrKysr
-KysrKysrKysrDQo+Pj4gwqAgLi4uL2FtNjJkeHgtZXZtLzkxLXBpcGV3aXJlLXNvdXJjZS5j
-b25mwqDCoMKgwqDCoMKgIHwgMTcgKysrKysrKysrKysrKysrKw0KPj4+IMKgIC4uLi9waXBl
-d2lyZS9waXBld2lyZV8lLmJiYXBwZW5kwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKg
-IDQgKysrKw0KPj4+IMKgIDQgZmlsZXMgY2hhbmdlZCwgNTggaW5zZXJ0aW9ucygrKQ0KPj4+
-IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCANCj4+PiBtZXRhLXRpLWV4dHJhcy9yZWNpcGVzLW11
-bHRpbWVkaWEvcGlwZXdpcmUvcGlwZXdpcmUtdGkuaW5jDQo+Pj4gwqAgY3JlYXRlIG1vZGUg
-MTAwNjQ0IA0KPj4+IG1ldGEtdGktZXh0cmFzL3JlY2lwZXMtbXVsdGltZWRpYS9waXBld2ly
-ZS9waXBld2lyZS9hbTYyZHh4LWV2bS85MC1waXBld2lyZS1zaW5rLmNvbmYNCj4+PiDCoCBj
-cmVhdGUgbW9kZSAxMDA2NDQgDQo+Pj4gbWV0YS10aS1leHRyYXMvcmVjaXBlcy1tdWx0aW1l
-ZGlhL3BpcGV3aXJlL3BpcGV3aXJlL2FtNjJkeHgtZXZtLzkxLXBpcGV3aXJlLXNvdXJjZS5j
-b25mDQo+Pj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IA0KPj4+IG1ldGEtdGktZXh0cmFzL3Jl
-Y2lwZXMtbXVsdGltZWRpYS9waXBld2lyZS9waXBld2lyZV8lLmJiYXBwZW5kDQo+Pj4NCj4+
-PiBkaWZmIC0tZ2l0IA0KPj4+IGEvbWV0YS10aS1leHRyYXMvcmVjaXBlcy1tdWx0aW1lZGlh
-L3BpcGV3aXJlL3BpcGV3aXJlLXRpLmluYyANCj4+PiBiL21ldGEtdGktZXh0cmFzL3JlY2lw
-ZXMtbXVsdGltZWRpYS9waXBld2lyZS9waXBld2lyZS10aS5pbmMNCj4+PiBuZXcgZmlsZSBt
-b2RlIDEwMDY0NA0KPj4+IGluZGV4IDAwMDAwMDAwLi42NWE4MjY3MQ0KPj4+IC0tLSAvZGV2
-L251bGwNCj4+PiArKysgYi9tZXRhLXRpLWV4dHJhcy9yZWNpcGVzLW11bHRpbWVkaWEvcGlw
-ZXdpcmUvcGlwZXdpcmUtdGkuaW5jDQo+Pj4gQEAgLTAsMCArMSwyMCBAQA0KPj4+ICtQUjph
-cHBlbmQgPSAiLnRpMCINCj4+PiArDQo+Pj4gK0ZJTEVTRVhUUkFQQVRIUzpwcmVwZW5kIDo9
-ICIke1RISVNESVJ9L3BpcGV3aXJlOiINCj4+PiArDQo+Pj4gKyMgQU02MkQtc3BlY2lmaWMg
-Y29uZmlnIGZpbGVzDQo+Pj4gK1NSQ19VUkk6YXBwZW5kOmFtNjJkeHgtZXZtID0gIiBcDQo+
-Pj4gK8KgwqDCoCBmaWxlOi8vOTAtcGlwZXdpcmUtc2luay5jb25mIFwNCj4+PiArwqDCoMKg
-IGZpbGU6Ly85MS1waXBld2lyZS1zb3VyY2UuY29uZiBcDQo+Pj4gKyINCj4+PiArDQo+Pj4g
-K2RvX2luc3RhbGw6YXBwZW5kOmFtNjJkeHgtZXZtKCkgew0KPj4+ICvCoMKgwqAgaW5zdGFs
-bCAtZCAke0R9JHtzeXNjb25mZGlyfS9waXBld2lyZS9waXBld2lyZS5jb25mLmQNCj4+PiAr
-wqDCoMKgIGluc3RhbGwgLW0gMDY0NCAke1VOUEFDS0RJUn0vOTAtcGlwZXdpcmUtc2luay5j
-b25mIA0KPj4+ICR7RH0ke3N5c2NvbmZkaXJ9L3BpcGV3aXJlL3BpcGV3aXJlLmNvbmYuZC8N
-Cj4+PiArwqDCoMKgIGluc3RhbGwgLW0gMDY0NCAke1VOUEFDS0RJUn0vOTEtcGlwZXdpcmUt
-c291cmNlLmNvbmYgDQo+Pj4gJHtEfSR7c3lzY29uZmRpcn0vcGlwZXdpcmUvcGlwZXdpcmUu
-Y29uZi5kLw0KPj4+ICt9DQo+Pj4gKw0KPj4+ICtGSUxFUzoke1BOfTphcHBlbmQ6YW02MmR4
-eC1ldm0gPSAiIFwNCj4+PiArICR7c3lzY29uZmRpcn0vcGlwZXdpcmUvcGlwZXdpcmUuY29u
-Zi5kLzkwLXBpcGV3aXJlLXNpbmsuY29uZiBcDQo+Pj4gKyAke3N5c2NvbmZkaXJ9L3BpcGV3
-aXJlL3BpcGV3aXJlLmNvbmYuZC85MS1waXBld2lyZS1zb3VyY2UuY29uZiBcDQo+Pj4gKyIN
-Cj4+PiBkaWZmIC0tZ2l0IA0KPj4+IGEvbWV0YS10aS1leHRyYXMvcmVjaXBlcy1tdWx0aW1l
-ZGlhL3BpcGV3aXJlL3BpcGV3aXJlL2FtNjJkeHgtZXZtLzkwLXBpcGV3aXJlLXNpbmsuY29u
-ZiBiL21ldGEtdGktZXh0cmFzL3JlY2lwZXMtbXVsdGltZWRpYS9waXBld2lyZS9waXBld2ly
-ZS9hbTYyZHh4LWV2bS85MC1waXBld2lyZS1zaW5rLmNvbmYNCj4+PiBuZXcgZmlsZSBtb2Rl
-IDEwMDY0NA0KPj4+IGluZGV4IDAwMDAwMDAwLi44NTdjMzQ0ZQ0KPj4+IC0tLSAvZGV2L251
-bGwNCj4+PiArKysgDQo+Pj4gYi9tZXRhLXRpLWV4dHJhcy9yZWNpcGVzLW11bHRpbWVkaWEv
-cGlwZXdpcmUvcGlwZXdpcmUvYW02MmR4eC1ldm0vOTAtcGlwZXdpcmUtc2luay5jb25mDQo+
-Pj4gQEAgLTAsMCArMSwxNyBAQA0KPj4+ICsjIFBpcGVXaXJlIHNpbmsgY29uZmlndXJhdGlv
-biBmb3IgQU02MkQuDQo+Pj4gKw0KPj4+ICtjb250ZXh0Lm9iamVjdHMgPSBbDQo+Pj4gK8Kg
-wqDCoCB7DQo+Pj4gK8KgwqDCoMKgwqDCoMKgIGZhY3RvcnkgPSBhZGFwdGVyDQo+Pj4gK8Kg
-wqDCoMKgwqDCoMKgIGFyZ3MgPSB7DQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZmFj
-dG9yeS5uYW1lwqDCoMKgwqDCoMKgwqDCoMKgwqAgPSBhcGkuYWxzYS5wY20uc2luaw0KPj4+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG5vZGUubmFtZcKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgID0gImFsc2FfYXVkaW9fc2luayINCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCBub2RlLmRlc2NyaXB0aW9uwqDCoMKgwqDCoMKgID0gIkF1ZGlvIE91dHB1dCINCj4+PiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBtZWRpYS5jbGFzc8KgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgPSAiQXVkaW8vU2luayINCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBhcGkuYWxz
-YS5wYXRowqDCoMKgwqDCoMKgwqDCoMKgID0gImh3OkFNNjJEMkVWTSwwIg0KPj4+ICvCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIGF1ZGlvLnJhdGXCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-PSA0ODAwMA0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGF1ZGlvLmNoYW5uZWxzwqDC
-oMKgwqDCoMKgwqDCoCA9IDgNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBhdWRpby5w
-b3NpdGlvbsKgwqDCoMKgwqDCoMKgwqAgPSBbIEZMIEZSIEZDIExGRSBSTCBSUiBTTCBTUiBd
-DQo+Pj4gK8KgwqDCoMKgwqDCoMKgIH0NCj4+PiArwqDCoMKgIH0NCj4+PiArXQ0KPj4+IGRp
-ZmYgLS1naXQgDQo+Pj4gYS9tZXRhLXRpLWV4dHJhcy9yZWNpcGVzLW11bHRpbWVkaWEvcGlw
-ZXdpcmUvcGlwZXdpcmUvYW02MmR4eC1ldm0vOTEtcGlwZXdpcmUtc291cmNlLmNvbmYgYi9t
-ZXRhLXRpLWV4dHJhcy9yZWNpcGVzLW11bHRpbWVkaWEvcGlwZXdpcmUvcGlwZXdpcmUvYW02
-MmR4eC1ldm0vOTEtcGlwZXdpcmUtc291cmNlLmNvbmYNCj4+PiBuZXcgZmlsZSBtb2RlIDEw
-MDY0NA0KPj4+IGluZGV4IDAwMDAwMDAwLi5hYzc2MzVkZQ0KPj4+IC0tLSAvZGV2L251bGwN
-Cj4+PiArKysgDQo+Pj4gYi9tZXRhLXRpLWV4dHJhcy9yZWNpcGVzLW11bHRpbWVkaWEvcGlw
-ZXdpcmUvcGlwZXdpcmUvYW02MmR4eC1ldm0vOTEtcGlwZXdpcmUtc291cmNlLmNvbmYNCj4+
-PiBAQCAtMCwwICsxLDE3IEBADQo+Pj4gKyMgUGlwZVdpcmUgc291cmNlIGNvbmZpZ3VyYXRp
-b24gZm9yIEFNNjJELg0KPj4+ICsNCj4+PiArY29udGV4dC5vYmplY3RzID0gWw0KPj4+ICvC
-oMKgwqAgew0KPj4+ICvCoMKgwqDCoMKgwqDCoCBmYWN0b3J5ID0gYWRhcHRlcg0KPj4+ICvC
-oMKgwqDCoMKgwqDCoCBhcmdzID0gew0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGZh
-Y3RvcnkubmFtZcKgwqDCoMKgwqDCoMKgwqDCoMKgID0gYXBpLmFsc2EucGNtLnNvdXJjZQ0K
-Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG5vZGUubmFtZcKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgID0gImFsc2FfYXVkaW9fc291cmNlIg0KPj4+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIG5vZGUuZGVzY3JpcHRpb27CoMKgwqDCoMKgwqAgPSAiQXVkaW8gSW5wdXQiDQo+
-Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbWVkaWEuY2xhc3PCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgID0gIkF1ZGlvL1NvdXJjZSINCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBh
-cGkuYWxzYS5wYXRowqDCoMKgwqDCoMKgwqDCoMKgID0gImh3OkFNNjJEMkVWTSwwIg0KPj4+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGF1ZGlvLnJhdGXCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgPSA0ODAwMA0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGF1ZGlvLmNoYW5u
-ZWxzwqDCoMKgwqDCoMKgwqDCoCA9IDgNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBh
-dWRpby5wb3NpdGlvbsKgwqDCoMKgwqDCoMKgwqAgPSBbIEZMIEZSIEZDIExGRSBSTCBSUiBT
-TCBTUiBdDQo+Pj4gK8KgwqDCoMKgwqDCoMKgIH0NCj4+PiArwqDCoMKgIH0NCj4+PiArXQ0K
-Pj4+IGRpZmYgLS1naXQgDQo+Pj4gYS9tZXRhLXRpLWV4dHJhcy9yZWNpcGVzLW11bHRpbWVk
-aWEvcGlwZXdpcmUvcGlwZXdpcmVfJS5iYmFwcGVuZCANCj4+PiBiL21ldGEtdGktZXh0cmFz
-L3JlY2lwZXMtbXVsdGltZWRpYS9waXBld2lyZS9waXBld2lyZV8lLmJiYXBwZW5kDQo+Pj4g
-bmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4+PiBpbmRleCAwMDAwMDAwMC4uZjgwNmQyOGYNCj4+
-PiAtLS0gL2Rldi9udWxsDQo+Pj4gKysrIGIvbWV0YS10aS1leHRyYXMvcmVjaXBlcy1tdWx0
-aW1lZGlhL3BpcGV3aXJlL3BpcGV3aXJlXyUuYmJhcHBlbmQNCj4+PiBAQCAtMCwwICsxLDQg
-QEANCj4+PiArUElQRVdJUkVfVEkgPSAiIg0KPj4+ICtQSVBFV0lSRV9USTp0aS1zb2MgPSAi
-cGlwZXdpcmUtdGkuaW5jIg0KPj4+ICsNCj4+PiArcmVxdWlyZSAke1BJUEVXSVJFX1RJfQ0K
-Pj4NCg0KLS0gDQpSeWFuIEVhdG1vbiAgICAgICAgICAgICAgICByZWF0bW9uQHRpLmNvbQ0K
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NClRleGFzIEluc3Ry
-dW1lbnRzLCBJbmMuICAtICBMQ1BEICAtICBNR1RTDQo=
+Extend the PipeWire recipe to add platform-specific ALSA configuration.
+Add sink and source configuration for 8-channel audio playback and
+capture on the AM62D2EVM as the default configuration is 2-channel.
+
+Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+---
+Moved pipewire recipe to dynamic layers.
+
+ .../pipewire/pipewire-ti.inc                  | 20 +++++++++++++++++++
+ .../am62dxx-evm/90-pipewire-sink.conf         | 17 ++++++++++++++++
+ .../am62dxx-evm/91-pipewire-source.conf       | 17 ++++++++++++++++
+ .../pipewire/pipewire_%.bbappend              |  4 ++++
+ 4 files changed, 58 insertions(+)
+ create mode 100644 meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire-ti.inc
+ create mode 100644 meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire/am62dxx-evm/90-pipewire-sink.conf
+ create mode 100644 meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire/am62dxx-evm/91-pipewire-source.conf
+ create mode 100644 meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire_%.bbappend
+
+diff --git a/meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire-ti.inc b/meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire-ti.inc
+new file mode 100644
+index 00000000..65a82671
+--- /dev/null
++++ b/meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire-ti.inc
+@@ -0,0 +1,20 @@
++PR:append = ".ti0"
++
++FILESEXTRAPATHS:prepend := "${THISDIR}/pipewire:"
++
++# AM62D-specific config files
++SRC_URI:append:am62dxx-evm = " \
++    file://90-pipewire-sink.conf \
++    file://91-pipewire-source.conf \
++"
++
++do_install:append:am62dxx-evm() {
++    install -d ${D}${sysconfdir}/pipewire/pipewire.conf.d
++    install -m 0644 ${UNPACKDIR}/90-pipewire-sink.conf ${D}${sysconfdir}/pipewire/pipewire.conf.d/
++    install -m 0644 ${UNPACKDIR}/91-pipewire-source.conf ${D}${sysconfdir}/pipewire/pipewire.conf.d/
++}
++
++FILES:${PN}:append:am62dxx-evm = " \
++    ${sysconfdir}/pipewire/pipewire.conf.d/90-pipewire-sink.conf \
++    ${sysconfdir}/pipewire/pipewire.conf.d/91-pipewire-source.conf \
++"
+diff --git a/meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire/am62dxx-evm/90-pipewire-sink.conf b/meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire/am62dxx-evm/90-pipewire-sink.conf
+new file mode 100644
+index 00000000..857c344e
+--- /dev/null
++++ b/meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire/am62dxx-evm/90-pipewire-sink.conf
+@@ -0,0 +1,17 @@
++# PipeWire sink configuration for AM62D.
++
++context.objects = [
++    {
++        factory = adapter
++        args = {
++            factory.name           = api.alsa.pcm.sink
++            node.name              = "alsa_audio_sink"
++            node.description       = "Audio Output"
++            media.class            = "Audio/Sink"
++            api.alsa.path          = "hw:AM62D2EVM,0"
++            audio.rate             = 48000
++            audio.channels         = 8
++            audio.position         = [ FL FR FC LFE RL RR SL SR ]
++        }
++    }
++]
+diff --git a/meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire/am62dxx-evm/91-pipewire-source.conf b/meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire/am62dxx-evm/91-pipewire-source.conf
+new file mode 100644
+index 00000000..ac7635de
+--- /dev/null
++++ b/meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire/am62dxx-evm/91-pipewire-source.conf
+@@ -0,0 +1,17 @@
++# PipeWire source configuration for AM62D.
++
++context.objects = [
++    {
++        factory = adapter
++        args = {
++            factory.name           = api.alsa.pcm.source
++            node.name              = "alsa_audio_source"
++            node.description       = "Audio Input"
++            media.class            = "Audio/Source"
++            api.alsa.path          = "hw:AM62D2EVM,0"
++            audio.rate             = 48000
++            audio.channels         = 8
++            audio.position         = [ FL FR FC LFE RL RR SL SR ]
++        }
++    }
++]
+diff --git a/meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire_%.bbappend b/meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire_%.bbappend
+new file mode 100644
+index 00000000..f806d28f
+--- /dev/null
++++ b/meta-ti-bsp/dynamic-layers/multimedia-layer/recipes-multimedia/pipewire/pipewire_%.bbappend
+@@ -0,0 +1,4 @@
++PIPEWIRE_TI = ""
++PIPEWIRE_TI:ti-soc = "pipewire-ti.inc"
++
++require ${PIPEWIRE_TI}
+-- 
+2.34.1
+
 
