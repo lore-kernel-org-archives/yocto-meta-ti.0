@@ -1,211 +1,195 @@
-Return-Path: <prc@list.ti.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A90CCA5FC5
-	for <webhook@archiver.kernel.org>; Wed, 30 Sep 2026 13:11:43 +0000 (UTC)
-Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com [148.163.154.28])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13134.1790773896350221925
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE3B2CA5FC4
+	for <webhook@archiver.kernel.org>; Wed, 30 Sep 2026 16:22:19 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.17733.1790785338095232450
  for <meta-ti@lists.yoctoproject.org>;
- Wed, 30 Sep 2026 06:11:36 -0700
+ Wed, 30 Sep 2026 09:22:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=XZ+SHiL8;
- dkim=pass header.i=@list.ti.com header.s=selector1 header.b=Dj2EuwxG;
- spf=pass (domain: list.ti.com, ip: 148.163.154.28, mailfrom: prc@list.ti.com)
-Received: from pps.filterd (m0374956.ppops.net [127.0.0.1])
-	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68UB69ac2715434;
-	Wed, 30 Sep 2026 08:11:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	proofpoint-05-2026; bh=k4JiSDX9iqBm+XhtgOMu0g5b8oIL18o9ITGc0VDtW
-	F0=; b=XZ+SHiL85u8x+ba5xJA896FflYgkMSqi/DhH/1Yl+jXZD5lzmzKhpPQ/i
-	XlLTs457RpsBjDQW8oZ6C9mRjYOcqeegbadqmaL4ci62eKvSKm2nfktUMny3iwv0
-	iPuarzB+tazjb4HeuYok2IhbS9vHvejGeS51O1jUBgZdy2/PG2vBVHzrKOh6wqp1
-	rrLWJCU6p3q8wwJ3a895mPijBrOG42zvzTKE3tZfdd8wpwrfisoigBqHWcPpYihA
-	qTlc73GyTcToFty9xlZmC2qhxJrjsYJd2kp6qJjZnRFg7hvO8dkb/ZujiUO2ThIU
-	RIUVwa/OqrnRRBbc/NsYjWkWK9oYg==
-Received: from sa9pr02cu001.outbound.protection.outlook.com (mail-southcentralusazon11013039.outbound.protection.outlook.com [40.93.196.39])
-	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4h0m9fde35-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 30 Sep 2026 08:11:33 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JyuMIwM5yPVagl4uS785c3UlNnjGR0FqukX8Jp7/Ku9TsUA9uB9mvgHgrI8qZc5G9Wz00lyCSF6ZEAv5BSZiGT52pjCa8Negc9DJCMj2rd8Ya9r8psWfbbbVKKtcea+768DDMmu61InSYoGjT+r7LMs3KIGLMITnDQacepFVJKJvU1SdlTI+P55HmUFSGUe9n5YXExFLElWcl7TJMGlFQjpQjUy85gMZj0uPetdmBQxxuVoFd6RSbmpIb8Dw07Hn/6YSFVD/+aIymErjWn3ILvFI+jPog8wI4bzck4E//wMCef0rtWAu8ymGLPMUr0tG0tzo+Da4hsJjc/FzqCeaww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=k4JiSDX9iqBm+XhtgOMu0g5b8oIL18o9ITGc0VDtWF0=;
- b=GLf5r+A8eSaAAMoC4/VJHYf62fq5/atlv0QiOsYuBzkriJSlL1Z+7tEGzqNKhkRjKpCcKf+lFEGsgm58vO8L0OlVIMcchswd91dp44AWNn8TB+6hh3t63GoSwQHnRwLpKCVWETYkBFMBo7d5WntXKqabi54zEtRKHiW6+GVBCkohTcwqHqPoazFHECO8mSgdWzTtQX4vJzov3Jp3I2n3hZYIdB1l1zIIwtu+W8NT8q/Wkkz+iKtL/M9JjKWeV14kq484EIIKidJnWVRknH3Lof6FdAEoNfi1C61Tgtj2ugsJf17bgRnm6RNo9c2l8iBWg9pFazE0myGDVID9Px93sg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.yoctoproject.org
- smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
- action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
- (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=k4JiSDX9iqBm+XhtgOMu0g5b8oIL18o9ITGc0VDtWF0=;
- b=Dj2EuwxGuRyL4BA5IoeVrh31lGiFkCgtDRoDVTqKFbaCoIOMHAGLOIFmsjUntOwy4KF8lIY7iAGWjXB+F4X7SMlE+WGl5DtJhT8uuSO+e7yyqt/LOBBScSIp5DMj2fhyEOjs/XdCw7kqlMwIFUriaYcrqEaemFg2cx1PYJ5afvGEElu3wxEn/AN/8BQxaKb8lLVdaHyefdYFu3G/4SdjWd4zklEhoKEbpL0ibkztAJ6cZF/NBaf++UYyWiYTXkTbGtmG55C/p2pN9rkwqHDhqygoK2+e0nJBGQaC2cnBDLFVO+h7rCPf6v8MZ0xwpkMdmRpuOluFNFhv0r7GMMkssQ==
-Received: from SJ0PR03CA0011.namprd03.prod.outlook.com (2603:10b6:a03:33a::16)
- by CO6PR10MB5791.namprd10.prod.outlook.com (2603:10b6:303:14c::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.9; Wed, 30 Sep
- 2026 13:11:29 +0000
-Received: from SJ1PEPF000037A5.namprd04.prod.outlook.com
- (2603:10b6:a03:33a:cafe::6) by SJ0PR03CA0011.outlook.office365.com
- (2603:10b6:a03:33a::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.16 via Frontend Transport; Wed,
- 30 Sep 2026 13:11:29 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 198.47.21.195) smtp.mailfrom=list.ti.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=list.ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SJ1PEPF000037A5.mail.protection.outlook.com (10.167.244.137) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.472.14 via Frontend Transport; Wed, 30 Sep 2026 13:11:27 +0000
-Received: from DFLE202.ent.ti.com (10.64.6.60) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 30 Sep
- 2026 08:10:38 -0500
-Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 30 Sep
- 2026 08:10:38 -0500
-Received: from fllvem-mr08.itg.ti.com (10.64.41.88) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Wed, 30 Sep 2026 08:10:37 -0500
-Received: from fllvdckhpci031.itg.ti.com (fllvdckhpci031.itg.ti.com [10.64.72.41])
-	by fllvem-mr08.itg.ti.com (8.18.1/8.18.1) with ESMTP id 68UDAbD81655891;
-	Wed, 30 Sep 2026 08:10:37 -0500
-Received: by fllvdckhpci031.itg.ti.com (Postfix, from userid 60899)
-	id 331D69A9C2; Wed, 30 Sep 2026 08:10:37 -0500 (CDT)
-From: PRC Automation <prc@list.ti.com>
-To: Atharv Dubey <a-dubey@ti.com>
-CC: <meta-ti@lists.yoctoproject.org>, <reatmon@ti.com>, <denys@konsulko.com>,
-        <a-limaye@ti.com>, <u-kumar1@ti.com>, <m-chawdhry@ti.com>
-Subject: Re: [meta-ti][master][PATCH v4 1/3] dm-verity-upstream: Add dynamic layer for meta-security dm-verity
-Date: Wed, 30 Sep 2026 08:10:37 -0500
-Message-ID: <20260930131037.1427323-1-prc@list.ti.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20260930125938.95629-1-a-dubey@ti.com>
+ dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id ED2A640CD1;
+	Wed, 30 Sep 2026 16:22:16 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 6-SeunThm7cq; Wed, 30 Sep 2026 16:22:16 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 7BE8440C2C;
+	Wed, 30 Sep 2026 16:22:10 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 6B0DA17EEDD; Wed, 30 Sep 2026 12:22:09 -0400 (EDT)
+Date: Wed, 30 Sep 2026 12:22:09 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: a-dubey@ti.com
+Cc: meta-ti@lists.yoctoproject.org, reatmon@ti.com, denys@konsulko.com,
+	a-limaye@ti.com, u-kumar1@ti.com, m-chawdhry@ti.com
+Subject: Re: [meta-ti][master][PATCH v4 1/3] dm-verity-upstream: Add
+ dynamic layer for meta-security dm-verity
+Message-ID: <20260930162209.GI4190@denix.org>
 References: <20260930125938.95629-1-a-dubey@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000037A5:EE_|CO6PR10MB5791:EE_
-X-MS-Office365-Filtering-Correlation-Id: edf6127b-2748-4a41-1ceb-08df1ef45670
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|23010399003|36860700016|82310400026|1800799024|376014|18002099003|22082099003|13003099007|10067099003|56012099006;
-X-Microsoft-Antispam-Message-Info: 
-	luqwkBmXoNsjWWPLsaCcJf8O18R14QkULVSR3r0uBNqTe4keaPE/SKIOuHzhZtKxMhh74/N4iVuXveBA5JzF/YaXtUVONzIONwx1Q9L1rpVpdocpA7P0csACivsMWS3sEBWY+KrxKyt0wgniXpZf+/CCEOtzwrPwFZS8PW1KGnymoMwMfvpN7qbjeugVdmTgHBb5z+E1UD10Xo0d2UrREtO+FoVP78jx4zGeAON4775LrngsQKSfHdn0vlle0dG9UWx7VvSZVMzhJeKFaIRWBfoqPJtVc5IfVSCC9xEMKJF0lI8MmhzA7mgfhgUM2GyxR+xPV/TY9ypwBiWWswfuWLpkNDBjlSWMLK6R4Adx1QKsdQptetyFQ8E530nzW5R2Yd+PYwK6vyxQw6mlopQZgv4gMQUhmQiqc0KU78iUYtaf7FRtsDem/euTfAV1v7P0zy4GBy1iuJoku/VgnZtTuuSclUaOTPZ2MbmzamgNnI/ASvUjxoB0P0BwHVy14fafeQZgFxoJw5kLYUGRRUrtUlZkSmCyReUI6OcSPAkbxq3sgzRWQ9wQRTpWj3Cs0lqQm+r11lvC3PXwQlvUZEYnKcHxKXxsijiON758LRbGoeDwJL9G6n5gQ9E3gFp4xI/t4i4u2ZpLunI0BfdVNwu+hA==
-X-Forefront-Antispam-Report: 
-	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(23010399003)(36860700016)(82310400026)(1800799024)(376014)(18002099003)(22082099003)(13003099007)(10067099003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	t70aX02sSZDsHq10cvgrYyjd1td6FRjY+9CZBtH4bjyePMLce4uGLDAxkNYuRaHuxTCrVi++4vWOoDxsy96/0CdCUdBLY0pYpWCNVw29MRsBw9uTy4sYDm7GXVVKg8nreR+bxi5BJ7uV5/qRwzdxUrVTObEK1Av5c9LnPkMQFh9AMwGSKafzgVI2D2gkyKNT+jpp4Rrv5e9ypovdUntCaatLkB863A5c0SCpZKYhga8cfOKfpDg1GqogkI0BFDN9pjwzmfc8+1ju29cumshEiGpOa/EwDxh35bHQxrRdUyyob8RvuZS+sm/r6nfnymDYpCboGXUFiYfMQ1dzPuWUzMNqdceqFE5/Su9zh2MI2yPTH9M1cj2iLZKZghzToS3yVFFgKepv4+gNUXhZ8nRJFTYg/7ogqLZnQ7sJd30kE9BnwS3xtliWXECq6/mokeA5
-X-Exchange-RoutingPolicyChecked: 
-	n38DZnJAD8HMt0T/7ZoIVZYm7p56OngyigvK0XK1mpeR1jLBdHkjgkU3nU+Gfhqblis02dz8o/XxXU4T5hRiKamYve6+zvBzbMmNlMfs+TNly02Q/XzREfOtL74708DXjOtiSilh40liqCp3iOn46GuBpdLT2GmmVzyn7IDWf6tTTkRHWBtm7yagzrhqP9cW83GUaHqfZhYCwASH1x49qr6GJfFPRVhQSvL+ObPQUrsEcwhKg0bpOvClOWWdR/0FhzHrDpSA/0yFBb/19Z9/4i5PClHxD6P0k4SMrChQo1YNS5nrFdnlyjfM0m8jovu6elLv25pswu9DsG7HXZQpeQ==
-X-OriginatorOrg: list.ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2026 13:11:27.9692
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: edf6127b-2748-4a41-1ceb-08df1ef45670
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	SJ1PEPF000037A5.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO6PR10MB5791
-X-Authority-Analysis: v=2.4 cv=VfRir1p9 c=1 sm=1 tr=0 ts=6abd0a85 cx=c_pps
- a=6Lt9nLqKXikdeYFJc2ep4w==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=VdqzKS8jKosA:10 a=Vs-ZokuVWRQA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=jwouBfj2j3NM8CExmVVE:22
- a=iGHA9ds3AAAA:8 a=sozttTNsAAAA:8 a=0Qj9ofRoX9efyBQDLVAA:9
- a=nM-MV4yxpKKO9kiQg6Ot:22
-X-Proofpoint-GUID: S3n-4jf7sq9EPX9KKBhW0x_J0Jv4wLcr
-X-Proofpoint-ORIG-GUID: S3n-4jf7sq9EPX9KKBhW0x_J0Jv4wLcr
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA1MiBTYWx0ZWRfXxRl+SrmqE1lI
- hxmSZRiJh/LWQijh46sUD7Lz64A9HHyQ97oABmyIaA4L0RgxyLwWDJoZvqiclgp0/gpe/gv9rb4
- 2/zJWLjssQuLmFMJtzA3jMIWhF6snJA3MmCnxw79v4G5x0yXXP3qzcdq0O8gjnj8WGO5v7XhZUj
- 943qptjXO7ngNBIGXlmpbKA7SDMPpkkd36mXlcuJLVw/G0t19BI2w6C4Uvw66G7wk12kDgHqAQu
- hfEjDp5HJ+0Ef8pKM6fUG8HWWTdJaT6OflorwjWWCrEI3h4P5+ToAEQqJXh+0yjUqi6MWcAjjvy
- fhdkw1rRdOlEVcbPm9gaS25x116TaJZ6ijO246g1WQzIEMtvRFT20Mpp+2fLthfSzYrwTWoSMw2
- 1cYknasTcTcJ70Po9y5br509RXa2mbD/ViTgMwNzUnF7RjRqpWonqAr8j2XhwxztEf0FumUTSNs
- 0bvjluZu6Wrpdil6SAg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA1MiBTYWx0ZWRfXyIevyEKi2QW5
- jL0D/lk2GwMIF4MJV2sUwufjOr6kTccOlWn7/B72C16RhPmaNVRgtncBgOjRdNpw7ZEeIJBCN8O
- y4YVMv1v6NpLcrAYe12sb3LS4r9ceyc=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-30_02,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 adultscore=0 phishscore=0 malwarescore=0
- bulkscore=0 lowpriorityscore=0 priorityscore=1501 spamscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300052
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260930125938.95629-1-a-dubey@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <meta-ti.lists.yoctoproject.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <meta-ti@lists.yoctoproject.org>; Wed, 30 Sep 2026 13:11:43 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20425
+ <meta-ti@lists.yoctoproject.org>; Wed, 30 Sep 2026 16:22:19 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20426
 
-meta-ti / na / 20260930125938.95629-1-a-dubey
+On Wed, Sep 30, 2026 at 06:29:36PM +0530, Atharv Dubey via lists.yoctoproject.org wrote:
+> Add an optional dynamic layer enabling dm-verity block-level integrity
+> verification of the root filesystem for TI K3 platforms, using
+> meta-security's stock dm-verity mechanism as-is. Requires meta-security
+> to be present in bblayers.conf.
+> 
+> dm-verity hashes the rootfs at build time; at boot, a dedicated
+> initramfs loads the root hash and the kernel checks every block read
+> against it. Set DM_VERITY_IMAGE to enable all the verity-related
+> recipes for that image; other images build as usual.
+> 
+> Signed-off-by: Atharv Dubey <a-dubey@ti.com>
+> 
+> ---
+> v4:
+>  - Use ti-core-initramfs instead of a separate dm-verity initramfs
+>  - Instead of a DISTRO_FEATURE, just check if DM_VERITY_IMAGE is set
+> v3:
+>  - Disabled the automount rules from udev-aragoconf, so don't need the
+>    ignorelist for dm-verity
+> v2:
+>  - Replaced hardcoded /dev/mmcblk1p2 with a PARTUUID
+> ---
+>  meta-ti-bsp/conf/layer.conf                   |  3 +++
+>  meta-ti-bsp/conf/machine/include/k3.inc       |  7 ++++++
+>  .../conf/include/dm-verity-upstream.inc       | 23 +++++++++++++++++++
+>  .../udev/udev-aragoconf_%.bbappend            |  5 ++++
+>  .../udev/udev-extraconf_%.bbappend            |  6 +++++
+>  meta-ti-bsp/files/wic/k3-verity.wks.in        |  5 ++++
+>  6 files changed, 49 insertions(+)
+>  create mode 100644 meta-ti-bsp/dynamic-layers/security-layer/conf/include/dm-verity-upstream.inc
+>  create mode 100644 meta-ti-bsp/dynamic-layers/security-layer/recipes-core/udev/udev-aragoconf_%.bbappend
+>  create mode 100644 meta-ti-bsp/dynamic-layers/security-layer/recipes-core/udev/udev-extraconf_%.bbappend
+>  create mode 100644 meta-ti-bsp/files/wic/k3-verity.wks.in
+> 
+> diff --git a/meta-ti-bsp/conf/layer.conf b/meta-ti-bsp/conf/layer.conf
+> index 3cc54aa4..aca35cd3 100644
+> --- a/meta-ti-bsp/conf/layer.conf
+> +++ b/meta-ti-bsp/conf/layer.conf
+> @@ -20,12 +20,15 @@ LAYERDEPENDS_meta-ti-bsp = " \
+>  LAYERRECOMMENDS_meta-ti-bsp = " \
+>      openembedded-layer \
+>      tpm-layer \
+> +    security \
+>  "
+>  
+>  BBFILES_DYNAMIC += " \
+>      openembedded-layer:${LAYERDIR}/dynamic-layers/openembedded-layer/recipes*/*/*.bbappend \
+>      tpm-layer:${LAYERDIR}/dynamic-layers/tpm-layer/recipes*/*/*.bb \
+>      tpm-layer:${LAYERDIR}/dynamic-layers/tpm-layer/recipes*/*/*.bbappend \
+> +    security:${LAYERDIR}/dynamic-layers/security-layer/recipes*/*/*.bb \
+> +    security:${LAYERDIR}/dynamic-layers/security-layer/recipes*/*/*.bbappend \
+>  "
+>  
+>  SIGGEN_EXCLUDERECIPES_ABISAFE += " \
+> diff --git a/meta-ti-bsp/conf/machine/include/k3.inc b/meta-ti-bsp/conf/machine/include/k3.inc
+> index 2ebbfb9e..f19db45f 100644
+> --- a/meta-ti-bsp/conf/machine/include/k3.inc
+> +++ b/meta-ti-bsp/conf/machine/include/k3.inc
+> @@ -64,3 +64,10 @@ FALCON_INCLUDE = ""
+>  FALCON_INCLUDE:ti-falcon = "conf/machine/include/ti-falcon.inc"
+>  
+>  require ${FALCON_INCLUDE}
+> +
+> +# dm-verity protects the rootfs listed in DM_VERITY_IMAGE; see dynamic-layers/security-layer/conf/include/dm-verity-upstream.inc for what that turns on.
+> +DM_VERITY_IMAGE ??= ""
+> +
+> +DM_VERITY_UPSTREAM_INCLUDE = "${@'dynamic-layers/security-layer/conf/include/dm-verity-upstream.inc' if d.getVar('DM_VERITY_IMAGE') else ''}"
+> +
+> +require ${DM_VERITY_UPSTREAM_INCLUDE}
+> diff --git a/meta-ti-bsp/dynamic-layers/security-layer/conf/include/dm-verity-upstream.inc b/meta-ti-bsp/dynamic-layers/security-layer/conf/include/dm-verity-upstream.inc
+> new file mode 100644
+> index 00000000..3ff2b7d6
+> --- /dev/null
+> +++ b/meta-ti-bsp/dynamic-layers/security-layer/conf/include/dm-verity-upstream.inc
+> @@ -0,0 +1,23 @@
+> +# Enables dm-verity to check the rootfs for tampering on TI K3 boards.
+> +DM_VERITY_IMAGE_TYPE = "ext4"
+> +IMAGE_CLASSES += "dm-verity-img"
+> +
+> +# ti-core-initramfs.bbappend already wires the initramfs into the boot partition once dm-verity is enabled, so we don't need to do it here.
+> +
+> +# Derive the root partition's UUID from MACHINE so everyone computes the same one.
+> +python () {
+> +    import uuid
+> +
+> +    if not d.getVar('DM_VERITY_ROOT_PARTUUID'):
+> +        d.setVar('DM_VERITY_ROOT_PARTUUID',
+> +                 str(uuid.uuid5(uuid.NAMESPACE_DNS, 'dm-verity-root-%s' % d.getVar('MACHINE'))))
+> +}
 
-PRC Results: FAIL
-
-=========================================================
-  check-yocto-patches: PASS
-=========================================================
-Patches
-----------------------------------------
-WARN - [meta-ti][master][PATCH v4 2/3] linux-ti-staging: Add dm-verity kernel config
-    WARN: Revised patch missing a comment. (REVISION-1)
-        patch
-    
-    For details on the above errors/warnings visit: https://lists.yoctoproject.org/g/meta-ti/wiki/40887
-WARN - [meta-ti][master][PATCH v4 3/3] ti-core-initramfs: Extend with dm-verity support
-    WARN: Revised patch missing a comment. (REVISION-1)
-        patch
-    
-    For details on the above errors/warnings visit: https://lists.yoctoproject.org/g/meta-ti/wiki/40887
+Should these 2 anonymous python functions be combined and the above code go 
+behind the check below? Is DM_VERITY_ROOT_PARTUUID needed outside of the 
+DM_VERITY_IMAGE image?
 
 
+> +
+> +python () {
+> +    if d.getVar('PN') != d.getVar('DM_VERITY_IMAGE'):
+> +        return
+> +
+> +    d.setVar('WKS_FILE', 'k3-verity.wks.in')
+> +    d.appendVar('EXTRA_IMAGE_FEATURES', ' read-only-rootfs')
+> +    d.appendVar('WICVARS', ' DM_VERITY_IMAGE DM_VERITY_IMAGE_TYPE IMAGE_NAME_SUFFIX IMGDEPLOYDIR DM_VERITY_ROOT_PARTUUID')
+> +}
+> diff --git a/meta-ti-bsp/dynamic-layers/security-layer/recipes-core/udev/udev-aragoconf_%.bbappend b/meta-ti-bsp/dynamic-layers/security-layer/recipes-core/udev/udev-aragoconf_%.bbappend
+> new file mode 100644
+> index 00000000..e5f6c1b2
+> --- /dev/null
+> +++ b/meta-ti-bsp/dynamic-layers/security-layer/recipes-core/udev/udev-aragoconf_%.bbappend
+> @@ -0,0 +1,5 @@
+> +do_install:append() {
+> +    if ${@'true' if d.getVar('DM_VERITY_IMAGE') else 'false'}; then
+> +        : > ${D}${libdir}/udev/rules.d/50-arago.rules
 
-=========================================================
-  apply-yocto-patch: FAIL
-=========================================================
-master
-=====================
-Summary:
-- Patch Series: [meta-ti][master][PATCH v4 1/3] dm-verity-upstream: Add dynamic layer for meta-security dm-verity
-- Submitter: From: Atharv Dubey <a-dubey@ti.com>
-- Date: Date: Wed, 30 Sep 2026 18:29:36 +0530
-- Num Patches: 3
-- Mailing List (public inbox) Commit SHA: 9a1220ed1f51854c8dcf5b95709213f9e510bbe3
-
-Applied to:
-- Repository: lcpd-prc-meta-ti
-- Base Branch: master
-- Commit Author: LCPD Automation Script <lcpdbld@list.ti.com>
-- Commit Subject: CI/CD Auto-Merger: cicd.master.202609251030
-- Commit SHA: 9a970370942d7ff753a64b31bc367e1e27aa3048
-
-Patches
-----------------------------------------
-FAIL - [meta-ti][master][PATCH v4 1/3] dm-verity-upstream: Add dynamic layer for meta-security dm-verity
-    error: patch failed: meta-ti-bsp/conf/layer.conf:20
-    error: meta-ti-bsp/conf/layer.conf: patch does not apply
-    Applying: dm-verity-upstream: Add dynamic layer for meta-security dm-verity
-    Patch failed at 0001 dm-verity-upstream: Add dynamic layer for meta-security dm-verity
+Why not simply remove the file?
 
 
+> +    fi
+> +}
+> diff --git a/meta-ti-bsp/dynamic-layers/security-layer/recipes-core/udev/udev-extraconf_%.bbappend b/meta-ti-bsp/dynamic-layers/security-layer/recipes-core/udev/udev-extraconf_%.bbappend
+> new file mode 100644
+> index 00000000..a14e21ea
+> --- /dev/null
+> +++ b/meta-ti-bsp/dynamic-layers/security-layer/recipes-core/udev/udev-extraconf_%.bbappend
+> @@ -0,0 +1,6 @@
+> +# Nothing should ever get auto-mounted under dm-verity, so just kill the automounter.
+> +do_install:append() {
+> +    if ${@'true' if d.getVar('DM_VERITY_IMAGE') else 'false'}; then
+> +        : > ${D}${sysconfdir}/udev/rules.d/automount.rules
 
+Same question as above.
+
+
+> +    fi
+> +}
+> diff --git a/meta-ti-bsp/files/wic/k3-verity.wks.in b/meta-ti-bsp/files/wic/k3-verity.wks.in
+> new file mode 100644
+> index 00000000..62ae0ec1
+> --- /dev/null
+> +++ b/meta-ti-bsp/files/wic/k3-verity.wks.in
+> @@ -0,0 +1,5 @@
+> +# Disk layout for a board that boots with dm-verity enabled.
+> +
+> +bootloader --timeout=3 --append="rootfstype=ext4 root=PARTUUID=${DM_VERITY_ROOT_PARTUUID} ${TI_WKS_BOOTLOADER_APPEND}"
+> +part --source bootimg-efi --sourceparams="loader=${EFI_PROVIDER}${TI_WKS_INITRAMFS}" --fstype=vfat --label boot --active --align 1024 --use-uuid --fixed-size 128M
+> +part / --source rawcopy --sourceparams="file=${IMGDEPLOYDIR}/${DM_VERITY_IMAGE}-${MACHINE}${IMAGE_NAME_SUFFIX}.${DM_VERITY_IMAGE_TYPE}.verity" --align 1024 --uuid ${DM_VERITY_ROOT_PARTUUID}
+> -- 
+> 2.34.1
 
