@@ -1,506 +1,261 @@
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6405.1793912768727825145
+Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com [148.163.154.28])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.12412.1793933128174293711
  for <meta-ti@lists.yoctoproject.org>;
- Thu, 05 Nov 2026 13:06:09 -0800
+ Thu, 05 Nov 2026 18:45:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@criticallink.com header.s=google header.b=JsCa3kjx;
- spf=pass (domain: criticallink.com, ip: 209.85.128.177, mailfrom: jcormier@criticallink.com)
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-8b10d24345dso23196537b3.3
-        for <meta-ti@lists.yoctoproject.org>; Thu, 05 Nov 2026 13:06:08 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793912767; cv=none;
-        d=google.com; s=arc-20260327;
-        b=gAcKVHXEhx5U1ofyLEGARsA1w8ASqSkl2H86zNCea0lQ43YRBEf4yV7Enrdk/Xd6Jp
-         NcoVI0MhyGl77XlYeuWGgOA8vY4o0+fSQKDnKmduBlYE9BwPpR7iuqN9Y14JqXS1dLxY
-         b8j1hM3htbkYaxZ0QuSfOEZhkcChPRXZ2Od/8BgyqyzQehmFsggaQZbJ67ukIo4yql+Z
-         xO61xxmdQJbdPzqEPrql3EwLtgNdZ7oGKDhDuVBaOZ5Md01guOULBxy3Jok94hhhLfOX
-         N91kIj4uN3GZFwcIP7ztVsd1CPKA+WaT4+iK6cxwIIC82VK6lmAT3uQEKrjWP3JLOEPH
-         Ehog==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=dY2CyckIQwQlKZ6bfzHCVEzgiCJWSHPzn12g4MBSkh4=;
-        fh=/KNaWlTwIEuuLQG18s53dzAH+rzjQdvGxOk/PyEb748=;
-        b=X96Xmrj4QP1cv1fMlQIHgEItJUPAu6+gIDv7TQGUNK+psHdrL8N21MtuGrXWR11H1T
-         OSgo3Pqe0ynSk4ZcNTNcDZipbjkm+OjzaABFawayGrCXKhs0Gl54x51UJ7k/F0dfTTiT
-         gV9HkXNTR5vpYxi7hGqUyw7uv4fG2dsdgQBwxckUKmzwpB0nmwcizE6PozX3fPG3lmck
-         ryPHzd5qO1LrUdVwTZ3AXkMqXWHJR0wnm0H7g/StjHG1aCjNrKkyFaZWFdBm4VrXXkjM
-         JTeSpKKGwNX00kEWSRnYimDxrk+tp4teSLzagwdGtpj1+rB2Yi0npvc1+gqHqMur2+Qd
-         BKYg==;
-        darn=lists.yoctoproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=criticallink.com; s=google; t=1793912767; x=1794517567; darn=lists.yoctoproject.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=dY2CyckIQwQlKZ6bfzHCVEzgiCJWSHPzn12g4MBSkh4=;
-        b=JsCa3kjx9zlvW27jFs20VDXL+EJaZiDwZ1YkM16w9fdSTnUePpe+8TdYJXI2OfsMJ7
-         axufcD0m5Xne+OtX75Y1KZd4bvj6aHjHstD368cOckwOHHmWdX90YJOSjb/rxl9DYem3
-         FM2SDF+4DNsejZov/kDcma79uGDA0T0JFipo4Klzs9gaPO9YE+MhQCq0tUzrrEeBlUpG
-         CRwbDWspicayJi0xLAK6PofgbFdQemyhiAt1l6MWi3qLotwF5Md+9nvX5pakGnvFrN3N
-         QKJsSYbzBMUH7K4lsdycJ7WjYNFmXDK+883j7gILvGsqEpYTuHrG8P+YK0Pfrzv6U3bg
-         Dx6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793912767; x=1794517567;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=dY2CyckIQwQlKZ6bfzHCVEzgiCJWSHPzn12g4MBSkh4=;
-        b=tJSV6YkCzfp03R52QyGunAxthY4bzc0Y0ZvKxLl6KP6tT/stQbOwueg0uW8+dW4QWv
-         Tf+H73so//OJzCfa6L/yU4C/CeliE4nF6QdyjsBBkfnqJZRulC2fxvw9FqO/hiVWQNOU
-         rf14mBEgWgquw9iOxMNX6TQYyclB9/k4AFSxgmHVnN2NPifgvQRzrwqYUfial+HABEdD
-         47Ywz3KRU+6agzA+jjUkRx3wsXFPIat89FzBc9yFxfHusXhjtt+tjjYcaL0Pxs3CCfuM
-         H/yxHMiY/RVNzrEEXQAninhHIxQs8tsGbujBA8gSYKOx0BRxaFfkn1+pbpEuqkzBjihN
-         /08w==
-X-Forwarded-Encrypted: i=1; AL+hErHOzwqA3Nlo97pMeO/3KkoC3E8WQ0qWdROuRjVUF020NgXq9vgWi0W4oBwJ+wa3Xjh3axMRJG+O@lists.yoctoproject.org
-X-Gm-Message-State: APuU4Z8L+9tlKj+9EYiy3lc3xWHO4Ep1y4M5TC/u2IJ6jtQt99g2inRk
-	aLC2EuX9Dhlsn1v0rHXGpTaxPWHZU3uxrXqNqtwXtWyXgs2qIJRPKKPQDQ7JQwQ4VcVz3UPyppI
-	tfEgGLoJ5KiqvhQhYI+B3SmeojbPsH+OItdX55y8ZUPeoUVoX9HvgTi9A
-X-Gm-Gg: AYBFou0H8cjo+ZrY/cVb2SoLIaN9T2z9CEmk9l2qiwPgJBLPjA+bfNPhY+U8R3uel0b
-	yE5OIJz5rzQHFQlwcHDGUMpnne2Tt2Sa/LNlpbe6IV8RfeKoTnBVsetVFlXX9jUYaLBRo76E0jI
-	lGZJU2H0u+dY26j40L4hy281rDfZpqMwFt2gAbIrP0otBU04Zl1ClJNXMXkglJTdRZfKOACyDmg
-	H+o7BirnY1AQYxLoZKkPeeznWxrv6JckFOh6lCxRuoPVVqrPYgcCP02dJb1fJ1c1Z+lRKE6QkGq
-	QconSU9A7ydlJIar+mGRHUMqj5iIJ6oXwhomVunLBDarCdtxT6yEVMlB5nS/FG2b4Dw0JdiOm2H
-	+wIYSOlsBXGAaOwHP3Y/VX9Om0OXiUrtKfBzugiXu3aj6tF5wiJnr9lHt
-X-Received: by 2002:a05:690c:24c:b0:8b0:d9a6:dbcd with SMTP id
- 00721157ae682-8b341ac9febmr1443087b3.48.1793912767125; Thu, 05 Nov 2026
- 13:06:07 -0800 (PST)
+ dkim=pass header.i=@ti.com header.s=proofpoint-05-2026 header.b=jCc+wtAh;
+ dkim=pass header.i=@list.ti.com header.s=selector1 header.b=wICMww1j;
+ spf=pass (domain: list.ti.com, ip: 148.163.154.28, mailfrom: lcpdbld@list.ti.com)
+Received: from pps.filterd (m0374955.ppops.net [127.0.0.1])
+	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A5NiZlX2370172;
+	Thu, 5 Nov 2026 20:45:26 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=
+	content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=proofpoint-05-2026; bh=1YijoM7wbzXN7
+	G3fGPHbXz4VxYZUm67tmMzmyXRc7E0=; b=jCc+wtAhV/U17IKz3XCdBiguzV3ZB
+	ILtfKJNd277DR8GTK+OBtErky0d/O0/wbLI4t1CNyPR+auMbeGdJEsJaJaFmayAd
+	cfbIUkJME9wRAfEBChcpmIYpSGQvCiv+yeiI87ok2KULoqY0HNHS/4bbsI6ehoYY
+	79NcV0YY1nmWyM1wQiKEfGVNcGDkDf3lAS01WnRWYJFplKz/gEdyOUfINDLUumDJ
+	LQT7TJ4TMwMK1dgJszN9uBJES285JeVP1cRuGv/FAw/Fyv1QczEaDfd+PrldiTOh
+	gnhJ77OC5mVCidHi8/g1n2K43BQMEyahZSa485gu5NYex5HbUN4lCQ65w==
+Received: from bn1pr04cu002.outbound.protection.outlook.com (mail-eastus2azon11010032.outbound.protection.outlook.com [52.101.56.32])
+	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4hs3qm8vtk-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Thu, 05 Nov 2026 20:45:26 -0600 (CST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=VfOmEskTs+ZHEGiJHAQBXMGVElXmK7fGytLM0cJ8kbdtzotH20sxcg55K37o+e/jR3AK74UZP81j3c8tLHkzKRD0UlGQUKLjCQ0VfFrjMqODXojso7r8++cf3+FBXG1jinbA1QggUGDCSLe0lll3VVHD9X99hwRBft1dgLxeDaxKv2Q7/sCoNlBpzyRO22WJ00rQw128TUYeKJwgY+yPOw7OoROJ/MwWAu7yFvUwcY4ta2YAoW6HOkVj87HY4Sr1b5HMf3gu/cYn2x455XcFQVFFiF2iYUidgSdudZOajvFcb3XK+OiI7/LRdV6MHEz5YVOy0Z2D3ncxWyXjZvZVMw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1YijoM7wbzXN7G3fGPHbXz4VxYZUm67tmMzmyXRc7E0=;
+ b=eXc2WdB1Y50v8pf8Y75I1mxoqNTLS1/kuw/XGdfgj2xr1X6wvlzDttDLN8XGwb/5bwCbxA6Hq3fq/ZyZPSjxqA2HzSfVNTNFmij9M3fikaiksb8jkmwacYDOI9XZ9RfcrJHuPKxPbpfUMHa8wCLhTIJdoY54kuUeC4SbyI2xxZ78zmCz7yvTyz1R4nLlJB24pQsEPgg9DvflG43/QbyKKCUzto7swJn1MtNfKqLjp8k0SzIuIiXfMj4MiNaltfPhy9oQXkjdKU1Q847biyfN0LkJYiUTOsxPs7tYs0K3OZGOGqzcjLEeYt54G/4fUYlka4q7LP9V+qGl8kj6HxHCoQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.yoctoproject.org
+ smtp.mailfrom=list.ti.com; dmarc=pass (p=quarantine sp=none pct=100)
+ action=none header.from=list.ti.com; dkim=none (message not signed); arc=none
+ (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=list.ti.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1YijoM7wbzXN7G3fGPHbXz4VxYZUm67tmMzmyXRc7E0=;
+ b=wICMww1jkz6EF50/HQTRD6uHEN+LjCNkeivUqypBpPTWYoUH01N+oUgVBEJuc3Mxhy5DHUTjuTvVH3QxTlqgNO8B8HkLsFWgkyzn3xCX5BbjlgFXKT5aini/gRTLnjLPBc//52Q6tpnpB8D99zt3XE61Doj0Ey+swgfm6gw5nLM/Ar5FVQjzlVGQL12jgWOOqTMdxzeS0tg5+h9DyLlIgO83O4Ok+mxZ+USehUvunLmwI6zjYLAlwR0dVuCoRbbnL6LhqCAZiqhO2qCVKSwZb0B3W/0oeQZeKimx64sG8rlXhYjXaIHL0eSEiFWax4jEaEGV7Ulo3zu910VL4oG4LQ==
+Received: from SJ0PR05CA0121.namprd05.prod.outlook.com (2603:10b6:a03:33d::6)
+ by CH2PR10MB4216.namprd10.prod.outlook.com (2603:10b6:610:7d::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Fri, 6 Nov
+ 2026 02:45:22 +0000
+Received: from MW3PEPF00001658.namprd21.prod.outlook.com
+ (2603:10b6:a03:33d:cafe::3f) by SJ0PR05CA0121.outlook.office365.com
+ (2603:10b6:a03:33d::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.8 via Frontend Transport; Fri, 6
+ Nov 2026 02:45:22 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 198.47.21.194) smtp.mailfrom=list.ti.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=list.ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of list.ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ MW3PEPF00001658.mail.protection.outlook.com (10.167.249.202) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.569.0 via Frontend Transport; Fri, 6 Nov 2026 02:45:20 +0000
+Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 5 Nov
+ 2026 20:44:42 -0600
+Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 5 Nov
+ 2026 20:44:42 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
+ Transport; Thu, 5 Nov 2026 20:44:42 -0600
+Received: from fllvdckhpci102.itg.ti.com (fllvdckhpci102.itg.ti.com [10.64.72.97])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6A62ifin1368483;
+	Thu, 5 Nov 2026 20:44:41 -0600
+Received: by fllvdckhpci102.itg.ti.com (Postfix, from userid 60899)
+	id 355C52A6C; Thu,  5 Nov 2026 20:44:41 -0600 (CST)
+From: LCPD Automation Script <lcpdbld@list.ti.com>
+To: Ryan Eatmon <reatmon@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+        "Denys
+ Dmytriyenko" <denys@konsulko.com>,
+        <meta-ti@lists.yoctoproject.org>
+Subject: [meta-ti][wrynose][PATCH] CI/CD Auto-Merger: cicd.wrynose.202611051452
+Date: Thu, 5 Nov 2026 20:44:41 -0600
+Message-ID: <20261106024441.262042-1-lcpdbld@list.ti.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
-References: <CAFMvBt0wRnyFses6F3WNhSmxzNP-GvTi5tY3DgKCbVRTfMVcDA@mail.gmail.com>
- <20261105162117.GA4190@denix.org>
-In-Reply-To: <20261105162117.GA4190@denix.org>
-From: Jon Cormier <jcormier@criticallink.com>
-Date: Thu, 5 Nov 2026 16:05:55 -0500
-X-Gm-Features: AclHuK9CU617empIy8hztvyDeqR9KYvUyXAPS2zh9hOpb64bA8ncsfNGq7LVUwc
-Message-ID: <CADL8D3ae7wvRTi-zFidu0t9fbgfksrv5UKrYiY2_fVDG3tP4nA@mail.gmail.com>
-Subject: Re: [meta-ti] Unable to clone or fetch from git.ti.com
-To: denis@denix.org
-Cc: "Theodore A. Roth" <troth@openavr.org>, meta-ti@lists.yoctoproject.org
-Content-Type: multipart/alternative; boundary="0000000000003e2f5d065f8ddd51"
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MW3PEPF00001658:EE_|CH2PR10MB4216:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3d0fb16c-50e6-42ab-0ee0-08df3bafffc5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|23010399003|1800799024|36860700016|82310400026|260925021911599003|260925022911599003|260925021311599003|56012099006|261022075727099003|261009223027099003|261009221227099003|261021123027099003|261102123227099003|261021121427099003|10067099003|18002099003|6133799003|13003099007|3023799007;
+X-Microsoft-Antispam-Message-Info: nlRGxu1RE10BYfjli5JV2rcvhZv/k2SOPDGIvcJ9LSWmLyuvRm2ubxr23Bg+QtDm2PTDPFhI9RM49O1eRPKrw14BZATckyLUgUOj0T+T0oGAQwiEpHQgB2ZtUR1xvvDikgyd5vaSEn3B4MoIvCmuU/D5N6IseHF63AYjRdFfiBRsosacaMi917B0ilLdDFUZIvaznMB9nd4Yn50m/qXKsCZUBvjYSxPMIRqA91lY3wmI9YDvbUpOjn/Y3GwYQ0uj3MXioqwfMxwQGMVgsj09IAIt75nneanT/LLdQtZAvVlzYO1mU7MJM+8qzzTTVy53apJo0l9lK/VJN33rU3b3XryQ+alqfk908yGV4uPCXvsla4FMMhsQFASCUJyltOF0+wcwTodXsYZlhvwN2SBPBwTTnTu10i0ir3kj0CAtnzlNqoozn3GkfjOzrqP6gWqLUvWHS7vtyE3VaGfBVT9pb34LTKeD+v7PH+co4JjsUtTfN4I5pmBLSRXv/VgP2LAdY9BPKIs1cuflgy8j49up5o5YlKmZN1I3UXUnjbEh9bLTO5HrZr0hjnTMFaf0enAi8Fv4LVnFJ8UvQJIyLpXiHKBf+cjofQVdc3xFu+x8e1OfuuNNF9TCssZo/Q0S2EOOYgw0i9NI+QFG9BI4SJcZXt7RSpqE478wkAtpEoquAVGRW53JWYwMs5iA5oUWErvagkONVAQpqSW+w8/Vwm6MRw==
+X-Forefront-Antispam-Report: CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(36860700016)(82310400026)(260925021911599003)(260925022911599003)(260925021311599003)(56012099006)(261022075727099003)(261009223027099003)(261009221227099003)(261021123027099003)(261102123227099003)(261021121427099003)(10067099003)(18002099003)(6133799003)(13003099007)(3023799007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: AIT7WGHZcvTZ7z1w+StfpRfnzUrTwPBi7xE93smC9232u6HSSgyvlXIptWG2TLNi6ppQT9DIqHwK77ATHwhAePvQC6szaV+7vzf7AK2MM3WugPfnY4rXfd5J/XCXlcFzqrPpb6GbSTLLQi9ksJtEoFtTCsht2fsXZnV4ps0LiaM2R72/kQqtjWMeIxzZGWNTGiWWjA9vaFWYExIbJ9rblLYTw8eJ7xPrE6M4dped0WvfZ/pUr9OyVF8ZFxaYiBXMPETXMIM51wlQCtNW+pOMBw6mLyuydHiOb0CeycotcbMehnXCKr4Q3VzSrVb/Puvy+j1mH302UAPzTaN+ekE23zk/7IfbDH3Pyo/IGMxBnDrXLbGgxkXeNaIFZ8ymvBt3RbHlvVM0pkOOQROtZUv0v6qfN0+oxhT1XG9RJrmHzurPHppQIy/sDEdlYZvDpUy7
+X-Exchange-RoutingPolicyChecked: r2dR5Xjg73ReDYHzfAtAYbMT0Io2r1l1/aqKHt93LOtqSobaiOIJ2lqIJYGf4jy4jKEVp4JyIzFt2OkojoQYPgwwyaaVDuD4Hi7iRrtrwqWjWKa+h3rxhYiV8jBBPg2Abwq3/mWvGXdaCG+uZ7mNWvxbgX8aLoDNgT0cjCpvmTwbIHDKg4tXJhIwOXF44VG7O9BG8HJLtWmJBAXwO+HkxIv9H77b1SuBnUqIJwpjOrVdWOHdwl9jYEdqlxgJLTfGQ0DbQmnnYUFjYNHnuEeKyik7y0c6o8ab2AzbX9h66f6DnrXDqJ/f0PGwrLto58qy2/VdphjIU8bWbHlvATW87w==
+X-OriginatorOrg: list.ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 02:45:20.5043
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3d0fb16c-50e6-42ab-0ee0-08df3bafffc5
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MW3PEPF00001658.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR10MB4216
+X-Authority-Analysis: v=2.4 cv=IJ2XmQvG c=1 sm=1 tr=0 ts=6aed3f46 cx=c_pps
+ a=JAdTqqN4+A8LnUbrk8iLvA==:117 a=iwqwCZQqcuTv3JOpYdM7/Q==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=zJRp6_cAMcgA:10 a=f7IdgyKtn90A:10
+ a=Vs-ZokuVWRQA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=fPAWb5peG099m5CrUpKH:22 a=sozttTNsAAAA:8 a=NEAV23lmAAAA:8
+ a=CfbWCkBmEdMbRrB6tYQA:9
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDAxMCBTYWx0ZWRfXznDoQ/yOWUtc
+ NrMH8efBNahGBzVMUOoh/kNdaO0+gOPIuUqlAT5tsIXyI/kDMIcocP+JFq7hVWaFhbiSRrs9OIN
+ YGvwMhO1caqrYtId/YkFokH9xrrzHAtqiS4OUi3MY1N3QI1DPw+5xhGZPWM/JFjRjKAPiaFwiu+
+ y3tKXnG1iV44zSlx3/vIDQA4FBwMNe3aeocWYyQwfgBkKr4OQSRUqPIR2qkRW8yQLxQ/1Y/MRhc
+ QJBJlzfdli2gwq6T4G100ExtuZ5bZ/DIR+YWWJj2cRoErjITyOAXRkMu/kel6TDH9kBZdAOuPQ6
+ fz8l61HtDsa8eYVqIIJcvb90d+Olaml53PTdRUUGK2KZVWMQ8mmZ65SnXFj6ytPn+Yuip1DDdJV
+ x2LIIZiJ0TuledSbtOu8qPJaYkakIHZEXibGsS/8lCzNbe8CjxpCOGtz2yP0+JFxF/xz3o0vyF5
+ HhUQRfjtXQQ4coBI1qA==
+X-Proofpoint-ORIG-GUID: NUCUSGVPdgf_ZbSBzCD22yFIyPAiGR2B
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDAxMCBTYWx0ZWRfX4Ff2Vsr0WTIX
+ rtfGkgCHyS9/BWq7moIMcIQXt7V/Fq8Lw2JQtVDMFs962iNqpz+pM/CLEgk3nYg6K2zMOBcrSUC
+ ZeM5vSo9nufYtwMi9EolZkN3WK5YQuo=
+X-Proofpoint-GUID: NUCUSGVPdgf_ZbSBzCD22yFIyPAiGR2B
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-05_06,2026-11-04_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 malwarescore=0 lowpriorityscore=0 spamscore=0
+ priorityscore=1501 bulkscore=0 phishscore=0 impostorscore=0 adultscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611060010
 List-Id: <meta-ti.lists.yoctoproject.org>
-X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <meta-ti@lists.yoctoproject.org>; Thu, 05 Nov 2026 21:06:09 -0000
-X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20509
+X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by lin-tor-korg-lkml-alma10-1 with HTTPS for <meta-ti@lists.yoctoproject.org>; Fri, 06 Nov 2026 02:45:31 -0000
+X-Groupsio-URL: https://lists.yoctoproject.org/g/meta-ti/message/20510
+Content-Type: text/plain; charset="utf-8"
 
---0000000000003e2f5d065f8ddd51
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Updated the value(s) for:
+  ti-linux-fw: PRUETH_FW_AM65X_SR2_VERSION,TI_LINUX_FW_SRCREV
+  u-boot-ti-staging_2026.01: SRCREV_uboot
+  linux-ti-staging-rt_6.18: PV_ARM32,SRCREV_ARM32
+  linux-ti-staging_6.12: SRCREV
+  linux-ti-staging_6.18: PV,SRCREV
+  ltp-ddt: SRCREV
 
-The ipcdev repo does not seem to have a github mirror, so my am57x builds
-are failing.
+Changelogs:
+  ti-linux-fw: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/log/?qt=range&q=1028826ea156cc6c1e9d231ec9ed871d53b91f6d..b925982b33874847866c99bc3b2709101220b19f
+  u-boot-ti-staging_2026.01: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/log/?qt=range&q=e8e50d58c24a0d2d0e5839fc8bf32ce87cb3c877..d5ed5d0765992529e310d6cd2d29aa367c2fab36
+  linux-ti-staging-rt_6.18: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=76a19a503a6ccd2e9f9b2ebab0b3b359351c23e6..1f84651ac37d934edde4e92c30741edd5349486b
+  linux-ti-staging_6.12: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=5c0e395a2f28422a330b6db6341460879fc78454..29eb9539475463231b91007066aecd333f170a7c
+  linux-ti-staging_6.18: https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/log/?qt=range&q=51d57671f1f51baf253b4ed9251f6190469f885d..d09e8381cfd8ab035871464a796c1ffc080b7c0c
+  ltp-ddt: https://git.ti.com/cgit/test-automation/ltp-ddt/log/?qt=range&q=b809e9f77f5cc7ff9fca18fa48d79315323cc100..31cf1d0c9a98b9089c203c72706424cf7f02b374
 
-$ git clone https://git.ti.com/git/ipc/ipcdev.git
-Cloning into 'ipcdev'...
-error: RPC failed; HTTP 501 curl 22 The requested URL returned error: 501
-fatal: expected 'packfile'
+Signed-off-by: LCPD Automation Script <lcpdbld@list.ti.com>
+---
+ meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc          | 4 ++--
+ meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb  | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.18.bb | 4 ++--
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb    | 2 +-
+ meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb    | 4 ++--
+ meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt_20260130.bb    | 2 +-
+ 6 files changed, 9 insertions(+), 9 deletions(-)
 
+diff --git a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+index 4e1e3d1d..a9f7fc6b 100644
+--- a/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
++++ b/meta-ti-bsp/recipes-bsp/ti-linux-fw/ti-linux-fw.inc
+@@ -9,7 +9,7 @@ INC_PR = "r4"
+ # Firmware versions
+ CORESDK_RTOS_VERSION = "08.02.00.04"
+ PRUETH_FW_AM65X_VERSION = "08.00.00.20"
+-PRUETH_FW_AM65X_SR2_VERSION = "02.02.16.00"
++PRUETH_FW_AM65X_SR2_VERSION = "02.02.16.02"
+ GOODIX_FW_VERSION = "1.0.0.0"
+ CADENCE_MHDP_FW_VERSION = "2.1.0"
+ IMG_DEC_FW_VERSION = "1.0"
+@@ -21,7 +21,7 @@ TI_PKA_FW_VERSION = "2.1.0"
+ TI_IPC_EXAMPLES_FW_VERSION = "3.52.00.01"
+ PCM6240_FW_VERSION = "1.0.0.0"
+ 
+-TI_LINUX_FW_SRCREV ?= "1028826ea156cc6c1e9d231ec9ed871d53b91f6d"
++TI_LINUX_FW_SRCREV ?= "b925982b33874847866c99bc3b2709101220b19f"
+ SRCREV = "${TI_LINUX_FW_SRCREV}"
+ 
+ BRANCH ?= "ti-linux-firmware"
+diff --git a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb
+index 7fbfdbd5..ecab9ee1 100644
+--- a/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb
++++ b/meta-ti-bsp/recipes-bsp/u-boot/u-boot-ti-staging_2026.01.bb
+@@ -4,4 +4,4 @@ PR = "r0"
+ 
+ BRANCH = "ti-u-boot-2026.01"
+ 
+-SRCREV_uboot = "e8e50d58c24a0d2d0e5839fc8bf32ce87cb3c877"
++SRCREV_uboot = "d5ed5d0765992529e310d6cd2d29aa367c2fab36"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.18.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.18.bb
+index cbd0f834..43d763a5 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.18.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging-rt_6.18.bb
+@@ -10,8 +10,8 @@ BRANCH_ARM64 = "ti-linux-6.18.y"
+ BRANCH = "${BRANCH_ARM64}"
+ 
+ BRANCH_ARM32 = "ti-rt-linux-6.18.y-arm32"
+-SRCREV_ARM32 = "76a19a503a6ccd2e9f9b2ebab0b3b359351c23e6"
+-PV_ARM32 = "6.18.57+git"
++SRCREV_ARM32 = "1f84651ac37d934edde4e92c30741edd5349486b"
++PV_ARM32 = "6.18.60+git"
+ 
+ BRANCH:ti33x = "${BRANCH_ARM32}"
+ BRANCH:ti43x = "${BRANCH_ARM32}"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+index 9eb82385..ab99b306 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.12.bb
+@@ -21,7 +21,7 @@ S = "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}"
+ 
+ BRANCH ?= "ti-linux-6.12.y"
+ 
+-SRCREV ?= "5c0e395a2f28422a330b6db6341460879fc78454"
++SRCREV ?= "29eb9539475463231b91007066aecd333f170a7c"
+ PV = "6.12.57+git"
+ 
+ SRC_URI += "file://0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch"
+diff --git a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb
+index b62f58df..1d53a6e2 100644
+--- a/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb
++++ b/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb
+@@ -22,8 +22,8 @@ S = "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}"
+ 
+ BRANCH ?= "ti-linux-6.18.y"
+ 
+-SRCREV ?= "51d57671f1f51baf253b4ed9251f6190469f885d"
+-PV = "6.18.59+git"
++SRCREV ?= "d09e8381cfd8ab035871464a796c1ffc080b7c0c"
++PV = "6.18.60+git"
+ 
+ KERNEL_REPRODUCIBILITY_PATCHES = " \
+     file://0001-perf-python-Fix-compile-for-32bit-platforms.patch \
+diff --git a/meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt_20260130.bb b/meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt_20260130.bb
+index d166ecf4..c7e4a5a9 100644
+--- a/meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt_20260130.bb
++++ b/meta-ti-test/recipes-devtools/ltp-ddt/ltp-ddt_20260130.bb
+@@ -11,7 +11,7 @@ PE = "1"
+ PR = "r1"
+ PV:append = "+git"
+ 
+-SRCREV = "b809e9f77f5cc7ff9fca18fa48d79315323cc100"
++SRCREV = "31cf1d0c9a98b9089c203c72706424cf7f02b374"
+ BRANCH ?= "master"
+ 
+ SRC_URI:remove = "git://github.com/linux-test-project/ltp.git;branch=master;protocol=https"
+-- 
+2.43.5
 
-On Thu, Nov 5, 2026 at 11:21=E2=80=AFAM Denys Dmytriyenko via meta-ti <deni=
-s=3D
-denix.org@lists.yoctoproject.org> wrote:
-
-> Yes, git.ti.com is periodically under heavy AI bot crawlers attack and
-> sometimes goes down.
->
-> But meta-ti-bsp already sets up MIRRORS to point to github, where TI core
-> repos, like kernel and u-boot, are mirrored. This works for most users
-> automatically and doesn't break.
->
-> The error you are seeing is because you heve your own PREMIRRORS (e.g.
-> using
-> own-mirrors.bbclass), which contains an older clones of those repos and
-> hence
-> bitbake tries to use those, instead of falling back to MIRRORS, and can't
-> find
-> the required SRCREV:
->
-> | Error: UnpackError('No up to date source found: clone directory not
-> available or not up to date:
-> |
-> /home/troth/Yocto/Downloads/git2/git.ti.com.git.ti-linux-kernel.ti-linux-=
-kernel.git
->
->
-> You can disable your PREMIRRORS temporarily and re-fetch affected
-> components,
-> then you can re-enable it back.
->
-> Please note that there are a few other TI repos, mostly used in
-> meta-ti-extras
-> and meta-ti-tests, which are not mirrored on github, but they haven't bee=
-n
-> updated in a while, so your existing copies from your PREMIRRORS should b=
-e
-> fine.
->
->
-> On Thu, Nov 05, 2026 at 07:47:28AM -0700, Theodore A. Roth wrote:
-> > Hi All,
-> >
-> > We started seeing errors in our yocto builds using meta-ti when
-> > building the latest linux-ti-staging-6.18.59+git-r0 from wrynose.
-> >
-> > It appears that we can't clone or fetch from git.ti.com:
-> >
-> >     $ git clone https://git.ti.com/git/ti-u-boot/ti-u-boot.git
-> >     Cloning into 'ti-u-boot'...
-> >     error: RPC failed; HTTP 501 curl 22 The requested URL returned
-> error: 501
-> >     fatal: expected 'packfile'
-> >
-> >     $ git clone
-> https://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git
-> >     Cloning into 'ti-linux-kernel'...
-> >     error: RPC failed; HTTP 501 curl 22 The requested URL returned
-> error: 501
-> >    fatal: expected 'packfile'
-> >
-> > I have tried this both at home and in our offices (to check that corp
-> > firewall is not the issue).
-> >
-> > Here's the relevant output from bitbake:
-> >
-> >     $ bitbake virtual/kernel
-> >     ...
-> >     Build Configuration:
-> >     BB_VERSION           =3D "2.18.0"
-> >     BUILD_SYS            =3D "x86_64-linux"
-> >     NATIVELSBSTRING      =3D "universal"
-> >     TARGET_SYS           =3D "arm-trimble-linux-gnueabi"
-> >     MACHINE              =3D "judo-hs-prod"
-> >     SDKMACHINE           =3D "x86_64"
-> >     DISTRO               =3D "trmb-judo"
-> >     DISTRO_VERSION       =3D "1.1.1.dev20261104171417"
-> >     TUNE_FEATURES        =3D "arm armv7a vfp thumb neon
-> callconvention-hard"
-> >     meta                 =3D
-> "HEAD:ae5a301091f5b0574ea7444aab40b309b6d9f3f2"
-> >     meta-poky            =3D
-> "HEAD:79b6d87030178bed0088ad3b00aa6dfbabac37c4"
-> >     meta-oe
-> >     meta-initramfs
-> >     meta-filesystems
-> >     meta-python
-> >     meta-networking
-> >     meta-webserver       =3D
-> "HEAD:c734c2cb9713dbd6d50697a9f6c25ebdf3ae589e"
-> >     meta-virtualization  =3D
-> "HEAD:18d58082b2458cf85438ac6e0f2f1fd0153318cb"
-> >     meta-arm-toolchain
-> >     meta-arm             =3D
-> "HEAD:673e8d7c5dcd14de58092eb73e6ecc5eee5c1735"
-> >     meta-ti-bsp
-> >     meta-ti-extras       =3D
-> "HEAD:066a7c440c0b241bca045133ec8cb5e506d49d98"
-> >     meta-clang           =3D
-> "HEAD:ef0d22f21910a0c30c967eeb17d8f209806e2d81"
-> >     meta-rauc            =3D
-> "HEAD:38da0e5866a953e664001ba90b5edad68d68cd5d"
-> >     meta-bedrock
-> >     meta-bedrock-rauc
-> >     meta-bedrock-yubi    =3D
-> "HEAD:6c7b0bafe7b7d0871eb8c67ad467c845ccf6b1b9"
-> >     meta-judo            =3D
-> "HEAD:d32ad65582a763e9a682d19d0c6e6f93e9233c1a"
-> >     meta-judo-bsp        =3D
-> "HEAD:5dee33952a5fcb456045fb0598f3af59c66b65e6"
-> >     meta-judo-proprietary =3D
-> "HEAD:75867ed0ea3fdf9943ec4bc9346835c6d099e119"
-> >
-> >     Sstate summary: Wanted 110 Local 3 Mirrors 0 Missed 107 Current
-> > 167 (2% match, 61% complete)
-> >     ...
-> >     NOTE: Executing Tasks
-> >     WARNING: linux-ti-staging-6.18.59+git-r0 do_fetch: Failed to fetch
-> > URL git://
-> git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git;protocol=3Dhttps;branc=
-h=3Dti-linux-6.18.y
-> ,
-> > attempting MIRRORS if available
-> >     ERROR: linux-ti-staging-6.18.59+git-r0 do_unpack: Bitbake Fetcher
-> > Error: UnpackError('No up to date source found: clone directory not
-> > available or not up to date: \
-> >
->  /home/troth/Yocto/Downloads/git2/git.ti.com.git.ti-linux-kernel.ti-linux=
--kernel.git;
-> > shallow clone not enabled',
-> > 'git://
-> git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git;protocol=3Dhttps;branc=
-h=3Dti-linux-6.18.y
-> ')
-> >     ERROR: Logfile of failure stored in:
-> >
-> /home/troth/work/judo/judo-main-next/build-hs-prod/tmp/work/judo_hs_prod-=
-trimble-linux-gnueabi/linux-ti-staging/6.18.59+git/temp/log.do_unpack.51741=
-4
-> >     ERROR: Task
-> >
-> (/home/troth/work/judo/judo-main-next/build-hs-prod/../oe/meta-ti/meta-ti=
--bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb:
-> do_unpack)
-> > failed with exit code '1'
-> >
-> >     Summary: 1 task failed:
-> >
->  /home/troth/work/judo/judo-main-next/build-hs-prod/../oe/meta-ti/meta-ti=
--bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb:
-> do_unpack
-> >         log:
-> /home/troth/work/judo/judo-main-next/build-hs-prod/tmp/work/judo_hs_prod-=
-trimble-linux-gnueabi/linux-ti-staging/6.18.59+git/temp/log.do_unpack.51741=
-4
-> >     Summary: There was 1 WARNING message.
-> >     Summary: There was 1 ERROR message, returning a non-zero exit code.
-> >
-> > Wondering if anyone else is seeing this.
-> >
-> > The only workaround I have at the moment is to use the github mirror:
-> >
-> >     https://github.com/TexasInstruments/ti-linux-kernel.git
-> >
-> > Thanks,
-> >
-> > Ted Roth
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#20508):
-> https://lists.yoctoproject.org/g/meta-ti/message/20508
-> Mute This Topic: https://lists.yoctoproject.org/mt/122110829/7902621
-> Group Owner: meta-ti+owner@lists.yoctoproject.org
-> Unsubscribe: https://lists.yoctoproject.org/g/meta-ti/unsub [
-> jcormier@criticallink.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---=20
-Jonathan Cormier
-Senior Software Engineer
-
-Office:  315.425.4045 x222
-
-http://www.CriticalLink.com <http://www.criticallink.com/>
-6712 Brooklawn Parkway, Syracuse, NY 13211
-
---0000000000003e2f5d065f8ddd51
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>The ipcdev repo does not seem to have a github mirror=
-, so my am57x builds are failing.</div><div><br></div><div>$ git clone <a h=
-ref=3D"https://git.ti.com/git/ipc/ipcdev.git">https://git.ti.com/git/ipc/ip=
-cdev.git</a><br>Cloning into &#39;ipcdev&#39;...<br>error: RPC failed; HTTP=
- 501 curl 22 The requested URL returned error: 501<br>fatal: expected &#39;=
-packfile&#39;<br><br></div></div><br><div class=3D"gmail_quote gmail_quote_=
-container"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Nov 5, 2026 at 11:=
-21=E2=80=AFAM Denys Dmytriyenko via meta-ti &lt;denis=3D<a href=3D"mailto:d=
-enix.org@lists.yoctoproject.org">denix.org@lists.yoctoproject.org</a>&gt; w=
-rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
-x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Yes, <a hr=
-ef=3D"http://git.ti.com" rel=3D"noreferrer" target=3D"_blank">git.ti.com</a=
-> is periodically under heavy AI bot crawlers attack and <br>
-sometimes goes down.<br>
-<br>
-But meta-ti-bsp already sets up MIRRORS to point to github, where TI core <=
-br>
-repos, like kernel and u-boot, are mirrored. This works for most users <br>
-automatically and doesn&#39;t break.<br>
-<br>
-The error you are seeing is because you heve your own PREMIRRORS (e.g. usin=
-g <br>
-own-mirrors.bbclass), which contains an older clones of those repos and hen=
-ce <br>
-bitbake tries to use those, instead of falling back to MIRRORS, and can&#39=
-;t find <br>
-the required SRCREV:<br>
-<br>
-| Error: UnpackError(&#39;No up to date source found: clone directory not a=
-vailable or not up to date:<br>
-| /home/troth/Yocto/Downloads/git2/git.ti.com.git.ti-linux-kernel.ti-linux-=
-kernel.git<br>
-<br>
-<br>
-You can disable your PREMIRRORS temporarily and re-fetch affected component=
-s, <br>
-then you can re-enable it back.<br>
-<br>
-Please note that there are a few other TI repos, mostly used in meta-ti-ext=
-ras <br>
-and meta-ti-tests, which are not mirrored on github, but they haven&#39;t b=
-een <br>
-updated in a while, so your existing copies from your PREMIRRORS should be =
-<br>
-fine.<br>
-<br>
-<br>
-On Thu, Nov 05, 2026 at 07:47:28AM -0700, Theodore A. Roth wrote:<br>
-&gt; Hi All,<br>
-&gt; <br>
-&gt; We started seeing errors in our yocto builds using meta-ti when<br>
-&gt; building the latest linux-ti-staging-6.18.59+git-r0 from wrynose.<br>
-&gt; <br>
-&gt; It appears that we can&#39;t clone or fetch from <a href=3D"http://git=
-.ti.com" rel=3D"noreferrer" target=3D"_blank">git.ti.com</a>:<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0$ git clone <a href=3D"https://git.ti.com/git/ti-u-=
-boot/ti-u-boot.git" rel=3D"noreferrer" target=3D"_blank">https://git.ti.com=
-/git/ti-u-boot/ti-u-boot.git</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0Cloning into &#39;ti-u-boot&#39;...<br>
-&gt;=C2=A0 =C2=A0 =C2=A0error: RPC failed; HTTP 501 curl 22 The requested U=
-RL returned error: 501<br>
-&gt;=C2=A0 =C2=A0 =C2=A0fatal: expected &#39;packfile&#39;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0$ git clone <a href=3D"https://git.ti.com/git/ti-li=
-nux-kernel/ti-linux-kernel.git" rel=3D"noreferrer" target=3D"_blank">https:=
-//git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0Cloning into &#39;ti-linux-kernel&#39;...<br>
-&gt;=C2=A0 =C2=A0 =C2=A0error: RPC failed; HTTP 501 curl 22 The requested U=
-RL returned error: 501<br>
-&gt;=C2=A0 =C2=A0 fatal: expected &#39;packfile&#39;<br>
-&gt; <br>
-&gt; I have tried this both at home and in our offices (to check that corp<=
-br>
-&gt; firewall is not the issue).<br>
-&gt; <br>
-&gt; Here&#39;s the relevant output from bitbake:<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0$ bitbake virtual/kernel<br>
-&gt;=C2=A0 =C2=A0 =C2=A0...<br>
-&gt;=C2=A0 =C2=A0 =C2=A0Build Configuration:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0BB_VERSION=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-=3D &quot;2.18.0&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0BUILD_SYS=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=3D &quot;x86_64-linux&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0NATIVELSBSTRING=C2=A0 =C2=A0 =C2=A0 =3D &quot;unive=
-rsal&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0TARGET_SYS=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-=3D &quot;arm-trimble-linux-gnueabi&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0MACHINE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =3D &quot;judo-hs-prod&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0SDKMACHINE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-=3D &quot;x86_64&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0DISTRO=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0=3D &quot;trmb-judo&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0DISTRO_VERSION=C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;=
-1.1.1.dev20261104171417&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0TUNE_FEATURES=C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &quot;=
-arm armv7a vfp thumb neon callconvention-hard&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0=3D &quot;HEAD:ae5a301091f5b0574ea7444aab40b309b6d9f3f2&qu=
-ot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-poky=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=3D &quot;HEAD:79b6d87030178bed0088ad3b00aa6dfbabac37c4&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-oe<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-initramfs<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-filesystems<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-python<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-networking<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-webserver=C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;=
-HEAD:c734c2cb9713dbd6d50697a9f6c25ebdf3ae589e&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-virtualization=C2=A0 =3D &quot;HEAD:18d58082b2=
-458cf85438ac6e0f2f1fd0153318cb&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-arm-toolchain<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-arm=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0=3D &quot;HEAD:673e8d7c5dcd14de58092eb73e6ecc5eee5c1735&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-ti-bsp<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-ti-extras=C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;=
-HEAD:066a7c440c0b241bca045133ec8cb5e506d49d98&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-clang=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-=3D &quot;HEAD:ef0d22f21910a0c30c967eeb17d8f209806e2d81&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-rauc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=3D &quot;HEAD:38da0e5866a953e664001ba90b5edad68d68cd5d&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-bedrock<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-bedrock-rauc<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-bedrock-yubi=C2=A0 =C2=A0 =3D &quot;HEAD:6c7b0=
-bafe7b7d0871eb8c67ad467c845ccf6b1b9&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-judo=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=3D &quot;HEAD:d32ad65582a763e9a682d19d0c6e6f93e9233c1a&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-judo-bsp=C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &quot;=
-HEAD:5dee33952a5fcb456045fb0598f3af59c66b65e6&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-judo-proprietary =3D &quot;HEAD:75867ed0ea3fdf=
-9943ec4bc9346835c6d099e119&quot;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0Sstate summary: Wanted 110 Local 3 Mirrors 0 Missed=
- 107 Current<br>
-&gt; 167 (2% match, 61% complete)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0...<br>
-&gt;=C2=A0 =C2=A0 =C2=A0NOTE: Executing Tasks<br>
-&gt;=C2=A0 =C2=A0 =C2=A0WARNING: linux-ti-staging-6.18.59+git-r0 do_fetch: =
-Failed to fetch<br>
-&gt; URL git://<a href=3D"http://git.ti.com/git/ti-linux-kernel/ti-linux-ke=
-rnel.git;protocol=3Dhttps;branch=3Dti-linux-6.18.y" rel=3D"noreferrer" targ=
-et=3D"_blank">git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git;protocol=
-=3Dhttps;branch=3Dti-linux-6.18.y</a>,<br>
-&gt; attempting MIRRORS if available<br>
-&gt;=C2=A0 =C2=A0 =C2=A0ERROR: linux-ti-staging-6.18.59+git-r0 do_unpack: B=
-itbake Fetcher<br>
-&gt; Error: UnpackError(&#39;No up to date source found: clone directory no=
-t<br>
-&gt; available or not up to date: \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0/home/troth/Yocto/Downloads/git2/git.ti.com.git.ti-=
-linux-kernel.ti-linux-kernel.git;<br>
-&gt; shallow clone not enabled&#39;,<br>
-&gt; &#39;git://<a href=3D"http://git.ti.com/git/ti-linux-kernel/ti-linux-k=
-ernel.git;protocol=3Dhttps;branch=3Dti-linux-6.18.y" rel=3D"noreferrer" tar=
-get=3D"_blank">git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git;protocol=
-=3Dhttps;branch=3Dti-linux-6.18.y</a>&#39;)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0ERROR: Logfile of failure stored in:<br>
-&gt; /home/troth/work/judo/judo-main-next/build-hs-prod/tmp/work/judo_hs_pr=
-od-trimble-linux-gnueabi/linux-ti-staging/6.18.59+git/temp/log.do_unpack.51=
-7414<br>
-&gt;=C2=A0 =C2=A0 =C2=A0ERROR: Task<br>
-&gt; (/home/troth/work/judo/judo-main-next/build-hs-prod/../oe/meta-ti/meta=
--ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18.bb:do_unpack)<br>
-&gt; failed with exit code &#39;1&#39;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0Summary: 1 task failed:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/home/troth/work/judo/judo-main-next/build-h=
-s-prod/../oe/meta-ti/meta-ti-bsp/recipes-kernel/linux/linux-ti-staging_6.18=
-.bb:do_unpack<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0log: /home/troth/work/judo/judo-main-=
-next/build-hs-prod/tmp/work/judo_hs_prod-trimble-linux-gnueabi/linux-ti-sta=
-ging/6.18.59+git/temp/log.do_unpack.517414<br>
-&gt;=C2=A0 =C2=A0 =C2=A0Summary: There was 1 WARNING message.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0Summary: There was 1 ERROR message, returning a non=
--zero exit code.<br>
-&gt; <br>
-&gt; Wondering if anyone else is seeing this.<br>
-&gt; <br>
-&gt; The only workaround I have at the moment is to use the github mirror:<=
-br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"https://github.com/TexasInstruments/ti-l=
-inux-kernel.git" rel=3D"noreferrer" target=3D"_blank">https://github.com/Te=
-xasInstruments/ti-linux-kernel.git</a><br>
-&gt; <br>
-&gt; Thanks,<br>
-&gt; <br>
-&gt; Ted Roth<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#20508): <a href=3D"https://lists.yoctoproject.org/g/met=
-a-ti/message/20508" rel=3D"noreferrer" target=3D"_blank">https://lists.yoct=
-oproject.org/g/meta-ti/message/20508</a><br>
-Mute This Topic: <a href=3D"https://lists.yoctoproject.org/mt/122110829/790=
-2621" rel=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/m=
-t/122110829/7902621</a><br>
-Group Owner: <a href=3D"mailto:meta-ti%2Bowner@lists.yoctoproject.org" targ=
-et=3D"_blank">meta-ti+owner@lists.yoctoproject.org</a><br>
-Unsubscribe: <a href=3D"https://lists.yoctoproject.org/g/meta-ti/unsub" rel=
-=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/meta-ti/=
-unsub</a> [<a href=3D"mailto:jcormier@criticallink.com" target=3D"_blank">j=
-cormier@criticallink.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div><div><br clear=3D"all"></div><br><span class=3D"gmail_si=
-gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
-iv dir=3D"ltr"><div><div><div><div><div><div><div>Jonathan Cormier<br>Senio=
-r Software Engineer<br><br>Office: =C2=A0315.425.4045 x222</div><div><img s=
-rc=3D"https://www.criticallink.com/wp-content/uploads/critical-link-logo-em=
-ail.png"><br></div><div><div><a href=3D"http://www.criticallink.com/" targe=
-t=3D"_blank">http://www.CriticalLink.com</a></div></div></div>6712 Brooklaw=
-n Parkway, Syracuse, NY 13211 </div></div></div></div></div><br></div></div=
->
-
---0000000000003e2f5d065f8ddd51--
